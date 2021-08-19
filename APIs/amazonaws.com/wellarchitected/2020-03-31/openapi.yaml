@@ -2732,13 +2732,11 @@ components:
         LensAlias:
           $ref: '#/components/schemas/LensAlias'
         BaseLensVersion:
-          allOf:
-            - $ref: '#/components/schemas/LensVersion'
-            - description: The base version of the lens.
+          $ref: '#/components/schemas/LensVersion'
+          description: The base version of the lens.
         LatestLensVersion:
-          allOf:
-            - $ref: '#/components/schemas/LensVersion'
-            - description: The latest version of the lens.
+          $ref: '#/components/schemas/LensVersion'
+          description: The latest version of the lens.
         VersionDifferences:
           $ref: '#/components/schemas/VersionDifferences'
     GetMilestoneOutput:
@@ -2817,18 +2815,16 @@ components:
       type: object
       properties:
         NotificationSummaries:
-          allOf:
-            - $ref: '#/components/schemas/NotificationSummaries'
-            - description: List of lens notification summaries in a workload.
+          $ref: '#/components/schemas/NotificationSummaries'
+          description: List of lens notification summaries in a workload.
         NextToken:
           $ref: '#/components/schemas/NextToken'
     ListShareInvitationsOutput:
       type: object
       properties:
         ShareInvitationSummaries:
-          allOf:
-            - $ref: '#/components/schemas/ShareInvitationSummaries'
-            - description: List of share invitation summaries in a workload.
+          $ref: '#/components/schemas/ShareInvitationSummaries'
+          description: List of share invitation summaries in a workload.
         NextToken:
           $ref: '#/components/schemas/NextToken'
       description: Input for List Share Invitations
@@ -2836,9 +2832,8 @@ components:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags for the resource.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags for the resource.
     ListWorkloadSharesOutput:
       type: object
       properties:
@@ -2888,17 +2883,14 @@ components:
         - Status
       properties:
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ChoiceStatus'
-            - description: The status of a choice.
+          $ref: '#/components/schemas/ChoiceStatus'
+          description: The status of a choice.
         Reason:
-          allOf:
-            - $ref: '#/components/schemas/ChoiceReason'
-            - description: The reason why a choice is non-applicable to a question in your workload.
+          $ref: '#/components/schemas/ChoiceReason'
+          description: The reason why a choice is non-applicable to a question in your workload.
         Notes:
-          allOf:
-            - $ref: '#/components/schemas/ChoiceNotes'
-            - description: The notes associated with a choice.
+          $ref: '#/components/schemas/ChoiceNotes'
+          description: The notes associated with a choice.
       description: A list of choices to be updated.
     UpdateLensReviewOutput:
       type: object
@@ -2916,9 +2908,8 @@ components:
       type: object
       properties:
         ShareInvitation:
-          allOf:
-            - $ref: '#/components/schemas/ShareInvitation'
-            - description: The updated workload share invitation.
+          $ref: '#/components/schemas/ShareInvitation'
+          description: The updated workload share invitation.
     UpdateWorkloadOutput:
       type: object
       properties:
@@ -3012,9 +3003,8 @@ components:
         SelectedChoices:
           $ref: '#/components/schemas/SelectedChoices'
         ChoiceAnswers:
-          allOf:
-            - $ref: '#/components/schemas/ChoiceAnswers'
-            - description: A list of selected choices to a question in your workload.
+          $ref: '#/components/schemas/ChoiceAnswers'
+          description: A list of selected choices to a question in your workload.
         IsApplicable:
           $ref: '#/components/schemas/IsApplicable'
         Risk:
@@ -3022,9 +3012,8 @@ components:
         Notes:
           $ref: '#/components/schemas/Notes'
         Reason:
-          allOf:
-            - $ref: '#/components/schemas/AnswerReason'
-            - description: The reason why the question is not applicable to your workload.
+          $ref: '#/components/schemas/AnswerReason'
+          description: The reason why the question is not applicable to your workload.
       description: An answer of the question.
     AnswerSummary:
       type: object
@@ -3040,17 +3029,15 @@ components:
         SelectedChoices:
           $ref: '#/components/schemas/SelectedChoices'
         ChoiceAnswerSummaries:
-          allOf:
-            - $ref: '#/components/schemas/ChoiceAnswerSummaries'
-            - description: A list of selected choices to a question in your workload.
+          $ref: '#/components/schemas/ChoiceAnswerSummaries'
+          description: A list of selected choices to a question in your workload.
         IsApplicable:
           $ref: '#/components/schemas/IsApplicable'
         Risk:
           $ref: '#/components/schemas/Risk'
         Reason:
-          allOf:
-            - $ref: '#/components/schemas/AnswerReason'
-            - description: The reason why a choice is non-applicable to a question in your workload.
+          $ref: '#/components/schemas/AnswerReason'
+          description: The reason why a choice is non-applicable to a question in your workload.
       description: An answer summary of a lens review in a workload.
     AnswerSummaries:
       type: array
@@ -3126,17 +3113,14 @@ components:
         ChoiceId:
           $ref: '#/components/schemas/ChoiceId'
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ChoiceStatus'
-            - description: The status of a choice.
+          $ref: '#/components/schemas/ChoiceStatus'
+          description: The status of a choice.
         Reason:
-          allOf:
-            - $ref: '#/components/schemas/ChoiceReason'
-            - description: The reason why a choice is non-applicable to a question in your workload.
+          $ref: '#/components/schemas/ChoiceReason'
+          description: The reason why a choice is non-applicable to a question in your workload.
         Notes:
-          allOf:
-            - $ref: '#/components/schemas/ChoiceNotes'
-            - description: The notes associated with a choice.
+          $ref: '#/components/schemas/ChoiceNotes'
+          description: The notes associated with a choice.
       description: A choice that has been answered on a question in your workload.
     ChoiceAnswerSummary:
       type: object
@@ -3144,13 +3128,11 @@ components:
         ChoiceId:
           $ref: '#/components/schemas/ChoiceId'
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ChoiceStatus'
-            - description: The status of a choice.
+          $ref: '#/components/schemas/ChoiceStatus'
+          description: The status of a choice.
         Reason:
-          allOf:
-            - $ref: '#/components/schemas/ChoiceReason'
-            - description: The reason why a choice is non-applicable to a question in your workload.
+          $ref: '#/components/schemas/ChoiceReason'
+          description: The reason why a choice is non-applicable to a question in your workload.
       description: A choice summary that has been answered on a question in your workload.
     ChoiceUpdates:
       type: object
@@ -3292,9 +3274,8 @@ components:
         ClientRequestToken:
           $ref: '#/components/schemas/ClientRequestToken'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags to be associated with the workload.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags to be associated with the workload.
       description: Input for workload creation.
     WorkloadArn:
       type: string
@@ -3370,15 +3351,13 @@ components:
         LensAlias:
           $ref: '#/components/schemas/LensAlias'
         LensVersion:
-          allOf:
-            - $ref: '#/components/schemas/LensVersion'
-            - description: The version of the lens.
+          $ref: '#/components/schemas/LensVersion'
+          description: The version of the lens.
         LensName:
           $ref: '#/components/schemas/LensName'
         LensStatus:
-          allOf:
-            - $ref: '#/components/schemas/LensStatus'
-            - description: The status of the lens.
+          $ref: '#/components/schemas/LensStatus'
+          description: The status of the lens.
         PillarReviewSummaries:
           $ref: '#/components/schemas/PillarReviewSummaries'
         UpdatedAt:
@@ -3415,9 +3394,8 @@ components:
       type: object
       properties:
         PillarDifferences:
-          allOf:
-            - $ref: '#/components/schemas/PillarDifferences'
-            - description: The differences between the base and latest versions of the lens.
+          $ref: '#/components/schemas/PillarDifferences'
+          description: The differences between the base and latest versions of the lens.
       description: The differences between the base and latest versions of the lens.
     GetMilestoneInput:
       type: object
@@ -3469,9 +3447,8 @@ components:
         ReviewRestrictionDate:
           $ref: '#/components/schemas/Timestamp'
         IsReviewOwnerUpdateAcknowledged:
-          allOf:
-            - $ref: '#/components/schemas/IsReviewOwnerUpdateAcknowledged'
-            - description: '<p>Flag indicating whether the workload owner has acknowledged that the <i>Review owner</i> field is required.</p> <p>If a <b>Review owner</b> is not added to the workload within 60 days of acknowledgement, access to the workload is restricted until an owner is added.</p>'
+          $ref: '#/components/schemas/IsReviewOwnerUpdateAcknowledged'
+          description: '<p>Flag indicating whether the workload owner has acknowledged that the <i>Review owner</i> field is required.</p> <p>If a <b>Review owner</b> is not added to the workload within 60 days of acknowledgement, access to the workload is restricted until an owner is added.</p>'
         IndustryType:
           $ref: '#/components/schemas/WorkloadIndustryType'
         Industry:
@@ -3489,13 +3466,11 @@ components:
         Owner:
           $ref: '#/components/schemas/AwsAccountId'
         ShareInvitationId:
-          allOf:
-            - $ref: '#/components/schemas/ShareInvitationId'
-            - description: The ID assigned to the share invitation.
+          $ref: '#/components/schemas/ShareInvitationId'
+          description: The ID assigned to the share invitation.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags associated with the workload.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags associated with the workload.
       description: A workload return object.
     ImprovementSummary:
       type: object
@@ -3557,15 +3532,13 @@ components:
         LensAlias:
           $ref: '#/components/schemas/LensAlias'
         LensVersion:
-          allOf:
-            - $ref: '#/components/schemas/LensVersion'
-            - description: The version of the lens.
+          $ref: '#/components/schemas/LensVersion'
+          description: The version of the lens.
         LensName:
           $ref: '#/components/schemas/LensName'
         LensStatus:
-          allOf:
-            - $ref: '#/components/schemas/LensStatus'
-            - description: The status of the lens.
+          $ref: '#/components/schemas/LensStatus'
+          description: The status of the lens.
         UpdatedAt:
           $ref: '#/components/schemas/Timestamp'
         RiskCounts:
@@ -3582,9 +3555,8 @@ components:
         LensAlias:
           $ref: '#/components/schemas/LensAlias'
         LensVersion:
-          allOf:
-            - $ref: '#/components/schemas/LensVersion'
-            - description: The version of the lens.
+          $ref: '#/components/schemas/LensVersion'
+          description: The version of the lens.
         LensName:
           $ref: '#/components/schemas/LensName'
         Description:
@@ -3605,13 +3577,11 @@ components:
         LensAlias:
           $ref: '#/components/schemas/LensAlias'
         CurrentLensVersion:
-          allOf:
-            - $ref: '#/components/schemas/LensVersion'
-            - description: The current version of the lens.
+          $ref: '#/components/schemas/LensVersion'
+          description: The current version of the lens.
         LatestLensVersion:
-          allOf:
-            - $ref: '#/components/schemas/LensVersion'
-            - description: The latest version of the lens.
+          $ref: '#/components/schemas/LensVersion'
+          description: The latest version of the lens.
       description: Lens upgrade summary return object.
     ListAnswersMaxResults:
       type: integer
@@ -3673,9 +3643,8 @@ components:
         NextToken:
           $ref: '#/components/schemas/NextToken'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/ListNotificationsMaxResults'
-            - description: The maximum number of results to return for this request.
+          $ref: '#/components/schemas/ListNotificationsMaxResults'
+          description: The maximum number of results to return for this request.
     NotificationSummaries:
       type: array
       items:
@@ -3731,9 +3700,8 @@ components:
         NextToken:
           $ref: '#/components/schemas/NextToken'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/ListWorkloadsMaxResults'
-            - description: The maximum number of results to return for this request.
+          $ref: '#/components/schemas/ListWorkloadsMaxResults'
+          description: The maximum number of results to return for this request.
       description: Input to list all workloads.
     WorkloadSummaries:
       type: array
@@ -3776,13 +3744,11 @@ components:
       type: object
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/NotificationType'
-            - description: The type of notification.
+          $ref: '#/components/schemas/NotificationType'
+          description: The type of notification.
         LensUpgradeSummary:
-          allOf:
-            - $ref: '#/components/schemas/LensUpgradeSummary'
-            - description: Summary of lens upgrade.
+          $ref: '#/components/schemas/LensUpgradeSummary'
+          description: Summary of lens upgrade.
       description: A notification summary return object.
     NotificationType:
       type: string
@@ -3799,13 +3765,11 @@ components:
         PillarId:
           $ref: '#/components/schemas/PillarId'
         DifferenceStatus:
-          allOf:
-            - $ref: '#/components/schemas/DifferenceStatus'
-            - description: Indicates the type of change to the pillar.
+          $ref: '#/components/schemas/DifferenceStatus'
+          description: Indicates the type of change to the pillar.
         QuestionDifferences:
-          allOf:
-            - $ref: '#/components/schemas/QuestionDifferences'
-            - description: List of question differences.
+          $ref: '#/components/schemas/QuestionDifferences'
+          description: List of question differences.
       description: A pillar difference return object.
     PillarDifferences:
       type: array
@@ -3841,9 +3805,8 @@ components:
         QuestionTitle:
           $ref: '#/components/schemas/QuestionTitle'
         DifferenceStatus:
-          allOf:
-            - $ref: '#/components/schemas/DifferenceStatus'
-            - description: Indicates the type of change to the question.
+          $ref: '#/components/schemas/DifferenceStatus'
+          description: Indicates the type of change to the question.
       description: A question difference return object.
     ShareInvitationId:
       type: string
@@ -3852,9 +3815,8 @@ components:
       type: object
       properties:
         ShareInvitationId:
-          allOf:
-            - $ref: '#/components/schemas/ShareInvitationId'
-            - description: The ID assigned to the share invitation.
+          $ref: '#/components/schemas/ShareInvitationId'
+          description: The ID assigned to the share invitation.
         WorkloadId:
           $ref: '#/components/schemas/WorkloadId'
       description: The share invitation.
@@ -3868,9 +3830,8 @@ components:
       type: object
       properties:
         ShareInvitationId:
-          allOf:
-            - $ref: '#/components/schemas/ShareInvitationId'
-            - description: The ID assigned to the share invitation.
+          $ref: '#/components/schemas/ShareInvitationId'
+          description: The ID assigned to the share invitation.
         SharedBy:
           $ref: '#/components/schemas/AwsAccountId'
         SharedWith:
@@ -3904,9 +3865,8 @@ components:
       title: TagResourceInput
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags for the resource.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags for the resource.
     UntagResourceInput:
       type: object
       title: UntagResourceInput
@@ -3918,17 +3878,15 @@ components:
         SelectedChoices:
           $ref: '#/components/schemas/SelectedChoices'
         ChoiceUpdates:
-          allOf:
-            - $ref: '#/components/schemas/ChoiceUpdates'
-            - description: A list of choices to update on a question in your workload. The String key corresponds to the choice ID to be updated.
+          $ref: '#/components/schemas/ChoiceUpdates'
+          description: A list of choices to update on a question in your workload. The String key corresponds to the choice ID to be updated.
         Notes:
           $ref: '#/components/schemas/Notes'
         IsApplicable:
           $ref: '#/components/schemas/IsApplicable'
         Reason:
-          allOf:
-            - $ref: '#/components/schemas/AnswerReason'
-            - description: The reason why a question is not applicable to your workload.
+          $ref: '#/components/schemas/AnswerReason'
+          description: The reason why a question is not applicable to your workload.
       description: Input to update answer.
     UpdateLensReviewInput:
       type: object
@@ -3980,9 +3938,8 @@ components:
         ReviewOwner:
           $ref: '#/components/schemas/WorkloadReviewOwner'
         IsReviewOwnerUpdateAcknowledged:
-          allOf:
-            - $ref: '#/components/schemas/IsReviewOwnerUpdateAcknowledged'
-            - description: '<p>Flag indicating whether the workload owner has acknowledged that the <i>Review owner</i> field is required.</p> <p>If a <b>Review owner</b> is not added to the workload within 60 days of acknowledgement, access to the workload is restricted until an owner is added.</p>'
+          $ref: '#/components/schemas/IsReviewOwnerUpdateAcknowledged'
+          description: '<p>Flag indicating whether the workload owner has acknowledged that the <i>Review owner</i> field is required.</p> <p>If a <b>Review owner</b> is not added to the workload within 60 days of acknowledgement, access to the workload is restricted until an owner is added.</p>'
         IndustryType:
           $ref: '#/components/schemas/WorkloadIndustryType'
         Industry:

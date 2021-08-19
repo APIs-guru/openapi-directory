@@ -444,13 +444,11 @@ paths:
                   type: object
                   properties:
                     defaultAttributes:
-                      allOf:
-                        - $ref: '#/components/schemas/DefaultPlacementAttributeMap'
-                        - description: The default attributes (key/value pairs) to be applied to all placements using this template.
+                      $ref: '#/components/schemas/DefaultPlacementAttributeMap'
+                      description: The default attributes (key/value pairs) to be applied to all placements using this template.
                     deviceTemplates:
-                      allOf:
-                        - $ref: '#/components/schemas/DeviceTemplateMap'
-                        - description: An object specifying the <a>DeviceTemplate</a> for all placements using this (<a>PlacementTemplate</a>) template.
+                      $ref: '#/components/schemas/DeviceTemplateMap'
+                      description: An object specifying the <a>DeviceTemplate</a> for all placements using this (<a>PlacementTemplate</a>) template.
                 tags:
                   description: 'Optional tags (metadata key/value pairs) to be associated with the project. For example, <code>{ {"key1": "value1", "key2": "value2"} }</code>. For more information, see <a href="https://aws.amazon.com/answers/account-management/aws-tagging-strategies/">AWS Tagging Strategies</a>.'
                   type: object
@@ -831,13 +829,11 @@ paths:
                   type: object
                   properties:
                     defaultAttributes:
-                      allOf:
-                        - $ref: '#/components/schemas/DefaultPlacementAttributeMap'
-                        - description: The default attributes (key/value pairs) to be applied to all placements using this template.
+                      $ref: '#/components/schemas/DefaultPlacementAttributeMap'
+                      description: The default attributes (key/value pairs) to be applied to all placements using this template.
                     deviceTemplates:
-                      allOf:
-                        - $ref: '#/components/schemas/DeviceTemplateMap'
-                        - description: An object specifying the <a>DeviceTemplate</a> for all placements using this (<a>PlacementTemplate</a>) template.
+                      $ref: '#/components/schemas/DeviceTemplateMap'
+                      description: An object specifying the <a>DeviceTemplate</a> for all placements using this (<a>PlacementTemplate</a>) template.
   '/projects/{projectName}/placements/{placementName}/devices':
     get:
       operationId: GetDevicesInPlacement
@@ -1138,18 +1134,16 @@ components:
         - placement
       properties:
         placement:
-          allOf:
-            - $ref: '#/components/schemas/PlacementDescription'
-            - description: An object describing the placement.
+          $ref: '#/components/schemas/PlacementDescription'
+          description: An object describing the placement.
     DescribeProjectResponse:
       type: object
       required:
         - project
       properties:
         project:
-          allOf:
-            - $ref: '#/components/schemas/ProjectDescription'
-            - description: An object describing the project.
+          $ref: '#/components/schemas/ProjectDescription'
+          description: An object describing the project.
     DisassociateDeviceFromPlacementResponse:
       type: object
       properties: {}
@@ -1159,42 +1153,36 @@ components:
         - devices
       properties:
         devices:
-          allOf:
-            - $ref: '#/components/schemas/DeviceMap'
-            - description: An object containing the devices (zero or more) within the placement.
+          $ref: '#/components/schemas/DeviceMap'
+          description: An object containing the devices (zero or more) within the placement.
     ListPlacementsResponse:
       type: object
       required:
         - placements
       properties:
         placements:
-          allOf:
-            - $ref: '#/components/schemas/PlacementSummaryList'
-            - description: An object listing the requested placements.
+          $ref: '#/components/schemas/PlacementSummaryList'
+          description: An object listing the requested placements.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token used to retrieve the next set of results - will be effectively empty if there are no further results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token used to retrieve the next set of results - will be effectively empty if there are no further results.
     ListProjectsResponse:
       type: object
       required:
         - projects
       properties:
         projects:
-          allOf:
-            - $ref: '#/components/schemas/ProjectSummaryList'
-            - description: An object containing the list of projects.
+          $ref: '#/components/schemas/ProjectSummaryList'
+          description: An object containing the list of projects.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token used to retrieve the next set of results - will be effectively empty if there are no further results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token used to retrieve the next set of results - will be effectively empty if there are no further results.
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags (metadata key/value pairs) which you have assigned to the resource.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags (metadata key/value pairs) which you have assigned to the resource.
     TagResourceResponse:
       type: object
       properties: {}
@@ -1238,9 +1226,8 @@ components:
       title: AssociateDeviceWithPlacementRequest
       properties:
         deviceId:
-          allOf:
-            - $ref: '#/components/schemas/DeviceId'
-            - description: The ID of the physical device to be associated with the given placement in the project. Note that a mandatory 4 character prefix is required for all <code>deviceId</code> values.
+          $ref: '#/components/schemas/DeviceId'
+          description: The ID of the physical device to be associated with the given placement in the project. Note that a mandatory 4 character prefix is required for all <code>deviceId</code> values.
     AttributeDefaultValue:
       type: string
       maxLength: 800
@@ -1259,13 +1246,11 @@ components:
       title: CreatePlacementRequest
       properties:
         placementName:
-          allOf:
-            - $ref: '#/components/schemas/PlacementName'
-            - description: The name of the placement to be created.
+          $ref: '#/components/schemas/PlacementName'
+          description: The name of the placement to be created.
         attributes:
-          allOf:
-            - $ref: '#/components/schemas/PlacementAttributeMap'
-            - description: Optional user-defined key/value pairs providing contextual data (such as location or function) for the placement.
+          $ref: '#/components/schemas/PlacementAttributeMap'
+          description: Optional user-defined key/value pairs providing contextual data (such as location or function) for the placement.
     Description:
       type: string
       minLength: 0
@@ -1274,13 +1259,11 @@ components:
       type: object
       properties:
         defaultAttributes:
-          allOf:
-            - $ref: '#/components/schemas/DefaultPlacementAttributeMap'
-            - description: The default attributes (key/value pairs) to be applied to all placements using this template.
+          $ref: '#/components/schemas/DefaultPlacementAttributeMap'
+          description: The default attributes (key/value pairs) to be applied to all placements using this template.
         deviceTemplates:
-          allOf:
-            - $ref: '#/components/schemas/DeviceTemplateMap'
-            - description: An object specifying the <a>DeviceTemplate</a> for all placements using this (<a>PlacementTemplate</a>) template.
+          $ref: '#/components/schemas/DeviceTemplateMap'
+          description: An object specifying the <a>DeviceTemplate</a> for all placements using this (<a>PlacementTemplate</a>) template.
       description: An object defining the template for a placement.
     TagMap:
       type: object
@@ -1295,21 +1278,17 @@ components:
       title: CreateProjectRequest
       properties:
         projectName:
-          allOf:
-            - $ref: '#/components/schemas/ProjectName'
-            - description: The name of the project to create.
+          $ref: '#/components/schemas/ProjectName'
+          description: The name of the project to create.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: An optional description for the project.
+          $ref: '#/components/schemas/Description'
+          description: An optional description for the project.
         placementTemplate:
-          allOf:
-            - $ref: '#/components/schemas/PlacementTemplate'
-            - description: 'The schema defining the placement to be created. A placement template defines placement default attributes and device templates. You cannot add or remove device templates after the project has been created. However, you can update <code>callbackOverrides</code> for the device templates using the <code>UpdateProject</code> API.'
+          $ref: '#/components/schemas/PlacementTemplate'
+          description: 'The schema defining the placement to be created. A placement template defines placement default attributes and device templates. You cannot add or remove device templates after the project has been created. However, you can update <code>callbackOverrides</code> for the device templates using the <code>UpdateProject</code> API.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'Optional tags (metadata key/value pairs) to be associated with the project. For example, <code>{ {"key1": "value1", "key2": "value2"} }</code>. For more information, see <a href="https://aws.amazon.com/answers/account-management/aws-tagging-strategies/">AWS Tagging Strategies</a>.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'Optional tags (metadata key/value pairs) to be associated with the project. For example, <code>{ {"key1": "value1", "key2": "value2"} }</code>. For more information, see <a href="https://aws.amazon.com/answers/account-management/aws-tagging-strategies/">AWS Tagging Strategies</a>.'
     DeletePlacementRequest:
       type: object
       title: DeletePlacementRequest
@@ -1332,25 +1311,20 @@ components:
         - updatedDate
       properties:
         projectName:
-          allOf:
-            - $ref: '#/components/schemas/ProjectName'
-            - description: The name of the project containing the placement.
+          $ref: '#/components/schemas/ProjectName'
+          description: The name of the project containing the placement.
         placementName:
-          allOf:
-            - $ref: '#/components/schemas/PlacementName'
-            - description: The name of the placement.
+          $ref: '#/components/schemas/PlacementName'
+          description: The name of the placement.
         attributes:
-          allOf:
-            - $ref: '#/components/schemas/PlacementAttributeMap'
-            - description: The user-defined attributes associated with the placement.
+          $ref: '#/components/schemas/PlacementAttributeMap'
+          description: The user-defined attributes associated with the placement.
         createdDate:
-          allOf:
-            - $ref: '#/components/schemas/Time'
-            - description: 'The date when the placement was initially created, in UNIX epoch time format.'
+          $ref: '#/components/schemas/Time'
+          description: 'The date when the placement was initially created, in UNIX epoch time format.'
         updatedDate:
-          allOf:
-            - $ref: '#/components/schemas/Time'
-            - description: 'The date when the placement was last updated, in UNIX epoch time format. If the placement was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
+          $ref: '#/components/schemas/Time'
+          description: 'The date when the placement was last updated, in UNIX epoch time format. If the placement was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
       description: An object describing a project's placement.
     DescribeProjectRequest:
       type: object
@@ -1364,33 +1338,26 @@ components:
         - updatedDate
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ProjectArn'
-            - description: The ARN of the project.
+          $ref: '#/components/schemas/ProjectArn'
+          description: The ARN of the project.
         projectName:
-          allOf:
-            - $ref: '#/components/schemas/ProjectName'
-            - description: The name of the project for which to obtain information from.
+          $ref: '#/components/schemas/ProjectName'
+          description: The name of the project for which to obtain information from.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the project.
+          $ref: '#/components/schemas/Description'
+          description: The description of the project.
         createdDate:
-          allOf:
-            - $ref: '#/components/schemas/Time'
-            - description: 'The date when the project was originally created, in UNIX epoch time format.'
+          $ref: '#/components/schemas/Time'
+          description: 'The date when the project was originally created, in UNIX epoch time format.'
         updatedDate:
-          allOf:
-            - $ref: '#/components/schemas/Time'
-            - description: 'The date when the project was last updated, in UNIX epoch time format. If the project was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
+          $ref: '#/components/schemas/Time'
+          description: 'The date when the project was last updated, in UNIX epoch time format. If the project was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
         placementTemplate:
-          allOf:
-            - $ref: '#/components/schemas/PlacementTemplate'
-            - description: An object describing the project's placement specifications.
+          $ref: '#/components/schemas/PlacementTemplate'
+          description: An object describing the project's placement specifications.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags (metadata key/value pairs) associated with the project.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags (metadata key/value pairs) associated with the project.
       description: An object providing detailed information for a particular project associated with an AWS account and region.
     DeviceCallbackKey:
       type: string
@@ -1414,13 +1381,11 @@ components:
       type: object
       properties:
         deviceType:
-          allOf:
-            - $ref: '#/components/schemas/DeviceType'
-            - description: 'The device type, which currently must be <code>"button"</code>.'
+          $ref: '#/components/schemas/DeviceType'
+          description: 'The device type, which currently must be <code>"button"</code>.'
         callbackOverrides:
-          allOf:
-            - $ref: '#/components/schemas/DeviceCallbackOverrideMap'
-            - description: An optional Lambda function to invoke instead of the default Lambda function provided by the placement template.
+          $ref: '#/components/schemas/DeviceCallbackOverrideMap'
+          description: An optional Lambda function to invoke instead of the default Lambda function provided by the placement template.
       description: An object representing a device for a placement template (see <a>PlacementTemplate</a>).
     DisassociateDeviceFromPlacementRequest:
       type: object
@@ -1473,21 +1438,17 @@ components:
         - updatedDate
       properties:
         projectName:
-          allOf:
-            - $ref: '#/components/schemas/ProjectName'
-            - description: The name of the project containing the placement.
+          $ref: '#/components/schemas/ProjectName'
+          description: The name of the project containing the placement.
         placementName:
-          allOf:
-            - $ref: '#/components/schemas/PlacementName'
-            - description: The name of the placement being summarized.
+          $ref: '#/components/schemas/PlacementName'
+          description: The name of the placement being summarized.
         createdDate:
-          allOf:
-            - $ref: '#/components/schemas/Time'
-            - description: 'The date when the placement was originally created, in UNIX epoch time format.'
+          $ref: '#/components/schemas/Time'
+          description: 'The date when the placement was originally created, in UNIX epoch time format.'
         updatedDate:
-          allOf:
-            - $ref: '#/components/schemas/Time'
-            - description: 'The date when the placement was last updated, in UNIX epoch time format. If the placement was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
+          $ref: '#/components/schemas/Time'
+          description: 'The date when the placement was last updated, in UNIX epoch time format. If the placement was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
       description: An object providing summary information for a particular placement.
     ProjectSummary:
       type: object
@@ -1497,25 +1458,20 @@ components:
         - updatedDate
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ProjectArn'
-            - description: The ARN of the project.
+          $ref: '#/components/schemas/ProjectArn'
+          description: The ARN of the project.
         projectName:
-          allOf:
-            - $ref: '#/components/schemas/ProjectName'
-            - description: The name of the project being summarized.
+          $ref: '#/components/schemas/ProjectName'
+          description: The name of the project being summarized.
         createdDate:
-          allOf:
-            - $ref: '#/components/schemas/Time'
-            - description: 'The date when the project was originally created, in UNIX epoch time format.'
+          $ref: '#/components/schemas/Time'
+          description: 'The date when the project was originally created, in UNIX epoch time format.'
         updatedDate:
-          allOf:
-            - $ref: '#/components/schemas/Time'
-            - description: 'The date when the project was last updated, in UNIX epoch time format. If the project was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
+          $ref: '#/components/schemas/Time'
+          description: 'The date when the project was last updated, in UNIX epoch time format. If the project was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags (metadata key/value pairs) associated with the project.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags (metadata key/value pairs) associated with the project.
       description: An object providing summary information for a particular project for an associated AWS account and region.
     TagKeyList:
       type: array
@@ -1530,9 +1486,8 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The new or modifying tag(s) for the resource. See <a href="https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits">AWS IoT 1-Click Service Limits</a> for the maximum number of tags allowed per resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The new or modifying tag(s) for the resource. See <a href="https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits">AWS IoT 1-Click Service Limits</a> for the maximum number of tags allowed per resource.'
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -1542,20 +1497,17 @@ components:
       title: UpdatePlacementRequest
       properties:
         attributes:
-          allOf:
-            - $ref: '#/components/schemas/PlacementAttributeMap'
-            - description: The user-defined object of attributes used to update the placement. The maximum number of key/value pairs is 50.
+          $ref: '#/components/schemas/PlacementAttributeMap'
+          description: The user-defined object of attributes used to update the placement. The maximum number of key/value pairs is 50.
     UpdateProjectRequest:
       type: object
       title: UpdateProjectRequest
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: An optional user-defined description for the project.
+          $ref: '#/components/schemas/Description'
+          description: An optional user-defined description for the project.
         placementTemplate:
-          allOf:
-            - $ref: '#/components/schemas/PlacementTemplate'
-            - description: 'An object defining the project update. Once a project has been created, you cannot add device template names to the project. However, for a given <code>placementTemplate</code>, you can update the associated <code>callbackOverrides</code> for the device definition using this API.'
+          $ref: '#/components/schemas/PlacementTemplate'
+          description: 'An object defining the project update. Once a project has been created, you cannot add device template names to the project. However, for a given <code>placementTemplate</code>, you can update the associated <code>callbackOverrides</code> for the device definition using this API.'
 security:
   - hmac: []

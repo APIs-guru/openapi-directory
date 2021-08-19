@@ -440,17 +440,14 @@ components:
         - UnprocessedIdentifiers
       properties:
         Records:
-          allOf:
-            - $ref: '#/components/schemas/BatchGetRecordResultDetails'
-            - description: A list of Records you requested to be retrieved in batch.
+          $ref: '#/components/schemas/BatchGetRecordResultDetails'
+          description: A list of Records you requested to be retrieved in batch.
         Errors:
-          allOf:
-            - $ref: '#/components/schemas/BatchGetRecordErrors'
-            - description: A list of errors that have occured when retrieving a batch of Records.
+          $ref: '#/components/schemas/BatchGetRecordErrors'
+          description: A list of errors that have occured when retrieving a batch of Records.
         UnprocessedIdentifiers:
-          allOf:
-            - $ref: '#/components/schemas/UnprocessedIdentifiers'
-            - description: 'A unprocessed list of <code>FeatureGroup</code> names, with their corresponding <code>RecordIdentifier</code> value, and Feature name.'
+          $ref: '#/components/schemas/UnprocessedIdentifiers'
+          description: 'A unprocessed list of <code>FeatureGroup</code> names, with their corresponding <code>RecordIdentifier</code> value, and Feature name.'
     BatchGetRecordIdentifier:
       type: object
       required:
@@ -458,17 +455,14 @@ components:
         - RecordIdentifiersValueAsString
       properties:
         FeatureGroupName:
-          allOf:
-            - $ref: '#/components/schemas/FeatureGroupName'
-            - description: A <code>FeatureGroupName</code> containing Records you are retrieving in a batch.
+          $ref: '#/components/schemas/FeatureGroupName'
+          description: A <code>FeatureGroupName</code> containing Records you are retrieving in a batch.
         RecordIdentifiersValueAsString:
-          allOf:
-            - $ref: '#/components/schemas/RecordIdentifiers'
-            - description: The value for a list of record identifiers in string format.
+          $ref: '#/components/schemas/RecordIdentifiers'
+          description: The value for a list of record identifiers in string format.
         FeatureNames:
-          allOf:
-            - $ref: '#/components/schemas/FeatureNames'
-            - description: 'List of names of Features to be retrieved. If not specified, the latest value for all the Features are returned.'
+          $ref: '#/components/schemas/FeatureNames'
+          description: 'List of names of Features to be retrieved. If not specified, the latest value for all the Features are returned.'
       description: The identifier that identifies the batch of Records you are retrieving in a batch.
     ValidationError: {}
     InternalFailure: {}
@@ -478,9 +472,8 @@ components:
       type: object
       properties:
         Record:
-          allOf:
-            - $ref: '#/components/schemas/Record'
-            - description: The record you requested. A list of <code>FeatureValues</code>.
+          $ref: '#/components/schemas/Record'
+          description: The record you requested. A list of <code>FeatureValues</code>.
     FeatureName:
       type: string
       pattern: '^[a-zA-Z0-9]([-_]*[a-zA-Z0-9])*'
@@ -494,13 +487,11 @@ components:
         - ValueAsString
       properties:
         FeatureName:
-          allOf:
-            - $ref: '#/components/schemas/FeatureName'
-            - description: The name of a feature that a feature value corresponds to.
+          $ref: '#/components/schemas/FeatureName'
+          description: The name of a feature that a feature value corresponds to.
         ValueAsString:
-          allOf:
-            - $ref: '#/components/schemas/ValueAsString'
-            - description: 'The value associated with a feature, in string format. Note that features types can be String, Integral, or Fractional. This value represents all three types as a string.'
+          $ref: '#/components/schemas/ValueAsString'
+          description: 'The value associated with a feature, in string format. Note that features types can be String, Integral, or Fractional. This value represents all three types as a string.'
       description: The value associated with a feature.
     ValueAsString:
       type: string
@@ -518,21 +509,17 @@ components:
         - ErrorMessage
       properties:
         FeatureGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ValueAsString'
-            - description: The name of the feature group that the record belongs to.
+          $ref: '#/components/schemas/ValueAsString'
+          description: The name of the feature group that the record belongs to.
         RecordIdentifierValueAsString:
-          allOf:
-            - $ref: '#/components/schemas/ValueAsString'
-            - description: The value for the <code>RecordIdentifier</code> in string format of a Record from a <code>FeatureGroup</code> that is causing an error when attempting to be retrieved.
+          $ref: '#/components/schemas/ValueAsString'
+          description: The value for the <code>RecordIdentifier</code> in string format of a Record from a <code>FeatureGroup</code> that is causing an error when attempting to be retrieved.
         ErrorCode:
-          allOf:
-            - $ref: '#/components/schemas/ValueAsString'
-            - description: 'The error code of an error that has occured when attempting to retrieve a batch of Records. For more information on errors, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_GetRecord.html#API_feature_store_GetRecord_Errors"> Errors</a>.'
+          $ref: '#/components/schemas/ValueAsString'
+          description: 'The error code of an error that has occured when attempting to retrieve a batch of Records. For more information on errors, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_GetRecord.html#API_feature_store_GetRecord_Errors"> Errors</a>.'
         ErrorMessage:
-          allOf:
-            - $ref: '#/components/schemas/Message'
-            - description: The error message of an error that has occured when attempting to retrieve a record in the batch.
+          $ref: '#/components/schemas/Message'
+          description: The error message of an error that has occured when attempting to retrieve a record in the batch.
       description: The error that has occurred when attempting to retrieve a batch of Records.
     BatchGetRecordErrors:
       type: array
@@ -568,9 +555,8 @@ components:
       title: BatchGetRecordRequest
       properties:
         Identifiers:
-          allOf:
-            - $ref: '#/components/schemas/BatchGetRecordIdentifiers'
-            - description: 'A list of <code>FeatureGroup</code> names, with their corresponding <code>RecordIdentifier</code> value, and Feature name that have been requested to be retrieved in batch.'
+          $ref: '#/components/schemas/BatchGetRecordIdentifiers'
+          description: 'A list of <code>FeatureGroup</code> names, with their corresponding <code>RecordIdentifier</code> value, and Feature name that have been requested to be retrieved in batch.'
     BatchGetRecordResultDetails:
       type: array
       items:
@@ -594,17 +580,14 @@ components:
         - Record
       properties:
         FeatureGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ValueAsString'
-            - description: The <code>FeatureGroupName</code> containing Records you retrieved in a batch.
+          $ref: '#/components/schemas/ValueAsString'
+          description: The <code>FeatureGroupName</code> containing Records you retrieved in a batch.
         RecordIdentifierValueAsString:
-          allOf:
-            - $ref: '#/components/schemas/ValueAsString'
-            - description: The value of the record identifer in string format.
+          $ref: '#/components/schemas/ValueAsString'
+          description: The value of the record identifer in string format.
         Record:
-          allOf:
-            - $ref: '#/components/schemas/Record'
-            - description: The <code>Record</code> retrieved.
+          $ref: '#/components/schemas/Record'
+          description: The <code>Record</code> retrieved.
       description: The output of Records that have been retrieved in a batch.
     DeleteRecordRequest:
       type: object
@@ -621,8 +604,7 @@ components:
       title: PutRecordRequest
       properties:
         Record:
-          allOf:
-            - $ref: '#/components/schemas/Record'
-            - description: '<p>List of FeatureValues to be inserted. This will be a full over-write. If you only want to update few of the feature values, do the following:</p> <ul> <li> <p>Use <code>GetRecord</code> to retrieve the latest record.</p> </li> <li> <p>Update the record returned from <code>GetRecord</code>. </p> </li> <li> <p>Use <code>PutRecord</code> to update feature values.</p> </li> </ul>'
+          $ref: '#/components/schemas/Record'
+          description: '<p>List of FeatureValues to be inserted. This will be a full over-write. If you only want to update few of the feature values, do the following:</p> <ul> <li> <p>Use <code>GetRecord</code> to retrieve the latest record.</p> </li> <li> <p>Update the record returned from <code>GetRecord</code>. </p> </li> <li> <p>Use <code>PutRecord</code> to update feature values.</p> </li> </ul>'
 security:
   - hmac: []

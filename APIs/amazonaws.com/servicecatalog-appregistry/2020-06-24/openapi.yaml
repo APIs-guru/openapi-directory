@@ -1267,13 +1267,11 @@ components:
       type: object
       properties:
         applicationArn:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationArn'
-            - description: The Amazon resource name (ARN) of the application that was augmented with attributes.
+          $ref: '#/components/schemas/ApplicationArn'
+          description: The Amazon resource name (ARN) of the application that was augmented with attributes.
         attributeGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/AttributeGroupArn'
-            - description: The Amazon resource name (ARN) of the attribute group that contains the application's new attributes.
+          $ref: '#/components/schemas/AttributeGroupArn'
+          description: The Amazon resource name (ARN) of the attribute group that contains the application's new attributes.
     ResourceNotFoundException: {}
     ValidationException: {}
     InternalServerException: {}
@@ -1282,21 +1280,18 @@ components:
       type: object
       properties:
         applicationArn:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationArn'
-            - description: The Amazon resource name (ARN) of the application that was augmented with attributes.
+          $ref: '#/components/schemas/ApplicationArn'
+          description: The Amazon resource name (ARN) of the application that was augmented with attributes.
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon resource name (ARN) that specifies the resource.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon resource name (ARN) that specifies the resource.
     ConflictException: {}
     CreateApplicationResponse:
       type: object
       properties:
         application:
-          allOf:
-            - $ref: '#/components/schemas/Application'
-            - description: Information about the application.
+          $ref: '#/components/schemas/Application'
+          description: Information about the application.
     TagValue:
       type: string
       pattern: '[\p{L}\p{Z}\p{N}_.:/=+\-@]*'
@@ -1305,181 +1300,146 @@ components:
       type: object
       properties:
         attributeGroup:
-          allOf:
-            - $ref: '#/components/schemas/AttributeGroup'
-            - description: Information about the attribute group.
+          $ref: '#/components/schemas/AttributeGroup'
+          description: Information about the attribute group.
     DeleteApplicationResponse:
       type: object
       properties:
         application:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationSummary'
-            - description: Information about the deleted application.
+          $ref: '#/components/schemas/ApplicationSummary'
+          description: Information about the deleted application.
     DeleteAttributeGroupResponse:
       type: object
       properties:
         attributeGroup:
-          allOf:
-            - $ref: '#/components/schemas/AttributeGroupSummary'
-            - description: Information about the deleted attribute group.
+          $ref: '#/components/schemas/AttributeGroupSummary'
+          description: Information about the deleted attribute group.
     DisassociateAttributeGroupResponse:
       type: object
       properties:
         applicationArn:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationArn'
-            - description: The Amazon resource name (ARN) that specifies the application.
+          $ref: '#/components/schemas/ApplicationArn'
+          description: The Amazon resource name (ARN) that specifies the application.
         attributeGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/AttributeGroupArn'
-            - description: The Amazon resource name (ARN) that specifies the attribute group.
+          $ref: '#/components/schemas/AttributeGroupArn'
+          description: The Amazon resource name (ARN) that specifies the attribute group.
     DisassociateResourceResponse:
       type: object
       properties:
         applicationArn:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationArn'
-            - description: The Amazon resource name (ARN) that specifies the application.
+          $ref: '#/components/schemas/ApplicationArn'
+          description: The Amazon resource name (ARN) that specifies the application.
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon resource name (ARN) that specifies the resource.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon resource name (ARN) that specifies the resource.
     GetApplicationResponse:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationId'
-            - description: The identifier of the application.
+          $ref: '#/components/schemas/ApplicationId'
+          description: The identifier of the application.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationArn'
-            - description: The Amazon resource name (ARN) that specifies the application across services.
+          $ref: '#/components/schemas/ApplicationArn'
+          description: The Amazon resource name (ARN) that specifies the application across services.
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the application. The name must be unique in the region in which you are creating the application.
+          $ref: '#/components/schemas/Name'
+          description: The name of the application. The name must be unique in the region in which you are creating the application.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the application.
+          $ref: '#/components/schemas/Description'
+          description: The description of the application.
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The ISO-8601 formatted timestamp of the moment when the application was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The ISO-8601 formatted timestamp of the moment when the application was created.
         lastUpdateTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The ISO-8601 formatted timestamp of the moment when the application was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The ISO-8601 formatted timestamp of the moment when the application was last updated.
         associatedResourceCount:
-          allOf:
-            - $ref: '#/components/schemas/AssociationCount'
-            - description: The number of top-level resources that were registered as part of this application.
+          $ref: '#/components/schemas/AssociationCount'
+          description: The number of top-level resources that were registered as part of this application.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: Key-value pairs associated with the application.
+          $ref: '#/components/schemas/Tags'
+          description: Key-value pairs associated with the application.
     GetAttributeGroupResponse:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/AttributeGroupId'
-            - description: The identifier of the attribute group.
+          $ref: '#/components/schemas/AttributeGroupId'
+          description: The identifier of the attribute group.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/AttributeGroupArn'
-            - description: The Amazon resource name (ARN) that specifies the attribute group across services.
+          $ref: '#/components/schemas/AttributeGroupArn'
+          description: The Amazon resource name (ARN) that specifies the attribute group across services.
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the attribute group.
+          $ref: '#/components/schemas/Name'
+          description: The name of the attribute group.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the attribute group that the user provides.
+          $ref: '#/components/schemas/Description'
+          description: The description of the attribute group that the user provides.
         attributes:
-          allOf:
-            - $ref: '#/components/schemas/Attributes'
-            - description: A JSON string in the form of nested key-value pairs that represent the attributes in the group and describes an application and its components.
+          $ref: '#/components/schemas/Attributes'
+          description: A JSON string in the form of nested key-value pairs that represent the attributes in the group and describes an application and its components.
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The ISO-8601 formatted timestamp of the moment the attribute group was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The ISO-8601 formatted timestamp of the moment the attribute group was created.
         lastUpdateTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The ISO-8601 formatted timestamp of the moment the attribute group was last updated. This time is the same as the creationTime for a newly created attribute group.
+          $ref: '#/components/schemas/Timestamp'
+          description: The ISO-8601 formatted timestamp of the moment the attribute group was last updated. This time is the same as the creationTime for a newly created attribute group.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: Key-value pairs associated with the attribute group.
+          $ref: '#/components/schemas/Tags'
+          description: Key-value pairs associated with the attribute group.
     ListApplicationsResponse:
       type: object
       properties:
         applications:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationSummaries'
-            - description: This list of applications.
+          $ref: '#/components/schemas/ApplicationSummaries'
+          description: This list of applications.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The token to use to get the next page of results after a previous API call. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'The token to use to get the next page of results after a previous API call. '
     ListAssociatedAttributeGroupsResponse:
       type: object
       properties:
         attributeGroups:
-          allOf:
-            - $ref: '#/components/schemas/AttributeGroupIds'
-            - description: A list of attribute group IDs.
+          $ref: '#/components/schemas/AttributeGroupIds'
+          description: A list of attribute group IDs.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The token to use to get the next page of results after a previous API call. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'The token to use to get the next page of results after a previous API call. '
     ListAssociatedResourcesResponse:
       type: object
       properties:
         resources:
-          allOf:
-            - $ref: '#/components/schemas/Resources'
-            - description: Information about the resources.
+          $ref: '#/components/schemas/Resources'
+          description: Information about the resources.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The token to use to get the next page of results after a previous API call. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'The token to use to get the next page of results after a previous API call. '
     ListAttributeGroupsResponse:
       type: object
       properties:
         attributeGroups:
-          allOf:
-            - $ref: '#/components/schemas/AttributeGroupSummaries'
-            - description: This list of attribute groups.
+          $ref: '#/components/schemas/AttributeGroupSummaries'
+          description: This list of attribute groups.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The token to use to get the next page of results after a previous API call. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'The token to use to get the next page of results after a previous API call. '
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags on the resource.
+          $ref: '#/components/schemas/Tags'
+          description: The tags on the resource.
     SyncResourceResponse:
       type: object
       properties:
         applicationArn:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationArn'
-            - description: The Amazon resource name (ARN) that specifies the application.
+          $ref: '#/components/schemas/ApplicationArn'
+          description: The Amazon resource name (ARN) that specifies the application.
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon resource name (ARN) that specifies the resource.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon resource name (ARN) that specifies the resource.
         actionTaken:
-          allOf:
-            - $ref: '#/components/schemas/SyncAction'
-            - description: 'The results of the output if an application is associated with an ARN value, which could be <code>syncStarted</code> or None.'
+          $ref: '#/components/schemas/SyncAction'
+          description: 'The results of the output if an application is associated with an ARN value, which could be <code>syncStarted</code> or None.'
     TagResourceResponse:
       type: object
       properties: {}
@@ -1495,16 +1455,14 @@ components:
       type: object
       properties:
         application:
-          allOf:
-            - $ref: '#/components/schemas/Application'
-            - description: The updated information of the application.
+          $ref: '#/components/schemas/Application'
+          description: The updated information of the application.
     UpdateAttributeGroupResponse:
       type: object
       properties:
         attributeGroup:
-          allOf:
-            - $ref: '#/components/schemas/AttributeGroup'
-            - description: The updated information of the attribute group.
+          $ref: '#/components/schemas/AttributeGroup'
+          description: The updated information of the attribute group.
     ApplicationId:
       type: string
       pattern: '[a-z0-9]{12}'
@@ -1532,33 +1490,26 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationId'
-            - description: The identifier of the application.
+          $ref: '#/components/schemas/ApplicationId'
+          description: The identifier of the application.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationArn'
-            - description: The Amazon resource name (ARN) that specifies the application across services.
+          $ref: '#/components/schemas/ApplicationArn'
+          description: The Amazon resource name (ARN) that specifies the application across services.
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the application. The name must be unique in the region in which you are creating the application.
+          $ref: '#/components/schemas/Name'
+          description: The name of the application. The name must be unique in the region in which you are creating the application.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the application.
+          $ref: '#/components/schemas/Description'
+          description: The description of the application.
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The ISO-8601 formatted timestamp of the moment when the application was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The ISO-8601 formatted timestamp of the moment when the application was created.
         lastUpdateTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The ISO-8601 formatted timestamp of the moment when the application was last updated.'
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The ISO-8601 formatted timestamp of the moment when the application was last updated.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: Key-value pairs you can use to associate with the application.
+          $ref: '#/components/schemas/Tags'
+          description: Key-value pairs you can use to associate with the application.
       description: Represents a Service Catalog AppRegistry application that is the top-level node in a hierarchy of related cloud resource abstractions.
     ApplicationSpecifier:
       type: string
@@ -1569,29 +1520,23 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationId'
-            - description: The identifier of the application.
+          $ref: '#/components/schemas/ApplicationId'
+          description: The identifier of the application.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationArn'
-            - description: The Amazon resource name (ARN) that specifies the application across services.
+          $ref: '#/components/schemas/ApplicationArn'
+          description: The Amazon resource name (ARN) that specifies the application across services.
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the application. The name must be unique in the region in which you are creating the application.
+          $ref: '#/components/schemas/Name'
+          description: The name of the application. The name must be unique in the region in which you are creating the application.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the application.
+          $ref: '#/components/schemas/Description'
+          description: The description of the application.
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The ISO-8601 formatted timestamp of the moment when the application was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The ISO-8601 formatted timestamp of the moment when the application was created.
         lastUpdateTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The ISO-8601 formatted timestamp of the moment when the application was last updated.'
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The ISO-8601 formatted timestamp of the moment when the application was last updated.'
       description: Summary of a Service Catalog AppRegistry application.
     ApplicationSummaries:
       type: array
@@ -1639,33 +1584,26 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/AttributeGroupId'
-            - description: The globally unique attribute group identifier of the attribute group.
+          $ref: '#/components/schemas/AttributeGroupId'
+          description: The globally unique attribute group identifier of the attribute group.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/AttributeGroupArn'
-            - description: The Amazon resource name (ARN) that specifies the attribute group across services.
+          $ref: '#/components/schemas/AttributeGroupArn'
+          description: The Amazon resource name (ARN) that specifies the attribute group across services.
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the attribute group.
+          $ref: '#/components/schemas/Name'
+          description: The name of the attribute group.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the attribute group that the user provides.
+          $ref: '#/components/schemas/Description'
+          description: The description of the attribute group that the user provides.
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The ISO-8601 formatted timestamp of the moment the attribute group was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The ISO-8601 formatted timestamp of the moment the attribute group was created.
         lastUpdateTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The ISO-8601 formatted timestamp of the moment the attribute group was last updated. This time is the same as the creationTime for a newly created attribute group.
+          $ref: '#/components/schemas/Timestamp'
+          description: The ISO-8601 formatted timestamp of the moment the attribute group was last updated. This time is the same as the creationTime for a newly created attribute group.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: Key-value pairs you can use to associate with the attribute group.
+          $ref: '#/components/schemas/Tags'
+          description: Key-value pairs you can use to associate with the attribute group.
       description: Represents a Service Catalog AppRegistry attribute group that is rich metadata which describes an application and its components.
     AttributeGroupIds:
       type: array
@@ -1675,29 +1613,23 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/AttributeGroupId'
-            - description: The globally unique attribute group identifier of the attribute group.
+          $ref: '#/components/schemas/AttributeGroupId'
+          description: The globally unique attribute group identifier of the attribute group.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/AttributeGroupArn'
-            - description: The Amazon resource name (ARN) that specifies the attribute group across services.
+          $ref: '#/components/schemas/AttributeGroupArn'
+          description: The Amazon resource name (ARN) that specifies the attribute group across services.
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the attribute group.
+          $ref: '#/components/schemas/Name'
+          description: The name of the attribute group.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the attribute group that the user provides.
+          $ref: '#/components/schemas/Description'
+          description: The description of the attribute group that the user provides.
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The ISO-8601 formatted timestamp of the moment the attribute group was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The ISO-8601 formatted timestamp of the moment the attribute group was created.
         lastUpdateTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The ISO-8601 formatted timestamp of the moment the attribute group was last updated. This time is the same as the creationTime for a newly created attribute group.
+          $ref: '#/components/schemas/Timestamp'
+          description: The ISO-8601 formatted timestamp of the moment the attribute group was last updated. This time is the same as the creationTime for a newly created attribute group.
       description: Summary of a Service Catalog AppRegistry attribute group.
     AttributeGroupSummaries:
       type: array
@@ -1721,21 +1653,17 @@ components:
       title: CreateApplicationRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the application. The name must be unique in the region in which you are creating the application.
+          $ref: '#/components/schemas/Name'
+          description: The name of the application. The name must be unique in the region in which you are creating the application.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the application.
+          $ref: '#/components/schemas/Description'
+          description: The description of the application.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: Key-value pairs you can use to associate with the application.
+          $ref: '#/components/schemas/Tags'
+          description: Key-value pairs you can use to associate with the application.
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'A unique identifier that you provide to ensure idempotency. If you retry a request that completed successfully using the same client token and the same parameters, the retry succeeds without performing any further actions. If you retry a successful request using the same client token, but one or more of the parameters are different, the retry fails.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'A unique identifier that you provide to ensure idempotency. If you retry a request that completed successfully using the same client token and the same parameters, the retry succeeds without performing any further actions. If you retry a successful request using the same client token, but one or more of the parameters are different, the retry fails.'
     CreateAttributeGroupRequest:
       type: object
       required:
@@ -1745,25 +1673,20 @@ components:
       title: CreateAttributeGroupRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the attribute group.
+          $ref: '#/components/schemas/Name'
+          description: The name of the attribute group.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the attribute group that the user provides.
+          $ref: '#/components/schemas/Description'
+          description: The description of the attribute group that the user provides.
         attributes:
-          allOf:
-            - $ref: '#/components/schemas/Attributes'
-            - description: A JSON string in the form of nested key-value pairs that represent the attributes in the group and describes an application and its components.
+          $ref: '#/components/schemas/Attributes'
+          description: A JSON string in the form of nested key-value pairs that represent the attributes in the group and describes an application and its components.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: Key-value pairs you can use to associate with the attribute group.
+          $ref: '#/components/schemas/Tags'
+          description: Key-value pairs you can use to associate with the attribute group.
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'A unique identifier that you provide to ensure idempotency. If you retry a request that completed successfully using the same client token and the same parameters, the retry succeeds without performing any further actions. If you retry a successful request using the same client token, but one or more of the parameters are different, the retry fails.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'A unique identifier that you provide to ensure idempotency. If you retry a request that completed successfully using the same client token and the same parameters, the retry succeeds without performing any further actions. If you retry a successful request using the same client token, but one or more of the parameters are different, the retry fails.'
     DeleteApplicationRequest:
       type: object
       title: DeleteApplicationRequest
@@ -1828,13 +1751,11 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceSpecifier'
-            - description: The name of the resource.
+          $ref: '#/components/schemas/ResourceSpecifier'
+          description: The name of the resource.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/StackArn'
-            - description: The Amazon resource name (ARN) that specifies the resource across services.
+          $ref: '#/components/schemas/StackArn'
+          description: The Amazon resource name (ARN) that specifies the resource across services.
       description: Information about the resource.
     SyncAction:
       type: string
@@ -1858,9 +1779,8 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The new or modified tags for the resource.
+          $ref: '#/components/schemas/Tags'
+          description: The new or modified tags for the resource.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -1870,28 +1790,23 @@ components:
       title: UpdateApplicationRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The new name of the application. The name must be unique in the region in which you are updating the application.
+          $ref: '#/components/schemas/Name'
+          description: The new name of the application. The name must be unique in the region in which you are updating the application.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The new description of the application.
+          $ref: '#/components/schemas/Description'
+          description: The new description of the application.
     UpdateAttributeGroupRequest:
       type: object
       title: UpdateAttributeGroupRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The new name of the attribute group. The name must be unique in the region in which you are updating the attribute group.
+          $ref: '#/components/schemas/Name'
+          description: The new name of the attribute group. The name must be unique in the region in which you are updating the attribute group.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the attribute group that the user provides.
+          $ref: '#/components/schemas/Description'
+          description: The description of the attribute group that the user provides.
         attributes:
-          allOf:
-            - $ref: '#/components/schemas/Attributes'
-            - description: A JSON string in the form of nested key-value pairs that represent the attributes in the group and describes an application and its components.
+          $ref: '#/components/schemas/Attributes'
+          description: A JSON string in the form of nested key-value pairs that represent the attributes in the group and describes an application and its components.
 security:
   - hmac: []

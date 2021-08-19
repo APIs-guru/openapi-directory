@@ -2269,17 +2269,14 @@ components:
       title: AssociateEntityToThingRequest
       properties:
         thingName:
-          allOf:
-            - $ref: '#/components/schemas/ThingName'
-            - description: The name of the thing to which the entity is to be associated.
+          $ref: '#/components/schemas/ThingName'
+          description: The name of the thing to which the entity is to be associated.
         entityId:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: '<p>The ID of the device to be associated with the thing.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME</code> </p>'
+          $ref: '#/components/schemas/Urn'
+          description: '<p>The ID of the device to be associated with the thing.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME</code> </p>'
         namespaceVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The version of the user's namespace. Defaults to the latest version of the user's namespace.
+          $ref: '#/components/schemas/Version'
+          description: The version of the user's namespace. Defaults to the latest version of the user's namespace.
     InvalidRequestException: {}
     ResourceNotFoundException: {}
     InternalFailureException: {}
@@ -2288,9 +2285,8 @@ components:
       type: object
       properties:
         summary:
-          allOf:
-            - $ref: '#/components/schemas/FlowTemplateSummary'
-            - description: The summary object that describes the created workflow.
+          $ref: '#/components/schemas/FlowTemplateSummary'
+          description: The summary object that describes the created workflow.
     CreateFlowTemplateRequest:
       type: object
       required:
@@ -2298,22 +2294,19 @@ components:
       title: CreateFlowTemplateRequest
       properties:
         definition:
-          allOf:
-            - $ref: '#/components/schemas/DefinitionDocument'
-            - description: The workflow <code>DefinitionDocument</code>.
+          $ref: '#/components/schemas/DefinitionDocument'
+          description: The workflow <code>DefinitionDocument</code>.
         compatibleNamespaceVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: '<p>The namespace version in which the workflow is to be created.</p> <p>If no value is specified, the latest version is used by default.</p>'
+          $ref: '#/components/schemas/Version'
+          description: '<p>The namespace version in which the workflow is to be created.</p> <p>If no value is specified, the latest version is used by default.</p>'
     ResourceAlreadyExistsException: {}
     LimitExceededException: {}
     CreateSystemInstanceResponse:
       type: object
       properties:
         summary:
-          allOf:
-            - $ref: '#/components/schemas/SystemInstanceSummary'
-            - description: The summary object that describes the new system instance.
+          $ref: '#/components/schemas/SystemInstanceSummary'
+          description: The summary object that describes the new system instance.
     CreateSystemInstanceRequest:
       type: object
       required:
@@ -2322,36 +2315,30 @@ components:
       title: CreateSystemInstanceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: 'Metadata, consisting of key-value pairs, that can be used to categorize your system instances.'
+          $ref: '#/components/schemas/TagList'
+          description: 'Metadata, consisting of key-value pairs, that can be used to categorize your system instances.'
         definition:
           $ref: '#/components/schemas/DefinitionDocument'
         target:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentTarget'
-            - description: The target type of the deployment. Valid values are <code>GREENGRASS</code> and <code>CLOUD</code>.
+          $ref: '#/components/schemas/DeploymentTarget'
+          description: The target type of the deployment. Valid values are <code>GREENGRASS</code> and <code>CLOUD</code>.
         greengrassGroupName:
-          allOf:
-            - $ref: '#/components/schemas/GroupName'
-            - description: The name of the Greengrass group where the system instance will be deployed. This value is required if the value of the <code>target</code> parameter is <code>GREENGRASS</code>.
+          $ref: '#/components/schemas/GroupName'
+          description: The name of the Greengrass group where the system instance will be deployed. This value is required if the value of the <code>target</code> parameter is <code>GREENGRASS</code>.
         s3BucketName:
-          allOf:
-            - $ref: '#/components/schemas/S3BucketName'
-            - description: The name of the Amazon Simple Storage Service bucket that will be used to store and deploy the system instance's resource file. This value is required if the value of the <code>target</code> parameter is <code>GREENGRASS</code>.
+          $ref: '#/components/schemas/S3BucketName'
+          description: The name of the Amazon Simple Storage Service bucket that will be used to store and deploy the system instance's resource file. This value is required if the value of the <code>target</code> parameter is <code>GREENGRASS</code>.
         metricsConfiguration:
           $ref: '#/components/schemas/MetricsConfiguration'
         flowActionsRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The ARN of the IAM role that AWS IoT Things Graph will assume when it executes the flow. This role must have read and write access to AWS Lambda and AWS IoT and any other AWS services that the flow uses when it executes. This value is required if the value of the <code>target</code> parameter is <code>CLOUD</code>.
+          $ref: '#/components/schemas/RoleArn'
+          description: The ARN of the IAM role that AWS IoT Things Graph will assume when it executes the flow. This role must have read and write access to AWS Lambda and AWS IoT and any other AWS services that the flow uses when it executes. This value is required if the value of the <code>target</code> parameter is <code>CLOUD</code>.
     CreateSystemTemplateResponse:
       type: object
       properties:
         summary:
-          allOf:
-            - $ref: '#/components/schemas/SystemTemplateSummary'
-            - description: The summary object that describes the created system.
+          $ref: '#/components/schemas/SystemTemplateSummary'
+          description: The summary object that describes the created system.
     CreateSystemTemplateRequest:
       type: object
       required:
@@ -2359,13 +2346,11 @@ components:
       title: CreateSystemTemplateRequest
       properties:
         definition:
-          allOf:
-            - $ref: '#/components/schemas/DefinitionDocument'
-            - description: The <code>DefinitionDocument</code> used to create the system.
+          $ref: '#/components/schemas/DefinitionDocument'
+          description: The <code>DefinitionDocument</code> used to create the system.
         compatibleNamespaceVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: '<p>The namespace version in which the system is to be created.</p> <p>If no value is specified, the latest version is used by default.</p>'
+          $ref: '#/components/schemas/Version'
+          description: '<p>The namespace version in which the system is to be created.</p> <p>If no value is specified, the latest version is used by default.</p>'
     DeleteFlowTemplateResponse:
       type: object
       properties: {}
@@ -2376,21 +2361,18 @@ components:
       title: DeleteFlowTemplateRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: '<p>The ID of the workflow to be deleted.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code> </p>'
+          $ref: '#/components/schemas/Urn'
+          description: '<p>The ID of the workflow to be deleted.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code> </p>'
     ResourceInUseException: {}
     DeleteNamespaceResponse:
       type: object
       properties:
         namespaceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the namespace to be deleted.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the namespace to be deleted.
         namespaceName:
-          allOf:
-            - $ref: '#/components/schemas/NamespaceName'
-            - description: The name of the namespace to be deleted.
+          $ref: '#/components/schemas/NamespaceName'
+          description: The name of the namespace to be deleted.
     DeleteNamespaceRequest:
       type: object
       title: DeleteNamespaceRequest
@@ -2403,9 +2385,8 @@ components:
       title: DeleteSystemInstanceRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: The ID of the system instance to be deleted.
+          $ref: '#/components/schemas/Urn'
+          description: The ID of the system instance to be deleted.
     DeleteSystemTemplateResponse:
       type: object
       properties: {}
@@ -2416,30 +2397,26 @@ components:
       title: DeleteSystemTemplateRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: '<p>The ID of the system to be deleted.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code> </p>'
+          $ref: '#/components/schemas/Urn'
+          description: '<p>The ID of the system to be deleted.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code> </p>'
     DeploySystemInstanceResponse:
       type: object
       required:
         - summary
       properties:
         summary:
-          allOf:
-            - $ref: '#/components/schemas/SystemInstanceSummary'
-            - description: 'An object that contains summary information about a system instance that was deployed. '
+          $ref: '#/components/schemas/SystemInstanceSummary'
+          description: 'An object that contains summary information about a system instance that was deployed. '
         greengrassDeploymentId:
-          allOf:
-            - $ref: '#/components/schemas/GreengrassDeploymentId'
-            - description: The ID of the Greengrass deployment used to deploy the system instance.
+          $ref: '#/components/schemas/GreengrassDeploymentId'
+          description: The ID of the Greengrass deployment used to deploy the system instance.
     DeploySystemInstanceRequest:
       type: object
       title: DeploySystemInstanceRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: '<p>The ID of the system instance. This value is returned by the <code>CreateSystemInstance</code> action.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:deployment:DEPLOYMENTNAME</code> </p>'
+          $ref: '#/components/schemas/Urn'
+          description: '<p>The ID of the system instance. This value is returned by the <code>CreateSystemInstance</code> action.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:deployment:DEPLOYMENTNAME</code> </p>'
     DeprecateFlowTemplateResponse:
       type: object
       properties: {}
@@ -2450,9 +2427,8 @@ components:
       title: DeprecateFlowTemplateRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: '<p>The ID of the workflow to be deleted.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code> </p>'
+          $ref: '#/components/schemas/Urn'
+          description: '<p>The ID of the workflow to be deleted.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code> </p>'
     DeprecateSystemTemplateResponse:
       type: object
       properties: {}
@@ -2463,40 +2439,33 @@ components:
       title: DeprecateSystemTemplateRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: '<p>The ID of the system to delete.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code> </p>'
+          $ref: '#/components/schemas/Urn'
+          description: '<p>The ID of the system to delete.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code> </p>'
     DescribeNamespaceResponse:
       type: object
       properties:
         namespaceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the namespace.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the namespace.
         namespaceName:
-          allOf:
-            - $ref: '#/components/schemas/NamespaceName'
-            - description: The name of the namespace.
+          $ref: '#/components/schemas/NamespaceName'
+          description: The name of the namespace.
         trackingNamespaceName:
-          allOf:
-            - $ref: '#/components/schemas/NamespaceName'
-            - description: The name of the public namespace that the latest namespace version is tracking.
+          $ref: '#/components/schemas/NamespaceName'
+          description: The name of the public namespace that the latest namespace version is tracking.
         trackingNamespaceVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The version of the public namespace that the latest version is tracking.
+          $ref: '#/components/schemas/Version'
+          description: The version of the public namespace that the latest version is tracking.
         namespaceVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The version of the user's namespace to describe.
+          $ref: '#/components/schemas/Version'
+          description: The version of the user's namespace to describe.
     DescribeNamespaceRequest:
       type: object
       title: DescribeNamespaceRequest
       properties:
         namespaceName:
-          allOf:
-            - $ref: '#/components/schemas/NamespaceName'
-            - description: The name of the user's namespace. Set this to <code>aws</code> to get the public namespace.
+          $ref: '#/components/schemas/NamespaceName'
+          description: The name of the user's namespace. Set this to <code>aws</code> to get the public namespace.
     DissociateEntityFromThingResponse:
       type: object
       properties: {}
@@ -2508,20 +2477,17 @@ components:
       title: DissociateEntityFromThingRequest
       properties:
         thingName:
-          allOf:
-            - $ref: '#/components/schemas/ThingName'
-            - description: The name of the thing to disassociate.
+          $ref: '#/components/schemas/ThingName'
+          description: The name of the thing to disassociate.
         entityType:
-          allOf:
-            - $ref: '#/components/schemas/EntityType'
-            - description: The entity type from which to disassociate the thing.
+          $ref: '#/components/schemas/EntityType'
+          description: The entity type from which to disassociate the thing.
     GetEntitiesResponse:
       type: object
       properties:
         descriptions:
-          allOf:
-            - $ref: '#/components/schemas/EntityDescriptions'
-            - description: An array of descriptions for the specified entities.
+          $ref: '#/components/schemas/EntityDescriptions'
+          description: An array of descriptions for the specified entities.
     GetEntitiesRequest:
       type: object
       required:
@@ -2529,20 +2495,17 @@ components:
       title: GetEntitiesRequest
       properties:
         ids:
-          allOf:
-            - $ref: '#/components/schemas/Urns'
-            - description: '<p>An array of entity IDs.</p> <p>The IDs should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME</code> </p>'
+          $ref: '#/components/schemas/Urns'
+          description: '<p>An array of entity IDs.</p> <p>The IDs should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME</code> </p>'
         namespaceVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The version of the user's namespace. Defaults to the latest version of the user's namespace.
+          $ref: '#/components/schemas/Version'
+          description: The version of the user's namespace. Defaults to the latest version of the user's namespace.
     GetFlowTemplateResponse:
       type: object
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/FlowTemplateDescription'
-            - description: The object that describes the specified workflow.
+          $ref: '#/components/schemas/FlowTemplateDescription'
+          description: The object that describes the specified workflow.
     GetFlowTemplateRequest:
       type: object
       required:
@@ -2550,24 +2513,20 @@ components:
       title: GetFlowTemplateRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: '<p>The ID of the workflow.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code> </p>'
+          $ref: '#/components/schemas/Urn'
+          description: '<p>The ID of the workflow.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code> </p>'
         revisionNumber:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The number of the workflow revision to retrieve.
+          $ref: '#/components/schemas/Version'
+          description: The number of the workflow revision to retrieve.
     GetFlowTemplateRevisionsResponse:
       type: object
       properties:
         summaries:
-          allOf:
-            - $ref: '#/components/schemas/FlowTemplateSummaries'
-            - description: An array of objects that provide summary data about each revision.
+          $ref: '#/components/schemas/FlowTemplateSummaries'
+          description: An array of objects that provide summary data about each revision.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The string to specify as <code>nextToken</code> when you request the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The string to specify as <code>nextToken</code> when you request the next page of results.
     GetFlowTemplateRevisionsRequest:
       type: object
       required:
@@ -2575,40 +2534,32 @@ components:
       title: GetFlowTemplateRevisionsRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: '<p>The ID of the workflow.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code> </p>'
+          $ref: '#/components/schemas/Urn'
+          description: '<p>The ID of the workflow.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code> </p>'
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The string that specifies the next page of results. Use this when you're paginating results.
+          $ref: '#/components/schemas/NextToken'
+          description: The string that specifies the next page of results. Use this when you're paginating results.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in the response.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in the response.
     GetNamespaceDeletionStatusResponse:
       type: object
       properties:
         namespaceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the namespace that is being deleted.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the namespace that is being deleted.
         namespaceName:
-          allOf:
-            - $ref: '#/components/schemas/NamespaceName'
-            - description: The name of the namespace that is being deleted.
+          $ref: '#/components/schemas/NamespaceName'
+          description: The name of the namespace that is being deleted.
         status:
-          allOf:
-            - $ref: '#/components/schemas/NamespaceDeletionStatus'
-            - description: The status of the deletion request.
+          $ref: '#/components/schemas/NamespaceDeletionStatus'
+          description: The status of the deletion request.
         errorCode:
-          allOf:
-            - $ref: '#/components/schemas/NamespaceDeletionStatusErrorCodes'
-            - description: An error code returned by the namespace deletion task.
+          $ref: '#/components/schemas/NamespaceDeletionStatusErrorCodes'
+          description: An error code returned by the namespace deletion task.
         errorMessage:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: An error code returned by the namespace deletion task.
+          $ref: '#/components/schemas/String'
+          description: An error code returned by the namespace deletion task.
     GetNamespaceDeletionStatusRequest:
       type: object
       title: GetNamespaceDeletionStatusRequest
@@ -2617,9 +2568,8 @@ components:
       type: object
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/SystemInstanceDescription'
-            - description: An object that describes the system instance.
+          $ref: '#/components/schemas/SystemInstanceDescription'
+          description: An object that describes the system instance.
     GetSystemInstanceRequest:
       type: object
       required:
@@ -2627,16 +2577,14 @@ components:
       title: GetSystemInstanceRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: '<p>The ID of the system deployment instance. This value is returned by <code>CreateSystemInstance</code>.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:deployment:DEPLOYMENTNAME</code> </p>'
+          $ref: '#/components/schemas/Urn'
+          description: '<p>The ID of the system deployment instance. This value is returned by <code>CreateSystemInstance</code>.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:deployment:DEPLOYMENTNAME</code> </p>'
     GetSystemTemplateResponse:
       type: object
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/SystemTemplateDescription'
-            - description: An object that contains summary data about the system.
+          $ref: '#/components/schemas/SystemTemplateDescription'
+          description: An object that contains summary data about the system.
     GetSystemTemplateRequest:
       type: object
       required:
@@ -2644,24 +2592,20 @@ components:
       title: GetSystemTemplateRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: '<p>The ID of the system to get. This ID must be in the user''s namespace.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code> </p>'
+          $ref: '#/components/schemas/Urn'
+          description: '<p>The ID of the system to get. This ID must be in the user''s namespace.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code> </p>'
         revisionNumber:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The number that specifies the revision of the system to get.
+          $ref: '#/components/schemas/Version'
+          description: The number that specifies the revision of the system to get.
     GetSystemTemplateRevisionsResponse:
       type: object
       properties:
         summaries:
-          allOf:
-            - $ref: '#/components/schemas/SystemTemplateSummaries'
-            - description: An array of objects that contain summary data about the system template revisions.
+          $ref: '#/components/schemas/SystemTemplateSummaries'
+          description: An array of objects that contain summary data about the system template revisions.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The string to specify as <code>nextToken</code> when you request the next page of results. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'The string to specify as <code>nextToken</code> when you request the next page of results. '
     GetSystemTemplateRevisionsRequest:
       type: object
       required:
@@ -2669,17 +2613,14 @@ components:
       title: GetSystemTemplateRevisionsRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: '<p>The ID of the system template.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code> </p>'
+          $ref: '#/components/schemas/Urn'
+          description: '<p>The ID of the system template.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code> </p>'
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The string that specifies the next page of results. Use this when you're paginating results.
+          $ref: '#/components/schemas/NextToken'
+          description: The string that specifies the next page of results. Use this when you're paginating results.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in the response.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in the response.
     GetUploadStatusResponse:
       type: object
       required:
@@ -2688,33 +2629,26 @@ components:
         - createdDate
       properties:
         uploadId:
-          allOf:
-            - $ref: '#/components/schemas/UploadId'
-            - description: The ID of the upload.
+          $ref: '#/components/schemas/UploadId'
+          description: The ID of the upload.
         uploadStatus:
-          allOf:
-            - $ref: '#/components/schemas/UploadStatus'
-            - description: The status of the upload. The initial status is <code>IN_PROGRESS</code>. The response show all validation failures if the upload fails.
+          $ref: '#/components/schemas/UploadStatus'
+          description: The status of the upload. The initial status is <code>IN_PROGRESS</code>. The response show all validation failures if the upload fails.
         namespaceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the upload.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the upload.
         namespaceName:
-          allOf:
-            - $ref: '#/components/schemas/NamespaceName'
-            - description: The name of the upload's namespace.
+          $ref: '#/components/schemas/NamespaceName'
+          description: The name of the upload's namespace.
         namespaceVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The version of the user's namespace. Defaults to the latest version of the user's namespace.
+          $ref: '#/components/schemas/Version'
+          description: The version of the user's namespace. Defaults to the latest version of the user's namespace.
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: The reason for an upload failure.
+          $ref: '#/components/schemas/StringList'
+          description: The reason for an upload failure.
         createdDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date at which the upload was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date at which the upload was created.
     GetUploadStatusRequest:
       type: object
       required:
@@ -2722,20 +2656,17 @@ components:
       title: GetUploadStatusRequest
       properties:
         uploadId:
-          allOf:
-            - $ref: '#/components/schemas/UploadId'
-            - description: The ID of the upload. This value is returned by the <code>UploadEntityDefinitions</code> action.
+          $ref: '#/components/schemas/UploadId'
+          description: The ID of the upload. This value is returned by the <code>UploadEntityDefinitions</code> action.
     ListFlowExecutionMessagesResponse:
       type: object
       properties:
         messages:
-          allOf:
-            - $ref: '#/components/schemas/FlowExecutionMessages'
-            - description: A list of objects that contain information about events in the specified flow execution.
+          $ref: '#/components/schemas/FlowExecutionMessages'
+          description: A list of objects that contain information about events in the specified flow execution.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The string to specify as <code>nextToken</code> when you request the next page of results. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'The string to specify as <code>nextToken</code> when you request the next page of results. '
     ListFlowExecutionMessagesRequest:
       type: object
       required:
@@ -2743,28 +2674,23 @@ components:
       title: ListFlowExecutionMessagesRequest
       properties:
         flowExecutionId:
-          allOf:
-            - $ref: '#/components/schemas/FlowExecutionId'
-            - description: The ID of the flow execution.
+          $ref: '#/components/schemas/FlowExecutionId'
+          description: The ID of the flow execution.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The string that specifies the next page of results. Use this when you're paginating results.
+          $ref: '#/components/schemas/NextToken'
+          description: The string that specifies the next page of results. Use this when you're paginating results.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in the response.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in the response.
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: List of tags returned by the <code>ListTagsForResource</code> operation.
+          $ref: '#/components/schemas/TagList'
+          description: List of tags returned by the <code>ListTagsForResource</code> operation.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token that specifies the next page of results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token that specifies the next page of results to return.
     ListTagsForResourceRequest:
       type: object
       required:
@@ -2772,28 +2698,23 @@ components:
       title: ListTagsForResourceRequest
       properties:
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of tags to return.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of tags to return.
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArn'
-            - description: The Amazon Resource Name (ARN) of the resource whose tags are to be returned.
+          $ref: '#/components/schemas/ResourceArn'
+          description: The Amazon Resource Name (ARN) of the resource whose tags are to be returned.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token that specifies the next page of results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token that specifies the next page of results to return.
     SearchEntitiesResponse:
       type: object
       properties:
         descriptions:
-          allOf:
-            - $ref: '#/components/schemas/EntityDescriptions'
-            - description: An array of descriptions for each entity returned in the search result.
+          $ref: '#/components/schemas/EntityDescriptions'
+          description: An array of descriptions for each entity returned in the search result.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The string to specify as <code>nextToken</code> when you request the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The string to specify as <code>nextToken</code> when you request the next page of results.
     SearchEntitiesRequest:
       type: object
       required:
@@ -2801,36 +2722,29 @@ components:
       title: SearchEntitiesRequest
       properties:
         entityTypes:
-          allOf:
-            - $ref: '#/components/schemas/EntityTypes'
-            - description: The entity types for which to search.
+          $ref: '#/components/schemas/EntityTypes'
+          description: The entity types for which to search.
         filters:
-          allOf:
-            - $ref: '#/components/schemas/EntityFilters'
-            - description: '<p>Optional filter to apply to the search. Valid filters are <code>NAME</code> <code>NAMESPACE</code>, <code>SEMANTIC_TYPE_PATH</code> and <code>REFERENCED_ENTITY_ID</code>. <code>REFERENCED_ENTITY_ID</code> filters on entities that are used by the entity in the result set. For example, you can filter on the ID of a property that is used in a state.</p> <p>Multiple filters function as OR criteria in the query. Multiple values passed inside the filter function as AND criteria.</p>'
+          $ref: '#/components/schemas/EntityFilters'
+          description: '<p>Optional filter to apply to the search. Valid filters are <code>NAME</code> <code>NAMESPACE</code>, <code>SEMANTIC_TYPE_PATH</code> and <code>REFERENCED_ENTITY_ID</code>. <code>REFERENCED_ENTITY_ID</code> filters on entities that are used by the entity in the result set. For example, you can filter on the ID of a property that is used in a state.</p> <p>Multiple filters function as OR criteria in the query. Multiple values passed inside the filter function as AND criteria.</p>'
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The string that specifies the next page of results. Use this when you're paginating results.
+          $ref: '#/components/schemas/NextToken'
+          description: The string that specifies the next page of results. Use this when you're paginating results.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in the response.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in the response.
         namespaceVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The version of the user's namespace. Defaults to the latest version of the user's namespace.
+          $ref: '#/components/schemas/Version'
+          description: The version of the user's namespace. Defaults to the latest version of the user's namespace.
     SearchFlowExecutionsResponse:
       type: object
       properties:
         summaries:
-          allOf:
-            - $ref: '#/components/schemas/FlowExecutionSummaries'
-            - description: An array of objects that contain summary information about each workflow execution in the result set.
+          $ref: '#/components/schemas/FlowExecutionSummaries'
+          description: An array of objects that contain summary information about each workflow execution in the result set.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The string to specify as <code>nextToken</code> when you request the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The string to specify as <code>nextToken</code> when you request the next page of results.
     SearchFlowExecutionsRequest:
       type: object
       required:
@@ -2838,121 +2752,98 @@ components:
       title: SearchFlowExecutionsRequest
       properties:
         systemInstanceId:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: The ID of the system instance that contains the flow.
+          $ref: '#/components/schemas/Urn'
+          description: The ID of the system instance that contains the flow.
         flowExecutionId:
-          allOf:
-            - $ref: '#/components/schemas/FlowExecutionId'
-            - description: The ID of a flow execution.
+          $ref: '#/components/schemas/FlowExecutionId'
+          description: The ID of a flow execution.
         startTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date and time of the earliest flow execution to return.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time of the earliest flow execution to return.
         endTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date and time of the latest flow execution to return.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time of the latest flow execution to return.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The string that specifies the next page of results. Use this when you're paginating results.
+          $ref: '#/components/schemas/NextToken'
+          description: The string that specifies the next page of results. Use this when you're paginating results.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in the response.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in the response.
     SearchFlowTemplatesResponse:
       type: object
       properties:
         summaries:
-          allOf:
-            - $ref: '#/components/schemas/FlowTemplateSummaries'
-            - description: An array of objects that contain summary information about each workflow in the result set.
+          $ref: '#/components/schemas/FlowTemplateSummaries'
+          description: An array of objects that contain summary information about each workflow in the result set.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The string to specify as <code>nextToken</code> when you request the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The string to specify as <code>nextToken</code> when you request the next page of results.
     SearchFlowTemplatesRequest:
       type: object
       title: SearchFlowTemplatesRequest
       properties:
         filters:
-          allOf:
-            - $ref: '#/components/schemas/FlowTemplateFilters'
-            - description: An array of objects that limit the result set. The only valid filter is <code>DEVICE_MODEL_ID</code>.
+          $ref: '#/components/schemas/FlowTemplateFilters'
+          description: An array of objects that limit the result set. The only valid filter is <code>DEVICE_MODEL_ID</code>.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The string that specifies the next page of results. Use this when you're paginating results.
+          $ref: '#/components/schemas/NextToken'
+          description: The string that specifies the next page of results. Use this when you're paginating results.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in the response.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in the response.
     SearchSystemInstancesResponse:
       type: object
       properties:
         summaries:
-          allOf:
-            - $ref: '#/components/schemas/SystemInstanceSummaries'
-            - description: An array of objects that contain summary data abour the system instances in the result set.
+          $ref: '#/components/schemas/SystemInstanceSummaries'
+          description: An array of objects that contain summary data abour the system instances in the result set.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The string to specify as <code>nextToken</code> when you request the next page of results. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'The string to specify as <code>nextToken</code> when you request the next page of results. '
     SearchSystemInstancesRequest:
       type: object
       title: SearchSystemInstancesRequest
       properties:
         filters:
-          allOf:
-            - $ref: '#/components/schemas/SystemInstanceFilters'
-            - description: '<p>Optional filter to apply to the search. Valid filters are <code>SYSTEM_TEMPLATE_ID</code>, <code>STATUS</code>, and <code>GREENGRASS_GROUP_NAME</code>.</p> <p>Multiple filters function as OR criteria in the query. Multiple values passed inside the filter function as AND criteria.</p>'
+          $ref: '#/components/schemas/SystemInstanceFilters'
+          description: '<p>Optional filter to apply to the search. Valid filters are <code>SYSTEM_TEMPLATE_ID</code>, <code>STATUS</code>, and <code>GREENGRASS_GROUP_NAME</code>.</p> <p>Multiple filters function as OR criteria in the query. Multiple values passed inside the filter function as AND criteria.</p>'
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The string that specifies the next page of results. Use this when you're paginating results.
+          $ref: '#/components/schemas/NextToken'
+          description: The string that specifies the next page of results. Use this when you're paginating results.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in the response.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in the response.
     SearchSystemTemplatesResponse:
       type: object
       properties:
         summaries:
-          allOf:
-            - $ref: '#/components/schemas/SystemTemplateSummaries'
-            - description: An array of objects that contain summary information about each system deployment in the result set.
+          $ref: '#/components/schemas/SystemTemplateSummaries'
+          description: An array of objects that contain summary information about each system deployment in the result set.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The string to specify as <code>nextToken</code> when you request the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The string to specify as <code>nextToken</code> when you request the next page of results.
     SearchSystemTemplatesRequest:
       type: object
       title: SearchSystemTemplatesRequest
       properties:
         filters:
-          allOf:
-            - $ref: '#/components/schemas/SystemTemplateFilters'
-            - description: An array of filters that limit the result set. The only valid filter is <code>FLOW_TEMPLATE_ID</code>.
+          $ref: '#/components/schemas/SystemTemplateFilters'
+          description: An array of filters that limit the result set. The only valid filter is <code>FLOW_TEMPLATE_ID</code>.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The string that specifies the next page of results. Use this when you're paginating results.
+          $ref: '#/components/schemas/NextToken'
+          description: The string that specifies the next page of results. Use this when you're paginating results.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in the response.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in the response.
     SearchThingsResponse:
       type: object
       properties:
         things:
-          allOf:
-            - $ref: '#/components/schemas/Things'
-            - description: An array of things in the result set.
+          $ref: '#/components/schemas/Things'
+          description: An array of things in the result set.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The string to specify as <code>nextToken</code> when you request the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The string to specify as <code>nextToken</code> when you request the next page of results.
     SearchThingsRequest:
       type: object
       required:
@@ -2960,21 +2851,17 @@ components:
       title: SearchThingsRequest
       properties:
         entityId:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: '<p>The ID of the entity to which the things are associated.</p> <p>The IDs should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME</code> </p>'
+          $ref: '#/components/schemas/Urn'
+          description: '<p>The ID of the entity to which the things are associated.</p> <p>The IDs should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME</code> </p>'
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The string that specifies the next page of results. Use this when you're paginating results.
+          $ref: '#/components/schemas/NextToken'
+          description: The string that specifies the next page of results. Use this when you're paginating results.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in the response.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in the response.
         namespaceVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The version of the user's namespace. Defaults to the latest version of the user's namespace.
+          $ref: '#/components/schemas/Version'
+          description: The version of the user's namespace. Defaults to the latest version of the user's namespace.
     TagResourceResponse:
       type: object
       properties: {}
@@ -2986,28 +2873,24 @@ components:
       title: TagResourceRequest
       properties:
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArn'
-            - description: The Amazon Resource Name (ARN) of the resource whose tags are returned.
+          $ref: '#/components/schemas/ResourceArn'
+          description: The Amazon Resource Name (ARN) of the resource whose tags are returned.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: A list of tags to add to the resource.&gt;
+          $ref: '#/components/schemas/TagList'
+          description: A list of tags to add to the resource.&gt;
     UndeploySystemInstanceResponse:
       type: object
       properties:
         summary:
-          allOf:
-            - $ref: '#/components/schemas/SystemInstanceSummary'
-            - description: An object that contains summary information about the system instance that was removed from its target.
+          $ref: '#/components/schemas/SystemInstanceSummary'
+          description: An object that contains summary information about the system instance that was removed from its target.
     UndeploySystemInstanceRequest:
       type: object
       title: UndeploySystemInstanceRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: The ID of the system instance to remove from its target.
+          $ref: '#/components/schemas/Urn'
+          description: The ID of the system instance to remove from its target.
     UntagResourceResponse:
       type: object
       properties: {}
@@ -3019,20 +2902,17 @@ components:
       title: UntagResourceRequest
       properties:
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArn'
-            - description: The Amazon Resource Name (ARN) of the resource whose tags are to be removed.
+          $ref: '#/components/schemas/ResourceArn'
+          description: The Amazon Resource Name (ARN) of the resource whose tags are to be removed.
         tagKeys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyList'
-            - description: '<p>A list of tag key names to remove from the resource. You don''t specify the value. Both the key and its associated value are removed. </p> <p>This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html#cli-using-param-json">Using JSON for Parameters</a> in the <i>AWS CLI User Guide</i>. </p>'
+          $ref: '#/components/schemas/TagKeyList'
+          description: '<p>A list of tag key names to remove from the resource. You don''t specify the value. Both the key and its associated value are removed. </p> <p>This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html#cli-using-param-json">Using JSON for Parameters</a> in the <i>AWS CLI User Guide</i>. </p>'
     UpdateFlowTemplateResponse:
       type: object
       properties:
         summary:
-          allOf:
-            - $ref: '#/components/schemas/FlowTemplateSummary'
-            - description: An object containing summary information about the updated workflow.
+          $ref: '#/components/schemas/FlowTemplateSummary'
+          description: An object containing summary information about the updated workflow.
     UpdateFlowTemplateRequest:
       type: object
       required:
@@ -3041,24 +2921,20 @@ components:
       title: UpdateFlowTemplateRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: '<p>The ID of the workflow to be updated.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code> </p>'
+          $ref: '#/components/schemas/Urn'
+          description: '<p>The ID of the workflow to be updated.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code> </p>'
         definition:
-          allOf:
-            - $ref: '#/components/schemas/DefinitionDocument'
-            - description: The <code>DefinitionDocument</code> that contains the updated workflow definition.
+          $ref: '#/components/schemas/DefinitionDocument'
+          description: The <code>DefinitionDocument</code> that contains the updated workflow definition.
         compatibleNamespaceVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: '<p>The version of the user''s namespace.</p> <p>If no value is specified, the latest version is used by default. Use the <code>GetFlowTemplateRevisions</code> if you want to find earlier revisions of the flow to update.</p>'
+          $ref: '#/components/schemas/Version'
+          description: '<p>The version of the user''s namespace.</p> <p>If no value is specified, the latest version is used by default. Use the <code>GetFlowTemplateRevisions</code> if you want to find earlier revisions of the flow to update.</p>'
     UpdateSystemTemplateResponse:
       type: object
       properties:
         summary:
-          allOf:
-            - $ref: '#/components/schemas/SystemTemplateSummary'
-            - description: An object containing summary information about the updated system.
+          $ref: '#/components/schemas/SystemTemplateSummary'
+          description: An object containing summary information about the updated system.
     UpdateSystemTemplateRequest:
       type: object
       required:
@@ -3067,42 +2943,35 @@ components:
       title: UpdateSystemTemplateRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: '<p>The ID of the system to be updated.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code> </p>'
+          $ref: '#/components/schemas/Urn'
+          description: '<p>The ID of the system to be updated.</p> <p>The ID should be in the following format.</p> <p> <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code> </p>'
         definition:
-          allOf:
-            - $ref: '#/components/schemas/DefinitionDocument'
-            - description: The <code>DefinitionDocument</code> that contains the updated system definition.
+          $ref: '#/components/schemas/DefinitionDocument'
+          description: The <code>DefinitionDocument</code> that contains the updated system definition.
         compatibleNamespaceVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: '<p>The version of the user''s namespace. Defaults to the latest version of the user''s namespace.</p> <p>If no value is specified, the latest version is used by default.</p>'
+          $ref: '#/components/schemas/Version'
+          description: '<p>The version of the user''s namespace. Defaults to the latest version of the user''s namespace.</p> <p>If no value is specified, the latest version is used by default.</p>'
     UploadEntityDefinitionsResponse:
       type: object
       required:
         - uploadId
       properties:
         uploadId:
-          allOf:
-            - $ref: '#/components/schemas/UploadId'
-            - description: The ID that specifies the upload action. You can use this to track the status of the upload.
+          $ref: '#/components/schemas/UploadId'
+          description: The ID that specifies the upload action. You can use this to track the status of the upload.
     UploadEntityDefinitionsRequest:
       type: object
       title: UploadEntityDefinitionsRequest
       properties:
         document:
-          allOf:
-            - $ref: '#/components/schemas/DefinitionDocument'
-            - description: The <code>DefinitionDocument</code> that defines the updated entities.
+          $ref: '#/components/schemas/DefinitionDocument'
+          description: The <code>DefinitionDocument</code> that defines the updated entities.
         syncWithPublicNamespace:
-          allOf:
-            - $ref: '#/components/schemas/SyncWithPublicNamespace'
-            - description: 'A Boolean that specifies whether to synchronize with the latest version of the public namespace. If set to <code>true</code>, the upload will create a new namespace version.'
+          $ref: '#/components/schemas/SyncWithPublicNamespace'
+          description: 'A Boolean that specifies whether to synchronize with the latest version of the public namespace. If set to <code>true</code>, the upload will create a new namespace version.'
         deprecateExistingEntities:
-          allOf:
-            - $ref: '#/components/schemas/DeprecateExistingEntities'
-            - description: 'A Boolean that specifies whether to deprecate all entities in the latest version before uploading the new <code>DefinitionDocument</code>. If set to <code>true</code>, the upload will create a new namespace version.'
+          $ref: '#/components/schemas/DeprecateExistingEntities'
+          description: 'A Boolean that specifies whether to deprecate all entities in the latest version before uploading the new <code>DefinitionDocument</code>. If set to <code>true</code>, the upload will create a new namespace version.'
     Arn:
       type: string
     ThingName:
@@ -3123,33 +2992,27 @@ components:
         - text
       properties:
         language:
-          allOf:
-            - $ref: '#/components/schemas/DefinitionLanguage'
-            - description: The language used to define the entity. <code>GRAPHQL</code> is the only valid value.
+          $ref: '#/components/schemas/DefinitionLanguage'
+          description: The language used to define the entity. <code>GRAPHQL</code> is the only valid value.
         text:
-          allOf:
-            - $ref: '#/components/schemas/DefinitionText'
-            - description: The GraphQL text that defines the entity.
+          $ref: '#/components/schemas/DefinitionText'
+          description: The GraphQL text that defines the entity.
       description: 'A document that defines an entity. '
     FlowTemplateSummary:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: The ID of the workflow.
+          $ref: '#/components/schemas/Urn'
+          description: The ID of the workflow.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the workflow.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the workflow.
         revisionNumber:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The revision number of the workflow.
+          $ref: '#/components/schemas/Version'
+          description: The revision number of the workflow.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date when the workflow was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date when the workflow was created.
       description: An object that contains summary information about a workflow.
     TagList:
       type: array
@@ -3170,13 +3033,11 @@ components:
       type: object
       properties:
         cloudMetricEnabled:
-          allOf:
-            - $ref: '#/components/schemas/Enabled'
-            - description: A Boolean that specifies whether cloud metrics are collected.
+          $ref: '#/components/schemas/Enabled'
+          description: A Boolean that specifies whether cloud metrics are collected.
         metricRuleRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The ARN of the role that is used to collect cloud metrics.
+          $ref: '#/components/schemas/RoleArn'
+          description: The ARN of the role that is used to collect cloud metrics.
       description: 'An object that specifies whether cloud metrics are collected in a deployment and, if so, what role is used to collect metrics.'
     RoleArn:
       type: string
@@ -3186,61 +3047,48 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: The ID of the system instance.
+          $ref: '#/components/schemas/Urn'
+          description: The ID of the system instance.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the system instance.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the system instance.
         status:
-          allOf:
-            - $ref: '#/components/schemas/SystemInstanceDeploymentStatus'
-            - description: The status of the system instance.
+          $ref: '#/components/schemas/SystemInstanceDeploymentStatus'
+          description: The status of the system instance.
         target:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentTarget'
-            - description: The target of the system instance.
+          $ref: '#/components/schemas/DeploymentTarget'
+          description: The target of the system instance.
         greengrassGroupName:
-          allOf:
-            - $ref: '#/components/schemas/GroupName'
-            - description: The ID of the Greengrass group where the system instance is deployed.
+          $ref: '#/components/schemas/GroupName'
+          description: The ID of the Greengrass group where the system instance is deployed.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date when the system instance was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date when the system instance was created.
         updatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The date and time when the system instance was last updated.'
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The date and time when the system instance was last updated.'
         greengrassGroupId:
-          allOf:
-            - $ref: '#/components/schemas/GreengrassGroupId'
-            - description: The ID of the Greengrass group where the system instance is deployed.
+          $ref: '#/components/schemas/GreengrassGroupId'
+          description: The ID of the Greengrass group where the system instance is deployed.
         greengrassGroupVersionId:
-          allOf:
-            - $ref: '#/components/schemas/GreengrassGroupVersionId'
-            - description: The version of the Greengrass group where the system instance is deployed.
+          $ref: '#/components/schemas/GreengrassGroupVersionId'
+          description: The version of the Greengrass group where the system instance is deployed.
       description: An object that contains summary information about a system instance.
     SystemTemplateSummary:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: The ID of the system.
+          $ref: '#/components/schemas/Urn'
+          description: The ID of the system.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the system.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the system.
         revisionNumber:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The revision number of the system.
+          $ref: '#/components/schemas/Version'
+          description: The revision number of the system.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date when the system was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date when the system was created.
       description: An object that contains information about a system.
     DefinitionLanguage:
       type: string
@@ -3256,13 +3104,11 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: The ID of the workflow or system.
+          $ref: '#/components/schemas/Urn'
+          description: The ID of the workflow or system.
         revisionNumber:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The revision number of the workflow or system.
+          $ref: '#/components/schemas/Version'
+          description: The revision number of the workflow or system.
       description: An object that contains the ID and revision number of a workflow or system that is part of a deployment.
     DependencyRevisions:
       type: array
@@ -3294,25 +3140,20 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: The entity ID.
+          $ref: '#/components/schemas/Urn'
+          description: The entity ID.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The entity ARN.
+          $ref: '#/components/schemas/Arn'
+          description: The entity ARN.
         type:
-          allOf:
-            - $ref: '#/components/schemas/EntityType'
-            - description: The entity type.
+          $ref: '#/components/schemas/EntityType'
+          description: The entity type.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the entity was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the entity was created.
         definition:
-          allOf:
-            - $ref: '#/components/schemas/DefinitionDocument'
-            - description: The definition document of the entity.
+          $ref: '#/components/schemas/DefinitionDocument'
+          description: The definition document of the entity.
       description: Describes the properties of an entity.
     EntityDescriptions:
       type: array
@@ -3333,13 +3174,11 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/EntityFilterName'
-            - description: 'The name of the entity search filter field. <code>REFERENCED_ENTITY_ID</code> filters on entities that are used by the entity in the result set. For example, you can filter on the ID of a property that is used in a state.'
+          $ref: '#/components/schemas/EntityFilterName'
+          description: 'The name of the entity search filter field. <code>REFERENCED_ENTITY_ID</code> filters on entities that are used by the entity in the result set. For example, you can filter on the ID of a property that is used in a state.'
         value:
-          allOf:
-            - $ref: '#/components/schemas/EntityFilterValues'
-            - description: An array of string values for the search filter field. Multiple values function as AND criteria in the search.
+          $ref: '#/components/schemas/EntityFilterValues'
+          description: An array of string values for the search filter field. Multiple values function as AND criteria in the search.
       description: An object that filters an entity search. Multiple filters function as OR criteria in the search. For example a search that includes a <code>NAMESPACE</code> and a <code>REFERENCED_ENTITY_ID</code> filter searches for entities in the specified namespace that use the entity specified by the value of <code>REFERENCED_ENTITY_ID</code>.
     EntityFilterValue:
       type: string
@@ -3381,21 +3220,17 @@ components:
       type: object
       properties:
         messageId:
-          allOf:
-            - $ref: '#/components/schemas/FlowExecutionMessageId'
-            - description: The unique identifier of the message.
+          $ref: '#/components/schemas/FlowExecutionMessageId'
+          description: The unique identifier of the message.
         eventType:
-          allOf:
-            - $ref: '#/components/schemas/FlowExecutionEventType'
-            - description: The type of flow event .
+          $ref: '#/components/schemas/FlowExecutionEventType'
+          description: The type of flow event .
         timestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date and time when the message was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time when the message was last updated.
         payload:
-          allOf:
-            - $ref: '#/components/schemas/FlowExecutionMessagePayload'
-            - description: A string containing information about the flow event.
+          $ref: '#/components/schemas/FlowExecutionMessagePayload'
+          description: A string containing information about the flow event.
       description: An object that contains information about a flow event.
     FlowExecutionMessages:
       type: array
@@ -3412,29 +3247,23 @@ components:
       type: object
       properties:
         flowExecutionId:
-          allOf:
-            - $ref: '#/components/schemas/FlowExecutionId'
-            - description: The ID of the flow execution.
+          $ref: '#/components/schemas/FlowExecutionId'
+          description: The ID of the flow execution.
         status:
-          allOf:
-            - $ref: '#/components/schemas/FlowExecutionStatus'
-            - description: The current status of the flow execution.
+          $ref: '#/components/schemas/FlowExecutionStatus'
+          description: The current status of the flow execution.
         systemInstanceId:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: The ID of the system instance that contains the flow.
+          $ref: '#/components/schemas/Urn'
+          description: The ID of the system instance that contains the flow.
         flowTemplateId:
-          allOf:
-            - $ref: '#/components/schemas/Urn'
-            - description: The ID of the flow.
+          $ref: '#/components/schemas/Urn'
+          description: The ID of the flow.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date and time when the flow execution summary was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time when the flow execution summary was created.
         updatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date and time when the flow execution summary was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time when the flow execution summary was last updated.
       description: An object that contains summary information about a flow execution.
     FlowExecutionSummaries:
       type: array
@@ -3444,17 +3273,14 @@ components:
       type: object
       properties:
         summary:
-          allOf:
-            - $ref: '#/components/schemas/FlowTemplateSummary'
-            - description: An object that contains summary information about a workflow.
+          $ref: '#/components/schemas/FlowTemplateSummary'
+          description: An object that contains summary information about a workflow.
         definition:
-          allOf:
-            - $ref: '#/components/schemas/DefinitionDocument'
-            - description: A workflow's definition document.
+          $ref: '#/components/schemas/DefinitionDocument'
+          description: A workflow's definition document.
         validatedNamespaceVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The version of the user's namespace against which the workflow was validated. Use this value in your system instance.
+          $ref: '#/components/schemas/Version'
+          description: The version of the user's namespace against which the workflow was validated. Use this value in your system instance.
       description: An object that contains a workflow's definition and summary information.
     FlowTemplateFilterName:
       type: string
@@ -3471,13 +3297,11 @@ components:
         - value
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/FlowTemplateFilterName'
-            - description: The name of the search filter field.
+          $ref: '#/components/schemas/FlowTemplateFilterName'
+          description: The name of the search filter field.
         value:
-          allOf:
-            - $ref: '#/components/schemas/FlowTemplateFilterValues'
-            - description: An array of string values for the search filter field. Multiple values function as AND criteria in the search.
+          $ref: '#/components/schemas/FlowTemplateFilterValues'
+          description: An array of string values for the search filter field. Multiple values function as AND criteria in the search.
       description: An object that filters a workflow search.
     FlowTemplateFilterValue:
       type: string
@@ -3518,45 +3342,37 @@ components:
       type: object
       properties:
         summary:
-          allOf:
-            - $ref: '#/components/schemas/SystemInstanceSummary'
-            - description: An object that contains summary information about a system instance.
+          $ref: '#/components/schemas/SystemInstanceSummary'
+          description: An object that contains summary information about a system instance.
         definition:
           $ref: '#/components/schemas/DefinitionDocument'
         s3BucketName:
-          allOf:
-            - $ref: '#/components/schemas/S3BucketName'
-            - description: The Amazon Simple Storage Service bucket where information about a system instance is stored.
+          $ref: '#/components/schemas/S3BucketName'
+          description: The Amazon Simple Storage Service bucket where information about a system instance is stored.
         metricsConfiguration:
           $ref: '#/components/schemas/MetricsConfiguration'
         validatedNamespaceVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The version of the user's namespace against which the system instance was validated.
+          $ref: '#/components/schemas/Version'
+          description: The version of the user's namespace against which the system instance was validated.
         validatedDependencyRevisions:
-          allOf:
-            - $ref: '#/components/schemas/DependencyRevisions'
-            - description: A list of objects that contain all of the IDs and revision numbers of workflows and systems that are used in a system instance.
+          $ref: '#/components/schemas/DependencyRevisions'
+          description: A list of objects that contain all of the IDs and revision numbers of workflows and systems that are used in a system instance.
         flowActionsRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The AWS Identity and Access Management (IAM) role that AWS IoT Things Graph assumes during flow execution in a cloud deployment. This role must have read and write permissionss to AWS Lambda and AWS IoT and to any other AWS services that the flow uses.
+          $ref: '#/components/schemas/RoleArn'
+          description: The AWS Identity and Access Management (IAM) role that AWS IoT Things Graph assumes during flow execution in a cloud deployment. This role must have read and write permissionss to AWS Lambda and AWS IoT and to any other AWS services that the flow uses.
       description: An object that contains a system instance definition and summary information.
     SystemTemplateDescription:
       type: object
       properties:
         summary:
-          allOf:
-            - $ref: '#/components/schemas/SystemTemplateSummary'
-            - description: An object that contains summary information about a system.
+          $ref: '#/components/schemas/SystemTemplateSummary'
+          description: An object that contains summary information about a system.
         definition:
-          allOf:
-            - $ref: '#/components/schemas/DefinitionDocument'
-            - description: The definition document of a system.
+          $ref: '#/components/schemas/DefinitionDocument'
+          description: The definition document of a system.
         validatedNamespaceVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The namespace version against which the system was validated. Use this value in your system instance.
+          $ref: '#/components/schemas/Version'
+          description: The namespace version against which the system was validated. Use this value in your system instance.
       description: An object that contains a system's definition document and summary information.
     SystemTemplateSummaries:
       type: array
@@ -3627,13 +3443,11 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/SystemInstanceFilterName'
-            - description: The name of the search filter field.
+          $ref: '#/components/schemas/SystemInstanceFilterName'
+          description: The name of the search filter field.
         value:
-          allOf:
-            - $ref: '#/components/schemas/SystemInstanceFilterValues'
-            - description: 'An array of string values for the search filter field. Multiple values function as AND criteria in the search. '
+          $ref: '#/components/schemas/SystemInstanceFilterValues'
+          description: 'An array of string values for the search filter field. Multiple values function as AND criteria in the search. '
       description: An object that filters a system instance search. Multiple filters function as OR criteria in the search. For example a search that includes a GREENGRASS_GROUP_NAME and a STATUS filter searches for system instances in the specified Greengrass group that have the specified status.
     SystemInstanceFilterValue:
       type: string
@@ -3652,13 +3466,11 @@ components:
         - value
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/SystemTemplateFilterName'
-            - description: The name of the system search filter field.
+          $ref: '#/components/schemas/SystemTemplateFilterName'
+          description: The name of the system search filter field.
         value:
-          allOf:
-            - $ref: '#/components/schemas/SystemTemplateFilterValues'
-            - description: An array of string values for the search filter field. Multiple values function as AND criteria in the search.
+          $ref: '#/components/schemas/SystemTemplateFilterValues'
+          description: An array of string values for the search filter field. Multiple values function as AND criteria in the search.
       description: An object that filters a system search.
     SystemTemplateFilterValue:
       type: string
@@ -3679,13 +3491,11 @@ components:
         - value
       properties:
         key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: The required name of the tag. The string value can be from 1 to 128 Unicode characters in length.
+          $ref: '#/components/schemas/TagKey'
+          description: The required name of the tag. The string value can be from 1 to 128 Unicode characters in length.
         value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: The optional value of the tag. The string value can be from 1 to 256 Unicode characters in length.
+          $ref: '#/components/schemas/TagValue'
+          description: The optional value of the tag. The string value can be from 1 to 256 Unicode characters in length.
       description: Metadata assigned to an AWS IoT Things Graph resource consisting of a key-value pair.
     TagKeyList:
       type: array
@@ -3699,13 +3509,11 @@ components:
       type: object
       properties:
         thingArn:
-          allOf:
-            - $ref: '#/components/schemas/ThingArn'
-            - description: The ARN of the thing.
+          $ref: '#/components/schemas/ThingArn'
+          description: The ARN of the thing.
         thingName:
-          allOf:
-            - $ref: '#/components/schemas/ThingName'
-            - description: The name of the thing.
+          $ref: '#/components/schemas/ThingName'
+          description: The name of the thing.
       description: An AWS IoT thing.
 security:
   - hmac: []

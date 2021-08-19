@@ -267,13 +267,11 @@ components:
         - Segments
       properties:
         Segments:
-          allOf:
-            - $ref: '#/components/schemas/RealtimeContactAnalysisSegments'
-            - description: An analyzed transcript or category.
+          $ref: '#/components/schemas/RealtimeContactAnalysisSegments'
+          description: An analyzed transcript or category.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: '<p>If there are additional results, this is the token for the next set of results. If response includes <code>nextToken</code> there are two possible scenarios:</p> <ul> <li> <p>There are more segments so another call is required to get them.</p> </li> <li> <p>There are no more segments at this time, but more may be available later (real-time analysis is in progress) so the client should call the operation again to get new segments.</p> </li> </ul> <p>If response does not include <code>nextToken</code>, the analysis is completed (successfully or failed) and there are no more segments to retrieve.</p>'
+          $ref: '#/components/schemas/NextToken'
+          description: '<p>If there are additional results, this is the token for the next set of results. If response includes <code>nextToken</code> there are two possible scenarios:</p> <ul> <li> <p>There are more segments so another call is required to get them.</p> </li> <li> <p>There are no more segments at this time, but more may be available later (real-time analysis is in progress) so the client should call the operation again to get new segments.</p> </li> </ul> <p>If response does not include <code>nextToken</code>, the analysis is completed (successfully or failed) and there are no more segments to retrieve.</p>'
     InvalidRequestException: {}
     AccessDeniedException: {}
     ResourceNotFoundException: {}
@@ -298,13 +296,11 @@ components:
         - MatchedDetails
       properties:
         MatchedCategories:
-          allOf:
-            - $ref: '#/components/schemas/MatchedCategories'
-            - description: The category rules that have been matched in the analyzed segment.
+          $ref: '#/components/schemas/MatchedCategories'
+          description: The category rules that have been matched in the analyzed segment.
         MatchedDetails:
-          allOf:
-            - $ref: '#/components/schemas/MatchedDetails'
-            - description: The category rule that was matched and when it occurred in the transcript.
+          $ref: '#/components/schemas/MatchedDetails'
+          description: The category rule that was matched and when it occurred in the transcript.
       description: Provides the category rules that are used to automatically categorize contacts based on uttered keywords and phrases.
     PointsOfInterest:
       type: array
@@ -318,9 +314,8 @@ components:
         - PointsOfInterest
       properties:
         PointsOfInterest:
-          allOf:
-            - $ref: '#/components/schemas/PointsOfInterest'
-            - description: The section of audio where the category rule was detected.
+          $ref: '#/components/schemas/PointsOfInterest'
+          description: The section of audio where the category rule was detected.
       description: Provides information about the category rule that was matched.
     CategoryName:
       type: string
@@ -337,13 +332,11 @@ components:
         - EndOffsetChar
       properties:
         BeginOffsetChar:
-          allOf:
-            - $ref: '#/components/schemas/CharacterOffset'
-            - description: The beginning of the issue.
+          $ref: '#/components/schemas/CharacterOffset'
+          description: The beginning of the issue.
         EndOffsetChar:
-          allOf:
-            - $ref: '#/components/schemas/CharacterOffset'
-            - description: The end of the issue.
+          $ref: '#/components/schemas/CharacterOffset'
+          description: The end of the issue.
       description: 'For characters that were detected as issues, where they occur in the transcript.'
     ContactId:
       type: string
@@ -361,9 +354,8 @@ components:
         - CharacterOffsets
       properties:
         CharacterOffsets:
-          allOf:
-            - $ref: '#/components/schemas/CharacterOffsets'
-            - description: The offset for when the issue was detected in the segment.
+          $ref: '#/components/schemas/CharacterOffsets'
+          description: The offset for when the issue was detected in the segment.
       description: Potential issues that are detected based on an artificial intelligence analysis of each turn in the conversation.
     IssuesDetected:
       type: array
@@ -388,21 +380,17 @@ components:
       title: ListRealtimeContactAnalysisSegmentsRequest
       properties:
         InstanceId:
-          allOf:
-            - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance.
+          $ref: '#/components/schemas/InstanceId'
+          description: The identifier of the Amazon Connect instance.
         ContactId:
-          allOf:
-            - $ref: '#/components/schemas/ContactId'
-            - description: The identifier of the contact.
+          $ref: '#/components/schemas/ContactId'
+          description: The identifier of the contact.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximimum number of results to return per page.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximimum number of results to return per page.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
     RealtimeContactAnalysisSegments:
       type: array
       items:
@@ -429,13 +417,11 @@ components:
         - EndOffsetMillis
       properties:
         BeginOffsetMillis:
-          allOf:
-            - $ref: '#/components/schemas/OffsetMillis'
-            - description: The beginning offset in milliseconds where the category rule was detected.
+          $ref: '#/components/schemas/OffsetMillis'
+          description: The beginning offset in milliseconds where the category rule was detected.
         EndOffsetMillis:
-          allOf:
-            - $ref: '#/components/schemas/OffsetMillis'
-            - description: The ending offset in milliseconds where the category rule was detected.
+          $ref: '#/components/schemas/OffsetMillis'
+          description: The ending offset in milliseconds where the category rule was detected.
       description: The section of the contact audio where that category rule was detected.
     Transcript:
       type: object
@@ -449,49 +435,39 @@ components:
         - Sentiment
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/TranscriptId'
-            - description: The identifier of the transcript.
+          $ref: '#/components/schemas/TranscriptId'
+          description: The identifier of the transcript.
         ParticipantId:
-          allOf:
-            - $ref: '#/components/schemas/ParticipantId'
-            - description: The identifier of the participant.
+          $ref: '#/components/schemas/ParticipantId'
+          description: The identifier of the participant.
         ParticipantRole:
-          allOf:
-            - $ref: '#/components/schemas/ParticipantRole'
-            - description: 'The role of participant. For example, is it a customer, agent, or system.'
+          $ref: '#/components/schemas/ParticipantRole'
+          description: 'The role of participant. For example, is it a customer, agent, or system.'
         Content:
-          allOf:
-            - $ref: '#/components/schemas/TranscriptContent'
-            - description: The content of the transcript.
+          $ref: '#/components/schemas/TranscriptContent'
+          description: The content of the transcript.
         BeginOffsetMillis:
-          allOf:
-            - $ref: '#/components/schemas/OffsetMillis'
-            - description: The beginning offset in the contact for this transcript.
+          $ref: '#/components/schemas/OffsetMillis'
+          description: The beginning offset in the contact for this transcript.
         EndOffsetMillis:
-          allOf:
-            - $ref: '#/components/schemas/OffsetMillis'
-            - description: The end offset in the contact for this transcript.
+          $ref: '#/components/schemas/OffsetMillis'
+          description: The end offset in the contact for this transcript.
         Sentiment:
-          allOf:
-            - $ref: '#/components/schemas/SentimentValue'
-            - description: The sentiment of the detected for this piece of transcript.
+          $ref: '#/components/schemas/SentimentValue'
+          description: The sentiment of the detected for this piece of transcript.
         IssuesDetected:
-          allOf:
-            - $ref: '#/components/schemas/IssuesDetected'
-            - description: List of positions where issues were detected on the transcript.
+          $ref: '#/components/schemas/IssuesDetected'
+          description: List of positions where issues were detected on the transcript.
       description: A list of messages in the session.
     RealtimeContactAnalysisSegment:
       type: object
       properties:
         Transcript:
-          allOf:
-            - $ref: '#/components/schemas/Transcript'
-            - description: The analyzed transcript.
+          $ref: '#/components/schemas/Transcript'
+          description: The analyzed transcript.
         Categories:
-          allOf:
-            - $ref: '#/components/schemas/Categories'
-            - description: The matched category rules.
+          $ref: '#/components/schemas/Categories'
+          description: The matched category rules.
       description: An analyzed segment for a real-time analysis session.
     SentimentValue:
       type: string

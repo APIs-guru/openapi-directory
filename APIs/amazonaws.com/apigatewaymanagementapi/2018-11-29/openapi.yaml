@@ -357,8 +357,7 @@ components:
       title: PostToConnectionRequest
       properties:
         Data:
-          allOf:
-            - $ref: '#/components/schemas/Data'
-            - description: The data to be sent to the client specified by its connection id.
+          $ref: '#/components/schemas/Data'
+          description: The data to be sent to the client specified by its connection id.
 security:
   - hmac: []

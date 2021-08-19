@@ -1142,9 +1142,8 @@ components:
       type: object
       properties:
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: The user- or system-generated token from the initial request that can be used to repeat the request.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: The user- or system-generated token from the initial request that can be used to repeat the request.
     AssociateTeamMemberRequest:
       type: object
       required:
@@ -1154,25 +1153,20 @@ components:
       title: AssociateTeamMemberRequest
       properties:
         projectId:
-          allOf:
-            - $ref: '#/components/schemas/ProjectId'
-            - description: The ID of the project to which you will add the IAM user.
+          $ref: '#/components/schemas/ProjectId'
+          description: The ID of the project to which you will add the IAM user.
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: A user- or system-generated token that identifies the entity that requested the team member association to the project. This token can be used to repeat the request.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: A user- or system-generated token that identifies the entity that requested the team member association to the project. This token can be used to repeat the request.
         userArn:
-          allOf:
-            - $ref: '#/components/schemas/UserArn'
-            - description: The Amazon Resource Name (ARN) for the IAM user you want to add to the AWS CodeStar project.
+          $ref: '#/components/schemas/UserArn'
+          description: The Amazon Resource Name (ARN) for the IAM user you want to add to the AWS CodeStar project.
         projectRole:
-          allOf:
-            - $ref: '#/components/schemas/Role'
-            - description: The AWS CodeStar project role that will apply to this user. This role determines what actions a user can take in an AWS CodeStar project.
+          $ref: '#/components/schemas/Role'
+          description: The AWS CodeStar project role that will apply to this user. This role determines what actions a user can take in an AWS CodeStar project.
         remoteAccessAllowed:
-          allOf:
-            - $ref: '#/components/schemas/RemoteAccessAllowed'
-            - description: 'Whether the team member is allowed to use an SSH public/private key pair to remotely access project resources, for example Amazon EC2 instances.'
+          $ref: '#/components/schemas/RemoteAccessAllowed'
+          description: 'Whether the team member is allowed to use an SSH public/private key pair to remotely access project resources, for example Amazon EC2 instances.'
     LimitExceededException: {}
     ProjectNotFoundException: {}
     TeamMemberAlreadyAssociatedException: {}
@@ -1187,21 +1181,17 @@ components:
         - arn
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ProjectId'
-            - description: The ID of the project.
+          $ref: '#/components/schemas/ProjectId'
+          description: The ID of the project.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ProjectArn'
-            - description: The Amazon Resource Name (ARN) of the created project.
+          $ref: '#/components/schemas/ProjectArn'
+          description: The Amazon Resource Name (ARN) of the created project.
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: A user- or system-generated token that identifies the entity that requested project creation.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: A user- or system-generated token that identifies the entity that requested project creation.
         projectTemplateId:
-          allOf:
-            - $ref: '#/components/schemas/ProjectTemplateId'
-            - description: Reserved for future use.
+          $ref: '#/components/schemas/ProjectTemplateId'
+          description: Reserved for future use.
     CreateProjectRequest:
       type: object
       required:
@@ -1210,33 +1200,26 @@ components:
       title: CreateProjectRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ProjectName'
-            - description: The display name for the project to be created in AWS CodeStar.
+          $ref: '#/components/schemas/ProjectName'
+          description: The display name for the project to be created in AWS CodeStar.
         id:
-          allOf:
-            - $ref: '#/components/schemas/ProjectId'
-            - description: The ID of the project to be created in AWS CodeStar.
+          $ref: '#/components/schemas/ProjectId'
+          description: The ID of the project to be created in AWS CodeStar.
         description:
-          allOf:
-            - $ref: '#/components/schemas/ProjectDescription'
-            - description: 'The description of the project, if any.'
+          $ref: '#/components/schemas/ProjectDescription'
+          description: 'The description of the project, if any.'
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: A user- or system-generated token that identifies the entity that requested project creation. This token can be used to repeat the request.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: A user- or system-generated token that identifies the entity that requested project creation. This token can be used to repeat the request.
         sourceCode:
-          allOf:
-            - $ref: '#/components/schemas/SourceCode'
-            - description: 'A list of the Code objects submitted with the project request. If this parameter is specified, the request must also include the toolchain parameter.'
+          $ref: '#/components/schemas/SourceCode'
+          description: 'A list of the Code objects submitted with the project request. If this parameter is specified, the request must also include the toolchain parameter.'
         toolchain:
-          allOf:
-            - $ref: '#/components/schemas/Toolchain'
-            - description: 'The name of the toolchain template file submitted with the project request. If this parameter is specified, the request must also include the sourceCode parameter.'
+          $ref: '#/components/schemas/Toolchain'
+          description: 'The name of the toolchain template file submitted with the project request. If this parameter is specified, the request must also include the sourceCode parameter.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags created for the project.
+          $ref: '#/components/schemas/Tags'
+          description: The tags created for the project.
     ProjectAlreadyExistsException: {}
     ProjectCreationFailedException: {}
     CreateUserProfileResult:
@@ -1245,29 +1228,23 @@ components:
         - userArn
       properties:
         userArn:
-          allOf:
-            - $ref: '#/components/schemas/UserArn'
-            - description: The Amazon Resource Name (ARN) of the user in IAM.
+          $ref: '#/components/schemas/UserArn'
+          description: The Amazon Resource Name (ARN) of the user in IAM.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/UserProfileDisplayName'
-            - description: The name that is displayed as the friendly name for the user in AWS CodeStar.
+          $ref: '#/components/schemas/UserProfileDisplayName'
+          description: The name that is displayed as the friendly name for the user in AWS CodeStar.
         emailAddress:
-          allOf:
-            - $ref: '#/components/schemas/Email'
-            - description: The email address that is displayed as part of the user's profile in AWS CodeStar.
+          $ref: '#/components/schemas/Email'
+          description: The email address that is displayed as part of the user's profile in AWS CodeStar.
         sshPublicKey:
-          allOf:
-            - $ref: '#/components/schemas/SshPublicKey'
-            - description: The SSH public key associated with the user in AWS CodeStar. This is the public portion of the public/private keypair the user can use to access project resources if a project owner allows the user remote access to those resources.
+          $ref: '#/components/schemas/SshPublicKey'
+          description: The SSH public key associated with the user in AWS CodeStar. This is the public portion of the public/private keypair the user can use to access project resources if a project owner allows the user remote access to those resources.
         createdTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/CreatedTimestamp'
-            - description: 'The date the user profile was created, in timestamp format.'
+          $ref: '#/components/schemas/CreatedTimestamp'
+          description: 'The date the user profile was created, in timestamp format.'
         lastModifiedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/LastModifiedTimestamp'
-            - description: 'The date the user profile was last modified, in timestamp format.'
+          $ref: '#/components/schemas/LastModifiedTimestamp'
+          description: 'The date the user profile was last modified, in timestamp format.'
     CreateUserProfileRequest:
       type: object
       required:
@@ -1277,33 +1254,27 @@ components:
       title: CreateUserProfileRequest
       properties:
         userArn:
-          allOf:
-            - $ref: '#/components/schemas/UserArn'
-            - description: The Amazon Resource Name (ARN) of the user in IAM.
+          $ref: '#/components/schemas/UserArn'
+          description: The Amazon Resource Name (ARN) of the user in IAM.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/UserProfileDisplayName'
-            - description: 'The name that will be displayed as the friendly name for the user in AWS CodeStar. '
+          $ref: '#/components/schemas/UserProfileDisplayName'
+          description: 'The name that will be displayed as the friendly name for the user in AWS CodeStar. '
         emailAddress:
-          allOf:
-            - $ref: '#/components/schemas/Email'
-            - description: The email address that will be displayed as part of the user's profile in AWS CodeStar.
+          $ref: '#/components/schemas/Email'
+          description: The email address that will be displayed as part of the user's profile in AWS CodeStar.
         sshPublicKey:
-          allOf:
-            - $ref: '#/components/schemas/SshPublicKey'
-            - description: 'The SSH public key associated with the user in AWS CodeStar. If a project owner allows the user remote access to project resources, this public key will be used along with the user''s private key for SSH access.'
+          $ref: '#/components/schemas/SshPublicKey'
+          description: 'The SSH public key associated with the user in AWS CodeStar. If a project owner allows the user remote access to project resources, this public key will be used along with the user''s private key for SSH access.'
     UserProfileAlreadyExistsException: {}
     DeleteProjectResult:
       type: object
       properties:
         stackId:
-          allOf:
-            - $ref: '#/components/schemas/StackId'
-            - description: The ID of the primary stack in AWS CloudFormation that will be deleted as part of deleting the project and its resources.
+          $ref: '#/components/schemas/StackId'
+          description: The ID of the primary stack in AWS CloudFormation that will be deleted as part of deleting the project and its resources.
         projectArn:
-          allOf:
-            - $ref: '#/components/schemas/ProjectArn'
-            - description: The Amazon Resource Name (ARN) of the deleted project.
+          $ref: '#/components/schemas/ProjectArn'
+          description: The Amazon Resource Name (ARN) of the deleted project.
     DeleteProjectRequest:
       type: object
       required:
@@ -1311,26 +1282,22 @@ components:
       title: DeleteProjectRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ProjectId'
-            - description: The ID of the project to be deleted in AWS CodeStar.
+          $ref: '#/components/schemas/ProjectId'
+          description: The ID of the project to be deleted in AWS CodeStar.
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: 'A user- or system-generated token that identifies the entity that requested project deletion. This token can be used to repeat the request. '
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'A user- or system-generated token that identifies the entity that requested project deletion. This token can be used to repeat the request. '
         deleteStack:
-          allOf:
-            - $ref: '#/components/schemas/DeleteStack'
-            - description: Whether to send a delete request for the primary stack in AWS CloudFormation originally used to generate the project and its resources. This option will delete all AWS resources for the project (except for any buckets in Amazon S3) as well as deleting the project itself. Recommended for most use cases.
+          $ref: '#/components/schemas/DeleteStack'
+          description: Whether to send a delete request for the primary stack in AWS CloudFormation originally used to generate the project and its resources. This option will delete all AWS resources for the project (except for any buckets in Amazon S3) as well as deleting the project itself. Recommended for most use cases.
     DeleteUserProfileResult:
       type: object
       required:
         - userArn
       properties:
         userArn:
-          allOf:
-            - $ref: '#/components/schemas/UserArn'
-            - description: The Amazon Resource Name (ARN) of the user deleted from AWS CodeStar.
+          $ref: '#/components/schemas/UserArn'
+          description: The Amazon Resource Name (ARN) of the user deleted from AWS CodeStar.
     DeleteUserProfileRequest:
       type: object
       required:
@@ -1338,48 +1305,38 @@ components:
       title: DeleteUserProfileRequest
       properties:
         userArn:
-          allOf:
-            - $ref: '#/components/schemas/UserArn'
-            - description: The Amazon Resource Name (ARN) of the user to delete from AWS CodeStar.
+          $ref: '#/components/schemas/UserArn'
+          description: The Amazon Resource Name (ARN) of the user to delete from AWS CodeStar.
     DescribeProjectResult:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ProjectName'
-            - description: The display name for the project.
+          $ref: '#/components/schemas/ProjectName'
+          description: The display name for the project.
         id:
-          allOf:
-            - $ref: '#/components/schemas/ProjectId'
-            - description: The ID of the project.
+          $ref: '#/components/schemas/ProjectId'
+          description: The ID of the project.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ProjectArn'
-            - description: The Amazon Resource Name (ARN) for the project.
+          $ref: '#/components/schemas/ProjectArn'
+          description: The Amazon Resource Name (ARN) for the project.
         description:
-          allOf:
-            - $ref: '#/components/schemas/ProjectDescription'
-            - description: 'The description of the project, if any.'
+          $ref: '#/components/schemas/ProjectDescription'
+          description: 'The description of the project, if any.'
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: 'A user- or system-generated token that identifies the entity that requested project creation. '
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'A user- or system-generated token that identifies the entity that requested project creation. '
         createdTimeStamp:
-          allOf:
-            - $ref: '#/components/schemas/CreatedTimestamp'
-            - description: 'The date and time the project was created, in timestamp format.'
+          $ref: '#/components/schemas/CreatedTimestamp'
+          description: 'The date and time the project was created, in timestamp format.'
         stackId:
-          allOf:
-            - $ref: '#/components/schemas/StackId'
-            - description: The ID of the primary stack in AWS CloudFormation used to generate resources for the project.
+          $ref: '#/components/schemas/StackId'
+          description: The ID of the primary stack in AWS CloudFormation used to generate resources for the project.
         projectTemplateId:
-          allOf:
-            - $ref: '#/components/schemas/ProjectTemplateId'
-            - description: The ID for the AWS CodeStar project template used to create the project.
+          $ref: '#/components/schemas/ProjectTemplateId'
+          description: The ID for the AWS CodeStar project template used to create the project.
         status:
-          allOf:
-            - $ref: '#/components/schemas/ProjectStatus'
-            - description: The project creation or deletion status.
+          $ref: '#/components/schemas/ProjectStatus'
+          description: The project creation or deletion status.
     DescribeProjectRequest:
       type: object
       required:
@@ -1387,9 +1344,8 @@ components:
       title: DescribeProjectRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ProjectId'
-            - description: The ID of the project.
+          $ref: '#/components/schemas/ProjectId'
+          description: The ID of the project.
     DescribeUserProfileResult:
       type: object
       required:
@@ -1398,29 +1354,23 @@ components:
         - lastModifiedTimestamp
       properties:
         userArn:
-          allOf:
-            - $ref: '#/components/schemas/UserArn'
-            - description: The Amazon Resource Name (ARN) of the user.
+          $ref: '#/components/schemas/UserArn'
+          description: The Amazon Resource Name (ARN) of the user.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/UserProfileDisplayName'
-            - description: 'The display name shown for the user in AWS CodeStar projects. For example, this could be set to both first and last name ("Mary Major") or a single name ("Mary"). The display name is also used to generate the initial icon associated with the user in AWS CodeStar projects. If spaces are included in the display name, the first character that appears after the space will be used as the second character in the user initial icon. The initial icon displays a maximum of two characters, so a display name with more than one space (for example "Mary Jane Major") would generate an initial icon using the first character and the first character after the space ("MJ", not "MM").'
+          $ref: '#/components/schemas/UserProfileDisplayName'
+          description: 'The display name shown for the user in AWS CodeStar projects. For example, this could be set to both first and last name ("Mary Major") or a single name ("Mary"). The display name is also used to generate the initial icon associated with the user in AWS CodeStar projects. If spaces are included in the display name, the first character that appears after the space will be used as the second character in the user initial icon. The initial icon displays a maximum of two characters, so a display name with more than one space (for example "Mary Jane Major") would generate an initial icon using the first character and the first character after the space ("MJ", not "MM").'
         emailAddress:
-          allOf:
-            - $ref: '#/components/schemas/Email'
-            - description: The email address for the user. Optional.
+          $ref: '#/components/schemas/Email'
+          description: The email address for the user. Optional.
         sshPublicKey:
-          allOf:
-            - $ref: '#/components/schemas/SshPublicKey'
-            - description: 'The SSH public key associated with the user. This SSH public key is associated with the user profile, and can be used in conjunction with the associated private key for access to project resources, such as Amazon EC2 instances, if a project owner grants remote access to those resources.'
+          $ref: '#/components/schemas/SshPublicKey'
+          description: 'The SSH public key associated with the user. This SSH public key is associated with the user profile, and can be used in conjunction with the associated private key for access to project resources, such as Amazon EC2 instances, if a project owner grants remote access to those resources.'
         createdTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/CreatedTimestamp'
-            - description: 'The date and time when the user profile was created in AWS CodeStar, in timestamp format.'
+          $ref: '#/components/schemas/CreatedTimestamp'
+          description: 'The date and time when the user profile was created in AWS CodeStar, in timestamp format.'
         lastModifiedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/LastModifiedTimestamp'
-            - description: 'The date and time when the user profile was last modified, in timestamp format.'
+          $ref: '#/components/schemas/LastModifiedTimestamp'
+          description: 'The date and time when the user profile was last modified, in timestamp format.'
     DescribeUserProfileRequest:
       type: object
       required:
@@ -1428,9 +1378,8 @@ components:
       title: DescribeUserProfileRequest
       properties:
         userArn:
-          allOf:
-            - $ref: '#/components/schemas/UserArn'
-            - description: The Amazon Resource Name (ARN) of the user.
+          $ref: '#/components/schemas/UserArn'
+          description: The Amazon Resource Name (ARN) of the user.
     UserProfileNotFoundException: {}
     DisassociateTeamMemberResult:
       type: object
@@ -1443,50 +1392,42 @@ components:
       title: DisassociateTeamMemberRequest
       properties:
         projectId:
-          allOf:
-            - $ref: '#/components/schemas/ProjectId'
-            - description: The ID of the AWS CodeStar project from which you want to remove a team member.
+          $ref: '#/components/schemas/ProjectId'
+          description: The ID of the AWS CodeStar project from which you want to remove a team member.
         userArn:
-          allOf:
-            - $ref: '#/components/schemas/UserArn'
-            - description: The Amazon Resource Name (ARN) of the IAM user or group whom you want to remove from the project.
+          $ref: '#/components/schemas/UserArn'
+          description: The Amazon Resource Name (ARN) of the IAM user or group whom you want to remove from the project.
     ListProjectsResult:
       type: object
       required:
         - projects
       properties:
         projects:
-          allOf:
-            - $ref: '#/components/schemas/ProjectsList'
-            - description: A list of projects.
+          $ref: '#/components/schemas/ProjectsList'
+          description: A list of projects.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The continuation token to use when requesting the next set of results, if there are more results to be returned.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'The continuation token to use when requesting the next set of results, if there are more results to be returned.'
     ListProjectsRequest:
       type: object
       title: ListProjectsRequest
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The continuation token to be used to return the next set of results, if the results cannot be returned in one response.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'The continuation token to be used to return the next set of results, if the results cannot be returned in one response.'
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum amount of data that can be contained in a single set of results.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum amount of data that can be contained in a single set of results.
     InvalidNextTokenException: {}
     ListResourcesResult:
       type: object
       properties:
         resources:
-          allOf:
-            - $ref: '#/components/schemas/ResourcesResult'
-            - description: 'An array of resources associated with the project. '
+          $ref: '#/components/schemas/ResourcesResult'
+          description: 'An array of resources associated with the project. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The continuation token to use when requesting the next set of results, if there are more results to be returned.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'The continuation token to use when requesting the next set of results, if there are more results to be returned.'
     ListResourcesRequest:
       type: object
       required:
@@ -1494,28 +1435,23 @@ components:
       title: ListResourcesRequest
       properties:
         projectId:
-          allOf:
-            - $ref: '#/components/schemas/ProjectId'
-            - description: The ID of the project.
+          $ref: '#/components/schemas/ProjectId'
+          description: The ID of the project.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The continuation token for the next set of results, if the results cannot be returned in one response.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'The continuation token for the next set of results, if the results cannot be returned in one response.'
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum amount of data that can be contained in a single set of results.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum amount of data that can be contained in a single set of results.
     ListTagsForProjectResult:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags for the project.
+          $ref: '#/components/schemas/Tags'
+          description: The tags for the project.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: Reserved for future use.
+          $ref: '#/components/schemas/PaginationToken'
+          description: Reserved for future use.
     ListTagsForProjectRequest:
       type: object
       required:
@@ -1523,30 +1459,25 @@ components:
       title: ListTagsForProjectRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ProjectId'
-            - description: The ID of the project to get tags for.
+          $ref: '#/components/schemas/ProjectId'
+          description: The ID of the project to get tags for.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: Reserved for future use.
+          $ref: '#/components/schemas/PaginationToken'
+          description: Reserved for future use.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: Reserved for future use.
+          $ref: '#/components/schemas/MaxResults'
+          description: Reserved for future use.
     ListTeamMembersResult:
       type: object
       required:
         - teamMembers
       properties:
         teamMembers:
-          allOf:
-            - $ref: '#/components/schemas/TeamMemberResult'
-            - description: A list of team member objects for the project.
+          $ref: '#/components/schemas/TeamMemberResult'
+          description: A list of team member objects for the project.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The continuation token to use when requesting the next set of results, if there are more results to be returned.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'The continuation token to use when requesting the next set of results, if there are more results to be returned.'
     ListTeamMembersRequest:
       type: object
       required:
@@ -1554,49 +1485,41 @@ components:
       title: ListTeamMembersRequest
       properties:
         projectId:
-          allOf:
-            - $ref: '#/components/schemas/ProjectId'
-            - description: The ID of the project for which you want to list team members.
+          $ref: '#/components/schemas/ProjectId'
+          description: The ID of the project for which you want to list team members.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The continuation token for the next set of results, if the results cannot be returned in one response.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'The continuation token for the next set of results, if the results cannot be returned in one response.'
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of team members you want returned in a response.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of team members you want returned in a response.
     ListUserProfilesResult:
       type: object
       required:
         - userProfiles
       properties:
         userProfiles:
-          allOf:
-            - $ref: '#/components/schemas/UserProfilesList'
-            - description: All the user profiles configured in AWS CodeStar for an AWS account.
+          $ref: '#/components/schemas/UserProfilesList'
+          description: All the user profiles configured in AWS CodeStar for an AWS account.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The continuation token to use when requesting the next set of results, if there are more results to be returned.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'The continuation token to use when requesting the next set of results, if there are more results to be returned.'
     ListUserProfilesRequest:
       type: object
       title: ListUserProfilesRequest
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The continuation token for the next set of results, if the results cannot be returned in one response.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'The continuation token for the next set of results, if the results cannot be returned in one response.'
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in a response.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in a response.
     TagProjectResult:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags for the project.
+          $ref: '#/components/schemas/Tags'
+          description: The tags for the project.
     TagProjectRequest:
       type: object
       required:
@@ -1605,13 +1528,11 @@ components:
       title: TagProjectRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ProjectId'
-            - description: The ID of the project you want to add a tag to.
+          $ref: '#/components/schemas/ProjectId'
+          description: The ID of the project you want to add a tag to.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags you want to add to the project.
+          $ref: '#/components/schemas/Tags'
+          description: The tags you want to add to the project.
     UntagProjectResult:
       type: object
       properties: {}
@@ -1623,13 +1544,11 @@ components:
       title: UntagProjectRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ProjectId'
-            - description: The ID of the project to remove tags from.
+          $ref: '#/components/schemas/ProjectId'
+          description: The ID of the project to remove tags from.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagKeys'
-            - description: The tags to remove from the project.
+          $ref: '#/components/schemas/TagKeys'
+          description: The tags to remove from the project.
     UpdateProjectResult:
       type: object
       properties: {}
@@ -1640,32 +1559,26 @@ components:
       title: UpdateProjectRequest
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ProjectId'
-            - description: The ID of the project you want to update.
+          $ref: '#/components/schemas/ProjectId'
+          description: The ID of the project you want to update.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ProjectName'
-            - description: The name of the project you want to update.
+          $ref: '#/components/schemas/ProjectName'
+          description: The name of the project you want to update.
         description:
-          allOf:
-            - $ref: '#/components/schemas/ProjectDescription'
-            - description: 'The description of the project, if any.'
+          $ref: '#/components/schemas/ProjectDescription'
+          description: 'The description of the project, if any.'
     UpdateTeamMemberResult:
       type: object
       properties:
         userArn:
-          allOf:
-            - $ref: '#/components/schemas/UserArn'
-            - description: The Amazon Resource Name (ARN) of the user whose team membership attributes were updated.
+          $ref: '#/components/schemas/UserArn'
+          description: The Amazon Resource Name (ARN) of the user whose team membership attributes were updated.
         projectRole:
-          allOf:
-            - $ref: '#/components/schemas/Role'
-            - description: The project role granted to the user.
+          $ref: '#/components/schemas/Role'
+          description: The project role granted to the user.
         remoteAccessAllowed:
-          allOf:
-            - $ref: '#/components/schemas/RemoteAccessAllowed'
-            - description: Whether a team member is allowed to remotely access project resources using the SSH public key associated with the user's profile.
+          $ref: '#/components/schemas/RemoteAccessAllowed'
+          description: Whether a team member is allowed to remotely access project resources using the SSH public key associated with the user's profile.
     UpdateTeamMemberRequest:
       type: object
       required:
@@ -1674,21 +1587,17 @@ components:
       title: UpdateTeamMemberRequest
       properties:
         projectId:
-          allOf:
-            - $ref: '#/components/schemas/ProjectId'
-            - description: The ID of the project.
+          $ref: '#/components/schemas/ProjectId'
+          description: The ID of the project.
         userArn:
-          allOf:
-            - $ref: '#/components/schemas/UserArn'
-            - description: The Amazon Resource Name (ARN) of the user for whom you want to change team membership attributes.
+          $ref: '#/components/schemas/UserArn'
+          description: The Amazon Resource Name (ARN) of the user for whom you want to change team membership attributes.
         projectRole:
-          allOf:
-            - $ref: '#/components/schemas/Role'
-            - description: 'The role assigned to the user in the project. Project roles have different levels of access. For more information, see <a href="http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html">Working with Teams</a> in the <i>AWS CodeStar User Guide</i>.'
+          $ref: '#/components/schemas/Role'
+          description: 'The role assigned to the user in the project. Project roles have different levels of access. For more information, see <a href="http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html">Working with Teams</a> in the <i>AWS CodeStar User Guide</i>.'
         remoteAccessAllowed:
-          allOf:
-            - $ref: '#/components/schemas/RemoteAccessAllowed'
-            - description: 'Whether a team member is allowed to remotely access project resources using the SSH public key associated with the user''s profile. Even if this is set to True, the user must associate a public key with their profile before the user can access resources.'
+          $ref: '#/components/schemas/RemoteAccessAllowed'
+          description: 'Whether a team member is allowed to remotely access project resources using the SSH public key associated with the user''s profile. Even if this is set to True, the user must associate a public key with their profile before the user can access resources.'
     TeamMemberNotFoundException: {}
     UpdateUserProfileResult:
       type: object
@@ -1696,29 +1605,23 @@ components:
         - userArn
       properties:
         userArn:
-          allOf:
-            - $ref: '#/components/schemas/UserArn'
-            - description: The Amazon Resource Name (ARN) of the user in IAM.
+          $ref: '#/components/schemas/UserArn'
+          description: The Amazon Resource Name (ARN) of the user in IAM.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/UserProfileDisplayName'
-            - description: The name that is displayed as the friendly name for the user in AWS CodeStar.
+          $ref: '#/components/schemas/UserProfileDisplayName'
+          description: The name that is displayed as the friendly name for the user in AWS CodeStar.
         emailAddress:
-          allOf:
-            - $ref: '#/components/schemas/Email'
-            - description: The email address that is displayed as part of the user's profile in AWS CodeStar.
+          $ref: '#/components/schemas/Email'
+          description: The email address that is displayed as part of the user's profile in AWS CodeStar.
         sshPublicKey:
-          allOf:
-            - $ref: '#/components/schemas/SshPublicKey'
-            - description: The SSH public key associated with the user in AWS CodeStar. This is the public portion of the public/private keypair the user can use to access project resources if a project owner allows the user remote access to those resources.
+          $ref: '#/components/schemas/SshPublicKey'
+          description: The SSH public key associated with the user in AWS CodeStar. This is the public portion of the public/private keypair the user can use to access project resources if a project owner allows the user remote access to those resources.
         createdTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/CreatedTimestamp'
-            - description: 'The date the user profile was created, in timestamp format.'
+          $ref: '#/components/schemas/CreatedTimestamp'
+          description: 'The date the user profile was created, in timestamp format.'
         lastModifiedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/LastModifiedTimestamp'
-            - description: 'The date the user profile was last modified, in timestamp format.'
+          $ref: '#/components/schemas/LastModifiedTimestamp'
+          description: 'The date the user profile was last modified, in timestamp format.'
     UpdateUserProfileRequest:
       type: object
       required:
@@ -1726,21 +1629,17 @@ components:
       title: UpdateUserProfileRequest
       properties:
         userArn:
-          allOf:
-            - $ref: '#/components/schemas/UserArn'
-            - description: The name that will be displayed as the friendly name for the user in AWS CodeStar.
+          $ref: '#/components/schemas/UserArn'
+          description: The name that will be displayed as the friendly name for the user in AWS CodeStar.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/UserProfileDisplayName'
-            - description: The name that is displayed as the friendly name for the user in AWS CodeStar.
+          $ref: '#/components/schemas/UserProfileDisplayName'
+          description: The name that is displayed as the friendly name for the user in AWS CodeStar.
         emailAddress:
-          allOf:
-            - $ref: '#/components/schemas/Email'
-            - description: The email address that is displayed as part of the user's profile in AWS CodeStar.
+          $ref: '#/components/schemas/Email'
+          description: The email address that is displayed as part of the user's profile in AWS CodeStar.
         sshPublicKey:
-          allOf:
-            - $ref: '#/components/schemas/SshPublicKey'
-            - description: 'The SSH public key associated with the user in AWS CodeStar. If a project owner allows the user remote access to project resources, this public key will be used along with the user''s private key for SSH access.'
+          $ref: '#/components/schemas/SshPublicKey'
+          description: 'The SSH public key associated with the user in AWS CodeStar. If a project owner allows the user remote access to project resources, this public key will be used along with the user''s private key for SSH access.'
     ProjectId:
       type: string
       pattern: '^[a-z][a-z0-9-]+$'
@@ -1773,21 +1672,18 @@ components:
         - s3
       properties:
         s3:
-          allOf:
-            - $ref: '#/components/schemas/S3Location'
-            - description: 'Information about the Amazon S3 location where the source code files provided with the project request are stored. '
+          $ref: '#/components/schemas/S3Location'
+          description: 'Information about the Amazon S3 location where the source code files provided with the project request are stored. '
       description: The location where the source code files provided with the project request are stored. AWS CodeStar retrieves the files during project creation.
     CodeDestination:
       type: object
       properties:
         codeCommit:
-          allOf:
-            - $ref: '#/components/schemas/CodeCommitCodeDestination'
-            - description: Information about the AWS CodeCommit repository to be created in AWS CodeStar. This is where the source code files provided with the project request will be uploaded after project creation.
+          $ref: '#/components/schemas/CodeCommitCodeDestination'
+          description: Information about the AWS CodeCommit repository to be created in AWS CodeStar. This is where the source code files provided with the project request will be uploaded after project creation.
         gitHub:
-          allOf:
-            - $ref: '#/components/schemas/GitHubCodeDestination'
-            - description: Information about the GitHub repository to be created in AWS CodeStar. This is where the source code files provided with the project request will be uploaded after project creation.
+          $ref: '#/components/schemas/GitHubCodeDestination'
+          description: Information about the GitHub repository to be created in AWS CodeStar. This is where the source code files provided with the project request will be uploaded after project creation.
       description: 'The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit or GitHub. After AWS CodeStar provisions the new repository, the source code files provided with the project request are placed in the repository.'
     Code:
       type: object
@@ -1796,13 +1692,11 @@ components:
         - destination
       properties:
         source:
-          allOf:
-            - $ref: '#/components/schemas/CodeSource'
-            - description: The location where the source code files provided with the project request are stored. AWS CodeStar retrieves the files during project creation.
+          $ref: '#/components/schemas/CodeSource'
+          description: The location where the source code files provided with the project request are stored. AWS CodeStar retrieves the files during project creation.
         destination:
-          allOf:
-            - $ref: '#/components/schemas/CodeDestination'
-            - description: 'The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit or GitHub. After AWS CodeStar provisions the new repository, the source code files provided with the project request are placed in the repository.'
+          $ref: '#/components/schemas/CodeDestination'
+          description: 'The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit or GitHub. After AWS CodeStar provisions the new repository, the source code files provided with the project request are placed in the repository.'
       description: Location and destination information about the source code files provided with the project request. The source code is uploaded to the new project source repository after project creation.
     RepositoryName:
       type: string
@@ -1815,9 +1709,8 @@ components:
         - name
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name of the AWS CodeCommit repository to be created in AWS CodeStar.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name of the AWS CodeCommit repository to be created in AWS CodeStar.
       description: Information about the AWS CodeCommit repository to be created in AWS CodeStar. This is where the source code files provided with the project request will be uploaded after project creation.
     GitHubCodeDestination:
       type: object
@@ -1830,45 +1723,36 @@ components:
         - token
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: Name of the GitHub repository to be created in AWS CodeStar.
+          $ref: '#/components/schemas/RepositoryName'
+          description: Name of the GitHub repository to be created in AWS CodeStar.
         description:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryDescription'
-            - description: Description for the GitHub repository to be created in AWS CodeStar. This description displays in GitHub after the repository is created.
+          $ref: '#/components/schemas/RepositoryDescription'
+          description: Description for the GitHub repository to be created in AWS CodeStar. This description displays in GitHub after the repository is created.
         type:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryType'
-            - description: The type of GitHub repository to be created in AWS CodeStar. Valid values are User or Organization.
+          $ref: '#/components/schemas/RepositoryType'
+          description: The type of GitHub repository to be created in AWS CodeStar. Valid values are User or Organization.
         owner:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryOwner'
-            - description: 'The GitHub username for the owner of the GitHub repository to be created in AWS CodeStar. If this repository should be owned by a GitHub organization, provide its name.'
+          $ref: '#/components/schemas/RepositoryOwner'
+          description: 'The GitHub username for the owner of the GitHub repository to be created in AWS CodeStar. If this repository should be owned by a GitHub organization, provide its name.'
         privateRepository:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryIsPrivate'
-            - description: Whether the GitHub repository is to be a private repository.
+          $ref: '#/components/schemas/RepositoryIsPrivate'
+          description: Whether the GitHub repository is to be a private repository.
         issuesEnabled:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryEnableIssues'
-            - description: Whether to enable issues for the GitHub repository.
+          $ref: '#/components/schemas/RepositoryEnableIssues'
+          description: Whether to enable issues for the GitHub repository.
         token:
-          allOf:
-            - $ref: '#/components/schemas/GitHubPersonalToken'
-            - description: The GitHub user's personal access token for the GitHub repository.
+          $ref: '#/components/schemas/GitHubPersonalToken'
+          description: The GitHub user's personal access token for the GitHub repository.
       description: Information about the GitHub repository to be created in AWS CodeStar. This is where the source code files provided with the project request will be uploaded after project creation.
     S3Location:
       type: object
       properties:
         bucketName:
-          allOf:
-            - $ref: '#/components/schemas/BucketName'
-            - description: The Amazon S3 bucket name where the source code files provided with the project request are stored.
+          $ref: '#/components/schemas/BucketName'
+          description: The Amazon S3 bucket name where the source code files provided with the project request are stored.
         bucketKey:
-          allOf:
-            - $ref: '#/components/schemas/BucketKey'
-            - description: The Amazon S3 object key where the source code files provided with the project request are stored.
+          $ref: '#/components/schemas/BucketKey'
+          description: The Amazon S3 object key where the source code files provided with the project request are stored.
       description: The Amazon S3 location where the source code files provided with the project request are stored.
     ProjectName:
       type: string
@@ -1891,17 +1775,14 @@ components:
         - source
       properties:
         source:
-          allOf:
-            - $ref: '#/components/schemas/ToolchainSource'
-            - description: The Amazon S3 location where the toolchain template file provided with the project request is stored. AWS CodeStar retrieves the file during project creation.
+          $ref: '#/components/schemas/ToolchainSource'
+          description: The Amazon S3 location where the toolchain template file provided with the project request is stored. AWS CodeStar retrieves the file during project creation.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The service role ARN for AWS CodeStar to use for the toolchain template during stack provisioning.
+          $ref: '#/components/schemas/RoleArn'
+          description: The service role ARN for AWS CodeStar to use for the toolchain template during stack provisioning.
         stackParameters:
-          allOf:
-            - $ref: '#/components/schemas/TemplateParameterMap'
-            - description: 'The list of parameter overrides to be passed into the toolchain template during stack provisioning, if any.'
+          $ref: '#/components/schemas/TemplateParameterMap'
+          description: 'The list of parameter overrides to be passed into the toolchain template during stack provisioning, if any.'
       description: The toolchain template file provided with the project request. AWS CodeStar uses the template to provision the toolchain stack in AWS CloudFormation.
     Tags:
       type: object
@@ -1947,13 +1828,11 @@ components:
         - state
       properties:
         state:
-          allOf:
-            - $ref: '#/components/schemas/State'
-            - description: The phase of completion for a project creation or deletion.
+          $ref: '#/components/schemas/State'
+          description: The phase of completion for a project creation or deletion.
         reason:
-          allOf:
-            - $ref: '#/components/schemas/Reason'
-            - description: 'In the case of a project creation or deletion failure, a reason for the failure.'
+          $ref: '#/components/schemas/Reason'
+          description: 'In the case of a project creation or deletion failure, a reason for the failure.'
       description: An indication of whether a project creation or deletion is failed or successful.
     RepositoryDescription:
       type: string
@@ -2012,13 +1891,11 @@ components:
       type: object
       properties:
         projectId:
-          allOf:
-            - $ref: '#/components/schemas/ProjectId'
-            - description: The ID of the project.
+          $ref: '#/components/schemas/ProjectId'
+          description: The ID of the project.
         projectArn:
-          allOf:
-            - $ref: '#/components/schemas/ProjectArn'
-            - description: The Amazon Resource Name (ARN) of the project.
+          $ref: '#/components/schemas/ProjectArn'
+          description: The Amazon Resource Name (ARN) of the project.
       description: Information about the metadata for a project.
     ResourceId:
       type: string
@@ -2030,9 +1907,8 @@ components:
         - id
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The Amazon Resource Name (ARN) of the resource.
+          $ref: '#/components/schemas/ResourceId'
+          description: The Amazon Resource Name (ARN) of the resource.
       description: Information about a resource for a project.
     RoleArn:
       type: string
@@ -2058,17 +1934,14 @@ components:
         - projectRole
       properties:
         userArn:
-          allOf:
-            - $ref: '#/components/schemas/UserArn'
-            - description: The Amazon Resource Name (ARN) of the user in IAM.
+          $ref: '#/components/schemas/UserArn'
+          description: The Amazon Resource Name (ARN) of the user in IAM.
         projectRole:
-          allOf:
-            - $ref: '#/components/schemas/Role'
-            - description: 'The role assigned to the user in the project. Project roles have different levels of access. For more information, see <a href="http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html">Working with Teams</a> in the <i>AWS CodeStar User Guide</i>. '
+          $ref: '#/components/schemas/Role'
+          description: 'The role assigned to the user in the project. Project roles have different levels of access. For more information, see <a href="http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html">Working with Teams</a> in the <i>AWS CodeStar User Guide</i>. '
         remoteAccessAllowed:
-          allOf:
-            - $ref: '#/components/schemas/RemoteAccessAllowed'
-            - description: Whether the user is allowed to remotely access project resources using an SSH public/private key pair.
+          $ref: '#/components/schemas/RemoteAccessAllowed'
+          description: Whether the user is allowed to remotely access project resources using an SSH public/private key pair.
       description: Information about a team member in a project.
     TemplateParameterKey:
       type: string
@@ -2092,29 +1965,24 @@ components:
         - s3
       properties:
         s3:
-          allOf:
-            - $ref: '#/components/schemas/S3Location'
-            - description: The Amazon S3 bucket where the toolchain template file provided with the project request is stored.
+          $ref: '#/components/schemas/S3Location'
+          description: The Amazon S3 bucket where the toolchain template file provided with the project request is stored.
       description: The Amazon S3 location where the toolchain template file provided with the project request is stored. AWS CodeStar retrieves the file during project creation.
     UserProfileSummary:
       type: object
       properties:
         userArn:
-          allOf:
-            - $ref: '#/components/schemas/UserArn'
-            - description: The Amazon Resource Name (ARN) of the user in IAM.
+          $ref: '#/components/schemas/UserArn'
+          description: The Amazon Resource Name (ARN) of the user in IAM.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/UserProfileDisplayName'
-            - description: 'The display name of a user in AWS CodeStar. For example, this could be set to both first and last name ("Mary Major") or a single name ("Mary"). The display name is also used to generate the initial icon associated with the user in AWS CodeStar projects. If spaces are included in the display name, the first character that appears after the space will be used as the second character in the user initial icon. The initial icon displays a maximum of two characters, so a display name with more than one space (for example "Mary Jane Major") would generate an initial icon using the first character and the first character after the space ("MJ", not "MM").'
+          $ref: '#/components/schemas/UserProfileDisplayName'
+          description: 'The display name of a user in AWS CodeStar. For example, this could be set to both first and last name ("Mary Major") or a single name ("Mary"). The display name is also used to generate the initial icon associated with the user in AWS CodeStar projects. If spaces are included in the display name, the first character that appears after the space will be used as the second character in the user initial icon. The initial icon displays a maximum of two characters, so a display name with more than one space (for example "Mary Jane Major") would generate an initial icon using the first character and the first character after the space ("MJ", not "MM").'
         emailAddress:
-          allOf:
-            - $ref: '#/components/schemas/Email'
-            - description: The email address associated with the user.
+          $ref: '#/components/schemas/Email'
+          description: The email address associated with the user.
         sshPublicKey:
-          allOf:
-            - $ref: '#/components/schemas/SshPublicKey'
-            - description: 'The SSH public key associated with the user in AWS CodeStar. If a project owner allows the user remote access to project resources, this public key will be used along with the user''s private key for SSH access.'
+          $ref: '#/components/schemas/SshPublicKey'
+          description: 'The SSH public key associated with the user in AWS CodeStar. If a project owner allows the user remote access to project resources, this public key will be used along with the user''s private key for SSH access.'
       description: Information about a user's profile in AWS CodeStar.
 security:
   - hmac: []

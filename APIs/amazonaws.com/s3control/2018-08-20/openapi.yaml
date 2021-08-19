@@ -162,29 +162,24 @@ paths:
                   type: object
                   properties:
                     VpcId:
-                      allOf:
-                        - $ref: '#/components/schemas/VpcId'
-                        - description: 'If this field is specified, this access point will only allow connections from the specified VPC ID.'
+                      $ref: '#/components/schemas/VpcId'
+                      description: 'If this field is specified, this access point will only allow connections from the specified VPC ID.'
                 PublicAccessBlockConfiguration:
                   description: '<p>The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3 account. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the <i>Amazon S3 User Guide</i>.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
                   type: object
                   properties:
                     BlockPublicAcls:
-                      allOf:
-                        - $ref: '#/components/schemas/Setting'
-                        - description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
+                      $ref: '#/components/schemas/Setting'
+                      description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
                     IgnorePublicAcls:
-                      allOf:
-                        - $ref: '#/components/schemas/Setting'
-                        - description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p> <p>This is not supported for Amazon S3 on Outposts.</p>
+                      $ref: '#/components/schemas/Setting'
+                      description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p> <p>This is not supported for Amazon S3 on Outposts.</p>
                     BlockPublicPolicy:
-                      allOf:
-                        - $ref: '#/components/schemas/Setting'
-                        - description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p> <p>This is not supported for Amazon S3 on Outposts.</p>
+                      $ref: '#/components/schemas/Setting'
+                      description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p> <p>This is not supported for Amazon S3 on Outposts.</p>
                     RestrictPublicBuckets:
-                      allOf:
-                        - $ref: '#/components/schemas/Setting'
-                        - description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only Amazon Web Service principals and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
+                      $ref: '#/components/schemas/Setting'
+                      description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only Amazon Web Service principals and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -286,21 +281,17 @@ paths:
                   type: object
                   properties:
                     SupportingAccessPoint:
-                      allOf:
-                        - $ref: '#/components/schemas/ObjectLambdaSupportingAccessPointArn'
-                        - description: Standard access point associated with the Object Lambda Access Point.
+                      $ref: '#/components/schemas/ObjectLambdaSupportingAccessPointArn'
+                      description: Standard access point associated with the Object Lambda Access Point.
                     CloudWatchMetricsEnabled:
-                      allOf:
-                        - $ref: '#/components/schemas/Boolean'
-                        - description: A container for whether the CloudWatch metrics configuration is enabled.
+                      $ref: '#/components/schemas/Boolean'
+                      description: A container for whether the CloudWatch metrics configuration is enabled.
                     AllowedFeatures:
-                      allOf:
-                        - $ref: '#/components/schemas/ObjectLambdaAllowedFeaturesList'
-                        - description: A container for allowed features. Valid inputs are <code>GetObject-Range</code> and <code>GetObject-PartNumber</code>.
+                      $ref: '#/components/schemas/ObjectLambdaAllowedFeaturesList'
+                      description: A container for allowed features. Valid inputs are <code>GetObject-Range</code> and <code>GetObject-PartNumber</code>.
                     TransformationConfigurations:
-                      allOf:
-                        - $ref: '#/components/schemas/ObjectLambdaTransformationConfigurationsList'
-                        - description: A container for transformation configurations for an Object Lambda Access Point.
+                      $ref: '#/components/schemas/ObjectLambdaTransformationConfigurationsList'
+                      description: A container for transformation configurations for an Object Lambda Access Point.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -460,9 +451,8 @@ paths:
                   type: object
                   properties:
                     LocationConstraint:
-                      allOf:
-                        - $ref: '#/components/schemas/BucketLocationConstraint'
-                        - description: '<p>Specifies the Region where the bucket will be created. If you are creating a bucket on the US East (N. Virginia) Region (us-east-1), you do not need to specify the location. </p> <note> <p>This is not supported by Amazon S3 on Outposts buckets.</p> </note>'
+                      $ref: '#/components/schemas/BucketLocationConstraint'
+                      description: '<p>Specifies the Region where the bucket will be created. If you are creating a bucket on the US East (N. Virginia) Region (us-east-1), you do not need to specify the location. </p> <note> <p>This is not supported by Amazon S3 on Outposts buckets.</p> </note>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -537,29 +527,23 @@ paths:
                   type: object
                   properties:
                     LambdaInvoke:
-                      allOf:
-                        - $ref: '#/components/schemas/LambdaInvokeOperation'
-                        - description: Directs the specified job to invoke an Lambda function on every object in the manifest.
+                      $ref: '#/components/schemas/LambdaInvokeOperation'
+                      description: Directs the specified job to invoke an Lambda function on every object in the manifest.
                     S3PutObjectCopy:
-                      allOf:
-                        - $ref: '#/components/schemas/S3CopyObjectOperation'
-                        - description: Directs the specified job to run a PUT Copy object call on every object in the manifest.
+                      $ref: '#/components/schemas/S3CopyObjectOperation'
+                      description: Directs the specified job to run a PUT Copy object call on every object in the manifest.
                     S3PutObjectAcl:
-                      allOf:
-                        - $ref: '#/components/schemas/S3SetObjectAclOperation'
-                        - description: Directs the specified job to run a PUT Object acl call on every object in the manifest.
+                      $ref: '#/components/schemas/S3SetObjectAclOperation'
+                      description: Directs the specified job to run a PUT Object acl call on every object in the manifest.
                     S3PutObjectTagging:
-                      allOf:
-                        - $ref: '#/components/schemas/S3SetObjectTaggingOperation'
-                        - description: Directs the specified job to run a PUT Object tagging call on every object in the manifest.
+                      $ref: '#/components/schemas/S3SetObjectTaggingOperation'
+                      description: Directs the specified job to run a PUT Object tagging call on every object in the manifest.
                     S3DeleteObjectTagging:
-                      allOf:
-                        - $ref: '#/components/schemas/S3DeleteObjectTaggingOperation'
-                        - description: Directs the specified job to execute a DELETE Object tagging call on every object in the manifest.
+                      $ref: '#/components/schemas/S3DeleteObjectTaggingOperation'
+                      description: Directs the specified job to execute a DELETE Object tagging call on every object in the manifest.
                     S3InitiateRestoreObject:
-                      allOf:
-                        - $ref: '#/components/schemas/S3InitiateRestoreObjectOperation'
-                        - description: Directs the specified job to initiate restore requests for every archived object in the manifest.
+                      $ref: '#/components/schemas/S3InitiateRestoreObjectOperation'
+                      description: Directs the specified job to initiate restore requests for every archived object in the manifest.
                     S3PutObjectLegalHold:
                       $ref: '#/components/schemas/S3SetObjectLegalHoldOperation'
                     S3PutObjectRetention:
@@ -569,25 +553,20 @@ paths:
                   type: object
                   properties:
                     Bucket:
-                      allOf:
-                        - $ref: '#/components/schemas/S3BucketArnString'
-                        - description: The Amazon Resource Name (ARN) for the bucket where specified job-completion report will be stored.
+                      $ref: '#/components/schemas/S3BucketArnString'
+                      description: The Amazon Resource Name (ARN) for the bucket where specified job-completion report will be stored.
                     Format:
-                      allOf:
-                        - $ref: '#/components/schemas/JobReportFormat'
-                        - description: The format of the specified job-completion report.
+                      $ref: '#/components/schemas/JobReportFormat'
+                      description: The format of the specified job-completion report.
                     Enabled:
-                      allOf:
-                        - $ref: '#/components/schemas/Boolean'
-                        - description: Indicates whether the specified job will generate a job-completion report.
+                      $ref: '#/components/schemas/Boolean'
+                      description: Indicates whether the specified job will generate a job-completion report.
                     Prefix:
-                      allOf:
-                        - $ref: '#/components/schemas/ReportPrefixString'
-                        - description: An optional prefix to describe where in the specified bucket the job-completion report will be stored. Amazon S3 stores the job-completion report at <code>&lt;prefix&gt;/job-&lt;job-id&gt;/report.json</code>.
+                      $ref: '#/components/schemas/ReportPrefixString'
+                      description: An optional prefix to describe where in the specified bucket the job-completion report will be stored. Amazon S3 stores the job-completion report at <code>&lt;prefix&gt;/job-&lt;job-id&gt;/report.json</code>.
                     ReportScope:
-                      allOf:
-                        - $ref: '#/components/schemas/JobReportScope'
-                        - description: Indicates whether the job-completion report will include details of all tasks or only failed tasks.
+                      $ref: '#/components/schemas/JobReportScope'
+                      description: Indicates whether the job-completion report will include details of all tasks or only failed tasks.
                 ClientRequestToken:
                   description: An idempotency token to ensure that you don't accidentally submit the same request twice. You can use any string up to the maximum length.
                   type: string
@@ -598,13 +577,11 @@ paths:
                   type: object
                   properties:
                     Spec:
-                      allOf:
-                        - $ref: '#/components/schemas/JobManifestSpec'
-                        - description: 'Describes the format of the specified job''s manifest. If the manifest is in CSV format, also describes the columns contained within the manifest.'
+                      $ref: '#/components/schemas/JobManifestSpec'
+                      description: 'Describes the format of the specified job''s manifest. If the manifest is in CSV format, also describes the columns contained within the manifest.'
                     Location:
-                      allOf:
-                        - $ref: '#/components/schemas/JobManifestLocation'
-                        - description: Contains the information required to locate the specified job's manifest.
+                      $ref: '#/components/schemas/JobManifestLocation'
+                      description: Contains the information required to locate the specified job's manifest.
                 Description:
                   description: A description for this job. You can use any string within the permitted length. Descriptions don't need to be unique and can be used for multiple jobs.
                   type: string
@@ -1052,9 +1029,8 @@ paths:
                   type: object
                   properties:
                     Rules:
-                      allOf:
-                        - $ref: '#/components/schemas/LifecycleRules'
-                        - description: 'A lifecycle rule for individual objects in an Outposts bucket. '
+                      $ref: '#/components/schemas/LifecycleRules'
+                      description: 'A lifecycle rule for individual objects in an Outposts bucket. '
   '/v20180820/bucket/{name}/policy#x-amz-account-id':
     delete:
       operationId: DeleteBucketPolicy
@@ -1251,9 +1227,8 @@ paths:
                   type: object
                   properties:
                     TagSet:
-                      allOf:
-                        - $ref: '#/components/schemas/S3TagSet'
-                        - description: A collection for a set of tags.
+                      $ref: '#/components/schemas/S3TagSet'
+                      description: A collection for a set of tags.
   '/v20180820/jobs/{id}/tagging#x-amz-account-id':
     delete:
       operationId: DeleteJobTagging
@@ -1499,21 +1474,17 @@ paths:
                   type: object
                   properties:
                     BlockPublicAcls:
-                      allOf:
-                        - $ref: '#/components/schemas/Setting'
-                        - description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
+                      $ref: '#/components/schemas/Setting'
+                      description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
                     IgnorePublicAcls:
-                      allOf:
-                        - $ref: '#/components/schemas/Setting'
-                        - description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p> <p>This is not supported for Amazon S3 on Outposts.</p>
+                      $ref: '#/components/schemas/Setting'
+                      description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p> <p>This is not supported for Amazon S3 on Outposts.</p>
                     BlockPublicPolicy:
-                      allOf:
-                        - $ref: '#/components/schemas/Setting'
-                        - description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p> <p>This is not supported for Amazon S3 on Outposts.</p>
+                      $ref: '#/components/schemas/Setting'
+                      description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p> <p>This is not supported for Amazon S3 on Outposts.</p>
                     RestrictPublicBuckets:
-                      allOf:
-                        - $ref: '#/components/schemas/Setting'
-                        - description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only Amazon Web Service principals and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
+                      $ref: '#/components/schemas/Setting'
+                      description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only Amazon Web Service principals and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
   '/v20180820/storagelens/{storagelensid}#x-amz-account-id':
     delete:
       operationId: DeleteStorageLensConfiguration
@@ -1613,37 +1584,29 @@ paths:
                   type: object
                   properties:
                     Id:
-                      allOf:
-                        - $ref: '#/components/schemas/ConfigId'
-                        - description: A container for the Amazon S3 Storage Lens configuration ID.
+                      $ref: '#/components/schemas/ConfigId'
+                      description: A container for the Amazon S3 Storage Lens configuration ID.
                     AccountLevel:
-                      allOf:
-                        - $ref: '#/components/schemas/AccountLevel'
-                        - description: A container for all the account-level configurations of your S3 Storage Lens configuration.
+                      $ref: '#/components/schemas/AccountLevel'
+                      description: A container for all the account-level configurations of your S3 Storage Lens configuration.
                     Include:
-                      allOf:
-                        - $ref: '#/components/schemas/Include'
-                        - description: 'A container for what is included in this configuration. This container can only be valid if there is no <code>Exclude</code> container submitted, and it''s not empty. '
+                      $ref: '#/components/schemas/Include'
+                      description: 'A container for what is included in this configuration. This container can only be valid if there is no <code>Exclude</code> container submitted, and it''s not empty. '
                     Exclude:
-                      allOf:
-                        - $ref: '#/components/schemas/Exclude'
-                        - description: 'A container for what is excluded in this configuration. This container can only be valid if there is no <code>Include</code> container submitted, and it''s not empty. '
+                      $ref: '#/components/schemas/Exclude'
+                      description: 'A container for what is excluded in this configuration. This container can only be valid if there is no <code>Include</code> container submitted, and it''s not empty. '
                     DataExport:
-                      allOf:
-                        - $ref: '#/components/schemas/StorageLensDataExport'
-                        - description: 'A container to specify the properties of your S3 Storage Lens metrics export including, the destination, schema and format.'
+                      $ref: '#/components/schemas/StorageLensDataExport'
+                      description: 'A container to specify the properties of your S3 Storage Lens metrics export including, the destination, schema and format.'
                     IsEnabled:
-                      allOf:
-                        - $ref: '#/components/schemas/IsEnabled'
-                        - description: A container for whether the S3 Storage Lens configuration is enabled.
+                      $ref: '#/components/schemas/IsEnabled'
+                      description: A container for whether the S3 Storage Lens configuration is enabled.
                     AwsOrg:
-                      allOf:
-                        - $ref: '#/components/schemas/StorageLensAwsOrg'
-                        - description: A container for the Amazon Web Services organization for this S3 Storage Lens configuration.
+                      $ref: '#/components/schemas/StorageLensAwsOrg'
+                      description: A container for the Amazon Web Services organization for this S3 Storage Lens configuration.
                     StorageLensArn:
-                      allOf:
-                        - $ref: '#/components/schemas/StorageLensArn'
-                        - description: 'The Amazon Resource Name (ARN) of the S3 Storage Lens configuration. This property is read-only and follows the following format: <code> arn:aws:s3:<i>us-east-1</i>:<i>example-account-id</i>:storage-lens/<i>your-dashboard-name</i> </code> '
+                      $ref: '#/components/schemas/StorageLensArn'
+                      description: 'The Amazon Resource Name (ARN) of the S3 Storage Lens configuration. This property is read-only and follows the following format: <code> arn:aws:s3:<i>us-east-1</i>:<i>example-account-id</i>:storage-lens/<i>your-dashboard-name</i> </code> '
                 Tags:
                   description: <p>The tag set of the S3 Storage Lens configuration.</p> <note> <p>You can set up to a maximum of 50 tags.</p> </note>
                   type: array
@@ -1898,21 +1861,17 @@ paths:
                   type: object
                   properties:
                     SupportingAccessPoint:
-                      allOf:
-                        - $ref: '#/components/schemas/ObjectLambdaSupportingAccessPointArn'
-                        - description: Standard access point associated with the Object Lambda Access Point.
+                      $ref: '#/components/schemas/ObjectLambdaSupportingAccessPointArn'
+                      description: Standard access point associated with the Object Lambda Access Point.
                     CloudWatchMetricsEnabled:
-                      allOf:
-                        - $ref: '#/components/schemas/Boolean'
-                        - description: A container for whether the CloudWatch metrics configuration is enabled.
+                      $ref: '#/components/schemas/Boolean'
+                      description: A container for whether the CloudWatch metrics configuration is enabled.
                     AllowedFeatures:
-                      allOf:
-                        - $ref: '#/components/schemas/ObjectLambdaAllowedFeaturesList'
-                        - description: A container for allowed features. Valid inputs are <code>GetObject-Range</code> and <code>GetObject-PartNumber</code>.
+                      $ref: '#/components/schemas/ObjectLambdaAllowedFeaturesList'
+                      description: A container for allowed features. Valid inputs are <code>GetObject-Range</code> and <code>GetObject-PartNumber</code>.
                     TransformationConfigurations:
-                      allOf:
-                        - $ref: '#/components/schemas/ObjectLambdaTransformationConfigurationsList'
-                        - description: A container for transformation configurations for an Object Lambda Access Point.
+                      $ref: '#/components/schemas/ObjectLambdaTransformationConfigurationsList'
+                      description: A container for transformation configurations for an Object Lambda Access Point.
   '/v20180820/accesspoint/{name}/policyStatus#x-amz-account-id':
     get:
       operationId: GetAccessPointPolicyStatus
@@ -2419,13 +2378,11 @@ components:
       type: object
       properties:
         AccessPointArn:
-          allOf:
-            - $ref: '#/components/schemas/S3AccessPointArn'
-            - description: <p>The ARN of the access point.</p> <note> <p>This is only supported by Amazon S3 on Outposts.</p> </note>
+          $ref: '#/components/schemas/S3AccessPointArn'
+          description: <p>The ARN of the access point.</p> <note> <p>This is only supported by Amazon S3 on Outposts.</p> </note>
         Alias:
-          allOf:
-            - $ref: '#/components/schemas/Alias'
-            - description: The name or alias of the access point.
+          $ref: '#/components/schemas/Alias'
+          description: The name or alias of the access point.
     VpcId:
       type: string
       minLength: 1
@@ -2436,9 +2393,8 @@ components:
       type: object
       properties:
         ObjectLambdaAccessPointArn:
-          allOf:
-            - $ref: '#/components/schemas/ObjectLambdaAccessPointArn'
-            - description: Specifies the ARN for the Object Lambda Access Point.
+          $ref: '#/components/schemas/ObjectLambdaAccessPointArn'
+          description: Specifies the ARN for the Object Lambda Access Point.
     ObjectLambdaSupportingAccessPointArn:
       type: string
       pattern: 'arn:[^:]+:s3:[^:]*:\d{12}:accesspoint/.*'
@@ -2464,9 +2420,8 @@ components:
       type: object
       properties:
         BucketArn:
-          allOf:
-            - $ref: '#/components/schemas/S3RegionalBucketArn'
-            - description: '<p>The Amazon Resource Name (ARN) of the bucket.</p> <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:&lt;Region&gt;:&lt;account-id&gt;:outpost/&lt;outpost-id&gt;/bucket/&lt;my-bucket-name&gt;</code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded. </p>'
+          $ref: '#/components/schemas/S3RegionalBucketArn'
+          description: '<p>The Amazon Resource Name (ARN) of the bucket.</p> <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:&lt;Region&gt;:&lt;account-id&gt;:outpost/&lt;outpost-id&gt;/bucket/&lt;my-bucket-name&gt;</code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded. </p>'
     BucketLocationConstraint:
       type: string
       enum:
@@ -2487,104 +2442,83 @@ components:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The ID for this job. Amazon S3 generates this ID automatically and returns it after a successful <code>Create Job</code> request.
+          $ref: '#/components/schemas/JobId'
+          description: The ID for this job. Amazon S3 generates this ID automatically and returns it after a successful <code>Create Job</code> request.
     LambdaInvokeOperation:
       type: object
       properties:
         FunctionArn:
-          allOf:
-            - $ref: '#/components/schemas/FunctionArnString'
-            - description: The Amazon Resource Name (ARN) for the Lambda function that the specified job will invoke on every object in the manifest.
+          $ref: '#/components/schemas/FunctionArnString'
+          description: The Amazon Resource Name (ARN) for the Lambda function that the specified job will invoke on every object in the manifest.
       description: Contains the configuration parameters for a <code>Lambda Invoke</code> operation.
     S3CopyObjectOperation:
       type: object
       properties:
         TargetResource:
-          allOf:
-            - $ref: '#/components/schemas/S3BucketArnString'
-            - description: 'Specifies the destination bucket ARN for the batch copy operation. For example, to copy objects to a bucket named "destinationBucket", set the TargetResource to "arn:aws:s3:::destinationBucket".'
+          $ref: '#/components/schemas/S3BucketArnString'
+          description: 'Specifies the destination bucket ARN for the batch copy operation. For example, to copy objects to a bucket named "destinationBucket", set the TargetResource to "arn:aws:s3:::destinationBucket".'
         CannedAccessControlList:
-          allOf:
-            - $ref: '#/components/schemas/S3CannedAccessControlList'
-            - description: <p/>
+          $ref: '#/components/schemas/S3CannedAccessControlList'
+          description: <p/>
         AccessControlGrants:
-          allOf:
-            - $ref: '#/components/schemas/S3GrantList'
-            - description: <p/>
+          $ref: '#/components/schemas/S3GrantList'
+          description: <p/>
         MetadataDirective:
-          allOf:
-            - $ref: '#/components/schemas/S3MetadataDirective'
-            - description: <p/>
+          $ref: '#/components/schemas/S3MetadataDirective'
+          description: <p/>
         ModifiedSinceConstraint:
-          allOf:
-            - $ref: '#/components/schemas/TimeStamp'
-            - description: <p/>
+          $ref: '#/components/schemas/TimeStamp'
+          description: <p/>
         NewObjectMetadata:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectMetadata'
-            - description: <p/>
+          $ref: '#/components/schemas/S3ObjectMetadata'
+          description: <p/>
         NewObjectTagging:
-          allOf:
-            - $ref: '#/components/schemas/S3TagSet'
-            - description: <p/>
+          $ref: '#/components/schemas/S3TagSet'
+          description: <p/>
         RedirectLocation:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength2048String'
-            - description: 'Specifies an optional metadata property for website redirects, <code>x-amz-website-redirect-location</code>. Allows webpage redirects if the object is accessed through a website endpoint.'
+          $ref: '#/components/schemas/NonEmptyMaxLength2048String'
+          description: 'Specifies an optional metadata property for website redirects, <code>x-amz-website-redirect-location</code>. Allows webpage redirects if the object is accessed through a website endpoint.'
         RequesterPays:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: <p/>
+          $ref: '#/components/schemas/Boolean'
+          description: <p/>
         StorageClass:
-          allOf:
-            - $ref: '#/components/schemas/S3StorageClass'
-            - description: <p/>
+          $ref: '#/components/schemas/S3StorageClass'
+          description: <p/>
         UnModifiedSinceConstraint:
-          allOf:
-            - $ref: '#/components/schemas/TimeStamp'
-            - description: <p/>
+          $ref: '#/components/schemas/TimeStamp'
+          description: <p/>
         SSEAwsKmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyArnString'
-            - description: <p/>
+          $ref: '#/components/schemas/KmsKeyArnString'
+          description: <p/>
         TargetKeyPrefix:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-            - description: 'Specifies the folder prefix into which you would like the objects to be copied. For example, to copy objects into a folder named "Folder1" in the destination bucket, set the TargetKeyPrefix to "Folder1/".'
+          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+          description: 'Specifies the folder prefix into which you would like the objects to be copied. For example, to copy objects into a folder named "Folder1" in the destination bucket, set the TargetKeyPrefix to "Folder1/".'
         ObjectLockLegalHoldStatus:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectLockLegalHoldStatus'
-            - description: The legal hold status to be applied to all objects in the Batch Operations job.
+          $ref: '#/components/schemas/S3ObjectLockLegalHoldStatus'
+          description: The legal hold status to be applied to all objects in the Batch Operations job.
         ObjectLockMode:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectLockMode'
-            - description: The retention mode to be applied to all objects in the Batch Operations job.
+          $ref: '#/components/schemas/S3ObjectLockMode'
+          description: The retention mode to be applied to all objects in the Batch Operations job.
         ObjectLockRetainUntilDate:
-          allOf:
-            - $ref: '#/components/schemas/TimeStamp'
-            - description: The date when the applied object retention configuration expires on all objects in the Batch Operations job.
+          $ref: '#/components/schemas/TimeStamp'
+          description: The date when the applied object retention configuration expires on all objects in the Batch Operations job.
         BucketKeyEnabled:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: <p>Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption using Amazon Web Services KMS (SSE-KMS). Setting this header to <code>true</code> causes Amazon S3 to use an S3 Bucket Key for object encryption with SSE-KMS.</p> <p>Specifying this header with an <i>object</i> action doesn’t affect <i>bucket-level</i> settings for S3 Bucket Key.</p>
+          $ref: '#/components/schemas/Boolean'
+          description: <p>Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption using Amazon Web Services KMS (SSE-KMS). Setting this header to <code>true</code> causes Amazon S3 to use an S3 Bucket Key for object encryption with SSE-KMS.</p> <p>Specifying this header with an <i>object</i> action doesn’t affect <i>bucket-level</i> settings for S3 Bucket Key.</p>
       description: 'Contains the configuration parameters for a PUT Copy object operation. S3 Batch Operations passes every object to the underlying PUT Copy object API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html">PUT Object - Copy</a>.'
     S3SetObjectAclOperation:
       type: object
       properties:
         AccessControlPolicy:
-          allOf:
-            - $ref: '#/components/schemas/S3AccessControlPolicy'
-            - description: <p/>
+          $ref: '#/components/schemas/S3AccessControlPolicy'
+          description: <p/>
       description: 'Contains the configuration parameters for a Set Object ACL operation. S3 Batch Operations passes every object to the underlying PUT Object acl API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html">PUT Object acl</a>.'
     S3SetObjectTaggingOperation:
       type: object
       properties:
         TagSet:
-          allOf:
-            - $ref: '#/components/schemas/S3TagSet'
-            - description: <p/>
+          $ref: '#/components/schemas/S3TagSet'
+          description: <p/>
       description: 'Contains the configuration parameters for a Set Object Tagging operation. S3 Batch Operations passes every object to the underlying PUT Object tagging API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html">PUT Object tagging</a>.'
     S3DeleteObjectTaggingOperation:
       type: object
@@ -2594,13 +2528,11 @@ components:
       type: object
       properties:
         ExpirationInDays:
-          allOf:
-            - $ref: '#/components/schemas/S3ExpirationInDays'
-            - description: '<p>This argument specifies how long the S3 Glacier or S3 Glacier Deep Archive object remains available in Amazon S3. S3 Initiate Restore Object jobs that target S3 Glacier and S3 Glacier Deep Archive objects require <code>ExpirationInDays</code> set to 1 or greater.</p> <p>Conversely, do <i>not</i> set <code>ExpirationInDays</code> when creating S3 Initiate Restore Object jobs that target S3 Intelligent-Tiering Archive Access and Deep Archive Access tier objects. Objects in S3 Intelligent-Tiering archive access tiers are not subject to restore expiry, so specifying <code>ExpirationInDays</code> results in restore request failure.</p> <p>S3 Batch Operations jobs can operate either on S3 Glacier and S3 Glacier Deep Archive storage class objects or on S3 Intelligent-Tiering Archive Access and Deep Archive Access storage tier objects, but not both types in the same job. If you need to restore objects of both types you <i>must</i> create separate Batch Operations jobs. </p>'
+          $ref: '#/components/schemas/S3ExpirationInDays'
+          description: '<p>This argument specifies how long the S3 Glacier or S3 Glacier Deep Archive object remains available in Amazon S3. S3 Initiate Restore Object jobs that target S3 Glacier and S3 Glacier Deep Archive objects require <code>ExpirationInDays</code> set to 1 or greater.</p> <p>Conversely, do <i>not</i> set <code>ExpirationInDays</code> when creating S3 Initiate Restore Object jobs that target S3 Intelligent-Tiering Archive Access and Deep Archive Access tier objects. Objects in S3 Intelligent-Tiering archive access tiers are not subject to restore expiry, so specifying <code>ExpirationInDays</code> results in restore request failure.</p> <p>S3 Batch Operations jobs can operate either on S3 Glacier and S3 Glacier Deep Archive storage class objects or on S3 Intelligent-Tiering Archive Access and Deep Archive Access storage tier objects, but not both types in the same job. If you need to restore objects of both types you <i>must</i> create separate Batch Operations jobs. </p>'
         GlacierJobTier:
-          allOf:
-            - $ref: '#/components/schemas/S3GlacierJobTier'
-            - description: 'S3 Batch Operations supports <code>STANDARD</code> and <code>BULK</code> retrieval tiers, but not the <code>EXPEDITED</code> retrieval tier.'
+          $ref: '#/components/schemas/S3GlacierJobTier'
+          description: 'S3 Batch Operations supports <code>STANDARD</code> and <code>BULK</code> retrieval tiers, but not the <code>EXPEDITED</code> retrieval tier.'
       description: 'Contains the configuration parameters for an S3 Initiate Restore Object job. S3 Batch Operations passes every object to the underlying POST Object restore API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html#RESTObjectPOSTrestore-restore-request">RestoreObject</a>.'
     S3SetObjectLegalHoldOperation:
       type: object
@@ -2608,9 +2540,8 @@ components:
         - LegalHold
       properties:
         LegalHold:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectLockLegalHold'
-            - description: Contains the Object Lock legal hold status to be applied to all objects in the Batch Operations job.
+          $ref: '#/components/schemas/S3ObjectLockLegalHold'
+          description: Contains the Object Lock legal hold status to be applied to all objects in the Batch Operations job.
       description: 'Contains the configuration for an S3 Object Lock legal hold operation that an S3 Batch Operations job passes every object to the underlying <code>PutObjectLegalHold</code> API. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html">Using S3 Object Lock legal hold with S3 Batch Operations</a> in the <i>Amazon S3 User Guide</i>.'
     S3SetObjectRetentionOperation:
       type: object
@@ -2618,13 +2549,11 @@ components:
         - Retention
       properties:
         BypassGovernanceRetention:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Indicates if the action should be applied to objects in the Batch Operations job even if they have Object Lock <code> GOVERNANCE</code> type in place.
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates if the action should be applied to objects in the Batch Operations job even if they have Object Lock <code> GOVERNANCE</code> type in place.
         Retention:
-          allOf:
-            - $ref: '#/components/schemas/S3Retention'
-            - description: 'Contains the Object Lock retention mode to be applied to all objects in the Batch Operations job. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html">Using S3 Object Lock retention with S3 Batch Operations</a> in the <i>Amazon S3 User Guide</i>.'
+          $ref: '#/components/schemas/S3Retention'
+          description: 'Contains the Object Lock retention mode to be applied to all objects in the Batch Operations job. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html">Using S3 Object Lock retention with S3 Batch Operations</a> in the <i>Amazon S3 User Guide</i>.'
       description: 'Contains the configuration parameters for the Object Lock retention action for an S3 Batch Operations job. Batch Operations passes every object to the underlying <code>PutObjectRetention</code> API. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html">Using S3 Object Lock retention with S3 Batch Operations</a> in the <i>Amazon S3 User Guide</i>.'
     S3BucketArnString:
       type: string
@@ -2650,13 +2579,11 @@ components:
         - Format
       properties:
         Format:
-          allOf:
-            - $ref: '#/components/schemas/JobManifestFormat'
-            - description: Indicates which of the available formats the specified manifest uses.
+          $ref: '#/components/schemas/JobManifestFormat'
+          description: Indicates which of the available formats the specified manifest uses.
         Fields:
-          allOf:
-            - $ref: '#/components/schemas/JobManifestFieldList'
-            - description: 'If the specified manifest object is in the <code>S3BatchOperations_CSV_20180820</code> format, this element describes which columns contain the required data.'
+          $ref: '#/components/schemas/JobManifestFieldList'
+          description: 'If the specified manifest object is in the <code>S3BatchOperations_CSV_20180820</code> format, this element describes which columns contain the required data.'
       description: 'Describes the format of a manifest. If the manifest is in CSV format, also describes the columns contained within the manifest.'
     JobManifestLocation:
       type: object
@@ -2665,17 +2592,14 @@ components:
         - ETag
       properties:
         ObjectArn:
-          allOf:
-            - $ref: '#/components/schemas/S3KeyArnString'
-            - description: '<p>The Amazon Resource Name (ARN) for a manifest object.</p> <important> <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints"> XML related object key constraints</a>.</p> </important>'
+          $ref: '#/components/schemas/S3KeyArnString'
+          description: '<p>The Amazon Resource Name (ARN) for a manifest object.</p> <important> <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints"> XML related object key constraints</a>.</p> </important>'
         ObjectVersionId:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectVersionId'
-            - description: The optional version ID to identify a specific version of the manifest object.
+          $ref: '#/components/schemas/S3ObjectVersionId'
+          description: The optional version ID to identify a specific version of the manifest object.
         ETag:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-            - description: The ETag for the specified manifest object.
+          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+          description: The ETag for the specified manifest object.
       description: Contains the information required to locate a manifest object.
     S3Tag:
       type: object
@@ -2684,13 +2608,11 @@ components:
         - Value
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyString'
-            - description: <p/>
+          $ref: '#/components/schemas/TagKeyString'
+          description: <p/>
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValueString'
-            - description: <p/>
+          $ref: '#/components/schemas/TagValueString'
+          description: <p/>
       description: <p/>
     TooManyRequestsException: {}
     BadRequestException: {}
@@ -2707,89 +2629,73 @@ components:
       type: object
       properties:
         Job:
-          allOf:
-            - $ref: '#/components/schemas/JobDescriptor'
-            - description: Contains the configuration parameters and status for the job specified in the <code>Describe Job</code> request.
+          $ref: '#/components/schemas/JobDescriptor'
+          description: Contains the configuration parameters and status for the job specified in the <code>Describe Job</code> request.
     GetAccessPointResult:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/AccessPointName'
-            - description: The name of the specified access point.
+          $ref: '#/components/schemas/AccessPointName'
+          description: The name of the specified access point.
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/BucketName'
-            - description: The name of the bucket associated with the specified access point.
+          $ref: '#/components/schemas/BucketName'
+          description: The name of the bucket associated with the specified access point.
         NetworkOrigin:
-          allOf:
-            - $ref: '#/components/schemas/NetworkOrigin'
-            - description: '<p>Indicates whether this access point allows access from the public internet. If <code>VpcConfiguration</code> is specified for this access point, then <code>NetworkOrigin</code> is <code>VPC</code>, and the access point doesn''t allow access from the public internet. Otherwise, <code>NetworkOrigin</code> is <code>Internet</code>, and the access point allows access from the public internet, subject to the access point and bucket access policies.</p> <p>This will always be true for an Amazon S3 on Outposts access point</p>'
+          $ref: '#/components/schemas/NetworkOrigin'
+          description: '<p>Indicates whether this access point allows access from the public internet. If <code>VpcConfiguration</code> is specified for this access point, then <code>NetworkOrigin</code> is <code>VPC</code>, and the access point doesn''t allow access from the public internet. Otherwise, <code>NetworkOrigin</code> is <code>Internet</code>, and the access point allows access from the public internet, subject to the access point and bucket access policies.</p> <p>This will always be true for an Amazon S3 on Outposts access point</p>'
         VpcConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/VpcConfiguration'
-            - description: <p>Contains the virtual private cloud (VPC) configuration for the specified access point.</p> <note> <p>This element is empty if this access point is an Amazon S3 on Outposts access point that is used by other Amazon Web Services.</p> </note>
+          $ref: '#/components/schemas/VpcConfiguration'
+          description: <p>Contains the virtual private cloud (VPC) configuration for the specified access point.</p> <note> <p>This element is empty if this access point is an Amazon S3 on Outposts access point that is used by other Amazon Web Services.</p> </note>
         PublicAccessBlockConfiguration:
           $ref: '#/components/schemas/PublicAccessBlockConfiguration'
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/CreationDate'
-            - description: The date and time when the specified access point was created.
+          $ref: '#/components/schemas/CreationDate'
+          description: The date and time when the specified access point was created.
         Alias:
-          allOf:
-            - $ref: '#/components/schemas/Alias'
-            - description: The name or alias of the access point.
+          $ref: '#/components/schemas/Alias'
+          description: The name or alias of the access point.
         AccessPointArn:
-          allOf:
-            - $ref: '#/components/schemas/S3AccessPointArn'
-            - description: The ARN of the access point.
+          $ref: '#/components/schemas/S3AccessPointArn'
+          description: The ARN of the access point.
         Endpoints:
-          allOf:
-            - $ref: '#/components/schemas/Endpoints'
-            - description: The VPC endpoint for the access point.
+          $ref: '#/components/schemas/Endpoints'
+          description: The VPC endpoint for the access point.
     GetAccessPointConfigurationForObjectLambdaResult:
       type: object
       properties:
         Configuration:
-          allOf:
-            - $ref: '#/components/schemas/ObjectLambdaConfiguration'
-            - description: Object Lambda Access Point configuration document.
+          $ref: '#/components/schemas/ObjectLambdaConfiguration'
+          description: Object Lambda Access Point configuration document.
     GetAccessPointForObjectLambdaResult:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ObjectLambdaAccessPointName'
-            - description: The name of the Object Lambda Access Point.
+          $ref: '#/components/schemas/ObjectLambdaAccessPointName'
+          description: The name of the Object Lambda Access Point.
         PublicAccessBlockConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/PublicAccessBlockConfiguration'
-            - description: 'Configuration to block all public access. This setting is turned on and can not be edited. '
+          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+          description: 'Configuration to block all public access. This setting is turned on and can not be edited. '
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/CreationDate'
-            - description: The date and time when the specified Object Lambda Access Point was created.
+          $ref: '#/components/schemas/CreationDate'
+          description: The date and time when the specified Object Lambda Access Point was created.
     GetAccessPointPolicyResult:
       type: object
       properties:
         Policy:
-          allOf:
-            - $ref: '#/components/schemas/Policy'
-            - description: The access point policy associated with the specified access point.
+          $ref: '#/components/schemas/Policy'
+          description: The access point policy associated with the specified access point.
     GetAccessPointPolicyForObjectLambdaResult:
       type: object
       properties:
         Policy:
-          allOf:
-            - $ref: '#/components/schemas/ObjectLambdaPolicy'
-            - description: Object Lambda Access Point resource policy document.
+          $ref: '#/components/schemas/ObjectLambdaPolicy'
+          description: Object Lambda Access Point resource policy document.
     GetAccessPointPolicyStatusResult:
       type: object
       properties:
         PolicyStatus:
-          allOf:
-            - $ref: '#/components/schemas/PolicyStatus'
-            - description: Indicates the current policy status of the specified access point.
+          $ref: '#/components/schemas/PolicyStatus'
+          description: Indicates the current policy status of the specified access point.
     GetAccessPointPolicyStatusForObjectLambdaResult:
       type: object
       properties:
@@ -2799,102 +2705,86 @@ components:
       type: object
       properties:
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/BucketName'
-            - description: The Outposts bucket requested.
+          $ref: '#/components/schemas/BucketName'
+          description: The Outposts bucket requested.
         PublicAccessBlockEnabled:
-          allOf:
-            - $ref: '#/components/schemas/PublicAccessBlockEnabled'
-            - description: <p/>
+          $ref: '#/components/schemas/PublicAccessBlockEnabled'
+          description: <p/>
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/CreationDate'
-            - description: The creation date of the Outposts bucket.
+          $ref: '#/components/schemas/CreationDate'
+          description: The creation date of the Outposts bucket.
     GetBucketLifecycleConfigurationResult:
       type: object
       properties:
         Rules:
-          allOf:
-            - $ref: '#/components/schemas/LifecycleRules'
-            - description: Container for the lifecycle rule of the Outposts bucket.
+          $ref: '#/components/schemas/LifecycleRules'
+          description: Container for the lifecycle rule of the Outposts bucket.
     GetBucketPolicyResult:
       type: object
       properties:
         Policy:
-          allOf:
-            - $ref: '#/components/schemas/Policy'
-            - description: The policy of the Outposts bucket.
+          $ref: '#/components/schemas/Policy'
+          description: The policy of the Outposts bucket.
     GetBucketTaggingResult:
       type: object
       required:
         - TagSet
       properties:
         TagSet:
-          allOf:
-            - $ref: '#/components/schemas/S3TagSet'
-            - description: The tags set of the Outposts bucket.
+          $ref: '#/components/schemas/S3TagSet'
+          description: The tags set of the Outposts bucket.
     GetJobTaggingResult:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/S3TagSet'
-            - description: The set of tags associated with the S3 Batch Operations job.
+          $ref: '#/components/schemas/S3TagSet'
+          description: The set of tags associated with the S3 Batch Operations job.
     GetPublicAccessBlockOutput:
       type: object
       properties:
         PublicAccessBlockConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/PublicAccessBlockConfiguration'
-            - description: The <code>PublicAccessBlock</code> configuration currently in effect for this account.
+          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+          description: The <code>PublicAccessBlock</code> configuration currently in effect for this account.
     NoSuchPublicAccessBlockConfiguration: {}
     GetStorageLensConfigurationResult:
       type: object
       properties:
         StorageLensConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/StorageLensConfiguration'
-            - description: The S3 Storage Lens configuration requested.
+          $ref: '#/components/schemas/StorageLensConfiguration'
+          description: The S3 Storage Lens configuration requested.
     GetStorageLensConfigurationTaggingResult:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/StorageLensTags'
-            - description: The tags of S3 Storage Lens configuration requested.
+          $ref: '#/components/schemas/StorageLensTags'
+          description: The tags of S3 Storage Lens configuration requested.
     ListAccessPointsResult:
       type: object
       properties:
         AccessPointList:
-          allOf:
-            - $ref: '#/components/schemas/AccessPointList'
-            - description: Contains identification and configuration information for one or more access points associated with the specified bucket.
+          $ref: '#/components/schemas/AccessPointList'
+          description: Contains identification and configuration information for one or more access points associated with the specified bucket.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-            - description: 'If the specified bucket has more access points than can be returned in one call to this API, this field contains a continuation token that you can provide in subsequent calls to this API to retrieve additional access points.'
+          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+          description: 'If the specified bucket has more access points than can be returned in one call to this API, this field contains a continuation token that you can provide in subsequent calls to this API to retrieve additional access points.'
     ListAccessPointsForObjectLambdaResult:
       type: object
       properties:
         ObjectLambdaAccessPointList:
-          allOf:
-            - $ref: '#/components/schemas/ObjectLambdaAccessPointList'
-            - description: Returns list of Object Lambda Access Points.
+          $ref: '#/components/schemas/ObjectLambdaAccessPointList'
+          description: Returns list of Object Lambda Access Points.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-            - description: 'If the list has more access points than can be returned in one call to this API, this field contains a continuation token that you can provide in subsequent calls to this API to retrieve additional access points.'
+          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+          description: 'If the list has more access points than can be returned in one call to this API, this field contains a continuation token that you can provide in subsequent calls to this API to retrieve additional access points.'
     ListJobsResult:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/StringForNextToken'
-            - description: 'If the <code>List Jobs</code> request produced more than the maximum number of results, you can pass this value into a subsequent <code>List Jobs</code> request in order to retrieve the next page of results.'
+          $ref: '#/components/schemas/StringForNextToken'
+          description: 'If the <code>List Jobs</code> request produced more than the maximum number of results, you can pass this value into a subsequent <code>List Jobs</code> request in order to retrieve the next page of results.'
         Jobs:
-          allOf:
-            - $ref: '#/components/schemas/JobListDescriptorList'
-            - description: The list of current jobs and jobs that have ended within the last 30 days.
+          $ref: '#/components/schemas/JobListDescriptorList'
+          description: The list of current jobs and jobs that have ended within the last 30 days.
     JobStatus:
       type: string
       enum:
@@ -2917,24 +2807,20 @@ components:
       type: object
       properties:
         RegionalBucketList:
-          allOf:
-            - $ref: '#/components/schemas/RegionalBucketList'
-            - description: <p/>
+          $ref: '#/components/schemas/RegionalBucketList'
+          description: <p/>
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-            - description: ' <code>NextToken</code> is sent when <code>isTruncated</code> is true, which means there are more buckets that can be listed. The next list requests to Amazon S3 can be continued with this <code>NextToken</code>. <code>NextToken</code> is obfuscated and is not a real key.'
+          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+          description: ' <code>NextToken</code> is sent when <code>isTruncated</code> is true, which means there are more buckets that can be listed. The next list requests to Amazon S3 can be continued with this <code>NextToken</code>. <code>NextToken</code> is obfuscated and is not a real key.'
     ListStorageLensConfigurationsResult:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/ContinuationToken'
-            - description: 'If the request produced more than the maximum number of S3 Storage Lens configuration results, you can pass this value into a subsequent request to retrieve the next page of results.'
+          $ref: '#/components/schemas/ContinuationToken'
+          description: 'If the request produced more than the maximum number of S3 Storage Lens configuration results, you can pass this value into a subsequent request to retrieve the next page of results.'
         StorageLensConfigurationList:
-          allOf:
-            - $ref: '#/components/schemas/StorageLensConfigurationList'
-            - description: A list of S3 Storage Lens configurations.
+          $ref: '#/components/schemas/StorageLensConfigurationList'
+          description: A list of S3 Storage Lens configurations.
     LifecycleRules:
       type: array
       items:
@@ -2961,37 +2847,31 @@ components:
         - BucketLevel
       properties:
         ActivityMetrics:
-          allOf:
-            - $ref: '#/components/schemas/ActivityMetrics'
-            - description: A container for the S3 Storage Lens activity metrics.
+          $ref: '#/components/schemas/ActivityMetrics'
+          description: A container for the S3 Storage Lens activity metrics.
         BucketLevel:
-          allOf:
-            - $ref: '#/components/schemas/BucketLevel'
-            - description: A container for the S3 Storage Lens bucket-level configuration.
+          $ref: '#/components/schemas/BucketLevel'
+          description: A container for the S3 Storage Lens bucket-level configuration.
       description: A container for the account level Amazon S3 Storage Lens configuration.
     Include:
       type: object
       properties:
         Buckets:
-          allOf:
-            - $ref: '#/components/schemas/Buckets'
-            - description: A container for the S3 Storage Lens bucket includes.
+          $ref: '#/components/schemas/Buckets'
+          description: A container for the S3 Storage Lens bucket includes.
         Regions:
-          allOf:
-            - $ref: '#/components/schemas/Regions'
-            - description: A container for the S3 Storage Lens Region includes.
+          $ref: '#/components/schemas/Regions'
+          description: A container for the S3 Storage Lens Region includes.
       description: A container for what Amazon S3 Storage Lens configuration includes.
     Exclude:
       type: object
       properties:
         Buckets:
-          allOf:
-            - $ref: '#/components/schemas/Buckets'
-            - description: A container for the S3 Storage Lens bucket excludes.
+          $ref: '#/components/schemas/Buckets'
+          description: A container for the S3 Storage Lens bucket excludes.
         Regions:
-          allOf:
-            - $ref: '#/components/schemas/Regions'
-            - description: A container for the S3 Storage Lens Region excludes.
+          $ref: '#/components/schemas/Regions'
+          description: A container for the S3 Storage Lens Region excludes.
       description: A container for what Amazon S3 Storage Lens will exclude.
     StorageLensDataExport:
       type: object
@@ -2999,9 +2879,8 @@ components:
         - S3BucketDestination
       properties:
         S3BucketDestination:
-          allOf:
-            - $ref: '#/components/schemas/S3BucketDestination'
-            - description: <p>A container for the bucket where the S3 Storage Lens metrics export will be located.</p> <note> <p>This bucket must be located in the same Region as the storage lens configuration. </p> </note>
+          $ref: '#/components/schemas/S3BucketDestination'
+          description: <p>A container for the bucket where the S3 Storage Lens metrics export will be located.</p> <note> <p>This bucket must be located in the same Region as the storage lens configuration. </p> </note>
       description: 'A container to specify the properties of your S3 Storage Lens metrics export, including the destination, schema, and format.'
     IsEnabled:
       type: boolean
@@ -3011,9 +2890,8 @@ components:
         - Arn
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/AwsOrgArn'
-            - description: 'A container for the Amazon Resource Name (ARN) of the Amazon Web Services organization. This property is read-only and follows the following format: <code> arn:aws:organizations:<i>us-east-1</i>:<i>example-account-id</i>:organization/<i>o-ex2l495dck</i> </code> '
+          $ref: '#/components/schemas/AwsOrgArn'
+          description: 'A container for the Amazon Resource Name (ARN) of the Amazon Web Services organization. This property is read-only and follows the following format: <code> arn:aws:organizations:<i>us-east-1</i>:<i>example-account-id</i>:organization/<i>o-ex2l495dck</i> </code> '
       description: The Amazon Web Services organization for your S3 Storage Lens.
     StorageLensArn:
       type: string
@@ -3027,13 +2905,11 @@ components:
         - Value
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyString'
-            - description: <p/>
+          $ref: '#/components/schemas/TagKeyString'
+          description: <p/>
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValueString'
-            - description: <p/>
+          $ref: '#/components/schemas/TagValueString'
+          description: <p/>
       description: <p/>
     PutStorageLensConfigurationTaggingResult:
       type: object
@@ -3045,28 +2921,23 @@ components:
         - Priority
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The ID for the job whose priority Amazon S3 updated.
+          $ref: '#/components/schemas/JobId'
+          description: The ID for the job whose priority Amazon S3 updated.
         Priority:
-          allOf:
-            - $ref: '#/components/schemas/JobPriority'
-            - description: The new priority assigned to the specified job.
+          $ref: '#/components/schemas/JobPriority'
+          description: The new priority assigned to the specified job.
     UpdateJobStatusResult:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The ID for the job whose status was updated.
+          $ref: '#/components/schemas/JobId'
+          description: The ID for the job whose status was updated.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: The current status for the specified job.
+          $ref: '#/components/schemas/JobStatus'
+          description: The current status for the specified job.
         StatusUpdateReason:
-          allOf:
-            - $ref: '#/components/schemas/JobStatusUpdateReason'
-            - description: The reason that the specified job's status was updated.
+          $ref: '#/components/schemas/JobStatusUpdateReason'
+          description: The reason that the specified job's status was updated.
     JobStatusException: {}
     DaysAfterInitiation:
       type: integer
@@ -3074,9 +2945,8 @@ components:
       type: object
       properties:
         DaysAfterInitiation:
-          allOf:
-            - $ref: '#/components/schemas/DaysAfterInitiation'
-            - description: Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload to the Outposts bucket.
+          $ref: '#/components/schemas/DaysAfterInitiation'
+          description: Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload to the Outposts bucket.
       description: The container for abort incomplete multipart upload
     AccessPointName:
       type: string
@@ -3093,9 +2963,8 @@ components:
         - VpcId
       properties:
         VpcId:
-          allOf:
-            - $ref: '#/components/schemas/VpcId'
-            - description: 'If this field is specified, this access point will only allow connections from the specified VPC ID.'
+          $ref: '#/components/schemas/VpcId'
+          description: 'If this field is specified, this access point will only allow connections from the specified VPC ID.'
       description: The virtual private cloud (VPC) configuration for an access point.
     BucketName:
       type: string
@@ -3117,29 +2986,23 @@ components:
         - Bucket
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/AccessPointName'
-            - description: The name of this access point.
+          $ref: '#/components/schemas/AccessPointName'
+          description: The name of this access point.
         NetworkOrigin:
-          allOf:
-            - $ref: '#/components/schemas/NetworkOrigin'
-            - description: 'Indicates whether this access point allows access from the public internet. If <code>VpcConfiguration</code> is specified for this access point, then <code>NetworkOrigin</code> is <code>VPC</code>, and the access point doesn''t allow access from the public internet. Otherwise, <code>NetworkOrigin</code> is <code>Internet</code>, and the access point allows access from the public internet, subject to the access point and bucket access policies.'
+          $ref: '#/components/schemas/NetworkOrigin'
+          description: 'Indicates whether this access point allows access from the public internet. If <code>VpcConfiguration</code> is specified for this access point, then <code>NetworkOrigin</code> is <code>VPC</code>, and the access point doesn''t allow access from the public internet. Otherwise, <code>NetworkOrigin</code> is <code>Internet</code>, and the access point allows access from the public internet, subject to the access point and bucket access policies.'
         VpcConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/VpcConfiguration'
-            - description: '<p>The virtual private cloud (VPC) configuration for this access point, if one exists.</p> <note> <p>This element is empty if this access point is an Amazon S3 on Outposts access point that is used by other Amazon Web Services.</p> </note>'
+          $ref: '#/components/schemas/VpcConfiguration'
+          description: '<p>The virtual private cloud (VPC) configuration for this access point, if one exists.</p> <note> <p>This element is empty if this access point is an Amazon S3 on Outposts access point that is used by other Amazon Web Services.</p> </note>'
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/BucketName'
-            - description: The name of the bucket associated with this access point.
+          $ref: '#/components/schemas/BucketName'
+          description: The name of the bucket associated with this access point.
         AccessPointArn:
-          allOf:
-            - $ref: '#/components/schemas/S3AccessPointArn'
-            - description: The ARN for the access point.
+          $ref: '#/components/schemas/S3AccessPointArn'
+          description: The ARN for the access point.
         Alias:
-          allOf:
-            - $ref: '#/components/schemas/Alias'
-            - description: The name or alias of the access point.
+          $ref: '#/components/schemas/Alias'
+          description: The name or alias of the access point.
       description: An access point used to access a bucket.
     AccessPointList:
       type: array
@@ -3156,21 +3019,18 @@ components:
       type: object
       properties:
         IsEnabled:
-          allOf:
-            - $ref: '#/components/schemas/IsEnabled'
-            - description: A container for whether the activity metrics are enabled.
+          $ref: '#/components/schemas/IsEnabled'
+          description: A container for whether the activity metrics are enabled.
       description: A container for the activity metrics.
     BucketLevel:
       type: object
       properties:
         ActivityMetrics:
-          allOf:
-            - $ref: '#/components/schemas/ActivityMetrics'
-            - description: A container for the bucket-level activity metrics for Amazon S3 Storage Lens
+          $ref: '#/components/schemas/ActivityMetrics'
+          description: A container for the bucket-level activity metrics for Amazon S3 Storage Lens
         PrefixLevel:
-          allOf:
-            - $ref: '#/components/schemas/PrefixLevel'
-            - description: A container for the bucket-level prefix-level metrics for S3 Storage Lens
+          $ref: '#/components/schemas/PrefixLevel'
+          description: A container for the bucket-level prefix-level metrics for S3 Storage Lens
       description: A container for the bucket-level configuration.
     FunctionArnString:
       type: string
@@ -3185,13 +3045,11 @@ components:
         - FunctionArn
       properties:
         FunctionArn:
-          allOf:
-            - $ref: '#/components/schemas/FunctionArnString'
-            - description: The Amazon Resource Name (ARN) of the Lambda function.
+          $ref: '#/components/schemas/FunctionArnString'
+          description: The Amazon Resource Name (ARN) of the Lambda function.
         FunctionPayload:
-          allOf:
-            - $ref: '#/components/schemas/AwsLambdaTransformationPayload'
-            - description: Additional JSON that provides supplemental data to the Lambda function used to transform objects.
+          $ref: '#/components/schemas/AwsLambdaTransformationPayload'
+          description: Additional JSON that provides supplemental data to the Lambda function used to transform objects.
       description: Lambda function used to transform objects through an Object Lambda Access Point.
     AwsOrgArn:
       type: string
@@ -3211,9 +3069,8 @@ components:
         - StorageMetrics
       properties:
         StorageMetrics:
-          allOf:
-            - $ref: '#/components/schemas/PrefixLevelStorageMetrics'
-            - description: A container for the prefix-level storage metrics for S3 Storage Lens.
+          $ref: '#/components/schemas/PrefixLevelStorageMetrics'
+          description: A container for the prefix-level storage metrics for S3 Storage Lens.
       description: A container for the prefix-level configuration.
     Buckets:
       type: array
@@ -3240,21 +3097,17 @@ components:
         - TransformationConfigurations
       properties:
         SupportingAccessPoint:
-          allOf:
-            - $ref: '#/components/schemas/ObjectLambdaSupportingAccessPointArn'
-            - description: Standard access point associated with the Object Lambda Access Point.
+          $ref: '#/components/schemas/ObjectLambdaSupportingAccessPointArn'
+          description: Standard access point associated with the Object Lambda Access Point.
         CloudWatchMetricsEnabled:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: A container for whether the CloudWatch metrics configuration is enabled.
+          $ref: '#/components/schemas/Boolean'
+          description: A container for whether the CloudWatch metrics configuration is enabled.
         AllowedFeatures:
-          allOf:
-            - $ref: '#/components/schemas/ObjectLambdaAllowedFeaturesList'
-            - description: A container for allowed features. Valid inputs are <code>GetObject-Range</code> and <code>GetObject-PartNumber</code>.
+          $ref: '#/components/schemas/ObjectLambdaAllowedFeaturesList'
+          description: A container for allowed features. Valid inputs are <code>GetObject-Range</code> and <code>GetObject-PartNumber</code>.
         TransformationConfigurations:
-          allOf:
-            - $ref: '#/components/schemas/ObjectLambdaTransformationConfigurationsList'
-            - description: A container for transformation configurations for an Object Lambda Access Point.
+          $ref: '#/components/schemas/ObjectLambdaTransformationConfigurationsList'
+          description: A container for transformation configurations for an Object Lambda Access Point.
       description: A configuration used when creating an Object Lambda Access Point.
     CreateAccessPointForObjectLambdaRequest:
       type: object
@@ -3263,9 +3116,8 @@ components:
       title: CreateAccessPointForObjectLambdaRequest
       properties:
         Configuration:
-          allOf:
-            - $ref: '#/components/schemas/ObjectLambdaConfiguration'
-            - description: Object Lambda Access Point configuration as a JSON document.
+          $ref: '#/components/schemas/ObjectLambdaConfiguration'
+          description: Object Lambda Access Point configuration as a JSON document.
     ObjectLambdaAccessPointArn:
       type: string
       pattern: 'arn:[^:]+:s3-object-lambda:[^:]*:\d{12}:accesspoint/.*'
@@ -3275,21 +3127,17 @@ components:
       type: object
       properties:
         BlockPublicAcls:
-          allOf:
-            - $ref: '#/components/schemas/Setting'
-            - description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
+          $ref: '#/components/schemas/Setting'
+          description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
         IgnorePublicAcls:
-          allOf:
-            - $ref: '#/components/schemas/Setting'
-            - description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p> <p>This is not supported for Amazon S3 on Outposts.</p>
+          $ref: '#/components/schemas/Setting'
+          description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p> <p>This is not supported for Amazon S3 on Outposts.</p>
         BlockPublicPolicy:
-          allOf:
-            - $ref: '#/components/schemas/Setting'
-            - description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p> <p>This is not supported for Amazon S3 on Outposts.</p>
+          $ref: '#/components/schemas/Setting'
+          description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p> <p>This is not supported for Amazon S3 on Outposts.</p>
         RestrictPublicBuckets:
-          allOf:
-            - $ref: '#/components/schemas/Setting'
-            - description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only Amazon Web Service principals and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
+          $ref: '#/components/schemas/Setting'
+          description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only Amazon Web Service principals and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
       description: '<p>The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3 account. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the <i>Amazon S3 User Guide</i>.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
     CreateAccessPointRequest:
       type: object
@@ -3298,24 +3146,20 @@ components:
       title: CreateAccessPointRequest
       properties:
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/BucketName'
-            - description: '<p>The name of the bucket that you want to associate this access point with.</p> <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:&lt;Region&gt;:&lt;account-id&gt;:outpost/&lt;outpost-id&gt;/bucket/&lt;my-bucket-name&gt;</code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded. </p>'
+          $ref: '#/components/schemas/BucketName'
+          description: '<p>The name of the bucket that you want to associate this access point with.</p> <p>For using this parameter with Amazon S3 on Outposts with the REST API, you must specify the name and the x-amz-outpost-id as well.</p> <p>For using this parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must specify the ARN of the bucket accessed in the format <code>arn:aws:s3-outposts:&lt;Region&gt;:&lt;account-id&gt;:outpost/&lt;outpost-id&gt;/bucket/&lt;my-bucket-name&gt;</code>. For example, to access the bucket <code>reports</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports</code>. The value must be URL encoded. </p>'
         VpcConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/VpcConfiguration'
-            - description: '<p>If you include this field, Amazon S3 restricts access to this access point to requests from the specified virtual private cloud (VPC).</p> <note> <p>This is required for creating an access point for Amazon S3 on Outposts buckets.</p> </note>'
+          $ref: '#/components/schemas/VpcConfiguration'
+          description: '<p>If you include this field, Amazon S3 restricts access to this access point to requests from the specified virtual private cloud (VPC).</p> <note> <p>This is required for creating an access point for Amazon S3 on Outposts buckets.</p> </note>'
         PublicAccessBlockConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/PublicAccessBlockConfiguration'
-            - description: ' The <code>PublicAccessBlock</code> configuration that you want to apply to the access point. '
+          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+          description: ' The <code>PublicAccessBlock</code> configuration that you want to apply to the access point. '
     CreateBucketConfiguration:
       type: object
       properties:
         LocationConstraint:
-          allOf:
-            - $ref: '#/components/schemas/BucketLocationConstraint'
-            - description: '<p>Specifies the Region where the bucket will be created. If you are creating a bucket on the US East (N. Virginia) Region (us-east-1), you do not need to specify the location. </p> <note> <p>This is not supported by Amazon S3 on Outposts buckets.</p> </note>'
+          $ref: '#/components/schemas/BucketLocationConstraint'
+          description: '<p>Specifies the Region where the bucket will be created. If you are creating a bucket on the US East (N. Virginia) Region (us-east-1), you do not need to specify the location. </p> <note> <p>This is not supported by Amazon S3 on Outposts buckets.</p> </note>'
       description: <p>The container for the bucket configuration.</p> <note> <p>This is not supported by Amazon S3 on Outposts buckets.</p> </note>
     GrantFullControl:
       type: string
@@ -3338,9 +3182,8 @@ components:
       title: CreateBucketRequest
       properties:
         CreateBucketConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/CreateBucketConfiguration'
-            - description: <p>The configuration information for the bucket.</p> <note> <p>This is not supported by Amazon S3 on Outposts buckets.</p> </note>
+          $ref: '#/components/schemas/CreateBucketConfiguration'
+          description: <p>The configuration information for the bucket.</p> <note> <p>This is not supported by Amazon S3 on Outposts buckets.</p> </note>
       xml:
         namespace: 'http://awss3control.amazonaws.com/doc/2018-08-20/'
     Location:
@@ -3353,29 +3196,23 @@ components:
       type: object
       properties:
         LambdaInvoke:
-          allOf:
-            - $ref: '#/components/schemas/LambdaInvokeOperation'
-            - description: Directs the specified job to invoke an Lambda function on every object in the manifest.
+          $ref: '#/components/schemas/LambdaInvokeOperation'
+          description: Directs the specified job to invoke an Lambda function on every object in the manifest.
         S3PutObjectCopy:
-          allOf:
-            - $ref: '#/components/schemas/S3CopyObjectOperation'
-            - description: Directs the specified job to run a PUT Copy object call on every object in the manifest.
+          $ref: '#/components/schemas/S3CopyObjectOperation'
+          description: Directs the specified job to run a PUT Copy object call on every object in the manifest.
         S3PutObjectAcl:
-          allOf:
-            - $ref: '#/components/schemas/S3SetObjectAclOperation'
-            - description: Directs the specified job to run a PUT Object acl call on every object in the manifest.
+          $ref: '#/components/schemas/S3SetObjectAclOperation'
+          description: Directs the specified job to run a PUT Object acl call on every object in the manifest.
         S3PutObjectTagging:
-          allOf:
-            - $ref: '#/components/schemas/S3SetObjectTaggingOperation'
-            - description: Directs the specified job to run a PUT Object tagging call on every object in the manifest.
+          $ref: '#/components/schemas/S3SetObjectTaggingOperation'
+          description: Directs the specified job to run a PUT Object tagging call on every object in the manifest.
         S3DeleteObjectTagging:
-          allOf:
-            - $ref: '#/components/schemas/S3DeleteObjectTaggingOperation'
-            - description: Directs the specified job to execute a DELETE Object tagging call on every object in the manifest.
+          $ref: '#/components/schemas/S3DeleteObjectTaggingOperation'
+          description: Directs the specified job to execute a DELETE Object tagging call on every object in the manifest.
         S3InitiateRestoreObject:
-          allOf:
-            - $ref: '#/components/schemas/S3InitiateRestoreObjectOperation'
-            - description: Directs the specified job to initiate restore requests for every archived object in the manifest.
+          $ref: '#/components/schemas/S3InitiateRestoreObjectOperation'
+          description: Directs the specified job to initiate restore requests for every archived object in the manifest.
         S3PutObjectLegalHold:
           $ref: '#/components/schemas/S3SetObjectLegalHoldOperation'
         S3PutObjectRetention:
@@ -3387,25 +3224,20 @@ components:
         - Enabled
       properties:
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3BucketArnString'
-            - description: The Amazon Resource Name (ARN) for the bucket where specified job-completion report will be stored.
+          $ref: '#/components/schemas/S3BucketArnString'
+          description: The Amazon Resource Name (ARN) for the bucket where specified job-completion report will be stored.
         Format:
-          allOf:
-            - $ref: '#/components/schemas/JobReportFormat'
-            - description: The format of the specified job-completion report.
+          $ref: '#/components/schemas/JobReportFormat'
+          description: The format of the specified job-completion report.
         Enabled:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether the specified job will generate a job-completion report.
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates whether the specified job will generate a job-completion report.
         Prefix:
-          allOf:
-            - $ref: '#/components/schemas/ReportPrefixString'
-            - description: An optional prefix to describe where in the specified bucket the job-completion report will be stored. Amazon S3 stores the job-completion report at <code>&lt;prefix&gt;/job-&lt;job-id&gt;/report.json</code>.
+          $ref: '#/components/schemas/ReportPrefixString'
+          description: An optional prefix to describe where in the specified bucket the job-completion report will be stored. Amazon S3 stores the job-completion report at <code>&lt;prefix&gt;/job-&lt;job-id&gt;/report.json</code>.
         ReportScope:
-          allOf:
-            - $ref: '#/components/schemas/JobReportScope'
-            - description: Indicates whether the job-completion report will include details of all tasks or only failed tasks.
+          $ref: '#/components/schemas/JobReportScope'
+          description: Indicates whether the job-completion report will include details of all tasks or only failed tasks.
       description: Contains the configuration parameters for a job-completion report.
     JobManifest:
       type: object
@@ -3414,13 +3246,11 @@ components:
         - Location
       properties:
         Spec:
-          allOf:
-            - $ref: '#/components/schemas/JobManifestSpec'
-            - description: 'Describes the format of the specified job''s manifest. If the manifest is in CSV format, also describes the columns contained within the manifest.'
+          $ref: '#/components/schemas/JobManifestSpec'
+          description: 'Describes the format of the specified job''s manifest. If the manifest is in CSV format, also describes the columns contained within the manifest.'
         Location:
-          allOf:
-            - $ref: '#/components/schemas/JobManifestLocation'
-            - description: Contains the information required to locate the specified job's manifest.
+          $ref: '#/components/schemas/JobManifestLocation'
+          description: Contains the information required to locate the specified job's manifest.
       description: Contains the configuration information for a job's manifest.
     NonEmptyMaxLength256String:
       type: string
@@ -3447,41 +3277,32 @@ components:
       title: CreateJobRequest
       properties:
         ConfirmationRequired:
-          allOf:
-            - $ref: '#/components/schemas/ConfirmationRequired'
-            - description: Indicates whether confirmation is required before Amazon S3 runs the job. Confirmation is only required for jobs created through the Amazon S3 console.
+          $ref: '#/components/schemas/ConfirmationRequired'
+          description: Indicates whether confirmation is required before Amazon S3 runs the job. Confirmation is only required for jobs created through the Amazon S3 console.
         Operation:
-          allOf:
-            - $ref: '#/components/schemas/JobOperation'
-            - description: 'The action that you want this job to perform on every object listed in the manifest. For more information about the available actions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-actions.html">Operations</a> in the <i>Amazon S3 User Guide</i>.'
+          $ref: '#/components/schemas/JobOperation'
+          description: 'The action that you want this job to perform on every object listed in the manifest. For more information about the available actions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-actions.html">Operations</a> in the <i>Amazon S3 User Guide</i>.'
         Report:
-          allOf:
-            - $ref: '#/components/schemas/JobReport'
-            - description: Configuration parameters for the optional job-completion report.
+          $ref: '#/components/schemas/JobReport'
+          description: Configuration parameters for the optional job-completion report.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength64String'
-            - description: An idempotency token to ensure that you don't accidentally submit the same request twice. You can use any string up to the maximum length.
+          $ref: '#/components/schemas/NonEmptyMaxLength64String'
+          description: An idempotency token to ensure that you don't accidentally submit the same request twice. You can use any string up to the maximum length.
         Manifest:
-          allOf:
-            - $ref: '#/components/schemas/JobManifest'
-            - description: Configuration parameters for the manifest.
+          $ref: '#/components/schemas/JobManifest'
+          description: Configuration parameters for the manifest.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength256String'
-            - description: A description for this job. You can use any string within the permitted length. Descriptions don't need to be unique and can be used for multiple jobs.
+          $ref: '#/components/schemas/NonEmptyMaxLength256String'
+          description: A description for this job. You can use any string within the permitted length. Descriptions don't need to be unique and can be used for multiple jobs.
         Priority:
-          allOf:
-            - $ref: '#/components/schemas/JobPriority'
-            - description: The numerical priority for this job. Higher numbers indicate higher priority.
+          $ref: '#/components/schemas/JobPriority'
+          description: The numerical priority for this job. Higher numbers indicate higher priority.
         RoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IAMRoleArn'
-            - description: The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) role that Batch Operations will use to run this job's action on every object in the manifest.
+          $ref: '#/components/schemas/IAMRoleArn'
+          description: The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) role that Batch Operations will use to run this job's action on every object in the manifest.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/S3TagSet'
-            - description: 'A set of tags to associate with the S3 Batch Operations job. This is an optional parameter. '
+          $ref: '#/components/schemas/S3TagSet'
+          description: 'A set of tags to associate with the S3 Batch Operations job. This is an optional parameter. '
     JobId:
       type: string
       pattern: '[a-zA-Z0-9\-\_]+'
@@ -3551,73 +3372,56 @@ components:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The ID for the specified job.
+          $ref: '#/components/schemas/JobId'
+          description: The ID for the specified job.
         ConfirmationRequired:
-          allOf:
-            - $ref: '#/components/schemas/ConfirmationRequired'
-            - description: Indicates whether confirmation is required before Amazon S3 begins running the specified job. Confirmation is required only for jobs created through the Amazon S3 console.
+          $ref: '#/components/schemas/ConfirmationRequired'
+          description: Indicates whether confirmation is required before Amazon S3 begins running the specified job. Confirmation is required only for jobs created through the Amazon S3 console.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength256String'
-            - description: 'The description for this job, if one was provided in this job''s <code>Create Job</code> request.'
+          $ref: '#/components/schemas/NonEmptyMaxLength256String'
+          description: 'The description for this job, if one was provided in this job''s <code>Create Job</code> request.'
         JobArn:
-          allOf:
-            - $ref: '#/components/schemas/JobArn'
-            - description: The Amazon Resource Name (ARN) for this job.
+          $ref: '#/components/schemas/JobArn'
+          description: The Amazon Resource Name (ARN) for this job.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: The current status of the specified job.
+          $ref: '#/components/schemas/JobStatus'
+          description: The current status of the specified job.
         Manifest:
-          allOf:
-            - $ref: '#/components/schemas/JobManifest'
-            - description: The configuration information for the specified job's manifest object.
+          $ref: '#/components/schemas/JobManifest'
+          description: The configuration information for the specified job's manifest object.
         Operation:
-          allOf:
-            - $ref: '#/components/schemas/JobOperation'
-            - description: The operation that the specified job is configured to run on the objects listed in the manifest.
+          $ref: '#/components/schemas/JobOperation'
+          description: The operation that the specified job is configured to run on the objects listed in the manifest.
         Priority:
-          allOf:
-            - $ref: '#/components/schemas/JobPriority'
-            - description: The priority of the specified job.
+          $ref: '#/components/schemas/JobPriority'
+          description: The priority of the specified job.
         ProgressSummary:
-          allOf:
-            - $ref: '#/components/schemas/JobProgressSummary'
-            - description: 'Describes the total number of tasks that the specified job has run, the number of tasks that succeeded, and the number of tasks that failed.'
+          $ref: '#/components/schemas/JobProgressSummary'
+          description: 'Describes the total number of tasks that the specified job has run, the number of tasks that succeeded, and the number of tasks that failed.'
         StatusUpdateReason:
-          allOf:
-            - $ref: '#/components/schemas/JobStatusUpdateReason'
-            - description: The reason for updating the job.
+          $ref: '#/components/schemas/JobStatusUpdateReason'
+          description: The reason for updating the job.
         FailureReasons:
-          allOf:
-            - $ref: '#/components/schemas/JobFailureList'
-            - description: 'If the specified job failed, this field contains information describing the failure.'
+          $ref: '#/components/schemas/JobFailureList'
+          description: 'If the specified job failed, this field contains information describing the failure.'
         Report:
-          allOf:
-            - $ref: '#/components/schemas/JobReport'
-            - description: Contains the configuration information for the job-completion report if you requested one in the <code>Create Job</code> request.
+          $ref: '#/components/schemas/JobReport'
+          description: Contains the configuration information for the job-completion report if you requested one in the <code>Create Job</code> request.
         CreationTime:
-          allOf:
-            - $ref: '#/components/schemas/JobCreationTime'
-            - description: A timestamp indicating when this job was created.
+          $ref: '#/components/schemas/JobCreationTime'
+          description: A timestamp indicating when this job was created.
         TerminationDate:
-          allOf:
-            - $ref: '#/components/schemas/JobTerminationDate'
-            - description: 'A timestamp indicating when this job terminated. A job''s termination date is the date and time when it succeeded, failed, or was canceled.'
+          $ref: '#/components/schemas/JobTerminationDate'
+          description: 'A timestamp indicating when this job terminated. A job''s termination date is the date and time when it succeeded, failed, or was canceled.'
         RoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IAMRoleArn'
-            - description: The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) role assigned to run the tasks for this job.
+          $ref: '#/components/schemas/IAMRoleArn'
+          description: The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) role assigned to run the tasks for this job.
         SuspendedDate:
-          allOf:
-            - $ref: '#/components/schemas/SuspendedDate'
-            - description: 'The timestamp when this job was suspended, if it has been suspended.'
+          $ref: '#/components/schemas/SuspendedDate'
+          description: 'The timestamp when this job was suspended, if it has been suspended.'
         SuspendedCause:
-          allOf:
-            - $ref: '#/components/schemas/SuspendedCause'
-            - description: 'The reason why the specified job was suspended. A job is only suspended if you create it through the Amazon S3 console. When you create the job, it enters the <code>Suspended</code> state to await confirmation before running. After you confirm the job, it automatically exits the <code>Suspended</code> state.'
+          $ref: '#/components/schemas/SuspendedCause'
+          description: 'The reason why the specified job was suspended. A job is only suspended if you create it through the Amazon S3 console. When you create the job, it enters the <code>Suspended</code> state to await confirmation before running. After you confirm the job, it automatically exits the <code>Suspended</code> state.'
       description: A container element for the job configuration and status information returned by a <code>Describe Job</code> request.
     NonEmptyMaxLength1024String:
       type: string
@@ -3674,9 +3478,8 @@ components:
       type: object
       properties:
         IsPublic:
-          allOf:
-            - $ref: '#/components/schemas/IsPublic'
-            - description: <p/>
+          $ref: '#/components/schemas/IsPublic'
+          description: <p/>
       description: 'Indicates whether this access point policy is public. For more information about how Amazon S3 evaluates policies to determine whether they are public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the <i>Amazon S3 User Guide</i>. '
     GetAccessPointPolicyStatusRequest:
       type: object
@@ -3724,37 +3527,29 @@ components:
         - IsEnabled
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ConfigId'
-            - description: A container for the Amazon S3 Storage Lens configuration ID.
+          $ref: '#/components/schemas/ConfigId'
+          description: A container for the Amazon S3 Storage Lens configuration ID.
         AccountLevel:
-          allOf:
-            - $ref: '#/components/schemas/AccountLevel'
-            - description: A container for all the account-level configurations of your S3 Storage Lens configuration.
+          $ref: '#/components/schemas/AccountLevel'
+          description: A container for all the account-level configurations of your S3 Storage Lens configuration.
         Include:
-          allOf:
-            - $ref: '#/components/schemas/Include'
-            - description: 'A container for what is included in this configuration. This container can only be valid if there is no <code>Exclude</code> container submitted, and it''s not empty. '
+          $ref: '#/components/schemas/Include'
+          description: 'A container for what is included in this configuration. This container can only be valid if there is no <code>Exclude</code> container submitted, and it''s not empty. '
         Exclude:
-          allOf:
-            - $ref: '#/components/schemas/Exclude'
-            - description: 'A container for what is excluded in this configuration. This container can only be valid if there is no <code>Include</code> container submitted, and it''s not empty. '
+          $ref: '#/components/schemas/Exclude'
+          description: 'A container for what is excluded in this configuration. This container can only be valid if there is no <code>Include</code> container submitted, and it''s not empty. '
         DataExport:
-          allOf:
-            - $ref: '#/components/schemas/StorageLensDataExport'
-            - description: 'A container to specify the properties of your S3 Storage Lens metrics export including, the destination, schema and format.'
+          $ref: '#/components/schemas/StorageLensDataExport'
+          description: 'A container to specify the properties of your S3 Storage Lens metrics export including, the destination, schema and format.'
         IsEnabled:
-          allOf:
-            - $ref: '#/components/schemas/IsEnabled'
-            - description: A container for whether the S3 Storage Lens configuration is enabled.
+          $ref: '#/components/schemas/IsEnabled'
+          description: A container for whether the S3 Storage Lens configuration is enabled.
         AwsOrg:
-          allOf:
-            - $ref: '#/components/schemas/StorageLensAwsOrg'
-            - description: A container for the Amazon Web Services organization for this S3 Storage Lens configuration.
+          $ref: '#/components/schemas/StorageLensAwsOrg'
+          description: A container for the Amazon Web Services organization for this S3 Storage Lens configuration.
         StorageLensArn:
-          allOf:
-            - $ref: '#/components/schemas/StorageLensArn'
-            - description: 'The Amazon Resource Name (ARN) of the S3 Storage Lens configuration. This property is read-only and follows the following format: <code> arn:aws:s3:<i>us-east-1</i>:<i>example-account-id</i>:storage-lens/<i>your-dashboard-name</i> </code> '
+          $ref: '#/components/schemas/StorageLensArn'
+          description: 'The Amazon Resource Name (ARN) of the S3 Storage Lens configuration. This property is read-only and follows the following format: <code> arn:aws:s3:<i>us-east-1</i>:<i>example-account-id</i>:storage-lens/<i>your-dashboard-name</i> </code> '
       description: A container for the Amazon S3 Storage Lens configuration.
     GetStorageLensConfigurationTaggingRequest:
       type: object
@@ -3783,17 +3578,14 @@ components:
       type: object
       properties:
         TotalNumberOfTasks:
-          allOf:
-            - $ref: '#/components/schemas/JobTotalNumberOfTasks'
-            - description: <p/>
+          $ref: '#/components/schemas/JobTotalNumberOfTasks'
+          description: <p/>
         NumberOfTasksSucceeded:
-          allOf:
-            - $ref: '#/components/schemas/JobNumberOfTasksSucceeded'
-            - description: <p/>
+          $ref: '#/components/schemas/JobNumberOfTasksSucceeded'
+          description: <p/>
         NumberOfTasksFailed:
-          allOf:
-            - $ref: '#/components/schemas/JobNumberOfTasksFailed'
-            - description: <p/>
+          $ref: '#/components/schemas/JobNumberOfTasksFailed'
+          description: <p/>
       description: 'Describes the total number of tasks that the specified job has started, the number of tasks that succeeded, and the number of tasks that failed.'
     JobStatusUpdateReason:
       type: string
@@ -3825,13 +3617,11 @@ components:
       type: object
       properties:
         FailureCode:
-          allOf:
-            - $ref: '#/components/schemas/JobFailureCode'
-            - description: 'The failure code, if any, for the specified job.'
+          $ref: '#/components/schemas/JobFailureCode'
+          description: 'The failure code, if any, for the specified job.'
         FailureReason:
-          allOf:
-            - $ref: '#/components/schemas/JobFailureReason'
-            - description: 'The failure reason, if any, for the specified job.'
+          $ref: '#/components/schemas/JobFailureReason'
+          description: 'The failure reason, if any, for the specified job.'
       description: 'If this job failed, this element indicates why the job failed.'
     OperationName:
       type: string
@@ -3848,37 +3638,29 @@ components:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The ID for the specified job.
+          $ref: '#/components/schemas/JobId'
+          description: The ID for the specified job.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength256String'
-            - description: The user-specified description that was included in the specified job's <code>Create Job</code> request.
+          $ref: '#/components/schemas/NonEmptyMaxLength256String'
+          description: The user-specified description that was included in the specified job's <code>Create Job</code> request.
         Operation:
-          allOf:
-            - $ref: '#/components/schemas/OperationName'
-            - description: The operation that the specified job is configured to run on every object listed in the manifest.
+          $ref: '#/components/schemas/OperationName'
+          description: The operation that the specified job is configured to run on every object listed in the manifest.
         Priority:
-          allOf:
-            - $ref: '#/components/schemas/JobPriority'
-            - description: The current priority for the specified job.
+          $ref: '#/components/schemas/JobPriority'
+          description: The current priority for the specified job.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: The specified job's current status.
+          $ref: '#/components/schemas/JobStatus'
+          description: The specified job's current status.
         CreationTime:
-          allOf:
-            - $ref: '#/components/schemas/JobCreationTime'
-            - description: A timestamp indicating when the specified job was created.
+          $ref: '#/components/schemas/JobCreationTime'
+          description: A timestamp indicating when the specified job was created.
         TerminationDate:
-          allOf:
-            - $ref: '#/components/schemas/JobTerminationDate'
-            - description: 'A timestamp indicating when the specified job terminated. A job''s termination date is the date and time when it succeeded, failed, or was canceled.'
+          $ref: '#/components/schemas/JobTerminationDate'
+          description: 'A timestamp indicating when the specified job terminated. A job''s termination date is the date and time when it succeeded, failed, or was canceled.'
         ProgressSummary:
-          allOf:
-            - $ref: '#/components/schemas/JobProgressSummary'
-            - description: 'Describes the total number of tasks that the specified job has run, the number of tasks that succeeded, and the number of tasks that failed.'
+          $ref: '#/components/schemas/JobProgressSummary'
+          description: 'Describes the total number of tasks that the specified job has run, the number of tasks that succeeded, and the number of tasks that failed.'
       description: Contains the configuration and status information for a single job retrieved as part of a job list.
     JobListDescriptorList:
       type: array
@@ -3930,39 +3712,33 @@ components:
       type: object
       properties:
         Rules:
-          allOf:
-            - $ref: '#/components/schemas/LifecycleRules'
-            - description: 'A lifecycle rule for individual objects in an Outposts bucket. '
+          $ref: '#/components/schemas/LifecycleRules'
+          description: 'A lifecycle rule for individual objects in an Outposts bucket. '
       description: The container for the Outposts bucket lifecycle configuration.
     LifecycleExpiration:
       type: object
       properties:
         Date:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: Indicates at what date the object is to be deleted. Should be in GMT ISO 8601 format.
+          $ref: '#/components/schemas/Date'
+          description: Indicates at what date the object is to be deleted. Should be in GMT ISO 8601 format.
         Days:
-          allOf:
-            - $ref: '#/components/schemas/Days'
-            - description: 'Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.'
+          $ref: '#/components/schemas/Days'
+          description: 'Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.'
         ExpiredObjectDeleteMarker:
-          allOf:
-            - $ref: '#/components/schemas/ExpiredObjectDeleteMarker'
-            - description: 'Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired. If set to false, the policy takes no action. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.'
+          $ref: '#/components/schemas/ExpiredObjectDeleteMarker'
+          description: 'Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired. If set to false, the policy takes no action. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.'
       description: The container of the Outposts bucket lifecycle expiration.
     LifecycleRuleFilter:
       type: object
       properties:
         Prefix:
-          allOf:
-            - $ref: '#/components/schemas/Prefix'
-            - description: '<p>Prefix identifying one or more objects to which the rule applies.</p> <important> <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints"> XML related object key constraints</a>.</p> </important>'
+          $ref: '#/components/schemas/Prefix'
+          description: '<p>Prefix identifying one or more objects to which the rule applies.</p> <important> <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints"> XML related object key constraints</a>.</p> </important>'
         Tag:
           $ref: '#/components/schemas/S3Tag'
         And:
-          allOf:
-            - $ref: '#/components/schemas/LifecycleRuleAndOperator'
-            - description: The container for the <code>AND</code> condition for the lifecycle rule.
+          $ref: '#/components/schemas/LifecycleRuleAndOperator'
+          description: The container for the <code>AND</code> condition for the lifecycle rule.
       description: The container for the filter of the lifecycle rule.
     TransitionList:
       type: array
@@ -3982,9 +3758,8 @@ components:
       type: object
       properties:
         NoncurrentDays:
-          allOf:
-            - $ref: '#/components/schemas/Days'
-            - description: 'Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the <i>Amazon S3 User Guide</i>.'
+          $ref: '#/components/schemas/Days'
+          description: 'Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the <i>Amazon S3 User Guide</i>.'
       description: The container of the noncurrent version expiration.
     LifecycleRule:
       type: object
@@ -3992,37 +3767,29 @@ components:
         - Status
       properties:
         Expiration:
-          allOf:
-            - $ref: '#/components/schemas/LifecycleExpiration'
-            - description: 'Specifies the expiration for the lifecycle of the object in the form of date, days and, whether the object has a delete marker.'
+          $ref: '#/components/schemas/LifecycleExpiration'
+          description: 'Specifies the expiration for the lifecycle of the object in the form of date, days and, whether the object has a delete marker.'
         ID:
-          allOf:
-            - $ref: '#/components/schemas/ID'
-            - description: Unique identifier for the rule. The value cannot be longer than 255 characters.
+          $ref: '#/components/schemas/ID'
+          description: Unique identifier for the rule. The value cannot be longer than 255 characters.
         Filter:
-          allOf:
-            - $ref: '#/components/schemas/LifecycleRuleFilter'
-            - description: The container for the filter of lifecycle rule.
+          $ref: '#/components/schemas/LifecycleRuleFilter'
+          description: The container for the filter of lifecycle rule.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ExpirationStatus'
-            - description: 'If ''Enabled'', the rule is currently being applied. If ''Disabled'', the rule is not currently being applied.'
+          $ref: '#/components/schemas/ExpirationStatus'
+          description: 'If ''Enabled'', the rule is currently being applied. If ''Disabled'', the rule is not currently being applied.'
         Transitions:
-          allOf:
-            - $ref: '#/components/schemas/TransitionList'
-            - description: <p>Specifies when an Amazon S3 object transitions to a specified storage class.</p> <note> <p>This is not supported by Amazon S3 on Outposts buckets.</p> </note>
+          $ref: '#/components/schemas/TransitionList'
+          description: <p>Specifies when an Amazon S3 object transitions to a specified storage class.</p> <note> <p>This is not supported by Amazon S3 on Outposts buckets.</p> </note>
         NoncurrentVersionTransitions:
-          allOf:
-            - $ref: '#/components/schemas/NoncurrentVersionTransitionList'
-            - description: '<p> Specifies the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to a specific storage class at a set period in the object''s lifetime. </p> <note> <p>This is not supported by Amazon S3 on Outposts buckets.</p> </note>'
+          $ref: '#/components/schemas/NoncurrentVersionTransitionList'
+          description: '<p> Specifies the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to a specific storage class at a set period in the object''s lifetime. </p> <note> <p>This is not supported by Amazon S3 on Outposts buckets.</p> </note>'
         NoncurrentVersionExpiration:
-          allOf:
-            - $ref: '#/components/schemas/NoncurrentVersionExpiration'
-            - description: <p>The noncurrent version expiration of the lifecycle rule.</p> <note> <p>This is not supported by Amazon S3 on Outposts buckets.</p> </note>
+          $ref: '#/components/schemas/NoncurrentVersionExpiration'
+          description: <p>The noncurrent version expiration of the lifecycle rule.</p> <note> <p>This is not supported by Amazon S3 on Outposts buckets.</p> </note>
         AbortIncompleteMultipartUpload:
-          allOf:
-            - $ref: '#/components/schemas/AbortIncompleteMultipartUpload'
-            - description: 'Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 waits before permanently removing all parts of the upload. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config"> Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Policy</a> in the <i>Amazon S3 User Guide</i>.'
+          $ref: '#/components/schemas/AbortIncompleteMultipartUpload'
+          description: 'Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 waits before permanently removing all parts of the upload. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config"> Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Policy</a> in the <i>Amazon S3 User Guide</i>.'
       description: The container for the Outposts bucket lifecycle rule.
     Prefix:
       type: string
@@ -4030,13 +3797,11 @@ components:
       type: object
       properties:
         Prefix:
-          allOf:
-            - $ref: '#/components/schemas/Prefix'
-            - description: Prefix identifying one or more objects to which the rule applies.
+          $ref: '#/components/schemas/Prefix'
+          description: Prefix identifying one or more objects to which the rule applies.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/S3TagSet'
-            - description: All of these tags must exist in the object's tag set in order for the rule to apply.
+          $ref: '#/components/schemas/S3TagSet'
+          description: All of these tags must exist in the object's tag set in order for the rule to apply.
       description: The container for the Outposts bucket lifecycle rule and operator.
     MaxResults:
       type: integer
@@ -4090,21 +3855,17 @@ components:
         - HomeRegion
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ConfigId'
-            - description: A container for the S3 Storage Lens configuration ID.
+          $ref: '#/components/schemas/ConfigId'
+          description: A container for the S3 Storage Lens configuration ID.
         StorageLensArn:
-          allOf:
-            - $ref: '#/components/schemas/StorageLensArn'
-            - description: The ARN of the S3 Storage Lens configuration. This property is read-only.
+          $ref: '#/components/schemas/StorageLensArn'
+          description: The ARN of the S3 Storage Lens configuration. This property is read-only.
         HomeRegion:
-          allOf:
-            - $ref: '#/components/schemas/S3AWSRegion'
-            - description: A container for the S3 Storage Lens home Region. Your metrics data is stored and retained in your designated S3 Storage Lens home Region.
+          $ref: '#/components/schemas/S3AWSRegion'
+          description: A container for the S3 Storage Lens home Region. Your metrics data is stored and retained in your designated S3 Storage Lens home Region.
         IsEnabled:
-          allOf:
-            - $ref: '#/components/schemas/IsEnabled'
-            - description: A container for whether the S3 Storage Lens configuration is enabled. This property is required.
+          $ref: '#/components/schemas/IsEnabled'
+          description: A container for whether the S3 Storage Lens configuration is enabled. This property is required.
       description: 'Part of <code>ListStorageLensConfigurationResult</code>. Each entry includes the description of the S3 Storage Lens configuration, its home Region, whether it is enabled, its Amazon Resource Name (ARN), and config ID.'
     ListStorageLensConfigurationsRequest:
       type: object
@@ -4143,13 +3904,11 @@ components:
       type: object
       properties:
         NoncurrentDays:
-          allOf:
-            - $ref: '#/components/schemas/Days'
-            - description: 'Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations"> How Amazon S3 Calculates How Long an Object Has Been Noncurrent</a> in the <i>Amazon S3 User Guide</i>.'
+          $ref: '#/components/schemas/Days'
+          description: 'Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations"> How Amazon S3 Calculates How Long an Object Has Been Noncurrent</a> in the <i>Amazon S3 User Guide</i>.'
         StorageClass:
-          allOf:
-            - $ref: '#/components/schemas/TransitionStorageClass'
-            - description: The class of storage used to store the object.
+          $ref: '#/components/schemas/TransitionStorageClass'
+          description: The class of storage used to store the object.
       description: The container for the noncurrent version transition.
     ObjectLambdaAccessPoint:
       type: object
@@ -4157,13 +3916,11 @@ components:
         - Name
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ObjectLambdaAccessPointName'
-            - description: The name of the Object Lambda Access Point.
+          $ref: '#/components/schemas/ObjectLambdaAccessPointName'
+          description: The name of the Object Lambda Access Point.
         ObjectLambdaAccessPointArn:
-          allOf:
-            - $ref: '#/components/schemas/ObjectLambdaAccessPointArn'
-            - description: Specifies the ARN for the Object Lambda Access Point.
+          $ref: '#/components/schemas/ObjectLambdaAccessPointArn'
+          description: Specifies the ARN for the Object Lambda Access Point.
       description: An access point with an attached Lambda function used to access transformed data from an Amazon S3 bucket.
     ObjectLambdaAllowedFeature:
       type: string
@@ -4174,9 +3931,8 @@ components:
       type: object
       properties:
         AwsLambda:
-          allOf:
-            - $ref: '#/components/schemas/AwsLambdaTransformation'
-            - description: A container for an Lambda function.
+          $ref: '#/components/schemas/AwsLambdaTransformation'
+          description: A container for an Lambda function.
       description: A container for AwsLambdaTransformation.
     ObjectLambdaTransformationConfigurationActionsList:
       type: array
@@ -4192,13 +3948,11 @@ components:
         - ContentTransformation
       properties:
         Actions:
-          allOf:
-            - $ref: '#/components/schemas/ObjectLambdaTransformationConfigurationActionsList'
-            - description: A container for the action of an Object Lambda Access Point configuration. Valid input is <code>GetObject</code>.
+          $ref: '#/components/schemas/ObjectLambdaTransformationConfigurationActionsList'
+          description: A container for the action of an Object Lambda Access Point configuration. Valid input is <code>GetObject</code>.
         ContentTransformation:
-          allOf:
-            - $ref: '#/components/schemas/ObjectLambdaContentTransformation'
-            - description: A container for the content transformation of an Object Lambda Access Point configuration.
+          $ref: '#/components/schemas/ObjectLambdaContentTransformation'
+          description: A container for the content transformation of an Object Lambda Access Point configuration.
       description: A configuration used when creating an Object Lambda Access Point transformation.
     ObjectLambdaTransformationConfigurationAction:
       type: string
@@ -4212,9 +3966,8 @@ components:
       type: object
       properties:
         IsEnabled:
-          allOf:
-            - $ref: '#/components/schemas/IsEnabled'
-            - description: A container for whether prefix-level storage metrics are enabled.
+          $ref: '#/components/schemas/IsEnabled'
+          description: A container for whether prefix-level storage metrics are enabled.
         SelectionCriteria:
           $ref: '#/components/schemas/SelectionCriteria'
       description: A container for the prefix-level storage metrics for S3 Storage Lens.
@@ -4222,17 +3975,14 @@ components:
       type: object
       properties:
         Delimiter:
-          allOf:
-            - $ref: '#/components/schemas/StorageLensPrefixLevelDelimiter'
-            - description: A container for the delimiter of the selection criteria being used.
+          $ref: '#/components/schemas/StorageLensPrefixLevelDelimiter'
+          description: A container for the delimiter of the selection criteria being used.
         MaxDepth:
-          allOf:
-            - $ref: '#/components/schemas/StorageLensPrefixLevelMaxDepth'
-            - description: The max depth of the selection criteria
+          $ref: '#/components/schemas/StorageLensPrefixLevelMaxDepth'
+          description: The max depth of the selection criteria
         MinStorageBytesPercentage:
-          allOf:
-            - $ref: '#/components/schemas/MinStorageBytesPercentage'
-            - description: <p>The minimum number of storage bytes percentage whose metrics will be selected.</p> <note> <p>You must choose a value greater than or equal to <code>1.0</code>.</p> </note>
+          $ref: '#/components/schemas/MinStorageBytesPercentage'
+          description: <p>The minimum number of storage bytes percentage whose metrics will be selected.</p> <note> <p>You must choose a value greater than or equal to <code>1.0</code>.</p> </note>
       description: <p/>
     PutAccessPointConfigurationForObjectLambdaRequest:
       type: object
@@ -4241,9 +3991,8 @@ components:
       title: PutAccessPointConfigurationForObjectLambdaRequest
       properties:
         Configuration:
-          allOf:
-            - $ref: '#/components/schemas/ObjectLambdaConfiguration'
-            - description: Object Lambda Access Point configuration document.
+          $ref: '#/components/schemas/ObjectLambdaConfiguration'
+          description: Object Lambda Access Point configuration document.
     PutAccessPointPolicyForObjectLambdaRequest:
       type: object
       required:
@@ -4251,9 +4000,8 @@ components:
       title: PutAccessPointPolicyForObjectLambdaRequest
       properties:
         Policy:
-          allOf:
-            - $ref: '#/components/schemas/ObjectLambdaPolicy'
-            - description: Object Lambda Access Point resource policy document.
+          $ref: '#/components/schemas/ObjectLambdaPolicy'
+          description: Object Lambda Access Point resource policy document.
     PutAccessPointPolicyRequest:
       type: object
       required:
@@ -4261,17 +4009,15 @@ components:
       title: PutAccessPointPolicyRequest
       properties:
         Policy:
-          allOf:
-            - $ref: '#/components/schemas/Policy'
-            - description: 'The policy that you want to apply to the specified access point. For more information about access point policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html">Managing data access with Amazon S3 access points</a> in the <i>Amazon S3 User Guide</i>.'
+          $ref: '#/components/schemas/Policy'
+          description: 'The policy that you want to apply to the specified access point. For more information about access point policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html">Managing data access with Amazon S3 access points</a> in the <i>Amazon S3 User Guide</i>.'
     PutBucketLifecycleConfigurationRequest:
       type: object
       title: PutBucketLifecycleConfigurationRequest
       properties:
         LifecycleConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/LifecycleConfiguration'
-            - description: 'Container for lifecycle rules. You can add as many as 1,000 rules.'
+          $ref: '#/components/schemas/LifecycleConfiguration'
+          description: 'Container for lifecycle rules. You can add as many as 1,000 rules.'
       xml:
         namespace: 'http://awss3control.amazonaws.com/doc/2018-08-20/'
     PutBucketPolicyRequest:
@@ -4281,18 +4027,16 @@ components:
       title: PutBucketPolicyRequest
       properties:
         Policy:
-          allOf:
-            - $ref: '#/components/schemas/Policy'
-            - description: The bucket policy as a JSON document.
+          $ref: '#/components/schemas/Policy'
+          description: The bucket policy as a JSON document.
     Tagging:
       type: object
       required:
         - TagSet
       properties:
         TagSet:
-          allOf:
-            - $ref: '#/components/schemas/S3TagSet'
-            - description: A collection for a set of tags.
+          $ref: '#/components/schemas/S3TagSet'
+          description: A collection for a set of tags.
       description: <p/>
     PutBucketTaggingRequest:
       type: object
@@ -4301,9 +4045,8 @@ components:
       title: PutBucketTaggingRequest
       properties:
         Tagging:
-          allOf:
-            - $ref: '#/components/schemas/Tagging'
-            - description: <p/>
+          $ref: '#/components/schemas/Tagging'
+          description: <p/>
       xml:
         namespace: 'http://awss3control.amazonaws.com/doc/2018-08-20/'
     PutJobTaggingRequest:
@@ -4313,9 +4056,8 @@ components:
       title: PutJobTaggingRequest
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/S3TagSet'
-            - description: The set of tags to associate with the S3 Batch Operations job.
+          $ref: '#/components/schemas/S3TagSet'
+          description: The set of tags to associate with the S3 Batch Operations job.
     PutPublicAccessBlockRequest:
       type: object
       required:
@@ -4323,9 +4065,8 @@ components:
       title: PutPublicAccessBlockRequest
       properties:
         PublicAccessBlockConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/PublicAccessBlockConfiguration'
-            - description: The <code>PublicAccessBlock</code> configuration that you want to apply to the specified account.
+          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+          description: The <code>PublicAccessBlock</code> configuration that you want to apply to the specified account.
       xml:
         namespace: 'http://awss3control.amazonaws.com/doc/2018-08-20/'
     PutStorageLensConfigurationRequest:
@@ -4335,13 +4076,11 @@ components:
       title: PutStorageLensConfigurationRequest
       properties:
         StorageLensConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/StorageLensConfiguration'
-            - description: The S3 Storage Lens configuration.
+          $ref: '#/components/schemas/StorageLensConfiguration'
+          description: The S3 Storage Lens configuration.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/StorageLensTags'
-            - description: <p>The tag set of the S3 Storage Lens configuration.</p> <note> <p>You can set up to a maximum of 50 tags.</p> </note>
+          $ref: '#/components/schemas/StorageLensTags'
+          description: <p>The tag set of the S3 Storage Lens configuration.</p> <note> <p>You can set up to a maximum of 50 tags.</p> </note>
     PutStorageLensConfigurationTaggingRequest:
       type: object
       required:
@@ -4349,9 +4088,8 @@ components:
       title: PutStorageLensConfigurationTaggingRequest
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/StorageLensTags'
-            - description: <p>The tag set of the S3 Storage Lens configuration.</p> <note> <p>You can set up to a maximum of 50 tags.</p> </note>
+          $ref: '#/components/schemas/StorageLensTags'
+          description: <p>The tag set of the S3 Storage Lens configuration.</p> <note> <p>You can set up to a maximum of 50 tags.</p> </note>
     RegionalBucket:
       type: object
       required:
@@ -4360,25 +4098,20 @@ components:
         - CreationDate
       properties:
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/BucketName'
-            - description: <p/>
+          $ref: '#/components/schemas/BucketName'
+          description: <p/>
         BucketArn:
-          allOf:
-            - $ref: '#/components/schemas/S3RegionalBucketArn'
-            - description: The Amazon Resource Name (ARN) for the regional bucket.
+          $ref: '#/components/schemas/S3RegionalBucketArn'
+          description: The Amazon Resource Name (ARN) for the regional bucket.
         PublicAccessBlockEnabled:
-          allOf:
-            - $ref: '#/components/schemas/PublicAccessBlockEnabled'
-            - description: <p/>
+          $ref: '#/components/schemas/PublicAccessBlockEnabled'
+          description: <p/>
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/CreationDate'
-            - description: The creation date of the regional bucket
+          $ref: '#/components/schemas/CreationDate'
+          description: The creation date of the regional bucket
         OutpostId:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength64String'
-            - description: The Outposts ID of the regional bucket.
+          $ref: '#/components/schemas/NonEmptyMaxLength64String'
+          description: The Outposts ID of the regional bucket.
       description: The container for the regional bucket.
     RequestedJobStatus:
       type: string
@@ -4389,13 +4122,11 @@ components:
       type: object
       properties:
         ID:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-            - description: <p/>
+          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+          description: <p/>
         DisplayName:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-            - description: <p/>
+          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+          description: <p/>
       description: <p/>
     S3GrantList:
       type: array
@@ -4407,13 +4138,11 @@ components:
         - Owner
       properties:
         Owner:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectOwner'
-            - description: <p/>
+          $ref: '#/components/schemas/S3ObjectOwner'
+          description: <p/>
         Grants:
-          allOf:
-            - $ref: '#/components/schemas/S3GrantList'
-            - description: <p/>
+          $ref: '#/components/schemas/S3GrantList'
+          description: <p/>
       description: <p/>
     S3CannedAccessControlList:
       type: string
@@ -4429,13 +4158,11 @@ components:
       type: object
       properties:
         AccessControlList:
-          allOf:
-            - $ref: '#/components/schemas/S3AccessControlList'
-            - description: <p/>
+          $ref: '#/components/schemas/S3AccessControlList'
+          description: <p/>
         CannedAccessControlList:
-          allOf:
-            - $ref: '#/components/schemas/S3CannedAccessControlList'
-            - description: <p/>
+          $ref: '#/components/schemas/S3CannedAccessControlList'
+          description: <p/>
       description: <p/>
     StorageLensDataExportEncryption:
       type: object
@@ -4462,29 +4189,23 @@ components:
         - Arn
       properties:
         Format:
-          allOf:
-            - $ref: '#/components/schemas/Format'
-            - description: <p/>
+          $ref: '#/components/schemas/Format'
+          description: <p/>
         OutputSchemaVersion:
-          allOf:
-            - $ref: '#/components/schemas/OutputSchemaVersion'
-            - description: The schema version of the export file.
+          $ref: '#/components/schemas/OutputSchemaVersion'
+          description: The schema version of the export file.
         AccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: The account ID of the owner of the S3 Storage Lens metrics export bucket.
+          $ref: '#/components/schemas/AccountId'
+          description: The account ID of the owner of the S3 Storage Lens metrics export bucket.
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/S3BucketArnString'
-            - description: 'The Amazon Resource Name (ARN) of the bucket. This property is read-only and follows the following format: <code> arn:aws:s3:<i>us-east-1</i>:<i>example-account-id</i>:bucket/<i>your-destination-bucket-name</i> </code> '
+          $ref: '#/components/schemas/S3BucketArnString'
+          description: 'The Amazon Resource Name (ARN) of the bucket. This property is read-only and follows the following format: <code> arn:aws:s3:<i>us-east-1</i>:<i>example-account-id</i>:bucket/<i>your-destination-bucket-name</i> </code> '
         Prefix:
-          allOf:
-            - $ref: '#/components/schemas/Prefix'
-            - description: The prefix of the destination bucket where the metrics export will be delivered.
+          $ref: '#/components/schemas/Prefix'
+          description: The prefix of the destination bucket where the metrics export will be delivered.
         Encryption:
-          allOf:
-            - $ref: '#/components/schemas/StorageLensDataExportEncryption'
-            - description: The container for the type encryption of the metrics exports in this bucket.
+          $ref: '#/components/schemas/StorageLensDataExportEncryption'
+          description: The container for the type encryption of the metrics exports in this bucket.
       description: A container for the bucket where the Amazon S3 Storage Lens metrics export files are located.
     S3ContentLength:
       type: integer
@@ -4501,49 +4222,38 @@ components:
       type: object
       properties:
         CacheControl:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-            - description: <p/>
+          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+          description: <p/>
         ContentDisposition:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-            - description: <p/>
+          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+          description: <p/>
         ContentEncoding:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-            - description: <p/>
+          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+          description: <p/>
         ContentLanguage:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-            - description: <p/>
+          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+          description: <p/>
         UserMetadata:
-          allOf:
-            - $ref: '#/components/schemas/S3UserMetadata'
-            - description: <p/>
+          $ref: '#/components/schemas/S3UserMetadata'
+          description: <p/>
         ContentLength:
-          allOf:
-            - $ref: '#/components/schemas/S3ContentLength'
-            - description: <p/>
+          $ref: '#/components/schemas/S3ContentLength'
+          description: <p/>
         ContentMD5:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-            - description: <p/>
+          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+          description: <p/>
         ContentType:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-            - description: <p/>
+          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+          description: <p/>
         HttpExpiresDate:
-          allOf:
-            - $ref: '#/components/schemas/TimeStamp'
-            - description: <p/>
+          $ref: '#/components/schemas/TimeStamp'
+          description: <p/>
         RequesterCharged:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: <p/>
+          $ref: '#/components/schemas/Boolean'
+          description: <p/>
         SSEAlgorithm:
-          allOf:
-            - $ref: '#/components/schemas/S3SSEAlgorithm'
-            - description: <p/>
+          $ref: '#/components/schemas/S3SSEAlgorithm'
+          description: <p/>
       description: <p/>
     S3StorageClass:
       type: string
@@ -4576,17 +4286,14 @@ components:
       type: object
       properties:
         TypeIdentifier:
-          allOf:
-            - $ref: '#/components/schemas/S3GranteeTypeIdentifier'
-            - description: <p/>
+          $ref: '#/components/schemas/S3GranteeTypeIdentifier'
+          description: <p/>
         Identifier:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-            - description: <p/>
+          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+          description: <p/>
         DisplayName:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-            - description: <p/>
+          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+          description: <p/>
       description: <p/>
     S3Permission:
       type: string
@@ -4600,13 +4307,11 @@ components:
       type: object
       properties:
         Grantee:
-          allOf:
-            - $ref: '#/components/schemas/S3Grantee'
-            - description: <p/>
+          $ref: '#/components/schemas/S3Grantee'
+          description: <p/>
         Permission:
-          allOf:
-            - $ref: '#/components/schemas/S3Permission'
-            - description: <p/>
+          $ref: '#/components/schemas/S3Permission'
+          description: <p/>
       description: <p/>
     S3GranteeTypeIdentifier:
       type: string
@@ -4620,9 +4325,8 @@ components:
         - Status
       properties:
         Status:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectLockLegalHoldStatus'
-            - description: The Object Lock legal hold status to be applied to all objects in the Batch Operations job.
+          $ref: '#/components/schemas/S3ObjectLockLegalHoldStatus'
+          description: The Object Lock legal hold status to be applied to all objects in the Batch Operations job.
       description: Whether S3 Object Lock legal hold will be applied to objects in an S3 Batch Operations job.
     S3ObjectLockRetentionMode:
       type: string
@@ -4643,13 +4347,11 @@ components:
       type: object
       properties:
         RetainUntilDate:
-          allOf:
-            - $ref: '#/components/schemas/TimeStamp'
-            - description: The date when the applied Object Lock retention will expire on all objects set by the Batch Operations job.
+          $ref: '#/components/schemas/TimeStamp'
+          description: The date when the applied Object Lock retention will expire on all objects set by the Batch Operations job.
         Mode:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectLockRetentionMode'
-            - description: The Object Lock retention mode to be applied to all objects in the Batch Operations job.
+          $ref: '#/components/schemas/S3ObjectLockRetentionMode'
+          description: The Object Lock retention mode to be applied to all objects in the Batch Operations job.
       description: 'Contains the S3 Object Lock retention mode to be applied to all objects in the S3 Batch Operations job. If you don''t provide <code>Mode</code> and <code>RetainUntilDate</code> data types in your operation, you will remove the retention from your objects. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html">Using S3 Object Lock retention with S3 Batch Operations</a> in the <i>Amazon S3 User Guide</i>.'
     TagKeyString:
       type: string
@@ -4668,9 +4370,8 @@ components:
         - KeyId
       properties:
         KeyId:
-          allOf:
-            - $ref: '#/components/schemas/SSEKMSKeyId'
-            - description: 'A container for the ARN of the SSE-KMS encryption. This property is read-only and follows the following format: <code> arn:aws:kms:<i>us-east-1</i>:<i>example-account-id</i>:key/<i>example-9a73-4afc-8d29-8f5900cef44e</i> </code> '
+          $ref: '#/components/schemas/SSEKMSKeyId'
+          description: 'A container for the ARN of the SSE-KMS encryption. This property is read-only and follows the following format: <code> arn:aws:kms:<i>us-east-1</i>:<i>example-account-id</i>:key/<i>example-9a73-4afc-8d29-8f5900cef44e</i> </code> '
       description: <p/>
     SSES3:
       type: object
@@ -4687,17 +4388,14 @@ components:
       type: object
       properties:
         Date:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: Indicates when objects are transitioned to the specified storage class. The date value must be in ISO 8601 format. The time is always midnight UTC.
+          $ref: '#/components/schemas/Date'
+          description: Indicates when objects are transitioned to the specified storage class. The date value must be in ISO 8601 format. The time is always midnight UTC.
         Days:
-          allOf:
-            - $ref: '#/components/schemas/Days'
-            - description: Indicates the number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer.
+          $ref: '#/components/schemas/Days'
+          description: Indicates the number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer.
         StorageClass:
-          allOf:
-            - $ref: '#/components/schemas/TransitionStorageClass'
-            - description: The storage class to which you want the object to transition.
+          $ref: '#/components/schemas/TransitionStorageClass'
+          description: The storage class to which you want the object to transition.
       description: 'Specifies when an object transitions to a specified storage class. For more information about Amazon S3 Lifecycle configuration rules, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html"> Transitioning objects using Amazon S3 Lifecycle</a> in the <i>Amazon S3 User Guide</i>.'
     UpdateJobPriorityRequest:
       type: object

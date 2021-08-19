@@ -448,40 +448,33 @@ components:
       type: object
       properties:
         Body:
-          allOf:
-            - $ref: '#/components/schemas/PayloadBlob'
-            - description: 'The bytes of the object. '
+          $ref: '#/components/schemas/PayloadBlob'
+          description: 'The bytes of the object. '
         StatusCode:
-          allOf:
-            - $ref: '#/components/schemas/statusCode'
-            - description: The HTML status code of the request. Status codes ranging from 200 to 299 indicate success. All other status codes indicate the type of error that occurred.
+          $ref: '#/components/schemas/statusCode'
+          description: The HTML status code of the request. Status codes ranging from 200 to 299 indicate success. All other status codes indicate the type of error that occurred.
     RequestedRangeNotSatisfiableException: {}
     ListItemsResponse:
       type: object
       properties:
         Items:
-          allOf:
-            - $ref: '#/components/schemas/ItemList'
-            - description: The metadata entries for the folders and objects at the requested path.
+          $ref: '#/components/schemas/ItemList'
+          description: The metadata entries for the folders and objects at the requested path.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The token that can be used in a request to view the next set of results. For example, you submit a <code>ListItems</code> request that matches 2,000 items with <code>MaxResults</code> set at 500. The service returns the first batch of results (up to 500) and a <code>NextToken</code> value that can be used to fetch the next batch of results.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'The token that can be used in a request to view the next set of results. For example, you submit a <code>ListItems</code> request that matches 2,000 items with <code>MaxResults</code> set at 500. The service returns the first batch of results (up to 500) and a <code>NextToken</code> value that can be used to fetch the next batch of results.'
     PutObjectResponse:
       type: object
       properties:
         ContentSHA256:
-          allOf:
-            - $ref: '#/components/schemas/SHA256Hash'
-            - description: The SHA256 digest of the object that is persisted.
+          $ref: '#/components/schemas/SHA256Hash'
+          description: The SHA256 digest of the object that is persisted.
         ETag:
-          allOf:
-            - $ref: '#/components/schemas/ETag'
-            - description: Unique identifier of the object in the container.
+          $ref: '#/components/schemas/ETag'
+          description: Unique identifier of the object in the container.
         StorageClass:
-          allOf:
-            - $ref: '#/components/schemas/StorageClass'
-            - description: The storage class where the object was persisted. The class should be “Temporal”.
+          $ref: '#/components/schemas/StorageClass'
+          description: The storage class where the object was persisted. The class should be “Temporal”.
     ContentRangePattern:
       type: string
       pattern: ^bytes=\d+\-\d+/\d+$
@@ -537,29 +530,23 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ItemName'
-            - description: The name of the item.
+          $ref: '#/components/schemas/ItemName'
+          description: The name of the item.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ItemType'
-            - description: The item type (folder or object).
+          $ref: '#/components/schemas/ItemType'
+          description: The item type (folder or object).
         ETag:
-          allOf:
-            - $ref: '#/components/schemas/ETag'
-            - description: The ETag that represents a unique instance of the item.
+          $ref: '#/components/schemas/ETag'
+          description: The ETag that represents a unique instance of the item.
         LastModified:
-          allOf:
-            - $ref: '#/components/schemas/TimeStamp'
-            - description: The date and time that the item was last modified.
+          $ref: '#/components/schemas/TimeStamp'
+          description: The date and time that the item was last modified.
         ContentType:
-          allOf:
-            - $ref: '#/components/schemas/ContentType'
-            - description: The content type of the item.
+          $ref: '#/components/schemas/ContentType'
+          description: The content type of the item.
         ContentLength:
-          allOf:
-            - $ref: '#/components/schemas/NonNegativeLong'
-            - description: The length of the item in bytes.
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: The length of the item in bytes.
       description: A metadata entry for a folder or object.
     ItemList:
       type: array
@@ -600,9 +587,8 @@ components:
       title: PutObjectRequest
       properties:
         Body:
-          allOf:
-            - $ref: '#/components/schemas/PayloadBlob'
-            - description: 'The bytes to be stored. '
+          $ref: '#/components/schemas/PayloadBlob'
+          description: 'The bytes to be stored. '
     SHA256Hash:
       type: string
       pattern: '[0-9A-Fa-f]{64}'

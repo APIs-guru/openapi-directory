@@ -393,13 +393,11 @@ components:
         - RoutingControlState
       properties:
         RoutingControlArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Number (ARN) of the response.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Number (ARN) of the response.
         RoutingControlState:
-          allOf:
-            - $ref: '#/components/schemas/RoutingControlState'
-            - description: The state of the routing control.
+          $ref: '#/components/schemas/RoutingControlState'
+          description: The state of the routing control.
     GetRoutingControlStateRequest:
       type: object
       required:
@@ -407,9 +405,8 @@ components:
       title: GetRoutingControlStateRequest
       properties:
         RoutingControlArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Number (ARN) for the routing control that you want to get the state for.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Number (ARN) for the routing control that you want to get the state for.
     AccessDeniedException: {}
     InternalServerException: {}
     ResourceNotFoundException: {}
@@ -427,13 +424,11 @@ components:
       title: UpdateRoutingControlStateRequest
       properties:
         RoutingControlArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Number (ARN) for the routing control that you want to update the state for.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Number (ARN) for the routing control that you want to update the state for.
         RoutingControlState:
-          allOf:
-            - $ref: '#/components/schemas/RoutingControlState'
-            - description: The state of the routing control. You can set the value to be On or Off.
+          $ref: '#/components/schemas/RoutingControlState'
+          description: The state of the routing control. You can set the value to be On or Off.
     ConflictException: {}
     UpdateRoutingControlStatesResponse:
       type: object
@@ -445,9 +440,8 @@ components:
       title: UpdateRoutingControlStatesRequest
       properties:
         UpdateRoutingControlStateEntries:
-          allOf:
-            - $ref: '#/components/schemas/UpdateRoutingControlStateEntries'
-            - description: A set of routing control entries that you want to update.
+          $ref: '#/components/schemas/UpdateRoutingControlStateEntries'
+          description: A set of routing control entries that you want to update.
     Arn:
       type: string
       pattern: '^[A-Za-z0-9:\/_-]*$'
@@ -465,13 +459,11 @@ components:
         - RoutingControlState
       properties:
         RoutingControlArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Number (ARN) for the routing control state entry.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Number (ARN) for the routing control state entry.
         RoutingControlState:
-          allOf:
-            - $ref: '#/components/schemas/RoutingControlState'
-            - description: The routing control state in a set of routing control state entries.
+          $ref: '#/components/schemas/RoutingControlState'
+          description: The routing control state in a set of routing control state entries.
       description: A routing control state.
     UpdateRoutingControlStateEntries:
       type: array

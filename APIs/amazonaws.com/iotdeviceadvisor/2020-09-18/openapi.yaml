@@ -151,25 +151,20 @@ paths:
                   type: object
                   properties:
                     suiteDefinitionName:
-                      allOf:
-                        - $ref: '#/components/schemas/SuiteDefinitionName'
-                        - description: Gets Suite Definition Configuration name.
+                      $ref: '#/components/schemas/SuiteDefinitionName'
+                      description: Gets Suite Definition Configuration name.
                     devices:
-                      allOf:
-                        - $ref: '#/components/schemas/DeviceUnderTestList'
-                        - description: Gets the devices configured.
+                      $ref: '#/components/schemas/DeviceUnderTestList'
+                      description: Gets the devices configured.
                     intendedForQualification:
-                      allOf:
-                        - $ref: '#/components/schemas/IntendedForQualificationBoolean'
-                        - description: Gets the tests intended for qualification in a suite.
+                      $ref: '#/components/schemas/IntendedForQualificationBoolean'
+                      description: Gets the tests intended for qualification in a suite.
                     rootGroup:
-                      allOf:
-                        - $ref: '#/components/schemas/RootGroup'
-                        - description: Gets test suite root group.
+                      $ref: '#/components/schemas/RootGroup'
+                      description: Gets test suite root group.
                     devicePermissionRoleArn:
-                      allOf:
-                        - $ref: '#/components/schemas/AmazonResourceName'
-                        - description: Gets device permission arn.
+                      $ref: '#/components/schemas/AmazonResourceName'
+                      description: Gets device permission arn.
                 tags:
                   description: The tags to be attached to the suite definition.
                   type: object
@@ -351,25 +346,20 @@ paths:
                   type: object
                   properties:
                     suiteDefinitionName:
-                      allOf:
-                        - $ref: '#/components/schemas/SuiteDefinitionName'
-                        - description: Gets Suite Definition Configuration name.
+                      $ref: '#/components/schemas/SuiteDefinitionName'
+                      description: Gets Suite Definition Configuration name.
                     devices:
-                      allOf:
-                        - $ref: '#/components/schemas/DeviceUnderTestList'
-                        - description: Gets the devices configured.
+                      $ref: '#/components/schemas/DeviceUnderTestList'
+                      description: Gets the devices configured.
                     intendedForQualification:
-                      allOf:
-                        - $ref: '#/components/schemas/IntendedForQualificationBoolean'
-                        - description: Gets the tests intended for qualification in a suite.
+                      $ref: '#/components/schemas/IntendedForQualificationBoolean'
+                      description: Gets the tests intended for qualification in a suite.
                     rootGroup:
-                      allOf:
-                        - $ref: '#/components/schemas/RootGroup'
-                        - description: Gets test suite root group.
+                      $ref: '#/components/schemas/RootGroup'
+                      description: Gets test suite root group.
                     devicePermissionRoleArn:
-                      allOf:
-                        - $ref: '#/components/schemas/AmazonResourceName'
-                        - description: Gets device permission arn.
+                      $ref: '#/components/schemas/AmazonResourceName'
+                      description: Gets device permission arn.
   '/suiteDefinitions/{suiteDefinitionId}/suiteRuns/{suiteRunId}':
     get:
       operationId: GetSuiteRun
@@ -695,13 +685,11 @@ paths:
                   type: object
                   properties:
                     primaryDevice:
-                      allOf:
-                        - $ref: '#/components/schemas/DeviceUnderTest'
-                        - description: Gets the primary device for suite run.
+                      $ref: '#/components/schemas/DeviceUnderTest'
+                      description: Gets the primary device for suite run.
                     selectedTestList:
-                      allOf:
-                        - $ref: '#/components/schemas/SelectedTestList'
-                        - description: Gets test case list.
+                      $ref: '#/components/schemas/SelectedTestList'
+                      description: Gets test case list.
                 tags:
                   description: The tags to be attached to the suite run.
                   type: object
@@ -883,21 +871,17 @@ components:
       type: object
       properties:
         suiteDefinitionId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: Creates a Device Advisor test suite with suite UUID.
+          $ref: '#/components/schemas/UUID'
+          description: Creates a Device Advisor test suite with suite UUID.
         suiteDefinitionArn:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Creates a Device Advisor test suite with Amazon Resource name.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: Creates a Device Advisor test suite with Amazon Resource name.
         suiteDefinitionName:
-          allOf:
-            - $ref: '#/components/schemas/SuiteDefinitionName'
-            - description: Creates a Device Advisor test suite with suite definition name.
+          $ref: '#/components/schemas/SuiteDefinitionName'
+          description: Creates a Device Advisor test suite with suite definition name.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Creates a Device Advisor test suite with TimeStamp of when it was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: Creates a Device Advisor test suite with TimeStamp of when it was created.
     SuiteDefinitionName:
       type: string
       minLength: 1
@@ -931,147 +915,117 @@ components:
       type: object
       properties:
         suiteDefinitionId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: Suite definition Id of the suite definition.
+          $ref: '#/components/schemas/UUID'
+          description: Suite definition Id of the suite definition.
         suiteDefinitionArn:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: The ARN of the suite definition.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The ARN of the suite definition.
         suiteDefinitionVersion:
-          allOf:
-            - $ref: '#/components/schemas/SuiteDefinitionVersion'
-            - description: Suite definition version of the suite definition.
+          $ref: '#/components/schemas/SuiteDefinitionVersion'
+          description: Suite definition version of the suite definition.
         latestVersion:
-          allOf:
-            - $ref: '#/components/schemas/SuiteDefinitionVersion'
-            - description: Latest suite definition version of the suite definition.
+          $ref: '#/components/schemas/SuiteDefinitionVersion'
+          description: Latest suite definition version of the suite definition.
         suiteDefinitionConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/SuiteDefinitionConfiguration'
-            - description: Suite configuration of the suite definition.
+          $ref: '#/components/schemas/SuiteDefinitionConfiguration'
+          description: Suite configuration of the suite definition.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Date (in Unix epoch time) when the suite definition was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: Date (in Unix epoch time) when the suite definition was created.
         lastModifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Date (in Unix epoch time) when the suite definition was last modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: Date (in Unix epoch time) when the suite definition was last modified.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: Tags attached to the suite definition.
+          $ref: '#/components/schemas/TagMap'
+          description: Tags attached to the suite definition.
     ResourceNotFoundException: {}
     GetSuiteRunResponse:
       type: object
       properties:
         suiteDefinitionId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: Suite definition Id for the test suite run.
+          $ref: '#/components/schemas/UUID'
+          description: Suite definition Id for the test suite run.
         suiteDefinitionVersion:
-          allOf:
-            - $ref: '#/components/schemas/SuiteDefinitionVersion'
-            - description: Suite definition version for the test suite run.
+          $ref: '#/components/schemas/SuiteDefinitionVersion'
+          description: Suite definition version for the test suite run.
         suiteRunId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: Suite run Id for the test suite run.
+          $ref: '#/components/schemas/UUID'
+          description: Suite run Id for the test suite run.
         suiteRunArn:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: The ARN of the suite run.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The ARN of the suite run.
         suiteRunConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/SuiteRunConfiguration'
-            - description: Suite run configuration for the test suite run.
+          $ref: '#/components/schemas/SuiteRunConfiguration'
+          description: Suite run configuration for the test suite run.
         testResult:
-          allOf:
-            - $ref: '#/components/schemas/TestResult'
-            - description: Test results for the test suite run.
+          $ref: '#/components/schemas/TestResult'
+          description: Test results for the test suite run.
         startTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Date (in Unix epoch time) when the test suite run was started.
+          $ref: '#/components/schemas/Timestamp'
+          description: Date (in Unix epoch time) when the test suite run was started.
         endTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Date (in Unix epoch time) when the test suite run ended.
+          $ref: '#/components/schemas/Timestamp'
+          description: Date (in Unix epoch time) when the test suite run ended.
         status:
-          allOf:
-            - $ref: '#/components/schemas/SuiteRunStatus'
-            - description: Status for the test suite run.
+          $ref: '#/components/schemas/SuiteRunStatus'
+          description: Status for the test suite run.
         errorReason:
-          allOf:
-            - $ref: '#/components/schemas/ErrorReason'
-            - description: Error reason for any test suite run failure.
+          $ref: '#/components/schemas/ErrorReason'
+          description: Error reason for any test suite run failure.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags attached to the suite run.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags attached to the suite run.
     GetSuiteRunReportResponse:
       type: object
       properties:
         qualificationReportDownloadUrl:
-          allOf:
-            - $ref: '#/components/schemas/QualificationReportDownloadUrl'
-            - description: Download URL of the qualification report.
+          $ref: '#/components/schemas/QualificationReportDownloadUrl'
+          description: Download URL of the qualification report.
     ListSuiteDefinitionsResponse:
       type: object
       properties:
         suiteDefinitionInformationList:
-          allOf:
-            - $ref: '#/components/schemas/SuiteDefinitionInformationList'
-            - description: An array of objects that provide summaries of information about the suite definitions in the list.
+          $ref: '#/components/schemas/SuiteDefinitionInformationList'
+          description: An array of objects that provide summaries of information about the suite definitions in the list.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: A token used to get the next set of results.
+          $ref: '#/components/schemas/Token'
+          description: A token used to get the next set of results.
     ListSuiteRunsResponse:
       type: object
       properties:
         suiteRunsList:
-          allOf:
-            - $ref: '#/components/schemas/SuiteRunsList'
-            - description: An array of objects that provide summaries of information about the suite runs in the list.
+          $ref: '#/components/schemas/SuiteRunsList'
+          description: An array of objects that provide summaries of information about the suite runs in the list.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: A token to retrieve the next set of results.
+          $ref: '#/components/schemas/Token'
+          description: A token to retrieve the next set of results.
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags attached to the IoT Device Advisor resource.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags attached to the IoT Device Advisor resource.
     StartSuiteRunResponse:
       type: object
       properties:
         suiteRunId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: Suite Run Id of the started suite run.
+          $ref: '#/components/schemas/UUID'
+          description: Suite Run Id of the started suite run.
         suiteRunArn:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Amazon resource name of the started suite run.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: Amazon resource name of the started suite run.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Date (in Unix epoch time) when the suite run was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: Date (in Unix epoch time) when the suite run was created.
     DeviceUnderTest:
       type: object
       properties:
         thingArn:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Lists devices thing arn
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: Lists devices thing arn
         certificateArn:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Lists devices certificate arn
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: Lists devices certificate arn
       description: Lists all the devices under test
     SelectedTestList:
       type: array
@@ -1097,52 +1051,41 @@ components:
       type: object
       properties:
         suiteDefinitionId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: Suite definition Id of the updated test suite.
+          $ref: '#/components/schemas/UUID'
+          description: Suite definition Id of the updated test suite.
         suiteDefinitionArn:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Amazon Resource name of the updated test suite.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: Amazon Resource name of the updated test suite.
         suiteDefinitionName:
-          allOf:
-            - $ref: '#/components/schemas/SuiteDefinitionName'
-            - description: Suite definition name of the updated test suite.
+          $ref: '#/components/schemas/SuiteDefinitionName'
+          description: Suite definition name of the updated test suite.
         suiteDefinitionVersion:
-          allOf:
-            - $ref: '#/components/schemas/SuiteDefinitionVersion'
-            - description: Suite definition version of the updated test suite.
+          $ref: '#/components/schemas/SuiteDefinitionVersion'
+          description: Suite definition version of the updated test suite.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Timestamp of when the test suite was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: Timestamp of when the test suite was created.
         lastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Timestamp of when the test suite was updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: Timestamp of when the test suite was updated.
     SuiteDefinitionConfiguration:
       type: object
       properties:
         suiteDefinitionName:
-          allOf:
-            - $ref: '#/components/schemas/SuiteDefinitionName'
-            - description: Gets Suite Definition Configuration name.
+          $ref: '#/components/schemas/SuiteDefinitionName'
+          description: Gets Suite Definition Configuration name.
         devices:
-          allOf:
-            - $ref: '#/components/schemas/DeviceUnderTestList'
-            - description: Gets the devices configured.
+          $ref: '#/components/schemas/DeviceUnderTestList'
+          description: Gets the devices configured.
         intendedForQualification:
-          allOf:
-            - $ref: '#/components/schemas/IntendedForQualificationBoolean'
-            - description: Gets the tests intended for qualification in a suite.
+          $ref: '#/components/schemas/IntendedForQualificationBoolean'
+          description: Gets the tests intended for qualification in a suite.
         rootGroup:
-          allOf:
-            - $ref: '#/components/schemas/RootGroup'
-            - description: Gets test suite root group.
+          $ref: '#/components/schemas/RootGroup'
+          description: Gets test suite root group.
         devicePermissionRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Gets device permission arn.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: Gets device permission arn.
       description: Gets Suite Definition Configuration.
     TagMap:
       type: object
@@ -1155,13 +1098,11 @@ components:
       title: CreateSuiteDefinitionRequest
       properties:
         suiteDefinitionConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/SuiteDefinitionConfiguration'
-            - description: Creates a Device Advisor test suite with suite definition configuration.
+          $ref: '#/components/schemas/SuiteDefinitionConfiguration'
+          description: Creates a Device Advisor test suite with suite definition configuration.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags to be attached to the suite definition.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags to be attached to the suite definition.
     UUID:
       type: string
       minLength: 12
@@ -1199,21 +1140,18 @@ components:
       type: object
       properties:
         primaryDevice:
-          allOf:
-            - $ref: '#/components/schemas/DeviceUnderTest'
-            - description: Gets the primary device for suite run.
+          $ref: '#/components/schemas/DeviceUnderTest'
+          description: Gets the primary device for suite run.
         selectedTestList:
-          allOf:
-            - $ref: '#/components/schemas/SelectedTestList'
-            - description: Gets test case list.
+          $ref: '#/components/schemas/SelectedTestList'
+          description: Gets test case list.
       description: Gets suite run configuration.
     TestResult:
       type: object
       properties:
         groups:
-          allOf:
-            - $ref: '#/components/schemas/GroupResultList'
-            - description: Show each group of test results.
+          $ref: '#/components/schemas/GroupResultList'
+          description: Show each group of test results.
       description: Show each group result.
     SuiteRunStatus:
       type: string
@@ -1238,17 +1176,14 @@ components:
       type: object
       properties:
         groupId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: Group result Id.
+          $ref: '#/components/schemas/UUID'
+          description: Group result Id.
         groupName:
-          allOf:
-            - $ref: '#/components/schemas/GroupName'
-            - description: Group Result Name.
+          $ref: '#/components/schemas/GroupName'
+          description: Group Result Name.
         tests:
-          allOf:
-            - $ref: '#/components/schemas/TestCaseRuns'
-            - description: Tests under Group Result.
+          $ref: '#/components/schemas/TestCaseRuns'
+          description: Tests under Group Result.
       description: Show Group Result.
     GroupResultList:
       type: array
@@ -1289,17 +1224,14 @@ components:
       title: StartSuiteRunRequest
       properties:
         suiteDefinitionVersion:
-          allOf:
-            - $ref: '#/components/schemas/SuiteDefinitionVersion'
-            - description: Suite definition version of the test suite.
+          $ref: '#/components/schemas/SuiteDefinitionVersion'
+          description: Suite definition version of the test suite.
         suiteRunConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/SuiteRunConfiguration'
-            - description: Suite run configuration.
+          $ref: '#/components/schemas/SuiteRunConfiguration'
+          description: Suite run configuration.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags to be attached to the suite run.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags to be attached to the suite run.
     Status:
       type: string
       enum:
@@ -1320,25 +1252,20 @@ components:
       type: object
       properties:
         suiteDefinitionId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: Suite definition Id of the test suite.
+          $ref: '#/components/schemas/UUID'
+          description: Suite definition Id of the test suite.
         suiteDefinitionName:
-          allOf:
-            - $ref: '#/components/schemas/SuiteDefinitionName'
-            - description: Suite name of the test suite.
+          $ref: '#/components/schemas/SuiteDefinitionName'
+          description: Suite name of the test suite.
         defaultDevices:
-          allOf:
-            - $ref: '#/components/schemas/DeviceUnderTestList'
-            - description: Specifies the devices under test for the test suite.
+          $ref: '#/components/schemas/DeviceUnderTestList'
+          description: Specifies the devices under test for the test suite.
         intendedForQualification:
-          allOf:
-            - $ref: '#/components/schemas/IntendedForQualificationBoolean'
-            - description: Specifies if the test suite is intended for qualification.
+          $ref: '#/components/schemas/IntendedForQualificationBoolean'
+          description: Specifies if the test suite is intended for qualification.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Date (in Unix epoch time) when the test suite was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: Date (in Unix epoch time) when the test suite was created.
       description: Information about the suite definition.
     SuiteRunResultCount:
       type: integer
@@ -1348,45 +1275,35 @@ components:
       type: object
       properties:
         suiteDefinitionId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: Suite definition Id of the suite run.
+          $ref: '#/components/schemas/UUID'
+          description: Suite definition Id of the suite run.
         suiteDefinitionVersion:
-          allOf:
-            - $ref: '#/components/schemas/SuiteDefinitionVersion'
-            - description: Suite definition version of the suite run.
+          $ref: '#/components/schemas/SuiteDefinitionVersion'
+          description: Suite definition version of the suite run.
         suiteDefinitionName:
-          allOf:
-            - $ref: '#/components/schemas/SuiteDefinitionName'
-            - description: Suite definition name of the suite run.
+          $ref: '#/components/schemas/SuiteDefinitionName'
+          description: Suite definition name of the suite run.
         suiteRunId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: Suite run Id of the suite run.
+          $ref: '#/components/schemas/UUID'
+          description: Suite run Id of the suite run.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Date (in Unix epoch time) when the suite run was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: Date (in Unix epoch time) when the suite run was created.
         startedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Date (in Unix epoch time) when the suite run was started.
+          $ref: '#/components/schemas/Timestamp'
+          description: Date (in Unix epoch time) when the suite run was started.
         endAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Date (in Unix epoch time) when the suite run ended.
+          $ref: '#/components/schemas/Timestamp'
+          description: Date (in Unix epoch time) when the suite run ended.
         status:
-          allOf:
-            - $ref: '#/components/schemas/SuiteRunStatus'
-            - description: Status of the suite run.
+          $ref: '#/components/schemas/SuiteRunStatus'
+          description: Status of the suite run.
         passed:
-          allOf:
-            - $ref: '#/components/schemas/SuiteRunResultCount'
-            - description: Number of test cases that passed in the suite run.
+          $ref: '#/components/schemas/SuiteRunResultCount'
+          description: Number of test cases that passed in the suite run.
         failed:
-          allOf:
-            - $ref: '#/components/schemas/SuiteRunResultCount'
-            - description: Number of test cases that failed in the suite run.
+          $ref: '#/components/schemas/SuiteRunResultCount'
+          description: Number of test cases that failed in the suite run.
       description: Information about the suite run.
     TagKeyList:
       type: array
@@ -1401,9 +1318,8 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags to be attached to the IoT Device Advisor resource.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags to be attached to the IoT Device Advisor resource.
     TestCaseDefinitionName:
       type: string
     Warnings:
@@ -1412,41 +1328,32 @@ components:
       type: object
       properties:
         testCaseRunId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: Provides test case run Id.
+          $ref: '#/components/schemas/UUID'
+          description: Provides test case run Id.
         testCaseDefinitionId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: Provides test case run definition Id.
+          $ref: '#/components/schemas/UUID'
+          description: Provides test case run definition Id.
         testCaseDefinitionName:
-          allOf:
-            - $ref: '#/components/schemas/TestCaseDefinitionName'
-            - description: Provides test case run definition Name.
+          $ref: '#/components/schemas/TestCaseDefinitionName'
+          description: Provides test case run definition Name.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: Provides test case run status.
+          $ref: '#/components/schemas/Status'
+          description: Provides test case run status.
         startTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Provides test case run start time.
+          $ref: '#/components/schemas/Timestamp'
+          description: Provides test case run start time.
         endTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Provides test case run end time.
+          $ref: '#/components/schemas/Timestamp'
+          description: Provides test case run end time.
         logUrl:
-          allOf:
-            - $ref: '#/components/schemas/LogUrl'
-            - description: Provides test case run log Url.
+          $ref: '#/components/schemas/LogUrl'
+          description: Provides test case run log Url.
         warnings:
-          allOf:
-            - $ref: '#/components/schemas/Warnings'
-            - description: Provides test case run warnings.
+          $ref: '#/components/schemas/Warnings'
+          description: Provides test case run warnings.
         failure:
-          allOf:
-            - $ref: '#/components/schemas/Failure'
-            - description: Provides test case run failure result.
+          $ref: '#/components/schemas/Failure'
+          description: Provides test case run failure result.
       description: Provides test case run.
     UntagResourceRequest:
       type: object
@@ -1457,8 +1364,7 @@ components:
       title: UpdateSuiteDefinitionRequest
       properties:
         suiteDefinitionConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/SuiteDefinitionConfiguration'
-            - description: Updates a Device Advisor test suite with suite definition configuration.
+          $ref: '#/components/schemas/SuiteDefinitionConfiguration'
+          description: Updates a Device Advisor test suite with suite definition configuration.
 security:
   - hmac: []

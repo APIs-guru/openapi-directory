@@ -1672,17 +1672,14 @@ components:
       title: DeleteServiceQuotaIncreaseRequestFromTemplateRequest
       properties:
         ServiceCode:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCode'
-            - description: The service identifier.
+          $ref: '#/components/schemas/ServiceCode'
+          description: The service identifier.
         QuotaCode:
-          allOf:
-            - $ref: '#/components/schemas/QuotaCode'
-            - description: The quota identifier.
+          $ref: '#/components/schemas/QuotaCode'
+          description: The quota identifier.
         AwsRegion:
-          allOf:
-            - $ref: '#/components/schemas/AwsRegion'
-            - description: The AWS Region.
+          $ref: '#/components/schemas/AwsRegion'
+          description: The AWS Region.
     NoSuchResourceException: {}
     IllegalArgumentException: {}
     DisassociateServiceQuotaTemplateResponse:
@@ -1697,9 +1694,8 @@ components:
       type: object
       properties:
         Quota:
-          allOf:
-            - $ref: '#/components/schemas/ServiceQuota'
-            - description: Information about the quota.
+          $ref: '#/components/schemas/ServiceQuota'
+          description: Information about the quota.
     GetAWSDefaultServiceQuotaRequest:
       type: object
       required:
@@ -1708,20 +1704,17 @@ components:
       title: GetAWSDefaultServiceQuotaRequest
       properties:
         ServiceCode:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCode'
-            - description: The service identifier.
+          $ref: '#/components/schemas/ServiceCode'
+          description: The service identifier.
         QuotaCode:
-          allOf:
-            - $ref: '#/components/schemas/QuotaCode'
-            - description: The quota identifier.
+          $ref: '#/components/schemas/QuotaCode'
+          description: The quota identifier.
     GetAssociationForServiceQuotaTemplateResponse:
       type: object
       properties:
         ServiceQuotaTemplateAssociationStatus:
-          allOf:
-            - $ref: '#/components/schemas/ServiceQuotaTemplateAssociationStatus'
-            - description: 'The association status. If the status is <code>ASSOCIATED</code>, the quota increase requests in the template are automatically applied to new accounts in your organization.'
+          $ref: '#/components/schemas/ServiceQuotaTemplateAssociationStatus'
+          description: 'The association status. If the status is <code>ASSOCIATED</code>, the quota increase requests in the template are automatically applied to new accounts in your organization.'
     GetAssociationForServiceQuotaTemplateRequest:
       type: object
       title: GetAssociationForServiceQuotaTemplateRequest
@@ -1730,9 +1723,8 @@ components:
       type: object
       properties:
         RequestedQuota:
-          allOf:
-            - $ref: '#/components/schemas/RequestedServiceQuotaChange'
-            - description: Information about the quota increase request.
+          $ref: '#/components/schemas/RequestedServiceQuotaChange'
+          description: Information about the quota increase request.
     GetRequestedServiceQuotaChangeRequest:
       type: object
       required:
@@ -1740,16 +1732,14 @@ components:
       title: GetRequestedServiceQuotaChangeRequest
       properties:
         RequestId:
-          allOf:
-            - $ref: '#/components/schemas/RequestId'
-            - description: The ID of the quota increase request.
+          $ref: '#/components/schemas/RequestId'
+          description: The ID of the quota increase request.
     GetServiceQuotaResponse:
       type: object
       properties:
         Quota:
-          allOf:
-            - $ref: '#/components/schemas/ServiceQuota'
-            - description: Information about the quota.
+          $ref: '#/components/schemas/ServiceQuota'
+          description: Information about the quota.
     GetServiceQuotaRequest:
       type: object
       required:
@@ -1758,20 +1748,17 @@ components:
       title: GetServiceQuotaRequest
       properties:
         ServiceCode:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCode'
-            - description: The service identifier.
+          $ref: '#/components/schemas/ServiceCode'
+          description: The service identifier.
         QuotaCode:
-          allOf:
-            - $ref: '#/components/schemas/QuotaCode'
-            - description: The quota identifier.
+          $ref: '#/components/schemas/QuotaCode'
+          description: The quota identifier.
     GetServiceQuotaIncreaseRequestFromTemplateResponse:
       type: object
       properties:
         ServiceQuotaIncreaseRequestInTemplate:
-          allOf:
-            - $ref: '#/components/schemas/ServiceQuotaIncreaseRequestInTemplate'
-            - description: Information about the quota increase request.
+          $ref: '#/components/schemas/ServiceQuotaIncreaseRequestInTemplate'
+          description: Information about the quota increase request.
     GetServiceQuotaIncreaseRequestFromTemplateRequest:
       type: object
       required:
@@ -1781,28 +1768,23 @@ components:
       title: GetServiceQuotaIncreaseRequestFromTemplateRequest
       properties:
         ServiceCode:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCode'
-            - description: The service identifier.
+          $ref: '#/components/schemas/ServiceCode'
+          description: The service identifier.
         QuotaCode:
-          allOf:
-            - $ref: '#/components/schemas/QuotaCode'
-            - description: The quota identifier.
+          $ref: '#/components/schemas/QuotaCode'
+          description: The quota identifier.
         AwsRegion:
-          allOf:
-            - $ref: '#/components/schemas/AwsRegion'
-            - description: The AWS Region.
+          $ref: '#/components/schemas/AwsRegion'
+          description: The AWS Region.
     ListAWSDefaultServiceQuotasResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
         Quotas:
-          allOf:
-            - $ref: '#/components/schemas/ServiceQuotaListDefinition'
-            - description: Information about the quotas.
+          $ref: '#/components/schemas/ServiceQuotaListDefinition'
+          description: Information about the quotas.
     ListAWSDefaultServiceQuotasRequest:
       type: object
       required:
@@ -1810,60 +1792,49 @@ components:
       title: ListAWSDefaultServiceQuotasRequest
       properties:
         ServiceCode:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCode'
-            - description: The service identifier.
+          $ref: '#/components/schemas/ServiceCode'
+          description: The service identifier.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token for the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token for the next page of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.'
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.'
     InvalidPaginationTokenException: {}
     ListRequestedServiceQuotaChangeHistoryResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
         RequestedQuotas:
-          allOf:
-            - $ref: '#/components/schemas/RequestedServiceQuotaChangeHistoryListDefinition'
-            - description: Information about the quota increase requests.
+          $ref: '#/components/schemas/RequestedServiceQuotaChangeHistoryListDefinition'
+          description: Information about the quota increase requests.
     ListRequestedServiceQuotaChangeHistoryRequest:
       type: object
       title: ListRequestedServiceQuotaChangeHistoryRequest
       properties:
         ServiceCode:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCode'
-            - description: The service identifier.
+          $ref: '#/components/schemas/ServiceCode'
+          description: The service identifier.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/RequestStatus'
-            - description: The status of the quota increase request.
+          $ref: '#/components/schemas/RequestStatus'
+          description: The status of the quota increase request.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token for the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token for the next page of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.'
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.'
     ListRequestedServiceQuotaChangeHistoryByQuotaResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
         RequestedQuotas:
-          allOf:
-            - $ref: '#/components/schemas/RequestedServiceQuotaChangeHistoryListDefinition'
-            - description: Information about the quota increase requests.
+          $ref: '#/components/schemas/RequestedServiceQuotaChangeHistoryListDefinition'
+          description: Information about the quota increase requests.
     ListRequestedServiceQuotaChangeHistoryByQuotaRequest:
       type: object
       required:
@@ -1872,67 +1843,54 @@ components:
       title: ListRequestedServiceQuotaChangeHistoryByQuotaRequest
       properties:
         ServiceCode:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCode'
-            - description: The service identifier.
+          $ref: '#/components/schemas/ServiceCode'
+          description: The service identifier.
         QuotaCode:
-          allOf:
-            - $ref: '#/components/schemas/QuotaCode'
-            - description: The quota identifier.
+          $ref: '#/components/schemas/QuotaCode'
+          description: The quota identifier.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/RequestStatus'
-            - description: The status value of the quota increase request.
+          $ref: '#/components/schemas/RequestStatus'
+          description: The status value of the quota increase request.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token for the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token for the next page of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.'
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.'
     ListServiceQuotaIncreaseRequestsInTemplateResponse:
       type: object
       properties:
         ServiceQuotaIncreaseRequestInTemplateList:
-          allOf:
-            - $ref: '#/components/schemas/ServiceQuotaIncreaseRequestInTemplateList'
-            - description: Information about the quota increase requests.
+          $ref: '#/components/schemas/ServiceQuotaIncreaseRequestInTemplateList'
+          description: Information about the quota increase requests.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
     ListServiceQuotaIncreaseRequestsInTemplateRequest:
       type: object
       title: ListServiceQuotaIncreaseRequestsInTemplateRequest
       properties:
         ServiceCode:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCode'
-            - description: The service identifier.
+          $ref: '#/components/schemas/ServiceCode'
+          description: The service identifier.
         AwsRegion:
-          allOf:
-            - $ref: '#/components/schemas/AwsRegion'
-            - description: The AWS Region.
+          $ref: '#/components/schemas/AwsRegion'
+          description: The AWS Region.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token for the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token for the next page of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.'
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.'
     ListServiceQuotasResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
         Quotas:
-          allOf:
-            - $ref: '#/components/schemas/ServiceQuotaListDefinition'
-            - description: Information about the quotas.
+          $ref: '#/components/schemas/ServiceQuotaListDefinition'
+          description: Information about the quotas.
     ListServiceQuotasRequest:
       type: object
       required:
@@ -1940,47 +1898,39 @@ components:
       title: ListServiceQuotasRequest
       properties:
         ServiceCode:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCode'
-            - description: The service identifier.
+          $ref: '#/components/schemas/ServiceCode'
+          description: The service identifier.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token for the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token for the next page of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.'
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.'
     ListServicesResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
         Services:
-          allOf:
-            - $ref: '#/components/schemas/ServiceInfoListDefinition'
-            - description: Information about the services.
+          $ref: '#/components/schemas/ServiceInfoListDefinition'
+          description: Information about the services.
     ListServicesRequest:
       type: object
       title: ListServicesRequest
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token for the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token for the next page of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.'
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.'
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/OutputTags'
-            - description: A complex data type that contains zero or more tag elements.
+          $ref: '#/components/schemas/OutputTags'
+          description: A complex data type that contains zero or more tag elements.
     ListTagsForResourceRequest:
       type: object
       required:
@@ -1988,16 +1938,14 @@ components:
       title: ListTagsForResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: 'The Amazon Resource Name (ARN) for the applied quota for which you want to list tags. You can get this information by using the Service Quotas console, or by listing the quotas using the <a href="https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html">list-service-quotas</a> AWS CLI command or the <a href="https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html">ListServiceQuotas</a> AWS API operation.'
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: 'The Amazon Resource Name (ARN) for the applied quota for which you want to list tags. You can get this information by using the Service Quotas console, or by listing the quotas using the <a href="https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html">list-service-quotas</a> AWS CLI command or the <a href="https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html">ListServiceQuotas</a> AWS API operation.'
     PutServiceQuotaIncreaseRequestIntoTemplateResponse:
       type: object
       properties:
         ServiceQuotaIncreaseRequestInTemplate:
-          allOf:
-            - $ref: '#/components/schemas/ServiceQuotaIncreaseRequestInTemplate'
-            - description: Information about the quota increase request.
+          $ref: '#/components/schemas/ServiceQuotaIncreaseRequestInTemplate'
+          description: Information about the quota increase request.
     PutServiceQuotaIncreaseRequestIntoTemplateRequest:
       type: object
       required:
@@ -2008,29 +1956,24 @@ components:
       title: PutServiceQuotaIncreaseRequestIntoTemplateRequest
       properties:
         QuotaCode:
-          allOf:
-            - $ref: '#/components/schemas/QuotaCode'
-            - description: The quota identifier.
+          $ref: '#/components/schemas/QuotaCode'
+          description: The quota identifier.
         ServiceCode:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCode'
-            - description: The service identifier.
+          $ref: '#/components/schemas/ServiceCode'
+          description: The service identifier.
         AwsRegion:
-          allOf:
-            - $ref: '#/components/schemas/AwsRegion'
-            - description: The AWS Region.
+          $ref: '#/components/schemas/AwsRegion'
+          description: The AWS Region.
         DesiredValue:
-          allOf:
-            - $ref: '#/components/schemas/QuotaValue'
-            - description: 'The new, increased value for the quota.'
+          $ref: '#/components/schemas/QuotaValue'
+          description: 'The new, increased value for the quota.'
     QuotaExceededException: {}
     RequestServiceQuotaIncreaseResponse:
       type: object
       properties:
         RequestedQuota:
-          allOf:
-            - $ref: '#/components/schemas/RequestedServiceQuotaChange'
-            - description: Information about the quota increase request.
+          $ref: '#/components/schemas/RequestedServiceQuotaChange'
+          description: Information about the quota increase request.
     RequestServiceQuotaIncreaseRequest:
       type: object
       required:
@@ -2040,17 +1983,14 @@ components:
       title: RequestServiceQuotaIncreaseRequest
       properties:
         ServiceCode:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCode'
-            - description: The service identifier.
+          $ref: '#/components/schemas/ServiceCode'
+          description: The service identifier.
         QuotaCode:
-          allOf:
-            - $ref: '#/components/schemas/QuotaCode'
-            - description: The quota identifier.
+          $ref: '#/components/schemas/QuotaCode'
+          description: The quota identifier.
         DesiredValue:
-          allOf:
-            - $ref: '#/components/schemas/QuotaValue'
-            - description: 'The new, increased value for the quota.'
+          $ref: '#/components/schemas/QuotaValue'
+          description: 'The new, increased value for the quota.'
     ResourceAlreadyExistsException: {}
     InvalidResourceStateException: {}
     TagResourceResponse:
@@ -2064,13 +2004,11 @@ components:
       title: TagResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: 'The Amazon Resource Name (ARN) for the applied quota. You can get this information by using the Service Quotas console, or by listing the quotas using the <a href="https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html">list-service-quotas</a> AWS CLI command or the <a href="https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html">ListServiceQuotas</a> AWS API operation.'
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: 'The Amazon Resource Name (ARN) for the applied quota. You can get this information by using the Service Quotas console, or by listing the quotas using the <a href="https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html">list-service-quotas</a> AWS CLI command or the <a href="https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html">ListServiceQuotas</a> AWS API operation.'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/InputTags'
-            - description: The tags that you want to add to the resource.
+          $ref: '#/components/schemas/InputTags'
+          description: The tags that you want to add to the resource.
     TooManyTagsException: {}
     TagPolicyViolationException: {}
     UntagResourceResponse:
@@ -2084,13 +2022,11 @@ components:
       title: UntagResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: 'The Amazon Resource Name (ARN) for the applied quota that you want to untag. You can get this information by using the Service Quotas console, or by listing the quotas using the <a href="https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html">list-service-quotas</a> AWS CLI command or the <a href="https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html">ListServiceQuotas</a> AWS API operation.'
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: 'The Amazon Resource Name (ARN) for the applied quota that you want to untag. You can get this information by using the Service Quotas console, or by listing the quotas using the <a href="https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html">list-service-quotas</a> AWS CLI command or the <a href="https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html">ListServiceQuotas</a> AWS API operation.'
         TagKeys:
-          allOf:
-            - $ref: '#/components/schemas/InputTagKeys'
-            - description: The keys of the tags that you want to remove from the resource.
+          $ref: '#/components/schemas/InputTagKeys'
+          description: The keys of the tags that you want to remove from the resource.
     AmazonResourceName:
       type: string
       pattern: 'arn:aws(-[\w]+)*:*:.+:[0-9]{12}:.+'
@@ -2129,65 +2065,51 @@ components:
       type: object
       properties:
         ErrorCode:
-          allOf:
-            - $ref: '#/components/schemas/ErrorCode'
-            - description: '<p>Service Quotas returns the following error values:</p> <ul> <li> <p> <code>DEPENDENCY_ACCESS_DENIED_ERROR</code> - The caller does not have the required permissions to complete the action. To resolve the error, you must have permission to access the service or quota.</p> </li> <li> <p> <code>DEPENDENCY_THROTTLING_ERROR</code> - The service is throttling Service Quotas.</p> </li> <li> <p> <code>DEPENDENCY_SERVICE_ERROR</code> - The service is not available.</p> </li> <li> <p> <code>SERVICE_QUOTA_NOT_AVAILABLE_ERROR</code> - There was an error in Service Quotas.</p> </li> </ul>'
+          $ref: '#/components/schemas/ErrorCode'
+          description: '<p>Service Quotas returns the following error values:</p> <ul> <li> <p> <code>DEPENDENCY_ACCESS_DENIED_ERROR</code> - The caller does not have the required permissions to complete the action. To resolve the error, you must have permission to access the service or quota.</p> </li> <li> <p> <code>DEPENDENCY_THROTTLING_ERROR</code> - The service is throttling Service Quotas.</p> </li> <li> <p> <code>DEPENDENCY_SERVICE_ERROR</code> - The service is not available.</p> </li> <li> <p> <code>SERVICE_QUOTA_NOT_AVAILABLE_ERROR</code> - There was an error in Service Quotas.</p> </li> </ul>'
         ErrorMessage:
-          allOf:
-            - $ref: '#/components/schemas/ErrorMessage'
-            - description: The error message.
+          $ref: '#/components/schemas/ErrorMessage'
+          description: The error message.
       description: An error that explains why an action did not succeed.
     ServiceQuota:
       type: object
       properties:
         ServiceCode:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCode'
-            - description: The service identifier.
+          $ref: '#/components/schemas/ServiceCode'
+          description: The service identifier.
         ServiceName:
-          allOf:
-            - $ref: '#/components/schemas/ServiceName'
-            - description: The service name.
+          $ref: '#/components/schemas/ServiceName'
+          description: The service name.
         QuotaArn:
-          allOf:
-            - $ref: '#/components/schemas/QuotaArn'
-            - description: The Amazon Resource Name (ARN) of the quota.
+          $ref: '#/components/schemas/QuotaArn'
+          description: The Amazon Resource Name (ARN) of the quota.
         QuotaCode:
-          allOf:
-            - $ref: '#/components/schemas/QuotaCode'
-            - description: The quota identifier.
+          $ref: '#/components/schemas/QuotaCode'
+          description: The quota identifier.
         QuotaName:
-          allOf:
-            - $ref: '#/components/schemas/QuotaName'
-            - description: The quota name.
+          $ref: '#/components/schemas/QuotaName'
+          description: The quota name.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/QuotaValue'
-            - description: The quota value.
+          $ref: '#/components/schemas/QuotaValue'
+          description: The quota value.
         Unit:
-          allOf:
-            - $ref: '#/components/schemas/QuotaUnit'
-            - description: The unit of measurement.
+          $ref: '#/components/schemas/QuotaUnit'
+          description: The unit of measurement.
         Adjustable:
-          allOf:
-            - $ref: '#/components/schemas/QuotaAdjustable'
-            - description: Indicates whether the quota value can be increased.
+          $ref: '#/components/schemas/QuotaAdjustable'
+          description: Indicates whether the quota value can be increased.
         GlobalQuota:
-          allOf:
-            - $ref: '#/components/schemas/GlobalQuota'
-            - description: Indicates whether the quota is global.
+          $ref: '#/components/schemas/GlobalQuota'
+          description: Indicates whether the quota is global.
         UsageMetric:
-          allOf:
-            - $ref: '#/components/schemas/MetricInfo'
-            - description: Information about the measurement.
+          $ref: '#/components/schemas/MetricInfo'
+          description: Information about the measurement.
         Period:
-          allOf:
-            - $ref: '#/components/schemas/QuotaPeriod'
-            - description: The period of time.
+          $ref: '#/components/schemas/QuotaPeriod'
+          description: The period of time.
         ErrorReason:
-          allOf:
-            - $ref: '#/components/schemas/ErrorReason'
-            - description: The error code and error reason.
+          $ref: '#/components/schemas/ErrorReason'
+          description: The error code and error reason.
       description: Information about a quota.
     ServiceQuotaTemplateAssociationStatus:
       type: string
@@ -2203,97 +2125,75 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/RequestId'
-            - description: The unique identifier.
+          $ref: '#/components/schemas/RequestId'
+          description: The unique identifier.
         CaseId:
-          allOf:
-            - $ref: '#/components/schemas/CustomerServiceEngagementId'
-            - description: The case ID.
+          $ref: '#/components/schemas/CustomerServiceEngagementId'
+          description: The case ID.
         ServiceCode:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCode'
-            - description: The service identifier.
+          $ref: '#/components/schemas/ServiceCode'
+          description: The service identifier.
         ServiceName:
-          allOf:
-            - $ref: '#/components/schemas/ServiceName'
-            - description: The service name.
+          $ref: '#/components/schemas/ServiceName'
+          description: The service name.
         QuotaCode:
-          allOf:
-            - $ref: '#/components/schemas/QuotaCode'
-            - description: The quota identifier.
+          $ref: '#/components/schemas/QuotaCode'
+          description: The quota identifier.
         QuotaName:
-          allOf:
-            - $ref: '#/components/schemas/QuotaName'
-            - description: The quota name.
+          $ref: '#/components/schemas/QuotaName'
+          description: The quota name.
         DesiredValue:
-          allOf:
-            - $ref: '#/components/schemas/QuotaValue'
-            - description: 'The new, increased value for the quota.'
+          $ref: '#/components/schemas/QuotaValue'
+          description: 'The new, increased value for the quota.'
         Status:
-          allOf:
-            - $ref: '#/components/schemas/RequestStatus'
-            - description: The state of the quota increase request.
+          $ref: '#/components/schemas/RequestStatus'
+          description: The state of the quota increase request.
         Created:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: The date and time when the quota increase request was received and the case ID was created.
+          $ref: '#/components/schemas/DateTime'
+          description: The date and time when the quota increase request was received and the case ID was created.
         LastUpdated:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: The date and time of the most recent change.
+          $ref: '#/components/schemas/DateTime'
+          description: The date and time of the most recent change.
         Requester:
-          allOf:
-            - $ref: '#/components/schemas/Requester'
-            - description: The IAM identity of the requester.
+          $ref: '#/components/schemas/Requester'
+          description: The IAM identity of the requester.
         QuotaArn:
-          allOf:
-            - $ref: '#/components/schemas/QuotaArn'
-            - description: The Amazon Resource Name (ARN) of the quota.
+          $ref: '#/components/schemas/QuotaArn'
+          description: The Amazon Resource Name (ARN) of the quota.
         GlobalQuota:
-          allOf:
-            - $ref: '#/components/schemas/GlobalQuota'
-            - description: Indicates whether the quota is global.
+          $ref: '#/components/schemas/GlobalQuota'
+          description: Indicates whether the quota is global.
         Unit:
-          allOf:
-            - $ref: '#/components/schemas/QuotaUnit'
-            - description: The unit of measurement.
+          $ref: '#/components/schemas/QuotaUnit'
+          description: The unit of measurement.
       description: Information about a quota increase request.
     ServiceQuotaIncreaseRequestInTemplate:
       type: object
       properties:
         ServiceCode:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCode'
-            - description: The service identifier.
+          $ref: '#/components/schemas/ServiceCode'
+          description: The service identifier.
         ServiceName:
-          allOf:
-            - $ref: '#/components/schemas/ServiceName'
-            - description: The service name.
+          $ref: '#/components/schemas/ServiceName'
+          description: The service name.
         QuotaCode:
-          allOf:
-            - $ref: '#/components/schemas/QuotaCode'
-            - description: The quota identifier.
+          $ref: '#/components/schemas/QuotaCode'
+          description: The quota identifier.
         QuotaName:
-          allOf:
-            - $ref: '#/components/schemas/QuotaName'
-            - description: The quota name.
+          $ref: '#/components/schemas/QuotaName'
+          description: The quota name.
         DesiredValue:
-          allOf:
-            - $ref: '#/components/schemas/QuotaValue'
-            - description: 'The new, increased value of the quota.'
+          $ref: '#/components/schemas/QuotaValue'
+          description: 'The new, increased value of the quota.'
         AwsRegion:
-          allOf:
-            - $ref: '#/components/schemas/AwsRegion'
-            - description: The AWS Region.
+          $ref: '#/components/schemas/AwsRegion'
+          description: The AWS Region.
         Unit:
-          allOf:
-            - $ref: '#/components/schemas/QuotaUnit'
-            - description: The unit of measurement.
+          $ref: '#/components/schemas/QuotaUnit'
+          description: The unit of measurement.
         GlobalQuota:
-          allOf:
-            - $ref: '#/components/schemas/GlobalQuota'
-            - description: Indicates whether the quota is global.
+          $ref: '#/components/schemas/GlobalQuota'
+          description: Indicates whether the quota is global.
       description: Information about a quota increase request.
     GlobalQuota:
       type: boolean
@@ -2313,13 +2213,11 @@ components:
         - Value
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: 'A string that contains a tag key. The string length should be between 1 and 128 characters. Valid characters include a-z, A-Z, 0-9, space, and the special characters _ - . : / = + @.'
+          $ref: '#/components/schemas/TagKey'
+          description: 'A string that contains a tag key. The string length should be between 1 and 128 characters. Valid characters include a-z, A-Z, 0-9, space, and the special characters _ - . : / = + @.'
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: 'A string that contains an optional tag value. The string length should be between 0 and 256 characters. Valid characters include a-z, A-Z, 0-9, space, and the special characters _ - . : / = + @.'
+          $ref: '#/components/schemas/TagValue'
+          description: 'A string that contains an optional tag value. The string length should be between 0 and 256 characters. Valid characters include a-z, A-Z, 0-9, space, and the special characters _ - . : / = + @.'
       description: A complex data type that contains a tag key and tag value.
     InputTags:
       type: array
@@ -2385,21 +2283,17 @@ components:
       type: object
       properties:
         MetricNamespace:
-          allOf:
-            - $ref: '#/components/schemas/QuotaMetricNamespace'
-            - description: The namespace of the metric.
+          $ref: '#/components/schemas/QuotaMetricNamespace'
+          description: The namespace of the metric.
         MetricName:
-          allOf:
-            - $ref: '#/components/schemas/QuotaMetricName'
-            - description: The name of the metric.
+          $ref: '#/components/schemas/QuotaMetricName'
+          description: The name of the metric.
         MetricDimensions:
-          allOf:
-            - $ref: '#/components/schemas/MetricDimensionsMapDefinition'
-            - description: The metric dimension. This is a name/value pair that is part of the identity of a metric.
+          $ref: '#/components/schemas/MetricDimensionsMapDefinition'
+          description: The metric dimension. This is a name/value pair that is part of the identity of a metric.
         MetricStatisticRecommendation:
-          allOf:
-            - $ref: '#/components/schemas/Statistic'
-            - description: The metric statistic that we recommend you use when determining quota usage.
+          $ref: '#/components/schemas/Statistic'
+          description: The metric statistic that we recommend you use when determining quota usage.
       description: Information about the CloudWatch metric that reflects quota usage.
     PeriodUnit:
       type: string
@@ -2428,13 +2322,11 @@ components:
       type: object
       properties:
         PeriodValue:
-          allOf:
-            - $ref: '#/components/schemas/PeriodValue'
-            - description: The value.
+          $ref: '#/components/schemas/PeriodValue'
+          description: The value.
         PeriodUnit:
-          allOf:
-            - $ref: '#/components/schemas/PeriodUnit'
-            - description: The time unit.
+          $ref: '#/components/schemas/PeriodUnit'
+          description: The time unit.
       description: Information about the quota period.
     QuotaUnit:
       type: string
@@ -2446,13 +2338,11 @@ components:
       type: object
       properties:
         ServiceCode:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCode'
-            - description: The service identifier.
+          $ref: '#/components/schemas/ServiceCode'
+          description: The service identifier.
         ServiceName:
-          allOf:
-            - $ref: '#/components/schemas/ServiceName'
-            - description: The service name.
+          $ref: '#/components/schemas/ServiceName'
+          description: The service name.
       description: Information about a service.
     TagValue:
       type: string

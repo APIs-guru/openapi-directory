@@ -2318,25 +2318,20 @@ components:
       type: object
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The description of the discoverer.
+          $ref: '#/components/schemas/__string'
+          description: The description of the discoverer.
         DiscovererArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the discoverer.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the discoverer.
         DiscovererId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ID of the discoverer.
+          $ref: '#/components/schemas/__string'
+          description: The ID of the discoverer.
         SourceArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the event bus.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the event bus.
         State:
-          allOf:
-            - $ref: '#/components/schemas/DiscovererState'
-            - description: The state of the discoverer.
+          $ref: '#/components/schemas/DiscovererState'
+          description: The state of the discoverer.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2355,17 +2350,14 @@ components:
       type: object
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The description of the registry.
+          $ref: '#/components/schemas/__string'
+          description: The description of the registry.
         RegistryArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the registry.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the registry.
         RegistryName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the registry.
+          $ref: '#/components/schemas/__string'
+          description: The name of the registry.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2376,82 +2368,66 @@ components:
       type: object
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The description of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The description of the schema.
         LastModified:
-          allOf:
-            - $ref: '#/components/schemas/__timestampIso8601'
-            - description: The date and time that schema was modified.
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The date and time that schema was modified.
         SchemaArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the schema.
         SchemaName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The name of the schema.
         SchemaVersion:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The version number of the schema
+          $ref: '#/components/schemas/__string'
+          description: The version number of the schema
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - xml:
                 name: tags
         Type:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The type of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The type of the schema.
         VersionCreatedDate:
-          allOf:
-            - $ref: '#/components/schemas/__timestampIso8601'
-            - description: The date the schema version was created.
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The date the schema version was created.
     NotFoundException: {}
     DescribeCodeBindingResponse:
       type: object
       properties:
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/__timestampIso8601'
-            - description: The time and date that the code binding was created.
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The time and date that the code binding was created.
         LastModified:
-          allOf:
-            - $ref: '#/components/schemas/__timestampIso8601'
-            - description: The date and time that code bindings were modified.
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The date and time that code bindings were modified.
         SchemaVersion:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The version number of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The version number of the schema.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/CodeGenerationStatus'
-            - description: The current status of code binding generation.
+          $ref: '#/components/schemas/CodeGenerationStatus'
+          description: The current status of code binding generation.
     TooManyRequestsException: {}
     DescribeDiscovererResponse:
       type: object
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The description of the discoverer.
+          $ref: '#/components/schemas/__string'
+          description: The description of the discoverer.
         DiscovererArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the discoverer.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the discoverer.
         DiscovererId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ID of the discoverer.
+          $ref: '#/components/schemas/__string'
+          description: The ID of the discoverer.
         SourceArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the event bus.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the event bus.
         State:
-          allOf:
-            - $ref: '#/components/schemas/DiscovererState'
-            - description: The state of the discoverer.
+          $ref: '#/components/schemas/DiscovererState'
+          description: The state of the discoverer.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2462,17 +2438,14 @@ components:
       type: object
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The description of the registry.
+          $ref: '#/components/schemas/__string'
+          description: The description of the registry.
         RegistryArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the registry.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the registry.
         RegistryName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the registry.
+          $ref: '#/components/schemas/__string'
+          description: The name of the registry.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2483,29 +2456,23 @@ components:
       type: object
       properties:
         Content:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The source of the schema definition.
+          $ref: '#/components/schemas/__string'
+          description: The source of the schema definition.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The description of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The description of the schema.
         LastModified:
-          allOf:
-            - $ref: '#/components/schemas/__timestampIso8601'
-            - description: The date and time that schema was modified.
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The date and time that schema was modified.
         SchemaArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the schema.
         SchemaName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The name of the schema.
         SchemaVersion:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The version number of the schema
+          $ref: '#/components/schemas/__string'
+          description: The version number of the schema
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2513,13 +2480,11 @@ components:
                 name: tags
               description: Tags associated with the resource.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The type of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The type of the schema.
         VersionCreatedDate:
-          allOf:
-            - $ref: '#/components/schemas/__timestampIso8601'
-            - description: The date the schema version was created.
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The date the schema version was created.
     ExportSchemaResponse:
       type: object
       properties:
@@ -2542,9 +2507,8 @@ components:
       type: object
       properties:
         Content:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The source of the schema definition.
+          $ref: '#/components/schemas/__string'
+          description: The source of the schema definition.
     GetDiscoveredSchemaVersionItemInput:
       type: string
       minLength: 1
@@ -2553,57 +2517,47 @@ components:
       type: object
       properties:
         Policy:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The resource-based policy.
+          $ref: '#/components/schemas/__string'
+          description: The resource-based policy.
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The revision ID.
+          $ref: '#/components/schemas/__string'
+          description: The revision ID.
     ListDiscoverersResponse:
       type: object
       properties:
         Discoverers:
-          allOf:
-            - $ref: '#/components/schemas/__listOfDiscovererSummary'
-            - description: An array of DiscovererSummary information.
+          $ref: '#/components/schemas/__listOfDiscovererSummary'
+          description: An array of DiscovererSummary information.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
+          $ref: '#/components/schemas/__string'
+          description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
     ListRegistriesResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
+          $ref: '#/components/schemas/__string'
+          description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
         Registries:
-          allOf:
-            - $ref: '#/components/schemas/__listOfRegistrySummary'
-            - description: An array of registry summaries.
+          $ref: '#/components/schemas/__listOfRegistrySummary'
+          description: An array of registry summaries.
     ListSchemaVersionsResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
+          $ref: '#/components/schemas/__string'
+          description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
         SchemaVersions:
-          allOf:
-            - $ref: '#/components/schemas/__listOfSchemaVersionSummary'
-            - description: An array of schema version summaries.
+          $ref: '#/components/schemas/__listOfSchemaVersionSummary'
+          description: An array of schema version summaries.
     ListSchemasResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
+          $ref: '#/components/schemas/__string'
+          description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
         Schemas:
-          allOf:
-            - $ref: '#/components/schemas/__listOfSchemaSummary'
-            - description: An array of schema summaries.
+          $ref: '#/components/schemas/__listOfSchemaSummary'
+          description: An array of schema summaries.
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -2616,90 +2570,73 @@ components:
       type: object
       properties:
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/__timestampIso8601'
-            - description: The time and date that the code binding was created.
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The time and date that the code binding was created.
         LastModified:
-          allOf:
-            - $ref: '#/components/schemas/__timestampIso8601'
-            - description: The date and time that code bindings were modified.
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The date and time that code bindings were modified.
         SchemaVersion:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The version number of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The version number of the schema.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/CodeGenerationStatus'
-            - description: The current status of code binding generation.
+          $ref: '#/components/schemas/CodeGenerationStatus'
+          description: The current status of code binding generation.
     GoneException: {}
     PutResourcePolicyResponse:
       type: object
       properties:
         Policy:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The resource-based policy.
+          $ref: '#/components/schemas/__string'
+          description: The resource-based policy.
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The revision ID of the policy.
+          $ref: '#/components/schemas/__string'
+          description: The revision ID of the policy.
     PreconditionFailedException: {}
     SearchSchemasResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
+          $ref: '#/components/schemas/__string'
+          description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
         Schemas:
-          allOf:
-            - $ref: '#/components/schemas/__listOfSearchSchemaSummary'
-            - description: An array of SearchSchemaSummary information.
+          $ref: '#/components/schemas/__listOfSearchSchemaSummary'
+          description: An array of SearchSchemaSummary information.
     StartDiscovererResponse:
       type: object
       properties:
         DiscovererId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ID of the discoverer.
+          $ref: '#/components/schemas/__string'
+          description: The ID of the discoverer.
         State:
-          allOf:
-            - $ref: '#/components/schemas/DiscovererState'
-            - description: The state of the discoverer.
+          $ref: '#/components/schemas/DiscovererState'
+          description: The state of the discoverer.
     StopDiscovererResponse:
       type: object
       properties:
         DiscovererId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ID of the discoverer.
+          $ref: '#/components/schemas/__string'
+          description: The ID of the discoverer.
         State:
-          allOf:
-            - $ref: '#/components/schemas/DiscovererState'
-            - description: The state of the discoverer.
+          $ref: '#/components/schemas/DiscovererState'
+          description: The state of the discoverer.
     UpdateDiscovererResponse:
       type: object
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The description of the discoverer.
+          $ref: '#/components/schemas/__string'
+          description: The description of the discoverer.
         DiscovererArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the discoverer.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the discoverer.
         DiscovererId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ID of the discoverer.
+          $ref: '#/components/schemas/__string'
+          description: The ID of the discoverer.
         SourceArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the event bus.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the event bus.
         State:
-          allOf:
-            - $ref: '#/components/schemas/DiscovererState'
-            - description: The state of the discoverer.
+          $ref: '#/components/schemas/DiscovererState'
+          description: The state of the discoverer.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2710,17 +2647,14 @@ components:
       type: object
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The description of the registry.
+          $ref: '#/components/schemas/__string'
+          description: The description of the registry.
         RegistryArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the registry.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the registry.
         RegistryName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the registry.
+          $ref: '#/components/schemas/__string'
+          description: The name of the registry.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2731,38 +2665,31 @@ components:
       type: object
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The description of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The description of the schema.
         LastModified:
-          allOf:
-            - $ref: '#/components/schemas/__timestampIso8601'
-            - description: The date and time that schema was modified.
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The date and time that schema was modified.
         SchemaArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the schema.
         SchemaName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The name of the schema.
         SchemaVersion:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The version number of the schema
+          $ref: '#/components/schemas/__string'
+          description: The version number of the schema
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - xml:
                 name: tags
         Type:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The type of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The type of the schema.
         VersionCreatedDate:
-          allOf:
-            - $ref: '#/components/schemas/__timestampIso8601'
-            - description: The date the schema version was created.
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The date the schema version was created.
     CodeGenerationStatus:
       type: string
       enum:
@@ -2789,13 +2716,11 @@ components:
       title: CreateDiscovererRequest
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin0Max256'
-            - description: A description for the discoverer.
+          $ref: '#/components/schemas/__stringMin0Max256'
+          description: A description for the discoverer.
         SourceArn:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin20Max1600'
-            - description: The ARN of the event bus.
+          $ref: '#/components/schemas/__stringMin20Max1600'
+          description: The ARN of the event bus.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2813,9 +2738,8 @@ components:
       title: CreateRegistryRequest
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin0Max256'
-            - description: A description of the registry to be created.
+          $ref: '#/components/schemas/__stringMin0Max256'
+          description: A description of the registry to be created.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2839,13 +2763,11 @@ components:
       title: CreateSchemaRequest
       properties:
         Content:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin1Max100000'
-            - description: The source of the schema definition.
+          $ref: '#/components/schemas/__stringMin1Max100000'
+          description: The source of the schema definition.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin0Max256'
-            - description: A description of the schema.
+          $ref: '#/components/schemas/__stringMin0Max256'
+          description: A description of the schema.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2853,9 +2775,8 @@ components:
                 name: tags
               description: Tags associated with the schema.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/Type'
-            - description: The type of schema.
+          $ref: '#/components/schemas/Type'
+          description: The type of schema.
     __timestampIso8601:
       type: string
       format: date-time
@@ -2899,21 +2820,17 @@ components:
       type: object
       properties:
         DiscovererArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the discoverer.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the discoverer.
         DiscovererId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ID of the discoverer.
+          $ref: '#/components/schemas/__string'
+          description: The ID of the discoverer.
         SourceArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the event bus.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the event bus.
         State:
-          allOf:
-            - $ref: '#/components/schemas/DiscovererState'
-            - description: The state of the discoverer.
+          $ref: '#/components/schemas/DiscovererState'
+          description: The state of the discoverer.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2944,13 +2861,11 @@ components:
       title: GetDiscoveredSchemaRequest
       properties:
         Events:
-          allOf:
-            - $ref: '#/components/schemas/__listOfGetDiscoveredSchemaVersionItemInput'
-            - description: An array of strings where each string is a JSON event. These are the events that were used to generate the schema. The array includes a single type of event and has a maximum size of 10 events.
+          $ref: '#/components/schemas/__listOfGetDiscoveredSchemaVersionItemInput'
+          description: An array of strings where each string is a JSON event. These are the events that were used to generate the schema. The array includes a single type of event and has a maximum size of 10 events.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/Type'
-            - description: The type of event.
+          $ref: '#/components/schemas/Type'
+          description: The type of event.
     GetResourcePolicyRequest:
       type: object
       title: GetResourcePolicyRequest
@@ -3004,25 +2919,21 @@ components:
       title: PutResourcePolicyRequest
       properties:
         Policy:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The resource-based policy.
+          $ref: '#/components/schemas/__string'
+          description: The resource-based policy.
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The revision ID of the policy.
+          $ref: '#/components/schemas/__string'
+          description: The revision ID of the policy.
       description: The name of the policy.
     RegistrySummary:
       type: object
       properties:
         RegistryArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the registry.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the registry.
         RegistryName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the registry.
+          $ref: '#/components/schemas/__string'
+          description: The name of the registry.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -3035,17 +2946,14 @@ components:
       type: object
       properties:
         LastModified:
-          allOf:
-            - $ref: '#/components/schemas/__timestampIso8601'
-            - description: The date and time that schema was modified.
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The date and time that schema was modified.
         SchemaArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the schema.
         SchemaName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The name of the schema.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -3053,29 +2961,24 @@ components:
                 name: tags
               description: Tags associated with the schema.
         VersionCount:
-          allOf:
-            - $ref: '#/components/schemas/__long'
-            - description: The number of versions available for the schema.
+          $ref: '#/components/schemas/__long'
+          description: The number of versions available for the schema.
       description: A summary of schema details.
     SchemaVersionSummary:
       type: object
       properties:
         SchemaArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the schema version.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the schema version.
         SchemaName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The name of the schema.
         SchemaVersion:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The version number of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The version number of the schema.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/Type'
-            - description: The type of schema.
+          $ref: '#/components/schemas/Type'
+          description: The type of schema.
     __listOfSearchSchemaVersionSummary:
       type: array
       items:
@@ -3084,36 +2987,29 @@ components:
       type: object
       properties:
         RegistryName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the registry.
+          $ref: '#/components/schemas/__string'
+          description: The name of the registry.
         SchemaArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the schema.
         SchemaName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the schema.
+          $ref: '#/components/schemas/__string'
+          description: The name of the schema.
         SchemaVersions:
-          allOf:
-            - $ref: '#/components/schemas/__listOfSearchSchemaVersionSummary'
-            - description: An array of schema version summaries.
+          $ref: '#/components/schemas/__listOfSearchSchemaVersionSummary'
+          description: An array of schema version summaries.
     SearchSchemaVersionSummary:
       type: object
       properties:
         CreatedDate:
-          allOf:
-            - $ref: '#/components/schemas/__timestampIso8601'
-            - description: The date the schema version was created.
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The date the schema version was created.
         SchemaVersion:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The version number of the schema
+          $ref: '#/components/schemas/__string'
+          description: The version number of the schema
         Type:
-          allOf:
-            - $ref: '#/components/schemas/Type'
-            - description: The type of schema.
+          $ref: '#/components/schemas/Type'
+          description: The type of schema.
     SearchSchemasRequest:
       type: object
       title: SearchSchemasRequest
@@ -3156,17 +3052,15 @@ components:
       title: UpdateDiscovererRequest
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin0Max256'
-            - description: The description of the discoverer to update.
+          $ref: '#/components/schemas/__stringMin0Max256'
+          description: The description of the discoverer to update.
     UpdateRegistryRequest:
       type: object
       title: UpdateRegistryRequest
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin0Max256'
-            - description: The description of the registry to update.
+          $ref: '#/components/schemas/__stringMin0Max256'
+          description: The description of the registry to update.
       description: Updates the registry.
     __stringMin0Max36:
       type: string
@@ -3177,20 +3071,16 @@ components:
       title: UpdateSchemaRequest
       properties:
         ClientTokenId:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin0Max36'
-            - description: The ID of the client token.
+          $ref: '#/components/schemas/__stringMin0Max36'
+          description: The ID of the client token.
         Content:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin1Max100000'
-            - description: The source of the schema definition.
+          $ref: '#/components/schemas/__stringMin1Max100000'
+          description: The source of the schema definition.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin0Max256'
-            - description: The description of the schema.
+          $ref: '#/components/schemas/__stringMin0Max256'
+          description: The description of the schema.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/Type'
-            - description: The schema type for the events schema.
+          $ref: '#/components/schemas/Type'
+          description: The schema type for the events schema.
 security:
   - hmac: []

@@ -372,9 +372,8 @@ components:
       type: object
       properties:
         CancellationMessage:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' A <code>CancellationMessage</code> is returned when a <code>CancelQuery</code> request for the query specified by <code>QueryId</code> has already been issued. '
+          $ref: '#/components/schemas/String'
+          description: ' A <code>CancellationMessage</code> is returned when a <code>CancelQuery</code> request for the query specified by <code>QueryId</code> has already been issued. '
     CancelQueryRequest:
       type: object
       required:
@@ -382,9 +381,8 @@ components:
       title: CancelQueryRequest
       properties:
         QueryId:
-          allOf:
-            - $ref: '#/components/schemas/QueryId'
-            - description: ' The id of the query that needs to be cancelled. <code>QueryID</code> is returned as part of QueryResult. '
+          $ref: '#/components/schemas/QueryId'
+          description: ' The id of the query that needs to be cancelled. <code>QueryID</code> is returned as part of QueryResult. '
     AccessDeniedException: {}
     InternalServerException: {}
     ThrottlingException: {}
@@ -396,9 +394,8 @@ components:
         - Endpoints
       properties:
         Endpoints:
-          allOf:
-            - $ref: '#/components/schemas/Endpoints'
-            - description: An <code>Endpoints</code> object is returned when a <code>DescribeEndpoints</code> request is made.
+          $ref: '#/components/schemas/Endpoints'
+          description: An <code>Endpoints</code> object is returned when a <code>DescribeEndpoints</code> request is made.
     DescribeEndpointsRequest:
       type: object
       title: DescribeEndpointsRequest
@@ -411,25 +408,20 @@ components:
         - ColumnInfo
       properties:
         QueryId:
-          allOf:
-            - $ref: '#/components/schemas/QueryId'
-            - description: ' A unique ID for the given query. '
+          $ref: '#/components/schemas/QueryId'
+          description: ' A unique ID for the given query. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' A pagination token that can be used again on a <code>Query</code> call to get the next set of results. '
+          $ref: '#/components/schemas/String'
+          description: ' A pagination token that can be used again on a <code>Query</code> call to get the next set of results. '
         Rows:
-          allOf:
-            - $ref: '#/components/schemas/RowList'
-            - description: ' The result set rows returned by the query. '
+          $ref: '#/components/schemas/RowList'
+          description: ' The result set rows returned by the query. '
         ColumnInfo:
-          allOf:
-            - $ref: '#/components/schemas/ColumnInfoList'
-            - description: ' The column data types of the returned result set. '
+          $ref: '#/components/schemas/ColumnInfoList'
+          description: ' The column data types of the returned result set. '
         QueryStatus:
-          allOf:
-            - $ref: '#/components/schemas/QueryStatus'
-            - description: 'Information about the status of the query, including progress and bytes scannned.'
+          $ref: '#/components/schemas/QueryStatus'
+          description: 'Information about the status of the query, including progress and bytes scannned.'
     QueryRequest:
       type: object
       required:
@@ -437,21 +429,17 @@ components:
       title: QueryRequest
       properties:
         QueryString:
-          allOf:
-            - $ref: '#/components/schemas/QueryString'
-            - description: ' The query to be executed by Timestream. '
+          $ref: '#/components/schemas/QueryString'
+          description: ' The query to be executed by Timestream. '
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: '<p> Unique, case-sensitive string of up to 64 ASCII characters that you specify when you make a Query request. Providing a <code>ClientToken</code> makes the call to <code>Query</code> idempotent, meaning that multiple identical calls have the same effect as one single call. </p> <p>Your query request will fail in the following cases:</p> <ul> <li> <p> If you submit a request with the same client token outside the 5-minute idepotency window. </p> </li> <li> <p> If you submit a request with the same client token but a change in other parameters within the 5-minute idempotency window. </p> </li> </ul> <p> After 4 hours, any request with the same client token is treated as a new request. </p>'
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: '<p> Unique, case-sensitive string of up to 64 ASCII characters that you specify when you make a Query request. Providing a <code>ClientToken</code> makes the call to <code>Query</code> idempotent, meaning that multiple identical calls have the same effect as one single call. </p> <p>Your query request will fail in the following cases:</p> <ul> <li> <p> If you submit a request with the same client token outside the 5-minute idepotency window. </p> </li> <li> <p> If you submit a request with the same client token but a change in other parameters within the 5-minute idempotency window. </p> </li> </ul> <p> After 4 hours, any request with the same client token is treated as a new request. </p>'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' A pagination token passed to get a set of results. '
+          $ref: '#/components/schemas/String'
+          description: ' A pagination token passed to get a set of results. '
         MaxRows:
-          allOf:
-            - $ref: '#/components/schemas/MaxQueryResults'
-            - description: ' The total number of rows to return in the output. If the total number of rows available is more than the value specified, a NextToken is provided in the command''s output. To resume pagination, provide the NextToken value in the starting-token argument of a subsequent command. '
+          $ref: '#/components/schemas/MaxQueryResults'
+          description: ' The total number of rows to return in the output. If the total number of rows available is more than the value specified, a NextToken is provided in the command''s output. To resume pagination, provide the NextToken value in the starting-token argument of a subsequent command. '
     ConflictException: {}
     QueryExecutionException: {}
     QueryId:
@@ -470,21 +458,17 @@ components:
       type: object
       properties:
         ScalarType:
-          allOf:
-            - $ref: '#/components/schemas/ScalarType'
-            - description: 'Indicates if the column is of type string, integer, boolean, double, timestamp, date, time. '
+          $ref: '#/components/schemas/ScalarType'
+          description: 'Indicates if the column is of type string, integer, boolean, double, timestamp, date, time. '
         ArrayColumnInfo:
-          allOf:
-            - $ref: '#/components/schemas/ColumnInfo'
-            - description: Indicates if the column is an array.
+          $ref: '#/components/schemas/ColumnInfo'
+          description: Indicates if the column is an array.
         TimeSeriesMeasureValueColumnInfo:
-          allOf:
-            - $ref: '#/components/schemas/ColumnInfo'
-            - description: Indicates if the column is a timeseries data type.
+          $ref: '#/components/schemas/ColumnInfo'
+          description: Indicates if the column is a timeseries data type.
         RowColumnInfo:
-          allOf:
-            - $ref: '#/components/schemas/ColumnInfoList'
-            - description: Indicates if the column is a row.
+          $ref: '#/components/schemas/ColumnInfoList'
+          description: Indicates if the column is a row.
       description: 'Contains the data type of a column in a query result set. The data type can be scalar or complex. The supported scalar data types are integers, boolean, string, double, timestamp, date, time, and intervals. The supported complex data types are arrays, rows, and timeseries.'
     ColumnInfo:
       type: object
@@ -492,13 +476,11 @@ components:
         - Type
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The name of the result set column. The name of the result set is available for columns of all data types except for arrays. '
+          $ref: '#/components/schemas/String'
+          description: ' The name of the result set column. The name of the result set is available for columns of all data types except for arrays. '
         Type:
-          allOf:
-            - $ref: '#/components/schemas/Type'
-            - description: ' The data type of the result set column. The data type can be a scalar or complex. Scalar data types are integers, strings, doubles, booleans, and others. Complex data types are types such as arrays, rows, and others. '
+          $ref: '#/components/schemas/Type'
+          description: ' The data type of the result set column. The data type can be a scalar or complex. Scalar data types are integers, strings, doubles, booleans, and others. Complex data types are types such as arrays, rows, and others. '
       description: ' Contains the meta data for query results such as the column names, data types, and other attributes. '
     ColumnInfoList:
       type: array
@@ -520,9 +502,8 @@ components:
         - Data
       properties:
         Data:
-          allOf:
-            - $ref: '#/components/schemas/DatumList'
-            - description: List of data points in a single row of the result set.
+          $ref: '#/components/schemas/DatumList'
+          description: List of data points in a single row of the result set.
       description: Represents a single row in the query results.
     NullableBoolean:
       type: boolean
@@ -530,25 +511,20 @@ components:
       type: object
       properties:
         ScalarValue:
-          allOf:
-            - $ref: '#/components/schemas/ScalarValue'
-            - description: ' Indicates if the data point is a scalar value such as integer, string, double, or boolean. '
+          $ref: '#/components/schemas/ScalarValue'
+          description: ' Indicates if the data point is a scalar value such as integer, string, double, or boolean. '
         TimeSeriesValue:
-          allOf:
-            - $ref: '#/components/schemas/TimeSeriesDataPointList'
-            - description: ' Indicates if the data point is of timeseries data type. '
+          $ref: '#/components/schemas/TimeSeriesDataPointList'
+          description: ' Indicates if the data point is of timeseries data type. '
         ArrayValue:
-          allOf:
-            - $ref: '#/components/schemas/DatumList'
-            - description: ' Indicates if the data point is an array. '
+          $ref: '#/components/schemas/DatumList'
+          description: ' Indicates if the data point is an array. '
         RowValue:
-          allOf:
-            - $ref: '#/components/schemas/Row'
-            - description: ' Indicates if the data point is a row. '
+          $ref: '#/components/schemas/Row'
+          description: ' Indicates if the data point is a row. '
         NullValue:
-          allOf:
-            - $ref: '#/components/schemas/NullableBoolean'
-            - description: ' Indicates if the data point is null. '
+          $ref: '#/components/schemas/NullableBoolean'
+          description: ' Indicates if the data point is null. '
       description: ' Datum represents a single data point in a query result. '
     Endpoints:
       type: array
@@ -566,13 +542,11 @@ components:
         - CachePeriodInMinutes
       properties:
         Address:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: An endpoint address.
+          $ref: '#/components/schemas/String'
+          description: An endpoint address.
         CachePeriodInMinutes:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: 'The TTL for the endpoint, in minutes.'
+          $ref: '#/components/schemas/Long'
+          description: 'The TTL for the endpoint, in minutes.'
       description: 'Represents an available endpoint against which to make API calls agaisnt, as well as the TTL for that endpoint.'
     MaxQueryResults:
       type: integer
@@ -589,17 +563,14 @@ components:
       type: object
       properties:
         ProgressPercentage:
-          allOf:
-            - $ref: '#/components/schemas/Double'
-            - description: 'The progress of the query, expressed as a percentage.'
+          $ref: '#/components/schemas/Double'
+          description: 'The progress of the query, expressed as a percentage.'
         CumulativeBytesScanned:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: 'The amount of data scanned by the query in bytes. This is a cumulative sum and represents the total amount of bytes scanned since the query was started. '
+          $ref: '#/components/schemas/Long'
+          description: 'The amount of data scanned by the query in bytes. This is a cumulative sum and represents the total amount of bytes scanned since the query was started. '
         CumulativeBytesMetered:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: 'The amount of data scanned by the query in bytes that you will be charged for. This is a cumulative sum and represents the total amount of data that you will be charged for since the query was started. The charge is applied only once and is either applied when the query completes execution or when the query is cancelled. '
+          $ref: '#/components/schemas/Long'
+          description: 'The amount of data scanned by the query in bytes that you will be charged for. This is a cumulative sum and represents the total amount of data that you will be charged for since the query was started. The charge is applied only once and is either applied when the query completes execution or when the query is cancelled. '
       description: 'Information about the status of the query, including progress and bytes scannned.'
     ScalarType:
       type: string
@@ -624,13 +595,11 @@ components:
         - Value
       properties:
         Time:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The timestamp when the measure value was collected.
+          $ref: '#/components/schemas/Timestamp'
+          description: The timestamp when the measure value was collected.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/Datum'
-            - description: The measure value for the data point.
+          $ref: '#/components/schemas/Datum'
+          description: The measure value for the data point.
       description: 'The timeseries datatype represents the values of a measure over time. A time series is an array of rows of timestamps and measure values, with rows sorted in ascending order of time. A TimeSeriesDataPoint is a single data point in the timeseries. It represents a tuple of (time, measure value) in a timeseries. '
 security:
   - hmac: []

@@ -242,13 +242,11 @@ paths:
                   type: object
                   properties:
                     reboot:
-                      allOf:
-                        - $ref: '#/components/schemas/Reboot'
-                        - description: Reboots the device.
+                      $ref: '#/components/schemas/Reboot'
+                      description: Reboots the device.
                     unlock:
-                      allOf:
-                        - $ref: '#/components/schemas/Unlock'
-                        - description: Unlocks the device.
+                      $ref: '#/components/schemas/Unlock'
+                      description: Unlocks the device.
                 description:
                   description: A description of the task and its targets.
                   type: string
@@ -1034,9 +1032,8 @@ components:
       type: object
       properties:
         taskId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The ID of the task that you are attempting to cancel.
+          $ref: '#/components/schemas/String'
+          description: The ID of the task that you are attempting to cancel.
     ThrottlingException: {}
     InternalServerException: {}
     ResourceNotFoundException: {}
@@ -1046,13 +1043,11 @@ components:
       type: object
       properties:
         taskArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the task that you created.
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Name (ARN) of the task that you created.
         taskId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The ID of the task that you created.
+          $ref: '#/components/schemas/String'
+          description: The ID of the task that you created.
     Reboot:
       type: object
       properties: {}
@@ -1068,173 +1063,137 @@ components:
       type: object
       properties:
         associatedWithJob:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The ID of the job used when ordering the device.
+          $ref: '#/components/schemas/String'
+          description: The ID of the job used when ordering the device.
         deviceCapacities:
-          allOf:
-            - $ref: '#/components/schemas/CapacityList'
-            - description: 'The hardware specifications of the device. '
+          $ref: '#/components/schemas/CapacityList'
+          description: 'The hardware specifications of the device. '
         deviceState:
-          allOf:
-            - $ref: '#/components/schemas/UnlockState'
-            - description: The current state of the device.
+          $ref: '#/components/schemas/UnlockState'
+          description: The current state of the device.
         deviceType:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The type of Amazon Web Services Snow Family device.
+          $ref: '#/components/schemas/String'
+          description: The type of Amazon Web Services Snow Family device.
         lastReachedOutAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: When the device last contacted the Amazon Web Services Cloud. Indicates that the device is online.
+          $ref: '#/components/schemas/Timestamp'
+          description: When the device last contacted the Amazon Web Services Cloud. Indicates that the device is online.
         lastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: When the device last pushed an update to the Amazon Web Services Cloud. Indicates when the device cache was refreshed.
+          $ref: '#/components/schemas/Timestamp'
+          description: When the device last pushed an update to the Amazon Web Services Cloud. Indicates when the device cache was refreshed.
         managedDeviceArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the device.
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Name (ARN) of the device.
         managedDeviceId:
-          allOf:
-            - $ref: '#/components/schemas/ManagedDeviceId'
-            - description: The ID of the device that you checked the information for.
+          $ref: '#/components/schemas/ManagedDeviceId'
+          description: The ID of the device that you checked the information for.
         physicalNetworkInterfaces:
-          allOf:
-            - $ref: '#/components/schemas/PhysicalNetworkInterfaceList'
-            - description: The network interfaces available on the device.
+          $ref: '#/components/schemas/PhysicalNetworkInterfaceList'
+          description: The network interfaces available on the device.
         software:
-          allOf:
-            - $ref: '#/components/schemas/SoftwareInformation'
-            - description: The software installed on the device.
+          $ref: '#/components/schemas/SoftwareInformation'
+          description: The software installed on the device.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment. '
+          $ref: '#/components/schemas/TagMap'
+          description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment. '
     DescribeDeviceEc2Output:
       type: object
       properties:
         instances:
-          allOf:
-            - $ref: '#/components/schemas/InstanceSummaryList'
-            - description: 'A list of structures containing information about each instance. '
+          $ref: '#/components/schemas/InstanceSummaryList'
+          description: 'A list of structures containing information about each instance. '
     DescribeExecutionOutput:
       type: object
       properties:
         executionId:
-          allOf:
-            - $ref: '#/components/schemas/ExecutionId'
-            - description: The ID of the execution.
+          $ref: '#/components/schemas/ExecutionId'
+          description: The ID of the execution.
         lastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: When the status of the execution was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: When the status of the execution was last updated.
         managedDeviceId:
-          allOf:
-            - $ref: '#/components/schemas/ManagedDeviceId'
-            - description: The ID of the managed device that the task is being executed on.
+          $ref: '#/components/schemas/ManagedDeviceId'
+          description: The ID of the managed device that the task is being executed on.
         startedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: When the execution began.
+          $ref: '#/components/schemas/Timestamp'
+          description: When the execution began.
         state:
-          allOf:
-            - $ref: '#/components/schemas/ExecutionState'
-            - description: The current state of the execution.
+          $ref: '#/components/schemas/ExecutionState'
+          description: The current state of the execution.
         taskId:
-          allOf:
-            - $ref: '#/components/schemas/TaskId'
-            - description: The ID of the task being executed on the device.
+          $ref: '#/components/schemas/TaskId'
+          description: The ID of the task being executed on the device.
     DescribeTaskOutput:
       type: object
       properties:
         completedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: When the task was completed.
+          $ref: '#/components/schemas/Timestamp'
+          description: When the task was completed.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: When the <code>CreateTask</code> operation was called.
+          $ref: '#/components/schemas/Timestamp'
+          description: When the <code>CreateTask</code> operation was called.
         description:
-          allOf:
-            - $ref: '#/components/schemas/TaskDescriptionString'
-            - description: The description provided of the task and managed devices.
+          $ref: '#/components/schemas/TaskDescriptionString'
+          description: The description provided of the task and managed devices.
         lastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: When the state of the task was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: When the state of the task was last updated.
         state:
-          allOf:
-            - $ref: '#/components/schemas/TaskState'
-            - description: The current state of the task.
+          $ref: '#/components/schemas/TaskState'
+          description: The current state of the task.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment.'
         targets:
-          allOf:
-            - $ref: '#/components/schemas/TargetList'
-            - description: The managed devices that the task was sent to.
+          $ref: '#/components/schemas/TargetList'
+          description: The managed devices that the task was sent to.
         taskArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the task.
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Name (ARN) of the task.
         taskId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The ID of the task.
+          $ref: '#/components/schemas/String'
+          description: The ID of the task.
     ListDeviceResourcesOutput:
       type: object
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: A pagination token to continue to the next page of results.
         resources:
-          allOf:
-            - $ref: '#/components/schemas/ResourceSummaryList'
-            - description: 'A structure defining the resource''s type, Amazon Resource Name (ARN), and ID.'
+          $ref: '#/components/schemas/ResourceSummaryList'
+          description: 'A structure defining the resource''s type, Amazon Resource Name (ARN), and ID.'
     ListDevicesOutput:
       type: object
       properties:
         devices:
-          allOf:
-            - $ref: '#/components/schemas/DeviceSummaryList'
-            - description: A list of device structures that contain information about the device.
+          $ref: '#/components/schemas/DeviceSummaryList'
+          description: A list of device structures that contain information about the device.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A pagination token to continue to the next page of devices.
+          $ref: '#/components/schemas/NextToken'
+          description: A pagination token to continue to the next page of devices.
     ListExecutionsOutput:
       type: object
       properties:
         executions:
-          allOf:
-            - $ref: '#/components/schemas/ExecutionSummaryList'
-            - description: 'A list of executions. Each execution contains the task ID, the device that the task is executing on, the execution ID, and the status of the execution.'
+          $ref: '#/components/schemas/ExecutionSummaryList'
+          description: 'A list of executions. Each execution contains the task ID, the device that the task is executing on, the execution ID, and the status of the execution.'
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A pagination token to continue to the next page of executions.
+          $ref: '#/components/schemas/NextToken'
+          description: A pagination token to continue to the next page of executions.
     ListTagsForResourceOutput:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The list of tags for the device or task.
+          $ref: '#/components/schemas/TagMap'
+          description: The list of tags for the device or task.
     ListTasksOutput:
       type: object
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A pagination token to continue to the next page of tasks.
+          $ref: '#/components/schemas/NextToken'
+          description: A pagination token to continue to the next page of tasks.
         tasks:
-          allOf:
-            - $ref: '#/components/schemas/TaskSummaryList'
-            - description: A list of task structures containing details about each task.
+          $ref: '#/components/schemas/TaskSummaryList'
+          description: A list of task structures containing details about each task.
     AttachmentStatus:
       type: string
       enum:
@@ -1266,25 +1225,20 @@ components:
       type: object
       properties:
         available:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The amount of capacity available for use on the device.
+          $ref: '#/components/schemas/Long'
+          description: The amount of capacity available for use on the device.
         name:
-          allOf:
-            - $ref: '#/components/schemas/CapacityNameString'
-            - description: 'The name of the type of capacity, such as memory.'
+          $ref: '#/components/schemas/CapacityNameString'
+          description: 'The name of the type of capacity, such as memory.'
         total:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The total capacity on the device.
+          $ref: '#/components/schemas/Long'
+          description: The total capacity on the device.
         unit:
-          allOf:
-            - $ref: '#/components/schemas/CapacityUnitString'
-            - description: The unit of measure for the type of capacity.
+          $ref: '#/components/schemas/CapacityUnitString'
+          description: The unit of measure for the type of capacity.
         used:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The amount of capacity used on the device.
+          $ref: '#/components/schemas/Long'
+          description: The amount of capacity used on the device.
       description: 'The physical capacity of the Amazon Web Services Snow Family device. '
     CapacityList:
       type: array
@@ -1296,13 +1250,11 @@ components:
       type: object
       properties:
         reboot:
-          allOf:
-            - $ref: '#/components/schemas/Reboot'
-            - description: Reboots the device.
+          $ref: '#/components/schemas/Reboot'
+          description: Reboots the device.
         unlock:
-          allOf:
-            - $ref: '#/components/schemas/Unlock'
-            - description: Unlocks the device.
+          $ref: '#/components/schemas/Unlock'
+          description: Unlocks the device.
       description: The command given to the device to execute.
     Integer:
       type: integer
@@ -1310,13 +1262,11 @@ components:
       type: object
       properties:
         coreCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The number of cores that the CPU can use.
+          $ref: '#/components/schemas/Integer'
+          description: The number of cores that the CPU can use.
         threadsPerCore:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The number of threads per core in the CPU.
+          $ref: '#/components/schemas/Integer'
+          description: The number of threads per core in the CPU.
       description: The options for how a device's CPU is configured.
     IdempotencyToken:
       type: string
@@ -1346,25 +1296,20 @@ components:
       title: CreateTaskInput
       properties:
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+          $ref: '#/components/schemas/IdempotencyToken'
+          description: A token ensuring that the action is called only once with the specified details.
         command:
-          allOf:
-            - $ref: '#/components/schemas/Command'
-            - description: The task to be performed. Only one task is executed on a device at a time.
+          $ref: '#/components/schemas/Command'
+          description: The task to be performed. Only one task is executed on a device at a time.
         description:
-          allOf:
-            - $ref: '#/components/schemas/TaskDescriptionString'
-            - description: A description of the task and its targets.
+          $ref: '#/components/schemas/TaskDescriptionString'
+          description: A description of the task and its targets.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment. '
+          $ref: '#/components/schemas/TagMap'
+          description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment. '
         targets:
-          allOf:
-            - $ref: '#/components/schemas/TargetList'
-            - description: A list of managed device IDs.
+          $ref: '#/components/schemas/TargetList'
+          description: A list of managed device IDs.
     InstanceIdsList:
       type: array
       items:
@@ -1380,9 +1325,8 @@ components:
       title: DescribeDeviceEc2Input
       properties:
         instanceIds:
-          allOf:
-            - $ref: '#/components/schemas/InstanceIdsList'
-            - description: A list of instance IDs associated with the managed device.
+          $ref: '#/components/schemas/InstanceIdsList'
+          description: A list of instance IDs associated with the managed device.
     InstanceSummaryList:
       type: array
       items:
@@ -1408,17 +1352,14 @@ components:
       type: object
       properties:
         installState:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The state of the software that is installed or that is being installed on the device.
+          $ref: '#/components/schemas/String'
+          description: The state of the software that is installed or that is being installed on the device.
         installedVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The version of the software currently installed on the device.
+          $ref: '#/components/schemas/String'
+          description: The version of the software currently installed on the device.
         installingVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The version of the software being installed on the device.
+          $ref: '#/components/schemas/String'
+          description: The version of the software being installed on the device.
       description: Information about the software on the device.
     DescribeExecutionInput:
       type: object
@@ -1452,21 +1393,17 @@ components:
       type: object
       properties:
         associatedWithJob:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The ID of the job used to order the device.
+          $ref: '#/components/schemas/String'
+          description: The ID of the job used to order the device.
         managedDeviceArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the device.
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Name (ARN) of the device.
         managedDeviceId:
-          allOf:
-            - $ref: '#/components/schemas/ManagedDeviceId'
-            - description: The ID of the device.
+          $ref: '#/components/schemas/ManagedDeviceId'
+          description: The ID of the device.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment.'
       description: Identifying information about the device.
     DeviceSummaryList:
       type: array
@@ -1476,41 +1413,33 @@ components:
       type: object
       properties:
         attachTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: When the attachment was initiated.
+          $ref: '#/components/schemas/Timestamp'
+          description: When the attachment was initiated.
         deleteOnTermination:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: A value that indicates whether the volume is deleted on instance termination.
+          $ref: '#/components/schemas/Boolean'
+          description: A value that indicates whether the volume is deleted on instance termination.
         status:
-          allOf:
-            - $ref: '#/components/schemas/AttachmentStatus'
-            - description: The attachment state.
+          $ref: '#/components/schemas/AttachmentStatus'
+          description: The attachment state.
         volumeId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The ID of the Amazon EBS volume.
+          $ref: '#/components/schemas/String'
+          description: The ID of the Amazon EBS volume.
       description: Describes a parameter used to set up an Amazon Elastic Block Store (Amazon EBS) volume in a block device mapping.
     ExecutionSummary:
       type: object
       properties:
         executionId:
-          allOf:
-            - $ref: '#/components/schemas/ExecutionId'
-            - description: The ID of the execution.
+          $ref: '#/components/schemas/ExecutionId'
+          description: The ID of the execution.
         managedDeviceId:
-          allOf:
-            - $ref: '#/components/schemas/ManagedDeviceId'
-            - description: The ID of the managed device that the task is being executed on.
+          $ref: '#/components/schemas/ManagedDeviceId'
+          description: The ID of the managed device that the task is being executed on.
         state:
-          allOf:
-            - $ref: '#/components/schemas/ExecutionState'
-            - description: The state of the execution.
+          $ref: '#/components/schemas/ExecutionState'
+          description: The state of the execution.
         taskId:
-          allOf:
-            - $ref: '#/components/schemas/TaskId'
-            - description: The ID of the task.
+          $ref: '#/components/schemas/TaskId'
+          description: The ID of the task.
       description: The summary of a task execution on a specified device.
     ExecutionSummaryList:
       type: array
@@ -1528,79 +1457,63 @@ components:
       type: object
       properties:
         code:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: '<p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored. </p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for the instance state code are all in the range of the low byte. These values are: </p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal. </p>'
+          $ref: '#/components/schemas/Integer'
+          description: '<p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored. </p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for the instance state code are all in the range of the low byte. These values are: </p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal. </p>'
         name:
-          allOf:
-            - $ref: '#/components/schemas/InstanceStateName'
-            - description: The current state of the instance.
+          $ref: '#/components/schemas/InstanceStateName'
+          description: The current state of the instance.
       description: The description of the current state of an instance.
     Instance:
       type: object
       properties:
         amiLaunchIndex:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'The Amazon Machine Image (AMI) launch index, which you can use to find this instance in the launch group. '
+          $ref: '#/components/schemas/Integer'
+          description: 'The Amazon Machine Image (AMI) launch index, which you can use to find this instance in the launch group. '
         blockDeviceMappings:
-          allOf:
-            - $ref: '#/components/schemas/InstanceBlockDeviceMappingList'
-            - description: Any block device mapping entries for the instance.
+          $ref: '#/components/schemas/InstanceBlockDeviceMappingList'
+          description: Any block device mapping entries for the instance.
         cpuOptions:
-          allOf:
-            - $ref: '#/components/schemas/CpuOptions'
-            - description: The CPU options for the instance.
+          $ref: '#/components/schemas/CpuOptions'
+          description: The CPU options for the instance.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: When the instance was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: When the instance was created.
         imageId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The ID of the AMI used to launch the instance.
+          $ref: '#/components/schemas/String'
+          description: The ID of the AMI used to launch the instance.
         instanceId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The ID of the instance.
+          $ref: '#/components/schemas/String'
+          description: The ID of the instance.
         instanceType:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The instance type.
+          $ref: '#/components/schemas/String'
+          description: The instance type.
         privateIpAddress:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The private IPv4 address assigned to the instance.
+          $ref: '#/components/schemas/String'
+          description: The private IPv4 address assigned to the instance.
         publicIpAddress:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The public IPv4 address assigned to the instance.
+          $ref: '#/components/schemas/String'
+          description: The public IPv4 address assigned to the instance.
         rootDeviceName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The device name of the root device volume (for example, <code>/dev/sda1</code>). '
+          $ref: '#/components/schemas/String'
+          description: 'The device name of the root device volume (for example, <code>/dev/sda1</code>). '
         securityGroups:
-          allOf:
-            - $ref: '#/components/schemas/SecurityGroupIdentifierList'
-            - description: The security groups for the instance.
+          $ref: '#/components/schemas/SecurityGroupIdentifierList'
+          description: The security groups for the instance.
         state:
           $ref: '#/components/schemas/InstanceState'
         updatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: When the instance was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: When the instance was last updated.
       description: 'The description of an instance. Currently, Amazon EC2 instances are the only supported instance type.'
     InstanceBlockDeviceMapping:
       type: object
       properties:
         deviceName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The block device name.
+          $ref: '#/components/schemas/String'
+          description: The block device name.
         ebs:
-          allOf:
-            - $ref: '#/components/schemas/EbsInstanceBlockDevice'
-            - description: 'The parameters used to automatically set up Amazon Elastic Block Store (Amazon EBS) volumes when the instance is launched. '
+          $ref: '#/components/schemas/EbsInstanceBlockDevice'
+          description: 'The parameters used to automatically set up Amazon Elastic Block Store (Amazon EBS) volumes when the instance is launched. '
       description: The description of a block device mapping.
     InstanceStateName:
       type: string
@@ -1615,13 +1528,11 @@ components:
       type: object
       properties:
         instance:
-          allOf:
-            - $ref: '#/components/schemas/Instance'
-            - description: A structure containing details about the instance.
+          $ref: '#/components/schemas/Instance'
+          description: A structure containing details about the instance.
         lastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: When the instance summary was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: When the instance summary was last updated.
       description: The details about the instance.
     IpAddressAssignment:
       type: string
@@ -1685,33 +1596,26 @@ components:
       type: object
       properties:
         defaultGateway:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The default gateway of the device.
+          $ref: '#/components/schemas/String'
+          description: The default gateway of the device.
         ipAddress:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The IP address of the device.
+          $ref: '#/components/schemas/String'
+          description: The IP address of the device.
         ipAddressAssignment:
-          allOf:
-            - $ref: '#/components/schemas/IpAddressAssignment'
-            - description: A value that describes whether the IP address is dynamic or persistent.
+          $ref: '#/components/schemas/IpAddressAssignment'
+          description: A value that describes whether the IP address is dynamic or persistent.
         macAddress:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The MAC address of the device.
+          $ref: '#/components/schemas/String'
+          description: The MAC address of the device.
         netmask:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The netmask used to divide the IP address into subnets.
+          $ref: '#/components/schemas/String'
+          description: The netmask used to divide the IP address into subnets.
         physicalConnectorType:
-          allOf:
-            - $ref: '#/components/schemas/PhysicalConnectorType'
-            - description: The physical connector type.
+          $ref: '#/components/schemas/PhysicalConnectorType'
+          description: The physical connector type.
         physicalNetworkInterfaceId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The physical network interface ID.
+          $ref: '#/components/schemas/String'
+          description: The physical network interface ID.
       description: The details about the physical network interface for the device.
     ResourceSummary:
       type: object
@@ -1719,29 +1623,24 @@ components:
         - resourceType
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource.
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Name (ARN) of the resource.
         id:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The ID of the resource.
+          $ref: '#/components/schemas/String'
+          description: The ID of the resource.
         resourceType:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The resource type.
+          $ref: '#/components/schemas/String'
+          description: The resource type.
       description: A summary of a resource available on the device.
     SecurityGroupIdentifier:
       type: object
       properties:
         groupId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The security group ID.
+          $ref: '#/components/schemas/String'
+          description: The security group ID.
         groupName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The security group name.
+          $ref: '#/components/schemas/String'
+          description: The security group name.
       description: Information about the device's security group.
     TagKeys:
       type: array
@@ -1754,30 +1653,25 @@ components:
       title: TagResourceInput
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment.'
     TaskSummary:
       type: object
       required:
         - taskId
       properties:
         state:
-          allOf:
-            - $ref: '#/components/schemas/TaskState'
-            - description: The state of the task assigned to one or many devices.
+          $ref: '#/components/schemas/TaskState'
+          description: The state of the task assigned to one or many devices.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment.'
         taskArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the task.
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Name (ARN) of the task.
         taskId:
-          allOf:
-            - $ref: '#/components/schemas/TaskId'
-            - description: The task ID.
+          $ref: '#/components/schemas/TaskId'
+          description: The task ID.
       description: Information about the task assigned to one or many devices.
     UntagResourceInput:
       type: object

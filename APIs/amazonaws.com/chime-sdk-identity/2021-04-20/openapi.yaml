@@ -1315,9 +1315,8 @@ paths:
                   type: object
                   properties:
                     ChannelRetentionSettings:
-                      allOf:
-                        - $ref: '#/components/schemas/ChannelRetentionSettings'
-                        - description: The length of time in days to retain the messages in a channel.
+                      $ref: '#/components/schemas/ChannelRetentionSettings'
+                      description: The length of time in days to retain the messages in a channel.
   /app-instance-users#app-instance-arn:
     get:
       operationId: ListAppInstanceUsers
@@ -1469,9 +1468,8 @@ components:
       type: object
       properties:
         AppInstanceArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The Amazon Resource Number (ARN) of the <code>AppInstance</code>.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The Amazon Resource Number (ARN) of the <code>AppInstance</code>.
     Tag:
       type: object
       required:
@@ -1479,13 +1477,11 @@ components:
         - Value
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: The key of the tag.
+          $ref: '#/components/schemas/TagKey'
+          description: The key of the tag.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: The value of the tag.
+          $ref: '#/components/schemas/TagValue'
+          description: The value of the tag.
       description: Describes a tag applied to a resource.
     BadRequestException: {}
     ConflictException: {}
@@ -1499,126 +1495,105 @@ components:
       type: object
       properties:
         AppInstanceAdmin:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The name and ARN of the admin for the <code>AppInstance</code>.
+          $ref: '#/components/schemas/Identity'
+          description: The name and ARN of the admin for the <code>AppInstance</code>.
         AppInstanceArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the of the admin for the <code>AppInstance</code>.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the of the admin for the <code>AppInstance</code>.
     CreateAppInstanceUserResponse:
       type: object
       properties:
         AppInstanceUserArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The user's ARN.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The user's ARN.
     DescribeAppInstanceResponse:
       type: object
       properties:
         AppInstance:
-          allOf:
-            - $ref: '#/components/schemas/AppInstance'
-            - description: 'The ARN, metadata, created and last-updated timestamps, and the name of the <code>AppInstance</code>. All timestamps use epoch milliseconds.'
+          $ref: '#/components/schemas/AppInstance'
+          description: 'The ARN, metadata, created and last-updated timestamps, and the name of the <code>AppInstance</code>. All timestamps use epoch milliseconds.'
     DescribeAppInstanceAdminResponse:
       type: object
       properties:
         AppInstanceAdmin:
-          allOf:
-            - $ref: '#/components/schemas/AppInstanceAdmin'
-            - description: 'The ARN and name of the <code>AppInstanceUser</code>, the ARN of the <code>AppInstance</code>, and the created and last-updated timestamps. All timestamps use epoch milliseconds.'
+          $ref: '#/components/schemas/AppInstanceAdmin'
+          description: 'The ARN and name of the <code>AppInstanceUser</code>, the ARN of the <code>AppInstance</code>, and the created and last-updated timestamps. All timestamps use epoch milliseconds.'
     DescribeAppInstanceUserResponse:
       type: object
       properties:
         AppInstanceUser:
-          allOf:
-            - $ref: '#/components/schemas/AppInstanceUser'
-            - description: The name of the <code>AppInstanceUser</code>.
+          $ref: '#/components/schemas/AppInstanceUser'
+          description: The name of the <code>AppInstanceUser</code>.
     GetAppInstanceRetentionSettingsResponse:
       type: object
       properties:
         AppInstanceRetentionSettings:
-          allOf:
-            - $ref: '#/components/schemas/AppInstanceRetentionSettings'
-            - description: The retention settings for the <code>AppInstance</code>.
+          $ref: '#/components/schemas/AppInstanceRetentionSettings'
+          description: The retention settings for the <code>AppInstance</code>.
         InitiateDeletionTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The timestamp representing the time at which the specified items are retained, in Epoch Seconds.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The timestamp representing the time at which the specified items are retained, in Epoch Seconds.'
     ListAppInstanceAdminsResponse:
       type: object
       properties:
         AppInstanceArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the <code>AppInstance</code>.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the <code>AppInstance</code>.
         AppInstanceAdmins:
-          allOf:
-            - $ref: '#/components/schemas/AppInstanceAdminList'
-            - description: The information for each administrator.
+          $ref: '#/components/schemas/AppInstanceAdminList'
+          description: The information for each administrator.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token returned from previous API requests until the number of administrators is reached.
+          $ref: '#/components/schemas/NextToken'
+          description: The token returned from previous API requests until the number of administrators is reached.
     ListAppInstanceUsersResponse:
       type: object
       properties:
         AppInstanceArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the <code>AppInstance</code>.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the <code>AppInstance</code>.
         AppInstanceUsers:
-          allOf:
-            - $ref: '#/components/schemas/AppInstanceUserList'
-            - description: The information for each requested <code>AppInstanceUser</code>.
+          $ref: '#/components/schemas/AppInstanceUserList'
+          description: The information for each requested <code>AppInstanceUser</code>.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token passed by previous API calls until all requested users are returned.
+          $ref: '#/components/schemas/NextToken'
+          description: The token passed by previous API calls until all requested users are returned.
     ListAppInstancesResponse:
       type: object
       properties:
         AppInstances:
-          allOf:
-            - $ref: '#/components/schemas/AppInstanceList'
-            - description: The information for each <code>AppInstance</code>.
+          $ref: '#/components/schemas/AppInstanceList'
+          description: The information for each <code>AppInstance</code>.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token passed by previous API requests until the maximum number of <code>AppInstance</code>s is reached.
+          $ref: '#/components/schemas/NextToken'
+          description: The token passed by previous API requests until the maximum number of <code>AppInstance</code>s is reached.
     PutAppInstanceRetentionSettingsResponse:
       type: object
       properties:
         AppInstanceRetentionSettings:
-          allOf:
-            - $ref: '#/components/schemas/AppInstanceRetentionSettings'
-            - description: 'The time in days to retain data. Data type: number.'
+          $ref: '#/components/schemas/AppInstanceRetentionSettings'
+          description: 'The time in days to retain data. Data type: number.'
         InitiateDeletionTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the API deletes data.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the API deletes data.
     ChannelRetentionSettings:
       type: object
       properties:
         RetentionDays:
-          allOf:
-            - $ref: '#/components/schemas/RetentionDays'
-            - description: The time in days to retain the messages in a channel.
+          $ref: '#/components/schemas/RetentionDays'
+          description: The time in days to retain the messages in a channel.
       description: The details of the retention settings for a channel.
     UpdateAppInstanceResponse:
       type: object
       properties:
         AppInstanceArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the <code>AppInstance</code>.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the <code>AppInstance</code>.
     UpdateAppInstanceUserResponse:
       type: object
       properties:
         AppInstanceUserArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the <code>AppInstanceUser</code>.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the <code>AppInstanceUser</code>.
     ChimeArn:
       type: string
       pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -1643,61 +1618,50 @@ components:
       type: object
       properties:
         AppInstanceArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the messaging instance.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the messaging instance.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyResourceName'
-            - description: The name of an <code>AppInstance</code>.
+          $ref: '#/components/schemas/NonEmptyResourceName'
+          description: The name of an <code>AppInstance</code>.
         CreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which an <code>AppInstance</code> was created. In epoch milliseconds.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which an <code>AppInstance</code> was created. In epoch milliseconds.
         LastUpdatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time an <code>AppInstance</code> was last updated. In epoch milliseconds.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time an <code>AppInstance</code> was last updated. In epoch milliseconds.
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of an <code>AppInstance</code>.
+          $ref: '#/components/schemas/Metadata'
+          description: The metadata of an <code>AppInstance</code>.
       description: 'The details of an <code>AppInstance</code>, an instance of an Amazon Chime SDK messaging application.'
     Identity:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN in an Identity.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN in an Identity.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name in an Identity.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name in an Identity.
       description: The details of a user.
     AppInstanceAdmin:
       type: object
       properties:
         Admin:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The <code>AppInstanceAdmin</code> data.
+          $ref: '#/components/schemas/Identity'
+          description: The <code>AppInstanceAdmin</code> data.
         AppInstanceArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the <code>AppInstance</code> for which the user is an administrator.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the <code>AppInstance</code> for which the user is an administrator.
         CreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which an administrator was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which an administrator was created.
       description: The details of an <code>AppInstanceAdmin</code>.
     AppInstanceAdminSummary:
       type: object
       properties:
         Admin:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The details of the <code>AppInstanceAdmin</code>.
+          $ref: '#/components/schemas/Identity'
+          description: The details of the <code>AppInstanceAdmin</code>.
       description: Summary of the details of an <code>AppInstanceAdmin</code>.
     AppInstanceAdminList:
       type: array
@@ -1707,17 +1671,14 @@ components:
       type: object
       properties:
         AppInstanceArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The <code>AppInstance</code> ARN.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The <code>AppInstance</code> ARN.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyResourceName'
-            - description: The name of the <code>AppInstance</code>.
+          $ref: '#/components/schemas/NonEmptyResourceName'
+          description: The name of the <code>AppInstance</code>.
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the <code>AppInstance</code>.
+          $ref: '#/components/schemas/Metadata'
+          description: The metadata of the <code>AppInstance</code>.
       description: Summary of the data for an <code>AppInstance</code>.
     AppInstanceList:
       type: array
@@ -1727,9 +1688,8 @@ components:
       type: object
       properties:
         ChannelRetentionSettings:
-          allOf:
-            - $ref: '#/components/schemas/ChannelRetentionSettings'
-            - description: The length of time in days to retain the messages in a channel.
+          $ref: '#/components/schemas/ChannelRetentionSettings'
+          description: The length of time in days to retain the messages in a channel.
       description: The details of the data-retention settings for an <code>AppInstance</code>.
     UserName:
       type: string
@@ -1741,41 +1701,33 @@ components:
       type: object
       properties:
         AppInstanceUserArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the <code>AppInstanceUser</code>.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the <code>AppInstanceUser</code>.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/UserName'
-            - description: The name of the <code>AppInstanceUser</code>.
+          $ref: '#/components/schemas/UserName'
+          description: The name of the <code>AppInstanceUser</code>.
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the <code>AppInstanceUser</code>.
+          $ref: '#/components/schemas/Metadata'
+          description: The metadata of the <code>AppInstanceUser</code>.
         CreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the <code>AppInstanceUser</code> was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the <code>AppInstanceUser</code> was created.
         LastUpdatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the <code>AppInstanceUser</code> was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the <code>AppInstanceUser</code> was last updated.
       description: The details of an <code>AppInstanceUser</code>.
     AppInstanceUserSummary:
       type: object
       properties:
         AppInstanceUserArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the <code>AppInstanceUser</code>.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the <code>AppInstanceUser</code>.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/UserName'
-            - description: The name of an <code>AppInstanceUser</code>.
+          $ref: '#/components/schemas/UserName'
+          description: The name of an <code>AppInstanceUser</code>.
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the <code>AppInstanceUser</code>.
+          $ref: '#/components/schemas/Metadata'
+          description: The metadata of the <code>AppInstanceUser</code>.
       description: Summary of the details of an <code>AppInstanceUser</code>.
     AppInstanceUserList:
       type: array
@@ -1798,9 +1750,8 @@ components:
       title: CreateAppInstanceAdminRequest
       properties:
         AppInstanceAdminArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the administrator of the current <code>AppInstance</code>.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the administrator of the current <code>AppInstance</code>.
     TagList:
       type: array
       items:
@@ -1815,21 +1766,17 @@ components:
       title: CreateAppInstanceRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyResourceName'
-            - description: The name of the <code>AppInstance</code>.
+          $ref: '#/components/schemas/NonEmptyResourceName'
+          description: The name of the <code>AppInstance</code>.
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the <code>AppInstance</code>. Limited to a 1KB string in UTF-8.
+          $ref: '#/components/schemas/Metadata'
+          description: The metadata of the <code>AppInstance</code>. Limited to a 1KB string in UTF-8.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: The <code>ClientRequestToken</code> of the <code>AppInstance</code>.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: The <code>ClientRequestToken</code> of the <code>AppInstance</code>.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: Tags assigned to the <code>AppInstanceUser</code>.
+          $ref: '#/components/schemas/TagList'
+          description: Tags assigned to the <code>AppInstanceUser</code>.
     UserId:
       type: string
       pattern: '[A-Za-z0-9]([A-Za-z0-9\:\-\_\.\@]{0,62}[A-Za-z0-9])?'
@@ -1846,29 +1793,23 @@ components:
       title: CreateAppInstanceUserRequest
       properties:
         AppInstanceArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the <code>AppInstance</code> request.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the <code>AppInstance</code> request.
         AppInstanceUserId:
-          allOf:
-            - $ref: '#/components/schemas/UserId'
-            - description: The user ID of the <code>AppInstance</code>.
+          $ref: '#/components/schemas/UserId'
+          description: The user ID of the <code>AppInstance</code>.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/UserName'
-            - description: The user's name.
+          $ref: '#/components/schemas/UserName'
+          description: The user's name.
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The request's metadata. Limited to a 1KB string in UTF-8.
+          $ref: '#/components/schemas/Metadata'
+          description: The request's metadata. Limited to a 1KB string in UTF-8.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: The token assigned to the user requesting an <code>AppInstance</code>.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: The token assigned to the user requesting an <code>AppInstance</code>.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: Tags assigned to the <code>AppInstanceUser</code>.
+          $ref: '#/components/schemas/TagList'
+          description: Tags assigned to the <code>AppInstanceUser</code>.
     DeleteAppInstanceAdminRequest:
       type: object
       title: DeleteAppInstanceAdminRequest
@@ -1932,9 +1873,8 @@ components:
       title: PutAppInstanceRetentionSettingsRequest
       properties:
         AppInstanceRetentionSettings:
-          allOf:
-            - $ref: '#/components/schemas/AppInstanceRetentionSettings'
-            - description: 'The time in days to retain data. Data type: number.'
+          $ref: '#/components/schemas/AppInstanceRetentionSettings'
+          description: 'The time in days to retain data. Data type: number.'
     TagKey:
       type: string
       minLength: 1
@@ -1953,13 +1893,11 @@ components:
       title: UpdateAppInstanceRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyResourceName'
-            - description: The name that you want to change.
+          $ref: '#/components/schemas/NonEmptyResourceName'
+          description: The name that you want to change.
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The metadata that you want to change.
+          $ref: '#/components/schemas/Metadata'
+          description: The metadata that you want to change.
     UpdateAppInstanceUserRequest:
       type: object
       required:
@@ -1968,12 +1906,10 @@ components:
       title: UpdateAppInstanceUserRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/UserName'
-            - description: The name of the <code>AppInstanceUser</code>.
+          $ref: '#/components/schemas/UserName'
+          description: The name of the <code>AppInstanceUser</code>.
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the <code>AppInstanceUser</code>.
+          $ref: '#/components/schemas/Metadata'
+          description: The metadata of the <code>AppInstanceUser</code>.
 security:
   - hmac: []

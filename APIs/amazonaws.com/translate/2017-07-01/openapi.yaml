@@ -1043,13 +1043,11 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The custom name that you assigned to the parallel data resource.
+          $ref: '#/components/schemas/ResourceName'
+          description: The custom name that you assigned to the parallel data resource.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ParallelDataStatus'
-            - description: 'The status of the parallel data resource. When the resource is ready for you to use, the status is <code>ACTIVE</code>.'
+          $ref: '#/components/schemas/ParallelDataStatus'
+          description: 'The status of the parallel data resource. When the resource is ready for you to use, the status is <code>ACTIVE</code>.'
     CreateParallelDataRequest:
       type: object
       required:
@@ -1059,23 +1057,19 @@ components:
       title: CreateParallelDataRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: A custom name for the parallel data resource in Amazon Translate. You must assign a name that is unique in the account and region.
+          $ref: '#/components/schemas/ResourceName'
+          description: A custom name for the parallel data resource in Amazon Translate. You must assign a name that is unique in the account and region.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A custom description for the parallel data resource in Amazon Translate.
+          $ref: '#/components/schemas/Description'
+          description: A custom description for the parallel data resource in Amazon Translate.
         ParallelDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/ParallelDataConfig'
-            - description: Specifies the format and S3 location of the parallel data input file.
+          $ref: '#/components/schemas/ParallelDataConfig'
+          description: Specifies the format and S3 location of the parallel data input file.
         EncryptionKey:
           $ref: '#/components/schemas/EncryptionKey'
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientTokenString'
-            - description: A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.
+          $ref: '#/components/schemas/ClientTokenString'
+          description: A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.
     InvalidParameterValueException: {}
     InvalidRequestException: {}
     LimitExceededException: {}
@@ -1086,13 +1080,11 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the parallel data resource that is being deleted.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the parallel data resource that is being deleted.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ParallelDataStatus'
-            - description: The status of the parallel data deletion.
+          $ref: '#/components/schemas/ParallelDataStatus'
+          description: The status of the parallel data deletion.
     DeleteParallelDataRequest:
       type: object
       required:
@@ -1100,9 +1092,8 @@ components:
       title: DeleteParallelDataRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the parallel data resource that is being deleted.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the parallel data resource that is being deleted.
     ConcurrentModificationException: {}
     ResourceNotFoundException: {}
     DeleteTerminologyRequest:
@@ -1112,16 +1103,14 @@ components:
       title: DeleteTerminologyRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: 'The name of the custom terminology being deleted. '
+          $ref: '#/components/schemas/ResourceName'
+          description: 'The name of the custom terminology being deleted. '
     DescribeTextTranslationJobResponse:
       type: object
       properties:
         TextTranslationJobProperties:
-          allOf:
-            - $ref: '#/components/schemas/TextTranslationJobProperties'
-            - description: An object that contains the properties associated with an asynchronous batch translation job.
+          $ref: '#/components/schemas/TextTranslationJobProperties'
+          description: An object that contains the properties associated with an asynchronous batch translation job.
     DescribeTextTranslationJobRequest:
       type: object
       required:
@@ -1129,28 +1118,23 @@ components:
       title: DescribeTextTranslationJobRequest
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The identifier that Amazon Translate generated for the job. The <a>StartTextTranslationJob</a> operation returns this identifier in its response.
+          $ref: '#/components/schemas/JobId'
+          description: The identifier that Amazon Translate generated for the job. The <a>StartTextTranslationJob</a> operation returns this identifier in its response.
     GetParallelDataResponse:
       type: object
       properties:
         ParallelDataProperties:
-          allOf:
-            - $ref: '#/components/schemas/ParallelDataProperties'
-            - description: The properties of the parallel data resource that is being retrieved.
+          $ref: '#/components/schemas/ParallelDataProperties'
+          description: The properties of the parallel data resource that is being retrieved.
         DataLocation:
-          allOf:
-            - $ref: '#/components/schemas/ParallelDataDataLocation'
-            - description: The location of the most recent parallel data input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30 minute expiration.
+          $ref: '#/components/schemas/ParallelDataDataLocation'
+          description: The location of the most recent parallel data input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30 minute expiration.
         AuxiliaryDataLocation:
-          allOf:
-            - $ref: '#/components/schemas/ParallelDataDataLocation'
-            - description: The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a parallel data resource. The location is returned as a presigned URL to that has a 30 minute expiration.
+          $ref: '#/components/schemas/ParallelDataDataLocation'
+          description: The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a parallel data resource. The location is returned as a presigned URL to that has a 30 minute expiration.
         LatestUpdateAttemptAuxiliaryDataLocation:
-          allOf:
-            - $ref: '#/components/schemas/ParallelDataDataLocation'
-            - description: The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to update a parallel data resource. The location is returned as a presigned URL to that has a 30 minute expiration.
+          $ref: '#/components/schemas/ParallelDataDataLocation'
+          description: The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to update a parallel data resource. The location is returned as a presigned URL to that has a 30 minute expiration.
     GetParallelDataRequest:
       type: object
       required:
@@ -1158,20 +1142,17 @@ components:
       title: GetParallelDataRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the parallel data resource that is being retrieved.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the parallel data resource that is being retrieved.
     GetTerminologyResponse:
       type: object
       properties:
         TerminologyProperties:
-          allOf:
-            - $ref: '#/components/schemas/TerminologyProperties'
-            - description: The properties of the custom terminology being retrieved.
+          $ref: '#/components/schemas/TerminologyProperties'
+          description: The properties of the custom terminology being retrieved.
         TerminologyDataLocation:
-          allOf:
-            - $ref: '#/components/schemas/TerminologyDataLocation'
-            - description: The data location of the custom terminology being retrieved. The custom terminology file is returned in a presigned url that has a 30 minute expiration.
+          $ref: '#/components/schemas/TerminologyDataLocation'
+          description: The data location of the custom terminology being retrieved. The custom terminology file is returned in a presigned url that has a 30 minute expiration.
     GetTerminologyRequest:
       type: object
       required:
@@ -1180,20 +1161,17 @@ components:
       title: GetTerminologyRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the custom terminology being retrieved.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the custom terminology being retrieved.
         TerminologyDataFormat:
-          allOf:
-            - $ref: '#/components/schemas/TerminologyDataFormat'
-            - description: 'The data format of the custom terminology being retrieved, either CSV or TMX.'
+          $ref: '#/components/schemas/TerminologyDataFormat'
+          description: 'The data format of the custom terminology being retrieved, either CSV or TMX.'
     ImportTerminologyResponse:
       type: object
       properties:
         TerminologyProperties:
-          allOf:
-            - $ref: '#/components/schemas/TerminologyProperties'
-            - description: The properties of the custom terminology being imported.
+          $ref: '#/components/schemas/TerminologyProperties'
+          description: The properties of the custom terminology being imported.
     ImportTerminologyRequest:
       type: object
       required:
@@ -1203,110 +1181,90 @@ components:
       title: ImportTerminologyRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the custom terminology being imported.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the custom terminology being imported.
         MergeStrategy:
-          allOf:
-            - $ref: '#/components/schemas/MergeStrategy'
-            - description: 'The merge strategy of the custom terminology being imported. Currently, only the OVERWRITE merge strategy is supported. In this case, the imported terminology will overwrite an existing terminology of the same name.'
+          $ref: '#/components/schemas/MergeStrategy'
+          description: 'The merge strategy of the custom terminology being imported. Currently, only the OVERWRITE merge strategy is supported. In this case, the imported terminology will overwrite an existing terminology of the same name.'
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the custom terminology being imported.
+          $ref: '#/components/schemas/Description'
+          description: The description of the custom terminology being imported.
         TerminologyData:
-          allOf:
-            - $ref: '#/components/schemas/TerminologyData'
-            - description: The terminology data for the custom terminology being imported.
+          $ref: '#/components/schemas/TerminologyData'
+          description: The terminology data for the custom terminology being imported.
         EncryptionKey:
-          allOf:
-            - $ref: '#/components/schemas/EncryptionKey'
-            - description: The encryption key for the custom terminology being imported.
+          $ref: '#/components/schemas/EncryptionKey'
+          description: The encryption key for the custom terminology being imported.
     ListParallelDataResponse:
       type: object
       properties:
         ParallelDataPropertiesList:
-          allOf:
-            - $ref: '#/components/schemas/ParallelDataPropertiesList'
-            - description: The properties of the parallel data resources returned by this request.
+          $ref: '#/components/schemas/ParallelDataPropertiesList'
+          description: The properties of the parallel data resources returned by this request.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+          $ref: '#/components/schemas/NextToken'
+          description: The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
     ListParallelDataRequest:
       type: object
       title: ListParallelDataRequest
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A string that specifies the next page of results to return in a paginated response.
+          $ref: '#/components/schemas/NextToken'
+          description: A string that specifies the next page of results to return in a paginated response.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResultsInteger'
-            - description: The maximum number of parallel data resources returned for each request.
+          $ref: '#/components/schemas/MaxResultsInteger'
+          description: The maximum number of parallel data resources returned for each request.
     ListTerminologiesResponse:
       type: object
       properties:
         TerminologyPropertiesList:
-          allOf:
-            - $ref: '#/components/schemas/TerminologyPropertiesList'
-            - description: The properties list of the custom terminologies returned on the list request.
+          $ref: '#/components/schemas/TerminologyPropertiesList'
+          description: The properties list of the custom terminologies returned on the list request.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' If the response to the ListTerminologies was truncated, the NextToken fetches the next group of custom terminologies.'
+          $ref: '#/components/schemas/NextToken'
+          description: ' If the response to the ListTerminologies was truncated, the NextToken fetches the next group of custom terminologies.'
     ListTerminologiesRequest:
       type: object
       title: ListTerminologiesRequest
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'If the result of the request to ListTerminologies was truncated, include the NextToken to fetch the next group of custom terminologies. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'If the result of the request to ListTerminologies was truncated, include the NextToken to fetch the next group of custom terminologies. '
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResultsInteger'
-            - description: The maximum number of custom terminologies returned per list request.
+          $ref: '#/components/schemas/MaxResultsInteger'
+          description: The maximum number of custom terminologies returned per list request.
     ListTextTranslationJobsResponse:
       type: object
       properties:
         TextTranslationJobPropertiesList:
-          allOf:
-            - $ref: '#/components/schemas/TextTranslationJobPropertiesList'
-            - description: A list containing the properties of each job that is returned.
+          $ref: '#/components/schemas/TextTranslationJobPropertiesList'
+          description: A list containing the properties of each job that is returned.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retreive the next page of results. This value is <code>null</code> when there are no more results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retreive the next page of results. This value is <code>null</code> when there are no more results to return.
     ListTextTranslationJobsRequest:
       type: object
       title: ListTextTranslationJobsRequest
       properties:
         Filter:
-          allOf:
-            - $ref: '#/components/schemas/TextTranslationJobFilter'
-            - description: 'The parameters that specify which batch translation jobs to retrieve. Filters include job name, job status, and submission time. You can only set one filter at a time.'
+          $ref: '#/components/schemas/TextTranslationJobFilter'
+          description: 'The parameters that specify which batch translation jobs to retrieve. Filters include job name, job status, and submission time. You can only set one filter at a time.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to request the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to request the next page of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResultsInteger'
-            - description: The maximum number of results to return in each page. The default value is 100.
+          $ref: '#/components/schemas/MaxResultsInteger'
+          description: The maximum number of results to return in each page. The default value is 100.
     InvalidFilterException: {}
     StartTextTranslationJobResponse:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: 'The identifier generated for the job. To get the status of a job, use this ID with the <a>DescribeTextTranslationJob</a> operation.'
+          $ref: '#/components/schemas/JobId'
+          description: 'The identifier generated for the job. To get the status of a job, use this ID with the <a>DescribeTextTranslationJob</a> operation.'
         JobStatus:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: '<p>The status of the job. Possible values include:</p> <ul> <li> <p> <code>SUBMITTED</code> - The job has been received and is queued for processing.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Amazon Translate is processing the job.</p> </li> <li> <p> <code>COMPLETED</code> - The job was successfully completed and the output is available.</p> </li> <li> <p> <code>COMPLETED_WITH_ERROR</code> - The job was completed with errors. The errors can be analyzed in the job''s output.</p> </li> <li> <p> <code>FAILED</code> - The job did not complete. To get details, use the <a>DescribeTextTranslationJob</a> operation.</p> </li> <li> <p> <code>STOP_REQUESTED</code> - The user who started the job has requested that it be stopped.</p> </li> <li> <p> <code>STOPPED</code> - The job has been stopped.</p> </li> </ul>'
+          $ref: '#/components/schemas/JobStatus'
+          description: '<p>The status of the job. Possible values include:</p> <ul> <li> <p> <code>SUBMITTED</code> - The job has been received and is queued for processing.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Amazon Translate is processing the job.</p> </li> <li> <p> <code>COMPLETED</code> - The job was successfully completed and the output is available.</p> </li> <li> <p> <code>COMPLETED_WITH_ERROR</code> - The job was completed with errors. The errors can be analyzed in the job''s output.</p> </li> <li> <p> <code>FAILED</code> - The job did not complete. To get details, use the <a>DescribeTextTranslationJob</a> operation.</p> </li> <li> <p> <code>STOP_REQUESTED</code> - The user who started the job has requested that it be stopped.</p> </li> <li> <p> <code>STOPPED</code> - The job has been stopped.</p> </li> </ul>'
     StartTextTranslationJobRequest:
       type: object
       required:
@@ -1319,53 +1277,42 @@ components:
       title: StartTextTranslationJobRequest
       properties:
         JobName:
-          allOf:
-            - $ref: '#/components/schemas/JobName'
-            - description: The name of the batch translation job to be performed.
+          $ref: '#/components/schemas/JobName'
+          description: The name of the batch translation job to be performed.
         InputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/InputDataConfig'
-            - description: Specifies the format and S3 location of the input documents for the translation job.
+          $ref: '#/components/schemas/InputDataConfig'
+          description: Specifies the format and S3 location of the input documents for the translation job.
         OutputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/OutputDataConfig'
-            - description: 'Specifies the S3 folder to which your job output will be saved. '
+          $ref: '#/components/schemas/OutputDataConfig'
+          description: 'Specifies the S3 folder to which your job output will be saved. '
         DataAccessRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that grants Amazon Translate read access to your input data. For more nformation, see <a>identity-and-access-management</a>.'
+          $ref: '#/components/schemas/IamRoleArn'
+          description: 'The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that grants Amazon Translate read access to your input data. For more nformation, see <a>identity-and-access-management</a>.'
         SourceLanguageCode:
-          allOf:
-            - $ref: '#/components/schemas/LanguageCodeString'
-            - description: '<p>The language code of the input language. For a list of language codes, see <a>what-is-languages</a>.</p> <p>Amazon Translate does not automatically detect a source language during batch translation jobs.</p>'
+          $ref: '#/components/schemas/LanguageCodeString'
+          description: '<p>The language code of the input language. For a list of language codes, see <a>what-is-languages</a>.</p> <p>Amazon Translate does not automatically detect a source language during batch translation jobs.</p>'
         TargetLanguageCodes:
-          allOf:
-            - $ref: '#/components/schemas/TargetLanguageCodeStringList'
-            - description: The language code of the output language.
+          $ref: '#/components/schemas/TargetLanguageCodeStringList'
+          description: The language code of the output language.
         TerminologyNames:
-          allOf:
-            - $ref: '#/components/schemas/ResourceNameList'
-            - description: 'The name of the terminology to use in the batch translation job. For a list of available terminologies, use the <a>ListTerminologies</a> operation.'
+          $ref: '#/components/schemas/ResourceNameList'
+          description: 'The name of the terminology to use in the batch translation job. For a list of available terminologies, use the <a>ListTerminologies</a> operation.'
         ParallelDataNames:
-          allOf:
-            - $ref: '#/components/schemas/ResourceNameList'
-            - description: 'The names of the parallel data resources to use in the batch translation job. For a list of available parallel data resources, use the <a>ListParallelData</a> operation.'
+          $ref: '#/components/schemas/ResourceNameList'
+          description: 'The names of the parallel data resources to use in the batch translation job. For a list of available parallel data resources, use the <a>ListParallelData</a> operation.'
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientTokenString'
-            - description: A unique identifier for the request. This token is auto-generated when using the Amazon Translate SDK.
+          $ref: '#/components/schemas/ClientTokenString'
+          description: A unique identifier for the request. This token is auto-generated when using the Amazon Translate SDK.
     UnsupportedLanguagePairException: {}
     StopTextTranslationJobResponse:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The job ID of the stopped batch translation job.
+          $ref: '#/components/schemas/JobId'
+          description: The job ID of the stopped batch translation job.
         JobStatus:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: 'The status of the designated job. Upon successful completion, the job''s status will be <code>STOPPED</code>.'
+          $ref: '#/components/schemas/JobStatus'
+          description: 'The status of the designated job. Upon successful completion, the job''s status will be <code>STOPPED</code>.'
     StopTextTranslationJobRequest:
       type: object
       required:
@@ -1373,9 +1320,8 @@ components:
       title: StopTextTranslationJobRequest
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The job ID of the job to be stopped.
+          $ref: '#/components/schemas/JobId'
+          description: The job ID of the job to be stopped.
     TranslateTextResponse:
       type: object
       required:
@@ -1384,21 +1330,17 @@ components:
         - TargetLanguageCode
       properties:
         TranslatedText:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The translated text.
+          $ref: '#/components/schemas/String'
+          description: The translated text.
         SourceLanguageCode:
-          allOf:
-            - $ref: '#/components/schemas/LanguageCodeString'
-            - description: The language code for the language of the source text.
+          $ref: '#/components/schemas/LanguageCodeString'
+          description: The language code for the language of the source text.
         TargetLanguageCode:
-          allOf:
-            - $ref: '#/components/schemas/LanguageCodeString'
-            - description: 'The language code for the language of the target text. '
+          $ref: '#/components/schemas/LanguageCodeString'
+          description: 'The language code for the language of the target text. '
         AppliedTerminologies:
-          allOf:
-            - $ref: '#/components/schemas/AppliedTerminologyList'
-            - description: The names of the custom terminologies applied to the input text by Amazon Translate for the translated text response.
+          $ref: '#/components/schemas/AppliedTerminologyList'
+          description: The names of the custom terminologies applied to the input text by Amazon Translate for the translated text response.
     TranslateTextRequest:
       type: object
       required:
@@ -1408,21 +1350,17 @@ components:
       title: TranslateTextRequest
       properties:
         Text:
-          allOf:
-            - $ref: '#/components/schemas/BoundedLengthString'
-            - description: 'The text to translate. The text string can be a maximum of 5,000 bytes long. Depending on your character set, this may be fewer than 5,000 characters.'
+          $ref: '#/components/schemas/BoundedLengthString'
+          description: 'The text to translate. The text string can be a maximum of 5,000 bytes long. Depending on your character set, this may be fewer than 5,000 characters.'
         TerminologyNames:
-          allOf:
-            - $ref: '#/components/schemas/ResourceNameList'
-            - description: The name of the terminology list file to be used in the TranslateText request. You can use 1 terminology list at most in a <code>TranslateText</code> request. Terminology lists can contain a maximum of 256 terms.
+          $ref: '#/components/schemas/ResourceNameList'
+          description: The name of the terminology list file to be used in the TranslateText request. You can use 1 terminology list at most in a <code>TranslateText</code> request. Terminology lists can contain a maximum of 256 terms.
         SourceLanguageCode:
-          allOf:
-            - $ref: '#/components/schemas/LanguageCodeString'
-            - description: '<p>The language code for the language of the source text. The language must be a language supported by Amazon Translate. For a list of language codes, see <a>what-is-languages</a>.</p> <p>To have Amazon Translate determine the source language of your text, you can specify <code>auto</code> in the <code>SourceLanguageCode</code> field. If you specify <code>auto</code>, Amazon Translate will call <a href="https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html">Amazon Comprehend</a> to determine the source language.</p>'
+          $ref: '#/components/schemas/LanguageCodeString'
+          description: '<p>The language code for the language of the source text. The language must be a language supported by Amazon Translate. For a list of language codes, see <a>what-is-languages</a>.</p> <p>To have Amazon Translate determine the source language of your text, you can specify <code>auto</code> in the <code>SourceLanguageCode</code> field. If you specify <code>auto</code>, Amazon Translate will call <a href="https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html">Amazon Comprehend</a> to determine the source language.</p>'
         TargetLanguageCode:
-          allOf:
-            - $ref: '#/components/schemas/LanguageCodeString'
-            - description: The language code requested for the language of the target text. The language must be a language supported by Amazon Translate.
+          $ref: '#/components/schemas/LanguageCodeString'
+          description: The language code requested for the language of the target text. The language must be a language supported by Amazon Translate.
     TextSizeLimitExceededException: {}
     DetectedLanguageLowConfidenceException: {}
     ServiceUnavailableException: {}
@@ -1430,21 +1368,17 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the parallel data resource being updated.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the parallel data resource being updated.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ParallelDataStatus'
-            - description: The status of the parallel data resource that you are attempting to update. Your update request is accepted only if this status is either <code>ACTIVE</code> or <code>FAILED</code>.
+          $ref: '#/components/schemas/ParallelDataStatus'
+          description: The status of the parallel data resource that you are attempting to update. Your update request is accepted only if this status is either <code>ACTIVE</code> or <code>FAILED</code>.
         LatestUpdateAttemptStatus:
-          allOf:
-            - $ref: '#/components/schemas/ParallelDataStatus'
-            - description: 'The status of the parallel data update attempt. When the updated parallel data resource is ready for you to use, the status is <code>ACTIVE</code>.'
+          $ref: '#/components/schemas/ParallelDataStatus'
+          description: 'The status of the parallel data update attempt. When the updated parallel data resource is ready for you to use, the status is <code>ACTIVE</code>.'
         LatestUpdateAttemptAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time that the most recent update was attempted.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the most recent update was attempted.
     UpdateParallelDataRequest:
       type: object
       required:
@@ -1454,21 +1388,17 @@ components:
       title: UpdateParallelDataRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the parallel data resource being updated.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the parallel data resource being updated.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A custom description for the parallel data resource in Amazon Translate.
+          $ref: '#/components/schemas/Description'
+          description: A custom description for the parallel data resource in Amazon Translate.
         ParallelDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/ParallelDataConfig'
-            - description: Specifies the format and S3 location of the parallel data input file.
+          $ref: '#/components/schemas/ParallelDataConfig'
+          description: Specifies the format and S3 location of the parallel data input file.
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientTokenString'
-            - description: A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.
+          $ref: '#/components/schemas/ClientTokenString'
+          description: A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.
     ResourceName:
       type: string
       pattern: '^([A-Za-z0-9-]_?)+$'
@@ -1482,13 +1412,11 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the custom terminology applied to the input text by Amazon Translate for the translated text response.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the custom terminology applied to the input text by Amazon Translate for the translated text response.
         Terms:
-          allOf:
-            - $ref: '#/components/schemas/TermList'
-            - description: 'The specific terms of the custom terminology applied to the input text by Amazon Translate for the translated text response. A maximum of 250 terms will be returned, and the specific terms applied will be the first 250 terms in the source text. '
+          $ref: '#/components/schemas/TermList'
+          description: 'The specific terms of the custom terminology applied to the input text by Amazon Translate for the translated text response. A maximum of 250 terms will be returned, and the specific terms applied will be the first 250 terms in the source text. '
       description: 'The custom terminology applied to the input text by Amazon Translate for the translated text response. This is optional in the response and will only be present if you specified terminology input in the request. Currently, only one terminology can be applied per TranslateText request.'
     AppliedTerminologyList:
       type: array
@@ -1519,13 +1447,11 @@ components:
         - Format
       properties:
         S3Uri:
-          allOf:
-            - $ref: '#/components/schemas/S3Uri'
-            - description: The URI of the Amazon S3 folder that contains the parallel data input file. The folder must be in the same Region as the API endpoint you are calling.
+          $ref: '#/components/schemas/S3Uri'
+          description: The URI of the Amazon S3 folder that contains the parallel data input file. The folder must be in the same Region as the API endpoint you are calling.
         Format:
-          allOf:
-            - $ref: '#/components/schemas/ParallelDataFormat'
-            - description: The format of the parallel data input file.
+          $ref: '#/components/schemas/ParallelDataFormat'
+          description: The format of the parallel data input file.
       description: Specifies the format and S3 location of the parallel data input file.
     EncryptionKey:
       type: object
@@ -1534,13 +1460,11 @@ components:
         - Id
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/EncryptionKeyType'
-            - description: The type of encryption key used by Amazon Translate to encrypt custom terminologies.
+          $ref: '#/components/schemas/EncryptionKeyType'
+          description: The type of encryption key used by Amazon Translate to encrypt custom terminologies.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/EncryptionKeyID'
-            - description: The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.
+          $ref: '#/components/schemas/EncryptionKeyID'
+          description: The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.
       description: The encryption key used to encrypt this object.
     ParallelDataStatus:
       type: string
@@ -1559,61 +1483,47 @@ components:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The ID of the translation job.
+          $ref: '#/components/schemas/JobId'
+          description: The ID of the translation job.
         JobName:
-          allOf:
-            - $ref: '#/components/schemas/JobName'
-            - description: The user-defined name of the translation job.
+          $ref: '#/components/schemas/JobName'
+          description: The user-defined name of the translation job.
         JobStatus:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: The status of the translation job.
+          $ref: '#/components/schemas/JobStatus'
+          description: The status of the translation job.
         JobDetails:
-          allOf:
-            - $ref: '#/components/schemas/JobDetails'
-            - description: The number of documents successfully and unsuccessfully processed during the translation job.
+          $ref: '#/components/schemas/JobDetails'
+          description: The number of documents successfully and unsuccessfully processed during the translation job.
         SourceLanguageCode:
-          allOf:
-            - $ref: '#/components/schemas/LanguageCodeString'
-            - description: The language code of the language of the source text. The language must be a language supported by Amazon Translate.
+          $ref: '#/components/schemas/LanguageCodeString'
+          description: The language code of the language of the source text. The language must be a language supported by Amazon Translate.
         TargetLanguageCodes:
-          allOf:
-            - $ref: '#/components/schemas/TargetLanguageCodeStringList'
-            - description: The language code of the language of the target text. The language must be a language supported by Amazon Translate.
+          $ref: '#/components/schemas/TargetLanguageCodeStringList'
+          description: The language code of the language of the target text. The language must be a language supported by Amazon Translate.
         TerminologyNames:
-          allOf:
-            - $ref: '#/components/schemas/ResourceNameList'
-            - description: A list containing the names of the terminologies applied to a translation job. Only one terminology can be applied per <a>StartTextTranslationJob</a> request at this time.
+          $ref: '#/components/schemas/ResourceNameList'
+          description: A list containing the names of the terminologies applied to a translation job. Only one terminology can be applied per <a>StartTextTranslationJob</a> request at this time.
         ParallelDataNames:
-          allOf:
-            - $ref: '#/components/schemas/ResourceNameList'
-            - description: A list containing the names of the parallel data resources applied to the translation job.
+          $ref: '#/components/schemas/ResourceNameList'
+          description: A list containing the names of the parallel data resources applied to the translation job.
         Message:
-          allOf:
-            - $ref: '#/components/schemas/UnboundedLengthString'
-            - description: An explanation of any errors that may have occured during the translation job.
+          $ref: '#/components/schemas/UnboundedLengthString'
+          description: An explanation of any errors that may have occured during the translation job.
         SubmittedTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the translation job was submitted.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the translation job was submitted.
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the translation job ended.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the translation job ended.
         InputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/InputDataConfig'
-            - description: The input configuration properties that were specified when the job was requested.
+          $ref: '#/components/schemas/InputDataConfig'
+          description: The input configuration properties that were specified when the job was requested.
         OutputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/OutputDataConfig'
-            - description: The output configuration properties that were specified when the job was requested.
+          $ref: '#/components/schemas/OutputDataConfig'
+          description: The output configuration properties that were specified when the job was requested.
         DataAccessRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that granted Amazon Translate read access to the job's input data.
+          $ref: '#/components/schemas/IamRoleArn'
+          description: The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that granted Amazon Translate read access to the job's input data.
       description: Provides information about a translation job.
     EncryptionKeyType:
       type: string
@@ -1628,71 +1538,55 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The custom name assigned to the parallel data resource.
+          $ref: '#/components/schemas/ResourceName'
+          description: The custom name assigned to the parallel data resource.
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/ParallelDataArn'
-            - description: The Amazon Resource Name (ARN) of the parallel data resource.
+          $ref: '#/components/schemas/ParallelDataArn'
+          description: The Amazon Resource Name (ARN) of the parallel data resource.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description assigned to the parallel data resource.
+          $ref: '#/components/schemas/Description'
+          description: The description assigned to the parallel data resource.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ParallelDataStatus'
-            - description: 'The status of the parallel data resource. When the parallel data is ready for you to use, the status is <code>ACTIVE</code>.'
+          $ref: '#/components/schemas/ParallelDataStatus'
+          description: 'The status of the parallel data resource. When the parallel data is ready for you to use, the status is <code>ACTIVE</code>.'
         SourceLanguageCode:
-          allOf:
-            - $ref: '#/components/schemas/LanguageCodeString'
-            - description: The source language of the translations in the parallel data file.
+          $ref: '#/components/schemas/LanguageCodeString'
+          description: The source language of the translations in the parallel data file.
         TargetLanguageCodes:
-          allOf:
-            - $ref: '#/components/schemas/LanguageCodeStringList'
-            - description: The language codes for the target languages available in the parallel data file. All possible target languages are returned as an array.
+          $ref: '#/components/schemas/LanguageCodeStringList'
+          description: The language codes for the target languages available in the parallel data file. All possible target languages are returned as an array.
         ParallelDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/ParallelDataConfig'
-            - description: Specifies the format and S3 location of the parallel data input file.
+          $ref: '#/components/schemas/ParallelDataConfig'
+          description: Specifies the format and S3 location of the parallel data input file.
         Message:
-          allOf:
-            - $ref: '#/components/schemas/UnboundedLengthString'
-            - description: 'Additional information from Amazon Translate about the parallel data resource. '
+          $ref: '#/components/schemas/UnboundedLengthString'
+          description: 'Additional information from Amazon Translate about the parallel data resource. '
         ImportedDataSize:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: 'The number of UTF-8 characters that Amazon Translate imported from the parallel data input file. This number includes only the characters in your translation examples. It does not include characters that are used to format your file. For example, if you provided a Translation Memory Exchange (.tmx) file, this number does not include the tags.'
+          $ref: '#/components/schemas/Long'
+          description: 'The number of UTF-8 characters that Amazon Translate imported from the parallel data input file. This number includes only the characters in your translation examples. It does not include characters that are used to format your file. For example, if you provided a Translation Memory Exchange (.tmx) file, this number does not include the tags.'
         ImportedRecordCount:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The number of records successfully imported from the parallel data input file.
+          $ref: '#/components/schemas/Long'
+          description: The number of records successfully imported from the parallel data input file.
         FailedRecordCount:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The number of records unsuccessfully imported from the parallel data input file.
+          $ref: '#/components/schemas/Long'
+          description: The number of records unsuccessfully imported from the parallel data input file.
         SkippedRecordCount:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: 'The number of items in the input file that Amazon Translate skipped when you created or updated the parallel data resource. For example, Amazon Translate skips empty records, empty target texts, and empty lines.'
+          $ref: '#/components/schemas/Long'
+          description: 'The number of items in the input file that Amazon Translate skipped when you created or updated the parallel data resource. For example, Amazon Translate skips empty records, empty target texts, and empty lines.'
         EncryptionKey:
           $ref: '#/components/schemas/EncryptionKey'
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the parallel data resource was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the parallel data resource was created.
         LastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the parallel data resource was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the parallel data resource was last updated.
         LatestUpdateAttemptStatus:
-          allOf:
-            - $ref: '#/components/schemas/ParallelDataStatus'
-            - description: The status of the most recent update attempt for the parallel data resource.
+          $ref: '#/components/schemas/ParallelDataStatus'
+          description: The status of the most recent update attempt for the parallel data resource.
         LatestUpdateAttemptAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time that the most recent update was attempted.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the most recent update was attempted.
       description: The properties of a parallel data resource.
     ParallelDataDataLocation:
       type: object
@@ -1701,13 +1595,11 @@ components:
         - Location
       properties:
         RepositoryType:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Describes the repository that contains the parallel data input file.
+          $ref: '#/components/schemas/String'
+          description: Describes the repository that contains the parallel data input file.
         Location:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon S3 location of the parallel data input file. The location is returned as a presigned URL to that has a 30 minute expiration.
+          $ref: '#/components/schemas/String'
+          description: The Amazon S3 location of the parallel data input file. The location is returned as a presigned URL to that has a 30 minute expiration.
       description: The location of the most recent parallel data input file that was successfully imported into Amazon Translate.
     TerminologyDataFormat:
       type: string
@@ -1718,45 +1610,35 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the custom terminology.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the custom terminology.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the custom terminology properties.
+          $ref: '#/components/schemas/Description'
+          description: The description of the custom terminology properties.
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/TerminologyArn'
-            - description: ' The Amazon Resource Name (ARN) of the custom terminology. '
+          $ref: '#/components/schemas/TerminologyArn'
+          description: ' The Amazon Resource Name (ARN) of the custom terminology. '
         SourceLanguageCode:
-          allOf:
-            - $ref: '#/components/schemas/LanguageCodeString'
-            - description: The language code for the source text of the translation request for which the custom terminology is being used.
+          $ref: '#/components/schemas/LanguageCodeString'
+          description: The language code for the source text of the translation request for which the custom terminology is being used.
         TargetLanguageCodes:
-          allOf:
-            - $ref: '#/components/schemas/LanguageCodeStringList'
-            - description: The language codes for the target languages available with the custom terminology file. All possible target languages are returned in array.
+          $ref: '#/components/schemas/LanguageCodeStringList'
+          description: The language codes for the target languages available with the custom terminology file. All possible target languages are returned in array.
         EncryptionKey:
-          allOf:
-            - $ref: '#/components/schemas/EncryptionKey'
-            - description: The encryption key for the custom terminology.
+          $ref: '#/components/schemas/EncryptionKey'
+          description: The encryption key for the custom terminology.
         SizeBytes:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The size of the file used when importing a custom terminology.
+          $ref: '#/components/schemas/Integer'
+          description: The size of the file used when importing a custom terminology.
         TermCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The number of terms included in the custom terminology.
+          $ref: '#/components/schemas/Integer'
+          description: The number of terms included in the custom terminology.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time at which the custom terminology was created, based on the timestamp.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time at which the custom terminology was created, based on the timestamp.'
         LastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time at which the custom terminology was last update, based on the timestamp.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time at which the custom terminology was last update, based on the timestamp.'
       description: The properties of the custom terminology.
     TerminologyDataLocation:
       type: object
@@ -1765,13 +1647,11 @@ components:
         - Location
       properties:
         RepositoryType:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The repository type for the custom terminology data.
+          $ref: '#/components/schemas/String'
+          description: The repository type for the custom terminology data.
         Location:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The location of the custom terminology data.
+          $ref: '#/components/schemas/String'
+          description: The location of the custom terminology data.
       description: The location of the custom terminology data.
     IamRoleArn:
       type: string
@@ -1789,13 +1669,11 @@ components:
         - Format
       properties:
         File:
-          allOf:
-            - $ref: '#/components/schemas/TerminologyFile'
-            - description: The file containing the custom terminology data. Your version of the AWS SDK performs a Base64-encoding on this field before sending a request to the AWS service. Users of the SDK should not perform Base64-encoding themselves.
+          $ref: '#/components/schemas/TerminologyFile'
+          description: The file containing the custom terminology data. Your version of the AWS SDK performs a Base64-encoding on this field before sending a request to the AWS service. Users of the SDK should not perform Base64-encoding themselves.
         Format:
-          allOf:
-            - $ref: '#/components/schemas/TerminologyDataFormat'
-            - description: The data format of the custom terminology. Either CSV or TMX.
+          $ref: '#/components/schemas/TerminologyDataFormat'
+          description: The data format of the custom terminology. Either CSV or TMX.
       description: The data associated with the custom terminology.
     S3Uri:
       type: string
@@ -1808,13 +1686,11 @@ components:
         - ContentType
       properties:
         S3Uri:
-          allOf:
-            - $ref: '#/components/schemas/S3Uri'
-            - description: The URI of the AWS S3 folder that contains the input file. The folder must be in the same Region as the API endpoint you are calling.
+          $ref: '#/components/schemas/S3Uri'
+          description: The URI of the AWS S3 folder that contains the input file. The folder must be in the same Region as the API endpoint you are calling.
         ContentType:
-          allOf:
-            - $ref: '#/components/schemas/ContentType'
-            - description: '<p>Describes the format of the data that you submit to Amazon Translate as input. You can specify one of the following multipurpose internet mail extension (MIME) types:</p> <ul> <li> <p> <code>text/html</code>: The input data consists of one or more HTML files. Amazon Translate translates only the text that resides in the <code>html</code> element in each file.</p> </li> <li> <p> <code>text/plain</code>: The input data consists of one or more unformatted text files. Amazon Translate translates every character in this type of input.</p> </li> <li> <p> <code>application/vnd.openxmlformats-officedocument.wordprocessingml.document</code>: The input data consists of one or more Word documents (.docx).</p> </li> <li> <p> <code>application/vnd.openxmlformats-officedocument.presentationml.presentation</code>: The input data consists of one or more PowerPoint Presentation files (.pptx).</p> </li> <li> <p> <code>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</code>: The input data consists of one or more Excel Workbook files (.xlsx).</p> </li> </ul> <important> <p>If you structure your input data as HTML, ensure that you set this parameter to <code>text/html</code>. By doing so, you cut costs by limiting the translation to the contents of the <code>html</code> element in each file. Otherwise, if you set this parameter to <code>text/plain</code>, your costs will cover the translation of every character.</p> </important>'
+          $ref: '#/components/schemas/ContentType'
+          description: '<p>Describes the format of the data that you submit to Amazon Translate as input. You can specify one of the following multipurpose internet mail extension (MIME) types:</p> <ul> <li> <p> <code>text/html</code>: The input data consists of one or more HTML files. Amazon Translate translates only the text that resides in the <code>html</code> element in each file.</p> </li> <li> <p> <code>text/plain</code>: The input data consists of one or more unformatted text files. Amazon Translate translates every character in this type of input.</p> </li> <li> <p> <code>application/vnd.openxmlformats-officedocument.wordprocessingml.document</code>: The input data consists of one or more Word documents (.docx).</p> </li> <li> <p> <code>application/vnd.openxmlformats-officedocument.presentationml.presentation</code>: The input data consists of one or more PowerPoint Presentation files (.pptx).</p> </li> <li> <p> <code>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</code>: The input data consists of one or more Excel Workbook files (.xlsx).</p> </li> </ul> <important> <p>If you structure your input data as HTML, ensure that you set this parameter to <code>text/html</code>. By doing so, you cut costs by limiting the translation to the contents of the <code>html</code> element in each file. Otherwise, if you set this parameter to <code>text/plain</code>, your costs will cover the translation of every character.</p> </important>'
       description: The input configuration properties for requesting a batch translation job.
     Integer:
       type: integer
@@ -1822,17 +1698,14 @@ components:
       type: object
       properties:
         TranslatedDocumentsCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The number of documents successfully processed during a translation job.
+          $ref: '#/components/schemas/Integer'
+          description: The number of documents successfully processed during a translation job.
         DocumentsWithErrorsCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The number of documents that could not be processed during a translation job.
+          $ref: '#/components/schemas/Integer'
+          description: The number of documents that could not be processed during a translation job.
         InputDocumentsCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The number of documents used as input in a translation job.
+          $ref: '#/components/schemas/Integer'
+          description: The number of documents used as input in a translation job.
       description: The number of documents successfully and unsuccessfully processed during a translation job.
     JobName:
       type: string
@@ -1877,21 +1750,17 @@ components:
       type: object
       properties:
         JobName:
-          allOf:
-            - $ref: '#/components/schemas/JobName'
-            - description: Filters the list of jobs by name.
+          $ref: '#/components/schemas/JobName'
+          description: Filters the list of jobs by name.
         JobStatus:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: Filters the list of jobs based by job status.
+          $ref: '#/components/schemas/JobStatus'
+          description: Filters the list of jobs based by job status.
         SubmittedBeforeTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Filters the list of jobs based on the time that the job was submitted for processing and returns only the jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Filters the list of jobs based on the time that the job was submitted for processing and returns only the jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.'
         SubmittedAfterTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Filters the list of jobs based on the time that the job was submitted for processing and returns only the jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Filters the list of jobs based on the time that the job was submitted for processing and returns only the jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.'
       description: 'Provides information for filtering a list of translation jobs. For more information, see <a>ListTextTranslationJobs</a>.'
     TextTranslationJobPropertiesList:
       type: array
@@ -1905,9 +1774,8 @@ components:
         - S3Uri
       properties:
         S3Uri:
-          allOf:
-            - $ref: '#/components/schemas/S3Uri'
-            - description: The URI of the S3 folder that contains a translation job's output file. The folder must be in the same Region as the API endpoint that you are calling.
+          $ref: '#/components/schemas/S3Uri'
+          description: The URI of the S3 folder that contains a translation job's output file. The folder must be in the same Region as the API endpoint that you are calling.
       description: The output configuration properties for a batch translation job.
     ParallelDataArn:
       type: string
@@ -1942,13 +1810,11 @@ components:
       type: object
       properties:
         SourceText:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The source text of the term being translated by the custom terminology.
+          $ref: '#/components/schemas/String'
+          description: The source text of the term being translated by the custom terminology.
         TargetText:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The target text of the term being translated by the custom terminology.
+          $ref: '#/components/schemas/String'
+          description: The target text of the term being translated by the custom terminology.
       description: The term being translated by the custom terminology.
     TerminologyArn:
       type: string

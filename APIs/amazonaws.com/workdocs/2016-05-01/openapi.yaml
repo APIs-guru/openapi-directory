@@ -577,13 +577,11 @@ paths:
                   type: object
                   properties:
                     SendEmail:
-                      allOf:
-                        - $ref: '#/components/schemas/BooleanType'
-                        - description: Boolean value to indicate an email notification should be sent to the receipients.
+                      $ref: '#/components/schemas/BooleanType'
+                      description: Boolean value to indicate an email notification should be sent to the receipients.
                     EmailMessage:
-                      allOf:
-                        - $ref: '#/components/schemas/MessageType'
-                        - description: Text value to be included in the email body.
+                      $ref: '#/components/schemas/MessageType'
+                      description: Text value to be included in the email body.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1546,13 +1544,11 @@ paths:
                   type: object
                   properties:
                     StorageAllocatedInBytes:
-                      allOf:
-                        - $ref: '#/components/schemas/PositiveSizeType'
-                        - description: 'The amount of storage allocated, in bytes.'
+                      $ref: '#/components/schemas/PositiveSizeType'
+                      description: 'The amount of storage allocated, in bytes.'
                     StorageType:
-                      allOf:
-                        - $ref: '#/components/schemas/StorageType'
-                        - description: The type of storage.
+                      $ref: '#/components/schemas/StorageType'
+                      description: The type of storage.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2790,13 +2786,11 @@ paths:
                   type: object
                   properties:
                     StorageAllocatedInBytes:
-                      allOf:
-                        - $ref: '#/components/schemas/PositiveSizeType'
-                        - description: 'The amount of storage allocated, in bytes.'
+                      $ref: '#/components/schemas/PositiveSizeType'
+                      description: 'The amount of storage allocated, in bytes.'
                     StorageType:
-                      allOf:
-                        - $ref: '#/components/schemas/StorageType'
-                        - description: The type of storage.
+                      $ref: '#/components/schemas/StorageType'
+                      description: The type of storage.
                 TimeZoneId:
                   description: The time zone ID of the user.
                   type: string
@@ -3960,16 +3954,14 @@ components:
       type: object
       properties:
         User:
-          allOf:
-            - $ref: '#/components/schemas/User'
-            - description: The user information.
+          $ref: '#/components/schemas/User'
+          description: The user information.
     AddResourcePermissionsResponse:
       type: object
       properties:
         ShareResults:
-          allOf:
-            - $ref: '#/components/schemas/ShareResultsList'
-            - description: The share results.
+          $ref: '#/components/schemas/ShareResultsList'
+          description: The share results.
     SharePrincipal:
       type: object
       required:
@@ -3978,17 +3970,14 @@ components:
         - Role
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the recipient.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the recipient.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/PrincipalType'
-            - description: The type of the recipient.
+          $ref: '#/components/schemas/PrincipalType'
+          description: The type of the recipient.
         Role:
-          allOf:
-            - $ref: '#/components/schemas/RoleType'
-            - description: The role of the recipient.
+          $ref: '#/components/schemas/RoleType'
+          description: The role of the recipient.
       description: 'Describes the recipient type and ID, if available.'
     BooleanType:
       type: boolean
@@ -4001,9 +3990,8 @@ components:
       type: object
       properties:
         Comment:
-          allOf:
-            - $ref: '#/components/schemas/Comment'
-            - description: The comment that has been created.
+          $ref: '#/components/schemas/Comment'
+          description: The comment that has been created.
     DocumentLockedForCommentsException: {}
     InvalidCommentOperationException: {}
     CreateCustomMetadataResponse:
@@ -4019,9 +4007,8 @@ components:
       type: object
       properties:
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/FolderMetadata'
-            - description: The metadata of the folder.
+          $ref: '#/components/schemas/FolderMetadata'
+          description: The metadata of the folder.
     EntityAlreadyExistsException: {}
     ConflictingOperationException: {}
     LimitExceededException: {}
@@ -4038,17 +4025,15 @@ components:
       type: object
       properties:
         Subscription:
-          allOf:
-            - $ref: '#/components/schemas/Subscription'
-            - description: The subscription.
+          $ref: '#/components/schemas/Subscription'
+          description: The subscription.
     TooManySubscriptionsException: {}
     CreateUserResponse:
       type: object
       properties:
         User:
-          allOf:
-            - $ref: '#/components/schemas/User'
-            - description: The user information.
+          $ref: '#/components/schemas/User'
+          description: The user information.
     PositiveSizeType:
       type: integer
       minimum: 0
@@ -4073,193 +4058,160 @@ components:
       type: object
       properties:
         UserActivities:
-          allOf:
-            - $ref: '#/components/schemas/UserActivities'
-            - description: The list of activities for the specified user and time period.
+          $ref: '#/components/schemas/UserActivities'
+          description: The list of activities for the specified user and time period.
         Marker:
-          allOf:
-            - $ref: '#/components/schemas/MarkerType'
-            - description: The marker for the next set of results.
+          $ref: '#/components/schemas/MarkerType'
+          description: The marker for the next set of results.
     InvalidArgumentException: {}
     DescribeCommentsResponse:
       type: object
       properties:
         Comments:
-          allOf:
-            - $ref: '#/components/schemas/CommentList'
-            - description: The list of comments for the specified document version.
+          $ref: '#/components/schemas/CommentList'
+          description: The list of comments for the specified document version.
         Marker:
-          allOf:
-            - $ref: '#/components/schemas/MarkerType'
-            - description: The marker for the next set of results. This marker was received from a previous call.
+          $ref: '#/components/schemas/MarkerType'
+          description: The marker for the next set of results. This marker was received from a previous call.
     DescribeDocumentVersionsResponse:
       type: object
       properties:
         DocumentVersions:
-          allOf:
-            - $ref: '#/components/schemas/DocumentVersionMetadataList'
-            - description: The document versions.
+          $ref: '#/components/schemas/DocumentVersionMetadataList'
+          description: The document versions.
         Marker:
-          allOf:
-            - $ref: '#/components/schemas/PageMarkerType'
-            - description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+          $ref: '#/components/schemas/PageMarkerType'
+          description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
     DescribeFolderContentsResponse:
       type: object
       properties:
         Folders:
-          allOf:
-            - $ref: '#/components/schemas/FolderMetadataList'
-            - description: The subfolders in the specified folder.
+          $ref: '#/components/schemas/FolderMetadataList'
+          description: The subfolders in the specified folder.
         Documents:
-          allOf:
-            - $ref: '#/components/schemas/DocumentMetadataList'
-            - description: The documents in the specified folder.
+          $ref: '#/components/schemas/DocumentMetadataList'
+          description: The documents in the specified folder.
         Marker:
-          allOf:
-            - $ref: '#/components/schemas/PageMarkerType'
-            - description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+          $ref: '#/components/schemas/PageMarkerType'
+          description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
     DescribeGroupsResponse:
       type: object
       properties:
         Groups:
-          allOf:
-            - $ref: '#/components/schemas/GroupMetadataList'
-            - description: The list of groups.
+          $ref: '#/components/schemas/GroupMetadataList'
+          description: The list of groups.
         Marker:
-          allOf:
-            - $ref: '#/components/schemas/MarkerType'
-            - description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+          $ref: '#/components/schemas/MarkerType'
+          description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
     DescribeNotificationSubscriptionsResponse:
       type: object
       properties:
         Subscriptions:
-          allOf:
-            - $ref: '#/components/schemas/SubscriptionList'
-            - description: The subscriptions.
+          $ref: '#/components/schemas/SubscriptionList'
+          description: The subscriptions.
         Marker:
-          allOf:
-            - $ref: '#/components/schemas/PageMarkerType'
-            - description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+          $ref: '#/components/schemas/PageMarkerType'
+          description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
     DescribeResourcePermissionsResponse:
       type: object
       properties:
         Principals:
-          allOf:
-            - $ref: '#/components/schemas/PrincipalList'
-            - description: The principals.
+          $ref: '#/components/schemas/PrincipalList'
+          description: The principals.
         Marker:
-          allOf:
-            - $ref: '#/components/schemas/PageMarkerType'
-            - description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+          $ref: '#/components/schemas/PageMarkerType'
+          description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
     DescribeRootFoldersResponse:
       type: object
       properties:
         Folders:
-          allOf:
-            - $ref: '#/components/schemas/FolderMetadataList'
-            - description: The user's special folders.
+          $ref: '#/components/schemas/FolderMetadataList'
+          description: The user's special folders.
         Marker:
-          allOf:
-            - $ref: '#/components/schemas/PageMarkerType'
-            - description: The marker for the next set of results.
+          $ref: '#/components/schemas/PageMarkerType'
+          description: The marker for the next set of results.
     DescribeUsersResponse:
       type: object
       properties:
         Users:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationUserList'
-            - description: The users.
+          $ref: '#/components/schemas/OrganizationUserList'
+          description: The users.
         TotalNumberOfUsers:
           allOf:
             - $ref: '#/components/schemas/SizeType'
             - deprecated: true
               description: The total number of users included in the results.
         Marker:
-          allOf:
-            - $ref: '#/components/schemas/PageMarkerType'
-            - description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+          $ref: '#/components/schemas/PageMarkerType'
+          description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
     RequestedEntityTooLargeException: {}
     GetCurrentUserResponse:
       type: object
       properties:
         User:
-          allOf:
-            - $ref: '#/components/schemas/User'
-            - description: Metadata of the user.
+          $ref: '#/components/schemas/User'
+          description: Metadata of the user.
     GetDocumentResponse:
       type: object
       properties:
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/DocumentMetadata'
-            - description: The metadata details of the document.
+          $ref: '#/components/schemas/DocumentMetadata'
+          description: The metadata details of the document.
         CustomMetadata:
-          allOf:
-            - $ref: '#/components/schemas/CustomMetadataMap'
-            - description: The custom metadata on the document.
+          $ref: '#/components/schemas/CustomMetadataMap'
+          description: The custom metadata on the document.
     InvalidPasswordException: {}
     GetDocumentPathResponse:
       type: object
       properties:
         Path:
-          allOf:
-            - $ref: '#/components/schemas/ResourcePath'
-            - description: The path information.
+          $ref: '#/components/schemas/ResourcePath'
+          description: The path information.
     GetDocumentVersionResponse:
       type: object
       properties:
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/DocumentVersionMetadata'
-            - description: The version metadata.
+          $ref: '#/components/schemas/DocumentVersionMetadata'
+          description: The version metadata.
         CustomMetadata:
-          allOf:
-            - $ref: '#/components/schemas/CustomMetadataMap'
-            - description: The custom metadata on the document version.
+          $ref: '#/components/schemas/CustomMetadataMap'
+          description: The custom metadata on the document version.
     GetFolderResponse:
       type: object
       properties:
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/FolderMetadata'
-            - description: The metadata of the folder.
+          $ref: '#/components/schemas/FolderMetadata'
+          description: The metadata of the folder.
         CustomMetadata:
-          allOf:
-            - $ref: '#/components/schemas/CustomMetadataMap'
-            - description: The custom metadata on the folder.
+          $ref: '#/components/schemas/CustomMetadataMap'
+          description: The custom metadata on the folder.
     GetFolderPathResponse:
       type: object
       properties:
         Path:
-          allOf:
-            - $ref: '#/components/schemas/ResourcePath'
-            - description: The path information.
+          $ref: '#/components/schemas/ResourcePath'
+          description: The path information.
     GetResourcesResponse:
       type: object
       properties:
         Folders:
-          allOf:
-            - $ref: '#/components/schemas/FolderMetadataList'
-            - description: The folders in the specified folder.
+          $ref: '#/components/schemas/FolderMetadataList'
+          description: The folders in the specified folder.
         Documents:
-          allOf:
-            - $ref: '#/components/schemas/DocumentMetadataList'
-            - description: The documents in the specified collection.
+          $ref: '#/components/schemas/DocumentMetadataList'
+          description: The documents in the specified collection.
         Marker:
-          allOf:
-            - $ref: '#/components/schemas/PageMarkerType'
-            - description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+          $ref: '#/components/schemas/PageMarkerType'
+          description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
     InitiateDocumentVersionUploadResponse:
       type: object
       properties:
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/DocumentMetadata'
-            - description: The document metadata.
+          $ref: '#/components/schemas/DocumentMetadata'
+          description: The document metadata.
         UploadMetadata:
-          allOf:
-            - $ref: '#/components/schemas/UploadMetadata'
-            - description: The upload metadata.
+          $ref: '#/components/schemas/UploadMetadata'
+          description: The upload metadata.
     StorageLimitExceededException: {}
     StorageLimitWillExceedException: {}
     DraftUploadOutOfSyncException: {}
@@ -4269,9 +4221,8 @@ components:
       type: object
       properties:
         User:
-          allOf:
-            - $ref: '#/components/schemas/User'
-            - description: The user information.
+          $ref: '#/components/schemas/User'
+          description: The user information.
     IllegalUserStateException: {}
     DeactivatingLastSystemUserException: {}
     AuthenticationHeaderType:
@@ -4306,65 +4257,50 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the user.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the user.
         Username:
-          allOf:
-            - $ref: '#/components/schemas/UsernameType'
-            - description: The login name of the user.
+          $ref: '#/components/schemas/UsernameType'
+          description: The login name of the user.
         EmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/EmailAddressType'
-            - description: The email address of the user.
+          $ref: '#/components/schemas/EmailAddressType'
+          description: The email address of the user.
         GivenName:
-          allOf:
-            - $ref: '#/components/schemas/UserAttributeValueType'
-            - description: The given name of the user.
+          $ref: '#/components/schemas/UserAttributeValueType'
+          description: The given name of the user.
         Surname:
-          allOf:
-            - $ref: '#/components/schemas/UserAttributeValueType'
-            - description: The surname of the user.
+          $ref: '#/components/schemas/UserAttributeValueType'
+          description: The surname of the user.
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the organization.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the organization.
         RootFolderId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceIdType'
-            - description: The ID of the root folder.
+          $ref: '#/components/schemas/ResourceIdType'
+          description: The ID of the root folder.
         RecycleBinFolderId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceIdType'
-            - description: The ID of the recycle bin folder.
+          $ref: '#/components/schemas/ResourceIdType'
+          description: The ID of the recycle bin folder.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/UserStatusType'
-            - description: The status of the user.
+          $ref: '#/components/schemas/UserStatusType'
+          description: The status of the user.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/UserType'
-            - description: The type of user.
+          $ref: '#/components/schemas/UserType'
+          description: The type of user.
         CreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/TimestampType'
-            - description: The time when the user was created.
+          $ref: '#/components/schemas/TimestampType'
+          description: The time when the user was created.
         ModifiedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/TimestampType'
-            - description: The time when the user was modified.
+          $ref: '#/components/schemas/TimestampType'
+          description: The time when the user was modified.
         TimeZoneId:
-          allOf:
-            - $ref: '#/components/schemas/TimeZoneIdType'
-            - description: The time zone ID of the user.
+          $ref: '#/components/schemas/TimeZoneIdType'
+          description: The time zone ID of the user.
         Locale:
-          allOf:
-            - $ref: '#/components/schemas/LocaleType'
-            - description: The locale of the user.
+          $ref: '#/components/schemas/LocaleType'
+          description: The locale of the user.
         Storage:
-          allOf:
-            - $ref: '#/components/schemas/UserStorageMetadata'
-            - description: The storage for the user.
+          $ref: '#/components/schemas/UserStorageMetadata'
+          description: The storage for the user.
       description: Describes a user.
     ActivityType:
       type: string
@@ -4409,133 +4345,105 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the user.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the user.
         Username:
-          allOf:
-            - $ref: '#/components/schemas/UsernameType'
-            - description: The name of the user.
+          $ref: '#/components/schemas/UsernameType'
+          description: The name of the user.
         GivenName:
-          allOf:
-            - $ref: '#/components/schemas/UserAttributeValueType'
-            - description: The given name of the user before a rename operation.
+          $ref: '#/components/schemas/UserAttributeValueType'
+          description: The given name of the user before a rename operation.
         Surname:
-          allOf:
-            - $ref: '#/components/schemas/UserAttributeValueType'
-            - description: The surname of the user.
+          $ref: '#/components/schemas/UserAttributeValueType'
+          description: The surname of the user.
         EmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/EmailAddressType'
-            - description: The email address of the user.
+          $ref: '#/components/schemas/EmailAddressType'
+          description: The email address of the user.
       description: Describes the metadata of the user.
     Participants:
       type: object
       properties:
         Users:
-          allOf:
-            - $ref: '#/components/schemas/UserMetadataList'
-            - description: The list of users.
+          $ref: '#/components/schemas/UserMetadataList'
+          description: The list of users.
         Groups:
-          allOf:
-            - $ref: '#/components/schemas/GroupMetadataList'
-            - description: The list of user groups.
+          $ref: '#/components/schemas/GroupMetadataList'
+          description: The list of user groups.
       description: Describes the users or user groups.
     ResourceMetadata:
       type: object
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: The type of resource.
+          $ref: '#/components/schemas/ResourceType'
+          description: The type of resource.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceNameType'
-            - description: The name of the resource.
+          $ref: '#/components/schemas/ResourceNameType'
+          description: The name of the resource.
         OriginalName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceNameType'
-            - description: The original name of the resource before a rename operation.
+          $ref: '#/components/schemas/ResourceNameType'
+          description: The original name of the resource before a rename operation.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ResourceIdType'
-            - description: The ID of the resource.
+          $ref: '#/components/schemas/ResourceIdType'
+          description: The ID of the resource.
         VersionId:
-          allOf:
-            - $ref: '#/components/schemas/DocumentVersionIdType'
-            - description: The version ID of the resource. This is an optional field and is filled for action on document version.
+          $ref: '#/components/schemas/DocumentVersionIdType'
+          description: The version ID of the resource. This is an optional field and is filled for action on document version.
         Owner:
-          allOf:
-            - $ref: '#/components/schemas/UserMetadata'
-            - description: The owner of the resource.
+          $ref: '#/components/schemas/UserMetadata'
+          description: The owner of the resource.
         ParentId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceIdType'
-            - description: The parent ID of the resource before a rename operation.
+          $ref: '#/components/schemas/ResourceIdType'
+          description: The parent ID of the resource before a rename operation.
       description: Describes the metadata of a resource.
     CommentMetadata:
       type: object
       properties:
         CommentId:
-          allOf:
-            - $ref: '#/components/schemas/CommentIdType'
-            - description: The ID of the comment.
+          $ref: '#/components/schemas/CommentIdType'
+          description: The ID of the comment.
         Contributor:
-          allOf:
-            - $ref: '#/components/schemas/User'
-            - description: The user who made the comment.
+          $ref: '#/components/schemas/User'
+          description: The user who made the comment.
         CreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/TimestampType'
-            - description: The timestamp that the comment was created.
+          $ref: '#/components/schemas/TimestampType'
+          description: The timestamp that the comment was created.
         CommentStatus:
-          allOf:
-            - $ref: '#/components/schemas/CommentStatusType'
-            - description: The status of the comment.
+          $ref: '#/components/schemas/CommentStatusType'
+          description: The status of the comment.
         RecipientId:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the user being replied to.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the user being replied to.
       description: Describes the metadata of a comment.
     Activity:
       type: object
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ActivityType'
-            - description: The activity type.
+          $ref: '#/components/schemas/ActivityType'
+          description: The activity type.
         TimeStamp:
-          allOf:
-            - $ref: '#/components/schemas/TimestampType'
-            - description: The timestamp when the action was performed.
+          $ref: '#/components/schemas/TimestampType'
+          description: The timestamp when the action was performed.
         IsIndirectActivity:
-          allOf:
-            - $ref: '#/components/schemas/BooleanType'
-            - description: 'Indicates whether an activity is indirect or direct. An indirect activity results from a direct activity performed on a parent resource. For example, sharing a parent folder (the direct activity) shares all of the subfolders and documents within the parent folder (the indirect activity).'
+          $ref: '#/components/schemas/BooleanType'
+          description: 'Indicates whether an activity is indirect or direct. An indirect activity results from a direct activity performed on a parent resource. For example, sharing a parent folder (the direct activity) shares all of the subfolders and documents within the parent folder (the indirect activity).'
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the organization.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the organization.
         Initiator:
-          allOf:
-            - $ref: '#/components/schemas/UserMetadata'
-            - description: The user who performed the action.
+          $ref: '#/components/schemas/UserMetadata'
+          description: The user who performed the action.
         Participants:
-          allOf:
-            - $ref: '#/components/schemas/Participants'
-            - description: 'The list of users or groups impacted by this action. This is an optional field and is filled for the following sharing activities: DOCUMENT_SHARED, DOCUMENT_SHARED, DOCUMENT_UNSHARED, FOLDER_SHARED, FOLDER_UNSHARED.'
+          $ref: '#/components/schemas/Participants'
+          description: 'The list of users or groups impacted by this action. This is an optional field and is filled for the following sharing activities: DOCUMENT_SHARED, DOCUMENT_SHARED, DOCUMENT_UNSHARED, FOLDER_SHARED, FOLDER_UNSHARED.'
         ResourceMetadata:
-          allOf:
-            - $ref: '#/components/schemas/ResourceMetadata'
-            - description: The metadata of the resource involved in the user action.
+          $ref: '#/components/schemas/ResourceMetadata'
+          description: The metadata of the resource involved in the user action.
         OriginalParent:
-          allOf:
-            - $ref: '#/components/schemas/ResourceMetadata'
-            - description: The original parent of the resource. This is an optional field and is filled for move activities.
+          $ref: '#/components/schemas/ResourceMetadata'
+          description: The original parent of the resource. This is an optional field and is filled for move activities.
         CommentMetadata:
-          allOf:
-            - $ref: '#/components/schemas/CommentMetadata'
-            - description: Metadata of the commenting activity. This is an optional field and is filled for commenting activities.
+          $ref: '#/components/schemas/CommentMetadata'
+          description: Metadata of the commenting activity. This is an optional field and is filled for commenting activities.
       description: Describes the activity information.
     ActivityNamesFilterType:
       type: string
@@ -4550,13 +4458,11 @@ components:
       type: object
       properties:
         SendEmail:
-          allOf:
-            - $ref: '#/components/schemas/BooleanType'
-            - description: Boolean value to indicate an email notification should be sent to the receipients.
+          $ref: '#/components/schemas/BooleanType'
+          description: Boolean value to indicate an email notification should be sent to the receipients.
         EmailMessage:
-          allOf:
-            - $ref: '#/components/schemas/MessageType'
-            - description: Text value to be included in the email body.
+          $ref: '#/components/schemas/MessageType'
+          description: Text value to be included in the email body.
       description: Set of options which defines notification preferences of given action.
     AddResourcePermissionsRequest:
       type: object
@@ -4565,13 +4471,11 @@ components:
       title: AddResourcePermissionsRequest
       properties:
         Principals:
-          allOf:
-            - $ref: '#/components/schemas/SharePrincipalList'
-            - description: 'The users, groups, or organization being granted permission.'
+          $ref: '#/components/schemas/SharePrincipalList'
+          description: 'The users, groups, or organization being granted permission.'
         NotificationOptions:
-          allOf:
-            - $ref: '#/components/schemas/NotificationOptions'
-            - description: The notification options.
+          $ref: '#/components/schemas/NotificationOptions'
+          description: The notification options.
     ShareResultsList:
       type: array
       items:
@@ -4608,41 +4512,32 @@ components:
         - CommentId
       properties:
         CommentId:
-          allOf:
-            - $ref: '#/components/schemas/CommentIdType'
-            - description: The ID of the comment.
+          $ref: '#/components/schemas/CommentIdType'
+          description: The ID of the comment.
         ParentId:
-          allOf:
-            - $ref: '#/components/schemas/CommentIdType'
-            - description: The ID of the parent comment.
+          $ref: '#/components/schemas/CommentIdType'
+          description: The ID of the parent comment.
         ThreadId:
-          allOf:
-            - $ref: '#/components/schemas/CommentIdType'
-            - description: The ID of the root comment in the thread.
+          $ref: '#/components/schemas/CommentIdType'
+          description: The ID of the root comment in the thread.
         Text:
-          allOf:
-            - $ref: '#/components/schemas/CommentTextType'
-            - description: The text of the comment.
+          $ref: '#/components/schemas/CommentTextType'
+          description: The text of the comment.
         Contributor:
-          allOf:
-            - $ref: '#/components/schemas/User'
-            - description: The details of the user who made the comment.
+          $ref: '#/components/schemas/User'
+          description: The details of the user who made the comment.
         CreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/TimestampType'
-            - description: The time that the comment was created.
+          $ref: '#/components/schemas/TimestampType'
+          description: The time that the comment was created.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/CommentStatusType'
-            - description: The status of the comment.
+          $ref: '#/components/schemas/CommentStatusType'
+          description: The status of the comment.
         Visibility:
-          allOf:
-            - $ref: '#/components/schemas/CommentVisibilityType'
-            - description: 'The visibility of the comment. Options are either PRIVATE, where the comment is visible only to the comment author and document owner and co-owners, or PUBLIC, where the comment is visible to document owners, co-owners, and contributors.'
+          $ref: '#/components/schemas/CommentVisibilityType'
+          description: 'The visibility of the comment. Options are either PRIVATE, where the comment is visible only to the comment author and document owner and co-owners, or PUBLIC, where the comment is visible to document owners, co-owners, and contributors.'
         RecipientId:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: 'If the comment is a reply to another user''s comment, this field contains the user ID of the user being replied to.'
+          $ref: '#/components/schemas/IdType'
+          description: 'If the comment is a reply to another user''s comment, this field contains the user ID of the user being replied to.'
       description: Describes a comment.
     CommentList:
       type: array
@@ -4655,25 +4550,20 @@ components:
       title: CreateCommentRequest
       properties:
         ParentId:
-          allOf:
-            - $ref: '#/components/schemas/CommentIdType'
-            - description: The ID of the parent comment.
+          $ref: '#/components/schemas/CommentIdType'
+          description: The ID of the parent comment.
         ThreadId:
-          allOf:
-            - $ref: '#/components/schemas/CommentIdType'
-            - description: The ID of the root comment in the thread.
+          $ref: '#/components/schemas/CommentIdType'
+          description: The ID of the root comment in the thread.
         Text:
-          allOf:
-            - $ref: '#/components/schemas/CommentTextType'
-            - description: The text of the comment.
+          $ref: '#/components/schemas/CommentTextType'
+          description: The text of the comment.
         Visibility:
-          allOf:
-            - $ref: '#/components/schemas/CommentVisibilityType'
-            - description: 'The visibility of the comment. Options are either PRIVATE, where the comment is visible only to the comment author and document owner and co-owners, or PUBLIC, where the comment is visible to document owners, co-owners, and contributors.'
+          $ref: '#/components/schemas/CommentVisibilityType'
+          description: 'The visibility of the comment. Options are either PRIVATE, where the comment is visible only to the comment author and document owner and co-owners, or PUBLIC, where the comment is visible to document owners, co-owners, and contributors.'
         NotifyCollaborators:
-          allOf:
-            - $ref: '#/components/schemas/BooleanType'
-            - description: Set this parameter to TRUE to send an email out to the document collaborators after the comment is created.
+          $ref: '#/components/schemas/BooleanType'
+          description: Set this parameter to TRUE to send an email out to the document collaborators after the comment is created.
     CustomMetadataMap:
       type: object
       minProperties: 1
@@ -4687,9 +4577,8 @@ components:
       title: CreateCustomMetadataRequest
       properties:
         CustomMetadata:
-          allOf:
-            - $ref: '#/components/schemas/CustomMetadataMap'
-            - description: Custom metadata in the form of name-value pairs.
+          $ref: '#/components/schemas/CustomMetadataMap'
+          description: Custom metadata in the form of name-value pairs.
     ResourceNameType:
       type: string
       pattern: '[\u0020-\u202D\u202F-\uFFFF]+'
@@ -4702,60 +4591,47 @@ components:
       title: CreateFolderRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceNameType'
-            - description: The name of the new folder.
+          $ref: '#/components/schemas/ResourceNameType'
+          description: The name of the new folder.
         ParentFolderId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceIdType'
-            - description: The ID of the parent folder.
+          $ref: '#/components/schemas/ResourceIdType'
+          description: The ID of the parent folder.
     FolderMetadata:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ResourceIdType'
-            - description: The ID of the folder.
+          $ref: '#/components/schemas/ResourceIdType'
+          description: The ID of the folder.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceNameType'
-            - description: The name of the folder.
+          $ref: '#/components/schemas/ResourceNameType'
+          description: The name of the folder.
         CreatorId:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the creator.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the creator.
         ParentFolderId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceIdType'
-            - description: The ID of the parent folder.
+          $ref: '#/components/schemas/ResourceIdType'
+          description: The ID of the parent folder.
         CreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/TimestampType'
-            - description: The time when the folder was created.
+          $ref: '#/components/schemas/TimestampType'
+          description: The time when the folder was created.
         ModifiedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/TimestampType'
-            - description: The time when the folder was updated.
+          $ref: '#/components/schemas/TimestampType'
+          description: The time when the folder was updated.
         ResourceState:
-          allOf:
-            - $ref: '#/components/schemas/ResourceStateType'
-            - description: The resource state of the folder.
+          $ref: '#/components/schemas/ResourceStateType'
+          description: The resource state of the folder.
         Signature:
-          allOf:
-            - $ref: '#/components/schemas/HashType'
-            - description: The unique identifier created from the subfolders and documents of the folder.
+          $ref: '#/components/schemas/HashType'
+          description: The unique identifier created from the subfolders and documents of the folder.
         Labels:
-          allOf:
-            - $ref: '#/components/schemas/SharedLabels'
-            - description: List of labels on the folder.
+          $ref: '#/components/schemas/SharedLabels'
+          description: List of labels on the folder.
         Size:
-          allOf:
-            - $ref: '#/components/schemas/SizeType'
-            - description: The size of the folder metadata.
+          $ref: '#/components/schemas/SizeType'
+          description: The size of the folder metadata.
         LatestVersionSize:
-          allOf:
-            - $ref: '#/components/schemas/SizeType'
-            - description: The size of the latest version of the folder metadata.
+          $ref: '#/components/schemas/SizeType'
+          description: The size of the latest version of the folder metadata.
       description: Describes a folder.
     SharedLabels:
       type: array
@@ -4769,9 +4645,8 @@ components:
       title: CreateLabelsRequest
       properties:
         Labels:
-          allOf:
-            - $ref: '#/components/schemas/SharedLabels'
-            - description: List of labels to add to the resource.
+          $ref: '#/components/schemas/SharedLabels'
+          description: List of labels to add to the resource.
     SubscriptionEndPointType:
       type: string
       minLength: 1
@@ -4793,32 +4668,26 @@ components:
       title: CreateNotificationSubscriptionRequest
       properties:
         Endpoint:
-          allOf:
-            - $ref: '#/components/schemas/SubscriptionEndPointType'
-            - description: 'The endpoint to receive the notifications. If the protocol is HTTPS, the endpoint is a URL that begins with <code>https</code>.'
+          $ref: '#/components/schemas/SubscriptionEndPointType'
+          description: 'The endpoint to receive the notifications. If the protocol is HTTPS, the endpoint is a URL that begins with <code>https</code>.'
         Protocol:
-          allOf:
-            - $ref: '#/components/schemas/SubscriptionProtocolType'
-            - description: 'The protocol to use. The supported value is https, which delivers JSON-encoded messages using HTTPS POST.'
+          $ref: '#/components/schemas/SubscriptionProtocolType'
+          description: 'The protocol to use. The supported value is https, which delivers JSON-encoded messages using HTTPS POST.'
         SubscriptionType:
-          allOf:
-            - $ref: '#/components/schemas/SubscriptionType'
-            - description: The notification type.
+          $ref: '#/components/schemas/SubscriptionType'
+          description: The notification type.
     Subscription:
       type: object
       properties:
         SubscriptionId:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the subscription.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the subscription.
         EndPoint:
-          allOf:
-            - $ref: '#/components/schemas/SubscriptionEndPointType'
-            - description: The endpoint of the subscription.
+          $ref: '#/components/schemas/SubscriptionEndPointType'
+          description: The endpoint of the subscription.
         Protocol:
-          allOf:
-            - $ref: '#/components/schemas/SubscriptionProtocolType'
-            - description: The protocol of the subscription.
+          $ref: '#/components/schemas/SubscriptionProtocolType'
+          description: The protocol of the subscription.
       description: Describes a subscription.
     UsernameType:
       type: string
@@ -4848,13 +4717,11 @@ components:
       type: object
       properties:
         StorageAllocatedInBytes:
-          allOf:
-            - $ref: '#/components/schemas/PositiveSizeType'
-            - description: 'The amount of storage allocated, in bytes.'
+          $ref: '#/components/schemas/PositiveSizeType'
+          description: 'The amount of storage allocated, in bytes.'
         StorageType:
-          allOf:
-            - $ref: '#/components/schemas/StorageType'
-            - description: The type of storage.
+          $ref: '#/components/schemas/StorageType'
+          description: The type of storage.
       description: Describes the storage for a user.
     CreateUserRequest:
       type: object
@@ -4866,37 +4733,29 @@ components:
       title: CreateUserRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the organization.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the organization.
         Username:
-          allOf:
-            - $ref: '#/components/schemas/UsernameType'
-            - description: The login name of the user.
+          $ref: '#/components/schemas/UsernameType'
+          description: The login name of the user.
         EmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/EmailAddressType'
-            - description: The email address of the user.
+          $ref: '#/components/schemas/EmailAddressType'
+          description: The email address of the user.
         GivenName:
-          allOf:
-            - $ref: '#/components/schemas/UserAttributeValueType'
-            - description: The given name of the user.
+          $ref: '#/components/schemas/UserAttributeValueType'
+          description: The given name of the user.
         Surname:
-          allOf:
-            - $ref: '#/components/schemas/UserAttributeValueType'
-            - description: The surname of the user.
+          $ref: '#/components/schemas/UserAttributeValueType'
+          description: The surname of the user.
         Password:
-          allOf:
-            - $ref: '#/components/schemas/PasswordType'
-            - description: The password of the user.
+          $ref: '#/components/schemas/PasswordType'
+          description: The password of the user.
         TimeZoneId:
-          allOf:
-            - $ref: '#/components/schemas/TimeZoneIdType'
-            - description: The time zone ID of the user.
+          $ref: '#/components/schemas/TimeZoneIdType'
+          description: The time zone ID of the user.
         StorageRule:
-          allOf:
-            - $ref: '#/components/schemas/StorageRuleType'
-            - description: The amount of storage for the user.
+          $ref: '#/components/schemas/StorageRuleType'
+          description: The amount of storage for the user.
     CustomMetadataKeyList:
       type: array
       items:
@@ -5078,57 +4937,44 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/DocumentVersionIdType'
-            - description: The ID of the version.
+          $ref: '#/components/schemas/DocumentVersionIdType'
+          description: The ID of the version.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceNameType'
-            - description: The name of the version.
+          $ref: '#/components/schemas/ResourceNameType'
+          description: The name of the version.
         ContentType:
-          allOf:
-            - $ref: '#/components/schemas/DocumentContentType'
-            - description: The content type of the document.
+          $ref: '#/components/schemas/DocumentContentType'
+          description: The content type of the document.
         Size:
-          allOf:
-            - $ref: '#/components/schemas/SizeType'
-            - description: 'The size of the document, in bytes.'
+          $ref: '#/components/schemas/SizeType'
+          description: 'The size of the document, in bytes.'
         Signature:
-          allOf:
-            - $ref: '#/components/schemas/HashType'
-            - description: The signature of the document.
+          $ref: '#/components/schemas/HashType'
+          description: The signature of the document.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/DocumentStatusType'
-            - description: The status of the document.
+          $ref: '#/components/schemas/DocumentStatusType'
+          description: The status of the document.
         CreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/TimestampType'
-            - description: The timestamp when the document was first uploaded.
+          $ref: '#/components/schemas/TimestampType'
+          description: The timestamp when the document was first uploaded.
         ModifiedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/TimestampType'
-            - description: The timestamp when the document was last uploaded.
+          $ref: '#/components/schemas/TimestampType'
+          description: The timestamp when the document was last uploaded.
         ContentCreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/TimestampType'
-            - description: The timestamp when the content of the document was originally created.
+          $ref: '#/components/schemas/TimestampType'
+          description: The timestamp when the content of the document was originally created.
         ContentModifiedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/TimestampType'
-            - description: The timestamp when the content of the document was modified.
+          $ref: '#/components/schemas/TimestampType'
+          description: The timestamp when the content of the document was modified.
         CreatorId:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the creator.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the creator.
         Thumbnail:
-          allOf:
-            - $ref: '#/components/schemas/DocumentThumbnailUrlMap'
-            - description: The thumbnail of the document.
+          $ref: '#/components/schemas/DocumentThumbnailUrlMap'
+          description: The thumbnail of the document.
         Source:
-          allOf:
-            - $ref: '#/components/schemas/DocumentSourceUrlMap'
-            - description: The source of the document.
+          $ref: '#/components/schemas/DocumentSourceUrlMap'
+          description: The source of the document.
       description: Describes a version of a document.
     ResourceStateType:
       type: string
@@ -5141,37 +4987,29 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ResourceIdType'
-            - description: The ID of the document.
+          $ref: '#/components/schemas/ResourceIdType'
+          description: The ID of the document.
         CreatorId:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the creator.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the creator.
         ParentFolderId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceIdType'
-            - description: The ID of the parent folder.
+          $ref: '#/components/schemas/ResourceIdType'
+          description: The ID of the parent folder.
         CreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/TimestampType'
-            - description: The time when the document was created.
+          $ref: '#/components/schemas/TimestampType'
+          description: The time when the document was created.
         ModifiedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/TimestampType'
-            - description: The time when the document was updated.
+          $ref: '#/components/schemas/TimestampType'
+          description: The time when the document was updated.
         LatestVersionMetadata:
-          allOf:
-            - $ref: '#/components/schemas/DocumentVersionMetadata'
-            - description: The latest version of the document.
+          $ref: '#/components/schemas/DocumentVersionMetadata'
+          description: The latest version of the document.
         ResourceState:
-          allOf:
-            - $ref: '#/components/schemas/ResourceStateType'
-            - description: The resource state.
+          $ref: '#/components/schemas/ResourceStateType'
+          description: The resource state.
         Labels:
-          allOf:
-            - $ref: '#/components/schemas/SharedLabels'
-            - description: List of labels on the document.
+          $ref: '#/components/schemas/SharedLabels'
+          description: List of labels on the document.
       description: Describes the document.
     DocumentSourceType:
       type: string
@@ -5223,9 +5061,8 @@ components:
       type: object
       properties:
         Components:
-          allOf:
-            - $ref: '#/components/schemas/ResourcePathComponentList'
-            - description: The components of the resource path.
+          $ref: '#/components/schemas/ResourcePathComponentList'
+          description: The components of the resource path.
       description: Describes the path information of a resource.
     GetDocumentRequest:
       type: object
@@ -5257,13 +5094,11 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the user group.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the user group.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/GroupNameType'
-            - description: The name of the group.
+          $ref: '#/components/schemas/GroupNameType'
+          description: The name of the group.
       description: Describes the metadata of a user group.
     HeaderNameType:
       type: string
@@ -5281,44 +5116,35 @@ components:
       title: InitiateDocumentVersionUploadRequest
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ResourceIdType'
-            - description: The ID of the document.
+          $ref: '#/components/schemas/ResourceIdType'
+          description: The ID of the document.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceNameType'
-            - description: The name of the document.
+          $ref: '#/components/schemas/ResourceNameType'
+          description: The name of the document.
         ContentCreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/TimestampType'
-            - description: The timestamp when the content of the document was originally created.
+          $ref: '#/components/schemas/TimestampType'
+          description: The timestamp when the content of the document was originally created.
         ContentModifiedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/TimestampType'
-            - description: The timestamp when the content of the document was modified.
+          $ref: '#/components/schemas/TimestampType'
+          description: The timestamp when the content of the document was modified.
         ContentType:
-          allOf:
-            - $ref: '#/components/schemas/DocumentContentType'
-            - description: The content type of the document.
+          $ref: '#/components/schemas/DocumentContentType'
+          description: The content type of the document.
         DocumentSizeInBytes:
-          allOf:
-            - $ref: '#/components/schemas/SizeType'
-            - description: 'The size of the document, in bytes.'
+          $ref: '#/components/schemas/SizeType'
+          description: 'The size of the document, in bytes.'
         ParentFolderId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceIdType'
-            - description: The ID of the parent folder.
+          $ref: '#/components/schemas/ResourceIdType'
+          description: The ID of the parent folder.
     UploadMetadata:
       type: object
       properties:
         UploadUrl:
-          allOf:
-            - $ref: '#/components/schemas/UrlType'
-            - description: The URL of the upload.
+          $ref: '#/components/schemas/UrlType'
+          description: The URL of the upload.
         SignedHeaders:
-          allOf:
-            - $ref: '#/components/schemas/SignedHeaderMap'
-            - description: The signed headers.
+          $ref: '#/components/schemas/SignedHeaderMap'
+          description: The signed headers.
       description: Describes the upload.
     LocaleType:
       type: string
@@ -5354,13 +5180,11 @@ components:
       type: object
       properties:
         Role:
-          allOf:
-            - $ref: '#/components/schemas/RoleType'
-            - description: The role of the user.
+          $ref: '#/components/schemas/RoleType'
+          description: The role of the user.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/RolePermissionType'
-            - description: The type of permissions.
+          $ref: '#/components/schemas/RolePermissionType'
+          description: The type of permissions.
       description: Describes the permissions.
     PermissionInfoList:
       type: array
@@ -5378,17 +5202,14 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the resource.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the resource.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/PrincipalType'
-            - description: The type of resource.
+          $ref: '#/components/schemas/PrincipalType'
+          description: The type of resource.
         Roles:
-          allOf:
-            - $ref: '#/components/schemas/PermissionInfoList'
-            - description: The permission information for the resource.
+          $ref: '#/components/schemas/PermissionInfoList'
+          description: The permission information for the resource.
       description: Describes a resource.
     RemoveAllResourcePermissionsRequest:
       type: object
@@ -5411,13 +5232,11 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the resource path.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the resource path.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceNameType'
-            - description: The name of the resource path.
+          $ref: '#/components/schemas/ResourceNameType'
+          description: The name of the resource path.
       description: Describes the resource path.
     ShareStatusType:
       type: string
@@ -5428,29 +5247,23 @@ components:
       type: object
       properties:
         PrincipalId:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the principal.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the principal.
         InviteePrincipalId:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the invited user.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the invited user.
         Role:
-          allOf:
-            - $ref: '#/components/schemas/RoleType'
-            - description: The role.
+          $ref: '#/components/schemas/RoleType'
+          description: The role.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ShareStatusType'
-            - description: The status.
+          $ref: '#/components/schemas/ShareStatusType'
+          description: The status.
         ShareId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceIdType'
-            - description: The ID of the resource that was shared.
+          $ref: '#/components/schemas/ResourceIdType'
+          description: The ID of the resource that was shared.
         StatusMessage:
-          allOf:
-            - $ref: '#/components/schemas/MessageType'
-            - description: The status message.
+          $ref: '#/components/schemas/MessageType'
+          description: The status message.
       description: Describes the share results of a resource.
     SignedHeaderMap:
       type: object
@@ -5461,41 +5274,34 @@ components:
       title: UpdateDocumentRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceNameType'
-            - description: The name of the document.
+          $ref: '#/components/schemas/ResourceNameType'
+          description: The name of the document.
         ParentFolderId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceIdType'
-            - description: The ID of the parent folder.
+          $ref: '#/components/schemas/ResourceIdType'
+          description: The ID of the parent folder.
         ResourceState:
-          allOf:
-            - $ref: '#/components/schemas/ResourceStateType'
-            - description: The resource state of the document. Only ACTIVE and RECYCLED are supported.
+          $ref: '#/components/schemas/ResourceStateType'
+          description: The resource state of the document. Only ACTIVE and RECYCLED are supported.
     UpdateDocumentVersionRequest:
       type: object
       title: UpdateDocumentVersionRequest
       properties:
         VersionStatus:
-          allOf:
-            - $ref: '#/components/schemas/DocumentVersionStatus'
-            - description: The status of the version.
+          $ref: '#/components/schemas/DocumentVersionStatus'
+          description: The status of the version.
     UpdateFolderRequest:
       type: object
       title: UpdateFolderRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceNameType'
-            - description: The name of the folder.
+          $ref: '#/components/schemas/ResourceNameType'
+          description: The name of the folder.
         ParentFolderId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceIdType'
-            - description: The ID of the parent folder.
+          $ref: '#/components/schemas/ResourceIdType'
+          description: The ID of the parent folder.
         ResourceState:
-          allOf:
-            - $ref: '#/components/schemas/ResourceStateType'
-            - description: The resource state of the folder. Only ACTIVE and RECYCLED are accepted values from the API.
+          $ref: '#/components/schemas/ResourceStateType'
+          description: The resource state of the folder. Only ACTIVE and RECYCLED are accepted values from the API.
     UserType:
       type: string
       enum:
@@ -5509,33 +5315,26 @@ components:
       title: UpdateUserRequest
       properties:
         GivenName:
-          allOf:
-            - $ref: '#/components/schemas/UserAttributeValueType'
-            - description: The given name of the user.
+          $ref: '#/components/schemas/UserAttributeValueType'
+          description: The given name of the user.
         Surname:
-          allOf:
-            - $ref: '#/components/schemas/UserAttributeValueType'
-            - description: The surname of the user.
+          $ref: '#/components/schemas/UserAttributeValueType'
+          description: The surname of the user.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/UserType'
-            - description: The type of the user.
+          $ref: '#/components/schemas/UserType'
+          description: The type of the user.
         StorageRule:
-          allOf:
-            - $ref: '#/components/schemas/StorageRuleType'
-            - description: The amount of storage for the user.
+          $ref: '#/components/schemas/StorageRuleType'
+          description: The amount of storage for the user.
         TimeZoneId:
-          allOf:
-            - $ref: '#/components/schemas/TimeZoneIdType'
-            - description: The time zone ID of the user.
+          $ref: '#/components/schemas/TimeZoneIdType'
+          description: The time zone ID of the user.
         Locale:
-          allOf:
-            - $ref: '#/components/schemas/LocaleType'
-            - description: The locale of the user.
+          $ref: '#/components/schemas/LocaleType'
+          description: The locale of the user.
         GrantPoweruserPrivileges:
-          allOf:
-            - $ref: '#/components/schemas/BooleanEnumType'
-            - description: Boolean value to determine whether the user is granted Poweruser privileges.
+          $ref: '#/components/schemas/BooleanEnumType'
+          description: Boolean value to determine whether the user is granted Poweruser privileges.
     UserStatusType:
       type: string
       enum:
@@ -5546,13 +5345,11 @@ components:
       type: object
       properties:
         StorageUtilizedInBytes:
-          allOf:
-            - $ref: '#/components/schemas/SizeType'
-            - description: 'The amount of storage used, in bytes.'
+          $ref: '#/components/schemas/SizeType'
+          description: 'The amount of storage used, in bytes.'
         StorageRule:
-          allOf:
-            - $ref: '#/components/schemas/StorageRuleType'
-            - description: The storage for a user.
+          $ref: '#/components/schemas/StorageRuleType'
+          description: The storage for a user.
       description: Describes the storage for a user.
 security:
   - hmac: []

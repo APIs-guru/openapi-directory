@@ -793,9 +793,8 @@ components:
       type: object
       properties:
         Status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: The status of the snapshot.
+          $ref: '#/components/schemas/Status'
+          description: The status of the snapshot.
     AccessDeniedException: {}
     ValidationException: {}
     ResourceNotFoundException: {}
@@ -806,55 +805,44 @@ components:
       type: object
       properties:
         BlockData:
-          allOf:
-            - $ref: '#/components/schemas/BlockData'
-            - description: The data content of the block.
+          $ref: '#/components/schemas/BlockData'
+          description: The data content of the block.
     ListChangedBlocksResponse:
       type: object
       properties:
         ChangedBlocks:
-          allOf:
-            - $ref: '#/components/schemas/ChangedBlocks'
-            - description: An array of objects containing information about the changed blocks.
+          $ref: '#/components/schemas/ChangedBlocks'
+          description: An array of objects containing information about the changed blocks.
         ExpiryTime:
-          allOf:
-            - $ref: '#/components/schemas/TimeStamp'
-            - description: The time when the <code>BlockToken</code> expires.
+          $ref: '#/components/schemas/TimeStamp'
+          description: The time when the <code>BlockToken</code> expires.
         VolumeSize:
-          allOf:
-            - $ref: '#/components/schemas/VolumeSize'
-            - description: The size of the volume in GB.
+          $ref: '#/components/schemas/VolumeSize'
+          description: The size of the volume in GB.
         BlockSize:
-          allOf:
-            - $ref: '#/components/schemas/BlockSize'
-            - description: 'The size of the blocks in the snapshot, in bytes.'
+          $ref: '#/components/schemas/BlockSize'
+          description: 'The size of the blocks in the snapshot, in bytes.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PageToken'
-            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+          $ref: '#/components/schemas/PageToken'
+          description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
     ListSnapshotBlocksResponse:
       type: object
       properties:
         Blocks:
-          allOf:
-            - $ref: '#/components/schemas/Blocks'
-            - description: An array of objects containing information about the blocks.
+          $ref: '#/components/schemas/Blocks'
+          description: An array of objects containing information about the blocks.
         ExpiryTime:
-          allOf:
-            - $ref: '#/components/schemas/TimeStamp'
-            - description: The time when the <code>BlockToken</code> expires.
+          $ref: '#/components/schemas/TimeStamp'
+          description: The time when the <code>BlockToken</code> expires.
         VolumeSize:
-          allOf:
-            - $ref: '#/components/schemas/VolumeSize'
-            - description: The size of the volume in GB.
+          $ref: '#/components/schemas/VolumeSize'
+          description: The size of the volume in GB.
         BlockSize:
-          allOf:
-            - $ref: '#/components/schemas/BlockSize'
-            - description: 'The size of the blocks in the snapshot, in bytes.'
+          $ref: '#/components/schemas/BlockSize'
+          description: 'The size of the blocks in the snapshot, in bytes.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PageToken'
-            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+          $ref: '#/components/schemas/PageToken'
+          description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
     PutSnapshotBlockResponse:
       type: object
       properties: {}
@@ -862,56 +850,44 @@ components:
       type: object
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the snapshot.
+          $ref: '#/components/schemas/Description'
+          description: The description of the snapshot.
         SnapshotId:
-          allOf:
-            - $ref: '#/components/schemas/SnapshotId'
-            - description: The ID of the snapshot.
+          $ref: '#/components/schemas/SnapshotId'
+          description: The ID of the snapshot.
         OwnerId:
-          allOf:
-            - $ref: '#/components/schemas/OwnerId'
-            - description: The Amazon Web Services account ID of the snapshot owner.
+          $ref: '#/components/schemas/OwnerId'
+          description: The Amazon Web Services account ID of the snapshot owner.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: The status of the snapshot.
+          $ref: '#/components/schemas/Status'
+          description: The status of the snapshot.
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/TimeStamp'
-            - description: The timestamp when the snapshot was created.
+          $ref: '#/components/schemas/TimeStamp'
+          description: The timestamp when the snapshot was created.
         VolumeSize:
-          allOf:
-            - $ref: '#/components/schemas/VolumeSize'
-            - description: 'The size of the volume, in GiB.'
+          $ref: '#/components/schemas/VolumeSize'
+          description: 'The size of the volume, in GiB.'
         BlockSize:
-          allOf:
-            - $ref: '#/components/schemas/BlockSize'
-            - description: 'The size of the blocks in the snapshot, in bytes.'
+          $ref: '#/components/schemas/BlockSize'
+          description: 'The size of the blocks in the snapshot, in bytes.'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'The tags applied to the snapshot. You can specify up to 50 tags per snapshot. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html"> Tagging your Amazon EC2 resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+          $ref: '#/components/schemas/Tags'
+          description: 'The tags applied to the snapshot. You can specify up to 50 tags per snapshot. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html"> Tagging your Amazon EC2 resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
         ParentSnapshotId:
-          allOf:
-            - $ref: '#/components/schemas/SnapshotId'
-            - description: The ID of the parent snapshot.
+          $ref: '#/components/schemas/SnapshotId'
+          description: The ID of the parent snapshot.
         KmsKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyArn'
-            - description: The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to encrypt the snapshot.
+          $ref: '#/components/schemas/KmsKeyArn'
+          description: The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to encrypt the snapshot.
     Tag:
       type: object
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: The key of the tag.
+          $ref: '#/components/schemas/TagKey'
+          description: The key of the tag.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: The value of the tag.
+          $ref: '#/components/schemas/TagValue'
+          description: The value of the tag.
       description: Describes a tag.
     ConcurrentLimitExceededException: {}
     ConflictException: {}
@@ -926,13 +902,11 @@ components:
       type: object
       properties:
         BlockIndex:
-          allOf:
-            - $ref: '#/components/schemas/BlockIndex'
-            - description: The block index.
+          $ref: '#/components/schemas/BlockIndex'
+          description: The block index.
         BlockToken:
-          allOf:
-            - $ref: '#/components/schemas/BlockToken'
-            - description: The block token for the block index.
+          $ref: '#/components/schemas/BlockToken'
+          description: The block token for the block index.
       description: A block of data in an Amazon Elastic Block Store snapshot.
     BlockData:
       type: string
@@ -949,17 +923,14 @@ components:
       type: object
       properties:
         BlockIndex:
-          allOf:
-            - $ref: '#/components/schemas/BlockIndex'
-            - description: The block index.
+          $ref: '#/components/schemas/BlockIndex'
+          description: The block index.
         FirstBlockToken:
-          allOf:
-            - $ref: '#/components/schemas/BlockToken'
-            - description: The block token for the block index of the <code>FirstSnapshotId</code> specified in the <code>ListChangedBlocks</code> operation. This value is absent if the first snapshot does not have the changed block that is on the second snapshot.
+          $ref: '#/components/schemas/BlockToken'
+          description: The block token for the block index of the <code>FirstSnapshotId</code> specified in the <code>ListChangedBlocks</code> operation. This value is absent if the first snapshot does not have the changed block that is on the second snapshot.
         SecondBlockToken:
-          allOf:
-            - $ref: '#/components/schemas/BlockToken'
-            - description: The block token for the block index of the <code>SecondSnapshotId</code> specified in the <code>ListChangedBlocks</code> operation.
+          $ref: '#/components/schemas/BlockToken'
+          description: The block token for the block index of the <code>SecondSnapshotId</code> specified in the <code>ListChangedBlocks</code> operation.
       description: A block of data in an Amazon Elastic Block Store snapshot that is different from another snapshot of the same volume/snapshot lineage.
     ChangedBlocks:
       type: array
@@ -1058,9 +1029,8 @@ components:
       title: PutSnapshotBlockRequest
       properties:
         BlockData:
-          allOf:
-            - $ref: '#/components/schemas/BlockData'
-            - description: '<p>The data to write to the block.</p> <p>The block data is not signed as part of the Signature Version 4 signing process. As a result, you must generate and provide a Base64-encoded SHA256 checksum for the block data using the <b>x-amz-Checksum</b> header. Also, you must specify the checksum algorithm using the <b>x-amz-Checksum-Algorithm</b> header. The checksum that you provide is part of the Signature Version 4 signing process. It is validated against a checksum generated by Amazon EBS to ensure the validity and authenticity of the data. If the checksums do not correspond, the request fails. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-checksums"> Using checksums with the EBS direct APIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+          $ref: '#/components/schemas/BlockData'
+          description: '<p>The data to write to the block.</p> <p>The block data is not signed as part of the Signature Version 4 signing process. As a result, you must generate and provide a Base64-encoded SHA256 checksum for the block data using the <b>x-amz-Checksum</b> header. Also, you must specify the checksum algorithm using the <b>x-amz-Checksum-Algorithm</b> header. The checksum that you provide is part of the Signature Version 4 signing process. It is validated against a checksum generated by Amazon EBS to ensure the validity and authenticity of the data. If the checksums do not correspond, the request fails. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-checksums"> Using checksums with the EBS direct APIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
     Tags:
       type: array
       items:
@@ -1076,37 +1046,29 @@ components:
       title: StartSnapshotRequest
       properties:
         VolumeSize:
-          allOf:
-            - $ref: '#/components/schemas/VolumeSize'
-            - description: 'The size of the volume, in GiB. The maximum size is <code>16384</code> GiB (16 TiB).'
+          $ref: '#/components/schemas/VolumeSize'
+          description: 'The size of the volume, in GiB. The maximum size is <code>16384</code> GiB (16 TiB).'
         ParentSnapshotId:
-          allOf:
-            - $ref: '#/components/schemas/SnapshotId'
-            - description: '<p>The ID of the parent snapshot. If there is no parent snapshot, or if you are creating the first snapshot for an on-premises volume, omit this parameter.</p> <p>If your account is enabled for encryption by default, you cannot use an unencrypted snapshot as a parent snapshot. You must first create an encrypted copy of the parent snapshot using <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CopySnapshot.html">CopySnapshot</a>.</p>'
+          $ref: '#/components/schemas/SnapshotId'
+          description: '<p>The ID of the parent snapshot. If there is no parent snapshot, or if you are creating the first snapshot for an on-premises volume, omit this parameter.</p> <p>If your account is enabled for encryption by default, you cannot use an unencrypted snapshot as a parent snapshot. You must first create an encrypted copy of the parent snapshot using <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CopySnapshot.html">CopySnapshot</a>.</p>'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags to apply to the snapshot.
+          $ref: '#/components/schemas/Tags'
+          description: The tags to apply to the snapshot.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description for the snapshot.
+          $ref: '#/components/schemas/Description'
+          description: A description for the snapshot.
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyToken'
-            - description: '<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully. The subsequent retries with the same client token return the result from the original successful request and they have no additional effect.</p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-direct-api-idempotency.html"> Idempotency for StartSnapshot API</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+          $ref: '#/components/schemas/IdempotencyToken'
+          description: '<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully. The subsequent retries with the same client token return the result from the original successful request and they have no additional effect.</p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-direct-api-idempotency.html"> Idempotency for StartSnapshot API</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
         Encrypted:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Indicates whether to encrypt the snapshot. To create an encrypted snapshot, specify <code>true</code>. To create an unencrypted snapshot, omit this parameter.</p> <p>If you specify a value for <b>ParentSnapshotId</b>, omit this parameter.</p> <p>If you specify <code>true</code>, the snapshot is encrypted using the KMS key specified using the <b>KmsKeyArn</b> parameter. If no value is specified for <b>KmsKeyArn</b>, the default KMS key for your account is used. If no default KMS key has been specified for your account, the Amazon Web Services managed KMS key is used. To set a default KMS key for your account, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyEbsDefaultKmsKeyId.html"> ModifyEbsDefaultKmsKeyId</a>.</p> <p>If your account is enabled for encryption by default, you cannot set this parameter to <code>false</code>. In this case, you can omit this parameter.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-encryption"> Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+          $ref: '#/components/schemas/Boolean'
+          description: '<p>Indicates whether to encrypt the snapshot. To create an encrypted snapshot, specify <code>true</code>. To create an unencrypted snapshot, omit this parameter.</p> <p>If you specify a value for <b>ParentSnapshotId</b>, omit this parameter.</p> <p>If you specify <code>true</code>, the snapshot is encrypted using the KMS key specified using the <b>KmsKeyArn</b> parameter. If no value is specified for <b>KmsKeyArn</b>, the default KMS key for your account is used. If no default KMS key has been specified for your account, the Amazon Web Services managed KMS key is used. To set a default KMS key for your account, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyEbsDefaultKmsKeyId.html"> ModifyEbsDefaultKmsKeyId</a>.</p> <p>If your account is enabled for encryption by default, you cannot set this parameter to <code>false</code>. In this case, you can omit this parameter.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-encryption"> Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
         KmsKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyArn'
-            - description: '<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key to be used to encrypt the snapshot. If you do not specify a KMS key, the default Amazon Web Services managed KMS key is used.</p> <p>If you specify a <b>ParentSnapshotId</b>, omit this parameter; the snapshot will be encrypted using the same KMS key that was used to encrypt the parent snapshot.</p> <p>If <b>Encrypted</b> is set to <code>true</code>, you must specify a KMS key ARN. </p>'
+          $ref: '#/components/schemas/KmsKeyArn'
+          description: '<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key to be used to encrypt the snapshot. If you do not specify a KMS key, the default Amazon Web Services managed KMS key is used.</p> <p>If you specify a <b>ParentSnapshotId</b>, omit this parameter; the snapshot will be encrypted using the same KMS key that was used to encrypt the parent snapshot.</p> <p>If <b>Encrypted</b> is set to <code>true</code>, you must specify a KMS key ARN. </p>'
         Timeout:
-          allOf:
-            - $ref: '#/components/schemas/Timeout'
-            - description: '<p>The amount of time (in minutes) after which the snapshot is automatically cancelled if:</p> <ul> <li> <p>No blocks are written to the snapshot.</p> </li> <li> <p>The snapshot is not completed after writing the last block of data.</p> </li> </ul> <p>If no value is specified, the timeout defaults to <code>60</code> minutes.</p>'
+          $ref: '#/components/schemas/Timeout'
+          description: '<p>The amount of time (in minutes) after which the snapshot is automatically cancelled if:</p> <ul> <li> <p>No blocks are written to the snapshot.</p> </li> <li> <p>The snapshot is not completed after writing the last block of data.</p> </li> </ul> <p>If no value is specified, the timeout defaults to <code>60</code> minutes.</p>'
     TagKey:
       type: string
       pattern: '^[\S\s]+$'

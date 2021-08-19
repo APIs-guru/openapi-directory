@@ -390,29 +390,23 @@ paths:
                   type: object
                   properties:
                     lambdaArn:
-                      allOf:
-                        - $ref: '#/components/schemas/LambdaFunctionARNWithVersionNumber'
-                        - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the Lambda function. The ARN must include the version of the function to import. You can''t use version aliases like <code>$LATEST</code>.'
+                      $ref: '#/components/schemas/LambdaFunctionARNWithVersionNumber'
+                      description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the Lambda function. The ARN must include the version of the function to import. You can''t use version aliases like <code>$LATEST</code>.'
                     componentName:
-                      allOf:
-                        - $ref: '#/components/schemas/ComponentNameString'
-                        - description: <p>The name of the component.</p> <p>Defaults to the name of the Lambda function.</p>
+                      $ref: '#/components/schemas/ComponentNameString'
+                      description: <p>The name of the component.</p> <p>Defaults to the name of the Lambda function.</p>
                     componentVersion:
-                      allOf:
-                        - $ref: '#/components/schemas/ComponentVersionString'
-                        - description: '<p>The version of the component.</p> <p>Defaults to the version of the Lambda function as a semantic version. For example, if your function version is <code>3</code>, the component version becomes <code>3.0.0</code>.</p>'
+                      $ref: '#/components/schemas/ComponentVersionString'
+                      description: '<p>The version of the component.</p> <p>Defaults to the version of the Lambda function as a semantic version. For example, if your function version is <code>3</code>, the component version becomes <code>3.0.0</code>.</p>'
                     componentPlatforms:
-                      allOf:
-                        - $ref: '#/components/schemas/ComponentPlatformList'
-                        - description: The platforms that the component version supports.
+                      $ref: '#/components/schemas/ComponentPlatformList'
+                      description: The platforms that the component version supports.
                     componentDependencies:
-                      allOf:
-                        - $ref: '#/components/schemas/ComponentDependencyMap'
-                        - description: The component versions on which this Lambda function component depends.
+                      $ref: '#/components/schemas/ComponentDependencyMap'
+                      description: The component versions on which this Lambda function component depends.
                     componentLambdaParameters:
-                      allOf:
-                        - $ref: '#/components/schemas/LambdaExecutionParameters'
-                        - description: The system and runtime parameters for the Lambda function as it runs on the Greengrass core device.
+                      $ref: '#/components/schemas/LambdaExecutionParameters'
+                      description: The system and runtime parameters for the Lambda function as it runs on the Greengrass core device.
                 tags:
                   description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
                   type: object
@@ -509,33 +503,27 @@ paths:
                   type: object
                   properties:
                     jobExecutionsRolloutConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/IoTJobExecutionsRolloutConfig'
-                        - description: The rollout configuration for the job. This configuration defines the rate at which the job rolls out to the fleet of target devices.
+                      $ref: '#/components/schemas/IoTJobExecutionsRolloutConfig'
+                      description: The rollout configuration for the job. This configuration defines the rate at which the job rolls out to the fleet of target devices.
                     abortConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/IoTJobAbortConfig'
-                        - description: The stop configuration for the job. This configuration defines when and how to stop a job rollout.
+                      $ref: '#/components/schemas/IoTJobAbortConfig'
+                      description: The stop configuration for the job. This configuration defines when and how to stop a job rollout.
                     timeoutConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/IoTJobTimeoutConfig'
-                        - description: The timeout configuration for the job. This configuration defines the amount of time each device has to complete the job.
+                      $ref: '#/components/schemas/IoTJobTimeoutConfig'
+                      description: The timeout configuration for the job. This configuration defines the amount of time each device has to complete the job.
                 deploymentPolicies:
                   description: Contains information about policies that define how a deployment updates components and handles failure.
                   type: object
                   properties:
                     failureHandlingPolicy:
-                      allOf:
-                        - $ref: '#/components/schemas/DeploymentFailureHandlingPolicy'
-                        - description: '<p>The failure handling policy for the configuration deployment. This policy defines what to do if the deployment fails.</p> <p>Default: <code>ROLLBACK</code> </p>'
+                      $ref: '#/components/schemas/DeploymentFailureHandlingPolicy'
+                      description: '<p>The failure handling policy for the configuration deployment. This policy defines what to do if the deployment fails.</p> <p>Default: <code>ROLLBACK</code> </p>'
                     componentUpdatePolicy:
-                      allOf:
-                        - $ref: '#/components/schemas/DeploymentComponentUpdatePolicy'
-                        - description: The component update policy for the configuration deployment. This policy defines when it's safe to deploy the configuration to devices.
+                      $ref: '#/components/schemas/DeploymentComponentUpdatePolicy'
+                      description: The component update policy for the configuration deployment. This policy defines when it's safe to deploy the configuration to devices.
                     configurationValidationPolicy:
-                      allOf:
-                        - $ref: '#/components/schemas/DeploymentConfigurationValidationPolicy'
-                        - description: The configuration validation policy for the configuration deployment. This policy defines how long each component has to validate its configure updates.
+                      $ref: '#/components/schemas/DeploymentConfigurationValidationPolicy'
+                      description: The configuration validation policy for the configuration deployment. This policy defines how long each component has to validate its configure updates.
                 tags:
                   description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
                   type: object
@@ -1613,13 +1601,11 @@ paths:
                   type: object
                   properties:
                     name:
-                      allOf:
-                        - $ref: '#/components/schemas/NonEmptyString'
-                        - description: '<p>The friendly name of the platform. This name helps you identify the platform.</p> <p>If you omit this parameter, IoT Greengrass creates a friendly name from the <code>os</code> and <code>architecture</code> of the platform.</p>'
+                      $ref: '#/components/schemas/NonEmptyString'
+                      description: '<p>The friendly name of the platform. This name helps you identify the platform.</p> <p>If you omit this parameter, IoT Greengrass creates a friendly name from the <code>os</code> and <code>architecture</code> of the platform.</p>'
                     attributes:
-                      allOf:
-                        - $ref: '#/components/schemas/PlatformAttributesMap'
-                        - description: 'A dictionary of attributes for the platform. The IoT Greengrass Core software defines the <code>os</code> and <code>platform</code> by default. You can specify additional platform attributes for a core device when you deploy the Greengrass nucleus component. For more information, see the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html">Greengrass nucleus component</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+                      $ref: '#/components/schemas/PlatformAttributesMap'
+                      description: 'A dictionary of attributes for the platform. The IoT Greengrass Core software defines the <code>os</code> and <code>platform</code> by default. You can specify additional platform attributes for a core device when you deploy the Greengrass nucleus component. For more information, see the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html">Greengrass nucleus component</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
                 componentCandidates:
                   description: The list of components to resolve.
                   type: array
@@ -1744,18 +1730,16 @@ components:
       type: object
       properties:
         errorEntries:
-          allOf:
-            - $ref: '#/components/schemas/AssociateClientDeviceWithCoreDeviceErrorList'
-            - description: The list of any errors for the entries in the request. Each error entry contains the name of the IoT thing that failed to associate.
+          $ref: '#/components/schemas/AssociateClientDeviceWithCoreDeviceErrorList'
+          description: The list of any errors for the entries in the request. Each error entry contains the name of the IoT thing that failed to associate.
     AssociateClientDeviceWithCoreDeviceEntry:
       type: object
       required:
         - thingName
       properties:
         thingName:
-          allOf:
-            - $ref: '#/components/schemas/IoTThingName'
-            - description: The name of the IoT thing that represents the client device to associate.
+          $ref: '#/components/schemas/IoTThingName'
+          description: The name of the IoT thing that represents the client device to associate.
       description: 'Contains a request to associate a client device with a core device. The <a href="https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html">BatchAssociateClientDeviceWithCoreDevice</a> operation consumes a list of these requests.'
     ValidationException: {}
     ResourceNotFoundException: {}
@@ -1766,26 +1750,23 @@ components:
       type: object
       properties:
         errorEntries:
-          allOf:
-            - $ref: '#/components/schemas/DisassociateClientDeviceFromCoreDeviceErrorList'
-            - description: The list of errors (if any) for the entries in the request. Each error entry contains the name of the IoT thing that failed to disassociate.
+          $ref: '#/components/schemas/DisassociateClientDeviceFromCoreDeviceErrorList'
+          description: The list of errors (if any) for the entries in the request. Each error entry contains the name of the IoT thing that failed to disassociate.
     DisassociateClientDeviceFromCoreDeviceEntry:
       type: object
       required:
         - thingName
       properties:
         thingName:
-          allOf:
-            - $ref: '#/components/schemas/IoTThingName'
-            - description: The name of the IoT thing that represents the client device to disassociate.
+          $ref: '#/components/schemas/IoTThingName'
+          description: The name of the IoT thing that represents the client device to disassociate.
       description: 'Contains a request to disassociate a client device from a core device. The <a href="https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html">BatchDisassociateClientDeviceWithCoreDevice</a> operation consumes a list of these requests.'
     CancelDeploymentResponse:
       type: object
       properties:
         message:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: A message that communicates if the cancel was successful.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: A message that communicates if the cancel was successful.
     ConflictException: {}
     CreateComponentVersionResponse:
       type: object
@@ -1796,25 +1777,20 @@ components:
         - status
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ComponentVersionARN'
-            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
+          $ref: '#/components/schemas/ComponentVersionARN'
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
         componentName:
-          allOf:
-            - $ref: '#/components/schemas/ComponentNameString'
-            - description: The name of the component.
+          $ref: '#/components/schemas/ComponentNameString'
+          description: The name of the component.
         componentVersion:
-          allOf:
-            - $ref: '#/components/schemas/ComponentVersionString'
-            - description: The version of the component.
+          $ref: '#/components/schemas/ComponentVersionString'
+          description: The version of the component.
         creationTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time at which the component was created, expressed in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time at which the component was created, expressed in ISO 8601 format.'
         status:
-          allOf:
-            - $ref: '#/components/schemas/CloudComponentStatus'
-            - description: The status of the component version in IoT Greengrass V2. This status is different from the status of the component on a core device.
+          $ref: '#/components/schemas/CloudComponentStatus'
+          description: The status of the component version in IoT Greengrass V2. This status is different from the status of the component on a core device.
     LambdaFunctionARNWithVersionNumber:
       type: string
       pattern: 'arn:aws(-cn|-us-gov)?:lambda:[^:]+:[0-9]+:function:[a-zA-Z0-9-_]+:[0-9]+'
@@ -1840,49 +1816,38 @@ components:
       type: object
       properties:
         eventSources:
-          allOf:
-            - $ref: '#/components/schemas/LambdaEventSourceList'
-            - description: The list of event sources to which to subscribe to receive work messages. The Lambda function runs when it receives a message from an event source. You can subscribe this function to local publish/subscribe messages and Amazon Web Services IoT Core MQTT messages.
+          $ref: '#/components/schemas/LambdaEventSourceList'
+          description: The list of event sources to which to subscribe to receive work messages. The Lambda function runs when it receives a message from an event source. You can subscribe this function to local publish/subscribe messages and Amazon Web Services IoT Core MQTT messages.
         maxQueueSize:
-          allOf:
-            - $ref: '#/components/schemas/OptionalInteger'
-            - description: The maximum size of the message queue for the Lambda function component. The IoT Greengrass core stores messages in a FIFO (first-in-first-out) queue until it can run the Lambda function to consume each message.
+          $ref: '#/components/schemas/OptionalInteger'
+          description: The maximum size of the message queue for the Lambda function component. The IoT Greengrass core stores messages in a FIFO (first-in-first-out) queue until it can run the Lambda function to consume each message.
         maxInstancesCount:
-          allOf:
-            - $ref: '#/components/schemas/OptionalInteger'
-            - description: The maximum number of instances that a non-pinned Lambda function can run at the same time.
+          $ref: '#/components/schemas/OptionalInteger'
+          description: The maximum number of instances that a non-pinned Lambda function can run at the same time.
         maxIdleTimeInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/OptionalInteger'
-            - description: The maximum amount of time in seconds that a non-pinned Lambda function can idle before the IoT Greengrass Core software stops its process.
+          $ref: '#/components/schemas/OptionalInteger'
+          description: The maximum amount of time in seconds that a non-pinned Lambda function can idle before the IoT Greengrass Core software stops its process.
         timeoutInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/OptionalInteger'
-            - description: The maximum amount of time in seconds that the Lambda function can process a work item.
+          $ref: '#/components/schemas/OptionalInteger'
+          description: The maximum amount of time in seconds that the Lambda function can process a work item.
         statusTimeoutInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/OptionalInteger'
-            - description: The interval in seconds at which a pinned (also known as long-lived) Lambda function component sends status updates to the Lambda manager component.
+          $ref: '#/components/schemas/OptionalInteger'
+          description: The interval in seconds at which a pinned (also known as long-lived) Lambda function component sends status updates to the Lambda manager component.
         pinned:
-          allOf:
-            - $ref: '#/components/schemas/OptionalBoolean'
-            - description: '<p>Whether or not the Lambda function is pinned, or long-lived.</p> <ul> <li> <p>A pinned Lambda function starts when IoT Greengrass starts and keeps running in its own container.</p> </li> <li> <p>A non-pinned Lambda function starts only when it receives a work item and exists after it idles for <code>maxIdleTimeInSeconds</code>. If the function has multiple work items, the IoT Greengrass Core software creates multiple instances of the function.</p> </li> </ul> <p>Default: <code>true</code> </p>'
+          $ref: '#/components/schemas/OptionalBoolean'
+          description: '<p>Whether or not the Lambda function is pinned, or long-lived.</p> <ul> <li> <p>A pinned Lambda function starts when IoT Greengrass starts and keeps running in its own container.</p> </li> <li> <p>A non-pinned Lambda function starts only when it receives a work item and exists after it idles for <code>maxIdleTimeInSeconds</code>. If the function has multiple work items, the IoT Greengrass Core software creates multiple instances of the function.</p> </li> </ul> <p>Default: <code>true</code> </p>'
         inputPayloadEncodingType:
-          allOf:
-            - $ref: '#/components/schemas/LambdaInputPayloadEncodingType'
-            - description: '<p>The encoding type that the Lambda function supports.</p> <p>Default: <code>json</code> </p>'
+          $ref: '#/components/schemas/LambdaInputPayloadEncodingType'
+          description: '<p>The encoding type that the Lambda function supports.</p> <p>Default: <code>json</code> </p>'
         execArgs:
-          allOf:
-            - $ref: '#/components/schemas/LambdaExecArgsList'
-            - description: The list of arguments to pass to the Lambda function when it runs.
+          $ref: '#/components/schemas/LambdaExecArgsList'
+          description: The list of arguments to pass to the Lambda function when it runs.
         environmentVariables:
-          allOf:
-            - $ref: '#/components/schemas/LambdaEnvironmentVariables'
-            - description: The map of environment variables that are available to the Lambda function when it runs.
+          $ref: '#/components/schemas/LambdaEnvironmentVariables'
+          description: The map of environment variables that are available to the Lambda function when it runs.
         linuxProcessParams:
-          allOf:
-            - $ref: '#/components/schemas/LambdaLinuxProcessParams'
-            - description: The parameters for the Linux process that contains the Lambda function.
+          $ref: '#/components/schemas/LambdaLinuxProcessParams'
+          description: The parameters for the Linux process that contains the Lambda function.
       description: Contains parameters for a Lambda function that runs on IoT Greengrass.
     TagValue:
       type: string
@@ -1893,44 +1858,36 @@ components:
       type: object
       properties:
         deploymentId:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ID of the deployment.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ID of the deployment.
         iotJobId:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ID of the IoT job that applies the deployment to target devices.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ID of the IoT job that applies the deployment to target devices.
         iotJobArn:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobARN'
-            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IoT job that applies the deployment to target devices.'
+          $ref: '#/components/schemas/IoTJobARN'
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IoT job that applies the deployment to target devices.'
     ComponentDeploymentSpecification:
       type: object
       properties:
         componentVersion:
-          allOf:
-            - $ref: '#/components/schemas/ComponentVersionString'
-            - description: The version of the component.
+          $ref: '#/components/schemas/ComponentVersionString'
+          description: The version of the component.
         configurationUpdate:
-          allOf:
-            - $ref: '#/components/schemas/ComponentConfigurationUpdate'
-            - description: 'The configuration updates to deploy for the component. You can define <i>reset</i> updates and <i>merge</i> updates. A reset updates the keys that you specify to the default configuration for the component. A merge updates the core device''s component configuration with the keys and values that you specify. The IoT Greengrass Core software applies reset updates before it applies merge updates. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html">Update component configurations</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+          $ref: '#/components/schemas/ComponentConfigurationUpdate'
+          description: 'The configuration updates to deploy for the component. You can define <i>reset</i> updates and <i>merge</i> updates. A reset updates the keys that you specify to the default configuration for the component. A merge updates the core device''s component configuration with the keys and values that you specify. The IoT Greengrass Core software applies reset updates before it applies merge updates. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html">Update component configurations</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
         runWith:
-          allOf:
-            - $ref: '#/components/schemas/ComponentRunWith'
-            - description: 'The system user and group that the IoT Greengrass Core software uses to run component processes on the core device. If you omit this parameter, the IoT Greengrass Core software uses the system user and group that you configure for the core device. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user">Configure the user and group that run components</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+          $ref: '#/components/schemas/ComponentRunWith'
+          description: 'The system user and group that the IoT Greengrass Core software uses to run component processes on the core device. If you omit this parameter, the IoT Greengrass Core software uses the system user and group that you configure for the core device. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user">Configure the user and group that run components</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
       description: Contains information about a component to deploy.
     IoTJobExecutionsRolloutConfig:
       type: object
       properties:
         exponentialRate:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobExponentialRolloutRate'
-            - description: The exponential rate to increase the job rollout rate.
+          $ref: '#/components/schemas/IoTJobExponentialRolloutRate'
+          description: The exponential rate to increase the job rollout rate.
         maximumPerMinute:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobMaxExecutionsPerMin'
-            - description: 'The maximum number of devices that receive a pending job notification, per minute.'
+          $ref: '#/components/schemas/IoTJobMaxExecutionsPerMin'
+          description: 'The maximum number of devices that receive a pending job notification, per minute.'
       description: Contains information about the rollout configuration for a job. This configuration defines the rate at which the job deploys a configuration to a fleet of target devices.
     IoTJobAbortConfig:
       type: object
@@ -1938,17 +1895,15 @@ components:
         - criteriaList
       properties:
         criteriaList:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobAbortCriteriaList'
-            - description: The list of criteria that define when and how to cancel the configuration deployment.
+          $ref: '#/components/schemas/IoTJobAbortCriteriaList'
+          description: The list of criteria that define when and how to cancel the configuration deployment.
       description: Contains a list of criteria that define when and how to cancel a configuration deployment.
     IoTJobTimeoutConfig:
       type: object
       properties:
         inProgressTimeoutInMinutes:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobInProgressTimeoutInMinutes'
-            - description: '<p>The amount of time, in minutes, that devices have to complete the job. The timer starts when the job status is set to <code>IN_PROGRESS</code>. If the job status doesn''t change to a terminal state before the time expires, then the job status is set to <code>TIMED_OUT</code>.</p> <p>The timeout interval must be between 1 minute and 7 days (10080 minutes).</p>'
+          $ref: '#/components/schemas/IoTJobInProgressTimeoutInMinutes'
+          description: '<p>The amount of time, in minutes, that devices have to complete the job. The timer starts when the job status is set to <code>IN_PROGRESS</code>. If the job status doesn''t change to a terminal state before the time expires, then the job status is set to <code>TIMED_OUT</code>.</p> <p>The timeout interval must be between 1 minute and 7 days (10080 minutes).</p>'
       description: Contains information about the timeout configuration for a job.
     DeploymentFailureHandlingPolicy:
       type: string
@@ -1959,61 +1914,49 @@ components:
       type: object
       properties:
         timeoutInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/OptionalInteger'
-            - description: '<p>The amount of time in seconds that each component on a device has to report that it''s safe to update. If the component waits for longer than this timeout, then the deployment proceeds on the device.</p> <p>Default: <code>60</code> </p>'
+          $ref: '#/components/schemas/OptionalInteger'
+          description: '<p>The amount of time in seconds that each component on a device has to report that it''s safe to update. If the component waits for longer than this timeout, then the deployment proceeds on the device.</p> <p>Default: <code>60</code> </p>'
         action:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentComponentUpdatePolicyAction'
-            - description: '<p>Whether or not to notify components and wait for components to become safe to update. Choose from the following options:</p> <ul> <li> <p> <code>NOTIFY_COMPONENTS</code> – The deployment notifies each component before it stops and updates that component. Components can use the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetocomponentupdates">SubscribeToComponentUpdates</a> IPC operation to receive these notifications. Then, components can respond with the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate">DeferComponentUpdate</a> IPC operation. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html">Create deployments</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p> </li> <li> <p> <code>SKIP_NOTIFY_COMPONENTS</code> – The deployment doesn''t notify components or wait for them to be safe to update.</p> </li> </ul> <p>Default: <code>NOTIFY_COMPONENTS</code> </p>'
+          $ref: '#/components/schemas/DeploymentComponentUpdatePolicyAction'
+          description: '<p>Whether or not to notify components and wait for components to become safe to update. Choose from the following options:</p> <ul> <li> <p> <code>NOTIFY_COMPONENTS</code> – The deployment notifies each component before it stops and updates that component. Components can use the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetocomponentupdates">SubscribeToComponentUpdates</a> IPC operation to receive these notifications. Then, components can respond with the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate">DeferComponentUpdate</a> IPC operation. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html">Create deployments</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p> </li> <li> <p> <code>SKIP_NOTIFY_COMPONENTS</code> – The deployment doesn''t notify components or wait for them to be safe to update.</p> </li> </ul> <p>Default: <code>NOTIFY_COMPONENTS</code> </p>'
       description: '<p>Contains information about a deployment''s policy that defines when components are safe to update.</p> <p>Each component on a device can report whether or not it''s ready to update. After a component and its dependencies are ready, they can apply the update in the deployment. You can configure whether or not the deployment notifies components of an update and waits for a response. You specify the amount of time each component has to respond to the update notification.</p>'
     DeploymentConfigurationValidationPolicy:
       type: object
       properties:
         timeoutInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/OptionalInteger'
-            - description: '<p>The amount of time in seconds that a component can validate its configuration updates. If the validation time exceeds this timeout, then the deployment proceeds for the device.</p> <p>Default: <code>30</code> </p>'
+          $ref: '#/components/schemas/OptionalInteger'
+          description: '<p>The amount of time in seconds that a component can validate its configuration updates. If the validation time exceeds this timeout, then the deployment proceeds for the device.</p> <p>Default: <code>30</code> </p>'
       description: 'Contains information about how long a component on a core device can validate its configuration updates before it times out. Components can use the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetovalidateconfigurationupdates">SubscribeToValidateConfigurationUpdates</a> IPC operation to receive notifications when a deployment specifies a configuration update. Then, components can respond with the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-sendconfigurationvalidityreport">SendConfigurationValidityReport</a> IPC operation. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html">Create deployments</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
     DescribeComponentResponse:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ComponentVersionARN'
-            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
+          $ref: '#/components/schemas/ComponentVersionARN'
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
         componentName:
-          allOf:
-            - $ref: '#/components/schemas/ComponentNameString'
-            - description: The name of the component.
+          $ref: '#/components/schemas/ComponentNameString'
+          description: The name of the component.
         componentVersion:
-          allOf:
-            - $ref: '#/components/schemas/ComponentVersionString'
-            - description: The version of the component.
+          $ref: '#/components/schemas/ComponentVersionString'
+          description: The version of the component.
         creationTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time at which the component was created, expressed in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time at which the component was created, expressed in ISO 8601 format.'
         publisher:
-          allOf:
-            - $ref: '#/components/schemas/PublisherString'
-            - description: The publisher of the component version.
+          $ref: '#/components/schemas/PublisherString'
+          description: The publisher of the component version.
         description:
-          allOf:
-            - $ref: '#/components/schemas/DescriptionString'
-            - description: The description of the component version.
+          $ref: '#/components/schemas/DescriptionString'
+          description: The description of the component version.
         status:
-          allOf:
-            - $ref: '#/components/schemas/CloudComponentStatus'
-            - description: The status of the component version in IoT Greengrass V2. This status is different from the status of the component on a core device.
+          $ref: '#/components/schemas/CloudComponentStatus'
+          description: The status of the component version in IoT Greengrass V2. This status is different from the status of the component on a core device.
         platforms:
-          allOf:
-            - $ref: '#/components/schemas/ComponentPlatformList'
-            - description: The platforms that the component version supports.
+          $ref: '#/components/schemas/ComponentPlatformList'
+          description: The platforms that the component version supports.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
     GetComponentResponse:
       type: object
       required:
@@ -2021,203 +1964,163 @@ components:
         - recipe
       properties:
         recipeOutputFormat:
-          allOf:
-            - $ref: '#/components/schemas/RecipeOutputFormat'
-            - description: The format of the recipe.
+          $ref: '#/components/schemas/RecipeOutputFormat'
+          description: The format of the recipe.
         recipe:
-          allOf:
-            - $ref: '#/components/schemas/RecipeBlob'
-            - description: The recipe of the component version.
+          $ref: '#/components/schemas/RecipeBlob'
+          description: The recipe of the component version.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
     GetComponentVersionArtifactResponse:
       type: object
       required:
         - preSignedUrl
       properties:
         preSignedUrl:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The URL of the artifact.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The URL of the artifact.
     GetCoreDeviceResponse:
       type: object
       properties:
         coreDeviceThingName:
-          allOf:
-            - $ref: '#/components/schemas/CoreDeviceThingName'
-            - description: The name of the core device. This is also the name of the IoT thing.
+          $ref: '#/components/schemas/CoreDeviceThingName'
+          description: The name of the core device. This is also the name of the IoT thing.
         coreVersion:
-          allOf:
-            - $ref: '#/components/schemas/GGCVersion'
-            - description: 'The version of the IoT Greengrass Core software that the core device runs. This version is equivalent to the version of the Greengrass nucleus component that runs on the core device. For more information, see the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html">Greengrass nucleus component</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+          $ref: '#/components/schemas/GGCVersion'
+          description: 'The version of the IoT Greengrass Core software that the core device runs. This version is equivalent to the version of the Greengrass nucleus component that runs on the core device. For more information, see the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html">Greengrass nucleus component</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
         platform:
-          allOf:
-            - $ref: '#/components/schemas/CoreDevicePlatformString'
-            - description: The operating system platform that the core device runs.
+          $ref: '#/components/schemas/CoreDevicePlatformString'
+          description: The operating system platform that the core device runs.
         architecture:
-          allOf:
-            - $ref: '#/components/schemas/CoreDeviceArchitectureString'
-            - description: The computer architecture of the core device.
+          $ref: '#/components/schemas/CoreDeviceArchitectureString'
+          description: The computer architecture of the core device.
         status:
-          allOf:
-            - $ref: '#/components/schemas/CoreDeviceStatus'
-            - description: '<p>The status of the core device. The core device status can be:</p> <ul> <li> <p> <code>HEALTHY</code> – The IoT Greengrass Core software and all components run on the core device without issue.</p> </li> <li> <p> <code>UNHEALTHY</code> – The IoT Greengrass Core software or a component is in a failed state on the core device.</p> </li> </ul>'
+          $ref: '#/components/schemas/CoreDeviceStatus'
+          description: '<p>The status of the core device. The core device status can be:</p> <ul> <li> <p> <code>HEALTHY</code> – The IoT Greengrass Core software and all components run on the core device without issue.</p> </li> <li> <p> <code>UNHEALTHY</code> – The IoT Greengrass Core software or a component is in a failed state on the core device.</p> </li> </ul>'
         lastStatusUpdateTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time at which the core device''s status last updated, expressed in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time at which the core device''s status last updated, expressed in ISO 8601 format.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
     GetDeploymentResponse:
       type: object
       properties:
         targetArn:
-          allOf:
-            - $ref: '#/components/schemas/TargetARN'
-            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the target IoT thing or thing group.'
+          $ref: '#/components/schemas/TargetARN'
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the target IoT thing or thing group.'
         revisionId:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The revision number of the deployment.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The revision number of the deployment.
         deploymentId:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ID of the deployment.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ID of the deployment.
         deploymentName:
-          allOf:
-            - $ref: '#/components/schemas/NullableString'
-            - description: The name of the deployment.
+          $ref: '#/components/schemas/NullableString'
+          description: The name of the deployment.
         deploymentStatus:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentStatus'
-            - description: The status of the deployment.
+          $ref: '#/components/schemas/DeploymentStatus'
+          description: The status of the deployment.
         iotJobId:
-          allOf:
-            - $ref: '#/components/schemas/NullableString'
-            - description: The ID of the IoT job that applies the deployment to target devices.
+          $ref: '#/components/schemas/NullableString'
+          description: The ID of the IoT job that applies the deployment to target devices.
         iotJobArn:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobARN'
-            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IoT job that applies the deployment to target devices.'
+          $ref: '#/components/schemas/IoTJobARN'
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IoT job that applies the deployment to target devices.'
         components:
-          allOf:
-            - $ref: '#/components/schemas/ComponentDeploymentSpecifications'
-            - description: 'The components to deploy. This is a dictionary, where each key is the name of a component, and each key''s value is the version and configuration to deploy for that component.'
+          $ref: '#/components/schemas/ComponentDeploymentSpecifications'
+          description: 'The components to deploy. This is a dictionary, where each key is the name of a component, and each key''s value is the version and configuration to deploy for that component.'
         deploymentPolicies:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentPolicies'
-            - description: The deployment policies for the deployment. These policies define how the deployment updates components and handles failure.
+          $ref: '#/components/schemas/DeploymentPolicies'
+          description: The deployment policies for the deployment. These policies define how the deployment updates components and handles failure.
         iotJobConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentIoTJobConfiguration'
-            - description: 'The job configuration for the deployment configuration. The job configuration specifies the rollout, timeout, and stop configurations for the deployment configuration.'
+          $ref: '#/components/schemas/DeploymentIoTJobConfiguration'
+          description: 'The job configuration for the deployment configuration. The job configuration specifies the rollout, timeout, and stop configurations for the deployment configuration.'
         creationTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time at which the deployment was created, expressed in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time at which the deployment was created, expressed in ISO 8601 format.'
         isLatestForTarget:
-          allOf:
-            - $ref: '#/components/schemas/IsLatestForTarget'
-            - description: Whether or not the deployment is the latest revision for its target.
+          $ref: '#/components/schemas/IsLatestForTarget'
+          description: Whether or not the deployment is the latest revision for its target.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
     ListClientDevicesAssociatedWithCoreDeviceResponse:
       type: object
       properties:
         associatedClientDevices:
-          allOf:
-            - $ref: '#/components/schemas/AssociatedClientDeviceList'
-            - description: A list that describes the client devices that are associated with the core device.
+          $ref: '#/components/schemas/AssociatedClientDeviceList'
+          description: A list that describes the client devices that are associated with the core device.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextTokenString'
-            - description: 'The token for the next set of results, or null if there are no additional results.'
+          $ref: '#/components/schemas/NextTokenString'
+          description: 'The token for the next set of results, or null if there are no additional results.'
     ListComponentVersionsResponse:
       type: object
       properties:
         componentVersions:
-          allOf:
-            - $ref: '#/components/schemas/ComponentVersionList'
-            - description: A list of versions that exist for the component.
+          $ref: '#/components/schemas/ComponentVersionList'
+          description: A list of versions that exist for the component.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextTokenString'
-            - description: 'The token for the next set of results, or null if there are no additional results.'
+          $ref: '#/components/schemas/NextTokenString'
+          description: 'The token for the next set of results, or null if there are no additional results.'
     ListComponentsResponse:
       type: object
       properties:
         components:
-          allOf:
-            - $ref: '#/components/schemas/ComponentList'
-            - description: A list that summarizes each component.
+          $ref: '#/components/schemas/ComponentList'
+          description: A list that summarizes each component.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextTokenString'
-            - description: 'The token for the next set of results, or null if there are no additional results.'
+          $ref: '#/components/schemas/NextTokenString'
+          description: 'The token for the next set of results, or null if there are no additional results.'
     ListCoreDevicesResponse:
       type: object
       properties:
         coreDevices:
-          allOf:
-            - $ref: '#/components/schemas/CoreDevicesList'
-            - description: A list that summarizes each core device.
+          $ref: '#/components/schemas/CoreDevicesList'
+          description: A list that summarizes each core device.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextTokenString'
-            - description: 'The token for the next set of results, or null if there are no additional results.'
+          $ref: '#/components/schemas/NextTokenString'
+          description: 'The token for the next set of results, or null if there are no additional results.'
     ListDeploymentsResponse:
       type: object
       properties:
         deployments:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentList'
-            - description: A list that summarizes each deployment.
+          $ref: '#/components/schemas/DeploymentList'
+          description: A list that summarizes each deployment.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextTokenString'
-            - description: 'The token for the next set of results, or null if there are no additional results.'
+          $ref: '#/components/schemas/NextTokenString'
+          description: 'The token for the next set of results, or null if there are no additional results.'
     ListEffectiveDeploymentsResponse:
       type: object
       properties:
         effectiveDeployments:
-          allOf:
-            - $ref: '#/components/schemas/EffectiveDeploymentsList'
-            - description: A list that summarizes each deployment on the core device.
+          $ref: '#/components/schemas/EffectiveDeploymentsList'
+          description: A list that summarizes each deployment on the core device.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextTokenString'
-            - description: 'The token for the next set of results, or null if there are no additional results.'
+          $ref: '#/components/schemas/NextTokenString'
+          description: 'The token for the next set of results, or null if there are no additional results.'
     ListInstalledComponentsResponse:
       type: object
       properties:
         installedComponents:
-          allOf:
-            - $ref: '#/components/schemas/InstalledComponentList'
-            - description: A list that summarizes each component on the core device.
+          $ref: '#/components/schemas/InstalledComponentList'
+          description: A list that summarizes each component on the core device.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextTokenString'
-            - description: 'The token for the next set of results, or null if there are no additional results.'
+          $ref: '#/components/schemas/NextTokenString'
+          description: 'The token for the next set of results, or null if there are no additional results.'
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
     ResolveComponentCandidatesResponse:
       type: object
       properties:
         resolvedComponentVersions:
-          allOf:
-            - $ref: '#/components/schemas/ResolvedComponentVersionsList'
-            - description: A list of components that meet the requirements that you specify in the request. This list includes each component's recipe that you can use to install the component.
+          $ref: '#/components/schemas/ResolvedComponentVersionsList'
+          description: A list of components that meet the requirements that you specify in the request. This list includes each component's recipe that you can use to install the component.
     NonEmptyString:
       type: string
       minLength: 1
@@ -2229,17 +2132,14 @@ components:
       type: object
       properties:
         componentName:
-          allOf:
-            - $ref: '#/components/schemas/ComponentNameString'
-            - description: The name of the component.
+          $ref: '#/components/schemas/ComponentNameString'
+          description: The name of the component.
         componentVersion:
-          allOf:
-            - $ref: '#/components/schemas/ComponentVersionString'
-            - description: The version of the component.
+          $ref: '#/components/schemas/ComponentVersionString'
+          description: The version of the component.
         versionRequirements:
-          allOf:
-            - $ref: '#/components/schemas/ComponentVersionRequirementMap'
-            - description: '<p>The version requirements for the component''s dependencies. Greengrass core devices get the version requirements from component recipes.</p> <p>IoT Greengrass V2 uses semantic version constraints. For more information, see <a href="https://semver.org/">Semantic Versioning</a>.</p>'
+          $ref: '#/components/schemas/ComponentVersionRequirementMap'
+          description: '<p>The version requirements for the component''s dependencies. Greengrass core devices get the version requirements from component recipes.</p> <p>IoT Greengrass V2 uses semantic version constraints. For more information, see <a href="https://semver.org/">Semantic Versioning</a>.</p>'
       description: Contains information about a component that is a candidate to deploy to a Greengrass core device.
     TagResourceResponse:
       type: object
@@ -2266,17 +2166,14 @@ components:
       type: object
       properties:
         thingName:
-          allOf:
-            - $ref: '#/components/schemas/IoTThingName'
-            - description: The name of the IoT thing whose associate request failed.
+          $ref: '#/components/schemas/IoTThingName'
+          description: The name of the IoT thing whose associate request failed.
         code:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The error code for the request.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The error code for the request.
         message:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: A message that provides additional information about the error.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: A message that provides additional information about the error.
       description: 'Contains an error that occurs from a request to associate a client device with a core device. The <a href="https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html">BatchAssociateClientDeviceWithCoreDevice</a> operation returns a list of these errors.'
     AssociateClientDeviceWithCoreDeviceErrorList:
       type: array
@@ -2291,13 +2188,11 @@ components:
       type: object
       properties:
         thingName:
-          allOf:
-            - $ref: '#/components/schemas/IoTThingName'
-            - description: The name of the IoT thing that represents the associated client device.
+          $ref: '#/components/schemas/IoTThingName'
+          description: The name of the IoT thing that represents the associated client device.
         associationTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time that the client device was associated, expressed in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time that the client device was associated, expressed in ISO 8601 format.'
       description: Contains information about a client device that is associated to a core device for cloud discovery.
     AssociatedClientDeviceList:
       type: array
@@ -2310,9 +2205,8 @@ components:
       title: BatchAssociateClientDeviceWithCoreDeviceRequest
       properties:
         entries:
-          allOf:
-            - $ref: '#/components/schemas/AssociateClientDeviceWithCoreDeviceEntryList'
-            - description: The list of client devices to associate.
+          $ref: '#/components/schemas/AssociateClientDeviceWithCoreDeviceEntryList'
+          description: The list of client devices to associate.
     DisassociateClientDeviceFromCoreDeviceEntryList:
       type: array
       items:
@@ -2324,9 +2218,8 @@ components:
       title: BatchDisassociateClientDeviceFromCoreDeviceRequest
       properties:
         entries:
-          allOf:
-            - $ref: '#/components/schemas/DisassociateClientDeviceFromCoreDeviceEntryList'
-            - description: The list of client devices to disassociate.
+          $ref: '#/components/schemas/DisassociateClientDeviceFromCoreDeviceEntryList'
+          description: The list of client devices to disassociate.
     DisassociateClientDeviceFromCoreDeviceErrorList:
       type: array
       items:
@@ -2362,17 +2255,14 @@ components:
       type: object
       properties:
         componentState:
-          allOf:
-            - $ref: '#/components/schemas/CloudComponentState'
-            - description: The state of the component.
+          $ref: '#/components/schemas/CloudComponentState'
+          description: The state of the component.
         message:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'A message that communicates details, such as errors, about the status of the component.'
+          $ref: '#/components/schemas/NonEmptyString'
+          description: 'A message that communicates details, such as errors, about the status of the component.'
         errors:
-          allOf:
-            - $ref: '#/components/schemas/StringMap'
-            - description: 'A dictionary of errors that communicate why the component is in an error state. For example, if IoT Greengrass can''t access an artifact for the component, then <code>errors</code> contains the artifact''s URI as a key, and the error message as the value for that key.'
+          $ref: '#/components/schemas/StringMap'
+          description: 'A dictionary of errors that communicate why the component is in an error state. For example, if IoT Greengrass can''t access an artifact for the component, then <code>errors</code> contains the artifact''s URI as a key, and the error message as the value for that key.'
       description: Contains the status of a component in the IoT Greengrass service.
     ComponentARN:
       type: string
@@ -2381,45 +2271,36 @@ components:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ComponentVersionARN'
-            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
+          $ref: '#/components/schemas/ComponentVersionARN'
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
         componentVersion:
-          allOf:
-            - $ref: '#/components/schemas/ComponentVersionString'
-            - description: The version of the component.
+          $ref: '#/components/schemas/ComponentVersionString'
+          description: The version of the component.
         creationTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time at which the component was created, expressed in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time at which the component was created, expressed in ISO 8601 format.'
         description:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The description of the component version.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The description of the component version.
         publisher:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The publisher of the component version.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The publisher of the component version.
         platforms:
-          allOf:
-            - $ref: '#/components/schemas/ComponentPlatformList'
-            - description: The platforms that the component version supports.
+          $ref: '#/components/schemas/ComponentPlatformList'
+          description: The platforms that the component version supports.
       description: Contains information about the latest version of a component.
     Component:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ComponentARN'
-            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
+          $ref: '#/components/schemas/ComponentARN'
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
         componentName:
-          allOf:
-            - $ref: '#/components/schemas/ComponentNameString'
-            - description: The name of the component.
+          $ref: '#/components/schemas/ComponentNameString'
+          description: The name of the component.
         latestVersion:
-          allOf:
-            - $ref: '#/components/schemas/ComponentLatestVersion'
-            - description: The latest version of the component and its details.
+          $ref: '#/components/schemas/ComponentLatestVersion'
+          description: The latest version of the component and its details.
       description: Contains information about a component.
     ComponentVersionRequirementMap:
       type: object
@@ -2445,25 +2326,21 @@ components:
       type: object
       properties:
         merge:
-          allOf:
-            - $ref: '#/components/schemas/ComponentConfigurationString'
-            - description: 'A serialized JSON string that contains the configuration object to merge to target devices. The core device merges this configuration with the component''s existing configuration. If this is the first time a component deploys on a device, the core device merges this configuration with the component''s default configuration. This means that the core device keeps it''s existing configuration for keys and values that you don''t specify in this object. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#merge-configuration-update">Merge configuration updates</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+          $ref: '#/components/schemas/ComponentConfigurationString'
+          description: 'A serialized JSON string that contains the configuration object to merge to target devices. The core device merges this configuration with the component''s existing configuration. If this is the first time a component deploys on a device, the core device merges this configuration with the component''s default configuration. This means that the core device keeps it''s existing configuration for keys and values that you don''t specify in this object. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#merge-configuration-update">Merge configuration updates</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
         reset:
-          allOf:
-            - $ref: '#/components/schemas/ComponentConfigurationPathList'
-            - description: 'The list of configuration nodes to reset to default values on target devices. Use JSON pointers to specify each node to reset. JSON pointers start with a forward slash (<code>/</code>) and use forward slashes to separate the key for each level in the object. For more information, see the <a href="https://tools.ietf.org/html/rfc6901">JSON pointer specification</a> and <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#reset-configuration-update">Reset configuration updates</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+          $ref: '#/components/schemas/ComponentConfigurationPathList'
+          description: 'The list of configuration nodes to reset to default values on target devices. Use JSON pointers to specify each node to reset. JSON pointers start with a forward slash (<code>/</code>) and use forward slashes to separate the key for each level in the object. For more information, see the <a href="https://tools.ietf.org/html/rfc6901">JSON pointer specification</a> and <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#reset-configuration-update">Reset configuration updates</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
       description: 'Contains information about a deployment''s update to a component''s configuration on Greengrass core devices. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html">Update component configurations</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
     ComponentDependencyRequirement:
       type: object
       properties:
         versionRequirement:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The component version requirement for the component dependency.</p> <p>IoT Greengrass V2 uses semantic version constraints. For more information, see <a href="https://semver.org/">Semantic Versioning</a>.</p>'
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>The component version requirement for the component dependency.</p> <p>IoT Greengrass V2 uses semantic version constraints. For more information, see <a href="https://semver.org/">Semantic Versioning</a>.</p>'
         dependencyType:
-          allOf:
-            - $ref: '#/components/schemas/ComponentDependencyType'
-            - description: '<p>The type of this dependency. Choose from the following options:</p> <ul> <li> <p> <code>SOFT</code> – The component doesn''t restart if the dependency changes state.</p> </li> <li> <p> <code>HARD</code> – The component restarts if the dependency changes state.</p> </li> </ul> <p>Default: <code>HARD</code> </p>'
+          $ref: '#/components/schemas/ComponentDependencyType'
+          description: '<p>The type of this dependency. Choose from the following options:</p> <ul> <li> <p> <code>SOFT</code> – The component doesn''t restart if the dependency changes state.</p> </li> <li> <p> <code>HARD</code> – The component restarts if the dependency changes state.</p> </li> </ul> <p>Default: <code>HARD</code> </p>'
       description: Contains information about a component dependency for a Lambda function component.
     ComponentDependencyType:
       type: string
@@ -2474,13 +2351,11 @@ components:
       type: object
       properties:
         posixUser:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The POSIX system user and (optional) group to use to run this component. Specify the user and group separated by a colon (<code>:</code>) in the following format: <code>user:group</code>. The group is optional. If you don''t specify a group, the IoT Greengrass Core software uses the primary user for the group.</p> <p>If you omit this parameter, the IoT Greengrass Core software uses the default system user and group that you configure on the Greengrass nucleus component. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user">Configure the user and group that run components</a>.</p>'
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>The POSIX system user and (optional) group to use to run this component. Specify the user and group separated by a colon (<code>:</code>) in the following format: <code>user:group</code>. The group is optional. If you don''t specify a group, the IoT Greengrass Core software uses the primary user for the group.</p> <p>If you omit this parameter, the IoT Greengrass Core software uses the default system user and group that you configure on the Greengrass nucleus component. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user">Configure the user and group that run components</a>.</p>'
         systemResourceLimits:
-          allOf:
-            - $ref: '#/components/schemas/SystemResourceLimits'
-            - description: '<p>The system resource limits to apply to this component''s process on the core device.</p> <p>If you omit this parameter, the IoT Greengrass Core software uses the default system resource limits that you configure on the Greengrass nucleus component. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits">Configure system resource limits for components</a>.</p>'
+          $ref: '#/components/schemas/SystemResourceLimits'
+          description: '<p>The system resource limits to apply to this component''s process on the core device.</p> <p>If you omit this parameter, the IoT Greengrass Core software uses the default system resource limits that you configure on the Greengrass nucleus component. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits">Configure system resource limits for components</a>.</p>'
       description: 'Contains information system user and group that the IoT Greengrass Core software uses to run component processes on the core device. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user">Configure the user and group that run components</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
     ComponentDeploymentSpecifications:
       type: object
@@ -2497,41 +2372,34 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The friendly name of the platform. This name helps you identify the platform.</p> <p>If you omit this parameter, IoT Greengrass creates a friendly name from the <code>os</code> and <code>architecture</code> of the platform.</p>'
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>The friendly name of the platform. This name helps you identify the platform.</p> <p>If you omit this parameter, IoT Greengrass creates a friendly name from the <code>os</code> and <code>architecture</code> of the platform.</p>'
         attributes:
-          allOf:
-            - $ref: '#/components/schemas/PlatformAttributesMap'
-            - description: 'A dictionary of attributes for the platform. The IoT Greengrass Core software defines the <code>os</code> and <code>platform</code> by default. You can specify additional platform attributes for a core device when you deploy the Greengrass nucleus component. For more information, see the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html">Greengrass nucleus component</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+          $ref: '#/components/schemas/PlatformAttributesMap'
+          description: 'A dictionary of attributes for the platform. The IoT Greengrass Core software defines the <code>os</code> and <code>platform</code> by default. You can specify additional platform attributes for a core device when you deploy the Greengrass nucleus component. For more information, see the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html">Greengrass nucleus component</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
       description: Contains information about a platform that a component supports.
     SystemResourceLimits:
       type: object
       properties:
         memory:
-          allOf:
-            - $ref: '#/components/schemas/Memory'
-            - description: 'The maximum amount of RAM, expressed in kilobytes, that a component''s processes can use on the core device.'
+          $ref: '#/components/schemas/Memory'
+          description: 'The maximum amount of RAM, expressed in kilobytes, that a component''s processes can use on the core device.'
         cpus:
-          allOf:
-            - $ref: '#/components/schemas/CPU'
-            - description: 'The maximum amount of CPU time that a component''s processes can use on the core device. A core device''s total CPU time is equivalent to the device''s number of CPU cores. For example, on a core device with 4 CPU cores, you can set this value to <code>2</code> to limit the component''s processes to 50 percent usage of each CPU core. On a device with 1 CPU core, you can set this value to <code>0.25</code> to limit the component''s processes to 25 percent usage of the CPU. If you set this value to a number greater than the number of CPU cores, the IoT Greengrass Core software doesn''t limit the component''s CPU usage.'
+          $ref: '#/components/schemas/CPU'
+          description: 'The maximum amount of CPU time that a component''s processes can use on the core device. A core device''s total CPU time is equivalent to the device''s number of CPU cores. For example, on a core device with 4 CPU cores, you can set this value to <code>2</code> to limit the component''s processes to 50 percent usage of each CPU core. On a device with 1 CPU core, you can set this value to <code>0.25</code> to limit the component''s processes to 25 percent usage of the CPU. If you set this value to a number greater than the number of CPU cores, the IoT Greengrass Core software doesn''t limit the component''s CPU usage.'
       description: 'Contains information about system resource limits that the IoT Greengrass Core software applies to a component''s processes. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits">Configure system resource limits for components</a>.'
     ComponentVersionListItem:
       type: object
       properties:
         componentName:
-          allOf:
-            - $ref: '#/components/schemas/ComponentNameString'
-            - description: The name of the component.
+          $ref: '#/components/schemas/ComponentNameString'
+          description: The name of the component.
         componentVersion:
-          allOf:
-            - $ref: '#/components/schemas/ComponentVersionString'
-            - description: The version of the component.
+          $ref: '#/components/schemas/ComponentVersionString'
+          description: The version of the component.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
+          $ref: '#/components/schemas/NonEmptyString'
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
       description: Contains information about a component version in a list.
     ComponentVersionList:
       type: array
@@ -2555,17 +2423,14 @@ components:
       type: object
       properties:
         coreDeviceThingName:
-          allOf:
-            - $ref: '#/components/schemas/CoreDeviceThingName'
-            - description: The name of the core device. This is also the name of the IoT thing.
+          $ref: '#/components/schemas/CoreDeviceThingName'
+          description: The name of the core device. This is also the name of the IoT thing.
         status:
-          allOf:
-            - $ref: '#/components/schemas/CoreDeviceStatus'
-            - description: '<p>The status of the core device. Core devices can have the following statuses:</p> <ul> <li> <p> <code>HEALTHY</code> – The IoT Greengrass Core software and all components run on the core device without issue.</p> </li> <li> <p> <code>UNHEALTHY</code> – The IoT Greengrass Core software or a component is in a failed state on the core device.</p> </li> </ul>'
+          $ref: '#/components/schemas/CoreDeviceStatus'
+          description: '<p>The status of the core device. Core devices can have the following statuses:</p> <ul> <li> <p> <code>HEALTHY</code> – The IoT Greengrass Core software and all components run on the core device without issue.</p> </li> <li> <p> <code>UNHEALTHY</code> – The IoT Greengrass Core software or a component is in a failed state on the core device.</p> </li> </ul>'
         lastStatusUpdateTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time at which the core device''s status last updated, expressed in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time at which the core device''s status last updated, expressed in ISO 8601 format.'
       description: 'Contains information about a Greengrass core device, which is an IoT thing that runs the IoT Greengrass Core software.'
     CoreDeviceArchitectureString:
       type: string
@@ -2587,29 +2452,23 @@ components:
         - lambdaArn
       properties:
         lambdaArn:
-          allOf:
-            - $ref: '#/components/schemas/LambdaFunctionARNWithVersionNumber'
-            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the Lambda function. The ARN must include the version of the function to import. You can''t use version aliases like <code>$LATEST</code>.'
+          $ref: '#/components/schemas/LambdaFunctionARNWithVersionNumber'
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the Lambda function. The ARN must include the version of the function to import. You can''t use version aliases like <code>$LATEST</code>.'
         componentName:
-          allOf:
-            - $ref: '#/components/schemas/ComponentNameString'
-            - description: <p>The name of the component.</p> <p>Defaults to the name of the Lambda function.</p>
+          $ref: '#/components/schemas/ComponentNameString'
+          description: <p>The name of the component.</p> <p>Defaults to the name of the Lambda function.</p>
         componentVersion:
-          allOf:
-            - $ref: '#/components/schemas/ComponentVersionString'
-            - description: '<p>The version of the component.</p> <p>Defaults to the version of the Lambda function as a semantic version. For example, if your function version is <code>3</code>, the component version becomes <code>3.0.0</code>.</p>'
+          $ref: '#/components/schemas/ComponentVersionString'
+          description: '<p>The version of the component.</p> <p>Defaults to the version of the Lambda function as a semantic version. For example, if your function version is <code>3</code>, the component version becomes <code>3.0.0</code>.</p>'
         componentPlatforms:
-          allOf:
-            - $ref: '#/components/schemas/ComponentPlatformList'
-            - description: The platforms that the component version supports.
+          $ref: '#/components/schemas/ComponentPlatformList'
+          description: The platforms that the component version supports.
         componentDependencies:
-          allOf:
-            - $ref: '#/components/schemas/ComponentDependencyMap'
-            - description: The component versions on which this Lambda function component depends.
+          $ref: '#/components/schemas/ComponentDependencyMap'
+          description: The component versions on which this Lambda function component depends.
         componentLambdaParameters:
-          allOf:
-            - $ref: '#/components/schemas/LambdaExecutionParameters'
-            - description: The system and runtime parameters for the Lambda function as it runs on the Greengrass core device.
+          $ref: '#/components/schemas/LambdaExecutionParameters'
+          description: The system and runtime parameters for the Lambda function as it runs on the Greengrass core device.
       description: Contains information about an Lambda function to import to create a component.
     TagMap:
       type: object
@@ -2622,21 +2481,17 @@ components:
       title: CreateComponentVersionRequest
       properties:
         inlineRecipe:
-          allOf:
-            - $ref: '#/components/schemas/RecipeBlob'
-            - description: '<p>The recipe to use to create the component. The recipe defines the component''s metadata, parameters, dependencies, lifecycle, artifacts, and platform compatibility.</p> <p>You must specify either <code>inlineRecipe</code> or <code>lambdaFunction</code>.</p>'
+          $ref: '#/components/schemas/RecipeBlob'
+          description: '<p>The recipe to use to create the component. The recipe defines the component''s metadata, parameters, dependencies, lifecycle, artifacts, and platform compatibility.</p> <p>You must specify either <code>inlineRecipe</code> or <code>lambdaFunction</code>.</p>'
         lambdaFunction:
-          allOf:
-            - $ref: '#/components/schemas/LambdaFunctionRecipeSource'
-            - description: <p>The parameters to create a component from a Lambda function.</p> <p>You must specify either <code>inlineRecipe</code> or <code>lambdaFunction</code>.</p>
+          $ref: '#/components/schemas/LambdaFunctionRecipeSource'
+          description: <p>The parameters to create a component from a Lambda function.</p> <p>You must specify either <code>inlineRecipe</code> or <code>lambdaFunction</code>.</p>
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientTokenString'
-            - description: 'A unique, case-sensitive identifier that you can provide to ensure that the request is idempotent. Idempotency means that the request is successfully processed only once, even if you send the request multiple times. When a request succeeds, and you specify the same client token for subsequent successful requests, the IoT Greengrass V2 service returns the successful response that it caches from the previous request. IoT Greengrass V2 caches successful responses for idempotent requests for up to 8 hours.'
+          $ref: '#/components/schemas/ClientTokenString'
+          description: 'A unique, case-sensitive identifier that you can provide to ensure that the request is idempotent. Idempotency means that the request is successfully processed only once, even if you send the request multiple times. When a request succeeds, and you specify the same client token for subsequent successful requests, the IoT Greengrass V2 service returns the successful response that it caches from the previous request. IoT Greengrass V2 caches successful responses for idempotent requests for up to 8 hours.'
     TargetARN:
       type: string
       pattern: 'arn:aws(-cn|-us-gov)?:iot:[^:]+:[0-9]+:(thing|thinggroup)/.+'
@@ -2644,33 +2499,27 @@ components:
       type: object
       properties:
         jobExecutionsRolloutConfig:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobExecutionsRolloutConfig'
-            - description: The rollout configuration for the job. This configuration defines the rate at which the job rolls out to the fleet of target devices.
+          $ref: '#/components/schemas/IoTJobExecutionsRolloutConfig'
+          description: The rollout configuration for the job. This configuration defines the rate at which the job rolls out to the fleet of target devices.
         abortConfig:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobAbortConfig'
-            - description: The stop configuration for the job. This configuration defines when and how to stop a job rollout.
+          $ref: '#/components/schemas/IoTJobAbortConfig'
+          description: The stop configuration for the job. This configuration defines when and how to stop a job rollout.
         timeoutConfig:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobTimeoutConfig'
-            - description: The timeout configuration for the job. This configuration defines the amount of time each device has to complete the job.
+          $ref: '#/components/schemas/IoTJobTimeoutConfig'
+          description: The timeout configuration for the job. This configuration defines the amount of time each device has to complete the job.
       description: Contains information about an IoT job configuration.
     DeploymentPolicies:
       type: object
       properties:
         failureHandlingPolicy:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentFailureHandlingPolicy'
-            - description: '<p>The failure handling policy for the configuration deployment. This policy defines what to do if the deployment fails.</p> <p>Default: <code>ROLLBACK</code> </p>'
+          $ref: '#/components/schemas/DeploymentFailureHandlingPolicy'
+          description: '<p>The failure handling policy for the configuration deployment. This policy defines what to do if the deployment fails.</p> <p>Default: <code>ROLLBACK</code> </p>'
         componentUpdatePolicy:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentComponentUpdatePolicy'
-            - description: The component update policy for the configuration deployment. This policy defines when it's safe to deploy the configuration to devices.
+          $ref: '#/components/schemas/DeploymentComponentUpdatePolicy'
+          description: The component update policy for the configuration deployment. This policy defines when it's safe to deploy the configuration to devices.
         configurationValidationPolicy:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentConfigurationValidationPolicy'
-            - description: The configuration validation policy for the configuration deployment. This policy defines how long each component has to validate its configure updates.
+          $ref: '#/components/schemas/DeploymentConfigurationValidationPolicy'
+          description: The configuration validation policy for the configuration deployment. This policy defines how long each component has to validate its configure updates.
       description: Contains information about policies that define how a deployment updates components and handles failure.
     CreateDeploymentRequest:
       type: object
@@ -2679,33 +2528,26 @@ components:
       title: CreateDeploymentRequest
       properties:
         targetArn:
-          allOf:
-            - $ref: '#/components/schemas/TargetARN'
-            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the target IoT thing or thing group.'
+          $ref: '#/components/schemas/TargetARN'
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the target IoT thing or thing group.'
         deploymentName:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The name of the deployment.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the deployment.
         components:
-          allOf:
-            - $ref: '#/components/schemas/ComponentDeploymentSpecifications'
-            - description: 'The components to deploy. This is a dictionary, where each key is the name of a component, and each key''s value is the version and configuration to deploy for that component.'
+          $ref: '#/components/schemas/ComponentDeploymentSpecifications'
+          description: 'The components to deploy. This is a dictionary, where each key is the name of a component, and each key''s value is the version and configuration to deploy for that component.'
         iotJobConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentIoTJobConfiguration'
-            - description: 'The job configuration for the deployment configuration. The job configuration specifies the rollout, timeout, and stop configurations for the deployment configuration.'
+          $ref: '#/components/schemas/DeploymentIoTJobConfiguration'
+          description: 'The job configuration for the deployment configuration. The job configuration specifies the rollout, timeout, and stop configurations for the deployment configuration.'
         deploymentPolicies:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentPolicies'
-            - description: The deployment policies for the deployment. These policies define how the deployment updates components and handles failure.
+          $ref: '#/components/schemas/DeploymentPolicies'
+          description: The deployment policies for the deployment. These policies define how the deployment updates components and handles failure.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientTokenString'
-            - description: 'A unique, case-sensitive identifier that you can provide to ensure that the request is idempotent. Idempotency means that the request is successfully processed only once, even if you send the request multiple times. When a request succeeds, and you specify the same client token for subsequent successful requests, the IoT Greengrass V2 service returns the successful response that it caches from the previous request. IoT Greengrass V2 caches successful responses for idempotent requests for up to 8 hours.'
+          $ref: '#/components/schemas/ClientTokenString'
+          description: 'A unique, case-sensitive identifier that you can provide to ensure that the request is idempotent. Idempotency means that the request is successfully processed only once, even if you send the request multiple times. When a request succeeds, and you specify the same client token for subsequent successful requests, the IoT Greengrass V2 service returns the successful response that it caches from the previous request. IoT Greengrass V2 caches successful responses for idempotent requests for up to 8 hours.'
     IoTJobARN:
       type: string
       pattern: 'arn:aws(-cn|-us-gov)?:iot:[^:]+:[0-9]+:job/.+'
@@ -2735,33 +2577,26 @@ components:
       type: object
       properties:
         targetArn:
-          allOf:
-            - $ref: '#/components/schemas/TargetARN'
-            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the target IoT thing or thing group.'
+          $ref: '#/components/schemas/TargetARN'
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the target IoT thing or thing group.'
         revisionId:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The revision number of the deployment.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The revision number of the deployment.
         deploymentId:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ID of the deployment.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ID of the deployment.
         deploymentName:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The name of the deployment.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the deployment.
         creationTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time at which the deployment was created, expressed in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time at which the deployment was created, expressed in ISO 8601 format.'
         deploymentStatus:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentStatus'
-            - description: The status of the deployment.
+          $ref: '#/components/schemas/DeploymentStatus'
+          description: The status of the deployment.
         isLatestForTarget:
-          allOf:
-            - $ref: '#/components/schemas/IsLatestForTarget'
-            - description: Whether or not the deployment is the latest revision for its target.
+          $ref: '#/components/schemas/IsLatestForTarget'
+          description: Whether or not the deployment is the latest revision for its target.
       description: Contains information about a deployment.
     OptionalInteger:
       type: integer
@@ -2799,17 +2634,14 @@ components:
       type: object
       properties:
         thingName:
-          allOf:
-            - $ref: '#/components/schemas/IoTThingName'
-            - description: The name of the IoT thing whose disassociate request failed.
+          $ref: '#/components/schemas/IoTThingName'
+          description: The name of the IoT thing whose disassociate request failed.
         code:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The error code for the request.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The error code for the request.
         message:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: A message that provides additional information about the error.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: A message that provides additional information about the error.
       description: 'Contains an error that occurs from a request to disassociate a client device from a core device. The <a href="https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html">BatchDisassociateClientDeviceWithCoreDevice</a> operation returns a list of these errors.'
     IoTJobId:
       type: string
@@ -2838,45 +2670,35 @@ components:
         - modifiedTimestamp
       properties:
         deploymentId:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentID'
-            - description: The ID of the deployment.
+          $ref: '#/components/schemas/DeploymentID'
+          description: The ID of the deployment.
         deploymentName:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentName'
-            - description: The name of the deployment.
+          $ref: '#/components/schemas/DeploymentName'
+          description: The name of the deployment.
         iotJobId:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobId'
-            - description: The ID of the IoT job that applies the deployment to target devices.
+          $ref: '#/components/schemas/IoTJobId'
+          description: The ID of the IoT job that applies the deployment to target devices.
         iotJobArn:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobARN'
-            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IoT job that applies the deployment to target devices.'
+          $ref: '#/components/schemas/IoTJobARN'
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IoT job that applies the deployment to target devices.'
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the deployment job.
+          $ref: '#/components/schemas/Description'
+          description: The description of the deployment job.
         targetArn:
-          allOf:
-            - $ref: '#/components/schemas/TargetARN'
-            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the target IoT thing or thing group.'
+          $ref: '#/components/schemas/TargetARN'
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the target IoT thing or thing group.'
         coreDeviceExecutionStatus:
-          allOf:
-            - $ref: '#/components/schemas/EffectiveDeploymentExecutionStatus'
-            - description: The status of the deployment job on the Greengrass core device.
+          $ref: '#/components/schemas/EffectiveDeploymentExecutionStatus'
+          description: The status of the deployment job on the Greengrass core device.
         reason:
-          allOf:
-            - $ref: '#/components/schemas/Reason'
-            - description: 'The reason code for the update, if the job was updated.'
+          $ref: '#/components/schemas/Reason'
+          description: 'The reason code for the update, if the job was updated.'
         creationTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time at which the deployment was created, expressed in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time at which the deployment was created, expressed in ISO 8601 format.'
         modifiedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time at which the deployment job was last modified, expressed in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time at which the deployment job was last modified, expressed in ISO 8601 format.'
       description: Contains information about a deployment job that IoT Greengrass sends to a Greengrass core device.
     EffectiveDeploymentsList:
       type: array
@@ -2935,25 +2757,20 @@ components:
       type: object
       properties:
         componentName:
-          allOf:
-            - $ref: '#/components/schemas/ComponentNameString'
-            - description: The name of the component.
+          $ref: '#/components/schemas/ComponentNameString'
+          description: The name of the component.
         componentVersion:
-          allOf:
-            - $ref: '#/components/schemas/ComponentVersionString'
-            - description: The version of the component.
+          $ref: '#/components/schemas/ComponentVersionString'
+          description: The version of the component.
         lifecycleState:
-          allOf:
-            - $ref: '#/components/schemas/InstalledComponentLifecycleState'
-            - description: The lifecycle state of the component.
+          $ref: '#/components/schemas/InstalledComponentLifecycleState'
+          description: The lifecycle state of the component.
         lifecycleStateDetails:
-          allOf:
-            - $ref: '#/components/schemas/LifecycleStateDetails'
-            - description: The details about the lifecycle state of the component.
+          $ref: '#/components/schemas/LifecycleStateDetails'
+          description: The details about the lifecycle state of the component.
         isRoot:
-          allOf:
-            - $ref: '#/components/schemas/IsRoot'
-            - description: Whether or not the component is a root component.
+          $ref: '#/components/schemas/IsRoot'
+          description: Whether or not the component is a root component.
       description: Contains information about a component on a Greengrass core device.
     InstalledComponentList:
       type: array
@@ -2991,21 +2808,17 @@ components:
         - minNumberOfExecutedThings
       properties:
         failureType:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobExecutionFailureType'
-            - description: The type of job deployment failure that can cancel a job.
+          $ref: '#/components/schemas/IoTJobExecutionFailureType'
+          description: The type of job deployment failure that can cancel a job.
         action:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobAbortAction'
-            - description: The action to perform when the criteria are met.
+          $ref: '#/components/schemas/IoTJobAbortAction'
+          description: The action to perform when the criteria are met.
         thresholdPercentage:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobAbortThresholdPercentage'
-            - description: '<p>The minimum percentage of <code>failureType</code> failures that occur before the job can cancel.</p> <p>This parameter supports up to two digits after the decimal (for example, you can specify <code>10.9</code> or <code>10.99</code>, but not <code>10.999</code>).</p>'
+          $ref: '#/components/schemas/IoTJobAbortThresholdPercentage'
+          description: '<p>The minimum percentage of <code>failureType</code> failures that occur before the job can cancel.</p> <p>This parameter supports up to two digits after the decimal (for example, you can specify <code>10.9</code> or <code>10.99</code>, but not <code>10.999</code>).</p>'
         minNumberOfExecutedThings:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobMinimumNumberOfExecutedThings'
-            - description: The minimum number of things that receive the configuration before the job can cancel.
+          $ref: '#/components/schemas/IoTJobMinimumNumberOfExecutedThings'
+          description: The minimum number of things that receive the configuration before the job can cancel.
       description: '<p>Contains criteria that define when and how to cancel a job.</p> <p>The deployment stops if the following conditions are true:</p> <ol> <li> <p>The number of things that receive the deployment exceeds the <code>minNumberOfExecutedThings</code>.</p> </li> <li> <p>The percentage of failures with type <code>failureType</code> exceeds the <code>thresholdPercentage</code>.</p> </li> </ol>'
     IoTJobExponentialRolloutRate:
       type: object
@@ -3015,17 +2828,14 @@ components:
         - rateIncreaseCriteria
       properties:
         baseRatePerMinute:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobRolloutBaseRatePerMinute'
-            - description: 'The minimum number of devices that receive a pending job notification, per minute, when the job starts. This parameter defines the initial rollout rate of the job.'
+          $ref: '#/components/schemas/IoTJobRolloutBaseRatePerMinute'
+          description: 'The minimum number of devices that receive a pending job notification, per minute, when the job starts. This parameter defines the initial rollout rate of the job.'
         incrementFactor:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobRolloutIncrementFactor'
-            - description: '<p>The exponential factor to increase the rollout rate for the job.</p> <p>This parameter supports up to one digit after the decimal (for example, you can specify <code>1.5</code>, but not <code>1.55</code>).</p>'
+          $ref: '#/components/schemas/IoTJobRolloutIncrementFactor'
+          description: '<p>The exponential factor to increase the rollout rate for the job.</p> <p>This parameter supports up to one digit after the decimal (for example, you can specify <code>1.5</code>, but not <code>1.55</code>).</p>'
         rateIncreaseCriteria:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobRateIncreaseCriteria'
-            - description: The criteria to increase the rollout rate for the job.
+          $ref: '#/components/schemas/IoTJobRateIncreaseCriteria'
+          description: The criteria to increase the rollout rate for the job.
       description: Contains information about an exponential rollout rate for a configuration deployment job.
     IoTJobMaxExecutionsPerMin:
       type: integer
@@ -3044,13 +2854,11 @@ components:
       type: object
       properties:
         numberOfNotifiedThings:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobNumberOfThings'
-            - description: The number of devices to receive the job notification before the rollout rate increases.
+          $ref: '#/components/schemas/IoTJobNumberOfThings'
+          description: The number of devices to receive the job notification before the rollout rate increases.
         numberOfSucceededThings:
-          allOf:
-            - $ref: '#/components/schemas/IoTJobNumberOfThings'
-            - description: The number of devices to successfully run the configuration job before the rollout rate increases.
+          $ref: '#/components/schemas/IoTJobNumberOfThings'
+          description: The number of devices to successfully run the configuration job before the rollout rate increases.
       description: Contains information about criteria to meet before a job increases its rollout rate. Specify either <code>numberOfNotifiedThings</code> or <code>numberOfSucceededThings</code>.
     IoTJobInProgressTimeoutInMinutes:
       type: integer
@@ -3071,21 +2879,17 @@ components:
       type: object
       properties:
         memorySizeInKB:
-          allOf:
-            - $ref: '#/components/schemas/OptionalInteger'
-            - description: '<p>The memory size of the container, expressed in kilobytes.</p> <p>Default: <code>16384</code> (16 MB)</p>'
+          $ref: '#/components/schemas/OptionalInteger'
+          description: '<p>The memory size of the container, expressed in kilobytes.</p> <p>Default: <code>16384</code> (16 MB)</p>'
         mountROSysfs:
-          allOf:
-            - $ref: '#/components/schemas/OptionalBoolean'
-            - description: '<p>Whether or not the container can read information from the device''s <code>/sys</code> folder.</p> <p>Default: <code>false</code> </p>'
+          $ref: '#/components/schemas/OptionalBoolean'
+          description: '<p>Whether or not the container can read information from the device''s <code>/sys</code> folder.</p> <p>Default: <code>false</code> </p>'
         volumes:
-          allOf:
-            - $ref: '#/components/schemas/LambdaVolumeList'
-            - description: The list of volumes that the container can access.
+          $ref: '#/components/schemas/LambdaVolumeList'
+          description: The list of volumes that the container can access.
         devices:
-          allOf:
-            - $ref: '#/components/schemas/LambdaDeviceList'
-            - description: The list of system devices that the container can access.
+          $ref: '#/components/schemas/LambdaDeviceList'
+          description: The list of system devices that the container can access.
       description: Contains information about a container in which Lambda functions run on Greengrass core devices.
     LambdaDeviceMount:
       type: object
@@ -3093,17 +2897,14 @@ components:
         - path
       properties:
         path:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemPath'
-            - description: The mount path for the device in the file system.
+          $ref: '#/components/schemas/FileSystemPath'
+          description: The mount path for the device in the file system.
         permission:
-          allOf:
-            - $ref: '#/components/schemas/LambdaFilesystemPermission'
-            - description: '<p>The permission to access the device: read/only (<code>ro</code>) or read/write (<code>rw</code>).</p> <p>Default: <code>ro</code> </p>'
+          $ref: '#/components/schemas/LambdaFilesystemPermission'
+          description: '<p>The permission to access the device: read/only (<code>ro</code>) or read/write (<code>rw</code>).</p> <p>Default: <code>ro</code> </p>'
         addGroupOwner:
-          allOf:
-            - $ref: '#/components/schemas/OptionalBoolean'
-            - description: '<p>Whether or not to add the component''s system user as an owner of the device.</p> <p>Default: <code>false</code> </p>'
+          $ref: '#/components/schemas/OptionalBoolean'
+          description: '<p>Whether or not to add the component''s system user as an owner of the device.</p> <p>Default: <code>false</code> </p>'
       description: Contains information about a device that Linux processes in a container can access.
     LambdaFilesystemPermission:
       type: string
@@ -3130,13 +2931,11 @@ components:
         - type
       properties:
         topic:
-          allOf:
-            - $ref: '#/components/schemas/TopicString'
-            - description: The topic to which to subscribe to receive event messages.
+          $ref: '#/components/schemas/TopicString'
+          description: The topic to which to subscribe to receive event messages.
         type:
-          allOf:
-            - $ref: '#/components/schemas/LambdaEventSourceType'
-            - description: '<p>The type of event source. Choose from the following options:</p> <ul> <li> <p> <code>PUB_SUB</code> – Subscribe to local publish/subscribe messages. This event source type doesn''t support MQTT wildcards (<code>+</code> and <code>#</code>) in the event source topic.</p> </li> <li> <p> <code>IOT_CORE</code> – Subscribe to Amazon Web Services IoT Core MQTT messages. This event source type supports MQTT wildcards (<code>+</code> and <code>#</code>) in the event source topic.</p> </li> </ul>'
+          $ref: '#/components/schemas/LambdaEventSourceType'
+          description: '<p>The type of event source. Choose from the following options:</p> <ul> <li> <p> <code>PUB_SUB</code> – Subscribe to local publish/subscribe messages. This event source type doesn''t support MQTT wildcards (<code>+</code> and <code>#</code>) in the event source topic.</p> </li> <li> <p> <code>IOT_CORE</code> – Subscribe to Amazon Web Services IoT Core MQTT messages. This event source type supports MQTT wildcards (<code>+</code> and <code>#</code>) in the event source topic.</p> </li> </ul>'
       description: Contains information about an event source for an Lambda function. The event source defines the topics on which this Lambda function subscribes to receive messages that run the function.
     LambdaEventSourceList:
       type: array
@@ -3157,13 +2956,11 @@ components:
       type: object
       properties:
         isolationMode:
-          allOf:
-            - $ref: '#/components/schemas/LambdaIsolationMode'
-            - description: '<p>The isolation mode for the process that contains the Lambda function. The process can run in an isolated runtime environment inside the IoT Greengrass container, or as a regular process outside any container.</p> <p>Default: <code>GreengrassContainer</code> </p>'
+          $ref: '#/components/schemas/LambdaIsolationMode'
+          description: '<p>The isolation mode for the process that contains the Lambda function. The process can run in an isolated runtime environment inside the IoT Greengrass container, or as a regular process outside any container.</p> <p>Default: <code>GreengrassContainer</code> </p>'
         containerParams:
-          allOf:
-            - $ref: '#/components/schemas/LambdaContainerParams'
-            - description: The parameters for the container in which the Lambda function runs.
+          $ref: '#/components/schemas/LambdaContainerParams'
+          description: The parameters for the container in which the Lambda function runs.
       description: Contains parameters for a Linux process that contains an Lambda function.
     LambdaIsolationMode:
       type: string
@@ -3177,21 +2974,17 @@ components:
         - destinationPath
       properties:
         sourcePath:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemPath'
-            - description: The path to the physical volume in the file system.
+          $ref: '#/components/schemas/FileSystemPath'
+          description: The path to the physical volume in the file system.
         destinationPath:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemPath'
-            - description: The path to the logical volume in the file system.
+          $ref: '#/components/schemas/FileSystemPath'
+          description: The path to the logical volume in the file system.
         permission:
-          allOf:
-            - $ref: '#/components/schemas/LambdaFilesystemPermission'
-            - description: '<p>The permission to access the volume: read/only (<code>ro</code>) or read/write (<code>rw</code>).</p> <p>Default: <code>ro</code> </p>'
+          $ref: '#/components/schemas/LambdaFilesystemPermission'
+          description: '<p>The permission to access the volume: read/only (<code>ro</code>) or read/write (<code>rw</code>).</p> <p>Default: <code>ro</code> </p>'
         addGroupOwner:
-          allOf:
-            - $ref: '#/components/schemas/OptionalBoolean'
-            - description: '<p>Whether or not to add the IoT Greengrass user group as an owner of the volume.</p> <p>Default: <code>false</code> </p>'
+          $ref: '#/components/schemas/OptionalBoolean'
+          description: '<p>Whether or not to add the IoT Greengrass user group as an owner of the volume.</p> <p>Default: <code>false</code> </p>'
       description: 'Contains information about a volume that Linux processes in a container can access. When you define a volume, the IoT Greengrass Core software mounts the source files to the destination inside the container.'
     NextTokenString:
       type: string
@@ -3242,13 +3035,11 @@ components:
       title: ResolveComponentCandidatesRequest
       properties:
         platform:
-          allOf:
-            - $ref: '#/components/schemas/ComponentPlatform'
-            - description: The platform to use to resolve compatible components.
+          $ref: '#/components/schemas/ComponentPlatform'
+          description: The platform to use to resolve compatible components.
         componentCandidates:
-          allOf:
-            - $ref: '#/components/schemas/ComponentCandidateList'
-            - description: The list of components to resolve.
+          $ref: '#/components/schemas/ComponentCandidateList'
+          description: The list of components to resolve.
     ResolvedComponentVersionsList:
       type: array
       items:
@@ -3257,21 +3048,17 @@ components:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ComponentVersionARN'
-            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
+          $ref: '#/components/schemas/ComponentVersionARN'
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
         componentName:
-          allOf:
-            - $ref: '#/components/schemas/ComponentNameString'
-            - description: The name of the component.
+          $ref: '#/components/schemas/ComponentNameString'
+          description: The name of the component.
         componentVersion:
-          allOf:
-            - $ref: '#/components/schemas/ComponentVersionString'
-            - description: The version of the component.
+          $ref: '#/components/schemas/ComponentVersionString'
+          description: The version of the component.
         recipe:
-          allOf:
-            - $ref: '#/components/schemas/RecipeBlob'
-            - description: The recipe of the component version.
+          $ref: '#/components/schemas/RecipeBlob'
+          description: The recipe of the component version.
       description: Contains information about a component version that is compatible to run on a Greengrass core device.
     TagKeyList:
       type: array
@@ -3286,9 +3073,8 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest

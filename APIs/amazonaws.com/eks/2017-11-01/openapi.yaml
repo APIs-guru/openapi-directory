@@ -263,37 +263,29 @@ paths:
                   type: object
                   properties:
                     identityProviderConfigName:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The name of the OIDC provider configuration.
+                      $ref: '#/components/schemas/String'
+                      description: The name of the OIDC provider configuration.
                     issuerUrl:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: 'The URL of the OpenID identity provider that allows the API server to discover public signing keys for verifying tokens. The URL must begin with <code>https://</code> and should correspond to the <code>iss</code> claim in the provider''s OIDC ID tokens. Per the OIDC standard, path components are allowed but query parameters are not. Typically the URL consists of only a hostname, like <code>https://server.example.org</code> or <code>https://example.com</code>. This URL should point to the level below <code>.well-known/openid-configuration</code> and must be publicly accessible over the internet.'
+                      $ref: '#/components/schemas/String'
+                      description: 'The URL of the OpenID identity provider that allows the API server to discover public signing keys for verifying tokens. The URL must begin with <code>https://</code> and should correspond to the <code>iss</code> claim in the provider''s OIDC ID tokens. Per the OIDC standard, path components are allowed but query parameters are not. Typically the URL consists of only a hostname, like <code>https://server.example.org</code> or <code>https://example.com</code>. This URL should point to the level below <code>.well-known/openid-configuration</code> and must be publicly accessible over the internet.'
                     clientId:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: This is also known as <i>audience</i>. The ID for the client application that makes authentication requests to the OpenID identity provider.
+                      $ref: '#/components/schemas/String'
+                      description: This is also known as <i>audience</i>. The ID for the client application that makes authentication requests to the OpenID identity provider.
                     usernameClaim:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: 'The JSON Web Token (JWT) claim to use as the username. The default is <code>sub</code>, which is expected to be a unique identifier of the end user. You can choose other claims, such as <code>email</code> or <code>name</code>, depending on the OpenID identity provider. Claims other than <code>email</code> are prefixed with the issuer URL to prevent naming clashes with other plug-ins.'
+                      $ref: '#/components/schemas/String'
+                      description: 'The JSON Web Token (JWT) claim to use as the username. The default is <code>sub</code>, which is expected to be a unique identifier of the end user. You can choose other claims, such as <code>email</code> or <code>name</code>, depending on the OpenID identity provider. Claims other than <code>email</code> are prefixed with the issuer URL to prevent naming clashes with other plug-ins.'
                     usernamePrefix:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: 'The prefix that is prepended to username claims to prevent clashes with existing names. If you do not provide this field, and <code>username</code> is a value other than <code>email</code>, the prefix defaults to <code>issuerurl#</code>. You can use the value <code>-</code> to disable all prefixing.'
+                      $ref: '#/components/schemas/String'
+                      description: 'The prefix that is prepended to username claims to prevent clashes with existing names. If you do not provide this field, and <code>username</code> is a value other than <code>email</code>, the prefix defaults to <code>issuerurl#</code>. You can use the value <code>-</code> to disable all prefixing.'
                     groupsClaim:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The JWT claim that the provider uses to return your groups.
+                      $ref: '#/components/schemas/String'
+                      description: The JWT claim that the provider uses to return your groups.
                     groupsPrefix:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: 'The prefix that is prepended to group claims to prevent clashes with existing names (such as <code>system:</code> groups). For example, the value<code> oidc:</code> will create group names like <code>oidc:engineering</code> and <code>oidc:infra</code>.'
+                      $ref: '#/components/schemas/String'
+                      description: 'The prefix that is prepended to group claims to prevent clashes with existing names (such as <code>system:</code> groups). For example, the value<code> oidc:</code> will create group names like <code>oidc:engineering</code> and <code>oidc:infra</code>.'
                     requiredClaims:
-                      allOf:
-                        - $ref: '#/components/schemas/requiredClaimsMap'
-                        - description: 'The key value pairs that describe required claims in the identity token. If set, each claim is verified to be present in the token with a matching value. For the maximum number of claims that you can require, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.'
+                      $ref: '#/components/schemas/requiredClaimsMap'
+                      description: 'The key value pairs that describe required claims in the identity token. If set, each claim is verified to be present in the token with a matching value. For the maximum number of claims that you can require, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.'
                 tags:
                   description: 'The metadata to apply to the configuration to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.'
                   type: object
@@ -559,41 +551,34 @@ paths:
                   type: object
                   properties:
                     subnetIds:
-                      allOf:
-                        - $ref: '#/components/schemas/StringList'
-                        - description: Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.
+                      $ref: '#/components/schemas/StringList'
+                      description: Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.
                     securityGroupIds:
-                      allOf:
-                        - $ref: '#/components/schemas/StringList'
-                        - description: '<p>Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use that allow communication between your nodes and the Kubernetes control plane. If you don''t specify any security groups, then familiarize yourself with the difference between Amazon EKS defaults for clusters deployed with Kubernetes:</p> <ul> <li> <p>1.14 Amazon EKS platform version <code>eks.2</code> and earlier</p> </li> <li> <p>1.14 Amazon EKS platform version <code>eks.3</code> and later </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Amazon EKS security group considerations</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>'
+                      $ref: '#/components/schemas/StringList'
+                      description: '<p>Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use that allow communication between your nodes and the Kubernetes control plane. If you don''t specify any security groups, then familiarize yourself with the difference between Amazon EKS defaults for clusters deployed with Kubernetes:</p> <ul> <li> <p>1.14 Amazon EKS platform version <code>eks.2</code> and earlier</p> </li> <li> <p>1.14 Amazon EKS platform version <code>eks.3</code> and later </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Amazon EKS security group considerations</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>'
                     endpointPublicAccess:
-                      allOf:
-                        - $ref: '#/components/schemas/BoxedBoolean'
-                        - description: 'Set this value to <code>false</code> to disable public access to your cluster''s Kubernetes API server endpoint. If you disable public access, your cluster''s Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is <code>true</code>, which enables public access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+                      $ref: '#/components/schemas/BoxedBoolean'
+                      description: 'Set this value to <code>false</code> to disable public access to your cluster''s Kubernetes API server endpoint. If you disable public access, your cluster''s Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is <code>true</code>, which enables public access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
                     endpointPrivateAccess:
-                      allOf:
-                        - $ref: '#/components/schemas/BoxedBoolean'
-                        - description: 'Set this value to <code>true</code> to enable private access for your cluster''s Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster''s VPC use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the nodes or Fargate pods. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+                      $ref: '#/components/schemas/BoxedBoolean'
+                      description: 'Set this value to <code>true</code> to enable private access for your cluster''s Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster''s VPC use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the nodes or Fargate pods. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
                     publicAccessCidrs:
-                      allOf:
-                        - $ref: '#/components/schemas/StringList'
-                        - description: 'The CIDR blocks that are allowed access to your cluster''s public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is <code>0.0.0.0/0</code>. If you''ve disabled private endpoint access and you have nodes or Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+                      $ref: '#/components/schemas/StringList'
+                      description: 'The CIDR blocks that are allowed access to your cluster''s public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is <code>0.0.0.0/0</code>. If you''ve disabled private endpoint access and you have nodes or Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
                 kubernetesNetworkConfig:
                   description: The Kubernetes network configuration for the cluster.
                   type: object
                   properties:
                     serviceIpv4Cidr:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: '<p>The CIDR block to assign Kubernetes service IP addresses from. If you don''t specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. The block must meet the following requirements:</p> <ul> <li> <p>Within one of the following private IP address blocks: 10.0.0.0/8, 172.16.0.0.0/12, or 192.168.0.0/16.</p> </li> <li> <p>Doesn''t overlap with any CIDR block assigned to the VPC that you selected for VPC.</p> </li> <li> <p>Between /24 and /12.</p> </li> </ul> <important> <p>You can only specify a custom CIDR block when you create a cluster and can''t change this value once the cluster is created.</p> </important>'
+                      $ref: '#/components/schemas/String'
+                      description: '<p>The CIDR block to assign Kubernetes service IP addresses from. If you don''t specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. The block must meet the following requirements:</p> <ul> <li> <p>Within one of the following private IP address blocks: 10.0.0.0/8, 172.16.0.0.0/12, or 192.168.0.0/16.</p> </li> <li> <p>Doesn''t overlap with any CIDR block assigned to the VPC that you selected for VPC.</p> </li> <li> <p>Between /24 and /12.</p> </li> </ul> <important> <p>You can only specify a custom CIDR block when you create a cluster and can''t change this value once the cluster is created.</p> </important>'
                 logging:
                   description: An object representing the logging configuration for resources in your cluster.
                   type: object
                   properties:
                     clusterLogging:
-                      allOf:
-                        - $ref: '#/components/schemas/LogSetups'
-                        - description: The cluster control plane logging configuration for your cluster.
+                      $ref: '#/components/schemas/LogSetups'
+                      description: The cluster control plane logging configuration for your cluster.
                 clientRequestToken:
                   description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                   type: string
@@ -899,17 +884,14 @@ paths:
                   type: object
                   properties:
                     minSize:
-                      allOf:
-                        - $ref: '#/components/schemas/ZeroCapacity'
-                        - description: The minimum number of nodes that the managed node group can scale in to.
+                      $ref: '#/components/schemas/ZeroCapacity'
+                      description: The minimum number of nodes that the managed node group can scale in to.
                     maxSize:
-                      allOf:
-                        - $ref: '#/components/schemas/Capacity'
-                        - description: 'The maximum number of nodes that the managed node group can scale out to. For information about the maximum number that you can specify, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.'
+                      $ref: '#/components/schemas/Capacity'
+                      description: 'The maximum number of nodes that the managed node group can scale out to. For information about the maximum number that you can specify, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.'
                     desiredSize:
-                      allOf:
-                        - $ref: '#/components/schemas/ZeroCapacity'
-                        - description: The current number of nodes that the managed node group should maintain.
+                      $ref: '#/components/schemas/ZeroCapacity'
+                      description: The current number of nodes that the managed node group should maintain.
                 diskSize:
                   description: 'The root device disk size (in GiB) for your node group instances. The default disk size is 20 GiB. If you specify <code>launchTemplate</code>, then don''t specify <code>diskSize</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
                   type: integer
@@ -936,13 +918,11 @@ paths:
                   type: object
                   properties:
                     ec2SshKey:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: 'The Amazon EC2 SSH key that provides access for SSH communication with the nodes in the managed node group. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2 key pairs and Linux instances</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>.'
+                      $ref: '#/components/schemas/String'
+                      description: 'The Amazon EC2 SSH key that provides access for SSH communication with the nodes in the managed node group. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2 key pairs and Linux instances</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>.'
                     sourceSecurityGroups:
-                      allOf:
-                        - $ref: '#/components/schemas/StringList'
-                        - description: 'The security groups that are allowed SSH access (port 22) to the nodes. If you specify an Amazon EC2 SSH key but do not specify a source security group when you create a managed node group, then port 22 on the nodes is opened to the internet (0.0.0.0/0). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.'
+                      $ref: '#/components/schemas/StringList'
+                      description: 'The security groups that are allowed SSH access (port 22) to the nodes. If you specify an Amazon EC2 SSH key but do not specify a source security group when you create a managed node group, then port 22 on the nodes is opened to the internet (0.0.0.0/0). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.'
                 nodeRole:
                   description: 'The Amazon Resource Name (ARN) of the IAM role to associate with your node group. The Amazon EKS worker node <code>kubelet</code> daemon makes calls to Amazon Web Services APIs on your behalf. Nodes receive permissions for these API calls through an IAM instance profile and associated policies. Before you can launch nodes and register them into a cluster, you must create an IAM role for those nodes to use when they are launched. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html">Amazon EKS node IAM role</a> in the <i> <i>Amazon EKS User Guide</i> </i>. If you specify <code>launchTemplate</code>, then don''t specify <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html"> <code>IamInstanceProfile</code> </a> in your launch template, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
                   type: string
@@ -971,29 +951,24 @@ paths:
                   type: object
                   properties:
                     name:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The name of the launch template.
+                      $ref: '#/components/schemas/String'
+                      description: The name of the launch template.
                     version:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: 'The version of the launch template to use. If no version is specified, then the template''s default version is used.'
+                      $ref: '#/components/schemas/String'
+                      description: 'The version of the launch template to use. If no version is specified, then the template''s default version is used.'
                     id:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The ID of the launch template.
+                      $ref: '#/components/schemas/String'
+                      description: The ID of the launch template.
                 updateConfig:
                   description: The node group update configuration.
                   type: object
                   properties:
                     maxUnavailable:
-                      allOf:
-                        - $ref: '#/components/schemas/NonZeroInteger'
-                        - description: The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or <code>maxUnavailablePercentage</code> is required to have a value.The maximum number is 100.
+                      $ref: '#/components/schemas/NonZeroInteger'
+                      description: The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or <code>maxUnavailablePercentage</code> is required to have a value.The maximum number is 100.
                     maxUnavailablePercentage:
-                      allOf:
-                        - $ref: '#/components/schemas/PercentCapacity'
-                        - description: 'The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or <code>maxUnavailable</code> is required to have a value.'
+                      $ref: '#/components/schemas/PercentCapacity'
+                      description: 'The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or <code>maxUnavailable</code> is required to have a value.'
                 capacityType:
                   description: The capacity type for your node group.
                   type: string
@@ -1643,13 +1618,11 @@ paths:
                   type: object
                   properties:
                     type:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The type of the identity provider configuration.
+                      $ref: '#/components/schemas/String'
+                      description: The type of the identity provider configuration.
                     name:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The name of the identity provider configuration.
+                      $ref: '#/components/schemas/String'
+                      description: The name of the identity provider configuration.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1794,13 +1767,11 @@ paths:
                   type: object
                   properties:
                     type:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The type of the identity provider configuration.
+                      $ref: '#/components/schemas/String'
+                      description: The type of the identity provider configuration.
                     name:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The name of the identity provider configuration.
+                      $ref: '#/components/schemas/String'
+                      description: The name of the identity provider configuration.
                 clientRequestToken:
                   description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                   type: string
@@ -2318,33 +2289,27 @@ paths:
                   type: object
                   properties:
                     subnetIds:
-                      allOf:
-                        - $ref: '#/components/schemas/StringList'
-                        - description: Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.
+                      $ref: '#/components/schemas/StringList'
+                      description: Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.
                     securityGroupIds:
-                      allOf:
-                        - $ref: '#/components/schemas/StringList'
-                        - description: '<p>Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use that allow communication between your nodes and the Kubernetes control plane. If you don''t specify any security groups, then familiarize yourself with the difference between Amazon EKS defaults for clusters deployed with Kubernetes:</p> <ul> <li> <p>1.14 Amazon EKS platform version <code>eks.2</code> and earlier</p> </li> <li> <p>1.14 Amazon EKS platform version <code>eks.3</code> and later </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Amazon EKS security group considerations</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>'
+                      $ref: '#/components/schemas/StringList'
+                      description: '<p>Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use that allow communication between your nodes and the Kubernetes control plane. If you don''t specify any security groups, then familiarize yourself with the difference between Amazon EKS defaults for clusters deployed with Kubernetes:</p> <ul> <li> <p>1.14 Amazon EKS platform version <code>eks.2</code> and earlier</p> </li> <li> <p>1.14 Amazon EKS platform version <code>eks.3</code> and later </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Amazon EKS security group considerations</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>'
                     endpointPublicAccess:
-                      allOf:
-                        - $ref: '#/components/schemas/BoxedBoolean'
-                        - description: 'Set this value to <code>false</code> to disable public access to your cluster''s Kubernetes API server endpoint. If you disable public access, your cluster''s Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is <code>true</code>, which enables public access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+                      $ref: '#/components/schemas/BoxedBoolean'
+                      description: 'Set this value to <code>false</code> to disable public access to your cluster''s Kubernetes API server endpoint. If you disable public access, your cluster''s Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is <code>true</code>, which enables public access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
                     endpointPrivateAccess:
-                      allOf:
-                        - $ref: '#/components/schemas/BoxedBoolean'
-                        - description: 'Set this value to <code>true</code> to enable private access for your cluster''s Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster''s VPC use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the nodes or Fargate pods. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+                      $ref: '#/components/schemas/BoxedBoolean'
+                      description: 'Set this value to <code>true</code> to enable private access for your cluster''s Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster''s VPC use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the nodes or Fargate pods. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
                     publicAccessCidrs:
-                      allOf:
-                        - $ref: '#/components/schemas/StringList'
-                        - description: 'The CIDR blocks that are allowed access to your cluster''s public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is <code>0.0.0.0/0</code>. If you''ve disabled private endpoint access and you have nodes or Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+                      $ref: '#/components/schemas/StringList'
+                      description: 'The CIDR blocks that are allowed access to your cluster''s public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is <code>0.0.0.0/0</code>. If you''ve disabled private endpoint access and you have nodes or Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
                 logging:
                   description: An object representing the logging configuration for resources in your cluster.
                   type: object
                   properties:
                     clusterLogging:
-                      allOf:
-                        - $ref: '#/components/schemas/LogSetups'
-                        - description: The cluster control plane logging configuration for your cluster.
+                      $ref: '#/components/schemas/LogSetups'
+                      description: The cluster control plane logging configuration for your cluster.
                 clientRequestToken:
                   description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                   type: string
@@ -2428,53 +2393,44 @@ paths:
                   type: object
                   properties:
                     addOrUpdateLabels:
-                      allOf:
-                        - $ref: '#/components/schemas/labelsMap'
-                        - description: Kubernetes labels to be added or updated.
+                      $ref: '#/components/schemas/labelsMap'
+                      description: Kubernetes labels to be added or updated.
                     removeLabels:
-                      allOf:
-                        - $ref: '#/components/schemas/labelsKeyList'
-                        - description: Kubernetes labels to be removed.
+                      $ref: '#/components/schemas/labelsKeyList'
+                      description: Kubernetes labels to be removed.
                 taints:
                   description: An object representing the details of an update to a taints payload.
                   type: object
                   properties:
                     addOrUpdateTaints:
-                      allOf:
-                        - $ref: '#/components/schemas/taintsList'
-                        - description: Kubernetes taints to be added or updated.
+                      $ref: '#/components/schemas/taintsList'
+                      description: Kubernetes taints to be added or updated.
                     removeTaints:
-                      allOf:
-                        - $ref: '#/components/schemas/taintsList'
-                        - description: Kubernetes taints to be removed.
+                      $ref: '#/components/schemas/taintsList'
+                      description: Kubernetes taints to be removed.
                 scalingConfig:
                   description: 'An object representing the scaling configuration details for the Auto Scaling group that is associated with your node group. When creating a node group, you must specify all or none of the properties. When updating a node group, you can specify any or none of the properties.'
                   type: object
                   properties:
                     minSize:
-                      allOf:
-                        - $ref: '#/components/schemas/ZeroCapacity'
-                        - description: The minimum number of nodes that the managed node group can scale in to.
+                      $ref: '#/components/schemas/ZeroCapacity'
+                      description: The minimum number of nodes that the managed node group can scale in to.
                     maxSize:
-                      allOf:
-                        - $ref: '#/components/schemas/Capacity'
-                        - description: 'The maximum number of nodes that the managed node group can scale out to. For information about the maximum number that you can specify, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.'
+                      $ref: '#/components/schemas/Capacity'
+                      description: 'The maximum number of nodes that the managed node group can scale out to. For information about the maximum number that you can specify, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.'
                     desiredSize:
-                      allOf:
-                        - $ref: '#/components/schemas/ZeroCapacity'
-                        - description: The current number of nodes that the managed node group should maintain.
+                      $ref: '#/components/schemas/ZeroCapacity'
+                      description: The current number of nodes that the managed node group should maintain.
                 updateConfig:
                   description: The node group update configuration.
                   type: object
                   properties:
                     maxUnavailable:
-                      allOf:
-                        - $ref: '#/components/schemas/NonZeroInteger'
-                        - description: The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or <code>maxUnavailablePercentage</code> is required to have a value.The maximum number is 100.
+                      $ref: '#/components/schemas/NonZeroInteger'
+                      description: The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or <code>maxUnavailablePercentage</code> is required to have a value.The maximum number is 100.
                     maxUnavailablePercentage:
-                      allOf:
-                        - $ref: '#/components/schemas/PercentCapacity'
-                        - description: 'The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or <code>maxUnavailable</code> is required to have a value.'
+                      $ref: '#/components/schemas/PercentCapacity'
+                      description: 'The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or <code>maxUnavailable</code> is required to have a value.'
                 clientRequestToken:
                   description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                   type: string
@@ -2564,17 +2520,14 @@ paths:
                   type: object
                   properties:
                     name:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The name of the launch template.
+                      $ref: '#/components/schemas/String'
+                      description: The name of the launch template.
                     version:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: 'The version of the launch template to use. If no version is specified, then the template''s default version is used.'
+                      $ref: '#/components/schemas/String'
+                      description: 'The version of the launch template to use. If no version is specified, then the template''s default version is used.'
                     id:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The ID of the launch template.
+                      $ref: '#/components/schemas/String'
+                      description: The ID of the launch template.
                 force:
                   description: 'Force the update if the existing node group''s pods are unable to be drained due to a pod disruption budget issue. If an update fails because pods could not be drained, you can force the update after it fails to terminate the old node whether or not any pods are running on the node.'
                   type: boolean
@@ -2650,13 +2603,11 @@ components:
       type: object
       properties:
         resources:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: Specifies the resources to be encrypted. The only supported value is "secrets".
+          $ref: '#/components/schemas/StringList'
+          description: Specifies the resources to be encrypted. The only supported value is "secrets".
         provider:
-          allOf:
-            - $ref: '#/components/schemas/Provider'
-            - description: Key Management Service (KMS) key. Either the ARN or the alias can be used.
+          $ref: '#/components/schemas/Provider'
+          description: Key Management Service (KMS) key. Either the ARN or the alias can be used.
       description: The encryption configuration for the cluster.
     InvalidParameterException: {}
     ClientException: {}
@@ -2670,9 +2621,8 @@ components:
         update:
           $ref: '#/components/schemas/Update'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags for the resource.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags for the resource.
     String:
       type: string
     requiredClaimsMap:
@@ -2692,9 +2642,8 @@ components:
       example: {}
       properties:
         cluster:
-          allOf:
-            - $ref: '#/components/schemas/Cluster'
-            - description: The full description of your new cluster.
+          $ref: '#/components/schemas/Cluster'
+          description: The full description of your new cluster.
     StringList:
       type: array
       items:
@@ -2712,28 +2661,24 @@ components:
       type: object
       properties:
         fargateProfile:
-          allOf:
-            - $ref: '#/components/schemas/FargateProfile'
-            - description: The full description of your new Fargate profile.
+          $ref: '#/components/schemas/FargateProfile'
+          description: The full description of your new Fargate profile.
     FargateProfileSelector:
       type: object
       properties:
         namespace:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Kubernetes namespace that the selector should match.
+          $ref: '#/components/schemas/String'
+          description: The Kubernetes namespace that the selector should match.
         labels:
-          allOf:
-            - $ref: '#/components/schemas/FargateProfileLabel'
-            - description: The Kubernetes labels that the selector should match. A pod must contain all of the labels that are specified in the selector for it to be considered a match.
+          $ref: '#/components/schemas/FargateProfileLabel'
+          description: The Kubernetes labels that the selector should match. A pod must contain all of the labels that are specified in the selector for it to be considered a match.
       description: An object representing an Fargate profile selector.
     CreateNodegroupResponse:
       type: object
       properties:
         nodegroup:
-          allOf:
-            - $ref: '#/components/schemas/Nodegroup'
-            - description: The full description of your new node group.
+          $ref: '#/components/schemas/Nodegroup'
+          description: The full description of your new node group.
     ZeroCapacity:
       type: integer
       minimum: 0
@@ -2748,17 +2693,14 @@ components:
       type: object
       properties:
         key:
-          allOf:
-            - $ref: '#/components/schemas/taintKey'
-            - description: The key of the taint.
+          $ref: '#/components/schemas/taintKey'
+          description: The key of the taint.
         value:
-          allOf:
-            - $ref: '#/components/schemas/taintValue'
-            - description: The value of the taint.
+          $ref: '#/components/schemas/taintValue'
+          description: The value of the taint.
         effect:
-          allOf:
-            - $ref: '#/components/schemas/TaintEffect'
-            - description: The effect of the taint.
+          $ref: '#/components/schemas/TaintEffect'
+          description: The effect of the taint.
       description: A property that allows a node to repel a set of pods.
     NonZeroInteger:
       type: integer
@@ -2777,23 +2719,20 @@ components:
       example: {}
       properties:
         cluster:
-          allOf:
-            - $ref: '#/components/schemas/Cluster'
-            - description: The full description of the cluster to delete.
+          $ref: '#/components/schemas/Cluster'
+          description: The full description of the cluster to delete.
     DeleteFargateProfileResponse:
       type: object
       properties:
         fargateProfile:
-          allOf:
-            - $ref: '#/components/schemas/FargateProfile'
-            - description: The deleted Fargate profile.
+          $ref: '#/components/schemas/FargateProfile'
+          description: The deleted Fargate profile.
     DeleteNodegroupResponse:
       type: object
       properties:
         nodegroup:
-          allOf:
-            - $ref: '#/components/schemas/Nodegroup'
-            - description: The full description of your deleted node group.
+          $ref: '#/components/schemas/Nodegroup'
+          description: The full description of your deleted node group.
     DescribeAddonResponse:
       type: object
       properties:
@@ -2803,13 +2742,11 @@ components:
       type: object
       properties:
         addons:
-          allOf:
-            - $ref: '#/components/schemas/Addons'
-            - description: The list of available versions with Kubernetes version compatibility.
+          $ref: '#/components/schemas/Addons'
+          description: The list of available versions with Kubernetes version compatibility.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeAddonVersionsResponse</code> where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p> <note> <p>This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+          $ref: '#/components/schemas/String'
+          description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeAddonVersionsResponse</code> where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p> <note> <p>This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
     DescribeClusterResponse:
       type: object
       example:
@@ -2832,37 +2769,32 @@ components:
           status: ACTIVE
       properties:
         cluster:
-          allOf:
-            - $ref: '#/components/schemas/Cluster'
-            - description: The full description of your specified cluster.
+          $ref: '#/components/schemas/Cluster'
+          description: The full description of your specified cluster.
     DescribeFargateProfileResponse:
       type: object
       properties:
         fargateProfile:
-          allOf:
-            - $ref: '#/components/schemas/FargateProfile'
-            - description: The full description of your Fargate profile.
+          $ref: '#/components/schemas/FargateProfile'
+          description: The full description of your Fargate profile.
     DescribeIdentityProviderConfigResponse:
       type: object
       properties:
         identityProviderConfig:
-          allOf:
-            - $ref: '#/components/schemas/IdentityProviderConfigResponse'
-            - description: The object that represents an OpenID Connect (OIDC) identity provider configuration.
+          $ref: '#/components/schemas/IdentityProviderConfigResponse'
+          description: The object that represents an OpenID Connect (OIDC) identity provider configuration.
     DescribeNodegroupResponse:
       type: object
       properties:
         nodegroup:
-          allOf:
-            - $ref: '#/components/schemas/Nodegroup'
-            - description: The full description of your node group.
+          $ref: '#/components/schemas/Nodegroup'
+          description: The full description of your node group.
     DescribeUpdateResponse:
       type: object
       properties:
         update:
-          allOf:
-            - $ref: '#/components/schemas/Update'
-            - description: The full description of the specified update.
+          $ref: '#/components/schemas/Update'
+          description: The full description of the specified update.
     DisassociateIdentityProviderConfigResponse:
       type: object
       properties:
@@ -2872,13 +2804,11 @@ components:
       type: object
       properties:
         addons:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: A list of available add-ons.
+          $ref: '#/components/schemas/StringList'
+          description: A list of available add-ons.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListAddonsResponse</code> where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p> <note> <p>This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+          $ref: '#/components/schemas/String'
+          description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListAddonsResponse</code> where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p> <note> <p>This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
     ListClustersResponse:
       type: object
       example:
@@ -2887,46 +2817,38 @@ components:
           - prod
       properties:
         clusters:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: A list of all of the clusters for your account in the specified Region.
+          $ref: '#/components/schemas/StringList'
+          description: A list of all of the clusters for your account in the specified Region.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The <code>nextToken</code> value to include in a future <code>ListClusters</code> request. When the results of a <code>ListClusters</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+          $ref: '#/components/schemas/String'
+          description: 'The <code>nextToken</code> value to include in a future <code>ListClusters</code> request. When the results of a <code>ListClusters</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
     ListFargateProfilesResponse:
       type: object
       properties:
         fargateProfileNames:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: A list of all of the Fargate profiles associated with the specified cluster.
+          $ref: '#/components/schemas/StringList'
+          description: A list of all of the Fargate profiles associated with the specified cluster.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The <code>nextToken</code> value to include in a future <code>ListFargateProfiles</code> request. When the results of a <code>ListFargateProfiles</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+          $ref: '#/components/schemas/String'
+          description: 'The <code>nextToken</code> value to include in a future <code>ListFargateProfiles</code> request. When the results of a <code>ListFargateProfiles</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
     ListIdentityProviderConfigsResponse:
       type: object
       properties:
         identityProviderConfigs:
-          allOf:
-            - $ref: '#/components/schemas/IdentityProviderConfigs'
-            - description: The identity provider configurations for the cluster.
+          $ref: '#/components/schemas/IdentityProviderConfigs'
+          description: The identity provider configurations for the cluster.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The <code>nextToken</code> value returned from a previous paginated <code>ListIdentityProviderConfigsResponse</code> where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.
+          $ref: '#/components/schemas/String'
+          description: The <code>nextToken</code> value returned from a previous paginated <code>ListIdentityProviderConfigsResponse</code> where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.
     ListNodegroupsResponse:
       type: object
       properties:
         nodegroups:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: A list of all of the node groups associated with the specified cluster.
+          $ref: '#/components/schemas/StringList'
+          description: A list of all of the node groups associated with the specified cluster.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The <code>nextToken</code> value to include in a future <code>ListNodegroups</code> request. When the results of a <code>ListNodegroups</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+          $ref: '#/components/schemas/String'
+          description: 'The <code>nextToken</code> value to include in a future <code>ListNodegroups</code> request. When the results of a <code>ListNodegroups</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
     ListTagsForResourceResponse:
       type: object
       example:
@@ -2934,22 +2856,19 @@ components:
           'aws:tag:domain': beta
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags for the resource.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags for the resource.
     BadRequestException: {}
     NotFoundException: {}
     ListUpdatesResponse:
       type: object
       properties:
         updateIds:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: A list of all the updates for the specified cluster and Region.
+          $ref: '#/components/schemas/StringList'
+          description: A list of all the updates for the specified cluster and Region.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The <code>nextToken</code> value to include in a future <code>ListUpdates</code> request. When the results of a <code>ListUpdates</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+          $ref: '#/components/schemas/String'
+          description: 'The <code>nextToken</code> value to include in a future <code>ListUpdates</code> request. When the results of a <code>ListUpdates</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
     TagResourceResponse:
       type: object
       properties: {}
@@ -2974,9 +2893,8 @@ components:
       type: object
       properties:
         update:
-          allOf:
-            - $ref: '#/components/schemas/Update'
-            - description: The full description of the specified update
+          $ref: '#/components/schemas/Update'
+          description: The full description of the specified update
     UpdateNodegroupConfigResponse:
       type: object
       properties:
@@ -3025,9 +2943,8 @@ components:
       type: object
       properties:
         issues:
-          allOf:
-            - $ref: '#/components/schemas/AddonIssueList'
-            - description: An object that represents the add-on's health issues.
+          $ref: '#/components/schemas/AddonIssueList'
+          description: An object that represents the add-on's health issues.
       description: The health of the add-on.
     Timestamp:
       type: string
@@ -3042,45 +2959,35 @@ components:
       type: object
       properties:
         addonName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the add-on.
+          $ref: '#/components/schemas/String'
+          description: The name of the add-on.
         clusterName:
-          allOf:
-            - $ref: '#/components/schemas/ClusterName'
-            - description: The name of the cluster.
+          $ref: '#/components/schemas/ClusterName'
+          description: The name of the cluster.
         status:
-          allOf:
-            - $ref: '#/components/schemas/AddonStatus'
-            - description: The status of the add-on.
+          $ref: '#/components/schemas/AddonStatus'
+          description: The status of the add-on.
         addonVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The version of the add-on.
+          $ref: '#/components/schemas/String'
+          description: The version of the add-on.
         health:
-          allOf:
-            - $ref: '#/components/schemas/AddonHealth'
-            - description: An object that represents the health of the add-on.
+          $ref: '#/components/schemas/AddonHealth'
+          description: An object that represents the health of the add-on.
         addonArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the add-on.
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Name (ARN) of the add-on.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date and time that the add-on was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time that the add-on was created.
         modifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date and time that the add-on was last modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time that the add-on was last modified.
         serviceAccountRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the IAM role that is bound to the Kubernetes service account used by the add-on.
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Name (ARN) of the IAM role that is bound to the Kubernetes service account used by the add-on.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The metadata that you apply to the add-on to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Add-on tags do not propagate to any other resources associated with the cluster. '
+          $ref: '#/components/schemas/TagMap'
+          description: 'The metadata that you apply to the add-on to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Add-on tags do not propagate to any other resources associated with the cluster. '
       description: An Amazon EKS add-on.
     AddonIssueList:
       type: array
@@ -3094,17 +3001,14 @@ components:
       type: object
       properties:
         addonName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the add-on.
+          $ref: '#/components/schemas/String'
+          description: The name of the add-on.
         type:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The type of the add-on.
+          $ref: '#/components/schemas/String'
+          description: The type of the add-on.
         addonVersions:
-          allOf:
-            - $ref: '#/components/schemas/AddonVersionInfoList'
-            - description: An object that represents information about available add-on versions and compatible Kubernetes versions.
+          $ref: '#/components/schemas/AddonVersionInfoList'
+          description: An object that represents information about available add-on versions and compatible Kubernetes versions.
       description: Information about an add-on.
     AddonIssueCode:
       type: string
@@ -3120,17 +3024,14 @@ components:
       type: object
       properties:
         code:
-          allOf:
-            - $ref: '#/components/schemas/AddonIssueCode'
-            - description: A code that describes the type of issue.
+          $ref: '#/components/schemas/AddonIssueCode'
+          description: A code that describes the type of issue.
         message:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A message that provides details about the issue and what might cause it.
+          $ref: '#/components/schemas/String'
+          description: A message that provides details about the issue and what might cause it.
         resourceIds:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: The resource IDs of the issue.
+          $ref: '#/components/schemas/StringList'
+          description: The resource IDs of the issue.
       description: An issue related to an add-on.
     Compatibilities:
       type: array
@@ -3140,17 +3041,14 @@ components:
       type: object
       properties:
         addonVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The version of the add-on.
+          $ref: '#/components/schemas/String'
+          description: The version of the add-on.
         architecture:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: The architectures that the version supports.
+          $ref: '#/components/schemas/StringList'
+          description: The architectures that the version supports.
         compatibilities:
-          allOf:
-            - $ref: '#/components/schemas/Compatibilities'
-            - description: An object that represents the compatibilities of a version.
+          $ref: '#/components/schemas/Compatibilities'
+          description: An object that represents the compatibilities of a version.
       description: Information about an add-on version.
     Addons:
       type: array
@@ -3168,40 +3066,32 @@ components:
       title: AssociateEncryptionConfigRequest
       properties:
         encryptionConfig:
-          allOf:
-            - $ref: '#/components/schemas/EncryptionConfigList'
-            - description: The configuration you are using for encryption.
+          $ref: '#/components/schemas/EncryptionConfigList'
+          description: The configuration you are using for encryption.
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The client request token you are using with the encryption configuration.
+          $ref: '#/components/schemas/String'
+          description: The client request token you are using with the encryption configuration.
     Update:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A UUID that is used to track the update.
+          $ref: '#/components/schemas/String'
+          description: A UUID that is used to track the update.
         status:
-          allOf:
-            - $ref: '#/components/schemas/UpdateStatus'
-            - description: The current status of the update.
+          $ref: '#/components/schemas/UpdateStatus'
+          description: The current status of the update.
         type:
-          allOf:
-            - $ref: '#/components/schemas/UpdateType'
-            - description: The type of the update.
+          $ref: '#/components/schemas/UpdateType'
+          description: The type of the update.
         params:
-          allOf:
-            - $ref: '#/components/schemas/UpdateParams'
-            - description: A key-value map that contains the parameters associated with the update.
+          $ref: '#/components/schemas/UpdateParams'
+          description: A key-value map that contains the parameters associated with the update.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the update was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the update was created.
         errors:
-          allOf:
-            - $ref: '#/components/schemas/ErrorDetails'
-            - description: Any errors associated with a <code>Failed</code> update.
+          $ref: '#/components/schemas/ErrorDetails'
+          description: Any errors associated with a <code>Failed</code> update.
       description: An object representing an asynchronous update.
     OidcIdentityProviderConfigRequest:
       type: object
@@ -3211,37 +3101,29 @@ components:
         - clientId
       properties:
         identityProviderConfigName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the OIDC provider configuration.
+          $ref: '#/components/schemas/String'
+          description: The name of the OIDC provider configuration.
         issuerUrl:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The URL of the OpenID identity provider that allows the API server to discover public signing keys for verifying tokens. The URL must begin with <code>https://</code> and should correspond to the <code>iss</code> claim in the provider''s OIDC ID tokens. Per the OIDC standard, path components are allowed but query parameters are not. Typically the URL consists of only a hostname, like <code>https://server.example.org</code> or <code>https://example.com</code>. This URL should point to the level below <code>.well-known/openid-configuration</code> and must be publicly accessible over the internet.'
+          $ref: '#/components/schemas/String'
+          description: 'The URL of the OpenID identity provider that allows the API server to discover public signing keys for verifying tokens. The URL must begin with <code>https://</code> and should correspond to the <code>iss</code> claim in the provider''s OIDC ID tokens. Per the OIDC standard, path components are allowed but query parameters are not. Typically the URL consists of only a hostname, like <code>https://server.example.org</code> or <code>https://example.com</code>. This URL should point to the level below <code>.well-known/openid-configuration</code> and must be publicly accessible over the internet.'
         clientId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: This is also known as <i>audience</i>. The ID for the client application that makes authentication requests to the OpenID identity provider.
+          $ref: '#/components/schemas/String'
+          description: This is also known as <i>audience</i>. The ID for the client application that makes authentication requests to the OpenID identity provider.
         usernameClaim:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The JSON Web Token (JWT) claim to use as the username. The default is <code>sub</code>, which is expected to be a unique identifier of the end user. You can choose other claims, such as <code>email</code> or <code>name</code>, depending on the OpenID identity provider. Claims other than <code>email</code> are prefixed with the issuer URL to prevent naming clashes with other plug-ins.'
+          $ref: '#/components/schemas/String'
+          description: 'The JSON Web Token (JWT) claim to use as the username. The default is <code>sub</code>, which is expected to be a unique identifier of the end user. You can choose other claims, such as <code>email</code> or <code>name</code>, depending on the OpenID identity provider. Claims other than <code>email</code> are prefixed with the issuer URL to prevent naming clashes with other plug-ins.'
         usernamePrefix:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The prefix that is prepended to username claims to prevent clashes with existing names. If you do not provide this field, and <code>username</code> is a value other than <code>email</code>, the prefix defaults to <code>issuerurl#</code>. You can use the value <code>-</code> to disable all prefixing.'
+          $ref: '#/components/schemas/String'
+          description: 'The prefix that is prepended to username claims to prevent clashes with existing names. If you do not provide this field, and <code>username</code> is a value other than <code>email</code>, the prefix defaults to <code>issuerurl#</code>. You can use the value <code>-</code> to disable all prefixing.'
         groupsClaim:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The JWT claim that the provider uses to return your groups.
+          $ref: '#/components/schemas/String'
+          description: The JWT claim that the provider uses to return your groups.
         groupsPrefix:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The prefix that is prepended to group claims to prevent clashes with existing names (such as <code>system:</code> groups). For example, the value<code> oidc:</code> will create group names like <code>oidc:engineering</code> and <code>oidc:infra</code>.'
+          $ref: '#/components/schemas/String'
+          description: 'The prefix that is prepended to group claims to prevent clashes with existing names (such as <code>system:</code> groups). For example, the value<code> oidc:</code> will create group names like <code>oidc:engineering</code> and <code>oidc:infra</code>.'
         requiredClaims:
-          allOf:
-            - $ref: '#/components/schemas/requiredClaimsMap'
-            - description: 'The key value pairs that describe required claims in the identity token. If set, each claim is verified to be present in the token with a matching value. For the maximum number of claims that you can require, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.'
+          $ref: '#/components/schemas/requiredClaimsMap'
+          description: 'The key value pairs that describe required claims in the identity token. If set, each claim is verified to be present in the token with a matching value. For the maximum number of claims that you can require, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.'
       description: 'An object representing an OpenID Connect (OIDC) configuration. Before associating an OIDC identity provider to your cluster, review the considerations in <a href="https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html">Authenticating users for your cluster from an OpenID Connect identity provider</a> in the <i>Amazon EKS User Guide</i>.'
     AssociateIdentityProviderConfigRequest:
       type: object
@@ -3250,24 +3132,20 @@ components:
       title: AssociateIdentityProviderConfigRequest
       properties:
         oidc:
-          allOf:
-            - $ref: '#/components/schemas/OidcIdentityProviderConfigRequest'
-            - description: An object that represents an OpenID Connect (OIDC) identity provider configuration.
+          $ref: '#/components/schemas/OidcIdentityProviderConfigRequest'
+          description: An object that represents an OpenID Connect (OIDC) identity provider configuration.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The metadata to apply to the configuration to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The metadata to apply to the configuration to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.'
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/String'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     AutoScalingGroup:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the Auto Scaling group associated with an Amazon EKS managed node group.
+          $ref: '#/components/schemas/String'
+          description: The name of the Auto Scaling group associated with an Amazon EKS managed node group.
       description: An Auto Scaling group that is associated with an Amazon EKS managed node group.
     AutoScalingGroupList:
       type: array
@@ -3286,65 +3164,54 @@ components:
       type: object
       properties:
         data:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Base64-encoded certificate data required to communicate with your cluster. Add this to the <code>certificate-authority-data</code> section of the <code>kubeconfig</code> file for your cluster.
+          $ref: '#/components/schemas/String'
+          description: The Base64-encoded certificate data required to communicate with your cluster. Add this to the <code>certificate-authority-data</code> section of the <code>kubeconfig</code> file for your cluster.
       description: An object representing the <code>certificate-authority-data</code> for your cluster.
     VpcConfigResponse:
       type: object
       properties:
         subnetIds:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: The subnets associated with your cluster.
+          $ref: '#/components/schemas/StringList'
+          description: The subnets associated with your cluster.
         securityGroupIds:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: The security groups associated with the cross-account elastic network interfaces that are used to allow communication between your nodes and the Kubernetes control plane.
+          $ref: '#/components/schemas/StringList'
+          description: The security groups associated with the cross-account elastic network interfaces that are used to allow communication between your nodes and the Kubernetes control plane.
         clusterSecurityGroupId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control-plane-to-data-plane communication.
+          $ref: '#/components/schemas/String'
+          description: The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control-plane-to-data-plane communication.
         vpcId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The VPC associated with your cluster.
+          $ref: '#/components/schemas/String'
+          description: The VPC associated with your cluster.
         endpointPublicAccess:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'This parameter indicates whether the Amazon EKS public API server endpoint is enabled. If the Amazon EKS public API server endpoint is disabled, your cluster''s Kubernetes API server can only receive requests that originate from within the cluster VPC.'
+          $ref: '#/components/schemas/Boolean'
+          description: 'This parameter indicates whether the Amazon EKS public API server endpoint is enabled. If the Amazon EKS public API server endpoint is disabled, your cluster''s Kubernetes API server can only receive requests that originate from within the cluster VPC.'
         endpointPrivateAccess:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'This parameter indicates whether the Amazon EKS private API server endpoint is enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes API requests that originate from within your cluster''s VPC use the private VPC endpoint instead of traversing the internet. If this value is disabled and you have nodes or Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the nodes or Fargate pods. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+          $ref: '#/components/schemas/Boolean'
+          description: 'This parameter indicates whether the Amazon EKS private API server endpoint is enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes API requests that originate from within your cluster''s VPC use the private VPC endpoint instead of traversing the internet. If this value is disabled and you have nodes or Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the nodes or Fargate pods. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
         publicAccessCidrs:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: 'The CIDR blocks that are allowed access to your cluster''s public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the listed CIDR blocks is denied. The default value is <code>0.0.0.0/0</code>. If you''ve disabled private endpoint access and you have nodes or Fargate pods in the cluster, then ensure that the necessary CIDR blocks are listed. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+          $ref: '#/components/schemas/StringList'
+          description: 'The CIDR blocks that are allowed access to your cluster''s public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the listed CIDR blocks is denied. The default value is <code>0.0.0.0/0</code>. If you''ve disabled private endpoint access and you have nodes or Fargate pods in the cluster, then ensure that the necessary CIDR blocks are listed. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
       description: An object representing an Amazon EKS cluster VPC configuration response.
     KubernetesNetworkConfigResponse:
       type: object
       properties:
         serviceIpv4Cidr:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The CIDR block that Kubernetes service IP addresses are assigned from. If you didn''t specify a CIDR block when you created the cluster, then Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this was specified, then it was specified when the cluster was created and it cannot be changed.'
+          $ref: '#/components/schemas/String'
+          description: 'The CIDR block that Kubernetes service IP addresses are assigned from. If you didn''t specify a CIDR block when you created the cluster, then Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this was specified, then it was specified when the cluster was created and it cannot be changed.'
       description: The Kubernetes network configuration for the cluster.
     Logging:
       type: object
       properties:
         clusterLogging:
-          allOf:
-            - $ref: '#/components/schemas/LogSetups'
-            - description: The cluster control plane logging configuration for your cluster.
+          $ref: '#/components/schemas/LogSetups'
+          description: The cluster control plane logging configuration for your cluster.
       description: An object representing the logging configuration for resources in your cluster.
     Identity:
       type: object
       properties:
         oidc:
-          allOf:
-            - $ref: '#/components/schemas/OIDC'
-            - description: 'An object representing the <a href="https://openid.net/connect/">OpenID Connect</a> identity provider information.'
+          $ref: '#/components/schemas/OIDC'
+          description: 'An object representing the <a href="https://openid.net/connect/">OpenID Connect</a> identity provider information.'
       description: An object representing an identity provider.
     ClusterStatus:
       type: string
@@ -3358,85 +3225,66 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the cluster.
+          $ref: '#/components/schemas/String'
+          description: The name of the cluster.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the cluster.
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Name (ARN) of the cluster.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the cluster was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the cluster was created.
         version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Kubernetes server version for the cluster.
+          $ref: '#/components/schemas/String'
+          description: The Kubernetes server version for the cluster.
         endpoint:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The endpoint for your Kubernetes API server.
+          $ref: '#/components/schemas/String'
+          description: The endpoint for your Kubernetes API server.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to Amazon Web Services API operations on your behalf.
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to Amazon Web Services API operations on your behalf.
         resourcesVpcConfig:
-          allOf:
-            - $ref: '#/components/schemas/VpcConfigResponse'
-            - description: 'The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster VPC Considerations</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>.'
+          $ref: '#/components/schemas/VpcConfigResponse'
+          description: 'The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster VPC Considerations</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>.'
         kubernetesNetworkConfig:
-          allOf:
-            - $ref: '#/components/schemas/KubernetesNetworkConfigResponse'
-            - description: The Kubernetes network configuration for the cluster.
+          $ref: '#/components/schemas/KubernetesNetworkConfigResponse'
+          description: The Kubernetes network configuration for the cluster.
         logging:
-          allOf:
-            - $ref: '#/components/schemas/Logging'
-            - description: The logging configuration for your cluster.
+          $ref: '#/components/schemas/Logging'
+          description: The logging configuration for your cluster.
         identity:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The identity provider information for the cluster.
+          $ref: '#/components/schemas/Identity'
+          description: The identity provider information for the cluster.
         status:
-          allOf:
-            - $ref: '#/components/schemas/ClusterStatus'
-            - description: The current status of the cluster.
+          $ref: '#/components/schemas/ClusterStatus'
+          description: The current status of the cluster.
         certificateAuthority:
-          allOf:
-            - $ref: '#/components/schemas/Certificate'
-            - description: The <code>certificate-authority-data</code> for your cluster.
+          $ref: '#/components/schemas/Certificate'
+          description: The <code>certificate-authority-data</code> for your cluster.
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/String'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         platformVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The platform version of your Amazon EKS cluster. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html">Platform Versions</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+          $ref: '#/components/schemas/String'
+          description: 'The platform version of your Amazon EKS cluster. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html">Platform Versions</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Cluster tags do not propagate to any other resources associated with the cluster. '
+          $ref: '#/components/schemas/TagMap'
+          description: 'The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Cluster tags do not propagate to any other resources associated with the cluster. '
         encryptionConfig:
-          allOf:
-            - $ref: '#/components/schemas/EncryptionConfigList'
-            - description: The encryption configuration for the cluster.
+          $ref: '#/components/schemas/EncryptionConfigList'
+          description: The encryption configuration for the cluster.
       description: An object representing an Amazon EKS cluster.
     Compatibility:
       type: object
       properties:
         clusterVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The supported Kubernetes version of the cluster.
+          $ref: '#/components/schemas/String'
+          description: The supported Kubernetes version of the cluster.
         platformVersions:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: The supported compute platform.
+          $ref: '#/components/schemas/StringList'
+          description: The supported compute platform.
         defaultVersion:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: The supported default version.
+          $ref: '#/components/schemas/Boolean'
+          description: The supported default version.
       description: Compatibility information.
     RoleArn:
       type: string
@@ -3454,60 +3302,48 @@ components:
       title: CreateAddonRequest
       properties:
         addonName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The name of the add-on. The name must match one of the names returned by <a href="https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html"> <code>DescribeAddonVersions</code> </a>.'
+          $ref: '#/components/schemas/String'
+          description: 'The name of the add-on. The name must match one of the names returned by <a href="https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html"> <code>DescribeAddonVersions</code> </a>.'
         addonVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The version of the add-on. The version must match one of the versions returned by <a href="https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html"> <code>DescribeAddonVersions</code> </a>.'
+          $ref: '#/components/schemas/String'
+          description: 'The version of the add-on. The version must match one of the versions returned by <a href="https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html"> <code>DescribeAddonVersions</code> </a>.'
         serviceAccountRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: '<p>The Amazon Resource Name (ARN) of an existing IAM role to bind to the add-on''s service account. The role must be assigned the IAM permissions required by the add-on. If you don''t specify an existing IAM role, then the add-on uses the permissions assigned to the node IAM role. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html">Amazon EKS node IAM role</a> in the <i>Amazon EKS User Guide</i>.</p> <note> <p>To specify an existing IAM role, you must have an IAM OpenID Connect (OIDC) provider created for your cluster. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html">Enabling IAM roles for service accounts on your cluster</a> in the <i>Amazon EKS User Guide</i>.</p> </note>'
+          $ref: '#/components/schemas/RoleArn'
+          description: '<p>The Amazon Resource Name (ARN) of an existing IAM role to bind to the add-on''s service account. The role must be assigned the IAM permissions required by the add-on. If you don''t specify an existing IAM role, then the add-on uses the permissions assigned to the node IAM role. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html">Amazon EKS node IAM role</a> in the <i>Amazon EKS User Guide</i>.</p> <note> <p>To specify an existing IAM role, you must have an IAM OpenID Connect (OIDC) provider created for your cluster. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html">Enabling IAM roles for service accounts on your cluster</a> in the <i>Amazon EKS User Guide</i>.</p> </note>'
         resolveConflicts:
-          allOf:
-            - $ref: '#/components/schemas/ResolveConflicts'
-            - description: How to resolve parameter value conflicts when migrating an existing add-on to an Amazon EKS add-on.
+          $ref: '#/components/schemas/ResolveConflicts'
+          description: How to resolve parameter value conflicts when migrating an existing add-on to an Amazon EKS add-on.
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/String'
+          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. '
+          $ref: '#/components/schemas/TagMap'
+          description: 'The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. '
     VpcConfigRequest:
       type: object
       properties:
         subnetIds:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.
+          $ref: '#/components/schemas/StringList'
+          description: Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.
         securityGroupIds:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: '<p>Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use that allow communication between your nodes and the Kubernetes control plane. If you don''t specify any security groups, then familiarize yourself with the difference between Amazon EKS defaults for clusters deployed with Kubernetes:</p> <ul> <li> <p>1.14 Amazon EKS platform version <code>eks.2</code> and earlier</p> </li> <li> <p>1.14 Amazon EKS platform version <code>eks.3</code> and later </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Amazon EKS security group considerations</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>'
+          $ref: '#/components/schemas/StringList'
+          description: '<p>Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use that allow communication between your nodes and the Kubernetes control plane. If you don''t specify any security groups, then familiarize yourself with the difference between Amazon EKS defaults for clusters deployed with Kubernetes:</p> <ul> <li> <p>1.14 Amazon EKS platform version <code>eks.2</code> and earlier</p> </li> <li> <p>1.14 Amazon EKS platform version <code>eks.3</code> and later </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Amazon EKS security group considerations</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>'
         endpointPublicAccess:
-          allOf:
-            - $ref: '#/components/schemas/BoxedBoolean'
-            - description: 'Set this value to <code>false</code> to disable public access to your cluster''s Kubernetes API server endpoint. If you disable public access, your cluster''s Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is <code>true</code>, which enables public access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+          $ref: '#/components/schemas/BoxedBoolean'
+          description: 'Set this value to <code>false</code> to disable public access to your cluster''s Kubernetes API server endpoint. If you disable public access, your cluster''s Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is <code>true</code>, which enables public access for your Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
         endpointPrivateAccess:
-          allOf:
-            - $ref: '#/components/schemas/BoxedBoolean'
-            - description: 'Set this value to <code>true</code> to enable private access for your cluster''s Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster''s VPC use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the nodes or Fargate pods. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+          $ref: '#/components/schemas/BoxedBoolean'
+          description: 'Set this value to <code>true</code> to enable private access for your cluster''s Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster''s VPC use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the nodes or Fargate pods. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
         publicAccessCidrs:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: 'The CIDR blocks that are allowed access to your cluster''s public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is <code>0.0.0.0/0</code>. If you''ve disabled private endpoint access and you have nodes or Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+          $ref: '#/components/schemas/StringList'
+          description: 'The CIDR blocks that are allowed access to your cluster''s public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is <code>0.0.0.0/0</code>. If you''ve disabled private endpoint access and you have nodes or Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
       description: An object representing the VPC configuration to use for an Amazon EKS cluster.
     KubernetesNetworkConfigRequest:
       type: object
       properties:
         serviceIpv4Cidr:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: '<p>The CIDR block to assign Kubernetes service IP addresses from. If you don''t specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. The block must meet the following requirements:</p> <ul> <li> <p>Within one of the following private IP address blocks: 10.0.0.0/8, 172.16.0.0.0/12, or 192.168.0.0/16.</p> </li> <li> <p>Doesn''t overlap with any CIDR block assigned to the VPC that you selected for VPC.</p> </li> <li> <p>Between /24 and /12.</p> </li> </ul> <important> <p>You can only specify a custom CIDR block when you create a cluster and can''t change this value once the cluster is created.</p> </important>'
+          $ref: '#/components/schemas/String'
+          description: '<p>The CIDR block to assign Kubernetes service IP addresses from. If you don''t specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. The block must meet the following requirements:</p> <ul> <li> <p>Within one of the following private IP address blocks: 10.0.0.0/8, 172.16.0.0.0/12, or 192.168.0.0/16.</p> </li> <li> <p>Doesn''t overlap with any CIDR block assigned to the VPC that you selected for VPC.</p> </li> <li> <p>Between /24 and /12.</p> </li> </ul> <important> <p>You can only specify a custom CIDR block when you create a cluster and can''t change this value once the cluster is created.</p> </important>'
       description: The Kubernetes network configuration for the cluster.
     CreateClusterRequest:
       type: object
@@ -3518,41 +3354,32 @@ components:
       title: CreateClusterRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ClusterName'
-            - description: The unique name to give to your cluster.
+          $ref: '#/components/schemas/ClusterName'
+          description: The unique name to give to your cluster.
         version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The desired Kubernetes version for your cluster. If you don''t specify a value here, the latest version available in Amazon EKS is used.'
+          $ref: '#/components/schemas/String'
+          description: 'The desired Kubernetes version for your cluster. If you don''t specify a value here, the latest version available in Amazon EKS is used.'
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to Amazon Web Services API operations on your behalf. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html">Amazon EKS Service IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+          $ref: '#/components/schemas/String'
+          description: 'The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to Amazon Web Services API operations on your behalf. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html">Amazon EKS Service IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
         resourcesVpcConfig:
-          allOf:
-            - $ref: '#/components/schemas/VpcConfigRequest'
-            - description: 'The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster VPC Considerations</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>. You must specify at least two subnets. You can specify up to five security groups, but we recommend that you use a dedicated security group for your cluster control plane.'
+          $ref: '#/components/schemas/VpcConfigRequest'
+          description: 'The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster VPC Considerations</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>. You must specify at least two subnets. You can specify up to five security groups, but we recommend that you use a dedicated security group for your cluster control plane.'
         kubernetesNetworkConfig:
-          allOf:
-            - $ref: '#/components/schemas/KubernetesNetworkConfigRequest'
-            - description: The Kubernetes network configuration for the cluster.
+          $ref: '#/components/schemas/KubernetesNetworkConfigRequest'
+          description: The Kubernetes network configuration for the cluster.
         logging:
-          allOf:
-            - $ref: '#/components/schemas/Logging'
-            - description: '<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren''t exported to CloudWatch Logs. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html">Amazon EKS Cluster control plane logs</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p> <note> <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see <a href="http://aws.amazon.com/cloudwatch/pricing/">CloudWatch Pricing</a>.</p> </note>'
+          $ref: '#/components/schemas/Logging'
+          description: '<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren''t exported to CloudWatch Logs. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html">Amazon EKS Cluster control plane logs</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p> <note> <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see <a href="http://aws.amazon.com/cloudwatch/pricing/">CloudWatch Pricing</a>.</p> </note>'
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/String'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.'
         encryptionConfig:
-          allOf:
-            - $ref: '#/components/schemas/EncryptionConfigList'
-            - description: The encryption configuration for the cluster.
+          $ref: '#/components/schemas/EncryptionConfigList'
+          description: The encryption configuration for the cluster.
     FargateProfileSelectors:
       type: array
       items:
@@ -3565,124 +3392,99 @@ components:
       title: CreateFargateProfileRequest
       properties:
         fargateProfileName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the Fargate profile.
+          $ref: '#/components/schemas/String'
+          description: The name of the Fargate profile.
         podExecutionRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in the Fargate profile. The pod execution role allows Fargate infrastructure to register with your cluster as a node, and it provides read access to Amazon ECR image repositories. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html">Pod Execution Role</a> in the <i>Amazon EKS User Guide</i>.'
+          $ref: '#/components/schemas/String'
+          description: 'The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in the Fargate profile. The pod execution role allows Fargate infrastructure to register with your cluster as a node, and it provides read access to Amazon ECR image repositories. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html">Pod Execution Role</a> in the <i>Amazon EKS User Guide</i>.'
         subnets:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: 'The IDs of subnets to launch your pods into. At this time, pods running on Fargate are not assigned public IP addresses, so only private subnets (with no direct route to an Internet Gateway) are accepted for this parameter.'
+          $ref: '#/components/schemas/StringList'
+          description: 'The IDs of subnets to launch your pods into. At this time, pods running on Fargate are not assigned public IP addresses, so only private subnets (with no direct route to an Internet Gateway) are accepted for this parameter.'
         selectors:
-          allOf:
-            - $ref: '#/components/schemas/FargateProfileSelectors'
-            - description: 'The selectors to match for pods to use this Fargate profile. Each selector must have an associated namespace. Optionally, you can also specify labels for a namespace. You may specify up to five selectors in a Fargate profile.'
+          $ref: '#/components/schemas/FargateProfileSelectors'
+          description: 'The selectors to match for pods to use this Fargate profile. Each selector must have an associated namespace. Optionally, you can also specify labels for a namespace. You may specify up to five selectors in a Fargate profile.'
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/String'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The metadata to apply to the Fargate profile to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Fargate profile tags do not propagate to any other resources associated with the Fargate profile, such as the pods that are scheduled with it.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The metadata to apply to the Fargate profile to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Fargate profile tags do not propagate to any other resources associated with the Fargate profile, such as the pods that are scheduled with it.'
     FargateProfile:
       type: object
       properties:
         fargateProfileName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the Fargate profile.
+          $ref: '#/components/schemas/String'
+          description: The name of the Fargate profile.
         fargateProfileArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The full Amazon Resource Name (ARN) of the Fargate profile.
+          $ref: '#/components/schemas/String'
+          description: The full Amazon Resource Name (ARN) of the Fargate profile.
         clusterName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the Amazon EKS cluster that the Fargate profile belongs to.
+          $ref: '#/components/schemas/String'
+          description: The name of the Amazon EKS cluster that the Fargate profile belongs to.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the Fargate profile was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the Fargate profile was created.
         podExecutionRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in the Fargate profile. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html">Pod Execution Role</a> in the <i>Amazon EKS User Guide</i>.'
+          $ref: '#/components/schemas/String'
+          description: 'The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in the Fargate profile. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html">Pod Execution Role</a> in the <i>Amazon EKS User Guide</i>.'
         subnets:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: The IDs of subnets to launch pods into.
+          $ref: '#/components/schemas/StringList'
+          description: The IDs of subnets to launch pods into.
         selectors:
-          allOf:
-            - $ref: '#/components/schemas/FargateProfileSelectors'
-            - description: The selectors to match for pods to use this Fargate profile.
+          $ref: '#/components/schemas/FargateProfileSelectors'
+          description: The selectors to match for pods to use this Fargate profile.
         status:
-          allOf:
-            - $ref: '#/components/schemas/FargateProfileStatus'
-            - description: The current status of the Fargate profile.
+          $ref: '#/components/schemas/FargateProfileStatus'
+          description: The current status of the Fargate profile.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The metadata applied to the Fargate profile to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Fargate profile tags do not propagate to any other resources associated with the Fargate profile, such as the pods that are scheduled with it.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The metadata applied to the Fargate profile to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Fargate profile tags do not propagate to any other resources associated with the Fargate profile, such as the pods that are scheduled with it.'
       description: An object representing an Fargate profile.
     NodegroupScalingConfig:
       type: object
       properties:
         minSize:
-          allOf:
-            - $ref: '#/components/schemas/ZeroCapacity'
-            - description: The minimum number of nodes that the managed node group can scale in to.
+          $ref: '#/components/schemas/ZeroCapacity'
+          description: The minimum number of nodes that the managed node group can scale in to.
         maxSize:
-          allOf:
-            - $ref: '#/components/schemas/Capacity'
-            - description: 'The maximum number of nodes that the managed node group can scale out to. For information about the maximum number that you can specify, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.'
+          $ref: '#/components/schemas/Capacity'
+          description: 'The maximum number of nodes that the managed node group can scale out to. For information about the maximum number that you can specify, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.'
         desiredSize:
-          allOf:
-            - $ref: '#/components/schemas/ZeroCapacity'
-            - description: The current number of nodes that the managed node group should maintain.
+          $ref: '#/components/schemas/ZeroCapacity'
+          description: The current number of nodes that the managed node group should maintain.
       description: 'An object representing the scaling configuration details for the Auto Scaling group that is associated with your node group. When creating a node group, you must specify all or none of the properties. When updating a node group, you can specify any or none of the properties.'
     RemoteAccessConfig:
       type: object
       properties:
         ec2SshKey:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The Amazon EC2 SSH key that provides access for SSH communication with the nodes in the managed node group. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2 key pairs and Linux instances</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>.'
+          $ref: '#/components/schemas/String'
+          description: 'The Amazon EC2 SSH key that provides access for SSH communication with the nodes in the managed node group. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2 key pairs and Linux instances</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>.'
         sourceSecurityGroups:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: 'The security groups that are allowed SSH access (port 22) to the nodes. If you specify an Amazon EC2 SSH key but do not specify a source security group when you create a managed node group, then port 22 on the nodes is opened to the internet (0.0.0.0/0). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.'
+          $ref: '#/components/schemas/StringList'
+          description: 'The security groups that are allowed SSH access (port 22) to the nodes. If you specify an Amazon EC2 SSH key but do not specify a source security group when you create a managed node group, then port 22 on the nodes is opened to the internet (0.0.0.0/0). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.'
       description: An object representing the remote access configuration for the managed node group.
     LaunchTemplateSpecification:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the launch template.
+          $ref: '#/components/schemas/String'
+          description: The name of the launch template.
         version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The version of the launch template to use. If no version is specified, then the template''s default version is used.'
+          $ref: '#/components/schemas/String'
+          description: 'The version of the launch template to use. If no version is specified, then the template''s default version is used.'
         id:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The ID of the launch template.
+          $ref: '#/components/schemas/String'
+          description: The ID of the launch template.
       description: '<p>An object representing a node group launch template specification. The launch template cannot include <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html"> <code>SubnetId</code> </a>, <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html"> <code>IamInstanceProfile</code> </a>, <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html"> <code>RequestSpotInstances</code> </a>, <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html"> <code>HibernationOptions</code> </a>, or <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TerminateInstances.html"> <code>TerminateInstances</code> </a>, or the node group deployment or update will fail. For more information about launch templates, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html"> <code>CreateLaunchTemplate</code> </a> in the Amazon EC2 API Reference. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.</p> <p>Specify either <code>name</code> or <code>id</code>, but not both.</p>'
     NodegroupUpdateConfig:
       type: object
       properties:
         maxUnavailable:
-          allOf:
-            - $ref: '#/components/schemas/NonZeroInteger'
-            - description: The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or <code>maxUnavailablePercentage</code> is required to have a value.The maximum number is 100.
+          $ref: '#/components/schemas/NonZeroInteger'
+          description: The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or <code>maxUnavailablePercentage</code> is required to have a value.The maximum number is 100.
         maxUnavailablePercentage:
-          allOf:
-            - $ref: '#/components/schemas/PercentCapacity'
-            - description: 'The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or <code>maxUnavailable</code> is required to have a value.'
+          $ref: '#/components/schemas/PercentCapacity'
+          description: 'The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or <code>maxUnavailable</code> is required to have a value.'
       description: The node group update configuration.
     CreateNodegroupRequest:
       type: object
@@ -3693,168 +3495,128 @@ components:
       title: CreateNodegroupRequest
       properties:
         nodegroupName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The unique name to give your node group.
+          $ref: '#/components/schemas/String'
+          description: The unique name to give your node group.
         scalingConfig:
-          allOf:
-            - $ref: '#/components/schemas/NodegroupScalingConfig'
-            - description: The scaling configuration details for the Auto Scaling group that is created for your node group.
+          $ref: '#/components/schemas/NodegroupScalingConfig'
+          description: The scaling configuration details for the Auto Scaling group that is created for your node group.
         diskSize:
-          allOf:
-            - $ref: '#/components/schemas/BoxedInteger'
-            - description: 'The root device disk size (in GiB) for your node group instances. The default disk size is 20 GiB. If you specify <code>launchTemplate</code>, then don''t specify <code>diskSize</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
+          $ref: '#/components/schemas/BoxedInteger'
+          description: 'The root device disk size (in GiB) for your node group instances. The default disk size is 20 GiB. If you specify <code>launchTemplate</code>, then don''t specify <code>diskSize</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
         subnets:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: 'The subnets to use for the Auto Scaling group that is created for your node group. If you specify <code>launchTemplate</code>, then don''t specify <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html"> <code>SubnetId</code> </a> in your launch template, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
+          $ref: '#/components/schemas/StringList'
+          description: 'The subnets to use for the Auto Scaling group that is created for your node group. If you specify <code>launchTemplate</code>, then don''t specify <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html"> <code>SubnetId</code> </a> in your launch template, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
         instanceTypes:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: 'Specify the instance types for a node group. If you specify a GPU instance type, be sure to specify <code>AL2_x86_64_GPU</code> with the <code>amiType</code> parameter. If you specify <code>launchTemplate</code>, then you can specify zero or one instance type in your launch template <i>or</i> you can specify 0-20 instance types for <code>instanceTypes</code>. If however, you specify an instance type in your launch template <i>and</i> specify any <code>instanceTypes</code>, the node group deployment will fail. If you don''t specify an instance type in a launch template or for <code>instanceTypes</code>, then <code>t3.medium</code> is used, by default. If you specify <code>Spot</code> for <code>capacityType</code>, then we recommend specifying multiple values for <code>instanceTypes</code>. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html#managed-node-group-capacity-types">Managed node group capacity types</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the <i>Amazon EKS User Guide</i>.'
+          $ref: '#/components/schemas/StringList'
+          description: 'Specify the instance types for a node group. If you specify a GPU instance type, be sure to specify <code>AL2_x86_64_GPU</code> with the <code>amiType</code> parameter. If you specify <code>launchTemplate</code>, then you can specify zero or one instance type in your launch template <i>or</i> you can specify 0-20 instance types for <code>instanceTypes</code>. If however, you specify an instance type in your launch template <i>and</i> specify any <code>instanceTypes</code>, the node group deployment will fail. If you don''t specify an instance type in a launch template or for <code>instanceTypes</code>, then <code>t3.medium</code> is used, by default. If you specify <code>Spot</code> for <code>capacityType</code>, then we recommend specifying multiple values for <code>instanceTypes</code>. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html#managed-node-group-capacity-types">Managed node group capacity types</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the <i>Amazon EKS User Guide</i>.'
         amiType:
-          allOf:
-            - $ref: '#/components/schemas/AMITypes'
-            - description: 'The AMI type for your node group. GPU instance types should use the <code>AL2_x86_64_GPU</code> AMI type. Non-GPU instances should use the <code>AL2_x86_64</code> AMI type. Arm instances should use the <code>AL2_ARM_64</code> AMI type. All types use the Amazon EKS optimized Amazon Linux 2 AMI. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don''t specify <code>amiType</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
+          $ref: '#/components/schemas/AMITypes'
+          description: 'The AMI type for your node group. GPU instance types should use the <code>AL2_x86_64_GPU</code> AMI type. Non-GPU instances should use the <code>AL2_x86_64</code> AMI type. Arm instances should use the <code>AL2_ARM_64</code> AMI type. All types use the Amazon EKS optimized Amazon Linux 2 AMI. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don''t specify <code>amiType</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
         remoteAccess:
-          allOf:
-            - $ref: '#/components/schemas/RemoteAccessConfig'
-            - description: 'The remote access (SSH) configuration to use with your node group. If you specify <code>launchTemplate</code>, then don''t specify <code>remoteAccess</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
+          $ref: '#/components/schemas/RemoteAccessConfig'
+          description: 'The remote access (SSH) configuration to use with your node group. If you specify <code>launchTemplate</code>, then don''t specify <code>remoteAccess</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
         nodeRole:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The Amazon Resource Name (ARN) of the IAM role to associate with your node group. The Amazon EKS worker node <code>kubelet</code> daemon makes calls to Amazon Web Services APIs on your behalf. Nodes receive permissions for these API calls through an IAM instance profile and associated policies. Before you can launch nodes and register them into a cluster, you must create an IAM role for those nodes to use when they are launched. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html">Amazon EKS node IAM role</a> in the <i> <i>Amazon EKS User Guide</i> </i>. If you specify <code>launchTemplate</code>, then don''t specify <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html"> <code>IamInstanceProfile</code> </a> in your launch template, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
+          $ref: '#/components/schemas/String'
+          description: 'The Amazon Resource Name (ARN) of the IAM role to associate with your node group. The Amazon EKS worker node <code>kubelet</code> daemon makes calls to Amazon Web Services APIs on your behalf. Nodes receive permissions for these API calls through an IAM instance profile and associated policies. Before you can launch nodes and register them into a cluster, you must create an IAM role for those nodes to use when they are launched. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html">Amazon EKS node IAM role</a> in the <i> <i>Amazon EKS User Guide</i> </i>. If you specify <code>launchTemplate</code>, then don''t specify <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html"> <code>IamInstanceProfile</code> </a> in your launch template, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
         labels:
-          allOf:
-            - $ref: '#/components/schemas/labelsMap'
-            - description: The Kubernetes labels to be applied to the nodes in the node group when they are created.
+          $ref: '#/components/schemas/labelsMap'
+          description: The Kubernetes labels to be applied to the nodes in the node group when they are created.
         taints:
-          allOf:
-            - $ref: '#/components/schemas/taintsList'
-            - description: The Kubernetes taints to be applied to the nodes in the node group.
+          $ref: '#/components/schemas/taintsList'
+          description: The Kubernetes taints to be applied to the nodes in the node group.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The metadata to apply to the node group to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Node group tags do not propagate to any other resources associated with the node group, such as the Amazon EC2 instances or subnets.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The metadata to apply to the node group to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Node group tags do not propagate to any other resources associated with the node group, such as the Amazon EC2 instances or subnets.'
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/String'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         launchTemplate:
-          allOf:
-            - $ref: '#/components/schemas/LaunchTemplateSpecification'
-            - description: 'An object representing a node group''s launch template specification. If specified, then do not specify <code>instanceTypes</code>, <code>diskSize</code>, or <code>remoteAccess</code> and make sure that the launch template meets the requirements in <code>launchTemplateSpecification</code>.'
+          $ref: '#/components/schemas/LaunchTemplateSpecification'
+          description: 'An object representing a node group''s launch template specification. If specified, then do not specify <code>instanceTypes</code>, <code>diskSize</code>, or <code>remoteAccess</code> and make sure that the launch template meets the requirements in <code>launchTemplateSpecification</code>.'
         updateConfig:
-          allOf:
-            - $ref: '#/components/schemas/NodegroupUpdateConfig'
-            - description: The node group update configuration.
+          $ref: '#/components/schemas/NodegroupUpdateConfig'
+          description: The node group update configuration.
         capacityType:
-          allOf:
-            - $ref: '#/components/schemas/CapacityTypes'
-            - description: The capacity type for your node group.
+          $ref: '#/components/schemas/CapacityTypes'
+          description: The capacity type for your node group.
         version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The Kubernetes version to use for your managed nodes. By default, the Kubernetes version of the cluster is used, and this is the only accepted specified value. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don''t specify <code>version</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
+          $ref: '#/components/schemas/String'
+          description: 'The Kubernetes version to use for your managed nodes. By default, the Kubernetes version of the cluster is used, and this is the only accepted specified value. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don''t specify <code>version</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
         releaseVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The AMI version of the Amazon EKS optimized AMI to use with your node group. By default, the latest available AMI version for the node group''s current Kubernetes version is used. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html">Amazon EKS optimized Amazon Linux 2 AMI versions</a> in the <i>Amazon EKS User Guide</i>. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don''t specify <code>releaseVersion</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
+          $ref: '#/components/schemas/String'
+          description: 'The AMI version of the Amazon EKS optimized AMI to use with your node group. By default, the latest available AMI version for the node group''s current Kubernetes version is used. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html">Amazon EKS optimized Amazon Linux 2 AMI versions</a> in the <i>Amazon EKS User Guide</i>. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don''t specify <code>releaseVersion</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
     Nodegroup:
       type: object
       properties:
         nodegroupName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name associated with an Amazon EKS managed node group.
+          $ref: '#/components/schemas/String'
+          description: The name associated with an Amazon EKS managed node group.
         nodegroupArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) associated with the managed node group.
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Name (ARN) associated with the managed node group.
         clusterName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the cluster that the managed node group resides in.
+          $ref: '#/components/schemas/String'
+          description: The name of the cluster that the managed node group resides in.
         version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Kubernetes version of the managed node group.
+          $ref: '#/components/schemas/String'
+          description: The Kubernetes version of the managed node group.
         releaseVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'If the node group was deployed using a launch template with a custom AMI, then this is the AMI ID that was specified in the launch template. For node groups that weren''t deployed using a launch template, this is the version of the Amazon EKS optimized AMI that the node group was deployed with.'
+          $ref: '#/components/schemas/String'
+          description: 'If the node group was deployed using a launch template with a custom AMI, then this is the AMI ID that was specified in the launch template. For node groups that weren''t deployed using a launch template, this is the version of the Amazon EKS optimized AMI that the node group was deployed with.'
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the managed node group was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the managed node group was created.
         modifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the managed node group was last modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the managed node group was last modified.
         status:
-          allOf:
-            - $ref: '#/components/schemas/NodegroupStatus'
-            - description: The current status of the managed node group.
+          $ref: '#/components/schemas/NodegroupStatus'
+          description: The current status of the managed node group.
         capacityType:
-          allOf:
-            - $ref: '#/components/schemas/CapacityTypes'
-            - description: The capacity type of your managed node group.
+          $ref: '#/components/schemas/CapacityTypes'
+          description: The capacity type of your managed node group.
         scalingConfig:
-          allOf:
-            - $ref: '#/components/schemas/NodegroupScalingConfig'
-            - description: The scaling configuration details for the Auto Scaling group that is associated with your node group.
+          $ref: '#/components/schemas/NodegroupScalingConfig'
+          description: The scaling configuration details for the Auto Scaling group that is associated with your node group.
         instanceTypes:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: 'If the node group wasn''t deployed with a launch template, then this is the instance type that is associated with the node group. If the node group was deployed with a launch template, then this is <code>null</code>.'
+          $ref: '#/components/schemas/StringList'
+          description: 'If the node group wasn''t deployed with a launch template, then this is the instance type that is associated with the node group. If the node group was deployed with a launch template, then this is <code>null</code>.'
         subnets:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: The subnets that were specified for the Auto Scaling group that is associated with your node group.
+          $ref: '#/components/schemas/StringList'
+          description: The subnets that were specified for the Auto Scaling group that is associated with your node group.
         remoteAccess:
-          allOf:
-            - $ref: '#/components/schemas/RemoteAccessConfig'
-            - description: 'If the node group wasn''t deployed with a launch template, then this is the remote access configuration that is associated with the node group. If the node group was deployed with a launch template, then this is <code>null</code>.'
+          $ref: '#/components/schemas/RemoteAccessConfig'
+          description: 'If the node group wasn''t deployed with a launch template, then this is the remote access configuration that is associated with the node group. If the node group was deployed with a launch template, then this is <code>null</code>.'
         amiType:
-          allOf:
-            - $ref: '#/components/schemas/AMITypes'
-            - description: 'If the node group was deployed using a launch template with a custom AMI, then this is <code>CUSTOM</code>. For node groups that weren''t deployed using a launch template, this is the AMI type that was specified in the node group configuration.'
+          $ref: '#/components/schemas/AMITypes'
+          description: 'If the node group was deployed using a launch template with a custom AMI, then this is <code>CUSTOM</code>. For node groups that weren''t deployed using a launch template, this is the AMI type that was specified in the node group configuration.'
         nodeRole:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The IAM role associated with your node group. The Amazon EKS node <code>kubelet</code> daemon makes calls to Amazon Web Services APIs on your behalf. Nodes receive permissions for these API calls through an IAM instance profile and associated policies.
+          $ref: '#/components/schemas/String'
+          description: The IAM role associated with your node group. The Amazon EKS node <code>kubelet</code> daemon makes calls to Amazon Web Services APIs on your behalf. Nodes receive permissions for these API calls through an IAM instance profile and associated policies.
         labels:
-          allOf:
-            - $ref: '#/components/schemas/labelsMap'
-            - description: <p>The Kubernetes labels applied to the nodes in the node group.</p> <note> <p>Only labels that are applied with the Amazon EKS API are shown here. There may be other Kubernetes labels applied to the nodes in this group.</p> </note>
+          $ref: '#/components/schemas/labelsMap'
+          description: <p>The Kubernetes labels applied to the nodes in the node group.</p> <note> <p>Only labels that are applied with the Amazon EKS API are shown here. There may be other Kubernetes labels applied to the nodes in this group.</p> </note>
         taints:
-          allOf:
-            - $ref: '#/components/schemas/taintsList'
-            - description: 'The Kubernetes taints to be applied to the nodes in the node group when they are created. Effect is one of <code>No_Schedule</code>, <code>Prefer_No_Schedule</code>, or <code>No_Execute</code>. Kubernetes taints can be used together with tolerations to control how workloads are scheduled to your nodes.'
+          $ref: '#/components/schemas/taintsList'
+          description: 'The Kubernetes taints to be applied to the nodes in the node group when they are created. Effect is one of <code>No_Schedule</code>, <code>Prefer_No_Schedule</code>, or <code>No_Execute</code>. Kubernetes taints can be used together with tolerations to control how workloads are scheduled to your nodes.'
         resources:
-          allOf:
-            - $ref: '#/components/schemas/NodegroupResources'
-            - description: 'The resources associated with the node group, such as Auto Scaling groups and security groups for remote access.'
+          $ref: '#/components/schemas/NodegroupResources'
+          description: 'The resources associated with the node group, such as Auto Scaling groups and security groups for remote access.'
         diskSize:
-          allOf:
-            - $ref: '#/components/schemas/BoxedInteger'
-            - description: 'If the node group wasn''t deployed with a launch template, then this is the disk size in the node group configuration. If the node group was deployed with a launch template, then this is <code>null</code>.'
+          $ref: '#/components/schemas/BoxedInteger'
+          description: 'If the node group wasn''t deployed with a launch template, then this is the disk size in the node group configuration. If the node group was deployed with a launch template, then this is <code>null</code>.'
         health:
-          allOf:
-            - $ref: '#/components/schemas/NodegroupHealth'
-            - description: 'The health status of the node group. If there are issues with your node group''s health, they are listed here.'
+          $ref: '#/components/schemas/NodegroupHealth'
+          description: 'The health status of the node group. If there are issues with your node group''s health, they are listed here.'
         updateConfig:
-          allOf:
-            - $ref: '#/components/schemas/NodegroupUpdateConfig'
-            - description: The node group update configuration.
+          $ref: '#/components/schemas/NodegroupUpdateConfig'
+          description: The node group update configuration.
         launchTemplate:
-          allOf:
-            - $ref: '#/components/schemas/LaunchTemplateSpecification'
-            - description: 'If a launch template was used to create the node group, then this is the launch template that was used.'
+          $ref: '#/components/schemas/LaunchTemplateSpecification'
+          description: 'If a launch template was used to create the node group, then this is the launch template that was used.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The metadata applied to the node group to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Node group tags do not propagate to any other resources associated with the node group, such as the Amazon EC2 instances or subnets. '
+          $ref: '#/components/schemas/TagMap'
+          description: 'The metadata applied to the node group to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Node group tags do not propagate to any other resources associated with the node group, such as the Amazon EC2 instances or subnets. '
       description: An object representing an Amazon EKS managed node group.
     DeleteAddonRequest:
       type: object
@@ -3899,13 +3661,11 @@ components:
         - name
       properties:
         type:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The type of the identity provider configuration.
+          $ref: '#/components/schemas/String'
+          description: The type of the identity provider configuration.
         name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the identity provider configuration.
+          $ref: '#/components/schemas/String'
+          description: The name of the identity provider configuration.
       description: An object representing an identity provider configuration.
     DescribeIdentityProviderConfigRequest:
       type: object
@@ -3914,16 +3674,14 @@ components:
       title: DescribeIdentityProviderConfigRequest
       properties:
         identityProviderConfig:
-          allOf:
-            - $ref: '#/components/schemas/IdentityProviderConfig'
-            - description: An object that represents an identity provider configuration.
+          $ref: '#/components/schemas/IdentityProviderConfig'
+          description: An object that represents an identity provider configuration.
     IdentityProviderConfigResponse:
       type: object
       properties:
         oidc:
-          allOf:
-            - $ref: '#/components/schemas/OidcIdentityProviderConfig'
-            - description: An object that represents an OpenID Connect (OIDC) identity provider configuration.
+          $ref: '#/components/schemas/OidcIdentityProviderConfig'
+          description: An object that represents an OpenID Connect (OIDC) identity provider configuration.
       description: An object that represents an identity configuration.
     DescribeNodegroupRequest:
       type: object
@@ -3940,20 +3698,17 @@ components:
       title: DisassociateIdentityProviderConfigRequest
       properties:
         identityProviderConfig:
-          allOf:
-            - $ref: '#/components/schemas/IdentityProviderConfig'
-            - description: An object that represents an identity provider configuration.
+          $ref: '#/components/schemas/IdentityProviderConfig'
+          description: An object that represents an identity provider configuration.
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/String'
+          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     Provider:
       type: object
       properties:
         keyArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html">Allowing Users in Other Accounts to Use a KMS key</a> in the <i>Key Management Service Developer Guide</i>.'
+          $ref: '#/components/schemas/String'
+          description: 'Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html">Allowing Users in Other Accounts to Use a KMS key</a> in the <i>Key Management Service Developer Guide</i>.'
       description: Identifies the Key Management Service (KMS) key used to encrypt the secrets.
     ErrorCode:
       type: string
@@ -3978,17 +3733,14 @@ components:
       type: object
       properties:
         errorCode:
-          allOf:
-            - $ref: '#/components/schemas/ErrorCode'
-            - description: '<p>A brief description of the error. </p> <ul> <li> <p> <b>SubnetNotFound</b>: We couldn''t find one of the subnets associated with the cluster.</p> </li> <li> <p> <b>SecurityGroupNotFound</b>: We couldn''t find one of the security groups associated with the cluster.</p> </li> <li> <p> <b>EniLimitReached</b>: You have reached the elastic network interface limit for your account.</p> </li> <li> <p> <b>IpNotAvailable</b>: A subnet associated with the cluster doesn''t have any free IP addresses.</p> </li> <li> <p> <b>AccessDenied</b>: You don''t have permissions to perform the specified operation.</p> </li> <li> <p> <b>OperationNotPermitted</b>: The service role associated with the cluster doesn''t have the required access permissions for Amazon EKS.</p> </li> <li> <p> <b>VpcIdNotFound</b>: We couldn''t find the VPC associated with the cluster.</p> </li> </ul>'
+          $ref: '#/components/schemas/ErrorCode'
+          description: '<p>A brief description of the error. </p> <ul> <li> <p> <b>SubnetNotFound</b>: We couldn''t find one of the subnets associated with the cluster.</p> </li> <li> <p> <b>SecurityGroupNotFound</b>: We couldn''t find one of the security groups associated with the cluster.</p> </li> <li> <p> <b>EniLimitReached</b>: You have reached the elastic network interface limit for your account.</p> </li> <li> <p> <b>IpNotAvailable</b>: A subnet associated with the cluster doesn''t have any free IP addresses.</p> </li> <li> <p> <b>AccessDenied</b>: You don''t have permissions to perform the specified operation.</p> </li> <li> <p> <b>OperationNotPermitted</b>: The service role associated with the cluster doesn''t have the required access permissions for Amazon EKS.</p> </li> <li> <p> <b>VpcIdNotFound</b>: We couldn''t find the VPC associated with the cluster.</p> </li> </ul>'
         errorMessage:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A more complete description of the error.
+          $ref: '#/components/schemas/String'
+          description: A more complete description of the error.
         resourceIds:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: An optional field that contains the resource IDs associated with the error.
+          $ref: '#/components/schemas/StringList'
+          description: An optional field that contains the resource IDs associated with the error.
       description: An object representing an error when an asynchronous operation fails.
     ErrorDetails:
       type: array
@@ -4014,61 +3766,48 @@ components:
       type: object
       properties:
         issuer:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The issuer URL for the OIDC identity provider.
+          $ref: '#/components/schemas/String'
+          description: The issuer URL for the OIDC identity provider.
       description: 'An object representing the <a href="https://openid.net/connect/">OpenID Connect</a> (OIDC) identity provider information for the cluster.'
     OidcIdentityProviderConfig:
       type: object
       properties:
         identityProviderConfigName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the configuration.
+          $ref: '#/components/schemas/String'
+          description: The name of the configuration.
         identityProviderConfigArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The ARN of the configuration.
+          $ref: '#/components/schemas/String'
+          description: The ARN of the configuration.
         clusterName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The cluster that the configuration is associated to.
+          $ref: '#/components/schemas/String'
+          description: The cluster that the configuration is associated to.
         issuerUrl:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The URL of the OIDC identity provider that allows the API server to discover public signing keys for verifying tokens.
+          $ref: '#/components/schemas/String'
+          description: The URL of the OIDC identity provider that allows the API server to discover public signing keys for verifying tokens.
         clientId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: This is also known as <i>audience</i>. The ID of the client application that makes authentication requests to the OIDC identity provider.
+          $ref: '#/components/schemas/String'
+          description: This is also known as <i>audience</i>. The ID of the client application that makes authentication requests to the OIDC identity provider.
         usernameClaim:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The JSON Web token (JWT) claim that is used as the username.
+          $ref: '#/components/schemas/String'
+          description: The JSON Web token (JWT) claim that is used as the username.
         usernamePrefix:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The prefix that is prepended to username claims to prevent clashes with existing names. The prefix can''t contain <code>system:</code> '
+          $ref: '#/components/schemas/String'
+          description: 'The prefix that is prepended to username claims to prevent clashes with existing names. The prefix can''t contain <code>system:</code> '
         groupsClaim:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The JSON web token (JWT) claim that the provider uses to return your groups.
+          $ref: '#/components/schemas/String'
+          description: The JSON web token (JWT) claim that the provider uses to return your groups.
         groupsPrefix:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The prefix that is prepended to group claims to prevent clashes with existing names (such as <code>system:</code> groups). For example, the value<code> oidc:</code> creates group names like <code>oidc:engineering</code> and <code>oidc:infra</code>. The prefix can''t contain <code>system:</code> '
+          $ref: '#/components/schemas/String'
+          description: 'The prefix that is prepended to group claims to prevent clashes with existing names (such as <code>system:</code> groups). For example, the value<code> oidc:</code> creates group names like <code>oidc:engineering</code> and <code>oidc:infra</code>. The prefix can''t contain <code>system:</code> '
         requiredClaims:
-          allOf:
-            - $ref: '#/components/schemas/requiredClaimsMap'
-            - description: 'The key-value pairs that describe required claims in the identity token. If set, each claim is verified to be present in the token with a matching value.'
+          $ref: '#/components/schemas/requiredClaimsMap'
+          description: 'The key-value pairs that describe required claims in the identity token. If set, each claim is verified to be present in the token with a matching value.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The metadata to apply to the provider configuration to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you defined.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The metadata to apply to the provider configuration to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you defined.'
         status:
-          allOf:
-            - $ref: '#/components/schemas/configStatus'
-            - description: The status of the OIDC identity provider.
+          $ref: '#/components/schemas/configStatus'
+          description: The status of the OIDC identity provider.
       description: 'An object that represents the configuration for an OpenID Connect (OIDC) identity provider. '
     IdentityProviderConfigs:
       type: array
@@ -4099,17 +3838,14 @@ components:
       type: object
       properties:
         code:
-          allOf:
-            - $ref: '#/components/schemas/NodegroupIssueCode'
-            - description: '<p>A brief description of the error.</p> <ul> <li> <p> <b>AccessDenied</b>: Amazon EKS or one or more of your managed nodes is failing to authenticate or authorize with your Kubernetes cluster API server.</p> </li> <li> <p> <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is experiencing failures while attempting to launch instances.</p> </li> <li> <p> <b>AutoScalingGroupNotFound</b>: We couldn''t find the Auto Scaling group associated with the managed node group. You may be able to recreate an Auto Scaling group with the same settings to recover.</p> </li> <li> <p> <b>ClusterUnreachable</b>: Amazon EKS or one or more of your managed nodes is unable to to communicate with your Kubernetes cluster API server. This can happen if there are network disruptions or if API servers are timing out processing requests. </p> </li> <li> <p> <b>Ec2LaunchTemplateNotFound</b>: We couldn''t find the Amazon EC2 launch template for your managed node group. You may be able to recreate a launch template with the same settings to recover.</p> </li> <li> <p> <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2 launch template version for your managed node group does not match the version that Amazon EKS created. You may be able to revert to the version that Amazon EKS created to recover.</p> </li> <li> <p> <b>Ec2SecurityGroupDeletionFailure</b>: We could not delete the remote access security group for your managed node group. Remove any dependencies from the security group.</p> </li> <li> <p> <b>Ec2SecurityGroupNotFound</b>: We couldn''t find the cluster security group for the cluster. You must recreate your cluster.</p> </li> <li> <p> <b>Ec2SubnetInvalidConfiguration</b>: One or more Amazon EC2 subnets specified for a node group do not automatically assign public IP addresses to instances launched into it. If you want your instances to be assigned a public IP address, then you need to enable the <code>auto-assign public IP address</code> setting for the subnet. See <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip">Modifying the public IPv4 addressing attribute for your subnet</a> in the Amazon VPC User Guide.</p> </li> <li> <p> <b>IamInstanceProfileNotFound</b>: We couldn''t find the IAM instance profile for your managed node group. You may be able to recreate an instance profile with the same settings to recover.</p> </li> <li> <p> <b>IamNodeRoleNotFound</b>: We couldn''t find the IAM role for your managed node group. You may be able to recreate an IAM role with the same settings to recover.</p> </li> <li> <p> <b>InstanceLimitExceeded</b>: Your Amazon Web Services account is unable to launch any more instances of the specified instance type. You may be able to request an Amazon EC2 instance limit increase to recover.</p> </li> <li> <p> <b>InsufficientFreeAddresses</b>: One or more of the subnets associated with your managed node group does not have enough available IP addresses for new nodes.</p> </li> <li> <p> <b>InternalFailure</b>: These errors are usually caused by an Amazon EKS server-side issue.</p> </li> <li> <p> <b>NodeCreationFailure</b>: Your launched instances are unable to register with your Amazon EKS cluster. Common causes of this failure are insufficient <a href="https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html">node IAM role</a> permissions or lack of outbound internet access for the nodes. </p> </li> </ul>'
+          $ref: '#/components/schemas/NodegroupIssueCode'
+          description: '<p>A brief description of the error.</p> <ul> <li> <p> <b>AccessDenied</b>: Amazon EKS or one or more of your managed nodes is failing to authenticate or authorize with your Kubernetes cluster API server.</p> </li> <li> <p> <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is experiencing failures while attempting to launch instances.</p> </li> <li> <p> <b>AutoScalingGroupNotFound</b>: We couldn''t find the Auto Scaling group associated with the managed node group. You may be able to recreate an Auto Scaling group with the same settings to recover.</p> </li> <li> <p> <b>ClusterUnreachable</b>: Amazon EKS or one or more of your managed nodes is unable to to communicate with your Kubernetes cluster API server. This can happen if there are network disruptions or if API servers are timing out processing requests. </p> </li> <li> <p> <b>Ec2LaunchTemplateNotFound</b>: We couldn''t find the Amazon EC2 launch template for your managed node group. You may be able to recreate a launch template with the same settings to recover.</p> </li> <li> <p> <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2 launch template version for your managed node group does not match the version that Amazon EKS created. You may be able to revert to the version that Amazon EKS created to recover.</p> </li> <li> <p> <b>Ec2SecurityGroupDeletionFailure</b>: We could not delete the remote access security group for your managed node group. Remove any dependencies from the security group.</p> </li> <li> <p> <b>Ec2SecurityGroupNotFound</b>: We couldn''t find the cluster security group for the cluster. You must recreate your cluster.</p> </li> <li> <p> <b>Ec2SubnetInvalidConfiguration</b>: One or more Amazon EC2 subnets specified for a node group do not automatically assign public IP addresses to instances launched into it. If you want your instances to be assigned a public IP address, then you need to enable the <code>auto-assign public IP address</code> setting for the subnet. See <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip">Modifying the public IPv4 addressing attribute for your subnet</a> in the Amazon VPC User Guide.</p> </li> <li> <p> <b>IamInstanceProfileNotFound</b>: We couldn''t find the IAM instance profile for your managed node group. You may be able to recreate an instance profile with the same settings to recover.</p> </li> <li> <p> <b>IamNodeRoleNotFound</b>: We couldn''t find the IAM role for your managed node group. You may be able to recreate an IAM role with the same settings to recover.</p> </li> <li> <p> <b>InstanceLimitExceeded</b>: Your Amazon Web Services account is unable to launch any more instances of the specified instance type. You may be able to request an Amazon EC2 instance limit increase to recover.</p> </li> <li> <p> <b>InsufficientFreeAddresses</b>: One or more of the subnets associated with your managed node group does not have enough available IP addresses for new nodes.</p> </li> <li> <p> <b>InternalFailure</b>: These errors are usually caused by an Amazon EKS server-side issue.</p> </li> <li> <p> <b>NodeCreationFailure</b>: Your launched instances are unable to register with your Amazon EKS cluster. Common causes of this failure are insufficient <a href="https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html">node IAM role</a> permissions or lack of outbound internet access for the nodes. </p> </li> </ul>'
         message:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The error message associated with the issue.
+          $ref: '#/components/schemas/String'
+          description: The error message associated with the issue.
         resourceIds:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: The Amazon Web Services resources that are afflicted by this issue.
+          $ref: '#/components/schemas/StringList'
+          description: The Amazon Web Services resources that are afflicted by this issue.
       description: An object representing an issue with an Amazon EKS resource.
     IssueList:
       type: array
@@ -4171,13 +3907,11 @@ components:
       type: object
       properties:
         types:
-          allOf:
-            - $ref: '#/components/schemas/LogTypes'
-            - description: The available cluster control plane log types.
+          $ref: '#/components/schemas/LogTypes'
+          description: The available cluster control plane log types.
         enabled:
-          allOf:
-            - $ref: '#/components/schemas/BoxedBoolean'
-            - description: 'If a log type is enabled, that log type exports its control plane logs to CloudWatch Logs. If a log type isn''t enabled, that log type doesn''t export its control plane logs. Each individual log type can be enabled or disabled independently.'
+          $ref: '#/components/schemas/BoxedBoolean'
+          description: 'If a log type is enabled, that log type exports its control plane logs to CloudWatch Logs. If a log type isn''t enabled, that log type doesn''t export its control plane logs. Each individual log type can be enabled or disabled independently.'
       description: An object representing the enabled or disabled Kubernetes control plane logs for your cluster.
     LogType:
       type: string
@@ -4201,21 +3935,18 @@ components:
       type: object
       properties:
         autoScalingGroups:
-          allOf:
-            - $ref: '#/components/schemas/AutoScalingGroupList'
-            - description: The Auto Scaling groups associated with the node group.
+          $ref: '#/components/schemas/AutoScalingGroupList'
+          description: The Auto Scaling groups associated with the node group.
         remoteAccessSecurityGroup:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The remote access security group associated with the node group. This security group controls SSH access to the nodes.
+          $ref: '#/components/schemas/String'
+          description: The remote access security group associated with the node group. This security group controls SSH access to the nodes.
       description: 'An object representing the resources associated with the node group, such as Auto Scaling groups and security groups for remote access.'
     NodegroupHealth:
       type: object
       properties:
         issues:
-          allOf:
-            - $ref: '#/components/schemas/IssueList'
-            - description: 'Any issues that are associated with the node group. '
+          $ref: '#/components/schemas/IssueList'
+          description: 'Any issues that are associated with the node group. '
       description: An object representing the health status of the node group.
     configStatus:
       type: string
@@ -4236,9 +3967,8 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags to add to the resource. A tag is an array of key-value pairs.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags to add to the resource. A tag is an array of key-value pairs.
     taintKey:
       type: string
       minLength: 1
@@ -4284,21 +4014,17 @@ components:
       title: UpdateAddonRequest
       properties:
         addonVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The version of the add-on. The version must match one of the versions returned by <a href="https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html"> <code>DescribeAddonVersions</code> </a>.'
+          $ref: '#/components/schemas/String'
+          description: 'The version of the add-on. The version must match one of the versions returned by <a href="https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html"> <code>DescribeAddonVersions</code> </a>.'
         serviceAccountRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: '<p>The Amazon Resource Name (ARN) of an existing IAM role to bind to the add-on''s service account. The role must be assigned the IAM permissions required by the add-on. If you don''t specify an existing IAM role, then the add-on uses the permissions assigned to the node IAM role. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html">Amazon EKS node IAM role</a> in the <i>Amazon EKS User Guide</i>.</p> <note> <p>To specify an existing IAM role, you must have an IAM OpenID Connect (OIDC) provider created for your cluster. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html">Enabling IAM roles for service accounts on your cluster</a> in the <i>Amazon EKS User Guide</i>.</p> </note>'
+          $ref: '#/components/schemas/RoleArn'
+          description: '<p>The Amazon Resource Name (ARN) of an existing IAM role to bind to the add-on''s service account. The role must be assigned the IAM permissions required by the add-on. If you don''t specify an existing IAM role, then the add-on uses the permissions assigned to the node IAM role. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html">Amazon EKS node IAM role</a> in the <i>Amazon EKS User Guide</i>.</p> <note> <p>To specify an existing IAM role, you must have an IAM OpenID Connect (OIDC) provider created for your cluster. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html">Enabling IAM roles for service accounts on your cluster</a> in the <i>Amazon EKS User Guide</i>.</p> </note>'
         resolveConflicts:
-          allOf:
-            - $ref: '#/components/schemas/ResolveConflicts'
-            - description: How to resolve parameter value conflicts when applying the new version of the add-on to the cluster.
+          $ref: '#/components/schemas/ResolveConflicts'
+          description: How to resolve parameter value conflicts when applying the new version of the add-on to the cluster.
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/String'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     UpdateClusterConfigRequest:
       type: object
       title: UpdateClusterConfigRequest
@@ -4306,13 +4032,11 @@ components:
         resourcesVpcConfig:
           $ref: '#/components/schemas/VpcConfigRequest'
         logging:
-          allOf:
-            - $ref: '#/components/schemas/Logging'
-            - description: '<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren''t exported to CloudWatch Logs. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html">Amazon EKS cluster control plane logs</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p> <note> <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see <a href="http://aws.amazon.com/cloudwatch/pricing/">CloudWatch Pricing</a>.</p> </note>'
+          $ref: '#/components/schemas/Logging'
+          description: '<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren''t exported to CloudWatch Logs. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html">Amazon EKS cluster control plane logs</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p> <note> <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see <a href="http://aws.amazon.com/cloudwatch/pricing/">CloudWatch Pricing</a>.</p> </note>'
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/String'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     UpdateClusterVersionRequest:
       type: object
       required:
@@ -4320,85 +4044,69 @@ components:
       title: UpdateClusterVersionRequest
       properties:
         version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The desired Kubernetes version following a successful update.
+          $ref: '#/components/schemas/String'
+          description: The desired Kubernetes version following a successful update.
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/String'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     UpdateLabelsPayload:
       type: object
       properties:
         addOrUpdateLabels:
-          allOf:
-            - $ref: '#/components/schemas/labelsMap'
-            - description: Kubernetes labels to be added or updated.
+          $ref: '#/components/schemas/labelsMap'
+          description: Kubernetes labels to be added or updated.
         removeLabels:
-          allOf:
-            - $ref: '#/components/schemas/labelsKeyList'
-            - description: Kubernetes labels to be removed.
+          $ref: '#/components/schemas/labelsKeyList'
+          description: Kubernetes labels to be removed.
       description: An object representing a Kubernetes label change for a managed node group.
     UpdateTaintsPayload:
       type: object
       properties:
         addOrUpdateTaints:
-          allOf:
-            - $ref: '#/components/schemas/taintsList'
-            - description: Kubernetes taints to be added or updated.
+          $ref: '#/components/schemas/taintsList'
+          description: Kubernetes taints to be added or updated.
         removeTaints:
-          allOf:
-            - $ref: '#/components/schemas/taintsList'
-            - description: Kubernetes taints to be removed.
+          $ref: '#/components/schemas/taintsList'
+          description: Kubernetes taints to be removed.
       description: An object representing the details of an update to a taints payload.
     UpdateNodegroupConfigRequest:
       type: object
       title: UpdateNodegroupConfigRequest
       properties:
         labels:
-          allOf:
-            - $ref: '#/components/schemas/UpdateLabelsPayload'
-            - description: The Kubernetes labels to be applied to the nodes in the node group after the update.
+          $ref: '#/components/schemas/UpdateLabelsPayload'
+          description: The Kubernetes labels to be applied to the nodes in the node group after the update.
         taints:
-          allOf:
-            - $ref: '#/components/schemas/UpdateTaintsPayload'
-            - description: The Kubernetes taints to be applied to the nodes in the node group after the update.
+          $ref: '#/components/schemas/UpdateTaintsPayload'
+          description: The Kubernetes taints to be applied to the nodes in the node group after the update.
         scalingConfig:
-          allOf:
-            - $ref: '#/components/schemas/NodegroupScalingConfig'
-            - description: The scaling configuration details for the Auto Scaling group after the update.
+          $ref: '#/components/schemas/NodegroupScalingConfig'
+          description: The scaling configuration details for the Auto Scaling group after the update.
         updateConfig:
-          allOf:
-            - $ref: '#/components/schemas/NodegroupUpdateConfig'
-            - description: The node group update configuration.
+          $ref: '#/components/schemas/NodegroupUpdateConfig'
+          description: The node group update configuration.
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/String'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     UpdateNodegroupVersionRequest:
       type: object
       title: UpdateNodegroupVersionRequest
       properties:
         version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The Kubernetes version to update to. If no version is specified, then the Kubernetes version of the node group does not change. You can specify the Kubernetes version of the cluster to update the node group to the latest AMI version of the cluster''s Kubernetes version. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don''t specify <code>version</code>, or the node group update will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
+          $ref: '#/components/schemas/String'
+          description: 'The Kubernetes version to update to. If no version is specified, then the Kubernetes version of the node group does not change. You can specify the Kubernetes version of the cluster to update the node group to the latest AMI version of the cluster''s Kubernetes version. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don''t specify <code>version</code>, or the node group update will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
         releaseVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The AMI version of the Amazon EKS optimized AMI to use for the update. By default, the latest available AMI version for the node group''s Kubernetes version is used. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html">Amazon EKS optimized Amazon Linux 2 AMI versions </a> in the <i>Amazon EKS User Guide</i>. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don''t specify <code>releaseVersion</code>, or the node group update will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
+          $ref: '#/components/schemas/String'
+          description: 'The AMI version of the Amazon EKS optimized AMI to use for the update. By default, the latest available AMI version for the node group''s Kubernetes version is used. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html">Amazon EKS optimized Amazon Linux 2 AMI versions </a> in the <i>Amazon EKS User Guide</i>. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don''t specify <code>releaseVersion</code>, or the node group update will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
         launchTemplate:
-          allOf:
-            - $ref: '#/components/schemas/LaunchTemplateSpecification'
-            - description: An object representing a node group's launch template specification. You can only update a node group using a launch template if the node group was originally deployed with a launch template.
+          $ref: '#/components/schemas/LaunchTemplateSpecification'
+          description: An object representing a node group's launch template specification. You can only update a node group using a launch template if the node group was originally deployed with a launch template.
         force:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'Force the update if the existing node group''s pods are unable to be drained due to a pod disruption budget issue. If an update fails because pods could not be drained, you can force the update after it fails to terminate the old node whether or not any pods are running on the node.'
+          $ref: '#/components/schemas/Boolean'
+          description: 'Force the update if the existing node group''s pods are unable to be drained due to a pod disruption budget issue. If an update fails because pods could not be drained, you can force the update after it fails to terminate the old node whether or not any pods are running on the node.'
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/String'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     UpdateParamType:
       type: string
       enum:
@@ -4429,13 +4137,11 @@ components:
       type: object
       properties:
         type:
-          allOf:
-            - $ref: '#/components/schemas/UpdateParamType'
-            - description: The keys associated with an update request.
+          $ref: '#/components/schemas/UpdateParamType'
+          description: The keys associated with an update request.
         value:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The value of the keys submitted as part of an update request.
+          $ref: '#/components/schemas/String'
+          description: The value of the keys submitted as part of an update request.
       description: An object representing the details of an update request.
     labelKey:
       type: string

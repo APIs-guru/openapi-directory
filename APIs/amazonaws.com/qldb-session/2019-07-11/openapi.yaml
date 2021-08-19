@@ -239,69 +239,54 @@ components:
       type: object
       properties:
         StartSession:
-          allOf:
-            - $ref: '#/components/schemas/StartSessionResult'
-            - description: Contains the details of the started session that includes a session token. This <code>SessionToken</code> is required for every subsequent command that is issued during the current session.
+          $ref: '#/components/schemas/StartSessionResult'
+          description: Contains the details of the started session that includes a session token. This <code>SessionToken</code> is required for every subsequent command that is issued during the current session.
         StartTransaction:
-          allOf:
-            - $ref: '#/components/schemas/StartTransactionResult'
-            - description: Contains the details of the started transaction.
+          $ref: '#/components/schemas/StartTransactionResult'
+          description: Contains the details of the started transaction.
         EndSession:
-          allOf:
-            - $ref: '#/components/schemas/EndSessionResult'
-            - description: Contains the details of the ended session.
+          $ref: '#/components/schemas/EndSessionResult'
+          description: Contains the details of the ended session.
         CommitTransaction:
-          allOf:
-            - $ref: '#/components/schemas/CommitTransactionResult'
-            - description: Contains the details of the committed transaction.
+          $ref: '#/components/schemas/CommitTransactionResult'
+          description: Contains the details of the committed transaction.
         AbortTransaction:
-          allOf:
-            - $ref: '#/components/schemas/AbortTransactionResult'
-            - description: Contains the details of the aborted transaction.
+          $ref: '#/components/schemas/AbortTransactionResult'
+          description: Contains the details of the aborted transaction.
         ExecuteStatement:
-          allOf:
-            - $ref: '#/components/schemas/ExecuteStatementResult'
-            - description: Contains the details of the executed statement.
+          $ref: '#/components/schemas/ExecuteStatementResult'
+          description: Contains the details of the executed statement.
         FetchPage:
-          allOf:
-            - $ref: '#/components/schemas/FetchPageResult'
-            - description: Contains the details of the fetched page.
+          $ref: '#/components/schemas/FetchPageResult'
+          description: Contains the details of the fetched page.
     SendCommandRequest:
       type: object
       title: SendCommandRequest
       properties:
         SessionToken:
-          allOf:
-            - $ref: '#/components/schemas/SessionToken'
-            - description: '<p>Specifies the session token for the current command. A session token is constant throughout the life of the session.</p> <p>To obtain a session token, run the <code>StartSession</code> command. This <code>SessionToken</code> is required for every subsequent command that is issued during the current session.</p>'
+          $ref: '#/components/schemas/SessionToken'
+          description: '<p>Specifies the session token for the current command. A session token is constant throughout the life of the session.</p> <p>To obtain a session token, run the <code>StartSession</code> command. This <code>SessionToken</code> is required for every subsequent command that is issued during the current session.</p>'
         StartSession:
-          allOf:
-            - $ref: '#/components/schemas/StartSessionRequest'
-            - description: Command to start a new session. A session token is obtained as part of the response.
+          $ref: '#/components/schemas/StartSessionRequest'
+          description: Command to start a new session. A session token is obtained as part of the response.
         StartTransaction:
-          allOf:
-            - $ref: '#/components/schemas/StartTransactionRequest'
-            - description: Command to start a new transaction.
+          $ref: '#/components/schemas/StartTransactionRequest'
+          description: Command to start a new transaction.
         EndSession:
-          allOf:
-            - $ref: '#/components/schemas/EndSessionRequest'
-            - description: Command to end the current session.
+          $ref: '#/components/schemas/EndSessionRequest'
+          description: Command to end the current session.
         CommitTransaction:
-          allOf:
-            - $ref: '#/components/schemas/CommitTransactionRequest'
-            - description: Command to commit the specified transaction.
+          $ref: '#/components/schemas/CommitTransactionRequest'
+          description: Command to commit the specified transaction.
         AbortTransaction:
-          allOf:
-            - $ref: '#/components/schemas/AbortTransactionRequest'
-            - description: Command to abort the current transaction.
+          $ref: '#/components/schemas/AbortTransactionRequest'
+          description: Command to abort the current transaction.
         ExecuteStatement:
-          allOf:
-            - $ref: '#/components/schemas/ExecuteStatementRequest'
-            - description: Command to execute a statement in the specified transaction.
+          $ref: '#/components/schemas/ExecuteStatementRequest'
+          description: Command to execute a statement in the specified transaction.
         FetchPage:
-          allOf:
-            - $ref: '#/components/schemas/FetchPageRequest'
-            - description: Command to fetch a page.
+          $ref: '#/components/schemas/FetchPageRequest'
+          description: Command to fetch a page.
     BadRequestException: {}
     InvalidSessionException: {}
     OccConflictException: {}
@@ -316,17 +301,15 @@ components:
       type: object
       properties:
         ProcessingTimeMilliseconds:
-          allOf:
-            - $ref: '#/components/schemas/ProcessingTimeMilliseconds'
-            - description: 'The amount of time that QLDB spent on processing the command, measured in milliseconds.'
+          $ref: '#/components/schemas/ProcessingTimeMilliseconds'
+          description: 'The amount of time that QLDB spent on processing the command, measured in milliseconds.'
       description: Contains server-side performance information for a command. Amazon QLDB captures timing information between the times when it receives the request and when it sends the corresponding response.
     AbortTransactionResult:
       type: object
       properties:
         TimingInformation:
-          allOf:
-            - $ref: '#/components/schemas/TimingInformation'
-            - description: Contains server-side performance information for the command.
+          $ref: '#/components/schemas/TimingInformation'
+          description: Contains server-side performance information for the command.
       description: Contains the details of the aborted transaction.
     CommitDigest:
       type: string
@@ -342,45 +325,37 @@ components:
         - CommitDigest
       properties:
         TransactionId:
-          allOf:
-            - $ref: '#/components/schemas/TransactionId'
-            - description: Specifies the transaction ID of the transaction to commit.
+          $ref: '#/components/schemas/TransactionId'
+          description: Specifies the transaction ID of the transaction to commit.
         CommitDigest:
-          allOf:
-            - $ref: '#/components/schemas/CommitDigest'
-            - description: '<p>Specifies the commit digest for the transaction to commit. For every active transaction, the commit digest must be passed. QLDB validates <code>CommitDigest</code> and rejects the commit with an error if the digest computed on the client does not match the digest computed by QLDB.</p> <p>The purpose of the <code>CommitDigest</code> parameter is to ensure that QLDB commits a transaction if and only if the server has processed the exact set of statements sent by the client, in the same order that client sent them, and with no duplicates.</p>'
+          $ref: '#/components/schemas/CommitDigest'
+          description: '<p>Specifies the commit digest for the transaction to commit. For every active transaction, the commit digest must be passed. QLDB validates <code>CommitDigest</code> and rejects the commit with an error if the digest computed on the client does not match the digest computed by QLDB.</p> <p>The purpose of the <code>CommitDigest</code> parameter is to ensure that QLDB commits a transaction if and only if the server has processed the exact set of statements sent by the client, in the same order that client sent them, and with no duplicates.</p>'
       description: Contains the details of the transaction to commit.
     IOUsage:
       type: object
       properties:
         ReadIOs:
-          allOf:
-            - $ref: '#/components/schemas/ReadIOs'
-            - description: The number of read I/O requests that the command made.
+          $ref: '#/components/schemas/ReadIOs'
+          description: The number of read I/O requests that the command made.
         WriteIOs:
-          allOf:
-            - $ref: '#/components/schemas/WriteIOs'
-            - description: The number of write I/O requests that the command made.
+          $ref: '#/components/schemas/WriteIOs'
+          description: The number of write I/O requests that the command made.
       description: Contains I/O usage metrics for a command that was invoked.
     CommitTransactionResult:
       type: object
       properties:
         TransactionId:
-          allOf:
-            - $ref: '#/components/schemas/TransactionId'
-            - description: The transaction ID of the committed transaction.
+          $ref: '#/components/schemas/TransactionId'
+          description: The transaction ID of the committed transaction.
         CommitDigest:
-          allOf:
-            - $ref: '#/components/schemas/CommitDigest'
-            - description: The commit digest of the committed transaction.
+          $ref: '#/components/schemas/CommitDigest'
+          description: The commit digest of the committed transaction.
         TimingInformation:
-          allOf:
-            - $ref: '#/components/schemas/TimingInformation'
-            - description: Contains server-side performance information for the command.
+          $ref: '#/components/schemas/TimingInformation'
+          description: Contains server-side performance information for the command.
         ConsumedIOs:
-          allOf:
-            - $ref: '#/components/schemas/IOUsage'
-            - description: Contains metrics about the number of I/O requests that were consumed.
+          $ref: '#/components/schemas/IOUsage'
+          description: Contains metrics about the number of I/O requests that were consumed.
       description: Contains the details of the committed transaction.
     EndSessionRequest:
       type: object
@@ -390,9 +365,8 @@ components:
       type: object
       properties:
         TimingInformation:
-          allOf:
-            - $ref: '#/components/schemas/TimingInformation'
-            - description: Contains server-side performance information for the command.
+          $ref: '#/components/schemas/TimingInformation'
+          description: Contains server-side performance information for the command.
       description: Contains the details of the ended session.
     Statement:
       type: string
@@ -409,45 +383,37 @@ components:
         - Statement
       properties:
         TransactionId:
-          allOf:
-            - $ref: '#/components/schemas/TransactionId'
-            - description: Specifies the transaction ID of the request.
+          $ref: '#/components/schemas/TransactionId'
+          description: Specifies the transaction ID of the request.
         Statement:
-          allOf:
-            - $ref: '#/components/schemas/Statement'
-            - description: Specifies the statement of the request.
+          $ref: '#/components/schemas/Statement'
+          description: Specifies the statement of the request.
         Parameters:
-          allOf:
-            - $ref: '#/components/schemas/StatementParameters'
-            - description: Specifies the parameters for the parameterized statement in the request.
+          $ref: '#/components/schemas/StatementParameters'
+          description: Specifies the parameters for the parameterized statement in the request.
       description: Specifies a request to execute a statement.
     Page:
       type: object
       properties:
         Values:
-          allOf:
-            - $ref: '#/components/schemas/ValueHolders'
-            - description: A structure that contains values in multiple encoding formats.
+          $ref: '#/components/schemas/ValueHolders'
+          description: A structure that contains values in multiple encoding formats.
         NextPageToken:
-          allOf:
-            - $ref: '#/components/schemas/PageToken'
-            - description: The token of the next page.
+          $ref: '#/components/schemas/PageToken'
+          description: The token of the next page.
       description: Contains details of the fetched page.
     ExecuteStatementResult:
       type: object
       properties:
         FirstPage:
-          allOf:
-            - $ref: '#/components/schemas/Page'
-            - description: Contains the details of the first fetched page.
+          $ref: '#/components/schemas/Page'
+          description: Contains the details of the first fetched page.
         TimingInformation:
-          allOf:
-            - $ref: '#/components/schemas/TimingInformation'
-            - description: Contains server-side performance information for the command.
+          $ref: '#/components/schemas/TimingInformation'
+          description: Contains server-side performance information for the command.
         ConsumedIOs:
-          allOf:
-            - $ref: '#/components/schemas/IOUsage'
-            - description: Contains metrics about the number of I/O requests that were consumed.
+          $ref: '#/components/schemas/IOUsage'
+          description: Contains metrics about the number of I/O requests that were consumed.
       description: Contains the details of the executed statement.
     PageToken:
       type: string
@@ -461,29 +427,24 @@ components:
         - NextPageToken
       properties:
         TransactionId:
-          allOf:
-            - $ref: '#/components/schemas/TransactionId'
-            - description: Specifies the transaction ID of the page to be fetched.
+          $ref: '#/components/schemas/TransactionId'
+          description: Specifies the transaction ID of the page to be fetched.
         NextPageToken:
-          allOf:
-            - $ref: '#/components/schemas/PageToken'
-            - description: Specifies the next page token of the page to be fetched.
+          $ref: '#/components/schemas/PageToken'
+          description: Specifies the next page token of the page to be fetched.
       description: Specifies the details of the page to be fetched.
     FetchPageResult:
       type: object
       properties:
         Page:
-          allOf:
-            - $ref: '#/components/schemas/Page'
-            - description: Contains details of the fetched page.
+          $ref: '#/components/schemas/Page'
+          description: Contains details of the fetched page.
         TimingInformation:
-          allOf:
-            - $ref: '#/components/schemas/TimingInformation'
-            - description: Contains server-side performance information for the command.
+          $ref: '#/components/schemas/TimingInformation'
+          description: Contains server-side performance information for the command.
         ConsumedIOs:
-          allOf:
-            - $ref: '#/components/schemas/IOUsage'
-            - description: Contains metrics about the number of I/O requests that were consumed.
+          $ref: '#/components/schemas/IOUsage'
+          description: Contains metrics about the number of I/O requests that were consumed.
       description: Contains the page that was fetched.
     ReadIOs:
       type: integer
@@ -519,9 +480,8 @@ components:
         - LedgerName
       properties:
         LedgerName:
-          allOf:
-            - $ref: '#/components/schemas/LedgerName'
-            - description: The name of the ledger to start a new session against.
+          $ref: '#/components/schemas/LedgerName'
+          description: The name of the ledger to start a new session against.
       description: Specifies a request to start a new session.
     StartTransactionRequest:
       type: object
@@ -531,37 +491,31 @@ components:
       type: object
       properties:
         SessionToken:
-          allOf:
-            - $ref: '#/components/schemas/SessionToken'
-            - description: Session token of the started session. This <code>SessionToken</code> is required for every subsequent command that is issued during the current session.
+          $ref: '#/components/schemas/SessionToken'
+          description: Session token of the started session. This <code>SessionToken</code> is required for every subsequent command that is issued during the current session.
         TimingInformation:
-          allOf:
-            - $ref: '#/components/schemas/TimingInformation'
-            - description: Contains server-side performance information for the command.
+          $ref: '#/components/schemas/TimingInformation'
+          description: Contains server-side performance information for the command.
       description: Contains the details of the started session.
     StartTransactionResult:
       type: object
       properties:
         TransactionId:
-          allOf:
-            - $ref: '#/components/schemas/TransactionId'
-            - description: The transaction ID of the started transaction.
+          $ref: '#/components/schemas/TransactionId'
+          description: The transaction ID of the started transaction.
         TimingInformation:
-          allOf:
-            - $ref: '#/components/schemas/TimingInformation'
-            - description: Contains server-side performance information for the command.
+          $ref: '#/components/schemas/TimingInformation'
+          description: Contains server-side performance information for the command.
       description: Contains the details of the started transaction.
     ValueHolder:
       type: object
       properties:
         IonBinary:
-          allOf:
-            - $ref: '#/components/schemas/IonBinary'
-            - description: An Amazon Ion binary value contained in a <code>ValueHolder</code> structure.
+          $ref: '#/components/schemas/IonBinary'
+          description: An Amazon Ion binary value contained in a <code>ValueHolder</code> structure.
         IonText:
-          allOf:
-            - $ref: '#/components/schemas/IonText'
-            - description: An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.
+          $ref: '#/components/schemas/IonText'
+          description: An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.
       description: A structure that can contain a value in multiple encoding formats.
 security:
   - hmac: []

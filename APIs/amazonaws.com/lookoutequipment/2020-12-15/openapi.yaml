@@ -1648,17 +1648,14 @@ components:
       type: object
       properties:
         DatasetName:
-          allOf:
-            - $ref: '#/components/schemas/DatasetName'
-            - description: 'The name of the dataset being created. '
+          $ref: '#/components/schemas/DatasetName'
+          description: 'The name of the dataset being created. '
         DatasetArn:
-          allOf:
-            - $ref: '#/components/schemas/DatasetArn'
-            - description: ' The Amazon Resource Name (ARN) of the dataset being created. '
+          $ref: '#/components/schemas/DatasetArn'
+          description: ' The Amazon Resource Name (ARN) of the dataset being created. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/DatasetStatus'
-            - description: 'Indicates the status of the <code>CreateDataset</code> operation. '
+          $ref: '#/components/schemas/DatasetStatus'
+          description: 'Indicates the status of the <code>CreateDataset</code> operation. '
     CreateDatasetRequest:
       type: object
       required:
@@ -1668,25 +1665,20 @@ components:
       title: CreateDatasetRequest
       properties:
         DatasetName:
-          allOf:
-            - $ref: '#/components/schemas/DatasetName'
-            - description: 'The name of the dataset being created. '
+          $ref: '#/components/schemas/DatasetName'
+          description: 'The name of the dataset being created. '
         DatasetSchema:
-          allOf:
-            - $ref: '#/components/schemas/DatasetSchema'
-            - description: 'A JSON description of the data that is in each time series dataset, including names, column names, and data types. '
+          $ref: '#/components/schemas/DatasetSchema'
+          description: 'A JSON description of the data that is in each time series dataset, including names, column names, and data types. '
         ServerSideKmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/NameOrArn'
-            - description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt dataset data by Amazon Lookout for Equipment. '
+          $ref: '#/components/schemas/NameOrArn'
+          description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt dataset data by Amazon Lookout for Equipment. '
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotenceToken'
-            - description: ' A unique identifier for the request. If you do not set the client request token, Amazon Lookout for Equipment generates one. '
+          $ref: '#/components/schemas/IdempotenceToken'
+          description: ' A unique identifier for the request. If you do not set the client request token, Amazon Lookout for Equipment generates one. '
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: 'Any tags associated with the ingested data described in the dataset. '
+          $ref: '#/components/schemas/TagList'
+          description: 'Any tags associated with the ingested data described in the dataset. '
     ValidationException: {}
     ConflictException: {}
     ThrottlingException: {}
@@ -1697,17 +1689,14 @@ components:
       type: object
       properties:
         InferenceSchedulerArn:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerArn'
-            - description: 'The Amazon Resource Name (ARN) of the inference scheduler being created. '
+          $ref: '#/components/schemas/InferenceSchedulerArn'
+          description: 'The Amazon Resource Name (ARN) of the inference scheduler being created. '
         InferenceSchedulerName:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerName'
-            - description: 'The name of inference scheduler being created. '
+          $ref: '#/components/schemas/InferenceSchedulerName'
+          description: 'The name of inference scheduler being created. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerStatus'
-            - description: 'Indicates the status of the <code>CreateInferenceScheduler</code> operation. '
+          $ref: '#/components/schemas/InferenceSchedulerStatus'
+          description: 'Indicates the status of the <code>CreateInferenceScheduler</code> operation. '
     CreateInferenceSchedulerRequest:
       type: object
       required:
@@ -1721,57 +1710,45 @@ components:
       title: CreateInferenceSchedulerRequest
       properties:
         ModelName:
-          allOf:
-            - $ref: '#/components/schemas/ModelName'
-            - description: 'The name of the previously trained ML model being used to create the inference scheduler. '
+          $ref: '#/components/schemas/ModelName'
+          description: 'The name of the previously trained ML model being used to create the inference scheduler. '
         InferenceSchedulerName:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerName'
-            - description: 'The name of the inference scheduler being created. '
+          $ref: '#/components/schemas/InferenceSchedulerName'
+          description: 'The name of the inference scheduler being created. '
         DataDelayOffsetInMinutes:
-          allOf:
-            - $ref: '#/components/schemas/DataDelayOffsetInMinutes'
-            - description: ' A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if you select an offset delay time of five minutes, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don''t need to stop and restart the scheduler when uploading new data. '
+          $ref: '#/components/schemas/DataDelayOffsetInMinutes'
+          description: ' A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if you select an offset delay time of five minutes, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don''t need to stop and restart the scheduler when uploading new data. '
         DataUploadFrequency:
-          allOf:
-            - $ref: '#/components/schemas/DataUploadFrequency'
-            - description: ' How often data is uploaded to the source S3 bucket for the input data. The value chosen is the length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This frequency also determines how often Amazon Lookout for Equipment starts a scheduled inference on your data. In this example, it starts once every 5 minutes. '
+          $ref: '#/components/schemas/DataUploadFrequency'
+          description: ' How often data is uploaded to the source S3 bucket for the input data. The value chosen is the length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This frequency also determines how often Amazon Lookout for Equipment starts a scheduled inference on your data. In this example, it starts once every 5 minutes. '
         DataInputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/InferenceInputConfiguration'
-            - description: 'Specifies configuration information for the input data for the inference scheduler, including delimiter, format, and dataset location. '
+          $ref: '#/components/schemas/InferenceInputConfiguration'
+          description: 'Specifies configuration information for the input data for the inference scheduler, including delimiter, format, and dataset location. '
         DataOutputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/InferenceOutputConfiguration'
-            - description: 'Specifies configuration information for the output results for the inference scheduler, including the S3 location for the output. '
+          $ref: '#/components/schemas/InferenceOutputConfiguration'
+          description: 'Specifies configuration information for the output results for the inference scheduler, including the S3 location for the output. '
         RoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference. '
+          $ref: '#/components/schemas/IamRoleArn'
+          description: 'The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference. '
         ServerSideKmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/NameOrArn'
-            - description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment. '
+          $ref: '#/components/schemas/NameOrArn'
+          description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment. '
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotenceToken'
-            - description: ' A unique identifier for the request. If you do not set the client request token, Amazon Lookout for Equipment generates one. '
+          $ref: '#/components/schemas/IdempotenceToken'
+          description: ' A unique identifier for the request. If you do not set the client request token, Amazon Lookout for Equipment generates one. '
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: 'Any tags associated with the inference scheduler. '
+          $ref: '#/components/schemas/TagList'
+          description: 'Any tags associated with the inference scheduler. '
     ResourceNotFoundException: {}
     CreateModelResponse:
       type: object
       properties:
         ModelArn:
-          allOf:
-            - $ref: '#/components/schemas/ModelArn'
-            - description: 'The Amazon Resource Name (ARN) of the model being created. '
+          $ref: '#/components/schemas/ModelArn'
+          description: 'The Amazon Resource Name (ARN) of the model being created. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ModelStatus'
-            - description: 'Indicates the status of the <code>CreateModel</code> operation. '
+          $ref: '#/components/schemas/ModelStatus'
+          description: 'Indicates the status of the <code>CreateModel</code> operation. '
     CreateModelRequest:
       type: object
       required:
@@ -1781,57 +1758,44 @@ components:
       title: CreateModelRequest
       properties:
         ModelName:
-          allOf:
-            - $ref: '#/components/schemas/ModelName'
-            - description: The name for the ML model to be created.
+          $ref: '#/components/schemas/ModelName'
+          description: The name for the ML model to be created.
         DatasetName:
-          allOf:
-            - $ref: '#/components/schemas/DatasetIdentifier'
-            - description: 'The name of the dataset for the ML model being created. '
+          $ref: '#/components/schemas/DatasetIdentifier'
+          description: 'The name of the dataset for the ML model being created. '
         DatasetSchema:
-          allOf:
-            - $ref: '#/components/schemas/DatasetSchema'
-            - description: 'The data schema for the ML model being created. '
+          $ref: '#/components/schemas/DatasetSchema'
+          description: 'The data schema for the ML model being created. '
         LabelsInputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/LabelsInputConfiguration'
-            - description: 'The input configuration for the labels being used for the ML model that''s being created. '
+          $ref: '#/components/schemas/LabelsInputConfiguration'
+          description: 'The input configuration for the labels being used for the ML model that''s being created. '
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotenceToken'
-            - description: 'A unique identifier for the request. If you do not set the client request token, Amazon Lookout for Equipment generates one. '
+          $ref: '#/components/schemas/IdempotenceToken'
+          description: 'A unique identifier for the request. If you do not set the client request token, Amazon Lookout for Equipment generates one. '
         TrainingDataStartTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Indicates the time reference in the dataset that should be used to begin the subset of training data for the ML model. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Indicates the time reference in the dataset that should be used to begin the subset of training data for the ML model. '
         TrainingDataEndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Indicates the time reference in the dataset that should be used to end the subset of training data for the ML model. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Indicates the time reference in the dataset that should be used to end the subset of training data for the ML model. '
         EvaluationDataStartTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Indicates the time reference in the dataset that should be used to begin the subset of evaluation data for the ML model. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Indicates the time reference in the dataset that should be used to begin the subset of evaluation data for the ML model. '
         EvaluationDataEndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Indicates the time reference in the dataset that should be used to end the subset of evaluation data for the ML model. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Indicates the time reference in the dataset that should be used to end the subset of evaluation data for the ML model. '
         RoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: ' The Amazon Resource Name (ARN) of a role with permission to access the data source being used to create the ML model. '
+          $ref: '#/components/schemas/IamRoleArn'
+          description: ' The Amazon Resource Name (ARN) of a role with permission to access the data source being used to create the ML model. '
         DataPreProcessingConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/DataPreProcessingConfiguration'
-            - description: '<p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of the data after post processing by Amazon Lookout for Equipment. For example, if you provide data that has been collected at a 1 second level and you want the system to resample the data at a 1 minute rate before training, the <code>TargetSamplingRate</code> is 1 minute.</p> <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the prefix "PT" to the rate you want. The value for a 1 second rate is therefore <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>, and the value for a 1 hour rate is <i>PT1H</i> </p>'
+          $ref: '#/components/schemas/DataPreProcessingConfiguration'
+          description: '<p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of the data after post processing by Amazon Lookout for Equipment. For example, if you provide data that has been collected at a 1 second level and you want the system to resample the data at a 1 minute rate before training, the <code>TargetSamplingRate</code> is 1 minute.</p> <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the prefix "PT" to the rate you want. The value for a 1 second rate is therefore <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>, and the value for a 1 hour rate is <i>PT1H</i> </p>'
         ServerSideKmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/NameOrArn'
-            - description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt model data by Amazon Lookout for Equipment. '
+          $ref: '#/components/schemas/NameOrArn'
+          description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt model data by Amazon Lookout for Equipment. '
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: ' Any tags associated with the ML model being created. '
+          $ref: '#/components/schemas/TagList'
+          description: ' Any tags associated with the ML model being created. '
     DeleteDatasetRequest:
       type: object
       required:
@@ -1839,9 +1803,8 @@ components:
       title: DeleteDatasetRequest
       properties:
         DatasetName:
-          allOf:
-            - $ref: '#/components/schemas/DatasetIdentifier'
-            - description: 'The name of the dataset to be deleted. '
+          $ref: '#/components/schemas/DatasetIdentifier'
+          description: 'The name of the dataset to be deleted. '
     DeleteInferenceSchedulerRequest:
       type: object
       required:
@@ -1849,9 +1812,8 @@ components:
       title: DeleteInferenceSchedulerRequest
       properties:
         InferenceSchedulerName:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerIdentifier'
-            - description: 'The name of the inference scheduler to be deleted. '
+          $ref: '#/components/schemas/InferenceSchedulerIdentifier'
+          description: 'The name of the inference scheduler to be deleted. '
     DeleteModelRequest:
       type: object
       required:
@@ -1859,40 +1821,32 @@ components:
       title: DeleteModelRequest
       properties:
         ModelName:
-          allOf:
-            - $ref: '#/components/schemas/ModelName'
-            - description: 'The name of the ML model to be deleted. '
+          $ref: '#/components/schemas/ModelName'
+          description: 'The name of the ML model to be deleted. '
     DescribeDataIngestionJobResponse:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/IngestionJobId'
-            - description: 'Indicates the job ID of the data ingestion job. '
+          $ref: '#/components/schemas/IngestionJobId'
+          description: 'Indicates the job ID of the data ingestion job. '
         DatasetArn:
-          allOf:
-            - $ref: '#/components/schemas/DatasetArn'
-            - description: 'The Amazon Resource Name (ARN) of the dataset being used in the data ingestion job. '
+          $ref: '#/components/schemas/DatasetArn'
+          description: 'The Amazon Resource Name (ARN) of the dataset being used in the data ingestion job. '
         IngestionInputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/IngestionInputConfiguration'
-            - description: 'Specifies the S3 location configuration for the data input for the data ingestion job. '
+          $ref: '#/components/schemas/IngestionInputConfiguration'
+          description: 'Specifies the S3 location configuration for the data input for the data ingestion job. '
         RoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of an IAM role with permission to access the data source being ingested. '
+          $ref: '#/components/schemas/IamRoleArn'
+          description: 'The Amazon Resource Name (ARN) of an IAM role with permission to access the data source being ingested. '
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time at which the data ingestion job was created. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time at which the data ingestion job was created. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/IngestionJobStatus'
-            - description: 'Indicates the status of the <code>DataIngestionJob</code> operation. '
+          $ref: '#/components/schemas/IngestionJobStatus'
+          description: 'Indicates the status of the <code>DataIngestionJob</code> operation. '
         FailedReason:
-          allOf:
-            - $ref: '#/components/schemas/BoundedLengthString'
-            - description: 'Specifies the reason for failure when a data ingestion job has failed. '
+          $ref: '#/components/schemas/BoundedLengthString'
+          description: 'Specifies the reason for failure when a data ingestion job has failed. '
     DescribeDataIngestionJobRequest:
       type: object
       required:
@@ -1900,44 +1854,35 @@ components:
       title: DescribeDataIngestionJobRequest
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/IngestionJobId'
-            - description: 'The job ID of the data ingestion job. '
+          $ref: '#/components/schemas/IngestionJobId'
+          description: 'The job ID of the data ingestion job. '
     DescribeDatasetResponse:
       type: object
       properties:
         DatasetName:
-          allOf:
-            - $ref: '#/components/schemas/DatasetName'
-            - description: 'The name of the dataset being described. '
+          $ref: '#/components/schemas/DatasetName'
+          description: 'The name of the dataset being described. '
         DatasetArn:
-          allOf:
-            - $ref: '#/components/schemas/DatasetArn'
-            - description: 'The Amazon Resource Name (ARN) of the dataset being described. '
+          $ref: '#/components/schemas/DatasetArn'
+          description: 'The Amazon Resource Name (ARN) of the dataset being described. '
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Specifies the time the dataset was created in Amazon Lookout for Equipment. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Specifies the time the dataset was created in Amazon Lookout for Equipment. '
         LastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Specifies the time the dataset was last updated, if it was. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Specifies the time the dataset was last updated, if it was. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/DatasetStatus'
-            - description: 'Indicates the status of the dataset. '
+          $ref: '#/components/schemas/DatasetStatus'
+          description: 'Indicates the status of the dataset. '
         Schema:
-          allOf:
-            - $ref: '#/components/schemas/InlineDataSchema'
-            - description: 'A JSON description of the data that is in each time series dataset, including names, column names, and data types. '
+          $ref: '#/components/schemas/InlineDataSchema'
+          description: 'A JSON description of the data that is in each time series dataset, including names, column names, and data types. '
         ServerSideKmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyArn'
-            - description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt dataset data by Amazon Lookout for Equipment. '
+          $ref: '#/components/schemas/KmsKeyArn'
+          description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt dataset data by Amazon Lookout for Equipment. '
         IngestionInputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/IngestionInputConfiguration'
-            - description: 'Specifies the S3 location configuration for the data input for the data ingestion job. '
+          $ref: '#/components/schemas/IngestionInputConfiguration'
+          description: 'Specifies the S3 location configuration for the data input for the data ingestion job. '
     DescribeDatasetRequest:
       type: object
       required:
@@ -1945,64 +1890,50 @@ components:
       title: DescribeDatasetRequest
       properties:
         DatasetName:
-          allOf:
-            - $ref: '#/components/schemas/DatasetIdentifier'
-            - description: 'The name of the dataset to be described. '
+          $ref: '#/components/schemas/DatasetIdentifier'
+          description: 'The name of the dataset to be described. '
     DescribeInferenceSchedulerResponse:
       type: object
       properties:
         ModelArn:
-          allOf:
-            - $ref: '#/components/schemas/ModelArn'
-            - description: 'The Amazon Resource Name (ARN) of the ML model of the inference scheduler being described. '
+          $ref: '#/components/schemas/ModelArn'
+          description: 'The Amazon Resource Name (ARN) of the ML model of the inference scheduler being described. '
         ModelName:
-          allOf:
-            - $ref: '#/components/schemas/ModelName'
-            - description: 'The name of the ML model of the inference scheduler being described. '
+          $ref: '#/components/schemas/ModelName'
+          description: 'The name of the ML model of the inference scheduler being described. '
         InferenceSchedulerName:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerName'
-            - description: 'The name of the inference scheduler being described. '
+          $ref: '#/components/schemas/InferenceSchedulerName'
+          description: 'The name of the inference scheduler being described. '
         InferenceSchedulerArn:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerArn'
-            - description: 'The Amazon Resource Name (ARN) of the inference scheduler being described. '
+          $ref: '#/components/schemas/InferenceSchedulerArn'
+          description: 'The Amazon Resource Name (ARN) of the inference scheduler being described. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerStatus'
-            - description: 'Indicates the status of the inference scheduler. '
+          $ref: '#/components/schemas/InferenceSchedulerStatus'
+          description: 'Indicates the status of the inference scheduler. '
         DataDelayOffsetInMinutes:
-          allOf:
-            - $ref: '#/components/schemas/DataDelayOffsetInMinutes'
-            - description: ' A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if you select an offset delay time of five minutes, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don''t need to stop and restart the scheduler when uploading new data.'
+          $ref: '#/components/schemas/DataDelayOffsetInMinutes'
+          description: ' A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if you select an offset delay time of five minutes, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don''t need to stop and restart the scheduler when uploading new data.'
         DataUploadFrequency:
-          allOf:
-            - $ref: '#/components/schemas/DataUploadFrequency'
-            - description: 'Specifies how often data is uploaded to the source S3 bucket for the input data. This value is the length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This frequency also determines how often Amazon Lookout for Equipment starts a scheduled inference on your data. In this example, it starts once every 5 minutes. '
+          $ref: '#/components/schemas/DataUploadFrequency'
+          description: 'Specifies how often data is uploaded to the source S3 bucket for the input data. This value is the length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This frequency also determines how often Amazon Lookout for Equipment starts a scheduled inference on your data. In this example, it starts once every 5 minutes. '
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Specifies the time at which the inference scheduler was created. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Specifies the time at which the inference scheduler was created. '
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Specifies the time at which the inference scheduler was last updated, if it was. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Specifies the time at which the inference scheduler was last updated, if it was. '
         DataInputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/InferenceInputConfiguration'
-            - description: ' Specifies configuration information for the input data for the inference scheduler, including delimiter, format, and dataset location. '
+          $ref: '#/components/schemas/InferenceInputConfiguration'
+          description: ' Specifies configuration information for the input data for the inference scheduler, including delimiter, format, and dataset location. '
         DataOutputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/InferenceOutputConfiguration'
-            - description: ' Specifies information for the output results for the inference scheduler, including the output S3 location. '
+          $ref: '#/components/schemas/InferenceOutputConfiguration'
+          description: ' Specifies information for the output results for the inference scheduler, including the output S3 location. '
         RoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: ' The Amazon Resource Name (ARN) of a role with permission to access the data source for the inference scheduler being described. '
+          $ref: '#/components/schemas/IamRoleArn'
+          description: ' The Amazon Resource Name (ARN) of a role with permission to access the data source for the inference scheduler being described. '
         ServerSideKmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyArn'
-            - description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment. '
+          $ref: '#/components/schemas/KmsKeyArn'
+          description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment. '
     DescribeInferenceSchedulerRequest:
       type: object
       required:
@@ -2010,92 +1941,71 @@ components:
       title: DescribeInferenceSchedulerRequest
       properties:
         InferenceSchedulerName:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerIdentifier'
-            - description: 'The name of the inference scheduler being described. '
+          $ref: '#/components/schemas/InferenceSchedulerIdentifier'
+          description: 'The name of the inference scheduler being described. '
     DescribeModelResponse:
       type: object
       properties:
         ModelName:
-          allOf:
-            - $ref: '#/components/schemas/ModelName'
-            - description: 'The name of the ML model being described. '
+          $ref: '#/components/schemas/ModelName'
+          description: 'The name of the ML model being described. '
         ModelArn:
-          allOf:
-            - $ref: '#/components/schemas/ModelArn'
-            - description: 'The Amazon Resource Name (ARN) of the ML model being described. '
+          $ref: '#/components/schemas/ModelArn'
+          description: 'The Amazon Resource Name (ARN) of the ML model being described. '
         DatasetName:
-          allOf:
-            - $ref: '#/components/schemas/DatasetName'
-            - description: 'The name of the dataset being used by the ML being described. '
+          $ref: '#/components/schemas/DatasetName'
+          description: 'The name of the dataset being used by the ML being described. '
         DatasetArn:
-          allOf:
-            - $ref: '#/components/schemas/DatasetArn'
-            - description: 'The Amazon Resouce Name (ARN) of the dataset used to create the ML model being described. '
+          $ref: '#/components/schemas/DatasetArn'
+          description: 'The Amazon Resouce Name (ARN) of the dataset used to create the ML model being described. '
         Schema:
-          allOf:
-            - $ref: '#/components/schemas/InlineDataSchema'
-            - description: 'A JSON description of the data that is in each time series dataset, including names, column names, and data types. '
+          $ref: '#/components/schemas/InlineDataSchema'
+          description: 'A JSON description of the data that is in each time series dataset, including names, column names, and data types. '
         LabelsInputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/LabelsInputConfiguration'
-            - description: 'Specifies configuration information about the labels input, including its S3 location. '
+          $ref: '#/components/schemas/LabelsInputConfiguration'
+          description: 'Specifies configuration information about the labels input, including its S3 location. '
         TrainingDataStartTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Indicates the time reference in the dataset that was used to begin the subset of training data for the ML model. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Indicates the time reference in the dataset that was used to begin the subset of training data for the ML model. '
         TrainingDataEndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Indicates the time reference in the dataset that was used to end the subset of training data for the ML model. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Indicates the time reference in the dataset that was used to end the subset of training data for the ML model. '
         EvaluationDataStartTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Indicates the time reference in the dataset that was used to begin the subset of evaluation data for the ML model. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Indicates the time reference in the dataset that was used to begin the subset of evaluation data for the ML model. '
         EvaluationDataEndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Indicates the time reference in the dataset that was used to end the subset of evaluation data for the ML model. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Indicates the time reference in the dataset that was used to end the subset of evaluation data for the ML model. '
         RoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: ' The Amazon Resource Name (ARN) of a role with permission to access the data source for the ML model being described. '
+          $ref: '#/components/schemas/IamRoleArn'
+          description: ' The Amazon Resource Name (ARN) of a role with permission to access the data source for the ML model being described. '
         DataPreProcessingConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/DataPreProcessingConfiguration'
-            - description: '<p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of the data after post processing by Amazon Lookout for Equipment. For example, if you provide data that has been collected at a 1 second level and you want the system to resample the data at a 1 minute rate before training, the <code>TargetSamplingRate</code> is 1 minute.</p> <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the prefix "PT" to the rate you want. The value for a 1 second rate is therefore <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>, and the value for a 1 hour rate is <i>PT1H</i> </p>'
+          $ref: '#/components/schemas/DataPreProcessingConfiguration'
+          description: '<p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of the data after post processing by Amazon Lookout for Equipment. For example, if you provide data that has been collected at a 1 second level and you want the system to resample the data at a 1 minute rate before training, the <code>TargetSamplingRate</code> is 1 minute.</p> <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the prefix "PT" to the rate you want. The value for a 1 second rate is therefore <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>, and the value for a 1 hour rate is <i>PT1H</i> </p>'
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ModelStatus'
-            - description: 'Specifies the current status of the model being described. Status describes the status of the most recent action of the model. '
+          $ref: '#/components/schemas/ModelStatus'
+          description: 'Specifies the current status of the model being described. Status describes the status of the most recent action of the model. '
         TrainingExecutionStartTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Indicates the time at which the training of the ML model began. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Indicates the time at which the training of the ML model began. '
         TrainingExecutionEndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Indicates the time at which the training of the ML model was completed. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Indicates the time at which the training of the ML model was completed. '
         FailedReason:
-          allOf:
-            - $ref: '#/components/schemas/BoundedLengthString'
-            - description: 'If the training of the ML model failed, this indicates the reason for that failure. '
+          $ref: '#/components/schemas/BoundedLengthString'
+          description: 'If the training of the ML model failed, this indicates the reason for that failure. '
         ModelMetrics:
-          allOf:
-            - $ref: '#/components/schemas/ModelMetrics'
-            - description: 'The Model Metrics show an aggregated summary of the model''s performance within the evaluation time range. This is the JSON content of the metrics created when evaluating the model. '
+          $ref: '#/components/schemas/ModelMetrics'
+          description: 'The Model Metrics show an aggregated summary of the model''s performance within the evaluation time range. This is the JSON content of the metrics created when evaluating the model. '
         LastUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Indicates the last time the ML model was updated. The type of update is not specified. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Indicates the last time the ML model was updated. The type of update is not specified. '
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Indicates the time and date at which the ML model was created. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Indicates the time and date at which the ML model was created. '
         ServerSideKmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyArn'
-            - description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt model data by Amazon Lookout for Equipment. '
+          $ref: '#/components/schemas/KmsKeyArn'
+          description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt model data by Amazon Lookout for Equipment. '
     DescribeModelRequest:
       type: object
       required:
@@ -2103,78 +2013,64 @@ components:
       title: DescribeModelRequest
       properties:
         ModelName:
-          allOf:
-            - $ref: '#/components/schemas/ModelName'
-            - description: 'The name of the ML model to be described. '
+          $ref: '#/components/schemas/ModelName'
+          description: 'The name of the ML model to be described. '
     ListDataIngestionJobsResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' An opaque pagination token indicating where to continue the listing of data ingestion jobs. '
+          $ref: '#/components/schemas/NextToken'
+          description: ' An opaque pagination token indicating where to continue the listing of data ingestion jobs. '
         DataIngestionJobSummaries:
-          allOf:
-            - $ref: '#/components/schemas/DataIngestionJobSummaries'
-            - description: 'Specifies information about the specific data ingestion job, including dataset name and status. '
+          $ref: '#/components/schemas/DataIngestionJobSummaries'
+          description: 'Specifies information about the specific data ingestion job, including dataset name and status. '
     ListDataIngestionJobsRequest:
       type: object
       title: ListDataIngestionJobsRequest
       properties:
         DatasetName:
-          allOf:
-            - $ref: '#/components/schemas/DatasetName'
-            - description: 'The name of the dataset being used for the data ingestion job. '
+          $ref: '#/components/schemas/DatasetName'
+          description: 'The name of the dataset being used for the data ingestion job. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' An opaque pagination token indicating where to continue the listing of data ingestion jobs. '
+          $ref: '#/components/schemas/NextToken'
+          description: ' An opaque pagination token indicating where to continue the listing of data ingestion jobs. '
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: ' Specifies the maximum number of data ingestion jobs to list. '
+          $ref: '#/components/schemas/MaxResults'
+          description: ' Specifies the maximum number of data ingestion jobs to list. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/IngestionJobStatus'
-            - description: 'Indicates the status of the data ingestion job. '
+          $ref: '#/components/schemas/IngestionJobStatus'
+          description: 'Indicates the status of the data ingestion job. '
     ListDatasetsResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' An opaque pagination token indicating where to continue the listing of datasets. '
+          $ref: '#/components/schemas/NextToken'
+          description: ' An opaque pagination token indicating where to continue the listing of datasets. '
         DatasetSummaries:
-          allOf:
-            - $ref: '#/components/schemas/DatasetSummaries'
-            - description: 'Provides information about the specified dataset, including creation time, dataset ARN, and status. '
+          $ref: '#/components/schemas/DatasetSummaries'
+          description: 'Provides information about the specified dataset, including creation time, dataset ARN, and status. '
     ListDatasetsRequest:
       type: object
       title: ListDatasetsRequest
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' An opaque pagination token indicating where to continue the listing of datasets. '
+          $ref: '#/components/schemas/NextToken'
+          description: ' An opaque pagination token indicating where to continue the listing of datasets. '
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: ' Specifies the maximum number of datasets to list. '
+          $ref: '#/components/schemas/MaxResults'
+          description: ' Specifies the maximum number of datasets to list. '
         DatasetNameBeginsWith:
-          allOf:
-            - $ref: '#/components/schemas/DatasetName'
-            - description: 'The beginning of the name of the datasets to be listed. '
+          $ref: '#/components/schemas/DatasetName'
+          description: 'The beginning of the name of the datasets to be listed. '
     ListInferenceExecutionsResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' An opaque pagination token indicating where to continue the listing of inference executions. '
+          $ref: '#/components/schemas/NextToken'
+          description: ' An opaque pagination token indicating where to continue the listing of inference executions. '
         InferenceExecutionSummaries:
-          allOf:
-            - $ref: '#/components/schemas/InferenceExecutionSummaries'
-            - description: 'Provides an array of information about the individual inference executions returned from the <code>ListInferenceExecutions</code> operation, including model used, inference scheduler, data configuration, and so on. '
+          $ref: '#/components/schemas/InferenceExecutionSummaries'
+          description: 'Provides an array of information about the individual inference executions returned from the <code>ListInferenceExecutions</code> operation, including model used, inference scheduler, data configuration, and so on. '
     ListInferenceExecutionsRequest:
       type: object
       required:
@@ -2182,102 +2078,82 @@ components:
       title: ListInferenceExecutionsRequest
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: An opaque pagination token indicating where to continue the listing of inference executions.
+          $ref: '#/components/schemas/NextToken'
+          description: An opaque pagination token indicating where to continue the listing of inference executions.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'Specifies the maximum number of inference executions to list. '
+          $ref: '#/components/schemas/MaxResults'
+          description: 'Specifies the maximum number of inference executions to list. '
         InferenceSchedulerName:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerIdentifier'
-            - description: 'The name of the inference scheduler for the inference execution listed. '
+          $ref: '#/components/schemas/InferenceSchedulerIdentifier'
+          description: 'The name of the inference scheduler for the inference execution listed. '
         DataStartTimeAfter:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time reference in the inferenced dataset after which Amazon Lookout for Equipment started the inference execution. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time reference in the inferenced dataset after which Amazon Lookout for Equipment started the inference execution. '
         DataEndTimeBefore:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time reference in the inferenced dataset before which Amazon Lookout for Equipment stopped the inference execution. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time reference in the inferenced dataset before which Amazon Lookout for Equipment stopped the inference execution. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/InferenceExecutionStatus'
-            - description: 'The status of the inference execution. '
+          $ref: '#/components/schemas/InferenceExecutionStatus'
+          description: 'The status of the inference execution. '
     ListInferenceSchedulersResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' An opaque pagination token indicating where to continue the listing of inference schedulers. '
+          $ref: '#/components/schemas/NextToken'
+          description: ' An opaque pagination token indicating where to continue the listing of inference schedulers. '
         InferenceSchedulerSummaries:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerSummaries'
-            - description: 'Provides information about the specified inference scheduler, including data upload frequency, model name and ARN, and status. '
+          $ref: '#/components/schemas/InferenceSchedulerSummaries'
+          description: 'Provides information about the specified inference scheduler, including data upload frequency, model name and ARN, and status. '
     ListInferenceSchedulersRequest:
       type: object
       title: ListInferenceSchedulersRequest
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' An opaque pagination token indicating where to continue the listing of inference schedulers. '
+          $ref: '#/components/schemas/NextToken'
+          description: ' An opaque pagination token indicating where to continue the listing of inference schedulers. '
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: ' Specifies the maximum number of inference schedulers to list. '
+          $ref: '#/components/schemas/MaxResults'
+          description: ' Specifies the maximum number of inference schedulers to list. '
         InferenceSchedulerNameBeginsWith:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerIdentifier'
-            - description: 'The beginning of the name of the inference schedulers to be listed. '
+          $ref: '#/components/schemas/InferenceSchedulerIdentifier'
+          description: 'The beginning of the name of the inference schedulers to be listed. '
         ModelName:
-          allOf:
-            - $ref: '#/components/schemas/ModelName'
-            - description: 'The name of the ML model used by the inference scheduler to be listed. '
+          $ref: '#/components/schemas/ModelName'
+          description: 'The name of the ML model used by the inference scheduler to be listed. '
     ListModelsResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' An opaque pagination token indicating where to continue the listing of ML models. '
+          $ref: '#/components/schemas/NextToken'
+          description: ' An opaque pagination token indicating where to continue the listing of ML models. '
         ModelSummaries:
-          allOf:
-            - $ref: '#/components/schemas/ModelSummaries'
-            - description: 'Provides information on the specified model, including created time, model and dataset ARNs, and status. '
+          $ref: '#/components/schemas/ModelSummaries'
+          description: 'Provides information on the specified model, including created time, model and dataset ARNs, and status. '
     ListModelsRequest:
       type: object
       title: ListModelsRequest
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' An opaque pagination token indicating where to continue the listing of ML models. '
+          $ref: '#/components/schemas/NextToken'
+          description: ' An opaque pagination token indicating where to continue the listing of ML models. '
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: ' Specifies the maximum number of ML models to list. '
+          $ref: '#/components/schemas/MaxResults'
+          description: ' Specifies the maximum number of ML models to list. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ModelStatus'
-            - description: 'The status of the ML model. '
+          $ref: '#/components/schemas/ModelStatus'
+          description: 'The status of the ML model. '
         ModelNameBeginsWith:
-          allOf:
-            - $ref: '#/components/schemas/ModelName'
-            - description: 'The beginning of the name of the ML models being listed. '
+          $ref: '#/components/schemas/ModelName'
+          description: 'The beginning of the name of the ML models being listed. '
         DatasetNameBeginsWith:
-          allOf:
-            - $ref: '#/components/schemas/DatasetName'
-            - description: 'The beginning of the name of the dataset of the ML models to be listed. '
+          $ref: '#/components/schemas/DatasetName'
+          description: 'The beginning of the name of the dataset of the ML models to be listed. '
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: ' Any tags associated with the resource. '
+          $ref: '#/components/schemas/TagList'
+          description: ' Any tags associated with the resource. '
     ListTagsForResourceRequest:
       type: object
       required:
@@ -2285,20 +2161,17 @@ components:
       title: ListTagsForResourceRequest
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceArn'
-            - description: 'The Amazon Resource Name (ARN) of the resource (such as the dataset or model) that is the focus of the <code>ListTagsForResource</code> operation. '
+          $ref: '#/components/schemas/AmazonResourceArn'
+          description: 'The Amazon Resource Name (ARN) of the resource (such as the dataset or model) that is the focus of the <code>ListTagsForResource</code> operation. '
     StartDataIngestionJobResponse:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/IngestionJobId'
-            - description: 'Indicates the job ID of the data ingestion job. '
+          $ref: '#/components/schemas/IngestionJobId'
+          description: 'Indicates the job ID of the data ingestion job. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/IngestionJobStatus'
-            - description: 'Indicates the status of the <code>StartDataIngestionJob</code> operation. '
+          $ref: '#/components/schemas/IngestionJobStatus'
+          description: 'Indicates the status of the <code>StartDataIngestionJob</code> operation. '
     StartDataIngestionJobRequest:
       type: object
       required:
@@ -2309,44 +2182,35 @@ components:
       title: StartDataIngestionJobRequest
       properties:
         DatasetName:
-          allOf:
-            - $ref: '#/components/schemas/DatasetIdentifier'
-            - description: 'The name of the dataset being used by the data ingestion job. '
+          $ref: '#/components/schemas/DatasetIdentifier'
+          description: 'The name of the dataset being used by the data ingestion job. '
         IngestionInputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/IngestionInputConfiguration'
-            - description: ' Specifies information for the input data for the data ingestion job, including dataset S3 location. '
+          $ref: '#/components/schemas/IngestionInputConfiguration'
+          description: ' Specifies information for the input data for the data ingestion job, including dataset S3 location. '
         RoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: ' The Amazon Resource Name (ARN) of a role with permission to access the data source for the data ingestion job. '
+          $ref: '#/components/schemas/IamRoleArn'
+          description: ' The Amazon Resource Name (ARN) of a role with permission to access the data source for the data ingestion job. '
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotenceToken'
-            - description: ' A unique identifier for the request. If you do not set the client request token, Amazon Lookout for Equipment generates one. '
+          $ref: '#/components/schemas/IdempotenceToken'
+          description: ' A unique identifier for the request. If you do not set the client request token, Amazon Lookout for Equipment generates one. '
     StartInferenceSchedulerResponse:
       type: object
       properties:
         ModelArn:
-          allOf:
-            - $ref: '#/components/schemas/ModelArn'
-            - description: 'The Amazon Resource Name (ARN) of the ML model being used by the inference scheduler. '
+          $ref: '#/components/schemas/ModelArn'
+          description: 'The Amazon Resource Name (ARN) of the ML model being used by the inference scheduler. '
         ModelName:
-          allOf:
-            - $ref: '#/components/schemas/ModelName'
-            - description: 'The name of the ML model being used by the inference scheduler. '
+          $ref: '#/components/schemas/ModelName'
+          description: 'The name of the ML model being used by the inference scheduler. '
         InferenceSchedulerName:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerName'
-            - description: 'The name of the inference scheduler being started. '
+          $ref: '#/components/schemas/InferenceSchedulerName'
+          description: 'The name of the inference scheduler being started. '
         InferenceSchedulerArn:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerArn'
-            - description: 'The Amazon Resource Name (ARN) of the inference scheduler being started. '
+          $ref: '#/components/schemas/InferenceSchedulerArn'
+          description: 'The Amazon Resource Name (ARN) of the inference scheduler being started. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerStatus'
-            - description: 'Indicates the status of the inference scheduler. '
+          $ref: '#/components/schemas/InferenceSchedulerStatus'
+          description: 'Indicates the status of the inference scheduler. '
     StartInferenceSchedulerRequest:
       type: object
       required:
@@ -2354,32 +2218,26 @@ components:
       title: StartInferenceSchedulerRequest
       properties:
         InferenceSchedulerName:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerIdentifier'
-            - description: 'The name of the inference scheduler to be started. '
+          $ref: '#/components/schemas/InferenceSchedulerIdentifier'
+          description: 'The name of the inference scheduler to be started. '
     StopInferenceSchedulerResponse:
       type: object
       properties:
         ModelArn:
-          allOf:
-            - $ref: '#/components/schemas/ModelArn'
-            - description: 'The Amazon Resource Name (ARN) of the ML model used by the inference scheduler being stopped. '
+          $ref: '#/components/schemas/ModelArn'
+          description: 'The Amazon Resource Name (ARN) of the ML model used by the inference scheduler being stopped. '
         ModelName:
-          allOf:
-            - $ref: '#/components/schemas/ModelName'
-            - description: 'The name of the ML model used by the inference scheduler being stopped. '
+          $ref: '#/components/schemas/ModelName'
+          description: 'The name of the ML model used by the inference scheduler being stopped. '
         InferenceSchedulerName:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerName'
-            - description: 'The name of the inference scheduler being stopped. '
+          $ref: '#/components/schemas/InferenceSchedulerName'
+          description: 'The name of the inference scheduler being stopped. '
         InferenceSchedulerArn:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerArn'
-            - description: 'The Amazon Resource Name (ARN) of the inference schedule being stopped. '
+          $ref: '#/components/schemas/InferenceSchedulerArn'
+          description: 'The Amazon Resource Name (ARN) of the inference schedule being stopped. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerStatus'
-            - description: 'Indicates the status of the inference scheduler. '
+          $ref: '#/components/schemas/InferenceSchedulerStatus'
+          description: 'Indicates the status of the inference scheduler. '
     StopInferenceSchedulerRequest:
       type: object
       required:
@@ -2387,9 +2245,8 @@ components:
       title: StopInferenceSchedulerRequest
       properties:
         InferenceSchedulerName:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerIdentifier'
-            - description: 'The name of the inference scheduler to be stopped. '
+          $ref: '#/components/schemas/InferenceSchedulerIdentifier'
+          description: 'The name of the inference scheduler to be stopped. '
     TagResourceResponse:
       type: object
       properties: {}
@@ -2401,13 +2258,11 @@ components:
       title: TagResourceRequest
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceArn'
-            - description: 'The Amazon Resource Name (ARN) of the specific resource to which the tag should be associated. '
+          $ref: '#/components/schemas/AmazonResourceArn'
+          description: 'The Amazon Resource Name (ARN) of the specific resource to which the tag should be associated. '
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: 'The tag or tags to be associated with a specific resource. Both the tag key and value are specified. '
+          $ref: '#/components/schemas/TagList'
+          description: 'The tag or tags to be associated with a specific resource. Both the tag key and value are specified. '
     UntagResourceResponse:
       type: object
       properties: {}
@@ -2419,13 +2274,11 @@ components:
       title: UntagResourceRequest
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceArn'
-            - description: 'The Amazon Resource Name (ARN) of the resource to which the tag is currently associated. '
+          $ref: '#/components/schemas/AmazonResourceArn'
+          description: 'The Amazon Resource Name (ARN) of the resource to which the tag is currently associated. '
         TagKeys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyList'
-            - description: 'Specifies the key of the tag to be removed from a specified resource. '
+          $ref: '#/components/schemas/TagKeyList'
+          description: 'Specifies the key of the tag to be removed from a specified resource. '
     UpdateInferenceSchedulerRequest:
       type: object
       required:
@@ -2433,29 +2286,23 @@ components:
       title: UpdateInferenceSchedulerRequest
       properties:
         InferenceSchedulerName:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerIdentifier'
-            - description: 'The name of the inference scheduler to be updated. '
+          $ref: '#/components/schemas/InferenceSchedulerIdentifier'
+          description: 'The name of the inference scheduler to be updated. '
         DataDelayOffsetInMinutes:
-          allOf:
-            - $ref: '#/components/schemas/DataDelayOffsetInMinutes'
-            - description: '&gt; A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if you select an offset delay time of five minutes, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don''t need to stop and restart the scheduler when uploading new data.'
+          $ref: '#/components/schemas/DataDelayOffsetInMinutes'
+          description: '&gt; A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if you select an offset delay time of five minutes, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don''t need to stop and restart the scheduler when uploading new data.'
         DataUploadFrequency:
-          allOf:
-            - $ref: '#/components/schemas/DataUploadFrequency'
-            - description: 'How often data is uploaded to the source S3 bucket for the input data. The value chosen is the length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This frequency also determines how often Amazon Lookout for Equipment starts a scheduled inference on your data. In this example, it starts once every 5 minutes. '
+          $ref: '#/components/schemas/DataUploadFrequency'
+          description: 'How often data is uploaded to the source S3 bucket for the input data. The value chosen is the length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This frequency also determines how often Amazon Lookout for Equipment starts a scheduled inference on your data. In this example, it starts once every 5 minutes. '
         DataInputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/InferenceInputConfiguration'
-            - description: ' Specifies information for the input data for the inference scheduler, including delimiter, format, and dataset location. '
+          $ref: '#/components/schemas/InferenceInputConfiguration'
+          description: ' Specifies information for the input data for the inference scheduler, including delimiter, format, and dataset location. '
         DataOutputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/InferenceOutputConfiguration'
-            - description: ' Specifies information for the output results from the inference scheduler, including the output S3 location. '
+          $ref: '#/components/schemas/InferenceOutputConfiguration'
+          description: ' Specifies information for the output results from the inference scheduler, including the output S3 location. '
         RoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: ' The Amazon Resource Name (ARN) of a role with permission to access the data source for the inference scheduler. '
+          $ref: '#/components/schemas/IamRoleArn'
+          description: ' The Amazon Resource Name (ARN) of a role with permission to access the data source for the inference scheduler. '
     AmazonResourceArn:
       type: string
       minLength: 1
@@ -2479,9 +2326,8 @@ components:
       type: object
       properties:
         InlineDataSchema:
-          allOf:
-            - $ref: '#/components/schemas/InlineDataSchema'
-            - description: ' '
+          $ref: '#/components/schemas/InlineDataSchema'
+          description: ' '
       description: 'Provides information about the data schema used with the given dataset. '
     NameOrArn:
       type: string
@@ -2536,17 +2382,14 @@ components:
       type: object
       properties:
         S3InputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/InferenceS3InputConfiguration'
-            - description: ' Specifies configuration information for the input data for the inference, including S3 location of input data.. '
+          $ref: '#/components/schemas/InferenceS3InputConfiguration'
+          description: ' Specifies configuration information for the input data for the inference, including S3 location of input data.. '
         InputTimeZoneOffset:
-          allOf:
-            - $ref: '#/components/schemas/TimeZoneOffset'
-            - description: 'Indicates the difference between your time zone and Greenwich Mean Time (GMT). '
+          $ref: '#/components/schemas/TimeZoneOffset'
+          description: 'Indicates the difference between your time zone and Greenwich Mean Time (GMT). '
         InferenceInputNameConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/InferenceInputNameConfiguration'
-            - description: '&gt; Specifies configuration information for the input data for the inference, including timestamp format and delimiter. '
+          $ref: '#/components/schemas/InferenceInputNameConfiguration'
+          description: '&gt; Specifies configuration information for the input data for the inference, including timestamp format and delimiter. '
       description: '&gt; Specifies configuration information for the input data for the inference, including S3 location of input data.. '
     InferenceOutputConfiguration:
       type: object
@@ -2554,13 +2397,11 @@ components:
         - S3OutputConfiguration
       properties:
         S3OutputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/InferenceS3OutputConfiguration'
-            - description: ' Specifies configuration information for the output results from for the inference, output S3 location. '
+          $ref: '#/components/schemas/InferenceS3OutputConfiguration'
+          description: ' Specifies configuration information for the output results from for the inference, output S3 location. '
         KmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/NameOrArn'
-            - description: 'The ID number for the AWS KMS key used to encrypt the inference output. '
+          $ref: '#/components/schemas/NameOrArn'
+          description: 'The ID number for the AWS KMS key used to encrypt the inference output. '
       description: ' Specifies configuration information for the output results from for the inference, including KMS key ID and output S3 location. '
     IamRoleArn:
       type: string
@@ -2590,9 +2431,8 @@ components:
         - S3InputConfiguration
       properties:
         S3InputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/LabelsS3InputConfiguration'
-            - description: 'Contains location information for the S3 location being used for label data. '
+          $ref: '#/components/schemas/LabelsS3InputConfiguration'
+          description: 'Contains location information for the S3 location being used for label data. '
       description: 'Contains the configuration information for the S3 location being used to hold label data. '
     Timestamp:
       type: string
@@ -2601,9 +2441,8 @@ components:
       type: object
       properties:
         TargetSamplingRate:
-          allOf:
-            - $ref: '#/components/schemas/TargetSamplingRate'
-            - description: '<p>The sampling rate of the data after post processing by Amazon Lookout for Equipment. For example, if you provide data that has been collected at a 1 second level and you want the system to resample the data at a 1 minute rate before training, the <code>TargetSamplingRate</code> is 1 minute.</p> <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the prefix "PT" to the rate you want. The value for a 1 second rate is therefore <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>, and the value for a 1 hour rate is <i>PT1H</i> </p>'
+          $ref: '#/components/schemas/TargetSamplingRate'
+          description: '<p>The sampling rate of the data after post processing by Amazon Lookout for Equipment. For example, if you provide data that has been collected at a 1 second level and you want the system to resample the data at a 1 minute rate before training, the <code>TargetSamplingRate</code> is 1 minute.</p> <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the prefix "PT" to the rate you want. The value for a 1 second rate is therefore <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>, and the value for a 1 hour rate is <i>PT1H</i> </p>'
       description: '<p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of the data after post processing by Amazon Lookout for Equipment. For example, if you provide data that has been collected at a 1 second level and you want the system to resample the data at a 1 minute rate before training, the <code>TargetSamplingRate</code> is 1 minute.</p> <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the prefix "PT" to the rate you want. The value for a 1 second rate is therefore <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>, and the value for a 1 hour rate is <i>PT1H</i> </p>'
     ModelArn:
       type: string
@@ -2620,25 +2459,20 @@ components:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/IngestionJobId'
-            - description: 'Indicates the job ID of the data ingestion job. '
+          $ref: '#/components/schemas/IngestionJobId'
+          description: 'Indicates the job ID of the data ingestion job. '
         DatasetName:
-          allOf:
-            - $ref: '#/components/schemas/DatasetName'
-            - description: 'The name of the dataset used for the data ingestion job. '
+          $ref: '#/components/schemas/DatasetName'
+          description: 'The name of the dataset used for the data ingestion job. '
         DatasetArn:
-          allOf:
-            - $ref: '#/components/schemas/DatasetArn'
-            - description: 'The Amazon Resource Name (ARN) of the dataset used in the data ingestion job. '
+          $ref: '#/components/schemas/DatasetArn'
+          description: 'The Amazon Resource Name (ARN) of the dataset used in the data ingestion job. '
         IngestionInputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/IngestionInputConfiguration'
-            - description: ' Specifies information for the input data for the data inference job, including data S3 location parameters. '
+          $ref: '#/components/schemas/IngestionInputConfiguration'
+          description: ' Specifies information for the input data for the data inference job, including data S3 location parameters. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/IngestionJobStatus'
-            - description: 'Indicates the status of the data ingestion job. '
+          $ref: '#/components/schemas/IngestionJobStatus'
+          description: 'Indicates the status of the data ingestion job. '
       description: 'Provides information about a specified data ingestion job, including dataset information, data ingestion configuration, and status. '
     DataIngestionJobSummaries:
       type: array
@@ -2654,9 +2488,8 @@ components:
         - S3InputConfiguration
       properties:
         S3InputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/IngestionS3InputConfiguration'
-            - description: 'The location information for the S3 bucket used for input data for the data ingestion. '
+          $ref: '#/components/schemas/IngestionS3InputConfiguration'
+          description: 'The location information for the S3 bucket used for input data for the data ingestion. '
       description: ' Specifies configuration information for the input data for the data ingestion job, including input data S3 location. '
     IngestionJobStatus:
       type: string
@@ -2686,21 +2519,17 @@ components:
       type: object
       properties:
         DatasetName:
-          allOf:
-            - $ref: '#/components/schemas/DatasetName'
-            - description: 'The name of the dataset. '
+          $ref: '#/components/schemas/DatasetName'
+          description: 'The name of the dataset. '
         DatasetArn:
-          allOf:
-            - $ref: '#/components/schemas/DatasetArn'
-            - description: 'The Amazon Resource Name (ARN) of the specified dataset. '
+          $ref: '#/components/schemas/DatasetArn'
+          description: 'The Amazon Resource Name (ARN) of the specified dataset. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/DatasetStatus'
-            - description: 'Indicates the status of the dataset. '
+          $ref: '#/components/schemas/DatasetStatus'
+          description: 'Indicates the status of the dataset. '
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time at which the dataset was created in Amazon Lookout for Equipment. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time at which the dataset was created in Amazon Lookout for Equipment. '
       description: 'Contains information about the specific data set, including name, ARN, and status. '
     DatasetSummaries:
       type: array
@@ -2733,53 +2562,41 @@ components:
       type: object
       properties:
         ModelName:
-          allOf:
-            - $ref: '#/components/schemas/ModelName'
-            - description: 'The name of the ML model being used for the inference execution. '
+          $ref: '#/components/schemas/ModelName'
+          description: 'The name of the ML model being used for the inference execution. '
         ModelArn:
-          allOf:
-            - $ref: '#/components/schemas/ModelArn'
-            - description: 'The Amazon Resource Name (ARN) of the ML model used for the inference execution. '
+          $ref: '#/components/schemas/ModelArn'
+          description: 'The Amazon Resource Name (ARN) of the ML model used for the inference execution. '
         InferenceSchedulerName:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerName'
-            - description: 'The name of the inference scheduler being used for the inference execution. '
+          $ref: '#/components/schemas/InferenceSchedulerName'
+          description: 'The name of the inference scheduler being used for the inference execution. '
         InferenceSchedulerArn:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerArn'
-            - description: ' The Amazon Resource Name (ARN) of the inference scheduler being used for the inference execution. '
+          $ref: '#/components/schemas/InferenceSchedulerArn'
+          description: ' The Amazon Resource Name (ARN) of the inference scheduler being used for the inference execution. '
         ScheduledStartTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Indicates the start time at which the inference scheduler began the specific inference execution. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Indicates the start time at which the inference scheduler began the specific inference execution. '
         DataStartTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Indicates the time reference in the dataset at which the inference execution began. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Indicates the time reference in the dataset at which the inference execution began. '
         DataEndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Indicates the time reference in the dataset at which the inference execution stopped. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Indicates the time reference in the dataset at which the inference execution stopped. '
         DataInputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/InferenceInputConfiguration'
-            - description: ' Specifies configuration information for the input data for the inference scheduler, including delimiter, format, and dataset location. '
+          $ref: '#/components/schemas/InferenceInputConfiguration'
+          description: ' Specifies configuration information for the input data for the inference scheduler, including delimiter, format, and dataset location. '
         DataOutputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/InferenceOutputConfiguration'
-            - description: ' Specifies configuration information for the output results from for the inference execution, including the output S3 location. '
+          $ref: '#/components/schemas/InferenceOutputConfiguration'
+          description: ' Specifies configuration information for the output results from for the inference execution, including the output S3 location. '
         CustomerResultObject:
-          allOf:
-            - $ref: '#/components/schemas/S3Object'
-            - description: ' '
+          $ref: '#/components/schemas/S3Object'
+          description: ' '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/InferenceExecutionStatus'
-            - description: 'Indicates the status of the inference execution. '
+          $ref: '#/components/schemas/InferenceExecutionStatus'
+          description: 'Indicates the status of the inference execution. '
         FailedReason:
-          allOf:
-            - $ref: '#/components/schemas/BoundedLengthString'
-            - description: ' Specifies the reason for failure when an inference execution has failed. '
+          $ref: '#/components/schemas/BoundedLengthString'
+          description: ' Specifies the reason for failure when an inference execution has failed. '
       description: 'Contains information about the specific inference execution, including input and output data configuration, inference scheduling information, status, and so on. '
     InferenceExecutionSummaries:
       type: array
@@ -2792,13 +2609,11 @@ components:
         - Key
       properties:
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3Bucket'
-            - description: 'The name of the specific S3 bucket. '
+          $ref: '#/components/schemas/S3Bucket'
+          description: 'The name of the specific S3 bucket. '
         Key:
-          allOf:
-            - $ref: '#/components/schemas/S3Key'
-            - description: 'The AWS Key Management Service (AWS KMS) key being used to encrypt the S3 object. Without this key, data in the bucket is not accessible. '
+          $ref: '#/components/schemas/S3Key'
+          description: 'The AWS Key Management Service (AWS KMS) key being used to encrypt the S3 object. Without this key, data in the bucket is not accessible. '
       description: 'Contains information about an S3 bucket. '
     InferenceS3InputConfiguration:
       type: object
@@ -2806,13 +2621,11 @@ components:
         - Bucket
       properties:
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3Bucket'
-            - description: 'The bucket containing the input dataset for the inference. '
+          $ref: '#/components/schemas/S3Bucket'
+          description: 'The bucket containing the input dataset for the inference. '
         Prefix:
-          allOf:
-            - $ref: '#/components/schemas/S3Prefix'
-            - description: 'The prefix for the S3 bucket used for the input data for the inference. '
+          $ref: '#/components/schemas/S3Prefix'
+          description: 'The prefix for the S3 bucket used for the input data for the inference. '
       description: ' Specifies configuration information for the input data for the inference, including input data S3 location. '
     TimeZoneOffset:
       type: string
@@ -2821,13 +2634,11 @@ components:
       type: object
       properties:
         TimestampFormat:
-          allOf:
-            - $ref: '#/components/schemas/FileNameTimestampFormat'
-            - description: 'The format of the timestamp, whether Epoch time, or standard, with or without hyphens (-). '
+          $ref: '#/components/schemas/FileNameTimestampFormat'
+          description: 'The format of the timestamp, whether Epoch time, or standard, with or without hyphens (-). '
         ComponentTimestampDelimiter:
-          allOf:
-            - $ref: '#/components/schemas/ComponentTimestampDelimiter'
-            - description: 'Indicates the delimiter character used between items in the data. '
+          $ref: '#/components/schemas/ComponentTimestampDelimiter'
+          description: 'Indicates the delimiter character used between items in the data. '
       description: '&gt;&gt; Specifies configuration information for the input data for the inference, including timestamp format and delimiter. '
     InferenceS3OutputConfiguration:
       type: object
@@ -2835,13 +2646,11 @@ components:
         - Bucket
       properties:
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3Bucket'
-            - description: ' The bucket containing the output results from the inference '
+          $ref: '#/components/schemas/S3Bucket'
+          description: ' The bucket containing the output results from the inference '
         Prefix:
-          allOf:
-            - $ref: '#/components/schemas/S3Prefix'
-            - description: ' The prefix for the S3 bucket used for the output results from the inference. '
+          $ref: '#/components/schemas/S3Prefix'
+          description: ' The prefix for the S3 bucket used for the output results from the inference. '
       description: ' Specifies configuration information for the output results from the inference, including output S3 location. '
     S3Bucket:
       type: string
@@ -2857,33 +2666,26 @@ components:
       type: object
       properties:
         ModelName:
-          allOf:
-            - $ref: '#/components/schemas/ModelName'
-            - description: 'The name of the ML model used for the inference scheduler. '
+          $ref: '#/components/schemas/ModelName'
+          description: 'The name of the ML model used for the inference scheduler. '
         ModelArn:
-          allOf:
-            - $ref: '#/components/schemas/ModelArn'
-            - description: ' The Amazon Resource Name (ARN) of the ML model used by the inference scheduler. '
+          $ref: '#/components/schemas/ModelArn'
+          description: ' The Amazon Resource Name (ARN) of the ML model used by the inference scheduler. '
         InferenceSchedulerName:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerName'
-            - description: 'The name of the inference scheduler. '
+          $ref: '#/components/schemas/InferenceSchedulerName'
+          description: 'The name of the inference scheduler. '
         InferenceSchedulerArn:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerArn'
-            - description: ' The Amazon Resource Name (ARN) of the inference scheduler. '
+          $ref: '#/components/schemas/InferenceSchedulerArn'
+          description: ' The Amazon Resource Name (ARN) of the inference scheduler. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/InferenceSchedulerStatus'
-            - description: 'Indicates the status of the inference scheduler. '
+          $ref: '#/components/schemas/InferenceSchedulerStatus'
+          description: 'Indicates the status of the inference scheduler. '
         DataDelayOffsetInMinutes:
-          allOf:
-            - $ref: '#/components/schemas/DataDelayOffsetInMinutes'
-            - description: '&gt; A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if an offset delay time of five minutes was selected, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don''t need to stop and restart the scheduler when uploading new data. '
+          $ref: '#/components/schemas/DataDelayOffsetInMinutes'
+          description: '&gt; A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if an offset delay time of five minutes was selected, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don''t need to stop and restart the scheduler when uploading new data. '
         DataUploadFrequency:
-          allOf:
-            - $ref: '#/components/schemas/DataUploadFrequency'
-            - description: 'How often data is uploaded to the source S3 bucket for the input data. This value is the length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This frequency also determines how often Amazon Lookout for Equipment starts a scheduled inference on your data. In this example, it starts once every 5 minutes. '
+          $ref: '#/components/schemas/DataUploadFrequency'
+          description: 'How often data is uploaded to the source S3 bucket for the input data. This value is the length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This frequency also determines how often Amazon Lookout for Equipment starts a scheduled inference on your data. In this example, it starts once every 5 minutes. '
       description: 'Contains information about the specific inference scheduler, including data delay offset, model name and ARN, status, and so on. '
     InferenceSchedulerSummaries:
       type: array
@@ -2895,13 +2697,11 @@ components:
         - Bucket
       properties:
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3Bucket'
-            - description: 'The name of the S3 bucket used for the input data for the data ingestion. '
+          $ref: '#/components/schemas/S3Bucket'
+          description: 'The name of the S3 bucket used for the input data for the data ingestion. '
         Prefix:
-          allOf:
-            - $ref: '#/components/schemas/S3Prefix'
-            - description: 'The prefix for the S3 location being used for the input data for the data ingestion. '
+          $ref: '#/components/schemas/S3Prefix'
+          description: 'The prefix for the S3 location being used for the input data for the data ingestion. '
       description: ' Specifies S3 configuration information for the input data for the data ingestion job. '
     LabelsS3InputConfiguration:
       type: object
@@ -2909,13 +2709,11 @@ components:
         - Bucket
       properties:
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3Bucket'
-            - description: 'The name of the S3 bucket holding the label data. '
+          $ref: '#/components/schemas/S3Bucket'
+          description: 'The name of the S3 bucket holding the label data. '
         Prefix:
-          allOf:
-            - $ref: '#/components/schemas/S3Prefix'
-            - description: ' The prefix for the S3 bucket used for the label data. '
+          $ref: '#/components/schemas/S3Prefix'
+          description: ' The prefix for the S3 bucket used for the label data. '
       description: 'The location information (prefix and bucket name) for the s3 location being used for label data. '
     NextToken:
       type: string
@@ -2933,29 +2731,23 @@ components:
       type: object
       properties:
         ModelName:
-          allOf:
-            - $ref: '#/components/schemas/ModelName'
-            - description: 'The name of the ML model. '
+          $ref: '#/components/schemas/ModelName'
+          description: 'The name of the ML model. '
         ModelArn:
-          allOf:
-            - $ref: '#/components/schemas/ModelArn'
-            - description: ' The Amazon Resource Name (ARN) of the ML model. '
+          $ref: '#/components/schemas/ModelArn'
+          description: ' The Amazon Resource Name (ARN) of the ML model. '
         DatasetName:
-          allOf:
-            - $ref: '#/components/schemas/DatasetName'
-            - description: 'The name of the dataset being used for the ML model. '
+          $ref: '#/components/schemas/DatasetName'
+          description: 'The name of the dataset being used for the ML model. '
         DatasetArn:
-          allOf:
-            - $ref: '#/components/schemas/DatasetArn'
-            - description: ' The Amazon Resource Name (ARN) of the dataset used to create the model. '
+          $ref: '#/components/schemas/DatasetArn'
+          description: ' The Amazon Resource Name (ARN) of the dataset used to create the model. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ModelStatus'
-            - description: 'Indicates the status of the ML model. '
+          $ref: '#/components/schemas/ModelStatus'
+          description: 'Indicates the status of the ML model. '
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time at which the specific model was created. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time at which the specific model was created. '
       description: 'Provides information about the specified ML model, including dataset and model names and ARNs, as well as status. '
     S3Key:
       type: string
@@ -2979,13 +2771,11 @@ components:
         - Value
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: 'The key for the specified tag. '
+          $ref: '#/components/schemas/TagKey'
+          description: 'The key for the specified tag. '
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: 'The value for the specified tag. '
+          $ref: '#/components/schemas/TagValue'
+          description: 'The value for the specified tag. '
       description: 'A tag is a key-value pair that can be added to a resource as metadata. '
     TagKeyList:
       type: array

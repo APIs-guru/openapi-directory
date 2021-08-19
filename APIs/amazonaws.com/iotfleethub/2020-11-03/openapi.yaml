@@ -625,13 +625,11 @@ components:
         - applicationArn
       properties:
         applicationId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique Id of the web application.
+          $ref: '#/components/schemas/Id'
+          description: The unique Id of the web application.
         applicationArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the web application.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the web application.
     TagValue:
       type: string
       minLength: 1
@@ -657,71 +655,56 @@ components:
         - roleArn
       properties:
         applicationId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique Id of the web application.
+          $ref: '#/components/schemas/Id'
+          description: The unique Id of the web application.
         applicationArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the web application.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the web application.
         applicationName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the web application.
+          $ref: '#/components/schemas/Name'
+          description: The name of the web application.
         applicationDescription:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: An optional description of the web application.
+          $ref: '#/components/schemas/Description'
+          description: An optional description of the web application.
         applicationUrl:
-          allOf:
-            - $ref: '#/components/schemas/Url'
-            - description: The URL of the web application.
+          $ref: '#/components/schemas/Url'
+          description: The URL of the web application.
         applicationState:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationState'
-            - description: The current state of the web application.
+          $ref: '#/components/schemas/ApplicationState'
+          description: The current state of the web application.
         applicationCreationDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date (in Unix epoch time) when the application was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date (in Unix epoch time) when the application was created.
         applicationLastUpdateDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date (in Unix epoch time) when the application was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date (in Unix epoch time) when the application was last updated.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the role that the web application assumes when it interacts with AWS IoT Core.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the role that the web application assumes when it interacts with AWS IoT Core.
         ssoClientId:
-          allOf:
-            - $ref: '#/components/schemas/SsoClientId'
-            - description: The Id of the single sign-on client that you use to authenticate and authorize users on the web application.
+          $ref: '#/components/schemas/SsoClientId'
+          description: The Id of the single sign-on client that you use to authenticate and authorize users on the web application.
         errorMessage:
-          allOf:
-            - $ref: '#/components/schemas/ErrorMessage'
-            - description: A message indicating why the <code>DescribeApplication</code> API failed.
+          $ref: '#/components/schemas/ErrorMessage'
+          description: A message indicating why the <code>DescribeApplication</code> API failed.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: A set of key/value pairs that you can use to manage the web application resource.
+          $ref: '#/components/schemas/TagMap'
+          description: A set of key/value pairs that you can use to manage the web application resource.
     ListApplicationsResponse:
       type: object
       properties:
         applicationSummaries:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationSummaries'
-            - description: An array of objects that provide summaries of information about the web applications in the list.
+          $ref: '#/components/schemas/ApplicationSummaries'
+          description: An array of objects that provide summaries of information about the web applications in the list.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token used to get the next set of results.
+          $ref: '#/components/schemas/NextToken'
+          description: A token used to get the next set of results.
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The list of tags assigned to the resource.
+          $ref: '#/components/schemas/TagMap'
+          description: The list of tags assigned to the resource.
     TagResourceResponse:
       type: object
       properties: {}
@@ -753,33 +736,26 @@ components:
         - applicationUrl
       properties:
         applicationId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique Id of the web application.
+          $ref: '#/components/schemas/Id'
+          description: The unique Id of the web application.
         applicationName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the web application.
+          $ref: '#/components/schemas/Name'
+          description: The name of the web application.
         applicationDescription:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: An optional description of the web application.
+          $ref: '#/components/schemas/Description'
+          description: An optional description of the web application.
         applicationUrl:
-          allOf:
-            - $ref: '#/components/schemas/Url'
-            - description: The URL of the web application.
+          $ref: '#/components/schemas/Url'
+          description: The URL of the web application.
         applicationCreationDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date (in Unix epoch time) when the web application was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date (in Unix epoch time) when the web application was created.
         applicationLastUpdateDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date (in Unix epoch time) when the web application was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date (in Unix epoch time) when the web application was last updated.
         applicationState:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationState'
-            - description: The current state of the web application.
+          $ref: '#/components/schemas/ApplicationState'
+          description: The current state of the web application.
       description: <p>A summary of information about a AWS IoT Device Management web application.</p> <note> <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p> </note>
     ApplicationSummaries:
       type: array
@@ -831,25 +807,20 @@ components:
       title: CreateApplicationRequest
       properties:
         applicationName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the web application.
+          $ref: '#/components/schemas/Name'
+          description: The name of the web application.
         applicationDescription:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: An optional description of the web application.
+          $ref: '#/components/schemas/Description'
+          description: An optional description of the web application.
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: <p>The ARN of the role that the web application assumes when it interacts with AWS IoT Core.</p> <note> <p>The name of the role must be in the form <code>AWSIotFleetHub_<i>random_string</i> </code>.</p> </note>
+          $ref: '#/components/schemas/Arn'
+          description: <p>The ARN of the role that the web application assumes when it interacts with AWS IoT Core.</p> <note> <p>The name of the role must be in the form <code>AWSIotFleetHub_<i>random_string</i> </code>.</p> </note>
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: A set of key/value pairs that you can use to manage the web application resource.
+          $ref: '#/components/schemas/TagMap'
+          description: A set of key/value pairs that you can use to manage the web application resource.
     DeleteApplicationRequest:
       type: object
       title: DeleteApplicationRequest
@@ -888,9 +859,8 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The new or modified tags for the resource.
+          $ref: '#/components/schemas/TagMap'
+          description: The new or modified tags for the resource.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -900,16 +870,13 @@ components:
       title: UpdateApplicationRequest
       properties:
         applicationName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the web application.
+          $ref: '#/components/schemas/Name'
+          description: The name of the web application.
         applicationDescription:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: An optional description of the web application.
+          $ref: '#/components/schemas/Description'
+          description: An optional description of the web application.
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
 security:
   - hmac: []

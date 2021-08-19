@@ -405,13 +405,11 @@ paths:
                   type: object
                   properties:
                     SortBy:
-                      allOf:
-                        - $ref: '#/components/schemas/SortBy'
-                        - description: '<p>For <code>ListEntities</code>, supported attributes include <code>LastModifiedDate</code> (default), <code>Visibility</code>, <code>EntityId</code>, and <code>Name</code>.</p> <p>For <code>ListChangeSets</code>, supported attributes include <code>StartTime</code> and <code>EndTime</code>.</p>'
+                      $ref: '#/components/schemas/SortBy'
+                      description: '<p>For <code>ListEntities</code>, supported attributes include <code>LastModifiedDate</code> (default), <code>Visibility</code>, <code>EntityId</code>, and <code>Name</code>.</p> <p>For <code>ListChangeSets</code>, supported attributes include <code>StartTime</code> and <code>EndTime</code>.</p>'
                     SortOrder:
-                      allOf:
-                        - $ref: '#/components/schemas/SortOrder'
-                        - description: The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.
+                      $ref: '#/components/schemas/SortOrder'
+                      description: The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.
                 MaxResults:
                   description: 'The maximum number of results returned by a single call. This value must be provided in the next call to retrieve the next set of results. By default, this value is 20.'
                   type: integer
@@ -519,13 +517,11 @@ paths:
                   type: object
                   properties:
                     SortBy:
-                      allOf:
-                        - $ref: '#/components/schemas/SortBy'
-                        - description: '<p>For <code>ListEntities</code>, supported attributes include <code>LastModifiedDate</code> (default), <code>Visibility</code>, <code>EntityId</code>, and <code>Name</code>.</p> <p>For <code>ListChangeSets</code>, supported attributes include <code>StartTime</code> and <code>EndTime</code>.</p>'
+                      $ref: '#/components/schemas/SortBy'
+                      description: '<p>For <code>ListEntities</code>, supported attributes include <code>LastModifiedDate</code> (default), <code>Visibility</code>, <code>EntityId</code>, and <code>Name</code>.</p> <p>For <code>ListChangeSets</code>, supported attributes include <code>StartTime</code> and <code>EndTime</code>.</p>'
                     SortOrder:
-                      allOf:
-                        - $ref: '#/components/schemas/SortOrder'
-                        - description: The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.
+                      $ref: '#/components/schemas/SortOrder'
+                      description: The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.
                 NextToken:
                   description: 'The value of the next token, if it exists. Null if there are no more results.'
                   type: string
@@ -698,13 +694,11 @@ components:
       type: object
       properties:
         ChangeSetId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The unique identifier for the change set referenced in this request.
+          $ref: '#/components/schemas/ResourceId'
+          description: The unique identifier for the change set referenced in this request.
         ChangeSetArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: The ARN associated with the change set referenced in this request.
+          $ref: '#/components/schemas/ARN'
+          description: The ARN associated with the change set referenced in this request.
     InternalServiceException: {}
     AccessDeniedException: {}
     ValidationException: {}
@@ -715,87 +709,69 @@ components:
       type: object
       properties:
         ChangeSetId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: Required. The unique identifier for the change set referenced in this request.
+          $ref: '#/components/schemas/ResourceId'
+          description: Required. The unique identifier for the change set referenced in this request.
         ChangeSetArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: The ARN associated with the unique identifier for the change set referenced in this request.
+          $ref: '#/components/schemas/ARN'
+          description: The ARN associated with the unique identifier for the change set referenced in this request.
         ChangeSetName:
-          allOf:
-            - $ref: '#/components/schemas/ChangeSetName'
-            - description: 'The optional name provided in the <code>StartChangeSet</code> request. If you do not provide a name, one is set by default.'
+          $ref: '#/components/schemas/ChangeSetName'
+          description: 'The optional name provided in the <code>StartChangeSet</code> request. If you do not provide a name, one is set by default.'
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTimeISO8601'
-            - description: 'The date and time, in ISO 8601 format (2018-02-27T13:45:22Z), the request started. '
+          $ref: '#/components/schemas/DateTimeISO8601'
+          description: 'The date and time, in ISO 8601 format (2018-02-27T13:45:22Z), the request started. '
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTimeISO8601'
-            - description: 'The date and time, in ISO 8601 format (2018-02-27T13:45:22Z), the request transitioned to a terminal state. The change cannot transition to a different state. Null if the request is not in a terminal state. '
+          $ref: '#/components/schemas/DateTimeISO8601'
+          description: 'The date and time, in ISO 8601 format (2018-02-27T13:45:22Z), the request transitioned to a terminal state. The change cannot transition to a different state. Null if the request is not in a terminal state. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ChangeStatus'
-            - description: The status of the change request.
+          $ref: '#/components/schemas/ChangeStatus'
+          description: The status of the change request.
         FailureCode:
-          allOf:
-            - $ref: '#/components/schemas/FailureCode'
-            - description: 'Returned if the change set is in <code>FAILED</code> status. Can be either <code>CLIENT_ERROR</code>, which means that there are issues with the request (see the <code>ErrorDetailList</code>), or <code>SERVER_FAULT</code>, which means that there is a problem in the system, and you should retry your request.'
+          $ref: '#/components/schemas/FailureCode'
+          description: 'Returned if the change set is in <code>FAILED</code> status. Can be either <code>CLIENT_ERROR</code>, which means that there are issues with the request (see the <code>ErrorDetailList</code>), or <code>SERVER_FAULT</code>, which means that there is a problem in the system, and you should retry your request.'
         FailureDescription:
-          allOf:
-            - $ref: '#/components/schemas/ExceptionMessageContent'
-            - description: 'Returned if there is a failure on the change set, but that failure is not related to any of the changes in the request.'
+          $ref: '#/components/schemas/ExceptionMessageContent'
+          description: 'Returned if there is a failure on the change set, but that failure is not related to any of the changes in the request.'
         ChangeSet:
-          allOf:
-            - $ref: '#/components/schemas/ChangeSetDescription'
-            - description: An array of <code>ChangeSummary</code> objects.
+          $ref: '#/components/schemas/ChangeSetDescription'
+          description: An array of <code>ChangeSummary</code> objects.
     DescribeEntityResponse:
       type: object
       properties:
         EntityType:
-          allOf:
-            - $ref: '#/components/schemas/EntityType'
-            - description: 'The named type of the entity, in the format of <code>EntityType@Version</code>.'
+          $ref: '#/components/schemas/EntityType'
+          description: 'The named type of the entity, in the format of <code>EntityType@Version</code>.'
         EntityIdentifier:
-          allOf:
-            - $ref: '#/components/schemas/Identifier'
-            - description: 'The identifier of the entity, in the format of <code>EntityId@RevisionId</code>.'
+          $ref: '#/components/schemas/Identifier'
+          description: 'The identifier of the entity, in the format of <code>EntityId@RevisionId</code>.'
         EntityArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: The ARN associated to the unique identifier for the change set referenced in this request.
+          $ref: '#/components/schemas/ARN'
+          description: The ARN associated to the unique identifier for the change set referenced in this request.
         LastModifiedDate:
-          allOf:
-            - $ref: '#/components/schemas/DateTimeISO8601'
-            - description: 'The last modified date of the entity, in ISO 8601 format (2018-02-27T13:45:22Z).'
+          $ref: '#/components/schemas/DateTimeISO8601'
+          description: 'The last modified date of the entity, in ISO 8601 format (2018-02-27T13:45:22Z).'
         Details:
-          allOf:
-            - $ref: '#/components/schemas/Json'
-            - description: This stringified JSON object includes the details of the entity.
+          $ref: '#/components/schemas/Json'
+          description: This stringified JSON object includes the details of the entity.
     ResourceNotSupportedException: {}
     ListChangeSetsResponse:
       type: object
       properties:
         ChangeSetSummaryList:
-          allOf:
-            - $ref: '#/components/schemas/ChangeSetSummaryList'
-            - description: ' Array of <code>ChangeSetSummaryListItem</code> objects.'
+          $ref: '#/components/schemas/ChangeSetSummaryList'
+          description: ' Array of <code>ChangeSetSummaryListItem</code> objects.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The value of the next token, if it exists. Null if there are no more results.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'The value of the next token, if it exists. Null if there are no more results.'
     Filter:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/FilterName'
-            - description: '<p>For <code>ListEntities</code>, the supported value for this is an <code>EntityId</code>.</p> <p>For <code>ListChangeSets</code>, the supported values are as follows:</p>'
+          $ref: '#/components/schemas/FilterName'
+          description: '<p>For <code>ListEntities</code>, the supported value for this is an <code>EntityId</code>.</p> <p>For <code>ListChangeSets</code>, the supported values are as follows:</p>'
         ValueList:
-          allOf:
-            - $ref: '#/components/schemas/ValueList'
-            - description: '<p> <code>ListEntities</code> - This is a list of unique <code>EntityId</code>s.</p> <p> <code>ListChangeSets</code> - The supported filter names and associated <code>ValueList</code>s is as follows:</p> <ul> <li> <p> <code>ChangeSetName</code> - The supported <code>ValueList</code> is a list of non-unique <code>ChangeSetName</code>s. These are defined when you call the <code>StartChangeSet</code> action.</p> </li> <li> <p> <code>Status</code> - The supported <code>ValueList</code> is a list of statuses for all change set requests.</p> </li> <li> <p> <code>EntityId</code> - The supported <code>ValueList</code> is a list of unique <code>EntityId</code>s.</p> </li> <li> <p> <code>BeforeStartTime</code> - The supported <code>ValueList</code> is a list of all change sets that started before the filter value.</p> </li> <li> <p> <code>AfterStartTime</code> - The supported <code>ValueList</code> is a list of all change sets that started after the filter value.</p> </li> <li> <p> <code>BeforeEndTime</code> - The supported <code>ValueList</code> is a list of all change sets that ended before the filter value.</p> </li> <li> <p> <code>AfterEndTime</code> - The supported <code>ValueList</code> is a list of all change sets that ended after the filter value.</p> </li> </ul>'
+          $ref: '#/components/schemas/ValueList'
+          description: '<p> <code>ListEntities</code> - This is a list of unique <code>EntityId</code>s.</p> <p> <code>ListChangeSets</code> - The supported filter names and associated <code>ValueList</code>s is as follows:</p> <ul> <li> <p> <code>ChangeSetName</code> - The supported <code>ValueList</code> is a list of non-unique <code>ChangeSetName</code>s. These are defined when you call the <code>StartChangeSet</code> action.</p> </li> <li> <p> <code>Status</code> - The supported <code>ValueList</code> is a list of statuses for all change set requests.</p> </li> <li> <p> <code>EntityId</code> - The supported <code>ValueList</code> is a list of unique <code>EntityId</code>s.</p> </li> <li> <p> <code>BeforeStartTime</code> - The supported <code>ValueList</code> is a list of all change sets that started before the filter value.</p> </li> <li> <p> <code>AfterStartTime</code> - The supported <code>ValueList</code> is a list of all change sets that started after the filter value.</p> </li> <li> <p> <code>BeforeEndTime</code> - The supported <code>ValueList</code> is a list of all change sets that ended before the filter value.</p> </li> <li> <p> <code>AfterEndTime</code> - The supported <code>ValueList</code> is a list of all change sets that ended after the filter value.</p> </li> </ul>'
       description: 'A filter object, used to optionally filter results from calls to the <code>ListEntities</code> and <code>ListChangeSets</code> actions.'
     SortBy:
       type: string
@@ -811,24 +787,20 @@ components:
       type: object
       properties:
         EntitySummaryList:
-          allOf:
-            - $ref: '#/components/schemas/EntitySummaryList'
-            - description: ' Array of <code>EntitySummary</code> object.'
+          $ref: '#/components/schemas/EntitySummaryList'
+          description: ' Array of <code>EntitySummary</code> object.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The value of the next token if it exists. Null if there is no more result.
+          $ref: '#/components/schemas/NextToken'
+          description: The value of the next token if it exists. Null if there is no more result.
     StartChangeSetResponse:
       type: object
       properties:
         ChangeSetId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: Unique identifier generated for the request.
+          $ref: '#/components/schemas/ResourceId'
+          description: Unique identifier generated for the request.
         ChangeSetArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: The ARN associated to the unique identifier generated for the request.
+          $ref: '#/components/schemas/ARN'
+          description: The ARN associated to the unique identifier generated for the request.
     Change:
       type: object
       required:
@@ -837,21 +809,17 @@ components:
         - Details
       properties:
         ChangeType:
-          allOf:
-            - $ref: '#/components/schemas/ChangeType'
-            - description: Change types are single string values that describe your intention for the change. Each change type is unique for each <code>EntityType</code> provided in the change's scope.
+          $ref: '#/components/schemas/ChangeType'
+          description: Change types are single string values that describe your intention for the change. Each change type is unique for each <code>EntityType</code> provided in the change's scope.
         Entity:
-          allOf:
-            - $ref: '#/components/schemas/Entity'
-            - description: The entity to be changed.
+          $ref: '#/components/schemas/Entity'
+          description: The entity to be changed.
         Details:
-          allOf:
-            - $ref: '#/components/schemas/Json'
-            - description: This object contains details specific to the change type of the requested change.
+          $ref: '#/components/schemas/Json'
+          description: This object contains details specific to the change type of the requested change.
         ChangeName:
-          allOf:
-            - $ref: '#/components/schemas/ChangeName'
-            - description: Optional name for the change.
+          $ref: '#/components/schemas/ChangeName'
+          description: Optional name for the change.
       description: 'An object that contains the <code>ChangeType</code>, <code>Details</code>, and <code>Entity</code>.'
     ServiceQuotaExceededException: {}
     ARN:
@@ -884,13 +852,11 @@ components:
         - Type
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/EntityType'
-            - description: The type of entity.
+          $ref: '#/components/schemas/EntityType'
+          description: The type of entity.
         Identifier:
-          allOf:
-            - $ref: '#/components/schemas/Identifier'
-            - description: The identifier for the entity.
+          $ref: '#/components/schemas/Identifier'
+          description: The identifier for the entity.
       description: 'An entity contains data that describes your product, its supported features, and how it can be used or launched by your customer. '
     Json:
       type: string
@@ -906,25 +872,20 @@ components:
       type: object
       properties:
         ChangeType:
-          allOf:
-            - $ref: '#/components/schemas/ChangeType'
-            - description: The type of the change.
+          $ref: '#/components/schemas/ChangeType'
+          description: The type of the change.
         Entity:
-          allOf:
-            - $ref: '#/components/schemas/Entity'
-            - description: The entity to be changed.
+          $ref: '#/components/schemas/Entity'
+          description: The entity to be changed.
         Details:
-          allOf:
-            - $ref: '#/components/schemas/Json'
-            - description: This object contains details specific to the change type of the requested change.
+          $ref: '#/components/schemas/Json'
+          description: This object contains details specific to the change type of the requested change.
         ErrorDetailList:
-          allOf:
-            - $ref: '#/components/schemas/ErrorDetailList'
-            - description: An array of <code>ErrorDetail</code> objects associated with the change.
+          $ref: '#/components/schemas/ErrorDetailList'
+          description: An array of <code>ErrorDetail</code> objects associated with the change.
         ChangeName:
-          allOf:
-            - $ref: '#/components/schemas/ChangeName'
-            - description: Optional name for the change.
+          $ref: '#/components/schemas/ChangeName'
+          description: Optional name for the change.
       description: This object is a container for common summary information about the change. The summary doesn't contain the whole change structure.
     ChangeSetDescription:
       type: array
@@ -939,37 +900,29 @@ components:
       type: object
       properties:
         ChangeSetId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The unique identifier for a change set.
+          $ref: '#/components/schemas/ResourceId'
+          description: The unique identifier for a change set.
         ChangeSetArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: The ARN associated with the unique identifier for the change set referenced in this request.
+          $ref: '#/components/schemas/ARN'
+          description: The ARN associated with the unique identifier for the change set referenced in this request.
         ChangeSetName:
-          allOf:
-            - $ref: '#/components/schemas/ChangeSetName'
-            - description: The non-unique name for the change set.
+          $ref: '#/components/schemas/ChangeSetName'
+          description: The non-unique name for the change set.
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTimeISO8601'
-            - description: 'The time, in ISO 8601 format (2018-02-27T13:45:22Z), when the change set was started.'
+          $ref: '#/components/schemas/DateTimeISO8601'
+          description: 'The time, in ISO 8601 format (2018-02-27T13:45:22Z), when the change set was started.'
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTimeISO8601'
-            - description: 'The time, in ISO 8601 format (2018-02-27T13:45:22Z), when the change set was finished.'
+          $ref: '#/components/schemas/DateTimeISO8601'
+          description: 'The time, in ISO 8601 format (2018-02-27T13:45:22Z), when the change set was finished.'
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ChangeStatus'
-            - description: The current status of the change set.
+          $ref: '#/components/schemas/ChangeStatus'
+          description: The current status of the change set.
         EntityIdList:
-          allOf:
-            - $ref: '#/components/schemas/ResourceIdList'
-            - description: This object is a list of entity IDs (string) that are a part of a change set. The entity ID list is a maximum of 20 entities. It must contain at least one entity.
+          $ref: '#/components/schemas/ResourceIdList'
+          description: This object is a list of entity IDs (string) that are a part of a change set. The entity ID list is a maximum of 20 entities. It must contain at least one entity.
         FailureCode:
-          allOf:
-            - $ref: '#/components/schemas/FailureCode'
-            - description: 'Returned if the change set is in <code>FAILED</code> status. Can be either <code>CLIENT_ERROR</code>, which means that there are issues with the request (see the <code>ErrorDetailList</code> of <code>DescribeChangeSet</code>), or <code>SERVER_FAULT</code>, which means that there is a problem in the system, and you should retry your request.'
+          $ref: '#/components/schemas/FailureCode'
+          description: 'Returned if the change set is in <code>FAILED</code> status. Can be either <code>CLIENT_ERROR</code>, which means that there are issues with the request (see the <code>ErrorDetailList</code> of <code>DescribeChangeSet</code>), or <code>SERVER_FAULT</code>, which means that there is a problem in the system, and you should retry your request.'
       description: A summary of a change set returned in a list of change sets when the <code>ListChangeSets</code> action is called.
     ChangeSetSummaryList:
       type: array
@@ -1043,29 +996,23 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/EntityNameString'
-            - description: The name for the entity. This value is not unique. It is defined by the seller.
+          $ref: '#/components/schemas/EntityNameString'
+          description: The name for the entity. This value is not unique. It is defined by the seller.
         EntityType:
-          allOf:
-            - $ref: '#/components/schemas/EntityType'
-            - description: The type of the entity.
+          $ref: '#/components/schemas/EntityType'
+          description: The type of the entity.
         EntityId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The unique identifier for the entity.
+          $ref: '#/components/schemas/ResourceId'
+          description: The unique identifier for the entity.
         EntityArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: The ARN associated with the unique identifier for the entity.
+          $ref: '#/components/schemas/ARN'
+          description: The ARN associated with the unique identifier for the entity.
         LastModifiedDate:
-          allOf:
-            - $ref: '#/components/schemas/DateTimeISO8601'
-            - description: 'The last time the entity was published, using ISO 8601 format (2018-02-27T13:45:22Z).'
+          $ref: '#/components/schemas/DateTimeISO8601'
+          description: 'The last time the entity was published, using ISO 8601 format (2018-02-27T13:45:22Z).'
         Visibility:
-          allOf:
-            - $ref: '#/components/schemas/VisibilityValue'
-            - description: 'The visibility status of the entity to buyers. This value can be <code>Public</code> (everyone can view the entity), <code>Limited</code> (the entity is visible to limited accounts only), or <code>Restricted</code> (the entity was published and then unpublished and only existing buyers can view it). '
+          $ref: '#/components/schemas/VisibilityValue'
+          description: 'The visibility status of the entity to buyers. This value can be <code>Public</code> (everyone can view the entity), <code>Limited</code> (the entity is visible to limited accounts only), or <code>Restricted</code> (the entity was published and then unpublished and only existing buyers can view it). '
       description: 'This object is a container for common summary information about the entity. The summary doesn''t contain the whole entity structure, but it does contain information common across all entities.'
     EntitySummaryList:
       type: array
@@ -1080,13 +1027,11 @@ components:
       type: object
       properties:
         ErrorCode:
-          allOf:
-            - $ref: '#/components/schemas/ErrorCodeString'
-            - description: The error code that identifies the type of error.
+          $ref: '#/components/schemas/ErrorCodeString'
+          description: The error code that identifies the type of error.
         ErrorMessage:
-          allOf:
-            - $ref: '#/components/schemas/ExceptionMessageContent'
-            - description: The message for the error.
+          $ref: '#/components/schemas/ExceptionMessageContent'
+          description: The message for the error.
       description: Details about the error.
     FilterName:
       type: string
@@ -1114,13 +1059,11 @@ components:
       type: object
       properties:
         SortBy:
-          allOf:
-            - $ref: '#/components/schemas/SortBy'
-            - description: '<p>For <code>ListEntities</code>, supported attributes include <code>LastModifiedDate</code> (default), <code>Visibility</code>, <code>EntityId</code>, and <code>Name</code>.</p> <p>For <code>ListChangeSets</code>, supported attributes include <code>StartTime</code> and <code>EndTime</code>.</p>'
+          $ref: '#/components/schemas/SortBy'
+          description: '<p>For <code>ListEntities</code>, supported attributes include <code>LastModifiedDate</code> (default), <code>Visibility</code>, <code>EntityId</code>, and <code>Name</code>.</p> <p>For <code>ListChangeSets</code>, supported attributes include <code>StartTime</code> and <code>EndTime</code>.</p>'
         SortOrder:
-          allOf:
-            - $ref: '#/components/schemas/SortOrder'
-            - description: The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.
+          $ref: '#/components/schemas/SortOrder'
+          description: The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.
       description: 'An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.'
     MaxResultInteger:
       type: integer
@@ -1138,25 +1081,20 @@ components:
       title: ListChangeSetsRequest
       properties:
         Catalog:
-          allOf:
-            - $ref: '#/components/schemas/Catalog'
-            - description: 'The catalog related to the request. Fixed value: <code>AWSMarketplace</code> '
+          $ref: '#/components/schemas/Catalog'
+          description: 'The catalog related to the request. Fixed value: <code>AWSMarketplace</code> '
         FilterList:
-          allOf:
-            - $ref: '#/components/schemas/FilterList'
-            - description: An array of filter objects.
+          $ref: '#/components/schemas/FilterList'
+          description: An array of filter objects.
         Sort:
-          allOf:
-            - $ref: '#/components/schemas/Sort'
-            - description: 'An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.'
+          $ref: '#/components/schemas/Sort'
+          description: 'An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResultInteger'
-            - description: 'The maximum number of results returned by a single call. This value must be provided in the next call to retrieve the next set of results. By default, this value is 20.'
+          $ref: '#/components/schemas/MaxResultInteger'
+          description: 'The maximum number of results returned by a single call. This value must be provided in the next call to retrieve the next set of results. By default, this value is 20.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token value retrieved from a previous call to access the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token value retrieved from a previous call to access the next page of results.
     ListEntitiesRequest:
       type: object
       required:
@@ -1165,29 +1103,23 @@ components:
       title: ListEntitiesRequest
       properties:
         Catalog:
-          allOf:
-            - $ref: '#/components/schemas/Catalog'
-            - description: 'The catalog related to the request. Fixed value: <code>AWSMarketplace</code> '
+          $ref: '#/components/schemas/Catalog'
+          description: 'The catalog related to the request. Fixed value: <code>AWSMarketplace</code> '
         EntityType:
-          allOf:
-            - $ref: '#/components/schemas/EntityType'
-            - description: The type of entities to retrieve.
+          $ref: '#/components/schemas/EntityType'
+          description: The type of entities to retrieve.
         FilterList:
-          allOf:
-            - $ref: '#/components/schemas/FilterList'
-            - description: 'An array of filter objects. Each filter object contains two attributes, <code>filterName</code> and <code>filterValues</code>.'
+          $ref: '#/components/schemas/FilterList'
+          description: 'An array of filter objects. Each filter object contains two attributes, <code>filterName</code> and <code>filterValues</code>.'
         Sort:
-          allOf:
-            - $ref: '#/components/schemas/Sort'
-            - description: 'An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.'
+          $ref: '#/components/schemas/Sort'
+          description: 'An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The value of the next token, if it exists. Null if there are no more results.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'The value of the next token, if it exists. Null if there are no more results.'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResultInteger'
-            - description: 'Specifies the upper limit of the elements on a single page. If a value isn''t provided, the default value is 20.'
+          $ref: '#/components/schemas/MaxResultInteger'
+          description: 'Specifies the upper limit of the elements on a single page. If a value isn''t provided, the default value is 20.'
     RequestedChangeList:
       type: array
       items:
@@ -1202,20 +1134,16 @@ components:
       title: StartChangeSetRequest
       properties:
         Catalog:
-          allOf:
-            - $ref: '#/components/schemas/Catalog'
-            - description: 'The catalog related to the request. Fixed value: <code>AWSMarketplace</code> '
+          $ref: '#/components/schemas/Catalog'
+          description: 'The catalog related to the request. Fixed value: <code>AWSMarketplace</code> '
         ChangeSet:
-          allOf:
-            - $ref: '#/components/schemas/RequestedChangeList'
-            - description: Array of <code>change</code> object.
+          $ref: '#/components/schemas/RequestedChangeList'
+          description: Array of <code>change</code> object.
         ChangeSetName:
-          allOf:
-            - $ref: '#/components/schemas/ChangeSetName'
-            - description: 'Optional case sensitive string of up to 100 ASCII characters. The change set name can be used to filter the list of change sets. '
+          $ref: '#/components/schemas/ChangeSetName'
+          description: 'Optional case sensitive string of up to 100 ASCII characters. The change set name can be used to filter the list of change sets. '
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: A unique token to identify the request to ensure idempotency.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: A unique token to identify the request to ensure idempotency.
 security:
   - hmac: []

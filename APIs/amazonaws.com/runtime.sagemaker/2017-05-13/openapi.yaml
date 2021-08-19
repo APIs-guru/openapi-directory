@@ -394,9 +394,8 @@ components:
         - Body
       properties:
         Body:
-          allOf:
-            - $ref: '#/components/schemas/BodyBlob'
-            - description: '<p>Includes the inference provided by the model.</p> <p>For information about the format of the response body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats-Inference</a>.</p>'
+          $ref: '#/components/schemas/BodyBlob'
+          description: '<p>Includes the inference provided by the model.</p> <p>For information about the format of the response body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats-Inference</a>.</p>'
     InternalFailure: {}
     ServiceUnavailable: {}
     ValidationError: {}
@@ -405,9 +404,8 @@ components:
       type: object
       properties:
         InferenceId:
-          allOf:
-            - $ref: '#/components/schemas/Header'
-            - description: Identifier for an inference request. This will be the same as the <code>InferenceId</code> specified in the input. Amazon SageMaker will generate an identifier for you if you do not specify one.
+          $ref: '#/components/schemas/Header'
+          description: Identifier for an inference request. This will be the same as the <code>InferenceId</code> specified in the input. Amazon SageMaker will generate an identifier for you if you do not specify one.
     BodyBlob:
       type: string
       maxLength: 6291456
@@ -463,8 +461,7 @@ components:
       title: InvokeEndpointInput
       properties:
         Body:
-          allOf:
-            - $ref: '#/components/schemas/BodyBlob'
-            - description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats-Inference</a>.</p>'
+          $ref: '#/components/schemas/BodyBlob'
+          description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats-Inference</a>.</p>'
 security:
   - hmac: []

@@ -1170,9 +1170,8 @@ components:
       type: object
       properties:
         NodeAssociationStatusToken:
-          allOf:
-            - $ref: '#/components/schemas/NodeAssociationStatusToken'
-            - description: 'Contains a token which can be passed to the <code>DescribeNodeAssociationStatus</code> API call to get the status of the association request. '
+          $ref: '#/components/schemas/NodeAssociationStatusToken'
+          description: 'Contains a token which can be passed to the <code>DescribeNodeAssociationStatus</code> API call to get the status of the association request. '
     AssociateNodeRequest:
       type: object
       required:
@@ -1182,17 +1181,14 @@ components:
       title: AssociateNodeRequest
       properties:
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/ServerName'
-            - description: 'The name of the server with which to associate the node. '
+          $ref: '#/components/schemas/ServerName'
+          description: 'The name of the server with which to associate the node. '
         NodeName:
-          allOf:
-            - $ref: '#/components/schemas/NodeName'
-            - description: 'The name of the node. '
+          $ref: '#/components/schemas/NodeName'
+          description: 'The name of the node. '
         EngineAttributes:
-          allOf:
-            - $ref: '#/components/schemas/EngineAttributes'
-            - description: '<p>Engine attributes used for associating the node. </p> <p class="title"> <b>Attributes accepted in a AssociateNode request for Chef</b> </p> <ul> <li> <p> <code>CHEF_ORGANIZATION</code>: The Chef organization with which the node is associated. By default only one organization named <code>default</code> can exist. </p> </li> <li> <p> <code>CHEF_NODE_PUBLIC_KEY</code>: A PEM-formatted public key. This key is required for the <code>chef-client</code> agent to access the Chef API. </p> </li> </ul> <p class="title"> <b>Attributes accepted in a AssociateNode request for Puppet</b> </p> <ul> <li> <p> <code>PUPPET_NODE_CSR</code>: A PEM-formatted certificate-signing request (CSR) that is created by the node. </p> </li> </ul>'
+          $ref: '#/components/schemas/EngineAttributes'
+          description: '<p>Engine attributes used for associating the node. </p> <p class="title"> <b>Attributes accepted in a AssociateNode request for Chef</b> </p> <ul> <li> <p> <code>CHEF_ORGANIZATION</code>: The Chef organization with which the node is associated. By default only one organization named <code>default</code> can exist. </p> </li> <li> <p> <code>CHEF_NODE_PUBLIC_KEY</code>: A PEM-formatted public key. This key is required for the <code>chef-client</code> agent to access the Chef API. </p> </li> </ul> <p class="title"> <b>Attributes accepted in a AssociateNode request for Puppet</b> </p> <ul> <li> <p> <code>PUPPET_NODE_CSR</code>: A PEM-formatted certificate-signing request (CSR) that is created by the node. </p> </li> </ul>'
     InvalidStateException: {}
     ResourceNotFoundException: {}
     ValidationException: {}
@@ -1200,9 +1196,8 @@ components:
       type: object
       properties:
         Backup:
-          allOf:
-            - $ref: '#/components/schemas/Backup'
-            - description: Backup created by request.
+          $ref: '#/components/schemas/Backup'
+          description: Backup created by request.
     CreateBackupRequest:
       type: object
       required:
@@ -1210,25 +1205,21 @@ components:
       title: CreateBackupRequest
       properties:
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/ServerName'
-            - description: 'The name of the server that you want to back up. '
+          $ref: '#/components/schemas/ServerName'
+          description: 'The name of the server that you want to back up. '
         Description:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' A user-defined description of the backup. '
+          $ref: '#/components/schemas/String'
+          description: ' A user-defined description of the backup. '
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: '<p>A map that contains tag keys and tag values to attach to an AWS OpsWorks-CM server backup.</p> <ul> <li> <p>The key cannot be empty.</p> </li> <li> <p>The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code> </p> </li> <li> <p>The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code> </p> </li> <li> <p>Leading and trailing white spaces are trimmed from both the key and value.</p> </li> <li> <p>A maximum of 50 user-applied tags is allowed for tag-supported AWS OpsWorks-CM resources.</p> </li> </ul>'
+          $ref: '#/components/schemas/TagList'
+          description: '<p>A map that contains tag keys and tag values to attach to an AWS OpsWorks-CM server backup.</p> <ul> <li> <p>The key cannot be empty.</p> </li> <li> <p>The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code> </p> </li> <li> <p>The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code> </p> </li> <li> <p>Leading and trailing white spaces are trimmed from both the key and value.</p> </li> <li> <p>A maximum of 50 user-applied tags is allowed for tag-supported AWS OpsWorks-CM resources.</p> </li> </ul>'
     LimitExceededException: {}
     CreateServerResponse:
       type: object
       properties:
         Server:
-          allOf:
-            - $ref: '#/components/schemas/Server'
-            - description: 'The server that is created by the request. '
+          $ref: '#/components/schemas/Server'
+          description: 'The server that is created by the request. '
     CreateServerRequest:
       type: object
       required:
@@ -1240,89 +1231,68 @@ components:
       title: CreateServerRequest
       properties:
         AssociatePublicIpAddress:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: ' Associate a public IP address with a server that you are launching. Valid values are <code>true</code> or <code>false</code>. The default value is <code>true</code>. '
+          $ref: '#/components/schemas/Boolean'
+          description: ' Associate a public IP address with a server that you are launching. Valid values are <code>true</code> or <code>false</code>. The default value is <code>true</code>. '
         CustomDomain:
-          allOf:
-            - $ref: '#/components/schemas/CustomDomain'
-            - description: 'An optional public endpoint of a server, such as <code>https://aws.my-company.com</code>. To access the server, create a CNAME DNS record in your preferred DNS service that points the custom domain to the endpoint that is generated when the server is created (the value of the CreateServer Endpoint attribute). You cannot access the server by using the generated <code>Endpoint</code> value if the server is using a custom domain. If you specify a custom domain, you must also specify values for <code>CustomCertificate</code> and <code>CustomPrivateKey</code>.'
+          $ref: '#/components/schemas/CustomDomain'
+          description: 'An optional public endpoint of a server, such as <code>https://aws.my-company.com</code>. To access the server, create a CNAME DNS record in your preferred DNS service that points the custom domain to the endpoint that is generated when the server is created (the value of the CreateServer Endpoint attribute). You cannot access the server by using the generated <code>Endpoint</code> value if the server is using a custom domain. If you specify a custom domain, you must also specify values for <code>CustomCertificate</code> and <code>CustomPrivateKey</code>.'
         CustomCertificate:
-          allOf:
-            - $ref: '#/components/schemas/CustomCertificate'
-            - description: '<p>A PEM-formatted HTTPS certificate. The value can be be a single, self-signed certificate, or a certificate chain. If you specify a custom certificate, you must also specify values for <code>CustomDomain</code> and <code>CustomPrivateKey</code>. The following are requirements for the <code>CustomCertificate</code> value:</p> <ul> <li> <p>You can provide either a self-signed, custom certificate, or the full certificate chain.</p> </li> <li> <p>The certificate must be a valid X509 certificate, or a certificate chain in PEM format.</p> </li> <li> <p>The certificate must be valid at the time of upload. A certificate can''t be used before its validity period begins (the certificate''s <code>NotBefore</code> date), or after it expires (the certificate''s <code>NotAfter</code> date).</p> </li> <li> <p>The certificate’s common name or subject alternative names (SANs), if present, must match the value of <code>CustomDomain</code>.</p> </li> <li> <p>The certificate must match the value of <code>CustomPrivateKey</code>.</p> </li> </ul>'
+          $ref: '#/components/schemas/CustomCertificate'
+          description: '<p>A PEM-formatted HTTPS certificate. The value can be be a single, self-signed certificate, or a certificate chain. If you specify a custom certificate, you must also specify values for <code>CustomDomain</code> and <code>CustomPrivateKey</code>. The following are requirements for the <code>CustomCertificate</code> value:</p> <ul> <li> <p>You can provide either a self-signed, custom certificate, or the full certificate chain.</p> </li> <li> <p>The certificate must be a valid X509 certificate, or a certificate chain in PEM format.</p> </li> <li> <p>The certificate must be valid at the time of upload. A certificate can''t be used before its validity period begins (the certificate''s <code>NotBefore</code> date), or after it expires (the certificate''s <code>NotAfter</code> date).</p> </li> <li> <p>The certificate’s common name or subject alternative names (SANs), if present, must match the value of <code>CustomDomain</code>.</p> </li> <li> <p>The certificate must match the value of <code>CustomPrivateKey</code>.</p> </li> </ul>'
         CustomPrivateKey:
-          allOf:
-            - $ref: '#/components/schemas/CustomPrivateKey'
-            - description: 'A private key in PEM format for connecting to the server by using HTTPS. The private key must not be encrypted; it cannot be protected by a password or passphrase. If you specify a custom private key, you must also specify values for <code>CustomDomain</code> and <code>CustomCertificate</code>.'
+          $ref: '#/components/schemas/CustomPrivateKey'
+          description: 'A private key in PEM format for connecting to the server by using HTTPS. The private key must not be encrypted; it cannot be protected by a password or passphrase. If you specify a custom private key, you must also specify values for <code>CustomDomain</code> and <code>CustomCertificate</code>.'
         DisableAutomatedBackup:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: ' Enable or disable scheduled backups. Valid values are <code>true</code> or <code>false</code>. The default value is <code>true</code>. '
+          $ref: '#/components/schemas/Boolean'
+          description: ' Enable or disable scheduled backups. Valid values are <code>true</code> or <code>false</code>. The default value is <code>true</code>. '
         Engine:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The configuration management engine to use. Valid values include <code>ChefAutomate</code> and <code>Puppet</code>. '
+          $ref: '#/components/schemas/String'
+          description: ' The configuration management engine to use. Valid values include <code>ChefAutomate</code> and <code>Puppet</code>. '
         EngineModel:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The engine model of the server. Valid values in this release include <code>Monolithic</code> for Puppet and <code>Single</code> for Chef. '
+          $ref: '#/components/schemas/String'
+          description: ' The engine model of the server. Valid values in this release include <code>Monolithic</code> for Puppet and <code>Single</code> for Chef. '
         EngineVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The major release version of the engine that you want to use. For a Chef server, the valid value for EngineVersion is currently <code>2</code>. For a Puppet server, valid values are <code>2019</code> or <code>2017</code>. '
+          $ref: '#/components/schemas/String'
+          description: ' The major release version of the engine that you want to use. For a Chef server, the valid value for EngineVersion is currently <code>2</code>. For a Puppet server, valid values are <code>2019</code> or <code>2017</code>. '
         EngineAttributes:
-          allOf:
-            - $ref: '#/components/schemas/EngineAttributes'
-            - description: '<p>Optional engine attributes on a specified server. </p> <p class="title"> <b>Attributes accepted in a Chef createServer request:</b> </p> <ul> <li> <p> <code>CHEF_AUTOMATE_PIVOTAL_KEY</code>: A base64-encoded RSA public key. The corresponding private key is required to access the Chef API. When no CHEF_AUTOMATE_PIVOTAL_KEY is set, a private key is generated and returned in the response. </p> </li> <li> <p> <code>CHEF_AUTOMATE_ADMIN_PASSWORD</code>: The password for the administrative user in the Chef Automate web-based dashboard. The password length is a minimum of eight characters, and a maximum of 32. The password can contain letters, numbers, and special characters (!/@#$%^&amp;+=_). The password must contain at least one lower case letter, one upper case letter, one number, and one special character. When no CHEF_AUTOMATE_ADMIN_PASSWORD is set, one is generated and returned in the response.</p> </li> </ul> <p class="title"> <b>Attributes accepted in a Puppet createServer request:</b> </p> <ul> <li> <p> <code>PUPPET_ADMIN_PASSWORD</code>: To work with the Puppet Enterprise console, a password must use ASCII characters.</p> </li> <li> <p> <code>PUPPET_R10K_REMOTE</code>: The r10k remote is the URL of your control repository (for example, ssh://git@your.git-repo.com:user/control-repo.git). Specifying an r10k remote opens TCP port 8170.</p> </li> <li> <p> <code>PUPPET_R10K_PRIVATE_KEY</code>: If you are using a private Git repository, add PUPPET_R10K_PRIVATE_KEY to specify a PEM-encoded private SSH key.</p> </li> </ul>'
+          $ref: '#/components/schemas/EngineAttributes'
+          description: '<p>Optional engine attributes on a specified server. </p> <p class="title"> <b>Attributes accepted in a Chef createServer request:</b> </p> <ul> <li> <p> <code>CHEF_AUTOMATE_PIVOTAL_KEY</code>: A base64-encoded RSA public key. The corresponding private key is required to access the Chef API. When no CHEF_AUTOMATE_PIVOTAL_KEY is set, a private key is generated and returned in the response. </p> </li> <li> <p> <code>CHEF_AUTOMATE_ADMIN_PASSWORD</code>: The password for the administrative user in the Chef Automate web-based dashboard. The password length is a minimum of eight characters, and a maximum of 32. The password can contain letters, numbers, and special characters (!/@#$%^&amp;+=_). The password must contain at least one lower case letter, one upper case letter, one number, and one special character. When no CHEF_AUTOMATE_ADMIN_PASSWORD is set, one is generated and returned in the response.</p> </li> </ul> <p class="title"> <b>Attributes accepted in a Puppet createServer request:</b> </p> <ul> <li> <p> <code>PUPPET_ADMIN_PASSWORD</code>: To work with the Puppet Enterprise console, a password must use ASCII characters.</p> </li> <li> <p> <code>PUPPET_R10K_REMOTE</code>: The r10k remote is the URL of your control repository (for example, ssh://git@your.git-repo.com:user/control-repo.git). Specifying an r10k remote opens TCP port 8170.</p> </li> <li> <p> <code>PUPPET_R10K_PRIVATE_KEY</code>: If you are using a private Git repository, add PUPPET_R10K_PRIVATE_KEY to specify a PEM-encoded private SSH key.</p> </li> </ul>'
         BackupRetentionCount:
-          allOf:
-            - $ref: '#/components/schemas/BackupRetentionCountDefinition'
-            - description: ' The number of automated backups that you want to keep. Whenever a new backup is created, AWS OpsWorks CM deletes the oldest backups if this number is exceeded. The default value is <code>1</code>. '
+          $ref: '#/components/schemas/BackupRetentionCountDefinition'
+          description: ' The number of automated backups that you want to keep. Whenever a new backup is created, AWS OpsWorks CM deletes the oldest backups if this number is exceeded. The default value is <code>1</code>. '
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/ServerName'
-            - description: ' The name of the server. The server name must be unique within your AWS account, within each region. Server names must start with a letter; then letters, numbers, or hyphens (-) are allowed, up to a maximum of 40 characters. '
+          $ref: '#/components/schemas/ServerName'
+          description: ' The name of the server. The server name must be unique within your AWS account, within each region. Server names must start with a letter; then letters, numbers, or hyphens (-) are allowed, up to a maximum of 40 characters. '
         InstanceProfileArn:
-          allOf:
-            - $ref: '#/components/schemas/InstanceProfileArn'
-            - description: ' The ARN of the instance profile that your Amazon EC2 instances use. Although the AWS OpsWorks console typically creates the instance profile for you, if you are using API commands instead, run the service-role-creation.yaml AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml. This template creates a CloudFormation stack that includes the instance profile you need. '
+          $ref: '#/components/schemas/InstanceProfileArn'
+          description: ' The ARN of the instance profile that your Amazon EC2 instances use. Although the AWS OpsWorks console typically creates the instance profile for you, if you are using API commands instead, run the service-role-creation.yaml AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml. This template creates a CloudFormation stack that includes the instance profile you need. '
         InstanceType:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The Amazon EC2 instance type to use. For example, <code>m5.large</code>. '
+          $ref: '#/components/schemas/String'
+          description: ' The Amazon EC2 instance type to use. For example, <code>m5.large</code>. '
         KeyPair:
-          allOf:
-            - $ref: '#/components/schemas/KeyPair'
-            - description: ' The Amazon EC2 key pair to set for the instance. This parameter is optional; if desired, you may specify this parameter to connect to your instances by using SSH. '
+          $ref: '#/components/schemas/KeyPair'
+          description: ' The Amazon EC2 key pair to set for the instance. This parameter is optional; if desired, you may specify this parameter to connect to your instances by using SSH. '
         PreferredMaintenanceWindow:
-          allOf:
-            - $ref: '#/components/schemas/TimeWindowDefinition'
-            - description: '<p> The start time for a one-hour period each week during which AWS OpsWorks CM performs maintenance on the instance. Valid values must be specified in the following format: <code>DDD:HH:MM</code>. <code>MM</code> must be specified as <code>00</code>. The specified time is in coordinated universal time (UTC). The default value is a random one-hour period on Tuesday, Wednesday, or Friday. See <code>TimeWindowDefinition</code> for more information. </p> <p> <b>Example:</b> <code>Mon:08:00</code>, which represents a start time of every Monday at 08:00 UTC. (8:00 a.m.) </p>'
+          $ref: '#/components/schemas/TimeWindowDefinition'
+          description: '<p> The start time for a one-hour period each week during which AWS OpsWorks CM performs maintenance on the instance. Valid values must be specified in the following format: <code>DDD:HH:MM</code>. <code>MM</code> must be specified as <code>00</code>. The specified time is in coordinated universal time (UTC). The default value is a random one-hour period on Tuesday, Wednesday, or Friday. See <code>TimeWindowDefinition</code> for more information. </p> <p> <b>Example:</b> <code>Mon:08:00</code>, which represents a start time of every Monday at 08:00 UTC. (8:00 a.m.) </p>'
         PreferredBackupWindow:
-          allOf:
-            - $ref: '#/components/schemas/TimeWindowDefinition'
-            - description: '<p> The start time for a one-hour period during which AWS OpsWorks CM backs up application-level data on your server if automated backups are enabled. Valid values must be specified in one of the following formats: </p> <ul> <li> <p> <code>HH:MM</code> for daily backups</p> </li> <li> <p> <code>DDD:HH:MM</code> for weekly backups</p> </li> </ul> <p> <code>MM</code> must be specified as <code>00</code>. The specified time is in coordinated universal time (UTC). The default value is a random, daily start time.</p> <p> <b>Example:</b> <code>08:00</code>, which represents a daily start time of 08:00 UTC.</p> <p> <b>Example:</b> <code>Mon:08:00</code>, which represents a start time of every Monday at 08:00 UTC. (8:00 a.m.)</p>'
+          $ref: '#/components/schemas/TimeWindowDefinition'
+          description: '<p> The start time for a one-hour period during which AWS OpsWorks CM backs up application-level data on your server if automated backups are enabled. Valid values must be specified in one of the following formats: </p> <ul> <li> <p> <code>HH:MM</code> for daily backups</p> </li> <li> <p> <code>DDD:HH:MM</code> for weekly backups</p> </li> </ul> <p> <code>MM</code> must be specified as <code>00</code>. The specified time is in coordinated universal time (UTC). The default value is a random, daily start time.</p> <p> <b>Example:</b> <code>08:00</code>, which represents a daily start time of 08:00 UTC.</p> <p> <b>Example:</b> <code>Mon:08:00</code>, which represents a start time of every Monday at 08:00 UTC. (8:00 a.m.)</p>'
         SecurityGroupIds:
-          allOf:
-            - $ref: '#/components/schemas/Strings'
-            - description: '<p> A list of security group IDs to attach to the Amazon EC2 instance. If you add this parameter, the specified security groups must be within the VPC that is specified by <code>SubnetIds</code>. </p> <p> If you do not specify this parameter, AWS OpsWorks CM creates one new security group that uses TCP ports 22 and 443, open to 0.0.0.0/0 (everyone). </p>'
+          $ref: '#/components/schemas/Strings'
+          description: '<p> A list of security group IDs to attach to the Amazon EC2 instance. If you add this parameter, the specified security groups must be within the VPC that is specified by <code>SubnetIds</code>. </p> <p> If you do not specify this parameter, AWS OpsWorks CM creates one new security group that uses TCP ports 22 and 443, open to 0.0.0.0/0 (everyone). </p>'
         ServiceRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/ServiceRoleArn'
-            - description: ' The service role that the AWS OpsWorks CM service backend uses to work with your account. Although the AWS OpsWorks management console typically creates the service role for you, if you are using the AWS CLI or API commands, run the service-role-creation.yaml AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml. This template creates a CloudFormation stack that includes the service role and instance profile that you need. '
+          $ref: '#/components/schemas/ServiceRoleArn'
+          description: ' The service role that the AWS OpsWorks CM service backend uses to work with your account. Although the AWS OpsWorks management console typically creates the service role for you, if you are using the AWS CLI or API commands, run the service-role-creation.yaml AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml. This template creates a CloudFormation stack that includes the service role and instance profile that you need. '
         SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/Strings'
-            - description: '<p> The IDs of subnets in which to launch the server EC2 instance. </p> <p> Amazon EC2-Classic customers: This field is required. All servers must run within a VPC. The VPC must have "Auto Assign Public IP" enabled. </p> <p> EC2-VPC customers: This field is optional. If you do not specify subnet IDs, your EC2 instances are created in a default subnet that is selected by Amazon EC2. If you specify subnet IDs, the VPC must have "Auto Assign Public IP" enabled. </p> <p>For more information about supported Amazon EC2 platforms, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html">Supported Platforms</a>.</p>'
+          $ref: '#/components/schemas/Strings'
+          description: '<p> The IDs of subnets in which to launch the server EC2 instance. </p> <p> Amazon EC2-Classic customers: This field is required. All servers must run within a VPC. The VPC must have "Auto Assign Public IP" enabled. </p> <p> EC2-VPC customers: This field is optional. If you do not specify subnet IDs, your EC2 instances are created in a default subnet that is selected by Amazon EC2. If you specify subnet IDs, the VPC must have "Auto Assign Public IP" enabled. </p> <p>For more information about supported Amazon EC2 platforms, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html">Supported Platforms</a>.</p>'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: '<p>A map that contains tag keys and tag values to attach to an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server.</p> <ul> <li> <p>The key cannot be empty.</p> </li> <li> <p>The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : / @</code> </p> </li> <li> <p>The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : / @</code> </p> </li> <li> <p>Leading and trailing white spaces are trimmed from both the key and value.</p> </li> <li> <p>A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM server.</p> </li> </ul>'
+          $ref: '#/components/schemas/TagList'
+          description: '<p>A map that contains tag keys and tag values to attach to an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server.</p> <ul> <li> <p>The key cannot be empty.</p> </li> <li> <p>The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : / @</code> </p> </li> <li> <p>The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : / @</code> </p> </li> <li> <p>Leading and trailing white spaces are trimmed from both the key and value.</p> </li> <li> <p>A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM server.</p> </li> </ul>'
         BackupId:
-          allOf:
-            - $ref: '#/components/schemas/BackupId'
-            - description: ' If you specify this field, AWS OpsWorks CM creates the server by using the backup represented by BackupId. '
+          $ref: '#/components/schemas/BackupId'
+          description: ' If you specify this field, AWS OpsWorks CM creates the server by using the backup represented by BackupId. '
     ResourceAlreadyExistsException: {}
     DeleteBackupResponse:
       type: object
@@ -1334,9 +1304,8 @@ components:
       title: DeleteBackupRequest
       properties:
         BackupId:
-          allOf:
-            - $ref: '#/components/schemas/BackupId'
-            - description: 'The ID of the backup to delete. Run the DescribeBackups command to get a list of backup IDs. Backup IDs are in the format <code>ServerName-yyyyMMddHHmmssSSS</code>. '
+          $ref: '#/components/schemas/BackupId'
+          description: 'The ID of the backup to delete. Run the DescribeBackups command to get a list of backup IDs. Backup IDs are in the format <code>ServerName-yyyyMMddHHmmssSSS</code>. '
     DeleteServerResponse:
       type: object
       properties: {}
@@ -1347,16 +1316,14 @@ components:
       title: DeleteServerRequest
       properties:
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/ServerName'
-            - description: The ID of the server to delete.
+          $ref: '#/components/schemas/ServerName'
+          description: The ID of the server to delete.
     DescribeAccountAttributesResponse:
       type: object
       properties:
         Attributes:
-          allOf:
-            - $ref: '#/components/schemas/AccountAttributes'
-            - description: ' The attributes that are currently set for the account. '
+          $ref: '#/components/schemas/AccountAttributes'
+          description: ' The attributes that are currently set for the account. '
     DescribeAccountAttributesRequest:
       type: object
       title: DescribeAccountAttributesRequest
@@ -1365,45 +1332,37 @@ components:
       type: object
       properties:
         Backups:
-          allOf:
-            - $ref: '#/components/schemas/Backups'
-            - description: 'Contains the response to a <code>DescribeBackups</code> request. '
+          $ref: '#/components/schemas/Backups'
+          description: 'Contains the response to a <code>DescribeBackups</code> request. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: This is not currently implemented for <code>DescribeBackups</code> requests.
+          $ref: '#/components/schemas/String'
+          description: This is not currently implemented for <code>DescribeBackups</code> requests.
     DescribeBackupsRequest:
       type: object
       title: DescribeBackupsRequest
       properties:
         BackupId:
-          allOf:
-            - $ref: '#/components/schemas/BackupId'
-            - description: 'Describes a single backup. '
+          $ref: '#/components/schemas/BackupId'
+          description: 'Describes a single backup. '
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/ServerName'
-            - description: 'Returns backups for the server with the specified ServerName. '
+          $ref: '#/components/schemas/ServerName'
+          description: 'Returns backups for the server with the specified ServerName. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: This is not currently implemented for <code>DescribeBackups</code> requests.
+          $ref: '#/components/schemas/NextToken'
+          description: This is not currently implemented for <code>DescribeBackups</code> requests.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: This is not currently implemented for <code>DescribeBackups</code> requests.
+          $ref: '#/components/schemas/MaxResults'
+          description: This is not currently implemented for <code>DescribeBackups</code> requests.
     InvalidNextTokenException: {}
     DescribeEventsResponse:
       type: object
       properties:
         ServerEvents:
-          allOf:
-            - $ref: '#/components/schemas/ServerEvents'
-            - description: 'Contains the response to a <code>DescribeEvents</code> request. '
+          $ref: '#/components/schemas/ServerEvents'
+          description: 'Contains the response to a <code>DescribeEvents</code> request. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call <code>DescribeEvents</code> again, and assign the token from the previous results as the value of the <code>nextToken</code> parameter. If there are no more results, the response object''s <code>nextToken</code> parameter value is <code>null</code>. Setting a <code>nextToken</code> value that was not returned in your previous results causes an <code>InvalidNextTokenException</code> to occur. '
+          $ref: '#/components/schemas/String'
+          description: 'NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call <code>DescribeEvents</code> again, and assign the token from the previous results as the value of the <code>nextToken</code> parameter. If there are no more results, the response object''s <code>nextToken</code> parameter value is <code>null</code>. Setting a <code>nextToken</code> value that was not returned in your previous results causes an <code>InvalidNextTokenException</code> to occur. '
     DescribeEventsRequest:
       type: object
       required:
@@ -1411,28 +1370,23 @@ components:
       title: DescribeEventsRequest
       properties:
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/ServerName'
-            - description: The name of the server for which you want to view events.
+          $ref: '#/components/schemas/ServerName'
+          description: The name of the server for which you want to view events.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call <code>DescribeEvents</code> again, and assign the token from the previous results as the value of the <code>nextToken</code> parameter. If there are no more results, the response object''s <code>nextToken</code> parameter value is <code>null</code>. Setting a <code>nextToken</code> value that was not returned in your previous results causes an <code>InvalidNextTokenException</code> to occur. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call <code>DescribeEvents</code> again, and assign the token from the previous results as the value of the <code>nextToken</code> parameter. If there are no more results, the response object''s <code>nextToken</code> parameter value is <code>null</code>. Setting a <code>nextToken</code> value that was not returned in your previous results causes an <code>InvalidNextTokenException</code> to occur. '
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'To receive a paginated response, use this parameter to specify the maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results. '
+          $ref: '#/components/schemas/MaxResults'
+          description: 'To receive a paginated response, use this parameter to specify the maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results. '
     DescribeNodeAssociationStatusResponse:
       type: object
       properties:
         NodeAssociationStatus:
-          allOf:
-            - $ref: '#/components/schemas/NodeAssociationStatus'
-            - description: '<p>The status of the association or disassociation request. </p> <p class="title"> <b>Possible values:</b> </p> <ul> <li> <p> <code>SUCCESS</code>: The association or disassociation succeeded. </p> </li> <li> <p> <code>FAILED</code>: The association or disassociation failed. </p> </li> <li> <p> <code>IN_PROGRESS</code>: The association or disassociation is still in progress. </p> </li> </ul>'
+          $ref: '#/components/schemas/NodeAssociationStatus'
+          description: '<p>The status of the association or disassociation request. </p> <p class="title"> <b>Possible values:</b> </p> <ul> <li> <p> <code>SUCCESS</code>: The association or disassociation succeeded. </p> </li> <li> <p> <code>FAILED</code>: The association or disassociation failed. </p> </li> <li> <p> <code>IN_PROGRESS</code>: The association or disassociation is still in progress. </p> </li> </ul>'
         EngineAttributes:
-          allOf:
-            - $ref: '#/components/schemas/EngineAttributes'
-            - description: 'Attributes specific to the node association. In Puppet, the attibute PUPPET_NODE_CERT contains the signed certificate (the result of the CSR). '
+          $ref: '#/components/schemas/EngineAttributes'
+          description: 'Attributes specific to the node association. In Puppet, the attibute PUPPET_NODE_CERT contains the signed certificate (the result of the CSR). '
     DescribeNodeAssociationStatusRequest:
       type: object
       required:
@@ -1441,47 +1395,39 @@ components:
       title: DescribeNodeAssociationStatusRequest
       properties:
         NodeAssociationStatusToken:
-          allOf:
-            - $ref: '#/components/schemas/NodeAssociationStatusToken'
-            - description: 'The token returned in either the AssociateNodeResponse or the DisassociateNodeResponse. '
+          $ref: '#/components/schemas/NodeAssociationStatusToken'
+          description: 'The token returned in either the AssociateNodeResponse or the DisassociateNodeResponse. '
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/ServerName'
-            - description: 'The name of the server from which to disassociate the node. '
+          $ref: '#/components/schemas/ServerName'
+          description: 'The name of the server from which to disassociate the node. '
     DescribeServersResponse:
       type: object
       properties:
         Servers:
-          allOf:
-            - $ref: '#/components/schemas/Servers'
-            - description: '<p>Contains the response to a <code>DescribeServers</code> request.</p> <p> <i>For Chef Automate servers:</i> If <code>DescribeServersResponse$Servers$EngineAttributes</code> includes CHEF_MAJOR_UPGRADE_AVAILABLE, you can upgrade the Chef Automate server to Chef Automate 2. To be eligible for upgrade, a server running Chef Automate 1 must have had at least one successful maintenance run after November 1, 2019.</p> <p> <i>For Puppet servers:</i> <code>DescribeServersResponse$Servers$EngineAttributes</code> contains the following two responses:</p> <ul> <li> <p> <code>PUPPET_API_CA_CERT</code>, the PEM-encoded CA certificate that is used by the Puppet API over TCP port number 8140. The CA certificate is also used to sign node certificates.</p> </li> <li> <p> <code>PUPPET_API_CRL</code>, a certificate revocation list. The certificate revocation list is for internal maintenance purposes only. For more information about the Puppet certificate revocation list, see <a href="https://puppet.com/docs/puppet/5.5/man/certificate_revocation_list.html">Man Page: puppet certificate_revocation_list</a> in the Puppet documentation.</p> </li> </ul>'
+          $ref: '#/components/schemas/Servers'
+          description: '<p>Contains the response to a <code>DescribeServers</code> request.</p> <p> <i>For Chef Automate servers:</i> If <code>DescribeServersResponse$Servers$EngineAttributes</code> includes CHEF_MAJOR_UPGRADE_AVAILABLE, you can upgrade the Chef Automate server to Chef Automate 2. To be eligible for upgrade, a server running Chef Automate 1 must have had at least one successful maintenance run after November 1, 2019.</p> <p> <i>For Puppet servers:</i> <code>DescribeServersResponse$Servers$EngineAttributes</code> contains the following two responses:</p> <ul> <li> <p> <code>PUPPET_API_CA_CERT</code>, the PEM-encoded CA certificate that is used by the Puppet API over TCP port number 8140. The CA certificate is also used to sign node certificates.</p> </li> <li> <p> <code>PUPPET_API_CRL</code>, a certificate revocation list. The certificate revocation list is for internal maintenance purposes only. For more information about the Puppet certificate revocation list, see <a href="https://puppet.com/docs/puppet/5.5/man/certificate_revocation_list.html">Man Page: puppet certificate_revocation_list</a> in the Puppet documentation.</p> </li> </ul>'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'This is not currently implemented for <code>DescribeServers</code> requests. '
+          $ref: '#/components/schemas/String'
+          description: 'This is not currently implemented for <code>DescribeServers</code> requests. '
     DescribeServersRequest:
       type: object
       title: DescribeServersRequest
       properties:
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/ServerName'
-            - description: Describes the server with the specified ServerName.
+          $ref: '#/components/schemas/ServerName'
+          description: Describes the server with the specified ServerName.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'This is not currently implemented for <code>DescribeServers</code> requests. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'This is not currently implemented for <code>DescribeServers</code> requests. '
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'This is not currently implemented for <code>DescribeServers</code> requests. '
+          $ref: '#/components/schemas/MaxResults'
+          description: 'This is not currently implemented for <code>DescribeServers</code> requests. '
     DisassociateNodeResponse:
       type: object
       properties:
         NodeAssociationStatusToken:
-          allOf:
-            - $ref: '#/components/schemas/NodeAssociationStatusToken'
-            - description: 'Contains a token which can be passed to the <code>DescribeNodeAssociationStatus</code> API call to get the status of the disassociation request. '
+          $ref: '#/components/schemas/NodeAssociationStatusToken'
+          description: 'Contains a token which can be passed to the <code>DescribeNodeAssociationStatus</code> API call to get the status of the disassociation request. '
     DisassociateNodeRequest:
       type: object
       required:
@@ -1490,28 +1436,23 @@ components:
       title: DisassociateNodeRequest
       properties:
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/ServerName'
-            - description: 'The name of the server from which to disassociate the node. '
+          $ref: '#/components/schemas/ServerName'
+          description: 'The name of the server from which to disassociate the node. '
         NodeName:
-          allOf:
-            - $ref: '#/components/schemas/NodeName'
-            - description: 'The name of the client node. '
+          $ref: '#/components/schemas/NodeName'
+          description: 'The name of the client node. '
         EngineAttributes:
-          allOf:
-            - $ref: '#/components/schemas/EngineAttributes'
-            - description: '<p>Engine attributes that are used for disassociating the node. No attributes are required for Puppet. </p> <p class="title"> <b>Attributes required in a DisassociateNode request for Chef</b> </p> <ul> <li> <p> <code>CHEF_ORGANIZATION</code>: The Chef organization with which the node was associated. By default only one organization named <code>default</code> can exist. </p> </li> </ul>'
+          $ref: '#/components/schemas/EngineAttributes'
+          description: '<p>Engine attributes that are used for disassociating the node. No attributes are required for Puppet. </p> <p class="title"> <b>Attributes required in a DisassociateNode request for Chef</b> </p> <ul> <li> <p> <code>CHEF_ORGANIZATION</code>: The Chef organization with which the node was associated. By default only one organization named <code>default</code> can exist. </p> </li> </ul>'
     ExportServerEngineAttributeResponse:
       type: object
       properties:
         EngineAttribute:
-          allOf:
-            - $ref: '#/components/schemas/EngineAttribute'
-            - description: The requested engine attribute pair with attribute name and value.
+          $ref: '#/components/schemas/EngineAttribute'
+          description: The requested engine attribute pair with attribute name and value.
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/ServerName'
-            - description: The server name used in the request.
+          $ref: '#/components/schemas/ServerName'
+          description: The server name used in the request.
     ExportServerEngineAttributeRequest:
       type: object
       required:
@@ -1520,28 +1461,23 @@ components:
       title: ExportServerEngineAttributeRequest
       properties:
         ExportAttributeName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The name of the export attribute. Currently, the supported export attribute is <code>Userdata</code>. This exports a user data script that includes parameters and values provided in the <code>InputAttributes</code> list.'
+          $ref: '#/components/schemas/String'
+          description: 'The name of the export attribute. Currently, the supported export attribute is <code>Userdata</code>. This exports a user data script that includes parameters and values provided in the <code>InputAttributes</code> list.'
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/ServerName'
-            - description: The name of the server from which you are exporting the attribute.
+          $ref: '#/components/schemas/ServerName'
+          description: The name of the server from which you are exporting the attribute.
         InputAttributes:
-          allOf:
-            - $ref: '#/components/schemas/EngineAttributes'
-            - description: '<p>The list of engine attributes. The list type is <code>EngineAttribute</code>. An <code>EngineAttribute</code> list item is a pair that includes an attribute name and its value. For the <code>Userdata</code> ExportAttributeName, the following are supported engine attribute names.</p> <ul> <li> <p> <b>RunList</b> In Chef, a list of roles or recipes that are run in the specified order. In Puppet, this parameter is ignored.</p> </li> <li> <p> <b>OrganizationName</b> In Chef, an organization name. AWS OpsWorks for Chef Automate always creates the organization <code>default</code>. In Puppet, this parameter is ignored.</p> </li> <li> <p> <b>NodeEnvironment</b> In Chef, a node environment (for example, development, staging, or one-box). In Puppet, this parameter is ignored.</p> </li> <li> <p> <b>NodeClientVersion</b> In Chef, the version of the Chef engine (three numbers separated by dots, such as 13.8.5). If this attribute is empty, OpsWorks for Chef Automate uses the most current version. In Puppet, this parameter is ignored.</p> </li> </ul>'
+          $ref: '#/components/schemas/EngineAttributes'
+          description: '<p>The list of engine attributes. The list type is <code>EngineAttribute</code>. An <code>EngineAttribute</code> list item is a pair that includes an attribute name and its value. For the <code>Userdata</code> ExportAttributeName, the following are supported engine attribute names.</p> <ul> <li> <p> <b>RunList</b> In Chef, a list of roles or recipes that are run in the specified order. In Puppet, this parameter is ignored.</p> </li> <li> <p> <b>OrganizationName</b> In Chef, an organization name. AWS OpsWorks for Chef Automate always creates the organization <code>default</code>. In Puppet, this parameter is ignored.</p> </li> <li> <p> <b>NodeEnvironment</b> In Chef, a node environment (for example, development, staging, or one-box). In Puppet, this parameter is ignored.</p> </li> <li> <p> <b>NodeClientVersion</b> In Chef, the version of the Chef engine (three numbers separated by dots, such as 13.8.5). If this attribute is empty, OpsWorks for Chef Automate uses the most current version. In Puppet, this parameter is ignored.</p> </li> </ul>'
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: Tags that have been applied to the resource.
+          $ref: '#/components/schemas/TagList'
+          description: Tags that have been applied to the resource.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token that you can use as the value of <code>NextToken</code> in subsequent calls to the API to show more results.
+          $ref: '#/components/schemas/NextToken'
+          description: A token that you can use as the value of <code>NextToken</code> in subsequent calls to the API to show more results.
     ListTagsForResourceRequest:
       type: object
       required:
@@ -1549,17 +1485,14 @@ components:
       title: ListTagsForResourceRequest
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/AWSOpsWorksCMResourceArn'
-            - description: 'The Amazon Resource Number (ARN) of an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server for which you want to show applied tags. For example, <code>arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE</code>.'
+          $ref: '#/components/schemas/AWSOpsWorksCMResourceArn'
+          description: 'The Amazon Resource Number (ARN) of an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server for which you want to show applied tags. For example, <code>arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE</code>.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call <code>ListTagsForResource</code> again, and assign the token from the previous results as the value of the <code>nextToken</code> parameter. If there are no more results, the response object''s <code>nextToken</code> parameter value is <code>null</code>. Setting a <code>nextToken</code> value that was not returned in your previous results causes an <code>InvalidNextTokenException</code> to occur.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call <code>ListTagsForResource</code> again, and assign the token from the previous results as the value of the <code>nextToken</code> parameter. If there are no more results, the response object''s <code>nextToken</code> parameter value is <code>null</code>. Setting a <code>nextToken</code> value that was not returned in your previous results causes an <code>InvalidNextTokenException</code> to occur.'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'To receive a paginated response, use this parameter to specify the maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.'
+          $ref: '#/components/schemas/MaxResults'
+          description: 'To receive a paginated response, use this parameter to specify the maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.'
     RestoreServerResponse:
       type: object
       properties:
@@ -1573,28 +1506,23 @@ components:
       title: RestoreServerRequest
       properties:
         BackupId:
-          allOf:
-            - $ref: '#/components/schemas/BackupId'
-            - description: ' The ID of the backup that you want to use to restore a server. '
+          $ref: '#/components/schemas/BackupId'
+          description: ' The ID of the backup that you want to use to restore a server. '
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/ServerName'
-            - description: ' The name of the server that you want to restore. '
+          $ref: '#/components/schemas/ServerName'
+          description: ' The name of the server that you want to restore. '
         InstanceType:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The type of instance to restore. Valid values must be specified in the following format: <code>^([cm][34]|t2).*</code> For example, <code>m5.large</code>. Valid values are <code>m5.large</code>, <code>r5.xlarge</code>, and <code>r5.2xlarge</code>. If you do not specify this parameter, RestoreServer uses the instance type from the specified backup. '
+          $ref: '#/components/schemas/String'
+          description: ' The type of instance to restore. Valid values must be specified in the following format: <code>^([cm][34]|t2).*</code> For example, <code>m5.large</code>. Valid values are <code>m5.large</code>, <code>r5.xlarge</code>, and <code>r5.2xlarge</code>. If you do not specify this parameter, RestoreServer uses the instance type from the specified backup. '
         KeyPair:
-          allOf:
-            - $ref: '#/components/schemas/KeyPair'
-            - description: ' The name of the key pair to set on the new EC2 instance. This can be helpful if the administrator no longer has the SSH key. '
+          $ref: '#/components/schemas/KeyPair'
+          description: ' The name of the key pair to set on the new EC2 instance. This can be helpful if the administrator no longer has the SSH key. '
     StartMaintenanceResponse:
       type: object
       properties:
         Server:
-          allOf:
-            - $ref: '#/components/schemas/Server'
-            - description: 'Contains the response to a <code>StartMaintenance</code> request. '
+          $ref: '#/components/schemas/Server'
+          description: 'Contains the response to a <code>StartMaintenance</code> request. '
     StartMaintenanceRequest:
       type: object
       required:
@@ -1602,13 +1530,11 @@ components:
       title: StartMaintenanceRequest
       properties:
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/ServerName'
-            - description: 'The name of the server on which to run maintenance. '
+          $ref: '#/components/schemas/ServerName'
+          description: 'The name of the server on which to run maintenance. '
         EngineAttributes:
-          allOf:
-            - $ref: '#/components/schemas/EngineAttributes'
-            - description: '<p>Engine attributes that are specific to the server on which you want to run maintenance.</p> <p class="title"> <b>Attributes accepted in a StartMaintenance request for Chef</b> </p> <ul> <li> <p> <code>CHEF_MAJOR_UPGRADE</code>: If a Chef Automate server is eligible for upgrade to Chef Automate 2, add this engine attribute to a <code>StartMaintenance</code> request and set the value to <code>true</code> to upgrade the server to Chef Automate 2. For more information, see <a href="https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html">Upgrade an AWS OpsWorks for Chef Automate Server to Chef Automate 2</a>. </p> </li> </ul>'
+          $ref: '#/components/schemas/EngineAttributes'
+          description: '<p>Engine attributes that are specific to the server on which you want to run maintenance.</p> <p class="title"> <b>Attributes accepted in a StartMaintenance request for Chef</b> </p> <ul> <li> <p> <code>CHEF_MAJOR_UPGRADE</code>: If a Chef Automate server is eligible for upgrade to Chef Automate 2, add this engine attribute to a <code>StartMaintenance</code> request and set the value to <code>true</code> to upgrade the server to Chef Automate 2. For more information, see <a href="https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html">Upgrade an AWS OpsWorks for Chef Automate Server to Chef Automate 2</a>. </p> </li> </ul>'
     TagResourceResponse:
       type: object
       properties: {}
@@ -1620,13 +1546,11 @@ components:
       title: TagResourceRequest
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/AWSOpsWorksCMResourceArn'
-            - description: 'The Amazon Resource Number (ARN) of a resource to which you want to apply tags. For example, <code>arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE</code>.'
+          $ref: '#/components/schemas/AWSOpsWorksCMResourceArn'
+          description: 'The Amazon Resource Number (ARN) of a resource to which you want to apply tags. For example, <code>arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE</code>.'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: '<p>A map that contains tag keys and tag values to attach to AWS OpsWorks-CM servers or backups.</p> <ul> <li> <p>The key cannot be empty.</p> </li> <li> <p>The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code> </p> </li> <li> <p>The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code> </p> </li> <li> <p>Leading and trailing white spaces are trimmed from both the key and value.</p> </li> <li> <p>A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM server or backup.</p> </li> </ul>'
+          $ref: '#/components/schemas/TagList'
+          description: '<p>A map that contains tag keys and tag values to attach to AWS OpsWorks-CM servers or backups.</p> <ul> <li> <p>The key cannot be empty.</p> </li> <li> <p>The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code> </p> </li> <li> <p>The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code> </p> </li> <li> <p>Leading and trailing white spaces are trimmed from both the key and value.</p> </li> <li> <p>A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM server or backup.</p> </li> </ul>'
     UntagResourceResponse:
       type: object
       properties: {}
@@ -1638,20 +1562,17 @@ components:
       title: UntagResourceRequest
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/AWSOpsWorksCMResourceArn'
-            - description: 'The Amazon Resource Number (ARN) of a resource from which you want to remove tags. For example, <code>arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE</code>.'
+          $ref: '#/components/schemas/AWSOpsWorksCMResourceArn'
+          description: 'The Amazon Resource Number (ARN) of a resource from which you want to remove tags. For example, <code>arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE</code>.'
         TagKeys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyList'
-            - description: The keys of tags that you want to remove.
+          $ref: '#/components/schemas/TagKeyList'
+          description: The keys of tags that you want to remove.
     UpdateServerResponse:
       type: object
       properties:
         Server:
-          allOf:
-            - $ref: '#/components/schemas/Server'
-            - description: 'Contains the response to a <code>UpdateServer</code> request. '
+          $ref: '#/components/schemas/Server'
+          description: 'Contains the response to a <code>UpdateServer</code> request. '
     UpdateServerRequest:
       type: object
       required:
@@ -1659,17 +1580,14 @@ components:
       title: UpdateServerRequest
       properties:
         DisableAutomatedBackup:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'Setting DisableAutomatedBackup to <code>true</code> disables automated or scheduled backups. Automated backups are enabled by default. '
+          $ref: '#/components/schemas/Boolean'
+          description: 'Setting DisableAutomatedBackup to <code>true</code> disables automated or scheduled backups. Automated backups are enabled by default. '
         BackupRetentionCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'Sets the number of automated backups that you want to keep. '
+          $ref: '#/components/schemas/Integer'
+          description: 'Sets the number of automated backups that you want to keep. '
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/ServerName'
-            - description: 'The name of the server to update. '
+          $ref: '#/components/schemas/ServerName'
+          description: 'The name of the server to update. '
         PreferredMaintenanceWindow:
           $ref: '#/components/schemas/TimeWindowDefinition'
         PreferredBackupWindow:
@@ -1678,9 +1596,8 @@ components:
       type: object
       properties:
         Server:
-          allOf:
-            - $ref: '#/components/schemas/Server'
-            - description: 'Contains the response to an <code>UpdateServerEngineAttributes</code> request. '
+          $ref: '#/components/schemas/Server'
+          description: 'Contains the response to an <code>UpdateServerEngineAttributes</code> request. '
     UpdateServerEngineAttributesRequest:
       type: object
       required:
@@ -1689,17 +1606,14 @@ components:
       title: UpdateServerEngineAttributesRequest
       properties:
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/ServerName'
-            - description: 'The name of the server to update. '
+          $ref: '#/components/schemas/ServerName'
+          description: 'The name of the server to update. '
         AttributeName:
-          allOf:
-            - $ref: '#/components/schemas/AttributeName'
-            - description: 'The name of the engine attribute to update. '
+          $ref: '#/components/schemas/AttributeName'
+          description: 'The name of the engine attribute to update. '
         AttributeValue:
-          allOf:
-            - $ref: '#/components/schemas/AttributeValue'
-            - description: 'The value to set for the attribute. '
+          $ref: '#/components/schemas/AttributeValue'
+          description: 'The value to set for the attribute. '
     AWSOpsWorksCMResourceArn:
       type: string
       pattern: 'arn:aws.*:opsworks-cm:.*:[0-9]{12}:.*'
@@ -1713,17 +1627,14 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: '<p> The attribute name. The following are supported attribute names. </p> <ul> <li> <p> <i>ServerLimit:</i> The number of current servers/maximum number of servers allowed. By default, you can have a maximum of 10 servers. </p> </li> <li> <p> <i>ManualBackupLimit:</i> The number of current manual backups/maximum number of backups allowed. By default, you can have a maximum of 50 manual backups saved. </p> </li> </ul>'
+          $ref: '#/components/schemas/String'
+          description: '<p> The attribute name. The following are supported attribute names. </p> <ul> <li> <p> <i>ServerLimit:</i> The number of current servers/maximum number of servers allowed. By default, you can have a maximum of 10 servers. </p> </li> <li> <p> <i>ManualBackupLimit:</i> The number of current manual backups/maximum number of backups allowed. By default, you can have a maximum of 50 manual backups saved. </p> </li> </ul>'
         Maximum:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The maximum allowed value. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The maximum allowed value. '
         Used:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The current usage, such as the current number of servers that are associated with the account. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The current usage, such as the current number of servers that are associated with the account. '
       description: 'Stores account attributes. '
     AccountAttributes:
       type: array
@@ -1789,57 +1700,44 @@ components:
       type: object
       properties:
         BackupArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The ARN of the backup. '
+          $ref: '#/components/schemas/String'
+          description: 'The ARN of the backup. '
         BackupId:
-          allOf:
-            - $ref: '#/components/schemas/BackupId'
-            - description: ' The generated ID of the backup. Example: <code>myServerName-yyyyMMddHHmmssSSS</code> '
+          $ref: '#/components/schemas/BackupId'
+          description: ' The generated ID of the backup. Example: <code>myServerName-yyyyMMddHHmmssSSS</code> '
         BackupType:
-          allOf:
-            - $ref: '#/components/schemas/BackupType'
-            - description: ' The backup type. Valid values are <code>automated</code> or <code>manual</code>. '
+          $ref: '#/components/schemas/BackupType'
+          description: ' The backup type. Valid values are <code>automated</code> or <code>manual</code>. '
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time stamp when the backup was created in the database. Example: <code>2016-07-29T13:38:47.520Z</code> '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time stamp when the backup was created in the database. Example: <code>2016-07-29T13:38:47.520Z</code> '
         Description:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' A user-provided description for a manual backup. This field is empty for automated backups. '
+          $ref: '#/components/schemas/String'
+          description: ' A user-provided description for a manual backup. This field is empty for automated backups. '
         Engine:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The engine type that is obtained from the server when the backup is created. '
+          $ref: '#/components/schemas/String'
+          description: ' The engine type that is obtained from the server when the backup is created. '
         EngineModel:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The engine model that is obtained from the server when the backup is created. '
+          $ref: '#/components/schemas/String'
+          description: ' The engine model that is obtained from the server when the backup is created. '
         EngineVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The engine version that is obtained from the server when the backup is created. '
+          $ref: '#/components/schemas/String'
+          description: ' The engine version that is obtained from the server when the backup is created. '
         InstanceProfileArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The EC2 instance profile ARN that is obtained from the server when the backup is created. Because this value is stored, you are not required to provide the InstanceProfileArn again if you restore a backup. '
+          $ref: '#/components/schemas/String'
+          description: ' The EC2 instance profile ARN that is obtained from the server when the backup is created. Because this value is stored, you are not required to provide the InstanceProfileArn again if you restore a backup. '
         InstanceType:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The instance type that is obtained from the server when the backup is created. '
+          $ref: '#/components/schemas/String'
+          description: ' The instance type that is obtained from the server when the backup is created. '
         KeyPair:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The key pair that is obtained from the server when the backup is created. '
+          $ref: '#/components/schemas/String'
+          description: ' The key pair that is obtained from the server when the backup is created. '
         PreferredBackupWindow:
-          allOf:
-            - $ref: '#/components/schemas/TimeWindowDefinition'
-            - description: ' The preferred backup period that is obtained from the server when the backup is created. '
+          $ref: '#/components/schemas/TimeWindowDefinition'
+          description: ' The preferred backup period that is obtained from the server when the backup is created. '
         PreferredMaintenanceWindow:
-          allOf:
-            - $ref: '#/components/schemas/TimeWindowDefinition'
-            - description: ' The preferred maintenance period that is obtained from the server when the backup is created. '
+          $ref: '#/components/schemas/TimeWindowDefinition'
+          description: ' The preferred maintenance period that is obtained from the server when the backup is created. '
         S3DataSize:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -1851,41 +1749,32 @@ components:
             - deprecated: true
               description: ' This field is deprecated and is no longer used. '
         S3LogUrl:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The Amazon S3 URL of the backup''s log file. '
+          $ref: '#/components/schemas/String'
+          description: ' The Amazon S3 URL of the backup''s log file. '
         SecurityGroupIds:
-          allOf:
-            - $ref: '#/components/schemas/Strings'
-            - description: ' The security group IDs that are obtained from the server when the backup is created. '
+          $ref: '#/components/schemas/Strings'
+          description: ' The security group IDs that are obtained from the server when the backup is created. '
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/ServerName'
-            - description: ' The name of the server from which the backup was made. '
+          $ref: '#/components/schemas/ServerName'
+          description: ' The name of the server from which the backup was made. '
         ServiceRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The service role ARN that is obtained from the server when the backup is created. '
+          $ref: '#/components/schemas/String'
+          description: ' The service role ARN that is obtained from the server when the backup is created. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/BackupStatus'
-            - description: 'The status of a backup while in progress. '
+          $ref: '#/components/schemas/BackupStatus'
+          description: 'The status of a backup while in progress. '
         StatusDescription:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' An informational message about backup status. '
+          $ref: '#/components/schemas/String'
+          description: ' An informational message about backup status. '
         SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/Strings'
-            - description: ' The subnet IDs that are obtained from the server when the backup is created. '
+          $ref: '#/components/schemas/Strings'
+          description: ' The subnet IDs that are obtained from the server when the backup is created. '
         ToolsVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The version of AWS OpsWorks CM-specific tools that is obtained from the server when the backup is created. '
+          $ref: '#/components/schemas/String'
+          description: ' The version of AWS OpsWorks CM-specific tools that is obtained from the server when the backup is created. '
         UserArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The IAM user ARN of the requester for manual backups. This field is empty for automated backups. '
+          $ref: '#/components/schemas/String'
+          description: ' The IAM user ARN of the requester for manual backups. This field is empty for automated backups. '
       description: 'Describes a single backup. '
     BackupRetentionCountDefinition:
       type: integer
@@ -1931,101 +1820,77 @@ components:
       type: object
       properties:
         AssociatePublicIpAddress:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'Associate a public IP address with a server that you are launching. '
+          $ref: '#/components/schemas/Boolean'
+          description: 'Associate a public IP address with a server that you are launching. '
         BackupRetentionCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'The number of automated backups to keep. '
+          $ref: '#/components/schemas/Integer'
+          description: 'The number of automated backups to keep. '
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The name of the server. '
+          $ref: '#/components/schemas/String'
+          description: 'The name of the server. '
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Time stamp of server creation. Example <code>2016-07-29T13:38:47.520Z</code> '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Time stamp of server creation. Example <code>2016-07-29T13:38:47.520Z</code> '
         CloudFormationStackArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The ARN of the CloudFormation stack that was used to create the server. '
+          $ref: '#/components/schemas/String'
+          description: 'The ARN of the CloudFormation stack that was used to create the server. '
         CustomDomain:
-          allOf:
-            - $ref: '#/components/schemas/CustomDomain'
-            - description: 'An optional public endpoint of a server, such as <code>https://aws.my-company.com</code>. You cannot access the server by using the <code>Endpoint</code> value if the server has a <code>CustomDomain</code> specified.'
+          $ref: '#/components/schemas/CustomDomain'
+          description: 'An optional public endpoint of a server, such as <code>https://aws.my-company.com</code>. You cannot access the server by using the <code>Endpoint</code> value if the server has a <code>CustomDomain</code> specified.'
         DisableAutomatedBackup:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'Disables automated backups. The number of stored backups is dependent on the value of PreferredBackupCount. '
+          $ref: '#/components/schemas/Boolean'
+          description: 'Disables automated backups. The number of stored backups is dependent on the value of PreferredBackupCount. '
         Endpoint:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' A DNS name that can be used to access the engine. Example: <code>myserver-asdfghjkl.us-east-1.opsworks.io</code>. You cannot access the server by using the <code>Endpoint</code> value if the server has a <code>CustomDomain</code> specified. '
+          $ref: '#/components/schemas/String'
+          description: ' A DNS name that can be used to access the engine. Example: <code>myserver-asdfghjkl.us-east-1.opsworks.io</code>. You cannot access the server by using the <code>Endpoint</code> value if the server has a <code>CustomDomain</code> specified. '
         Engine:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The engine type of the server. Valid values in this release include <code>ChefAutomate</code> and <code>Puppet</code>. '
+          $ref: '#/components/schemas/String'
+          description: 'The engine type of the server. Valid values in this release include <code>ChefAutomate</code> and <code>Puppet</code>. '
         EngineModel:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The engine model of the server. Valid values in this release include <code>Monolithic</code> for Puppet and <code>Single</code> for Chef. '
+          $ref: '#/components/schemas/String'
+          description: 'The engine model of the server. Valid values in this release include <code>Monolithic</code> for Puppet and <code>Single</code> for Chef. '
         EngineAttributes:
-          allOf:
-            - $ref: '#/components/schemas/EngineAttributes'
-            - description: '<p>The response of a createServer() request returns the master credential to access the server in EngineAttributes. These credentials are not stored by AWS OpsWorks CM; they are returned only as part of the result of createServer(). </p> <p class="title"> <b>Attributes returned in a createServer response for Chef</b> </p> <ul> <li> <p> <code>CHEF_AUTOMATE_PIVOTAL_KEY</code>: A base64-encoded RSA private key that is generated by AWS OpsWorks for Chef Automate. This private key is required to access the Chef API.</p> </li> <li> <p> <code>CHEF_STARTER_KIT</code>: A base64-encoded ZIP file. The ZIP file contains a Chef starter kit, which includes a README, a configuration file, and the required RSA private key. Save this file, unzip it, and then change to the directory where you''ve unzipped the file contents. From this directory, you can run Knife commands.</p> </li> </ul> <p class="title"> <b>Attributes returned in a createServer response for Puppet</b> </p> <ul> <li> <p> <code>PUPPET_STARTER_KIT</code>: A base64-encoded ZIP file. The ZIP file contains a Puppet starter kit, including a README and a required private key. Save this file, unzip it, and then change to the directory where you''ve unzipped the file contents.</p> </li> <li> <p> <code>PUPPET_ADMIN_PASSWORD</code>: An administrator password that you can use to sign in to the Puppet Enterprise console after the server is online.</p> </li> </ul>'
+          $ref: '#/components/schemas/EngineAttributes'
+          description: '<p>The response of a createServer() request returns the master credential to access the server in EngineAttributes. These credentials are not stored by AWS OpsWorks CM; they are returned only as part of the result of createServer(). </p> <p class="title"> <b>Attributes returned in a createServer response for Chef</b> </p> <ul> <li> <p> <code>CHEF_AUTOMATE_PIVOTAL_KEY</code>: A base64-encoded RSA private key that is generated by AWS OpsWorks for Chef Automate. This private key is required to access the Chef API.</p> </li> <li> <p> <code>CHEF_STARTER_KIT</code>: A base64-encoded ZIP file. The ZIP file contains a Chef starter kit, which includes a README, a configuration file, and the required RSA private key. Save this file, unzip it, and then change to the directory where you''ve unzipped the file contents. From this directory, you can run Knife commands.</p> </li> </ul> <p class="title"> <b>Attributes returned in a createServer response for Puppet</b> </p> <ul> <li> <p> <code>PUPPET_STARTER_KIT</code>: A base64-encoded ZIP file. The ZIP file contains a Puppet starter kit, including a README and a required private key. Save this file, unzip it, and then change to the directory where you''ve unzipped the file contents.</p> </li> <li> <p> <code>PUPPET_ADMIN_PASSWORD</code>: An administrator password that you can use to sign in to the Puppet Enterprise console after the server is online.</p> </li> </ul>'
         EngineVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The engine version of the server. For a Chef server, the valid value for EngineVersion is currently <code>2</code>. For a Puppet server, specify either <code>2019</code> or <code>2017</code>. '
+          $ref: '#/components/schemas/String'
+          description: 'The engine version of the server. For a Chef server, the valid value for EngineVersion is currently <code>2</code>. For a Puppet server, specify either <code>2019</code> or <code>2017</code>. '
         InstanceProfileArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The instance profile ARN of the server. '
+          $ref: '#/components/schemas/String'
+          description: 'The instance profile ARN of the server. '
         InstanceType:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The instance type for the server, as specified in the CloudFormation stack. This might not be the same instance type that is shown in the EC2 console. '
+          $ref: '#/components/schemas/String'
+          description: ' The instance type for the server, as specified in the CloudFormation stack. This might not be the same instance type that is shown in the EC2 console. '
         KeyPair:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The key pair associated with the server. '
+          $ref: '#/components/schemas/String'
+          description: 'The key pair associated with the server. '
         MaintenanceStatus:
-          allOf:
-            - $ref: '#/components/schemas/MaintenanceStatus'
-            - description: 'The status of the most recent server maintenance run. Shows <code>SUCCESS</code> or <code>FAILED</code>. '
+          $ref: '#/components/schemas/MaintenanceStatus'
+          description: 'The status of the most recent server maintenance run. Shows <code>SUCCESS</code> or <code>FAILED</code>. '
         PreferredMaintenanceWindow:
-          allOf:
-            - $ref: '#/components/schemas/TimeWindowDefinition'
-            - description: 'The preferred maintenance period specified for the server. '
+          $ref: '#/components/schemas/TimeWindowDefinition'
+          description: 'The preferred maintenance period specified for the server. '
         PreferredBackupWindow:
-          allOf:
-            - $ref: '#/components/schemas/TimeWindowDefinition'
-            - description: 'The preferred backup period specified for the server. '
+          $ref: '#/components/schemas/TimeWindowDefinition'
+          description: 'The preferred backup period specified for the server. '
         SecurityGroupIds:
-          allOf:
-            - $ref: '#/components/schemas/Strings'
-            - description: ' The security group IDs for the server, as specified in the CloudFormation stack. These might not be the same security groups that are shown in the EC2 console. '
+          $ref: '#/components/schemas/Strings'
+          description: ' The security group IDs for the server, as specified in the CloudFormation stack. These might not be the same security groups that are shown in the EC2 console. '
         ServiceRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The service role ARN used to create the server. '
+          $ref: '#/components/schemas/String'
+          description: 'The service role ARN used to create the server. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ServerStatus'
-            - description: ' The server''s status. This field displays the states of actions in progress, such as creating, running, or backing up the server, as well as the server''s health state. '
+          $ref: '#/components/schemas/ServerStatus'
+          description: ' The server''s status. This field displays the states of actions in progress, such as creating, running, or backing up the server, as well as the server''s health state. '
         StatusReason:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' Depending on the server status, this field has either a human-readable message (such as a create or backup error), or an escaped block of JSON (used for health check results). '
+          $ref: '#/components/schemas/String'
+          description: ' Depending on the server status, this field has either a human-readable message (such as a create or backup error), or an escaped block of JSON (used for health check results). '
         SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/Strings'
-            - description: ' The subnet IDs specified in a CreateServer request. '
+          $ref: '#/components/schemas/Strings'
+          description: ' The subnet IDs specified in a CreateServer request. '
         ServerArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The ARN of the server. '
+          $ref: '#/components/schemas/String'
+          description: 'The ARN of the server. '
       description: 'Describes a configuration management server. '
     NextToken:
       type: string
@@ -2062,13 +1927,11 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/EngineAttributeName'
-            - description: 'The name of the engine attribute. '
+          $ref: '#/components/schemas/EngineAttributeName'
+          description: 'The name of the engine attribute. '
         Value:
-          allOf:
-            - $ref: '#/components/schemas/EngineAttributeValue'
-            - description: 'The value of the engine attribute. '
+          $ref: '#/components/schemas/EngineAttributeValue'
+          description: 'The value of the engine attribute. '
       description: 'A name and value pair that is specific to the engine of the server. '
     MaintenanceStatus:
       type: string
@@ -2095,21 +1958,17 @@ components:
       type: object
       properties:
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time when the event occurred. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time when the event occurred. '
         ServerName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The name of the server on or for which the event occurred. '
+          $ref: '#/components/schemas/String'
+          description: 'The name of the server on or for which the event occurred. '
         Message:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A human-readable informational or status message.
+          $ref: '#/components/schemas/String'
+          description: A human-readable informational or status message.
         LogUrl:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon S3 URL of the event's log file.
+          $ref: '#/components/schemas/String'
+          description: The Amazon S3 URL of the event's log file.
       description: 'An event that is related to the server, such as the start of maintenance or backup. '
     TagKey:
       type: string
@@ -2128,13 +1987,11 @@ components:
         - Value
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: 'A tag key, such as <code>Stage</code> or <code>Name</code>. A tag key cannot be empty. The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code> '
+          $ref: '#/components/schemas/TagKey'
+          description: 'A tag key, such as <code>Stage</code> or <code>Name</code>. A tag key cannot be empty. The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code> '
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: 'An optional tag value, such as <code>Production</code> or <code>test-owcm-server</code>. The value can be a maximum of 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code> '
+          $ref: '#/components/schemas/TagValue'
+          description: 'An optional tag value, such as <code>Production</code> or <code>test-owcm-server</code>. The value can be a maximum of 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code> '
       description: A map that contains tag keys and tag values to attach to an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server. Leading and trailing white spaces are trimmed from both the key and value. A maximum of 50 user-applied tags is allowed for tag-supported AWS OpsWorks-CM resources.
     TagKeyList:
       type: array

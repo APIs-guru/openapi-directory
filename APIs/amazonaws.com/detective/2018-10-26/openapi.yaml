@@ -1043,9 +1043,8 @@ components:
       type: object
       properties:
         GraphArn:
-          allOf:
-            - $ref: '#/components/schemas/GraphArn'
-            - description: The ARN of the new behavior graph.
+          $ref: '#/components/schemas/GraphArn'
+          description: The ARN of the new behavior graph.
     TagValue:
       type: string
       maxLength: 256
@@ -1054,13 +1053,11 @@ components:
       type: object
       properties:
         Members:
-          allOf:
-            - $ref: '#/components/schemas/MemberDetailList'
-            - description: 'The set of member account invitation requests that Detective was able to process. This includes accounts that are being verified, that failed verification, and that passed verification and are being sent an invitation.'
+          $ref: '#/components/schemas/MemberDetailList'
+          description: 'The set of member account invitation requests that Detective was able to process. This includes accounts that are being verified, that failed verification, and that passed verification and are being sent an invitation.'
         UnprocessedAccounts:
-          allOf:
-            - $ref: '#/components/schemas/UnprocessedAccountList'
-            - description: 'The list of accounts for which Detective was unable to process the invitation request. For each account, the list provides the reason why the request could not be processed. The list includes accounts that are already member accounts in the behavior graph.'
+          $ref: '#/components/schemas/UnprocessedAccountList'
+          description: 'The list of accounts for which Detective was unable to process the invitation request. For each account, the list provides the reason why the request could not be processed. The list includes accounts that are already member accounts in the behavior graph.'
     Account:
       type: object
       required:
@@ -1068,25 +1065,21 @@ components:
         - EmailAddress
       properties:
         AccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: The account identifier of the AWS account.
+          $ref: '#/components/schemas/AccountId'
+          description: The account identifier of the AWS account.
         EmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/EmailAddress'
-            - description: The AWS account root user email address for the AWS account.
+          $ref: '#/components/schemas/EmailAddress'
+          description: The AWS account root user email address for the AWS account.
       description: An AWS account that is the administrator account of or a member of a behavior graph.
     DeleteMembersResponse:
       type: object
       properties:
         AccountIds:
-          allOf:
-            - $ref: '#/components/schemas/AccountIdList'
-            - description: The list of AWS account identifiers for the member accounts that Detective successfully deleted from the behavior graph.
+          $ref: '#/components/schemas/AccountIdList'
+          description: The list of AWS account identifiers for the member accounts that Detective successfully deleted from the behavior graph.
         UnprocessedAccounts:
-          allOf:
-            - $ref: '#/components/schemas/UnprocessedAccountList'
-            - description: 'The list of member accounts that Detective was not able to delete from the behavior graph. For each member account, provides the reason that the deletion could not be processed.'
+          $ref: '#/components/schemas/UnprocessedAccountList'
+          description: 'The list of member accounts that Detective was not able to delete from the behavior graph. For each member account, provides the reason that the deletion could not be processed.'
     AccountId:
       type: string
       pattern: '^[0-9]+$'
@@ -1096,53 +1089,44 @@ components:
       type: object
       properties:
         MemberDetails:
-          allOf:
-            - $ref: '#/components/schemas/MemberDetailList'
-            - description: The member account details that Detective is returning in response to the request.
+          $ref: '#/components/schemas/MemberDetailList'
+          description: The member account details that Detective is returning in response to the request.
         UnprocessedAccounts:
-          allOf:
-            - $ref: '#/components/schemas/UnprocessedAccountList'
-            - description: '<p>The requested member accounts for which Detective was unable to return member details.</p> <p>For each account, provides the reason why the request could not be processed.</p>'
+          $ref: '#/components/schemas/UnprocessedAccountList'
+          description: '<p>The requested member accounts for which Detective was unable to return member details.</p> <p>For each account, provides the reason why the request could not be processed.</p>'
     ListGraphsResponse:
       type: object
       properties:
         GraphList:
-          allOf:
-            - $ref: '#/components/schemas/GraphList'
-            - description: A list of behavior graphs that the account is an administrator account for.
+          $ref: '#/components/schemas/GraphList'
+          description: A list of behavior graphs that the account is an administrator account for.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'If there are more behavior graphs remaining in the results, then this is the pagination token to use to request the next page of behavior graphs.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If there are more behavior graphs remaining in the results, then this is the pagination token to use to request the next page of behavior graphs.'
     ListInvitationsResponse:
       type: object
       properties:
         Invitations:
-          allOf:
-            - $ref: '#/components/schemas/MemberDetailList'
-            - description: The list of behavior graphs for which the member account has open or accepted invitations.
+          $ref: '#/components/schemas/MemberDetailList'
+          description: The list of behavior graphs for which the member account has open or accepted invitations.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'If there are more behavior graphs remaining in the results, then this is the pagination token to use to request the next page of behavior graphs.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If there are more behavior graphs remaining in the results, then this is the pagination token to use to request the next page of behavior graphs.'
     ListMembersResponse:
       type: object
       properties:
         MemberDetails:
-          allOf:
-            - $ref: '#/components/schemas/MemberDetailList'
-            - description: <p>The list of member accounts in the behavior graph.</p> <p>The results include member accounts that did not pass verification and member accounts that have not yet accepted the invitation to the behavior graph. The results do not include member accounts that were removed from the behavior graph.</p>
+          $ref: '#/components/schemas/MemberDetailList'
+          description: <p>The list of member accounts in the behavior graph.</p> <p>The results include member accounts that did not pass verification and member accounts that have not yet accepted the invitation to the behavior graph. The results do not include member accounts that were removed from the behavior graph.</p>
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'If there are more member accounts remaining in the results, then this is the pagination token to use to request the next page of member accounts.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If there are more member accounts remaining in the results, then this is the pagination token to use to request the next page of member accounts.'
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tag values that are assigned to the behavior graph. The request returns up to 50 tag values.
+          $ref: '#/components/schemas/TagMap'
+          description: The tag values that are assigned to the behavior graph. The request returns up to 50 tag values.
     TagResourceResponse:
       type: object
       properties: {}
@@ -1164,9 +1148,8 @@ components:
       title: AcceptInvitationRequest
       properties:
         GraphArn:
-          allOf:
-            - $ref: '#/components/schemas/GraphArn'
-            - description: <p>The ARN of the behavior graph that the member account is accepting the invitation for.</p> <p>The member account status in the behavior graph must be <code>INVITED</code>.</p>
+          $ref: '#/components/schemas/GraphArn'
+          description: <p>The ARN of the behavior graph that the member account is accepting the invitation for.</p> <p>The member account status in the behavior graph must be <code>INVITED</code>.</p>
     EmailAddress:
       type: string
       pattern: ^.+@.+$
@@ -1199,9 +1182,8 @@ components:
       title: CreateGraphRequest
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags to assign to the new behavior graph. You can add up to 50 tags. For each tag, you provide the tag key and the tag value. Each tag key can contain up to 128 characters. Each tag value can contain up to 256 characters.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags to assign to the new behavior graph. You can add up to 50 tags. For each tag, you provide the tag key and the tag value. Each tag key can contain up to 128 characters. Each tag value can contain up to 256 characters.'
     EmailMessage:
       type: string
       minLength: 1
@@ -1214,21 +1196,17 @@ components:
       title: CreateMembersRequest
       properties:
         GraphArn:
-          allOf:
-            - $ref: '#/components/schemas/GraphArn'
-            - description: The ARN of the behavior graph to invite the member accounts to contribute their data to.
+          $ref: '#/components/schemas/GraphArn'
+          description: The ARN of the behavior graph to invite the member accounts to contribute their data to.
         Message:
-          allOf:
-            - $ref: '#/components/schemas/EmailMessage'
-            - description: Customized message text to include in the invitation email message to the invited member accounts.
+          $ref: '#/components/schemas/EmailMessage'
+          description: Customized message text to include in the invitation email message to the invited member accounts.
         DisableEmailNotification:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'if set to <code>true</code>, then the member accounts do not receive email notifications. By default, this is set to <code>false</code>, and the member accounts receive email notifications.'
+          $ref: '#/components/schemas/Boolean'
+          description: 'if set to <code>true</code>, then the member accounts do not receive email notifications. By default, this is set to <code>false</code>, and the member accounts receive email notifications.'
         Accounts:
-          allOf:
-            - $ref: '#/components/schemas/AccountList'
-            - description: 'The list of AWS accounts to invite to become member accounts in the behavior graph. You can invite up to 50 accounts at a time. For each invited account, the account list contains the account identifier and the AWS account root user email address.'
+          $ref: '#/components/schemas/AccountList'
+          description: 'The list of AWS accounts to invite to become member accounts in the behavior graph. You can invite up to 50 accounts at a time. For each invited account, the account list contains the account identifier and the AWS account root user email address.'
     MemberDetailList:
       type: array
       items:
@@ -1244,9 +1222,8 @@ components:
       title: DeleteGraphRequest
       properties:
         GraphArn:
-          allOf:
-            - $ref: '#/components/schemas/GraphArn'
-            - description: The ARN of the behavior graph to disable.
+          $ref: '#/components/schemas/GraphArn'
+          description: The ARN of the behavior graph to disable.
     DeleteMembersRequest:
       type: object
       required:
@@ -1255,13 +1232,11 @@ components:
       title: DeleteMembersRequest
       properties:
         GraphArn:
-          allOf:
-            - $ref: '#/components/schemas/GraphArn'
-            - description: The ARN of the behavior graph to delete members from.
+          $ref: '#/components/schemas/GraphArn'
+          description: The ARN of the behavior graph to delete members from.
         AccountIds:
-          allOf:
-            - $ref: '#/components/schemas/AccountIdList'
-            - description: The list of AWS account identifiers for the member accounts to delete from the behavior graph. You can delete up to 50 member accounts at a time.
+          $ref: '#/components/schemas/AccountIdList'
+          description: The list of AWS account identifiers for the member accounts to delete from the behavior graph. You can delete up to 50 member accounts at a time.
     DisassociateMembershipRequest:
       type: object
       required:
@@ -1269,9 +1244,8 @@ components:
       title: DisassociateMembershipRequest
       properties:
         GraphArn:
-          allOf:
-            - $ref: '#/components/schemas/GraphArn'
-            - description: <p>The ARN of the behavior graph to remove the member account from.</p> <p>The member account's member status in the behavior graph must be <code>ENABLED</code>.</p>
+          $ref: '#/components/schemas/GraphArn'
+          description: <p>The ARN of the behavior graph to remove the member account from.</p> <p>The member account's member status in the behavior graph must be <code>ENABLED</code>.</p>
     GetMembersRequest:
       type: object
       required:
@@ -1280,13 +1254,11 @@ components:
       title: GetMembersRequest
       properties:
         GraphArn:
-          allOf:
-            - $ref: '#/components/schemas/GraphArn'
-            - description: The ARN of the behavior graph for which to request the member details.
+          $ref: '#/components/schemas/GraphArn'
+          description: The ARN of the behavior graph for which to request the member details.
         AccountIds:
-          allOf:
-            - $ref: '#/components/schemas/AccountIdList'
-            - description: <p>The list of AWS account identifiers for the member account for which to return member details. You can request details for up to 50 member accounts at a time.</p> <p>You cannot use <code>GetMembers</code> to retrieve information about member accounts that were removed from the behavior graph.</p>
+          $ref: '#/components/schemas/AccountIdList'
+          description: <p>The list of AWS account identifiers for the member account for which to return member details. You can request details for up to 50 member accounts at a time.</p> <p>You cannot use <code>GetMembers</code> to retrieve information about member accounts that were removed from the behavior graph.</p>
     Timestamp:
       type: string
       format: date-time
@@ -1294,13 +1266,11 @@ components:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/GraphArn'
-            - description: The ARN of the behavior graph.
+          $ref: '#/components/schemas/GraphArn'
+          description: The ARN of the behavior graph.
         CreatedTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date and time that the behavior graph was created. The value is in milliseconds since the epoch.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time that the behavior graph was created. The value is in milliseconds since the epoch.
       description: A behavior graph in Detective.
     GraphList:
       type: array
@@ -1319,25 +1289,21 @@ components:
       title: ListGraphsRequest
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'For requests to get the next page of results, the pagination token that was returned with the previous set of results. The initial request does not include a pagination token.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'For requests to get the next page of results, the pagination token that was returned with the previous set of results. The initial request does not include a pagination token.'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MemberResultsLimit'
-            - description: 'The maximum number of graphs to return at a time. The total must be less than the overall limit on the number of results to return, which is currently 200.'
+          $ref: '#/components/schemas/MemberResultsLimit'
+          description: 'The maximum number of graphs to return at a time. The total must be less than the overall limit on the number of results to return, which is currently 200.'
     ListInvitationsRequest:
       type: object
       title: ListInvitationsRequest
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'For requests to retrieve the next page of results, the pagination token that was returned with the previous page of results. The initial request does not include a pagination token.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'For requests to retrieve the next page of results, the pagination token that was returned with the previous page of results. The initial request does not include a pagination token.'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MemberResultsLimit'
-            - description: 'The maximum number of behavior graph invitations to return in the response. The total must be less than the overall limit on the number of results to return, which is currently 200.'
+          $ref: '#/components/schemas/MemberResultsLimit'
+          description: 'The maximum number of behavior graph invitations to return in the response. The total must be less than the overall limit on the number of results to return, which is currently 200.'
     ListMembersRequest:
       type: object
       required:
@@ -1345,17 +1311,14 @@ components:
       title: ListMembersRequest
       properties:
         GraphArn:
-          allOf:
-            - $ref: '#/components/schemas/GraphArn'
-            - description: The ARN of the behavior graph for which to retrieve the list of member accounts.
+          $ref: '#/components/schemas/GraphArn'
+          description: The ARN of the behavior graph for which to retrieve the list of member accounts.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'For requests to retrieve the next page of member account results, the pagination token that was returned with the previous page of results. The initial request does not include a pagination token.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'For requests to retrieve the next page of member account results, the pagination token that was returned with the previous page of results. The initial request does not include a pagination token.'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MemberResultsLimit'
-            - description: 'The maximum number of member accounts to include in the response. The total must be less than the overall limit on the number of results to return, which is currently 200.'
+          $ref: '#/components/schemas/MemberResultsLimit'
+          description: 'The maximum number of member accounts to include in the response. The total must be less than the overall limit on the number of results to return, which is currently 200.'
     ListTagsForResourceRequest:
       type: object
       title: ListTagsForResourceRequest
@@ -1380,50 +1343,40 @@ components:
       type: object
       properties:
         AccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: The AWS account identifier for the member account.
+          $ref: '#/components/schemas/AccountId'
+          description: The AWS account identifier for the member account.
         EmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/EmailAddress'
-            - description: The AWS account root user email address for the member account.
+          $ref: '#/components/schemas/EmailAddress'
+          description: The AWS account root user email address for the member account.
         GraphArn:
-          allOf:
-            - $ref: '#/components/schemas/GraphArn'
-            - description: The ARN of the behavior graph that the member account was invited to.
+          $ref: '#/components/schemas/GraphArn'
+          description: The ARN of the behavior graph that the member account was invited to.
         MasterId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
             - deprecated: true
               description: The AWS account identifier of the administrator account for the behavior graph.This property is deprecated. Use AdministratorId instead.
         AdministratorId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: The AWS account identifier of the administrator account for the behavior graph.
+          $ref: '#/components/schemas/AccountId'
+          description: The AWS account identifier of the administrator account for the behavior graph.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/MemberStatus'
-            - description: '<p>The current membership status of the member account. The status can have one of the following values:</p> <ul> <li> <p> <code>INVITED</code> - Indicates that the member was sent an invitation but has not yet responded.</p> </li> <li> <p> <code>VERIFICATION_IN_PROGRESS</code> - Indicates that Detective is verifying that the account identifier and email address provided for the member account match. If they do match, then Detective sends the invitation. If the email address and account identifier don''t match, then the member cannot be added to the behavior graph.</p> </li> <li> <p> <code>VERIFICATION_FAILED</code> - Indicates that the account and email address provided for the member account do not match, and Detective did not send an invitation to the account.</p> </li> <li> <p> <code>ENABLED</code> - Indicates that the member account accepted the invitation to contribute to the behavior graph.</p> </li> <li> <p> <code>ACCEPTED_BUT_DISABLED</code> - Indicates that the member account accepted the invitation but is prevented from contributing data to the behavior graph. <code>DisabledReason</code> provides the reason why the member account is not enabled.</p> </li> </ul> <p>Member accounts that declined an invitation or that were removed from the behavior graph are not included.</p>'
+          $ref: '#/components/schemas/MemberStatus'
+          description: '<p>The current membership status of the member account. The status can have one of the following values:</p> <ul> <li> <p> <code>INVITED</code> - Indicates that the member was sent an invitation but has not yet responded.</p> </li> <li> <p> <code>VERIFICATION_IN_PROGRESS</code> - Indicates that Detective is verifying that the account identifier and email address provided for the member account match. If they do match, then Detective sends the invitation. If the email address and account identifier don''t match, then the member cannot be added to the behavior graph.</p> </li> <li> <p> <code>VERIFICATION_FAILED</code> - Indicates that the account and email address provided for the member account do not match, and Detective did not send an invitation to the account.</p> </li> <li> <p> <code>ENABLED</code> - Indicates that the member account accepted the invitation to contribute to the behavior graph.</p> </li> <li> <p> <code>ACCEPTED_BUT_DISABLED</code> - Indicates that the member account accepted the invitation but is prevented from contributing data to the behavior graph. <code>DisabledReason</code> provides the reason why the member account is not enabled.</p> </li> </ul> <p>Member accounts that declined an invitation or that were removed from the behavior graph are not included.</p>'
         DisabledReason:
-          allOf:
-            - $ref: '#/components/schemas/MemberDisabledReason'
-            - description: '<p>For member accounts with a status of <code>ACCEPTED_BUT_DISABLED</code>, the reason that the member account is not enabled.</p> <p>The reason can have one of the following values:</p> <ul> <li> <p> <code>VOLUME_TOO_HIGH</code> - Indicates that adding the member account would cause the data volume for the behavior graph to be too high.</p> </li> <li> <p> <code>VOLUME_UNKNOWN</code> - Indicates that Detective is unable to verify the data volume for the member account. This is usually because the member account is not enrolled in Amazon GuardDuty. </p> </li> </ul>'
+          $ref: '#/components/schemas/MemberDisabledReason'
+          description: '<p>For member accounts with a status of <code>ACCEPTED_BUT_DISABLED</code>, the reason that the member account is not enabled.</p> <p>The reason can have one of the following values:</p> <ul> <li> <p> <code>VOLUME_TOO_HIGH</code> - Indicates that adding the member account would cause the data volume for the behavior graph to be too high.</p> </li> <li> <p> <code>VOLUME_UNKNOWN</code> - Indicates that Detective is unable to verify the data volume for the member account. This is usually because the member account is not enrolled in Amazon GuardDuty. </p> </li> </ul>'
         InvitedTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date and time that Detective sent the invitation to the member account. The value is in milliseconds since the epoch.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time that Detective sent the invitation to the member account. The value is in milliseconds since the epoch.
         UpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date and time that the member account was last updated. The value is in milliseconds since the epoch.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time that the member account was last updated. The value is in milliseconds since the epoch.
         VolumeUsageInBytes:
-          allOf:
-            - $ref: '#/components/schemas/ByteValue'
-            - description: The data volume in bytes per day for the member account.
+          $ref: '#/components/schemas/ByteValue'
+          description: The data volume in bytes per day for the member account.
         VolumeUsageUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The data and time when the member account data volume was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The data and time when the member account data volume was last updated.
         PercentOfGraphUtilization:
           allOf:
             - $ref: '#/components/schemas/Percentage'
@@ -1442,9 +1395,8 @@ components:
       title: RejectInvitationRequest
       properties:
         GraphArn:
-          allOf:
-            - $ref: '#/components/schemas/GraphArn'
-            - description: <p>The ARN of the behavior graph to reject the invitation to.</p> <p>The member account's current member status in the behavior graph must be <code>INVITED</code>.</p>
+          $ref: '#/components/schemas/GraphArn'
+          description: <p>The ARN of the behavior graph to reject the invitation to.</p> <p>The member account's current member status in the behavior graph must be <code>INVITED</code>.</p>
     StartMonitoringMemberRequest:
       type: object
       required:
@@ -1453,13 +1405,11 @@ components:
       title: StartMonitoringMemberRequest
       properties:
         GraphArn:
-          allOf:
-            - $ref: '#/components/schemas/GraphArn'
-            - description: The ARN of the behavior graph.
+          $ref: '#/components/schemas/GraphArn'
+          description: The ARN of the behavior graph.
         AccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: <p>The account ID of the member account to try to enable.</p> <p>The account must be an invited member account with a status of <code>ACCEPTED_BUT_DISABLED</code>. </p>
+          $ref: '#/components/schemas/AccountId'
+          description: <p>The account ID of the member account to try to enable.</p> <p>The account must be an invited member account with a status of <code>ACCEPTED_BUT_DISABLED</code>. </p>
     TagKeyList:
       type: array
       items:
@@ -1473,22 +1423,19 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags to assign to the behavior graph. You can add up to 50 tags. For each tag, you provide the tag key and the tag value. Each tag key can contain up to 128 characters. Each tag value can contain up to 256 characters.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags to assign to the behavior graph. You can add up to 50 tags. For each tag, you provide the tag key and the tag value. Each tag key can contain up to 128 characters. Each tag value can contain up to 256 characters.'
     UnprocessedReason:
       type: string
     UnprocessedAccount:
       type: object
       properties:
         AccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: The AWS account identifier of the member account that was not processed.
+          $ref: '#/components/schemas/AccountId'
+          description: The AWS account identifier of the member account that was not processed.
         Reason:
-          allOf:
-            - $ref: '#/components/schemas/UnprocessedReason'
-            - description: The reason that the member account request could not be processed.
+          $ref: '#/components/schemas/UnprocessedReason'
+          description: The reason that the member account request could not be processed.
       description: A member account that was included in a request but for which the request could not be processed.
     UntagResourceRequest:
       type: object

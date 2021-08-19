@@ -3635,9 +3635,8 @@ components:
       type: object
       properties:
         errors:
-          allOf:
-            - $ref: '#/components/schemas/BatchCreateVariableErrorList'
-            - description: Provides the errors for the <code>BatchCreateVariable</code> request.
+          $ref: '#/components/schemas/BatchCreateVariableErrorList'
+          description: Provides the errors for the <code>BatchCreateVariable</code> request.
     BatchCreateVariableRequest:
       type: object
       required:
@@ -3645,13 +3644,11 @@ components:
       title: BatchCreateVariableRequest
       properties:
         variableEntries:
-          allOf:
-            - $ref: '#/components/schemas/VariableEntryList'
-            - description: The list of variables for the batch create variable request.
+          $ref: '#/components/schemas/VariableEntryList'
+          description: The list of variables for the batch create variable request.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: A collection of key and value pairs.
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     ValidationException: {}
     InternalServerException: {}
     ThrottlingException: {}
@@ -3660,13 +3657,11 @@ components:
       type: object
       properties:
         variables:
-          allOf:
-            - $ref: '#/components/schemas/VariableList'
-            - description: The returned variables.
+          $ref: '#/components/schemas/VariableList'
+          description: The returned variables.
         errors:
-          allOf:
-            - $ref: '#/components/schemas/BatchGetVariableErrorList'
-            - description: The errors from the request.
+          $ref: '#/components/schemas/BatchGetVariableErrorList'
+          description: The errors from the request.
     BatchGetVariableRequest:
       type: object
       required:
@@ -3674,9 +3669,8 @@ components:
       title: BatchGetVariableRequest
       properties:
         names:
-          allOf:
-            - $ref: '#/components/schemas/NameList'
-            - description: The list of variable names to get.
+          $ref: '#/components/schemas/NameList'
+          description: The list of variable names to get.
     CancelBatchPredictionJobResult:
       type: object
       properties: {}
@@ -3687,9 +3681,8 @@ components:
       title: CancelBatchPredictionJobRequest
       properties:
         jobId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The ID of the batch prediction job to cancel.
+          $ref: '#/components/schemas/identifier'
+          description: The ID of the batch prediction job to cancel.
     ResourceNotFoundException: {}
     CreateBatchPredictionJobResult:
       type: object
@@ -3706,52 +3699,41 @@ components:
       title: CreateBatchPredictionJobRequest
       properties:
         jobId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The ID of the batch prediction job.
+          $ref: '#/components/schemas/identifier'
+          description: The ID of the batch prediction job.
         inputPath:
-          allOf:
-            - $ref: '#/components/schemas/s3BucketLocation'
-            - description: The Amazon S3 location of your training file.
+          $ref: '#/components/schemas/s3BucketLocation'
+          description: The Amazon S3 location of your training file.
         outputPath:
-          allOf:
-            - $ref: '#/components/schemas/s3BucketLocation'
-            - description: The Amazon S3 location of your output file.
+          $ref: '#/components/schemas/s3BucketLocation'
+          description: The Amazon S3 location of your output file.
         eventTypeName:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name of the event type.
+          $ref: '#/components/schemas/identifier'
+          description: The name of the event type.
         detectorName:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name of the detector.
+          $ref: '#/components/schemas/identifier'
+          description: The name of the detector.
         detectorVersion:
-          allOf:
-            - $ref: '#/components/schemas/wholeNumberVersionString'
-            - description: The detector version.
+          $ref: '#/components/schemas/wholeNumberVersionString'
+          description: The detector version.
         iamRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/iamRoleArn'
-            - description: The ARN of the IAM role to use for this job request.
+          $ref: '#/components/schemas/iamRoleArn'
+          description: The ARN of the IAM role to use for this job request.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: A collection of key and value pairs.
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     CreateDetectorVersionResult:
       type: object
       properties:
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The ID for the created version's parent detector.
+          $ref: '#/components/schemas/identifier'
+          description: The ID for the created version's parent detector.
         detectorVersionId:
-          allOf:
-            - $ref: '#/components/schemas/nonEmptyString'
-            - description: 'The ID for the created detector. '
+          $ref: '#/components/schemas/nonEmptyString'
+          description: 'The ID for the created detector. '
         status:
-          allOf:
-            - $ref: '#/components/schemas/DetectorVersionStatus'
-            - description: The status of the detector version.
+          $ref: '#/components/schemas/DetectorVersionStatus'
+          description: The status of the detector version.
     CreateDetectorVersionRequest:
       type: object
       required:
@@ -3760,33 +3742,26 @@ components:
       title: CreateDetectorVersionRequest
       properties:
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The ID of the detector under which you want to create a new version.
+          $ref: '#/components/schemas/identifier'
+          description: The ID of the detector under which you want to create a new version.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The description of the detector version.
+          $ref: '#/components/schemas/description'
+          description: The description of the detector version.
         externalModelEndpoints:
-          allOf:
-            - $ref: '#/components/schemas/ListOfStrings'
-            - description: The Amazon Sagemaker model endpoints to include in the detector version.
+          $ref: '#/components/schemas/ListOfStrings'
+          description: The Amazon Sagemaker model endpoints to include in the detector version.
         rules:
-          allOf:
-            - $ref: '#/components/schemas/RuleList'
-            - description: The rules to include in the detector version.
+          $ref: '#/components/schemas/RuleList'
+          description: The rules to include in the detector version.
         modelVersions:
-          allOf:
-            - $ref: '#/components/schemas/ListOfModelVersions'
-            - description: The model versions to include in the detector version.
+          $ref: '#/components/schemas/ListOfModelVersions'
+          description: The model versions to include in the detector version.
         ruleExecutionMode:
-          allOf:
-            - $ref: '#/components/schemas/RuleExecutionMode'
-            - description: '<p>The rule execution mode for the rules included in the detector version.</p> <p>You can define and edit the rule mode at the detector version level, when it is in draft status.</p> <p>If you specify <code>FIRST_MATCHED</code>, Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p> <p>If you specifiy <code>ALL_MATCHED</code>, Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. </p> <p>The default behavior is <code>FIRST_MATCHED</code>.</p>'
+          $ref: '#/components/schemas/RuleExecutionMode'
+          description: '<p>The rule execution mode for the rules included in the detector version.</p> <p>You can define and edit the rule mode at the detector version level, when it is in draft status.</p> <p>If you specify <code>FIRST_MATCHED</code>, Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p> <p>If you specifiy <code>ALL_MATCHED</code>, Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. </p> <p>The default behavior is <code>FIRST_MATCHED</code>.</p>'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: A collection of key and value pairs.
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     CreateModelResult:
       type: object
       properties: {}
@@ -3799,44 +3774,35 @@ components:
       title: CreateModelRequest
       properties:
         modelId:
-          allOf:
-            - $ref: '#/components/schemas/modelIdentifier'
-            - description: The model ID.
+          $ref: '#/components/schemas/modelIdentifier'
+          description: The model ID.
         modelType:
-          allOf:
-            - $ref: '#/components/schemas/ModelTypeEnum'
-            - description: 'The model type. '
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: 'The model type. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: 'The model description. '
+          $ref: '#/components/schemas/description'
+          description: 'The model description. '
         eventTypeName:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The name of the event type.
+          $ref: '#/components/schemas/string'
+          description: The name of the event type.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: A collection of key and value pairs.
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     CreateModelVersionResult:
       type: object
       properties:
         modelId:
-          allOf:
-            - $ref: '#/components/schemas/modelIdentifier'
-            - description: The model ID.
+          $ref: '#/components/schemas/modelIdentifier'
+          description: The model ID.
         modelType:
-          allOf:
-            - $ref: '#/components/schemas/ModelTypeEnum'
-            - description: The model type.
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
         modelVersionNumber:
-          allOf:
-            - $ref: '#/components/schemas/nonEmptyString'
-            - description: The model version number of the model version created.
+          $ref: '#/components/schemas/nonEmptyString'
+          description: The model version number of the model version created.
         status:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The model version status. '
+          $ref: '#/components/schemas/string'
+          description: 'The model version status. '
     CreateModelVersionRequest:
       type: object
       required:
@@ -3847,36 +3813,29 @@ components:
       title: CreateModelVersionRequest
       properties:
         modelId:
-          allOf:
-            - $ref: '#/components/schemas/modelIdentifier'
-            - description: 'The model ID. '
+          $ref: '#/components/schemas/modelIdentifier'
+          description: 'The model ID. '
         modelType:
-          allOf:
-            - $ref: '#/components/schemas/ModelTypeEnum'
-            - description: The model type.
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
         trainingDataSource:
-          allOf:
-            - $ref: '#/components/schemas/TrainingDataSourceEnum'
-            - description: 'The training data source location in Amazon S3. '
+          $ref: '#/components/schemas/TrainingDataSourceEnum'
+          description: 'The training data source location in Amazon S3. '
         trainingDataSchema:
-          allOf:
-            - $ref: '#/components/schemas/TrainingDataSchema'
-            - description: The training data schema.
+          $ref: '#/components/schemas/TrainingDataSchema'
+          description: The training data schema.
         externalEventsDetail:
-          allOf:
-            - $ref: '#/components/schemas/ExternalEventsDetail'
-            - description: Details for the external events data used for model version training. Required if <code>trainingDataSource</code> is <code>EXTERNAL_EVENTS</code>.
+          $ref: '#/components/schemas/ExternalEventsDetail'
+          description: Details for the external events data used for model version training. Required if <code>trainingDataSource</code> is <code>EXTERNAL_EVENTS</code>.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: A collection of key and value pairs.
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     CreateRuleResult:
       type: object
       properties:
         rule:
-          allOf:
-            - $ref: '#/components/schemas/Rule'
-            - description: The created rule.
+          $ref: '#/components/schemas/Rule'
+          description: The created rule.
     CreateRuleRequest:
       type: object
       required:
@@ -3888,33 +3847,26 @@ components:
       title: CreateRuleRequest
       properties:
         ruleId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The rule ID.
+          $ref: '#/components/schemas/identifier'
+          description: The rule ID.
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The detector ID for the rule's parent detector.
+          $ref: '#/components/schemas/identifier'
+          description: The detector ID for the rule's parent detector.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The rule description.
+          $ref: '#/components/schemas/description'
+          description: The rule description.
         expression:
-          allOf:
-            - $ref: '#/components/schemas/ruleExpression'
-            - description: The rule expression.
+          $ref: '#/components/schemas/ruleExpression'
+          description: The rule expression.
         language:
-          allOf:
-            - $ref: '#/components/schemas/Language'
-            - description: The language of the rule.
+          $ref: '#/components/schemas/Language'
+          description: The language of the rule.
         outcomes:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyListOfStrings'
-            - description: The outcome or outcomes returned when the rule expression matches.
+          $ref: '#/components/schemas/NonEmptyListOfStrings'
+          description: The outcome or outcomes returned when the rule expression matches.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: A collection of key and value pairs.
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     CreateVariableResult:
       type: object
       properties: {}
@@ -3928,33 +3880,26 @@ components:
       title: CreateVariableRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The name of the variable.
+          $ref: '#/components/schemas/string'
+          description: The name of the variable.
         dataType:
-          allOf:
-            - $ref: '#/components/schemas/DataType'
-            - description: The data type.
+          $ref: '#/components/schemas/DataType'
+          description: The data type.
         dataSource:
-          allOf:
-            - $ref: '#/components/schemas/DataSource'
-            - description: The source of the data.
+          $ref: '#/components/schemas/DataSource'
+          description: The source of the data.
         defaultValue:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The default value for the variable when no value is received.
+          $ref: '#/components/schemas/string'
+          description: The default value for the variable when no value is received.
         description:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The description.
+          $ref: '#/components/schemas/string'
+          description: The description.
         variableType:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: '<p>The variable type. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>. </p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT</code> </p>'
+          $ref: '#/components/schemas/string'
+          description: '<p>The variable type. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>. </p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT</code> </p>'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: A collection of key and value pairs.
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     DeleteBatchPredictionJobResult:
       type: object
       properties: {}
@@ -3965,9 +3910,8 @@ components:
       title: DeleteBatchPredictionJobRequest
       properties:
         jobId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The ID of the batch prediction job to delete.
+          $ref: '#/components/schemas/identifier'
+          description: The ID of the batch prediction job to delete.
     DeleteDetectorResult:
       type: object
       properties: {}
@@ -3978,9 +3922,8 @@ components:
       title: DeleteDetectorRequest
       properties:
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The ID of the detector to delete.
+          $ref: '#/components/schemas/identifier'
+          description: The ID of the detector to delete.
     ConflictException: {}
     DeleteDetectorVersionResult:
       type: object
@@ -3993,13 +3936,11 @@ components:
       title: DeleteDetectorVersionRequest
       properties:
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The ID of the parent detector for the detector version to delete.
+          $ref: '#/components/schemas/identifier'
+          description: The ID of the parent detector for the detector version to delete.
         detectorVersionId:
-          allOf:
-            - $ref: '#/components/schemas/wholeNumberVersionString'
-            - description: The ID of the detector version to delete.
+          $ref: '#/components/schemas/wholeNumberVersionString'
+          description: The ID of the detector version to delete.
     DeleteEntityTypeResult:
       type: object
       properties: {}
@@ -4010,9 +3951,8 @@ components:
       title: DeleteEntityTypeRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name of the entity type to delete.
+          $ref: '#/components/schemas/identifier'
+          description: The name of the entity type to delete.
     DeleteEventResult:
       type: object
       properties: {}
@@ -4024,13 +3964,11 @@ components:
       title: DeleteEventRequest
       properties:
         eventId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The ID of the event to delete.
+          $ref: '#/components/schemas/identifier'
+          description: The ID of the event to delete.
         eventTypeName:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name of the event type.
+          $ref: '#/components/schemas/identifier'
+          description: The name of the event type.
     DeleteEventTypeResult:
       type: object
       properties: {}
@@ -4041,9 +3979,8 @@ components:
       title: DeleteEventTypeRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name of the event type to delete.
+          $ref: '#/components/schemas/identifier'
+          description: The name of the event type to delete.
     DeleteExternalModelResult:
       type: object
       properties: {}
@@ -4054,9 +3991,8 @@ components:
       title: DeleteExternalModelRequest
       properties:
         modelEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/sageMakerEndpointIdentifier'
-            - description: The endpoint of the Amazon Sagemaker model to delete.
+          $ref: '#/components/schemas/sageMakerEndpointIdentifier'
+          description: The endpoint of the Amazon Sagemaker model to delete.
     DeleteLabelResult:
       type: object
       properties: {}
@@ -4067,9 +4003,8 @@ components:
       title: DeleteLabelRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name of the label to delete.
+          $ref: '#/components/schemas/identifier'
+          description: The name of the label to delete.
     DeleteModelResult:
       type: object
       properties: {}
@@ -4081,13 +4016,11 @@ components:
       title: DeleteModelRequest
       properties:
         modelId:
-          allOf:
-            - $ref: '#/components/schemas/modelIdentifier'
-            - description: The model ID of the model to delete.
+          $ref: '#/components/schemas/modelIdentifier'
+          description: The model ID of the model to delete.
         modelType:
-          allOf:
-            - $ref: '#/components/schemas/ModelTypeEnum'
-            - description: The model type of the model to delete.
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type of the model to delete.
     DeleteModelVersionResult:
       type: object
       properties: {}
@@ -4100,17 +4033,14 @@ components:
       title: DeleteModelVersionRequest
       properties:
         modelId:
-          allOf:
-            - $ref: '#/components/schemas/modelIdentifier'
-            - description: The model ID of the model version to delete.
+          $ref: '#/components/schemas/modelIdentifier'
+          description: The model ID of the model version to delete.
         modelType:
-          allOf:
-            - $ref: '#/components/schemas/ModelTypeEnum'
-            - description: The model type of the model version to delete.
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type of the model version to delete.
         modelVersionNumber:
-          allOf:
-            - $ref: '#/components/schemas/floatVersionString'
-            - description: The model version number of the model version to delete.
+          $ref: '#/components/schemas/floatVersionString'
+          description: The model version number of the model version to delete.
     DeleteOutcomeResult:
       type: object
       properties: {}
@@ -4121,9 +4051,8 @@ components:
       title: DeleteOutcomeRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name of the outcome to delete.
+          $ref: '#/components/schemas/identifier'
+          description: The name of the outcome to delete.
     DeleteRuleResult:
       type: object
       properties: {}
@@ -4145,28 +4074,23 @@ components:
       title: DeleteVariableRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The name of the variable to delete.
+          $ref: '#/components/schemas/string'
+          description: The name of the variable to delete.
     DescribeDetectorResult:
       type: object
       properties:
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The detector ID.
+          $ref: '#/components/schemas/identifier'
+          description: The detector ID.
         detectorVersionSummaries:
-          allOf:
-            - $ref: '#/components/schemas/DetectorVersionSummaryList'
-            - description: The status and description for each detector version.
+          $ref: '#/components/schemas/DetectorVersionSummaryList'
+          description: The status and description for each detector version.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next token to be used for subsequent requests.
+          $ref: '#/components/schemas/string'
+          description: The next token to be used for subsequent requests.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The detector ARN.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The detector ARN.
     DescribeDetectorRequest:
       type: object
       required:
@@ -4174,126 +4098,100 @@ components:
       title: DescribeDetectorRequest
       properties:
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The detector ID.
+          $ref: '#/components/schemas/identifier'
+          description: The detector ID.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next token from the previous response.
+          $ref: '#/components/schemas/string'
+          description: The next token from the previous response.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/DetectorVersionMaxResults'
-            - description: The maximum number of results to return for the request.
+          $ref: '#/components/schemas/DetectorVersionMaxResults'
+          description: The maximum number of results to return for the request.
     DescribeModelVersionsResult:
       type: object
       properties:
         modelVersionDetails:
-          allOf:
-            - $ref: '#/components/schemas/modelVersionDetailList'
-            - description: The model version details.
+          $ref: '#/components/schemas/modelVersionDetailList'
+          description: The model version details.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next token.
+          $ref: '#/components/schemas/string'
+          description: The next token.
     DescribeModelVersionsRequest:
       type: object
       title: DescribeModelVersionsRequest
       properties:
         modelId:
-          allOf:
-            - $ref: '#/components/schemas/modelIdentifier'
-            - description: The model ID.
+          $ref: '#/components/schemas/modelIdentifier'
+          description: The model ID.
         modelVersionNumber:
-          allOf:
-            - $ref: '#/components/schemas/floatVersionString'
-            - description: The model version number.
+          $ref: '#/components/schemas/floatVersionString'
+          description: The model version number.
         modelType:
-          allOf:
-            - $ref: '#/components/schemas/ModelTypeEnum'
-            - description: The model type.
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next token from the previous results.
+          $ref: '#/components/schemas/string'
+          description: The next token from the previous results.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/modelsMaxPageSize'
-            - description: The maximum number of results to return.
+          $ref: '#/components/schemas/modelsMaxPageSize'
+          description: The maximum number of results to return.
     GetBatchPredictionJobsResult:
       type: object
       properties:
         batchPredictions:
-          allOf:
-            - $ref: '#/components/schemas/BatchPredictionList'
-            - description: An array containing the details of each batch prediction job.
+          $ref: '#/components/schemas/BatchPredictionList'
+          description: An array containing the details of each batch prediction job.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next token for the subsequent request.
+          $ref: '#/components/schemas/string'
+          description: The next token for the subsequent request.
     GetBatchPredictionJobsRequest:
       type: object
       title: GetBatchPredictionJobsRequest
       properties:
         jobId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The batch prediction job for which to get the details.
+          $ref: '#/components/schemas/identifier'
+          description: The batch prediction job for which to get the details.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/batchPredictionsMaxPageSize'
-            - description: The maximum number of objects to return for the request.
+          $ref: '#/components/schemas/batchPredictionsMaxPageSize'
+          description: The maximum number of objects to return for the request.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next token from the previous request.
+          $ref: '#/components/schemas/string'
+          description: The next token from the previous request.
     GetDetectorVersionResult:
       type: object
       properties:
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The detector ID.
+          $ref: '#/components/schemas/identifier'
+          description: The detector ID.
         detectorVersionId:
-          allOf:
-            - $ref: '#/components/schemas/wholeNumberVersionString'
-            - description: The detector version ID.
+          $ref: '#/components/schemas/wholeNumberVersionString'
+          description: The detector version ID.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The detector version description.
+          $ref: '#/components/schemas/description'
+          description: The detector version description.
         externalModelEndpoints:
-          allOf:
-            - $ref: '#/components/schemas/ListOfStrings'
-            - description: The Amazon SageMaker model endpoints included in the detector version.
+          $ref: '#/components/schemas/ListOfStrings'
+          description: The Amazon SageMaker model endpoints included in the detector version.
         modelVersions:
-          allOf:
-            - $ref: '#/components/schemas/ListOfModelVersions'
-            - description: 'The model versions included in the detector version. '
+          $ref: '#/components/schemas/ListOfModelVersions'
+          description: 'The model versions included in the detector version. '
         rules:
-          allOf:
-            - $ref: '#/components/schemas/RuleList'
-            - description: The rules included in the detector version.
+          $ref: '#/components/schemas/RuleList'
+          description: The rules included in the detector version.
         status:
-          allOf:
-            - $ref: '#/components/schemas/DetectorVersionStatus'
-            - description: The status of the detector version.
+          $ref: '#/components/schemas/DetectorVersionStatus'
+          description: The status of the detector version.
         lastUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: 'The timestamp when the detector version was last updated. '
+          $ref: '#/components/schemas/time'
+          description: 'The timestamp when the detector version was last updated. '
         createdTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: 'The timestamp when the detector version was created. '
+          $ref: '#/components/schemas/time'
+          description: 'The timestamp when the detector version was created. '
         ruleExecutionMode:
-          allOf:
-            - $ref: '#/components/schemas/RuleExecutionMode'
-            - description: '<p>The execution mode of the rule in the dectector</p> <p> <code>FIRST_MATCHED</code> indicates that Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p> <p> <code>ALL_MATCHED</code> indicates that Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. You can define and edit the rule mode at the detector version level, when it is in draft status.</p>'
+          $ref: '#/components/schemas/RuleExecutionMode'
+          description: '<p>The execution mode of the rule in the dectector</p> <p> <code>FIRST_MATCHED</code> indicates that Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p> <p> <code>ALL_MATCHED</code> indicates that Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. You can define and edit the rule mode at the detector version level, when it is in draft status.</p>'
         arn:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The detector version ARN.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The detector version ARN.
     GetDetectorVersionRequest:
       type: object
       required:
@@ -4302,78 +4200,64 @@ components:
       title: GetDetectorVersionRequest
       properties:
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The detector ID.
+          $ref: '#/components/schemas/identifier'
+          description: The detector ID.
         detectorVersionId:
-          allOf:
-            - $ref: '#/components/schemas/wholeNumberVersionString'
-            - description: The detector version ID.
+          $ref: '#/components/schemas/wholeNumberVersionString'
+          description: The detector version ID.
     GetDetectorsResult:
       type: object
       properties:
         detectors:
-          allOf:
-            - $ref: '#/components/schemas/DetectorList'
-            - description: The detectors.
+          $ref: '#/components/schemas/DetectorList'
+          description: The detectors.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next page token.
+          $ref: '#/components/schemas/string'
+          description: The next page token.
     GetDetectorsRequest:
       type: object
       title: GetDetectorsRequest
       properties:
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The detector ID.
+          $ref: '#/components/schemas/identifier'
+          description: The detector ID.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next token for the subsequent request.
+          $ref: '#/components/schemas/string'
+          description: The next token for the subsequent request.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/DetectorsMaxResults'
-            - description: The maximum number of objects to return for the request.
+          $ref: '#/components/schemas/DetectorsMaxResults'
+          description: The maximum number of objects to return for the request.
     GetEntityTypesResult:
       type: object
       properties:
         entityTypes:
-          allOf:
-            - $ref: '#/components/schemas/entityTypeList'
-            - description: An array of entity types.
+          $ref: '#/components/schemas/entityTypeList'
+          description: An array of entity types.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next page token.
+          $ref: '#/components/schemas/string'
+          description: The next page token.
     GetEntityTypesRequest:
       type: object
       title: GetEntityTypesRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name.
+          $ref: '#/components/schemas/identifier'
+          description: The name.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next token for the subsequent request.
+          $ref: '#/components/schemas/string'
+          description: The next token for the subsequent request.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/entityTypesMaxResults'
-            - description: The maximum number of objects to return for the request.
+          $ref: '#/components/schemas/entityTypesMaxResults'
+          description: The maximum number of objects to return for the request.
     GetEventPredictionResult:
       type: object
       properties:
         modelScores:
-          allOf:
-            - $ref: '#/components/schemas/ListOfModelScores'
-            - description: 'The model scores. Amazon Fraud Detector generates model scores between 0 and 1000, where 0 is low fraud risk and 1000 is high fraud risk. Model scores are directly related to the false positive rate (FPR). For example, a score of 600 corresponds to an estimated 10% false positive rate whereas a score of 900 corresponds to an estimated 2% false positive rate.'
+          $ref: '#/components/schemas/ListOfModelScores'
+          description: 'The model scores. Amazon Fraud Detector generates model scores between 0 and 1000, where 0 is low fraud risk and 1000 is high fraud risk. Model scores are directly related to the false positive rate (FPR). For example, a score of 600 corresponds to an estimated 10% false positive rate whereas a score of 900 corresponds to an estimated 2% false positive rate.'
         ruleResults:
-          allOf:
-            - $ref: '#/components/schemas/ListOfRuleResults'
-            - description: The results.
+          $ref: '#/components/schemas/ListOfRuleResults'
+          description: The results.
     GetEventPredictionRequest:
       type: object
       required:
@@ -4386,160 +4270,128 @@ components:
       title: GetEventPredictionRequest
       properties:
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The detector ID.
+          $ref: '#/components/schemas/string'
+          description: The detector ID.
         detectorVersionId:
-          allOf:
-            - $ref: '#/components/schemas/wholeNumberVersionString'
-            - description: The detector version ID.
+          $ref: '#/components/schemas/wholeNumberVersionString'
+          description: The detector version ID.
         eventId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The unique ID used to identify the event.
+          $ref: '#/components/schemas/string'
+          description: The unique ID used to identify the event.
         eventTypeName:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The event type associated with the detector specified for the prediction.
+          $ref: '#/components/schemas/string'
+          description: The event type associated with the detector specified for the prediction.
         entities:
-          allOf:
-            - $ref: '#/components/schemas/listOfEntities'
-            - description: 'The entity type (associated with the detector''s event type) and specific entity ID representing who performed the event. If an entity id is not available, use "UNKNOWN."'
+          $ref: '#/components/schemas/listOfEntities'
+          description: 'The entity type (associated with the detector''s event type) and specific entity ID representing who performed the event. If an entity id is not available, use "UNKNOWN."'
         eventTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Timestamp that defines when the event under evaluation occurred.
+          $ref: '#/components/schemas/string'
+          description: Timestamp that defines when the event under evaluation occurred.
         eventVariables:
-          allOf:
-            - $ref: '#/components/schemas/EventVariableMap'
-            - description: '<p>Names of the event type''s variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.</p> <important> <ul> <li> <p>You must provide at least one eventVariable</p> </li> <li> <p>If detectorVersion is associated with a modelVersion, you must provide at least one associated eventVariable</p> </li> </ul> </important> <p>To ensure highest possible fraud prediction and to simplify your data preparation, Amazon Fraud Detector will replace all missing variables or values as follows:</p> <p> <b>For Amazon Fraud Detector trained models:</b> </p> <p>If a null value is provided explicitly for a variable or if a variable is missing, model will replace the null value or the missing variable (no variable name in the eventVariables map) with calculated default mean/medians for numeric variables and with special values for categorical variables.</p> <p> <b>For External models ( for example, imported SageMaker):</b> </p> <p>If a null value is provided explicitly for a variable, the model and rules will use “null” as the value. If a variable is not provided (no variable name in the eventVariables map), model and rules will use the default value that is provided for the variable. </p>'
+          $ref: '#/components/schemas/EventVariableMap'
+          description: '<p>Names of the event type''s variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.</p> <important> <ul> <li> <p>You must provide at least one eventVariable</p> </li> <li> <p>If detectorVersion is associated with a modelVersion, you must provide at least one associated eventVariable</p> </li> </ul> </important> <p>To ensure highest possible fraud prediction and to simplify your data preparation, Amazon Fraud Detector will replace all missing variables or values as follows:</p> <p> <b>For Amazon Fraud Detector trained models:</b> </p> <p>If a null value is provided explicitly for a variable or if a variable is missing, model will replace the null value or the missing variable (no variable name in the eventVariables map) with calculated default mean/medians for numeric variables and with special values for categorical variables.</p> <p> <b>For External models ( for example, imported SageMaker):</b> </p> <p>If a null value is provided explicitly for a variable, the model and rules will use “null” as the value. If a variable is not provided (no variable name in the eventVariables map), model and rules will use the default value that is provided for the variable. </p>'
         externalModelEndpointDataBlobs:
-          allOf:
-            - $ref: '#/components/schemas/ExternalModelEndpointDataBlobMap'
-            - description: The Amazon SageMaker model endpoint input data blobs.
+          $ref: '#/components/schemas/ExternalModelEndpointDataBlobMap'
+          description: The Amazon SageMaker model endpoint input data blobs.
     GetEventTypesResult:
       type: object
       properties:
         eventTypes:
-          allOf:
-            - $ref: '#/components/schemas/eventTypeList'
-            - description: An array of event types.
+          $ref: '#/components/schemas/eventTypeList'
+          description: An array of event types.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next page token.
+          $ref: '#/components/schemas/string'
+          description: The next page token.
     GetEventTypesRequest:
       type: object
       title: GetEventTypesRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name.
+          $ref: '#/components/schemas/identifier'
+          description: The name.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next token for the subsequent request.
+          $ref: '#/components/schemas/string'
+          description: The next token for the subsequent request.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/eventTypesMaxResults'
-            - description: The maximum number of objects to return for the request.
+          $ref: '#/components/schemas/eventTypesMaxResults'
+          description: The maximum number of objects to return for the request.
     GetExternalModelsResult:
       type: object
       properties:
         externalModels:
-          allOf:
-            - $ref: '#/components/schemas/ExternalModelList'
-            - description: Gets the Amazon SageMaker models.
+          $ref: '#/components/schemas/ExternalModelList'
+          description: Gets the Amazon SageMaker models.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next page token to be used in subsequent requests.
+          $ref: '#/components/schemas/string'
+          description: The next page token to be used in subsequent requests.
     GetExternalModelsRequest:
       type: object
       title: GetExternalModelsRequest
       properties:
         modelEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The Amazon SageMaker model endpoint.
+          $ref: '#/components/schemas/string'
+          description: The Amazon SageMaker model endpoint.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next page token for the request.
+          $ref: '#/components/schemas/string'
+          description: The next page token for the request.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/ExternalModelsMaxResults'
-            - description: The maximum number of objects to return for the request.
+          $ref: '#/components/schemas/ExternalModelsMaxResults'
+          description: The maximum number of objects to return for the request.
     GetKMSEncryptionKeyResult:
       type: object
       properties:
         kmsKey:
-          allOf:
-            - $ref: '#/components/schemas/KMSKey'
-            - description: The KMS encryption key.
+          $ref: '#/components/schemas/KMSKey'
+          description: The KMS encryption key.
     GetLabelsResult:
       type: object
       properties:
         labels:
-          allOf:
-            - $ref: '#/components/schemas/labelList'
-            - description: An array of labels.
+          $ref: '#/components/schemas/labelList'
+          description: An array of labels.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next page token.
+          $ref: '#/components/schemas/string'
+          description: The next page token.
     GetLabelsRequest:
       type: object
       title: GetLabelsRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name of the label or labels to get.
+          $ref: '#/components/schemas/identifier'
+          description: The name of the label or labels to get.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next token for the subsequent request.
+          $ref: '#/components/schemas/string'
+          description: The next token for the subsequent request.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/labelsMaxResults'
-            - description: The maximum number of objects to return for the request.
+          $ref: '#/components/schemas/labelsMaxResults'
+          description: The maximum number of objects to return for the request.
     GetModelVersionResult:
       type: object
       properties:
         modelId:
-          allOf:
-            - $ref: '#/components/schemas/modelIdentifier'
-            - description: The model ID.
+          $ref: '#/components/schemas/modelIdentifier'
+          description: The model ID.
         modelType:
-          allOf:
-            - $ref: '#/components/schemas/ModelTypeEnum'
-            - description: The model type.
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
         modelVersionNumber:
-          allOf:
-            - $ref: '#/components/schemas/floatVersionString'
-            - description: The model version number.
+          $ref: '#/components/schemas/floatVersionString'
+          description: The model version number.
         trainingDataSource:
-          allOf:
-            - $ref: '#/components/schemas/TrainingDataSourceEnum'
-            - description: The training data source.
+          $ref: '#/components/schemas/TrainingDataSourceEnum'
+          description: The training data source.
         trainingDataSchema:
-          allOf:
-            - $ref: '#/components/schemas/TrainingDataSchema'
-            - description: The training data schema.
+          $ref: '#/components/schemas/TrainingDataSchema'
+          description: The training data schema.
         externalEventsDetail:
-          allOf:
-            - $ref: '#/components/schemas/ExternalEventsDetail'
-            - description: The event details.
+          $ref: '#/components/schemas/ExternalEventsDetail'
+          description: The event details.
         status:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: '<p>The model version status.</p> <p>Possible values are:</p> <ul> <li> <p> <code>TRAINING_IN_PROGRESS</code> </p> </li> <li> <p> <code>TRAINING_COMPLETE</code> </p> </li> <li> <p> <code>ACTIVATE_REQUESTED</code> </p> </li> <li> <p> <code>ACTIVATE_IN_PROGRESS</code> </p> </li> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>INACTIVATE_REQUESTED</code> </p> </li> <li> <p> <code>INACTIVATE_IN_PROGRESS</code> </p> </li> <li> <p> <code>INACTIVE</code> </p> </li> <li> <p> <code>ERROR</code> </p> </li> </ul>'
+          $ref: '#/components/schemas/string'
+          description: '<p>The model version status.</p> <p>Possible values are:</p> <ul> <li> <p> <code>TRAINING_IN_PROGRESS</code> </p> </li> <li> <p> <code>TRAINING_COMPLETE</code> </p> </li> <li> <p> <code>ACTIVATE_REQUESTED</code> </p> </li> <li> <p> <code>ACTIVATE_IN_PROGRESS</code> </p> </li> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>INACTIVATE_REQUESTED</code> </p> </li> <li> <p> <code>INACTIVATE_IN_PROGRESS</code> </p> </li> <li> <p> <code>INACTIVE</code> </p> </li> <li> <p> <code>ERROR</code> </p> </li> </ul>'
         arn:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The model version ARN.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The model version ARN.
     GetModelVersionRequest:
       type: object
       required:
@@ -4549,86 +4401,70 @@ components:
       title: GetModelVersionRequest
       properties:
         modelId:
-          allOf:
-            - $ref: '#/components/schemas/modelIdentifier'
-            - description: The model ID.
+          $ref: '#/components/schemas/modelIdentifier'
+          description: The model ID.
         modelType:
-          allOf:
-            - $ref: '#/components/schemas/ModelTypeEnum'
-            - description: The model type.
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
         modelVersionNumber:
-          allOf:
-            - $ref: '#/components/schemas/floatVersionString'
-            - description: The model version number.
+          $ref: '#/components/schemas/floatVersionString'
+          description: The model version number.
     GetModelsResult:
       type: object
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next page token to be used in subsequent requests.
+          $ref: '#/components/schemas/string'
+          description: The next page token to be used in subsequent requests.
         models:
-          allOf:
-            - $ref: '#/components/schemas/modelList'
-            - description: The array of models.
+          $ref: '#/components/schemas/modelList'
+          description: The array of models.
     GetModelsRequest:
       type: object
       title: GetModelsRequest
       properties:
         modelId:
-          allOf:
-            - $ref: '#/components/schemas/modelIdentifier'
-            - description: The model ID.
+          $ref: '#/components/schemas/modelIdentifier'
+          description: The model ID.
         modelType:
-          allOf:
-            - $ref: '#/components/schemas/ModelTypeEnum'
-            - description: The model type.
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next token for the subsequent request.
+          $ref: '#/components/schemas/string'
+          description: The next token for the subsequent request.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/modelsMaxPageSize'
-            - description: 'The maximum number of objects to return for the request. '
+          $ref: '#/components/schemas/modelsMaxPageSize'
+          description: 'The maximum number of objects to return for the request. '
     GetOutcomesResult:
       type: object
       properties:
         outcomes:
-          allOf:
-            - $ref: '#/components/schemas/OutcomeList'
-            - description: 'The outcomes. '
+          $ref: '#/components/schemas/OutcomeList'
+          description: 'The outcomes. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next page token for subsequent requests.
+          $ref: '#/components/schemas/string'
+          description: The next page token for subsequent requests.
     GetOutcomesRequest:
       type: object
       title: GetOutcomesRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name of the outcome or outcomes to get.
+          $ref: '#/components/schemas/identifier'
+          description: The name of the outcome or outcomes to get.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The next page token for the request. '
+          $ref: '#/components/schemas/string'
+          description: 'The next page token for the request. '
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/OutcomesMaxResults'
-            - description: 'The maximum number of objects to return for the request. '
+          $ref: '#/components/schemas/OutcomesMaxResults'
+          description: 'The maximum number of objects to return for the request. '
     GetRulesResult:
       type: object
       properties:
         ruleDetails:
-          allOf:
-            - $ref: '#/components/schemas/RuleDetailList'
-            - description: The details of the requested rule.
+          $ref: '#/components/schemas/RuleDetailList'
+          description: The details of the requested rule.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next page token to be used in subsequent requests.
+          $ref: '#/components/schemas/string'
+          description: The next page token to be used in subsequent requests.
     GetRulesRequest:
       type: object
       required:
@@ -4636,63 +4472,51 @@ components:
       title: GetRulesRequest
       properties:
         ruleId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The rule ID.
+          $ref: '#/components/schemas/identifier'
+          description: The rule ID.
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The detector ID.
+          $ref: '#/components/schemas/identifier'
+          description: The detector ID.
         ruleVersion:
-          allOf:
-            - $ref: '#/components/schemas/wholeNumberVersionString'
-            - description: The rule version.
+          $ref: '#/components/schemas/wholeNumberVersionString'
+          description: The rule version.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next page token.
+          $ref: '#/components/schemas/string'
+          description: The next page token.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/RulesMaxResults'
-            - description: The maximum number of rules to return for the request.
+          $ref: '#/components/schemas/RulesMaxResults'
+          description: The maximum number of rules to return for the request.
     GetVariablesResult:
       type: object
       properties:
         variables:
-          allOf:
-            - $ref: '#/components/schemas/VariableList'
-            - description: 'The names of the variables returned. '
+          $ref: '#/components/schemas/VariableList'
+          description: 'The names of the variables returned. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The next page token to be used in subsequent requests. '
+          $ref: '#/components/schemas/string'
+          description: 'The next page token to be used in subsequent requests. '
     GetVariablesRequest:
       type: object
       title: GetVariablesRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The name of the variable. '
+          $ref: '#/components/schemas/string'
+          description: 'The name of the variable. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The next page token of the get variable request. '
+          $ref: '#/components/schemas/string'
+          description: 'The next page token of the get variable request. '
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/VariablesMaxResults'
-            - description: 'The max size per page determined for the get variable request. '
+          $ref: '#/components/schemas/VariablesMaxResults'
+          description: 'The max size per page determined for the get variable request. '
     ListTagsForResourceResult:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: A collection of key and value pairs.
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The next token for subsequent requests. '
+          $ref: '#/components/schemas/string'
+          description: 'The next token for subsequent requests. '
     ListTagsForResourceRequest:
       type: object
       required:
@@ -4700,17 +4524,14 @@ components:
       title: ListTagsForResourceRequest
       properties:
         resourceARN:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The ARN that specifies the resource whose tags you want to list.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The ARN that specifies the resource whose tags you want to list.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The next token from the previous results.
+          $ref: '#/components/schemas/string'
+          description: The next token from the previous results.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/TagsMaxResults'
-            - description: 'The maximum number of objects to return for the request. '
+          $ref: '#/components/schemas/TagsMaxResults'
+          description: 'The maximum number of objects to return for the request. '
     PutDetectorResult:
       type: object
       properties: {}
@@ -4722,21 +4543,17 @@ components:
       title: PutDetectorRequest
       properties:
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: 'The detector ID. '
+          $ref: '#/components/schemas/identifier'
+          description: 'The detector ID. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The description of the detector.
+          $ref: '#/components/schemas/description'
+          description: The description of the detector.
         eventTypeName:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name of the event type.
+          $ref: '#/components/schemas/identifier'
+          description: The name of the event type.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: A collection of key and value pairs.
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     PutEntityTypeResult:
       type: object
       properties: {}
@@ -4747,17 +4564,14 @@ components:
       title: PutEntityTypeRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name of the entity type.
+          $ref: '#/components/schemas/identifier'
+          description: The name of the entity type.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The description.
+          $ref: '#/components/schemas/description'
+          description: The description.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: A collection of key and value pairs.
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     PutEventTypeResult:
       type: object
       properties: {}
@@ -4770,29 +4584,23 @@ components:
       title: PutEventTypeRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name.
+          $ref: '#/components/schemas/identifier'
+          description: The name.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The description of the event type.
+          $ref: '#/components/schemas/description'
+          description: The description of the event type.
         eventVariables:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyListOfStrings'
-            - description: The event type variables.
+          $ref: '#/components/schemas/NonEmptyListOfStrings'
+          description: The event type variables.
         labels:
-          allOf:
-            - $ref: '#/components/schemas/ListOfStrings'
-            - description: The event type labels.
+          $ref: '#/components/schemas/ListOfStrings'
+          description: The event type labels.
         entityTypes:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyListOfStrings'
-            - description: 'The entity type for the event type. Example entity types: customer, merchant, account.'
+          $ref: '#/components/schemas/NonEmptyListOfStrings'
+          description: 'The entity type for the event type. Example entity types: customer, merchant, account.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: A collection of key and value pairs.
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     PutExternalModelResult:
       type: object
       properties: {}
@@ -4808,33 +4616,26 @@ components:
       title: PutExternalModelRequest
       properties:
         modelEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/sageMakerEndpointIdentifier'
-            - description: The model endpoints name.
+          $ref: '#/components/schemas/sageMakerEndpointIdentifier'
+          description: The model endpoints name.
         modelSource:
-          allOf:
-            - $ref: '#/components/schemas/ModelSource'
-            - description: The source of the model.
+          $ref: '#/components/schemas/ModelSource'
+          description: The source of the model.
         invokeModelEndpointRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The IAM role used to invoke the model endpoint.
+          $ref: '#/components/schemas/string'
+          description: The IAM role used to invoke the model endpoint.
         inputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/ModelInputConfiguration'
-            - description: The model endpoint input configuration.
+          $ref: '#/components/schemas/ModelInputConfiguration'
+          description: The model endpoint input configuration.
         outputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/ModelOutputConfiguration'
-            - description: The model endpoint output configuration.
+          $ref: '#/components/schemas/ModelOutputConfiguration'
+          description: The model endpoint output configuration.
         modelEndpointStatus:
-          allOf:
-            - $ref: '#/components/schemas/ModelEndpointStatus'
-            - description: The model endpoint’s status in Amazon Fraud Detector.
+          $ref: '#/components/schemas/ModelEndpointStatus'
+          description: The model endpoint’s status in Amazon Fraud Detector.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: A collection of key and value pairs.
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     PutKMSEncryptionKeyResult:
       type: object
       properties: {}
@@ -4845,9 +4646,8 @@ components:
       title: PutKMSEncryptionKeyRequest
       properties:
         kmsEncryptionKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/KmsEncryptionKeyArn'
-            - description: The KMS encryption key ARN.
+          $ref: '#/components/schemas/KmsEncryptionKeyArn'
+          description: The KMS encryption key ARN.
     PutLabelResult:
       type: object
       properties: {}
@@ -4858,17 +4658,14 @@ components:
       title: PutLabelRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The label name.
+          $ref: '#/components/schemas/identifier'
+          description: The label name.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The label description.
+          $ref: '#/components/schemas/description'
+          description: The label description.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: <p/>
+          $ref: '#/components/schemas/tagList'
+          description: <p/>
     PutOutcomeResult:
       type: object
       properties: {}
@@ -4879,17 +4676,14 @@ components:
       title: PutOutcomeRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name of the outcome.
+          $ref: '#/components/schemas/identifier'
+          description: The name of the outcome.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The outcome description.
+          $ref: '#/components/schemas/description'
+          description: The outcome description.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: A collection of key and value pairs.
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     TagResourceResult:
       type: object
       properties: {}
@@ -4901,13 +4695,11 @@ components:
       title: TagResourceRequest
       properties:
         resourceARN:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The resource ARN.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The resource ARN.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: The tags to assign to the resource.
+          $ref: '#/components/schemas/tagList'
+          description: The tags to assign to the resource.
     UntagResourceResult:
       type: object
       properties: {}
@@ -4919,13 +4711,11 @@ components:
       title: UntagResourceRequest
       properties:
         resourceARN:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The ARN of the resource from which to remove the tag.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The ARN of the resource from which to remove the tag.
         tagKeys:
-          allOf:
-            - $ref: '#/components/schemas/tagKeyList'
-            - description: The resource ARN.
+          $ref: '#/components/schemas/tagKeyList'
+          description: The resource ARN.
     UpdateDetectorVersionResult:
       type: object
       properties: {}
@@ -4939,33 +4729,26 @@ components:
       title: UpdateDetectorVersionRequest
       properties:
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The parent detector ID for the detector version you want to update.
+          $ref: '#/components/schemas/identifier'
+          description: The parent detector ID for the detector version you want to update.
         detectorVersionId:
-          allOf:
-            - $ref: '#/components/schemas/wholeNumberVersionString'
-            - description: 'The detector version ID. '
+          $ref: '#/components/schemas/wholeNumberVersionString'
+          description: 'The detector version ID. '
         externalModelEndpoints:
-          allOf:
-            - $ref: '#/components/schemas/ListOfStrings'
-            - description: The Amazon SageMaker model endpoints to include in the detector version.
+          $ref: '#/components/schemas/ListOfStrings'
+          description: The Amazon SageMaker model endpoints to include in the detector version.
         rules:
-          allOf:
-            - $ref: '#/components/schemas/RuleList'
-            - description: The rules to include in the detector version.
+          $ref: '#/components/schemas/RuleList'
+          description: The rules to include in the detector version.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: 'The detector version description. '
+          $ref: '#/components/schemas/description'
+          description: 'The detector version description. '
         modelVersions:
-          allOf:
-            - $ref: '#/components/schemas/ListOfModelVersions'
-            - description: The model versions to include in the detector version.
+          $ref: '#/components/schemas/ListOfModelVersions'
+          description: The model versions to include in the detector version.
         ruleExecutionMode:
-          allOf:
-            - $ref: '#/components/schemas/RuleExecutionMode'
-            - description: '<p>The rule execution mode to add to the detector.</p> <p>If you specify <code>FIRST_MATCHED</code>, Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p> <p>If you specifiy <code>ALL_MATCHED</code>, Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. You can define and edit the rule mode at the detector version level, when it is in draft status.</p> <p>The default behavior is <code>FIRST_MATCHED</code>.</p>'
+          $ref: '#/components/schemas/RuleExecutionMode'
+          description: '<p>The rule execution mode to add to the detector.</p> <p>If you specify <code>FIRST_MATCHED</code>, Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p> <p>If you specifiy <code>ALL_MATCHED</code>, Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. You can define and edit the rule mode at the detector version level, when it is in draft status.</p> <p>The default behavior is <code>FIRST_MATCHED</code>.</p>'
     UpdateDetectorVersionMetadataResult:
       type: object
       properties: {}
@@ -4978,17 +4761,14 @@ components:
       title: UpdateDetectorVersionMetadataRequest
       properties:
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The detector ID.
+          $ref: '#/components/schemas/identifier'
+          description: The detector ID.
         detectorVersionId:
-          allOf:
-            - $ref: '#/components/schemas/wholeNumberVersionString'
-            - description: 'The detector version ID. '
+          $ref: '#/components/schemas/wholeNumberVersionString'
+          description: 'The detector version ID. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The description.
+          $ref: '#/components/schemas/description'
+          description: The description.
     UpdateDetectorVersionStatusResult:
       type: object
       properties: {}
@@ -5001,17 +4781,14 @@ components:
       title: UpdateDetectorVersionStatusRequest
       properties:
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: 'The detector ID. '
+          $ref: '#/components/schemas/identifier'
+          description: 'The detector ID. '
         detectorVersionId:
-          allOf:
-            - $ref: '#/components/schemas/wholeNumberVersionString'
-            - description: 'The detector version ID. '
+          $ref: '#/components/schemas/wholeNumberVersionString'
+          description: 'The detector version ID. '
         status:
-          allOf:
-            - $ref: '#/components/schemas/DetectorVersionStatus'
-            - description: The new status.
+          $ref: '#/components/schemas/DetectorVersionStatus'
+          description: The new status.
     UpdateModelResult:
       type: object
       properties: {}
@@ -5023,36 +4800,29 @@ components:
       title: UpdateModelRequest
       properties:
         modelId:
-          allOf:
-            - $ref: '#/components/schemas/modelIdentifier'
-            - description: The model ID.
+          $ref: '#/components/schemas/modelIdentifier'
+          description: The model ID.
         modelType:
-          allOf:
-            - $ref: '#/components/schemas/ModelTypeEnum'
-            - description: The model type.
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The new model description.
+          $ref: '#/components/schemas/description'
+          description: The new model description.
     UpdateModelVersionResult:
       type: object
       properties:
         modelId:
-          allOf:
-            - $ref: '#/components/schemas/modelIdentifier'
-            - description: The model ID.
+          $ref: '#/components/schemas/modelIdentifier'
+          description: The model ID.
         modelType:
-          allOf:
-            - $ref: '#/components/schemas/ModelTypeEnum'
-            - description: The model type.
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
         modelVersionNumber:
-          allOf:
-            - $ref: '#/components/schemas/floatVersionString'
-            - description: The model version number of the model version updated.
+          $ref: '#/components/schemas/floatVersionString'
+          description: The model version number of the model version updated.
         status:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The status of the updated model version.
+          $ref: '#/components/schemas/string'
+          description: The status of the updated model version.
     UpdateModelVersionRequest:
       type: object
       required:
@@ -5062,25 +4832,20 @@ components:
       title: UpdateModelVersionRequest
       properties:
         modelId:
-          allOf:
-            - $ref: '#/components/schemas/modelIdentifier'
-            - description: The model ID.
+          $ref: '#/components/schemas/modelIdentifier'
+          description: The model ID.
         modelType:
-          allOf:
-            - $ref: '#/components/schemas/ModelTypeEnum'
-            - description: The model type.
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
         majorVersionNumber:
-          allOf:
-            - $ref: '#/components/schemas/wholeNumberVersionString'
-            - description: The major version number.
+          $ref: '#/components/schemas/wholeNumberVersionString'
+          description: The major version number.
         externalEventsDetail:
-          allOf:
-            - $ref: '#/components/schemas/ExternalEventsDetail'
-            - description: The event details.
+          $ref: '#/components/schemas/ExternalEventsDetail'
+          description: The event details.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: A collection of key and value pairs.
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     UpdateModelVersionStatusResult:
       type: object
       properties: {}
@@ -5094,21 +4859,17 @@ components:
       title: UpdateModelVersionStatusRequest
       properties:
         modelId:
-          allOf:
-            - $ref: '#/components/schemas/modelIdentifier'
-            - description: The model ID of the model version to update.
+          $ref: '#/components/schemas/modelIdentifier'
+          description: The model ID of the model version to update.
         modelType:
-          allOf:
-            - $ref: '#/components/schemas/ModelTypeEnum'
-            - description: The model type.
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
         modelVersionNumber:
-          allOf:
-            - $ref: '#/components/schemas/floatVersionString'
-            - description: The model version number.
+          $ref: '#/components/schemas/floatVersionString'
+          description: The model version number.
         status:
-          allOf:
-            - $ref: '#/components/schemas/ModelVersionStatus'
-            - description: The model version status.
+          $ref: '#/components/schemas/ModelVersionStatus'
+          description: The model version status.
     UpdateRuleMetadataResult:
       type: object
       properties: {}
@@ -5120,20 +4881,17 @@ components:
       title: UpdateRuleMetadataRequest
       properties:
         rule:
-          allOf:
-            - $ref: '#/components/schemas/Rule'
-            - description: The rule to update.
+          $ref: '#/components/schemas/Rule'
+          description: The rule to update.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The rule description.
+          $ref: '#/components/schemas/description'
+          description: The rule description.
     UpdateRuleVersionResult:
       type: object
       properties:
         rule:
-          allOf:
-            - $ref: '#/components/schemas/Rule'
-            - description: The new rule version that was created.
+          $ref: '#/components/schemas/Rule'
+          description: The new rule version that was created.
     UpdateRuleVersionRequest:
       type: object
       required:
@@ -5144,29 +4902,23 @@ components:
       title: UpdateRuleVersionRequest
       properties:
         rule:
-          allOf:
-            - $ref: '#/components/schemas/Rule'
-            - description: The rule to update.
+          $ref: '#/components/schemas/Rule'
+          description: The rule to update.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The description.
+          $ref: '#/components/schemas/description'
+          description: The description.
         expression:
-          allOf:
-            - $ref: '#/components/schemas/ruleExpression'
-            - description: The rule expression.
+          $ref: '#/components/schemas/ruleExpression'
+          description: The rule expression.
         language:
-          allOf:
-            - $ref: '#/components/schemas/Language'
-            - description: The language.
+          $ref: '#/components/schemas/Language'
+          description: The language.
         outcomes:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyListOfStrings'
-            - description: The outcomes.
+          $ref: '#/components/schemas/NonEmptyListOfStrings'
+          description: The outcomes.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/tagList'
-            - description: The tags to assign to the rule version.
+          $ref: '#/components/schemas/tagList'
+          description: The tags to assign to the rule version.
     UpdateVariableResult:
       type: object
       properties: {}
@@ -5177,21 +4929,17 @@ components:
       title: UpdateVariableRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The name of the variable.
+          $ref: '#/components/schemas/string'
+          description: The name of the variable.
         defaultValue:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The new default value of the variable.
+          $ref: '#/components/schemas/string'
+          description: The new default value of the variable.
         description:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The new description.
+          $ref: '#/components/schemas/string'
+          description: The new description.
         variableType:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The variable type. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.'
+          $ref: '#/components/schemas/string'
+          description: 'The variable type. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.'
     AsyncJobStatus:
       type: string
       enum:
@@ -5209,17 +4957,14 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The name.
+          $ref: '#/components/schemas/string'
+          description: The name.
         code:
-          allOf:
-            - $ref: '#/components/schemas/integer'
-            - description: 'The error code. '
+          $ref: '#/components/schemas/integer'
+          description: 'The error code. '
         message:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The error message.
+          $ref: '#/components/schemas/string'
+          description: The error message.
       description: Provides the error of the batch create variable API.
     BatchCreateVariableErrorList:
       type: array
@@ -5241,17 +4986,14 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The error name. '
+          $ref: '#/components/schemas/string'
+          description: 'The error name. '
         code:
-          allOf:
-            - $ref: '#/components/schemas/integer'
-            - description: 'The error code. '
+          $ref: '#/components/schemas/integer'
+          description: 'The error code. '
         message:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The error message.
+          $ref: '#/components/schemas/string'
+          description: The error message.
       description: Provides the error of the batch get variable API.
     BatchGetVariableErrorList:
       type: array
@@ -5302,65 +5044,50 @@ components:
       type: object
       properties:
         jobId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The job ID for the batch prediction.
+          $ref: '#/components/schemas/identifier'
+          description: The job ID for the batch prediction.
         status:
-          allOf:
-            - $ref: '#/components/schemas/AsyncJobStatus'
-            - description: The batch prediction status.
+          $ref: '#/components/schemas/AsyncJobStatus'
+          description: The batch prediction status.
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The reason a batch prediction job failed.
+          $ref: '#/components/schemas/string'
+          description: The reason a batch prediction job failed.
         startTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of when the batch prediction job started.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the batch prediction job started.
         completionTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of when the batch prediction job comleted.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the batch prediction job comleted.
         lastHeartbeatTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of most recent heartbeat indicating the batch prediction job was making progress.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of most recent heartbeat indicating the batch prediction job was making progress.
         inputPath:
-          allOf:
-            - $ref: '#/components/schemas/s3BucketLocation'
-            - description: The Amazon S3 location of your training file.
+          $ref: '#/components/schemas/s3BucketLocation'
+          description: The Amazon S3 location of your training file.
         outputPath:
-          allOf:
-            - $ref: '#/components/schemas/s3BucketLocation'
-            - description: The Amazon S3 location of your output file.
+          $ref: '#/components/schemas/s3BucketLocation'
+          description: The Amazon S3 location of your output file.
         eventTypeName:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name of the event type.
+          $ref: '#/components/schemas/identifier'
+          description: The name of the event type.
         detectorName:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name of the detector.
+          $ref: '#/components/schemas/identifier'
+          description: The name of the detector.
         detectorVersion:
-          allOf:
-            - $ref: '#/components/schemas/floatVersionString'
-            - description: 'The detector version. '
+          $ref: '#/components/schemas/floatVersionString'
+          description: 'The detector version. '
         iamRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/iamRoleArn'
-            - description: The ARN of the IAM role to use for this job request.
+          $ref: '#/components/schemas/iamRoleArn'
+          description: The ARN of the IAM role to use for this job request.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The ARN of batch prediction job.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The ARN of batch prediction job.
         processedRecordsCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The number of records processed by the batch prediction job.
+          $ref: '#/components/schemas/Integer'
+          description: The number of records processed by the batch prediction job.
         totalRecordsCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The total number of records in the batch prediction job.
+          $ref: '#/components/schemas/Integer'
+          description: The total number of records in the batch prediction job.
       description: The batch prediction details.
     BatchPredictionList:
       type: array
@@ -5421,9 +5148,8 @@ components:
         - labelSchema
       properties:
         modelVariables:
-          allOf:
-            - $ref: '#/components/schemas/ListOfStrings'
-            - description: The training data schema variables.
+          $ref: '#/components/schemas/ListOfStrings'
+          description: The training data schema variables.
         labelSchema:
           $ref: '#/components/schemas/LabelSchema'
       description: The training data schema.
@@ -5434,13 +5160,11 @@ components:
         - dataAccessRoleArn
       properties:
         dataLocation:
-          allOf:
-            - $ref: '#/components/schemas/s3BucketLocation'
-            - description: The Amazon S3 bucket location for the data.
+          $ref: '#/components/schemas/s3BucketLocation'
+          description: The Amazon S3 bucket location for the data.
         dataAccessRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/iamRoleArn'
-            - description: The ARN of the role that provides Amazon Fraud Detector access to the data location.
+          $ref: '#/components/schemas/iamRoleArn'
+          description: The ARN of the role that provides Amazon Fraud Detector access to the data location.
       description: Details for the external events data used for model version training.
     ruleExpression:
       type: string
@@ -5464,17 +5188,14 @@ components:
         - ruleVersion
       properties:
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The detector for which the rule is associated.
+          $ref: '#/components/schemas/identifier'
+          description: The detector for which the rule is associated.
         ruleId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The rule ID.
+          $ref: '#/components/schemas/identifier'
+          description: The rule ID.
         ruleVersion:
-          allOf:
-            - $ref: '#/components/schemas/wholeNumberVersionString'
-            - description: The rule version.
+          $ref: '#/components/schemas/wholeNumberVersionString'
+          description: The rule version.
       description: A rule.
     DataType:
       type: string
@@ -5505,13 +5226,11 @@ components:
       type: object
       properties:
         fileLevelMessages:
-          allOf:
-            - $ref: '#/components/schemas/fileValidationMessageList'
-            - description: The file-specific model training validation messages.
+          $ref: '#/components/schemas/fileValidationMessageList'
+          description: The file-specific model training validation messages.
         fieldLevelMessages:
-          allOf:
-            - $ref: '#/components/schemas/fieldValidationMessageList'
-            - description: The field-specific model training validation messages.
+          $ref: '#/components/schemas/fieldValidationMessageList'
+          description: The field-specific model training validation messages.
       description: The model training validation messages.
     sageMakerEndpointIdentifier:
       type: string
@@ -5538,29 +5257,23 @@ components:
       type: object
       properties:
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The detector ID.
+          $ref: '#/components/schemas/identifier'
+          description: The detector ID.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The detector description.
+          $ref: '#/components/schemas/description'
+          description: The detector description.
         eventTypeName:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The name of the event type.
+          $ref: '#/components/schemas/identifier'
+          description: The name of the event type.
         lastUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of when the detector was last updated.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the detector was last updated.
         createdTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of when the detector was created.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the detector was created.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The detector ARN.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The detector ARN.
       description: The detector.
     DetectorList:
       type: array
@@ -5570,21 +5283,17 @@ components:
       type: object
       properties:
         detectorVersionId:
-          allOf:
-            - $ref: '#/components/schemas/nonEmptyString'
-            - description: 'The detector version ID. '
+          $ref: '#/components/schemas/nonEmptyString'
+          description: 'The detector version ID. '
         status:
-          allOf:
-            - $ref: '#/components/schemas/DetectorVersionStatus'
-            - description: 'The detector version status. '
+          $ref: '#/components/schemas/DetectorVersionStatus'
+          description: 'The detector version status. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: 'The detector version description. '
+          $ref: '#/components/schemas/description'
+          description: 'The detector version description. '
         lastUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of when the detector version was last updated.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the detector version was last updated.
       description: The summary of the detector version.
     DetectorsMaxResults:
       type: integer
@@ -5597,73 +5306,58 @@ components:
         - entityId
       properties:
         entityType:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The entity type.
+          $ref: '#/components/schemas/string'
+          description: The entity type.
         entityId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: 'The entity ID. If you do not know the <code>entityId</code>, you can pass <code>unknown</code>, which is areserved string literal.'
+          $ref: '#/components/schemas/identifier'
+          description: 'The entity ID. If you do not know the <code>entityId</code>, you can pass <code>unknown</code>, which is areserved string literal.'
       description: 'The entity details. '
     EntityType:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The entity type name.
+          $ref: '#/components/schemas/string'
+          description: The entity type name.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The entity type description.
+          $ref: '#/components/schemas/description'
+          description: The entity type description.
         lastUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of when the entity type was last updated.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the entity type was last updated.
         createdTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of when the entity type was created.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the entity type was created.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The entity type ARN.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The entity type ARN.
       description: The entity type details.
     EventType:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The event type name.
+          $ref: '#/components/schemas/string'
+          description: The event type name.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The event type description.
+          $ref: '#/components/schemas/description'
+          description: The event type description.
         eventVariables:
-          allOf:
-            - $ref: '#/components/schemas/ListOfStrings'
-            - description: The event type event variables.
+          $ref: '#/components/schemas/ListOfStrings'
+          description: The event type event variables.
         labels:
-          allOf:
-            - $ref: '#/components/schemas/ListOfStrings'
-            - description: The event type labels.
+          $ref: '#/components/schemas/ListOfStrings'
+          description: The event type labels.
         entityTypes:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyListOfStrings'
-            - description: The event type entity types.
+          $ref: '#/components/schemas/NonEmptyListOfStrings'
+          description: The event type entity types.
         lastUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of when the event type was last updated.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the event type was last updated.
         createdTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of when the event type was created.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the event type was created.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The entity type ARN.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The entity type ARN.
       description: The event type details.
     variableValue:
       type: string
@@ -5685,25 +5379,20 @@ components:
         - useEventVariables
       properties:
         eventTypeName:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The event type name.
+          $ref: '#/components/schemas/identifier'
+          description: The event type name.
         format:
-          allOf:
-            - $ref: '#/components/schemas/ModelInputDataFormat'
-            - description: ' The format of the model input configuration. The format differs depending on if it is passed through to SageMaker or constructed by Amazon Fraud Detector.'
+          $ref: '#/components/schemas/ModelInputDataFormat'
+          description: ' The format of the model input configuration. The format differs depending on if it is passed through to SageMaker or constructed by Amazon Fraud Detector.'
         useEventVariables:
-          allOf:
-            - $ref: '#/components/schemas/UseEventVariables'
-            - description: The event variables.
+          $ref: '#/components/schemas/UseEventVariables'
+          description: The event variables.
         jsonInputTemplate:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: ' Template for constructing the JSON input-data sent to SageMaker. At event-evaluation, the placeholders for variable names in the template will be replaced with the variable values before being sent to SageMaker. '
+          $ref: '#/components/schemas/string'
+          description: ' Template for constructing the JSON input-data sent to SageMaker. At event-evaluation, the placeholders for variable names in the template will be replaced with the variable values before being sent to SageMaker. '
         csvInputTemplate:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: ' Template for constructing the CSV input-data sent to SageMaker. At event-evaluation, the placeholders for variable-names in the template will be replaced with the variable values before being sent to SageMaker. '
+          $ref: '#/components/schemas/string'
+          description: ' Template for constructing the CSV input-data sent to SageMaker. At event-evaluation, the placeholders for variable-names in the template will be replaced with the variable values before being sent to SageMaker. '
       description: The Amazon SageMaker model input configuration.
     ModelOutputConfiguration:
       type: object
@@ -5711,17 +5400,14 @@ components:
         - format
       properties:
         format:
-          allOf:
-            - $ref: '#/components/schemas/ModelOutputDataFormat'
-            - description: The format of the model output configuration.
+          $ref: '#/components/schemas/ModelOutputDataFormat'
+          description: The format of the model output configuration.
         jsonKeyToVariableMap:
-          allOf:
-            - $ref: '#/components/schemas/JsonKeyToVariableMap'
-            - description: 'A map of JSON keys in response from SageMaker to the Amazon Fraud Detector variables. '
+          $ref: '#/components/schemas/JsonKeyToVariableMap'
+          description: 'A map of JSON keys in response from SageMaker to the Amazon Fraud Detector variables. '
         csvIndexToVariableMap:
-          allOf:
-            - $ref: '#/components/schemas/CsvIndexToVariableMap'
-            - description: 'A map of CSV index values in the SageMaker response to the Amazon Fraud Detector variables. '
+          $ref: '#/components/schemas/CsvIndexToVariableMap'
+          description: 'A map of CSV index values in the SageMaker response to the Amazon Fraud Detector variables. '
       description: Provides the Amazon Sagemaker model output configuration.
     ModelEndpointStatus:
       type: string
@@ -5732,53 +5418,42 @@ components:
       type: object
       properties:
         modelEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The Amazon SageMaker model endpoints.
+          $ref: '#/components/schemas/string'
+          description: The Amazon SageMaker model endpoints.
         modelSource:
-          allOf:
-            - $ref: '#/components/schemas/ModelSource'
-            - description: The source of the model.
+          $ref: '#/components/schemas/ModelSource'
+          description: The source of the model.
         invokeModelEndpointRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The role used to invoke the model. '
+          $ref: '#/components/schemas/string'
+          description: 'The role used to invoke the model. '
         inputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/ModelInputConfiguration'
-            - description: The input configuration.
+          $ref: '#/components/schemas/ModelInputConfiguration'
+          description: The input configuration.
         outputConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/ModelOutputConfiguration'
-            - description: The output configuration.
+          $ref: '#/components/schemas/ModelOutputConfiguration'
+          description: The output configuration.
         modelEndpointStatus:
-          allOf:
-            - $ref: '#/components/schemas/ModelEndpointStatus'
-            - description: The Amazon Fraud Detector status for the external model endpoint
+          $ref: '#/components/schemas/ModelEndpointStatus'
+          description: The Amazon Fraud Detector status for the external model endpoint
         lastUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of when the model was last updated.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the model was last updated.
         createdTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of when the model was last created.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the model was last created.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The model ARN.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The model ARN.
       description: The Amazon SageMaker model.
     ModelEndpointDataBlob:
       type: object
       properties:
         byteBuffer:
-          allOf:
-            - $ref: '#/components/schemas/blob'
-            - description: The byte buffer of the Amazon SageMaker model endpoint input data blob.
+          $ref: '#/components/schemas/blob'
+          description: The byte buffer of the Amazon SageMaker model endpoint input data blob.
         contentType:
-          allOf:
-            - $ref: '#/components/schemas/contentType'
-            - description: 'The content type of the Amazon SageMaker model endpoint input data blob. '
+          $ref: '#/components/schemas/contentType'
+          description: 'The content type of the Amazon SageMaker model endpoint input data blob. '
       description: A pre-formed Amazon SageMaker model input you can include if your detector version includes an imported Amazon SageMaker model endpoint with pass-through input configuration.
     ExternalModelEndpointDataBlobMap:
       type: object
@@ -5796,41 +5471,33 @@ components:
       type: object
       properties:
         fieldName:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The field name.
+          $ref: '#/components/schemas/string'
+          description: The field name.
         identifier:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The message ID.
+          $ref: '#/components/schemas/string'
+          description: The message ID.
         title:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The message title.
+          $ref: '#/components/schemas/string'
+          description: The message title.
         content:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The message content.
+          $ref: '#/components/schemas/string'
+          description: The message content.
         type:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The message type.
+          $ref: '#/components/schemas/string'
+          description: The message type.
       description: The message details.
     FileValidationMessage:
       type: object
       properties:
         title:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The message title.
+          $ref: '#/components/schemas/string'
+          description: The message title.
         content:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The message content.
+          $ref: '#/components/schemas/string'
+          description: The message content.
         type:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The message type.
+          $ref: '#/components/schemas/string'
+          description: The message type.
       description: The message details.
     batchPredictionsMaxPageSize:
       type: integer
@@ -5868,9 +5535,8 @@ components:
       type: object
       properties:
         kmsEncryptionKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/KmsEncryptionKeyArn'
-            - description: The encryption key ARN.
+          $ref: '#/components/schemas/KmsEncryptionKeyArn'
+          description: The encryption key ARN.
       description: The KMS key details.
     labelsMaxResults:
       type: integer
@@ -5917,25 +5583,20 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The label name.
+          $ref: '#/components/schemas/string'
+          description: The label name.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The label description.
+          $ref: '#/components/schemas/description'
+          description: The label description.
         lastUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of when the label was last updated.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the label was last updated.
         createdTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of when the event type was created.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the event type was created.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The label ARN.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The label ARN.
       description: The label details.
     labelMapper:
       type: object
@@ -5947,9 +5608,8 @@ components:
         - labelMapper
       properties:
         labelMapper:
-          allOf:
-            - $ref: '#/components/schemas/labelMapper'
-            - description: 'The label mapper maps the Amazon Fraud Detector supported model classification labels (<code>FRAUD</code>, <code>LEGIT</code>) to the appropriate event type labels. For example, if "<code>FRAUD</code>" and "<code>LEGIT</code>" are Amazon Fraud Detector supported labels, this mapper could be: <code>{"FRAUD" =&gt; ["0"]</code>, <code>"LEGIT" =&gt; ["1"]}</code> or <code>{"FRAUD" =&gt; ["false"]</code>, <code>"LEGIT" =&gt; ["true"]}</code> or <code>{"FRAUD" =&gt; ["fraud", "abuse"]</code>, <code>"LEGIT" =&gt; ["legit", "safe"]}</code>. The value part of the mapper is a list, because you may have multiple label variants from your event type for a single Amazon Fraud Detector label. '
+          $ref: '#/components/schemas/labelMapper'
+          description: 'The label mapper maps the Amazon Fraud Detector supported model classification labels (<code>FRAUD</code>, <code>LEGIT</code>) to the appropriate event type labels. For example, if "<code>FRAUD</code>" and "<code>LEGIT</code>" are Amazon Fraud Detector supported labels, this mapper could be: <code>{"FRAUD" =&gt; ["0"]</code>, <code>"LEGIT" =&gt; ["1"]}</code> or <code>{"FRAUD" =&gt; ["false"]</code>, <code>"LEGIT" =&gt; ["true"]}</code> or <code>{"FRAUD" =&gt; ["fraud", "abuse"]</code>, <code>"LEGIT" =&gt; ["legit", "safe"]}</code>. The value part of the mapper is a list, because you may have multiple label variants from your event type for a single Amazon Fraud Detector label. '
       description: The label schema.
     LogitMetric:
       type: object
@@ -5959,17 +5619,14 @@ components:
         - variableImportance
       properties:
         variableName:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The name of the variable.
+          $ref: '#/components/schemas/string'
+          description: The name of the variable.
         variableType:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The type of variable.
+          $ref: '#/components/schemas/string'
+          description: The type of variable.
         variableImportance:
-          allOf:
-            - $ref: '#/components/schemas/float'
-            - description: The relative importance of the variable.
+          $ref: '#/components/schemas/float'
+          description: The relative importance of the variable.
       description: The logit metric details.
     ListOfLogitMetrics:
       type: array
@@ -5979,13 +5636,11 @@ components:
       type: object
       properties:
         modelVersion:
-          allOf:
-            - $ref: '#/components/schemas/ModelVersion'
-            - description: The model version.
+          $ref: '#/components/schemas/ModelVersion'
+          description: The model version.
         scores:
-          allOf:
-            - $ref: '#/components/schemas/ModelPredictionMap'
-            - description: The model's fraud prediction scores.
+          $ref: '#/components/schemas/ModelPredictionMap'
+          description: The model's fraud prediction scores.
       description: The fraud prediction scores.
     ModelVersion:
       type: object
@@ -5995,33 +5650,27 @@ components:
         - modelVersionNumber
       properties:
         modelId:
-          allOf:
-            - $ref: '#/components/schemas/modelIdentifier'
-            - description: The model ID.
+          $ref: '#/components/schemas/modelIdentifier'
+          description: The model ID.
         modelType:
-          allOf:
-            - $ref: '#/components/schemas/ModelTypeEnum'
-            - description: The model type.
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
         modelVersionNumber:
-          allOf:
-            - $ref: '#/components/schemas/nonEmptyString'
-            - description: The model version number.
+          $ref: '#/components/schemas/nonEmptyString'
+          description: The model version number.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The model version ARN.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The model version ARN.
       description: The model version.
     RuleResult:
       type: object
       properties:
         ruleId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The rule ID that was matched, based on the rule execution mode.'
+          $ref: '#/components/schemas/string'
+          description: 'The rule ID that was matched, based on the rule execution mode.'
         outcomes:
-          allOf:
-            - $ref: '#/components/schemas/ListOfStrings'
-            - description: 'The outcomes of the matched rule, based on the rule execution mode.'
+          $ref: '#/components/schemas/ListOfStrings'
+          description: 'The outcomes of the matched rule, based on the rule execution mode.'
       description: The rule results.
     TagsMaxResults:
       type: integer
@@ -6034,53 +5683,42 @@ components:
       type: object
       properties:
         fpr:
-          allOf:
-            - $ref: '#/components/schemas/float'
-            - description: The false positive rate. This is the percentage of total legitimate events that are incorrectly predicted as fraud.
+          $ref: '#/components/schemas/float'
+          description: The false positive rate. This is the percentage of total legitimate events that are incorrectly predicted as fraud.
         precision:
-          allOf:
-            - $ref: '#/components/schemas/float'
-            - description: The percentage of fraud events correctly predicted as fraudulent as compared to all events predicted as fraudulent.
+          $ref: '#/components/schemas/float'
+          description: The percentage of fraud events correctly predicted as fraudulent as compared to all events predicted as fraudulent.
         tpr:
-          allOf:
-            - $ref: '#/components/schemas/float'
-            - description: The true positive rate. This is the percentage of total fraud the model detects. Also known as capture rate.
+          $ref: '#/components/schemas/float'
+          description: The true positive rate. This is the percentage of total fraud the model detects. Also known as capture rate.
         threshold:
-          allOf:
-            - $ref: '#/components/schemas/float'
-            - description: 'The model threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is labeled as fraud.'
+          $ref: '#/components/schemas/float'
+          description: 'The model threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is labeled as fraud.'
       description: Model performance metrics data points.
     Model:
       type: object
       properties:
         modelId:
-          allOf:
-            - $ref: '#/components/schemas/modelIdentifier'
-            - description: The model ID.
+          $ref: '#/components/schemas/modelIdentifier'
+          description: The model ID.
         modelType:
-          allOf:
-            - $ref: '#/components/schemas/ModelTypeEnum'
-            - description: The model type.
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The model description.
+          $ref: '#/components/schemas/description'
+          description: The model description.
         eventTypeName:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The name of the event type.
+          $ref: '#/components/schemas/string'
+          description: The name of the event type.
         createdTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of when the model was created.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the model was created.
         lastUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of last time the model was updated.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of last time the model was updated.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The ARN of the model.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The ARN of the model.
       description: The model.
     blob:
       type: string
@@ -6108,65 +5746,51 @@ components:
       type: object
       properties:
         dataValidationMetrics:
-          allOf:
-            - $ref: '#/components/schemas/DataValidationMetrics'
-            - description: The validation metrics.
+          $ref: '#/components/schemas/DataValidationMetrics'
+          description: The validation metrics.
         trainingMetrics:
-          allOf:
-            - $ref: '#/components/schemas/TrainingMetrics'
-            - description: The training metric details.
+          $ref: '#/components/schemas/TrainingMetrics'
+          description: The training metric details.
         variableImportanceMetrics:
-          allOf:
-            - $ref: '#/components/schemas/VariableImportanceMetrics'
-            - description: The variable importance metrics.
+          $ref: '#/components/schemas/VariableImportanceMetrics'
+          description: The variable importance metrics.
       description: The training result details.
     ModelVersionDetail:
       type: object
       properties:
         modelId:
-          allOf:
-            - $ref: '#/components/schemas/modelIdentifier'
-            - description: The model ID.
+          $ref: '#/components/schemas/modelIdentifier'
+          description: The model ID.
         modelType:
-          allOf:
-            - $ref: '#/components/schemas/ModelTypeEnum'
-            - description: The model type.
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
         modelVersionNumber:
-          allOf:
-            - $ref: '#/components/schemas/floatVersionString'
-            - description: The model version number.
+          $ref: '#/components/schemas/floatVersionString'
+          description: The model version number.
         status:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The status of the model version.
+          $ref: '#/components/schemas/string'
+          description: The status of the model version.
         trainingDataSource:
-          allOf:
-            - $ref: '#/components/schemas/TrainingDataSourceEnum'
-            - description: The model version training data source.
+          $ref: '#/components/schemas/TrainingDataSourceEnum'
+          description: The model version training data source.
         trainingDataSchema:
-          allOf:
-            - $ref: '#/components/schemas/TrainingDataSchema'
-            - description: The training data schema.
+          $ref: '#/components/schemas/TrainingDataSchema'
+          description: The training data schema.
         externalEventsDetail:
-          allOf:
-            - $ref: '#/components/schemas/ExternalEventsDetail'
-            - description: The event details.
+          $ref: '#/components/schemas/ExternalEventsDetail'
+          description: The event details.
         trainingResult:
-          allOf:
-            - $ref: '#/components/schemas/TrainingResult'
-            - description: The training results.
+          $ref: '#/components/schemas/TrainingResult'
+          description: The training results.
         lastUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: The timestamp when the model was last updated.
+          $ref: '#/components/schemas/time'
+          description: The timestamp when the model was last updated.
         createdTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: The timestamp when the model was created.
+          $ref: '#/components/schemas/time'
+          description: The timestamp when the model was created.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The model version ARN.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The model version ARN.
       description: The details of the model version.
     ModelVersionStatus:
       type: string
@@ -6178,69 +5802,54 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The outcome name.
+          $ref: '#/components/schemas/identifier'
+          description: The outcome name.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The outcome description.
+          $ref: '#/components/schemas/description'
+          description: The outcome description.
         lastUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: The timestamp when the outcome was last updated.
+          $ref: '#/components/schemas/time'
+          description: The timestamp when the outcome was last updated.
         createdTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: The timestamp when the outcome was created.
+          $ref: '#/components/schemas/time'
+          description: The timestamp when the outcome was created.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The outcome ARN.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The outcome ARN.
       description: The outcome.
     RuleDetail:
       type: object
       properties:
         ruleId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The rule ID.
+          $ref: '#/components/schemas/identifier'
+          description: The rule ID.
         description:
-          allOf:
-            - $ref: '#/components/schemas/description'
-            - description: The rule description.
+          $ref: '#/components/schemas/description'
+          description: The rule description.
         detectorId:
-          allOf:
-            - $ref: '#/components/schemas/identifier'
-            - description: The detector for which the rule is associated.
+          $ref: '#/components/schemas/identifier'
+          description: The detector for which the rule is associated.
         ruleVersion:
-          allOf:
-            - $ref: '#/components/schemas/wholeNumberVersionString'
-            - description: The rule version.
+          $ref: '#/components/schemas/wholeNumberVersionString'
+          description: The rule version.
         expression:
-          allOf:
-            - $ref: '#/components/schemas/ruleExpression'
-            - description: The rule expression.
+          $ref: '#/components/schemas/ruleExpression'
+          description: The rule expression.
         language:
-          allOf:
-            - $ref: '#/components/schemas/Language'
-            - description: The rule language.
+          $ref: '#/components/schemas/Language'
+          description: The rule language.
         outcomes:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyListOfStrings'
-            - description: The rule outcomes.
+          $ref: '#/components/schemas/NonEmptyListOfStrings'
+          description: The rule outcomes.
         lastUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: Timestamp of the last time the rule was updated.
+          $ref: '#/components/schemas/time'
+          description: Timestamp of the last time the rule was updated.
         createdTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: The timestamp of when the rule was created.
+          $ref: '#/components/schemas/time'
+          description: The timestamp of when the rule was created.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The rule ARN.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The rule ARN.
       description: The details of the rule.
     tagKey:
       type: string
@@ -6258,13 +5867,11 @@ components:
         - value
       properties:
         key:
-          allOf:
-            - $ref: '#/components/schemas/tagKey'
-            - description: A tag key.
+          $ref: '#/components/schemas/tagKey'
+          description: A tag key.
         value:
-          allOf:
-            - $ref: '#/components/schemas/tagValue'
-            - description: A value assigned to a tag key.
+          $ref: '#/components/schemas/tagValue'
+          description: A value assigned to a tag key.
       description: 'A key and value pair. '
     metricDataPointsList:
       type: array
@@ -6274,21 +5881,18 @@ components:
       type: object
       properties:
         auc:
-          allOf:
-            - $ref: '#/components/schemas/float'
-            - description: 'The area under the curve. This summarizes true positive rate (TPR) and false positive rate (FPR) across all possible model score thresholds. A model with no predictive power has an AUC of 0.5, whereas a perfect model has a score of 1.0.'
+          $ref: '#/components/schemas/float'
+          description: 'The area under the curve. This summarizes true positive rate (TPR) and false positive rate (FPR) across all possible model score thresholds. A model with no predictive power has an AUC of 0.5, whereas a perfect model has a score of 1.0.'
         metricDataPoints:
-          allOf:
-            - $ref: '#/components/schemas/metricDataPointsList'
-            - description: The data points details.
+          $ref: '#/components/schemas/metricDataPointsList'
+          description: The data points details.
       description: The training metric details.
     VariableImportanceMetrics:
       type: object
       properties:
         LogitMetrics:
-          allOf:
-            - $ref: '#/components/schemas/ListOfLogitMetrics'
-            - description: List of variable metrics.
+          $ref: '#/components/schemas/ListOfLogitMetrics'
+          description: List of variable metrics.
       description: The variable importance metrics details.
     tagKeyList:
       type: array
@@ -6300,69 +5904,54 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The name of the variable.
+          $ref: '#/components/schemas/string'
+          description: The name of the variable.
         dataType:
-          allOf:
-            - $ref: '#/components/schemas/DataType'
-            - description: 'The data type of the variable. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.'
+          $ref: '#/components/schemas/DataType'
+          description: 'The data type of the variable. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.'
         dataSource:
-          allOf:
-            - $ref: '#/components/schemas/DataSource'
-            - description: The data source of the variable.
+          $ref: '#/components/schemas/DataSource'
+          description: The data source of the variable.
         defaultValue:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The default value of the variable.
+          $ref: '#/components/schemas/string'
+          description: The default value of the variable.
         description:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The description of the variable. '
+          $ref: '#/components/schemas/string'
+          description: 'The description of the variable. '
         variableType:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: '<p>The variable type of the variable.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT </code> </p>'
+          $ref: '#/components/schemas/string'
+          description: '<p>The variable type of the variable.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT </code> </p>'
         lastUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: The time when variable was last updated.
+          $ref: '#/components/schemas/time'
+          description: The time when variable was last updated.
         createdTime:
-          allOf:
-            - $ref: '#/components/schemas/time'
-            - description: The time when the variable was created.
+          $ref: '#/components/schemas/time'
+          description: The time when the variable was created.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/fraudDetectorArn'
-            - description: The ARN of the variable.
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The ARN of the variable.
       description: The variable.
     VariableEntry:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The name of the variable.
+          $ref: '#/components/schemas/string'
+          description: The name of the variable.
         dataType:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The data type of the variable.
+          $ref: '#/components/schemas/string'
+          description: The data type of the variable.
         dataSource:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The data source of the variable.
+          $ref: '#/components/schemas/string'
+          description: The data source of the variable.
         defaultValue:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The default value of the variable.
+          $ref: '#/components/schemas/string'
+          description: The default value of the variable.
         description:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The description of the variable.
+          $ref: '#/components/schemas/string'
+          description: The description of the variable.
         variableType:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: '<p>The type of the variable. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT </code> </p>'
+          $ref: '#/components/schemas/string'
+          description: '<p>The type of the variable. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT </code> </p>'
       description: A variable in the list of variables for the batch create variable request.
     variableName:
       type: string

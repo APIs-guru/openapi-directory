@@ -510,17 +510,14 @@ components:
         - workspaceId
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceArn'
-            - description: The ARN of the workspace that was just created.
+          $ref: '#/components/schemas/WorkspaceArn'
+          description: The ARN of the workspace that was just created.
         status:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceStatus'
-            - description: The status of the workspace that was just created (usually CREATING).
+          $ref: '#/components/schemas/WorkspaceStatus'
+          description: The status of the workspace that was just created (usually CREATING).
         workspaceId:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceId'
-            - description: The generated ID of the workspace that was just created.
+          $ref: '#/components/schemas/WorkspaceId'
+          description: The generated ID of the workspace that was just created.
       description: Represents the output of a CreateWorkspace operation.
     ThrottlingException: {}
     ConflictException: {}
@@ -535,9 +532,8 @@ components:
         - workspace
       properties:
         workspace:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceDescription'
-            - description: The properties of the selected workspace.
+          $ref: '#/components/schemas/WorkspaceDescription'
+          description: The properties of the selected workspace.
       description: Represents the output of a DescribeWorkspace operation.
     ListWorkspacesResponse:
       type: object
@@ -545,13 +541,11 @@ components:
         - workspaces
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: Pagination token to use when requesting the next page in this list.
+          $ref: '#/components/schemas/PaginationToken'
+          description: Pagination token to use when requesting the next page in this list.
         workspaces:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceSummaryList'
-            - description: 'The list of existing workspaces, including those undergoing creation or deletion.'
+          $ref: '#/components/schemas/WorkspaceSummaryList'
+          description: 'The list of existing workspaces, including those undergoing creation or deletion.'
       description: Represents the output of a ListWorkspaces operation.
     WorkspaceAlias:
       type: string
@@ -569,13 +563,11 @@ components:
       title: CreateWorkspaceRequest
       properties:
         alias:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceAlias'
-            - description: An optional user-assigned alias for this workspace. This alias is for user reference and does not need to be unique.
+          $ref: '#/components/schemas/WorkspaceAlias'
+          description: An optional user-assigned alias for this workspace. This alias is for user reference and does not need to be unique.
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyToken'
-            - description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/IdempotencyToken'
+          description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
       description: Represents the input of a CreateWorkspace operation.
     WorkspaceArn:
       type: string
@@ -586,9 +578,8 @@ components:
         - statusCode
       properties:
         statusCode:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceStatusCode'
-            - description: Status code of this workspace.
+          $ref: '#/components/schemas/WorkspaceStatusCode'
+          description: Status code of this workspace.
       description: Represents the status of a workspace.
     WorkspaceId:
       type: string
@@ -615,29 +606,23 @@ components:
         - workspaceId
       properties:
         alias:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceAlias'
-            - description: Alias of this workspace.
+          $ref: '#/components/schemas/WorkspaceAlias'
+          description: Alias of this workspace.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceArn'
-            - description: The Amazon Resource Name (ARN) of this workspace.
+          $ref: '#/components/schemas/WorkspaceArn'
+          description: The Amazon Resource Name (ARN) of this workspace.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the workspace was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the workspace was created.
         prometheusEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/Uri'
-            - description: Prometheus endpoint URI.
+          $ref: '#/components/schemas/Uri'
+          description: Prometheus endpoint URI.
         status:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceStatus'
-            - description: The status of this workspace.
+          $ref: '#/components/schemas/WorkspaceStatus'
+          description: The status of this workspace.
         workspaceId:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceId'
-            - description: Unique string identifying this workspace.
+          $ref: '#/components/schemas/WorkspaceId'
+          description: Unique string identifying this workspace.
       description: Represents the properties of a workspace.
     ListWorkspacesRequestMaxResultsInteger:
       type: integer
@@ -664,13 +649,11 @@ components:
       title: UpdateWorkspaceAliasRequest
       properties:
         alias:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceAlias'
-            - description: The new alias of the workspace.
+          $ref: '#/components/schemas/WorkspaceAlias'
+          description: The new alias of the workspace.
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyToken'
-            - description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/IdempotencyToken'
+          description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
       description: Represents the input of an UpdateWorkspaceAlias operation.
     Uri:
       type: string
@@ -694,25 +677,20 @@ components:
         - workspaceId
       properties:
         alias:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceAlias'
-            - description: Alias of this workspace.
+          $ref: '#/components/schemas/WorkspaceAlias'
+          description: Alias of this workspace.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceArn'
-            - description: The AmazonResourceName of this workspace.
+          $ref: '#/components/schemas/WorkspaceArn'
+          description: The AmazonResourceName of this workspace.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the workspace was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the workspace was created.
         status:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceStatus'
-            - description: The status of this workspace.
+          $ref: '#/components/schemas/WorkspaceStatus'
+          description: The status of this workspace.
         workspaceId:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceId'
-            - description: Unique string identifying this workspace.
+          $ref: '#/components/schemas/WorkspaceId'
+          description: Unique string identifying this workspace.
       description: Represents a summary of the properties of a workspace.
 security:
   - hmac: []

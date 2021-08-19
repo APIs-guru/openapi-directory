@@ -169,17 +169,14 @@ paths:
                   type: object
                   properties:
                     BackupPlanName:
-                      allOf:
-                        - $ref: '#/components/schemas/BackupPlanName'
-                        - description: The optional display name of a backup plan.
+                      $ref: '#/components/schemas/BackupPlanName'
+                      description: The optional display name of a backup plan.
                     Rules:
-                      allOf:
-                        - $ref: '#/components/schemas/BackupRulesInput'
-                        - description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.'
+                      $ref: '#/components/schemas/BackupRulesInput'
+                      description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.'
                     AdvancedBackupSettings:
-                      allOf:
-                        - $ref: '#/components/schemas/AdvancedBackupSettings'
-                        - description: Specifies a list of <code>BackupOptions</code> for each resource type. These settings are only available for Windows VSS backup jobs.
+                      $ref: '#/components/schemas/AdvancedBackupSettings'
+                      description: Specifies a list of <code>BackupOptions</code> for each resource type. These settings are only available for Windows VSS backup jobs.
                 BackupPlanTags:
                   description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair. The specified tags are assigned to all backups created with this plan.'
                   type: object
@@ -325,21 +322,17 @@ paths:
                   type: object
                   properties:
                     SelectionName:
-                      allOf:
-                        - $ref: '#/components/schemas/BackupSelectionName'
-                        - description: The display name of a resource selection document.
+                      $ref: '#/components/schemas/BackupSelectionName'
+                      description: The display name of a resource selection document.
                     IamRoleArn:
-                      allOf:
-                        - $ref: '#/components/schemas/IAMRoleArn'
-                        - description: 'The ARN of the IAM role that AWS Backup uses to authenticate when backing up the target resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+                      $ref: '#/components/schemas/IAMRoleArn'
+                      description: 'The ARN of the IAM role that AWS Backup uses to authenticate when backing up the target resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
                     Resources:
-                      allOf:
-                        - $ref: '#/components/schemas/ResourceArns'
-                        - description: An array of strings that contain Amazon Resource Names (ARNs) of resources to assign to a backup plan.
+                      $ref: '#/components/schemas/ResourceArns'
+                      description: An array of strings that contain Amazon Resource Names (ARNs) of resources to assign to a backup plan.
                     ListOfTags:
-                      allOf:
-                        - $ref: '#/components/schemas/ListOfTags'
-                        - description: 'An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>"StringEquals": {"ec2:ResourceTag/Department": "accounting"</code>. Assigns the backup plan to every resource with at least one matching tag.'
+                      $ref: '#/components/schemas/ListOfTags'
+                      description: 'An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>"StringEquals": {"ec2:ResourceTag/Department": "accounting"</code>. Assigns the backup plan to every resource with at least one matching tag.'
                 CreatorRequestId:
                   description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
                   type: string
@@ -688,17 +681,14 @@ paths:
                   type: object
                   properties:
                     BackupPlanName:
-                      allOf:
-                        - $ref: '#/components/schemas/BackupPlanName'
-                        - description: The optional display name of a backup plan.
+                      $ref: '#/components/schemas/BackupPlanName'
+                      description: The optional display name of a backup plan.
                     Rules:
-                      allOf:
-                        - $ref: '#/components/schemas/BackupRulesInput'
-                        - description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.'
+                      $ref: '#/components/schemas/BackupRulesInput'
+                      description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.'
                     AdvancedBackupSettings:
-                      allOf:
-                        - $ref: '#/components/schemas/AdvancedBackupSettings'
-                        - description: Specifies a list of <code>BackupOptions</code> for each resource type. These settings are only available for Windows VSS backup jobs.
+                      $ref: '#/components/schemas/AdvancedBackupSettings'
+                      description: Specifies a list of <code>BackupOptions</code> for each resource type. These settings are only available for Windows VSS backup jobs.
   '/backup/plans/{backupPlanId}/selections/{selectionId}':
     delete:
       operationId: DeleteBackupSelection
@@ -1253,13 +1243,11 @@ paths:
                   type: object
                   properties:
                     MoveToColdStorageAfterDays:
-                      allOf:
-                        - $ref: '#/components/schemas/Long'
-                        - description: Specifies the number of days after creation that a recovery point is moved to cold storage.
+                      $ref: '#/components/schemas/Long'
+                      description: Specifies the number of days after creation that a recovery point is moved to cold storage.
                     DeleteAfterDays:
-                      allOf:
-                        - $ref: '#/components/schemas/Long'
-                        - description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.
+                      $ref: '#/components/schemas/Long'
+                      description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.
   '/backup-jobs/{backupJobId}':
     get:
       operationId: DescribeBackupJob
@@ -2963,13 +2951,11 @@ paths:
                   type: object
                   properties:
                     MoveToColdStorageAfterDays:
-                      allOf:
-                        - $ref: '#/components/schemas/Long'
-                        - description: Specifies the number of days after creation that a recovery point is moved to cold storage.
+                      $ref: '#/components/schemas/Long'
+                      description: Specifies the number of days after creation that a recovery point is moved to cold storage.
                     DeleteAfterDays:
-                      allOf:
-                        - $ref: '#/components/schemas/Long'
-                        - description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.
+                      $ref: '#/components/schemas/Long'
+                      description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.
                 RecoveryPointTags:
                   description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.'
                   type: object
@@ -3069,13 +3055,11 @@ paths:
                   type: object
                   properties:
                     MoveToColdStorageAfterDays:
-                      allOf:
-                        - $ref: '#/components/schemas/Long'
-                        - description: Specifies the number of days after creation that a recovery point is moved to cold storage.
+                      $ref: '#/components/schemas/Long'
+                      description: Specifies the number of days after creation that a recovery point is moved to cold storage.
                     DeleteAfterDays:
-                      allOf:
-                        - $ref: '#/components/schemas/Long'
-                        - description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.
+                      $ref: '#/components/schemas/Long'
+                      description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3339,25 +3323,20 @@ components:
       type: object
       properties:
         BackupPlanId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a backup plan.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a backup plan.
         BackupPlanArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for example, <code>arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for example, <code>arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50</code>.'
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that a backup plan is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time that a backup plan is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         VersionId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. They cannot be edited.'
+          $ref: '#/components/schemas/string'
+          description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. They cannot be edited.'
         AdvancedBackupSettings:
-          allOf:
-            - $ref: '#/components/schemas/AdvancedBackupSettings'
-            - description: A list of <code>BackupOptions</code> settings for a resource type. This option is only available for Windows VSS backup jobs.
+          $ref: '#/components/schemas/AdvancedBackupSettings'
+          description: A list of <code>BackupOptions</code> settings for a resource type. This option is only available for Windows VSS backup jobs.
     BackupPlanName:
       type: string
     BackupRulesInput:
@@ -3379,17 +3358,14 @@ components:
       type: object
       properties:
         SelectionId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies the body of a request to assign a set of resources to a backup plan.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies the body of a request to assign a set of resources to a backup plan.
         BackupPlanId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a backup plan.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a backup plan.
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a backup selection is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a backup selection is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
     BackupSelectionName:
       type: string
       pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
@@ -3407,36 +3383,29 @@ components:
       type: object
       properties:
         BackupVaultName:
-          allOf:
-            - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          $ref: '#/components/schemas/BackupVaultName'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         BackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a backup vault is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a backup vault is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
     DeleteBackupPlanOutput:
       type: object
       properties:
         BackupPlanId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a backup plan.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a backup plan.
         BackupPlanArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for example, <code>arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for example, <code>arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50</code>.'
         DeletionDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a backup plan is deleted, in Unix format and Coordinated Universal Time (UTC). The value of <code>DeletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a backup plan is deleted, in Unix format and Coordinated Universal Time (UTC). The value of <code>DeletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         VersionId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version IDs cannot be edited.'
+          $ref: '#/components/schemas/string'
+          description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version IDs cannot be edited.'
     ResourceNotFoundException: {}
     InvalidRequestException: {}
     InvalidResourceStateException: {}
@@ -3444,554 +3413,438 @@ components:
       type: object
       properties:
         AccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: Returns the account ID that owns the backup job.
+          $ref: '#/components/schemas/AccountId'
+          description: Returns the account ID that owns the backup job.
         BackupJobId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a request to AWS Backup to back up a resource.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a request to AWS Backup to back up a resource.
         BackupVaultName:
-          allOf:
-            - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          $ref: '#/components/schemas/BackupVaultName'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         BackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
         RecoveryPointArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: An ARN that uniquely identifies a saved resource. The format of the ARN depends on the resource type.
+          $ref: '#/components/schemas/ARN'
+          description: An ARN that uniquely identifies a saved resource. The format of the ARN depends on the resource type.
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that a backup job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time that a backup job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         CompletionDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that a job to create a backup job is completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time that a job to create a backup job is completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         State:
-          allOf:
-            - $ref: '#/components/schemas/BackupJobState'
-            - description: The current state of a resource recovery point.
+          $ref: '#/components/schemas/BackupJobState'
+          description: The current state of a resource recovery point.
         StatusMessage:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A detailed message explaining the status of the job to back up a resource.
+          $ref: '#/components/schemas/string'
+          description: A detailed message explaining the status of the job to back up a resource.
         PercentDone:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Contains an estimated percentage that is complete of a job at the time the job status was queried.
+          $ref: '#/components/schemas/string'
+          description: Contains an estimated percentage that is complete of a job at the time the job status was queried.
         BackupSizeInBytes:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: 'The size, in bytes, of a backup.'
+          $ref: '#/components/schemas/Long'
+          description: 'The size, in bytes, of a backup.'
         IamRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IAMRoleArn'
-            - description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+          $ref: '#/components/schemas/IAMRoleArn'
+          description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
         CreatedBy:
-          allOf:
-            - $ref: '#/components/schemas/RecoveryPointCreator'
-            - description: 'Contains identifying information about the creation of a backup job, including the <code>BackupPlanArn</code>, <code>BackupPlanId</code>, <code>BackupPlanVersion</code>, and <code>BackupRuleId</code> of the backup plan that is used to create it.'
+          $ref: '#/components/schemas/RecoveryPointCreator'
+          description: 'Contains identifying information about the creation of a backup job, including the <code>BackupPlanArn</code>, <code>BackupPlanId</code>, <code>BackupPlanVersion</code>, and <code>BackupRuleId</code> of the backup plan that is used to create it.'
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
+          $ref: '#/components/schemas/ResourceType'
+          description: 'The type of AWS resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
         BytesTransferred:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The size in bytes transferred to a backup vault at the time that the job status was queried.
+          $ref: '#/components/schemas/Long'
+          description: The size in bytes transferred to a backup vault at the time that the job status was queried.
         ExpectedCompletionDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that a job to back up resources is expected to be completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>ExpectedCompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time that a job to back up resources is expected to be completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>ExpectedCompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         StartBy:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'Specifies the time in Unix format and Coordinated Universal Time (UTC) when a backup job must be started before it is canceled. The value is calculated by adding the start window to the scheduled time. So if the scheduled time were 6:00 PM and the start window is 2 hours, the <code>StartBy</code> time would be 8:00 PM on the date specified. The value of <code>StartBy</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'Specifies the time in Unix format and Coordinated Universal Time (UTC) when a backup job must be started before it is canceled. The value is calculated by adding the start window to the scheduled time. So if the scheduled time were 6:00 PM and the start window is 2 hours, the <code>StartBy</code> time would be 8:00 PM on the date specified. The value of <code>StartBy</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         BackupOptions:
-          allOf:
-            - $ref: '#/components/schemas/BackupOptions'
-            - description: Represents the options specified as part of backup plan or on-demand backup job.
+          $ref: '#/components/schemas/BackupOptions'
+          description: Represents the options specified as part of backup plan or on-demand backup job.
         BackupType:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'Represents the actual backup type selected for a backup job. For example, if a successful WindowsVSS backup was taken, <code>BackupType</code> returns "WindowsVSS". If <code>BackupType</code> is empty, then the backup type that was is a regular backup.'
+          $ref: '#/components/schemas/string'
+          description: 'Represents the actual backup type selected for a backup job. For example, if a successful WindowsVSS backup was taken, <code>BackupType</code> returns "WindowsVSS". If <code>BackupType</code> is empty, then the backup type that was is a regular backup.'
     DependencyFailureException: {}
     DescribeBackupVaultOutput:
       type: object
       properties:
         BackupVaultName:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          $ref: '#/components/schemas/string'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         BackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
         EncryptionKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'The server-side encryption key that is used to protect your backups; for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'The server-side encryption key that is used to protect your backups; for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.'
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that a backup vault is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time that a backup vault is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         CreatorRequestId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+          $ref: '#/components/schemas/string'
+          description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
         NumberOfRecoveryPoints:
-          allOf:
-            - $ref: '#/components/schemas/long'
-            - description: The number of recovery points that are stored in a backup vault.
+          $ref: '#/components/schemas/long'
+          description: The number of recovery points that are stored in a backup vault.
     DescribeCopyJobOutput:
       type: object
       properties:
         CopyJob:
-          allOf:
-            - $ref: '#/components/schemas/CopyJob'
-            - description: Contains detailed information about a copy job.
+          $ref: '#/components/schemas/CopyJob'
+          description: Contains detailed information about a copy job.
     DescribeGlobalSettingsOutput:
       type: object
       properties:
         GlobalSettings:
-          allOf:
-            - $ref: '#/components/schemas/GlobalSettings'
-            - description: A list of resources along with the opt-in preferences for the account.
+          $ref: '#/components/schemas/GlobalSettings'
+          description: A list of resources along with the opt-in preferences for the account.
         LastUpdateTime:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that the global settings were last updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of <code>LastUpdateTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time that the global settings were last updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of <code>LastUpdateTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
     DescribeProtectedResourceOutput:
       type: object
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: An ARN that uniquely identifies a resource. The format of the ARN depends on the resource type.
+          $ref: '#/components/schemas/ARN'
+          description: An ARN that uniquely identifies a resource. The format of the ARN depends on the resource type.
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource saved as a recovery point; for example, an EBS volume or an Amazon RDS database.'
+          $ref: '#/components/schemas/ResourceType'
+          description: 'The type of AWS resource saved as a recovery point; for example, an EBS volume or an Amazon RDS database.'
         LastBackupTime:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that a resource was last backed up, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastBackupTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time that a resource was last backed up, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastBackupTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
     DescribeRecoveryPointOutput:
       type: object
       properties:
         RecoveryPointArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
         BackupVaultName:
-          allOf:
-            - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          $ref: '#/components/schemas/BackupVaultName'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         BackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An ARN that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An ARN that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
         SourceBackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies the source vault where the resource was originally backed up in; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:BackupVault</code>. If the recovery is restored to the same AWS account or Region, this value will be <code>null</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies the source vault where the resource was originally backed up in; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:BackupVault</code>. If the recovery is restored to the same AWS account or Region, this value will be <code>null</code>.'
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: An ARN that uniquely identifies a saved resource. The format of the ARN depends on the resource type.
+          $ref: '#/components/schemas/ARN'
+          description: An ARN that uniquely identifies a saved resource. The format of the ARN depends on the resource type.
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource to save as a recovery point; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
+          $ref: '#/components/schemas/ResourceType'
+          description: 'The type of AWS resource to save as a recovery point; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
         CreatedBy:
-          allOf:
-            - $ref: '#/components/schemas/RecoveryPointCreator'
-            - description: 'Contains identifying information about the creation of a recovery point, including the <code>BackupPlanArn</code>, <code>BackupPlanId</code>, <code>BackupPlanVersion</code>, and <code>BackupRuleId</code> of the backup plan used to create it.'
+          $ref: '#/components/schemas/RecoveryPointCreator'
+          description: 'Contains identifying information about the creation of a recovery point, including the <code>BackupPlanArn</code>, <code>BackupPlanId</code>, <code>BackupPlanVersion</code>, and <code>BackupRuleId</code> of the backup plan used to create it.'
         IamRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IAMRoleArn'
-            - description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+          $ref: '#/components/schemas/IAMRoleArn'
+          description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
         Status:
-          allOf:
-            - $ref: '#/components/schemas/RecoveryPointStatus'
-            - description: <p>A status code specifying the state of the recovery point.</p> <note> <p>A partial status indicates that the recovery point was not successfully re-created and must be retried.</p> </note>
+          $ref: '#/components/schemas/RecoveryPointStatus'
+          description: <p>A status code specifying the state of the recovery point.</p> <note> <p>A partial status indicates that the recovery point was not successfully re-created and must be retried.</p> </note>
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that a recovery point is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time that a recovery point is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         CompletionDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that a job to create a recovery point is completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time that a job to create a recovery point is completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         BackupSizeInBytes:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: 'The size, in bytes, of a backup.'
+          $ref: '#/components/schemas/Long'
+          description: 'The size, in bytes, of a backup.'
         CalculatedLifecycle:
-          allOf:
-            - $ref: '#/components/schemas/CalculatedLifecycle'
-            - description: A <code>CalculatedLifecycle</code> object containing <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps.
+          $ref: '#/components/schemas/CalculatedLifecycle'
+          description: A <code>CalculatedLifecycle</code> object containing <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps.
         Lifecycle:
-          allOf:
-            - $ref: '#/components/schemas/Lifecycle'
-            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups that are transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
+          $ref: '#/components/schemas/Lifecycle'
+          description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups that are transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
         EncryptionKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'The server-side encryption key used to protect your backups; for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'The server-side encryption key used to protect your backups; for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.'
         IsEncrypted:
-          allOf:
-            - $ref: '#/components/schemas/boolean'
-            - description: 'A Boolean value that is returned as <code>TRUE</code> if the specified recovery point is encrypted, or <code>FALSE</code> if the recovery point is not encrypted.'
+          $ref: '#/components/schemas/boolean'
+          description: 'A Boolean value that is returned as <code>TRUE</code> if the specified recovery point is encrypted, or <code>FALSE</code> if the recovery point is not encrypted.'
         StorageClass:
-          allOf:
-            - $ref: '#/components/schemas/StorageClass'
-            - description: Specifies the storage class of the recovery point. Valid values are <code>WARM</code> or <code>COLD</code>.
+          $ref: '#/components/schemas/StorageClass'
+          description: Specifies the storage class of the recovery point. Valid values are <code>WARM</code> or <code>COLD</code>.
         LastRestoreTime:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that a recovery point was last restored, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastRestoreTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time that a recovery point was last restored, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastRestoreTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
     DescribeRegionSettingsOutput:
       type: object
       properties:
         ResourceTypeOptInPreference:
-          allOf:
-            - $ref: '#/components/schemas/ResourceTypeOptInPreference'
-            - description: Returns a list of all services along with the opt-in preferences in the Region.
+          $ref: '#/components/schemas/ResourceTypeOptInPreference'
+          description: Returns a list of all services along with the opt-in preferences in the Region.
     DescribeRestoreJobOutput:
       type: object
       properties:
         AccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: Returns the account ID that owns the restore job.
+          $ref: '#/components/schemas/AccountId'
+          description: Returns the account ID that owns the restore job.
         RestoreJobId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies the job that restores a recovery point.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies the job that restores a recovery point.
         RecoveryPointArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that a restore job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time that a restore job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         CompletionDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that a job to restore a recovery point is completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time that a job to restore a recovery point is completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         Status:
-          allOf:
-            - $ref: '#/components/schemas/RestoreJobStatus'
-            - description: Status code specifying the state of the job that is initiated by AWS Backup to restore a recovery point.
+          $ref: '#/components/schemas/RestoreJobStatus'
+          description: Status code specifying the state of the job that is initiated by AWS Backup to restore a recovery point.
         StatusMessage:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A message showing the status of a job to restore a recovery point.
+          $ref: '#/components/schemas/string'
+          description: A message showing the status of a job to restore a recovery point.
         PercentDone:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Contains an estimated percentage that is complete of a job at the time the job status was queried.
+          $ref: '#/components/schemas/string'
+          description: Contains an estimated percentage that is complete of a job at the time the job status was queried.
         BackupSizeInBytes:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: 'The size, in bytes, of the restored resource.'
+          $ref: '#/components/schemas/Long'
+          description: 'The size, in bytes, of the restored resource.'
         IamRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IAMRoleArn'
-            - description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+          $ref: '#/components/schemas/IAMRoleArn'
+          description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
         ExpectedCompletionTimeMinutes:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The amount of time in minutes that a job restoring a recovery point is expected to take.
+          $ref: '#/components/schemas/Long'
+          description: The amount of time in minutes that a job restoring a recovery point is expected to take.
         CreatedResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: An Amazon Resource Name (ARN) that uniquely identifies a resource whose recovery point is being restored. The format of the ARN depends on the resource type of the backed-up resource.
+          $ref: '#/components/schemas/ARN'
+          description: An Amazon Resource Name (ARN) that uniquely identifies a resource whose recovery point is being restored. The format of the ARN depends on the resource type of the backed-up resource.
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: Returns metadata associated with a restore job listed by resource type.
+          $ref: '#/components/schemas/ResourceType'
+          description: Returns metadata associated with a restore job listed by resource type.
     ExportBackupPlanTemplateOutput:
       type: object
       properties:
         BackupPlanTemplateJson:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: <p>The body of a backup plan template in JSON format.</p> <note> <p>This is a signed JSON document that cannot be modified before being passed to <code>GetBackupPlanFromJSON.</code> </p> </note>
+          $ref: '#/components/schemas/string'
+          description: <p>The body of a backup plan template in JSON format.</p> <note> <p>This is a signed JSON document that cannot be modified before being passed to <code>GetBackupPlanFromJSON.</code> </p> </note>
     GetBackupPlanOutput:
       type: object
       properties:
         BackupPlan:
-          allOf:
-            - $ref: '#/components/schemas/BackupPlan'
-            - description: Specifies the body of a backup plan. Includes a <code>BackupPlanName</code> and one or more sets of <code>Rules</code>.
+          $ref: '#/components/schemas/BackupPlan'
+          description: Specifies the body of a backup plan. Includes a <code>BackupPlanName</code> and one or more sets of <code>Rules</code>.
         BackupPlanId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a backup plan.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a backup plan.
         BackupPlanArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for example, <code>arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for example, <code>arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50</code>.'
         VersionId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version IDs cannot be edited.'
+          $ref: '#/components/schemas/string'
+          description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version IDs cannot be edited.'
         CreatorRequestId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+          $ref: '#/components/schemas/string'
+          description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that a backup plan is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time that a backup plan is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         DeletionDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that a backup plan is deleted, in Unix format and Coordinated Universal Time (UTC). The value of <code>DeletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time that a backup plan is deleted, in Unix format and Coordinated Universal Time (UTC). The value of <code>DeletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         LastExecutionDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The last time a job to back up resources was run with this backup plan. A date and time, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastExecutionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The last time a job to back up resources was run with this backup plan. A date and time, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastExecutionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         AdvancedBackupSettings:
-          allOf:
-            - $ref: '#/components/schemas/AdvancedBackupSettings'
-            - description: Contains a list of <code>BackupOptions</code> for each resource type. The list is populated only if the advanced option is set for the backup plan.
+          $ref: '#/components/schemas/AdvancedBackupSettings'
+          description: Contains a list of <code>BackupOptions</code> for each resource type. The list is populated only if the advanced option is set for the backup plan.
     GetBackupPlanFromJSONOutput:
       type: object
       properties:
         BackupPlan:
-          allOf:
-            - $ref: '#/components/schemas/BackupPlan'
-            - description: Specifies the body of a backup plan. Includes a <code>BackupPlanName</code> and one or more sets of <code>Rules</code>.
+          $ref: '#/components/schemas/BackupPlan'
+          description: Specifies the body of a backup plan. Includes a <code>BackupPlanName</code> and one or more sets of <code>Rules</code>.
     GetBackupPlanFromTemplateOutput:
       type: object
       properties:
         BackupPlanDocument:
-          allOf:
-            - $ref: '#/components/schemas/BackupPlan'
-            - description: 'Returns the body of a backup plan based on the target template, including the name, rules, and backup vault of the plan.'
+          $ref: '#/components/schemas/BackupPlan'
+          description: 'Returns the body of a backup plan based on the target template, including the name, rules, and backup vault of the plan.'
     GetBackupSelectionOutput:
       type: object
       properties:
         BackupSelection:
-          allOf:
-            - $ref: '#/components/schemas/BackupSelection'
-            - description: Specifies the body of a request to assign a set of resources to a backup plan.
+          $ref: '#/components/schemas/BackupSelection'
+          description: Specifies the body of a request to assign a set of resources to a backup plan.
         SelectionId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies the body of a request to assign a set of resources to a backup plan.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies the body of a request to assign a set of resources to a backup plan.
         BackupPlanId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a backup plan.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a backup plan.
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a backup selection is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a backup selection is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         CreatorRequestId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+          $ref: '#/components/schemas/string'
+          description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
     GetBackupVaultAccessPolicyOutput:
       type: object
       properties:
         BackupVaultName:
-          allOf:
-            - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          $ref: '#/components/schemas/BackupVaultName'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         BackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
         Policy:
-          allOf:
-            - $ref: '#/components/schemas/IAMPolicy'
-            - description: The backup vault access policy document in JSON format.
+          $ref: '#/components/schemas/IAMPolicy'
+          description: The backup vault access policy document in JSON format.
     GetBackupVaultNotificationsOutput:
       type: object
       properties:
         BackupVaultName:
-          allOf:
-            - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          $ref: '#/components/schemas/BackupVaultName'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         BackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
         SNSTopicArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An ARN that uniquely identifies an Amazon Simple Notification Service (Amazon SNS) topic; for example, <code>arn:aws:sns:us-west-2:111122223333:MyTopic</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An ARN that uniquely identifies an Amazon Simple Notification Service (Amazon SNS) topic; for example, <code>arn:aws:sns:us-west-2:111122223333:MyTopic</code>.'
         BackupVaultEvents:
-          allOf:
-            - $ref: '#/components/schemas/BackupVaultEvents'
-            - description: An array of events that indicate the status of jobs to back up resources to the backup vault.
+          $ref: '#/components/schemas/BackupVaultEvents'
+          description: An array of events that indicate the status of jobs to back up resources to the backup vault.
     GetRecoveryPointRestoreMetadataOutput:
       type: object
       properties:
         BackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An ARN that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An ARN that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
         RecoveryPointArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
         RestoreMetadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The set of metadata key-value pairs that describe the original configuration of the backed-up resource. These values vary depending on the service that is being restored.
+          $ref: '#/components/schemas/Metadata'
+          description: The set of metadata key-value pairs that describe the original configuration of the backed-up resource. These values vary depending on the service that is being restored.
     GetSupportedResourceTypesOutput:
       type: object
       properties:
         ResourceTypes:
-          allOf:
-            - $ref: '#/components/schemas/ResourceTypes'
-            - description: '<p>Contains a string with the supported AWS resource types:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>'
+          $ref: '#/components/schemas/ResourceTypes'
+          description: '<p>Contains a string with the supported AWS resource types:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>'
     ListBackupJobsOutput:
       type: object
       properties:
         BackupJobs:
-          allOf:
-            - $ref: '#/components/schemas/BackupJobsList'
-            - description: An array of structures containing metadata about your backup jobs returned in JSON format.
+          $ref: '#/components/schemas/BackupJobsList'
+          description: An array of structures containing metadata about your backup jobs returned in JSON format.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          $ref: '#/components/schemas/string'
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
     ListBackupPlanTemplatesOutput:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          $ref: '#/components/schemas/string'
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
         BackupPlanTemplatesList:
-          allOf:
-            - $ref: '#/components/schemas/BackupPlanTemplatesList'
-            - description: An array of template list items containing metadata about your saved templates.
+          $ref: '#/components/schemas/BackupPlanTemplatesList'
+          description: An array of template list items containing metadata about your saved templates.
     ListBackupPlanVersionsOutput:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          $ref: '#/components/schemas/string'
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
         BackupPlanVersionsList:
-          allOf:
-            - $ref: '#/components/schemas/BackupPlanVersionsList'
-            - description: An array of version list items containing metadata about your backup plans.
+          $ref: '#/components/schemas/BackupPlanVersionsList'
+          description: An array of version list items containing metadata about your backup plans.
     ListBackupPlansOutput:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          $ref: '#/components/schemas/string'
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
         BackupPlansList:
-          allOf:
-            - $ref: '#/components/schemas/BackupPlansList'
-            - description: An array of backup plan list items containing metadata about your saved backup plans.
+          $ref: '#/components/schemas/BackupPlansList'
+          description: An array of backup plan list items containing metadata about your saved backup plans.
     ListBackupSelectionsOutput:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          $ref: '#/components/schemas/string'
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
         BackupSelectionsList:
-          allOf:
-            - $ref: '#/components/schemas/BackupSelectionsList'
-            - description: An array of backup selection list items containing metadata about each resource in the list.
+          $ref: '#/components/schemas/BackupSelectionsList'
+          description: An array of backup selection list items containing metadata about each resource in the list.
     ListBackupVaultsOutput:
       type: object
       properties:
         BackupVaultList:
-          allOf:
-            - $ref: '#/components/schemas/BackupVaultList'
-            - description: 'An array of backup vault list members containing vault metadata, including Amazon Resource Name (ARN), display name, creation date, number of saved recovery points, and encryption information if the resources saved in the backup vault are encrypted.'
+          $ref: '#/components/schemas/BackupVaultList'
+          description: 'An array of backup vault list members containing vault metadata, including Amazon Resource Name (ARN), display name, creation date, number of saved recovery points, and encryption information if the resources saved in the backup vault are encrypted.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          $ref: '#/components/schemas/string'
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
     ListCopyJobsOutput:
       type: object
       properties:
         CopyJobs:
-          allOf:
-            - $ref: '#/components/schemas/CopyJobsList'
-            - description: 'An array of structures containing metadata about your copy jobs returned in JSON format. '
+          $ref: '#/components/schemas/CopyJobsList'
+          description: 'An array of structures containing metadata about your copy jobs returned in JSON format. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token. '
+          $ref: '#/components/schemas/string'
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token. '
     ListProtectedResourcesOutput:
       type: object
       properties:
         Results:
-          allOf:
-            - $ref: '#/components/schemas/ProtectedResourcesList'
-            - description: 'An array of resources successfully backed up by AWS Backup including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.'
+          $ref: '#/components/schemas/ProtectedResourcesList'
+          description: 'An array of resources successfully backed up by AWS Backup including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          $ref: '#/components/schemas/string'
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
     ListRecoveryPointsByBackupVaultOutput:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          $ref: '#/components/schemas/string'
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
         RecoveryPoints:
-          allOf:
-            - $ref: '#/components/schemas/RecoveryPointByBackupVaultList'
-            - description: An array of objects that contain detailed information about recovery points saved in a backup vault.
+          $ref: '#/components/schemas/RecoveryPointByBackupVaultList'
+          description: An array of objects that contain detailed information about recovery points saved in a backup vault.
     ListRecoveryPointsByResourceOutput:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          $ref: '#/components/schemas/string'
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
         RecoveryPoints:
-          allOf:
-            - $ref: '#/components/schemas/RecoveryPointByResourceList'
-            - description: An array of objects that contain detailed information about recovery points of the specified resource type.
+          $ref: '#/components/schemas/RecoveryPointByResourceList'
+          description: An array of objects that contain detailed information about recovery points of the specified resource type.
     ListRestoreJobsOutput:
       type: object
       properties:
         RestoreJobs:
-          allOf:
-            - $ref: '#/components/schemas/RestoreJobsList'
-            - description: An array of objects that contain detailed information about jobs to restore saved resources.
+          $ref: '#/components/schemas/RestoreJobsList'
+          description: An array of objects that contain detailed information about jobs to restore saved resources.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          $ref: '#/components/schemas/string'
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
     ListTagsOutput:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+          $ref: '#/components/schemas/string'
+          description: 'The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'To help organize your resources, you can assign your own metadata to the resources you create. Each tag is a key-value pair.'
+          $ref: '#/components/schemas/Tags'
+          description: 'To help organize your resources, you can assign your own metadata to the resources you create. Each tag is a key-value pair.'
     BackupVaultEvent:
       type: string
       enum:
@@ -4014,17 +3867,14 @@ components:
       type: object
       properties:
         BackupJobId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a request to AWS Backup to back up a resource.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a request to AWS Backup to back up a resource.
         RecoveryPointArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that a backup job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time that a backup job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
     Long:
       type: integer
     BackupOptionValue:
@@ -4034,20 +3884,17 @@ components:
       type: object
       properties:
         CopyJobId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a copy job.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a copy job.
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that a copy job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time that a copy job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
     StartRestoreJobOutput:
       type: object
       properties:
         RestoreJobId:
-          allOf:
-            - $ref: '#/components/schemas/RestoreJobId'
-            - description: Uniquely identifies the job that restores a recovery point.
+          $ref: '#/components/schemas/RestoreJobId'
+          description: Uniquely identifies the job that restores a recovery point.
     MetadataValue:
       type: string
     string:
@@ -4056,46 +3903,37 @@ components:
       type: object
       properties:
         BackupPlanId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a backup plan.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a backup plan.
         BackupPlanArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for example, <code>arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for example, <code>arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50</code>.'
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a backup plan is updated, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a backup plan is updated, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         VersionId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version Ids cannot be edited.'
+          $ref: '#/components/schemas/string'
+          description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version Ids cannot be edited.'
         AdvancedBackupSettings:
-          allOf:
-            - $ref: '#/components/schemas/AdvancedBackupSettings'
-            - description: Contains a list of <code>BackupOptions</code> for each resource type.
+          $ref: '#/components/schemas/AdvancedBackupSettings'
+          description: Contains a list of <code>BackupOptions</code> for each resource type.
     GlobalSettingsValue:
       type: string
     UpdateRecoveryPointLifecycleOutput:
       type: object
       properties:
         BackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An ARN that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An ARN that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
         RecoveryPointArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
         Lifecycle:
-          allOf:
-            - $ref: '#/components/schemas/Lifecycle'
-            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
+          $ref: '#/components/schemas/Lifecycle'
+          description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
         CalculatedLifecycle:
-          allOf:
-            - $ref: '#/components/schemas/CalculatedLifecycle'
-            - description: A <code>CalculatedLifecycle</code> object containing <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps.
+          $ref: '#/components/schemas/CalculatedLifecycle'
+          description: A <code>CalculatedLifecycle</code> object containing <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps.
     IsEnabled:
       type: boolean
     ARN:
@@ -4114,13 +3952,11 @@ components:
       type: object
       properties:
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: '<p>Specifies an object containing resource type and backup options. The only supported resource type is Amazon EC2 instances with Windows VSS. For an CloudFormation example, see the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/integrate-cloudformation-with-aws-backup.html">sample CloudFormation template to enable Windows VSS</a> in the <i>AWS Backup User Guide</i>.</p> <p>Valid values: <code>EC2</code>.</p>'
+          $ref: '#/components/schemas/ResourceType'
+          description: '<p>Specifies an object containing resource type and backup options. The only supported resource type is Amazon EC2 instances with Windows VSS. For an CloudFormation example, see the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/integrate-cloudformation-with-aws-backup.html">sample CloudFormation template to enable Windows VSS</a> in the <i>AWS Backup User Guide</i>.</p> <p>Valid values: <code>EC2</code>.</p>'
         BackupOptions:
-          allOf:
-            - $ref: '#/components/schemas/BackupOptions'
-            - description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid values: </p> <p>Set to <code>"WindowsVSS":"enabled"</code> to enable the WindowsVSS backup option and create a VSS Windows backup. </p> <p>Set to <code>"WindowsVSS":"disabled"</code> to create a regular backup. The WindowsVSS option is not enabled by default.</p> <p>If you specify an invalid option, you get an <code>InvalidParameterValueException</code> exception.</p> <p>For more information about Windows VSS backups, see <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html">Creating a VSS-Enabled Windows Backup</a>.</p>'
+          $ref: '#/components/schemas/BackupOptions'
+          description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid values: </p> <p>Set to <code>"WindowsVSS":"enabled"</code> to enable the WindowsVSS backup option and create a VSS Windows backup. </p> <p>Set to <code>"WindowsVSS":"disabled"</code> to create a regular backup. The WindowsVSS option is not enabled by default.</p> <p>If you specify an invalid option, you get an <code>InvalidParameterValueException</code> exception.</p> <p>For more information about Windows VSS backups, see <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html">Creating a VSS-Enabled Windows Backup</a>.</p>'
       description: A list of backup options for each resource type.
     BackupVaultName:
       type: string
@@ -4143,105 +3979,81 @@ components:
       type: object
       properties:
         BackupPlanId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a backup plan.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a backup plan.
         BackupPlanArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for example, <code>arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for example, <code>arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50</code>.'
         BackupPlanVersion:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'Version IDs are unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. They cannot be edited.'
+          $ref: '#/components/schemas/string'
+          description: 'Version IDs are unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. They cannot be edited.'
         BackupRuleId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a rule used to schedule the backup of a selection of resources.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a rule used to schedule the backup of a selection of resources.
       description: Contains information about the backup plan and rule that AWS Backup used to initiate the recovery point backup.
     BackupJob:
       type: object
       properties:
         AccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: The account ID that owns the backup job.
+          $ref: '#/components/schemas/AccountId'
+          description: The account ID that owns the backup job.
         BackupJobId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a request to AWS Backup to back up a resource.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a request to AWS Backup to back up a resource.
         BackupVaultName:
-          allOf:
-            - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          $ref: '#/components/schemas/BackupVaultName'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         BackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
         RecoveryPointArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: An ARN that uniquely identifies a resource. The format of the ARN depends on the resource type.
+          $ref: '#/components/schemas/ARN'
+          description: An ARN that uniquely identifies a resource. The format of the ARN depends on the resource type.
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a backup job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a backup job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         CompletionDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a job to create a backup job is completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a job to create a backup job is completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         State:
-          allOf:
-            - $ref: '#/components/schemas/BackupJobState'
-            - description: The current state of a resource recovery point.
+          $ref: '#/components/schemas/BackupJobState'
+          description: The current state of a resource recovery point.
         StatusMessage:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A detailed message explaining the status of the job to back up a resource.
+          $ref: '#/components/schemas/string'
+          description: A detailed message explaining the status of the job to back up a resource.
         PercentDone:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Contains an estimated percentage complete of a job at the time the job status was queried.
+          $ref: '#/components/schemas/string'
+          description: Contains an estimated percentage complete of a job at the time the job status was queried.
         BackupSizeInBytes:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: 'The size, in bytes, of a backup.'
+          $ref: '#/components/schemas/Long'
+          description: 'The size, in bytes, of a backup.'
         IamRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IAMRoleArn'
-            - description: 'Specifies the IAM role ARN used to create the target recovery point. IAM roles other than the default role must include either <code>AWSBackup</code> or <code>AwsBackup</code> in the role name. For example, <code>arn:aws:iam::123456789012:role/AWSBackupRDSAccess</code>. Role names without those strings lack permissions to perform backup jobs.'
+          $ref: '#/components/schemas/IAMRoleArn'
+          description: 'Specifies the IAM role ARN used to create the target recovery point. IAM roles other than the default role must include either <code>AWSBackup</code> or <code>AwsBackup</code> in the role name. For example, <code>arn:aws:iam::123456789012:role/AWSBackupRDSAccess</code>. Role names without those strings lack permissions to perform backup jobs.'
         CreatedBy:
-          allOf:
-            - $ref: '#/components/schemas/RecoveryPointCreator'
-            - description: 'Contains identifying information about the creation of a backup job, including the <code>BackupPlanArn</code>, <code>BackupPlanId</code>, <code>BackupPlanVersion</code>, and <code>BackupRuleId</code> of the backup plan used to create it.'
+          $ref: '#/components/schemas/RecoveryPointCreator'
+          description: 'Contains identifying information about the creation of a backup job, including the <code>BackupPlanArn</code>, <code>BackupPlanId</code>, <code>BackupPlanVersion</code>, and <code>BackupRuleId</code> of the backup plan used to create it.'
         ExpectedCompletionDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a job to back up resources is expected to be completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>ExpectedCompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a job to back up resources is expected to be completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>ExpectedCompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         StartBy:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'Specifies the time in Unix format and Coordinated Universal Time (UTC) when a backup job must be started before it is canceled. The value is calculated by adding the start window to the scheduled time. So if the scheduled time were 6:00 PM and the start window is 2 hours, the <code>StartBy</code> time would be 8:00 PM on the date specified. The value of <code>StartBy</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'Specifies the time in Unix format and Coordinated Universal Time (UTC) when a backup job must be started before it is canceled. The value is calculated by adding the start window to the scheduled time. So if the scheduled time were 6:00 PM and the start window is 2 hours, the <code>StartBy</code> time would be 8:00 PM on the date specified. The value of <code>StartBy</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.'
+          $ref: '#/components/schemas/ResourceType'
+          description: 'The type of AWS resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.'
         BytesTransferred:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The size in bytes transferred to a backup vault at the time that the job status was queried.
+          $ref: '#/components/schemas/Long'
+          description: The size in bytes transferred to a backup vault at the time that the job status was queried.
         BackupOptions:
-          allOf:
-            - $ref: '#/components/schemas/BackupOptions'
-            - description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid values: Set to <code>"WindowsVSS”:“enabled"</code> to enable WindowsVSS backup option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. If you specify an invalid option, you get an <code>InvalidParameterValueException</code> exception.</p>'
+          $ref: '#/components/schemas/BackupOptions'
+          description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid values: Set to <code>"WindowsVSS”:“enabled"</code> to enable WindowsVSS backup option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. If you specify an invalid option, you get an <code>InvalidParameterValueException</code> exception.</p>'
         BackupType:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Represents the type of backup for a backup job.
+          $ref: '#/components/schemas/string'
+          description: Represents the type of backup for a backup job.
       description: Contains detailed information about a backup job.
     BackupJobsList:
       type: array
@@ -4261,17 +4073,14 @@ components:
         - Rules
       properties:
         BackupPlanName:
-          allOf:
-            - $ref: '#/components/schemas/BackupPlanName'
-            - description: The display name of a backup plan.
+          $ref: '#/components/schemas/BackupPlanName'
+          description: The display name of a backup plan.
         Rules:
-          allOf:
-            - $ref: '#/components/schemas/BackupRules'
-            - description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources. '
+          $ref: '#/components/schemas/BackupRules'
+          description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources. '
         AdvancedBackupSettings:
-          allOf:
-            - $ref: '#/components/schemas/AdvancedBackupSettings'
-            - description: Contains a list of <code>BackupOptions</code> for each resource type.
+          $ref: '#/components/schemas/AdvancedBackupSettings'
+          description: Contains a list of <code>BackupOptions</code> for each resource type.
       description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources.'
     BackupPlanInput:
       type: object
@@ -4280,29 +4089,24 @@ components:
         - Rules
       properties:
         BackupPlanName:
-          allOf:
-            - $ref: '#/components/schemas/BackupPlanName'
-            - description: The optional display name of a backup plan.
+          $ref: '#/components/schemas/BackupPlanName'
+          description: The optional display name of a backup plan.
         Rules:
-          allOf:
-            - $ref: '#/components/schemas/BackupRulesInput'
-            - description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.'
+          $ref: '#/components/schemas/BackupRulesInput'
+          description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.'
         AdvancedBackupSettings:
-          allOf:
-            - $ref: '#/components/schemas/AdvancedBackupSettings'
-            - description: Specifies a list of <code>BackupOptions</code> for each resource type. These settings are only available for Windows VSS backup jobs.
+          $ref: '#/components/schemas/AdvancedBackupSettings'
+          description: Specifies a list of <code>BackupOptions</code> for each resource type. These settings are only available for Windows VSS backup jobs.
       description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources. '
     BackupPlanTemplatesListMember:
       type: object
       properties:
         BackupPlanTemplateId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a stored backup plan template.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a stored backup plan template.
         BackupPlanTemplateName:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The optional display name of a backup plan template.
+          $ref: '#/components/schemas/string'
+          description: The optional display name of a backup plan template.
       description: An object specifying metadata associated with a backup plan template.
     BackupPlanTemplatesList:
       type: array
@@ -4312,41 +4116,32 @@ components:
       type: object
       properties:
         BackupPlanArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for example, <code>arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for example, <code>arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50</code>.'
         BackupPlanId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a backup plan.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a backup plan.
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a resource backup plan is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a resource backup plan is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         DeletionDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a backup plan is deleted, in Unix format and Coordinated Universal Time (UTC). The value of <code>DeletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a backup plan is deleted, in Unix format and Coordinated Universal Time (UTC). The value of <code>DeletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         VersionId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version IDs cannot be edited.'
+          $ref: '#/components/schemas/string'
+          description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version IDs cannot be edited.'
         BackupPlanName:
-          allOf:
-            - $ref: '#/components/schemas/BackupPlanName'
-            - description: The display name of a saved backup plan.
+          $ref: '#/components/schemas/BackupPlanName'
+          description: The display name of a saved backup plan.
         CreatorRequestId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+          $ref: '#/components/schemas/string'
+          description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
         LastExecutionDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The last time a job to back up resources was run with this rule. A date and time, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastExecutionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The last time a job to back up resources was run with this rule. A date and time, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastExecutionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         AdvancedBackupSettings:
-          allOf:
-            - $ref: '#/components/schemas/AdvancedBackupSettings'
-            - description: Contains a list of <code>BackupOptions</code> for a resource type.
+          $ref: '#/components/schemas/AdvancedBackupSettings'
+          description: Contains a list of <code>BackupOptions</code> for a resource type.
       description: Contains metadata about a backup plan.
     BackupPlanVersionsList:
       type: array
@@ -4367,13 +4162,11 @@ components:
       type: object
       properties:
         MoveToColdStorageAfterDays:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: Specifies the number of days after creation that a recovery point is moved to cold storage.
+          $ref: '#/components/schemas/Long'
+          description: Specifies the number of days after creation that a recovery point is moved to cold storage.
         DeleteAfterDays:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.
+          $ref: '#/components/schemas/Long'
+          description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.
       description: '<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
     Tags:
       type: object
@@ -4392,45 +4185,35 @@ components:
         - TargetBackupVaultName
       properties:
         RuleName:
-          allOf:
-            - $ref: '#/components/schemas/BackupRuleName'
-            - description: An optional display name for a backup rule.
+          $ref: '#/components/schemas/BackupRuleName'
+          description: An optional display name for a backup rule.
         TargetBackupVaultName:
-          allOf:
-            - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          $ref: '#/components/schemas/BackupVaultName'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         ScheduleExpression:
-          allOf:
-            - $ref: '#/components/schemas/CronExpression'
-            - description: 'A CRON expression specifying when AWS Backup initiates a backup job. For more information about cron expressions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html">Schedule Expressions for Rules</a> in the <i>Amazon CloudWatch Events User Guide.</i>. Prior to specifying a value for this parameter, we recommend testing your cron expression using one of the many available cron generator and testing tools.'
+          $ref: '#/components/schemas/CronExpression'
+          description: 'A CRON expression specifying when AWS Backup initiates a backup job. For more information about cron expressions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html">Schedule Expressions for Rules</a> in the <i>Amazon CloudWatch Events User Guide.</i>. Prior to specifying a value for this parameter, we recommend testing your cron expression using one of the many available cron generator and testing tools.'
         StartWindowMinutes:
-          allOf:
-            - $ref: '#/components/schemas/WindowMinutes'
-            - description: A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional.
+          $ref: '#/components/schemas/WindowMinutes'
+          description: A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional.
         CompletionWindowMinutes:
-          allOf:
-            - $ref: '#/components/schemas/WindowMinutes'
-            - description: A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by AWS Backup. This value is optional.
+          $ref: '#/components/schemas/WindowMinutes'
+          description: A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by AWS Backup. This value is optional.
         Lifecycle:
-          allOf:
-            - $ref: '#/components/schemas/Lifecycle'
-            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
+          $ref: '#/components/schemas/Lifecycle'
+          description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
         RecoveryPointTags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: An array of key-value pair strings that are assigned to resources that are associated with this rule when restored from backup.
+          $ref: '#/components/schemas/Tags'
+          description: An array of key-value pair strings that are assigned to resources that are associated with this rule when restored from backup.
         RuleId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a rule that is used to schedule the backup of a selection of resources.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a rule that is used to schedule the backup of a selection of resources.
         CopyActions:
-          allOf:
-            - $ref: '#/components/schemas/CopyActions'
-            - description: 'An array of <code>CopyAction</code> objects, which contains the details of the copy operation.'
+          $ref: '#/components/schemas/CopyActions'
+          description: 'An array of <code>CopyAction</code> objects, which contains the details of the copy operation.'
         EnableContinuousBackup:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Specifies whether AWS Backup creates continuous backups. True causes AWS Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes AWS Backup to create snapshot backups.
+          $ref: '#/components/schemas/Boolean'
+          description: Specifies whether AWS Backup creates continuous backups. True causes AWS Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes AWS Backup to create snapshot backups.
       description: Specifies a scheduled task used to back up a selection of resources.
     BackupRuleInput:
       type: object
@@ -4439,41 +4222,32 @@ components:
         - TargetBackupVaultName
       properties:
         RuleName:
-          allOf:
-            - $ref: '#/components/schemas/BackupRuleName'
-            - description: An optional display name for a backup rule.
+          $ref: '#/components/schemas/BackupRuleName'
+          description: An optional display name for a backup rule.
         TargetBackupVaultName:
-          allOf:
-            - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          $ref: '#/components/schemas/BackupVaultName'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         ScheduleExpression:
-          allOf:
-            - $ref: '#/components/schemas/CronExpression'
-            - description: A CRON expression specifying when AWS Backup initiates a backup job.
+          $ref: '#/components/schemas/CronExpression'
+          description: A CRON expression specifying when AWS Backup initiates a backup job.
         StartWindowMinutes:
-          allOf:
-            - $ref: '#/components/schemas/WindowMinutes'
-            - description: A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional.
+          $ref: '#/components/schemas/WindowMinutes'
+          description: A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional.
         CompletionWindowMinutes:
-          allOf:
-            - $ref: '#/components/schemas/WindowMinutes'
-            - description: A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by AWS Backup. This value is optional.
+          $ref: '#/components/schemas/WindowMinutes'
+          description: A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by AWS Backup. This value is optional.
         Lifecycle:
-          allOf:
-            - $ref: '#/components/schemas/Lifecycle'
-            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
+          $ref: '#/components/schemas/Lifecycle'
+          description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
         RecoveryPointTags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.'
+          $ref: '#/components/schemas/Tags'
+          description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.'
         CopyActions:
-          allOf:
-            - $ref: '#/components/schemas/CopyActions'
-            - description: 'An array of <code>CopyAction</code> objects, which contains the details of the copy operation.'
+          $ref: '#/components/schemas/CopyActions'
+          description: 'An array of <code>CopyAction</code> objects, which contains the details of the copy operation.'
         EnableContinuousBackup:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Specifies whether AWS Backup creates continuous backups. True causes AWS Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes AWS Backup to create snapshot backups.
+          $ref: '#/components/schemas/Boolean'
+          description: Specifies whether AWS Backup creates continuous backups. True causes AWS Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes AWS Backup to create snapshot backups.
       description: Specifies a scheduled task used to back up a selection of resources.
     BackupSelection:
       type: object
@@ -4482,49 +4256,39 @@ components:
         - IamRoleArn
       properties:
         SelectionName:
-          allOf:
-            - $ref: '#/components/schemas/BackupSelectionName'
-            - description: The display name of a resource selection document.
+          $ref: '#/components/schemas/BackupSelectionName'
+          description: The display name of a resource selection document.
         IamRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IAMRoleArn'
-            - description: 'The ARN of the IAM role that AWS Backup uses to authenticate when backing up the target resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+          $ref: '#/components/schemas/IAMRoleArn'
+          description: 'The ARN of the IAM role that AWS Backup uses to authenticate when backing up the target resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
         Resources:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArns'
-            - description: An array of strings that contain Amazon Resource Names (ARNs) of resources to assign to a backup plan.
+          $ref: '#/components/schemas/ResourceArns'
+          description: An array of strings that contain Amazon Resource Names (ARNs) of resources to assign to a backup plan.
         ListOfTags:
-          allOf:
-            - $ref: '#/components/schemas/ListOfTags'
-            - description: 'An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>"StringEquals": {"ec2:ResourceTag/Department": "accounting"</code>. Assigns the backup plan to every resource with at least one matching tag.'
+          $ref: '#/components/schemas/ListOfTags'
+          description: 'An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>"StringEquals": {"ec2:ResourceTag/Department": "accounting"</code>. Assigns the backup plan to every resource with at least one matching tag.'
       description: Used to specify a set of resources to a backup plan.
     BackupSelectionsListMember:
       type: object
       properties:
         SelectionId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a request to assign a set of resources to a backup plan.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a request to assign a set of resources to a backup plan.
         SelectionName:
-          allOf:
-            - $ref: '#/components/schemas/BackupSelectionName'
-            - description: The display name of a resource selection document.
+          $ref: '#/components/schemas/BackupSelectionName'
+          description: The display name of a resource selection document.
         BackupPlanId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a backup plan.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a backup plan.
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a backup plan is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a backup plan is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         CreatorRequestId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+          $ref: '#/components/schemas/string'
+          description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
         IamRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IAMRoleArn'
-            - description: 'Specifies the IAM role Amazon Resource Name (ARN) to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+          $ref: '#/components/schemas/IAMRoleArn'
+          description: 'Specifies the IAM role Amazon Resource Name (ARN) to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
       description: Contains metadata about a <code>BackupSelection</code> object.
     BackupSelectionsList:
       type: array
@@ -4538,29 +4302,23 @@ components:
       type: object
       properties:
         BackupVaultName:
-          allOf:
-            - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          $ref: '#/components/schemas/BackupVaultName'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         BackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a resource backup is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a resource backup is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         EncryptionKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'The server-side encryption key that is used to protect your backups; for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'The server-side encryption key that is used to protect your backups; for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.'
         CreatorRequestId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+          $ref: '#/components/schemas/string'
+          description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
         NumberOfRecoveryPoints:
-          allOf:
-            - $ref: '#/components/schemas/long'
-            - description: The number of recovery points that are stored in a backup vault.
+          $ref: '#/components/schemas/long'
+          description: The number of recovery points that are stored in a backup vault.
       description: Contains metadata about a backup vault.
     BackupVaultList:
       type: array
@@ -4572,13 +4330,11 @@ components:
       type: object
       properties:
         MoveToColdStorageAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: A timestamp that specifies when to transition a recovery point to cold storage.
+          $ref: '#/components/schemas/timestamp'
+          description: A timestamp that specifies when to transition a recovery point to cold storage.
         DeleteAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: A timestamp that specifies when to delete a recovery point.
+          $ref: '#/components/schemas/timestamp'
+          description: A timestamp that specifies when to delete a recovery point.
       description: '<p>Contains <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps, which are used to specify a lifecycle for a recovery point.</p> <p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
     ConditionType:
       type: string
@@ -4596,17 +4352,14 @@ components:
         - ConditionValue
       properties:
         ConditionType:
-          allOf:
-            - $ref: '#/components/schemas/ConditionType'
-            - description: 'An operation, such as <code>StringEquals</code>, that is applied to a key-value pair used to filter resources in a selection.'
+          $ref: '#/components/schemas/ConditionType'
+          description: 'An operation, such as <code>StringEquals</code>, that is applied to a key-value pair used to filter resources in a selection.'
         ConditionKey:
-          allOf:
-            - $ref: '#/components/schemas/ConditionKey'
-            - description: 'The key in a key-value pair. For example, in <code>"ec2:ResourceTag/Department": "accounting"</code>, <code>"ec2:ResourceTag/Department"</code> is the key.'
+          $ref: '#/components/schemas/ConditionKey'
+          description: 'The key in a key-value pair. For example, in <code>"ec2:ResourceTag/Department": "accounting"</code>, <code>"ec2:ResourceTag/Department"</code> is the key.'
         ConditionValue:
-          allOf:
-            - $ref: '#/components/schemas/ConditionValue'
-            - description: 'The value in a key-value pair. For example, in <code>"ec2:ResourceTag/Department": "accounting"</code>, <code>"accounting"</code> is the value.'
+          $ref: '#/components/schemas/ConditionValue'
+          description: 'The value in a key-value pair. For example, in <code>"ec2:ResourceTag/Department": "accounting"</code>, <code>"accounting"</code> is the value.'
       description: 'Contains an array of triplets made up of a condition type (such as <code>StringEquals</code>), a key, and a value. Conditions are used to filter resources in a selection that is assigned to a backup plan.'
     CopyAction:
       type: object
@@ -4616,9 +4369,8 @@ components:
         Lifecycle:
           $ref: '#/components/schemas/Lifecycle'
         DestinationBackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies the destination backup vault for the copied backup. For example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies the destination backup vault for the copied backup. For example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
       description: The details of the copy operation.
     CopyJobState:
       type: string
@@ -4631,63 +4383,49 @@ components:
       type: object
       properties:
         AccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: The account ID that owns the copy job.
+          $ref: '#/components/schemas/AccountId'
+          description: The account ID that owns the copy job.
         CopyJobId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a copy job.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies a copy job.
         SourceBackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a source copy vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>. '
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a source copy vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>. '
         SourceRecoveryPointArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An ARN that uniquely identifies a source recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An ARN that uniquely identifies a source recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
         DestinationBackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a destination copy vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a destination copy vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
         DestinationRecoveryPointArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An ARN that uniquely identifies a destination recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An ARN that uniquely identifies a destination recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'The AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
+          $ref: '#/components/schemas/ARN'
+          description: 'The AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a copy job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a copy job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         CompletionDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a copy job is completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a copy job is completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         State:
-          allOf:
-            - $ref: '#/components/schemas/CopyJobState'
-            - description: The current state of a copy job.
+          $ref: '#/components/schemas/CopyJobState'
+          description: The current state of a copy job.
         StatusMessage:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A detailed message explaining the status of the job to copy a resource.
+          $ref: '#/components/schemas/string'
+          description: A detailed message explaining the status of the job to copy a resource.
         BackupSizeInBytes:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: 'The size, in bytes, of a copy job.'
+          $ref: '#/components/schemas/Long'
+          description: 'The size, in bytes, of a copy job.'
         IamRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IAMRoleArn'
-            - description: 'Specifies the IAM role ARN used to copy the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+          $ref: '#/components/schemas/IAMRoleArn'
+          description: 'Specifies the IAM role ARN used to copy the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
         CreatedBy:
           $ref: '#/components/schemas/RecoveryPointCreator'
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
+          $ref: '#/components/schemas/ResourceType'
+          description: 'The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
       description: Contains detailed information about a copy job.
     CopyJobsList:
       type: array
@@ -4700,17 +4438,14 @@ components:
       title: CreateBackupPlanInput
       properties:
         BackupPlan:
-          allOf:
-            - $ref: '#/components/schemas/BackupPlanInput'
-            - description: Specifies the body of a backup plan. Includes a <code>BackupPlanName</code> and one or more sets of <code>Rules</code>.
+          $ref: '#/components/schemas/BackupPlanInput'
+          description: Specifies the body of a backup plan. Includes a <code>BackupPlanName</code> and one or more sets of <code>Rules</code>.
         BackupPlanTags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair. The specified tags are assigned to all backups created with this plan.'
+          $ref: '#/components/schemas/Tags'
+          description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair. The specified tags are assigned to all backups created with this plan.'
         CreatorRequestId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: 'Identifies the request and allows failed requests to be retried without the risk of running the operation twice. If the request includes a <code>CreatorRequestId</code> that matches an existing backup plan, that plan is returned. This parameter is optional.'
+          $ref: '#/components/schemas/string'
+          description: 'Identifies the request and allows failed requests to be retried without the risk of running the operation twice. If the request includes a <code>CreatorRequestId</code> that matches an existing backup plan, that plan is returned. This parameter is optional.'
     CreateBackupSelectionInput:
       type: object
       required:
@@ -4718,29 +4453,24 @@ components:
       title: CreateBackupSelectionInput
       properties:
         BackupSelection:
-          allOf:
-            - $ref: '#/components/schemas/BackupSelection'
-            - description: Specifies the body of a request to assign a set of resources to a backup plan.
+          $ref: '#/components/schemas/BackupSelection'
+          description: Specifies the body of a request to assign a set of resources to a backup plan.
         CreatorRequestId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+          $ref: '#/components/schemas/string'
+          description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
     CreateBackupVaultInput:
       type: object
       title: CreateBackupVaultInput
       properties:
         BackupVaultTags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: Metadata that you can assign to help organize the resources that you create. Each tag is a key-value pair.
+          $ref: '#/components/schemas/Tags'
+          description: Metadata that you can assign to help organize the resources that you create. Each tag is a key-value pair.
         EncryptionKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'The server-side encryption key that is used to protect your backups; for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'The server-side encryption key that is used to protect your backups; for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.'
         CreatorRequestId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+          $ref: '#/components/schemas/string'
+          description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
     DeleteBackupPlanInput:
       type: object
       title: DeleteBackupPlanInput
@@ -4845,9 +4575,8 @@ components:
       title: GetBackupPlanFromJSONInput
       properties:
         BackupPlanTemplateJson:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A customer-supplied backup plan document in JSON format.
+          $ref: '#/components/schemas/string'
+          description: A customer-supplied backup plan document in JSON format.
     GetBackupPlanFromTemplateInput:
       type: object
       title: GetBackupPlanFromTemplateInput
@@ -4958,26 +4687,22 @@ components:
       type: object
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+          $ref: '#/components/schemas/ARN'
+          description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.'
+          $ref: '#/components/schemas/ResourceType'
+          description: 'The type of AWS resource; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.'
         LastBackupTime:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a resource was last backed up, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastBackupTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a resource was last backed up, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastBackupTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
       description: A structure that contains information about a backed-up resource.
     PutBackupVaultAccessPolicyInput:
       type: object
       title: PutBackupVaultAccessPolicyInput
       properties:
         Policy:
-          allOf:
-            - $ref: '#/components/schemas/IAMPolicy'
-            - description: The backup vault access policy document in JSON format.
+          $ref: '#/components/schemas/IAMPolicy'
+          description: The backup vault access policy document in JSON format.
     PutBackupVaultNotificationsInput:
       type: object
       required:
@@ -4986,168 +4711,130 @@ components:
       title: PutBackupVaultNotificationsInput
       properties:
         SNSTopicArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'The Amazon Resource Name (ARN) that specifies the topic for a backup vault’s events; for example, <code>arn:aws:sns:us-west-2:111122223333:MyVaultTopic</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'The Amazon Resource Name (ARN) that specifies the topic for a backup vault’s events; for example, <code>arn:aws:sns:us-west-2:111122223333:MyVaultTopic</code>.'
         BackupVaultEvents:
-          allOf:
-            - $ref: '#/components/schemas/BackupVaultEvents'
-            - description: An array of events that indicate the status of jobs to back up resources to the backup vault.
+          $ref: '#/components/schemas/BackupVaultEvents'
+          description: An array of events that indicate the status of jobs to back up resources to the backup vault.
     RecoveryPointByBackupVault:
       type: object
       properties:
         RecoveryPointArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
         BackupVaultName:
-          allOf:
-            - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          $ref: '#/components/schemas/BackupVaultName'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         BackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An ARN that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An ARN that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
         SourceBackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: The backup vault where the recovery point was originally copied from. If the recovery point is restored to the same account this value will be <code>null</code>.
+          $ref: '#/components/schemas/ARN'
+          description: The backup vault where the recovery point was originally copied from. If the recovery point is restored to the same account this value will be <code>null</code>.
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: An ARN that uniquely identifies a resource. The format of the ARN depends on the resource type.
+          $ref: '#/components/schemas/ARN'
+          description: An ARN that uniquely identifies a resource. The format of the ARN depends on the resource type.
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource saved as a recovery point; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.'
+          $ref: '#/components/schemas/ResourceType'
+          description: 'The type of AWS resource saved as a recovery point; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.'
         CreatedBy:
-          allOf:
-            - $ref: '#/components/schemas/RecoveryPointCreator'
-            - description: 'Contains identifying information about the creation of a recovery point, including the <code>BackupPlanArn</code>, <code>BackupPlanId</code>, <code>BackupPlanVersion</code>, and <code>BackupRuleId</code> of the backup plan that is used to create it.'
+          $ref: '#/components/schemas/RecoveryPointCreator'
+          description: 'Contains identifying information about the creation of a recovery point, including the <code>BackupPlanArn</code>, <code>BackupPlanId</code>, <code>BackupPlanVersion</code>, and <code>BackupRuleId</code> of the backup plan that is used to create it.'
         IamRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IAMRoleArn'
-            - description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+          $ref: '#/components/schemas/IAMRoleArn'
+          description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
         Status:
-          allOf:
-            - $ref: '#/components/schemas/RecoveryPointStatus'
-            - description: A status code specifying the state of the recovery point.
+          $ref: '#/components/schemas/RecoveryPointStatus'
+          description: A status code specifying the state of the recovery point.
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a recovery point is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a recovery point is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         CompletionDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a job to restore a recovery point is completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a job to restore a recovery point is completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         BackupSizeInBytes:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: 'The size, in bytes, of a backup.'
+          $ref: '#/components/schemas/Long'
+          description: 'The size, in bytes, of a backup.'
         CalculatedLifecycle:
-          allOf:
-            - $ref: '#/components/schemas/CalculatedLifecycle'
-            - description: A <code>CalculatedLifecycle</code> object containing <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps.
+          $ref: '#/components/schemas/CalculatedLifecycle'
+          description: A <code>CalculatedLifecycle</code> object containing <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps.
         Lifecycle:
-          allOf:
-            - $ref: '#/components/schemas/Lifecycle'
-            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
+          $ref: '#/components/schemas/Lifecycle'
+          description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
         EncryptionKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'The server-side encryption key that is used to protect your backups; for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'The server-side encryption key that is used to protect your backups; for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.'
         IsEncrypted:
-          allOf:
-            - $ref: '#/components/schemas/boolean'
-            - description: 'A Boolean value that is returned as <code>TRUE</code> if the specified recovery point is encrypted, or <code>FALSE</code> if the recovery point is not encrypted.'
+          $ref: '#/components/schemas/boolean'
+          description: 'A Boolean value that is returned as <code>TRUE</code> if the specified recovery point is encrypted, or <code>FALSE</code> if the recovery point is not encrypted.'
         LastRestoreTime:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a recovery point was last restored, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastRestoreTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a recovery point was last restored, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastRestoreTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
       description: Contains detailed information about the recovery points stored in a backup vault.
     RecoveryPointByResource:
       type: object
       properties:
         RecoveryPointArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a recovery point is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a recovery point is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         Status:
-          allOf:
-            - $ref: '#/components/schemas/RecoveryPointStatus'
-            - description: A status code specifying the state of the recovery point.
+          $ref: '#/components/schemas/RecoveryPointStatus'
+          description: A status code specifying the state of the recovery point.
         EncryptionKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'The server-side encryption key that is used to protect your backups; for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'The server-side encryption key that is used to protect your backups; for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.'
         BackupSizeBytes:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: 'The size, in bytes, of a backup.'
+          $ref: '#/components/schemas/Long'
+          description: 'The size, in bytes, of a backup.'
         BackupVaultName:
-          allOf:
-            - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          $ref: '#/components/schemas/BackupVaultName'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
       description: Contains detailed information about a saved recovery point.
     RestoreJobsListMember:
       type: object
       properties:
         AccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: The account ID that owns the restore job.
+          $ref: '#/components/schemas/AccountId'
+          description: The account ID that owns the restore job.
         RestoreJobId:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies the job that restores a recovery point.
+          $ref: '#/components/schemas/string'
+          description: Uniquely identifies the job that restores a recovery point.
         RecoveryPointArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a restore job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a restore job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         CompletionDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a job to restore a recovery point is completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+          $ref: '#/components/schemas/timestamp'
+          description: 'The date and time a job to restore a recovery point is completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         Status:
-          allOf:
-            - $ref: '#/components/schemas/RestoreJobStatus'
-            - description: A status code specifying the state of the job initiated by AWS Backup to restore a recovery point.
+          $ref: '#/components/schemas/RestoreJobStatus'
+          description: A status code specifying the state of the job initiated by AWS Backup to restore a recovery point.
         StatusMessage:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A detailed message explaining the status of the job to restore a recovery point.
+          $ref: '#/components/schemas/string'
+          description: A detailed message explaining the status of the job to restore a recovery point.
         PercentDone:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: Contains an estimated percentage complete of a job at the time the job status was queried.
+          $ref: '#/components/schemas/string'
+          description: Contains an estimated percentage complete of a job at the time the job status was queried.
         BackupSizeInBytes:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: 'The size, in bytes, of the restored resource.'
+          $ref: '#/components/schemas/Long'
+          description: 'The size, in bytes, of the restored resource.'
         IamRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IAMRoleArn'
-            - description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+          $ref: '#/components/schemas/IAMRoleArn'
+          description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
         ExpectedCompletionTimeMinutes:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The amount of time in minutes that a job restoring a recovery point is expected to take.
+          $ref: '#/components/schemas/Long'
+          description: The amount of time in minutes that a job restoring a recovery point is expected to take.
         CreatedResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+          $ref: '#/components/schemas/ARN'
+          description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: 'The resource type of the listed restore jobs; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.'
+          $ref: '#/components/schemas/ResourceType'
+          description: 'The resource type of the listed restore jobs; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.'
       description: Contains metadata about a restore job.
     StartBackupJobInput:
       type: object
@@ -5158,41 +4845,32 @@ components:
       title: StartBackupJobInput
       properties:
         BackupVaultName:
-          allOf:
-            - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          $ref: '#/components/schemas/BackupVaultName'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+          $ref: '#/components/schemas/ARN'
+          description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
         IamRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IAMRoleArn'
-            - description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+          $ref: '#/components/schemas/IAMRoleArn'
+          description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
         IdempotencyToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A customer chosen string that can be used to distinguish between calls to <code>StartBackupJob</code>.
+          $ref: '#/components/schemas/string'
+          description: A customer chosen string that can be used to distinguish between calls to <code>StartBackupJob</code>.
         StartWindowMinutes:
-          allOf:
-            - $ref: '#/components/schemas/WindowMinutes'
-            - description: 'A value in minutes after a backup is scheduled before a job will be canceled if it doesn''t start successfully. This value is optional, and the default is 8 hours.'
+          $ref: '#/components/schemas/WindowMinutes'
+          description: 'A value in minutes after a backup is scheduled before a job will be canceled if it doesn''t start successfully. This value is optional, and the default is 8 hours.'
         CompleteWindowMinutes:
-          allOf:
-            - $ref: '#/components/schemas/WindowMinutes'
-            - description: 'A value in minutes during which a successfully started backup must complete, or else AWS Backup will cancel the job. This value is optional. This value begins counting down from when the backup was scheduled. It does not add additional time for <code>StartWindowMinutes</code>, or if the backup started later than scheduled.'
+          $ref: '#/components/schemas/WindowMinutes'
+          description: 'A value in minutes during which a successfully started backup must complete, or else AWS Backup will cancel the job. This value is optional. This value begins counting down from when the backup was scheduled. It does not add additional time for <code>StartWindowMinutes</code>, or if the backup started later than scheduled.'
         Lifecycle:
-          allOf:
-            - $ref: '#/components/schemas/Lifecycle'
-            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
+          $ref: '#/components/schemas/Lifecycle'
+          description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
         RecoveryPointTags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.'
+          $ref: '#/components/schemas/Tags'
+          description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.'
         BackupOptions:
-          allOf:
-            - $ref: '#/components/schemas/BackupOptions'
-            - description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid values: Set to <code>"WindowsVSS”:“enabled"</code> to enable WindowsVSS backup option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS option is not enabled by default.</p>'
+          $ref: '#/components/schemas/BackupOptions'
+          description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid values: Set to <code>"WindowsVSS”:“enabled"</code> to enable WindowsVSS backup option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS option is not enabled by default.</p>'
     StartCopyJobInput:
       type: object
       required:
@@ -5203,25 +4881,20 @@ components:
       title: StartCopyJobInput
       properties:
         RecoveryPointArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An ARN that uniquely identifies a recovery point to use for the copy job; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. '
+          $ref: '#/components/schemas/ARN'
+          description: 'An ARN that uniquely identifies a recovery point to use for the copy job; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. '
         SourceBackupVaultName:
-          allOf:
-            - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          $ref: '#/components/schemas/BackupVaultName'
+          description: 'The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         DestinationBackupVaultArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies a destination backup vault to copy to; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a destination backup vault to copy to; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
         IamRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IAMRoleArn'
-            - description: 'Specifies the IAM role ARN used to copy the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+          $ref: '#/components/schemas/IAMRoleArn'
+          description: 'Specifies the IAM role ARN used to copy the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
         IdempotencyToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A customer chosen string that can be used to distinguish between calls to <code>StartCopyJob</code>.
+          $ref: '#/components/schemas/string'
+          description: A customer chosen string that can be used to distinguish between calls to <code>StartCopyJob</code>.
         Lifecycle:
           $ref: '#/components/schemas/Lifecycle'
     StartRestoreJobInput:
@@ -5233,25 +4906,20 @@ components:
       title: StartRestoreJobInput
       properties:
         RecoveryPointArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
+          $ref: '#/components/schemas/ARN'
+          description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: '<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: The ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system. You can specify a key from another AWS account provided that key it is properly shared with your account via AWS KMS.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> <li> <p> <code>ItemsToRestore </code>: An array of one to five strings where each string is a file path. Use <code>ItemsToRestore</code> to restore specific files or directories rather than the entire file system. This parameter is optional. For example, <code>"itemsToRestore":"[\"/my.test\"]"</code>.</p> </li> </ul>'
+          $ref: '#/components/schemas/Metadata'
+          description: '<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: The ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system. You can specify a key from another AWS account provided that key it is properly shared with your account via AWS KMS.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> <li> <p> <code>ItemsToRestore </code>: An array of one to five strings where each string is a file path. Use <code>ItemsToRestore</code> to restore specific files or directories rather than the entire file system. This parameter is optional. For example, <code>"itemsToRestore":"[\"/my.test\"]"</code>.</p> </li> </ul>'
         IamRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IAMRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+          $ref: '#/components/schemas/IAMRoleArn'
+          description: 'The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
         IdempotencyToken:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: A customer chosen string that can be used to distinguish between calls to <code>StartRestoreJob</code>.
+          $ref: '#/components/schemas/string'
+          description: A customer chosen string that can be used to distinguish between calls to <code>StartRestoreJob</code>.
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>'
+          $ref: '#/components/schemas/ResourceType'
+          description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>'
     StopBackupJobInput:
       type: object
       title: StopBackupJobInput
@@ -5269,9 +4937,8 @@ components:
       title: TagResourceInput
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: Key-value pairs that are used to help organize your resources. You can assign your own metadata to the resources you create.
+          $ref: '#/components/schemas/Tags'
+          description: Key-value pairs that are used to help organize your resources. You can assign your own metadata to the resources you create.
     UntagResourceInput:
       type: object
       required:
@@ -5279,9 +4946,8 @@ components:
       title: UntagResourceInput
       properties:
         TagKeyList:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyList'
-            - description: A list of keys to identify which key-value tags to remove from a resource.
+          $ref: '#/components/schemas/TagKeyList'
+          description: A list of keys to identify which key-value tags to remove from a resource.
     UpdateBackupPlanInput:
       type: object
       required:
@@ -5289,32 +4955,28 @@ components:
       title: UpdateBackupPlanInput
       properties:
         BackupPlan:
-          allOf:
-            - $ref: '#/components/schemas/BackupPlanInput'
-            - description: Specifies the body of a backup plan. Includes a <code>BackupPlanName</code> and one or more sets of <code>Rules</code>.
+          $ref: '#/components/schemas/BackupPlanInput'
+          description: Specifies the body of a backup plan. Includes a <code>BackupPlanName</code> and one or more sets of <code>Rules</code>.
     UpdateGlobalSettingsInput:
       type: object
       title: UpdateGlobalSettingsInput
       properties:
         GlobalSettings:
-          allOf:
-            - $ref: '#/components/schemas/GlobalSettings'
-            - description: A list of resources along with the opt-in preferences for the account.
+          $ref: '#/components/schemas/GlobalSettings'
+          description: A list of resources along with the opt-in preferences for the account.
     UpdateRecoveryPointLifecycleInput:
       type: object
       title: UpdateRecoveryPointLifecycleInput
       properties:
         Lifecycle:
-          allOf:
-            - $ref: '#/components/schemas/Lifecycle'
-            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
+          $ref: '#/components/schemas/Lifecycle'
+          description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
     UpdateRegionSettingsInput:
       type: object
       title: UpdateRegionSettingsInput
       properties:
         ResourceTypeOptInPreference:
-          allOf:
-            - $ref: '#/components/schemas/ResourceTypeOptInPreference'
-            - description: Updates the list of services along with the opt-in preferences for the Region.
+          $ref: '#/components/schemas/ResourceTypeOptInPreference'
+          description: Updates the list of services along with the opt-in preferences for the Region.
 security:
   - hmac: []

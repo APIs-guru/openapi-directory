@@ -3554,9 +3554,8 @@ components:
         - environmentAccountConnection
       properties:
         environmentAccountConnection:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnection'
-            - description: The environment account connection data that's returned by AWS Proton.
+          $ref: '#/components/schemas/EnvironmentAccountConnection'
+          description: The environment account connection data that's returned by AWS Proton.
     AcceptEnvironmentAccountConnectionInput:
       type: object
       required:
@@ -3564,9 +3563,8 @@ components:
       title: AcceptEnvironmentAccountConnectionInput
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionId'
-            - description: The ID of the environment account connection.
+          $ref: '#/components/schemas/EnvironmentAccountConnectionId'
+          description: The ID of the environment account connection.
     ValidationException: {}
     AccessDeniedException: {}
     ThrottlingException: {}
@@ -3579,9 +3577,8 @@ components:
         - environment
       properties:
         environment:
-          allOf:
-            - $ref: '#/components/schemas/Environment'
-            - description: The environment summary data that's returned by AWS Proton.
+          $ref: '#/components/schemas/Environment'
+          description: The environment summary data that's returned by AWS Proton.
     CancelEnvironmentDeploymentInput:
       type: object
       required:
@@ -3589,18 +3586,16 @@ components:
       title: CancelEnvironmentDeploymentInput
       properties:
         environmentName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment with the deployment to cancel.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment with the deployment to cancel.
     CancelServiceInstanceDeploymentOutput:
       type: object
       required:
         - serviceInstance
       properties:
         serviceInstance:
-          allOf:
-            - $ref: '#/components/schemas/ServiceInstance'
-            - description: The service instance summary data that's returned by AWS Proton.
+          $ref: '#/components/schemas/ServiceInstance'
+          description: The service instance summary data that's returned by AWS Proton.
     CancelServiceInstanceDeploymentInput:
       type: object
       required:
@@ -3609,22 +3604,19 @@ components:
       title: CancelServiceInstanceDeploymentInput
       properties:
         serviceInstanceName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service instance with the deployment to cancel.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service instance with the deployment to cancel.
         serviceName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service with the service instance deployment to cancel.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service with the service instance deployment to cancel.
     CancelServicePipelineDeploymentOutput:
       type: object
       required:
         - pipeline
       properties:
         pipeline:
-          allOf:
-            - $ref: '#/components/schemas/ServicePipeline'
-            - description: The service pipeline detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/ServicePipeline'
+          description: The service pipeline detail data that's returned by AWS Proton.
     CancelServicePipelineDeploymentInput:
       type: object
       required:
@@ -3632,18 +3624,16 @@ components:
       title: CancelServicePipelineDeploymentInput
       properties:
         serviceName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service with the service pipeline deployment to cancel.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service with the service pipeline deployment to cancel.
     CreateEnvironmentOutput:
       type: object
       required:
         - environment
       properties:
         environment:
-          allOf:
-            - $ref: '#/components/schemas/Environment'
-            - description: The environment detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/Environment'
+          description: The environment detail data that's returned by AWS Proton.
     CreateEnvironmentInput:
       type: object
       required:
@@ -3654,41 +3644,32 @@ components:
       title: CreateEnvironmentInput
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the environment that's being created and deployed.
+          $ref: '#/components/schemas/Description'
+          description: A description of the environment that's being created and deployed.
         environmentAccountConnectionId:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionId'
-            - description: 'The ID of the environment account connection that you provide if you''re provisioning your environment infrastructure resources to an environment account. You must include either the <code>environmentAccountConnectionId</code> or <code>protonServiceRoleArn</code> parameter and value. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.'
+          $ref: '#/components/schemas/EnvironmentAccountConnectionId'
+          description: 'The ID of the environment account connection that you provide if you''re provisioning your environment infrastructure resources to an environment account. You must include either the <code>environmentAccountConnectionId</code> or <code>protonServiceRoleArn</code> parameter and value. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.'
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment.
         protonServiceRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS Proton to make calls to other services on your behalf. You must include either the <code>environmentAccountConnectionId</code> or <code>protonServiceRoleArn</code> parameter and value.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS Proton to make calls to other services on your behalf. You must include either the <code>environmentAccountConnectionId</code> or <code>protonServiceRoleArn</code> parameter and value.
         spec:
-          allOf:
-            - $ref: '#/components/schemas/SpecContents'
-            - description: 'A link to a YAML formatted spec file that provides inputs as defined in the environment template bundle schema file. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html">Environments</a> in the <i>AWS Proton Administrator Guide</i>.'
+          $ref: '#/components/schemas/SpecContents'
+          description: 'A link to a YAML formatted spec file that provides inputs as defined in the environment template bundle schema file. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html">Environments</a> in the <i>AWS Proton Administrator Guide</i>.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: 'Create tags for your environment. For more information, see <i>AWS Proton resources and tagging</i> in the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/resources.html">AWS Proton Administrator Guide</a> or <a href="https://docs.aws.amazon.com/proton/latest/userguide/resources.html">AWS Proton User Guide</a>.'
+          $ref: '#/components/schemas/TagList'
+          description: 'Create tags for your environment. For more information, see <i>AWS Proton resources and tagging</i> in the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/resources.html">AWS Proton Administrator Guide</a> or <a href="https://docs.aws.amazon.com/proton/latest/userguide/resources.html">AWS Proton User Guide</a>.'
         templateMajorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the major version of the environment template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the major version of the environment template.
         templateMinorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the minor version of the environment template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the minor version of the environment template.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: 'The name of the environment template. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-templates.html">Environment Templates</a> in the <i>AWS Proton Administrator Guide</i>.'
+          $ref: '#/components/schemas/ResourceName'
+          description: 'The name of the environment template. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-templates.html">Environment Templates</a> in the <i>AWS Proton Administrator Guide</i>.'
     ServiceQuotaExceededException: {}
     CreateEnvironmentAccountConnectionOutput:
       type: object
@@ -3696,9 +3677,8 @@ components:
         - environmentAccountConnection
       properties:
         environmentAccountConnection:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnection'
-            - description: The environment account connection detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/EnvironmentAccountConnection'
+          description: The environment account connection detail data that's returned by AWS Proton.
     CreateEnvironmentAccountConnectionInput:
       type: object
       required:
@@ -3708,30 +3688,25 @@ components:
       title: CreateEnvironmentAccountConnectionInput
       properties:
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'When included, if two identicial requests are made with the same client token, AWS Proton returns the environment account connection that the first request created.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'When included, if two identicial requests are made with the same client token, AWS Proton returns the environment account connection that the first request created.'
         environmentName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the AWS Proton environment that's created in the associated management account.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the AWS Proton environment that's created in the associated management account.
         managementAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AwsAccountId'
-            - description: 'The ID of the management account that accepts or rejects the environment account connection. You create an manage the AWS Proton environment in this account. If the management account accepts the environment account connection, AWS Proton can use the associated IAM role to provision environment infrastructure resources in the associated environment account.'
+          $ref: '#/components/schemas/AwsAccountId'
+          description: 'The ID of the management account that accepts or rejects the environment account connection. You create an manage the AWS Proton environment in this account. If the management account accepts the environment account connection, AWS Proton can use the associated IAM role to provision environment infrastructure resources in the associated environment account.'
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the IAM service role that's created in the environment account. AWS Proton uses this role to provision infrastructure resources in the associated environment account.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the IAM service role that's created in the environment account. AWS Proton uses this role to provision infrastructure resources in the associated environment account.
     CreateEnvironmentTemplateOutput:
       type: object
       required:
         - environmentTemplate
       properties:
         environmentTemplate:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentTemplate'
-            - description: The environment template detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/EnvironmentTemplate'
+          description: The environment template detail data that's returned by AWS Proton.
     CreateEnvironmentTemplateInput:
       type: object
       required:
@@ -3739,38 +3714,31 @@ components:
       title: CreateEnvironmentTemplateInput
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the environment template.
+          $ref: '#/components/schemas/Description'
+          description: A description of the environment template.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/DisplayName'
-            - description: The environment template name as displayed in the developer interface.
+          $ref: '#/components/schemas/DisplayName'
+          description: The environment template name as displayed in the developer interface.
         encryptionKey:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: A customer provided encryption key that AWS Proton uses to encrypt data.
+          $ref: '#/components/schemas/Arn'
+          description: A customer provided encryption key that AWS Proton uses to encrypt data.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment template.
         provisioning:
-          allOf:
-            - $ref: '#/components/schemas/Provisioning'
-            - description: 'When included, indicates that the environment template is for customer provisioned and managed infrastructure.'
+          $ref: '#/components/schemas/Provisioning'
+          description: 'When included, indicates that the environment template is for customer provisioned and managed infrastructure.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: 'Create tags for your environment template. For more information, see <i>AWS Proton resources and tagging</i> in the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/resources.html">AWS Proton Administrator Guide</a> or <a href="https://docs.aws.amazon.com/proton/latest/userguide/resources.html">AWS Proton User Guide</a>.'
+          $ref: '#/components/schemas/TagList'
+          description: 'Create tags for your environment template. For more information, see <i>AWS Proton resources and tagging</i> in the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/resources.html">AWS Proton Administrator Guide</a> or <a href="https://docs.aws.amazon.com/proton/latest/userguide/resources.html">AWS Proton User Guide</a>.'
     CreateEnvironmentTemplateVersionOutput:
       type: object
       required:
         - environmentTemplateVersion
       properties:
         environmentTemplateVersion:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentTemplateVersion'
-            - description: The environment template detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/EnvironmentTemplateVersion'
+          description: The environment template detail data that's returned by AWS Proton.
     CreateEnvironmentTemplateVersionInput:
       type: object
       required:
@@ -3779,38 +3747,31 @@ components:
       title: CreateEnvironmentTemplateVersionInput
       properties:
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'When included, if two identicial requests are made with the same client token, AWS Proton returns the environment template version that the first request created.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'When included, if two identicial requests are made with the same client token, AWS Proton returns the environment template version that the first request created.'
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the new version of an environment template.
+          $ref: '#/components/schemas/Description'
+          description: A description of the new version of an environment template.
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: '<p>To create a new minor version of the environment template, include a <code>majorVersion</code>.</p> <p>To create a new major and minor version of the environment template, <i>exclude</i> <code>majorVersion</code>.</p>'
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: '<p>To create a new minor version of the environment template, include a <code>majorVersion</code>.</p> <p>To create a new major and minor version of the environment template, <i>exclude</i> <code>majorVersion</code>.</p>'
         source:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionSourceInput'
-            - description: An object that includes the template bundle S3 bucket path and name for the new version of an template.
+          $ref: '#/components/schemas/TemplateVersionSourceInput'
+          description: An object that includes the template bundle S3 bucket path and name for the new version of an template.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: Create tags for a new version of an environment template.
+          $ref: '#/components/schemas/TagList'
+          description: Create tags for a new version of an environment template.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment template.
     CreateServiceOutput:
       type: object
       required:
         - service
       properties:
         service:
-          allOf:
-            - $ref: '#/components/schemas/Service'
-            - description: The service detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/Service'
+          description: The service detail data that's returned by AWS Proton.
     CreateServiceInput:
       type: object
       required:
@@ -3821,54 +3782,43 @@ components:
       title: CreateServiceInput
       properties:
         branchName:
-          allOf:
-            - $ref: '#/components/schemas/GitBranchName'
-            - description: The name of the code repository branch that holds the code that's deployed in AWS Proton. <i>Don't</i> include this parameter if your service template <i>doesn't</i> include a service pipeline.
+          $ref: '#/components/schemas/GitBranchName'
+          description: The name of the code repository branch that holds the code that's deployed in AWS Proton. <i>Don't</i> include this parameter if your service template <i>doesn't</i> include a service pipeline.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the AWS Proton service.
+          $ref: '#/components/schemas/Description'
+          description: A description of the AWS Proton service.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The service name.
+          $ref: '#/components/schemas/ResourceName'
+          description: The service name.
         repositoryConnectionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'The Amazon Resource Name (ARN) of the repository connection. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#setting-up-vcontrol">Set up repository connection</a> in the <i>AWS Proton Administrator Guide</i> and <a href="https://docs.aws.amazon.com/proton/latest/userguide/proton-setup.html#setup-repo-connection">Setting up with AWS Proton</a> in the <i>AWS Proton User Guide</i>. <i>Don''t</i> include this parameter if your service template <i>doesn''t</i> include a service pipeline.'
+          $ref: '#/components/schemas/Arn'
+          description: 'The Amazon Resource Name (ARN) of the repository connection. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#setting-up-vcontrol">Set up repository connection</a> in the <i>AWS Proton Administrator Guide</i> and <a href="https://docs.aws.amazon.com/proton/latest/userguide/proton-setup.html#setup-repo-connection">Setting up with AWS Proton</a> in the <i>AWS Proton User Guide</i>. <i>Don''t</i> include this parameter if your service template <i>doesn''t</i> include a service pipeline.'
         repositoryId:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryId'
-            - description: The ID of the code repository. <i>Don't</i> include this parameter if your service template <i>doesn't</i> include a service pipeline.
+          $ref: '#/components/schemas/RepositoryId'
+          description: The ID of the code repository. <i>Don't</i> include this parameter if your service template <i>doesn't</i> include a service pipeline.
         spec:
-          allOf:
-            - $ref: '#/components/schemas/SpecContents'
-            - description: 'A link to a spec file that provides inputs as defined in the service template bundle schema file. The spec file is in YAML format. Don’t include pipeline inputs in the spec if your service template <i>doesn’t</i> include a service pipeline. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-create-svc.html.html">Create a service</a> in the <i>AWS Proton Administrator Guide</i> and <a href="https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-create.html">Create a service</a> in the <i>AWS Proton User Guide</i>.'
+          $ref: '#/components/schemas/SpecContents'
+          description: 'A link to a spec file that provides inputs as defined in the service template bundle schema file. The spec file is in YAML format. Don’t include pipeline inputs in the spec if your service template <i>doesn’t</i> include a service pipeline. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-create-svc.html.html">Create a service</a> in the <i>AWS Proton Administrator Guide</i> and <a href="https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-create.html">Create a service</a> in the <i>AWS Proton User Guide</i>.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: 'Create tags for your service. For more information, see <i>AWS Proton resources and tagging</i> in the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/resources.html">AWS Proton Administrator Guide</a> or <a href="https://docs.aws.amazon.com/proton/latest/userguide/resources.html">AWS Proton User Guide</a>.'
+          $ref: '#/components/schemas/TagList'
+          description: 'Create tags for your service. For more information, see <i>AWS Proton resources and tagging</i> in the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/resources.html">AWS Proton Administrator Guide</a> or <a href="https://docs.aws.amazon.com/proton/latest/userguide/resources.html">AWS Proton User Guide</a>.'
         templateMajorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the major version of the service template that was used to create the service.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the major version of the service template that was used to create the service.
         templateMinorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the minor version of the service template that was used to create the service.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the minor version of the service template that was used to create the service.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template that's used to create the service.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template that's used to create the service.
     CreateServiceTemplateOutput:
       type: object
       required:
         - serviceTemplate
       properties:
         serviceTemplate:
-          allOf:
-            - $ref: '#/components/schemas/ServiceTemplate'
-            - description: The service template detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/ServiceTemplate'
+          description: The service template detail data that's returned by AWS Proton.
     CreateServiceTemplateInput:
       type: object
       required:
@@ -3876,38 +3826,31 @@ components:
       title: CreateServiceTemplateInput
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the service template.
+          $ref: '#/components/schemas/Description'
+          description: A description of the service template.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/DisplayName'
-            - description: The name of the service template as displayed in the developer interface.
+          $ref: '#/components/schemas/DisplayName'
+          description: The name of the service template as displayed in the developer interface.
         encryptionKey:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: A customer provided encryption key that's used to encrypt data.
+          $ref: '#/components/schemas/Arn'
+          description: A customer provided encryption key that's used to encrypt data.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template.
         pipelineProvisioning:
-          allOf:
-            - $ref: '#/components/schemas/Provisioning'
-            - description: 'AWS Proton includes a service pipeline for your service by default. When included, this parameter indicates that an AWS Proton service pipeline <i>won''t</i> be included for your service. Once specified, this parameter <i>can''t</i> be changed. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html">Service template bundles</a> in the <i>AWS Proton Administrator Guide</i>.'
+          $ref: '#/components/schemas/Provisioning'
+          description: 'AWS Proton includes a service pipeline for your service by default. When included, this parameter indicates that an AWS Proton service pipeline <i>won''t</i> be included for your service. Once specified, this parameter <i>can''t</i> be changed. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html">Service template bundles</a> in the <i>AWS Proton Administrator Guide</i>.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: 'Create tags for your service template. For more information, see <i>AWS Proton resources and tagging</i> in the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/resources.html">AWS Proton Administrator Guide</a> or <a href="https://docs.aws.amazon.com/proton/latest/userguide/resources.html">AWS Proton User Guide</a>.'
+          $ref: '#/components/schemas/TagList'
+          description: 'Create tags for your service template. For more information, see <i>AWS Proton resources and tagging</i> in the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/resources.html">AWS Proton Administrator Guide</a> or <a href="https://docs.aws.amazon.com/proton/latest/userguide/resources.html">AWS Proton User Guide</a>.'
     CreateServiceTemplateVersionOutput:
       type: object
       required:
         - serviceTemplateVersion
       properties:
         serviceTemplateVersion:
-          allOf:
-            - $ref: '#/components/schemas/ServiceTemplateVersion'
-            - description: The service template version summary of detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/ServiceTemplateVersion'
+          description: The service template version summary of detail data that's returned by AWS Proton.
     CreateServiceTemplateVersionInput:
       type: object
       required:
@@ -3917,40 +3860,32 @@ components:
       title: CreateServiceTemplateVersionInput
       properties:
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'When included, if two identicial requests are made with the same client token, AWS Proton returns the service template version that the first request created.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'When included, if two identicial requests are made with the same client token, AWS Proton returns the service template version that the first request created.'
         compatibleEnvironmentTemplates:
-          allOf:
-            - $ref: '#/components/schemas/CompatibleEnvironmentTemplateInputList'
-            - description: An array of compatible environment template objects for the new version of a service template.
+          $ref: '#/components/schemas/CompatibleEnvironmentTemplateInputList'
+          description: An array of compatible environment template objects for the new version of a service template.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the new version of a service template.
+          $ref: '#/components/schemas/Description'
+          description: A description of the new version of a service template.
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: '<p>To create a new minor version of the service template, include a <code>majorVersion</code>.</p> <p>To create a new major and minor version of the service template, <i>exclude</i> <code>majorVersion</code>.</p>'
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: '<p>To create a new minor version of the service template, include a <code>majorVersion</code>.</p> <p>To create a new major and minor version of the service template, <i>exclude</i> <code>majorVersion</code>.</p>'
         source:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionSourceInput'
-            - description: An object that includes the template bundle S3 bucket path and name for the new version of a service template.
+          $ref: '#/components/schemas/TemplateVersionSourceInput'
+          description: An object that includes the template bundle S3 bucket path and name for the new version of a service template.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: Create tags for a new version of a service template.
+          $ref: '#/components/schemas/TagList'
+          description: Create tags for a new version of a service template.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template.
     DeleteEnvironmentOutput:
       type: object
       properties:
         environment:
-          allOf:
-            - $ref: '#/components/schemas/Environment'
-            - description: The environment detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/Environment'
+          description: The environment detail data that's returned by AWS Proton.
     DeleteEnvironmentInput:
       type: object
       required:
@@ -3958,16 +3893,14 @@ components:
       title: DeleteEnvironmentInput
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment to delete.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment to delete.
     DeleteEnvironmentAccountConnectionOutput:
       type: object
       properties:
         environmentAccountConnection:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnection'
-            - description: The environment account connection detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/EnvironmentAccountConnection'
+          description: The environment account connection detail data that's returned by AWS Proton.
     DeleteEnvironmentAccountConnectionInput:
       type: object
       required:
@@ -3975,16 +3908,14 @@ components:
       title: DeleteEnvironmentAccountConnectionInput
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionId'
-            - description: The ID of the environment account connection to delete.
+          $ref: '#/components/schemas/EnvironmentAccountConnectionId'
+          description: The ID of the environment account connection to delete.
     DeleteEnvironmentTemplateOutput:
       type: object
       properties:
         environmentTemplate:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentTemplate'
-            - description: The environment template detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/EnvironmentTemplate'
+          description: The environment template detail data that's returned by AWS Proton.
     DeleteEnvironmentTemplateInput:
       type: object
       required:
@@ -3992,16 +3923,14 @@ components:
       title: DeleteEnvironmentTemplateInput
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment template to delete.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment template to delete.
     DeleteEnvironmentTemplateVersionOutput:
       type: object
       properties:
         environmentTemplateVersion:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentTemplateVersion'
-            - description: The environment template version detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/EnvironmentTemplateVersion'
+          description: The environment template version detail data that's returned by AWS Proton.
     DeleteEnvironmentTemplateVersionInput:
       type: object
       required:
@@ -4011,24 +3940,20 @@ components:
       title: DeleteEnvironmentTemplateVersionInput
       properties:
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The environment template major version to delete.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The environment template major version to delete.
         minorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The environment template minor version to delete.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The environment template minor version to delete.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment template.
     DeleteServiceOutput:
       type: object
       properties:
         service:
-          allOf:
-            - $ref: '#/components/schemas/Service'
-            - description: The service detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/Service'
+          description: The service detail data that's returned by AWS Proton.
     DeleteServiceInput:
       type: object
       required:
@@ -4036,16 +3961,14 @@ components:
       title: DeleteServiceInput
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service to delete.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service to delete.
     DeleteServiceTemplateOutput:
       type: object
       properties:
         serviceTemplate:
-          allOf:
-            - $ref: '#/components/schemas/ServiceTemplate'
-            - description: The service template detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/ServiceTemplate'
+          description: The service template detail data that's returned by AWS Proton.
     DeleteServiceTemplateInput:
       type: object
       required:
@@ -4053,16 +3976,14 @@ components:
       title: DeleteServiceTemplateInput
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template to delete.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template to delete.
     DeleteServiceTemplateVersionOutput:
       type: object
       properties:
         serviceTemplateVersion:
-          allOf:
-            - $ref: '#/components/schemas/ServiceTemplateVersion'
-            - description: The service template version detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/ServiceTemplateVersion'
+          description: The service template version detail data that's returned by AWS Proton.
     DeleteServiceTemplateVersionInput:
       type: object
       required:
@@ -4072,24 +3993,20 @@ components:
       title: DeleteServiceTemplateVersionInput
       properties:
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The service template major version to delete.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The service template major version to delete.
         minorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The service template minor version to delete.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The service template minor version to delete.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template.
     GetAccountSettingsOutput:
       type: object
       properties:
         accountSettings:
-          allOf:
-            - $ref: '#/components/schemas/AccountSettings'
-            - description: The AWS Proton pipeline service role detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/AccountSettings'
+          description: The AWS Proton pipeline service role detail data that's returned by AWS Proton.
     GetAccountSettingsInput:
       type: object
       title: GetAccountSettingsInput
@@ -4100,9 +4017,8 @@ components:
         - environment
       properties:
         environment:
-          allOf:
-            - $ref: '#/components/schemas/Environment'
-            - description: The environment detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/Environment'
+          description: The environment detail data that's returned by AWS Proton.
     GetEnvironmentInput:
       type: object
       required:
@@ -4110,18 +4026,16 @@ components:
       title: GetEnvironmentInput
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment that you want to get the detail data for.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment that you want to get the detail data for.
     GetEnvironmentAccountConnectionOutput:
       type: object
       required:
         - environmentAccountConnection
       properties:
         environmentAccountConnection:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnection'
-            - description: The environment account connection detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/EnvironmentAccountConnection'
+          description: The environment account connection detail data that's returned by AWS Proton.
     GetEnvironmentAccountConnectionInput:
       type: object
       required:
@@ -4129,18 +4043,16 @@ components:
       title: GetEnvironmentAccountConnectionInput
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionId'
-            - description: The ID of the environment account connection.
+          $ref: '#/components/schemas/EnvironmentAccountConnectionId'
+          description: The ID of the environment account connection.
     GetEnvironmentTemplateOutput:
       type: object
       required:
         - environmentTemplate
       properties:
         environmentTemplate:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentTemplate'
-            - description: The environment template detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/EnvironmentTemplate'
+          description: The environment template detail data that's returned by AWS Proton.
     GetEnvironmentTemplateInput:
       type: object
       required:
@@ -4148,18 +4060,16 @@ components:
       title: GetEnvironmentTemplateInput
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment template that you want to get the detail data for.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment template that you want to get the detail data for.
     GetEnvironmentTemplateVersionOutput:
       type: object
       required:
         - environmentTemplateVersion
       properties:
         environmentTemplateVersion:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentTemplateVersion'
-            - description: The environment template version detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/EnvironmentTemplateVersion'
+          description: The environment template version detail data that's returned by AWS Proton.
     GetEnvironmentTemplateVersionInput:
       type: object
       required:
@@ -4169,24 +4079,20 @@ components:
       title: GetEnvironmentTemplateVersionInput
       properties:
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: 'To view environment template major version detail data, include <code>majorVersion</code>.'
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: 'To view environment template major version detail data, include <code>majorVersion</code>.'
         minorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: 'To view environment template minor version detail data, include <code>minorVersion</code>.'
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: 'To view environment template minor version detail data, include <code>minorVersion</code>.'
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment template.
     GetServiceOutput:
       type: object
       properties:
         service:
-          allOf:
-            - $ref: '#/components/schemas/Service'
-            - description: The service detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/Service'
+          description: The service detail data that's returned by AWS Proton.
     GetServiceInput:
       type: object
       required:
@@ -4194,18 +4100,16 @@ components:
       title: GetServiceInput
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service that you want to get the detail data for.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service that you want to get the detail data for.
     GetServiceInstanceOutput:
       type: object
       required:
         - serviceInstance
       properties:
         serviceInstance:
-          allOf:
-            - $ref: '#/components/schemas/ServiceInstance'
-            - description: The service instance detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/ServiceInstance'
+          description: The service instance detail data that's returned by AWS Proton.
     GetServiceInstanceInput:
       type: object
       required:
@@ -4214,22 +4118,19 @@ components:
       title: GetServiceInstanceInput
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of a service instance that you want to get the detail data for.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of a service instance that you want to get the detail data for.
         serviceName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service that the service instance belongs to.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service that the service instance belongs to.
     GetServiceTemplateOutput:
       type: object
       required:
         - serviceTemplate
       properties:
         serviceTemplate:
-          allOf:
-            - $ref: '#/components/schemas/ServiceTemplate'
-            - description: The service template detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/ServiceTemplate'
+          description: The service template detail data that's returned by AWS Proton.
     GetServiceTemplateInput:
       type: object
       required:
@@ -4237,18 +4138,16 @@ components:
       title: GetServiceTemplateInput
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template that you want to get detail data for.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template that you want to get detail data for.
     GetServiceTemplateVersionOutput:
       type: object
       required:
         - serviceTemplateVersion
       properties:
         serviceTemplateVersion:
-          allOf:
-            - $ref: '#/components/schemas/ServiceTemplateVersion'
-            - description: The service template version detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/ServiceTemplateVersion'
+          description: The service template version detail data that's returned by AWS Proton.
     GetServiceTemplateVersionInput:
       type: object
       required:
@@ -4258,30 +4157,25 @@ components:
       title: GetServiceTemplateVersionInput
       properties:
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: 'To view service template major version detail data, include <code>majorVersion</code>.'
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: 'To view service template major version detail data, include <code>majorVersion</code>.'
         minorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: 'To view service template minor version detail data, include <code>minorVersion</code>.'
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: 'To view service template minor version detail data, include <code>minorVersion</code>.'
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template.
     ListEnvironmentAccountConnectionsOutput:
       type: object
       required:
         - environmentAccountConnections
       properties:
         environmentAccountConnections:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionSummaryList'
-            - description: 'An array of environment account connections with details that''s returned by AWS Proton. '
+          $ref: '#/components/schemas/EnvironmentAccountConnectionSummaryList'
+          description: 'An array of environment account connections with details that''s returned by AWS Proton. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token to indicate the location of the next environment account connection in the array of environment account connections, after the current requested list of environment account connections.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token to indicate the location of the next environment account connection in the array of environment account connections, after the current requested list of environment account connections.'
     ListEnvironmentAccountConnectionsInput:
       type: object
       required:
@@ -4289,38 +4183,31 @@ components:
       title: ListEnvironmentAccountConnectionsInput
       properties:
         environmentName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The environment name that's associated with each listed environment account connection.
+          $ref: '#/components/schemas/ResourceName'
+          description: The environment name that's associated with each listed environment account connection.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxPageResults'
-            - description: The maximum number of environment account connections to list.
+          $ref: '#/components/schemas/MaxPageResults'
+          description: The maximum number of environment account connections to list.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token to indicate the location of the next environment account connection in the array of environment account connections, after the list of environment account connections that was previously requested.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token to indicate the location of the next environment account connection in the array of environment account connections, after the list of environment account connections that was previously requested.'
         requestedBy:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionRequesterAccountType'
-            - description: The type of account making the <code>ListEnvironmentAccountConnections</code> request.
+          $ref: '#/components/schemas/EnvironmentAccountConnectionRequesterAccountType'
+          description: The type of account making the <code>ListEnvironmentAccountConnections</code> request.
         statuses:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionStatusList'
-            - description: The status details for each listed environment account connection.
+          $ref: '#/components/schemas/EnvironmentAccountConnectionStatusList'
+          description: The status details for each listed environment account connection.
     ListEnvironmentTemplateVersionsOutput:
       type: object
       required:
         - templateVersions
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token to indicate the location of the next major or minor version in the array of major or minor versions of an environment template, after the list of major or minor versions that was previously requested.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token to indicate the location of the next major or minor version in the array of major or minor versions of an environment template, after the list of major or minor versions that was previously requested.'
         templateVersions:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentTemplateVersionSummaryList'
-            - description: An array of major or minor versions of an environment template detail data.
+          $ref: '#/components/schemas/EnvironmentTemplateVersionSummaryList'
+          description: An array of major or minor versions of an environment template detail data.
     ListEnvironmentTemplateVersionsInput:
       type: object
       required:
@@ -4328,117 +4215,97 @@ components:
       title: ListEnvironmentTemplateVersionsInput
       properties:
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: '<p>To view a list of minor of versions under a major version of an environment template, include <code>majorVersion</code>.</p> <p>To view a list of major versions of an environment template, <i>exclude</i> <code>majorVersion</code>.</p>'
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: '<p>To view a list of minor of versions under a major version of an environment template, include <code>majorVersion</code>.</p> <p>To view a list of major versions of an environment template, <i>exclude</i> <code>majorVersion</code>.</p>'
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxPageResults'
-            - description: The maximum number of major or minor versions of an environment template to list.
+          $ref: '#/components/schemas/MaxPageResults'
+          description: The maximum number of major or minor versions of an environment template to list.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token to indicate the location of the next major or minor version in the array of major or minor versions of an environment template, after the list of major or minor versions that was previously requested.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token to indicate the location of the next major or minor version in the array of major or minor versions of an environment template, after the list of major or minor versions that was previously requested.'
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment template.
     ListEnvironmentTemplatesOutput:
       type: object
       required:
         - templates
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token to indicate the location of the next environment template in the array of environment templates, after the current requested list of environment templates.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token to indicate the location of the next environment template in the array of environment templates, after the current requested list of environment templates.'
         templates:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentTemplateSummaryList'
-            - description: An array of environment templates with detail data.
+          $ref: '#/components/schemas/EnvironmentTemplateSummaryList'
+          description: An array of environment templates with detail data.
     ListEnvironmentTemplatesInput:
       type: object
       title: ListEnvironmentTemplatesInput
       properties:
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxPageResults'
-            - description: The maximum number of environment templates to list.
+          $ref: '#/components/schemas/MaxPageResults'
+          description: The maximum number of environment templates to list.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token to indicate the location of the next environment template in the array of environment templates, after the list of environment templates that was previously requested.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token to indicate the location of the next environment template in the array of environment templates, after the list of environment templates that was previously requested.'
     ListEnvironmentsOutput:
       type: object
       required:
         - environments
       properties:
         environments:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentSummaryList'
-            - description: An array of environment detail data summaries.
+          $ref: '#/components/schemas/EnvironmentSummaryList'
+          description: An array of environment detail data summaries.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token to indicate the location of the next environment in the array of environments, after the current requested list of environments.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token to indicate the location of the next environment in the array of environments, after the current requested list of environments.'
     ListEnvironmentsInput:
       type: object
       title: ListEnvironmentsInput
       properties:
         environmentTemplates:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentTemplateFilterList'
-            - description: An array of the versions of the environment template.
+          $ref: '#/components/schemas/EnvironmentTemplateFilterList'
+          description: An array of the versions of the environment template.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxPageResults'
-            - description: The maximum number of environments to list.
+          $ref: '#/components/schemas/MaxPageResults'
+          description: The maximum number of environments to list.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token to indicate the location of the next environment in the array of environments, after the list of environments that was previously requested.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token to indicate the location of the next environment in the array of environments, after the list of environments that was previously requested.'
     ListServiceInstancesOutput:
       type: object
       required:
         - serviceInstances
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token to indicate the location of the next service instance in the array of service instances, after the current requested list of service instances.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token to indicate the location of the next service instance in the array of service instances, after the current requested list of service instances.'
         serviceInstances:
-          allOf:
-            - $ref: '#/components/schemas/ServiceInstanceSummaryList'
-            - description: An array of service instances with summaries of detail data.
+          $ref: '#/components/schemas/ServiceInstanceSummaryList'
+          description: An array of service instances with summaries of detail data.
     ListServiceInstancesInput:
       type: object
       title: ListServiceInstancesInput
       properties:
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxPageResults'
-            - description: The maximum number of service instances to list.
+          $ref: '#/components/schemas/MaxPageResults'
+          description: The maximum number of service instances to list.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token to indicate the location of the next service in the array of service instances, after the list of service instances that was previously requested.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token to indicate the location of the next service in the array of service instances, after the list of service instances that was previously requested.'
         serviceName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service that the service instance belongs to.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service that the service instance belongs to.
     ListServiceTemplateVersionsOutput:
       type: object
       required:
         - templateVersions
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token to indicate the location of the next major or minor version in the array of major or minor versions of a service template, after the list of major or minor versions that was previously requested.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token to indicate the location of the next major or minor version in the array of major or minor versions of a service template, after the list of major or minor versions that was previously requested.'
         templateVersions:
-          allOf:
-            - $ref: '#/components/schemas/ServiceTemplateVersionSummaryList'
-            - description: An array of major or minor versions of a service template with detail data.
+          $ref: '#/components/schemas/ServiceTemplateVersionSummaryList'
+          description: An array of major or minor versions of a service template with detail data.
     ListServiceTemplateVersionsInput:
       type: object
       required:
@@ -4446,84 +4313,70 @@ components:
       title: ListServiceTemplateVersionsInput
       properties:
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: '<p>To view a list of minor of versions under a major version of a service template, include <code>majorVersion</code>.</p> <p>To view a list of major versions of a service template, <i>exclude</i> <code>majorVersion</code>.</p>'
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: '<p>To view a list of minor of versions under a major version of a service template, include <code>majorVersion</code>.</p> <p>To view a list of major versions of a service template, <i>exclude</i> <code>majorVersion</code>.</p>'
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxPageResults'
-            - description: The maximum number of major or minor versions of a service template to list.
+          $ref: '#/components/schemas/MaxPageResults'
+          description: The maximum number of major or minor versions of a service template to list.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token to indicate the location of the next major or minor version in the array of major or minor versions of a service template, after the list of major or minor versions that was previously requested.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token to indicate the location of the next major or minor version in the array of major or minor versions of a service template, after the list of major or minor versions that was previously requested.'
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template.
     ListServiceTemplatesOutput:
       type: object
       required:
         - templates
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token to indicate the location of the next service template in the array of service templates, after the current requested list of service templates.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token to indicate the location of the next service template in the array of service templates, after the current requested list of service templates.'
         templates:
-          allOf:
-            - $ref: '#/components/schemas/ServiceTemplateSummaryList'
-            - description: An array of service templates with detail data.
+          $ref: '#/components/schemas/ServiceTemplateSummaryList'
+          description: An array of service templates with detail data.
     ListServiceTemplatesInput:
       type: object
       title: ListServiceTemplatesInput
       properties:
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxPageResults'
-            - description: The maximum number of service templates to list.
+          $ref: '#/components/schemas/MaxPageResults'
+          description: The maximum number of service templates to list.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token to indicate the location of the next service template in the array of service templates, after the list of service templates previously requested.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token to indicate the location of the next service template in the array of service templates, after the list of service templates previously requested.'
     ListServicesOutput:
       type: object
       required:
         - services
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token to indicate the location of the next service in the array of services, after the current requested list of services.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token to indicate the location of the next service in the array of services, after the current requested list of services.'
         services:
-          allOf:
-            - $ref: '#/components/schemas/ServiceSummaryList'
-            - description: An array of services with summaries of detail data.
+          $ref: '#/components/schemas/ServiceSummaryList'
+          description: An array of services with summaries of detail data.
     ListServicesInput:
       type: object
       title: ListServicesInput
       properties:
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxPageResults'
-            - description: The maximum number of services to list.
+          $ref: '#/components/schemas/MaxPageResults'
+          description: The maximum number of services to list.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token to indicate the location of the next service in the array of services, after the list of services that was previously requested.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token to indicate the location of the next service in the array of services, after the list of services that was previously requested.'
     ListTagsForResourceOutput:
       type: object
       required:
         - tags
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'A token to indicate the location of the next resource tag in the array of resource tags, after the current requested list of resource tags.'
+          $ref: '#/components/schemas/String'
+          description: 'A token to indicate the location of the next resource tag in the array of resource tags, after the current requested list of resource tags.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: An array of resource tags with detail data.
+          $ref: '#/components/schemas/TagList'
+          description: An array of resource tags with detail data.
     ListTagsForResourceInput:
       type: object
       required:
@@ -4531,26 +4384,22 @@ components:
       title: ListTagsForResourceInput
       properties:
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxPageResults'
-            - description: The maximum number of tags to list.
+          $ref: '#/components/schemas/MaxPageResults'
+          description: The maximum number of tags to list.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'A token to indicate the location of the next resource tag in the array of resource tags, after the list of resource tags that was previously requested.'
+          $ref: '#/components/schemas/String'
+          description: 'A token to indicate the location of the next resource tag in the array of resource tags, after the list of resource tags that was previously requested.'
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the resource for the listed tags.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the resource for the listed tags.
     RejectEnvironmentAccountConnectionOutput:
       type: object
       required:
         - environmentAccountConnection
       properties:
         environmentAccountConnection:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnection'
-            - description: The environment connection account detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/EnvironmentAccountConnection'
+          description: The environment connection account detail data that's returned by AWS Proton.
     RejectEnvironmentAccountConnectionInput:
       type: object
       required:
@@ -4558,9 +4407,8 @@ components:
       title: RejectEnvironmentAccountConnectionInput
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionId'
-            - description: The ID of the environment account connection to reject.
+          $ref: '#/components/schemas/EnvironmentAccountConnectionId'
+          description: The ID of the environment account connection to reject.
     TagResourceOutput:
       type: object
       properties: {}
@@ -4572,13 +4420,11 @@ components:
       title: TagResourceInput
       properties:
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the resource that the resource tag is applied to.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the resource that the resource tag is applied to.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: An array of resource tags to apply to a resource.
+          $ref: '#/components/schemas/TagList'
+          description: An array of resource tags to apply to a resource.
     UntagResourceOutput:
       type: object
       properties: {}
@@ -4590,39 +4436,34 @@ components:
       title: UntagResourceInput
       properties:
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the resource that the tag is to be removed from.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the resource that the tag is to be removed from.
         tagKeys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyList'
-            - description: An array of tag keys indicating the resource tags to be removed from the resource.
+          $ref: '#/components/schemas/TagKeyList'
+          description: An array of tag keys indicating the resource tags to be removed from the resource.
     UpdateAccountSettingsOutput:
       type: object
       required:
         - accountSettings
       properties:
         accountSettings:
-          allOf:
-            - $ref: '#/components/schemas/AccountSettings'
-            - description: The AWS Proton pipeline service role detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/AccountSettings'
+          description: The AWS Proton pipeline service role detail data that's returned by AWS Proton.
     UpdateAccountSettingsInput:
       type: object
       title: UpdateAccountSettingsInput
       properties:
         pipelineServiceRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the AWS Proton pipeline service role.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the AWS Proton pipeline service role.
     UpdateEnvironmentOutput:
       type: object
       required:
         - environment
       properties:
         environment:
-          allOf:
-            - $ref: '#/components/schemas/Environment'
-            - description: The environment detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/Environment'
+          description: The environment detail data that's returned by AWS Proton.
     UpdateEnvironmentInput:
       type: object
       required:
@@ -4631,46 +4472,37 @@ components:
       title: UpdateEnvironmentInput
       properties:
         deploymentType:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentUpdateType'
-            - description: '<p>There are four modes for updating an environment as described in the following. The <code>deploymentType</code> field defines the mode.</p> <dl> <dt/> <dd> <p> <code>NONE</code> </p> <p>In this mode, a deployment <i>doesn''t</i> occur. Only the requested metadata parameters are updated.</p> </dd> <dt/> <dd> <p> <code>CURRENT_VERSION</code> </p> <p>In this mode, the environment is deployed and updated with the new spec that you provide. Only requested parameters are updated. <i>Don’t</i> include minor or major version parameters when you use this <code>deployment-type</code>.</p> </dd> <dt/> <dd> <p> <code>MINOR_VERSION</code> </p> <p>In this mode, the environment is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.</p> </dd> <dt/> <dd> <p> <code>MAJOR_VERSION</code> </p> <p>In this mode, the environment is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can also specify a different major version that is higher than the major version in use and a minor version (optional).</p> </dd> </dl>'
+          $ref: '#/components/schemas/DeploymentUpdateType'
+          description: '<p>There are four modes for updating an environment as described in the following. The <code>deploymentType</code> field defines the mode.</p> <dl> <dt/> <dd> <p> <code>NONE</code> </p> <p>In this mode, a deployment <i>doesn''t</i> occur. Only the requested metadata parameters are updated.</p> </dd> <dt/> <dd> <p> <code>CURRENT_VERSION</code> </p> <p>In this mode, the environment is deployed and updated with the new spec that you provide. Only requested parameters are updated. <i>Don’t</i> include minor or major version parameters when you use this <code>deployment-type</code>.</p> </dd> <dt/> <dd> <p> <code>MINOR_VERSION</code> </p> <p>In this mode, the environment is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.</p> </dd> <dt/> <dd> <p> <code>MAJOR_VERSION</code> </p> <p>In this mode, the environment is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can also specify a different major version that is higher than the major version in use and a minor version (optional).</p> </dd> </dl>'
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the environment update.
+          $ref: '#/components/schemas/Description'
+          description: A description of the environment update.
         environmentAccountConnectionId:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionId'
-            - description: <p>The ID of the environment account connection.</p> <p>You can only update to a new environment account connection if it was created in the same environment account that the current environment account connection was created in and is associated with the current environment.</p>
+          $ref: '#/components/schemas/EnvironmentAccountConnectionId'
+          description: <p>The ID of the environment account connection.</p> <p>You can only update to a new environment account connection if it was created in the same environment account that the current environment account connection was created in and is associated with the current environment.</p>
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment to update.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment to update.
         protonServiceRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS Proton to make API calls to other services your behalf.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS Proton to make API calls to other services your behalf.
         spec:
-          allOf:
-            - $ref: '#/components/schemas/SpecContents'
-            - description: The formatted specification that defines the update.
+          $ref: '#/components/schemas/SpecContents'
+          description: The formatted specification that defines the update.
         templateMajorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the major version of the environment to update.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the major version of the environment to update.
         templateMinorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the minor version of the environment to update.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the minor version of the environment to update.
     UpdateEnvironmentAccountConnectionOutput:
       type: object
       required:
         - environmentAccountConnection
       properties:
         environmentAccountConnection:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnection'
-            - description: The environment account connection detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/EnvironmentAccountConnection'
+          description: The environment account connection detail data that's returned by AWS Proton.
     UpdateEnvironmentAccountConnectionInput:
       type: object
       required:
@@ -4679,22 +4511,19 @@ components:
       title: UpdateEnvironmentAccountConnectionInput
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionId'
-            - description: The ID of the environment account connection to update.
+          $ref: '#/components/schemas/EnvironmentAccountConnectionId'
+          description: The ID of the environment account connection to update.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the IAM service role that is associated with the environment account connection to update.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the IAM service role that is associated with the environment account connection to update.
     UpdateEnvironmentTemplateOutput:
       type: object
       required:
         - environmentTemplate
       properties:
         environmentTemplate:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentTemplate'
-            - description: The environment template detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/EnvironmentTemplate'
+          description: The environment template detail data that's returned by AWS Proton.
     UpdateEnvironmentTemplateInput:
       type: object
       required:
@@ -4702,26 +4531,22 @@ components:
       title: UpdateEnvironmentTemplateInput
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the environment template update.
+          $ref: '#/components/schemas/Description'
+          description: A description of the environment template update.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/DisplayName'
-            - description: The name of the environment template to update as displayed in the developer interface.
+          $ref: '#/components/schemas/DisplayName'
+          description: The name of the environment template to update as displayed in the developer interface.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment template to update.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment template to update.
     UpdateEnvironmentTemplateVersionOutput:
       type: object
       required:
         - environmentTemplateVersion
       properties:
         environmentTemplateVersion:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentTemplateVersion'
-            - description: The environment template version detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/EnvironmentTemplateVersion'
+          description: The environment template version detail data that's returned by AWS Proton.
     UpdateEnvironmentTemplateVersionInput:
       type: object
       required:
@@ -4731,34 +4556,28 @@ components:
       title: UpdateEnvironmentTemplateVersionInput
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of environment template version to update.
+          $ref: '#/components/schemas/Description'
+          description: A description of environment template version to update.
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: 'To update a major version of an environment template, include <code>majorVersion</code>.'
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: 'To update a major version of an environment template, include <code>majorVersion</code>.'
         minorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: 'To update a minor version of an environment template, include <code>minorVersion</code>.'
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: 'To update a minor version of an environment template, include <code>minorVersion</code>.'
         status:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionStatus'
-            - description: The status of the environment template minor version to update.
+          $ref: '#/components/schemas/TemplateVersionStatus'
+          description: The status of the environment template minor version to update.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment template.
     UpdateServiceOutput:
       type: object
       required:
         - service
       properties:
         service:
-          allOf:
-            - $ref: '#/components/schemas/Service'
-            - description: The service detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/Service'
+          description: The service detail data that's returned by AWS Proton.
     UpdateServiceInput:
       type: object
       required:
@@ -4766,26 +4585,22 @@ components:
       title: UpdateServiceInput
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The edited service description.
+          $ref: '#/components/schemas/Description'
+          description: The edited service description.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service to edit.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service to edit.
         spec:
-          allOf:
-            - $ref: '#/components/schemas/SpecContents'
-            - description: 'Lists the service instances to add and the existing service instances to remain. Omit the existing service instances to delete from the list. <i>Don''t</i> include edits to the existing service instances or pipeline. For more information, see <i>Edit a service</i> in the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-update.html">AWS Proton Administrator Guide</a> or the <a href="https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-update.html">AWS Proton User Guide</a>.'
+          $ref: '#/components/schemas/SpecContents'
+          description: 'Lists the service instances to add and the existing service instances to remain. Omit the existing service instances to delete from the list. <i>Don''t</i> include edits to the existing service instances or pipeline. For more information, see <i>Edit a service</i> in the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-update.html">AWS Proton Administrator Guide</a> or the <a href="https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-update.html">AWS Proton User Guide</a>.'
     UpdateServiceInstanceOutput:
       type: object
       required:
         - serviceInstance
       properties:
         serviceInstance:
-          allOf:
-            - $ref: '#/components/schemas/ServiceInstance'
-            - description: The service instance summary data returned by AWS Proton.
+          $ref: '#/components/schemas/ServiceInstance'
+          description: The service instance summary data returned by AWS Proton.
     UpdateServiceInstanceInput:
       type: object
       required:
@@ -4795,38 +4610,31 @@ components:
       title: UpdateServiceInstanceInput
       properties:
         deploymentType:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentUpdateType'
-            - description: '<p>The deployment type.</p> <p>There are four modes for updating a service instance as described in the following. The <code>deploymentType</code> field defines the mode.</p> <dl> <dt/> <dd> <p> <code>NONE</code> </p> <p>In this mode, a deployment <i>doesn''t</i> occur. Only the requested metadata parameters are updated.</p> </dd> <dt/> <dd> <p> <code>CURRENT_VERSION</code> </p> <p>In this mode, the service instance is deployed and updated with the new spec that you provide. Only requested parameters are updated. <i>Don’t</i> include minor or major version parameters when you use this <code>deployment-type</code>.</p> </dd> <dt/> <dd> <p> <code>MINOR_VERSION</code> </p> <p>In this mode, the service instance is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.</p> </dd> <dt/> <dd> <p> <code>MAJOR_VERSION</code> </p> <p>In this mode, the service instance is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can also specify a different major version that is higher than the major version in use and a minor version (optional).</p> </dd> </dl>'
+          $ref: '#/components/schemas/DeploymentUpdateType'
+          description: '<p>The deployment type.</p> <p>There are four modes for updating a service instance as described in the following. The <code>deploymentType</code> field defines the mode.</p> <dl> <dt/> <dd> <p> <code>NONE</code> </p> <p>In this mode, a deployment <i>doesn''t</i> occur. Only the requested metadata parameters are updated.</p> </dd> <dt/> <dd> <p> <code>CURRENT_VERSION</code> </p> <p>In this mode, the service instance is deployed and updated with the new spec that you provide. Only requested parameters are updated. <i>Don’t</i> include minor or major version parameters when you use this <code>deployment-type</code>.</p> </dd> <dt/> <dd> <p> <code>MINOR_VERSION</code> </p> <p>In this mode, the service instance is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.</p> </dd> <dt/> <dd> <p> <code>MAJOR_VERSION</code> </p> <p>In this mode, the service instance is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can also specify a different major version that is higher than the major version in use and a minor version (optional).</p> </dd> </dl>'
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service instance to update.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service instance to update.
         serviceName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service that the service instance belongs to.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service that the service instance belongs to.
         spec:
-          allOf:
-            - $ref: '#/components/schemas/SpecContents'
-            - description: The formatted specification that defines the service instance update.
+          $ref: '#/components/schemas/SpecContents'
+          description: The formatted specification that defines the service instance update.
         templateMajorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The major version of the service template to update.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The major version of the service template to update.
         templateMinorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The minor version of the service template to update.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The minor version of the service template to update.
     UpdateServicePipelineOutput:
       type: object
       required:
         - pipeline
       properties:
         pipeline:
-          allOf:
-            - $ref: '#/components/schemas/ServicePipeline'
-            - description: The pipeline details returned by AWS Proton.
+          $ref: '#/components/schemas/ServicePipeline'
+          description: The pipeline details returned by AWS Proton.
     UpdateServicePipelineInput:
       type: object
       required:
@@ -4836,34 +4644,28 @@ components:
       title: UpdateServicePipelineInput
       properties:
         deploymentType:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentUpdateType'
-            - description: '<p>The deployment type.</p> <p>There are four modes for updating a service pipeline as described in the following. The <code>deploymentType</code> field defines the mode.</p> <dl> <dt/> <dd> <p> <code>NONE</code> </p> <p>In this mode, a deployment <i>doesn''t</i> occur. Only the requested metadata parameters are updated.</p> </dd> <dt/> <dd> <p> <code>CURRENT_VERSION</code> </p> <p>In this mode, the service pipeline is deployed and updated with the new spec that you provide. Only requested parameters are updated. <i>Don’t</i> include minor or major version parameters when you use this <code>deployment-type</code>.</p> </dd> <dt/> <dd> <p> <code>MINOR_VERSION</code> </p> <p>In this mode, the service pipeline is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.</p> </dd> <dt/> <dd> <p> <code>MAJOR_VERSION</code> </p> <p>In this mode, the service pipeline is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can also specify a different major version that is higher than the major version in use and a minor version (optional).</p> </dd> </dl>'
+          $ref: '#/components/schemas/DeploymentUpdateType'
+          description: '<p>The deployment type.</p> <p>There are four modes for updating a service pipeline as described in the following. The <code>deploymentType</code> field defines the mode.</p> <dl> <dt/> <dd> <p> <code>NONE</code> </p> <p>In this mode, a deployment <i>doesn''t</i> occur. Only the requested metadata parameters are updated.</p> </dd> <dt/> <dd> <p> <code>CURRENT_VERSION</code> </p> <p>In this mode, the service pipeline is deployed and updated with the new spec that you provide. Only requested parameters are updated. <i>Don’t</i> include minor or major version parameters when you use this <code>deployment-type</code>.</p> </dd> <dt/> <dd> <p> <code>MINOR_VERSION</code> </p> <p>In this mode, the service pipeline is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.</p> </dd> <dt/> <dd> <p> <code>MAJOR_VERSION</code> </p> <p>In this mode, the service pipeline is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can also specify a different major version that is higher than the major version in use and a minor version (optional).</p> </dd> </dl>'
         serviceName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service to that the pipeline is associated with.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service to that the pipeline is associated with.
         spec:
-          allOf:
-            - $ref: '#/components/schemas/SpecContents'
-            - description: The spec for the service pipeline to update.
+          $ref: '#/components/schemas/SpecContents'
+          description: The spec for the service pipeline to update.
         templateMajorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The major version of the service template that was used to create the service that the pipeline is associated with.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The major version of the service template that was used to create the service that the pipeline is associated with.
         templateMinorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The minor version of the service template that was used to create the service that the pipeline is associated with.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The minor version of the service template that was used to create the service that the pipeline is associated with.
     UpdateServiceTemplateOutput:
       type: object
       required:
         - serviceTemplate
       properties:
         serviceTemplate:
-          allOf:
-            - $ref: '#/components/schemas/ServiceTemplate'
-            - description: The service template detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/ServiceTemplate'
+          description: The service template detail data that's returned by AWS Proton.
     UpdateServiceTemplateInput:
       type: object
       required:
@@ -4871,26 +4673,22 @@ components:
       title: UpdateServiceTemplateInput
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the service template update.
+          $ref: '#/components/schemas/Description'
+          description: A description of the service template update.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/DisplayName'
-            - description: The name of the service template to update as displayed in the developer interface.
+          $ref: '#/components/schemas/DisplayName'
+          description: The name of the service template to update as displayed in the developer interface.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template to update.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template to update.
     UpdateServiceTemplateVersionOutput:
       type: object
       required:
         - serviceTemplateVersion
       properties:
         serviceTemplateVersion:
-          allOf:
-            - $ref: '#/components/schemas/ServiceTemplateVersion'
-            - description: The service template version detail data that's returned by AWS Proton.
+          $ref: '#/components/schemas/ServiceTemplateVersion'
+          description: The service template version detail data that's returned by AWS Proton.
     UpdateServiceTemplateVersionInput:
       type: object
       required:
@@ -4900,29 +4698,23 @@ components:
       title: UpdateServiceTemplateVersionInput
       properties:
         compatibleEnvironmentTemplates:
-          allOf:
-            - $ref: '#/components/schemas/CompatibleEnvironmentTemplateInputList'
-            - description: An array of compatible environment names for a service template major or minor version to update.
+          $ref: '#/components/schemas/CompatibleEnvironmentTemplateInputList'
+          description: An array of compatible environment names for a service template major or minor version to update.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of a service template version to update.
+          $ref: '#/components/schemas/Description'
+          description: A description of a service template version to update.
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: 'To update a major version of a service template, include <code>majorVersion</code>.'
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: 'To update a major version of a service template, include <code>majorVersion</code>.'
         minorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: 'To update a minor version of a service template, include <code>minorVersion</code>.'
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: 'To update a minor version of a service template, include <code>minorVersion</code>.'
         status:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionStatus'
-            - description: The status of the service template minor version to update.
+          $ref: '#/components/schemas/TemplateVersionStatus'
+          description: The status of the service template minor version to update.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template.
     EnvironmentAccountConnectionId:
       type: string
       pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
@@ -4940,41 +4732,32 @@ components:
         - status
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionArn'
-            - description: The Amazon Resource Name (ARN) of the environment account connection.
+          $ref: '#/components/schemas/EnvironmentAccountConnectionArn'
+          description: The Amazon Resource Name (ARN) of the environment account connection.
         environmentAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AwsAccountId'
-            - description: The environment account that's connected to the environment account connection.
+          $ref: '#/components/schemas/AwsAccountId'
+          description: The environment account that's connected to the environment account connection.
         environmentName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment that's associated with the environment account connection.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment that's associated with the environment account connection.
         id:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionId'
-            - description: The ID of the environment account connection.
+          $ref: '#/components/schemas/EnvironmentAccountConnectionId'
+          description: The ID of the environment account connection.
         lastModifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the environment account connection was last modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the environment account connection was last modified.
         managementAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AwsAccountId'
-            - description: The ID of the management account that's connected to the environment account connection.
+          $ref: '#/components/schemas/AwsAccountId'
+          description: The ID of the management account that's connected to the environment account connection.
         requestedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the environment account connection request was made.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the environment account connection request was made.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The IAM service role that's associated with the environment account connection.
+          $ref: '#/components/schemas/Arn'
+          description: The IAM service role that's associated with the environment account connection.
         status:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionStatus'
-            - description: The status of the environment account connection.
+          $ref: '#/components/schemas/EnvironmentAccountConnectionStatus'
+          description: The status of the environment account connection.
       description: The environment account connection detail data.
     Arn:
       type: string
@@ -4984,9 +4767,8 @@ components:
       type: object
       properties:
         pipelineServiceRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the AWS Proton pipeline service role.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the AWS Proton pipeline service role.
       description: The AWS Proton pipeline service role data.
     AwsAccountId:
       type: string
@@ -5010,69 +4792,53 @@ components:
         - templateName
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentArn'
-            - description: The Amazon Resource Name (ARN) of the environment.
+          $ref: '#/components/schemas/EnvironmentArn'
+          description: The Amazon Resource Name (ARN) of the environment.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the environment was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the environment was created.
         deploymentStatus:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentStatus'
-            - description: The environment deployment status.
+          $ref: '#/components/schemas/DeploymentStatus'
+          description: The environment deployment status.
         deploymentStatusMessage:
-          allOf:
-            - $ref: '#/components/schemas/StatusMessage'
-            - description: An environment deployment status message.
+          $ref: '#/components/schemas/StatusMessage'
+          description: An environment deployment status message.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the environment.
+          $ref: '#/components/schemas/Description'
+          description: The description of the environment.
         environmentAccountConnectionId:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionId'
-            - description: The ID of the environment account connection that's used to provision infrastructure resources in an environment account.
+          $ref: '#/components/schemas/EnvironmentAccountConnectionId'
+          description: The ID of the environment account connection that's used to provision infrastructure resources in an environment account.
         environmentAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AwsAccountId'
-            - description: The ID of the environment account that the environment infrastructure resources are provisioned in.
+          $ref: '#/components/schemas/AwsAccountId'
+          description: The ID of the environment account that the environment infrastructure resources are provisioned in.
         lastDeploymentAttemptedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when a deployment of the environment was last attempted.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when a deployment of the environment was last attempted.
         lastDeploymentSucceededAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the environment was last deployed successfully.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the environment was last deployed successfully.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment.
         protonServiceRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS Proton to make calls to other services on your behalf.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS Proton to make calls to other services on your behalf.
         provisioning:
-          allOf:
-            - $ref: '#/components/schemas/Provisioning'
-            - description: 'When included, indicates that the environment template is for customer provisioned and managed infrastructure.'
+          $ref: '#/components/schemas/Provisioning'
+          description: 'When included, indicates that the environment template is for customer provisioned and managed infrastructure.'
         spec:
-          allOf:
-            - $ref: '#/components/schemas/SpecContents'
-            - description: The environment spec.
+          $ref: '#/components/schemas/SpecContents'
+          description: The environment spec.
         templateMajorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the major version of the environment template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the major version of the environment template.
         templateMinorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the minor version of the environment template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the minor version of the environment template.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The Amazon Resource Name (ARN) of the environment template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The Amazon Resource Name (ARN) of the environment template.
       description: The environment detail data. An AWS Proton environment is a set resources shared across an AWS Proton service.
     ServiceInstance:
       type: object
@@ -5090,57 +4856,44 @@ components:
         - templateName
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ServiceInstanceArn'
-            - description: The Amazon Resource Name (ARN) of the service instance.
+          $ref: '#/components/schemas/ServiceInstanceArn'
+          description: The Amazon Resource Name (ARN) of the service instance.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the service instance was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the service instance was created.
         deploymentStatus:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentStatus'
-            - description: The service instance deployment status.
+          $ref: '#/components/schemas/DeploymentStatus'
+          description: The service instance deployment status.
         deploymentStatusMessage:
-          allOf:
-            - $ref: '#/components/schemas/StatusMessage'
-            - description: A service instance deployment status message.
+          $ref: '#/components/schemas/StatusMessage'
+          description: A service instance deployment status message.
         environmentName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment that the service instance was deployed into.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment that the service instance was deployed into.
         lastDeploymentAttemptedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when a deployment of the service instance was last attempted.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when a deployment of the service instance was last attempted.
         lastDeploymentSucceededAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the service instance was last deployed successfully.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the service instance was last deployed successfully.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service instance.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service instance.
         serviceName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service that the service instance belongs to.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service that the service instance belongs to.
         spec:
-          allOf:
-            - $ref: '#/components/schemas/SpecContents'
-            - description: The service spec that was used to create the service instance.
+          $ref: '#/components/schemas/SpecContents'
+          description: The service spec that was used to create the service instance.
         templateMajorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the major version of the service template that was used to create the service instance.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the major version of the service template that was used to create the service instance.
         templateMinorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the minor version of the service template that was used to create the service instance.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the minor version of the service template that was used to create the service instance.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template that was used to create the service instance.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template that was used to create the service instance.
       description: The service instance detail data.
     ServicePipeline:
       type: object
@@ -5155,45 +4908,35 @@ components:
         - templateName
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the service pipeline.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the service pipeline.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the service pipeline was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the service pipeline was created.
         deploymentStatus:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentStatus'
-            - description: The deployment status of the service pipeline.
+          $ref: '#/components/schemas/DeploymentStatus'
+          description: The deployment status of the service pipeline.
         deploymentStatusMessage:
-          allOf:
-            - $ref: '#/components/schemas/StatusMessage'
-            - description: A service pipeline deployment status message.
+          $ref: '#/components/schemas/StatusMessage'
+          description: A service pipeline deployment status message.
         lastDeploymentAttemptedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when a deployment of the service pipeline was last attempted.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when a deployment of the service pipeline was last attempted.
         lastDeploymentSucceededAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the service pipeline was last deployed successfully.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the service pipeline was last deployed successfully.
         spec:
-          allOf:
-            - $ref: '#/components/schemas/SpecContents'
-            - description: The service spec that was used to create the service pipeline.
+          $ref: '#/components/schemas/SpecContents'
+          description: The service spec that was used to create the service pipeline.
         templateMajorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the major version of the service template that was used to create the service pipeline.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the major version of the service template that was used to create the service pipeline.
         templateMinorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the minor version of the service template that was used to create the service pipeline.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the minor version of the service template that was used to create the service pipeline.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template that was used to create the service pipeline.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template that was used to create the service pipeline.
       description: The service pipeline detail data.
     ClientToken:
       type: string
@@ -5212,13 +4955,11 @@ components:
         - templateName
       properties:
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The major version of the compatible environment template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The major version of the compatible environment template.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The compatible environment template name.
+          $ref: '#/components/schemas/ResourceName'
+          description: The compatible environment template name.
       description: Compatible environment template data.
     CompatibleEnvironmentTemplateInput:
       type: object
@@ -5227,13 +4968,11 @@ components:
         - templateName
       properties:
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The major version of the compatible environment template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The major version of the compatible environment template.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The compatible environment template name.
+          $ref: '#/components/schemas/ResourceName'
+          description: The compatible environment template name.
       description: Compatible environment template data.
     CompatibleEnvironmentTemplateInputList:
       type: array
@@ -5279,49 +5018,39 @@ components:
         - name
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentTemplateArn'
-            - description: The Amazon Resource Name (ARN) of the environment template.
+          $ref: '#/components/schemas/EnvironmentTemplateArn'
+          description: The Amazon Resource Name (ARN) of the environment template.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the environment template was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the environment template was created.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the environment template.
+          $ref: '#/components/schemas/Description'
+          description: A description of the environment template.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/DisplayName'
-            - description: The name of the environment template as displayed in the developer interface.
+          $ref: '#/components/schemas/DisplayName'
+          description: The name of the environment template as displayed in the developer interface.
         encryptionKey:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The customer provided encryption key for the environment template.
+          $ref: '#/components/schemas/Arn'
+          description: The customer provided encryption key for the environment template.
         lastModifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the environment template was last modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the environment template was last modified.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment template.
         provisioning:
-          allOf:
-            - $ref: '#/components/schemas/Provisioning'
-            - description: 'When included, indicates that the environment template is for customer provisioned and managed infrastructure.'
+          $ref: '#/components/schemas/Provisioning'
+          description: 'When included, indicates that the environment template is for customer provisioned and managed infrastructure.'
         recommendedVersion:
-          allOf:
-            - $ref: '#/components/schemas/FullTemplateVersionNumber'
-            - description: The ID of the recommended version of the environment template.
+          $ref: '#/components/schemas/FullTemplateVersionNumber'
+          description: The ID of the recommended version of the environment template.
       description: The environment template data.
     TemplateVersionSourceInput:
       type: object
       properties:
         s3:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectSource'
-            - description: An S3 source object that includes the template bundle S3 path and name for a template minor version.
+          $ref: '#/components/schemas/S3ObjectSource'
+          description: An S3 source object that includes the template bundle S3 path and name for a template minor version.
       description: Template version source data.
     EnvironmentTemplateVersion:
       type: object
@@ -5335,49 +5064,38 @@ components:
         - templateName
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentTemplateVersionArn'
-            - description: The Amazon Resource Name (ARN) of the version of an environment template.
+          $ref: '#/components/schemas/EnvironmentTemplateVersionArn'
+          description: The Amazon Resource Name (ARN) of the version of an environment template.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the version of an environment template was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the version of an environment template was created.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the minor version of an environment template.
+          $ref: '#/components/schemas/Description'
+          description: A description of the minor version of an environment template.
         lastModifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the version of an environment template was last modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the version of an environment template was last modified.
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the latest major version that's associated with the version of an environment template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the latest major version that's associated with the version of an environment template.
         minorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the minor version of an environment template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the minor version of an environment template.
         recommendedMinorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the recommended minor version of the environment template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the recommended minor version of the environment template.
         schema:
-          allOf:
-            - $ref: '#/components/schemas/TemplateSchema'
-            - description: The schema of the version of an environment template.
+          $ref: '#/components/schemas/TemplateSchema'
+          description: The schema of the version of an environment template.
         status:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionStatus'
-            - description: The status of the version of an environment template.
+          $ref: '#/components/schemas/TemplateVersionStatus'
+          description: The status of the version of an environment template.
         statusMessage:
-          allOf:
-            - $ref: '#/components/schemas/StatusMessage'
-            - description: The status message of the version of an environment template.
+          $ref: '#/components/schemas/StatusMessage'
+          description: The status message of the version of an environment template.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the version of an environment template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the version of an environment template.
       description: The environment template version data.
     GitBranchName:
       type: string
@@ -5399,57 +5117,44 @@ components:
         - templateName
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ServiceArn'
-            - description: The Amazon Resource Name (ARN) of the service.
+          $ref: '#/components/schemas/ServiceArn'
+          description: The Amazon Resource Name (ARN) of the service.
         branchName:
-          allOf:
-            - $ref: '#/components/schemas/GitBranchName'
-            - description: The name of the code repository branch that holds the code that's deployed in AWS Proton.
+          $ref: '#/components/schemas/GitBranchName'
+          description: The name of the code repository branch that holds the code that's deployed in AWS Proton.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the service was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the service was created.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of a service.
+          $ref: '#/components/schemas/Description'
+          description: A description of a service.
         lastModifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the service was last modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the service was last modified.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service.
         pipeline:
-          allOf:
-            - $ref: '#/components/schemas/ServicePipeline'
-            - description: The service pipeline detail data.
+          $ref: '#/components/schemas/ServicePipeline'
+          description: The service pipeline detail data.
         repositoryConnectionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'The Amazon Resource Name (ARN) of the repository connection. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#setting-up-vcontrol">Set up a repository connection</a> in the <i>AWS Proton Administrator Guide</i> and <a href="https://docs.aws.amazon.com/proton/latest/userguide/proton-setup.html#setup-repo-connection">Setting up with AWS Proton</a> in the <i>AWS Proton User Guide</i>.'
+          $ref: '#/components/schemas/Arn'
+          description: 'The Amazon Resource Name (ARN) of the repository connection. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#setting-up-vcontrol">Set up a repository connection</a> in the <i>AWS Proton Administrator Guide</i> and <a href="https://docs.aws.amazon.com/proton/latest/userguide/proton-setup.html#setup-repo-connection">Setting up with AWS Proton</a> in the <i>AWS Proton User Guide</i>.'
         repositoryId:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryId'
-            - description: The ID of the code repository.
+          $ref: '#/components/schemas/RepositoryId'
+          description: The ID of the code repository.
         spec:
-          allOf:
-            - $ref: '#/components/schemas/SpecContents'
-            - description: The formatted specification that defines the service.
+          $ref: '#/components/schemas/SpecContents'
+          description: The formatted specification that defines the service.
         status:
-          allOf:
-            - $ref: '#/components/schemas/ServiceStatus'
-            - description: The status of the service.
+          $ref: '#/components/schemas/ServiceStatus'
+          description: The status of the service.
         statusMessage:
-          allOf:
-            - $ref: '#/components/schemas/StatusMessage'
-            - description: A service status message.
+          $ref: '#/components/schemas/StatusMessage'
+          description: A service status message.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template.
       description: The service detail data.
     ServiceTemplate:
       type: object
@@ -5460,41 +5165,32 @@ components:
         - name
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ServiceTemplateArn'
-            - description: The Amazon Resource Name (ARN) of the service template.
+          $ref: '#/components/schemas/ServiceTemplateArn'
+          description: The Amazon Resource Name (ARN) of the service template.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the service template was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the service template was created.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the service template.
+          $ref: '#/components/schemas/Description'
+          description: A description of the service template.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/DisplayName'
-            - description: The service template name as displayed in the developer interface.
+          $ref: '#/components/schemas/DisplayName'
+          description: The service template name as displayed in the developer interface.
         encryptionKey:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The customer provided service template encryption key that's used to encrypt data.
+          $ref: '#/components/schemas/Arn'
+          description: The customer provided service template encryption key that's used to encrypt data.
         lastModifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the service template was last modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the service template was last modified.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template.
         pipelineProvisioning:
-          allOf:
-            - $ref: '#/components/schemas/Provisioning'
-            - description: 'If <code>pipelineProvisioning</code> is <code>true</code>, a service pipeline is included in the service template. Otherwise, a service pipeline <i>isn''t</i> included in the service template.'
+          $ref: '#/components/schemas/Provisioning'
+          description: 'If <code>pipelineProvisioning</code> is <code>true</code>, a service pipeline is included in the service template. Otherwise, a service pipeline <i>isn''t</i> included in the service template.'
         recommendedVersion:
-          allOf:
-            - $ref: '#/components/schemas/FullTemplateVersionNumber'
-            - description: The ID of the recommended version of the service template.
+          $ref: '#/components/schemas/FullTemplateVersionNumber'
+          description: The ID of the recommended version of the service template.
       description: The service template detail data.
     ServiceTemplateVersion:
       type: object
@@ -5509,53 +5205,41 @@ components:
         - templateName
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ServiceTemplateVersionArn'
-            - description: The Amazon Resource Name (ARN) of the version of a service template.
+          $ref: '#/components/schemas/ServiceTemplateVersionArn'
+          description: The Amazon Resource Name (ARN) of the version of a service template.
         compatibleEnvironmentTemplates:
-          allOf:
-            - $ref: '#/components/schemas/CompatibleEnvironmentTemplateList'
-            - description: An array of compatible environment template names for the major version of a service template.
+          $ref: '#/components/schemas/CompatibleEnvironmentTemplateList'
+          description: An array of compatible environment template names for the major version of a service template.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the version of a service template was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the version of a service template was created.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the version of a service template.
+          $ref: '#/components/schemas/Description'
+          description: A description of the version of a service template.
         lastModifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the version of a service template was last modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the version of a service template was last modified.
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the latest major version that's associated with the version of a service template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the latest major version that's associated with the version of a service template.
         minorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the minor version of a service template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the minor version of a service template.
         recommendedMinorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the recommended minor version of the service template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the recommended minor version of the service template.
         schema:
-          allOf:
-            - $ref: '#/components/schemas/TemplateSchema'
-            - description: The schema of the version of a service template.
+          $ref: '#/components/schemas/TemplateSchema'
+          description: The schema of the version of a service template.
         status:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionStatus'
-            - description: The service template version status.
+          $ref: '#/components/schemas/TemplateVersionStatus'
+          description: The service template version status.
         statusMessage:
-          allOf:
-            - $ref: '#/components/schemas/StatusMessage'
-            - description: A service template version status message.
+          $ref: '#/components/schemas/StatusMessage'
+          description: A service template version status message.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the version of a service template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the version of a service template.
       description: The version of a service template detail data.
     DeploymentStatus:
       type: string
@@ -5614,41 +5298,32 @@ components:
         - status
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionArn'
-            - description: The Amazon Resource Name (ARN) of the environment account connection.
+          $ref: '#/components/schemas/EnvironmentAccountConnectionArn'
+          description: The Amazon Resource Name (ARN) of the environment account connection.
         environmentAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AwsAccountId'
-            - description: The ID of the environment account that's connected to the environment account connection.
+          $ref: '#/components/schemas/AwsAccountId'
+          description: The ID of the environment account that's connected to the environment account connection.
         environmentName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment that's associated with the environment account connection.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment that's associated with the environment account connection.
         id:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionId'
-            - description: The ID of the environment account connection.
+          $ref: '#/components/schemas/EnvironmentAccountConnectionId'
+          description: The ID of the environment account connection.
         lastModifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the environment account connection was last modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the environment account connection was last modified.
         managementAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AwsAccountId'
-            - description: The ID of the management account that's connected to the environment account connection.
+          $ref: '#/components/schemas/AwsAccountId'
+          description: The ID of the management account that's connected to the environment account connection.
         requestedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the environment account connection request was made.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the environment account connection request was made.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The IAM service role that's associated with the environment account connection.
+          $ref: '#/components/schemas/Arn'
+          description: The IAM service role that's associated with the environment account connection.
         status:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionStatus'
-            - description: The status of the environment account connection.
+          $ref: '#/components/schemas/EnvironmentAccountConnectionStatus'
+          description: The status of the environment account connection.
       description: A summary of the environment account connection detail data.
     EnvironmentAccountConnectionSummaryList:
       type: array
@@ -5668,65 +5343,50 @@ components:
         - templateName
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentArn'
-            - description: The Amazon Resource Name (ARN) of the environment.
+          $ref: '#/components/schemas/EnvironmentArn'
+          description: The Amazon Resource Name (ARN) of the environment.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the environment was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the environment was created.
         deploymentStatus:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentStatus'
-            - description: The environment deployment status.
+          $ref: '#/components/schemas/DeploymentStatus'
+          description: The environment deployment status.
         deploymentStatusMessage:
-          allOf:
-            - $ref: '#/components/schemas/StatusMessage'
-            - description: An environment deployment status message.
+          $ref: '#/components/schemas/StatusMessage'
+          description: An environment deployment status message.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the environment.
+          $ref: '#/components/schemas/Description'
+          description: The description of the environment.
         environmentAccountConnectionId:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentAccountConnectionId'
-            - description: The ID of the environment account connection that the environment is associated with.
+          $ref: '#/components/schemas/EnvironmentAccountConnectionId'
+          description: The ID of the environment account connection that the environment is associated with.
         environmentAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AwsAccountId'
-            - description: The ID of the environment account that the environment infrastructure resources are provisioned in.
+          $ref: '#/components/schemas/AwsAccountId'
+          description: The ID of the environment account that the environment infrastructure resources are provisioned in.
         lastDeploymentAttemptedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when a deployment of the environment was last attempted.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when a deployment of the environment was last attempted.
         lastDeploymentSucceededAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the environment was last deployed successfully.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the environment was last deployed successfully.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment.
         protonServiceRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS Proton to make calls to other services on your behalf.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS Proton to make calls to other services on your behalf.
         provisioning:
-          allOf:
-            - $ref: '#/components/schemas/Provisioning'
-            - description: 'When included, indicates that the environment template is for customer provisioned and managed infrastructure.'
+          $ref: '#/components/schemas/Provisioning'
+          description: 'When included, indicates that the environment template is for customer provisioned and managed infrastructure.'
         templateMajorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the major version of the environment template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the major version of the environment template.
         templateMinorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the minor version of the environment template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the minor version of the environment template.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment template.
       description: A summary of the environment detail data.
     EnvironmentSummaryList:
       type: array
@@ -5746,13 +5406,11 @@ components:
         - templateName
       properties:
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: Include <code>majorVersion</code> to filter search for a major version.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: Include <code>majorVersion</code> to filter search for a major version.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: Include <code>templateName</code> to filter search for a template name.
+          $ref: '#/components/schemas/ResourceName'
+          description: Include <code>templateName</code> to filter search for a template name.
       description: A search filter for environment templates.
     EnvironmentTemplateFilterList:
       type: array
@@ -5767,37 +5425,29 @@ components:
         - name
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentTemplateArn'
-            - description: The Amazon Resource Name (ARN) of the environment template.
+          $ref: '#/components/schemas/EnvironmentTemplateArn'
+          description: The Amazon Resource Name (ARN) of the environment template.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the environment template was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the environment template was created.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the environment template.
+          $ref: '#/components/schemas/Description'
+          description: A description of the environment template.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/DisplayName'
-            - description: The name of the environment template as displayed in the developer interface.
+          $ref: '#/components/schemas/DisplayName'
+          description: The name of the environment template as displayed in the developer interface.
         lastModifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the environment template was last modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the environment template was last modified.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment template.
         provisioning:
-          allOf:
-            - $ref: '#/components/schemas/Provisioning'
-            - description: 'When included, indicates that the environment template is for customer provisioned and managed infrastructure.'
+          $ref: '#/components/schemas/Provisioning'
+          description: 'When included, indicates that the environment template is for customer provisioned and managed infrastructure.'
         recommendedVersion:
-          allOf:
-            - $ref: '#/components/schemas/FullTemplateVersionNumber'
-            - description: The ID of the recommended version of the environment template.
+          $ref: '#/components/schemas/FullTemplateVersionNumber'
+          description: The ID of the recommended version of the environment template.
       description: The environment template data.
     EnvironmentTemplateSummaryList:
       type: array
@@ -5829,45 +5479,35 @@ components:
         - templateName
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentTemplateVersionArn'
-            - description: The Amazon Resource Name (ARN) of the version of an environment template.
+          $ref: '#/components/schemas/EnvironmentTemplateVersionArn'
+          description: The Amazon Resource Name (ARN) of the version of an environment template.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the version of an environment template was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the version of an environment template was created.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the version of an environment template.
+          $ref: '#/components/schemas/Description'
+          description: A description of the version of an environment template.
         lastModifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the version of an environment template was last modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the version of an environment template was last modified.
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the latest major version that's associated with the version of an environment template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the latest major version that's associated with the version of an environment template.
         minorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the version of an environment template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the version of an environment template.
         recommendedMinorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the recommended minor version of the environment template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the recommended minor version of the environment template.
         status:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionStatus'
-            - description: The status of the version of an environment template.
+          $ref: '#/components/schemas/TemplateVersionStatus'
+          description: The status of the version of an environment template.
         statusMessage:
-          allOf:
-            - $ref: '#/components/schemas/StatusMessage'
-            - description: The status message of the version of an environment template.
+          $ref: '#/components/schemas/StatusMessage'
+          description: The status message of the version of an environment template.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the version of an environment template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the version of an environment template.
       description: A summary of the version of an environment template detail data.
     EnvironmentTemplateVersionSummaryList:
       type: array
@@ -5914,13 +5554,11 @@ components:
         - key
       properties:
         bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3Bucket'
-            - description: The name of the S3 bucket that contains a template bundle.
+          $ref: '#/components/schemas/S3Bucket'
+          description: The name of the S3 bucket that contains a template bundle.
         key:
-          allOf:
-            - $ref: '#/components/schemas/S3Key'
-            - description: The path to the S3 bucket that contains a template bundle.
+          $ref: '#/components/schemas/S3Key'
+          description: The path to the S3 bucket that contains a template bundle.
       description: Template bundle S3 bucket data.
     ServiceArn:
       type: string
@@ -5959,53 +5597,41 @@ components:
         - templateName
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ServiceInstanceArn'
-            - description: The Amazon Resource Name (ARN) of the service instance.
+          $ref: '#/components/schemas/ServiceInstanceArn'
+          description: The Amazon Resource Name (ARN) of the service instance.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the service instance was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the service instance was created.
         deploymentStatus:
-          allOf:
-            - $ref: '#/components/schemas/DeploymentStatus'
-            - description: The service instance deployment status.
+          $ref: '#/components/schemas/DeploymentStatus'
+          description: The service instance deployment status.
         deploymentStatusMessage:
-          allOf:
-            - $ref: '#/components/schemas/StatusMessage'
-            - description: A service instance deployment status message.
+          $ref: '#/components/schemas/StatusMessage'
+          description: A service instance deployment status message.
         environmentName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the environment that the service instance was deployed into.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the environment that the service instance was deployed into.
         lastDeploymentAttemptedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when a deployment of the service was last attempted.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when a deployment of the service was last attempted.
         lastDeploymentSucceededAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the service was last deployed successfully.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the service was last deployed successfully.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service instance.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service instance.
         serviceName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service that the service instance belongs to.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service that the service instance belongs to.
         templateMajorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the major version of a service template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the major version of a service template.
         templateMinorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the minor version of a service template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the minor version of a service template.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template.
       description: A summary of the service instance detail data.
     ServiceSummary:
       type: object
@@ -6018,37 +5644,29 @@ components:
         - templateName
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ServiceArn'
-            - description: The Amazon Resource Name (ARN) of the service.
+          $ref: '#/components/schemas/ServiceArn'
+          description: The Amazon Resource Name (ARN) of the service.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the service was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the service was created.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the service.
+          $ref: '#/components/schemas/Description'
+          description: A description of the service.
         lastModifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the service was last modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the service was last modified.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service.
         status:
-          allOf:
-            - $ref: '#/components/schemas/ServiceStatus'
-            - description: The status of the service.
+          $ref: '#/components/schemas/ServiceStatus'
+          description: The status of the service.
         statusMessage:
-          allOf:
-            - $ref: '#/components/schemas/StatusMessage'
-            - description: A service status message.
+          $ref: '#/components/schemas/StatusMessage'
+          description: A service status message.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template.
       description: A summary of the service detail data.
     ServiceTemplateArn:
       type: string
@@ -6061,37 +5679,29 @@ components:
         - name
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ServiceTemplateArn'
-            - description: The Amazon Resource Name (ARN) of the service template.
+          $ref: '#/components/schemas/ServiceTemplateArn'
+          description: The Amazon Resource Name (ARN) of the service template.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the service template was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the service template was created.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the service template.
+          $ref: '#/components/schemas/Description'
+          description: A description of the service template.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/DisplayName'
-            - description: The service template name as displayed in the developer interface.
+          $ref: '#/components/schemas/DisplayName'
+          description: The service template name as displayed in the developer interface.
         lastModifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the service template was last modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the service template was last modified.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template.
         pipelineProvisioning:
-          allOf:
-            - $ref: '#/components/schemas/Provisioning'
-            - description: 'If <code>pipelineProvisioning</code> is <code>true</code>, a service pipeline is included in the service template, otherwise a service pipeline <i>isn''t</i> included in the service template.'
+          $ref: '#/components/schemas/Provisioning'
+          description: 'If <code>pipelineProvisioning</code> is <code>true</code>, a service pipeline is included in the service template, otherwise a service pipeline <i>isn''t</i> included in the service template.'
         recommendedVersion:
-          allOf:
-            - $ref: '#/components/schemas/FullTemplateVersionNumber'
-            - description: The ID of the recommended version of the service template.
+          $ref: '#/components/schemas/FullTemplateVersionNumber'
+          description: The ID of the recommended version of the service template.
       description: The service template summary data.
     ServiceTemplateVersionArn:
       type: string
@@ -6107,45 +5717,35 @@ components:
         - templateName
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ServiceTemplateVersionArn'
-            - description: The Amazon Resource Name (ARN) of the version of a service template.
+          $ref: '#/components/schemas/ServiceTemplateVersionArn'
+          description: The Amazon Resource Name (ARN) of the version of a service template.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the version of a service template was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the version of a service template was created.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the version of a service template.
+          $ref: '#/components/schemas/Description'
+          description: A description of the version of a service template.
         lastModifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the version of a service template was last modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the version of a service template was last modified.
         majorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the latest major version that's associated with the version of a service template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the latest major version that's associated with the version of a service template.
         minorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the minor version of a service template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the minor version of a service template.
         recommendedMinorVersion:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionPart'
-            - description: The ID of the recommended minor version of the service template.
+          $ref: '#/components/schemas/TemplateVersionPart'
+          description: The ID of the recommended minor version of the service template.
         status:
-          allOf:
-            - $ref: '#/components/schemas/TemplateVersionStatus'
-            - description: The service template minor version status.
+          $ref: '#/components/schemas/TemplateVersionStatus'
+          description: The service template minor version status.
         statusMessage:
-          allOf:
-            - $ref: '#/components/schemas/StatusMessage'
-            - description: A service template minor version status message.
+          $ref: '#/components/schemas/StatusMessage'
+          description: A service template minor version status message.
         templateName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the service template.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service template.
       description: A summary of the service template version detail data.
     TagKey:
       type: string
@@ -6162,13 +5762,11 @@ components:
         - value
       properties:
         key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: The key of the resource tag.
+          $ref: '#/components/schemas/TagKey'
+          description: The key of the resource tag.
         value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: The value of the resource tag.
+          $ref: '#/components/schemas/TagValue'
+          description: The value of the resource tag.
       description: A description of a resource tag.
     TagKeyList:
       type: array

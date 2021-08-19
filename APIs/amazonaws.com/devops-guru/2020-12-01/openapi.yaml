@@ -182,9 +182,8 @@ paths:
                   type: object
                   properties:
                     Sns:
-                      allOf:
-                        - $ref: '#/components/schemas/SnsChannelConfig'
-                        - description: '<p> Information about a notification channel configured in DevOps Guru to send notifications when insights are created. </p> <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html">Permissions for cross account Amazon SNS topics</a>.</p> <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html">Permissions for AWS KMS–encrypted Amazon SNS topics</a>.</p>'
+                      $ref: '#/components/schemas/SnsChannelConfig'
+                      description: '<p> Information about a notification channel configured in DevOps Guru to send notifications when insights are created. </p> <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html">Permissions for cross account Amazon SNS topics</a>.</p> <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html">Permissions for AWS KMS–encrypted Amazon SNS topics</a>.</p>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -533,13 +532,11 @@ paths:
                   type: object
                   properties:
                     Id:
-                      allOf:
-                        - $ref: '#/components/schemas/InsightId'
-                        - description: ' The insight feedback ID. '
+                      $ref: '#/components/schemas/InsightId'
+                      description: ' The insight feedback ID. '
                     Feedback:
-                      allOf:
-                        - $ref: '#/components/schemas/InsightFeedbackOption'
-                        - description: ' The feedback provided by the customer. '
+                      $ref: '#/components/schemas/InsightFeedbackOption'
+                      description: ' The feedback provided by the customer. '
   '/insights/{Id}':
     get:
       operationId: DescribeInsight
@@ -881,9 +878,8 @@ paths:
                   type: object
                   properties:
                     CloudFormation:
-                      allOf:
-                        - $ref: '#/components/schemas/CloudFormationCostEstimationResourceCollectionFilter'
-                        - description: An object that specifies the CloudFormation stack that defines the AWS resources used to create a monthly estimate for DevOps Guru.
+                      $ref: '#/components/schemas/CloudFormationCostEstimationResourceCollectionFilter'
+                      description: An object that specifies the CloudFormation stack that defines the AWS resources used to create a monthly estimate for DevOps Guru.
                 ClientToken:
                   description: The idempotency token used to identify each cost estimate request.
                   type: string
@@ -1033,13 +1029,11 @@ paths:
                   type: object
                   properties:
                     FromTime:
-                      allOf:
-                        - $ref: '#/components/schemas/Timestamp'
-                        - description: ' The start time of the time range. '
+                      $ref: '#/components/schemas/Timestamp'
+                      description: ' The start time of the time range. '
                     ToTime:
-                      allOf:
-                        - $ref: '#/components/schemas/Timestamp'
-                        - description: ' The end time of the time range. '
+                      $ref: '#/components/schemas/Timestamp'
+                      description: ' The end time of the time range. '
                 MaxResults:
                   description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
                   type: integer
@@ -1127,25 +1121,20 @@ paths:
                   type: object
                   properties:
                     InsightId:
-                      allOf:
-                        - $ref: '#/components/schemas/InsightId'
-                        - description: ' An ID of an insight that is related to the events you want to filter for. '
+                      $ref: '#/components/schemas/InsightId'
+                      description: ' An ID of an insight that is related to the events you want to filter for. '
                     EventTimeRange:
-                      allOf:
-                        - $ref: '#/components/schemas/EventTimeRange'
-                        - description: ' A time range during which you want the filtered events to have occurred. '
+                      $ref: '#/components/schemas/EventTimeRange'
+                      description: ' A time range during which you want the filtered events to have occurred. '
                     EventClass:
-                      allOf:
-                        - $ref: '#/components/schemas/EventClass'
-                        - description: ' The class of the events you want to filter for, such as an infrastructure change, a deployment, or a schema change. '
+                      $ref: '#/components/schemas/EventClass'
+                      description: ' The class of the events you want to filter for, such as an infrastructure change, a deployment, or a schema change. '
                     EventSource:
-                      allOf:
-                        - $ref: '#/components/schemas/EventSource'
-                        - description: ' The AWS source that emitted the events you want to filter for. '
+                      $ref: '#/components/schemas/EventSource'
+                      description: ' The AWS source that emitted the events you want to filter for. '
                     DataSource:
-                      allOf:
-                        - $ref: '#/components/schemas/EventDataSource'
-                        - description: ' The source, <code>AWS_CLOUD_TRAIL</code> or <code>AWS_CODE_DEPLOY</code>, of the events you want returned. '
+                      $ref: '#/components/schemas/EventDataSource'
+                      description: ' The source, <code>AWS_CLOUD_TRAIL</code> or <code>AWS_CODE_DEPLOY</code>, of the events you want returned. '
                     ResourceCollection:
                       $ref: '#/components/schemas/ResourceCollection'
                 MaxResults:
@@ -1229,17 +1218,14 @@ paths:
                   type: object
                   properties:
                     Ongoing:
-                      allOf:
-                        - $ref: '#/components/schemas/ListInsightsOngoingStatusFilter'
-                        - description: ' A <code>ListInsightsAnyStatusFilter</code> that specifies ongoing insights that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
+                      $ref: '#/components/schemas/ListInsightsOngoingStatusFilter'
+                      description: ' A <code>ListInsightsAnyStatusFilter</code> that specifies ongoing insights that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
                     Closed:
-                      allOf:
-                        - $ref: '#/components/schemas/ListInsightsClosedStatusFilter'
-                        - description: ' A <code>ListInsightsClosedStatusFilter</code> that specifies closed insights that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
+                      $ref: '#/components/schemas/ListInsightsClosedStatusFilter'
+                      description: ' A <code>ListInsightsClosedStatusFilter</code> that specifies closed insights that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
                     Any:
-                      allOf:
-                        - $ref: '#/components/schemas/ListInsightsAnyStatusFilter'
-                        - description: ' A <code>ListInsightsAnyStatusFilter</code> that specifies insights of any status that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
+                      $ref: '#/components/schemas/ListInsightsAnyStatusFilter'
+                      description: ' A <code>ListInsightsAnyStatusFilter</code> that specifies insights of any status that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
                 MaxResults:
                   description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
                   type: integer
@@ -1479,31 +1465,26 @@ paths:
                   type: object
                   properties:
                     FromTime:
-                      allOf:
-                        - $ref: '#/components/schemas/Timestamp'
-                        - description: ' The start time of the time range. '
+                      $ref: '#/components/schemas/Timestamp'
+                      description: ' The start time of the time range. '
                     ToTime:
-                      allOf:
-                        - $ref: '#/components/schemas/Timestamp'
-                        - description: ' The end time of the time range. '
+                      $ref: '#/components/schemas/Timestamp'
+                      description: ' The end time of the time range. '
                 Filters:
                   description: ' Specifies one or more severity values and one or more status values that are used to search for insights. '
                   type: object
                   properties:
                     Severities:
-                      allOf:
-                        - $ref: '#/components/schemas/InsightSeverities'
-                        - description: ' An array of severity values used to search for insights. '
+                      $ref: '#/components/schemas/InsightSeverities'
+                      description: ' An array of severity values used to search for insights. '
                     Statuses:
-                      allOf:
-                        - $ref: '#/components/schemas/InsightStatuses'
-                        - description: ' An array of status values used to search for insights. '
+                      $ref: '#/components/schemas/InsightStatuses'
+                      description: ' An array of status values used to search for insights. '
                     ResourceCollection:
                       $ref: '#/components/schemas/ResourceCollection'
                     ServiceCollection:
-                      allOf:
-                        - $ref: '#/components/schemas/ServiceCollection'
-                        - description: A collection of the names of AWS services.
+                      $ref: '#/components/schemas/ServiceCollection'
+                      description: A collection of the names of AWS services.
                 MaxResults:
                   description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
                   type: integer
@@ -1592,9 +1573,8 @@ paths:
                   type: object
                   properties:
                     CloudFormation:
-                      allOf:
-                        - $ref: '#/components/schemas/UpdateCloudFormationCollectionFilter'
-                        - description: ' An collection of AWS CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks. '
+                      $ref: '#/components/schemas/UpdateCloudFormationCollectionFilter'
+                      description: ' An collection of AWS CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1661,16 +1641,14 @@ components:
         - Id
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/NotificationChannelId'
-            - description: ' The ID of the added notification channel. '
+          $ref: '#/components/schemas/NotificationChannelId'
+          description: ' The ID of the added notification channel. '
     SnsChannelConfig:
       type: object
       properties:
         TopicArn:
-          allOf:
-            - $ref: '#/components/schemas/TopicArn'
-            - description: ' The Amazon Resource Name (ARN) of an Amazon Simple Notification Service topic. '
+          $ref: '#/components/schemas/TopicArn'
+          description: ' The Amazon Resource Name (ARN) of an Amazon Simple Notification Service topic. '
       description: '<p> Contains the Amazon Resource Name (ARN) of an Amazon Simple Notification Service topic. </p> <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html">Permissions for cross account Amazon SNS topics</a>.</p> <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html">Permissions for AWS KMS–encrypted Amazon SNS topics</a>.</p>'
     AccessDeniedException: {}
     ConflictException: {}
@@ -1688,21 +1666,17 @@ components:
         - ResourceHours
       properties:
         OpenReactiveInsights:
-          allOf:
-            - $ref: '#/components/schemas/NumOpenReactiveInsights'
-            - description: ' An integer that specifies the number of open reactive insights in your AWS account. '
+          $ref: '#/components/schemas/NumOpenReactiveInsights'
+          description: ' An integer that specifies the number of open reactive insights in your AWS account. '
         OpenProactiveInsights:
-          allOf:
-            - $ref: '#/components/schemas/NumOpenProactiveInsights'
-            - description: ' An integer that specifies the number of open proactive insights in your AWS account. '
+          $ref: '#/components/schemas/NumOpenProactiveInsights'
+          description: ' An integer that specifies the number of open proactive insights in your AWS account. '
         MetricsAnalyzed:
-          allOf:
-            - $ref: '#/components/schemas/NumMetricsAnalyzed'
-            - description: ' An integer that specifies the number of metrics that have been analyzed in your AWS account. '
+          $ref: '#/components/schemas/NumMetricsAnalyzed'
+          description: ' An integer that specifies the number of metrics that have been analyzed in your AWS account. '
         ResourceHours:
-          allOf:
-            - $ref: '#/components/schemas/ResourceHours'
-            - description: 'The number of Amazon DevOps Guru resource analysis hours billed to the current AWS account in the last hour. '
+          $ref: '#/components/schemas/ResourceHours'
+          description: 'The number of Amazon DevOps Guru resource analysis hours billed to the current AWS account in the last hour. '
     DescribeAccountOverviewResponse:
       type: object
       required:
@@ -1711,28 +1685,23 @@ components:
         - MeanTimeToRecoverInMilliseconds
       properties:
         ReactiveInsights:
-          allOf:
-            - $ref: '#/components/schemas/NumReactiveInsights'
-            - description: ' An integer that specifies the number of open reactive insights in your AWS account that were created during the time range passed in. '
+          $ref: '#/components/schemas/NumReactiveInsights'
+          description: ' An integer that specifies the number of open reactive insights in your AWS account that were created during the time range passed in. '
         ProactiveInsights:
-          allOf:
-            - $ref: '#/components/schemas/NumProactiveInsights'
-            - description: ' An integer that specifies the number of open proactive insights in your AWS account that were created during the time range passed in. '
+          $ref: '#/components/schemas/NumProactiveInsights'
+          description: ' An integer that specifies the number of open proactive insights in your AWS account that were created during the time range passed in. '
         MeanTimeToRecoverInMilliseconds:
-          allOf:
-            - $ref: '#/components/schemas/MeanTimeToRecoverInMilliseconds'
-            - description: ' The Mean Time to Recover (MTTR) for all closed insights that were created during the time range passed in. '
+          $ref: '#/components/schemas/MeanTimeToRecoverInMilliseconds'
+          description: ' The Mean Time to Recover (MTTR) for all closed insights that were created during the time range passed in. '
     DescribeAnomalyResponse:
       type: object
       properties:
         ProactiveAnomaly:
-          allOf:
-            - $ref: '#/components/schemas/ProactiveAnomaly'
-            - description: ' A <code>ReactiveAnomaly</code> object that represents the requested anomaly. '
+          $ref: '#/components/schemas/ProactiveAnomaly'
+          description: ' A <code>ReactiveAnomaly</code> object that represents the requested anomaly. '
         ReactiveAnomaly:
-          allOf:
-            - $ref: '#/components/schemas/ReactiveAnomaly'
-            - description: ' A <code>ProactiveAnomaly</code> object that represents the requested anomaly. '
+          $ref: '#/components/schemas/ReactiveAnomaly'
+          description: ' A <code>ProactiveAnomaly</code> object that represents the requested anomaly. '
     DescribeFeedbackResponse:
       type: object
       properties:
@@ -1742,30 +1711,25 @@ components:
       type: object
       properties:
         ProactiveInsight:
-          allOf:
-            - $ref: '#/components/schemas/ProactiveInsight'
-            - description: ' A <code>ProactiveInsight</code> object that represents the requested insight. '
+          $ref: '#/components/schemas/ProactiveInsight'
+          description: ' A <code>ProactiveInsight</code> object that represents the requested insight. '
         ReactiveInsight:
-          allOf:
-            - $ref: '#/components/schemas/ReactiveInsight'
-            - description: ' A <code>ReactiveInsight</code> object that represents the requested insight. '
+          $ref: '#/components/schemas/ReactiveInsight'
+          description: ' A <code>ReactiveInsight</code> object that represents the requested insight. '
     DescribeResourceCollectionHealthResponse:
       type: object
       required:
         - CloudFormation
       properties:
         CloudFormation:
-          allOf:
-            - $ref: '#/components/schemas/CloudFormationHealths'
-            - description: ' The returned <code>CloudFormationHealthOverview</code> object that contains an <code>InsightHealthOverview</code> object with the requested system health information. '
+          $ref: '#/components/schemas/CloudFormationHealths'
+          description: ' The returned <code>CloudFormationHealthOverview</code> object that contains an <code>InsightHealthOverview</code> object with the requested system health information. '
         Service:
-          allOf:
-            - $ref: '#/components/schemas/ServiceHealths'
-            - description: An array of <code>ServiceHealth</code> objects that describes the health of the AWS services associated with the resources in the collection.
+          $ref: '#/components/schemas/ServiceHealths'
+          description: An array of <code>ServiceHealth</code> objects that describes the health of the AWS services associated with the resources in the collection.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/UuidNextToken'
-            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+          $ref: '#/components/schemas/UuidNextToken'
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     DescribeServiceIntegrationResponse:
       type: object
       properties:
@@ -1775,55 +1739,44 @@ components:
       type: object
       properties:
         ResourceCollection:
-          allOf:
-            - $ref: '#/components/schemas/CostEstimationResourceCollectionFilter'
-            - description: The collection of the AWS resources used to create your monthly DevOps Guru cost estimate.
+          $ref: '#/components/schemas/CostEstimationResourceCollectionFilter'
+          description: The collection of the AWS resources used to create your monthly DevOps Guru cost estimate.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/CostEstimationStatus'
-            - description: 'The status of creating this cost estimate. If it''s still in progress, the status <code>ONGOING</code> is returned. If it is finished, the status <code>COMPLETED</code> is returned.'
+          $ref: '#/components/schemas/CostEstimationStatus'
+          description: 'The status of creating this cost estimate. If it''s still in progress, the status <code>ONGOING</code> is returned. If it is finished, the status <code>COMPLETED</code> is returned.'
         Costs:
-          allOf:
-            - $ref: '#/components/schemas/ServiceResourceCosts'
-            - description: An array of <code>ResourceCost</code> objects that each contains details about the monthly cost estimate to analyze one of your AWS resources.
+          $ref: '#/components/schemas/ServiceResourceCosts'
+          description: An array of <code>ResourceCost</code> objects that each contains details about the monthly cost estimate to analyze one of your AWS resources.
         TimeRange:
-          allOf:
-            - $ref: '#/components/schemas/CostEstimationTimeRange'
-            - description: The start and end time of the cost estimation.
+          $ref: '#/components/schemas/CostEstimationTimeRange'
+          description: The start and end time of the cost estimation.
         TotalCost:
-          allOf:
-            - $ref: '#/components/schemas/Cost'
-            - description: The estimated monthly cost to analyze the AWS resources. This value is the sum of the estimated costs to analyze each resource in the <code>Costs</code> object in this response.
+          $ref: '#/components/schemas/Cost'
+          description: The estimated monthly cost to analyze the AWS resources. This value is the sum of the estimated costs to analyze each resource in the <code>Costs</code> object in this response.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/UuidNextToken'
-            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+          $ref: '#/components/schemas/UuidNextToken'
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     GetResourceCollectionResponse:
       type: object
       properties:
         ResourceCollection:
-          allOf:
-            - $ref: '#/components/schemas/ResourceCollectionFilter'
-            - description: ' The requested list of AWS resource collections. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. '
+          $ref: '#/components/schemas/ResourceCollectionFilter'
+          description: ' The requested list of AWS resource collections. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/UuidNextToken'
-            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+          $ref: '#/components/schemas/UuidNextToken'
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     ListAnomaliesForInsightResponse:
       type: object
       properties:
         ProactiveAnomalies:
-          allOf:
-            - $ref: '#/components/schemas/ProactiveAnomalies'
-            - description: ' An array of <code>ProactiveAnomalySummary</code> objects that represent the requested anomalies '
+          $ref: '#/components/schemas/ProactiveAnomalies'
+          description: ' An array of <code>ProactiveAnomalySummary</code> objects that represent the requested anomalies '
         ReactiveAnomalies:
-          allOf:
-            - $ref: '#/components/schemas/ReactiveAnomalies'
-            - description: ' An array of <code>ReactiveAnomalySummary</code> objects that represent the requested anomalies '
+          $ref: '#/components/schemas/ReactiveAnomalies'
+          description: ' An array of <code>ReactiveAnomalySummary</code> objects that represent the requested anomalies '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/UuidNextToken'
-            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+          $ref: '#/components/schemas/UuidNextToken'
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     Timestamp:
       type: string
       format: date-time
@@ -1833,13 +1786,11 @@ components:
         - Events
       properties:
         Events:
-          allOf:
-            - $ref: '#/components/schemas/Events'
-            - description: ' A list of the requested events. '
+          $ref: '#/components/schemas/Events'
+          description: ' A list of the requested events. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/UuidNextToken'
-            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+          $ref: '#/components/schemas/UuidNextToken'
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     InsightId:
       type: string
       pattern: '^[\w-]*$'
@@ -1852,13 +1803,11 @@ components:
         - ToTime
       properties:
         FromTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time when the event started. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time when the event started. '
         ToTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time when the event ended. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time when the event ended. '
       description: ' The time range during which an AWS event occurred. AWS resource events and metrics are analyzed by DevOps Guru to find anomalous behavior and provide recommendations to improve your operational solutions. '
     EventClass:
       type: string
@@ -1882,34 +1831,29 @@ components:
       type: object
       properties:
         CloudFormation:
-          allOf:
-            - $ref: '#/components/schemas/CloudFormationCollection'
-            - description: ' An array of the names of AWS CloudFormation stacks. The stacks define AWS resources that DevOps Guru analyzes. You can specify up to 500 AWS CloudFormation stacks. '
+          $ref: '#/components/schemas/CloudFormationCollection'
+          description: ' An array of the names of AWS CloudFormation stacks. The stacks define AWS resources that DevOps Guru analyzes. You can specify up to 500 AWS CloudFormation stacks. '
       description: ' A collection of AWS resources supported by DevOps Guru. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. '
     ListInsightsResponse:
       type: object
       properties:
         ProactiveInsights:
-          allOf:
-            - $ref: '#/components/schemas/ProactiveInsights'
-            - description: ' The returned list of proactive insights. '
+          $ref: '#/components/schemas/ProactiveInsights'
+          description: ' The returned list of proactive insights. '
         ReactiveInsights:
-          allOf:
-            - $ref: '#/components/schemas/ReactiveInsights'
-            - description: ' The returned list of reactive insights. '
+          $ref: '#/components/schemas/ReactiveInsights'
+          description: ' The returned list of reactive insights. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/UuidNextToken'
-            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+          $ref: '#/components/schemas/UuidNextToken'
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     ListInsightsOngoingStatusFilter:
       type: object
       required:
         - Type
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/InsightType'
-            - description: ' Use to filter for either <code>REACTIVE</code> or <code>PROACTIVE</code> insights. '
+          $ref: '#/components/schemas/InsightType'
+          description: ' Use to filter for either <code>REACTIVE</code> or <code>PROACTIVE</code> insights. '
       description: ' Used to filter for insights that have the status <code>ONGOING</code>. '
     ListInsightsClosedStatusFilter:
       type: object
@@ -1918,13 +1862,11 @@ components:
         - EndTimeRange
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/InsightType'
-            - description: ' Use to filter for either <code>REACTIVE</code> or <code>PROACTIVE</code> insights. '
+          $ref: '#/components/schemas/InsightType'
+          description: ' Use to filter for either <code>REACTIVE</code> or <code>PROACTIVE</code> insights. '
         EndTimeRange:
-          allOf:
-            - $ref: '#/components/schemas/EndTimeRange'
-            - description: ' A time range used to specify when the behavior of the filtered insights ended. '
+          $ref: '#/components/schemas/EndTimeRange'
+          description: ' A time range used to specify when the behavior of the filtered insights ended. '
       description: ' Used to filter for insights that have the status <code>CLOSED</code>. '
     ListInsightsAnyStatusFilter:
       type: object
@@ -1933,36 +1875,30 @@ components:
         - StartTimeRange
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/InsightType'
-            - description: ' Use to filter for either <code>REACTIVE</code> or <code>PROACTIVE</code> insights. '
+          $ref: '#/components/schemas/InsightType'
+          description: ' Use to filter for either <code>REACTIVE</code> or <code>PROACTIVE</code> insights. '
         StartTimeRange:
-          allOf:
-            - $ref: '#/components/schemas/StartTimeRange'
-            - description: ' A time range used to specify when the behavior of the filtered insights started. '
+          $ref: '#/components/schemas/StartTimeRange'
+          description: ' A time range used to specify when the behavior of the filtered insights started. '
       description: ' Used to filter for insights that have any status. '
     ListNotificationChannelsResponse:
       type: object
       properties:
         Channels:
-          allOf:
-            - $ref: '#/components/schemas/Channels'
-            - description: ' An array that contains the requested notification channels. '
+          $ref: '#/components/schemas/Channels'
+          description: ' An array that contains the requested notification channels. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/UuidNextToken'
-            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+          $ref: '#/components/schemas/UuidNextToken'
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     ListRecommendationsResponse:
       type: object
       properties:
         Recommendations:
-          allOf:
-            - $ref: '#/components/schemas/Recommendations'
-            - description: ' An array of the requested recommendations. '
+          $ref: '#/components/schemas/Recommendations'
+          description: ' An array of the requested recommendations. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/UuidNextToken'
-            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+          $ref: '#/components/schemas/UuidNextToken'
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     PutFeedbackResponse:
       type: object
       properties: {}
@@ -1981,17 +1917,14 @@ components:
       type: object
       properties:
         ProactiveInsights:
-          allOf:
-            - $ref: '#/components/schemas/ProactiveInsights'
-            - description: ' The returned proactive insights. '
+          $ref: '#/components/schemas/ProactiveInsights'
+          description: ' The returned proactive insights. '
         ReactiveInsights:
-          allOf:
-            - $ref: '#/components/schemas/ReactiveInsights'
-            - description: ' The returned reactive insights. '
+          $ref: '#/components/schemas/ReactiveInsights'
+          description: ' The returned reactive insights. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/UuidNextToken'
-            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+          $ref: '#/components/schemas/UuidNextToken'
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     InsightSeverities:
       type: array
       items:
@@ -2008,9 +1941,8 @@ components:
       type: object
       properties:
         ServiceNames:
-          allOf:
-            - $ref: '#/components/schemas/ServiceNames'
-            - description: An array of strings that each specifies the name of an AWS service.
+          $ref: '#/components/schemas/ServiceNames'
+          description: An array of strings that each specifies the name of an AWS service.
       description: A collection of the names of AWS services.
     StartCostEstimationResponse:
       type: object
@@ -2019,9 +1951,8 @@ components:
       type: object
       properties:
         StackNames:
-          allOf:
-            - $ref: '#/components/schemas/CostEstimationStackNames'
-            - description: An array of CloudFormation stack names. Its size is fixed at 1 item.
+          $ref: '#/components/schemas/CostEstimationStackNames'
+          description: An array of CloudFormation stack names. Its size is fixed at 1 item.
       description: 'Information about an AWS CloudFormation stack used to create a monthly cost estimate for DevOps Guru to analyze AWS resources. The maximum number of stacks you can specify for a cost estimate is one. The estimate created is for the cost to analyze the AWS resources defined by the stack. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html">Stacks</a> in the <i>AWS CloudFormation User Guide</i>.'
     UpdateResourceCollectionResponse:
       type: object
@@ -2030,9 +1961,8 @@ components:
       type: object
       properties:
         StackNames:
-          allOf:
-            - $ref: '#/components/schemas/UpdateStackNames'
-            - description: ' An array of the names of the AWS CloudFormation stacks to update. You can specify up to 500 AWS CloudFormation stacks. '
+          $ref: '#/components/schemas/UpdateStackNames'
+          description: ' An array of the names of the AWS CloudFormation stacks to update. You can specify up to 500 AWS CloudFormation stacks. '
       description: ' Contains the names of AWS CloudFormation stacks used to update a collection of stacks. You can specify up to 500 AWS CloudFormation stacks.'
     UpdateServiceIntegrationResponse:
       type: object
@@ -2041,9 +1971,8 @@ components:
       type: object
       properties:
         OptInStatus:
-          allOf:
-            - $ref: '#/components/schemas/OptInStatus'
-            - description: ' Specifies if DevOps Guru is enabled to create an AWS Systems Manager OpsItem for each created insight. '
+          $ref: '#/components/schemas/OptInStatus'
+          description: ' Specifies if DevOps Guru is enabled to create an AWS Systems Manager OpsItem for each created insight. '
       description: ' Information about whether DevOps Guru is configured to create an OpsItem in AWS Systems Manager OpsCenter for each created insight. '
     NotificationChannelConfig:
       type: object
@@ -2051,9 +1980,8 @@ components:
         - Sns
       properties:
         Sns:
-          allOf:
-            - $ref: '#/components/schemas/SnsChannelConfig'
-            - description: '<p> Information about a notification channel configured in DevOps Guru to send notifications when insights are created. </p> <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html">Permissions for cross account Amazon SNS topics</a>.</p> <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html">Permissions for AWS KMS–encrypted Amazon SNS topics</a>.</p>'
+          $ref: '#/components/schemas/SnsChannelConfig'
+          description: '<p> Information about a notification channel configured in DevOps Guru to send notifications when insights are created. </p> <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html">Permissions for cross account Amazon SNS topics</a>.</p> <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html">Permissions for AWS KMS–encrypted Amazon SNS topics</a>.</p>'
       description: ' Information about notification channels you have configured with DevOps Guru. The one supported notification channel is Amazon Simple Notification Service (Amazon SNS).'
     AddNotificationChannelRequest:
       type: object
@@ -2062,9 +1990,8 @@ components:
       title: AddNotificationChannelRequest
       properties:
         Config:
-          allOf:
-            - $ref: '#/components/schemas/NotificationChannelConfig'
-            - description: ' A <code>NotificationChannelConfig</code> object that specifies what type of notification channel to add. The one supported notification channel is Amazon Simple Notification Service (Amazon SNS). '
+          $ref: '#/components/schemas/NotificationChannelConfig'
+          description: ' A <code>NotificationChannelConfig</code> object that specifies what type of notification channel to add. The one supported notification channel is Amazon Simple Notification Service (Amazon SNS). '
     NotificationChannelId:
       type: string
       pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
@@ -2084,13 +2011,11 @@ components:
         - OpenTime
       properties:
         OpenTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time when an anomaly is opened. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time when an anomaly is opened. '
         CloseTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time when an anomaly is closed. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time when an anomaly is closed. '
       description: ' A time range that specifies when DevOps Guru opens and then closes an anomaly. This is different from <code>AnomalyTimeRange</code>, which specifies the time range when DevOps Guru actually observes the anomalous behavior. '
     AnomalySeverity:
       type: string
@@ -2106,9 +2031,8 @@ components:
       type: object
       properties:
         CloudWatchMetrics:
-          allOf:
-            - $ref: '#/components/schemas/CloudWatchMetricsDetails'
-            - description: ' An array of <code>CloudWatchMetricsDetail</code> object that contains information about the analyzed metrics that displayed anomalous behavior. '
+          $ref: '#/components/schemas/CloudWatchMetricsDetails'
+          description: ' An array of <code>CloudWatchMetricsDetail</code> object that contains information about the analyzed metrics that displayed anomalous behavior. '
       description: ' Details about the source of the anomalous operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. '
     AnomalyStatus:
       type: string
@@ -2121,25 +2045,21 @@ components:
         - StartTime
       properties:
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time when the anomalous behavior started. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time when the anomalous behavior started. '
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time when the anomalous behavior ended. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time when the anomalous behavior ended. '
       description: ' A time range that specifies when the observed unusual behavior in an anomaly started and ended. This is different from <code>AnomalyReportedTimeRange</code>, which specifies the time range when DevOps Guru opens and then closes an anomaly. '
     NotificationChannel:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/NotificationChannelId'
-            - description: ' The ID of a notification channel. '
+          $ref: '#/components/schemas/NotificationChannelId'
+          description: ' The ID of a notification channel. '
         Config:
-          allOf:
-            - $ref: '#/components/schemas/NotificationChannelConfig'
-            - description: ' A <code>NotificationChannelConfig</code> object that contains information about configured notification channels. '
+          $ref: '#/components/schemas/NotificationChannelConfig'
+          description: ' A <code>NotificationChannelConfig</code> object that contains information about configured notification channels. '
       description: '<p> Information about a notification channel. A notification channel is used to notify you when DevOps Guru creates an insight. The one supported notification channel is Amazon Simple Notification Service (Amazon SNS). </p> <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html">Permissions for cross account Amazon SNS topics</a>.</p> <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html">Permissions for AWS KMS–encrypted Amazon SNS topics</a>.</p>'
     Channels:
       type: array
@@ -2158,17 +2078,15 @@ components:
       type: object
       properties:
         StackNames:
-          allOf:
-            - $ref: '#/components/schemas/StackNames'
-            - description: ' An array of CloudFormation stack names. '
+          $ref: '#/components/schemas/StackNames'
+          description: ' An array of CloudFormation stack names. '
       description: ' Information about AWS CloudFormation stacks. You can use up to 500 stacks to specify which AWS resources in your account to analyze. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. '
     CloudFormationCollectionFilter:
       type: object
       properties:
         StackNames:
-          allOf:
-            - $ref: '#/components/schemas/StackNames'
-            - description: ' An array of CloudFormation stack names. '
+          $ref: '#/components/schemas/StackNames'
+          description: ' An array of CloudFormation stack names. '
       description: ' Information about AWS CloudFormation stacks. You can use up to 500 stacks to specify which AWS resources in your account to analyze. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. '
     CostEstimationStackNames:
       type: array
@@ -2185,29 +2103,24 @@ components:
       type: object
       properties:
         OpenProactiveInsights:
-          allOf:
-            - $ref: '#/components/schemas/NumOpenProactiveInsights'
-            - description: ' The number of open proactive insights. '
+          $ref: '#/components/schemas/NumOpenProactiveInsights'
+          description: ' The number of open proactive insights. '
         OpenReactiveInsights:
-          allOf:
-            - $ref: '#/components/schemas/NumOpenReactiveInsights'
-            - description: ' The number of open reactive insights. '
+          $ref: '#/components/schemas/NumOpenReactiveInsights'
+          description: ' The number of open reactive insights. '
         MeanTimeToRecoverInMilliseconds:
-          allOf:
-            - $ref: '#/components/schemas/MeanTimeToRecoverInMilliseconds'
-            - description: ' The Meant Time to Recover (MTTR) for the insight. '
+          $ref: '#/components/schemas/MeanTimeToRecoverInMilliseconds'
+          description: ' The Meant Time to Recover (MTTR) for the insight. '
       description: ' Information about the number of open reactive and proactive insights that can be used to gauge the health of your system. '
     CloudFormationHealth:
       type: object
       properties:
         StackName:
-          allOf:
-            - $ref: '#/components/schemas/StackName'
-            - description: ' The name of the CloudFormation stack. '
+          $ref: '#/components/schemas/StackName'
+          description: ' The name of the CloudFormation stack. '
         Insight:
-          allOf:
-            - $ref: '#/components/schemas/InsightHealth'
-            - description: ' Information about the health of the AWS resources in your account that are specified by an AWS CloudFormation stack, including the number of open proactive, open reactive insights, and the Mean Time to Recover (MTTR) of closed insights. '
+          $ref: '#/components/schemas/InsightHealth'
+          description: ' Information about the health of the AWS resources in your account that are specified by an AWS CloudFormation stack, including the number of open proactive, open reactive insights, and the Mean Time to Recover (MTTR) of closed insights. '
       description: ' Information about the health of AWS resources in your account that are specified by an AWS CloudFormation stack. '
     CloudFormationHealths:
       type: array
@@ -2240,29 +2153,23 @@ components:
       type: object
       properties:
         MetricName:
-          allOf:
-            - $ref: '#/components/schemas/CloudWatchMetricsMetricName'
-            - description: ' The name of the CloudWatch metric. '
+          $ref: '#/components/schemas/CloudWatchMetricsMetricName'
+          description: ' The name of the CloudWatch metric. '
         Namespace:
-          allOf:
-            - $ref: '#/components/schemas/CloudWatchMetricsNamespace'
-            - description: ' The namespace of the CloudWatch metric. A namespace is a container for CloudWatch metrics. '
+          $ref: '#/components/schemas/CloudWatchMetricsNamespace'
+          description: ' The namespace of the CloudWatch metric. A namespace is a container for CloudWatch metrics. '
         Dimensions:
-          allOf:
-            - $ref: '#/components/schemas/CloudWatchMetricsDimensions'
-            - description: ' An array of CloudWatch dimensions associated with '
+          $ref: '#/components/schemas/CloudWatchMetricsDimensions'
+          description: ' An array of CloudWatch dimensions associated with '
         Stat:
-          allOf:
-            - $ref: '#/components/schemas/CloudWatchMetricsStat'
-            - description: ' The type of statistic associated with the CloudWatch metric. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic">Statistics</a> in the <i>Amazon CloudWatch User Guide</i>. '
+          $ref: '#/components/schemas/CloudWatchMetricsStat'
+          description: ' The type of statistic associated with the CloudWatch metric. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic">Statistics</a> in the <i>Amazon CloudWatch User Guide</i>. '
         Unit:
-          allOf:
-            - $ref: '#/components/schemas/CloudWatchMetricsUnit'
-            - description: ' The unit of measure used for the CloudWatch metric. For example, <code>Bytes</code>, <code>Seconds</code>, <code>Count</code>, and <code>Percent</code>. '
+          $ref: '#/components/schemas/CloudWatchMetricsUnit'
+          description: ' The unit of measure used for the CloudWatch metric. For example, <code>Bytes</code>, <code>Seconds</code>, <code>Count</code>, and <code>Percent</code>. '
         Period:
-          allOf:
-            - $ref: '#/components/schemas/CloudWatchMetricsPeriod'
-            - description: ' The length of time associated with the CloudWatch metric in number of seconds. '
+          $ref: '#/components/schemas/CloudWatchMetricsPeriod'
+          description: ' The length of time associated with the CloudWatch metric in number of seconds. '
       description: ' Information about an Amazon CloudWatch metric. '
     CloudWatchMetricsDimensionName:
       type: string
@@ -2272,13 +2179,11 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/CloudWatchMetricsDimensionName'
-            - description: ' The name of the CloudWatch dimension. '
+          $ref: '#/components/schemas/CloudWatchMetricsDimensionName'
+          description: ' The name of the CloudWatch dimension. '
         Value:
-          allOf:
-            - $ref: '#/components/schemas/CloudWatchMetricsDimensionValue'
-            - description: ' The value of the CloudWatch dimension. '
+          $ref: '#/components/schemas/CloudWatchMetricsDimensionValue'
+          description: ' The value of the CloudWatch dimension. '
       description: ' The dimension of a Amazon CloudWatch metric that is used when DevOps Guru analyzes the resources in your account for operational problems and anomalous behavior. A dimension is a name/value pair that is part of the identity of a metric. A metric can have up to 10 dimensions. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension">Dimensions</a> in the <i>Amazon CloudWatch User Guide</i>. '
     Cost:
       type: number
@@ -2287,9 +2192,8 @@ components:
       type: object
       properties:
         CloudFormation:
-          allOf:
-            - $ref: '#/components/schemas/CloudFormationCostEstimationResourceCollectionFilter'
-            - description: An object that specifies the CloudFormation stack that defines the AWS resources used to create a monthly estimate for DevOps Guru.
+          $ref: '#/components/schemas/CloudFormationCostEstimationResourceCollectionFilter'
+          description: An object that specifies the CloudFormation stack that defines the AWS resources used to create a monthly estimate for DevOps Guru.
       description: 'Information about a filter used to specify which AWS resources are analyzed to create a monthly DevOps Guru cost estimate. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html">Estimate your Amazon DevOps Guru costs</a> and <a href="http://aws.amazon.com/devops-guru/pricing/">Amazon DevOps Guru pricing</a>. '
     CostEstimationServiceResourceCount:
       type: integer
@@ -2307,13 +2211,11 @@ components:
       type: object
       properties:
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The start time of the cost estimation.
+          $ref: '#/components/schemas/Timestamp'
+          description: The start time of the cost estimation.
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The end time of the cost estimation.
+          $ref: '#/components/schemas/Timestamp'
+          description: The end time of the cost estimation.
       description: The time range of a cost estimation.
     DescribeAccountHealthRequest:
       type: object
@@ -2334,13 +2236,11 @@ components:
       title: DescribeAccountOverviewRequest
       properties:
         FromTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The start of the time range passed in. The start time granularity is at the day level. The floor of the start time is used. Returned information occurred after this day. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The start of the time range passed in. The start time granularity is at the day level. The floor of the start time is used. Returned information occurred after this day. '
         ToTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The end of the time range passed in. The start time granularity is at the day level. The floor of the start time is used. Returned information occurred before this day. If this is not specified, then the current day is used. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The end of the time range passed in. The start time granularity is at the day level. The floor of the start time is used. Returned information occurred before this day. If this is not specified, then the current day is used. '
     NumReactiveInsights:
       type: integer
     NumProactiveInsights:
@@ -2355,73 +2255,59 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/AnomalyId'
-            - description: ' The ID of a proactive anomaly. '
+          $ref: '#/components/schemas/AnomalyId'
+          description: ' The ID of a proactive anomaly. '
         Severity:
-          allOf:
-            - $ref: '#/components/schemas/AnomalySeverity'
-            - description: ' The severity of a proactive anomaly. '
+          $ref: '#/components/schemas/AnomalySeverity'
+          description: ' The severity of a proactive anomaly. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/AnomalyStatus'
-            - description: ' The status of a proactive anomaly. '
+          $ref: '#/components/schemas/AnomalyStatus'
+          description: ' The status of a proactive anomaly. '
         UpdateTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time of the anomaly''s most recent update. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time of the anomaly''s most recent update. '
         AnomalyTimeRange:
           $ref: '#/components/schemas/AnomalyTimeRange'
         AnomalyReportedTimeRange:
-          allOf:
-            - $ref: '#/components/schemas/AnomalyReportedTimeRange'
-            - description: ' A <code>AnomalyReportedTimeRange</code> object that specifies the time range between when the anomaly is opened and the time when it is closed. '
+          $ref: '#/components/schemas/AnomalyReportedTimeRange'
+          description: ' A <code>AnomalyReportedTimeRange</code> object that specifies the time range between when the anomaly is opened and the time when it is closed. '
         PredictionTimeRange:
           $ref: '#/components/schemas/PredictionTimeRange'
         SourceDetails:
-          allOf:
-            - $ref: '#/components/schemas/AnomalySourceDetails'
-            - description: ' Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. '
+          $ref: '#/components/schemas/AnomalySourceDetails'
+          description: ' Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. '
         AssociatedInsightId:
-          allOf:
-            - $ref: '#/components/schemas/InsightId'
-            - description: ' The ID of the insight that contains this anomaly. An insight is composed of related anomalies. '
+          $ref: '#/components/schemas/InsightId'
+          description: ' The ID of the insight that contains this anomaly. An insight is composed of related anomalies. '
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
         Limit:
-          allOf:
-            - $ref: '#/components/schemas/AnomalyLimit'
-            - description: ' A threshold that was exceeded by behavior in analyzed resources. Exceeding this threshold is related to the anomalous behavior that generated this anomaly. '
+          $ref: '#/components/schemas/AnomalyLimit'
+          description: ' A threshold that was exceeded by behavior in analyzed resources. Exceeding this threshold is related to the anomalous behavior that generated this anomaly. '
       description: Information about an anomaly. This object is returned by <code>ListAnomalies</code>.
     ReactiveAnomaly:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/AnomalyId'
-            - description: 'The ID of the reactive anomaly. '
+          $ref: '#/components/schemas/AnomalyId'
+          description: 'The ID of the reactive anomaly. '
         Severity:
-          allOf:
-            - $ref: '#/components/schemas/AnomalySeverity'
-            - description: 'The severity of the anomaly. '
+          $ref: '#/components/schemas/AnomalySeverity'
+          description: 'The severity of the anomaly. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/AnomalyStatus'
-            - description: ' The status of the anomaly. '
+          $ref: '#/components/schemas/AnomalyStatus'
+          description: ' The status of the anomaly. '
         AnomalyTimeRange:
           $ref: '#/components/schemas/AnomalyTimeRange'
         AnomalyReportedTimeRange:
-          allOf:
-            - $ref: '#/components/schemas/AnomalyReportedTimeRange'
-            - description: ' A <code>AnomalyReportedTimeRange</code> object that specifies the time range between when the anomaly is opened and the time when it is closed. '
+          $ref: '#/components/schemas/AnomalyReportedTimeRange'
+          description: ' A <code>AnomalyReportedTimeRange</code> object that specifies the time range between when the anomaly is opened and the time when it is closed. '
         SourceDetails:
-          allOf:
-            - $ref: '#/components/schemas/AnomalySourceDetails'
-            - description: ' Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. '
+          $ref: '#/components/schemas/AnomalySourceDetails'
+          description: ' Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. '
         AssociatedInsightId:
-          allOf:
-            - $ref: '#/components/schemas/InsightId'
-            - description: ' The ID of the insight that contains this anomaly. An insight is composed of related anomalies. '
+          $ref: '#/components/schemas/InsightId'
+          description: ' The ID of the insight that contains this anomaly. An insight is composed of related anomalies. '
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
       description: Details about a reactive anomaly. This object is returned by <code>ListAnomalies</code>.
@@ -2430,20 +2316,17 @@ components:
       title: DescribeFeedbackRequest
       properties:
         InsightId:
-          allOf:
-            - $ref: '#/components/schemas/InsightId'
-            - description: ' The ID of the insight for which the feedback was provided. '
+          $ref: '#/components/schemas/InsightId'
+          description: ' The ID of the insight for which the feedback was provided. '
     InsightFeedback:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/InsightId'
-            - description: ' The insight feedback ID. '
+          $ref: '#/components/schemas/InsightId'
+          description: ' The insight feedback ID. '
         Feedback:
-          allOf:
-            - $ref: '#/components/schemas/InsightFeedbackOption'
-            - description: ' The feedback provided by the customer. '
+          $ref: '#/components/schemas/InsightFeedbackOption'
+          description: ' The feedback provided by the customer. '
       description: ' Information about insight feedback received from a customer. '
     DescribeInsightRequest:
       type: object
@@ -2453,21 +2336,17 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/InsightId'
-            - description: 'The ID of the proactive insight. '
+          $ref: '#/components/schemas/InsightId'
+          description: 'The ID of the proactive insight. '
         Name:
-          allOf:
-            - $ref: '#/components/schemas/InsightName'
-            - description: 'The name of the proactive insight. '
+          $ref: '#/components/schemas/InsightName'
+          description: 'The name of the proactive insight. '
         Severity:
-          allOf:
-            - $ref: '#/components/schemas/InsightSeverity'
-            - description: 'The severity of the proactive insight. '
+          $ref: '#/components/schemas/InsightSeverity'
+          description: 'The severity of the proactive insight. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/InsightStatus'
-            - description: 'The status of the proactive insight. '
+          $ref: '#/components/schemas/InsightStatus'
+          description: 'The status of the proactive insight. '
         InsightTimeRange:
           $ref: '#/components/schemas/InsightTimeRange'
         PredictionTimeRange:
@@ -2475,37 +2354,31 @@ components:
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
         SsmOpsItemId:
-          allOf:
-            - $ref: '#/components/schemas/SsmOpsItemId'
-            - description: ' The ID of the AWS System Manager OpsItem created for this insight. You must enable the creation of OpstItems insights before they are created for each insight. '
+          $ref: '#/components/schemas/SsmOpsItemId'
+          description: ' The ID of the AWS System Manager OpsItem created for this insight. You must enable the creation of OpstItems insights before they are created for each insight. '
       description: Details about a proactive insight. This object is returned by <code>ListInsights</code>.
     ReactiveInsight:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/InsightId'
-            - description: ' The ID of a reactive insight. '
+          $ref: '#/components/schemas/InsightId'
+          description: ' The ID of a reactive insight. '
         Name:
-          allOf:
-            - $ref: '#/components/schemas/InsightName'
-            - description: ' The name of a reactive insight. '
+          $ref: '#/components/schemas/InsightName'
+          description: ' The name of a reactive insight. '
         Severity:
-          allOf:
-            - $ref: '#/components/schemas/InsightSeverity'
-            - description: ' The severity of a reactive insight. '
+          $ref: '#/components/schemas/InsightSeverity'
+          description: ' The severity of a reactive insight. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/InsightStatus'
-            - description: ' The status of a reactive insight. '
+          $ref: '#/components/schemas/InsightStatus'
+          description: ' The status of a reactive insight. '
         InsightTimeRange:
           $ref: '#/components/schemas/InsightTimeRange'
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
         SsmOpsItemId:
-          allOf:
-            - $ref: '#/components/schemas/SsmOpsItemId'
-            - description: ' The ID of the AWS System Manager OpsItem created for this insight. You must enable the creation of OpstItems insights before they are created for each insight. '
+          $ref: '#/components/schemas/SsmOpsItemId'
+          description: ' The ID of the AWS System Manager OpsItem created for this insight. You must enable the creation of OpstItems insights before they are created for each insight. '
       description: ' Information about a reactive insight. This object is returned by <code>ListInsights</code>. '
     ResourceCollectionType:
       type: string
@@ -2533,21 +2406,18 @@ components:
       type: object
       properties:
         OpsCenter:
-          allOf:
-            - $ref: '#/components/schemas/OpsCenterIntegration'
-            - description: ' Information about whether DevOps Guru is configured to create an OpsItem in AWS Systems Manager OpsCenter for each created insight. '
+          $ref: '#/components/schemas/OpsCenterIntegration'
+          description: ' Information about whether DevOps Guru is configured to create an OpsItem in AWS Systems Manager OpsCenter for each created insight. '
       description: ' Information about the integration of DevOps Guru with another AWS service, such as AWS Systems Manager. '
     EndTimeRange:
       type: object
       properties:
         FromTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The earliest end time in the time range. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The earliest end time in the time range. '
         ToTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The latest end time in the time range. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The latest end time in the time range. '
       description: ' A range of time that specifies when anomalous behavior in an anomaly or insight ended. '
     EventId:
       type: string
@@ -2565,33 +2435,26 @@ components:
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
         Id:
-          allOf:
-            - $ref: '#/components/schemas/EventId'
-            - description: ' The ID of the event. '
+          $ref: '#/components/schemas/EventId'
+          description: ' The ID of the event. '
         Time:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' A <code>Timestamp</code> that specifies the time the event occurred. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' A <code>Timestamp</code> that specifies the time the event occurred. '
         EventSource:
-          allOf:
-            - $ref: '#/components/schemas/EventSource'
-            - description: ' The AWS source that emitted the event. '
+          $ref: '#/components/schemas/EventSource'
+          description: ' The AWS source that emitted the event. '
         Name:
-          allOf:
-            - $ref: '#/components/schemas/EventName'
-            - description: ' The name of the event. '
+          $ref: '#/components/schemas/EventName'
+          description: ' The name of the event. '
         DataSource:
-          allOf:
-            - $ref: '#/components/schemas/EventDataSource'
-            - description: ' The source, <code>AWS_CLOUD_TRAIL</code> or <code>AWS_CODE_DEPLOY</code>, where DevOps Guru analysis found the event. '
+          $ref: '#/components/schemas/EventDataSource'
+          description: ' The source, <code>AWS_CLOUD_TRAIL</code> or <code>AWS_CODE_DEPLOY</code>, where DevOps Guru analysis found the event. '
         EventClass:
-          allOf:
-            - $ref: '#/components/schemas/EventClass'
-            - description: ' The class of the event. The class specifies what the event is related to, such as an infrastructure change, a deployment, or a schema change. '
+          $ref: '#/components/schemas/EventClass'
+          description: ' The class of the event. The class specifies what the event is related to, such as an infrastructure change, a deployment, or a schema change. '
         Resources:
-          allOf:
-            - $ref: '#/components/schemas/EventResources'
-            - description: ' An <code>EventResource</code> object that contains information about the resource that emitted the event. '
+          $ref: '#/components/schemas/EventResources'
+          description: ' An <code>EventResource</code> object that contains information about the resource that emitted the event. '
       description: ' An AWS resource event. AWS resource events and metrics are analyzed by DevOps Guru to find anomalous behavior and provide recommendations to improve your operational solutions. '
     EventResourceType:
       type: string
@@ -2612,17 +2475,14 @@ components:
       type: object
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/EventResourceType'
-            - description: ' The type of resource that emitted an event. '
+          $ref: '#/components/schemas/EventResourceType'
+          description: ' The type of resource that emitted an event. '
         Name:
-          allOf:
-            - $ref: '#/components/schemas/EventResourceName'
-            - description: ' The name of the resource that emitted an event. '
+          $ref: '#/components/schemas/EventResourceName'
+          description: ' The name of the resource that emitted an event. '
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/EventResourceArn'
-            - description: ' The Amazon Resource Name (ARN) of the resource that emitted an event. '
+          $ref: '#/components/schemas/EventResourceArn'
+          description: ' The Amazon Resource Name (ARN) of the resource that emitted an event. '
       description: ' The AWS resource that emitted an event. AWS resource events and metrics are analyzed by DevOps Guru to find anomalous behavior and provide recommendations to improve your operational solutions. '
     Events:
       type: array
@@ -2644,9 +2504,8 @@ components:
       type: object
       properties:
         CloudFormation:
-          allOf:
-            - $ref: '#/components/schemas/CloudFormationCollectionFilter'
-            - description: ' Information about AWS CloudFormation stacks. You can use up to 500 stacks to specify which AWS resources in your account to analyze. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. '
+          $ref: '#/components/schemas/CloudFormationCollectionFilter'
+          description: ' Information about AWS CloudFormation stacks. You can use up to 500 stacks to specify which AWS resources in your account to analyze. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. '
       description: ' Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru. '
     InsightName:
       type: string
@@ -2670,13 +2529,11 @@ components:
         - StartTime
       properties:
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time when the behavior described in an insight started. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time when the behavior described in an insight started. '
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time when the behavior described in an insight ended. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time when the behavior described in an insight ended. '
       description: ' A time ranged that specifies when the observed behavior in an insight started and ended. '
     InsightType:
       type: string
@@ -2691,30 +2548,25 @@ components:
       type: object
       properties:
         FromTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The start time of the time range. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The start time of the time range. '
         ToTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The end time of the time range. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The end time of the time range. '
       description: ' A time range used to specify when the behavior of an insight or anomaly started. '
     ListAnomaliesForInsightRequest:
       type: object
       title: ListAnomaliesForInsightRequest
       properties:
         StartTimeRange:
-          allOf:
-            - $ref: '#/components/schemas/StartTimeRange'
-            - description: ' A time range used to specify when the requested anomalies started. All returned anomalies started during this time range. '
+          $ref: '#/components/schemas/StartTimeRange'
+          description: ' A time range used to specify when the requested anomalies started. All returned anomalies started during this time range. '
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/ListAnomaliesForInsightMaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          $ref: '#/components/schemas/ListAnomaliesForInsightMaxResults'
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/UuidNextToken'
-            - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+          $ref: '#/components/schemas/UuidNextToken'
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
     ProactiveAnomalies:
       type: array
       items:
@@ -2727,25 +2579,20 @@ components:
       type: object
       properties:
         InsightId:
-          allOf:
-            - $ref: '#/components/schemas/InsightId'
-            - description: ' An ID of an insight that is related to the events you want to filter for. '
+          $ref: '#/components/schemas/InsightId'
+          description: ' An ID of an insight that is related to the events you want to filter for. '
         EventTimeRange:
-          allOf:
-            - $ref: '#/components/schemas/EventTimeRange'
-            - description: ' A time range during which you want the filtered events to have occurred. '
+          $ref: '#/components/schemas/EventTimeRange'
+          description: ' A time range during which you want the filtered events to have occurred. '
         EventClass:
-          allOf:
-            - $ref: '#/components/schemas/EventClass'
-            - description: ' The class of the events you want to filter for, such as an infrastructure change, a deployment, or a schema change. '
+          $ref: '#/components/schemas/EventClass'
+          description: ' The class of the events you want to filter for, such as an infrastructure change, a deployment, or a schema change. '
         EventSource:
-          allOf:
-            - $ref: '#/components/schemas/EventSource'
-            - description: ' The AWS source that emitted the events you want to filter for. '
+          $ref: '#/components/schemas/EventSource'
+          description: ' The AWS source that emitted the events you want to filter for. '
         DataSource:
-          allOf:
-            - $ref: '#/components/schemas/EventDataSource'
-            - description: ' The source, <code>AWS_CLOUD_TRAIL</code> or <code>AWS_CODE_DEPLOY</code>, of the events you want returned. '
+          $ref: '#/components/schemas/EventDataSource'
+          description: ' The source, <code>AWS_CLOUD_TRAIL</code> or <code>AWS_CODE_DEPLOY</code>, of the events you want returned. '
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
       description: ' Filters you can use to specify which events are returned when <code>ListEvents</code> is called. '
@@ -2760,17 +2607,14 @@ components:
       title: ListEventsRequest
       properties:
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/ListEventsFilters'
-            - description: ' A <code>ListEventsFilters</code> object used to specify which events to return. '
+          $ref: '#/components/schemas/ListEventsFilters'
+          description: ' A <code>ListEventsFilters</code> object used to specify which events to return. '
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/ListEventsMaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          $ref: '#/components/schemas/ListEventsMaxResults'
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/UuidNextToken'
-            - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+          $ref: '#/components/schemas/UuidNextToken'
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
     ListInsightsMaxResults:
       type: integer
       minimum: 1
@@ -2779,17 +2623,14 @@ components:
       type: object
       properties:
         Ongoing:
-          allOf:
-            - $ref: '#/components/schemas/ListInsightsOngoingStatusFilter'
-            - description: ' A <code>ListInsightsAnyStatusFilter</code> that specifies ongoing insights that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
+          $ref: '#/components/schemas/ListInsightsOngoingStatusFilter'
+          description: ' A <code>ListInsightsAnyStatusFilter</code> that specifies ongoing insights that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
         Closed:
-          allOf:
-            - $ref: '#/components/schemas/ListInsightsClosedStatusFilter'
-            - description: ' A <code>ListInsightsClosedStatusFilter</code> that specifies closed insights that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
+          $ref: '#/components/schemas/ListInsightsClosedStatusFilter'
+          description: ' A <code>ListInsightsClosedStatusFilter</code> that specifies closed insights that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
         Any:
-          allOf:
-            - $ref: '#/components/schemas/ListInsightsAnyStatusFilter'
-            - description: ' A <code>ListInsightsAnyStatusFilter</code> that specifies insights of any status that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
+          $ref: '#/components/schemas/ListInsightsAnyStatusFilter'
+          description: ' A <code>ListInsightsAnyStatusFilter</code> that specifies insights of any status that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
       description: ' A filter used by <code>ListInsights</code> to specify which insights to return. '
     ListInsightsRequest:
       type: object
@@ -2798,17 +2639,14 @@ components:
       title: ListInsightsRequest
       properties:
         StatusFilter:
-          allOf:
-            - $ref: '#/components/schemas/ListInsightsStatusFilter'
-            - description: ' A filter used to filter the returned insights by their status. You can specify one status filter. '
+          $ref: '#/components/schemas/ListInsightsStatusFilter'
+          description: ' A filter used to filter the returned insights by their status. You can specify one status filter. '
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/ListInsightsMaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          $ref: '#/components/schemas/ListInsightsMaxResults'
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/UuidNextToken'
-            - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+          $ref: '#/components/schemas/UuidNextToken'
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
     ProactiveInsights:
       type: array
       items:
@@ -2822,9 +2660,8 @@ components:
       title: ListNotificationChannelsRequest
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/UuidNextToken'
-            - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+          $ref: '#/components/schemas/UuidNextToken'
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
     Locale:
       type: string
       enum:
@@ -2846,17 +2683,14 @@ components:
       title: ListRecommendationsRequest
       properties:
         InsightId:
-          allOf:
-            - $ref: '#/components/schemas/InsightId'
-            - description: ' The ID of the requested insight. '
+          $ref: '#/components/schemas/InsightId'
+          description: ' The ID of the requested insight. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/UuidNextToken'
-            - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+          $ref: '#/components/schemas/UuidNextToken'
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
         Locale:
-          allOf:
-            - $ref: '#/components/schemas/Locale'
-            - description: A locale that specifies the language to use for recommendations.
+          $ref: '#/components/schemas/Locale'
+          description: A locale that specifies the language to use for recommendations.
     Recommendations:
       type: array
       items:
@@ -2873,9 +2707,8 @@ components:
       type: object
       properties:
         OptInStatus:
-          allOf:
-            - $ref: '#/components/schemas/OptInStatus'
-            - description: ' Specifies if DevOps Guru is enabled to create an AWS Systems Manager OpsItem for each created insight. '
+          $ref: '#/components/schemas/OptInStatus'
+          description: ' Specifies if DevOps Guru is enabled to create an AWS Systems Manager OpsItem for each created insight. '
       description: ' Information about whether DevOps Guru is configured to create an OpsItem in AWS Systems Manager OpsCenter for each created insight. '
     PredictionTimeRange:
       type: object
@@ -2883,55 +2716,45 @@ components:
         - StartTime
       properties:
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time range during which a metric limit is expected to be exceeded. This applies to proactive insights only. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time range during which a metric limit is expected to be exceeded. This applies to proactive insights only. '
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time when the behavior in a proactive insight is expected to end. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time when the behavior in a proactive insight is expected to end. '
       description: ' The time range during which anomalous behavior in a proactive anomaly or an insight is expected to occur. '
     ProactiveAnomalySummary:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/AnomalyId'
-            - description: The ID of the anomaly.
+          $ref: '#/components/schemas/AnomalyId'
+          description: The ID of the anomaly.
         Severity:
-          allOf:
-            - $ref: '#/components/schemas/AnomalySeverity'
-            - description: The severity of the anomaly.
+          $ref: '#/components/schemas/AnomalySeverity'
+          description: The severity of the anomaly.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/AnomalyStatus'
-            - description: The status of the anomaly.
+          $ref: '#/components/schemas/AnomalyStatus'
+          description: The status of the anomaly.
         UpdateTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time of the anomaly''s most recent update. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time of the anomaly''s most recent update. '
         AnomalyTimeRange:
           $ref: '#/components/schemas/AnomalyTimeRange'
         AnomalyReportedTimeRange:
-          allOf:
-            - $ref: '#/components/schemas/AnomalyReportedTimeRange'
-            - description: ' A <code>AnomalyReportedTimeRange</code> object that specifies the time range between when the anomaly is opened and the time when it is closed. '
+          $ref: '#/components/schemas/AnomalyReportedTimeRange'
+          description: ' A <code>AnomalyReportedTimeRange</code> object that specifies the time range between when the anomaly is opened and the time when it is closed. '
         PredictionTimeRange:
           $ref: '#/components/schemas/PredictionTimeRange'
         SourceDetails:
-          allOf:
-            - $ref: '#/components/schemas/AnomalySourceDetails'
-            - description: ' Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. '
+          $ref: '#/components/schemas/AnomalySourceDetails'
+          description: ' Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. '
         AssociatedInsightId:
-          allOf:
-            - $ref: '#/components/schemas/InsightId'
-            - description: ' The ID of the insight that contains this anomaly. An insight is composed of related anomalies. '
+          $ref: '#/components/schemas/InsightId'
+          description: ' The ID of the insight that contains this anomaly. An insight is composed of related anomalies. '
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
         Limit:
-          allOf:
-            - $ref: '#/components/schemas/AnomalyLimit'
-            - description: ' A threshold that was exceeded by behavior in analyzed resources. Exceeding this threshold is related to the anomalous behavior that generated this anomaly. '
+          $ref: '#/components/schemas/AnomalyLimit'
+          description: ' A threshold that was exceeded by behavior in analyzed resources. Exceeding this threshold is related to the anomalous behavior that generated this anomaly. '
       description: 'Details about a proactive anomaly. This object is returned by <code>DescribeAnomaly.</code> '
     SsmOpsItemId:
       type: string
@@ -2942,21 +2765,17 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/InsightId'
-            - description: 'The ID of the proactive insight. '
+          $ref: '#/components/schemas/InsightId'
+          description: 'The ID of the proactive insight. '
         Name:
-          allOf:
-            - $ref: '#/components/schemas/InsightName'
-            - description: 'The name of the proactive insight. '
+          $ref: '#/components/schemas/InsightName'
+          description: 'The name of the proactive insight. '
         Severity:
-          allOf:
-            - $ref: '#/components/schemas/InsightSeverity'
-            - description: 'The severity of the proactive insight. '
+          $ref: '#/components/schemas/InsightSeverity'
+          description: 'The severity of the proactive insight. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/InsightStatus'
-            - description: 'The status of the proactive insight. '
+          $ref: '#/components/schemas/InsightStatus'
+          description: 'The status of the proactive insight. '
         InsightTimeRange:
           $ref: '#/components/schemas/InsightTimeRange'
         PredictionTimeRange:
@@ -2964,47 +2783,39 @@ components:
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
         ServiceCollection:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCollection'
-            - description: A collection of the names of AWS services.
+          $ref: '#/components/schemas/ServiceCollection'
+          description: A collection of the names of AWS services.
       description: 'Details about a proactive insight. This object is returned by <code>DescribeInsight.</code> '
     PutFeedbackRequest:
       type: object
       title: PutFeedbackRequest
       properties:
         InsightFeedback:
-          allOf:
-            - $ref: '#/components/schemas/InsightFeedback'
-            - description: ' The feedback from customers is about the recommendations in this insight. '
+          $ref: '#/components/schemas/InsightFeedback'
+          description: ' The feedback from customers is about the recommendations in this insight. '
     ReactiveAnomalySummary:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/AnomalyId'
-            - description: ' The ID of the reactive anomaly. '
+          $ref: '#/components/schemas/AnomalyId'
+          description: ' The ID of the reactive anomaly. '
         Severity:
-          allOf:
-            - $ref: '#/components/schemas/AnomalySeverity'
-            - description: ' The severity of the reactive anomaly. '
+          $ref: '#/components/schemas/AnomalySeverity'
+          description: ' The severity of the reactive anomaly. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/AnomalyStatus'
-            - description: ' The status of the reactive anomaly. '
+          $ref: '#/components/schemas/AnomalyStatus'
+          description: ' The status of the reactive anomaly. '
         AnomalyTimeRange:
           $ref: '#/components/schemas/AnomalyTimeRange'
         AnomalyReportedTimeRange:
-          allOf:
-            - $ref: '#/components/schemas/AnomalyReportedTimeRange'
-            - description: ' A <code>AnomalyReportedTimeRange</code> object that specifies the time range between when the anomaly is opened and the time when it is closed. '
+          $ref: '#/components/schemas/AnomalyReportedTimeRange'
+          description: ' A <code>AnomalyReportedTimeRange</code> object that specifies the time range between when the anomaly is opened and the time when it is closed. '
         SourceDetails:
-          allOf:
-            - $ref: '#/components/schemas/AnomalySourceDetails'
-            - description: ' Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. '
+          $ref: '#/components/schemas/AnomalySourceDetails'
+          description: ' Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. '
         AssociatedInsightId:
-          allOf:
-            - $ref: '#/components/schemas/InsightId'
-            - description: ' The ID of the insight that contains this anomaly. An insight is composed of related anomalies. '
+          $ref: '#/components/schemas/InsightId'
+          description: ' The ID of the insight that contains this anomaly. An insight is composed of related anomalies. '
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
       description: 'Details about a reactive anomaly. This object is returned by <code>DescribeAnomaly.</code> '
@@ -3012,29 +2823,24 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/InsightId'
-            - description: ' The ID of a reactive summary. '
+          $ref: '#/components/schemas/InsightId'
+          description: ' The ID of a reactive summary. '
         Name:
-          allOf:
-            - $ref: '#/components/schemas/InsightName'
-            - description: ' The name of a reactive insight. '
+          $ref: '#/components/schemas/InsightName'
+          description: ' The name of a reactive insight. '
         Severity:
-          allOf:
-            - $ref: '#/components/schemas/InsightSeverity'
-            - description: ' The severity of a reactive insight. '
+          $ref: '#/components/schemas/InsightSeverity'
+          description: ' The severity of a reactive insight. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/InsightStatus'
-            - description: ' The status of a reactive insight. '
+          $ref: '#/components/schemas/InsightStatus'
+          description: ' The status of a reactive insight. '
         InsightTimeRange:
           $ref: '#/components/schemas/InsightTimeRange'
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
         ServiceCollection:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCollection'
-            - description: A collection of the names of AWS services.
+          $ref: '#/components/schemas/ServiceCollection'
+          description: A collection of the names of AWS services.
       description: ' Information about a reactive insight. This object is returned by <code>DescribeInsight.</code> '
     RecommendationDescription:
       type: string
@@ -3056,41 +2862,33 @@ components:
       type: object
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationDescription'
-            - description: ' A description of the problem. '
+          $ref: '#/components/schemas/RecommendationDescription'
+          description: ' A description of the problem. '
         Link:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationLink'
-            - description: ' A hyperlink to information to help you address the problem. '
+          $ref: '#/components/schemas/RecommendationLink'
+          description: ' A hyperlink to information to help you address the problem. '
         Name:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationName'
-            - description: ' The name of the recommendation. '
+          $ref: '#/components/schemas/RecommendationName'
+          description: ' The name of the recommendation. '
         Reason:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationReason'
-            - description: ' The reason DevOps Guru flagged the anomalous behavior as a problem. '
+          $ref: '#/components/schemas/RecommendationReason'
+          description: ' The reason DevOps Guru flagged the anomalous behavior as a problem. '
         RelatedEvents:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationRelatedEvents'
-            - description: ' Events that are related to the problem. Use these events to learn more about what''s happening and to help address the issue. '
+          $ref: '#/components/schemas/RecommendationRelatedEvents'
+          description: ' Events that are related to the problem. Use these events to learn more about what''s happening and to help address the issue. '
         RelatedAnomalies:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationRelatedAnomalies'
-            - description: ' Anomalies that are related to the problem. Use these Anomalies to learn more about what''s happening and to help address the issue. '
+          $ref: '#/components/schemas/RecommendationRelatedAnomalies'
+          description: ' Anomalies that are related to the problem. Use these Anomalies to learn more about what''s happening and to help address the issue. '
       description: ' Recommendation information to help you remediate detected anomalous behavior that generated an insight. '
     RecommendationRelatedAnomaly:
       type: object
       properties:
         Resources:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationRelatedAnomalyResources'
-            - description: ' An array of objects that represent resources in which DevOps Guru detected anomalous behavior. Each object contains the name and type of the resource. '
+          $ref: '#/components/schemas/RecommendationRelatedAnomalyResources'
+          description: ' An array of objects that represent resources in which DevOps Guru detected anomalous behavior. Each object contains the name and type of the resource. '
         SourceDetails:
-          allOf:
-            - $ref: '#/components/schemas/RelatedAnomalySourceDetails'
-            - description: ' Information about where the anomalous behavior related the recommendation was found. For example, details in Amazon CloudWatch metrics. '
+          $ref: '#/components/schemas/RelatedAnomalySourceDetails'
+          description: ' Information about where the anomalous behavior related the recommendation was found. For example, details in Amazon CloudWatch metrics. '
       description: ' Information about an anomaly that is related to a recommendation. '
     RecommendationRelatedAnomalyResources:
       type: array
@@ -3108,13 +2906,11 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationRelatedAnomalyResourceName'
-            - description: ' The name of the resource. '
+          $ref: '#/components/schemas/RecommendationRelatedAnomalyResourceName'
+          description: ' The name of the resource. '
         Type:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationRelatedAnomalyResourceType'
-            - description: ' The type of the resource. '
+          $ref: '#/components/schemas/RecommendationRelatedAnomalyResourceType'
+          description: ' The type of the resource. '
       description: ' Information about a resource in which DevOps Guru detected anomalous behavior. '
     RecommendationRelatedCloudWatchMetricsSourceDetails:
       type: array
@@ -3124,9 +2920,8 @@ components:
       type: object
       properties:
         CloudWatchMetrics:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationRelatedCloudWatchMetricsSourceDetails'
-            - description: ' An array of <code>CloudWatchMetricsDetail</code> objects that contains information about the analyzed metrics that displayed anomalous behavior. '
+          $ref: '#/components/schemas/RecommendationRelatedCloudWatchMetricsSourceDetails'
+          description: ' An array of <code>CloudWatchMetricsDetail</code> objects that contains information about the analyzed metrics that displayed anomalous behavior. '
       description: ' Contains an array of <code>RecommendationRelatedCloudWatchMetricsSourceDetail</code> objects that contain the name and namespace of an Amazon CloudWatch metric. '
     RecommendationRelatedCloudWatchMetricsSourceMetricName:
       type: string
@@ -3136,13 +2931,11 @@ components:
       type: object
       properties:
         MetricName:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationRelatedCloudWatchMetricsSourceMetricName'
-            - description: The name of the CloudWatch metric.
+          $ref: '#/components/schemas/RecommendationRelatedCloudWatchMetricsSourceMetricName'
+          description: The name of the CloudWatch metric.
         Namespace:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationRelatedCloudWatchMetricsSourceNamespace'
-            - description: The namespace of the CloudWatch metric. A namespace is a container for CloudWatch metrics.
+          $ref: '#/components/schemas/RecommendationRelatedCloudWatchMetricsSourceNamespace'
+          description: The namespace of the CloudWatch metric. A namespace is a container for CloudWatch metrics.
       description: ' Information about an Amazon CloudWatch metric that is analyzed by DevOps Guru. It is one of many analyzed metrics that are used to generate insights. '
     RecommendationRelatedEventName:
       type: string
@@ -3154,13 +2947,11 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationRelatedEventName'
-            - description: ' The name of the event. This corresponds to the <code>Name</code> field in an <code>Event</code> object. '
+          $ref: '#/components/schemas/RecommendationRelatedEventName'
+          description: ' The name of the event. This corresponds to the <code>Name</code> field in an <code>Event</code> object. '
         Resources:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationRelatedEventResources'
-            - description: ' A <code>ResourceCollection</code> object that contains arrays of the names of AWS CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks. '
+          $ref: '#/components/schemas/RecommendationRelatedEventResources'
+          description: ' A <code>ResourceCollection</code> object that contains arrays of the names of AWS CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks. '
       description: ' Information about an event that is related to a recommendation. '
     RecommendationRelatedEventResourceName:
       type: string
@@ -3170,13 +2961,11 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationRelatedEventResourceName'
-            - description: ' The name of the resource that emitted the event. This corresponds to the <code>Name</code> field in an <code>EventResource</code> object. '
+          $ref: '#/components/schemas/RecommendationRelatedEventResourceName'
+          description: ' The name of the resource that emitted the event. This corresponds to the <code>Name</code> field in an <code>EventResource</code> object. '
         Type:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationRelatedEventResourceType'
-            - description: ' The type of the resource that emitted the event. This corresponds to the <code>Type</code> field in an <code>EventResource</code> object. '
+          $ref: '#/components/schemas/RecommendationRelatedEventResourceType'
+          description: ' The type of the resource that emitted the event. This corresponds to the <code>Type</code> field in an <code>EventResource</code> object. '
       description: ' Information about an AWS resource that emitted and event that is related to a recommendation in an insight. '
     RemoveNotificationChannelRequest:
       type: object
@@ -3191,19 +2980,16 @@ components:
       type: object
       properties:
         Severities:
-          allOf:
-            - $ref: '#/components/schemas/InsightSeverities'
-            - description: ' An array of severity values used to search for insights. '
+          $ref: '#/components/schemas/InsightSeverities'
+          description: ' An array of severity values used to search for insights. '
         Statuses:
-          allOf:
-            - $ref: '#/components/schemas/InsightStatuses'
-            - description: ' An array of status values used to search for insights. '
+          $ref: '#/components/schemas/InsightStatuses'
+          description: ' An array of status values used to search for insights. '
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
         ServiceCollection:
-          allOf:
-            - $ref: '#/components/schemas/ServiceCollection'
-            - description: A collection of the names of AWS services.
+          $ref: '#/components/schemas/ServiceCollection'
+          description: A collection of the names of AWS services.
       description: ' Specifies one or more severity values and one or more status values that are used to search for insights. '
     SearchInsightsMaxResults:
       type: integer
@@ -3217,25 +3003,20 @@ components:
       title: SearchInsightsRequest
       properties:
         StartTimeRange:
-          allOf:
-            - $ref: '#/components/schemas/StartTimeRange'
-            - description: ' The start of the time range passed in. Returned insights occurred after this time. '
+          $ref: '#/components/schemas/StartTimeRange'
+          description: ' The start of the time range passed in. Returned insights occurred after this time. '
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/SearchInsightsFilters'
-            - description: ' A <code>SearchInsightsFilters</code> object that is used to set the severity and status filters on your insight search. '
+          $ref: '#/components/schemas/SearchInsightsFilters'
+          description: ' A <code>SearchInsightsFilters</code> object that is used to set the severity and status filters on your insight search. '
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/SearchInsightsMaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          $ref: '#/components/schemas/SearchInsightsMaxResults'
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/UuidNextToken'
-            - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+          $ref: '#/components/schemas/UuidNextToken'
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
         Type:
-          allOf:
-            - $ref: '#/components/schemas/InsightType'
-            - description: ' The type of insights you are searching for (<code>REACTIVE</code> or <code>PROACTIVE</code>). '
+          $ref: '#/components/schemas/InsightType'
+          description: ' The type of insights you are searching for (<code>REACTIVE</code> or <code>PROACTIVE</code>). '
     ServiceNames:
       type: array
       items:
@@ -3272,49 +3053,40 @@ components:
       type: object
       properties:
         OpenProactiveInsights:
-          allOf:
-            - $ref: '#/components/schemas/NumOpenProactiveInsights'
-            - description: The number of open proactive insights in the AWS service
+          $ref: '#/components/schemas/NumOpenProactiveInsights'
+          description: The number of open proactive insights in the AWS service
         OpenReactiveInsights:
-          allOf:
-            - $ref: '#/components/schemas/NumOpenReactiveInsights'
-            - description: The number of open reactive insights in the AWS service
+          $ref: '#/components/schemas/NumOpenReactiveInsights'
+          description: The number of open reactive insights in the AWS service
       description: Contains the number of open proactive and reactive insights in an analyzed AWS service.
     ServiceHealth:
       type: object
       properties:
         ServiceName:
-          allOf:
-            - $ref: '#/components/schemas/ServiceName'
-            - description: The name of the AWS service.
+          $ref: '#/components/schemas/ServiceName'
+          description: The name of the AWS service.
         Insight:
-          allOf:
-            - $ref: '#/components/schemas/ServiceInsightHealth'
-            - description: Represents the health of an AWS service. This is a <code>ServiceInsightHealth</code> that contains the number of open proactive and reactive insights for this service.
+          $ref: '#/components/schemas/ServiceInsightHealth'
+          description: Represents the health of an AWS service. This is a <code>ServiceInsightHealth</code> that contains the number of open proactive and reactive insights for this service.
       description: Represents the health of an AWS service.
     ServiceResourceCost:
       type: object
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: The type of the AWS resource.
+          $ref: '#/components/schemas/ResourceType'
+          description: The type of the AWS resource.
         State:
-          allOf:
-            - $ref: '#/components/schemas/CostEstimationServiceResourceState'
-            - description: 'The state of the resource. The resource is <code>ACTIVE</code> if it produces metrics, events, or logs within an hour, otherwise it is <code>INACTIVE</code>. You pay for the number of active AWS resource hours analyzed for each resource. Inactive resources are not charged. '
+          $ref: '#/components/schemas/CostEstimationServiceResourceState'
+          description: 'The state of the resource. The resource is <code>ACTIVE</code> if it produces metrics, events, or logs within an hour, otherwise it is <code>INACTIVE</code>. You pay for the number of active AWS resource hours analyzed for each resource. Inactive resources are not charged. '
         Count:
-          allOf:
-            - $ref: '#/components/schemas/CostEstimationServiceResourceCount'
-            - description: The number of active resources analyzed for this service to create a monthly cost estimate.
+          $ref: '#/components/schemas/CostEstimationServiceResourceCount'
+          description: The number of active resources analyzed for this service to create a monthly cost estimate.
         UnitCost:
-          allOf:
-            - $ref: '#/components/schemas/Cost'
-            - description: 'The price per hour to analyze the resources in the service. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html">Estimate your Amazon DevOps Guru costs</a> and <a href="http://aws.amazon.com/devops-guru/pricing/">Amazon DevOps Guru pricing</a>.'
+          $ref: '#/components/schemas/Cost'
+          description: 'The price per hour to analyze the resources in the service. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html">Estimate your Amazon DevOps Guru costs</a> and <a href="http://aws.amazon.com/devops-guru/pricing/">Amazon DevOps Guru pricing</a>.'
         Cost:
-          allOf:
-            - $ref: '#/components/schemas/Cost'
-            - description: The total estimated monthly cost to analyze the active resources for this resource.
+          $ref: '#/components/schemas/Cost'
+          description: The total estimated monthly cost to analyze the active resources for this resource.
       description: 'An object that contains information about the estimated monthly cost to analyze an AWS resource. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html">Estimate your Amazon DevOps Guru costs</a> and <a href="http://aws.amazon.com/devops-guru/pricing/">Amazon DevOps Guru pricing</a>.'
     TopicArn:
       type: string
@@ -3328,13 +3100,11 @@ components:
       title: StartCostEstimationRequest
       properties:
         ResourceCollection:
-          allOf:
-            - $ref: '#/components/schemas/CostEstimationResourceCollectionFilter'
-            - description: The collection of AWS resources used to create a monthly DevOps Guru cost estimate.
+          $ref: '#/components/schemas/CostEstimationResourceCollectionFilter'
+          description: The collection of AWS resources used to create a monthly DevOps Guru cost estimate.
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: The idempotency token used to identify each cost estimate request.
+          $ref: '#/components/schemas/ClientToken'
+          description: The idempotency token used to identify each cost estimate request.
     UpdateStackNames:
       type: array
       items:
@@ -3350,9 +3120,8 @@ components:
       type: object
       properties:
         CloudFormation:
-          allOf:
-            - $ref: '#/components/schemas/UpdateCloudFormationCollectionFilter'
-            - description: ' An collection of AWS CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks. '
+          $ref: '#/components/schemas/UpdateCloudFormationCollectionFilter'
+          description: ' An collection of AWS CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks. '
       description: ' Contains information used to update a collection of AWS resources. '
     UpdateResourceCollectionRequest:
       type: object
@@ -3362,9 +3131,8 @@ components:
       title: UpdateResourceCollectionRequest
       properties:
         Action:
-          allOf:
-            - $ref: '#/components/schemas/UpdateResourceCollectionAction'
-            - description: ' Specifies if the resource collection in the request is added or deleted to the resource collection. '
+          $ref: '#/components/schemas/UpdateResourceCollectionAction'
+          description: ' Specifies if the resource collection in the request is added or deleted to the resource collection. '
         ResourceCollection:
           $ref: '#/components/schemas/UpdateResourceCollectionFilter'
     UpdateServiceIntegrationConfig:
@@ -3380,8 +3148,7 @@ components:
       title: UpdateServiceIntegrationRequest
       properties:
         ServiceIntegration:
-          allOf:
-            - $ref: '#/components/schemas/UpdateServiceIntegrationConfig'
-            - description: ' An <code>IntegratedServiceConfig</code> object used to specify the integrated service you want to update, and whether you want to update it to enabled or disabled. '
+          $ref: '#/components/schemas/UpdateServiceIntegrationConfig'
+          description: ' An <code>IntegratedServiceConfig</code> object used to specify the integrated service you want to update, and whether you want to update it to enabled or disabled. '
 security:
   - hmac: []

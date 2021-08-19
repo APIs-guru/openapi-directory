@@ -208,29 +208,23 @@ paths:
                   type: object
                   properties:
                     samlMetadataDocument:
-                      allOf:
-                        - $ref: '#/components/schemas/SamlMetadataDocument'
-                        - description: SAML 2.0 Metadata document from identity provider (IdP).
+                      $ref: '#/components/schemas/SamlMetadataDocument'
+                      description: SAML 2.0 Metadata document from identity provider (IdP).
                     samlMetadataURL:
-                      allOf:
-                        - $ref: '#/components/schemas/url'
-                        - description: Provide the metadata URL from your SAML 2.0 compliant identity provider (IdP).
+                      $ref: '#/components/schemas/url'
+                      description: Provide the metadata URL from your SAML 2.0 compliant identity provider (IdP).
                     applicationCallBackURL:
-                      allOf:
-                        - $ref: '#/components/schemas/url'
-                        - description: The redirect or sign-in URL that should be entered into the SAML 2.0 compliant identity provider configuration (IdP).
+                      $ref: '#/components/schemas/url'
+                      description: The redirect or sign-in URL that should be entered into the SAML 2.0 compliant identity provider configuration (IdP).
                     federationURN:
-                      allOf:
-                        - $ref: '#/components/schemas/urn'
-                        - description: The Uniform Resource Name (URN). Also referred as Service Provider URN or Audience URI or Service Provider Entity ID.
+                      $ref: '#/components/schemas/urn'
+                      description: The Uniform Resource Name (URN). Also referred as Service Provider URN or Audience URI or Service Provider Entity ID.
                     federationProviderName:
-                      allOf:
-                        - $ref: '#/components/schemas/FederationProviderName'
-                        - description: Name of the identity provider (IdP).
+                      $ref: '#/components/schemas/FederationProviderName'
+                      description: Name of the identity provider (IdP).
                     attributeMap:
-                      allOf:
-                        - $ref: '#/components/schemas/AttributeMap'
-                        - description: 'SAML attribute name and value. The name must always be <code>Email</code> and the value should be set to the attribute definition in which user email is set. For example, name would be <code>Email</code> and value <code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress</code>. Please check your SAML 2.0 compliant identity provider (IdP) documentation for details.'
+                      $ref: '#/components/schemas/AttributeMap'
+                      description: 'SAML attribute name and value. The name must always be <code>Email</code> and the value should be set to the attribute definition in which user email is set. For example, name would be <code>Email</code> and value <code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress</code>. Please check your SAML 2.0 compliant identity provider (IdP) documentation for details.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -462,29 +456,23 @@ paths:
                   type: object
                   properties:
                     samlMetadataDocument:
-                      allOf:
-                        - $ref: '#/components/schemas/SamlMetadataDocument'
-                        - description: SAML 2.0 Metadata document from identity provider (IdP).
+                      $ref: '#/components/schemas/SamlMetadataDocument'
+                      description: SAML 2.0 Metadata document from identity provider (IdP).
                     samlMetadataURL:
-                      allOf:
-                        - $ref: '#/components/schemas/url'
-                        - description: Provide the metadata URL from your SAML 2.0 compliant identity provider (IdP).
+                      $ref: '#/components/schemas/url'
+                      description: Provide the metadata URL from your SAML 2.0 compliant identity provider (IdP).
                     applicationCallBackURL:
-                      allOf:
-                        - $ref: '#/components/schemas/url'
-                        - description: The redirect or sign-in URL that should be entered into the SAML 2.0 compliant identity provider configuration (IdP).
+                      $ref: '#/components/schemas/url'
+                      description: The redirect or sign-in URL that should be entered into the SAML 2.0 compliant identity provider configuration (IdP).
                     federationURN:
-                      allOf:
-                        - $ref: '#/components/schemas/urn'
-                        - description: The Uniform Resource Name (URN). Also referred as Service Provider URN or Audience URI or Service Provider Entity ID.
+                      $ref: '#/components/schemas/urn'
+                      description: The Uniform Resource Name (URN). Also referred as Service Provider URN or Audience URI or Service Provider Entity ID.
                     federationProviderName:
-                      allOf:
-                        - $ref: '#/components/schemas/FederationProviderName'
-                        - description: Name of the identity provider (IdP).
+                      $ref: '#/components/schemas/FederationProviderName'
+                      description: Name of the identity provider (IdP).
                     attributeMap:
-                      allOf:
-                        - $ref: '#/components/schemas/AttributeMap'
-                        - description: 'SAML attribute name and value. The name must always be <code>Email</code> and the value should be set to the attribute definition in which user email is set. For example, name would be <code>Email</code> and value <code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress</code>. Please check your SAML 2.0 compliant identity provider (IdP) documentation for details.'
+                      $ref: '#/components/schemas/AttributeMap'
+                      description: 'SAML attribute name and value. The name must always be <code>Email</code> and the value should be set to the attribute definition in which user email is set. For example, name would be <code>Email</code> and value <code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress</code>. Please check your SAML 2.0 compliant identity provider (IdP) documentation for details.'
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
@@ -699,17 +687,14 @@ components:
       type: object
       properties:
         environmentId:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The unique identifier for FinSpace environment that you created.
+          $ref: '#/components/schemas/IdType'
+          description: The unique identifier for FinSpace environment that you created.
         environmentArn:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentArn'
-            - description: The Amazon Resource Name (ARN) of the FinSpace environment that you created.
+          $ref: '#/components/schemas/EnvironmentArn'
+          description: The Amazon Resource Name (ARN) of the FinSpace environment that you created.
         environmentUrl:
-          allOf:
-            - $ref: '#/components/schemas/url'
-            - description: The sign-in url for the web application of the FinSpace environment you created.
+          $ref: '#/components/schemas/url'
+          description: The sign-in url for the web application of the FinSpace environment you created.
     TagValue:
       type: string
       pattern: '^[a-zA-Z0-9+-=._:@ ]+$'
@@ -753,27 +738,23 @@ components:
       type: object
       properties:
         environment:
-          allOf:
-            - $ref: '#/components/schemas/Environment'
-            - description: The name of the FinSpace environment.
+          $ref: '#/components/schemas/Environment'
+          description: The name of the FinSpace environment.
     ListEnvironmentsResponse:
       type: object
       properties:
         environments:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentList'
-            - description: A list of all of your FinSpace environments.
+          $ref: '#/components/schemas/EnvironmentList'
+          description: A list of all of your FinSpace environments.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: A token that you can use in a subsequent call to retrieve the next set of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: A token that you can use in a subsequent call to retrieve the next set of results.
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: A list of all tags for a resource.
+          $ref: '#/components/schemas/TagMap'
+          description: A list of all tags for a resource.
     InvalidRequestException: {}
     TagResourceResponse:
       type: object
@@ -790,9 +771,8 @@ components:
       type: object
       properties:
         environment:
-          allOf:
-            - $ref: '#/components/schemas/Environment'
-            - description: Returns the FinSpace environment object.
+          $ref: '#/components/schemas/Environment'
+          description: Returns the FinSpace environment object.
     EnvironmentName:
       type: string
       pattern: '^[a-zA-Z0-9]+[a-zA-Z0-9-]*[a-zA-Z0-9]$'
@@ -823,29 +803,23 @@ components:
       type: object
       properties:
         samlMetadataDocument:
-          allOf:
-            - $ref: '#/components/schemas/SamlMetadataDocument'
-            - description: SAML 2.0 Metadata document from identity provider (IdP).
+          $ref: '#/components/schemas/SamlMetadataDocument'
+          description: SAML 2.0 Metadata document from identity provider (IdP).
         samlMetadataURL:
-          allOf:
-            - $ref: '#/components/schemas/url'
-            - description: Provide the metadata URL from your SAML 2.0 compliant identity provider (IdP).
+          $ref: '#/components/schemas/url'
+          description: Provide the metadata URL from your SAML 2.0 compliant identity provider (IdP).
         applicationCallBackURL:
-          allOf:
-            - $ref: '#/components/schemas/url'
-            - description: The redirect or sign-in URL that should be entered into the SAML 2.0 compliant identity provider configuration (IdP).
+          $ref: '#/components/schemas/url'
+          description: The redirect or sign-in URL that should be entered into the SAML 2.0 compliant identity provider configuration (IdP).
         federationURN:
-          allOf:
-            - $ref: '#/components/schemas/urn'
-            - description: The Uniform Resource Name (URN). Also referred as Service Provider URN or Audience URI or Service Provider Entity ID.
+          $ref: '#/components/schemas/urn'
+          description: The Uniform Resource Name (URN). Also referred as Service Provider URN or Audience URI or Service Provider Entity ID.
         federationProviderName:
-          allOf:
-            - $ref: '#/components/schemas/FederationProviderName'
-            - description: Name of the identity provider (IdP).
+          $ref: '#/components/schemas/FederationProviderName'
+          description: Name of the identity provider (IdP).
         attributeMap:
-          allOf:
-            - $ref: '#/components/schemas/AttributeMap'
-            - description: 'SAML attribute name and value. The name must always be <code>Email</code> and the value should be set to the attribute definition in which user email is set. For example, name would be <code>Email</code> and value <code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress</code>. Please check your SAML 2.0 compliant identity provider (IdP) documentation for details.'
+          $ref: '#/components/schemas/AttributeMap'
+          description: 'SAML attribute name and value. The name must always be <code>Email</code> and the value should be set to the attribute definition in which user email is set. For example, name would be <code>Email</code> and value <code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress</code>. Please check your SAML 2.0 compliant identity provider (IdP) documentation for details.'
       description: Configuration information when authentication mode is FEDERATED.
     CreateEnvironmentRequest:
       type: object
@@ -854,29 +828,23 @@ components:
       title: CreateEnvironmentRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentName'
-            - description: The name of the FinSpace environment to be created.
+          $ref: '#/components/schemas/EnvironmentName'
+          description: The name of the FinSpace environment to be created.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the FinSpace environment to be created.
+          $ref: '#/components/schemas/Description'
+          description: The description of the FinSpace environment to be created.
         kmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyId'
-            - description: The KMS key id to encrypt your data in the FinSpace environment.
+          $ref: '#/components/schemas/KmsKeyId'
+          description: The KMS key id to encrypt your data in the FinSpace environment.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: Add tags to your FinSpace environment.
+          $ref: '#/components/schemas/TagMap'
+          description: Add tags to your FinSpace environment.
         federationMode:
-          allOf:
-            - $ref: '#/components/schemas/FederationMode'
-            - description: <p>Authentication mode for the environment.</p> <ul> <li> <p> <code>FEDERATED</code> - Users access FinSpace through Single Sign On (SSO) via your Identity provider.</p> </li> <li> <p> <code>LOCAL</code> - Users access FinSpace via email and password managed within the FinSpace environment.</p> </li> </ul>
+          $ref: '#/components/schemas/FederationMode'
+          description: <p>Authentication mode for the environment.</p> <ul> <li> <p> <code>FEDERATED</code> - Users access FinSpace through Single Sign On (SSO) via your Identity provider.</p> </li> <li> <p> <code>LOCAL</code> - Users access FinSpace via email and password managed within the FinSpace environment.</p> </li> </ul>
         federationParameters:
-          allOf:
-            - $ref: '#/components/schemas/FederationParameters'
-            - description: Configuration information when authentication mode is FEDERATED.
+          $ref: '#/components/schemas/FederationParameters'
+          description: Configuration information when authentication mode is FEDERATED.
     IdType:
       type: string
       pattern: '^[a-zA-Z0-9]{1,26}$'
@@ -913,53 +881,41 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentName'
-            - description: The name of the FinSpace environment.
+          $ref: '#/components/schemas/EnvironmentName'
+          description: The name of the FinSpace environment.
         environmentId:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The identifier of the FinSpace environment.
+          $ref: '#/components/schemas/IdType'
+          description: The identifier of the FinSpace environment.
         awsAccountId:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The ID of the AWS account in which the FinSpace environment is created.
+          $ref: '#/components/schemas/IdType'
+          description: The ID of the AWS account in which the FinSpace environment is created.
         status:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentStatus'
-            - description: The current status of creation of the FinSpace environment.
+          $ref: '#/components/schemas/EnvironmentStatus'
+          description: The current status of creation of the FinSpace environment.
         environmentUrl:
-          allOf:
-            - $ref: '#/components/schemas/url'
-            - description: The sign-in url for the web application of your FinSpace environment.
+          $ref: '#/components/schemas/url'
+          description: The sign-in url for the web application of your FinSpace environment.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the FinSpace environment.
+          $ref: '#/components/schemas/Description'
+          description: The description of the FinSpace environment.
         environmentArn:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentArn'
-            - description: The Amazon Resource Name (ARN) of your FinSpace environment.
+          $ref: '#/components/schemas/EnvironmentArn'
+          description: The Amazon Resource Name (ARN) of your FinSpace environment.
         sageMakerStudioDomainUrl:
-          allOf:
-            - $ref: '#/components/schemas/SmsDomainUrl'
-            - description: The url of the integrated FinSpace notebook environment in your web application.
+          $ref: '#/components/schemas/SmsDomainUrl'
+          description: The url of the integrated FinSpace notebook environment in your web application.
         kmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyId'
-            - description: The KMS key id used to encrypt in the FinSpace environment.
+          $ref: '#/components/schemas/KmsKeyId'
+          description: The KMS key id used to encrypt in the FinSpace environment.
         dedicatedServiceAccountId:
-          allOf:
-            - $ref: '#/components/schemas/IdType'
-            - description: The AWS account ID of the dedicated service account associated with your FinSpace environment.
+          $ref: '#/components/schemas/IdType'
+          description: The AWS account ID of the dedicated service account associated with your FinSpace environment.
         federationMode:
-          allOf:
-            - $ref: '#/components/schemas/FederationMode'
-            - description: The authentication mode for the environment.
+          $ref: '#/components/schemas/FederationMode'
+          description: The authentication mode for the environment.
         federationParameters:
-          allOf:
-            - $ref: '#/components/schemas/FederationParameters'
-            - description: Configuration information when authentication mode is FEDERATED.
+          $ref: '#/components/schemas/FederationParameters'
+          description: Configuration information when authentication mode is FEDERATED.
       description: Represents an FinSpace environment.
     EnvironmentList:
       type: array
@@ -1004,9 +960,8 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: One or more tags to be assigned to the resource.
+          $ref: '#/components/schemas/TagMap'
+          description: One or more tags to be assigned to the resource.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -1016,17 +971,14 @@ components:
       title: UpdateEnvironmentRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentName'
-            - description: The name of the environment.
+          $ref: '#/components/schemas/EnvironmentName'
+          description: The name of the environment.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the environment.
+          $ref: '#/components/schemas/Description'
+          description: The description of the environment.
         federationMode:
-          allOf:
-            - $ref: '#/components/schemas/FederationMode'
-            - description: <p>Authentication mode for the environment.</p> <ul> <li> <p> <code>FEDERATED</code> - Users access FinSpace through Single Sign On (SSO) via your Identity provider.</p> </li> <li> <p> <code>LOCAL</code> - Users access FinSpace via email and password managed within the FinSpace environment.</p> </li> </ul>
+          $ref: '#/components/schemas/FederationMode'
+          description: <p>Authentication mode for the environment.</p> <ul> <li> <p> <code>FEDERATED</code> - Users access FinSpace through Single Sign On (SSO) via your Identity provider.</p> </li> <li> <p> <code>LOCAL</code> - Users access FinSpace via email and password managed within the FinSpace environment.</p> </li> </ul>
         federationParameters:
           $ref: '#/components/schemas/FederationParameters'
 security:

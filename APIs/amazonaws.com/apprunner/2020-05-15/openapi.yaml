@@ -1387,17 +1387,14 @@ components:
         - CustomDomain
       properties:
         DNSTarget:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The App Runner subdomain of the App Runner service. The custom domain name is mapped to this target name.
+          $ref: '#/components/schemas/String'
+          description: The App Runner subdomain of the App Runner service. The custom domain name is mapped to this target name.
         ServiceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of the App Runner service with which a custom domain name is associated.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of the App Runner service with which a custom domain name is associated.
         CustomDomain:
-          allOf:
-            - $ref: '#/components/schemas/CustomDomain'
-            - description: A description of the domain name that's being associated.
+          $ref: '#/components/schemas/CustomDomain'
+          description: A description of the domain name that's being associated.
     AssociateCustomDomainRequest:
       type: object
       required:
@@ -1406,17 +1403,14 @@ components:
       title: AssociateCustomDomainRequest
       properties:
         ServiceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of the App Runner service that you want to associate a custom domain name with.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of the App Runner service that you want to associate a custom domain name with.
         DomainName:
-          allOf:
-            - $ref: '#/components/schemas/DomainName'
-            - description: 'A custom domain endpoint to associate. Specify a root domain (for example, <code>example.com</code>), a subdomain (for example, <code>login.example.com</code> or <code>admin.login.example.com</code>), or a wildcard (for example, <code>*.example.com</code>).'
+          $ref: '#/components/schemas/DomainName'
+          description: 'A custom domain endpoint to associate. Specify a root domain (for example, <code>example.com</code>), a subdomain (for example, <code>login.example.com</code> or <code>admin.login.example.com</code>), or a wildcard (for example, <code>*.example.com</code>).'
         EnableWWWSubdomain:
-          allOf:
-            - $ref: '#/components/schemas/NullableBoolean'
-            - description: '<p>Set to <code>true</code> to associate the subdomain <code>www.<i>DomainName</i> </code> with the App Runner service in addition to the base domain.</p> <p>Default: <code>true</code> </p>'
+          $ref: '#/components/schemas/NullableBoolean'
+          description: '<p>Set to <code>true</code> to associate the subdomain <code>www.<i>DomainName</i> </code> with the App Runner service in addition to the base domain.</p> <p>Default: <code>true</code> </p>'
     InvalidRequestException: {}
     InternalServiceErrorException: {}
     InvalidStateException: {}
@@ -1426,9 +1420,8 @@ components:
         - AutoScalingConfiguration
       properties:
         AutoScalingConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/AutoScalingConfiguration'
-            - description: A description of the App Runner auto scaling configuration that's created by this request.
+          $ref: '#/components/schemas/AutoScalingConfiguration'
+          description: A description of the App Runner auto scaling configuration that's created by this request.
     CreateAutoScalingConfigurationRequest:
       type: object
       required:
@@ -1436,25 +1429,20 @@ components:
       title: CreateAutoScalingConfigurationRequest
       properties:
         AutoScalingConfigurationName:
-          allOf:
-            - $ref: '#/components/schemas/AutoScalingConfigurationName'
-            - description: 'A name for the auto scaling configuration. When you use it for the first time in an AWS Region, App Runner creates revision number <code>1</code> of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.'
+          $ref: '#/components/schemas/AutoScalingConfigurationName'
+          description: 'A name for the auto scaling configuration. When you use it for the first time in an AWS Region, App Runner creates revision number <code>1</code> of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.'
         MaxConcurrency:
-          allOf:
-            - $ref: '#/components/schemas/ASConfigMaxConcurrency'
-            - description: '<p>The maximum number of concurrent requests that you want an instance to process. If the number of concurrent requests exceeds this limit, App Runner scales up your service.</p> <p>Default: <code>100</code> </p>'
+          $ref: '#/components/schemas/ASConfigMaxConcurrency'
+          description: '<p>The maximum number of concurrent requests that you want an instance to process. If the number of concurrent requests exceeds this limit, App Runner scales up your service.</p> <p>Default: <code>100</code> </p>'
         MinSize:
-          allOf:
-            - $ref: '#/components/schemas/ASConfigMinSize'
-            - description: '<p>The minimum number of instances that App Runner provisions for your service. The service always has at least <code>MinSize</code> provisioned instances. Some of them actively serve traffic. The rest of them (provisioned and inactive instances) are a cost-effective compute capacity reserve and are ready to be quickly activated. You pay for memory usage of all the provisioned instances. You pay for CPU usage of only the active subset.</p> <p>App Runner temporarily doubles the number of provisioned instances during deployments, to maintain the same capacity for both old and new code.</p> <p>Default: <code>1</code> </p>'
+          $ref: '#/components/schemas/ASConfigMinSize'
+          description: '<p>The minimum number of instances that App Runner provisions for your service. The service always has at least <code>MinSize</code> provisioned instances. Some of them actively serve traffic. The rest of them (provisioned and inactive instances) are a cost-effective compute capacity reserve and are ready to be quickly activated. You pay for memory usage of all the provisioned instances. You pay for CPU usage of only the active subset.</p> <p>App Runner temporarily doubles the number of provisioned instances during deployments, to maintain the same capacity for both old and new code.</p> <p>Default: <code>1</code> </p>'
         MaxSize:
-          allOf:
-            - $ref: '#/components/schemas/ASConfigMaxSize'
-            - description: '<p>The maximum number of instances that your service scales up to. At most <code>MaxSize</code> instances actively serve traffic for your service.</p> <p>Default: <code>25</code> </p>'
+          $ref: '#/components/schemas/ASConfigMaxSize'
+          description: '<p>The maximum number of instances that your service scales up to. At most <code>MaxSize</code> instances actively serve traffic for your service.</p> <p>Default: <code>25</code> </p>'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: A list of metadata items that you can associate with your auto scaling configuration resource. A tag is a key-value pair.
+          $ref: '#/components/schemas/TagList'
+          description: A list of metadata items that you can associate with your auto scaling configuration resource. A tag is a key-value pair.
     ServiceQuotaExceededException: {}
     CreateConnectionResponse:
       type: object
@@ -1462,9 +1450,8 @@ components:
         - Connection
       properties:
         Connection:
-          allOf:
-            - $ref: '#/components/schemas/Connection'
-            - description: A description of the App Runner connection that's created by this request.
+          $ref: '#/components/schemas/Connection'
+          description: A description of the App Runner connection that's created by this request.
     CreateConnectionRequest:
       type: object
       required:
@@ -1473,17 +1460,14 @@ components:
       title: CreateConnectionRequest
       properties:
         ConnectionName:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionName'
-            - description: A name for the new connection. It must be unique across all App Runner connections for the AWS account in the AWS Region.
+          $ref: '#/components/schemas/ConnectionName'
+          description: A name for the new connection. It must be unique across all App Runner connections for the AWS account in the AWS Region.
         ProviderType:
-          allOf:
-            - $ref: '#/components/schemas/ProviderType'
-            - description: The source repository provider.
+          $ref: '#/components/schemas/ProviderType'
+          description: The source repository provider.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: A list of metadata items that you can associate with your connection resource. A tag is a key-value pair.
+          $ref: '#/components/schemas/TagList'
+          description: A list of metadata items that you can associate with your connection resource. A tag is a key-value pair.
     CreateServiceResponse:
       type: object
       required:
@@ -1491,13 +1475,11 @@ components:
         - OperationId
       properties:
         Service:
-          allOf:
-            - $ref: '#/components/schemas/Service'
-            - description: A description of the App Runner service that's created by this request.
+          $ref: '#/components/schemas/Service'
+          description: A description of the App Runner service that's created by this request.
         OperationId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: 'The unique ID of the asynchronous operation that this request started. You can use it combined with the <a href="https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html">ListOperations</a> call to track the operation''s progress.'
+          $ref: '#/components/schemas/UUID'
+          description: 'The unique ID of the asynchronous operation that this request started. You can use it combined with the <a href="https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html">ListOperations</a> call to track the operation''s progress.'
     CreateServiceRequest:
       type: object
       required:
@@ -1506,42 +1488,34 @@ components:
       title: CreateServiceRequest
       properties:
         ServiceName:
-          allOf:
-            - $ref: '#/components/schemas/ServiceName'
-            - description: A name for the new service. It must be unique across all the running App Runner services in your AWS account in the AWS Region.
+          $ref: '#/components/schemas/ServiceName'
+          description: A name for the new service. It must be unique across all the running App Runner services in your AWS account in the AWS Region.
         SourceConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/SourceConfiguration'
-            - description: The source to deploy to the App Runner service. It can be a code or an image repository.
+          $ref: '#/components/schemas/SourceConfiguration'
+          description: The source to deploy to the App Runner service. It can be a code or an image repository.
         InstanceConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/InstanceConfiguration'
-            - description: The runtime configuration of instances (scaling units) of the App Runner service.
+          $ref: '#/components/schemas/InstanceConfiguration'
+          description: The runtime configuration of instances (scaling units) of the App Runner service.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: An optional list of metadata items that you can associate with your service resource. A tag is a key-value pair.
+          $ref: '#/components/schemas/TagList'
+          description: An optional list of metadata items that you can associate with your service resource. A tag is a key-value pair.
         EncryptionConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/EncryptionConfiguration'
-            - description: 'An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an AWS managed CMK.'
+          $ref: '#/components/schemas/EncryptionConfiguration'
+          description: 'An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an AWS managed CMK.'
         HealthCheckConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/HealthCheckConfiguration'
-            - description: The settings for the health check that AWS App Runner performs to monitor the health of your service.
+          $ref: '#/components/schemas/HealthCheckConfiguration'
+          description: The settings for the health check that AWS App Runner performs to monitor the health of your service.
         AutoScalingConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: 'The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with your service. If not provided, App Runner associates the latest revision of a default auto scaling configuration.'
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: 'The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with your service. If not provided, App Runner associates the latest revision of a default auto scaling configuration.'
     DeleteAutoScalingConfigurationResponse:
       type: object
       required:
         - AutoScalingConfiguration
       properties:
         AutoScalingConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/AutoScalingConfiguration'
-            - description: A description of the App Runner auto scaling configuration that this request just deleted.
+          $ref: '#/components/schemas/AutoScalingConfiguration'
+          description: A description of the App Runner auto scaling configuration that this request just deleted.
     DeleteAutoScalingConfigurationRequest:
       type: object
       required:
@@ -1549,17 +1523,15 @@ components:
       title: DeleteAutoScalingConfigurationRequest
       properties:
         AutoScalingConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: '<p>The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want to delete.</p> <p>The ARN can be a full auto scaling configuration ARN, or a partial ARN ending with either <code>.../<i>name</i> </code> or <code>.../<i>name</i>/<i>revision</i> </code>. If a revision isn''t specified, the latest active revision is deleted.</p>'
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: '<p>The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want to delete.</p> <p>The ARN can be a full auto scaling configuration ARN, or a partial ARN ending with either <code>.../<i>name</i> </code> or <code>.../<i>name</i>/<i>revision</i> </code>. If a revision isn''t specified, the latest active revision is deleted.</p>'
     ResourceNotFoundException: {}
     DeleteConnectionResponse:
       type: object
       properties:
         Connection:
-          allOf:
-            - $ref: '#/components/schemas/Connection'
-            - description: A description of the App Runner connection that this request just deleted.
+          $ref: '#/components/schemas/Connection'
+          description: A description of the App Runner connection that this request just deleted.
     DeleteConnectionRequest:
       type: object
       required:
@@ -1567,9 +1539,8 @@ components:
       title: DeleteConnectionRequest
       properties:
         ConnectionArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of the App Runner connection that you want to delete.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of the App Runner connection that you want to delete.
     DeleteServiceResponse:
       type: object
       required:
@@ -1577,13 +1548,11 @@ components:
         - OperationId
       properties:
         Service:
-          allOf:
-            - $ref: '#/components/schemas/Service'
-            - description: A description of the App Runner service that this request just deleted.
+          $ref: '#/components/schemas/Service'
+          description: A description of the App Runner service that this request just deleted.
         OperationId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track the operation's progress.
+          $ref: '#/components/schemas/UUID'
+          description: The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track the operation's progress.
     DeleteServiceRequest:
       type: object
       required:
@@ -1591,18 +1560,16 @@ components:
       title: DeleteServiceRequest
       properties:
         ServiceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of the App Runner service that you want to delete.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of the App Runner service that you want to delete.
     DescribeAutoScalingConfigurationResponse:
       type: object
       required:
         - AutoScalingConfiguration
       properties:
         AutoScalingConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/AutoScalingConfiguration'
-            - description: A full description of the App Runner auto scaling configuration that you specified in this request.
+          $ref: '#/components/schemas/AutoScalingConfiguration'
+          description: A full description of the App Runner auto scaling configuration that you specified in this request.
     DescribeAutoScalingConfigurationRequest:
       type: object
       required:
@@ -1610,9 +1577,8 @@ components:
       title: DescribeAutoScalingConfigurationRequest
       properties:
         AutoScalingConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: '<p>The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want a description for.</p> <p>The ARN can be a full auto scaling configuration ARN, or a partial ARN ending with either <code>.../<i>name</i> </code> or <code>.../<i>name</i>/<i>revision</i> </code>. If a revision isn''t specified, the latest active revision is described.</p>'
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: '<p>The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want a description for.</p> <p>The ARN can be a full auto scaling configuration ARN, or a partial ARN ending with either <code>.../<i>name</i> </code> or <code>.../<i>name</i>/<i>revision</i> </code>. If a revision isn''t specified, the latest active revision is described.</p>'
     DescribeCustomDomainsResponse:
       type: object
       required:
@@ -1621,21 +1587,17 @@ components:
         - CustomDomains
       properties:
         DNSTarget:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The App Runner subdomain of the App Runner service. The associated custom domain names are mapped to this target name.
+          $ref: '#/components/schemas/String'
+          description: The App Runner subdomain of the App Runner service. The associated custom domain names are mapped to this target name.
         ServiceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of the App Runner service whose associated custom domain names you want to describe.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of the App Runner service whose associated custom domain names you want to describe.
         CustomDomains:
-          allOf:
-            - $ref: '#/components/schemas/CustomDomainList'
-            - description: 'A list of descriptions of custom domain names that are associated with the service. In a paginated request, the request returns up to <code>MaxResults</code> records per call.'
+          $ref: '#/components/schemas/CustomDomainList'
+          description: 'A list of descriptions of custom domain names that are associated with the service. In a paginated request, the request returns up to <code>MaxResults</code> records per call.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.
+          $ref: '#/components/schemas/String'
+          description: The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.
     DescribeCustomDomainsRequest:
       type: object
       required:
@@ -1643,26 +1605,22 @@ components:
       title: DescribeCustomDomainsRequest
       properties:
         ServiceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of the App Runner service that you want associated custom domain names to be described for.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of the App Runner service that you want associated custom domain names to be described for.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: '<p>A token from a previous result page. It''s used for a paginated request. The request retrieves the next result page. All other parameter values must be identical to the ones that are specified in the initial request.</p> <p>If you don''t specify <code>NextToken</code>, the request retrieves the first result page.</p>'
+          $ref: '#/components/schemas/String'
+          description: '<p>A token from a previous result page. It''s used for a paginated request. The request retrieves the next result page. All other parameter values must be identical to the ones that are specified in the initial request.</p> <p>If you don''t specify <code>NextToken</code>, the request retrieves the first result page.</p>'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/DescribeCustomDomainsMaxResults'
-            - description: '<p>The maximum number of results that each response (result page) can include. It''s used for a paginated request.</p> <p>If you don''t specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>'
+          $ref: '#/components/schemas/DescribeCustomDomainsMaxResults'
+          description: '<p>The maximum number of results that each response (result page) can include. It''s used for a paginated request.</p> <p>If you don''t specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>'
     DescribeServiceResponse:
       type: object
       required:
         - Service
       properties:
         Service:
-          allOf:
-            - $ref: '#/components/schemas/Service'
-            - description: A full description of the App Runner service that you specified in this request.
+          $ref: '#/components/schemas/Service'
+          description: A full description of the App Runner service that you specified in this request.
     DescribeServiceRequest:
       type: object
       required:
@@ -1670,9 +1628,8 @@ components:
       title: DescribeServiceRequest
       properties:
         ServiceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of the App Runner service that you want a description for.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of the App Runner service that you want a description for.
     DisassociateCustomDomainResponse:
       type: object
       required:
@@ -1681,17 +1638,14 @@ components:
         - CustomDomain
       properties:
         DNSTarget:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The App Runner subdomain of the App Runner service. The disassociated custom domain name was mapped to this target name.
+          $ref: '#/components/schemas/String'
+          description: The App Runner subdomain of the App Runner service. The disassociated custom domain name was mapped to this target name.
         ServiceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of the App Runner service that a custom domain name is disassociated from.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of the App Runner service that a custom domain name is disassociated from.
         CustomDomain:
-          allOf:
-            - $ref: '#/components/schemas/CustomDomain'
-            - description: A description of the domain name that's being disassociated.
+          $ref: '#/components/schemas/CustomDomain'
+          description: A description of the domain name that's being disassociated.
     DisassociateCustomDomainRequest:
       type: object
       required:
@@ -1700,86 +1654,71 @@ components:
       title: DisassociateCustomDomainRequest
       properties:
         ServiceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of the App Runner service that you want to disassociate a custom domain name from.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of the App Runner service that you want to disassociate a custom domain name from.
         DomainName:
-          allOf:
-            - $ref: '#/components/schemas/DomainName'
-            - description: The domain name that you want to disassociate from the App Runner service.
+          $ref: '#/components/schemas/DomainName'
+          description: The domain name that you want to disassociate from the App Runner service.
     ListAutoScalingConfigurationsResponse:
       type: object
       required:
         - AutoScalingConfigurationSummaryList
       properties:
         AutoScalingConfigurationSummaryList:
-          allOf:
-            - $ref: '#/components/schemas/AutoScalingConfigurationSummaryList'
-            - description: 'A list of summary information records for auto scaling configurations. In a paginated request, the request returns up to <code>MaxResults</code> records for each call.'
+          $ref: '#/components/schemas/AutoScalingConfigurationSummaryList'
+          description: 'A list of summary information records for auto scaling configurations. In a paginated request, the request returns up to <code>MaxResults</code> records for each call.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.
+          $ref: '#/components/schemas/NextToken'
+          description: The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.
     ListAutoScalingConfigurationsRequest:
       type: object
       title: ListAutoScalingConfigurationsRequest
       properties:
         AutoScalingConfigurationName:
-          allOf:
-            - $ref: '#/components/schemas/AutoScalingConfigurationName'
-            - description: 'The name of the App Runner auto scaling configuration that you want to list. If specified, App Runner lists revisions that share this name. If not specified, App Runner returns revisions of all configurations.'
+          $ref: '#/components/schemas/AutoScalingConfigurationName'
+          description: 'The name of the App Runner auto scaling configuration that you want to list. If specified, App Runner lists revisions that share this name. If not specified, App Runner returns revisions of all configurations.'
         LatestOnly:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Set to <code>true</code> to list only the latest revision for each requested configuration name.</p> <p>Keep as <code>false</code> to list all revisions for each requested configuration name.</p> <p>Default: <code>false</code> </p>'
+          $ref: '#/components/schemas/Boolean'
+          description: '<p>Set to <code>true</code> to list only the latest revision for each requested configuration name.</p> <p>Keep as <code>false</code> to list all revisions for each requested configuration name.</p> <p>Default: <code>false</code> </p>'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: '<p>The maximum number of results to include in each response (result page). It''s used for a paginated request.</p> <p>If you don''t specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>'
+          $ref: '#/components/schemas/MaxResults'
+          description: '<p>The maximum number of results to include in each response (result page). It''s used for a paginated request.</p> <p>If you don''t specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: '<p>A token from a previous result page. It''s used for a paginated request. The request retrieves the next result page. All other parameter values must be identical to the ones that are specified in the initial request.</p> <p>If you don''t specify <code>NextToken</code>, the request retrieves the first result page.</p>'
+          $ref: '#/components/schemas/NextToken'
+          description: '<p>A token from a previous result page. It''s used for a paginated request. The request retrieves the next result page. All other parameter values must be identical to the ones that are specified in the initial request.</p> <p>If you don''t specify <code>NextToken</code>, the request retrieves the first result page.</p>'
     ListConnectionsResponse:
       type: object
       required:
         - ConnectionSummaryList
       properties:
         ConnectionSummaryList:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionSummaryList'
-            - description: 'A list of summary information records for connections. In a paginated request, the request returns up to <code>MaxResults</code> records for each call.'
+          $ref: '#/components/schemas/ConnectionSummaryList'
+          description: 'A list of summary information records for connections. In a paginated request, the request returns up to <code>MaxResults</code> records for each call.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token that you can pass in a subsequent request to get the next result page. Returned in a paginated request.
+          $ref: '#/components/schemas/NextToken'
+          description: The token that you can pass in a subsequent request to get the next result page. Returned in a paginated request.
     ListConnectionsRequest:
       type: object
       title: ListConnectionsRequest
       properties:
         ConnectionName:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionName'
-            - description: 'If specified, only this connection is returned. If not specified, the result isn''t filtered by name.'
+          $ref: '#/components/schemas/ConnectionName'
+          description: 'If specified, only this connection is returned. If not specified, the result isn''t filtered by name.'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: '<p>The maximum number of results to include in each response (result page). Used for a paginated request.</p> <p>If you don''t specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>'
+          $ref: '#/components/schemas/MaxResults'
+          description: '<p>The maximum number of results to include in each response (result page). Used for a paginated request.</p> <p>If you don''t specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: '<p>A token from a previous result page. Used for a paginated request. The request retrieves the next result page. All other parameter values must be identical to the ones specified in the initial request.</p> <p>If you don''t specify <code>NextToken</code>, the request retrieves the first result page.</p>'
+          $ref: '#/components/schemas/NextToken'
+          description: '<p>A token from a previous result page. Used for a paginated request. The request retrieves the next result page. All other parameter values must be identical to the ones specified in the initial request.</p> <p>If you don''t specify <code>NextToken</code>, the request retrieves the first result page.</p>'
     ListOperationsResponse:
       type: object
       properties:
         OperationSummaryList:
-          allOf:
-            - $ref: '#/components/schemas/OperationSummaryList'
-            - description: 'A list of operation summary information records. In a paginated request, the request returns up to <code>MaxResults</code> records for each call.'
+          $ref: '#/components/schemas/OperationSummaryList'
+          description: 'A list of operation summary information records. In a paginated request, the request returns up to <code>MaxResults</code> records for each call.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.
+          $ref: '#/components/schemas/String'
+          description: The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.
     ListOperationsRequest:
       type: object
       required:
@@ -1787,49 +1726,41 @@ components:
       title: ListOperationsRequest
       properties:
         ServiceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of the App Runner service that you want a list of operations for.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of the App Runner service that you want a list of operations for.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: '<p>A token from a previous result page. It''s used for a paginated request. The request retrieves the next result page. All other parameter values must be identical to the ones specified in the initial request.</p> <p>If you don''t specify <code>NextToken</code>, the request retrieves the first result page.</p>'
+          $ref: '#/components/schemas/String'
+          description: '<p>A token from a previous result page. It''s used for a paginated request. The request retrieves the next result page. All other parameter values must be identical to the ones specified in the initial request.</p> <p>If you don''t specify <code>NextToken</code>, the request retrieves the first result page.</p>'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/ListOperationsMaxResults'
-            - description: '<p>The maximum number of results to include in each response (result page). It''s used for a paginated request.</p> <p>If you don''t specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>'
+          $ref: '#/components/schemas/ListOperationsMaxResults'
+          description: '<p>The maximum number of results to include in each response (result page). It''s used for a paginated request.</p> <p>If you don''t specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>'
     ListServicesResponse:
       type: object
       required:
         - ServiceSummaryList
       properties:
         ServiceSummaryList:
-          allOf:
-            - $ref: '#/components/schemas/ServiceSummaryList'
-            - description: 'A list of service summary information records. In a paginated request, the request returns up to <code>MaxResults</code> records for each call.'
+          $ref: '#/components/schemas/ServiceSummaryList'
+          description: 'A list of service summary information records. In a paginated request, the request returns up to <code>MaxResults</code> records for each call.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.
+          $ref: '#/components/schemas/String'
+          description: The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.
     ListServicesRequest:
       type: object
       title: ListServicesRequest
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: '<p>A token from a previous result page. Used for a paginated request. The request retrieves the next result page. All other parameter values must be identical to the ones specified in the initial request.</p> <p>If you don''t specify <code>NextToken</code>, the request retrieves the first result page.</p>'
+          $ref: '#/components/schemas/String'
+          description: '<p>A token from a previous result page. Used for a paginated request. The request retrieves the next result page. All other parameter values must be identical to the ones specified in the initial request.</p> <p>If you don''t specify <code>NextToken</code>, the request retrieves the first result page.</p>'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/ServiceMaxResults'
-            - description: '<p>The maximum number of results to include in each response (result page). It''s used for a paginated request.</p> <p>If you don''t specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>'
+          $ref: '#/components/schemas/ServiceMaxResults'
+          description: '<p>The maximum number of results to include in each response (result page). It''s used for a paginated request.</p> <p>If you don''t specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>'
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: A list of the tag key-value pairs that are associated with the resource.
+          $ref: '#/components/schemas/TagList'
+          description: A list of the tag key-value pairs that are associated with the resource.
     ListTagsForResourceRequest:
       type: object
       required:
@@ -1837,22 +1768,19 @@ components:
       title: ListTagsForResourceRequest
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: <p>The Amazon Resource Name (ARN) of the resource that a tag list is requested for.</p> <p>It must be the ARN of an App Runner resource.</p>
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: <p>The Amazon Resource Name (ARN) of the resource that a tag list is requested for.</p> <p>It must be the ARN of an App Runner resource.</p>
     PauseServiceResponse:
       type: object
       required:
         - Service
       properties:
         Service:
-          allOf:
-            - $ref: '#/components/schemas/Service'
-            - description: A description of the App Runner service that this request just paused.
+          $ref: '#/components/schemas/Service'
+          description: A description of the App Runner service that this request just paused.
         OperationId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track the operation's progress.
+          $ref: '#/components/schemas/UUID'
+          description: The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track the operation's progress.
     PauseServiceRequest:
       type: object
       required:
@@ -1860,22 +1788,19 @@ components:
       title: PauseServiceRequest
       properties:
         ServiceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of the App Runner service that you want to pause.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of the App Runner service that you want to pause.
     ResumeServiceResponse:
       type: object
       required:
         - Service
       properties:
         Service:
-          allOf:
-            - $ref: '#/components/schemas/Service'
-            - description: A description of the App Runner service that this request just resumed.
+          $ref: '#/components/schemas/Service'
+          description: A description of the App Runner service that this request just resumed.
         OperationId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track the operation's progress.
+          $ref: '#/components/schemas/UUID'
+          description: The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track the operation's progress.
     ResumeServiceRequest:
       type: object
       required:
@@ -1883,18 +1808,16 @@ components:
       title: ResumeServiceRequest
       properties:
         ServiceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of the App Runner service that you want to resume.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of the App Runner service that you want to resume.
     StartDeploymentResponse:
       type: object
       required:
         - OperationId
       properties:
         OperationId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track the operation's progress.
+          $ref: '#/components/schemas/UUID'
+          description: The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track the operation's progress.
     StartDeploymentRequest:
       type: object
       required:
@@ -1902,9 +1825,8 @@ components:
       title: StartDeploymentRequest
       properties:
         ServiceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of the App Runner service that you want to manually deploy to.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of the App Runner service that you want to manually deploy to.
     TagResourceResponse:
       type: object
       properties: {}
@@ -1916,13 +1838,11 @@ components:
       title: TagResourceRequest
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: <p>The Amazon Resource Name (ARN) of the resource that you want to update tags for.</p> <p>It must be the ARN of an App Runner resource.</p>
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: <p>The Amazon Resource Name (ARN) of the resource that you want to update tags for.</p> <p>It must be the ARN of an App Runner resource.</p>
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: 'A list of tag key-value pairs to add or update. If a key is new to the resource, the tag is added with the provided value. If a key is already associated with the resource, the value of the tag is updated.'
+          $ref: '#/components/schemas/TagList'
+          description: 'A list of tag key-value pairs to add or update. If a key is new to the resource, the tag is added with the provided value. If a key is already associated with the resource, the value of the tag is updated.'
     UntagResourceResponse:
       type: object
       properties: {}
@@ -1934,13 +1854,11 @@ components:
       title: UntagResourceRequest
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: <p>The Amazon Resource Name (ARN) of the resource that you want to remove tags from.</p> <p>It must be the ARN of an App Runner resource.</p>
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: <p>The Amazon Resource Name (ARN) of the resource that you want to remove tags from.</p> <p>It must be the ARN of an App Runner resource.</p>
         TagKeys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyList'
-            - description: A list of tag keys that you want to remove.
+          $ref: '#/components/schemas/TagKeyList'
+          description: A list of tag keys that you want to remove.
     UpdateServiceResponse:
       type: object
       required:
@@ -1948,13 +1866,11 @@ components:
         - OperationId
       properties:
         Service:
-          allOf:
-            - $ref: '#/components/schemas/Service'
-            - description: A description of the App Runner service updated by this request. All configuration values in the returned <code>Service</code> structure reflect configuration changes that are being applied by this request.
+          $ref: '#/components/schemas/Service'
+          description: A description of the App Runner service updated by this request. All configuration values in the returned <code>Service</code> structure reflect configuration changes that are being applied by this request.
         OperationId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track the operation's progress.
+          $ref: '#/components/schemas/UUID'
+          description: The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track the operation's progress.
     UpdateServiceRequest:
       type: object
       required:
@@ -1962,25 +1878,20 @@ components:
       title: UpdateServiceRequest
       properties:
         ServiceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of the App Runner service that you want to update.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of the App Runner service that you want to update.
         SourceConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/SourceConfiguration'
-            - description: '<p>The source configuration to apply to the App Runner service.</p> <p>You can change the configuration of the code or image repository that the service uses. However, you can''t switch from code to image or the other way around. This means that you must provide the same structure member of <code>SourceConfiguration</code> that you originally included when you created the service. Specifically, you can include either <code>CodeRepository</code> or <code>ImageRepository</code>. To update the source configuration, set the values to members of the structure that you include.</p>'
+          $ref: '#/components/schemas/SourceConfiguration'
+          description: '<p>The source configuration to apply to the App Runner service.</p> <p>You can change the configuration of the code or image repository that the service uses. However, you can''t switch from code to image or the other way around. This means that you must provide the same structure member of <code>SourceConfiguration</code> that you originally included when you created the service. Specifically, you can include either <code>CodeRepository</code> or <code>ImageRepository</code>. To update the source configuration, set the values to members of the structure that you include.</p>'
         InstanceConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/InstanceConfiguration'
-            - description: The runtime configuration to apply to instances (scaling units) of the App Runner service.
+          $ref: '#/components/schemas/InstanceConfiguration'
+          description: The runtime configuration to apply to instances (scaling units) of the App Runner service.
         AutoScalingConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with your service.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with your service.
         HealthCheckConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/HealthCheckConfiguration'
-            - description: The settings for the health check that AWS App Runner performs to monitor the health of your service.
+          $ref: '#/components/schemas/HealthCheckConfiguration'
+          description: The settings for the health check that AWS App Runner performs to monitor the health of your service.
     ASConfigMaxConcurrency:
       type: integer
       minimum: 1
@@ -2017,21 +1928,17 @@ components:
         - Status
       properties:
         DomainName:
-          allOf:
-            - $ref: '#/components/schemas/DomainName'
-            - description: 'An associated custom domain endpoint. It can be a root domain (for example, <code>example.com</code>), a subdomain (for example, <code>login.example.com</code> or <code>admin.login.example.com</code>), or a wildcard (for example, <code>*.example.com</code>).'
+          $ref: '#/components/schemas/DomainName'
+          description: 'An associated custom domain endpoint. It can be a root domain (for example, <code>example.com</code>), a subdomain (for example, <code>login.example.com</code> or <code>admin.login.example.com</code>), or a wildcard (for example, <code>*.example.com</code>).'
         EnableWWWSubdomain:
-          allOf:
-            - $ref: '#/components/schemas/NullableBoolean'
-            - description: 'When <code>true</code>, the subdomain <code>www.<i>DomainName</i> </code> is associated with the App Runner service in addition to the base domain.'
+          $ref: '#/components/schemas/NullableBoolean'
+          description: 'When <code>true</code>, the subdomain <code>www.<i>DomainName</i> </code> is associated with the App Runner service in addition to the base domain.'
         CertificateValidationRecords:
-          allOf:
-            - $ref: '#/components/schemas/CertificateValidationRecordList'
-            - description: A list of certificate CNAME records that's used for this domain name.
+          $ref: '#/components/schemas/CertificateValidationRecordList'
+          description: A list of certificate CNAME records that's used for this domain name.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/CustomDomainAssociationStatus'
-            - description: The current state of the domain name association.
+          $ref: '#/components/schemas/CustomDomainAssociationStatus'
+          description: The current state of the domain name association.
       description: Describes a custom domain that's associated with an AWS App Runner service.
     RoleArn:
       type: string
@@ -2042,13 +1949,11 @@ components:
       type: object
       properties:
         ConnectionArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of the App Runner connection that enables the App Runner service to connect to a source repository. It's required for GitHub code repositories.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of the App Runner connection that enables the App Runner service to connect to a source repository. It's required for GitHub code repositories.
         AccessRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The Amazon Resource Name (ARN) of the IAM role that grants the App Runner service access to a source repository. It's required for ECR image repositories (but not for ECR Public repositories).
+          $ref: '#/components/schemas/RoleArn'
+          description: The Amazon Resource Name (ARN) of the IAM role that grants the App Runner service access to a source repository. It's required for ECR image repositories (but not for ECR Public repositories).
       description: Describes resources needed to authenticate access to some source repositories. The specific resource depends on the repository provider.
     AutoScalingConfigurationName:
       type: string
@@ -2071,61 +1976,48 @@ components:
       type: object
       properties:
         AutoScalingConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of this auto scaling configuration.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of this auto scaling configuration.
         AutoScalingConfigurationName:
-          allOf:
-            - $ref: '#/components/schemas/AutoScalingConfigurationName'
-            - description: The customer-provided auto scaling configuration name. It can be used in multiple revisions of a configuration.
+          $ref: '#/components/schemas/AutoScalingConfigurationName'
+          description: The customer-provided auto scaling configuration name. It can be used in multiple revisions of a configuration.
         AutoScalingConfigurationRevision:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'The revision of this auto scaling configuration. It''s unique among all the active configurations (<code>"Status": "ACTIVE"</code>) that share the same <code>AutoScalingConfigurationName</code>.'
+          $ref: '#/components/schemas/Integer'
+          description: 'The revision of this auto scaling configuration. It''s unique among all the active configurations (<code>"Status": "ACTIVE"</code>) that share the same <code>AutoScalingConfigurationName</code>.'
         Latest:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: It's set to <code>true</code> for the configuration with the highest <code>Revision</code> among all configurations that share the same <code>Name</code>. It's set to <code>false</code> otherwise.
+          $ref: '#/components/schemas/Boolean'
+          description: It's set to <code>true</code> for the configuration with the highest <code>Revision</code> among all configurations that share the same <code>Name</code>. It's set to <code>false</code> otherwise.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/AutoScalingConfigurationStatus'
-            - description: 'The current state of the auto scaling configuration. If the status of a configuration revision is <code>INACTIVE</code>, it was deleted and can''t be used. Inactive configuration revisions are permanently removed some time after they are deleted.'
+          $ref: '#/components/schemas/AutoScalingConfigurationStatus'
+          description: 'The current state of the auto scaling configuration. If the status of a configuration revision is <code>INACTIVE</code>, it was deleted and can''t be used. Inactive configuration revisions are permanently removed some time after they are deleted.'
         MaxConcurrency:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'The maximum number of concurrent requests that an instance processes. If the number of concurrent requests exceeds this limit, App Runner scales the service up.'
+          $ref: '#/components/schemas/Integer'
+          description: 'The maximum number of concurrent requests that an instance processes. If the number of concurrent requests exceeds this limit, App Runner scales the service up.'
         MinSize:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: '<p>The minimum number of instances that App Runner provisions for a service. The service always has at least <code>MinSize</code> provisioned instances. Some of them actively serve traffic. The rest of them (provisioned and inactive instances) are a cost-effective compute capacity reserve and are ready to be quickly activated. You pay for memory usage of all the provisioned instances. You pay for CPU usage of only the active subset.</p> <p>App Runner temporarily doubles the number of provisioned instances during deployments, to maintain the same capacity for both old and new code.</p>'
+          $ref: '#/components/schemas/Integer'
+          description: '<p>The minimum number of instances that App Runner provisions for a service. The service always has at least <code>MinSize</code> provisioned instances. Some of them actively serve traffic. The rest of them (provisioned and inactive instances) are a cost-effective compute capacity reserve and are ready to be quickly activated. You pay for memory usage of all the provisioned instances. You pay for CPU usage of only the active subset.</p> <p>App Runner temporarily doubles the number of provisioned instances during deployments, to maintain the same capacity for both old and new code.</p>'
         MaxSize:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The maximum number of instances that a service scales up to. At most <code>MaxSize</code> instances actively serve traffic for your service.
+          $ref: '#/components/schemas/Integer'
+          description: The maximum number of instances that a service scales up to. At most <code>MaxSize</code> instances actively serve traffic for your service.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the auto scaling configuration was created. It's in Unix time stamp format.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the auto scaling configuration was created. It's in Unix time stamp format.
         DeletedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the auto scaling configuration was deleted. It's in Unix time stamp format.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the auto scaling configuration was deleted. It's in Unix time stamp format.
       description: <p>Describes an AWS App Runner automatic scaling configuration resource. Multiple revisions of a configuration have the same <code>AutoScalingConfigurationName</code> and different <code>AutoScalingConfigurationRevision</code> values.</p> <p>A higher <code>MinSize</code> increases the spread of your App Runner service over more Availability Zones in the AWS Region. The tradeoff is a higher minimal cost.</p> <p>A lower <code>MaxSize</code> controls your cost. The tradeoff is lower responsiveness during peak demand.</p>
     AutoScalingConfigurationSummary:
       type: object
       properties:
         AutoScalingConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of this auto scaling configuration.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of this auto scaling configuration.
         AutoScalingConfigurationName:
-          allOf:
-            - $ref: '#/components/schemas/AutoScalingConfigurationName'
-            - description: The customer-provided auto scaling configuration name. It can be used in multiple revisions of a configuration.
+          $ref: '#/components/schemas/AutoScalingConfigurationName'
+          description: The customer-provided auto scaling configuration name. It can be used in multiple revisions of a configuration.
         AutoScalingConfigurationRevision:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'The revision of this auto scaling configuration. It''s unique among all the active configurations (<code>"Status": "ACTIVE"</code>) with the same <code>AutoScalingConfigurationName</code>.'
+          $ref: '#/components/schemas/Integer'
+          description: 'The revision of this auto scaling configuration. It''s unique among all the active configurations (<code>"Status": "ACTIVE"</code>) with the same <code>AutoScalingConfigurationName</code>.'
       description: '<p>Provides summary information about an AWS App Runner automatic scaling configuration resource.</p> <p>This type contains limited information about an auto scaling configuration. It includes only identification information, without configuration details. It''s returned by the <a>ListAutoScalingConfigurations</a> action. Complete configuration information is returned by the <a>CreateAutoScalingConfiguration</a>, <a>DescribeAutoScalingConfiguration</a>, and <a>DeleteAutoScalingConfiguration</a> actions using the <a>AutoScalingConfiguration</a> type.</p>'
     AutoScalingConfigurationSummaryList:
       type: array
@@ -2144,21 +2036,17 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The certificate CNAME record name.
+          $ref: '#/components/schemas/String'
+          description: The certificate CNAME record name.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The record type, always <code>CNAME</code>.'
+          $ref: '#/components/schemas/String'
+          description: 'The record type, always <code>CNAME</code>.'
         Value:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The certificate CNAME record value.
+          $ref: '#/components/schemas/String'
+          description: The certificate CNAME record value.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/CertificateValidationRecordStatus'
-            - description: The current state of the certificate CNAME record validation. It should change to <code>SUCCESS</code> after App Runner completes validation with your DNS.
+          $ref: '#/components/schemas/CertificateValidationRecordStatus'
+          description: The current state of the certificate CNAME record validation. It should change to <code>SUCCESS</code> after App Runner completes validation with your DNS.
       description: 'Describes a certificate CNAME record to add to your DNS. For more information, see <a href="https://docs.aws.amazon.com/apprunner/latest/api/API_AssociateCustomDomain.html">AssociateCustomDomain</a>.'
     CertificateValidationRecordList:
       type: array
@@ -2175,25 +2063,20 @@ components:
         - Runtime
       properties:
         Runtime:
-          allOf:
-            - $ref: '#/components/schemas/Runtime'
-            - description: A runtime environment type for building and running an App Runner service. It represents a programming language runtime.
+          $ref: '#/components/schemas/Runtime'
+          description: A runtime environment type for building and running an App Runner service. It represents a programming language runtime.
         BuildCommand:
-          allOf:
-            - $ref: '#/components/schemas/BuildCommand'
-            - description: The command App Runner runs to build your application.
+          $ref: '#/components/schemas/BuildCommand'
+          description: The command App Runner runs to build your application.
         StartCommand:
-          allOf:
-            - $ref: '#/components/schemas/StartCommand'
-            - description: The command App Runner runs to start your application.
+          $ref: '#/components/schemas/StartCommand'
+          description: The command App Runner runs to start your application.
         Port:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: '<p>The port that your application listens to in the container.</p> <p>Default: <code>8080</code> </p>'
+          $ref: '#/components/schemas/String'
+          description: '<p>The port that your application listens to in the container.</p> <p>Default: <code>8080</code> </p>'
         RuntimeEnvironmentVariables:
-          allOf:
-            - $ref: '#/components/schemas/RuntimeEnvironmentVariables'
-            - description: The environment variables that are available to your running App Runner service. An array of key-value pairs. Keys with a prefix of <code>AWSAPPRUNNER</code> are reserved for system use and aren't valid.
+          $ref: '#/components/schemas/RuntimeEnvironmentVariables'
+          description: The environment variables that are available to your running App Runner service. An array of key-value pairs. Keys with a prefix of <code>AWSAPPRUNNER</code> are reserved for system use and aren't valid.
       description: 'Describes the basic configuration needed for building and running an AWS App Runner service. This type doesn''t support the full set of possible configuration options. Fur full configuration capabilities, use a <code>apprunner.yaml</code> file in the source code repository.'
     CodeConfiguration:
       type: object
@@ -2201,13 +2084,11 @@ components:
         - ConfigurationSource
       properties:
         ConfigurationSource:
-          allOf:
-            - $ref: '#/components/schemas/ConfigurationSource'
-            - description: '<p>The source of the App Runner configuration. Values are interpreted as follows:</p> <ul> <li> <p> <code>REPOSITORY</code> – App Runner reads configuration values from the <code>apprunner.yaml</code> file in the source code repository and ignores <code>CodeConfigurationValues</code>.</p> </li> <li> <p> <code>API</code> – App Runner uses configuration values provided in <code>CodeConfigurationValues</code> and ignores the <code>apprunner.yaml</code> file in the source code repository.</p> </li> </ul>'
+          $ref: '#/components/schemas/ConfigurationSource'
+          description: '<p>The source of the App Runner configuration. Values are interpreted as follows:</p> <ul> <li> <p> <code>REPOSITORY</code> – App Runner reads configuration values from the <code>apprunner.yaml</code> file in the source code repository and ignores <code>CodeConfigurationValues</code>.</p> </li> <li> <p> <code>API</code> – App Runner uses configuration values provided in <code>CodeConfigurationValues</code> and ignores the <code>apprunner.yaml</code> file in the source code repository.</p> </li> </ul>'
         CodeConfigurationValues:
-          allOf:
-            - $ref: '#/components/schemas/CodeConfigurationValues'
-            - description: The basic configuration for building and running the App Runner service. Use it to quickly launch an App Runner service without providing a <code>apprunner.yaml</code> file in the source code repository (or ignoring the file if it exists).
+          $ref: '#/components/schemas/CodeConfigurationValues'
+          description: The basic configuration for building and running the App Runner service. Use it to quickly launch an App Runner service without providing a <code>apprunner.yaml</code> file in the source code repository (or ignoring the file if it exists).
       description: Describes the configuration that AWS App Runner uses to build and run an App Runner service from a source code repository.
     Runtime:
       type: string
@@ -2228,13 +2109,11 @@ components:
         - Value
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/SourceCodeVersionType'
-            - description: '<p>The type of version identifier.</p> <p>For a git-based repository, branches represent versions.</p>'
+          $ref: '#/components/schemas/SourceCodeVersionType'
+          description: '<p>The type of version identifier.</p> <p>For a git-based repository, branches represent versions.</p>'
         Value:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: '<p>A source code version.</p> <p>For a git-based repository, a branch name maps to a specific version. App Runner uses the most recent commit to the branch.</p>'
+          $ref: '#/components/schemas/String'
+          description: '<p>A source code version.</p> <p>For a git-based repository, a branch name maps to a specific version. App Runner uses the most recent commit to the branch.</p>'
       description: Identifies a version of code that AWS App Runner refers to within a source code repository.
     CodeRepository:
       type: object
@@ -2243,17 +2122,14 @@ components:
         - SourceCodeVersion
       properties:
         RepositoryUrl:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The location of the repository that contains the source code.
+          $ref: '#/components/schemas/String'
+          description: The location of the repository that contains the source code.
         SourceCodeVersion:
-          allOf:
-            - $ref: '#/components/schemas/SourceCodeVersion'
-            - description: The version that should be used within the source code repository.
+          $ref: '#/components/schemas/SourceCodeVersion'
+          description: The version that should be used within the source code repository.
         CodeConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/CodeConfiguration'
-            - description: Configuration for building and running the service from a source code repository.
+          $ref: '#/components/schemas/CodeConfiguration'
+          description: Configuration for building and running the service from a source code repository.
       description: Describes a source code repository.
     ConnectionName:
       type: string
@@ -2275,49 +2151,39 @@ components:
       type: object
       properties:
         ConnectionName:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionName'
-            - description: The customer-provided connection name.
+          $ref: '#/components/schemas/ConnectionName'
+          description: The customer-provided connection name.
         ConnectionArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of this connection.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of this connection.
         ProviderType:
-          allOf:
-            - $ref: '#/components/schemas/ProviderType'
-            - description: The source repository provider.
+          $ref: '#/components/schemas/ProviderType'
+          description: The source repository provider.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionStatus'
-            - description: 'The current state of the App Runner connection. When the state is <code>AVAILABLE</code>, you can use the connection to create an App Runner service.'
+          $ref: '#/components/schemas/ConnectionStatus'
+          description: 'The current state of the App Runner connection. When the state is <code>AVAILABLE</code>, you can use the connection to create an App Runner service.'
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The App Runner connection creation time, expressed as a Unix time stamp.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The App Runner connection creation time, expressed as a Unix time stamp.'
       description: Describes an AWS App Runner connection resource.
     ConnectionSummary:
       type: object
       properties:
         ConnectionName:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionName'
-            - description: The customer-provided connection name.
+          $ref: '#/components/schemas/ConnectionName'
+          description: The customer-provided connection name.
         ConnectionArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of this connection.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of this connection.
         ProviderType:
-          allOf:
-            - $ref: '#/components/schemas/ProviderType'
-            - description: The source repository provider.
+          $ref: '#/components/schemas/ProviderType'
+          description: The source repository provider.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionStatus'
-            - description: 'The current state of the App Runner connection. When the state is <code>AVAILABLE</code>, you can use the connection to create an App Runner service.'
+          $ref: '#/components/schemas/ConnectionStatus'
+          description: 'The current state of the App Runner connection. When the state is <code>AVAILABLE</code>, you can use the connection to create an App Runner service.'
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The App Runner connection creation time, expressed as a Unix time stamp.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The App Runner connection creation time, expressed as a Unix time stamp.'
       description: Provides summary information about an AWS App Runner connection resource.
     ConnectionSummaryList:
       type: array
@@ -2341,37 +2207,30 @@ components:
       type: object
       properties:
         CodeRepository:
-          allOf:
-            - $ref: '#/components/schemas/CodeRepository'
-            - description: <p>The description of a source code repository.</p> <p>You must provide either this member or <code>ImageRepository</code> (but not both).</p>
+          $ref: '#/components/schemas/CodeRepository'
+          description: <p>The description of a source code repository.</p> <p>You must provide either this member or <code>ImageRepository</code> (but not both).</p>
         ImageRepository:
-          allOf:
-            - $ref: '#/components/schemas/ImageRepository'
-            - description: <p>The description of a source image repository.</p> <p>You must provide either this member or <code>CodeRepository</code> (but not both).</p>
+          $ref: '#/components/schemas/ImageRepository'
+          description: <p>The description of a source image repository.</p> <p>You must provide either this member or <code>CodeRepository</code> (but not both).</p>
         AutoDeploymentsEnabled:
-          allOf:
-            - $ref: '#/components/schemas/NullableBoolean'
-            - description: '<p>If <code>true</code>, continuous integration from the source repository is enabled for the App Runner service. Each repository change (source code commit or new image version) starts a deployment.</p> <p>Default: <code>true</code> </p>'
+          $ref: '#/components/schemas/NullableBoolean'
+          description: '<p>If <code>true</code>, continuous integration from the source repository is enabled for the App Runner service. Each repository change (source code commit or new image version) starts a deployment.</p> <p>Default: <code>true</code> </p>'
         AuthenticationConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/AuthenticationConfiguration'
-            - description: Describes the resources that are needed to authenticate access to some source repositories.
+          $ref: '#/components/schemas/AuthenticationConfiguration'
+          description: Describes the resources that are needed to authenticate access to some source repositories.
       description: Describes the source deployed to an AWS App Runner service. It can be a code or an image repository.
     InstanceConfiguration:
       type: object
       properties:
         Cpu:
-          allOf:
-            - $ref: '#/components/schemas/Cpu'
-            - description: '<p>The number of CPU units reserved for each instance of your App Runner service.</p> <p>Default: <code>1 vCPU</code> </p>'
+          $ref: '#/components/schemas/Cpu'
+          description: '<p>The number of CPU units reserved for each instance of your App Runner service.</p> <p>Default: <code>1 vCPU</code> </p>'
         Memory:
-          allOf:
-            - $ref: '#/components/schemas/Memory'
-            - description: '<p>The amount of memory, in MB or GB, reserved for each instance of your App Runner service.</p> <p>Default: <code>2 GB</code> </p>'
+          $ref: '#/components/schemas/Memory'
+          description: '<p>The amount of memory, in MB or GB, reserved for each instance of your App Runner service.</p> <p>Default: <code>2 GB</code> </p>'
         InstanceRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The Amazon Resource Name (ARN) of an IAM role that provides permissions to your App Runner service. These are permissions that your code needs when it calls any AWS APIs.
+          $ref: '#/components/schemas/RoleArn'
+          description: The Amazon Resource Name (ARN) of an IAM role that provides permissions to your App Runner service. These are permissions that your code needs when it calls any AWS APIs.
       description: Describes the runtime configuration of an AWS App Runner service instance (scaling unit).
     EncryptionConfiguration:
       type: object
@@ -2379,37 +2238,30 @@ components:
         - KmsKey
       properties:
         KmsKey:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyArn'
-            - description: The ARN of the KMS key that's used for encryption.
+          $ref: '#/components/schemas/KmsKeyArn'
+          description: The ARN of the KMS key that's used for encryption.
       description: Describes a custom encryption key that AWS App Runner uses to encrypt copies of the source repository and service logs.
     HealthCheckConfiguration:
       type: object
       properties:
         Protocol:
-          allOf:
-            - $ref: '#/components/schemas/HealthCheckProtocol'
-            - description: '<p>The IP protocol that App Runner uses to perform health checks for your service.</p> <p>If you set <code>Protocol</code> to <code>HTTP</code>, App Runner sends health check requests to the HTTP path specified by <code>Path</code>.</p> <p>Default: <code>TCP</code> </p>'
+          $ref: '#/components/schemas/HealthCheckProtocol'
+          description: '<p>The IP protocol that App Runner uses to perform health checks for your service.</p> <p>If you set <code>Protocol</code> to <code>HTTP</code>, App Runner sends health check requests to the HTTP path specified by <code>Path</code>.</p> <p>Default: <code>TCP</code> </p>'
         Path:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: '<p>The URL that health check requests are sent to.</p> <p> <code>Path</code> is only applicable when you set <code>Protocol</code> to <code>HTTP</code>.</p> <p>Default: <code>"/"</code> </p>'
+          $ref: '#/components/schemas/String'
+          description: '<p>The URL that health check requests are sent to.</p> <p> <code>Path</code> is only applicable when you set <code>Protocol</code> to <code>HTTP</code>.</p> <p>Default: <code>"/"</code> </p>'
         Interval:
-          allOf:
-            - $ref: '#/components/schemas/HealthCheckInterval'
-            - description: '<p>The time interval, in seconds, between health checks.</p> <p>Default: <code>5</code> </p>'
+          $ref: '#/components/schemas/HealthCheckInterval'
+          description: '<p>The time interval, in seconds, between health checks.</p> <p>Default: <code>5</code> </p>'
         Timeout:
-          allOf:
-            - $ref: '#/components/schemas/HealthCheckTimeout'
-            - description: '<p>The time, in seconds, to wait for a health check response before deciding it failed.</p> <p>Default: <code>2</code> </p>'
+          $ref: '#/components/schemas/HealthCheckTimeout'
+          description: '<p>The time, in seconds, to wait for a health check response before deciding it failed.</p> <p>Default: <code>2</code> </p>'
         HealthyThreshold:
-          allOf:
-            - $ref: '#/components/schemas/HealthCheckHealthyThreshold'
-            - description: '<p>The number of consecutive checks that must succeed before App Runner decides that the service is healthy.</p> <p>Default: <code>3</code> </p>'
+          $ref: '#/components/schemas/HealthCheckHealthyThreshold'
+          description: '<p>The number of consecutive checks that must succeed before App Runner decides that the service is healthy.</p> <p>Default: <code>3</code> </p>'
         UnhealthyThreshold:
-          allOf:
-            - $ref: '#/components/schemas/HealthCheckUnhealthyThreshold'
-            - description: '<p>The number of consecutive checks that must fail before App Runner decides that the service is unhealthy.</p> <p>Default: <code>3</code> </p>'
+          $ref: '#/components/schemas/HealthCheckUnhealthyThreshold'
+          description: '<p>The number of consecutive checks that must fail before App Runner decides that the service is unhealthy.</p> <p>Default: <code>3</code> </p>'
       description: Describes the settings for the health check that AWS App Runner performs to monitor the health of a service.
     Service:
       type: object
@@ -2426,57 +2278,44 @@ components:
         - AutoScalingConfigurationSummary
       properties:
         ServiceName:
-          allOf:
-            - $ref: '#/components/schemas/ServiceName'
-            - description: The customer-provided service name.
+          $ref: '#/components/schemas/ServiceName'
+          description: The customer-provided service name.
         ServiceId:
-          allOf:
-            - $ref: '#/components/schemas/ServiceId'
-            - description: An ID that App Runner generated for this service. It's unique within the AWS Region.
+          $ref: '#/components/schemas/ServiceId'
+          description: An ID that App Runner generated for this service. It's unique within the AWS Region.
         ServiceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of this service.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of this service.
         ServiceUrl:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A subdomain URL that App Runner generated for this service. You can use this URL to access your service web application.
+          $ref: '#/components/schemas/String'
+          description: A subdomain URL that App Runner generated for this service. You can use this URL to access your service web application.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the App Runner service was created. It's in the Unix time stamp format.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the App Runner service was created. It's in the Unix time stamp format.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the App Runner service was last updated at. It's in the Unix time stamp format.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the App Runner service was last updated at. It's in the Unix time stamp format.
         DeletedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the App Runner service was deleted. It's in the Unix time stamp format.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the App Runner service was deleted. It's in the Unix time stamp format.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ServiceStatus'
-            - description: '<p>The current state of the App Runner service. These particular values mean the following.</p> <ul> <li> <p> <code>CREATE_FAILED</code> – The service failed to create. To troubleshoot this failure, read the failure events and logs, change any parameters that need to be fixed, and retry the call to create the service.</p> <p>The failed service isn''t usable, and still counts towards your service quota. When you''re done analyzing the failure, delete the service.</p> </li> <li> <p> <code>DELETE_FAILED</code> – The service failed to delete and can''t be successfully recovered. Retry the service deletion call to ensure that all related resources are removed.</p> </li> </ul>'
+          $ref: '#/components/schemas/ServiceStatus'
+          description: '<p>The current state of the App Runner service. These particular values mean the following.</p> <ul> <li> <p> <code>CREATE_FAILED</code> – The service failed to create. To troubleshoot this failure, read the failure events and logs, change any parameters that need to be fixed, and retry the call to create the service.</p> <p>The failed service isn''t usable, and still counts towards your service quota. When you''re done analyzing the failure, delete the service.</p> </li> <li> <p> <code>DELETE_FAILED</code> – The service failed to delete and can''t be successfully recovered. Retry the service deletion call to ensure that all related resources are removed.</p> </li> </ul>'
         SourceConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/SourceConfiguration'
-            - description: The source deployed to the App Runner service. It can be a code or an image repository.
+          $ref: '#/components/schemas/SourceConfiguration'
+          description: The source deployed to the App Runner service. It can be a code or an image repository.
         InstanceConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/InstanceConfiguration'
-            - description: The runtime configuration of instances (scaling units) of this service.
+          $ref: '#/components/schemas/InstanceConfiguration'
+          description: The runtime configuration of instances (scaling units) of this service.
         EncryptionConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/EncryptionConfiguration'
-            - description: The encryption key that App Runner uses to encrypt the service logs and the copy of the source repository that App Runner maintains for the service. It can be either a customer-provided encryption key or an AWS managed CMK.
+          $ref: '#/components/schemas/EncryptionConfiguration'
+          description: The encryption key that App Runner uses to encrypt the service logs and the copy of the source repository that App Runner maintains for the service. It can be either a customer-provided encryption key or an AWS managed CMK.
         HealthCheckConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/HealthCheckConfiguration'
-            - description: The settings for the health check that App Runner performs to monitor the health of this service.
+          $ref: '#/components/schemas/HealthCheckConfiguration'
+          description: The settings for the health check that App Runner performs to monitor the health of this service.
         AutoScalingConfigurationSummary:
-          allOf:
-            - $ref: '#/components/schemas/AutoScalingConfigurationSummary'
-            - description: Summary information for the App Runner automatic scaling configuration resource that's associated with this service.
+          $ref: '#/components/schemas/AutoScalingConfigurationSummary'
+          description: Summary information for the App Runner automatic scaling configuration resource that's associated with this service.
       description: '<p>Describes an AWS App Runner service. It can describe a service in any state, including deleted services.</p> <p>This type contains the full information about a service, including configuration details. It''s returned by the <a href="https://docs.aws.amazon.com/apprunner/latest/api/API_CreateService.html">CreateService</a>, <a href="https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeService.html">DescribeService</a>, and <a href="https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteService.html">DeleteService</a> actions. A subset of this information is returned by the <a href="https://docs.aws.amazon.com/apprunner/latest/api/API_ListServices.html">ListServices</a> action using the <a href="https://docs.aws.amazon.com/apprunner/latest/api/API_ServiceSummary.html">ServiceSummary</a> type.</p>'
     UUID:
       type: string
@@ -2531,17 +2370,14 @@ components:
       type: object
       properties:
         RuntimeEnvironmentVariables:
-          allOf:
-            - $ref: '#/components/schemas/RuntimeEnvironmentVariables'
-            - description: Environment variables that are available to your running App Runner service. An array of key-value pairs. Keys with a prefix of <code>AWSAPPRUNNER</code> are reserved for system use and aren't valid.
+          $ref: '#/components/schemas/RuntimeEnvironmentVariables'
+          description: Environment variables that are available to your running App Runner service. An array of key-value pairs. Keys with a prefix of <code>AWSAPPRUNNER</code> are reserved for system use and aren't valid.
         StartCommand:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'An optional command that App Runner runs to start the application in the source image. If specified, this command overrides the Docker image’s default start command.'
+          $ref: '#/components/schemas/String'
+          description: 'An optional command that App Runner runs to start the application in the source image. If specified, this command overrides the Docker image’s default start command.'
         Port:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: '<p>The port that your application listens to in the container.</p> <p>Default: <code>8080</code> </p>'
+          $ref: '#/components/schemas/String'
+          description: '<p>The port that your application listens to in the container.</p> <p>Default: <code>8080</code> </p>'
       description: Describes the configuration that AWS App Runner uses to run an App Runner service using an image pulled from a source image repository.
     ImageIdentifier:
       type: string
@@ -2560,17 +2396,14 @@ components:
         - ImageRepositoryType
       properties:
         ImageIdentifier:
-          allOf:
-            - $ref: '#/components/schemas/ImageIdentifier'
-            - description: '<p>The identifier of an image.</p> <p>For an image in Amazon Elastic Container Registry (Amazon ECR), this is an image name. For the image name format, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-pull-ecr-image.html">Pulling an image</a> in the <i>Amazon ECR User Guide</i>.</p>'
+          $ref: '#/components/schemas/ImageIdentifier'
+          description: '<p>The identifier of an image.</p> <p>For an image in Amazon Elastic Container Registry (Amazon ECR), this is an image name. For the image name format, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-pull-ecr-image.html">Pulling an image</a> in the <i>Amazon ECR User Guide</i>.</p>'
         ImageConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/ImageConfiguration'
-            - description: Configuration for running the identified image.
+          $ref: '#/components/schemas/ImageConfiguration'
+          description: Configuration for running the identified image.
         ImageRepositoryType:
-          allOf:
-            - $ref: '#/components/schemas/ImageRepositoryType'
-            - description: The type of the image repository. This reflects the repository provider and whether the repository is private or public.
+          $ref: '#/components/schemas/ImageRepositoryType'
+          description: The type of the image repository. This reflects the repository provider and whether the repository is private or public.
       description: Describes a source image repository.
     Memory:
       type: string
@@ -2624,33 +2457,26 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: A unique ID of this operation. It's unique in the scope of the App Runner service.
+          $ref: '#/components/schemas/UUID'
+          description: A unique ID of this operation. It's unique in the scope of the App Runner service.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/OperationType'
-            - description: The type of operation. It indicates a specific action that occured.
+          $ref: '#/components/schemas/OperationType'
+          description: The type of operation. It indicates a specific action that occured.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/OperationStatus'
-            - description: The current state of the operation.
+          $ref: '#/components/schemas/OperationStatus'
+          description: The current state of the operation.
         TargetArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: 'The Amazon Resource Name (ARN) of the resource that the operation acted on (for example, an App Runner service).'
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: 'The Amazon Resource Name (ARN) of the resource that the operation acted on (for example, an App Runner service).'
         StartedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the operation started. It's in the Unix time stamp format.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the operation started. It's in the Unix time stamp format.
         EndedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the operation ended. It's in the Unix time stamp format.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the operation ended. It's in the Unix time stamp format.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the operation was last updated. It's in the Unix time stamp format.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the operation was last updated. It's in the Unix time stamp format.
       description: Provides summary information for an operation that occurred on an AWS App Runner service.
     RuntimeEnvironmentVariablesValue:
       type: string
@@ -2676,33 +2502,26 @@ components:
       type: object
       properties:
         ServiceName:
-          allOf:
-            - $ref: '#/components/schemas/ServiceName'
-            - description: The customer-provided service name.
+          $ref: '#/components/schemas/ServiceName'
+          description: The customer-provided service name.
         ServiceId:
-          allOf:
-            - $ref: '#/components/schemas/ServiceId'
-            - description: An ID that App Runner generated for this service. It's unique within the AWS Region.
+          $ref: '#/components/schemas/ServiceId'
+          description: An ID that App Runner generated for this service. It's unique within the AWS Region.
         ServiceArn:
-          allOf:
-            - $ref: '#/components/schemas/AppRunnerResourceArn'
-            - description: The Amazon Resource Name (ARN) of this service.
+          $ref: '#/components/schemas/AppRunnerResourceArn'
+          description: The Amazon Resource Name (ARN) of this service.
         ServiceUrl:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A subdomain URL that App Runner generated for this service. You can use this URL to access your service web application.
+          $ref: '#/components/schemas/String'
+          description: A subdomain URL that App Runner generated for this service. You can use this URL to access your service web application.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the App Runner service was created. It's in the Unix time stamp format.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the App Runner service was created. It's in the Unix time stamp format.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the App Runner service was last updated. It's in theUnix time stamp format.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the App Runner service was last updated. It's in theUnix time stamp format.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ServiceStatus'
-            - description: '<p>The current state of the App Runner service. These particular values mean the following.</p> <ul> <li> <p> <code>CREATE_FAILED</code> – The service failed to create. Read the failure events and logs, change any parameters that need to be fixed, and retry the call to create the service.</p> <p>The failed service isn''t usable, and still counts towards your service quota. When you''re done analyzing the failure, delete the service.</p> </li> <li> <p> <code>DELETE_FAILED</code> – The service failed to delete and can''t be successfully recovered. Retry the service deletion call to ensure that all related resources are removed.</p> </li> </ul>'
+          $ref: '#/components/schemas/ServiceStatus'
+          description: '<p>The current state of the App Runner service. These particular values mean the following.</p> <ul> <li> <p> <code>CREATE_FAILED</code> – The service failed to create. Read the failure events and logs, change any parameters that need to be fixed, and retry the call to create the service.</p> <p>The failed service isn''t usable, and still counts towards your service quota. When you''re done analyzing the failure, delete the service.</p> </li> <li> <p> <code>DELETE_FAILED</code> – The service failed to delete and can''t be successfully recovered. Retry the service deletion call to ensure that all related resources are removed.</p> </li> </ul>'
       description: '<p>Provides summary information for an AWS App Runner service.</p> <p>This type contains limited information about a service. It doesn''t include configuration details. It''s returned by the <a href="https://docs.aws.amazon.com/apprunner/latest/api/API_ListServices.html">ListServices</a> action. Complete service information is returned by the <a href="https://docs.aws.amazon.com/apprunner/latest/api/API_CreateService.html">CreateService</a>, <a href="https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeService.html">DescribeService</a>, and <a href="https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteService.html">DeleteService</a> actions using the <a href="https://docs.aws.amazon.com/apprunner/latest/api/API_Service.html">Service</a> type.</p>'
     SourceCodeVersionType:
       type: string
@@ -2722,13 +2541,11 @@ components:
       type: object
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: The key of the tag.
+          $ref: '#/components/schemas/TagKey'
+          description: The key of the tag.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: The value of the tag.
+          $ref: '#/components/schemas/TagValue'
+          description: The value of the tag.
       description: Describes a tag that is applied to an AWS App Runner resource. A tag is a metadata item consisting of a key-value pair.
     TagKeyList:
       type: array

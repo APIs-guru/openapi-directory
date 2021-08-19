@@ -491,17 +491,14 @@ paths:
                   type: object
                   properties:
                     Id:
-                      allOf:
-                        - $ref: '#/components/schemas/ChatItemId'
-                        - description: 'The ID of the message or event where to start. '
+                      $ref: '#/components/schemas/ChatItemId'
+                      description: 'The ID of the message or event where to start. '
                     AbsoluteTime:
-                      allOf:
-                        - $ref: '#/components/schemas/Instant'
-                        - description: '<p>The time in ISO format where to start.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+                      $ref: '#/components/schemas/Instant'
+                      description: '<p>The time in ISO format where to start.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
                     MostRecent:
-                      allOf:
-                        - $ref: '#/components/schemas/MostRecent'
-                        - description: 'The start position of the most recent message where you want to start. '
+                      $ref: '#/components/schemas/MostRecent'
+                      description: 'The start position of the most recent message where you want to start. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -819,13 +816,11 @@ components:
       type: object
       properties:
         Websocket:
-          allOf:
-            - $ref: '#/components/schemas/Websocket'
-            - description: Creates the participant's websocket connection.
+          $ref: '#/components/schemas/Websocket'
+          description: Creates the participant's websocket connection.
         ConnectionCredentials:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionCredentials'
-            - description: Creates the participant's connection credentials. The authentication token associated with the participant's connection.
+          $ref: '#/components/schemas/ConnectionCredentials'
+          description: Creates the participant's connection credentials. The authentication token associated with the participant's connection.
     ConnectionType:
       type: string
       enum:
@@ -838,28 +833,23 @@ components:
       type: object
       properties:
         Url:
-          allOf:
-            - $ref: '#/components/schemas/PreSignedAttachmentUrl'
-            - description: The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.
+          $ref: '#/components/schemas/PreSignedAttachmentUrl'
+          description: The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.
         UrlExpiry:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601Datetime'
-            - description: 'The expiration time of the URL in ISO timestamp. It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.'
+          $ref: '#/components/schemas/ISO8601Datetime'
+          description: 'The expiration time of the URL in ISO timestamp. It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.'
     GetTranscriptResponse:
       type: object
       properties:
         InitialContactId:
-          allOf:
-            - $ref: '#/components/schemas/ContactId'
-            - description: 'The initial contact ID for the contact. '
+          $ref: '#/components/schemas/ContactId'
+          description: 'The initial contact ID for the contact. '
         Transcript:
-          allOf:
-            - $ref: '#/components/schemas/Transcript'
-            - description: The list of messages in the session.
+          $ref: '#/components/schemas/Transcript'
+          description: The list of messages in the session.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token. Use the value returned previously in the next subsequent request to retrieve the next set of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token. Use the value returned previously in the next subsequent request to retrieve the next set of results.
     ChatItemId:
       type: string
       minLength: 1
@@ -876,35 +866,29 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ChatItemId'
-            - description: The ID of the response.
+          $ref: '#/components/schemas/ChatItemId'
+          description: The ID of the response.
         AbsoluteTime:
-          allOf:
-            - $ref: '#/components/schemas/Instant'
-            - description: '<p>The time when the event was sent.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+          $ref: '#/components/schemas/Instant'
+          description: '<p>The time when the event was sent.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
     SendMessageResponse:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ChatItemId'
-            - description: The ID of the message.
+          $ref: '#/components/schemas/ChatItemId'
+          description: The ID of the message.
         AbsoluteTime:
-          allOf:
-            - $ref: '#/components/schemas/Instant'
-            - description: '<p>The time when the message was sent.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+          $ref: '#/components/schemas/Instant'
+          description: '<p>The time when the message was sent.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
     StartAttachmentUploadResponse:
       type: object
       properties:
         AttachmentId:
-          allOf:
-            - $ref: '#/components/schemas/ArtifactId'
-            - description: A unique identifier for the attachment.
+          $ref: '#/components/schemas/ArtifactId'
+          description: A unique identifier for the attachment.
         UploadMetadata:
-          allOf:
-            - $ref: '#/components/schemas/UploadMetadata'
-            - description: Fields to be used while uploading the attachment.
+          $ref: '#/components/schemas/UploadMetadata'
+          description: Fields to be used while uploading the attachment.
     ArtifactStatus:
       type: string
       enum:
@@ -929,21 +913,17 @@ components:
       type: object
       properties:
         ContentType:
-          allOf:
-            - $ref: '#/components/schemas/ContentType'
-            - description: 'Describes the MIME file type of the attachment. For a list of supported file types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.'
+          $ref: '#/components/schemas/ContentType'
+          description: 'Describes the MIME file type of the attachment. For a list of supported file types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.'
         AttachmentId:
-          allOf:
-            - $ref: '#/components/schemas/ArtifactId'
-            - description: A unique identifier for the attachment.
+          $ref: '#/components/schemas/ArtifactId'
+          description: A unique identifier for the attachment.
         AttachmentName:
-          allOf:
-            - $ref: '#/components/schemas/AttachmentName'
-            - description: A case-sensitive name of the attachment being uploaded.
+          $ref: '#/components/schemas/AttachmentName'
+          description: A case-sensitive name of the attachment being uploaded.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ArtifactStatus'
-            - description: Status of the attachment.
+          $ref: '#/components/schemas/ArtifactStatus'
+          description: Status of the attachment.
       description: The case-insensitive input to indicate standard MIME type that describes the format of the file that will be uploaded.
     AttachmentSizeInBytes:
       type: integer
@@ -992,26 +972,22 @@ components:
       title: CompleteAttachmentUploadRequest
       properties:
         AttachmentIds:
-          allOf:
-            - $ref: '#/components/schemas/AttachmentIdList'
-            - description: A list of unique identifiers for the attachments.
+          $ref: '#/components/schemas/AttachmentIdList'
+          description: A list of unique identifiers for the attachments.
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyClientToken'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/NonEmptyClientToken'
+          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     ISO8601Datetime:
       type: string
     ConnectionCredentials:
       type: object
       properties:
         ConnectionToken:
-          allOf:
-            - $ref: '#/components/schemas/ParticipantToken'
-            - description: The connection token.
+          $ref: '#/components/schemas/ParticipantToken'
+          description: The connection token.
         Expiry:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601Datetime'
-            - description: '<p>The expiration of the token.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+          $ref: '#/components/schemas/ISO8601Datetime'
+          description: '<p>The expiration of the token.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
       description: 'Connection credentials. '
     ConnectionTypeList:
       type: array
@@ -1029,29 +1005,25 @@ components:
       title: CreateParticipantConnectionRequest
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionTypeList'
-            - description: Type of connection information required.
+          $ref: '#/components/schemas/ConnectionTypeList'
+          description: Type of connection information required.
     Websocket:
       type: object
       properties:
         Url:
-          allOf:
-            - $ref: '#/components/schemas/PreSignedConnectionUrl'
-            - description: The URL of the websocket.
+          $ref: '#/components/schemas/PreSignedConnectionUrl'
+          description: The URL of the websocket.
         ConnectionExpiry:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601Datetime'
-            - description: '<p>The URL expiration timestamp in ISO date format.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+          $ref: '#/components/schemas/ISO8601Datetime'
+          description: '<p>The URL expiration timestamp in ISO date format.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
       description: The websocket for the participant's connection.
     DisconnectParticipantRequest:
       type: object
       title: DisconnectParticipantRequest
       properties:
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     DisplayName:
       type: string
       minLength: 1
@@ -1063,9 +1035,8 @@ components:
       title: GetAttachmentRequest
       properties:
         AttachmentId:
-          allOf:
-            - $ref: '#/components/schemas/ArtifactId'
-            - description: A unique identifier for the attachment.
+          $ref: '#/components/schemas/ArtifactId'
+          description: A unique identifier for the attachment.
     PreSignedAttachmentUrl:
       type: string
       minLength: 1
@@ -1092,46 +1063,37 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ChatItemId'
-            - description: 'The ID of the message or event where to start. '
+          $ref: '#/components/schemas/ChatItemId'
+          description: 'The ID of the message or event where to start. '
         AbsoluteTime:
-          allOf:
-            - $ref: '#/components/schemas/Instant'
-            - description: '<p>The time in ISO format where to start.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+          $ref: '#/components/schemas/Instant'
+          description: '<p>The time in ISO format where to start.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
         MostRecent:
-          allOf:
-            - $ref: '#/components/schemas/MostRecent'
-            - description: 'The start position of the most recent message where you want to start. '
+          $ref: '#/components/schemas/MostRecent'
+          description: 'The start position of the most recent message where you want to start. '
       description: 'A filtering option for where to start. For example, if you sent 100 messages, start with message 50. '
     GetTranscriptRequest:
       type: object
       title: GetTranscriptRequest
       properties:
         ContactId:
-          allOf:
-            - $ref: '#/components/schemas/ContactId'
-            - description: The contactId from the current contact chain for which transcript is needed.
+          $ref: '#/components/schemas/ContactId'
+          description: The contactId from the current contact chain for which transcript is needed.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return in the page. Default: 10. '
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of results to return in the page. Default: 10. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token. Use the value returned previously in the next subsequent request to retrieve the next set of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token. Use the value returned previously in the next subsequent request to retrieve the next set of results.
         ScanDirection:
-          allOf:
-            - $ref: '#/components/schemas/ScanDirection'
-            - description: 'The direction from StartPosition from which to retrieve message. Default: BACKWARD when no StartPosition is provided, FORWARD with StartPosition. '
+          $ref: '#/components/schemas/ScanDirection'
+          description: 'The direction from StartPosition from which to retrieve message. Default: BACKWARD when no StartPosition is provided, FORWARD with StartPosition. '
         SortOrder:
-          allOf:
-            - $ref: '#/components/schemas/SortKey'
-            - description: 'The sort order for the records. Default: DESCENDING.'
+          $ref: '#/components/schemas/SortKey'
+          description: 'The sort order for the records. Default: DESCENDING.'
         StartPosition:
-          allOf:
-            - $ref: '#/components/schemas/StartPosition'
-            - description: A filtering option for where to start.
+          $ref: '#/components/schemas/StartPosition'
+          description: A filtering option for where to start.
     Transcript:
       type: array
       items:
@@ -1150,41 +1112,32 @@ components:
       type: object
       properties:
         AbsoluteTime:
-          allOf:
-            - $ref: '#/components/schemas/Instant'
-            - description: '<p>The time when the message or event was sent.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+          $ref: '#/components/schemas/Instant'
+          description: '<p>The time when the message or event was sent.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
         Content:
-          allOf:
-            - $ref: '#/components/schemas/ChatContent'
-            - description: The content of the message or event.
+          $ref: '#/components/schemas/ChatContent'
+          description: The content of the message or event.
         ContentType:
-          allOf:
-            - $ref: '#/components/schemas/ChatContentType'
-            - description: The type of content of the item.
+          $ref: '#/components/schemas/ChatContentType'
+          description: The type of content of the item.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ChatItemId'
-            - description: The ID of the item.
+          $ref: '#/components/schemas/ChatItemId'
+          description: The ID of the item.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ChatItemType'
-            - description: 'Type of the item: message or event. '
+          $ref: '#/components/schemas/ChatItemType'
+          description: 'Type of the item: message or event. '
         ParticipantId:
-          allOf:
-            - $ref: '#/components/schemas/ParticipantId'
-            - description: The ID of the sender in the session.
+          $ref: '#/components/schemas/ParticipantId'
+          description: The ID of the sender in the session.
         DisplayName:
-          allOf:
-            - $ref: '#/components/schemas/DisplayName'
-            - description: The chat display name of the sender.
+          $ref: '#/components/schemas/DisplayName'
+          description: The chat display name of the sender.
         ParticipantRole:
-          allOf:
-            - $ref: '#/components/schemas/ParticipantRole'
-            - description: 'The role of the sender. For example, is it a customer, agent, or system.'
+          $ref: '#/components/schemas/ParticipantRole'
+          description: 'The role of the sender. For example, is it a customer, agent, or system.'
         Attachments:
-          allOf:
-            - $ref: '#/components/schemas/Attachments'
-            - description: Provides information about the attachments.
+          $ref: '#/components/schemas/Attachments'
+          description: Provides information about the attachments.
       description: 'An item - message or event - that has been sent. '
     PreSignedConnectionUrl:
       type: string
@@ -1197,17 +1150,14 @@ components:
       title: SendEventRequest
       properties:
         ContentType:
-          allOf:
-            - $ref: '#/components/schemas/ChatContentType'
-            - description: '<p>The content type of the request. Supported types are:</p> <ul> <li> <p>application/vnd.amazonaws.connect.event.typing</p> </li> <li> <p>application/vnd.amazonaws.connect.event.connection.acknowledged</p> </li> </ul>'
+          $ref: '#/components/schemas/ChatContentType'
+          description: '<p>The content type of the request. Supported types are:</p> <ul> <li> <p>application/vnd.amazonaws.connect.event.typing</p> </li> <li> <p>application/vnd.amazonaws.connect.event.connection.acknowledged</p> </li> </ul>'
         Content:
-          allOf:
-            - $ref: '#/components/schemas/ChatContent'
-            - description: 'The content of the event to be sent (for example, message text). This is not yet supported.'
+          $ref: '#/components/schemas/ChatContent'
+          description: 'The content of the event to be sent (for example, message text). This is not yet supported.'
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     SendMessageRequest:
       type: object
       required:
@@ -1216,17 +1166,14 @@ components:
       title: SendMessageRequest
       properties:
         ContentType:
-          allOf:
-            - $ref: '#/components/schemas/ChatContentType'
-            - description: The type of the content. Supported types are text/plain.
+          $ref: '#/components/schemas/ChatContentType'
+          description: The type of the content. Supported types are text/plain.
         Content:
-          allOf:
-            - $ref: '#/components/schemas/ChatContent'
-            - description: The content of the message.
+          $ref: '#/components/schemas/ChatContent'
+          description: The content of the message.
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     StartAttachmentUploadRequest:
       type: object
       required:
@@ -1237,36 +1184,29 @@ components:
       title: StartAttachmentUploadRequest
       properties:
         ContentType:
-          allOf:
-            - $ref: '#/components/schemas/ContentType'
-            - description: 'Describes the MIME file type of the attachment. For a list of supported file types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.'
+          $ref: '#/components/schemas/ContentType'
+          description: 'Describes the MIME file type of the attachment. For a list of supported file types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.'
         AttachmentSizeInBytes:
-          allOf:
-            - $ref: '#/components/schemas/AttachmentSizeInBytes'
-            - description: The size of the attachment in bytes.
+          $ref: '#/components/schemas/AttachmentSizeInBytes'
+          description: The size of the attachment in bytes.
         AttachmentName:
-          allOf:
-            - $ref: '#/components/schemas/AttachmentName'
-            - description: A case-sensitive name of the attachment being uploaded.
+          $ref: '#/components/schemas/AttachmentName'
+          description: A case-sensitive name of the attachment being uploaded.
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyClientToken'
-            - description: A unique case sensitive identifier to support idempotency of request.
+          $ref: '#/components/schemas/NonEmptyClientToken'
+          description: A unique case sensitive identifier to support idempotency of request.
     UploadMetadata:
       type: object
       properties:
         Url:
-          allOf:
-            - $ref: '#/components/schemas/UploadMetadataUrl'
-            - description: The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.
+          $ref: '#/components/schemas/UploadMetadataUrl'
+          description: The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.
         UrlExpiry:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601Datetime'
-            - description: 'The expiration time of the URL in ISO timestamp. It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.'
+          $ref: '#/components/schemas/ISO8601Datetime'
+          description: 'The expiration time of the URL in ISO timestamp. It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.'
         HeadersToInclude:
-          allOf:
-            - $ref: '#/components/schemas/UploadMetadataSignedHeaders'
-            - description: The headers to be provided while uploading the file to the URL.
+          $ref: '#/components/schemas/UploadMetadataSignedHeaders'
+          description: The headers to be provided while uploading the file to the URL.
       description: Fields to be used while uploading the attachment.
     UploadMetadataUrl:
       type: string

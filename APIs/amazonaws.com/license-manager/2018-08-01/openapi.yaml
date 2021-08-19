@@ -3443,17 +3443,14 @@ components:
       type: object
       properties:
         GrantArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Grant ARN.
+          $ref: '#/components/schemas/Arn'
+          description: Grant ARN.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/GrantStatus'
-            - description: Grant status.
+          $ref: '#/components/schemas/GrantStatus'
+          description: Grant status.
         Version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Grant version.
+          $ref: '#/components/schemas/String'
+          description: Grant version.
     AcceptGrantRequest:
       type: object
       required:
@@ -3461,9 +3458,8 @@ components:
       title: AcceptGrantRequest
       properties:
         GrantArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the grant.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the grant.
     ValidationException: {}
     InvalidParameterValueException: {}
     AuthorizationException: {}
@@ -3481,50 +3477,40 @@ components:
       title: CheckInLicenseRequest
       properties:
         LicenseConsumptionToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License consumption token.
+          $ref: '#/components/schemas/String'
+          description: License consumption token.
         Beneficiary:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License beneficiary.
+          $ref: '#/components/schemas/String'
+          description: License beneficiary.
     ResourceNotFoundException: {}
     ConflictException: {}
     CheckoutBorrowLicenseResponse:
       type: object
       properties:
         LicenseArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the license.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the license.
         LicenseConsumptionToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License consumption token.
+          $ref: '#/components/schemas/String'
+          description: License consumption token.
         EntitlementsAllowed:
-          allOf:
-            - $ref: '#/components/schemas/EntitlementDataList'
-            - description: Allowed license entitlements.
+          $ref: '#/components/schemas/EntitlementDataList'
+          description: Allowed license entitlements.
         NodeId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Node ID.
+          $ref: '#/components/schemas/String'
+          description: Node ID.
         SignedToken:
-          allOf:
-            - $ref: '#/components/schemas/SignedToken'
-            - description: Signed token.
+          $ref: '#/components/schemas/SignedToken'
+          description: Signed token.
         IssuedAt:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DateTime'
-            - description: Date and time at which the license checkout is issued.
+          $ref: '#/components/schemas/ISO8601DateTime'
+          description: Date and time at which the license checkout is issued.
         Expiration:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DateTime'
-            - description: Date and time at which the license checkout expires.
+          $ref: '#/components/schemas/ISO8601DateTime'
+          description: Date and time at which the license checkout expires.
         CheckoutMetadata:
-          allOf:
-            - $ref: '#/components/schemas/MetadataList'
-            - description: Information about constraints.
+          $ref: '#/components/schemas/MetadataList'
+          description: Information about constraints.
     CheckoutBorrowLicenseRequest:
       type: object
       required:
@@ -3535,29 +3521,23 @@ components:
       title: CheckoutBorrowLicenseRequest
       properties:
         LicenseArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the license. The license must use the borrow consumption configuration.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the license. The license must use the borrow consumption configuration.
         Entitlements:
-          allOf:
-            - $ref: '#/components/schemas/EntitlementDataList'
-            - description: License entitlements. Partial checkouts are not supported.
+          $ref: '#/components/schemas/EntitlementDataList'
+          description: License entitlements. Partial checkouts are not supported.
         DigitalSignatureMethod:
-          allOf:
-            - $ref: '#/components/schemas/DigitalSignatureMethod'
-            - description: 'Digital signature method. The possible value is JSON Web Signature (JWS) algorithm PS384. For more information, see <a href="https://tools.ietf.org/html/rfc7518#section-3.5">RFC 7518 Digital Signature with RSASSA-PSS</a>.'
+          $ref: '#/components/schemas/DigitalSignatureMethod'
+          description: 'Digital signature method. The possible value is JSON Web Signature (JWS) algorithm PS384. For more information, see <a href="https://tools.ietf.org/html/rfc7518#section-3.5">RFC 7518 Digital Signature with RSASSA-PSS</a>.'
         NodeId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Node ID.
+          $ref: '#/components/schemas/String'
+          description: Node ID.
         CheckoutMetadata:
-          allOf:
-            - $ref: '#/components/schemas/MetadataList'
-            - description: Information about constraints.
+          $ref: '#/components/schemas/MetadataList'
+          description: Information about constraints.
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     NoEntitlementsAllowedException: {}
     EntitlementNotAllowedException: {}
     UnsupportedDigitalSignatureMethodException: {}
@@ -3566,33 +3546,26 @@ components:
       type: object
       properties:
         CheckoutType:
-          allOf:
-            - $ref: '#/components/schemas/CheckoutType'
-            - description: Checkout type.
+          $ref: '#/components/schemas/CheckoutType'
+          description: Checkout type.
         LicenseConsumptionToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License consumption token.
+          $ref: '#/components/schemas/String'
+          description: License consumption token.
         EntitlementsAllowed:
-          allOf:
-            - $ref: '#/components/schemas/EntitlementDataList'
-            - description: Allowed license entitlements.
+          $ref: '#/components/schemas/EntitlementDataList'
+          description: Allowed license entitlements.
         SignedToken:
-          allOf:
-            - $ref: '#/components/schemas/SignedToken'
-            - description: Signed token.
+          $ref: '#/components/schemas/SignedToken'
+          description: Signed token.
         NodeId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Node ID.
+          $ref: '#/components/schemas/String'
+          description: Node ID.
         IssuedAt:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DateTime'
-            - description: Date and time at which the license checkout is issued.
+          $ref: '#/components/schemas/ISO8601DateTime'
+          description: Date and time at which the license checkout is issued.
         Expiration:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DateTime'
-            - description: Date and time at which the license checkout expires.
+          $ref: '#/components/schemas/ISO8601DateTime'
+          description: Date and time at which the license checkout expires.
     CheckoutLicenseRequest:
       type: object
       required:
@@ -3604,48 +3577,38 @@ components:
       title: CheckoutLicenseRequest
       properties:
         ProductSKU:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Product SKU.
+          $ref: '#/components/schemas/String'
+          description: Product SKU.
         CheckoutType:
-          allOf:
-            - $ref: '#/components/schemas/CheckoutType'
-            - description: Checkout type.
+          $ref: '#/components/schemas/CheckoutType'
+          description: Checkout type.
         KeyFingerprint:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Key fingerprint identifying the license.
+          $ref: '#/components/schemas/String'
+          description: Key fingerprint identifying the license.
         Entitlements:
-          allOf:
-            - $ref: '#/components/schemas/EntitlementDataList'
-            - description: License entitlements.
+          $ref: '#/components/schemas/EntitlementDataList'
+          description: License entitlements.
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         Beneficiary:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License beneficiary.
+          $ref: '#/components/schemas/String'
+          description: License beneficiary.
         NodeId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Node ID.
+          $ref: '#/components/schemas/String'
+          description: Node ID.
     CreateGrantResponse:
       type: object
       properties:
         GrantArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Grant ARN.
+          $ref: '#/components/schemas/Arn'
+          description: Grant ARN.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/GrantStatus'
-            - description: Grant status.
+          $ref: '#/components/schemas/GrantStatus'
+          description: Grant status.
         Version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Grant version.
+          $ref: '#/components/schemas/String'
+          description: Grant version.
     CreateGrantRequest:
       type: object
       required:
@@ -3658,44 +3621,35 @@ components:
       title: CreateGrantRequest
       properties:
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         GrantName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Grant name.
+          $ref: '#/components/schemas/String'
+          description: Grant name.
         LicenseArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the license.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the license.
         Principals:
-          allOf:
-            - $ref: '#/components/schemas/PrincipalArnList'
-            - description: The grant principals.
+          $ref: '#/components/schemas/PrincipalArnList'
+          description: The grant principals.
         HomeRegion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Home Region of the grant.
+          $ref: '#/components/schemas/String'
+          description: Home Region of the grant.
         AllowedOperations:
-          allOf:
-            - $ref: '#/components/schemas/AllowedOperationList'
-            - description: Allowed operations for the grant.
+          $ref: '#/components/schemas/AllowedOperationList'
+          description: Allowed operations for the grant.
     CreateGrantVersionResponse:
       type: object
       properties:
         GrantArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Grant ARN.
+          $ref: '#/components/schemas/Arn'
+          description: Grant ARN.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/GrantStatus'
-            - description: Grant status.
+          $ref: '#/components/schemas/GrantStatus'
+          description: Grant status.
         Version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: New version of the grant.
+          $ref: '#/components/schemas/String'
+          description: New version of the grant.
     CreateGrantVersionRequest:
       type: object
       required:
@@ -3704,46 +3658,37 @@ components:
       title: CreateGrantVersionRequest
       properties:
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         GrantArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the grant.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the grant.
         GrantName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Grant name.
+          $ref: '#/components/schemas/String'
+          description: Grant name.
         AllowedOperations:
-          allOf:
-            - $ref: '#/components/schemas/AllowedOperationList'
-            - description: Allowed operations for the grant.
+          $ref: '#/components/schemas/AllowedOperationList'
+          description: Allowed operations for the grant.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/GrantStatus'
-            - description: Grant status.
+          $ref: '#/components/schemas/GrantStatus'
+          description: Grant status.
         StatusReason:
           $ref: '#/components/schemas/StatusReasonMessage'
         SourceVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Current version of the grant.
+          $ref: '#/components/schemas/String'
+          description: Current version of the grant.
     CreateLicenseResponse:
       type: object
       properties:
         LicenseArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the license.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the license.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/LicenseStatus'
-            - description: License status.
+          $ref: '#/components/schemas/LicenseStatus'
+          description: License status.
         Version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License version.
+          $ref: '#/components/schemas/String'
+          description: License version.
     CreateLicenseRequest:
       type: object
       required:
@@ -3760,56 +3705,44 @@ components:
       title: CreateLicenseRequest
       properties:
         LicenseName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License name.
+          $ref: '#/components/schemas/String'
+          description: License name.
         ProductName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Product name.
+          $ref: '#/components/schemas/String'
+          description: Product name.
         ProductSKU:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Product SKU.
+          $ref: '#/components/schemas/String'
+          description: Product SKU.
         Issuer:
-          allOf:
-            - $ref: '#/components/schemas/Issuer'
-            - description: License issuer.
+          $ref: '#/components/schemas/Issuer'
+          description: License issuer.
         HomeRegion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Home Region for the license.
+          $ref: '#/components/schemas/String'
+          description: Home Region for the license.
         Validity:
-          allOf:
-            - $ref: '#/components/schemas/DatetimeRange'
-            - description: 'Date and time range during which the license is valid, in ISO8601-UTC format.'
+          $ref: '#/components/schemas/DatetimeRange'
+          description: 'Date and time range during which the license is valid, in ISO8601-UTC format.'
         Entitlements:
-          allOf:
-            - $ref: '#/components/schemas/EntitlementList'
-            - description: License entitlements.
+          $ref: '#/components/schemas/EntitlementList'
+          description: License entitlements.
         Beneficiary:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License beneficiary.
+          $ref: '#/components/schemas/String'
+          description: License beneficiary.
         ConsumptionConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/ConsumptionConfiguration'
-            - description: Configuration for consumption of the license. Choose a provisional configuration for workloads running with continuous connectivity. Choose a borrow configuration for workloads with offline usage.
+          $ref: '#/components/schemas/ConsumptionConfiguration'
+          description: Configuration for consumption of the license. Choose a provisional configuration for workloads running with continuous connectivity. Choose a borrow configuration for workloads with offline usage.
         LicenseMetadata:
-          allOf:
-            - $ref: '#/components/schemas/MetadataList'
-            - description: Information about the license.
+          $ref: '#/components/schemas/MetadataList'
+          description: Information about the license.
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     CreateLicenseConfigurationResponse:
       type: object
       properties:
         LicenseConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the license configuration.
     CreateLicenseConfigurationRequest:
       type: object
       required:
@@ -3818,48 +3751,38 @@ components:
       title: CreateLicenseConfigurationRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Name of the license configuration.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Description of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Description of the license configuration.
         LicenseCountingType:
-          allOf:
-            - $ref: '#/components/schemas/LicenseCountingType'
-            - description: Dimension used to track the license inventory.
+          $ref: '#/components/schemas/LicenseCountingType'
+          description: Dimension used to track the license inventory.
         LicenseCount:
-          allOf:
-            - $ref: '#/components/schemas/BoxLong'
-            - description: Number of licenses managed by the license configuration.
+          $ref: '#/components/schemas/BoxLong'
+          description: Number of licenses managed by the license configuration.
         LicenseCountHardLimit:
-          allOf:
-            - $ref: '#/components/schemas/BoxBoolean'
-            - description: Indicates whether hard or soft license enforcement is used. Exceeding a hard limit blocks the launch of new instances.
+          $ref: '#/components/schemas/BoxBoolean'
+          description: Indicates whether hard or soft license enforcement is used. Exceeding a hard limit blocks the launch of new instances.
         LicenseRules:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: '<p>License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). The available rules vary by dimension, as follows.</p> <ul> <li> <p> <code>Cores</code> dimension: <code>allowedTenancy</code> | <code>licenseAffinityToHost</code> | <code>maximumCores</code> | <code>minimumCores</code> </p> </li> <li> <p> <code>Instances</code> dimension: <code>allowedTenancy</code> | <code>maximumCores</code> | <code>minimumCores</code> | <code>maximumSockets</code> | <code>minimumSockets</code> | <code>maximumVcpus</code> | <code>minimumVcpus</code> </p> </li> <li> <p> <code>Sockets</code> dimension: <code>allowedTenancy</code> | <code>licenseAffinityToHost</code> | <code>maximumSockets</code> | <code>minimumSockets</code> </p> </li> <li> <p> <code>vCPUs</code> dimension: <code>allowedTenancy</code> | <code>honorVcpuOptimization</code> | <code>maximumVcpus</code> | <code>minimumVcpus</code> </p> </li> </ul> <p>The unit for <code>licenseAffinityToHost</code> is days and the range is 1 to 180. The possible values for <code>allowedTenancy</code> are <code>EC2-Default</code>, <code>EC2-DedicatedHost</code>, and <code>EC2-DedicatedInstance</code>. The possible values for <code>honorVcpuOptimization</code> are <code>True</code> and <code>False</code>.</p>'
+          $ref: '#/components/schemas/StringList'
+          description: '<p>License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). The available rules vary by dimension, as follows.</p> <ul> <li> <p> <code>Cores</code> dimension: <code>allowedTenancy</code> | <code>licenseAffinityToHost</code> | <code>maximumCores</code> | <code>minimumCores</code> </p> </li> <li> <p> <code>Instances</code> dimension: <code>allowedTenancy</code> | <code>maximumCores</code> | <code>minimumCores</code> | <code>maximumSockets</code> | <code>minimumSockets</code> | <code>maximumVcpus</code> | <code>minimumVcpus</code> </p> </li> <li> <p> <code>Sockets</code> dimension: <code>allowedTenancy</code> | <code>licenseAffinityToHost</code> | <code>maximumSockets</code> | <code>minimumSockets</code> </p> </li> <li> <p> <code>vCPUs</code> dimension: <code>allowedTenancy</code> | <code>honorVcpuOptimization</code> | <code>maximumVcpus</code> | <code>minimumVcpus</code> </p> </li> </ul> <p>The unit for <code>licenseAffinityToHost</code> is days and the range is 1 to 180. The possible values for <code>allowedTenancy</code> are <code>EC2-Default</code>, <code>EC2-DedicatedHost</code>, and <code>EC2-DedicatedInstance</code>. The possible values for <code>honorVcpuOptimization</code> are <code>True</code> and <code>False</code>.</p>'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: Tags to add to the license configuration.
+          $ref: '#/components/schemas/TagList'
+          description: Tags to add to the license configuration.
         DisassociateWhenNotFound:
-          allOf:
-            - $ref: '#/components/schemas/BoxBoolean'
-            - description: 'When true, disassociates a resource when software is uninstalled.'
+          $ref: '#/components/schemas/BoxBoolean'
+          description: 'When true, disassociates a resource when software is uninstalled.'
         ProductInformationList:
-          allOf:
-            - $ref: '#/components/schemas/ProductInformationList'
-            - description: Product information.
+          $ref: '#/components/schemas/ProductInformationList'
+          description: Product information.
     CreateLicenseManagerReportGeneratorResponse:
       type: object
       properties:
         LicenseManagerReportGeneratorArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Number (ARN) of the new report generator.
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Number (ARN) of the new report generator.
     CreateLicenseManagerReportGeneratorRequest:
       type: object
       required:
@@ -3871,48 +3794,38 @@ components:
       title: CreateLicenseManagerReportGeneratorRequest
       properties:
         ReportGeneratorName:
-          allOf:
-            - $ref: '#/components/schemas/ReportGeneratorName'
-            - description: Name of the report generator.
+          $ref: '#/components/schemas/ReportGeneratorName'
+          description: Name of the report generator.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ReportTypeList'
-            - description: '<p>Type of reports to generate. The following report types an be generated:</p> <ul> <li> <p>License configuration report - Reports on the number and details of consumed licenses for a license configuration.</p> </li> <li> <p>Resource report - Reports on the tracked licenses and resource consumption for a license configuration.</p> </li> </ul>'
+          $ref: '#/components/schemas/ReportTypeList'
+          description: '<p>Type of reports to generate. The following report types an be generated:</p> <ul> <li> <p>License configuration report - Reports on the number and details of consumed licenses for a license configuration.</p> </li> <li> <p>Resource report - Reports on the tracked licenses and resource consumption for a license configuration.</p> </li> </ul>'
         ReportContext:
-          allOf:
-            - $ref: '#/components/schemas/ReportContext'
-            - description: Defines the type of license configuration the report generator tracks.
+          $ref: '#/components/schemas/ReportContext'
+          description: Defines the type of license configuration the report generator tracks.
         ReportFrequency:
-          allOf:
-            - $ref: '#/components/schemas/ReportFrequency'
-            - description: 'Frequency by which reports are generated. Reports can be generated daily, monthly, or weekly.'
+          $ref: '#/components/schemas/ReportFrequency'
+          description: 'Frequency by which reports are generated. Reports can be generated daily, monthly, or weekly.'
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         Description:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Description of the report generator.
+          $ref: '#/components/schemas/String'
+          description: Description of the report generator.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: Tags to add to the report generator.
+          $ref: '#/components/schemas/TagList'
+          description: Tags to add to the report generator.
     CreateLicenseVersionResponse:
       type: object
       properties:
         LicenseArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: License ARN.
+          $ref: '#/components/schemas/Arn'
+          description: License ARN.
         Version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: New version of the license.
+          $ref: '#/components/schemas/String'
+          description: New version of the license.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/LicenseStatus'
-            - description: License status.
+          $ref: '#/components/schemas/LicenseStatus'
+          description: License status.
     CreateLicenseVersionRequest:
       type: object
       required:
@@ -3929,68 +3842,53 @@ components:
       title: CreateLicenseVersionRequest
       properties:
         LicenseArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the license.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the license.
         LicenseName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License name.
+          $ref: '#/components/schemas/String'
+          description: License name.
         ProductName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Product name.
+          $ref: '#/components/schemas/String'
+          description: Product name.
         Issuer:
-          allOf:
-            - $ref: '#/components/schemas/Issuer'
-            - description: License issuer.
+          $ref: '#/components/schemas/Issuer'
+          description: License issuer.
         HomeRegion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Home Region of the license.
+          $ref: '#/components/schemas/String'
+          description: Home Region of the license.
         Validity:
-          allOf:
-            - $ref: '#/components/schemas/DatetimeRange'
-            - description: 'Date and time range during which the license is valid, in ISO8601-UTC format.'
+          $ref: '#/components/schemas/DatetimeRange'
+          description: 'Date and time range during which the license is valid, in ISO8601-UTC format.'
         LicenseMetadata:
-          allOf:
-            - $ref: '#/components/schemas/MetadataList'
-            - description: Information about the license.
+          $ref: '#/components/schemas/MetadataList'
+          description: Information about the license.
         Entitlements:
-          allOf:
-            - $ref: '#/components/schemas/EntitlementList'
-            - description: License entitlements.
+          $ref: '#/components/schemas/EntitlementList'
+          description: License entitlements.
         ConsumptionConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/ConsumptionConfiguration'
-            - description: Configuration for consumption of the license. Choose a provisional configuration for workloads running with continuous connectivity. Choose a borrow configuration for workloads with offline usage.
+          $ref: '#/components/schemas/ConsumptionConfiguration'
+          description: Configuration for consumption of the license. Choose a provisional configuration for workloads running with continuous connectivity. Choose a borrow configuration for workloads with offline usage.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/LicenseStatus'
-            - description: License status.
+          $ref: '#/components/schemas/LicenseStatus'
+          description: License status.
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         SourceVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Current version of the license.
+          $ref: '#/components/schemas/String'
+          description: Current version of the license.
     CreateTokenResponse:
       type: object
       properties:
         TokenId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token ID.
+          $ref: '#/components/schemas/String'
+          description: Token ID.
         TokenType:
-          allOf:
-            - $ref: '#/components/schemas/TokenType'
-            - description: Token type.
+          $ref: '#/components/schemas/TokenType'
+          description: Token type.
         Token:
-          allOf:
-            - $ref: '#/components/schemas/TokenString'
-            - description: 'Refresh token, encoded as a JWT token.'
+          $ref: '#/components/schemas/TokenString'
+          description: 'Refresh token, encoded as a JWT token.'
     CreateTokenRequest:
       type: object
       required:
@@ -3999,40 +3897,32 @@ components:
       title: CreateTokenRequest
       properties:
         LicenseArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the license. The ARN is mapped to the aud claim of the JWT token.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the license. The ARN is mapped to the aud claim of the JWT token.
         RoleArns:
-          allOf:
-            - $ref: '#/components/schemas/ArnList'
-            - description: Amazon Resource Name (ARN) of the IAM roles to embed in the token. License Manager does not check whether the roles are in use.
+          $ref: '#/components/schemas/ArnList'
+          description: Amazon Resource Name (ARN) of the IAM roles to embed in the token. License Manager does not check whether the roles are in use.
         ExpirationInDays:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'Token expiration, in days, counted from token creation. The default is 365 days.'
+          $ref: '#/components/schemas/Integer'
+          description: 'Token expiration, in days, counted from token creation. The default is 365 days.'
         TokenProperties:
-          allOf:
-            - $ref: '#/components/schemas/MaxSize3StringList'
-            - description: Data specified by the caller to be included in the JWT token. The data is mapped to the amr claim of the JWT token.
+          $ref: '#/components/schemas/MaxSize3StringList'
+          description: Data specified by the caller to be included in the JWT token. The data is mapped to the amr claim of the JWT token.
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'Idempotency token, valid for 10 minutes.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'Idempotency token, valid for 10 minutes.'
     DeleteGrantResponse:
       type: object
       properties:
         GrantArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Grant ARN.
+          $ref: '#/components/schemas/Arn'
+          description: Grant ARN.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/GrantStatus'
-            - description: Grant status.
+          $ref: '#/components/schemas/GrantStatus'
+          description: Grant status.
         Version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Grant version.
+          $ref: '#/components/schemas/String'
+          description: Grant version.
     DeleteGrantRequest:
       type: object
       required:
@@ -4041,26 +3931,22 @@ components:
       title: DeleteGrantRequest
       properties:
         GrantArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the grant.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the grant.
         StatusReason:
           $ref: '#/components/schemas/StatusReasonMessage'
         Version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Current version of the grant.
+          $ref: '#/components/schemas/String'
+          description: Current version of the grant.
     DeleteLicenseResponse:
       type: object
       properties:
         Status:
-          allOf:
-            - $ref: '#/components/schemas/LicenseDeletionStatus'
-            - description: License status.
+          $ref: '#/components/schemas/LicenseDeletionStatus'
+          description: License status.
         DeletionDate:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DateTime'
-            - description: Date on which the license is deleted.
+          $ref: '#/components/schemas/ISO8601DateTime'
+          description: Date on which the license is deleted.
     DeleteLicenseRequest:
       type: object
       required:
@@ -4069,13 +3955,11 @@ components:
       title: DeleteLicenseRequest
       properties:
         LicenseArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the license.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the license.
         SourceVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Current version of the license.
+          $ref: '#/components/schemas/String'
+          description: Current version of the license.
     DeleteLicenseConfigurationResponse:
       type: object
       properties: {}
@@ -4086,9 +3970,8 @@ components:
       title: DeleteLicenseConfigurationRequest
       properties:
         LicenseConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ID of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: ID of the license configuration.
     DeleteLicenseManagerReportGeneratorResponse:
       type: object
       properties: {}
@@ -4099,9 +3982,8 @@ components:
       title: DeleteLicenseManagerReportGeneratorRequest
       properties:
         LicenseManagerReportGeneratorArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Number (ARN) of the report generator that will be deleted.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Number (ARN) of the report generator that will be deleted.
     DeleteTokenResponse:
       type: object
       properties: {}
@@ -4112,20 +3994,17 @@ components:
       title: DeleteTokenRequest
       properties:
         TokenId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token ID.
+          $ref: '#/components/schemas/String'
+          description: Token ID.
     ExtendLicenseConsumptionResponse:
       type: object
       properties:
         LicenseConsumptionToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License consumption token.
+          $ref: '#/components/schemas/String'
+          description: License consumption token.
         Expiration:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DateTime'
-            - description: Date and time at which the license consumption expires.
+          $ref: '#/components/schemas/ISO8601DateTime'
+          description: Date and time at which the license consumption expires.
     ExtendLicenseConsumptionRequest:
       type: object
       required:
@@ -4133,20 +4012,17 @@ components:
       title: ExtendLicenseConsumptionRequest
       properties:
         LicenseConsumptionToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License consumption token.
+          $ref: '#/components/schemas/String'
+          description: License consumption token.
         DryRun:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'Checks whether you have the required permissions for the action, without actually making the request. Provides an error response if you do not have the required permissions.'
+          $ref: '#/components/schemas/Boolean'
+          description: 'Checks whether you have the required permissions for the action, without actually making the request. Provides an error response if you do not have the required permissions.'
     GetAccessTokenResponse:
       type: object
       properties:
         AccessToken:
-          allOf:
-            - $ref: '#/components/schemas/TokenString'
-            - description: Temporary access token.
+          $ref: '#/components/schemas/TokenString'
+          description: Temporary access token.
     GetAccessTokenRequest:
       type: object
       required:
@@ -4154,20 +4030,17 @@ components:
       title: GetAccessTokenRequest
       properties:
         Token:
-          allOf:
-            - $ref: '#/components/schemas/TokenString'
-            - description: 'Refresh token, encoded as a JWT token.'
+          $ref: '#/components/schemas/TokenString'
+          description: 'Refresh token, encoded as a JWT token.'
         TokenProperties:
-          allOf:
-            - $ref: '#/components/schemas/MaxSize3StringList'
-            - description: Token properties to validate against those present in the JWT token.
+          $ref: '#/components/schemas/MaxSize3StringList'
+          description: Token properties to validate against those present in the JWT token.
     GetGrantResponse:
       type: object
       properties:
         Grant:
-          allOf:
-            - $ref: '#/components/schemas/Grant'
-            - description: Grant details.
+          $ref: '#/components/schemas/Grant'
+          description: Grant details.
     GetGrantRequest:
       type: object
       required:
@@ -4175,20 +4048,17 @@ components:
       title: GetGrantRequest
       properties:
         GrantArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the grant.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the grant.
         Version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Grant version.
+          $ref: '#/components/schemas/String'
+          description: Grant version.
     GetLicenseResponse:
       type: object
       properties:
         License:
-          allOf:
-            - $ref: '#/components/schemas/License'
-            - description: License details.
+          $ref: '#/components/schemas/License'
+          description: License details.
     GetLicenseRequest:
       type: object
       required:
@@ -4196,84 +4066,65 @@ components:
       title: GetLicenseRequest
       properties:
         LicenseArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the license.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the license.
         Version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License version.
+          $ref: '#/components/schemas/String'
+          description: License version.
     GetLicenseConfigurationResponse:
       type: object
       properties:
         LicenseConfigurationId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Unique ID for the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Unique ID for the license configuration.
         LicenseConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the license configuration.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Name of the license configuration.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Description of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Description of the license configuration.
         LicenseCountingType:
-          allOf:
-            - $ref: '#/components/schemas/LicenseCountingType'
-            - description: Dimension on which the licenses are counted.
+          $ref: '#/components/schemas/LicenseCountingType'
+          description: Dimension on which the licenses are counted.
         LicenseRules:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: License rules.
+          $ref: '#/components/schemas/StringList'
+          description: License rules.
         LicenseCount:
-          allOf:
-            - $ref: '#/components/schemas/BoxLong'
-            - description: Number of available licenses.
+          $ref: '#/components/schemas/BoxLong'
+          description: Number of available licenses.
         LicenseCountHardLimit:
-          allOf:
-            - $ref: '#/components/schemas/BoxBoolean'
-            - description: Sets the number of available licenses as a hard limit.
+          $ref: '#/components/schemas/BoxBoolean'
+          description: Sets the number of available licenses as a hard limit.
         ConsumedLicenses:
-          allOf:
-            - $ref: '#/components/schemas/BoxLong'
-            - description: Number of licenses assigned to resources.
+          $ref: '#/components/schemas/BoxLong'
+          description: Number of licenses assigned to resources.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License configuration status.
+          $ref: '#/components/schemas/String'
+          description: License configuration status.
         OwnerAccountId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Account ID of the owner of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Account ID of the owner of the license configuration.
         ConsumedLicenseSummaryList:
-          allOf:
-            - $ref: '#/components/schemas/ConsumedLicenseSummaryList'
-            - description: Summaries of the licenses consumed by resources.
+          $ref: '#/components/schemas/ConsumedLicenseSummaryList'
+          description: Summaries of the licenses consumed by resources.
         ManagedResourceSummaryList:
-          allOf:
-            - $ref: '#/components/schemas/ManagedResourceSummaryList'
-            - description: Summaries of the managed resources.
+          $ref: '#/components/schemas/ManagedResourceSummaryList'
+          description: Summaries of the managed resources.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: Tags for the license configuration.
+          $ref: '#/components/schemas/TagList'
+          description: Tags for the license configuration.
         ProductInformationList:
-          allOf:
-            - $ref: '#/components/schemas/ProductInformationList'
-            - description: Product information.
+          $ref: '#/components/schemas/ProductInformationList'
+          description: Product information.
         AutomatedDiscoveryInformation:
-          allOf:
-            - $ref: '#/components/schemas/AutomatedDiscoveryInformation'
-            - description: Automated discovery information.
+          $ref: '#/components/schemas/AutomatedDiscoveryInformation'
+          description: Automated discovery information.
         DisassociateWhenNotFound:
-          allOf:
-            - $ref: '#/components/schemas/BoxBoolean'
-            - description: 'When true, disassociates a resource when software is uninstalled.'
+          $ref: '#/components/schemas/BoxBoolean'
+          description: 'When true, disassociates a resource when software is uninstalled.'
     GetLicenseConfigurationRequest:
       type: object
       required:
@@ -4281,16 +4132,14 @@ components:
       title: GetLicenseConfigurationRequest
       properties:
         LicenseConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the license configuration.
     GetLicenseManagerReportGeneratorResponse:
       type: object
       properties:
         ReportGenerator:
-          allOf:
-            - $ref: '#/components/schemas/ReportGenerator'
-            - description: A report generator that creates periodic reports on your license configurations.
+          $ref: '#/components/schemas/ReportGenerator'
+          description: A report generator that creates periodic reports on your license configurations.
     GetLicenseManagerReportGeneratorRequest:
       type: object
       required:
@@ -4298,16 +4147,14 @@ components:
       title: GetLicenseManagerReportGeneratorRequest
       properties:
         LicenseManagerReportGeneratorArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: mazon Resource Number (ARN) of the report generator to retrieve information on.
+          $ref: '#/components/schemas/String'
+          description: mazon Resource Number (ARN) of the report generator to retrieve information on.
     GetLicenseUsageResponse:
       type: object
       properties:
         LicenseUsage:
-          allOf:
-            - $ref: '#/components/schemas/LicenseUsage'
-            - description: License usage details.
+          $ref: '#/components/schemas/LicenseUsage'
+          description: License usage details.
     GetLicenseUsageRequest:
       type: object
       required:
@@ -4315,32 +4162,26 @@ components:
       title: GetLicenseUsageRequest
       properties:
         LicenseArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the license.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the license.
     GetServiceSettingsResponse:
       type: object
       properties:
         S3BucketArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'Regional S3 bucket path for storing reports, license trail event data, discovery data, and so on.'
+          $ref: '#/components/schemas/String'
+          description: 'Regional S3 bucket path for storing reports, license trail event data, discovery data, and so on.'
         SnsTopicArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: SNS topic configured to receive notifications from License Manager.
+          $ref: '#/components/schemas/String'
+          description: SNS topic configured to receive notifications from License Manager.
         OrganizationConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationConfiguration'
-            - description: Indicates whether AWS Organizations is integrated with License Manager for cross-account discovery.
+          $ref: '#/components/schemas/OrganizationConfiguration'
+          description: Indicates whether AWS Organizations is integrated with License Manager for cross-account discovery.
         EnableCrossAccountsDiscovery:
-          allOf:
-            - $ref: '#/components/schemas/BoxBoolean'
-            - description: Indicates whether cross-account discovery is enabled.
+          $ref: '#/components/schemas/BoxBoolean'
+          description: Indicates whether cross-account discovery is enabled.
         LicenseManagerResourceShareArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the AWS resource share. The License Manager management account provides member accounts with access to this share.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the AWS resource share. The License Manager management account provides member accounts with access to this share.
     GetServiceSettingsRequest:
       type: object
       title: GetServiceSettingsRequest
@@ -4349,13 +4190,11 @@ components:
       type: object
       properties:
         LicenseConfigurationAssociations:
-          allOf:
-            - $ref: '#/components/schemas/LicenseConfigurationAssociations'
-            - description: Information about the associations for the license configuration.
+          $ref: '#/components/schemas/LicenseConfigurationAssociations'
+          description: Information about the associations for the license configuration.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
     ListAssociationsForLicenseConfigurationRequest:
       type: object
       required:
@@ -4363,60 +4202,49 @@ components:
       title: ListAssociationsForLicenseConfigurationRequest
       properties:
         LicenseConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of a license configuration.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of a license configuration.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/BoxInteger'
-            - description: Maximum number of results to return in a single call.
+          $ref: '#/components/schemas/BoxInteger'
+          description: Maximum number of results to return in a single call.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
     FilterLimitExceededException: {}
     ListDistributedGrantsResponse:
       type: object
       properties:
         Grants:
-          allOf:
-            - $ref: '#/components/schemas/GrantList'
-            - description: Distributed grant details.
+          $ref: '#/components/schemas/GrantList'
+          description: Distributed grant details.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
     ListDistributedGrantsRequest:
       type: object
       title: ListDistributedGrantsRequest
       properties:
         GrantArns:
-          allOf:
-            - $ref: '#/components/schemas/ArnList'
-            - description: Amazon Resource Names (ARNs) of the grants.
+          $ref: '#/components/schemas/ArnList'
+          description: Amazon Resource Names (ARNs) of the grants.
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/FilterList'
-            - description: '<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>LicenseArn</code> </p> </li> <li> <p> <code>GrantStatus</code> </p> </li> <li> <p> <code>GranteePrincipalARN</code> </p> </li> <li> <p> <code>ProductSKU</code> </p> </li> <li> <p> <code>LicenseIssuerName</code> </p> </li> </ul>'
+          $ref: '#/components/schemas/FilterList'
+          description: '<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>LicenseArn</code> </p> </li> <li> <p> <code>GrantStatus</code> </p> </li> <li> <p> <code>GranteePrincipalARN</code> </p> </li> <li> <p> <code>ProductSKU</code> </p> </li> <li> <p> <code>LicenseIssuerName</code> </p> </li> </ul>'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxSize100'
-            - description: Maximum number of results to return in a single call.
+          $ref: '#/components/schemas/MaxSize100'
+          description: Maximum number of results to return in a single call.
     ListFailuresForLicenseConfigurationOperationsResponse:
       type: object
       properties:
         LicenseOperationFailureList:
-          allOf:
-            - $ref: '#/components/schemas/LicenseOperationFailureList'
-            - description: License configuration operations that failed.
+          $ref: '#/components/schemas/LicenseOperationFailureList'
+          description: License configuration operations that failed.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
     ListFailuresForLicenseConfigurationOperationsRequest:
       type: object
       required:
@@ -4424,86 +4252,70 @@ components:
       title: ListFailuresForLicenseConfigurationOperationsRequest
       properties:
         LicenseConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name of the license configuration.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/BoxInteger'
-            - description: Maximum number of results to return in a single call.
+          $ref: '#/components/schemas/BoxInteger'
+          description: Maximum number of results to return in a single call.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
     ListLicenseConfigurationsResponse:
       type: object
       properties:
         LicenseConfigurations:
-          allOf:
-            - $ref: '#/components/schemas/LicenseConfigurations'
-            - description: Information about the license configurations.
+          $ref: '#/components/schemas/LicenseConfigurations'
+          description: Information about the license configurations.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
     ListLicenseConfigurationsRequest:
       type: object
       title: ListLicenseConfigurationsRequest
       properties:
         LicenseConfigurationArns:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: Amazon Resource Names (ARN) of the license configurations.
+          $ref: '#/components/schemas/StringList'
+          description: Amazon Resource Names (ARN) of the license configurations.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/BoxInteger'
-            - description: Maximum number of results to return in a single call.
+          $ref: '#/components/schemas/BoxInteger'
+          description: Maximum number of results to return in a single call.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/Filters'
-            - description: '<p>Filters to scope the results. The following filters and logical operators are supported:</p> <ul> <li> <p> <code>licenseCountingType</code> - The dimension on which licenses are counted. Possible values are <code>vCPU</code> | <code>Instance</code> | <code>Core</code> | <code>Socket</code>. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>enforceLicenseCount</code> - A Boolean value that indicates whether hard license enforcement is used. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>usagelimitExceeded</code> - A Boolean value that indicates whether the available licenses have been exceeded. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> </ul>'
+          $ref: '#/components/schemas/Filters'
+          description: '<p>Filters to scope the results. The following filters and logical operators are supported:</p> <ul> <li> <p> <code>licenseCountingType</code> - The dimension on which licenses are counted. Possible values are <code>vCPU</code> | <code>Instance</code> | <code>Core</code> | <code>Socket</code>. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>enforceLicenseCount</code> - A Boolean value that indicates whether hard license enforcement is used. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>usagelimitExceeded</code> - A Boolean value that indicates whether the available licenses have been exceeded. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> </ul>'
     ListLicenseManagerReportGeneratorsResponse:
       type: object
       properties:
         ReportGenerators:
-          allOf:
-            - $ref: '#/components/schemas/ReportGeneratorList'
-            - description: A report generator that creates periodic reports on your license configurations.
+          $ref: '#/components/schemas/ReportGeneratorList'
+          description: A report generator that creates periodic reports on your license configurations.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
     ListLicenseManagerReportGeneratorsRequest:
       type: object
       title: ListLicenseManagerReportGeneratorsRequest
       properties:
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/FilterList'
-            - description: '<p>Filters to scope the results. The following filters are supported: </p> <ul> <li> <p> <code>LicenseConfigurationArn</code> </p> </li> </ul>'
+          $ref: '#/components/schemas/FilterList'
+          description: '<p>Filters to scope the results. The following filters are supported: </p> <ul> <li> <p> <code>LicenseConfigurationArn</code> </p> </li> </ul>'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxSize100'
-            - description: Maximum number of results to return in a single call.
+          $ref: '#/components/schemas/MaxSize100'
+          description: Maximum number of results to return in a single call.
     ListLicenseSpecificationsForResourceResponse:
       type: object
       properties:
         LicenseSpecifications:
-          allOf:
-            - $ref: '#/components/schemas/LicenseSpecifications'
-            - description: License configurations associated with a resource.
+          $ref: '#/components/schemas/LicenseSpecifications'
+          description: License configurations associated with a resource.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
     ListLicenseSpecificationsForResourceRequest:
       type: object
       required:
@@ -4511,28 +4323,23 @@ components:
       title: ListLicenseSpecificationsForResourceRequest
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of a resource that has an associated license configuration.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of a resource that has an associated license configuration.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/BoxInteger'
-            - description: Maximum number of results to return in a single call.
+          $ref: '#/components/schemas/BoxInteger'
+          description: Maximum number of results to return in a single call.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
     ListLicenseVersionsResponse:
       type: object
       properties:
         Licenses:
-          allOf:
-            - $ref: '#/components/schemas/LicenseList'
-            - description: License details.
+          $ref: '#/components/schemas/LicenseList'
+          description: License details.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
     ListLicenseVersionsRequest:
       type: object
       required:
@@ -4540,145 +4347,118 @@ components:
       title: ListLicenseVersionsRequest
       properties:
         LicenseArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the license.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the license.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxSize100'
-            - description: Maximum number of results to return in a single call.
+          $ref: '#/components/schemas/MaxSize100'
+          description: Maximum number of results to return in a single call.
     ListLicensesResponse:
       type: object
       properties:
         Licenses:
-          allOf:
-            - $ref: '#/components/schemas/LicenseList'
-            - description: License details.
+          $ref: '#/components/schemas/LicenseList'
+          description: License details.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
     ListLicensesRequest:
       type: object
       title: ListLicensesRequest
       properties:
         LicenseArns:
-          allOf:
-            - $ref: '#/components/schemas/ArnList'
-            - description: Amazon Resource Names (ARNs) of the licenses.
+          $ref: '#/components/schemas/ArnList'
+          description: Amazon Resource Names (ARNs) of the licenses.
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/FilterList'
-            - description: '<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>Beneficiary</code> </p> </li> <li> <p> <code>ProductSKU</code> </p> </li> <li> <p> <code>Fingerprint</code> </p> </li> <li> <p> <code>Status</code> </p> </li> </ul>'
+          $ref: '#/components/schemas/FilterList'
+          description: '<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>Beneficiary</code> </p> </li> <li> <p> <code>ProductSKU</code> </p> </li> <li> <p> <code>Fingerprint</code> </p> </li> <li> <p> <code>Status</code> </p> </li> </ul>'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxSize100'
-            - description: Maximum number of results to return in a single call.
+          $ref: '#/components/schemas/MaxSize100'
+          description: Maximum number of results to return in a single call.
     ListReceivedGrantsResponse:
       type: object
       properties:
         Grants:
-          allOf:
-            - $ref: '#/components/schemas/GrantList'
-            - description: Received grant details.
+          $ref: '#/components/schemas/GrantList'
+          description: Received grant details.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
     ListReceivedGrantsRequest:
       type: object
       title: ListReceivedGrantsRequest
       properties:
         GrantArns:
-          allOf:
-            - $ref: '#/components/schemas/ArnList'
-            - description: Amazon Resource Names (ARNs) of the grants.
+          $ref: '#/components/schemas/ArnList'
+          description: Amazon Resource Names (ARNs) of the grants.
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/FilterList'
-            - description: '<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>ProductSKU</code> </p> </li> <li> <p> <code>LicenseIssuerName</code> </p> </li> <li> <p> <code>LicenseArn</code> </p> </li> <li> <p> <code>GrantStatus</code> </p> </li> <li> <p> <code>GranterAccountId</code> </p> </li> </ul>'
+          $ref: '#/components/schemas/FilterList'
+          description: '<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>ProductSKU</code> </p> </li> <li> <p> <code>LicenseIssuerName</code> </p> </li> <li> <p> <code>LicenseArn</code> </p> </li> <li> <p> <code>GrantStatus</code> </p> </li> <li> <p> <code>GranterAccountId</code> </p> </li> </ul>'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxSize100'
-            - description: Maximum number of results to return in a single call.
+          $ref: '#/components/schemas/MaxSize100'
+          description: Maximum number of results to return in a single call.
     ListReceivedLicensesResponse:
       type: object
       properties:
         Licenses:
-          allOf:
-            - $ref: '#/components/schemas/GrantedLicenseList'
-            - description: Received license details.
+          $ref: '#/components/schemas/GrantedLicenseList'
+          description: Received license details.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
     ListReceivedLicensesRequest:
       type: object
       title: ListReceivedLicensesRequest
       properties:
         LicenseArns:
-          allOf:
-            - $ref: '#/components/schemas/ArnList'
-            - description: Amazon Resource Names (ARNs) of the licenses.
+          $ref: '#/components/schemas/ArnList'
+          description: Amazon Resource Names (ARNs) of the licenses.
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/FilterList'
-            - description: '<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>ProductSKU</code> </p> </li> <li> <p> <code>Status</code> </p> </li> <li> <p> <code>Fingerprint</code> </p> </li> <li> <p> <code>IssuerName</code> </p> </li> <li> <p> <code>Beneficiary</code> </p> </li> </ul>'
+          $ref: '#/components/schemas/FilterList'
+          description: '<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>ProductSKU</code> </p> </li> <li> <p> <code>Status</code> </p> </li> <li> <p> <code>Fingerprint</code> </p> </li> <li> <p> <code>IssuerName</code> </p> </li> <li> <p> <code>Beneficiary</code> </p> </li> </ul>'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxSize100'
-            - description: Maximum number of results to return in a single call.
+          $ref: '#/components/schemas/MaxSize100'
+          description: Maximum number of results to return in a single call.
     ListResourceInventoryResponse:
       type: object
       properties:
         ResourceInventoryList:
-          allOf:
-            - $ref: '#/components/schemas/ResourceInventoryList'
-            - description: Information about the resources.
+          $ref: '#/components/schemas/ResourceInventoryList'
+          description: Information about the resources.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
     ListResourceInventoryRequest:
       type: object
       title: ListResourceInventoryRequest
       properties:
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/BoxInteger'
-            - description: Maximum number of results to return in a single call.
+          $ref: '#/components/schemas/BoxInteger'
+          description: Maximum number of results to return in a single call.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/InventoryFilterList'
-            - description: '<p>Filters to scope the results. The following filters and logical operators are supported:</p> <ul> <li> <p> <code>account_id</code> - The ID of the AWS account that owns the resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>application_name</code> - The name of the application. Logical operators are <code>EQUALS</code> | <code>BEGINS_WITH</code>.</p> </li> <li> <p> <code>license_included</code> - The type of license included. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>. Possible values are <code>sql-server-enterprise</code> | <code>sql-server-standard</code> | <code>sql-server-web</code> | <code>windows-server-datacenter</code>.</p> </li> <li> <p> <code>platform</code> - The platform of the resource. Logical operators are <code>EQUALS</code> | <code>BEGINS_WITH</code>.</p> </li> <li> <p> <code>resource_id</code> - The ID of the resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>tag:&lt;key&gt;</code> - The key/value combination of a tag assigned to the resource. Logical operators are <code>EQUALS</code> (single account) or <code>EQUALS</code> | <code>NOT_EQUALS</code> (cross account).</p> </li> </ul>'
+          $ref: '#/components/schemas/InventoryFilterList'
+          description: '<p>Filters to scope the results. The following filters and logical operators are supported:</p> <ul> <li> <p> <code>account_id</code> - The ID of the AWS account that owns the resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>application_name</code> - The name of the application. Logical operators are <code>EQUALS</code> | <code>BEGINS_WITH</code>.</p> </li> <li> <p> <code>license_included</code> - The type of license included. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>. Possible values are <code>sql-server-enterprise</code> | <code>sql-server-standard</code> | <code>sql-server-web</code> | <code>windows-server-datacenter</code>.</p> </li> <li> <p> <code>platform</code> - The platform of the resource. Logical operators are <code>EQUALS</code> | <code>BEGINS_WITH</code>.</p> </li> <li> <p> <code>resource_id</code> - The ID of the resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>tag:&lt;key&gt;</code> - The key/value combination of a tag assigned to the resource. Logical operators are <code>EQUALS</code> (single account) or <code>EQUALS</code> | <code>NOT_EQUALS</code> (cross account).</p> </li> </ul>'
     FailedDependencyException: {}
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: Information about the tags.
+          $ref: '#/components/schemas/TagList'
+          description: Information about the tags.
     ListTagsForResourceRequest:
       type: object
       required:
@@ -4686,51 +4466,42 @@ components:
       title: ListTagsForResourceRequest
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the license configuration.
     ListTokensResponse:
       type: object
       properties:
         Tokens:
-          allOf:
-            - $ref: '#/components/schemas/TokenList'
-            - description: Received token details.
+          $ref: '#/components/schemas/TokenList'
+          description: Received token details.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
     ListTokensRequest:
       type: object
       title: ListTokensRequest
       properties:
         TokenIds:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: Token IDs.
+          $ref: '#/components/schemas/StringList'
+          description: Token IDs.
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/FilterList'
-            - description: '<p>Filters to scope the results. The following filter is supported:</p> <ul> <li> <p> <code>LicenseArns</code> </p> </li> </ul>'
+          $ref: '#/components/schemas/FilterList'
+          description: '<p>Filters to scope the results. The following filter is supported:</p> <ul> <li> <p> <code>LicenseArns</code> </p> </li> </ul>'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxSize100'
-            - description: Maximum number of results to return in a single call.
+          $ref: '#/components/schemas/MaxSize100'
+          description: Maximum number of results to return in a single call.
     ListUsageForLicenseConfigurationResponse:
       type: object
       properties:
         LicenseConfigurationUsageList:
-          allOf:
-            - $ref: '#/components/schemas/LicenseConfigurationUsageList'
-            - description: Information about the license configurations.
+          $ref: '#/components/schemas/LicenseConfigurationUsageList'
+          description: Information about the license configurations.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
     ListUsageForLicenseConfigurationRequest:
       type: object
       required:
@@ -4738,36 +4509,29 @@ components:
       title: ListUsageForLicenseConfigurationRequest
       properties:
         LicenseConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the license configuration.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/BoxInteger'
-            - description: Maximum number of results to return in a single call.
+          $ref: '#/components/schemas/BoxInteger'
+          description: Maximum number of results to return in a single call.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token for the next set of results.
+          $ref: '#/components/schemas/String'
+          description: Token for the next set of results.
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/Filters'
-            - description: '<p>Filters to scope the results. The following filters and logical operators are supported:</p> <ul> <li> <p> <code>resourceArn</code> - The ARN of the license configuration resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>resourceType</code> - The resource type (<code>EC2_INSTANCE</code> | <code>EC2_HOST</code> | <code>EC2_AMI</code> | <code>SYSTEMS_MANAGER_MANAGED_INSTANCE</code>). Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>resourceAccount</code> - The ID of the account that owns the resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> </ul>'
+          $ref: '#/components/schemas/Filters'
+          description: '<p>Filters to scope the results. The following filters and logical operators are supported:</p> <ul> <li> <p> <code>resourceArn</code> - The ARN of the license configuration resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>resourceType</code> - The resource type (<code>EC2_INSTANCE</code> | <code>EC2_HOST</code> | <code>EC2_AMI</code> | <code>SYSTEMS_MANAGER_MANAGED_INSTANCE</code>). Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>resourceAccount</code> - The ID of the account that owns the resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> </ul>'
     RejectGrantResponse:
       type: object
       properties:
         GrantArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Grant ARN.
+          $ref: '#/components/schemas/Arn'
+          description: Grant ARN.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/GrantStatus'
-            - description: Grant status.
+          $ref: '#/components/schemas/GrantStatus'
+          description: Grant status.
         Version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Grant version.
+          $ref: '#/components/schemas/String'
+          description: Grant version.
     RejectGrantRequest:
       type: object
       required:
@@ -4775,9 +4539,8 @@ components:
       title: RejectGrantRequest
       properties:
         GrantArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the grant.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the grant.
     TagResourceResponse:
       type: object
       properties: {}
@@ -4789,13 +4552,11 @@ components:
       title: TagResourceRequest
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the license configuration.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: One or more tags.
+          $ref: '#/components/schemas/TagList'
+          description: One or more tags.
     UntagResourceResponse:
       type: object
       properties: {}
@@ -4807,13 +4568,11 @@ components:
       title: UntagResourceRequest
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the license configuration.
         TagKeys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyList'
-            - description: Keys identifying the tags to remove.
+          $ref: '#/components/schemas/TagKeyList'
+          description: Keys identifying the tags to remove.
     UpdateLicenseConfigurationResponse:
       type: object
       properties: {}
@@ -4824,41 +4583,32 @@ components:
       title: UpdateLicenseConfigurationRequest
       properties:
         LicenseConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the license configuration.
         LicenseConfigurationStatus:
-          allOf:
-            - $ref: '#/components/schemas/LicenseConfigurationStatus'
-            - description: New status of the license configuration.
+          $ref: '#/components/schemas/LicenseConfigurationStatus'
+          description: New status of the license configuration.
         LicenseRules:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: New license rule. The only rule that you can add after you create a license configuration is licenseAffinityToHost.
+          $ref: '#/components/schemas/StringList'
+          description: New license rule. The only rule that you can add after you create a license configuration is licenseAffinityToHost.
         LicenseCount:
-          allOf:
-            - $ref: '#/components/schemas/BoxLong'
-            - description: New number of licenses managed by the license configuration.
+          $ref: '#/components/schemas/BoxLong'
+          description: New number of licenses managed by the license configuration.
         LicenseCountHardLimit:
-          allOf:
-            - $ref: '#/components/schemas/BoxBoolean'
-            - description: New hard limit of the number of available licenses.
+          $ref: '#/components/schemas/BoxBoolean'
+          description: New hard limit of the number of available licenses.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: New name of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: New name of the license configuration.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: New description of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: New description of the license configuration.
         ProductInformationList:
-          allOf:
-            - $ref: '#/components/schemas/ProductInformationList'
-            - description: New product information.
+          $ref: '#/components/schemas/ProductInformationList'
+          description: New product information.
         DisassociateWhenNotFound:
-          allOf:
-            - $ref: '#/components/schemas/BoxBoolean'
-            - description: 'When true, disassociates a resource when software is uninstalled.'
+          $ref: '#/components/schemas/BoxBoolean'
+          description: 'When true, disassociates a resource when software is uninstalled.'
     UpdateLicenseManagerReportGeneratorResponse:
       type: object
       properties: {}
@@ -4874,33 +4624,26 @@ components:
       title: UpdateLicenseManagerReportGeneratorRequest
       properties:
         LicenseManagerReportGeneratorArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Number (ARN) of the report generator to update.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Number (ARN) of the report generator to update.
         ReportGeneratorName:
-          allOf:
-            - $ref: '#/components/schemas/ReportGeneratorName'
-            - description: Name of the report generator.
+          $ref: '#/components/schemas/ReportGeneratorName'
+          description: Name of the report generator.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ReportTypeList'
-            - description: '<p>Type of reports to generate. The following report types an be generated:</p> <ul> <li> <p>License configuration report - Reports on the number and details of consumed licenses for a license configuration.</p> </li> <li> <p>Resource report - Reports on the tracked licenses and resource consumption for a license configuration.</p> </li> </ul>'
+          $ref: '#/components/schemas/ReportTypeList'
+          description: '<p>Type of reports to generate. The following report types an be generated:</p> <ul> <li> <p>License configuration report - Reports on the number and details of consumed licenses for a license configuration.</p> </li> <li> <p>Resource report - Reports on the tracked licenses and resource consumption for a license configuration.</p> </li> </ul>'
         ReportContext:
-          allOf:
-            - $ref: '#/components/schemas/ReportContext'
-            - description: '?'
+          $ref: '#/components/schemas/ReportContext'
+          description: '?'
         ReportFrequency:
-          allOf:
-            - $ref: '#/components/schemas/ReportFrequency'
-            - description: '<p>Frequency by which reports are generated. The following options are avaiable:</p> <p>??? What are the APi value options?</p>'
+          $ref: '#/components/schemas/ReportFrequency'
+          description: '<p>Frequency by which reports are generated. The following options are avaiable:</p> <p>??? What are the APi value options?</p>'
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         Description:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Description of the report generator.
+          $ref: '#/components/schemas/String'
+          description: Description of the report generator.
     UpdateLicenseSpecificationsForResourceResponse:
       type: object
       properties: {}
@@ -4911,17 +4654,14 @@ components:
       title: UpdateLicenseSpecificationsForResourceRequest
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the AWS resource.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the AWS resource.
         AddLicenseSpecifications:
-          allOf:
-            - $ref: '#/components/schemas/LicenseSpecifications'
-            - description: ARNs of the license configurations to add.
+          $ref: '#/components/schemas/LicenseSpecifications'
+          description: ARNs of the license configurations to add.
         RemoveLicenseSpecifications:
-          allOf:
-            - $ref: '#/components/schemas/LicenseSpecifications'
-            - description: ARNs of the license configurations to remove.
+          $ref: '#/components/schemas/LicenseSpecifications'
+          description: ARNs of the license configurations to remove.
     InvalidResourceStateException: {}
     LicenseUsageException: {}
     UpdateServiceSettingsResponse:
@@ -4932,21 +4672,17 @@ components:
       title: UpdateServiceSettingsRequest
       properties:
         S3BucketArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the Amazon S3 bucket where the License Manager information is stored.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the Amazon S3 bucket where the License Manager information is stored.
         SnsTopicArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the Amazon SNS topic used for License Manager alerts.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the Amazon SNS topic used for License Manager alerts.
         OrganizationConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationConfiguration'
-            - description: Enables integration with AWS Organizations for cross-account discovery.
+          $ref: '#/components/schemas/OrganizationConfiguration'
+          description: Enables integration with AWS Organizations for cross-account discovery.
         EnableCrossAccountsDiscovery:
-          allOf:
-            - $ref: '#/components/schemas/BoxBoolean'
-            - description: Activates cross-account discovery.
+          $ref: '#/components/schemas/BoxBoolean'
+          description: Activates cross-account discovery.
     Arn:
       type: string
       pattern: '^arn:aws(-(cn|us-gov|iso-b|iso-c|iso-d))?:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$'
@@ -4992,9 +4728,8 @@ components:
       type: object
       properties:
         LastRunTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: Time that automated discovery last ran.
+          $ref: '#/components/schemas/DateTime'
+          description: Time that automated discovery last ran.
       description: Describes automated discovery.
     Boolean:
       type: boolean
@@ -5009,13 +4744,11 @@ components:
         - MaxTimeToLiveInMinutes
       properties:
         AllowEarlyCheckIn:
-          allOf:
-            - $ref: '#/components/schemas/BoxBoolean'
-            - description: Indicates whether early check-ins are allowed.
+          $ref: '#/components/schemas/BoxBoolean'
+          description: Indicates whether early check-ins are allowed.
         MaxTimeToLiveInMinutes:
-          allOf:
-            - $ref: '#/components/schemas/BoxInteger'
-            - description: 'Maximum time for the borrow configuration, in minutes.'
+          $ref: '#/components/schemas/BoxInteger'
+          description: 'Maximum time for the borrow configuration, in minutes.'
       description: Details about a borrow configuration.
     BoxLong:
       type: integer
@@ -5063,13 +4796,11 @@ components:
       type: object
       properties:
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: Resource type of the resource consuming a license.
+          $ref: '#/components/schemas/ResourceType'
+          description: Resource type of the resource consuming a license.
         ConsumedLicenses:
-          allOf:
-            - $ref: '#/components/schemas/BoxLong'
-            - description: Number of licenses consumed by the resource.
+          $ref: '#/components/schemas/BoxLong'
+          description: Number of licenses consumed by the resource.
       description: Details about license consumption.
     ConsumedLicenseSummaryList:
       type: array
@@ -5087,25 +4818,21 @@ components:
         - MaxTimeToLiveInMinutes
       properties:
         MaxTimeToLiveInMinutes:
-          allOf:
-            - $ref: '#/components/schemas/BoxInteger'
-            - description: 'Maximum time for the provisional configuration, in minutes.'
+          $ref: '#/components/schemas/BoxInteger'
+          description: 'Maximum time for the provisional configuration, in minutes.'
       description: Details about a provisional configuration.
     ConsumptionConfiguration:
       type: object
       properties:
         RenewType:
-          allOf:
-            - $ref: '#/components/schemas/RenewType'
-            - description: Renewal frequency.
+          $ref: '#/components/schemas/RenewType'
+          description: Renewal frequency.
         ProvisionalConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/ProvisionalConfiguration'
-            - description: Details about a provisional configuration.
+          $ref: '#/components/schemas/ProvisionalConfiguration'
+          description: Details about a provisional configuration.
         BorrowConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/BorrowConfiguration'
-            - description: Details about a borrow configuration.
+          $ref: '#/components/schemas/BorrowConfiguration'
+          description: Details about a borrow configuration.
       description: Details about a consumption configuration.
     PrincipalArnList:
       type: array
@@ -5150,21 +4877,18 @@ components:
         - licenseConfigurationArns
       properties:
         licenseConfigurationArns:
-          allOf:
-            - $ref: '#/components/schemas/ArnList'
-            - description: Amazon Resource Number (ARN) of the license configuration that this generator reports on.
+          $ref: '#/components/schemas/ArnList'
+          description: Amazon Resource Number (ARN) of the license configuration that this generator reports on.
       description: Details of the license configuration that this generator reports on.
     ReportFrequency:
       type: object
       properties:
         value:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: Number of times within the frequency period that a report will be generated. Currently only <code>1</code> is supported.
+          $ref: '#/components/schemas/Integer'
+          description: Number of times within the frequency period that a report will be generated. Currently only <code>1</code> is supported.
         period:
-          allOf:
-            - $ref: '#/components/schemas/ReportFrequencyType'
-            - description: 'Time period between each report. The period can be daily, weekly, or monthly.'
+          $ref: '#/components/schemas/ReportFrequencyType'
+          description: 'Time period between each report. The period can be daily, weekly, or monthly.'
       description: Details on how frequently reports are generated.
     Issuer:
       type: object
@@ -5172,13 +4896,11 @@ components:
         - Name
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Issuer name.
+          $ref: '#/components/schemas/String'
+          description: Issuer name.
         SignKey:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.'
+          $ref: '#/components/schemas/String'
+          description: 'Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.'
       description: Details about the issuer of a license.
     DatetimeRange:
       type: object
@@ -5186,13 +4908,11 @@ components:
         - Begin
       properties:
         Begin:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DateTime'
-            - description: Start of the time range.
+          $ref: '#/components/schemas/ISO8601DateTime'
+          description: Start of the time range.
         End:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DateTime'
-            - description: End of the time range.
+          $ref: '#/components/schemas/ISO8601DateTime'
+          description: End of the time range.
       description: 'Describes a time range, in ISO8601-UTC format.'
     EntitlementList:
       type: array
@@ -5267,29 +4987,23 @@ components:
         - Unit
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Entitlement name.
+          $ref: '#/components/schemas/String'
+          description: Entitlement name.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Entitlement resource. Use only if the unit is None.
+          $ref: '#/components/schemas/String'
+          description: Entitlement resource. Use only if the unit is None.
         MaxCount:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: Maximum entitlement count. Use if the unit is not None.
+          $ref: '#/components/schemas/Long'
+          description: Maximum entitlement count. Use if the unit is not None.
         Overage:
-          allOf:
-            - $ref: '#/components/schemas/BoxBoolean'
-            - description: Indicates whether overages are allowed.
+          $ref: '#/components/schemas/BoxBoolean'
+          description: Indicates whether overages are allowed.
         Unit:
-          allOf:
-            - $ref: '#/components/schemas/EntitlementUnit'
-            - description: Entitlement unit.
+          $ref: '#/components/schemas/EntitlementUnit'
+          description: Entitlement unit.
         AllowCheckIn:
-          allOf:
-            - $ref: '#/components/schemas/BoxBoolean'
-            - description: Indicates whether check-ins are allowed.
+          $ref: '#/components/schemas/BoxBoolean'
+          description: Indicates whether check-ins are allowed.
       description: Describes a resource entitled for use with a license.
     EntitlementDataUnit:
       type: string
@@ -5328,17 +5042,14 @@ components:
         - Unit
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Entitlement data name.
+          $ref: '#/components/schemas/String'
+          description: Entitlement data name.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Entitlement data value.
+          $ref: '#/components/schemas/String'
+          description: Entitlement data value.
         Unit:
-          allOf:
-            - $ref: '#/components/schemas/EntitlementDataUnit'
-            - description: Entitlement data unit.
+          $ref: '#/components/schemas/EntitlementDataUnit'
+          description: Entitlement data unit.
       description: Data associated with an entitlement resource.
     EntitlementUsage:
       type: object
@@ -5348,21 +5059,17 @@ components:
         - Unit
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Entitlement usage name.
+          $ref: '#/components/schemas/String'
+          description: Entitlement usage name.
         ConsumedValue:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Resource usage consumed.
+          $ref: '#/components/schemas/String'
+          description: Resource usage consumed.
         MaxCount:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Maximum entitlement usage count.
+          $ref: '#/components/schemas/String'
+          description: Maximum entitlement usage count.
         Unit:
-          allOf:
-            - $ref: '#/components/schemas/EntitlementDataUnit'
-            - description: Entitlement usage unit.
+          $ref: '#/components/schemas/EntitlementDataUnit'
+          description: Entitlement usage unit.
       description: Usage associated with an entitlement resource.
     EntitlementUsageList:
       type: array
@@ -5378,13 +5085,11 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/FilterName'
-            - description: Name of the filter. Filter names are case-sensitive.
+          $ref: '#/components/schemas/FilterName'
+          description: Name of the filter. Filter names are case-sensitive.
         Values:
-          allOf:
-            - $ref: '#/components/schemas/FilterValues'
-            - description: Filter values. Filter values are case-sensitive.
+          $ref: '#/components/schemas/FilterValues'
+          description: Filter values. Filter values are case-sensitive.
       description: 'A filter name and value pair that is used to return more specific results from a describe operation. Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs.'
     FilterList:
       type: array
@@ -5410,45 +5115,35 @@ components:
         - GrantedOperations
       properties:
         GrantArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the grant.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the grant.
         GrantName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Grant name.
+          $ref: '#/components/schemas/String'
+          description: Grant name.
         ParentArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Parent ARN.
+          $ref: '#/components/schemas/Arn'
+          description: Parent ARN.
         LicenseArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: License ARN.
+          $ref: '#/components/schemas/Arn'
+          description: License ARN.
         GranteePrincipalArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The grantee principal ARN.
+          $ref: '#/components/schemas/Arn'
+          description: The grantee principal ARN.
         HomeRegion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Home Region of the grant.
+          $ref: '#/components/schemas/String'
+          description: Home Region of the grant.
         GrantStatus:
-          allOf:
-            - $ref: '#/components/schemas/GrantStatus'
-            - description: Grant status.
+          $ref: '#/components/schemas/GrantStatus'
+          description: Grant status.
         StatusReason:
-          allOf:
-            - $ref: '#/components/schemas/StatusReasonMessage'
-            - description: Grant status reason.
+          $ref: '#/components/schemas/StatusReasonMessage'
+          description: Grant status reason.
         Version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Grant version.
+          $ref: '#/components/schemas/String'
+          description: Grant version.
         GrantedOperations:
-          allOf:
-            - $ref: '#/components/schemas/AllowedOperationList'
-            - description: Granted operations.
+          $ref: '#/components/schemas/AllowedOperationList'
+          description: Granted operations.
       description: Describes a grant.
     ManagedResourceSummaryList:
       type: array
@@ -5458,125 +5153,97 @@ components:
       type: object
       properties:
         ReportGeneratorName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of the report generator.
+          $ref: '#/components/schemas/String'
+          description: Name of the report generator.
         ReportType:
-          allOf:
-            - $ref: '#/components/schemas/ReportTypeList'
-            - description: Type of reports that are generated.
+          $ref: '#/components/schemas/ReportTypeList'
+          description: Type of reports that are generated.
         ReportContext:
-          allOf:
-            - $ref: '#/components/schemas/ReportContext'
-            - description: License configuration type this generator reports on.
+          $ref: '#/components/schemas/ReportContext'
+          description: License configuration type this generator reports on.
         ReportFrequency:
-          allOf:
-            - $ref: '#/components/schemas/ReportFrequency'
-            - description: Details on how frequently reports are generated.
+          $ref: '#/components/schemas/ReportFrequency'
+          description: Details on how frequently reports are generated.
         LicenseManagerReportGeneratorArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Number (ARN) of the report generator.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Number (ARN) of the report generator.
         LastRunStatus:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Status of the last report generation attempt.
+          $ref: '#/components/schemas/String'
+          description: Status of the last report generation attempt.
         LastRunFailureReason:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Failure message for the last report generation attempt.
+          $ref: '#/components/schemas/String'
+          description: Failure message for the last report generation attempt.
         LastReportGenerationTime:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Time the last report was generated at.
+          $ref: '#/components/schemas/String'
+          description: Time the last report was generated at.
         ReportCreatorAccount:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The AWS account ID used to create the report generator.
+          $ref: '#/components/schemas/String'
+          description: The AWS account ID used to create the report generator.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Description of the report generator.
+          $ref: '#/components/schemas/String'
+          description: Description of the report generator.
         S3Location:
-          allOf:
-            - $ref: '#/components/schemas/S3Location'
-            - description: Details of the S3 bucket that report generator reports are published to.
+          $ref: '#/components/schemas/S3Location'
+          description: Details of the S3 bucket that report generator reports are published to.
         CreateTime:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Time the report was created.
+          $ref: '#/components/schemas/String'
+          description: Time the report was created.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: Tags associated with the report generator.
+          $ref: '#/components/schemas/TagList'
+          description: Tags associated with the report generator.
       description: Describe the details of a report generator.
     License:
       type: object
       properties:
         LicenseArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the license.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the license.
         LicenseName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License name.
+          $ref: '#/components/schemas/String'
+          description: License name.
         ProductName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Product name.
+          $ref: '#/components/schemas/String'
+          description: Product name.
         ProductSKU:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Product SKU.
+          $ref: '#/components/schemas/String'
+          description: Product SKU.
         Issuer:
-          allOf:
-            - $ref: '#/components/schemas/IssuerDetails'
-            - description: License issuer.
+          $ref: '#/components/schemas/IssuerDetails'
+          description: License issuer.
         HomeRegion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Home Region of the license.
+          $ref: '#/components/schemas/String'
+          description: Home Region of the license.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/LicenseStatus'
-            - description: License status.
+          $ref: '#/components/schemas/LicenseStatus'
+          description: License status.
         Validity:
-          allOf:
-            - $ref: '#/components/schemas/DatetimeRange'
-            - description: 'Date and time range during which the license is valid, in ISO8601-UTC format.'
+          $ref: '#/components/schemas/DatetimeRange'
+          description: 'Date and time range during which the license is valid, in ISO8601-UTC format.'
         Beneficiary:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License beneficiary.
+          $ref: '#/components/schemas/String'
+          description: License beneficiary.
         Entitlements:
-          allOf:
-            - $ref: '#/components/schemas/EntitlementList'
-            - description: License entitlements.
+          $ref: '#/components/schemas/EntitlementList'
+          description: License entitlements.
         ConsumptionConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/ConsumptionConfiguration'
-            - description: Configuration for consumption of the license.
+          $ref: '#/components/schemas/ConsumptionConfiguration'
+          description: Configuration for consumption of the license.
         LicenseMetadata:
-          allOf:
-            - $ref: '#/components/schemas/MetadataList'
-            - description: License metadata.
+          $ref: '#/components/schemas/MetadataList'
+          description: License metadata.
         CreateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DateTime'
-            - description: License creation time.
+          $ref: '#/components/schemas/ISO8601DateTime'
+          description: License creation time.
         Version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License version.
+          $ref: '#/components/schemas/String'
+          description: License version.
       description: Software license that is managed in AWS License Manager.
     LicenseUsage:
       type: object
       properties:
         EntitlementUsages:
-          allOf:
-            - $ref: '#/components/schemas/EntitlementUsageList'
-            - description: License entitlement usages.
+          $ref: '#/components/schemas/EntitlementUsageList'
+          description: License entitlement usages.
       description: Describes the entitlement usage associated with a license.
     OrganizationConfiguration:
       type: object
@@ -5584,9 +5251,8 @@ components:
         - EnableIntegration
       properties:
         EnableIntegration:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Enables AWS Organization integration.
+          $ref: '#/components/schemas/Boolean'
+          description: Enables AWS Organization integration.
       description: Configuration information for AWS Organizations.
     GrantList:
       type: array
@@ -5596,95 +5262,75 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Issuer name.
+          $ref: '#/components/schemas/String'
+          description: Issuer name.
         SignKey:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.'
+          $ref: '#/components/schemas/String'
+          description: 'Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.'
         KeyFingerprint:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Issuer key fingerprint.
+          $ref: '#/components/schemas/String'
+          description: Issuer key fingerprint.
       description: Details associated with the issuer of a license.
     ReceivedMetadata:
       type: object
       properties:
         ReceivedStatus:
-          allOf:
-            - $ref: '#/components/schemas/ReceivedStatus'
-            - description: Received status.
+          $ref: '#/components/schemas/ReceivedStatus'
+          description: Received status.
         ReceivedStatusReason:
           $ref: '#/components/schemas/StatusReasonMessage'
         AllowedOperations:
-          allOf:
-            - $ref: '#/components/schemas/AllowedOperationList'
-            - description: Allowed operations.
+          $ref: '#/components/schemas/AllowedOperationList'
+          description: Allowed operations.
       description: Metadata associated with received licenses and grants.
     GrantedLicense:
       type: object
       properties:
         LicenseArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Amazon Resource Name (ARN) of the license.
+          $ref: '#/components/schemas/Arn'
+          description: Amazon Resource Name (ARN) of the license.
         LicenseName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: License name.
+          $ref: '#/components/schemas/String'
+          description: License name.
         ProductName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Product name.
+          $ref: '#/components/schemas/String'
+          description: Product name.
         ProductSKU:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Product SKU.
+          $ref: '#/components/schemas/String'
+          description: Product SKU.
         Issuer:
-          allOf:
-            - $ref: '#/components/schemas/IssuerDetails'
-            - description: Granted license issuer.
+          $ref: '#/components/schemas/IssuerDetails'
+          description: Granted license issuer.
         HomeRegion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Home Region of the granted license.
+          $ref: '#/components/schemas/String'
+          description: Home Region of the granted license.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/LicenseStatus'
-            - description: Granted license status.
+          $ref: '#/components/schemas/LicenseStatus'
+          description: Granted license status.
         Validity:
-          allOf:
-            - $ref: '#/components/schemas/DatetimeRange'
-            - description: 'Date and time range during which the granted license is valid, in ISO8601-UTC format.'
+          $ref: '#/components/schemas/DatetimeRange'
+          description: 'Date and time range during which the granted license is valid, in ISO8601-UTC format.'
         Beneficiary:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Granted license beneficiary.
+          $ref: '#/components/schemas/String'
+          description: Granted license beneficiary.
         Entitlements:
-          allOf:
-            - $ref: '#/components/schemas/EntitlementList'
-            - description: License entitlements.
+          $ref: '#/components/schemas/EntitlementList'
+          description: License entitlements.
         ConsumptionConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/ConsumptionConfiguration'
-            - description: Configuration for consumption of the license.
+          $ref: '#/components/schemas/ConsumptionConfiguration'
+          description: Configuration for consumption of the license.
         LicenseMetadata:
-          allOf:
-            - $ref: '#/components/schemas/MetadataList'
-            - description: Granted license metadata.
+          $ref: '#/components/schemas/MetadataList'
+          description: Granted license metadata.
         CreateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DateTime'
-            - description: Creation time of the granted license.
+          $ref: '#/components/schemas/ISO8601DateTime'
+          description: Creation time of the granted license.
         Version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Version of the granted license.
+          $ref: '#/components/schemas/String'
+          description: Version of the granted license.
         ReceivedMetadata:
-          allOf:
-            - $ref: '#/components/schemas/ReceivedMetadata'
-            - description: Granted license received metadata.
+          $ref: '#/components/schemas/ReceivedMetadata'
+          description: Granted license received metadata.
       description: Describes a license that is granted to a grantee.
     GrantedLicenseList:
       type: array
@@ -5704,17 +5350,14 @@ components:
         - Condition
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of the filter.
+          $ref: '#/components/schemas/String'
+          description: Name of the filter.
         Condition:
-          allOf:
-            - $ref: '#/components/schemas/InventoryFilterCondition'
-            - description: Condition of the filter.
+          $ref: '#/components/schemas/InventoryFilterCondition'
+          description: Condition of the filter.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Value of the filter.
+          $ref: '#/components/schemas/String'
+          description: Value of the filter.
       description: An inventory filter.
     InventoryFilterList:
       type: array
@@ -5724,93 +5367,72 @@ components:
       type: object
       properties:
         LicenseConfigurationId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Unique ID of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Unique ID of the license configuration.
         LicenseConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the license configuration.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Name of the license configuration.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Description of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Description of the license configuration.
         LicenseCountingType:
-          allOf:
-            - $ref: '#/components/schemas/LicenseCountingType'
-            - description: Dimension to use to track the license inventory.
+          $ref: '#/components/schemas/LicenseCountingType'
+          description: Dimension to use to track the license inventory.
         LicenseRules:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: License rules.
+          $ref: '#/components/schemas/StringList'
+          description: License rules.
         LicenseCount:
-          allOf:
-            - $ref: '#/components/schemas/BoxLong'
-            - description: Number of licenses managed by the license configuration.
+          $ref: '#/components/schemas/BoxLong'
+          description: Number of licenses managed by the license configuration.
         LicenseCountHardLimit:
-          allOf:
-            - $ref: '#/components/schemas/BoxBoolean'
-            - description: Number of available licenses as a hard limit.
+          $ref: '#/components/schemas/BoxBoolean'
+          description: Number of available licenses as a hard limit.
         DisassociateWhenNotFound:
-          allOf:
-            - $ref: '#/components/schemas/BoxBoolean'
-            - description: 'When true, disassociates a resource when software is uninstalled.'
+          $ref: '#/components/schemas/BoxBoolean'
+          description: 'When true, disassociates a resource when software is uninstalled.'
         ConsumedLicenses:
-          allOf:
-            - $ref: '#/components/schemas/BoxLong'
-            - description: 'Number of licenses consumed. '
+          $ref: '#/components/schemas/BoxLong'
+          description: 'Number of licenses consumed. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Status of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Status of the license configuration.
         OwnerAccountId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Account ID of the license configuration's owner.
+          $ref: '#/components/schemas/String'
+          description: Account ID of the license configuration's owner.
         ConsumedLicenseSummaryList:
-          allOf:
-            - $ref: '#/components/schemas/ConsumedLicenseSummaryList'
-            - description: Summaries for licenses consumed by various resources.
+          $ref: '#/components/schemas/ConsumedLicenseSummaryList'
+          description: Summaries for licenses consumed by various resources.
         ManagedResourceSummaryList:
-          allOf:
-            - $ref: '#/components/schemas/ManagedResourceSummaryList'
-            - description: Summaries for managed resources.
+          $ref: '#/components/schemas/ManagedResourceSummaryList'
+          description: Summaries for managed resources.
         ProductInformationList:
-          allOf:
-            - $ref: '#/components/schemas/ProductInformationList'
-            - description: Product information.
+          $ref: '#/components/schemas/ProductInformationList'
+          description: Product information.
         AutomatedDiscoveryInformation:
-          allOf:
-            - $ref: '#/components/schemas/AutomatedDiscoveryInformation'
-            - description: Automated discovery information.
+          $ref: '#/components/schemas/AutomatedDiscoveryInformation'
+          description: Automated discovery information.
       description: 'A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM must be associated with a host), and the number of licenses purchased and used.'
     LicenseConfigurationAssociation:
       type: object
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the resource.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the resource.
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: Type of server resource.
+          $ref: '#/components/schemas/ResourceType'
+          description: Type of server resource.
         ResourceOwnerId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ID of the AWS account that owns the resource consuming licenses.
+          $ref: '#/components/schemas/String'
+          description: ID of the AWS account that owns the resource consuming licenses.
         AssociationTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: Time when the license configuration was associated with the resource.
+          $ref: '#/components/schemas/DateTime'
+          description: Time when the license configuration was associated with the resource.
         AmiAssociationScope:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Scope of AMI associations. The possible value is <code>cross-account</code>.
+          $ref: '#/components/schemas/String'
+          description: Scope of AMI associations. The possible value is <code>cross-account</code>.
       description: Describes an association with a license configuration.
     LicenseConfigurationAssociations:
       type: array
@@ -5825,29 +5447,23 @@ components:
       type: object
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the resource.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the resource.
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: Type of resource.
+          $ref: '#/components/schemas/ResourceType'
+          description: Type of resource.
         ResourceStatus:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Status of the resource.
+          $ref: '#/components/schemas/String'
+          description: Status of the resource.
         ResourceOwnerId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ID of the account that owns the resource.
+          $ref: '#/components/schemas/String'
+          description: ID of the account that owns the resource.
         AssociationTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: Time when the license configuration was initially associated with the resource.
+          $ref: '#/components/schemas/DateTime'
+          description: Time when the license configuration was initially associated with the resource.
         ConsumedLicenses:
-          allOf:
-            - $ref: '#/components/schemas/BoxLong'
-            - description: Number of licenses consumed by the resource.
+          $ref: '#/components/schemas/BoxLong'
+          description: Number of licenses consumed by the resource.
       description: Details about the usage of a resource associated with a license configuration.
     LicenseConfigurationUsageList:
       type: array
@@ -5865,37 +5481,29 @@ components:
       type: object
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the resource.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the resource.
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: Resource type.
+          $ref: '#/components/schemas/ResourceType'
+          description: Resource type.
         ErrorMessage:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Error message.
+          $ref: '#/components/schemas/String'
+          description: Error message.
         FailureTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: Failure time.
+          $ref: '#/components/schemas/DateTime'
+          description: Failure time.
         OperationName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of the operation.
+          $ref: '#/components/schemas/String'
+          description: Name of the operation.
         ResourceOwnerId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ID of the AWS account that owns the resource.
+          $ref: '#/components/schemas/String'
+          description: ID of the AWS account that owns the resource.
         OperationRequestedBy:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The requester is "License Manager Automated Discovery".
+          $ref: '#/components/schemas/String'
+          description: The requester is "License Manager Automated Discovery".
         MetadataList:
-          allOf:
-            - $ref: '#/components/schemas/MetadataList'
-            - description: Reserved.
+          $ref: '#/components/schemas/MetadataList'
+          description: Reserved.
       description: Describes the failure of a license operation.
     LicenseOperationFailureList:
       type: array
@@ -5907,13 +5515,11 @@ components:
         - LicenseConfigurationArn
       properties:
         LicenseConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the license configuration.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the license configuration.
         AmiAssociationScope:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Scope of AMI associations. The possible value is <code>cross-account</code>.
+          $ref: '#/components/schemas/String'
+          description: Scope of AMI associations. The possible value is <code>cross-account</code>.
       description: Details for associating a license configuration with a resource.
     LicenseSpecifications:
       type: array
@@ -5939,25 +5545,21 @@ components:
       type: object
       properties:
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: Type of resource associated with a license.
+          $ref: '#/components/schemas/ResourceType'
+          description: Type of resource associated with a license.
         AssociationCount:
-          allOf:
-            - $ref: '#/components/schemas/BoxLong'
-            - description: Number of resources associated with licenses.
+          $ref: '#/components/schemas/BoxLong'
+          description: Number of resources associated with licenses.
       description: Summary information about a managed resource.
     Metadata:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The key name.
+          $ref: '#/components/schemas/String'
+          description: The key name.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The value.
+          $ref: '#/components/schemas/String'
+          description: The value.
       description: Describes key/value pairs.
     ProductInformationFilterList:
       type: array
@@ -5970,13 +5572,11 @@ components:
         - ProductInformationFilterList
       properties:
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Resource type. The possible values are <code>SSM_MANAGED</code> | <code>RDS</code>.
+          $ref: '#/components/schemas/String'
+          description: Resource type. The possible values are <code>SSM_MANAGED</code> | <code>RDS</code>.
         ProductInformationFilterList:
-          allOf:
-            - $ref: '#/components/schemas/ProductInformationFilterList'
-            - description: '<p>A Product information filter consists of a <code>ProductInformationFilterComparator</code> which is a logical operator, a <code>ProductInformationFilterName</code> which specifies the type of filter being declared, and a <code>ProductInformationFilterValue</code> that specifies the value to filter on. </p> <p>Accepted values for <code>ProductInformationFilterName</code> are listed here along with descriptions and valid options for <code>ProductInformationFilterComparator</code>. </p> <p>The following filters and are supported when the resource type is <code>SSM_MANAGED</code>:</p> <ul> <li> <p> <code>Application Name</code> - The name of the application. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Application Publisher</code> - The publisher of the application. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Application Version</code> - The version of the application. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Platform Name</code> - The name of the platform. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Platform Type</code> - The platform type. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Tag:key</code> - The key of a tag attached to an AWS resource you wish to exclude from automated discovery. Logical operator is <code>NOT_EQUALS</code>. The key for your tag must be appended to <code>Tag:</code> following the example: <code>Tag:name-of-your-key</code>. <code>ProductInformationFilterValue</code> is optional if you are not using values for the key. </p> </li> <li> <p> <code>AccountId</code> - The 12-digit ID of an AWS account you wish to exclude from automated discovery. Logical operator is <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>License Included</code> - The type of license included. Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>. Possible values are: <code>sql-server-enterprise</code> | <code>sql-server-standard</code> | <code>sql-server-web</code> | <code>windows-server-datacenter</code>.</p> </li> </ul> <p>The following filters and logical operators are supported when the resource type is <code>RDS</code>:</p> <ul> <li> <p> <code>Engine Edition</code> - The edition of the database engine. Logical operator is <code>EQUALS</code>. Possible values are: <code>oracle-ee</code> | <code>oracle-se</code> | <code>oracle-se1</code> | <code>oracle-se2</code>.</p> </li> <li> <p> <code>License Pack</code> - The license pack. Logical operator is <code>EQUALS</code>. Possible values are: <code>data guard</code> | <code>diagnostic pack sqlt</code> | <code>tuning pack sqlt</code> | <code>ols</code> | <code>olap</code>.</p> </li> </ul>'
+          $ref: '#/components/schemas/ProductInformationFilterList'
+          description: '<p>A Product information filter consists of a <code>ProductInformationFilterComparator</code> which is a logical operator, a <code>ProductInformationFilterName</code> which specifies the type of filter being declared, and a <code>ProductInformationFilterValue</code> that specifies the value to filter on. </p> <p>Accepted values for <code>ProductInformationFilterName</code> are listed here along with descriptions and valid options for <code>ProductInformationFilterComparator</code>. </p> <p>The following filters and are supported when the resource type is <code>SSM_MANAGED</code>:</p> <ul> <li> <p> <code>Application Name</code> - The name of the application. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Application Publisher</code> - The publisher of the application. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Application Version</code> - The version of the application. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Platform Name</code> - The name of the platform. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Platform Type</code> - The platform type. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Tag:key</code> - The key of a tag attached to an AWS resource you wish to exclude from automated discovery. Logical operator is <code>NOT_EQUALS</code>. The key for your tag must be appended to <code>Tag:</code> following the example: <code>Tag:name-of-your-key</code>. <code>ProductInformationFilterValue</code> is optional if you are not using values for the key. </p> </li> <li> <p> <code>AccountId</code> - The 12-digit ID of an AWS account you wish to exclude from automated discovery. Logical operator is <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>License Included</code> - The type of license included. Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>. Possible values are: <code>sql-server-enterprise</code> | <code>sql-server-standard</code> | <code>sql-server-web</code> | <code>windows-server-datacenter</code>.</p> </li> </ul> <p>The following filters and logical operators are supported when the resource type is <code>RDS</code>:</p> <ul> <li> <p> <code>Engine Edition</code> - The edition of the database engine. Logical operator is <code>EQUALS</code>. Possible values are: <code>oracle-ee</code> | <code>oracle-se</code> | <code>oracle-se1</code> | <code>oracle-se2</code>.</p> </li> <li> <p> <code>License Pack</code> - The license pack. Logical operator is <code>EQUALS</code>. Possible values are: <code>data guard</code> | <code>diagnostic pack sqlt</code> | <code>tuning pack sqlt</code> | <code>ols</code> | <code>olap</code>.</p> </li> </ul>'
       description: Describes product information for a license configuration.
     ProductInformationFilter:
       type: object
@@ -5985,17 +5585,14 @@ components:
         - ProductInformationFilterComparator
       properties:
         ProductInformationFilterName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Filter name.
+          $ref: '#/components/schemas/String'
+          description: Filter name.
         ProductInformationFilterValue:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: Filter value.
+          $ref: '#/components/schemas/StringList'
+          description: Filter value.
         ProductInformationFilterComparator:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Logical operator.
+          $ref: '#/components/schemas/String'
+          description: Logical operator.
       description: Describes product information filters.
     ReceivedStatus:
       type: string
@@ -6018,13 +5615,11 @@ components:
       type: object
       properties:
         bucket:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of the S3 bucket reports are published to.
+          $ref: '#/components/schemas/String'
+          description: Name of the S3 bucket reports are published to.
         keyPrefix:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Prefix of the S3 bucket reports are published to.
+          $ref: '#/components/schemas/String'
+          description: Prefix of the S3 bucket reports are published to.
       description: Details of the S3 bucket that report generator reports are published to.
     ReportType:
       type: string
@@ -6035,41 +5630,33 @@ components:
       type: object
       properties:
         ResourceId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ID of the resource.
+          $ref: '#/components/schemas/String'
+          description: ID of the resource.
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: Type of resource.
+          $ref: '#/components/schemas/ResourceType'
+          description: Type of resource.
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the resource.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the resource.
         Platform:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Platform of the resource.
+          $ref: '#/components/schemas/String'
+          description: Platform of the resource.
         PlatformVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Platform version of the resource in the inventory.
+          $ref: '#/components/schemas/String'
+          description: Platform version of the resource in the inventory.
         ResourceOwningAccountId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ID of the account that owns the resource.
+          $ref: '#/components/schemas/String'
+          description: ID of the account that owns the resource.
       description: Details about a resource.
     Tag:
       type: object
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Tag key.
+          $ref: '#/components/schemas/String'
+          description: Tag key.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Tag value.
+          $ref: '#/components/schemas/String'
+          description: Tag value.
       description: Details about a tag for a license configuration.
     TagKeyList:
       type: array
@@ -6079,33 +5666,26 @@ components:
       type: object
       properties:
         TokenId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token ID.
+          $ref: '#/components/schemas/String'
+          description: Token ID.
         TokenType:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Type of token generated. The supported value is <code>REFRESH_TOKEN</code>.
+          $ref: '#/components/schemas/String'
+          description: Type of token generated. The supported value is <code>REFRESH_TOKEN</code>.
         LicenseArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Amazon Resource Name (ARN) of the license.
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the license.
         ExpirationTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DateTime'
-            - description: 'Token expiration time, in ISO8601-UTC format.'
+          $ref: '#/components/schemas/ISO8601DateTime'
+          description: 'Token expiration time, in ISO8601-UTC format.'
         TokenProperties:
-          allOf:
-            - $ref: '#/components/schemas/MaxSize3StringList'
-            - description: Data specified by the caller.
+          $ref: '#/components/schemas/MaxSize3StringList'
+          description: Data specified by the caller.
         RoleArns:
-          allOf:
-            - $ref: '#/components/schemas/ArnList'
-            - description: Amazon Resource Names (ARN) of the roles included in the token.
+          $ref: '#/components/schemas/ArnList'
+          description: Amazon Resource Names (ARN) of the roles included in the token.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Token status. The possible values are <code>AVAILABLE</code> and <code>DELETED</code>.
+          $ref: '#/components/schemas/String'
+          description: Token status. The possible values are <code>AVAILABLE</code> and <code>DELETED</code>.
       description: Describes a token.
 security:
   - hmac: []

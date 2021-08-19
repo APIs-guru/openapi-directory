@@ -537,9 +537,8 @@ paths:
                   type: object
                   properties:
                     AdditionalVersionWeights:
-                      allOf:
-                        - $ref: '#/components/schemas/AdditionalVersionWeights'
-                        - description: 'The second version, and the percentage of traffic that''s routed to it.'
+                      $ref: '#/components/schemas/AdditionalVersionWeights'
+                      description: 'The second version, and the percentage of traffic that''s routed to it.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -658,17 +657,15 @@ paths:
                   type: object
                   properties:
                     SigningProfileVersionArns:
-                      allOf:
-                        - $ref: '#/components/schemas/SigningProfileVersionArns'
-                        - description: 'The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. '
+                      $ref: '#/components/schemas/SigningProfileVersionArns'
+                      description: 'The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. '
                 CodeSigningPolicies:
                   description: 'Code signing configuration <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies">policies</a> specify the validation failure action for signature mismatch or expiry.'
                   type: object
                   properties:
                     UntrustedArtifactOnDeployment:
-                      allOf:
-                        - $ref: '#/components/schemas/CodeSigningPolicy'
-                        - description: '<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if signature validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>'
+                      $ref: '#/components/schemas/CodeSigningPolicy'
+                      description: '<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if signature validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -809,13 +806,11 @@ paths:
                   type: object
                   properties:
                     OnSuccess:
-                      allOf:
-                        - $ref: '#/components/schemas/OnSuccess'
-                        - description: The destination configuration for successful invocations.
+                      $ref: '#/components/schemas/OnSuccess'
+                      description: The destination configuration for successful invocations.
                     OnFailure:
-                      allOf:
-                        - $ref: '#/components/schemas/OnFailure'
-                        - description: The destination configuration for failed invocations.
+                      $ref: '#/components/schemas/OnFailure'
+                      description: The destination configuration for failed invocations.
                 MaximumRecordAgeInSeconds:
                   description: (Streams only) Discard records older than the specified age. The default value is infinite (-1).
                   type: integer
@@ -860,9 +855,8 @@ paths:
                   type: object
                   properties:
                     Endpoints:
-                      allOf:
-                        - $ref: '#/components/schemas/Endpoints'
-                        - description: 'The list of bootstrap servers for your Kafka brokers in the following format: <code>"KAFKA_BOOTSTRAP_SERVERS": ["abc.xyz.com:xxxx","abc2.xyz.com:xxxx"]</code>.'
+                      $ref: '#/components/schemas/Endpoints'
+                      description: 'The list of bootstrap servers for your Kafka brokers in the following format: <code>"KAFKA_BOOTSTRAP_SERVERS": ["abc.xyz.com:xxxx","abc2.xyz.com:xxxx"]</code>.'
                 FunctionResponseTypes:
                   description: (Streams only) A list of current response type enums applied to the event source mapping.
                   type: array
@@ -1069,25 +1063,20 @@ paths:
                   type: object
                   properties:
                     ZipFile:
-                      allOf:
-                        - $ref: '#/components/schemas/Blob'
-                        - description: The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
+                      $ref: '#/components/schemas/Blob'
+                      description: The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
                     S3Bucket:
-                      allOf:
-                        - $ref: '#/components/schemas/S3Bucket'
-                        - description: An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.
+                      $ref: '#/components/schemas/S3Bucket'
+                      description: An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.
                     S3Key:
-                      allOf:
-                        - $ref: '#/components/schemas/S3Key'
-                        - description: The Amazon S3 key of the deployment package.
+                      $ref: '#/components/schemas/S3Key'
+                      description: The Amazon S3 key of the deployment package.
                     S3ObjectVersion:
-                      allOf:
-                        - $ref: '#/components/schemas/S3ObjectVersion'
-                        - description: 'For versioned objects, the version of the deployment package object to use.'
+                      $ref: '#/components/schemas/S3ObjectVersion'
+                      description: 'For versioned objects, the version of the deployment package object to use.'
                     ImageUri:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: 'URI of a <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html">container image</a> in the Amazon ECR registry.'
+                      $ref: '#/components/schemas/String'
+                      description: 'URI of a <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html">container image</a> in the Amazon ECR registry.'
                 Description:
                   description: A description of the function.
                   type: string
@@ -1110,13 +1099,11 @@ paths:
                   type: object
                   properties:
                     SubnetIds:
-                      allOf:
-                        - $ref: '#/components/schemas/SubnetIds'
-                        - description: A list of VPC subnet IDs.
+                      $ref: '#/components/schemas/SubnetIds'
+                      description: A list of VPC subnet IDs.
                     SecurityGroupIds:
-                      allOf:
-                        - $ref: '#/components/schemas/SecurityGroupIds'
-                        - description: A list of VPC security groups IDs.
+                      $ref: '#/components/schemas/SecurityGroupIds'
+                      description: A list of VPC security groups IDs.
                 PackageType:
                   description: The type of deployment package. Set to <code>Image</code> for container image and set <code>Zip</code> for ZIP archive.
                   type: string
@@ -1128,17 +1115,15 @@ paths:
                   type: object
                   properties:
                     TargetArn:
-                      allOf:
-                        - $ref: '#/components/schemas/ResourceArn'
-                        - description: The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
+                      $ref: '#/components/schemas/ResourceArn'
+                      description: The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
                 Environment:
                   description: 'A function''s environment variable settings. You can use environment variables to adjust your function''s behavior without updating code. An environment variable is a pair of strings that are stored in a function''s version-specific configuration. '
                   type: object
                   properties:
                     Variables:
-                      allOf:
-                        - $ref: '#/components/schemas/EnvironmentVariables'
-                        - description: 'Environment variable key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html">Using Lambda environment variables</a>.'
+                      $ref: '#/components/schemas/EnvironmentVariables'
+                      description: 'Environment variable key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html">Using Lambda environment variables</a>.'
                 KMSKeyArn:
                   description: 'The ARN of the Amazon Web Services Key Management Service (KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, Lambda uses a default service key.'
                   type: string
@@ -1148,9 +1133,8 @@ paths:
                   type: object
                   properties:
                     Mode:
-                      allOf:
-                        - $ref: '#/components/schemas/TracingMode'
-                        - description: The tracing mode.
+                      $ref: '#/components/schemas/TracingMode'
+                      description: The tracing mode.
                 Tags:
                   description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a> to apply to the function.'
                   type: object
@@ -1172,17 +1156,14 @@ paths:
                   type: object
                   properties:
                     EntryPoint:
-                      allOf:
-                        - $ref: '#/components/schemas/StringList'
-                        - description: 'Specifies the entry point to their application, which is typically the location of the runtime executable.'
+                      $ref: '#/components/schemas/StringList'
+                      description: 'Specifies the entry point to their application, which is typically the location of the runtime executable.'
                     Command:
-                      allOf:
-                        - $ref: '#/components/schemas/StringList'
-                        - description: 'Specifies parameters that you want to pass in with ENTRYPOINT. '
+                      $ref: '#/components/schemas/StringList'
+                      description: 'Specifies parameters that you want to pass in with ENTRYPOINT. '
                     WorkingDirectory:
-                      allOf:
-                        - $ref: '#/components/schemas/WorkingDirectory'
-                        - description: Specifies the working directory.
+                      $ref: '#/components/schemas/WorkingDirectory'
+                      description: Specifies the working directory.
                 CodeSigningConfigArn:
                   description: 'To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes a set of signing profiles, which define the trusted publishers for this function.'
                   type: string
@@ -1395,9 +1376,8 @@ paths:
                   type: object
                   properties:
                     AdditionalVersionWeights:
-                      allOf:
-                        - $ref: '#/components/schemas/AdditionalVersionWeights'
-                        - description: 'The second version, and the percentage of traffic that''s routed to it.'
+                      $ref: '#/components/schemas/AdditionalVersionWeights'
+                      description: 'The second version, and the percentage of traffic that''s routed to it.'
                 RevisionId:
                   description: Only update the alias if the revision ID matches the ID that's specified. Use this option to avoid modifying an alias that has changed since you last read it.
                   type: string
@@ -1544,17 +1524,15 @@ paths:
                   type: object
                   properties:
                     SigningProfileVersionArns:
-                      allOf:
-                        - $ref: '#/components/schemas/SigningProfileVersionArns'
-                        - description: 'The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. '
+                      $ref: '#/components/schemas/SigningProfileVersionArns'
+                      description: 'The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. '
                 CodeSigningPolicies:
                   description: 'Code signing configuration <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies">policies</a> specify the validation failure action for signature mismatch or expiry.'
                   type: object
                   properties:
                     UntrustedArtifactOnDeployment:
-                      allOf:
-                        - $ref: '#/components/schemas/CodeSigningPolicy'
-                        - description: '<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if signature validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>'
+                      $ref: '#/components/schemas/CodeSigningPolicy'
+                      description: '<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if signature validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>'
   '/2015-03-31/event-source-mappings/{UUID}':
     delete:
       operationId: DeleteEventSourceMapping
@@ -1736,13 +1714,11 @@ paths:
                   type: object
                   properties:
                     OnSuccess:
-                      allOf:
-                        - $ref: '#/components/schemas/OnSuccess'
-                        - description: The destination configuration for successful invocations.
+                      $ref: '#/components/schemas/OnSuccess'
+                      description: The destination configuration for successful invocations.
                     OnFailure:
-                      allOf:
-                        - $ref: '#/components/schemas/OnFailure'
-                        - description: The destination configuration for failed invocations.
+                      $ref: '#/components/schemas/OnFailure'
+                      description: The destination configuration for failed invocations.
                 MaximumRecordAgeInSeconds:
                   description: (Streams only) Discard records older than the specified age. The default value is infinite (-1).
                   type: integer
@@ -2388,13 +2364,11 @@ paths:
                   type: object
                   properties:
                     OnSuccess:
-                      allOf:
-                        - $ref: '#/components/schemas/OnSuccess'
-                        - description: The destination configuration for successful invocations.
+                      $ref: '#/components/schemas/OnSuccess'
+                      description: The destination configuration for successful invocations.
                     OnFailure:
-                      allOf:
-                        - $ref: '#/components/schemas/OnFailure'
-                        - description: The destination configuration for failed invocations.
+                      $ref: '#/components/schemas/OnFailure'
+                      description: The destination configuration for failed invocations.
     post:
       operationId: UpdateFunctionEventInvokeConfig
       description: '<p>Updates the configuration for asynchronous invocation for a function, version, or alias.</p> <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>'
@@ -2476,13 +2450,11 @@ paths:
                   type: object
                   properties:
                     OnSuccess:
-                      allOf:
-                        - $ref: '#/components/schemas/OnSuccess'
-                        - description: The destination configuration for successful invocations.
+                      $ref: '#/components/schemas/OnSuccess'
+                      description: The destination configuration for successful invocations.
                     OnFailure:
-                      allOf:
-                        - $ref: '#/components/schemas/OnFailure'
-                        - description: The destination configuration for failed invocations.
+                      $ref: '#/components/schemas/OnFailure'
+                      description: The destination configuration for failed invocations.
   '/2018-10-31/layers/{LayerName}/versions/{VersionNumber}':
     delete:
       operationId: DeleteLayerVersion
@@ -3027,21 +2999,18 @@ paths:
                   type: object
                   properties:
                     SubnetIds:
-                      allOf:
-                        - $ref: '#/components/schemas/SubnetIds'
-                        - description: A list of VPC subnet IDs.
+                      $ref: '#/components/schemas/SubnetIds'
+                      description: A list of VPC subnet IDs.
                     SecurityGroupIds:
-                      allOf:
-                        - $ref: '#/components/schemas/SecurityGroupIds'
-                        - description: A list of VPC security groups IDs.
+                      $ref: '#/components/schemas/SecurityGroupIds'
+                      description: A list of VPC security groups IDs.
                 Environment:
                   description: 'A function''s environment variable settings. You can use environment variables to adjust your function''s behavior without updating code. An environment variable is a pair of strings that are stored in a function''s version-specific configuration. '
                   type: object
                   properties:
                     Variables:
-                      allOf:
-                        - $ref: '#/components/schemas/EnvironmentVariables'
-                        - description: 'Environment variable key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html">Using Lambda environment variables</a>.'
+                      $ref: '#/components/schemas/EnvironmentVariables'
+                      description: 'Environment variable key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html">Using Lambda environment variables</a>.'
                 Runtime:
                   description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>.'
                   type: string
@@ -3076,9 +3045,8 @@ paths:
                   type: object
                   properties:
                     TargetArn:
-                      allOf:
-                        - $ref: '#/components/schemas/ResourceArn'
-                        - description: The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
+                      $ref: '#/components/schemas/ResourceArn'
+                      description: The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
                 KMSKeyArn:
                   description: 'The ARN of the Amazon Web Services Key Management Service (KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, Lambda uses a default service key.'
                   type: string
@@ -3088,9 +3056,8 @@ paths:
                   type: object
                   properties:
                     Mode:
-                      allOf:
-                        - $ref: '#/components/schemas/TracingMode'
-                        - description: The tracing mode.
+                      $ref: '#/components/schemas/TracingMode'
+                      description: The tracing mode.
                 RevisionId:
                   description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid modifying a function that has changed since you last read it.
                   type: string
@@ -3110,17 +3077,14 @@ paths:
                   type: object
                   properties:
                     EntryPoint:
-                      allOf:
-                        - $ref: '#/components/schemas/StringList'
-                        - description: 'Specifies the entry point to their application, which is typically the location of the runtime executable.'
+                      $ref: '#/components/schemas/StringList'
+                      description: 'Specifies the entry point to their application, which is typically the location of the runtime executable.'
                     Command:
-                      allOf:
-                        - $ref: '#/components/schemas/StringList'
-                        - description: 'Specifies parameters that you want to pass in with ENTRYPOINT. '
+                      $ref: '#/components/schemas/StringList'
+                      description: 'Specifies parameters that you want to pass in with ENTRYPOINT. '
                     WorkingDirectory:
-                      allOf:
-                        - $ref: '#/components/schemas/WorkingDirectory'
-                        - description: Specifies the working directory.
+                      $ref: '#/components/schemas/WorkingDirectory'
+                      description: Specifies the working directory.
   /2018-10-31/layers#find=LayerVersion&Arn:
     get:
       operationId: GetLayerVersionByArn
@@ -3845,21 +3809,17 @@ paths:
                   type: object
                   properties:
                     S3Bucket:
-                      allOf:
-                        - $ref: '#/components/schemas/S3Bucket'
-                        - description: The Amazon S3 bucket of the layer archive.
+                      $ref: '#/components/schemas/S3Bucket'
+                      description: The Amazon S3 bucket of the layer archive.
                     S3Key:
-                      allOf:
-                        - $ref: '#/components/schemas/S3Key'
-                        - description: The Amazon S3 key of the layer archive.
+                      $ref: '#/components/schemas/S3Key'
+                      description: The Amazon S3 key of the layer archive.
                     S3ObjectVersion:
-                      allOf:
-                        - $ref: '#/components/schemas/S3ObjectVersion'
-                        - description: 'For versioned objects, the version of the layer archive object to use.'
+                      $ref: '#/components/schemas/S3ObjectVersion'
+                      description: 'For versioned objects, the version of the layer archive object to use.'
                     ZipFile:
-                      allOf:
-                        - $ref: '#/components/schemas/Blob'
-                        - description: The base64-encoded contents of the layer archive. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
+                      $ref: '#/components/schemas/Blob'
+                      description: The base64-encoded contents of the layer archive. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
                 CompatibleRuntimes:
                   description: 'A list of compatible <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">function runtimes</a>. Used for filtering with <a>ListLayers</a> and <a>ListLayerVersions</a>.'
                   type: array
@@ -4684,13 +4644,11 @@ components:
       type: object
       properties:
         Statement:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The permission statement.
+          $ref: '#/components/schemas/String'
+          description: The permission statement.
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A unique identifier for the current revision of the policy.
+          $ref: '#/components/schemas/String'
+          description: A unique identifier for the current revision of the policy.
     ServiceException: {}
     ResourceNotFoundException: {}
     ResourceConflictException: {}
@@ -4702,36 +4660,29 @@ components:
       type: object
       properties:
         Statement:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The permission statement that's added to the function policy.
+          $ref: '#/components/schemas/String'
+          description: The permission statement that's added to the function policy.
     AliasConfiguration:
       type: object
       properties:
         AliasArn:
-          allOf:
-            - $ref: '#/components/schemas/FunctionArn'
-            - description: The Amazon Resource Name (ARN) of the alias.
+          $ref: '#/components/schemas/FunctionArn'
+          description: The Amazon Resource Name (ARN) of the alias.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/Alias'
-            - description: The name of the alias.
+          $ref: '#/components/schemas/Alias'
+          description: The name of the alias.
         FunctionVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The function version that the alias invokes.
+          $ref: '#/components/schemas/Version'
+          description: The function version that the alias invokes.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the alias.
+          $ref: '#/components/schemas/Description'
+          description: A description of the alias.
         RoutingConfig:
-          allOf:
-            - $ref: '#/components/schemas/AliasRoutingConfiguration'
-            - description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">routing configuration</a> of the alias.'
+          $ref: '#/components/schemas/AliasRoutingConfiguration'
+          description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">routing configuration</a> of the alias.'
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A unique identifier that changes when you update the alias.
+          $ref: '#/components/schemas/String'
+          description: A unique identifier that changes when you update the alias.
       description: 'Provides configuration information about a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">alias</a>.'
     AdditionalVersionWeights:
       type: object
@@ -4743,9 +4694,8 @@ components:
         - CodeSigningConfig
       properties:
         CodeSigningConfig:
-          allOf:
-            - $ref: '#/components/schemas/CodeSigningConfig'
-            - description: The code signing configuration.
+          $ref: '#/components/schemas/CodeSigningConfig'
+          description: The code signing configuration.
     SigningProfileVersionArns:
       type: array
       items:
@@ -4761,109 +4711,85 @@ components:
       type: object
       properties:
         UUID:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The identifier of the event source mapping.
+          $ref: '#/components/schemas/String'
+          description: The identifier of the event source mapping.
         StartingPosition:
-          allOf:
-            - $ref: '#/components/schemas/EventSourcePosition'
-            - description: 'The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources. <code>AT_TIMESTAMP</code> is supported only for Amazon Kinesis streams.'
+          $ref: '#/components/schemas/EventSourcePosition'
+          description: 'The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources. <code>AT_TIMESTAMP</code> is supported only for Amazon Kinesis streams.'
         StartingPositionTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading.'
+          $ref: '#/components/schemas/Date'
+          description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading.'
         BatchSize:
-          allOf:
-            - $ref: '#/components/schemas/BatchSize'
-            - description: The maximum number of items to retrieve in a single batch.
+          $ref: '#/components/schemas/BatchSize'
+          description: The maximum number of items to retrieve in a single batch.
         MaximumBatchingWindowInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/MaximumBatchingWindowInSeconds'
-            - description: '(Streams and Amazon SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.'
+          $ref: '#/components/schemas/MaximumBatchingWindowInSeconds'
+          description: '(Streams and Amazon SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.'
         ParallelizationFactor:
-          allOf:
-            - $ref: '#/components/schemas/ParallelizationFactor'
-            - description: (Streams only) The number of batches to process concurrently from each shard. The default value is 1.
+          $ref: '#/components/schemas/ParallelizationFactor'
+          description: (Streams only) The number of batches to process concurrently from each shard. The default value is 1.
         EventSourceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the event source.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the event source.
         FunctionArn:
-          allOf:
-            - $ref: '#/components/schemas/FunctionArn'
-            - description: The ARN of the Lambda function.
+          $ref: '#/components/schemas/FunctionArn'
+          description: The ARN of the Lambda function.
         LastModified:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date that the event source mapping was last updated or that its state changed.
+          $ref: '#/components/schemas/Date'
+          description: The date that the event source mapping was last updated or that its state changed.
         LastProcessingResult:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The result of the last Lambda invocation of your function.
+          $ref: '#/components/schemas/String'
+          description: The result of the last Lambda invocation of your function.
         State:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The state of the event source mapping. It can be one of the following: <code>Creating</code>, <code>Enabling</code>, <code>Enabled</code>, <code>Disabling</code>, <code>Disabled</code>, <code>Updating</code>, or <code>Deleting</code>.'
+          $ref: '#/components/schemas/String'
+          description: 'The state of the event source mapping. It can be one of the following: <code>Creating</code>, <code>Enabling</code>, <code>Enabled</code>, <code>Disabling</code>, <code>Disabled</code>, <code>Updating</code>, or <code>Deleting</code>.'
         StateTransitionReason:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Indicates whether a user or Lambda made the last change to the event source mapping.
+          $ref: '#/components/schemas/String'
+          description: Indicates whether a user or Lambda made the last change to the event source mapping.
         DestinationConfig:
-          allOf:
-            - $ref: '#/components/schemas/DestinationConfig'
-            - description: (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
+          $ref: '#/components/schemas/DestinationConfig'
+          description: (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
         Topics:
-          allOf:
-            - $ref: '#/components/schemas/Topics'
-            - description: The name of the Kafka topic.
+          $ref: '#/components/schemas/Topics'
+          description: The name of the Kafka topic.
         Queues:
-          allOf:
-            - $ref: '#/components/schemas/Queues'
-            - description: ' (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.'
+          $ref: '#/components/schemas/Queues'
+          description: ' (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.'
         SourceAccessConfigurations:
-          allOf:
-            - $ref: '#/components/schemas/SourceAccessConfigurations'
-            - description: 'An array of the authentication protocol, VPC components, or virtual host to secure and define your event source.'
+          $ref: '#/components/schemas/SourceAccessConfigurations'
+          description: 'An array of the authentication protocol, VPC components, or virtual host to secure and define your event source.'
         SelfManagedEventSource:
-          allOf:
-            - $ref: '#/components/schemas/SelfManagedEventSource'
-            - description: The self-managed Apache Kafka cluster for your event source.
+          $ref: '#/components/schemas/SelfManagedEventSource'
+          description: The self-managed Apache Kafka cluster for your event source.
         MaximumRecordAgeInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/MaximumRecordAgeInSeconds'
-            - description: '(Streams only) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records. '
+          $ref: '#/components/schemas/MaximumRecordAgeInSeconds'
+          description: '(Streams only) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records. '
         BisectBatchOnFunctionError:
-          allOf:
-            - $ref: '#/components/schemas/BisectBatchOnFunctionError'
-            - description: '(Streams only) If the function returns an error, split the batch in two and retry. The default value is false.'
+          $ref: '#/components/schemas/BisectBatchOnFunctionError'
+          description: '(Streams only) If the function returns an error, split the batch in two and retry. The default value is false.'
         MaximumRetryAttempts:
-          allOf:
-            - $ref: '#/components/schemas/MaximumRetryAttemptsEventSourceMapping'
-            - description: '(Streams only) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, Lambda retries failed records until the record expires in the event source.'
+          $ref: '#/components/schemas/MaximumRetryAttemptsEventSourceMapping'
+          description: '(Streams only) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, Lambda retries failed records until the record expires in the event source.'
         TumblingWindowInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/TumblingWindowInSeconds'
-            - description: (Streams only) The duration in seconds of a processing window. The range is 1–900 seconds.
+          $ref: '#/components/schemas/TumblingWindowInSeconds'
+          description: (Streams only) The duration in seconds of a processing window. The range is 1–900 seconds.
         FunctionResponseTypes:
-          allOf:
-            - $ref: '#/components/schemas/FunctionResponseTypeList'
-            - description: (Streams only) A list of current response type enums applied to the event source mapping.
+          $ref: '#/components/schemas/FunctionResponseTypeList'
+          description: (Streams only) A list of current response type enums applied to the event source mapping.
       description: 'A mapping between an Amazon Web Services resource and a Lambda function. For details, see <a>CreateEventSourceMapping</a>.'
     OnSuccess:
       type: object
       properties:
         Destination:
-          allOf:
-            - $ref: '#/components/schemas/DestinationArn'
-            - description: The Amazon Resource Name (ARN) of the destination resource.
+          $ref: '#/components/schemas/DestinationArn'
+          description: The Amazon Resource Name (ARN) of the destination resource.
       description: A destination for events that were processed successfully.
     OnFailure:
       type: object
       properties:
         Destination:
-          allOf:
-            - $ref: '#/components/schemas/DestinationArn'
-            - description: The Amazon Resource Name (ARN) of the destination resource.
+          $ref: '#/components/schemas/DestinationArn'
+          description: The Amazon Resource Name (ARN) of the destination resource.
       description: A destination for events that failed processing.
     Topic:
       type: string
@@ -4879,13 +4805,11 @@ components:
       type: object
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/SourceAccessType'
-            - description: '<p>The type of authentication protocol, VPC components, or virtual host for your event source. For example: <code>"Type":"SASL_SCRAM_512_AUTH"</code>.</p> <ul> <li> <p> <code>BASIC_AUTH</code> - (Amazon MQ) The Secrets Manager secret that stores your broker credentials.</p> </li> <li> <p> <code>BASIC_AUTH</code> - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.</p> </li> <li> <p> <code>VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.</p> </li> <li> <p> <code>VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your self-managed Apache Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_256_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_512_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.</p> </li> <li> <p> <code>VIRTUAL_HOST</code> - (Amazon MQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source.</p> </li> </ul>'
+          $ref: '#/components/schemas/SourceAccessType'
+          description: '<p>The type of authentication protocol, VPC components, or virtual host for your event source. For example: <code>"Type":"SASL_SCRAM_512_AUTH"</code>.</p> <ul> <li> <p> <code>BASIC_AUTH</code> - (Amazon MQ) The Secrets Manager secret that stores your broker credentials.</p> </li> <li> <p> <code>BASIC_AUTH</code> - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.</p> </li> <li> <p> <code>VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.</p> </li> <li> <p> <code>VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your self-managed Apache Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_256_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_512_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.</p> </li> <li> <p> <code>VIRTUAL_HOST</code> - (Amazon MQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source.</p> </li> </ul>'
         URI:
-          allOf:
-            - $ref: '#/components/schemas/URI'
-            - description: 'The value for your chosen configuration in <code>Type</code>. For example: <code>"URI": "arn:aws:secretsmanager:us-east-1:01234567890:secret:MyBrokerSecretName"</code>.'
+          $ref: '#/components/schemas/URI'
+          description: 'The value for your chosen configuration in <code>Type</code>. For example: <code>"URI": "arn:aws:secretsmanager:us-east-1:01234567890:secret:MyBrokerSecretName"</code>.'
       description: 'To secure and define access to your event source, you can specify the authentication protocol, VPC components, or virtual host.'
     Endpoints:
       type: object
@@ -4901,129 +4825,98 @@ components:
       type: object
       properties:
         FunctionName:
-          allOf:
-            - $ref: '#/components/schemas/NamespacedFunctionName'
-            - description: The name of the function.
+          $ref: '#/components/schemas/NamespacedFunctionName'
+          description: The name of the function.
         FunctionArn:
-          allOf:
-            - $ref: '#/components/schemas/NameSpacedFunctionArn'
-            - description: The function's Amazon Resource Name (ARN).
+          $ref: '#/components/schemas/NameSpacedFunctionArn'
+          description: The function's Amazon Resource Name (ARN).
         Runtime:
-          allOf:
-            - $ref: '#/components/schemas/Runtime'
-            - description: The runtime environment for the Lambda function.
+          $ref: '#/components/schemas/Runtime'
+          description: The runtime environment for the Lambda function.
         Role:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The function's execution role.
+          $ref: '#/components/schemas/RoleArn'
+          description: The function's execution role.
         Handler:
-          allOf:
-            - $ref: '#/components/schemas/Handler'
-            - description: The function that Lambda calls to begin executing your function.
+          $ref: '#/components/schemas/Handler'
+          description: The function that Lambda calls to begin executing your function.
         CodeSize:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: 'The size of the function''s deployment package, in bytes.'
+          $ref: '#/components/schemas/Long'
+          description: 'The size of the function''s deployment package, in bytes.'
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The function's description.
+          $ref: '#/components/schemas/Description'
+          description: The function's description.
         Timeout:
-          allOf:
-            - $ref: '#/components/schemas/Timeout'
-            - description: The amount of time in seconds that Lambda allows a function to run before stopping it.
+          $ref: '#/components/schemas/Timeout'
+          description: The amount of time in seconds that Lambda allows a function to run before stopping it.
         MemorySize:
-          allOf:
-            - $ref: '#/components/schemas/MemorySize'
-            - description: 'The amount of memory available to the function at runtime. '
+          $ref: '#/components/schemas/MemorySize'
+          description: 'The amount of memory available to the function at runtime. '
         LastModified:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the function was last updated, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the function was last updated, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).'
         CodeSha256:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The SHA256 hash of the function's deployment package.
+          $ref: '#/components/schemas/String'
+          description: The SHA256 hash of the function's deployment package.
         Version:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The version of the Lambda function.
+          $ref: '#/components/schemas/Version'
+          description: The version of the Lambda function.
         VpcConfig:
-          allOf:
-            - $ref: '#/components/schemas/VpcConfigResponse'
-            - description: The function's networking configuration.
+          $ref: '#/components/schemas/VpcConfigResponse'
+          description: The function's networking configuration.
         DeadLetterConfig:
-          allOf:
-            - $ref: '#/components/schemas/DeadLetterConfig'
-            - description: The function's dead letter queue.
+          $ref: '#/components/schemas/DeadLetterConfig'
+          description: The function's dead letter queue.
         Environment:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentResponse'
-            - description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html">environment variables</a>.'
+          $ref: '#/components/schemas/EnvironmentResponse'
+          description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html">environment variables</a>.'
         KMSKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/KMSKeyArn'
-            - description: The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed CMK.
+          $ref: '#/components/schemas/KMSKeyArn'
+          description: The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed CMK.
         TracingConfig:
-          allOf:
-            - $ref: '#/components/schemas/TracingConfigResponse'
-            - description: The function's X-Ray tracing configuration.
+          $ref: '#/components/schemas/TracingConfigResponse'
+          description: The function's X-Ray tracing configuration.
         MasterArn:
-          allOf:
-            - $ref: '#/components/schemas/FunctionArn'
-            - description: 'For Lambda@Edge functions, the ARN of the master function.'
+          $ref: '#/components/schemas/FunctionArn'
+          description: 'For Lambda@Edge functions, the ARN of the master function.'
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The latest updated revision of the function or alias.
+          $ref: '#/components/schemas/String'
+          description: The latest updated revision of the function or alias.
         Layers:
-          allOf:
-            - $ref: '#/components/schemas/LayersReferenceList'
-            - description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html"> layers</a>.'
+          $ref: '#/components/schemas/LayersReferenceList'
+          description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html"> layers</a>.'
         State:
-          allOf:
-            - $ref: '#/components/schemas/State'
-            - description: 'The current state of the function. When the state is <code>Inactive</code>, you can reactivate the function by invoking it.'
+          $ref: '#/components/schemas/State'
+          description: 'The current state of the function. When the state is <code>Inactive</code>, you can reactivate the function by invoking it.'
         StateReason:
-          allOf:
-            - $ref: '#/components/schemas/StateReason'
-            - description: The reason for the function's current state.
+          $ref: '#/components/schemas/StateReason'
+          description: The reason for the function's current state.
         StateReasonCode:
-          allOf:
-            - $ref: '#/components/schemas/StateReasonCode'
-            - description: 'The reason code for the function''s current state. When the code is <code>Creating</code>, you can''t invoke or modify the function.'
+          $ref: '#/components/schemas/StateReasonCode'
+          description: 'The reason code for the function''s current state. When the code is <code>Creating</code>, you can''t invoke or modify the function.'
         LastUpdateStatus:
-          allOf:
-            - $ref: '#/components/schemas/LastUpdateStatus'
-            - description: The status of the last update that was performed on the function. This is first set to <code>Successful</code> after function creation completes.
+          $ref: '#/components/schemas/LastUpdateStatus'
+          description: The status of the last update that was performed on the function. This is first set to <code>Successful</code> after function creation completes.
         LastUpdateStatusReason:
-          allOf:
-            - $ref: '#/components/schemas/LastUpdateStatusReason'
-            - description: The reason for the last update that was performed on the function.
+          $ref: '#/components/schemas/LastUpdateStatusReason'
+          description: The reason for the last update that was performed on the function.
         LastUpdateStatusReasonCode:
-          allOf:
-            - $ref: '#/components/schemas/LastUpdateStatusReasonCode'
-            - description: The reason code for the last update that was performed on the function.
+          $ref: '#/components/schemas/LastUpdateStatusReasonCode'
+          description: The reason code for the last update that was performed on the function.
         FileSystemConfigs:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemConfigList'
-            - description: 'Connection settings for an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html">Amazon EFS file system</a>.'
+          $ref: '#/components/schemas/FileSystemConfigList'
+          description: 'Connection settings for an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html">Amazon EFS file system</a>.'
         PackageType:
-          allOf:
-            - $ref: '#/components/schemas/PackageType'
-            - description: The type of deployment package. Set to <code>Image</code> for container image and set <code>Zip</code> for .zip file archive.
+          $ref: '#/components/schemas/PackageType'
+          description: The type of deployment package. Set to <code>Image</code> for container image and set <code>Zip</code> for .zip file archive.
         ImageConfigResponse:
-          allOf:
-            - $ref: '#/components/schemas/ImageConfigResponse'
-            - description: The function's image configuration values.
+          $ref: '#/components/schemas/ImageConfigResponse'
+          description: The function's image configuration values.
         SigningProfileVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the signing profile version.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the signing profile version.
         SigningJobArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the signing job.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the signing job.
       description: Details about a function's configuration.
     Blob:
       type: string
@@ -5079,13 +4972,11 @@ components:
         - LocalMountPath
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemArn'
-            - description: The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.
+          $ref: '#/components/schemas/FileSystemArn'
+          description: The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.
         LocalMountPath:
-          allOf:
-            - $ref: '#/components/schemas/LocalMountPath'
-            - description: 'The path where the function can access the file system, starting with <code>/mnt/</code>.'
+          $ref: '#/components/schemas/LocalMountPath'
+          description: 'The path where the function can access the file system, starting with <code>/mnt/</code>.'
       description: 'Details about the connection between a Lambda function and an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html">Amazon EFS file system</a>.'
     StringList:
       type: array
@@ -5107,41 +4998,34 @@ components:
       type: object
       properties:
         AccountLimit:
-          allOf:
-            - $ref: '#/components/schemas/AccountLimit'
-            - description: Limits that are related to concurrency and code storage.
+          $ref: '#/components/schemas/AccountLimit'
+          description: Limits that are related to concurrency and code storage.
         AccountUsage:
-          allOf:
-            - $ref: '#/components/schemas/AccountUsage'
-            - description: The number of functions and amount of storage in use.
+          $ref: '#/components/schemas/AccountUsage'
+          description: The number of functions and amount of storage in use.
     GetCodeSigningConfigResponse:
       type: object
       required:
         - CodeSigningConfig
       properties:
         CodeSigningConfig:
-          allOf:
-            - $ref: '#/components/schemas/CodeSigningConfig'
-            - description: The code signing configuration
+          $ref: '#/components/schemas/CodeSigningConfig'
+          description: The code signing configuration
     GetFunctionResponse:
       type: object
       properties:
         Configuration:
-          allOf:
-            - $ref: '#/components/schemas/FunctionConfiguration'
-            - description: The configuration of the function or version.
+          $ref: '#/components/schemas/FunctionConfiguration'
+          description: The configuration of the function or version.
         Code:
-          allOf:
-            - $ref: '#/components/schemas/FunctionCodeLocation'
-            - description: The deployment package of the function or version.
+          $ref: '#/components/schemas/FunctionCodeLocation'
+          description: The deployment package of the function or version.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a>.'
+          $ref: '#/components/schemas/Tags'
+          description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a>.'
         Concurrency:
-          allOf:
-            - $ref: '#/components/schemas/Concurrency'
-            - description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">reserved concurrency</a>.'
+          $ref: '#/components/schemas/Concurrency'
+          description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">reserved concurrency</a>.'
     GetFunctionCodeSigningConfigResponse:
       type: object
       required:
@@ -5149,139 +5033,111 @@ components:
         - FunctionName
       properties:
         CodeSigningConfigArn:
-          allOf:
-            - $ref: '#/components/schemas/CodeSigningConfigArn'
-            - description: The The Amazon Resource Name (ARN) of the code signing configuration.
+          $ref: '#/components/schemas/CodeSigningConfigArn'
+          description: The The Amazon Resource Name (ARN) of the code signing configuration.
         FunctionName:
-          allOf:
-            - $ref: '#/components/schemas/FunctionName'
-            - description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          $ref: '#/components/schemas/FunctionName'
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
     GetFunctionConcurrencyResponse:
       type: object
       properties:
         ReservedConcurrentExecutions:
-          allOf:
-            - $ref: '#/components/schemas/ReservedConcurrentExecutions'
-            - description: The number of simultaneous executions that are reserved for the function.
+          $ref: '#/components/schemas/ReservedConcurrentExecutions'
+          description: The number of simultaneous executions that are reserved for the function.
     FunctionEventInvokeConfig:
       type: object
       properties:
         LastModified:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time that the configuration was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time that the configuration was last updated.
         FunctionArn:
-          allOf:
-            - $ref: '#/components/schemas/FunctionArn'
-            - description: The Amazon Resource Name (ARN) of the function.
+          $ref: '#/components/schemas/FunctionArn'
+          description: The Amazon Resource Name (ARN) of the function.
         MaximumRetryAttempts:
-          allOf:
-            - $ref: '#/components/schemas/MaximumRetryAttempts'
-            - description: The maximum number of times to retry when the function returns an error.
+          $ref: '#/components/schemas/MaximumRetryAttempts'
+          description: The maximum number of times to retry when the function returns an error.
         MaximumEventAgeInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/MaximumEventAgeInSeconds'
-            - description: The maximum age of a request that Lambda sends to a function for processing.
+          $ref: '#/components/schemas/MaximumEventAgeInSeconds'
+          description: The maximum age of a request that Lambda sends to a function for processing.
         DestinationConfig:
-          allOf:
-            - $ref: '#/components/schemas/DestinationConfig'
-            - description: <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of an SQS queue.</p> </li> <li> <p> <b>Topic</b> - The ARN of an SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul>
+          $ref: '#/components/schemas/DestinationConfig'
+          description: <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of an SQS queue.</p> </li> <li> <p> <b>Topic</b> - The ARN of an SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul>
     GetLayerVersionResponse:
       type: object
       properties:
         Content:
-          allOf:
-            - $ref: '#/components/schemas/LayerVersionContentOutput'
-            - description: Details about the layer version.
+          $ref: '#/components/schemas/LayerVersionContentOutput'
+          description: Details about the layer version.
         LayerArn:
-          allOf:
-            - $ref: '#/components/schemas/LayerArn'
-            - description: The ARN of the layer.
+          $ref: '#/components/schemas/LayerArn'
+          description: The ARN of the layer.
         LayerVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/LayerVersionArn'
-            - description: The ARN of the layer version.
+          $ref: '#/components/schemas/LayerVersionArn'
+          description: The ARN of the layer version.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the version.
+          $ref: '#/components/schemas/Description'
+          description: The description of the version.
         CreatedDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date that the layer version was created, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date that the layer version was created, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).'
         Version:
-          allOf:
-            - $ref: '#/components/schemas/LayerVersionNumber'
-            - description: The version number.
+          $ref: '#/components/schemas/LayerVersionNumber'
+          description: The version number.
         CompatibleRuntimes:
-          allOf:
-            - $ref: '#/components/schemas/CompatibleRuntimes'
-            - description: The layer's compatible runtimes.
+          $ref: '#/components/schemas/CompatibleRuntimes'
+          description: The layer's compatible runtimes.
         LicenseInfo:
-          allOf:
-            - $ref: '#/components/schemas/LicenseInfo'
-            - description: The layer's software license.
+          $ref: '#/components/schemas/LicenseInfo'
+          description: The layer's software license.
     GetLayerVersionPolicyResponse:
       type: object
       properties:
         Policy:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The policy document.
+          $ref: '#/components/schemas/String'
+          description: The policy document.
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A unique identifier for the current revision of the policy.
+          $ref: '#/components/schemas/String'
+          description: A unique identifier for the current revision of the policy.
     GetPolicyResponse:
       type: object
       properties:
         Policy:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The resource-based policy.
+          $ref: '#/components/schemas/String'
+          description: The resource-based policy.
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A unique identifier for the current revision of the policy.
+          $ref: '#/components/schemas/String'
+          description: A unique identifier for the current revision of the policy.
     GetProvisionedConcurrencyConfigResponse:
       type: object
       properties:
         RequestedProvisionedConcurrentExecutions:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: The amount of provisioned concurrency requested.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: The amount of provisioned concurrency requested.
         AvailableProvisionedConcurrentExecutions:
-          allOf:
-            - $ref: '#/components/schemas/NonNegativeInteger'
-            - description: The amount of provisioned concurrency available.
+          $ref: '#/components/schemas/NonNegativeInteger'
+          description: The amount of provisioned concurrency available.
         AllocatedProvisionedConcurrentExecutions:
-          allOf:
-            - $ref: '#/components/schemas/NonNegativeInteger'
-            - description: The amount of provisioned concurrency allocated.
+          $ref: '#/components/schemas/NonNegativeInteger'
+          description: The amount of provisioned concurrency allocated.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ProvisionedConcurrencyStatusEnum'
-            - description: The status of the allocation process.
+          $ref: '#/components/schemas/ProvisionedConcurrencyStatusEnum'
+          description: The status of the allocation process.
         StatusReason:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'For failed allocations, the reason that provisioned concurrency could not be allocated.'
+          $ref: '#/components/schemas/String'
+          description: 'For failed allocations, the reason that provisioned concurrency could not be allocated.'
         LastModified:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that a user last updated the configuration, in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601 format</a>.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that a user last updated the configuration, in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601 format</a>.'
     ProvisionedConcurrencyConfigNotFoundException: {}
     InvocationResponse:
       type: object
       properties:
         StatusCode:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'The HTTP status code is in the 200 range for a successful request. For the <code>RequestResponse</code> invocation type, this status code is 200. For the <code>Event</code> invocation type, this status code is 202. For the <code>DryRun</code> invocation type, the status code is 204.'
+          $ref: '#/components/schemas/Integer'
+          description: 'The HTTP status code is in the 200 range for a successful request. For the <code>RequestResponse</code> invocation type, this status code is 200. For the <code>Event</code> invocation type, this status code is 202. For the <code>DryRun</code> invocation type, the status code is 204.'
         Payload:
-          allOf:
-            - $ref: '#/components/schemas/Blob'
-            - description: 'The response from the function, or an error object.'
+          $ref: '#/components/schemas/Blob'
+          description: 'The response from the function, or an error object.'
     InvalidRequestContentException: {}
     RequestTooLargeException: {}
     UnsupportedMediaTypeException: {}
@@ -5308,163 +5164,133 @@ components:
       deprecated: true
       properties:
         Status:
-          allOf:
-            - $ref: '#/components/schemas/HttpStatus'
-            - description: The status code.
+          $ref: '#/components/schemas/HttpStatus'
+          description: The status code.
       description: 'A success response (<code>202 Accepted</code>) indicates that the request is queued for invocation. '
     ListAliasesResponse:
       type: object
       properties:
         NextMarker:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The pagination token that's included if more results are available.
+          $ref: '#/components/schemas/String'
+          description: The pagination token that's included if more results are available.
         Aliases:
-          allOf:
-            - $ref: '#/components/schemas/AliasList'
-            - description: A list of aliases.
+          $ref: '#/components/schemas/AliasList'
+          description: A list of aliases.
     ListCodeSigningConfigsResponse:
       type: object
       properties:
         NextMarker:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The pagination token that's included if more results are available.
+          $ref: '#/components/schemas/String'
+          description: The pagination token that's included if more results are available.
         CodeSigningConfigs:
-          allOf:
-            - $ref: '#/components/schemas/CodeSigningConfigList'
-            - description: The code signing configurations
+          $ref: '#/components/schemas/CodeSigningConfigList'
+          description: The code signing configurations
     ListEventSourceMappingsResponse:
       type: object
       properties:
         NextMarker:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A pagination token that's returned when the response doesn't contain all event source mappings.
+          $ref: '#/components/schemas/String'
+          description: A pagination token that's returned when the response doesn't contain all event source mappings.
         EventSourceMappings:
-          allOf:
-            - $ref: '#/components/schemas/EventSourceMappingsList'
-            - description: A list of event source mappings.
+          $ref: '#/components/schemas/EventSourceMappingsList'
+          description: A list of event source mappings.
     ListFunctionEventInvokeConfigsResponse:
       type: object
       properties:
         FunctionEventInvokeConfigs:
-          allOf:
-            - $ref: '#/components/schemas/FunctionEventInvokeConfigList'
-            - description: A list of configurations.
+          $ref: '#/components/schemas/FunctionEventInvokeConfigList'
+          description: A list of configurations.
         NextMarker:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The pagination token that's included if more results are available.
+          $ref: '#/components/schemas/String'
+          description: The pagination token that's included if more results are available.
     ListFunctionsResponse:
       type: object
       properties:
         NextMarker:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The pagination token that's included if more results are available.
+          $ref: '#/components/schemas/String'
+          description: The pagination token that's included if more results are available.
         Functions:
-          allOf:
-            - $ref: '#/components/schemas/FunctionList'
-            - description: A list of Lambda functions.
+          $ref: '#/components/schemas/FunctionList'
+          description: A list of Lambda functions.
       description: A list of Lambda functions.
     ListFunctionsByCodeSigningConfigResponse:
       type: object
       properties:
         NextMarker:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The pagination token that's included if more results are available.
+          $ref: '#/components/schemas/String'
+          description: The pagination token that's included if more results are available.
         FunctionArns:
-          allOf:
-            - $ref: '#/components/schemas/FunctionArnList'
-            - description: 'The function ARNs. '
+          $ref: '#/components/schemas/FunctionArnList'
+          description: 'The function ARNs. '
     ListLayerVersionsResponse:
       type: object
       properties:
         NextMarker:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A pagination token returned when the response doesn't contain all versions.
+          $ref: '#/components/schemas/String'
+          description: A pagination token returned when the response doesn't contain all versions.
         LayerVersions:
-          allOf:
-            - $ref: '#/components/schemas/LayerVersionsList'
-            - description: A list of versions.
+          $ref: '#/components/schemas/LayerVersionsList'
+          description: A list of versions.
     ListLayersResponse:
       type: object
       properties:
         NextMarker:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A pagination token returned when the response doesn't contain all layers.
+          $ref: '#/components/schemas/String'
+          description: A pagination token returned when the response doesn't contain all layers.
         Layers:
-          allOf:
-            - $ref: '#/components/schemas/LayersList'
-            - description: A list of function layers.
+          $ref: '#/components/schemas/LayersList'
+          description: A list of function layers.
     ListProvisionedConcurrencyConfigsResponse:
       type: object
       properties:
         ProvisionedConcurrencyConfigs:
-          allOf:
-            - $ref: '#/components/schemas/ProvisionedConcurrencyConfigList'
-            - description: A list of provisioned concurrency configurations.
+          $ref: '#/components/schemas/ProvisionedConcurrencyConfigList'
+          description: A list of provisioned concurrency configurations.
         NextMarker:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The pagination token that's included if more results are available.
+          $ref: '#/components/schemas/String'
+          description: The pagination token that's included if more results are available.
     ListTagsResponse:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The function's tags.
+          $ref: '#/components/schemas/Tags'
+          description: The function's tags.
     ListVersionsByFunctionResponse:
       type: object
       properties:
         NextMarker:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The pagination token that's included if more results are available.
+          $ref: '#/components/schemas/String'
+          description: The pagination token that's included if more results are available.
         Versions:
-          allOf:
-            - $ref: '#/components/schemas/FunctionList'
-            - description: A list of Lambda function versions.
+          $ref: '#/components/schemas/FunctionList'
+          description: A list of Lambda function versions.
     PublishLayerVersionResponse:
       type: object
       properties:
         Content:
-          allOf:
-            - $ref: '#/components/schemas/LayerVersionContentOutput'
-            - description: Details about the layer version.
+          $ref: '#/components/schemas/LayerVersionContentOutput'
+          description: Details about the layer version.
         LayerArn:
-          allOf:
-            - $ref: '#/components/schemas/LayerArn'
-            - description: The ARN of the layer.
+          $ref: '#/components/schemas/LayerArn'
+          description: The ARN of the layer.
         LayerVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/LayerVersionArn'
-            - description: The ARN of the layer version.
+          $ref: '#/components/schemas/LayerVersionArn'
+          description: The ARN of the layer version.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the version.
+          $ref: '#/components/schemas/Description'
+          description: The description of the version.
         CreatedDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date that the layer version was created, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date that the layer version was created, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).'
         Version:
-          allOf:
-            - $ref: '#/components/schemas/LayerVersionNumber'
-            - description: The version number.
+          $ref: '#/components/schemas/LayerVersionNumber'
+          description: The version number.
         CompatibleRuntimes:
-          allOf:
-            - $ref: '#/components/schemas/CompatibleRuntimes'
-            - description: The layer's compatible runtimes.
+          $ref: '#/components/schemas/CompatibleRuntimes'
+          description: The layer's compatible runtimes.
         LicenseInfo:
-          allOf:
-            - $ref: '#/components/schemas/LicenseInfo'
-            - description: The layer's software license.
+          $ref: '#/components/schemas/LicenseInfo'
+          description: The layer's software license.
     Runtime:
       type: string
       enum:
@@ -5500,47 +5326,38 @@ components:
         - FunctionName
       properties:
         CodeSigningConfigArn:
-          allOf:
-            - $ref: '#/components/schemas/CodeSigningConfigArn'
-            - description: The The Amazon Resource Name (ARN) of the code signing configuration.
+          $ref: '#/components/schemas/CodeSigningConfigArn'
+          description: The The Amazon Resource Name (ARN) of the code signing configuration.
         FunctionName:
-          allOf:
-            - $ref: '#/components/schemas/FunctionName'
-            - description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          $ref: '#/components/schemas/FunctionName'
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
     Concurrency:
       type: object
       properties:
         ReservedConcurrentExecutions:
-          allOf:
-            - $ref: '#/components/schemas/ReservedConcurrentExecutions'
-            - description: 'The number of concurrent executions that are reserved for this function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Managing Concurrency</a>.'
+          $ref: '#/components/schemas/ReservedConcurrentExecutions'
+          description: 'The number of concurrent executions that are reserved for this function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Managing Concurrency</a>.'
     PutProvisionedConcurrencyConfigResponse:
       type: object
       properties:
         RequestedProvisionedConcurrentExecutions:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: The amount of provisioned concurrency requested.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: The amount of provisioned concurrency requested.
         AvailableProvisionedConcurrentExecutions:
-          allOf:
-            - $ref: '#/components/schemas/NonNegativeInteger'
-            - description: The amount of provisioned concurrency available.
+          $ref: '#/components/schemas/NonNegativeInteger'
+          description: The amount of provisioned concurrency available.
         AllocatedProvisionedConcurrentExecutions:
-          allOf:
-            - $ref: '#/components/schemas/NonNegativeInteger'
-            - description: The amount of provisioned concurrency allocated.
+          $ref: '#/components/schemas/NonNegativeInteger'
+          description: The amount of provisioned concurrency allocated.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ProvisionedConcurrencyStatusEnum'
-            - description: The status of the allocation process.
+          $ref: '#/components/schemas/ProvisionedConcurrencyStatusEnum'
+          description: The status of the allocation process.
         StatusReason:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'For failed allocations, the reason that provisioned concurrency could not be allocated.'
+          $ref: '#/components/schemas/String'
+          description: 'For failed allocations, the reason that provisioned concurrency could not be allocated.'
         LastModified:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that a user last updated the configuration, in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601 format</a>.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that a user last updated the configuration, in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601 format</a>.'
     TagKey:
       type: string
     UpdateCodeSigningConfigResponse:
@@ -5549,9 +5366,8 @@ components:
         - CodeSigningConfig
       properties:
         CodeSigningConfig:
-          allOf:
-            - $ref: '#/components/schemas/CodeSigningConfig'
-            - description: The code signing configuration
+          $ref: '#/components/schemas/CodeSigningConfig'
+          description: The code signing configuration
     Long:
       type: integer
     Integer:
@@ -5563,37 +5379,30 @@ components:
       type: object
       properties:
         TotalCodeSize:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The amount of storage space that you can use for all deployment packages and layer archives.
+          $ref: '#/components/schemas/Long'
+          description: The amount of storage space that you can use for all deployment packages and layer archives.
         CodeSizeUnzipped:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The maximum size of a function's deployment package and layers when they're extracted.
+          $ref: '#/components/schemas/Long'
+          description: The maximum size of a function's deployment package and layers when they're extracted.
         CodeSizeZipped:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The maximum size of a deployment package when it's uploaded directly to Lambda. Use Amazon S3 for larger files.
+          $ref: '#/components/schemas/Long'
+          description: The maximum size of a deployment package when it's uploaded directly to Lambda. Use Amazon S3 for larger files.
         ConcurrentExecutions:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The maximum number of simultaneous function executions.
+          $ref: '#/components/schemas/Integer'
+          description: The maximum number of simultaneous function executions.
         UnreservedConcurrentExecutions:
-          allOf:
-            - $ref: '#/components/schemas/UnreservedConcurrentExecutions'
-            - description: 'The maximum number of simultaneous function executions, minus the capacity that''s reserved for individual functions with <a>PutFunctionConcurrency</a>.'
+          $ref: '#/components/schemas/UnreservedConcurrentExecutions'
+          description: 'The maximum number of simultaneous function executions, minus the capacity that''s reserved for individual functions with <a>PutFunctionConcurrency</a>.'
       description: Limits that are related to concurrency and storage. All file and storage sizes are in bytes.
     AccountUsage:
       type: object
       properties:
         TotalCodeSize:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: 'The amount of storage space, in bytes, that''s being used by deployment packages and layer archives.'
+          $ref: '#/components/schemas/Long'
+          description: 'The amount of storage space, in bytes, that''s being used by deployment packages and layer archives.'
         FunctionCount:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The number of Lambda functions.
+          $ref: '#/components/schemas/Long'
+          description: The number of Lambda functions.
       description: The number of functions and amount of storage in use.
     Action:
       type: string
@@ -5630,21 +5439,17 @@ components:
       title: AddLayerVersionPermissionRequest
       properties:
         StatementId:
-          allOf:
-            - $ref: '#/components/schemas/StatementId'
-            - description: An identifier that distinguishes the policy from others on the same layer version.
+          $ref: '#/components/schemas/StatementId'
+          description: An identifier that distinguishes the policy from others on the same layer version.
         Action:
-          allOf:
-            - $ref: '#/components/schemas/LayerPermissionAllowedAction'
-            - description: 'The API action that grants access to the layer. For example, <code>lambda:GetLayerVersion</code>.'
+          $ref: '#/components/schemas/LayerPermissionAllowedAction'
+          description: 'The API action that grants access to the layer. For example, <code>lambda:GetLayerVersion</code>.'
         Principal:
-          allOf:
-            - $ref: '#/components/schemas/LayerPermissionAllowedPrincipal'
-            - description: 'An account ID, or <code>*</code> to grant layer usage permission to all accounts in an organization, or all Amazon Web Services accounts (if <code>organizationId</code> is not specified). For the last case, make sure that you really do want all Amazon Web Services accounts to have usage permission to this layer. '
+          $ref: '#/components/schemas/LayerPermissionAllowedPrincipal'
+          description: 'An account ID, or <code>*</code> to grant layer usage permission to all accounts in an organization, or all Amazon Web Services accounts (if <code>organizationId</code> is not specified). For the last case, make sure that you really do want all Amazon Web Services accounts to have usage permission to this layer. '
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: 'With the principal set to <code>*</code>, grant permission to all accounts in the specified organization.'
+          $ref: '#/components/schemas/OrganizationId'
+          description: 'With the principal set to <code>*</code>, grant permission to all accounts in the specified organization.'
     FunctionName:
       type: string
       pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
@@ -5679,33 +5484,26 @@ components:
       title: AddPermissionRequest
       properties:
         StatementId:
-          allOf:
-            - $ref: '#/components/schemas/StatementId'
-            - description: A statement identifier that differentiates the statement from others in the same policy.
+          $ref: '#/components/schemas/StatementId'
+          description: A statement identifier that differentiates the statement from others in the same policy.
         Action:
-          allOf:
-            - $ref: '#/components/schemas/Action'
-            - description: 'The action that the principal can use on the function. For example, <code>lambda:InvokeFunction</code> or <code>lambda:GetFunction</code>.'
+          $ref: '#/components/schemas/Action'
+          description: 'The action that the principal can use on the function. For example, <code>lambda:InvokeFunction</code> or <code>lambda:GetFunction</code>.'
         Principal:
-          allOf:
-            - $ref: '#/components/schemas/Principal'
-            - description: 'The Amazon Web Services service or account that invokes the function. If you specify a service, use <code>SourceArn</code> or <code>SourceAccount</code> to limit who can invoke the function through that service.'
+          $ref: '#/components/schemas/Principal'
+          description: 'The Amazon Web Services service or account that invokes the function. If you specify a service, use <code>SourceArn</code> or <code>SourceAccount</code> to limit who can invoke the function through that service.'
         SourceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'For Amazon Web Services services, the ARN of the Amazon Web Services resource that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.'
+          $ref: '#/components/schemas/Arn'
+          description: 'For Amazon Web Services services, the ARN of the Amazon Web Services resource that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.'
         SourceAccount:
-          allOf:
-            - $ref: '#/components/schemas/SourceOwner'
-            - description: 'For Amazon S3, the ID of the account that owns the resource. Use this together with <code>SourceArn</code> to ensure that the resource is owned by the specified account. It is possible for an Amazon S3 bucket to be deleted by its owner and recreated by another account.'
+          $ref: '#/components/schemas/SourceOwner'
+          description: 'For Amazon S3, the ID of the account that owns the resource. Use this together with <code>SourceArn</code> to ensure that the resource is owned by the specified account. It is possible for an Amazon S3 bucket to be deleted by its owner and recreated by another account.'
         EventSourceToken:
-          allOf:
-            - $ref: '#/components/schemas/EventSourceToken'
-            - description: 'For Alexa Smart Home functions, a token that must be supplied by the invoker.'
+          $ref: '#/components/schemas/EventSourceToken'
+          description: 'For Alexa Smart Home functions, a token that must be supplied by the invoker.'
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Only update the policy if the revision ID matches the ID that's specified. Use this option to avoid modifying a policy that has changed since you last read it.
+          $ref: '#/components/schemas/String'
+          description: Only update the policy if the revision ID matches the ID that's specified. Use this option to avoid modifying a policy that has changed since you last read it.
     AdditionalVersion:
       type: string
       pattern: '[0-9]+'
@@ -5737,9 +5535,8 @@ components:
       type: object
       properties:
         AdditionalVersionWeights:
-          allOf:
-            - $ref: '#/components/schemas/AdditionalVersionWeights'
-            - description: 'The second version, and the percentage of traffic that''s routed to it.'
+          $ref: '#/components/schemas/AdditionalVersionWeights'
+          description: 'The second version, and the percentage of traffic that''s routed to it.'
       description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">traffic-shifting</a> configuration of a Lambda function alias.'
     AliasList:
       type: array
@@ -5751,9 +5548,8 @@ components:
         - SigningProfileVersionArns
       properties:
         SigningProfileVersionArns:
-          allOf:
-            - $ref: '#/components/schemas/SigningProfileVersionArns'
-            - description: 'The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. '
+          $ref: '#/components/schemas/SigningProfileVersionArns'
+          description: 'The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. '
       description: 'List of signing profiles that can sign a code package. '
     BatchSize:
       type: integer
@@ -5776,9 +5572,8 @@ components:
       type: object
       properties:
         UntrustedArtifactOnDeployment:
-          allOf:
-            - $ref: '#/components/schemas/CodeSigningPolicy'
-            - description: '<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if signature validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>'
+          $ref: '#/components/schemas/CodeSigningPolicy'
+          description: '<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if signature validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>'
       description: 'Code signing configuration <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies">policies</a> specify the validation failure action for signature mismatch or expiry.'
     Timestamp:
       type: string
@@ -5792,29 +5587,23 @@ components:
         - LastModified
       properties:
         CodeSigningConfigId:
-          allOf:
-            - $ref: '#/components/schemas/CodeSigningConfigId'
-            - description: Unique identifer for the Code signing configuration.
+          $ref: '#/components/schemas/CodeSigningConfigId'
+          description: Unique identifer for the Code signing configuration.
         CodeSigningConfigArn:
-          allOf:
-            - $ref: '#/components/schemas/CodeSigningConfigArn'
-            - description: The Amazon Resource Name (ARN) of the Code signing configuration.
+          $ref: '#/components/schemas/CodeSigningConfigArn'
+          description: The Amazon Resource Name (ARN) of the Code signing configuration.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: Code signing configuration description.
+          $ref: '#/components/schemas/Description'
+          description: Code signing configuration description.
         AllowedPublishers:
-          allOf:
-            - $ref: '#/components/schemas/AllowedPublishers'
-            - description: List of allowed publishers.
+          $ref: '#/components/schemas/AllowedPublishers'
+          description: List of allowed publishers.
         CodeSigningPolicies:
-          allOf:
-            - $ref: '#/components/schemas/CodeSigningPolicies'
-            - description: The code signing policy controls the validation failure action for signature mismatch or expiry.
+          $ref: '#/components/schemas/CodeSigningPolicies'
+          description: The code signing policy controls the validation failure action for signature mismatch or expiry.
         LastModified:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the Code signing configuration was last modified, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD). '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the Code signing configuration was last modified, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD). '
       description: 'Details about a <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html">Code signing configuration</a>. '
     CodeSigningConfigList:
       type: array
@@ -5836,21 +5625,17 @@ components:
       title: CreateAliasRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/Alias'
-            - description: The name of the alias.
+          $ref: '#/components/schemas/Alias'
+          description: The name of the alias.
         FunctionVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The function version that the alias invokes.
+          $ref: '#/components/schemas/Version'
+          description: The function version that the alias invokes.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the alias.
+          $ref: '#/components/schemas/Description'
+          description: A description of the alias.
         RoutingConfig:
-          allOf:
-            - $ref: '#/components/schemas/AliasRoutingConfiguration'
-            - description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing">routing configuration</a> of the alias.'
+          $ref: '#/components/schemas/AliasRoutingConfiguration'
+          description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing">routing configuration</a> of the alias.'
     CreateCodeSigningConfigRequest:
       type: object
       required:
@@ -5858,17 +5643,14 @@ components:
       title: CreateCodeSigningConfigRequest
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: Descriptive name for this code signing configuration.
+          $ref: '#/components/schemas/Description'
+          description: Descriptive name for this code signing configuration.
         AllowedPublishers:
-          allOf:
-            - $ref: '#/components/schemas/AllowedPublishers'
-            - description: Signing profiles for this code signing configuration.
+          $ref: '#/components/schemas/AllowedPublishers'
+          description: Signing profiles for this code signing configuration.
         CodeSigningPolicies:
-          allOf:
-            - $ref: '#/components/schemas/CodeSigningPolicies'
-            - description: 'The code signing policies define the actions to take if the validation checks fail. '
+          $ref: '#/components/schemas/CodeSigningPolicies'
+          description: 'The code signing policies define the actions to take if the validation checks fail. '
     Enabled:
       type: boolean
     MaximumBatchingWindowInSeconds:
@@ -5892,13 +5674,11 @@ components:
       type: object
       properties:
         OnSuccess:
-          allOf:
-            - $ref: '#/components/schemas/OnSuccess'
-            - description: The destination configuration for successful invocations.
+          $ref: '#/components/schemas/OnSuccess'
+          description: The destination configuration for successful invocations.
         OnFailure:
-          allOf:
-            - $ref: '#/components/schemas/OnFailure'
-            - description: The destination configuration for failed invocations.
+          $ref: '#/components/schemas/OnFailure'
+          description: The destination configuration for failed invocations.
       description: A configuration object that specifies the destination of an event after Lambda processes it.
     MaximumRecordAgeInSeconds:
       type: integer
@@ -5934,9 +5714,8 @@ components:
       type: object
       properties:
         Endpoints:
-          allOf:
-            - $ref: '#/components/schemas/Endpoints'
-            - description: 'The list of bootstrap servers for your Kafka brokers in the following format: <code>"KAFKA_BOOTSTRAP_SERVERS": ["abc.xyz.com:xxxx","abc2.xyz.com:xxxx"]</code>.'
+          $ref: '#/components/schemas/Endpoints'
+          description: 'The list of bootstrap servers for your Kafka brokers in the following format: <code>"KAFKA_BOOTSTRAP_SERVERS": ["abc.xyz.com:xxxx","abc2.xyz.com:xxxx"]</code>.'
       description: The self-managed Apache Kafka cluster for your event source.
     FunctionResponseTypeList:
       type: array
@@ -5951,77 +5730,59 @@ components:
       title: CreateEventSourceMappingRequest
       properties:
         EventSourceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: <p>The Amazon Resource Name (ARN) of the event source.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - The ARN of the data stream or a stream consumer.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - The ARN of the stream.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - The ARN of the queue.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - The ARN of the cluster.</p> </li> </ul>
+          $ref: '#/components/schemas/Arn'
+          description: <p>The Amazon Resource Name (ARN) of the event source.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - The ARN of the data stream or a stream consumer.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - The ARN of the stream.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - The ARN of the queue.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - The ARN of the cluster.</p> </li> </ul>
         FunctionName:
-          allOf:
-            - $ref: '#/components/schemas/FunctionName'
-            - description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it''s limited to 64 characters in length.</p>'
+          $ref: '#/components/schemas/FunctionName'
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it''s limited to 64 characters in length.</p>'
         Enabled:
-          allOf:
-            - $ref: '#/components/schemas/Enabled'
-            - description: 'If true, the event source mapping is active. Set to false to pause polling and invocation.'
+          $ref: '#/components/schemas/Enabled'
+          description: 'If true, the event source mapping is active. Set to false to pause polling and invocation.'
         BatchSize:
-          allOf:
-            - $ref: '#/components/schemas/BatchSize'
-            - description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Self-Managed Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>'
+          $ref: '#/components/schemas/BatchSize'
+          description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Self-Managed Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>'
         MaximumBatchingWindowInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/MaximumBatchingWindowInSeconds'
-            - description: '(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds.'
+          $ref: '#/components/schemas/MaximumBatchingWindowInSeconds'
+          description: '(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds.'
         ParallelizationFactor:
-          allOf:
-            - $ref: '#/components/schemas/ParallelizationFactor'
-            - description: (Streams only) The number of batches to process from each shard concurrently.
+          $ref: '#/components/schemas/ParallelizationFactor'
+          description: (Streams only) The number of batches to process from each shard concurrently.
         StartingPosition:
-          allOf:
-            - $ref: '#/components/schemas/EventSourcePosition'
-            - description: 'The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.'
+          $ref: '#/components/schemas/EventSourcePosition'
+          description: 'The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.'
         StartingPositionTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading.'
+          $ref: '#/components/schemas/Date'
+          description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading.'
         DestinationConfig:
-          allOf:
-            - $ref: '#/components/schemas/DestinationConfig'
-            - description: (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
+          $ref: '#/components/schemas/DestinationConfig'
+          description: (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
         MaximumRecordAgeInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/MaximumRecordAgeInSeconds'
-            - description: (Streams only) Discard records older than the specified age. The default value is infinite (-1).
+          $ref: '#/components/schemas/MaximumRecordAgeInSeconds'
+          description: (Streams only) Discard records older than the specified age. The default value is infinite (-1).
         BisectBatchOnFunctionError:
-          allOf:
-            - $ref: '#/components/schemas/BisectBatchOnFunctionError'
-            - description: '(Streams only) If the function returns an error, split the batch in two and retry.'
+          $ref: '#/components/schemas/BisectBatchOnFunctionError'
+          description: '(Streams only) If the function returns an error, split the batch in two and retry.'
         MaximumRetryAttempts:
-          allOf:
-            - $ref: '#/components/schemas/MaximumRetryAttemptsEventSourceMapping'
-            - description: '(Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
+          $ref: '#/components/schemas/MaximumRetryAttemptsEventSourceMapping'
+          description: '(Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
         TumblingWindowInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/TumblingWindowInSeconds'
-            - description: (Streams only) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
+          $ref: '#/components/schemas/TumblingWindowInSeconds'
+          description: (Streams only) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
         Topics:
-          allOf:
-            - $ref: '#/components/schemas/Topics'
-            - description: The name of the Kafka topic.
+          $ref: '#/components/schemas/Topics'
+          description: The name of the Kafka topic.
         Queues:
-          allOf:
-            - $ref: '#/components/schemas/Queues'
-            - description: ' (MQ) The name of the Amazon MQ broker destination queue to consume. '
+          $ref: '#/components/schemas/Queues'
+          description: ' (MQ) The name of the Amazon MQ broker destination queue to consume. '
         SourceAccessConfigurations:
-          allOf:
-            - $ref: '#/components/schemas/SourceAccessConfigurations'
-            - description: An array of authentication protocols or VPC components required to secure your event source.
+          $ref: '#/components/schemas/SourceAccessConfigurations'
+          description: An array of authentication protocols or VPC components required to secure your event source.
         SelfManagedEventSource:
-          allOf:
-            - $ref: '#/components/schemas/SelfManagedEventSource'
-            - description: The Self-Managed Apache Kafka cluster to send records.
+          $ref: '#/components/schemas/SelfManagedEventSource'
+          description: The Self-Managed Apache Kafka cluster to send records.
         FunctionResponseTypes:
-          allOf:
-            - $ref: '#/components/schemas/FunctionResponseTypeList'
-            - description: (Streams only) A list of current response type enums applied to the event source mapping.
+          $ref: '#/components/schemas/FunctionResponseTypeList'
+          description: (Streams only) A list of current response type enums applied to the event source mapping.
     RoleArn:
       type: string
       pattern: 'arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
@@ -6033,25 +5794,20 @@ components:
       type: object
       properties:
         ZipFile:
-          allOf:
-            - $ref: '#/components/schemas/Blob'
-            - description: The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
+          $ref: '#/components/schemas/Blob'
+          description: The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
         S3Bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3Bucket'
-            - description: An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.
+          $ref: '#/components/schemas/S3Bucket'
+          description: An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.
         S3Key:
-          allOf:
-            - $ref: '#/components/schemas/S3Key'
-            - description: The Amazon S3 key of the deployment package.
+          $ref: '#/components/schemas/S3Key'
+          description: The Amazon S3 key of the deployment package.
         S3ObjectVersion:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectVersion'
-            - description: 'For versioned objects, the version of the deployment package object to use.'
+          $ref: '#/components/schemas/S3ObjectVersion'
+          description: 'For versioned objects, the version of the deployment package object to use.'
         ImageUri:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'URI of a <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html">container image</a> in the Amazon ECR registry.'
+          $ref: '#/components/schemas/String'
+          description: 'URI of a <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html">container image</a> in the Amazon ECR registry.'
       description: 'The code for the Lambda function. You can specify either an object in Amazon S3, upload a .zip file archive deployment package directly, or specify the URI of a container image.'
     Timeout:
       type: integer
@@ -6064,13 +5820,11 @@ components:
       type: object
       properties:
         SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/SubnetIds'
-            - description: A list of VPC subnet IDs.
+          $ref: '#/components/schemas/SubnetIds'
+          description: A list of VPC subnet IDs.
         SecurityGroupIds:
-          allOf:
-            - $ref: '#/components/schemas/SecurityGroupIds'
-            - description: A list of VPC security groups IDs.
+          $ref: '#/components/schemas/SecurityGroupIds'
+          description: A list of VPC security groups IDs.
       description: 'The VPC security groups and subnets that are attached to a Lambda function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
     PackageType:
       type: string
@@ -6081,17 +5835,15 @@ components:
       type: object
       properties:
         TargetArn:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArn'
-            - description: The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
+          $ref: '#/components/schemas/ResourceArn'
+          description: The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
       description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">dead-letter queue</a> for failed asynchronous invocations.'
     Environment:
       type: object
       properties:
         Variables:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentVariables'
-            - description: 'Environment variable key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html">Using Lambda environment variables</a>.'
+          $ref: '#/components/schemas/EnvironmentVariables'
+          description: 'Environment variable key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html">Using Lambda environment variables</a>.'
       description: 'A function''s environment variable settings. You can use environment variables to adjust your function''s behavior without updating code. An environment variable is a pair of strings that are stored in a function''s version-specific configuration. '
     KMSKeyArn:
       type: string
@@ -6100,9 +5852,8 @@ components:
       type: object
       properties:
         Mode:
-          allOf:
-            - $ref: '#/components/schemas/TracingMode'
-            - description: The tracing mode.
+          $ref: '#/components/schemas/TracingMode'
+          description: The tracing mode.
       description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html">X-Ray</a> tracing configuration. To sample and record incoming requests, set <code>Mode</code> to <code>Active</code>.'
     Tags:
       type: object
@@ -6121,17 +5872,14 @@ components:
       type: object
       properties:
         EntryPoint:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: 'Specifies the entry point to their application, which is typically the location of the runtime executable.'
+          $ref: '#/components/schemas/StringList'
+          description: 'Specifies the entry point to their application, which is typically the location of the runtime executable.'
         Command:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: 'Specifies parameters that you want to pass in with ENTRYPOINT. '
+          $ref: '#/components/schemas/StringList'
+          description: 'Specifies parameters that you want to pass in with ENTRYPOINT. '
         WorkingDirectory:
-          allOf:
-            - $ref: '#/components/schemas/WorkingDirectory'
-            - description: Specifies the working directory.
+          $ref: '#/components/schemas/WorkingDirectory'
+          description: Specifies the working directory.
       description: 'Configuration values that override the container image Dockerfile settings. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms">Container settings</a>. '
     CreateFunctionRequest:
       type: object
@@ -6142,85 +5890,65 @@ components:
       title: CreateFunctionRequest
       properties:
         FunctionName:
-          allOf:
-            - $ref: '#/components/schemas/FunctionName'
-            - description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          $ref: '#/components/schemas/FunctionName'
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
         Runtime:
-          allOf:
-            - $ref: '#/components/schemas/Runtime'
-            - description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>.'
+          $ref: '#/components/schemas/Runtime'
+          description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>.'
         Role:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The Amazon Resource Name (ARN) of the function's execution role.
+          $ref: '#/components/schemas/RoleArn'
+          description: The Amazon Resource Name (ARN) of the function's execution role.
         Handler:
-          allOf:
-            - $ref: '#/components/schemas/Handler'
-            - description: 'The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html">Programming Model</a>.'
+          $ref: '#/components/schemas/Handler'
+          description: 'The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html">Programming Model</a>.'
         Code:
-          allOf:
-            - $ref: '#/components/schemas/FunctionCode'
-            - description: The code for the function.
+          $ref: '#/components/schemas/FunctionCode'
+          description: The code for the function.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the function.
+          $ref: '#/components/schemas/Description'
+          description: A description of the function.
         Timeout:
-          allOf:
-            - $ref: '#/components/schemas/Timeout'
-            - description: 'The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For additional information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html">Lambda execution environment</a>.'
+          $ref: '#/components/schemas/Timeout'
+          description: 'The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For additional information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html">Lambda execution environment</a>.'
         MemorySize:
-          allOf:
-            - $ref: '#/components/schemas/MemorySize'
-            - description: 'The amount of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html">memory available to the function</a> at runtime. Increasing the function memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.'
+          $ref: '#/components/schemas/MemorySize'
+          description: 'The amount of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html">memory available to the function</a> at runtime. Increasing the function memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.'
         Publish:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Set to true to publish the first version of the function during creation.
+          $ref: '#/components/schemas/Boolean'
+          description: Set to true to publish the first version of the function during creation.
         VpcConfig:
-          allOf:
-            - $ref: '#/components/schemas/VpcConfig'
-            - description: 'For network connectivity to Amazon Web Services resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
+          $ref: '#/components/schemas/VpcConfig'
+          description: 'For network connectivity to Amazon Web Services resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
         PackageType:
-          allOf:
-            - $ref: '#/components/schemas/PackageType'
-            - description: The type of deployment package. Set to <code>Image</code> for container image and set <code>Zip</code> for ZIP archive.
+          $ref: '#/components/schemas/PackageType'
+          description: The type of deployment package. Set to <code>Image</code> for container image and set <code>Zip</code> for ZIP archive.
         DeadLetterConfig:
-          allOf:
-            - $ref: '#/components/schemas/DeadLetterConfig'
-            - description: 'A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">Dead Letter Queues</a>.'
+          $ref: '#/components/schemas/DeadLetterConfig'
+          description: 'A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">Dead Letter Queues</a>.'
         Environment:
-          allOf:
-            - $ref: '#/components/schemas/Environment'
-            - description: Environment variables that are accessible from function code during execution.
+          $ref: '#/components/schemas/Environment'
+          description: Environment variables that are accessible from function code during execution.
         KMSKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/KMSKeyArn'
-            - description: 'The ARN of the Amazon Web Services Key Management Service (KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, Lambda uses a default service key.'
+          $ref: '#/components/schemas/KMSKeyArn'
+          description: 'The ARN of the Amazon Web Services Key Management Service (KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, Lambda uses a default service key.'
         TracingConfig:
-          allOf:
-            - $ref: '#/components/schemas/TracingConfig'
-            - description: 'Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with <a href="https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html">X-Ray</a>.'
+          $ref: '#/components/schemas/TracingConfig'
+          description: 'Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with <a href="https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html">X-Ray</a>.'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a> to apply to the function.'
+          $ref: '#/components/schemas/Tags'
+          description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a> to apply to the function.'
         Layers:
-          allOf:
-            - $ref: '#/components/schemas/LayerList'
-            - description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment. Specify each layer by its ARN, including the version.'
+          $ref: '#/components/schemas/LayerList'
+          description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment. Specify each layer by its ARN, including the version.'
         FileSystemConfigs:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemConfigList'
-            - description: Connection settings for an Amazon EFS file system.
+          $ref: '#/components/schemas/FileSystemConfigList'
+          description: Connection settings for an Amazon EFS file system.
         ImageConfig:
-          allOf:
-            - $ref: '#/components/schemas/ImageConfig'
-            - description: 'Container image <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-images.html#configuration-images-settings">configuration values</a> that override the values in the container image Dockerfile.'
+          $ref: '#/components/schemas/ImageConfig'
+          description: 'Container image <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-images.html#configuration-images-settings">configuration values</a> that override the values in the container image Dockerfile.'
         CodeSigningConfigArn:
-          allOf:
-            - $ref: '#/components/schemas/CodeSigningConfigArn'
-            - description: 'To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes a set of signing profiles, which define the trusted publishers for this function.'
+          $ref: '#/components/schemas/CodeSigningConfigArn'
+          description: 'To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes a set of signing profiles, which define the trusted publishers for this function.'
     DeleteAliasRequest:
       type: object
       title: DeleteAliasRequest
@@ -6284,25 +6012,21 @@ components:
       type: object
       properties:
         ErrorCode:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The error code.
+          $ref: '#/components/schemas/String'
+          description: The error code.
         Message:
-          allOf:
-            - $ref: '#/components/schemas/SensitiveString'
-            - description: The error message.
+          $ref: '#/components/schemas/SensitiveString'
+          description: The error message.
       description: Error messages for environment variables that couldn't be applied.
     EnvironmentResponse:
       type: object
       properties:
         Variables:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentVariables'
-            - description: Environment variable key-value pairs.
+          $ref: '#/components/schemas/EnvironmentVariables'
+          description: Environment variable key-value pairs.
         Error:
-          allOf:
-            - $ref: '#/components/schemas/EnvironmentError'
-            - description: Error messages for environment variables that couldn't be applied.
+          $ref: '#/components/schemas/EnvironmentError'
+          description: Error messages for environment variables that couldn't be applied.
       description: 'The results of an operation to update or read environment variables. If the operation is successful, the response contains the environment variables. If it failed, the response contains details about the error.'
     EnvironmentVariableName:
       type: string
@@ -6331,21 +6055,17 @@ components:
       type: object
       properties:
         RepositoryType:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The service that's hosting the file.
+          $ref: '#/components/schemas/String'
+          description: The service that's hosting the file.
         Location:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A presigned URL that you can use to download the deployment package.
+          $ref: '#/components/schemas/String'
+          description: A presigned URL that you can use to download the deployment package.
         ImageUri:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: URI of a container image in the Amazon ECR registry.
+          $ref: '#/components/schemas/String'
+          description: URI of a container image in the Amazon ECR registry.
         ResolvedImageUri:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The resolved URI for the image.
+          $ref: '#/components/schemas/String'
+          description: The resolved URI for the image.
       description: Details about a function's deployment package.
     NamespacedFunctionName:
       type: string
@@ -6359,25 +6079,21 @@ components:
       type: object
       properties:
         SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/SubnetIds'
-            - description: A list of VPC subnet IDs.
+          $ref: '#/components/schemas/SubnetIds'
+          description: A list of VPC subnet IDs.
         SecurityGroupIds:
-          allOf:
-            - $ref: '#/components/schemas/SecurityGroupIds'
-            - description: A list of VPC security groups IDs.
+          $ref: '#/components/schemas/SecurityGroupIds'
+          description: A list of VPC security groups IDs.
         VpcId:
-          allOf:
-            - $ref: '#/components/schemas/VpcId'
-            - description: The ID of the VPC.
+          $ref: '#/components/schemas/VpcId'
+          description: The ID of the VPC.
       description: The VPC security groups and subnets that are attached to a Lambda function.
     TracingConfigResponse:
       type: object
       properties:
         Mode:
-          allOf:
-            - $ref: '#/components/schemas/TracingMode'
-            - description: The tracing mode.
+          $ref: '#/components/schemas/TracingMode'
+          description: The tracing mode.
       description: The function's X-Ray tracing configuration.
     LayersReferenceList:
       type: array
@@ -6433,13 +6149,11 @@ components:
       type: object
       properties:
         ImageConfig:
-          allOf:
-            - $ref: '#/components/schemas/ImageConfig'
-            - description: Configuration values that override the container image Dockerfile.
+          $ref: '#/components/schemas/ImageConfig'
+          description: Configuration values that override the container image Dockerfile.
         Error:
-          allOf:
-            - $ref: '#/components/schemas/ImageConfigError'
-            - description: Error response to GetFunctionConfiguration.
+          $ref: '#/components/schemas/ImageConfigError'
+          description: Error response to GetFunctionConfiguration.
       description: Response to GetFunctionConfiguration request.
     MaximumRetryAttempts:
       type: integer
@@ -6513,25 +6227,20 @@ components:
       type: object
       properties:
         Location:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A link to the layer archive in Amazon S3 that is valid for 10 minutes.
+          $ref: '#/components/schemas/String'
+          description: A link to the layer archive in Amazon S3 that is valid for 10 minutes.
         CodeSha256:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The SHA-256 hash of the layer archive.
+          $ref: '#/components/schemas/String'
+          description: The SHA-256 hash of the layer archive.
         CodeSize:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The size of the layer archive in bytes.
+          $ref: '#/components/schemas/Long'
+          description: The size of the layer archive in bytes.
         SigningProfileVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) for a signing profile version.
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Name (ARN) for a signing profile version.
         SigningJobArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of a signing job.
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Name (ARN) of a signing job.
       description: 'Details about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>.'
     LayerArn:
       type: string
@@ -6567,13 +6276,11 @@ components:
       type: object
       properties:
         ErrorCode:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Error code.
+          $ref: '#/components/schemas/String'
+          description: Error code.
         Message:
-          allOf:
-            - $ref: '#/components/schemas/SensitiveString'
-            - description: Error message.
+          $ref: '#/components/schemas/SensitiveString'
+          description: Error message.
       description: Error response to GetFunctionConfiguration.
     InvocationType:
       type: string
@@ -6591,9 +6298,8 @@ components:
       title: InvocationRequest
       properties:
         Payload:
-          allOf:
-            - $ref: '#/components/schemas/Blob'
-            - description: The JSON that you want to provide to your Lambda function as input.
+          $ref: '#/components/schemas/Blob'
+          description: The JSON that you want to provide to your Lambda function as input.
     InvokeAsyncRequest:
       type: object
       required:
@@ -6602,76 +6308,61 @@ components:
       title: InvokeAsyncRequest
       properties:
         InvokeArgs:
-          allOf:
-            - $ref: '#/components/schemas/BlobStream'
-            - description: The JSON that you want to provide to your Lambda function as input.
+          $ref: '#/components/schemas/BlobStream'
+          description: The JSON that you want to provide to your Lambda function as input.
     Layer:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/LayerVersionArn'
-            - description: The Amazon Resource Name (ARN) of the function layer.
+          $ref: '#/components/schemas/LayerVersionArn'
+          description: The Amazon Resource Name (ARN) of the function layer.
         CodeSize:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The size of the layer archive in bytes.
+          $ref: '#/components/schemas/Long'
+          description: The size of the layer archive in bytes.
         SigningProfileVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) for a signing profile version.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) for a signing profile version.
         SigningJobArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of a signing job.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of a signing job.
       description: 'An <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>.'
     LayerVersionContentInput:
       type: object
       properties:
         S3Bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3Bucket'
-            - description: The Amazon S3 bucket of the layer archive.
+          $ref: '#/components/schemas/S3Bucket'
+          description: The Amazon S3 bucket of the layer archive.
         S3Key:
-          allOf:
-            - $ref: '#/components/schemas/S3Key'
-            - description: The Amazon S3 key of the layer archive.
+          $ref: '#/components/schemas/S3Key'
+          description: The Amazon S3 key of the layer archive.
         S3ObjectVersion:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectVersion'
-            - description: 'For versioned objects, the version of the layer archive object to use.'
+          $ref: '#/components/schemas/S3ObjectVersion'
+          description: 'For versioned objects, the version of the layer archive object to use.'
         ZipFile:
-          allOf:
-            - $ref: '#/components/schemas/Blob'
-            - description: The base64-encoded contents of the layer archive. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
+          $ref: '#/components/schemas/Blob'
+          description: The base64-encoded contents of the layer archive. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
       description: 'A ZIP archive that contains the contents of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>. You can specify either an Amazon S3 location, or upload a layer archive directly.'
     LayerVersionsListItem:
       type: object
       properties:
         LayerVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/LayerVersionArn'
-            - description: The ARN of the layer version.
+          $ref: '#/components/schemas/LayerVersionArn'
+          description: The ARN of the layer version.
         Version:
-          allOf:
-            - $ref: '#/components/schemas/LayerVersionNumber'
-            - description: The version number.
+          $ref: '#/components/schemas/LayerVersionNumber'
+          description: The version number.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the version.
+          $ref: '#/components/schemas/Description'
+          description: The description of the version.
         CreatedDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date that the version was created, in ISO 8601 format. For example, <code>2018-11-27T15:10:45.123+0000</code>.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date that the version was created, in ISO 8601 format. For example, <code>2018-11-27T15:10:45.123+0000</code>.'
         CompatibleRuntimes:
-          allOf:
-            - $ref: '#/components/schemas/CompatibleRuntimes'
-            - description: The layer's compatible runtimes.
+          $ref: '#/components/schemas/CompatibleRuntimes'
+          description: The layer's compatible runtimes.
         LicenseInfo:
-          allOf:
-            - $ref: '#/components/schemas/LicenseInfo'
-            - description: The layer's open-source license.
+          $ref: '#/components/schemas/LicenseInfo'
+          description: The layer's open-source license.
       description: 'Details about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>.'
     LayerVersionsList:
       type: array
@@ -6681,17 +6372,14 @@ components:
       type: object
       properties:
         LayerName:
-          allOf:
-            - $ref: '#/components/schemas/LayerName'
-            - description: The name of the layer.
+          $ref: '#/components/schemas/LayerName'
+          description: The name of the layer.
         LayerArn:
-          allOf:
-            - $ref: '#/components/schemas/LayerArn'
-            - description: The Amazon Resource Name (ARN) of the function layer.
+          $ref: '#/components/schemas/LayerArn'
+          description: The Amazon Resource Name (ARN) of the function layer.
         LatestMatchingVersion:
-          allOf:
-            - $ref: '#/components/schemas/LayerVersionsListItem'
-            - description: The newest version of the layer.
+          $ref: '#/components/schemas/LayerVersionsListItem'
+          description: The newest version of the layer.
       description: 'Details about an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>.'
     LayersList:
       type: array
@@ -6773,33 +6461,26 @@ components:
       type: object
       properties:
         FunctionArn:
-          allOf:
-            - $ref: '#/components/schemas/FunctionArn'
-            - description: The Amazon Resource Name (ARN) of the alias or version.
+          $ref: '#/components/schemas/FunctionArn'
+          description: The Amazon Resource Name (ARN) of the alias or version.
         RequestedProvisionedConcurrentExecutions:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: The amount of provisioned concurrency requested.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: The amount of provisioned concurrency requested.
         AvailableProvisionedConcurrentExecutions:
-          allOf:
-            - $ref: '#/components/schemas/NonNegativeInteger'
-            - description: The amount of provisioned concurrency available.
+          $ref: '#/components/schemas/NonNegativeInteger'
+          description: The amount of provisioned concurrency available.
         AllocatedProvisionedConcurrentExecutions:
-          allOf:
-            - $ref: '#/components/schemas/NonNegativeInteger'
-            - description: The amount of provisioned concurrency allocated.
+          $ref: '#/components/schemas/NonNegativeInteger'
+          description: The amount of provisioned concurrency allocated.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ProvisionedConcurrencyStatusEnum'
-            - description: The status of the allocation process.
+          $ref: '#/components/schemas/ProvisionedConcurrencyStatusEnum'
+          description: The status of the allocation process.
         StatusReason:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'For failed allocations, the reason that provisioned concurrency could not be allocated.'
+          $ref: '#/components/schemas/String'
+          description: 'For failed allocations, the reason that provisioned concurrency could not be allocated.'
         LastModified:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that a user last updated the configuration, in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601 format</a>.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that a user last updated the configuration, in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601 format</a>.'
       description: Details about the provisioned concurrency configuration for a function alias or version.
     PublishLayerVersionRequest:
       type: object
@@ -6808,37 +6489,30 @@ components:
       title: PublishLayerVersionRequest
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the version.
+          $ref: '#/components/schemas/Description'
+          description: The description of the version.
         Content:
-          allOf:
-            - $ref: '#/components/schemas/LayerVersionContentInput'
-            - description: The function layer archive.
+          $ref: '#/components/schemas/LayerVersionContentInput'
+          description: The function layer archive.
         CompatibleRuntimes:
-          allOf:
-            - $ref: '#/components/schemas/CompatibleRuntimes'
-            - description: 'A list of compatible <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">function runtimes</a>. Used for filtering with <a>ListLayers</a> and <a>ListLayerVersions</a>.'
+          $ref: '#/components/schemas/CompatibleRuntimes'
+          description: 'A list of compatible <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">function runtimes</a>. Used for filtering with <a>ListLayers</a> and <a>ListLayerVersions</a>.'
         LicenseInfo:
-          allOf:
-            - $ref: '#/components/schemas/LicenseInfo'
-            - description: '<p>The layer''s software license. It can be any of the following:</p> <ul> <li> <p>An <a href="https://spdx.org/licenses/">SPDX license identifier</a>. For example, <code>MIT</code>.</p> </li> <li> <p>The URL of a license hosted on the internet. For example, <code>https://opensource.org/licenses/MIT</code>.</p> </li> <li> <p>The full text of the license.</p> </li> </ul>'
+          $ref: '#/components/schemas/LicenseInfo'
+          description: '<p>The layer''s software license. It can be any of the following:</p> <ul> <li> <p>An <a href="https://spdx.org/licenses/">SPDX license identifier</a>. For example, <code>MIT</code>.</p> </li> <li> <p>The URL of a license hosted on the internet. For example, <code>https://opensource.org/licenses/MIT</code>.</p> </li> <li> <p>The full text of the license.</p> </li> </ul>'
     PublishVersionRequest:
       type: object
       title: PublishVersionRequest
       properties:
         CodeSha256:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Only publish a version if the hash value matches the value that's specified. Use this option to avoid publishing a version if the function code has changed since you last updated it. You can get the hash for the version that you uploaded from the output of <a>UpdateFunctionCode</a>.
+          $ref: '#/components/schemas/String'
+          description: Only publish a version if the hash value matches the value that's specified. Use this option to avoid publishing a version if the function code has changed since you last updated it. You can get the hash for the version that you uploaded from the output of <a>UpdateFunctionCode</a>.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description for the version to override the description in the function configuration.
+          $ref: '#/components/schemas/Description'
+          description: A description for the version to override the description in the function configuration.
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid publishing a version if the function configuration has changed since you last updated it.
+          $ref: '#/components/schemas/String'
+          description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid publishing a version if the function configuration has changed since you last updated it.
     PutFunctionCodeSigningConfigRequest:
       type: object
       required:
@@ -6846,9 +6520,8 @@ components:
       title: PutFunctionCodeSigningConfigRequest
       properties:
         CodeSigningConfigArn:
-          allOf:
-            - $ref: '#/components/schemas/CodeSigningConfigArn'
-            - description: The The Amazon Resource Name (ARN) of the code signing configuration.
+          $ref: '#/components/schemas/CodeSigningConfigArn'
+          description: The The Amazon Resource Name (ARN) of the code signing configuration.
     PutFunctionConcurrencyRequest:
       type: object
       required:
@@ -6856,25 +6529,21 @@ components:
       title: PutFunctionConcurrencyRequest
       properties:
         ReservedConcurrentExecutions:
-          allOf:
-            - $ref: '#/components/schemas/ReservedConcurrentExecutions'
-            - description: The number of simultaneous executions to reserve for the function.
+          $ref: '#/components/schemas/ReservedConcurrentExecutions'
+          description: The number of simultaneous executions to reserve for the function.
     PutFunctionEventInvokeConfigRequest:
       type: object
       title: PutFunctionEventInvokeConfigRequest
       properties:
         MaximumRetryAttempts:
-          allOf:
-            - $ref: '#/components/schemas/MaximumRetryAttempts'
-            - description: The maximum number of times to retry when the function returns an error.
+          $ref: '#/components/schemas/MaximumRetryAttempts'
+          description: The maximum number of times to retry when the function returns an error.
         MaximumEventAgeInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/MaximumEventAgeInSeconds'
-            - description: The maximum age of a request that Lambda sends to a function for processing.
+          $ref: '#/components/schemas/MaximumEventAgeInSeconds'
+          description: The maximum age of a request that Lambda sends to a function for processing.
         DestinationConfig:
-          allOf:
-            - $ref: '#/components/schemas/DestinationConfig'
-            - description: <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of an SQS queue.</p> </li> <li> <p> <b>Topic</b> - The ARN of an SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul>
+          $ref: '#/components/schemas/DestinationConfig'
+          description: <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of an SQS queue.</p> </li> <li> <p> <b>Topic</b> - The ARN of an SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul>
     PutProvisionedConcurrencyConfigRequest:
       type: object
       required:
@@ -6882,9 +6551,8 @@ components:
       title: PutProvisionedConcurrencyConfigRequest
       properties:
         ProvisionedConcurrentExecutions:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: The amount of provisioned concurrency to allocate for the version or alias.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: The amount of provisioned concurrency to allocate for the version or alias.
     RemoveLayerVersionPermissionRequest:
       type: object
       title: RemoveLayerVersionPermissionRequest
@@ -6922,9 +6590,8 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: A list of tags to apply to the function.
+          $ref: '#/components/schemas/Tags'
+          description: A list of tags to apply to the function.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -6934,205 +6601,160 @@ components:
       title: UpdateAliasRequest
       properties:
         FunctionVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The function version that the alias invokes.
+          $ref: '#/components/schemas/Version'
+          description: The function version that the alias invokes.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the alias.
+          $ref: '#/components/schemas/Description'
+          description: A description of the alias.
         RoutingConfig:
-          allOf:
-            - $ref: '#/components/schemas/AliasRoutingConfiguration'
-            - description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing">routing configuration</a> of the alias.'
+          $ref: '#/components/schemas/AliasRoutingConfiguration'
+          description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing">routing configuration</a> of the alias.'
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Only update the alias if the revision ID matches the ID that's specified. Use this option to avoid modifying an alias that has changed since you last read it.
+          $ref: '#/components/schemas/String'
+          description: Only update the alias if the revision ID matches the ID that's specified. Use this option to avoid modifying an alias that has changed since you last read it.
     UpdateCodeSigningConfigRequest:
       type: object
       title: UpdateCodeSigningConfigRequest
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: Descriptive name for this code signing configuration.
+          $ref: '#/components/schemas/Description'
+          description: Descriptive name for this code signing configuration.
         AllowedPublishers:
-          allOf:
-            - $ref: '#/components/schemas/AllowedPublishers'
-            - description: Signing profiles for this code signing configuration.
+          $ref: '#/components/schemas/AllowedPublishers'
+          description: Signing profiles for this code signing configuration.
         CodeSigningPolicies:
-          allOf:
-            - $ref: '#/components/schemas/CodeSigningPolicies'
-            - description: The code signing policy.
+          $ref: '#/components/schemas/CodeSigningPolicies'
+          description: The code signing policy.
     UpdateEventSourceMappingRequest:
       type: object
       title: UpdateEventSourceMappingRequest
       properties:
         FunctionName:
-          allOf:
-            - $ref: '#/components/schemas/FunctionName'
-            - description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it''s limited to 64 characters in length.</p>'
+          $ref: '#/components/schemas/FunctionName'
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it''s limited to 64 characters in length.</p>'
         Enabled:
-          allOf:
-            - $ref: '#/components/schemas/Enabled'
-            - description: 'If true, the event source mapping is active. Set to false to pause polling and invocation.'
+          $ref: '#/components/schemas/Enabled'
+          description: 'If true, the event source mapping is active. Set to false to pause polling and invocation.'
         BatchSize:
-          allOf:
-            - $ref: '#/components/schemas/BatchSize'
-            - description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Self-Managed Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>'
+          $ref: '#/components/schemas/BatchSize'
+          description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Self-Managed Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>'
         MaximumBatchingWindowInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/MaximumBatchingWindowInSeconds'
-            - description: '(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds.'
+          $ref: '#/components/schemas/MaximumBatchingWindowInSeconds'
+          description: '(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds.'
         DestinationConfig:
-          allOf:
-            - $ref: '#/components/schemas/DestinationConfig'
-            - description: (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
+          $ref: '#/components/schemas/DestinationConfig'
+          description: (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
         MaximumRecordAgeInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/MaximumRecordAgeInSeconds'
-            - description: (Streams only) Discard records older than the specified age. The default value is infinite (-1).
+          $ref: '#/components/schemas/MaximumRecordAgeInSeconds'
+          description: (Streams only) Discard records older than the specified age. The default value is infinite (-1).
         BisectBatchOnFunctionError:
-          allOf:
-            - $ref: '#/components/schemas/BisectBatchOnFunctionError'
-            - description: '(Streams only) If the function returns an error, split the batch in two and retry.'
+          $ref: '#/components/schemas/BisectBatchOnFunctionError'
+          description: '(Streams only) If the function returns an error, split the batch in two and retry.'
         MaximumRetryAttempts:
-          allOf:
-            - $ref: '#/components/schemas/MaximumRetryAttemptsEventSourceMapping'
-            - description: '(Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
+          $ref: '#/components/schemas/MaximumRetryAttemptsEventSourceMapping'
+          description: '(Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
         ParallelizationFactor:
-          allOf:
-            - $ref: '#/components/schemas/ParallelizationFactor'
-            - description: (Streams only) The number of batches to process from each shard concurrently.
+          $ref: '#/components/schemas/ParallelizationFactor'
+          description: (Streams only) The number of batches to process from each shard concurrently.
         SourceAccessConfigurations:
-          allOf:
-            - $ref: '#/components/schemas/SourceAccessConfigurations'
-            - description: An array of authentication protocols or VPC components required to secure your event source.
+          $ref: '#/components/schemas/SourceAccessConfigurations'
+          description: An array of authentication protocols or VPC components required to secure your event source.
         TumblingWindowInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/TumblingWindowInSeconds'
-            - description: (Streams only) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
+          $ref: '#/components/schemas/TumblingWindowInSeconds'
+          description: (Streams only) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
         FunctionResponseTypes:
-          allOf:
-            - $ref: '#/components/schemas/FunctionResponseTypeList'
-            - description: (Streams only) A list of current response type enums applied to the event source mapping.
+          $ref: '#/components/schemas/FunctionResponseTypeList'
+          description: (Streams only) A list of current response type enums applied to the event source mapping.
     UpdateFunctionCodeRequest:
       type: object
       title: UpdateFunctionCodeRequest
       properties:
         ZipFile:
-          allOf:
-            - $ref: '#/components/schemas/Blob'
-            - description: The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
+          $ref: '#/components/schemas/Blob'
+          description: The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
         S3Bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3Bucket'
-            - description: An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.
+          $ref: '#/components/schemas/S3Bucket'
+          description: An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.
         S3Key:
-          allOf:
-            - $ref: '#/components/schemas/S3Key'
-            - description: The Amazon S3 key of the deployment package.
+          $ref: '#/components/schemas/S3Key'
+          description: The Amazon S3 key of the deployment package.
         S3ObjectVersion:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectVersion'
-            - description: 'For versioned objects, the version of the deployment package object to use.'
+          $ref: '#/components/schemas/S3ObjectVersion'
+          description: 'For versioned objects, the version of the deployment package object to use.'
         ImageUri:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: URI of a container image in the Amazon ECR registry.
+          $ref: '#/components/schemas/String'
+          description: URI of a container image in the Amazon ECR registry.
         Publish:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Set to true to publish a new version of the function after updating the code. This has the same effect as calling <a>PublishVersion</a> separately.
+          $ref: '#/components/schemas/Boolean'
+          description: Set to true to publish a new version of the function after updating the code. This has the same effect as calling <a>PublishVersion</a> separately.
         DryRun:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Set to true to validate the request parameters and access permissions without modifying the function code.
+          $ref: '#/components/schemas/Boolean'
+          description: Set to true to validate the request parameters and access permissions without modifying the function code.
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid modifying a function that has changed since you last read it.
+          $ref: '#/components/schemas/String'
+          description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid modifying a function that has changed since you last read it.
     UpdateFunctionConfigurationRequest:
       type: object
       title: UpdateFunctionConfigurationRequest
       properties:
         Role:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The Amazon Resource Name (ARN) of the function's execution role.
+          $ref: '#/components/schemas/RoleArn'
+          description: The Amazon Resource Name (ARN) of the function's execution role.
         Handler:
-          allOf:
-            - $ref: '#/components/schemas/Handler'
-            - description: 'The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html">Programming Model</a>.'
+          $ref: '#/components/schemas/Handler'
+          description: 'The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html">Programming Model</a>.'
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the function.
+          $ref: '#/components/schemas/Description'
+          description: A description of the function.
         Timeout:
-          allOf:
-            - $ref: '#/components/schemas/Timeout'
-            - description: 'The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For additional information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html">Lambda execution environment</a>.'
+          $ref: '#/components/schemas/Timeout'
+          description: 'The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For additional information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html">Lambda execution environment</a>.'
         MemorySize:
-          allOf:
-            - $ref: '#/components/schemas/MemorySize'
-            - description: 'The amount of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html">memory available to the function</a> at runtime. Increasing the function memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.'
+          $ref: '#/components/schemas/MemorySize'
+          description: 'The amount of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html">memory available to the function</a> at runtime. Increasing the function memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.'
         VpcConfig:
-          allOf:
-            - $ref: '#/components/schemas/VpcConfig'
-            - description: 'For network connectivity to Amazon Web Services resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
+          $ref: '#/components/schemas/VpcConfig'
+          description: 'For network connectivity to Amazon Web Services resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
         Environment:
-          allOf:
-            - $ref: '#/components/schemas/Environment'
-            - description: Environment variables that are accessible from function code during execution.
+          $ref: '#/components/schemas/Environment'
+          description: Environment variables that are accessible from function code during execution.
         Runtime:
-          allOf:
-            - $ref: '#/components/schemas/Runtime'
-            - description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>.'
+          $ref: '#/components/schemas/Runtime'
+          description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>.'
         DeadLetterConfig:
-          allOf:
-            - $ref: '#/components/schemas/DeadLetterConfig'
-            - description: 'A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">Dead Letter Queues</a>.'
+          $ref: '#/components/schemas/DeadLetterConfig'
+          description: 'A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">Dead Letter Queues</a>.'
         KMSKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/KMSKeyArn'
-            - description: 'The ARN of the Amazon Web Services Key Management Service (KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, Lambda uses a default service key.'
+          $ref: '#/components/schemas/KMSKeyArn'
+          description: 'The ARN of the Amazon Web Services Key Management Service (KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, Lambda uses a default service key.'
         TracingConfig:
-          allOf:
-            - $ref: '#/components/schemas/TracingConfig'
-            - description: 'Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with <a href="https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html">X-Ray</a>.'
+          $ref: '#/components/schemas/TracingConfig'
+          description: 'Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with <a href="https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html">X-Ray</a>.'
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid modifying a function that has changed since you last read it.
+          $ref: '#/components/schemas/String'
+          description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid modifying a function that has changed since you last read it.
         Layers:
-          allOf:
-            - $ref: '#/components/schemas/LayerList'
-            - description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment. Specify each layer by its ARN, including the version.'
+          $ref: '#/components/schemas/LayerList'
+          description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment. Specify each layer by its ARN, including the version.'
         FileSystemConfigs:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemConfigList'
-            - description: Connection settings for an Amazon EFS file system.
+          $ref: '#/components/schemas/FileSystemConfigList'
+          description: Connection settings for an Amazon EFS file system.
         ImageConfig:
-          allOf:
-            - $ref: '#/components/schemas/ImageConfig'
-            - description: ' <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html">Container image configuration values</a> that override the values in the container image Dockerfile.'
+          $ref: '#/components/schemas/ImageConfig'
+          description: ' <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html">Container image configuration values</a> that override the values in the container image Dockerfile.'
     UpdateFunctionEventInvokeConfigRequest:
       type: object
       title: UpdateFunctionEventInvokeConfigRequest
       properties:
         MaximumRetryAttempts:
-          allOf:
-            - $ref: '#/components/schemas/MaximumRetryAttempts'
-            - description: The maximum number of times to retry when the function returns an error.
+          $ref: '#/components/schemas/MaximumRetryAttempts'
+          description: The maximum number of times to retry when the function returns an error.
         MaximumEventAgeInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/MaximumEventAgeInSeconds'
-            - description: The maximum age of a request that Lambda sends to a function for processing.
+          $ref: '#/components/schemas/MaximumEventAgeInSeconds'
+          description: The maximum age of a request that Lambda sends to a function for processing.
         DestinationConfig:
-          allOf:
-            - $ref: '#/components/schemas/DestinationConfig'
-            - description: <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of an SQS queue.</p> </li> <li> <p> <b>Topic</b> - The ARN of an SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul>
+          $ref: '#/components/schemas/DestinationConfig'
+          description: <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of an SQS queue.</p> </li> <li> <p> <b>Topic</b> - The ARN of an SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul>
     VpcId:
       type: string
 security:

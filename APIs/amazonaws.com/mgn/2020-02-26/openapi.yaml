@@ -166,9 +166,8 @@ paths:
                   type: object
                   properties:
                     state:
-                      allOf:
-                        - $ref: '#/components/schemas/ChangeServerLifeCycleStateSourceServerLifecycleState'
-                        - description: The request to change the source server migration lifecycle state.
+                      $ref: '#/components/schemas/ChangeServerLifeCycleStateSourceServerLifecycleState'
+                      description: The request to change the source server migration lifecycle state.
                 sourceServerID:
                   description: The request to change the source server migration lifecycle state by source server ID.
                   type: string
@@ -581,17 +580,14 @@ paths:
                   type: object
                   properties:
                     fromDate:
-                      allOf:
-                        - $ref: '#/components/schemas/ISO8601DatetimeString'
-                        - description: Request to describe Job log filters by date.
+                      $ref: '#/components/schemas/ISO8601DatetimeString'
+                      description: Request to describe Job log filters by date.
                     jobIDs:
-                      allOf:
-                        - $ref: '#/components/schemas/DescribeJobsRequestFiltersJobIDs'
-                        - description: Request to describe Job log filters by job ID.
+                      $ref: '#/components/schemas/DescribeJobsRequestFiltersJobIDs'
+                      description: Request to describe Job log filters by job ID.
                     toDate:
-                      allOf:
-                        - $ref: '#/components/schemas/ISO8601DatetimeString'
-                        - description: Request to describe Job log by last date.
+                      $ref: '#/components/schemas/ISO8601DatetimeString'
+                      description: Request to describe Job log by last date.
                 maxResults:
                   description: Request to describe Job log by max results.
                   type: integer
@@ -734,13 +730,11 @@ paths:
                   type: object
                   properties:
                     isArchived:
-                      allOf:
-                        - $ref: '#/components/schemas/Boolean'
-                        - description: Request to filter Source Servers list by archived.
+                      $ref: '#/components/schemas/Boolean'
+                      description: Request to filter Source Servers list by archived.
                     sourceServerIDs:
-                      allOf:
-                        - $ref: '#/components/schemas/DescribeSourceServersRequestFiltersIDs'
-                        - description: Request to filter Source Servers list by Source Server ID.
+                      $ref: '#/components/schemas/DescribeSourceServersRequestFiltersIDs'
+                      description: Request to filter Source Servers list by Source Server ID.
                 maxResults:
                   description: Request to filter Source Servers list by maximum results.
                   type: integer
@@ -1520,9 +1514,8 @@ paths:
                   type: object
                   properties:
                     osByol:
-                      allOf:
-                        - $ref: '#/components/schemas/Boolean'
-                        - description: Configure BYOL OS licensing.
+                      $ref: '#/components/schemas/Boolean'
+                      description: Configure BYOL OS licensing.
                 name:
                   description: Update Launch configuration name request.
                   type: string
@@ -1863,37 +1856,29 @@ components:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: Source server ARN.
+          $ref: '#/components/schemas/ARN'
+          description: Source server ARN.
         dataReplicationInfo:
-          allOf:
-            - $ref: '#/components/schemas/DataReplicationInfo'
-            - description: Source server data replication info.
+          $ref: '#/components/schemas/DataReplicationInfo'
+          description: Source server data replication info.
         isArchived:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Source server archived status.
+          $ref: '#/components/schemas/Boolean'
+          description: Source server archived status.
         launchedInstance:
-          allOf:
-            - $ref: '#/components/schemas/LaunchedInstance'
-            - description: Source server launched instance.
+          $ref: '#/components/schemas/LaunchedInstance'
+          description: Source server launched instance.
         lifeCycle:
-          allOf:
-            - $ref: '#/components/schemas/LifeCycle'
-            - description: Source server lifecycle state.
+          $ref: '#/components/schemas/LifeCycle'
+          description: Source server lifecycle state.
         sourceProperties:
-          allOf:
-            - $ref: '#/components/schemas/SourceProperties'
-            - description: Source server properties.
+          $ref: '#/components/schemas/SourceProperties'
+          description: Source server properties.
         sourceServerID:
-          allOf:
-            - $ref: '#/components/schemas/SourceServerID'
-            - description: Source server ID.
+          $ref: '#/components/schemas/SourceServerID'
+          description: Source server ID.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Source server Tags.
+          $ref: '#/components/schemas/TagsMap'
+          description: Source server Tags.
     ChangeServerLifeCycleStateSourceServerLifecycleState:
       type: string
       enum:
@@ -1910,65 +1895,50 @@ components:
         - replicationConfigurationTemplateID
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: Replication Configuration template ARN.
+          $ref: '#/components/schemas/ARN'
+          description: Replication Configuration template ARN.
         associateDefaultSecurityGroup:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Replication Configuration template associate default Application Migration Service Security group.
+          $ref: '#/components/schemas/Boolean'
+          description: Replication Configuration template associate default Application Migration Service Security group.
         bandwidthThrottling:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: Replication Configuration template bandwidth throtting.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: Replication Configuration template bandwidth throtting.
         createPublicIP:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Replication Configuration template create Public IP.
+          $ref: '#/components/schemas/Boolean'
+          description: Replication Configuration template create Public IP.
         dataPlaneRouting:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationDataPlaneRouting'
-            - description: Replication Configuration template data plane routing.
+          $ref: '#/components/schemas/ReplicationConfigurationDataPlaneRouting'
+          description: Replication Configuration template data plane routing.
         defaultLargeStagingDiskType:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationDefaultLargeStagingDiskType'
-            - description: Replication Configuration template use dedault large Staging Disk type.
+          $ref: '#/components/schemas/ReplicationConfigurationDefaultLargeStagingDiskType'
+          description: Replication Configuration template use dedault large Staging Disk type.
         ebsEncryption:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationEbsEncryption'
-            - description: Replication Configuration template EBS encryption.
+          $ref: '#/components/schemas/ReplicationConfigurationEbsEncryption'
+          description: Replication Configuration template EBS encryption.
         ebsEncryptionKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: Replication Configuration template EBS encryption key ARN.
+          $ref: '#/components/schemas/ARN'
+          description: Replication Configuration template EBS encryption key ARN.
         replicationConfigurationTemplateID:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationTemplateID'
-            - description: Replication Configuration template template ID.
+          $ref: '#/components/schemas/ReplicationConfigurationTemplateID'
+          description: Replication Configuration template template ID.
         replicationServerInstanceType:
-          allOf:
-            - $ref: '#/components/schemas/EC2InstanceType'
-            - description: Replication Configuration template server instance type.
+          $ref: '#/components/schemas/EC2InstanceType'
+          description: Replication Configuration template server instance type.
         replicationServersSecurityGroupsIDs:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationServersSecurityGroupsIDs'
-            - description: Replication Configuration template server Security Groups IDs.
+          $ref: '#/components/schemas/ReplicationServersSecurityGroupsIDs'
+          description: Replication Configuration template server Security Groups IDs.
         stagingAreaSubnetId:
-          allOf:
-            - $ref: '#/components/schemas/SubnetID'
-            - description: Replication Configuration template Staging Area subnet ID.
+          $ref: '#/components/schemas/SubnetID'
+          description: Replication Configuration template Staging Area subnet ID.
         stagingAreaTags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Replication Configuration template Staging Area Tags.
+          $ref: '#/components/schemas/TagsMap'
+          description: Replication Configuration template Staging Area Tags.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Replication Configuration template Tags.
+          $ref: '#/components/schemas/TagsMap'
+          description: Replication Configuration template Tags.
         useDedicatedReplicationServer:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Replication Configuration template use Dedicated Replication Server.
+          $ref: '#/components/schemas/Boolean'
+          description: Replication Configuration template use Dedicated Replication Server.
     SecurityGroupID:
       type: string
       pattern: '^sg-[0-9a-fA-F]{8,}$'
@@ -1992,24 +1962,20 @@ components:
       type: object
       properties:
         items:
-          allOf:
-            - $ref: '#/components/schemas/JobLogs'
-            - description: Request to describe Job log response items.
+          $ref: '#/components/schemas/JobLogs'
+          description: Request to describe Job log response items.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: Request to describe Job log response next token.
+          $ref: '#/components/schemas/PaginationToken'
+          description: Request to describe Job log response next token.
     DescribeJobsResponse:
       type: object
       properties:
         items:
-          allOf:
-            - $ref: '#/components/schemas/JobsList'
-            - description: Request to describe Job log items.
+          $ref: '#/components/schemas/JobsList'
+          description: Request to describe Job log items.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: Request to describe Job response by next token.
+          $ref: '#/components/schemas/PaginationToken'
+          description: Request to describe Job response by next token.
     ISO8601DatetimeString:
       type: string
       pattern: '^[1-9][0-9]*-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T([0-1][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?Z$'
@@ -2025,13 +1991,11 @@ components:
       type: object
       properties:
         items:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationTemplates'
-            - description: Request to describe Replication Configuration template by items.
+          $ref: '#/components/schemas/ReplicationConfigurationTemplates'
+          description: Request to describe Replication Configuration template by items.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: Request to describe Replication Configuration template by next token.
+          $ref: '#/components/schemas/PaginationToken'
+          description: Request to describe Replication Configuration template by next token.
     ReplicationConfigurationTemplateID:
       type: string
       pattern: '^rct-[0-9a-zA-Z]{17}$'
@@ -2041,13 +2005,11 @@ components:
       type: object
       properties:
         items:
-          allOf:
-            - $ref: '#/components/schemas/SourceServersList'
-            - description: Request to filter Source Servers list by item.
+          $ref: '#/components/schemas/SourceServersList'
+          description: Request to filter Source Servers list by item.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: Request to filter Source Servers next token.
+          $ref: '#/components/schemas/PaginationToken'
+          description: Request to filter Source Servers next token.
     Boolean:
       type: boolean
     DescribeSourceServersRequestFiltersIDs:
@@ -2060,100 +2022,77 @@ components:
       type: object
       properties:
         copyPrivateIp:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Copy Private IP during Launch Configuration.
+          $ref: '#/components/schemas/Boolean'
+          description: Copy Private IP during Launch Configuration.
         copyTags:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Copy Tags during Launch Configuration.
+          $ref: '#/components/schemas/Boolean'
+          description: Copy Tags during Launch Configuration.
         ec2LaunchTemplateID:
-          allOf:
-            - $ref: '#/components/schemas/BoundedString'
-            - description: Configure EC2 lauch configuration template ID.
+          $ref: '#/components/schemas/BoundedString'
+          description: Configure EC2 lauch configuration template ID.
         launchDisposition:
-          allOf:
-            - $ref: '#/components/schemas/LaunchDisposition'
-            - description: Configure launch dispostion for launch configuration.
+          $ref: '#/components/schemas/LaunchDisposition'
+          description: Configure launch dispostion for launch configuration.
         licensing:
-          allOf:
-            - $ref: '#/components/schemas/Licensing'
-            - description: Configure launch configuration OS licensing.
+          $ref: '#/components/schemas/Licensing'
+          description: Configure launch configuration OS licensing.
         name:
-          allOf:
-            - $ref: '#/components/schemas/SmallBoundedString'
-            - description: Configure launch configuration name.
+          $ref: '#/components/schemas/SmallBoundedString'
+          description: Configure launch configuration name.
         sourceServerID:
-          allOf:
-            - $ref: '#/components/schemas/SourceServerID'
-            - description: Configure launch configuration Source Server ID.
+          $ref: '#/components/schemas/SourceServerID'
+          description: Configure launch configuration Source Server ID.
         targetInstanceTypeRightSizingMethod:
-          allOf:
-            - $ref: '#/components/schemas/TargetInstanceTypeRightSizingMethod'
-            - description: Configure launch configuration Target instance type right sizing method.
+          $ref: '#/components/schemas/TargetInstanceTypeRightSizingMethod'
+          description: Configure launch configuration Target instance type right sizing method.
     ReplicationConfiguration:
       type: object
       properties:
         associateDefaultSecurityGroup:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Replication Configuration associate default Application Migration Service Security Group.
+          $ref: '#/components/schemas/Boolean'
+          description: Replication Configuration associate default Application Migration Service Security Group.
         bandwidthThrottling:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: Replication Configuration set bandwidth throttling.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: Replication Configuration set bandwidth throttling.
         createPublicIP:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Replication Configuration create Public IP.
+          $ref: '#/components/schemas/Boolean'
+          description: Replication Configuration create Public IP.
         dataPlaneRouting:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationDataPlaneRouting'
-            - description: Replication Configuration data plane routing.
+          $ref: '#/components/schemas/ReplicationConfigurationDataPlaneRouting'
+          description: Replication Configuration data plane routing.
         defaultLargeStagingDiskType:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationDefaultLargeStagingDiskType'
-            - description: Replication Configuration use default large Staging Disks.
+          $ref: '#/components/schemas/ReplicationConfigurationDefaultLargeStagingDiskType'
+          description: Replication Configuration use default large Staging Disks.
         ebsEncryption:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationEbsEncryption'
-            - description: Replication Configuration EBS encryption.
+          $ref: '#/components/schemas/ReplicationConfigurationEbsEncryption'
+          description: Replication Configuration EBS encryption.
         ebsEncryptionKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: Replication Configuration EBS encryption key ARN.
+          $ref: '#/components/schemas/ARN'
+          description: Replication Configuration EBS encryption key ARN.
         name:
-          allOf:
-            - $ref: '#/components/schemas/SmallBoundedString'
-            - description: Replication Configuration name.
+          $ref: '#/components/schemas/SmallBoundedString'
+          description: Replication Configuration name.
         replicatedDisks:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationReplicatedDisks'
-            - description: Replication Configuration replicated disks.
+          $ref: '#/components/schemas/ReplicationConfigurationReplicatedDisks'
+          description: Replication Configuration replicated disks.
         replicationServerInstanceType:
-          allOf:
-            - $ref: '#/components/schemas/EC2InstanceType'
-            - description: Replication Configuration Replication Server instance type.
+          $ref: '#/components/schemas/EC2InstanceType'
+          description: Replication Configuration Replication Server instance type.
         replicationServersSecurityGroupsIDs:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationServersSecurityGroupsIDs'
-            - description: Replication Configuration Replication Server Security Group IDs.
+          $ref: '#/components/schemas/ReplicationServersSecurityGroupsIDs'
+          description: Replication Configuration Replication Server Security Group IDs.
         sourceServerID:
-          allOf:
-            - $ref: '#/components/schemas/SourceServerID'
-            - description: Replication Configuration Source Server ID.
+          $ref: '#/components/schemas/SourceServerID'
+          description: Replication Configuration Source Server ID.
         stagingAreaSubnetId:
-          allOf:
-            - $ref: '#/components/schemas/SubnetID'
-            - description: Replication Configuration Staging Area subnet ID.
+          $ref: '#/components/schemas/SubnetID'
+          description: Replication Configuration Staging Area subnet ID.
         stagingAreaTags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Replication Configuration Staging Area tags.
+          $ref: '#/components/schemas/TagsMap'
+          description: Replication Configuration Staging Area tags.
         useDedicatedReplicationServer:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Replication Configuration use Dedicated Replication Server.
+          $ref: '#/components/schemas/Boolean'
+          description: Replication Configuration use Dedicated Replication Server.
     InitializeServiceResponse:
       type: object
       properties: {}
@@ -2161,18 +2100,16 @@ components:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: List tags for resource response.
+          $ref: '#/components/schemas/TagsMap'
+          description: List tags for resource response.
     ThrottlingException: {}
     InternalServerException: {}
     StartCutoverResponse:
       type: object
       properties:
         job:
-          allOf:
-            - $ref: '#/components/schemas/Job'
-            - description: Start Cutover Job response.
+          $ref: '#/components/schemas/Job'
+          description: Start Cutover Job response.
     SourceServerID:
       type: string
       pattern: '^s-[0-9a-zA-Z]{17}$'
@@ -2182,16 +2119,14 @@ components:
       type: object
       properties:
         job:
-          allOf:
-            - $ref: '#/components/schemas/Job'
-            - description: Start Test Job response.
+          $ref: '#/components/schemas/Job'
+          description: Start Test Job response.
     TerminateTargetInstancesResponse:
       type: object
       properties:
         job:
-          allOf:
-            - $ref: '#/components/schemas/Job'
-            - description: Terminate Target instance Job response.
+          $ref: '#/components/schemas/Job'
+          description: Terminate Target instance Job response.
     TagKey:
       type: string
       minLength: 0
@@ -2200,21 +2135,17 @@ components:
       type: object
       properties:
         deviceName:
-          allOf:
-            - $ref: '#/components/schemas/BoundedString'
-            - description: Replication Configuration replicated disk device name.
+          $ref: '#/components/schemas/BoundedString'
+          description: Replication Configuration replicated disk device name.
         iops:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: Replication Configuration replicated disk IOPs.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: Replication Configuration replicated disk IOPs.
         isBootDisk:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Replication Configuration replicated disk boot disk.
+          $ref: '#/components/schemas/Boolean'
+          description: Replication Configuration replicated disk boot disk.
         stagingDiskType:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationReplicatedDiskStagingDiskType'
-            - description: Replication Configuration replicated disk staging disk type.
+          $ref: '#/components/schemas/ReplicationConfigurationReplicatedDiskStagingDiskType'
+          description: Replication Configuration replicated disk staging disk type.
       description: Replication Configuration replicated disk.
     ARN:
       type: string
@@ -2231,13 +2162,11 @@ components:
       type: object
       properties:
         cores:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: The number of CPU cores on the source server.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: The number of CPU cores on the source server.
         modelName:
-          allOf:
-            - $ref: '#/components/schemas/BoundedString'
-            - description: The source server's CPU model name.
+          $ref: '#/components/schemas/BoundedString'
+          description: The source server's CPU model name.
       description: Source server CPU information.
     ChangeServerLifeCycleStateSourceServerLifecycle:
       type: object
@@ -2245,9 +2174,8 @@ components:
         - state
       properties:
         state:
-          allOf:
-            - $ref: '#/components/schemas/ChangeServerLifeCycleStateSourceServerLifecycleState'
-            - description: The request to change the source server migration lifecycle state.
+          $ref: '#/components/schemas/ChangeServerLifeCycleStateSourceServerLifecycleState'
+          description: The request to change the source server migration lifecycle state.
       description: The request to change the source server migration lifecycle state.
     ChangeServerLifeCycleStateRequest:
       type: object
@@ -2257,13 +2185,11 @@ components:
       title: ChangeServerLifeCycleStateRequest
       properties:
         lifeCycle:
-          allOf:
-            - $ref: '#/components/schemas/ChangeServerLifeCycleStateSourceServerLifecycle'
-            - description: The request to change the source server migration lifecycle state.
+          $ref: '#/components/schemas/ChangeServerLifeCycleStateSourceServerLifecycle'
+          description: The request to change the source server migration lifecycle state.
         sourceServerID:
-          allOf:
-            - $ref: '#/components/schemas/SourceServerID'
-            - description: The request to change the source server migration lifecycle state by source server ID.
+          $ref: '#/components/schemas/SourceServerID'
+          description: The request to change the source server migration lifecycle state by source server ID.
     Cpus:
       type: array
       items:
@@ -2321,57 +2247,44 @@ components:
       title: CreateReplicationConfigurationTemplateRequest
       properties:
         associateDefaultSecurityGroup:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Request to associate the default Application Migration Service Security group with the Replication Settings template.
+          $ref: '#/components/schemas/Boolean'
+          description: Request to associate the default Application Migration Service Security group with the Replication Settings template.
         bandwidthThrottling:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: Request to configure bandwidth throttling during Replication Settings template creation.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: Request to configure bandwidth throttling during Replication Settings template creation.
         createPublicIP:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Request to create Public IP during Replication Settings template creation.
+          $ref: '#/components/schemas/Boolean'
+          description: Request to create Public IP during Replication Settings template creation.
         dataPlaneRouting:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationDataPlaneRouting'
-            - description: Request to configure data plane routing during Replication Settings template creation.
+          $ref: '#/components/schemas/ReplicationConfigurationDataPlaneRouting'
+          description: Request to configure data plane routing during Replication Settings template creation.
         defaultLargeStagingDiskType:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationDefaultLargeStagingDiskType'
-            - description: Request to configure the Staging Disk EBS volume type to "gp2" during Replication Settings template creation.
+          $ref: '#/components/schemas/ReplicationConfigurationDefaultLargeStagingDiskType'
+          description: Request to configure the Staging Disk EBS volume type to "gp2" during Replication Settings template creation.
         ebsEncryption:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationEbsEncryption'
-            - description: Request to configure EBS enryption during Replication Settings template creation.
+          $ref: '#/components/schemas/ReplicationConfigurationEbsEncryption'
+          description: Request to configure EBS enryption during Replication Settings template creation.
         ebsEncryptionKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: Request to configure an EBS enryption key during Replication Settings template creation.
+          $ref: '#/components/schemas/ARN'
+          description: Request to configure an EBS enryption key during Replication Settings template creation.
         replicationServerInstanceType:
-          allOf:
-            - $ref: '#/components/schemas/EC2InstanceType'
-            - description: Request to configure the Replication Server instance type during Replication Settings template creation.
+          $ref: '#/components/schemas/EC2InstanceType'
+          description: Request to configure the Replication Server instance type during Replication Settings template creation.
         replicationServersSecurityGroupsIDs:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationServersSecurityGroupsIDs'
-            - description: Request to configure the Replication Server Secuirity group ID during Replication Settings template creation.
+          $ref: '#/components/schemas/ReplicationServersSecurityGroupsIDs'
+          description: Request to configure the Replication Server Secuirity group ID during Replication Settings template creation.
         stagingAreaSubnetId:
-          allOf:
-            - $ref: '#/components/schemas/SubnetID'
-            - description: Request to configure the Staging Area subnet ID during Replication Settings template creation.
+          $ref: '#/components/schemas/SubnetID'
+          description: Request to configure the Staging Area subnet ID during Replication Settings template creation.
         stagingAreaTags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Request to configure Staiging Area tags during Replication Settings template creation.
+          $ref: '#/components/schemas/TagsMap'
+          description: Request to configure Staiging Area tags during Replication Settings template creation.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Request to configure tags during Replication Settings template creation.
+          $ref: '#/components/schemas/TagsMap'
+          description: Request to configure tags during Replication Settings template creation.
         useDedicatedReplicationServer:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Request to use Dedicated Replication Servers during Replication Settings template creation.
+          $ref: '#/components/schemas/Boolean'
+          description: Request to use Dedicated Replication Servers during Replication Settings template creation.
     DataReplicationErrorString:
       type: string
       enum:
@@ -2397,29 +2310,24 @@ components:
       type: object
       properties:
         error:
-          allOf:
-            - $ref: '#/components/schemas/DataReplicationErrorString'
-            - description: Error in data replication.
+          $ref: '#/components/schemas/DataReplicationErrorString'
+          description: Error in data replication.
         rawError:
-          allOf:
-            - $ref: '#/components/schemas/LargeBoundedString'
-            - description: Error in data replication.
+          $ref: '#/components/schemas/LargeBoundedString'
+          description: Error in data replication.
       description: Error in data replication.
     DataReplicationInitiation:
       type: object
       properties:
         nextAttemptDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Request to query next data initiation date and time.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Request to query next data initiation date and time.
         startDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Request to query data initiation start date and time.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Request to query data initiation start date and time.
         steps:
-          allOf:
-            - $ref: '#/components/schemas/DataReplicationInitiationSteps'
-            - description: Request to query data initiation steps.
+          $ref: '#/components/schemas/DataReplicationInitiationSteps'
+          description: Request to query data initiation steps.
       description: Data replication initiation.
     DataReplicationState:
       type: string
@@ -2444,53 +2352,42 @@ components:
       type: object
       properties:
         dataReplicationError:
-          allOf:
-            - $ref: '#/components/schemas/DataReplicationError'
-            - description: Error in obtaining data replication info.
+          $ref: '#/components/schemas/DataReplicationError'
+          description: Error in obtaining data replication info.
         dataReplicationInitiation:
-          allOf:
-            - $ref: '#/components/schemas/DataReplicationInitiation'
-            - description: Request to query whether data replication has been initiated.
+          $ref: '#/components/schemas/DataReplicationInitiation'
+          description: Request to query whether data replication has been initiated.
         dataReplicationState:
-          allOf:
-            - $ref: '#/components/schemas/DataReplicationState'
-            - description: Request to query the data replication state.
+          $ref: '#/components/schemas/DataReplicationState'
+          description: Request to query the data replication state.
         etaDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Request to query the time when data replication will be complete.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Request to query the time when data replication will be complete.
         lagDuration:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Request to query data replication lag durating.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Request to query data replication lag durating.
         replicatedDisks:
-          allOf:
-            - $ref: '#/components/schemas/DataReplicationInfoReplicatedDisks'
-            - description: Request to query disks replicated.
+          $ref: '#/components/schemas/DataReplicationInfoReplicatedDisks'
+          description: Request to query disks replicated.
       description: Request data replication info.
     DataReplicationInfoReplicatedDisk:
       type: object
       properties:
         backloggedStorageBytes:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: Request to query data replication backlog size in bytes.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: Request to query data replication backlog size in bytes.
         deviceName:
-          allOf:
-            - $ref: '#/components/schemas/BoundedString'
-            - description: Request to query device name.
+          $ref: '#/components/schemas/BoundedString'
+          description: Request to query device name.
         replicatedStorageBytes:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: Request to query amount of data replicated in bytes.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: Request to query amount of data replicated in bytes.
         rescannedStorageBytes:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: Request to query amount of data rescanned in bytes.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: Request to query amount of data rescanned in bytes.
         totalStorageBytes:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: Request to query total amount of data replicated in bytes.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: Request to query total amount of data replicated in bytes.
       description: Request to query disks replicated.
     DataReplicationInitiationSteps:
       type: array
@@ -2522,13 +2419,11 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/DataReplicationInitiationStepName'
-            - description: Request to query data initiation step name.
+          $ref: '#/components/schemas/DataReplicationInitiationStepName'
+          description: Request to query data initiation step name.
         status:
-          allOf:
-            - $ref: '#/components/schemas/DataReplicationInitiationStepStatus'
-            - description: Request to query data initiation status.
+          $ref: '#/components/schemas/DataReplicationInitiationStepStatus'
+          description: Request to query data initiation status.
       description: Data replication intiation step.
     JobID:
       type: string
@@ -2542,9 +2437,8 @@ components:
       title: DeleteJobRequest
       properties:
         jobID:
-          allOf:
-            - $ref: '#/components/schemas/JobID'
-            - description: Request to delete Job from service by Job ID.
+          $ref: '#/components/schemas/JobID'
+          description: Request to delete Job from service by Job ID.
     DeleteReplicationConfigurationTemplateRequest:
       type: object
       required:
@@ -2552,9 +2446,8 @@ components:
       title: DeleteReplicationConfigurationTemplateRequest
       properties:
         replicationConfigurationTemplateID:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationTemplateID'
-            - description: Request to delete Replication Configuration Template from service by Replication Configuration Template ID.
+          $ref: '#/components/schemas/ReplicationConfigurationTemplateID'
+          description: Request to delete Replication Configuration Template from service by Replication Configuration Template ID.
     DeleteSourceServerRequest:
       type: object
       required:
@@ -2562,9 +2455,8 @@ components:
       title: DeleteSourceServerRequest
       properties:
         sourceServerID:
-          allOf:
-            - $ref: '#/components/schemas/SourceServerID'
-            - description: Request to delete Source Server from service by Server ID.
+          $ref: '#/components/schemas/SourceServerID'
+          description: Request to delete Source Server from service by Server ID.
     StrictlyPositiveInteger:
       type: integer
       minimum: 1
@@ -2579,17 +2471,14 @@ components:
       title: DescribeJobLogItemsRequest
       properties:
         jobID:
-          allOf:
-            - $ref: '#/components/schemas/JobID'
-            - description: Request to describe Job log job ID.
+          $ref: '#/components/schemas/JobID'
+          description: Request to describe Job log job ID.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/StrictlyPositiveInteger'
-            - description: Request to describe Job log item maximum results.
+          $ref: '#/components/schemas/StrictlyPositiveInteger'
+          description: Request to describe Job log item maximum results.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: Request to describe Job log next token.
+          $ref: '#/components/schemas/PaginationToken'
+          description: Request to describe Job log next token.
     JobLogs:
       type: array
       items:
@@ -2598,17 +2487,14 @@ components:
       type: object
       properties:
         fromDate:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Request to describe Job log filters by date.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Request to describe Job log filters by date.
         jobIDs:
-          allOf:
-            - $ref: '#/components/schemas/DescribeJobsRequestFiltersJobIDs'
-            - description: Request to describe Job log filters by job ID.
+          $ref: '#/components/schemas/DescribeJobsRequestFiltersJobIDs'
+          description: Request to describe Job log filters by job ID.
         toDate:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Request to describe Job log by last date.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Request to describe Job log by last date.
       description: Request to describe Job log filters.
     DescribeJobsRequest:
       type: object
@@ -2617,17 +2503,14 @@ components:
       title: DescribeJobsRequest
       properties:
         filters:
-          allOf:
-            - $ref: '#/components/schemas/DescribeJobsRequestFilters'
-            - description: Request to describe Job log filters.
+          $ref: '#/components/schemas/DescribeJobsRequestFilters'
+          description: Request to describe Job log filters.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/StrictlyPositiveInteger'
-            - description: Request to describe Job log by max results.
+          $ref: '#/components/schemas/StrictlyPositiveInteger'
+          description: Request to describe Job log by max results.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: Request to describe Job logby next token.
+          $ref: '#/components/schemas/PaginationToken'
+          description: Request to describe Job logby next token.
     JobsList:
       type: array
       items:
@@ -2645,17 +2528,14 @@ components:
       title: DescribeReplicationConfigurationTemplatesRequest
       properties:
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/StrictlyPositiveInteger'
-            - description: Request to describe Replication Configuration template by max results.
+          $ref: '#/components/schemas/StrictlyPositiveInteger'
+          description: Request to describe Replication Configuration template by max results.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: Request to describe Replication Configuration template by next token.
+          $ref: '#/components/schemas/PaginationToken'
+          description: Request to describe Replication Configuration template by next token.
         replicationConfigurationTemplateIDs:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationTemplateIDs'
-            - description: Request to describe Replication Configuration template by template IDs.
+          $ref: '#/components/schemas/ReplicationConfigurationTemplateIDs'
+          description: Request to describe Replication Configuration template by template IDs.
     ReplicationConfigurationTemplates:
       type: array
       items:
@@ -2664,13 +2544,11 @@ components:
       type: object
       properties:
         isArchived:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Request to filter Source Servers list by archived.
+          $ref: '#/components/schemas/Boolean'
+          description: Request to filter Source Servers list by archived.
         sourceServerIDs:
-          allOf:
-            - $ref: '#/components/schemas/DescribeSourceServersRequestFiltersIDs'
-            - description: Request to filter Source Servers list by Source Server ID.
+          $ref: '#/components/schemas/DescribeSourceServersRequestFiltersIDs'
+          description: Request to filter Source Servers list by Source Server ID.
       description: Request to filter Source Servers list.
     DescribeSourceServersRequest:
       type: object
@@ -2679,17 +2557,14 @@ components:
       title: DescribeSourceServersRequest
       properties:
         filters:
-          allOf:
-            - $ref: '#/components/schemas/DescribeSourceServersRequestFilters'
-            - description: Request to filter Source Servers list.
+          $ref: '#/components/schemas/DescribeSourceServersRequestFilters'
+          description: Request to filter Source Servers list.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/StrictlyPositiveInteger'
-            - description: Request to filter Source Servers list by maximum results.
+          $ref: '#/components/schemas/StrictlyPositiveInteger'
+          description: Request to filter Source Servers list by maximum results.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: Request to filter Source Servers list by next token.
+          $ref: '#/components/schemas/PaginationToken'
+          description: Request to filter Source Servers list by next token.
     SourceServersList:
       type: array
       items:
@@ -2701,20 +2576,17 @@ components:
       title: DisconnectFromServiceRequest
       properties:
         sourceServerID:
-          allOf:
-            - $ref: '#/components/schemas/SourceServerID'
-            - description: Request to disconnect Source Server from service by Server ID.
+          $ref: '#/components/schemas/SourceServerID'
+          description: Request to disconnect Source Server from service by Server ID.
     Disk:
       type: object
       properties:
         bytes:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: The amount of storage on the disk in bytes.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: The amount of storage on the disk in bytes.
         deviceName:
-          allOf:
-            - $ref: '#/components/schemas/BoundedString'
-            - description: The disk or device name.
+          $ref: '#/components/schemas/BoundedString'
+          description: The disk or device name.
       description: The disk identifier.
     Disks:
       type: array
@@ -2734,9 +2606,8 @@ components:
       title: FinalizeCutoverRequest
       properties:
         sourceServerID:
-          allOf:
-            - $ref: '#/components/schemas/SourceServerID'
-            - description: Request to finalize Cutover by Soure Server ID.
+          $ref: '#/components/schemas/SourceServerID'
+          description: Request to finalize Cutover by Soure Server ID.
     FirstBoot:
       type: string
       enum:
@@ -2751,9 +2622,8 @@ components:
       title: GetLaunchConfigurationRequest
       properties:
         sourceServerID:
-          allOf:
-            - $ref: '#/components/schemas/SourceServerID'
-            - description: Request to get Launch Configuration information by Source Server ID.
+          $ref: '#/components/schemas/SourceServerID'
+          description: Request to get Launch Configuration information by Source Server ID.
     GetReplicationConfigurationRequest:
       type: object
       required:
@@ -2761,9 +2631,8 @@ components:
       title: GetReplicationConfigurationRequest
       properties:
         sourceServerID:
-          allOf:
-            - $ref: '#/components/schemas/SourceServerID'
-            - description: Request to get Replication Configuaration by Source Server ID.
+          $ref: '#/components/schemas/SourceServerID'
+          description: Request to get Replication Configuaration by Source Server ID.
     IPsList:
       type: array
       items:
@@ -2772,21 +2641,17 @@ components:
       type: object
       properties:
         awsInstanceID:
-          allOf:
-            - $ref: '#/components/schemas/EC2InstanceID'
-            - description: AWS Instance ID identification hint.
+          $ref: '#/components/schemas/EC2InstanceID'
+          description: AWS Instance ID identification hint.
         fqdn:
-          allOf:
-            - $ref: '#/components/schemas/BoundedString'
-            - description: FQDN address identification hint.
+          $ref: '#/components/schemas/BoundedString'
+          description: FQDN address identification hint.
         hostname:
-          allOf:
-            - $ref: '#/components/schemas/BoundedString'
-            - description: Hostname identification hint.
+          $ref: '#/components/schemas/BoundedString'
+          description: Hostname identification hint.
         vmWareUuid:
-          allOf:
-            - $ref: '#/components/schemas/BoundedString'
-            - description: vmWare UUID identification hint.
+          $ref: '#/components/schemas/BoundedString'
+          description: vmWare UUID identification hint.
       description: Identification hints.
     InitializeServiceRequest:
       type: object
@@ -2820,41 +2685,32 @@ components:
         - jobID
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: the ARN of the specific Job.
+          $ref: '#/components/schemas/ARN'
+          description: the ARN of the specific Job.
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Job creation time.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Job creation time.
         endDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Job end time.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Job end time.
         initiatedBy:
-          allOf:
-            - $ref: '#/components/schemas/InitiatedBy'
-            - description: Job initiated by field.
+          $ref: '#/components/schemas/InitiatedBy'
+          description: Job initiated by field.
         jobID:
-          allOf:
-            - $ref: '#/components/schemas/JobID'
-            - description: Job ID.
+          $ref: '#/components/schemas/JobID'
+          description: Job ID.
         participatingServers:
-          allOf:
-            - $ref: '#/components/schemas/ParticipatingServers'
-            - description: Servers participating in a specific Job.
+          $ref: '#/components/schemas/ParticipatingServers'
+          description: Servers participating in a specific Job.
         status:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: Job status.
+          $ref: '#/components/schemas/JobStatus'
+          description: Job status.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Tags associated with spcific Job.
+          $ref: '#/components/schemas/TagsMap'
+          description: Tags associated with spcific Job.
         type:
-          allOf:
-            - $ref: '#/components/schemas/JobType'
-            - description: Job type.
+          $ref: '#/components/schemas/JobType'
+          description: Job type.
       description: Job.
     JobLogEvent:
       type: string
@@ -2879,37 +2735,30 @@ components:
       type: object
       properties:
         conversionServerID:
-          allOf:
-            - $ref: '#/components/schemas/EC2InstanceID'
-            - description: Job Event conversion Server ID.
+          $ref: '#/components/schemas/EC2InstanceID'
+          description: Job Event conversion Server ID.
         rawError:
-          allOf:
-            - $ref: '#/components/schemas/LargeBoundedString'
-            - description: Job error.
+          $ref: '#/components/schemas/LargeBoundedString'
+          description: Job error.
         sourceServerID:
-          allOf:
-            - $ref: '#/components/schemas/SourceServerID'
-            - description: Job Event Source Server ID.
+          $ref: '#/components/schemas/SourceServerID'
+          description: Job Event Source Server ID.
         targetInstanceID:
-          allOf:
-            - $ref: '#/components/schemas/EC2InstanceID'
-            - description: Job Event Target instance ID.
+          $ref: '#/components/schemas/EC2InstanceID'
+          description: Job Event Target instance ID.
       description: Job log data
     JobLog:
       type: object
       properties:
         event:
-          allOf:
-            - $ref: '#/components/schemas/JobLogEvent'
-            - description: Job log event.
+          $ref: '#/components/schemas/JobLogEvent'
+          description: Job log event.
         eventData:
-          allOf:
-            - $ref: '#/components/schemas/JobLogEventData'
-            - description: Job event data
+          $ref: '#/components/schemas/JobLogEventData'
+          description: Job event data
         logDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Job log event date and time.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Job log event date and time.
       description: Job log.
     LaunchDisposition:
       type: string
@@ -2920,9 +2769,8 @@ components:
       type: object
       properties:
         osByol:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Configure BYOL OS licensing.
+          $ref: '#/components/schemas/Boolean'
+          description: Configure BYOL OS licensing.
       description: Configure Licensing.
     SmallBoundedString:
       type: string
@@ -2945,49 +2793,40 @@ components:
       type: object
       properties:
         ec2InstanceID:
-          allOf:
-            - $ref: '#/components/schemas/EC2InstanceID'
-            - description: Configure launced instance EC2 ID.
+          $ref: '#/components/schemas/EC2InstanceID'
+          description: Configure launced instance EC2 ID.
         firstBoot:
-          allOf:
-            - $ref: '#/components/schemas/FirstBoot'
-            - description: Configure launced instance first boot.
+          $ref: '#/components/schemas/FirstBoot'
+          description: Configure launced instance first boot.
         jobID:
-          allOf:
-            - $ref: '#/components/schemas/JobID'
-            - description: Configure launced instance Job ID.
+          $ref: '#/components/schemas/JobID'
+          description: Configure launced instance Job ID.
       description: Configure launced instance.
     LifeCycleLastCutover:
       type: object
       properties:
         finalized:
-          allOf:
-            - $ref: '#/components/schemas/LifeCycleLastCutoverFinalized'
-            - description: Lifecycle Cutover finalized date and time.
+          $ref: '#/components/schemas/LifeCycleLastCutoverFinalized'
+          description: Lifecycle Cutover finalized date and time.
         initiated:
-          allOf:
-            - $ref: '#/components/schemas/LifeCycleLastCutoverInitiated'
-            - description: Lifecycle last Cutover initiated.
+          $ref: '#/components/schemas/LifeCycleLastCutoverInitiated'
+          description: Lifecycle last Cutover initiated.
         reverted:
-          allOf:
-            - $ref: '#/components/schemas/LifeCycleLastCutoverReverted'
-            - description: Lifecycle last Cutover reverted.
+          $ref: '#/components/schemas/LifeCycleLastCutoverReverted'
+          description: Lifecycle last Cutover reverted.
       description: Lifecycle last Cutover .
     LifeCycleLastTest:
       type: object
       properties:
         finalized:
-          allOf:
-            - $ref: '#/components/schemas/LifeCycleLastTestFinalized'
-            - description: Lifecycle last Test finlized.
+          $ref: '#/components/schemas/LifeCycleLastTestFinalized'
+          description: Lifecycle last Test finlized.
         initiated:
-          allOf:
-            - $ref: '#/components/schemas/LifeCycleLastTestInitiated'
-            - description: Lifecycle last Test initiated.
+          $ref: '#/components/schemas/LifeCycleLastTestInitiated'
+          description: Lifecycle last Test initiated.
         reverted:
-          allOf:
-            - $ref: '#/components/schemas/LifeCycleLastTestReverted'
-            - description: Lifecycle last Test reverted.
+          $ref: '#/components/schemas/LifeCycleLastTestReverted'
+          description: Lifecycle last Test reverted.
       description: Lifecycle last Test.
     LifeCycleState:
       type: string
@@ -3004,89 +2843,74 @@ components:
       type: object
       properties:
         addedToServiceDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Lifecycle added to service data and time.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Lifecycle added to service data and time.
         elapsedReplicationDuration:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Lifecycle elapsed time and duration.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Lifecycle elapsed time and duration.
         firstByteDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Lifecycle replication initiation date and time.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Lifecycle replication initiation date and time.
         lastCutover:
-          allOf:
-            - $ref: '#/components/schemas/LifeCycleLastCutover'
-            - description: Lifecycle last Cutover.
+          $ref: '#/components/schemas/LifeCycleLastCutover'
+          description: Lifecycle last Cutover.
         lastSeenByServiceDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Lifecycle last seen date and time.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Lifecycle last seen date and time.
         lastTest:
-          allOf:
-            - $ref: '#/components/schemas/LifeCycleLastTest'
-            - description: Lifecycle last Test.
+          $ref: '#/components/schemas/LifeCycleLastTest'
+          description: Lifecycle last Test.
         state:
-          allOf:
-            - $ref: '#/components/schemas/LifeCycleState'
-            - description: Lifecycle state.
+          $ref: '#/components/schemas/LifeCycleState'
+          description: Lifecycle state.
       description: Lifecycle.
     LifeCycleLastCutoverFinalized:
       type: object
       properties:
         apiCallDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Lifecycle Cutover finalized date and time.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Lifecycle Cutover finalized date and time.
       description: Lifecycle Cutover finalized
     LifeCycleLastCutoverInitiated:
       type: object
       properties:
         apiCallDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: <p/>
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: <p/>
         jobID:
-          allOf:
-            - $ref: '#/components/schemas/JobID'
-            - description: Lifecycle last Cutover initiated by Job ID.
+          $ref: '#/components/schemas/JobID'
+          description: Lifecycle last Cutover initiated by Job ID.
       description: Lifecycle last Cutover initiated.
     LifeCycleLastCutoverReverted:
       type: object
       properties:
         apiCallDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Lifecycle last Cutover reverted API call date time.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Lifecycle last Cutover reverted API call date time.
       description: Lifecycle last Cutover reverted.
     LifeCycleLastTestFinalized:
       type: object
       properties:
         apiCallDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Lifecycle Test failed API call date and time.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Lifecycle Test failed API call date and time.
       description: Lifecycle last Test finlized.
     LifeCycleLastTestInitiated:
       type: object
       properties:
         apiCallDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Lifecycle last Test initiated API call date and time.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Lifecycle last Test initiated API call date and time.
         jobID:
-          allOf:
-            - $ref: '#/components/schemas/JobID'
-            - description: Lifecycle last Test initiated Job ID.
+          $ref: '#/components/schemas/JobID'
+          description: Lifecycle last Test initiated Job ID.
       description: Lifecycle last Test initiated.
     LifeCycleLastTestReverted:
       type: object
       properties:
         apiCallDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Lifecycle last Test reverted API call date and time.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Lifecycle last Test reverted API call date and time.
       description: Lifecycle last Test reverted.
     ListTagsForResourceRequest:
       type: object
@@ -3099,24 +2923,20 @@ components:
       title: MarkAsArchivedRequest
       properties:
         sourceServerID:
-          allOf:
-            - $ref: '#/components/schemas/SourceServerID'
-            - description: Mark as archived by Source Server ID.
+          $ref: '#/components/schemas/SourceServerID'
+          description: Mark as archived by Source Server ID.
     NetworkInterface:
       type: object
       properties:
         ips:
-          allOf:
-            - $ref: '#/components/schemas/IPsList'
-            - description: Network interface IPs.
+          $ref: '#/components/schemas/IPsList'
+          description: Network interface IPs.
         isPrimary:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Network interface primary IP.
+          $ref: '#/components/schemas/Boolean'
+          description: Network interface primary IP.
         macAddress:
-          allOf:
-            - $ref: '#/components/schemas/BoundedString'
-            - description: Network interface Mac address.
+          $ref: '#/components/schemas/BoundedString'
+          description: Network interface Mac address.
       description: Network interface.
     NetworkInterfaces:
       type: array
@@ -3128,21 +2948,18 @@ components:
       type: object
       properties:
         fullString:
-          allOf:
-            - $ref: '#/components/schemas/BoundedString'
-            - description: OS full string.
+          $ref: '#/components/schemas/BoundedString'
+          description: OS full string.
       description: Operating System.
     ParticipatingServer:
       type: object
       properties:
         launchStatus:
-          allOf:
-            - $ref: '#/components/schemas/LaunchStatus'
-            - description: Participating server launch status.
+          $ref: '#/components/schemas/LaunchStatus'
+          description: Participating server launch status.
         sourceServerID:
-          allOf:
-            - $ref: '#/components/schemas/SourceServerID'
-            - description: Participating server Source Server ID.
+          $ref: '#/components/schemas/SourceServerID'
+          description: Participating server Source Server ID.
       description: Server participating in Job.
     ReplicationConfigurationReplicatedDisks:
       type: array
@@ -3166,44 +2983,35 @@ components:
       title: RetryDataReplicationRequest
       properties:
         sourceServerID:
-          allOf:
-            - $ref: '#/components/schemas/SourceServerID'
-            - description: Retry data replication for Source Server ID.
+          $ref: '#/components/schemas/SourceServerID'
+          description: Retry data replication for Source Server ID.
     SourceProperties:
       type: object
       properties:
         cpus:
-          allOf:
-            - $ref: '#/components/schemas/Cpus'
-            - description: Source Server CPUs.
+          $ref: '#/components/schemas/Cpus'
+          description: Source Server CPUs.
         disks:
-          allOf:
-            - $ref: '#/components/schemas/Disks'
-            - description: Source Server disks.
+          $ref: '#/components/schemas/Disks'
+          description: Source Server disks.
         identificationHints:
-          allOf:
-            - $ref: '#/components/schemas/IdentificationHints'
-            - description: Source server identification hints.
+          $ref: '#/components/schemas/IdentificationHints'
+          description: Source server identification hints.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Source server last update date and time.
+          $ref: '#/components/schemas/ISO8601DatetimeString'
+          description: Source server last update date and time.
         networkInterfaces:
-          allOf:
-            - $ref: '#/components/schemas/NetworkInterfaces'
-            - description: Source server network interfaces.
+          $ref: '#/components/schemas/NetworkInterfaces'
+          description: Source server network interfaces.
         os:
-          allOf:
-            - $ref: '#/components/schemas/OS'
-            - description: Source server OS.
+          $ref: '#/components/schemas/OS'
+          description: Source server OS.
         ramBytes:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: Source server RAM in bytes.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: Source server RAM in bytes.
         recommendedInstanceType:
-          allOf:
-            - $ref: '#/components/schemas/EC2InstanceType'
-            - description: Source server recommended instance type.
+          $ref: '#/components/schemas/EC2InstanceType'
+          description: Source server recommended instance type.
       description: Source server properties.
     StartCutoverRequestSourceServerIDs:
       type: array
@@ -3218,13 +3026,11 @@ components:
       title: StartCutoverRequest
       properties:
         sourceServerIDs:
-          allOf:
-            - $ref: '#/components/schemas/StartCutoverRequestSourceServerIDs'
-            - description: Start Cutover by Source Server IDs.
+          $ref: '#/components/schemas/StartCutoverRequestSourceServerIDs'
+          description: Start Cutover by Source Server IDs.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Start Cutover by Tags.
+          $ref: '#/components/schemas/TagsMap'
+          description: Start Cutover by Tags.
     StartTestRequestSourceServerIDs:
       type: array
       items:
@@ -3238,13 +3044,11 @@ components:
       title: StartTestRequest
       properties:
         sourceServerIDs:
-          allOf:
-            - $ref: '#/components/schemas/StartTestRequestSourceServerIDs'
-            - description: Start Test for Source Server IDs.
+          $ref: '#/components/schemas/StartTestRequestSourceServerIDs'
+          description: Start Test for Source Server IDs.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Start Test by Tags.
+          $ref: '#/components/schemas/TagsMap'
+          description: Start Test by Tags.
     TagKeys:
       type: array
       items:
@@ -3256,9 +3060,8 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Tag resource by Tags.
+          $ref: '#/components/schemas/TagsMap'
+          description: Tag resource by Tags.
     TerminateTargetInstancesRequestSourceServerIDs:
       type: array
       items:
@@ -3272,13 +3075,11 @@ components:
       title: TerminateTargetInstancesRequest
       properties:
         sourceServerIDs:
-          allOf:
-            - $ref: '#/components/schemas/TerminateTargetInstancesRequestSourceServerIDs'
-            - description: Terminate Target instance by Source Server IDs.
+          $ref: '#/components/schemas/TerminateTargetInstancesRequestSourceServerIDs'
+          description: Terminate Target instance by Source Server IDs.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Terminate Target instance by Tags.
+          $ref: '#/components/schemas/TagsMap'
+          description: Terminate Target instance by Tags.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -3290,33 +3091,26 @@ components:
       title: UpdateLaunchConfigurationRequest
       properties:
         copyPrivateIp:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Update Launch configuration copy Private IP request.
+          $ref: '#/components/schemas/Boolean'
+          description: Update Launch configuration copy Private IP request.
         copyTags:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Update Launch configuration copy Tags request.
+          $ref: '#/components/schemas/Boolean'
+          description: Update Launch configuration copy Tags request.
         launchDisposition:
-          allOf:
-            - $ref: '#/components/schemas/LaunchDisposition'
-            - description: Update Launch configuration launch disposition request.
+          $ref: '#/components/schemas/LaunchDisposition'
+          description: Update Launch configuration launch disposition request.
         licensing:
-          allOf:
-            - $ref: '#/components/schemas/Licensing'
-            - description: Update Launch configuration licensing request.
+          $ref: '#/components/schemas/Licensing'
+          description: Update Launch configuration licensing request.
         name:
-          allOf:
-            - $ref: '#/components/schemas/SmallBoundedString'
-            - description: Update Launch configuration name request.
+          $ref: '#/components/schemas/SmallBoundedString'
+          description: Update Launch configuration name request.
         sourceServerID:
-          allOf:
-            - $ref: '#/components/schemas/SourceServerID'
-            - description: Update Launch configuration by Source Server ID request.
+          $ref: '#/components/schemas/SourceServerID'
+          description: Update Launch configuration by Source Server ID request.
         targetInstanceTypeRightSizingMethod:
-          allOf:
-            - $ref: '#/components/schemas/TargetInstanceTypeRightSizingMethod'
-            - description: Update Launch configuration Target instance right sizing request.
+          $ref: '#/components/schemas/TargetInstanceTypeRightSizingMethod'
+          description: Update Launch configuration Target instance right sizing request.
     UpdateReplicationConfigurationRequest:
       type: object
       required:
@@ -3324,65 +3118,50 @@ components:
       title: UpdateReplicationConfigurationRequest
       properties:
         associateDefaultSecurityGroup:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Update replication configuration associate default Application Migration Service Security group request.
+          $ref: '#/components/schemas/Boolean'
+          description: Update replication configuration associate default Application Migration Service Security group request.
         bandwidthThrottling:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: Update replication configuration bandwidth throttling request.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: Update replication configuration bandwidth throttling request.
         createPublicIP:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Update replication configuration create Public IP request.
+          $ref: '#/components/schemas/Boolean'
+          description: Update replication configuration create Public IP request.
         dataPlaneRouting:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationDataPlaneRouting'
-            - description: Update replication configuration data plane routing request.
+          $ref: '#/components/schemas/ReplicationConfigurationDataPlaneRouting'
+          description: Update replication configuration data plane routing request.
         defaultLargeStagingDiskType:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationDefaultLargeStagingDiskType'
-            - description: Update replication configuration use default large Staging Disk type request.
+          $ref: '#/components/schemas/ReplicationConfigurationDefaultLargeStagingDiskType'
+          description: Update replication configuration use default large Staging Disk type request.
         ebsEncryption:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationEbsEncryption'
-            - description: Update replication configuration EBS encryption request.
+          $ref: '#/components/schemas/ReplicationConfigurationEbsEncryption'
+          description: Update replication configuration EBS encryption request.
         ebsEncryptionKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: Update replication configuration EBS encryption key ARN request.
+          $ref: '#/components/schemas/ARN'
+          description: Update replication configuration EBS encryption key ARN request.
         name:
-          allOf:
-            - $ref: '#/components/schemas/SmallBoundedString'
-            - description: Update replication configuration name request.
+          $ref: '#/components/schemas/SmallBoundedString'
+          description: Update replication configuration name request.
         replicatedDisks:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationReplicatedDisks'
-            - description: Update replication configuration replicated disks request.
+          $ref: '#/components/schemas/ReplicationConfigurationReplicatedDisks'
+          description: Update replication configuration replicated disks request.
         replicationServerInstanceType:
-          allOf:
-            - $ref: '#/components/schemas/EC2InstanceType'
-            - description: Update replication configuration Replication Server instance type request.
+          $ref: '#/components/schemas/EC2InstanceType'
+          description: Update replication configuration Replication Server instance type request.
         replicationServersSecurityGroupsIDs:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationServersSecurityGroupsIDs'
-            - description: Update replication configuration Replication Server Security Groups IDs request.
+          $ref: '#/components/schemas/ReplicationServersSecurityGroupsIDs'
+          description: Update replication configuration Replication Server Security Groups IDs request.
         sourceServerID:
-          allOf:
-            - $ref: '#/components/schemas/SourceServerID'
-            - description: Update replication configuration Source Server ID request.
+          $ref: '#/components/schemas/SourceServerID'
+          description: Update replication configuration Source Server ID request.
         stagingAreaSubnetId:
-          allOf:
-            - $ref: '#/components/schemas/SubnetID'
-            - description: Update replication configuration Staging Area subnet request.
+          $ref: '#/components/schemas/SubnetID'
+          description: Update replication configuration Staging Area subnet request.
         stagingAreaTags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Update replication configuration Staging Area Tags request.
+          $ref: '#/components/schemas/TagsMap'
+          description: Update replication configuration Staging Area Tags request.
         useDedicatedReplicationServer:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Update replication configuration use dedicated Replication Server request.
+          $ref: '#/components/schemas/Boolean'
+          description: Update replication configuration use dedicated Replication Server request.
     UpdateReplicationConfigurationTemplateRequest:
       type: object
       required:
@@ -3390,60 +3169,46 @@ components:
       title: UpdateReplicationConfigurationTemplateRequest
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: Update replication configuration template ARN request.
+          $ref: '#/components/schemas/ARN'
+          description: Update replication configuration template ARN request.
         associateDefaultSecurityGroup:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Update replication configuration template associate default Application Migration Service Security group request.
+          $ref: '#/components/schemas/Boolean'
+          description: Update replication configuration template associate default Application Migration Service Security group request.
         bandwidthThrottling:
-          allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
-            - description: Update replication configuration template bandwidth throttling request.
+          $ref: '#/components/schemas/PositiveInteger'
+          description: Update replication configuration template bandwidth throttling request.
         createPublicIP:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Update replication configuration template create Public IP request.
+          $ref: '#/components/schemas/Boolean'
+          description: Update replication configuration template create Public IP request.
         dataPlaneRouting:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationDataPlaneRouting'
-            - description: Update replication configuration template data plane routing request.
+          $ref: '#/components/schemas/ReplicationConfigurationDataPlaneRouting'
+          description: Update replication configuration template data plane routing request.
         defaultLargeStagingDiskType:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationDefaultLargeStagingDiskType'
-            - description: Update replication configuration template use default large Staging Disk type request.
+          $ref: '#/components/schemas/ReplicationConfigurationDefaultLargeStagingDiskType'
+          description: Update replication configuration template use default large Staging Disk type request.
         ebsEncryption:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationEbsEncryption'
-            - description: Update replication configuration template EBS encryption request.
+          $ref: '#/components/schemas/ReplicationConfigurationEbsEncryption'
+          description: Update replication configuration template EBS encryption request.
         ebsEncryptionKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: Update replication configuration template EBS encryption key ARN request.
+          $ref: '#/components/schemas/ARN'
+          description: Update replication configuration template EBS encryption key ARN request.
         replicationConfigurationTemplateID:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationConfigurationTemplateID'
-            - description: Update replication configuration template template ID request.
+          $ref: '#/components/schemas/ReplicationConfigurationTemplateID'
+          description: Update replication configuration template template ID request.
         replicationServerInstanceType:
-          allOf:
-            - $ref: '#/components/schemas/EC2InstanceType'
-            - description: Update replication configuration template Replication Server instance type request.
+          $ref: '#/components/schemas/EC2InstanceType'
+          description: Update replication configuration template Replication Server instance type request.
         replicationServersSecurityGroupsIDs:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationServersSecurityGroupsIDs'
-            - description: Update replication configuration template Replication Server Security groups IDs request.
+          $ref: '#/components/schemas/ReplicationServersSecurityGroupsIDs'
+          description: Update replication configuration template Replication Server Security groups IDs request.
         stagingAreaSubnetId:
-          allOf:
-            - $ref: '#/components/schemas/SubnetID'
-            - description: Update replication configuration template Staging Area subnet ID request.
+          $ref: '#/components/schemas/SubnetID'
+          description: Update replication configuration template Staging Area subnet ID request.
         stagingAreaTags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Update replication configuration template Staging Area Tags request.
+          $ref: '#/components/schemas/TagsMap'
+          description: Update replication configuration template Staging Area Tags request.
         useDedicatedReplicationServer:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Update replication configuration template use dedicated Replication Server request.
+          $ref: '#/components/schemas/Boolean'
+          description: Update replication configuration template use dedicated Replication Server request.
 security:
   - hmac: []

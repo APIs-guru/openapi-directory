@@ -279,57 +279,46 @@ components:
       type: object
       properties:
         DeviceRegistration:
-          allOf:
-            - $ref: '#/components/schemas/DeviceRegistration'
-            - description: Describes if the device is currently registered with SageMaker Edge Manager.
+          $ref: '#/components/schemas/DeviceRegistration'
+          description: Describes if the device is currently registered with SageMaker Edge Manager.
         CacheTTL:
-          allOf:
-            - $ref: '#/components/schemas/CacheTTLSeconds'
-            - description: 'The amount of time, in seconds, that the registration status is stored on the device’s cache before it is refreshed.'
+          $ref: '#/components/schemas/CacheTTLSeconds'
+          description: 'The amount of time, in seconds, that the registration status is stored on the device’s cache before it is refreshed.'
     InternalServiceException: {}
     EdgeMetric:
       type: object
       properties:
         Dimension:
-          allOf:
-            - $ref: '#/components/schemas/Dimension'
-            - description: The dimension of metrics published.
+          $ref: '#/components/schemas/Dimension'
+          description: The dimension of metrics published.
         MetricName:
-          allOf:
-            - $ref: '#/components/schemas/Metric'
-            - description: Returns the name of the metric.
+          $ref: '#/components/schemas/Metric'
+          description: Returns the name of the metric.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/Value'
-            - description: Returns the value of the metric.
+          $ref: '#/components/schemas/Value'
+          description: Returns the value of the metric.
         Timestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Timestamp of when the metric was requested.
+          $ref: '#/components/schemas/Timestamp'
+          description: Timestamp of when the metric was requested.
       description: Information required for edge device metrics.
     Model:
       type: object
       properties:
         ModelName:
-          allOf:
-            - $ref: '#/components/schemas/ModelName'
-            - description: The name of the model.
+          $ref: '#/components/schemas/ModelName'
+          description: The name of the model.
         ModelVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: The version of the model.
+          $ref: '#/components/schemas/Version'
+          description: The version of the model.
         LatestSampleTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The timestamp of the last data sample taken.
+          $ref: '#/components/schemas/Timestamp'
+          description: The timestamp of the last data sample taken.
         LatestInference:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The timestamp of the last inference that was made.
+          $ref: '#/components/schemas/Timestamp'
+          description: The timestamp of the last inference that was made.
         ModelMetrics:
-          allOf:
-            - $ref: '#/components/schemas/EdgeMetrics'
-            - description: Information required for model metrics.
+          $ref: '#/components/schemas/EdgeMetrics'
+          description: Information required for model metrics.
       description: Information about a model deployed on an edge device that is registered with SageMaker Edge Manager.
     CacheTTLSeconds:
       type: string
@@ -377,13 +366,11 @@ components:
       title: GetDeviceRegistrationRequest
       properties:
         DeviceName:
-          allOf:
-            - $ref: '#/components/schemas/DeviceName'
-            - description: The unique name of the device you want to get the registration status from.
+          $ref: '#/components/schemas/DeviceName'
+          description: The unique name of the device you want to get the registration status from.
         DeviceFleetName:
-          allOf:
-            - $ref: '#/components/schemas/DeviceFleetName'
-            - description: The name of the fleet that the device belongs to.
+          $ref: '#/components/schemas/DeviceFleetName'
+          description: The name of the fleet that the device belongs to.
     ModelName:
       type: string
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*$'
@@ -407,24 +394,19 @@ components:
       title: SendHeartbeatRequest
       properties:
         AgentMetrics:
-          allOf:
-            - $ref: '#/components/schemas/EdgeMetrics'
-            - description: For internal use. Returns a list of SageMaker Edge Manager agent operating metrics.
+          $ref: '#/components/schemas/EdgeMetrics'
+          description: For internal use. Returns a list of SageMaker Edge Manager agent operating metrics.
         Models:
-          allOf:
-            - $ref: '#/components/schemas/Models'
-            - description: Returns a list of models deployed on the the device.
+          $ref: '#/components/schemas/Models'
+          description: Returns a list of models deployed on the the device.
         AgentVersion:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: Returns the version of the agent.
+          $ref: '#/components/schemas/Version'
+          description: Returns the version of the agent.
         DeviceName:
-          allOf:
-            - $ref: '#/components/schemas/DeviceName'
-            - description: The unique name of the device.
+          $ref: '#/components/schemas/DeviceName'
+          description: The unique name of the device.
         DeviceFleetName:
-          allOf:
-            - $ref: '#/components/schemas/DeviceFleetName'
-            - description: The name of the fleet that the device belongs to.
+          $ref: '#/components/schemas/DeviceFleetName'
+          description: The name of the fleet that the device belongs to.
 security:
   - hmac: []

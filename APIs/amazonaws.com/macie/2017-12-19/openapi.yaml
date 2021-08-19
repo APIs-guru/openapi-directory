@@ -540,9 +540,8 @@ components:
       title: AssociateMemberAccountRequest
       properties:
         memberAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AWSAccountId'
-            - description: The ID of the AWS account that you want to associate with Amazon Macie Classic as a member account.
+          $ref: '#/components/schemas/AWSAccountId'
+          description: The ID of the AWS account that you want to associate with Amazon Macie Classic as a member account.
     InvalidInputException: {}
     LimitExceededException: {}
     InternalException: {}
@@ -550,9 +549,8 @@ components:
       type: object
       properties:
         failedS3Resources:
-          allOf:
-            - $ref: '#/components/schemas/FailedS3Resources'
-            - description: 'S3 resources that couldn''t be associated with Amazon Macie Classic. An error code and an error message are provided for each failed item. '
+          $ref: '#/components/schemas/FailedS3Resources'
+          description: 'S3 resources that couldn''t be associated with Amazon Macie Classic. An error code and an error message are provided for each failed item. '
     AssociateS3ResourcesRequest:
       type: object
       required:
@@ -560,13 +558,11 @@ components:
       title: AssociateS3ResourcesRequest
       properties:
         memberAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AWSAccountId'
-            - description: 'The ID of the Amazon Macie Classic member account whose resources you want to associate with Macie Classic. '
+          $ref: '#/components/schemas/AWSAccountId'
+          description: 'The ID of the Amazon Macie Classic member account whose resources you want to associate with Macie Classic. '
         s3Resources:
-          allOf:
-            - $ref: '#/components/schemas/S3ResourcesClassification'
-            - description: 'The S3 resources that you want to associate with Amazon Macie Classic for monitoring and data classification. '
+          $ref: '#/components/schemas/S3ResourcesClassification'
+          description: 'The S3 resources that you want to associate with Amazon Macie Classic for monitoring and data classification. '
     AccessDeniedException: {}
     DisassociateMemberAccountRequest:
       type: object
@@ -575,16 +571,14 @@ components:
       title: DisassociateMemberAccountRequest
       properties:
         memberAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AWSAccountId'
-            - description: The ID of the member account that you want to remove from Amazon Macie Classic.
+          $ref: '#/components/schemas/AWSAccountId'
+          description: The ID of the member account that you want to remove from Amazon Macie Classic.
     DisassociateS3ResourcesResult:
       type: object
       properties:
         failedS3Resources:
-          allOf:
-            - $ref: '#/components/schemas/FailedS3Resources'
-            - description: 'S3 resources that couldn''t be removed from being monitored and classified by Amazon Macie Classic. An error code and an error message are provided for each failed item. '
+          $ref: '#/components/schemas/FailedS3Resources'
+          description: 'S3 resources that couldn''t be removed from being monitored and classified by Amazon Macie Classic. An error code and an error message are provided for each failed item. '
     DisassociateS3ResourcesRequest:
       type: object
       required:
@@ -592,70 +586,58 @@ components:
       title: DisassociateS3ResourcesRequest
       properties:
         memberAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AWSAccountId'
-            - description: 'The ID of the Amazon Macie Classic member account whose resources you want to remove from being monitored by Macie Classic. '
+          $ref: '#/components/schemas/AWSAccountId'
+          description: 'The ID of the Amazon Macie Classic member account whose resources you want to remove from being monitored by Macie Classic. '
         associatedS3Resources:
-          allOf:
-            - $ref: '#/components/schemas/S3Resources'
-            - description: 'The S3 resources (buckets or prefixes) that you want to remove from being monitored and classified by Amazon Macie Classic. '
+          $ref: '#/components/schemas/S3Resources'
+          description: 'The S3 resources (buckets or prefixes) that you want to remove from being monitored and classified by Amazon Macie Classic. '
     ListMemberAccountsResult:
       type: object
       properties:
         memberAccounts:
-          allOf:
-            - $ref: '#/components/schemas/MemberAccounts'
-            - description: 'A list of the Amazon Macie Classic member accounts returned by the action. The current Macie Classic administrator account is also included in this list. '
+          $ref: '#/components/schemas/MemberAccounts'
+          description: 'A list of the Amazon Macie Classic member accounts returned by the action. The current Macie Classic administrator account is also included in this list. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null. '
     ListMemberAccountsRequest:
       type: object
       title: ListMemberAccountsRequest
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'Use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListMemberAccounts action. Subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'Use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListMemberAccounts action. Subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data. '
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'Use this parameter to indicate the maximum number of items that you want in the response. The default value is 250. '
+          $ref: '#/components/schemas/MaxResults'
+          description: 'Use this parameter to indicate the maximum number of items that you want in the response. The default value is 250. '
     ListS3ResourcesResult:
       type: object
       properties:
         s3Resources:
-          allOf:
-            - $ref: '#/components/schemas/S3ResourcesClassification'
-            - description: A list of the associated S3 resources returned by the action.
+          $ref: '#/components/schemas/S3ResourcesClassification'
+          description: A list of the associated S3 resources returned by the action.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null. '
     ListS3ResourcesRequest:
       type: object
       title: ListS3ResourcesRequest
       properties:
         memberAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AWSAccountId'
-            - description: 'The Amazon Macie Classic member account ID whose associated S3 resources you want to list. '
+          $ref: '#/components/schemas/AWSAccountId'
+          description: 'The Amazon Macie Classic member account ID whose associated S3 resources you want to list. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'Use this parameter when paginating results. Set its value to null on your first call to the ListS3Resources action. Subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'Use this parameter when paginating results. Set its value to null on your first call to the ListS3Resources action. Subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data. '
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'Use this parameter to indicate the maximum number of items that you want in the response. The default value is 250. '
+          $ref: '#/components/schemas/MaxResults'
+          description: 'Use this parameter to indicate the maximum number of items that you want in the response. The default value is 250. '
     UpdateS3ResourcesResult:
       type: object
       properties:
         failedS3Resources:
-          allOf:
-            - $ref: '#/components/schemas/FailedS3Resources'
-            - description: 'The S3 resources whose classification types can''t be updated. An error code and an error message are provided for each failed item. '
+          $ref: '#/components/schemas/FailedS3Resources'
+          description: 'The S3 resources whose classification types can''t be updated. An error code and an error message are provided for each failed item. '
     UpdateS3ResourcesRequest:
       type: object
       required:
@@ -663,13 +645,11 @@ components:
       title: UpdateS3ResourcesRequest
       properties:
         memberAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AWSAccountId'
-            - description: 'The AWS ID of the Amazon Macie Classic member account whose S3 resources'' classification types you want to update. '
+          $ref: '#/components/schemas/AWSAccountId'
+          description: 'The AWS ID of the Amazon Macie Classic member account whose S3 resources'' classification types you want to update. '
         s3ResourcesUpdate:
-          allOf:
-            - $ref: '#/components/schemas/S3ResourcesClassificationUpdate'
-            - description: The S3 resources whose classification types you want to update.
+          $ref: '#/components/schemas/S3ResourcesClassificationUpdate'
+          description: The S3 resources whose classification types you want to update.
     AWSAccountId:
       type: string
       pattern: '[0-9]{12}'
@@ -700,25 +680,21 @@ components:
         - continuous
       properties:
         oneTime:
-          allOf:
-            - $ref: '#/components/schemas/S3OneTimeClassificationType'
-            - description: 'A one-time classification of all of the existing objects in a specified S3 bucket. '
+          $ref: '#/components/schemas/S3OneTimeClassificationType'
+          description: 'A one-time classification of all of the existing objects in a specified S3 bucket. '
         continuous:
-          allOf:
-            - $ref: '#/components/schemas/S3ContinuousClassificationType'
-            - description: 'A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie Classic begins performing continuous classification after a bucket is successfully associated with Macie Classic. '
+          $ref: '#/components/schemas/S3ContinuousClassificationType'
+          description: 'A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie Classic begins performing continuous classification after a bucket is successfully associated with Macie Classic. '
       description: 'The classification type that Amazon Macie Classic applies to the associated S3 resources. '
     ClassificationTypeUpdate:
       type: object
       properties:
         oneTime:
-          allOf:
-            - $ref: '#/components/schemas/S3OneTimeClassificationType'
-            - description: 'A one-time classification of all of the existing objects in a specified S3 bucket. '
+          $ref: '#/components/schemas/S3OneTimeClassificationType'
+          description: 'A one-time classification of all of the existing objects in a specified S3 bucket. '
         continuous:
-          allOf:
-            - $ref: '#/components/schemas/S3ContinuousClassificationType'
-            - description: 'A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie Classic begins performing continuous classification after a bucket is successfully associated with Macie Classic. '
+          $ref: '#/components/schemas/S3ContinuousClassificationType'
+          description: 'A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie Classic begins performing continuous classification after a bucket is successfully associated with Macie Classic. '
       description: 'The classification type that Amazon Macie Classic applies to the associated S3 resources. At least one of the classification types (oneTime or continuous) must be specified. '
     S3Resources:
       type: array
@@ -737,29 +713,24 @@ components:
         - bucketName
       properties:
         bucketName:
-          allOf:
-            - $ref: '#/components/schemas/BucketName'
-            - description: The name of the S3 bucket.
+          $ref: '#/components/schemas/BucketName'
+          description: The name of the S3 bucket.
         prefix:
-          allOf:
-            - $ref: '#/components/schemas/Prefix'
-            - description: 'The prefix of the S3 bucket. '
+          $ref: '#/components/schemas/Prefix'
+          description: 'The prefix of the S3 bucket. '
       description: 'Contains information about the S3 resource. This data type is used as a request parameter in the DisassociateS3Resources action and can be used as a response parameter in the AssociateS3Resources and UpdateS3Resources actions. '
     FailedS3Resource:
       type: object
       properties:
         failedItem:
-          allOf:
-            - $ref: '#/components/schemas/S3Resource'
-            - description: The failed S3 resources.
+          $ref: '#/components/schemas/S3Resource'
+          description: The failed S3 resources.
         errorCode:
-          allOf:
-            - $ref: '#/components/schemas/ErrorCode'
-            - description: The status code of a failed item.
+          $ref: '#/components/schemas/ErrorCode'
+          description: The status code of a failed item.
         errorMessage:
-          allOf:
-            - $ref: '#/components/schemas/ExceptionMessage'
-            - description: The error message of a failed item.
+          $ref: '#/components/schemas/ExceptionMessage'
+          description: The error message of a failed item.
       description: Includes details about the failed S3 resources.
     NextToken:
       type: string
@@ -775,9 +746,8 @@ components:
       type: object
       properties:
         accountId:
-          allOf:
-            - $ref: '#/components/schemas/AWSAccountId'
-            - description: The AWS account ID of the Amazon Macie Classic member account.
+          $ref: '#/components/schemas/AWSAccountId'
+          description: The AWS account ID of the Amazon Macie Classic member account.
       description: Contains information about the Amazon Macie Classic member account.
     Prefix:
       type: string
@@ -789,17 +759,14 @@ components:
         - classificationType
       properties:
         bucketName:
-          allOf:
-            - $ref: '#/components/schemas/BucketName'
-            - description: The name of the S3 bucket that you want to associate with Amazon Macie Classic.
+          $ref: '#/components/schemas/BucketName'
+          description: The name of the S3 bucket that you want to associate with Amazon Macie Classic.
         prefix:
-          allOf:
-            - $ref: '#/components/schemas/Prefix'
-            - description: The prefix of the S3 bucket that you want to associate with Amazon Macie Classic.
+          $ref: '#/components/schemas/Prefix'
+          description: The prefix of the S3 bucket that you want to associate with Amazon Macie Classic.
         classificationType:
-          allOf:
-            - $ref: '#/components/schemas/ClassificationType'
-            - description: 'The classification type that you want to specify for the resource associated with Amazon Macie Classic. '
+          $ref: '#/components/schemas/ClassificationType'
+          description: 'The classification type that you want to specify for the resource associated with Amazon Macie Classic. '
       description: 'The S3 resources that you want to associate with Amazon Macie Classic for monitoring and data classification. This data type is used as a request parameter in the AssociateS3Resources action and a response parameter in the ListS3Resources action. '
     S3ResourceClassificationUpdate:
       type: object
@@ -808,17 +775,14 @@ components:
         - classificationTypeUpdate
       properties:
         bucketName:
-          allOf:
-            - $ref: '#/components/schemas/BucketName'
-            - description: The name of the S3 bucket whose classification types you want to update.
+          $ref: '#/components/schemas/BucketName'
+          description: The name of the S3 bucket whose classification types you want to update.
         prefix:
-          allOf:
-            - $ref: '#/components/schemas/Prefix'
-            - description: The prefix of the S3 bucket whose classification types you want to update.
+          $ref: '#/components/schemas/Prefix'
+          description: The prefix of the S3 bucket whose classification types you want to update.
         classificationTypeUpdate:
-          allOf:
-            - $ref: '#/components/schemas/ClassificationTypeUpdate'
-            - description: 'The classification type that you want to update for the resource associated with Amazon Macie Classic. '
+          $ref: '#/components/schemas/ClassificationTypeUpdate'
+          description: 'The classification type that you want to update for the resource associated with Amazon Macie Classic. '
       description: 'The S3 resources whose classification types you want to update. This data type is used as a request parameter in the UpdateS3Resources action. '
     S3ResourcesClassificationUpdate:
       type: array

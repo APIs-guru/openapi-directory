@@ -791,22 +791,19 @@ components:
       type: object
       properties:
         experimentTemplate:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplate'
-            - description: Information about the experiment template.
+          $ref: '#/components/schemas/ExperimentTemplate'
+          description: Information about the experiment template.
     CreateExperimentTemplateStopConditionInput:
       type: object
       required:
         - source
       properties:
         source:
-          allOf:
-            - $ref: '#/components/schemas/StopConditionSource'
-            - description: 'The source for the stop condition. Specify <code>aws:cloudwatch:alarm</code> if the stop condition is defined by a CloudWatch alarm. Specify <code>none</code> if there is no stop condition.'
+          $ref: '#/components/schemas/StopConditionSource'
+          description: 'The source for the stop condition. Specify <code>aws:cloudwatch:alarm</code> if the stop condition is defined by a CloudWatch alarm. Specify <code>none</code> if there is no stop condition.'
         value:
-          allOf:
-            - $ref: '#/components/schemas/StopConditionValue'
-            - description: The Amazon Resource Name (ARN) of the CloudWatch alarm. This is required if the source is a CloudWatch alarm.
+          $ref: '#/components/schemas/StopConditionValue'
+          description: The Amazon Resource Name (ARN) of the CloudWatch alarm. This is required if the source is a CloudWatch alarm.
       description: Specifies a stop condition for an experiment template.
     CreateExperimentTemplateTargetInput:
       type: object
@@ -815,25 +812,20 @@ components:
         - selectionMode
       properties:
         resourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: The AWS resource type. The resource type must be supported for the specified action.
+          $ref: '#/components/schemas/ResourceType'
+          description: The AWS resource type. The resource type must be supported for the specified action.
         resourceArns:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArnList'
-            - description: The Amazon Resource Names (ARNs) of the resources.
+          $ref: '#/components/schemas/ResourceArnList'
+          description: The Amazon Resource Names (ARNs) of the resources.
         resourceTags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags for the target resources.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags for the target resources.
         filters:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateTargetFilterInputList'
-            - description: The filters to apply to identify target resources using specific attributes.
+          $ref: '#/components/schemas/ExperimentTemplateTargetFilterInputList'
+          description: The filters to apply to identify target resources using specific attributes.
         selectionMode:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateTargetSelectionMode'
-            - description: '<p>Scopes the identified resources to a specific count of the resources at random, or a percentage of the resources. All identified resources are included in the target.</p> <ul> <li> <p>ALL - Run the action on all identified targets. This is the default.</p> </li> <li> <p>COUNT(n) - Run the action on the specified number of targets, chosen from the identified targets at random. For example, COUNT(1) selects one of the targets.</p> </li> <li> <p>PERCENT(n) - Run the action on the specified percentage of targets, chosen from the identified targets at random. For example, PERCENT(25) selects 25% of the targets.</p> </li> </ul>'
+          $ref: '#/components/schemas/ExperimentTemplateTargetSelectionMode'
+          description: '<p>Scopes the identified resources to a specific count of the resources at random, or a percentage of the resources. All identified resources are included in the target.</p> <ul> <li> <p>ALL - Run the action on all identified targets. This is the default.</p> </li> <li> <p>COUNT(n) - Run the action on the specified number of targets, chosen from the identified targets at random. For example, COUNT(1) selects one of the targets.</p> </li> <li> <p>PERCENT(n) - Run the action on the specified percentage of targets, chosen from the identified targets at random. For example, PERCENT(25) selects 25% of the targets.</p> </li> </ul>'
       description: Specifies a target for an experiment. You must specify at least one Amazon Resource Name (ARN) or at least one resource tag. You cannot specify both ARNs and tags.
     CreateExperimentTemplateActionInput:
       type: object
@@ -841,25 +833,20 @@ components:
         - actionId
       properties:
         actionId:
-          allOf:
-            - $ref: '#/components/schemas/ActionId'
-            - description: The ID of the action.
+          $ref: '#/components/schemas/ActionId'
+          description: The ID of the action.
         description:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateActionDescription'
-            - description: A description for the action.
+          $ref: '#/components/schemas/ExperimentTemplateActionDescription'
+          description: A description for the action.
         parameters:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateActionParameterMap'
-            - description: 'The parameters for the action, if applicable.'
+          $ref: '#/components/schemas/ExperimentTemplateActionParameterMap'
+          description: 'The parameters for the action, if applicable.'
         targets:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateActionTargetMap'
-            - description: The targets for the action.
+          $ref: '#/components/schemas/ExperimentTemplateActionTargetMap'
+          description: The targets for the action.
         startAfter:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateActionStartAfterList'
-            - description: The name of the action that must be completed before the current action starts. Omit this parameter to run the action at the start of the experiment.
+          $ref: '#/components/schemas/ExperimentTemplateActionStartAfterList'
+          description: The name of the action that must be completed before the current action starts. Omit this parameter to run the action at the start of the experiment.
       description: Specifies an action for an experiment template.
     TagValue:
       type: string
@@ -873,84 +860,71 @@ components:
       type: object
       properties:
         experimentTemplate:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplate'
-            - description: Information about the experiment template.
+          $ref: '#/components/schemas/ExperimentTemplate'
+          description: Information about the experiment template.
     GetActionResponse:
       type: object
       properties:
         action:
-          allOf:
-            - $ref: '#/components/schemas/Action'
-            - description: Information about the action.
+          $ref: '#/components/schemas/Action'
+          description: Information about the action.
     GetExperimentResponse:
       type: object
       properties:
         experiment:
-          allOf:
-            - $ref: '#/components/schemas/Experiment'
-            - description: Information about the experiment.
+          $ref: '#/components/schemas/Experiment'
+          description: Information about the experiment.
     GetExperimentTemplateResponse:
       type: object
       properties:
         experimentTemplate:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplate'
-            - description: Information about the experiment template.
+          $ref: '#/components/schemas/ExperimentTemplate'
+          description: Information about the experiment template.
     ListActionsResponse:
       type: object
       properties:
         actions:
-          allOf:
-            - $ref: '#/components/schemas/ActionSummaryList'
-            - description: The actions.
+          $ref: '#/components/schemas/ActionSummaryList'
+          description: The actions.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     ListExperimentTemplatesResponse:
       type: object
       properties:
         experimentTemplates:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateSummaryList'
-            - description: The experiment templates.
+          $ref: '#/components/schemas/ExperimentTemplateSummaryList'
+          description: The experiment templates.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     ListExperimentsResponse:
       type: object
       properties:
         experiments:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentSummaryList'
-            - description: The experiments.
+          $ref: '#/components/schemas/ExperimentSummaryList'
+          description: The experiments.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags for the resource.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags for the resource.
     StartExperimentResponse:
       type: object
       properties:
         experiment:
-          allOf:
-            - $ref: '#/components/schemas/Experiment'
-            - description: Information about the experiment.
+          $ref: '#/components/schemas/Experiment'
+          description: Information about the experiment.
     StopExperimentResponse:
       type: object
       properties:
         experiment:
-          allOf:
-            - $ref: '#/components/schemas/Experiment'
-            - description: Information about the experiment.
+          $ref: '#/components/schemas/Experiment'
+          description: Information about the experiment.
     TagResourceResponse:
       type: object
       properties: {}
@@ -965,22 +939,19 @@ components:
       type: object
       properties:
         experimentTemplate:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplate'
-            - description: Information about the experiment template.
+          $ref: '#/components/schemas/ExperimentTemplate'
+          description: Information about the experiment template.
     UpdateExperimentTemplateStopConditionInput:
       type: object
       required:
         - source
       properties:
         source:
-          allOf:
-            - $ref: '#/components/schemas/StopConditionSource'
-            - description: 'The source for the stop condition. Specify <code>aws:cloudwatch:alarm</code> if the stop condition is defined by a CloudWatch alarm. Specify <code>none</code> if there is no stop condition.'
+          $ref: '#/components/schemas/StopConditionSource'
+          description: 'The source for the stop condition. Specify <code>aws:cloudwatch:alarm</code> if the stop condition is defined by a CloudWatch alarm. Specify <code>none</code> if there is no stop condition.'
         value:
-          allOf:
-            - $ref: '#/components/schemas/StopConditionValue'
-            - description: The Amazon Resource Name (ARN) of the CloudWatch alarm.
+          $ref: '#/components/schemas/StopConditionValue'
+          description: The Amazon Resource Name (ARN) of the CloudWatch alarm.
       description: Specifies a stop condition for an experiment. You can define a stop condition as a CloudWatch alarm.
     UpdateExperimentTemplateTargetInput:
       type: object
@@ -989,49 +960,39 @@ components:
         - selectionMode
       properties:
         resourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: The AWS resource type. The resource type must be supported for the specified action.
+          $ref: '#/components/schemas/ResourceType'
+          description: The AWS resource type. The resource type must be supported for the specified action.
         resourceArns:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArnList'
-            - description: The Amazon Resource Names (ARNs) of the targets.
+          $ref: '#/components/schemas/ResourceArnList'
+          description: The Amazon Resource Names (ARNs) of the targets.
         resourceTags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags for the target resources.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags for the target resources.
         filters:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateTargetFilterInputList'
-            - description: The filters to apply to identify target resources using specific attributes.
+          $ref: '#/components/schemas/ExperimentTemplateTargetFilterInputList'
+          description: The filters to apply to identify target resources using specific attributes.
         selectionMode:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateTargetSelectionMode'
-            - description: Scopes the identified resources to a specific count or percentage.
+          $ref: '#/components/schemas/ExperimentTemplateTargetSelectionMode'
+          description: Scopes the identified resources to a specific count or percentage.
       description: Specifies a target for an experiment. You must specify at least one Amazon Resource Name (ARN) or at least one resource tag. You cannot specify both.
     UpdateExperimentTemplateActionInputItem:
       type: object
       properties:
         actionId:
-          allOf:
-            - $ref: '#/components/schemas/ActionId'
-            - description: The ID of the action.
+          $ref: '#/components/schemas/ActionId'
+          description: The ID of the action.
         description:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateActionDescription'
-            - description: A description for the action.
+          $ref: '#/components/schemas/ExperimentTemplateActionDescription'
+          description: A description for the action.
         parameters:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateActionParameterMap'
-            - description: 'The parameters for the action, if applicable.'
+          $ref: '#/components/schemas/ExperimentTemplateActionParameterMap'
+          description: 'The parameters for the action, if applicable.'
         targets:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateActionTargetMap'
-            - description: The targets for the action.
+          $ref: '#/components/schemas/ExperimentTemplateActionTargetMap'
+          description: The targets for the action.
         startAfter:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateActionStartAfterList'
-            - description: The name of the action that must be completed before the current action starts. Omit this parameter to run the action at the start of the experiment.
+          $ref: '#/components/schemas/ExperimentTemplateActionStartAfterList'
+          description: The name of the action that must be completed before the current action starts. Omit this parameter to run the action at the start of the experiment.
       description: Specifies an action for an experiment template.
     ActionId:
       type: string
@@ -1058,25 +1019,20 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ActionId'
-            - description: The ID of the action.
+          $ref: '#/components/schemas/ActionId'
+          description: The ID of the action.
         description:
-          allOf:
-            - $ref: '#/components/schemas/ActionDescription'
-            - description: The description for the action.
+          $ref: '#/components/schemas/ActionDescription'
+          description: The description for the action.
         parameters:
-          allOf:
-            - $ref: '#/components/schemas/ActionParameterMap'
-            - description: 'The action parameters, if applicable.'
+          $ref: '#/components/schemas/ActionParameterMap'
+          description: 'The action parameters, if applicable.'
         targets:
-          allOf:
-            - $ref: '#/components/schemas/ActionTargetMap'
-            - description: The supported targets for the action.
+          $ref: '#/components/schemas/ActionTargetMap'
+          description: The supported targets for the action.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags for the action.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags for the action.
       description: 'Describes an action. For more information, see <a href="https://docs.aws.amazon.com/fis/latest/userguide/fis-actions-reference.html">AWS FIS actions</a> in the <i>AWS Fault Injection Simulator User Guide</i>.'
     ActionParameterDescription:
       type: string
@@ -1088,13 +1044,11 @@ components:
       type: object
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/ActionParameterDescription'
-            - description: The parameter description.
+          $ref: '#/components/schemas/ActionParameterDescription'
+          description: The parameter description.
         required:
-          allOf:
-            - $ref: '#/components/schemas/ActionParameterRequired'
-            - description: Indicates whether the parameter is required.
+          $ref: '#/components/schemas/ActionParameterRequired'
+          description: Indicates whether the parameter is required.
       description: Describes a parameter for an action.
     ActionParameterName:
       type: string
@@ -1104,21 +1058,17 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ActionId'
-            - description: The ID of the action.
+          $ref: '#/components/schemas/ActionId'
+          description: The ID of the action.
         description:
-          allOf:
-            - $ref: '#/components/schemas/ActionDescription'
-            - description: The description for the action.
+          $ref: '#/components/schemas/ActionDescription'
+          description: The description for the action.
         targets:
-          allOf:
-            - $ref: '#/components/schemas/ActionTargetMap'
-            - description: The targets for the action.
+          $ref: '#/components/schemas/ActionTargetMap'
+          description: The targets for the action.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags for the action.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags for the action.
       description: Provides a summary of an action.
     ActionSummaryList:
       type: array
@@ -1132,9 +1082,8 @@ components:
       type: object
       properties:
         resourceType:
-          allOf:
-            - $ref: '#/components/schemas/TargetResourceType'
-            - description: The resource type of the target.
+          $ref: '#/components/schemas/TargetResourceType'
+          description: The resource type of the target.
       description: Describes a target for an action.
     ActionTargetName:
       type: string
@@ -1193,72 +1142,56 @@ components:
       title: CreateExperimentTemplateRequest
       properties:
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         description:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateDescription'
-            - description: A description for the experiment template. Can contain up to 64 letters (A-Z and a-z).
+          $ref: '#/components/schemas/ExperimentTemplateDescription'
+          description: A description for the experiment template. Can contain up to 64 letters (A-Z and a-z).
         stopConditions:
-          allOf:
-            - $ref: '#/components/schemas/CreateExperimentTemplateStopConditionInputList'
-            - description: The stop conditions.
+          $ref: '#/components/schemas/CreateExperimentTemplateStopConditionInputList'
+          description: The stop conditions.
         targets:
-          allOf:
-            - $ref: '#/components/schemas/CreateExperimentTemplateTargetInputMap'
-            - description: The targets for the experiment.
+          $ref: '#/components/schemas/CreateExperimentTemplateTargetInputMap'
+          description: The targets for the experiment.
         actions:
-          allOf:
-            - $ref: '#/components/schemas/CreateExperimentTemplateActionInputMap'
-            - description: The actions for the experiment.
+          $ref: '#/components/schemas/CreateExperimentTemplateActionInputMap'
+          description: The actions for the experiment.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+          $ref: '#/components/schemas/RoleArn'
+          description: The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags to apply to the experiment template.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags to apply to the experiment template.
     ExperimentTemplate:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateId'
-            - description: The ID of the experiment template.
+          $ref: '#/components/schemas/ExperimentTemplateId'
+          description: The ID of the experiment template.
         description:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateDescription'
-            - description: The description for the experiment template.
+          $ref: '#/components/schemas/ExperimentTemplateDescription'
+          description: The description for the experiment template.
         targets:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateTargetMap'
-            - description: The targets for the experiment.
+          $ref: '#/components/schemas/ExperimentTemplateTargetMap'
+          description: The targets for the experiment.
         actions:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateActionMap'
-            - description: The actions for the experiment.
+          $ref: '#/components/schemas/ExperimentTemplateActionMap'
+          description: The actions for the experiment.
         stopConditions:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateStopConditionList'
-            - description: The stop conditions for the experiment.
+          $ref: '#/components/schemas/ExperimentTemplateStopConditionList'
+          description: The stop conditions for the experiment.
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/CreationTime'
-            - description: The time the experiment template was created.
+          $ref: '#/components/schemas/CreationTime'
+          description: The time the experiment template was created.
         lastUpdateTime:
-          allOf:
-            - $ref: '#/components/schemas/LastUpdateTime'
-            - description: The time the experiment template was last updated.
+          $ref: '#/components/schemas/LastUpdateTime'
+          description: The time the experiment template was last updated.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The Amazon Resource Name (ARN) of an IAM role.
+          $ref: '#/components/schemas/RoleArn'
+          description: The Amazon Resource Name (ARN) of an IAM role.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags for the experiment template.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags for the experiment template.
       description: Describes an experiment template.
     StopConditionSource:
       type: string
@@ -1305,13 +1238,11 @@ components:
       type: object
       properties:
         status:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentStatus'
-            - description: The state of the experiment.
+          $ref: '#/components/schemas/ExperimentStatus'
+          description: The state of the experiment.
         reason:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentStatusReason'
-            - description: The reason for the state.
+          $ref: '#/components/schemas/ExperimentStatusReason'
+          description: The reason for the state.
       description: Describes the state of an experiment.
     ExperimentTargetMap:
       type: object
@@ -1335,49 +1266,38 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentId'
-            - description: The ID of the experiment.
+          $ref: '#/components/schemas/ExperimentId'
+          description: The ID of the experiment.
         experimentTemplateId:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateId'
-            - description: The ID of the experiment template.
+          $ref: '#/components/schemas/ExperimentTemplateId'
+          description: The ID of the experiment template.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+          $ref: '#/components/schemas/RoleArn'
+          description: The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
         state:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentState'
-            - description: The state of the experiment.
+          $ref: '#/components/schemas/ExperimentState'
+          description: The state of the experiment.
         targets:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTargetMap'
-            - description: The targets for the experiment.
+          $ref: '#/components/schemas/ExperimentTargetMap'
+          description: The targets for the experiment.
         actions:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentActionMap'
-            - description: The actions for the experiment.
+          $ref: '#/components/schemas/ExperimentActionMap'
+          description: The actions for the experiment.
         stopConditions:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentStopConditionList'
-            - description: The stop conditions for the experiment.
+          $ref: '#/components/schemas/ExperimentStopConditionList'
+          description: The stop conditions for the experiment.
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/CreationTime'
-            - description: The time the experiment was created.
+          $ref: '#/components/schemas/CreationTime'
+          description: The time the experiment was created.
         startTime:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentStartTime'
-            - description: The time that the experiment was started.
+          $ref: '#/components/schemas/ExperimentStartTime'
+          description: The time that the experiment was started.
         endTime:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentEndTime'
-            - description: The time that the experiment ended.
+          $ref: '#/components/schemas/ExperimentEndTime'
+          description: The time that the experiment ended.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags for the experiment.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags for the experiment.
       description: Describes an experiment.
     ExperimentActionDescription:
       type: string
@@ -1399,41 +1319,33 @@ components:
       type: object
       properties:
         status:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentActionStatus'
-            - description: The state of the action.
+          $ref: '#/components/schemas/ExperimentActionStatus'
+          description: The state of the action.
         reason:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentActionStatusReason'
-            - description: The reason for the state.
+          $ref: '#/components/schemas/ExperimentActionStatusReason'
+          description: The reason for the state.
       description: Describes the state of an action.
     ExperimentAction:
       type: object
       properties:
         actionId:
-          allOf:
-            - $ref: '#/components/schemas/ActionId'
-            - description: The ID of the action.
+          $ref: '#/components/schemas/ActionId'
+          description: The ID of the action.
         description:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentActionDescription'
-            - description: The description for the action.
+          $ref: '#/components/schemas/ExperimentActionDescription'
+          description: The description for the action.
         parameters:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentActionParameterMap'
-            - description: The parameters for the action.
+          $ref: '#/components/schemas/ExperimentActionParameterMap'
+          description: The parameters for the action.
         targets:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentActionTargetMap'
-            - description: The targets for the action.
+          $ref: '#/components/schemas/ExperimentActionTargetMap'
+          description: The targets for the action.
         startAfter:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentActionStartAfterList'
-            - description: The name of the action that must be completed before this action starts.
+          $ref: '#/components/schemas/ExperimentActionStartAfterList'
+          description: The name of the action that must be completed before this action starts.
         state:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentActionState'
-            - description: The state of the action.
+          $ref: '#/components/schemas/ExperimentActionState'
+          description: The state of the action.
       description: Describes the action for an experiment.
     ExperimentActionName:
       type: string
@@ -1492,37 +1404,30 @@ components:
       type: object
       properties:
         source:
-          allOf:
-            - $ref: '#/components/schemas/StopConditionSource'
-            - description: The source for the stop condition.
+          $ref: '#/components/schemas/StopConditionSource'
+          description: The source for the stop condition.
         value:
-          allOf:
-            - $ref: '#/components/schemas/StopConditionValue'
-            - description: 'The Amazon Resource Name (ARN) of the CloudWatch alarm, if applicable.'
+          $ref: '#/components/schemas/StopConditionValue'
+          description: 'The Amazon Resource Name (ARN) of the CloudWatch alarm, if applicable.'
       description: Describes the stop condition for an experiment.
     ExperimentSummary:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentId'
-            - description: The ID of the experiment.
+          $ref: '#/components/schemas/ExperimentId'
+          description: The ID of the experiment.
         experimentTemplateId:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateId'
-            - description: The ID of the experiment template.
+          $ref: '#/components/schemas/ExperimentTemplateId'
+          description: The ID of the experiment template.
         state:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentState'
-            - description: The state of the experiment.
+          $ref: '#/components/schemas/ExperimentState'
+          description: The state of the experiment.
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/CreationTime'
-            - description: The time that the experiment was created.
+          $ref: '#/components/schemas/CreationTime'
+          description: The time that the experiment was created.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags for the experiment.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags for the experiment.
       description: Provides a summary of an experiment.
     ExperimentSummaryList:
       type: array
@@ -1540,25 +1445,20 @@ components:
       type: object
       properties:
         resourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: The resource type.
+          $ref: '#/components/schemas/ResourceType'
+          description: The resource type.
         resourceArns:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArnList'
-            - description: The Amazon Resource Names (ARNs) of the resources.
+          $ref: '#/components/schemas/ResourceArnList'
+          description: The Amazon Resource Names (ARNs) of the resources.
         resourceTags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags for the target resources.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags for the target resources.
         filters:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTargetFilterList'
-            - description: The filters to apply to identify target resources using specific attributes.
+          $ref: '#/components/schemas/ExperimentTargetFilterList'
+          description: The filters to apply to identify target resources using specific attributes.
         selectionMode:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTargetSelectionMode'
-            - description: Scopes the identified resources to a specific count or percentage.
+          $ref: '#/components/schemas/ExperimentTargetSelectionMode'
+          description: Scopes the identified resources to a specific count or percentage.
       description: Describes a target for an experiment.
     ExperimentTargetFilterPath:
       type: string
@@ -1572,13 +1472,11 @@ components:
       type: object
       properties:
         path:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTargetFilterPath'
-            - description: The attribute path for the filter.
+          $ref: '#/components/schemas/ExperimentTargetFilterPath'
+          description: The attribute path for the filter.
         values:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTargetFilterValues'
-            - description: The attribute values for the filter.
+          $ref: '#/components/schemas/ExperimentTargetFilterValues'
+          description: The attribute values for the filter.
       description: Describes a filter used for the target resources in an experiment.
     ExperimentTargetFilterValue:
       type: string
@@ -1603,25 +1501,20 @@ components:
       type: object
       properties:
         actionId:
-          allOf:
-            - $ref: '#/components/schemas/ActionId'
-            - description: The ID of the action.
+          $ref: '#/components/schemas/ActionId'
+          description: The ID of the action.
         description:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateActionDescription'
-            - description: A description for the action.
+          $ref: '#/components/schemas/ExperimentTemplateActionDescription'
+          description: A description for the action.
         parameters:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateActionParameterMap'
-            - description: The parameters for the action.
+          $ref: '#/components/schemas/ExperimentTemplateActionParameterMap'
+          description: The parameters for the action.
         targets:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateActionTargetMap'
-            - description: The targets for the action.
+          $ref: '#/components/schemas/ExperimentTemplateActionTargetMap'
+          description: The targets for the action.
         startAfter:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateActionStartAfterList'
-            - description: The name of the action that must be completed before the current action starts.
+          $ref: '#/components/schemas/ExperimentTemplateActionStartAfterList'
+          description: The name of the action that must be completed before the current action starts.
       description: Describes an action for an experiment template.
     ExperimentTemplateActionName:
       type: string
@@ -1651,37 +1544,30 @@ components:
       type: object
       properties:
         source:
-          allOf:
-            - $ref: '#/components/schemas/StopConditionSource'
-            - description: The source for the stop condition.
+          $ref: '#/components/schemas/StopConditionSource'
+          description: The source for the stop condition.
         value:
-          allOf:
-            - $ref: '#/components/schemas/StopConditionValue'
-            - description: 'The Amazon Resource Name (ARN) of the CloudWatch alarm, if applicable.'
+          $ref: '#/components/schemas/StopConditionValue'
+          description: 'The Amazon Resource Name (ARN) of the CloudWatch alarm, if applicable.'
       description: Describes a stop condition for an experiment template.
     ExperimentTemplateSummary:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateId'
-            - description: The ID of the experiment template.
+          $ref: '#/components/schemas/ExperimentTemplateId'
+          description: The ID of the experiment template.
         description:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateDescription'
-            - description: The description of the experiment template.
+          $ref: '#/components/schemas/ExperimentTemplateDescription'
+          description: The description of the experiment template.
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/CreationTime'
-            - description: The time that the experiment template was created.
+          $ref: '#/components/schemas/CreationTime'
+          description: The time that the experiment template was created.
         lastUpdateTime:
-          allOf:
-            - $ref: '#/components/schemas/LastUpdateTime'
-            - description: The time that the experiment template was last updated.
+          $ref: '#/components/schemas/LastUpdateTime'
+          description: The time that the experiment template was last updated.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags for the experiment template.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags for the experiment template.
       description: Provides a summary of an experiment template.
     ExperimentTemplateSummaryList:
       type: array
@@ -1695,25 +1581,20 @@ components:
       type: object
       properties:
         resourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: The resource type.
+          $ref: '#/components/schemas/ResourceType'
+          description: The resource type.
         resourceArns:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArnList'
-            - description: The Amazon Resource Names (ARNs) of the targets.
+          $ref: '#/components/schemas/ResourceArnList'
+          description: The Amazon Resource Names (ARNs) of the targets.
         resourceTags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags for the target resources.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags for the target resources.
         filters:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateTargetFilterList'
-            - description: The filters to apply to identify target resources using specific attributes.
+          $ref: '#/components/schemas/ExperimentTemplateTargetFilterList'
+          description: The filters to apply to identify target resources using specific attributes.
         selectionMode:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateTargetSelectionMode'
-            - description: Scopes the identified resources to a specific count or percentage.
+          $ref: '#/components/schemas/ExperimentTemplateTargetSelectionMode'
+          description: Scopes the identified resources to a specific count or percentage.
       description: Describes a target for an experiment template.
     ExperimentTemplateTargetFilterPath:
       type: string
@@ -1727,13 +1608,11 @@ components:
       type: object
       properties:
         path:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateTargetFilterPath'
-            - description: The attribute path for the filter.
+          $ref: '#/components/schemas/ExperimentTemplateTargetFilterPath'
+          description: The attribute path for the filter.
         values:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateTargetFilterValues'
-            - description: The attribute values for the filter.
+          $ref: '#/components/schemas/ExperimentTemplateTargetFilterValues'
+          description: The attribute values for the filter.
       description: Describes a filter used for the target resources in an experiment template.
     ExperimentTemplateTargetInputFilter:
       type: object
@@ -1742,13 +1621,11 @@ components:
         - values
       properties:
         path:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateTargetFilterPath'
-            - description: The attribute path for the filter.
+          $ref: '#/components/schemas/ExperimentTemplateTargetFilterPath'
+          description: The attribute path for the filter.
         values:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateTargetFilterValues'
-            - description: The attribute values for the filter.
+          $ref: '#/components/schemas/ExperimentTemplateTargetFilterValues'
+          description: The attribute values for the filter.
       description: Describes a filter used for the target resource input in an experiment template.
     ExperimentTemplateTargetFilterValue:
       type: string
@@ -1812,17 +1689,14 @@ components:
       title: StartExperimentRequest
       properties:
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/ClientToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         experimentTemplateId:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateId'
-            - description: The ID of the experiment template.
+          $ref: '#/components/schemas/ExperimentTemplateId'
+          description: The ID of the experiment template.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags to apply to the experiment.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags to apply to the experiment.
     StopExperimentRequest:
       type: object
       title: StopExperimentRequest
@@ -1838,9 +1712,8 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags for the resource.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags for the resource.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -1862,24 +1735,19 @@ components:
       title: UpdateExperimentTemplateRequest
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/ExperimentTemplateDescription'
-            - description: A description for the template.
+          $ref: '#/components/schemas/ExperimentTemplateDescription'
+          description: A description for the template.
         stopConditions:
-          allOf:
-            - $ref: '#/components/schemas/UpdateExperimentTemplateStopConditionInputList'
-            - description: The stop conditions for the experiment.
+          $ref: '#/components/schemas/UpdateExperimentTemplateStopConditionInputList'
+          description: The stop conditions for the experiment.
         targets:
-          allOf:
-            - $ref: '#/components/schemas/UpdateExperimentTemplateTargetInputMap'
-            - description: The targets for the experiment.
+          $ref: '#/components/schemas/UpdateExperimentTemplateTargetInputMap'
+          description: The targets for the experiment.
         actions:
-          allOf:
-            - $ref: '#/components/schemas/UpdateExperimentTemplateActionInputMap'
-            - description: The actions for the experiment.
+          $ref: '#/components/schemas/UpdateExperimentTemplateActionInputMap'
+          description: The actions for the experiment.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+          $ref: '#/components/schemas/RoleArn'
+          description: The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
 security:
   - hmac: []

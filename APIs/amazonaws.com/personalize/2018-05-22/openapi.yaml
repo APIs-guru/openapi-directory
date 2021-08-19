@@ -2608,9 +2608,8 @@ components:
       type: object
       properties:
         batchInferenceJobArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the batch inference job.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the batch inference job.
     CreateBatchInferenceJobRequest:
       type: object
       required:
@@ -2622,37 +2621,29 @@ components:
       title: CreateBatchInferenceJobRequest
       properties:
         jobName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the batch inference job to create.
+          $ref: '#/components/schemas/Name'
+          description: The name of the batch inference job to create.
         solutionVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the solution version that will be used to generate the batch inference recommendations.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the solution version that will be used to generate the batch inference recommendations.
         filterArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'The ARN of the filter to apply to the batch inference job. For more information on using filters, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html">Filtering Batch Recommendations</a>..'
+          $ref: '#/components/schemas/Arn'
+          description: 'The ARN of the filter to apply to the batch inference job. For more information on using filters, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html">Filtering Batch Recommendations</a>..'
         numResults:
-          allOf:
-            - $ref: '#/components/schemas/NumBatchResults'
-            - description: The number of recommendations to retreive.
+          $ref: '#/components/schemas/NumBatchResults'
+          description: The number of recommendations to retreive.
         jobInput:
-          allOf:
-            - $ref: '#/components/schemas/BatchInferenceJobInput'
-            - description: The Amazon S3 path that leads to the input file to base your recommendations on. The input material must be in JSON format.
+          $ref: '#/components/schemas/BatchInferenceJobInput'
+          description: The Amazon S3 path that leads to the input file to base your recommendations on. The input material must be in JSON format.
         jobOutput:
-          allOf:
-            - $ref: '#/components/schemas/BatchInferenceJobOutput'
-            - description: The path to the Amazon S3 bucket where the job's output will be stored.
+          $ref: '#/components/schemas/BatchInferenceJobOutput'
+          description: The path to the Amazon S3 bucket where the job's output will be stored.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and output Amazon S3 buckets respectively.
+          $ref: '#/components/schemas/RoleArn'
+          description: The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and output Amazon S3 buckets respectively.
         batchInferenceJobConfig:
-          allOf:
-            - $ref: '#/components/schemas/BatchInferenceJobConfig'
-            - description: The configuration details of a batch inference job.
+          $ref: '#/components/schemas/BatchInferenceJobConfig'
+          description: The configuration details of a batch inference job.
     InvalidInputException: {}
     ResourceAlreadyExistsException: {}
     LimitExceededException: {}
@@ -2662,9 +2653,8 @@ components:
       type: object
       properties:
         campaignArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the campaign.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the campaign.
     CreateCampaignRequest:
       type: object
       required:
@@ -2673,28 +2663,23 @@ components:
       title: CreateCampaignRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: A name for the new campaign. The campaign name must be unique within your account.
+          $ref: '#/components/schemas/Name'
+          description: A name for the new campaign. The campaign name must be unique within your account.
         solutionVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the solution version to deploy.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the solution version to deploy.
         minProvisionedTPS:
-          allOf:
-            - $ref: '#/components/schemas/TransactionsPerSecond'
-            - description: Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
+          $ref: '#/components/schemas/TransactionsPerSecond'
+          description: Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
         campaignConfig:
-          allOf:
-            - $ref: '#/components/schemas/CampaignConfig'
-            - description: The configuration details of a campaign.
+          $ref: '#/components/schemas/CampaignConfig'
+          description: The configuration details of a campaign.
     CreateDatasetResponse:
       type: object
       properties:
         datasetArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the dataset.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the dataset.
     CreateDatasetRequest:
       type: object
       required:
@@ -2705,28 +2690,23 @@ components:
       title: CreateDatasetRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name for the dataset.
+          $ref: '#/components/schemas/Name'
+          description: The name for the dataset.
         schemaArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the schema to associate with the dataset. The schema defines the dataset fields.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the schema to associate with the dataset. The schema defines the dataset fields.
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset group to add the dataset to.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset group to add the dataset to.
         datasetType:
-          allOf:
-            - $ref: '#/components/schemas/DatasetType'
-            - description: '<p>The type of dataset.</p> <p>One of the following (case insensitive) values:</p> <ul> <li> <p>Interactions</p> </li> <li> <p>Items</p> </li> <li> <p>Users</p> </li> </ul>'
+          $ref: '#/components/schemas/DatasetType'
+          description: '<p>The type of dataset.</p> <p>One of the following (case insensitive) values:</p> <ul> <li> <p>Interactions</p> </li> <li> <p>Items</p> </li> <li> <p>Users</p> </li> </ul>'
     CreateDatasetExportJobResponse:
       type: object
       properties:
         datasetExportJobArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset export job.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset export job.
     CreateDatasetExportJobRequest:
       type: object
       required:
@@ -2737,32 +2717,26 @@ components:
       title: CreateDatasetExportJobRequest
       properties:
         jobName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name for the dataset export job.
+          $ref: '#/components/schemas/Name'
+          description: The name for the dataset export job.
         datasetArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset that contains the data to export.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset that contains the data to export.
         ingestionMode:
-          allOf:
-            - $ref: '#/components/schemas/IngestionMode'
-            - description: 'The data to export, based on how you imported the data. You can choose to export only <code>BULK</code> data that you imported using a dataset import job, only <code>PUT</code> data that you imported incrementally (using the console, PutEvents, PutUsers and PutItems operations), or <code>ALL</code> for both types. The default value is <code>PUT</code>. '
+          $ref: '#/components/schemas/IngestionMode'
+          description: 'The data to export, based on how you imported the data. You can choose to export only <code>BULK</code> data that you imported using a dataset import job, only <code>PUT</code> data that you imported incrementally (using the console, PutEvents, PutUsers and PutItems operations), or <code>ALL</code> for both types. The default value is <code>PUT</code>. '
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The Amazon Resource Name (ARN) of the IAM service role that has permissions to add data to your output Amazon S3 bucket.
+          $ref: '#/components/schemas/RoleArn'
+          description: The Amazon Resource Name (ARN) of the IAM service role that has permissions to add data to your output Amazon S3 bucket.
         jobOutput:
-          allOf:
-            - $ref: '#/components/schemas/DatasetExportJobOutput'
-            - description: The path to the Amazon S3 bucket where the job's output is stored.
+          $ref: '#/components/schemas/DatasetExportJobOutput'
+          description: The path to the Amazon S3 bucket where the job's output is stored.
     CreateDatasetGroupResponse:
       type: object
       properties:
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the new dataset group.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the new dataset group.
     CreateDatasetGroupRequest:
       type: object
       required:
@@ -2770,24 +2744,20 @@ components:
       title: CreateDatasetGroupRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name for the new dataset group.
+          $ref: '#/components/schemas/Name'
+          description: The name for the new dataset group.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The ARN of the Identity and Access Management (IAM) role that has permissions to access the Key Management Service (KMS) key. Supplying an IAM role is only valid when also specifying a KMS key.
+          $ref: '#/components/schemas/RoleArn'
+          description: The ARN of the Identity and Access Management (IAM) role that has permissions to access the Key Management Service (KMS) key. Supplying an IAM role is only valid when also specifying a KMS key.
         kmsKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyArn'
-            - description: The Amazon Resource Name (ARN) of a Key Management Service (KMS) key used to encrypt the datasets.
+          $ref: '#/components/schemas/KmsKeyArn'
+          description: The Amazon Resource Name (ARN) of a Key Management Service (KMS) key used to encrypt the datasets.
     CreateDatasetImportJobResponse:
       type: object
       properties:
         datasetImportJobArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the dataset import job.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the dataset import job.
     CreateDatasetImportJobRequest:
       type: object
       required:
@@ -2798,32 +2768,26 @@ components:
       title: CreateDatasetImportJobRequest
       properties:
         jobName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name for the dataset import job.
+          $ref: '#/components/schemas/Name'
+          description: The name for the dataset import job.
         datasetArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the dataset that receives the imported data.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the dataset that receives the imported data.
         dataSource:
-          allOf:
-            - $ref: '#/components/schemas/DataSource'
-            - description: The Amazon S3 bucket that contains the training data to import.
+          $ref: '#/components/schemas/DataSource'
+          description: The Amazon S3 bucket that contains the training data to import.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The ARN of the IAM role that has permissions to read from the Amazon S3 data source.
+          $ref: '#/components/schemas/RoleArn'
+          description: The ARN of the IAM role that has permissions to read from the Amazon S3 data source.
     CreateEventTrackerResponse:
       type: object
       properties:
         eventTrackerArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the event tracker.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the event tracker.
         trackingId:
-          allOf:
-            - $ref: '#/components/schemas/TrackingId'
-            - description: 'The ID of the event tracker. Include this ID in requests to the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html">PutEvents</a> API.'
+          $ref: '#/components/schemas/TrackingId'
+          description: 'The ID of the event tracker. Include this ID in requests to the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html">PutEvents</a> API.'
     CreateEventTrackerRequest:
       type: object
       required:
@@ -2832,20 +2796,17 @@ components:
       title: CreateEventTrackerRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name for the event tracker.
+          $ref: '#/components/schemas/Name'
+          description: The name for the event tracker.
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset group that receives the event data.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset group that receives the event data.
     CreateFilterResponse:
       type: object
       properties:
         filterArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the new filter.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the new filter.
     CreateFilterRequest:
       type: object
       required:
@@ -2855,24 +2816,20 @@ components:
       title: CreateFilterRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the filter to create.
+          $ref: '#/components/schemas/Name'
+          description: The name of the filter to create.
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the dataset group that the filter will belong to.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the dataset group that the filter will belong to.
         filterExpression:
-          allOf:
-            - $ref: '#/components/schemas/FilterExpression'
-            - description: 'The filter expression defines which items are included or excluded from recommendations. Filter expression must follow specific format rules. For information about filter expression structure and syntax, see <a>filter-expressions</a>.'
+          $ref: '#/components/schemas/FilterExpression'
+          description: 'The filter expression defines which items are included or excluded from recommendations. Filter expression must follow specific format rules. For information about filter expression structure and syntax, see <a>filter-expressions</a>.'
     CreateSchemaResponse:
       type: object
       properties:
         schemaArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the created schema.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the created schema.
     CreateSchemaRequest:
       type: object
       required:
@@ -2881,20 +2838,17 @@ components:
       title: CreateSchemaRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name for the schema.
+          $ref: '#/components/schemas/Name'
+          description: The name for the schema.
         schema:
-          allOf:
-            - $ref: '#/components/schemas/AvroSchema'
-            - description: A schema in Avro JSON format.
+          $ref: '#/components/schemas/AvroSchema'
+          description: A schema in Avro JSON format.
     CreateSolutionResponse:
       type: object
       properties:
         solutionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the solution.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the solution.
     CreateSolutionRequest:
       type: object
       required:
@@ -2903,40 +2857,32 @@ components:
       title: CreateSolutionRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name for the solution.
+          $ref: '#/components/schemas/Name'
+          description: The name for the solution.
         performHPO:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe. The default is <code>false</code>.</p> <p>When performing AutoML, this parameter is always <code>true</code> and you should not set it to <code>false</code>.</p>'
+          $ref: '#/components/schemas/Boolean'
+          description: '<p>Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe. The default is <code>false</code>.</p> <p>When performing AutoML, this parameter is always <code>true</code> and you should not set it to <code>false</code>.</p>'
         performAutoML:
-          allOf:
-            - $ref: '#/components/schemas/PerformAutoML'
-            - description: '<p>Whether to perform automated machine learning (AutoML). The default is <code>false</code>. For this case, you must specify <code>recipeArn</code>.</p> <p>When set to <code>true</code>, Amazon Personalize analyzes your training data and selects the optimal USER_PERSONALIZATION recipe and hyperparameters. In this case, you must omit <code>recipeArn</code>. Amazon Personalize determines the optimal recipe by running tests with different values for the hyperparameters. AutoML lengthens the training process as compared to selecting a specific recipe.</p>'
+          $ref: '#/components/schemas/PerformAutoML'
+          description: '<p>Whether to perform automated machine learning (AutoML). The default is <code>false</code>. For this case, you must specify <code>recipeArn</code>.</p> <p>When set to <code>true</code>, Amazon Personalize analyzes your training data and selects the optimal USER_PERSONALIZATION recipe and hyperparameters. In this case, you must omit <code>recipeArn</code>. Amazon Personalize determines the optimal recipe by running tests with different values for the hyperparameters. AutoML lengthens the training process as compared to selecting a specific recipe.</p>'
         recipeArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the recipe to use for model training. Only specified when <code>performAutoML</code> is false.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the recipe to use for model training. Only specified when <code>performAutoML</code> is false.
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset group that provides the training data.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset group that provides the training data.
         eventType:
-          allOf:
-            - $ref: '#/components/schemas/EventType'
-            - description: '<p>When your have multiple event types (using an <code>EVENT_TYPE</code> schema field), this parameter specifies which event type (for example, ''click'' or ''like'') is used for training the model.</p> <p>If you do not provide an <code>eventType</code>, Amazon Personalize will use all interactions for training with equal weight regardless of type.</p>'
+          $ref: '#/components/schemas/EventType'
+          description: '<p>When your have multiple event types (using an <code>EVENT_TYPE</code> schema field), this parameter specifies which event type (for example, ''click'' or ''like'') is used for training the model.</p> <p>If you do not provide an <code>eventType</code>, Amazon Personalize will use all interactions for training with equal weight regardless of type.</p>'
         solutionConfig:
-          allOf:
-            - $ref: '#/components/schemas/SolutionConfig'
-            - description: '<p>The configuration to use with the solution. When <code>performAutoML</code> is set to true, Amazon Personalize only evaluates the <code>autoMLConfig</code> section of the solution configuration.</p> <note> <p>Amazon Personalize doesn''t support configuring the <code>hpoObjective</code> at this time.</p> </note>'
+          $ref: '#/components/schemas/SolutionConfig'
+          description: '<p>The configuration to use with the solution. When <code>performAutoML</code> is set to true, Amazon Personalize only evaluates the <code>autoMLConfig</code> section of the solution configuration.</p> <note> <p>Amazon Personalize doesn''t support configuring the <code>hpoObjective</code> at this time.</p> </note>'
     CreateSolutionVersionResponse:
       type: object
       properties:
         solutionVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the new solution version.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the new solution version.
     CreateSolutionVersionRequest:
       type: object
       required:
@@ -2944,13 +2890,11 @@ components:
       title: CreateSolutionVersionRequest
       properties:
         solutionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the solution containing the training configuration information.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the solution containing the training configuration information.
         trainingMode:
-          allOf:
-            - $ref: '#/components/schemas/TrainingMode'
-            - description: '<p>The scope of training to be performed when creating the solution version. The <code>FULL</code> option trains the solution version based on the entirety of the input solution''s training data, while the <code>UPDATE</code> option processes only the data that has changed in comparison to the input solution. Choose <code>UPDATE</code> when you want to incrementally update your solution version instead of creating an entirely new one.</p> <important> <p>The <code>UPDATE</code> option can only be used when you already have an active solution version created from the input solution using the <code>FULL</code> option and the input solution was trained with the <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html">User-Personalization</a> recipe or the <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html">HRNN-Coldstart</a> recipe.</p> </important>'
+          $ref: '#/components/schemas/TrainingMode'
+          description: '<p>The scope of training to be performed when creating the solution version. The <code>FULL</code> option trains the solution version based on the entirety of the input solution''s training data, while the <code>UPDATE</code> option processes only the data that has changed in comparison to the input solution. Choose <code>UPDATE</code> when you want to incrementally update your solution version instead of creating an entirely new one.</p> <important> <p>The <code>UPDATE</code> option can only be used when you already have an active solution version created from the input solution using the <code>FULL</code> option and the input solution was trained with the <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html">User-Personalization</a> recipe or the <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html">HRNN-Coldstart</a> recipe.</p> </important>'
     DeleteCampaignRequest:
       type: object
       required:
@@ -2958,9 +2902,8 @@ components:
       title: DeleteCampaignRequest
       properties:
         campaignArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the campaign to delete.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the campaign to delete.
     DeleteDatasetRequest:
       type: object
       required:
@@ -2968,9 +2911,8 @@ components:
       title: DeleteDatasetRequest
       properties:
         datasetArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset to delete.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset to delete.
     DeleteDatasetGroupRequest:
       type: object
       required:
@@ -2978,9 +2920,8 @@ components:
       title: DeleteDatasetGroupRequest
       properties:
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the dataset group to delete.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the dataset group to delete.
     DeleteEventTrackerRequest:
       type: object
       required:
@@ -2988,9 +2929,8 @@ components:
       title: DeleteEventTrackerRequest
       properties:
         eventTrackerArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the event tracker to delete.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the event tracker to delete.
     DeleteFilterRequest:
       type: object
       required:
@@ -2998,9 +2938,8 @@ components:
       title: DeleteFilterRequest
       properties:
         filterArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the filter to delete.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the filter to delete.
     DeleteSchemaRequest:
       type: object
       required:
@@ -3008,9 +2947,8 @@ components:
       title: DeleteSchemaRequest
       properties:
         schemaArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the schema to delete.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the schema to delete.
     DeleteSolutionRequest:
       type: object
       required:
@@ -3018,16 +2956,14 @@ components:
       title: DeleteSolutionRequest
       properties:
         solutionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the solution to delete.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the solution to delete.
     DescribeAlgorithmResponse:
       type: object
       properties:
         algorithm:
-          allOf:
-            - $ref: '#/components/schemas/Algorithm'
-            - description: A listing of the properties of the algorithm.
+          $ref: '#/components/schemas/Algorithm'
+          description: A listing of the properties of the algorithm.
     DescribeAlgorithmRequest:
       type: object
       required:
@@ -3035,16 +2971,14 @@ components:
       title: DescribeAlgorithmRequest
       properties:
         algorithmArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the algorithm to describe.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the algorithm to describe.
     DescribeBatchInferenceJobResponse:
       type: object
       properties:
         batchInferenceJob:
-          allOf:
-            - $ref: '#/components/schemas/BatchInferenceJob'
-            - description: Information on the specified batch inference job.
+          $ref: '#/components/schemas/BatchInferenceJob'
+          description: Information on the specified batch inference job.
     DescribeBatchInferenceJobRequest:
       type: object
       required:
@@ -3052,16 +2986,14 @@ components:
       title: DescribeBatchInferenceJobRequest
       properties:
         batchInferenceJobArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the batch inference job to describe.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the batch inference job to describe.
     DescribeCampaignResponse:
       type: object
       properties:
         campaign:
-          allOf:
-            - $ref: '#/components/schemas/Campaign'
-            - description: The properties of the campaign.
+          $ref: '#/components/schemas/Campaign'
+          description: The properties of the campaign.
     DescribeCampaignRequest:
       type: object
       required:
@@ -3069,16 +3001,14 @@ components:
       title: DescribeCampaignRequest
       properties:
         campaignArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the campaign.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the campaign.
     DescribeDatasetResponse:
       type: object
       properties:
         dataset:
-          allOf:
-            - $ref: '#/components/schemas/Dataset'
-            - description: A listing of the dataset's properties.
+          $ref: '#/components/schemas/Dataset'
+          description: A listing of the dataset's properties.
     DescribeDatasetRequest:
       type: object
       required:
@@ -3086,16 +3016,14 @@ components:
       title: DescribeDatasetRequest
       properties:
         datasetArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset to describe.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset to describe.
     DescribeDatasetExportJobResponse:
       type: object
       properties:
         datasetExportJob:
-          allOf:
-            - $ref: '#/components/schemas/DatasetExportJob'
-            - description: '<p>Information about the dataset export job, including the status.</p> <p>The status is one of the following values:</p> <ul> <li> <p>CREATE PENDING</p> </li> <li> <p>CREATE IN_PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> </ul>'
+          $ref: '#/components/schemas/DatasetExportJob'
+          description: '<p>Information about the dataset export job, including the status.</p> <p>The status is one of the following values:</p> <ul> <li> <p>CREATE PENDING</p> </li> <li> <p>CREATE IN_PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> </ul>'
     DescribeDatasetExportJobRequest:
       type: object
       required:
@@ -3103,16 +3031,14 @@ components:
       title: DescribeDatasetExportJobRequest
       properties:
         datasetExportJobArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset export job to describe.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset export job to describe.
     DescribeDatasetGroupResponse:
       type: object
       properties:
         datasetGroup:
-          allOf:
-            - $ref: '#/components/schemas/DatasetGroup'
-            - description: A listing of the dataset group's properties.
+          $ref: '#/components/schemas/DatasetGroup'
+          description: A listing of the dataset group's properties.
     DescribeDatasetGroupRequest:
       type: object
       required:
@@ -3120,16 +3046,14 @@ components:
       title: DescribeDatasetGroupRequest
       properties:
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset group to describe.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset group to describe.
     DescribeDatasetImportJobResponse:
       type: object
       properties:
         datasetImportJob:
-          allOf:
-            - $ref: '#/components/schemas/DatasetImportJob'
-            - description: '<p>Information about the dataset import job, including the status.</p> <p>The status is one of the following values:</p> <ul> <li> <p>CREATE PENDING</p> </li> <li> <p>CREATE IN_PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> </ul>'
+          $ref: '#/components/schemas/DatasetImportJob'
+          description: '<p>Information about the dataset import job, including the status.</p> <p>The status is one of the following values:</p> <ul> <li> <p>CREATE PENDING</p> </li> <li> <p>CREATE IN_PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> </ul>'
     DescribeDatasetImportJobRequest:
       type: object
       required:
@@ -3137,16 +3061,14 @@ components:
       title: DescribeDatasetImportJobRequest
       properties:
         datasetImportJobArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset import job to describe.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset import job to describe.
     DescribeEventTrackerResponse:
       type: object
       properties:
         eventTracker:
-          allOf:
-            - $ref: '#/components/schemas/EventTracker'
-            - description: An object that describes the event tracker.
+          $ref: '#/components/schemas/EventTracker'
+          description: An object that describes the event tracker.
     DescribeEventTrackerRequest:
       type: object
       required:
@@ -3154,16 +3076,14 @@ components:
       title: DescribeEventTrackerRequest
       properties:
         eventTrackerArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the event tracker to describe.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the event tracker to describe.
     DescribeFeatureTransformationResponse:
       type: object
       properties:
         featureTransformation:
-          allOf:
-            - $ref: '#/components/schemas/FeatureTransformation'
-            - description: A listing of the FeatureTransformation properties.
+          $ref: '#/components/schemas/FeatureTransformation'
+          description: A listing of the FeatureTransformation properties.
     DescribeFeatureTransformationRequest:
       type: object
       required:
@@ -3171,16 +3091,14 @@ components:
       title: DescribeFeatureTransformationRequest
       properties:
         featureTransformationArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the feature transformation to describe.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the feature transformation to describe.
     DescribeFilterResponse:
       type: object
       properties:
         filter:
-          allOf:
-            - $ref: '#/components/schemas/Filter'
-            - description: The filter's details.
+          $ref: '#/components/schemas/Filter'
+          description: The filter's details.
     DescribeFilterRequest:
       type: object
       required:
@@ -3188,16 +3106,14 @@ components:
       title: DescribeFilterRequest
       properties:
         filterArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the filter to describe.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the filter to describe.
     DescribeRecipeResponse:
       type: object
       properties:
         recipe:
-          allOf:
-            - $ref: '#/components/schemas/Recipe'
-            - description: An object that describes the recipe.
+          $ref: '#/components/schemas/Recipe'
+          description: An object that describes the recipe.
     DescribeRecipeRequest:
       type: object
       required:
@@ -3205,16 +3121,14 @@ components:
       title: DescribeRecipeRequest
       properties:
         recipeArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the recipe to describe.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the recipe to describe.
     DescribeSchemaResponse:
       type: object
       properties:
         schema:
-          allOf:
-            - $ref: '#/components/schemas/DatasetSchema'
-            - description: The requested schema.
+          $ref: '#/components/schemas/DatasetSchema'
+          description: The requested schema.
     DescribeSchemaRequest:
       type: object
       required:
@@ -3222,16 +3136,14 @@ components:
       title: DescribeSchemaRequest
       properties:
         schemaArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the schema to retrieve.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the schema to retrieve.
     DescribeSolutionResponse:
       type: object
       properties:
         solution:
-          allOf:
-            - $ref: '#/components/schemas/Solution'
-            - description: An object that describes the solution.
+          $ref: '#/components/schemas/Solution'
+          description: An object that describes the solution.
     DescribeSolutionRequest:
       type: object
       required:
@@ -3239,16 +3151,14 @@ components:
       title: DescribeSolutionRequest
       properties:
         solutionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the solution to describe.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the solution to describe.
     DescribeSolutionVersionResponse:
       type: object
       properties:
         solutionVersion:
-          allOf:
-            - $ref: '#/components/schemas/SolutionVersion'
-            - description: The solution version.
+          $ref: '#/components/schemas/SolutionVersion'
+          description: The solution version.
     DescribeSolutionVersionRequest:
       type: object
       required:
@@ -3256,20 +3166,17 @@ components:
       title: DescribeSolutionVersionRequest
       properties:
         solutionVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the solution version.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the solution version.
     GetSolutionMetricsResponse:
       type: object
       properties:
         solutionVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The same solution version ARN as specified in the request.
+          $ref: '#/components/schemas/Arn'
+          description: The same solution version ARN as specified in the request.
         metrics:
-          allOf:
-            - $ref: '#/components/schemas/Metrics'
-            - description: The metrics for the solution version.
+          $ref: '#/components/schemas/Metrics'
+          description: The metrics for the solution version.
     GetSolutionMetricsRequest:
       type: object
       required:
@@ -3277,326 +3184,267 @@ components:
       title: GetSolutionMetricsRequest
       properties:
         solutionVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the solution version for which to get metrics.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the solution version for which to get metrics.
     ListBatchInferenceJobsResponse:
       type: object
       properties:
         batchInferenceJobs:
-          allOf:
-            - $ref: '#/components/schemas/BatchInferenceJobs'
-            - description: A list containing information on each job that is returned.
+          $ref: '#/components/schemas/BatchInferenceJobs'
+          description: A list containing information on each job that is returned.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. The value is <code>null</code> when there are no more results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. The value is <code>null</code> when there are no more results to return.
     ListBatchInferenceJobsRequest:
       type: object
       title: ListBatchInferenceJobsRequest
       properties:
         solutionVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the solution version from which the batch inference jobs were created.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the solution version from which the batch inference jobs were created.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to request the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to request the next page of results.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of batch inference job results to return in each page. The default value is 100.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of batch inference job results to return in each page. The default value is 100.
     InvalidNextTokenException: {}
     ListCampaignsResponse:
       type: object
       properties:
         campaigns:
-          allOf:
-            - $ref: '#/components/schemas/Campaigns'
-            - description: A list of the campaigns.
+          $ref: '#/components/schemas/Campaigns'
+          description: A list of the campaigns.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token for getting the next set of campaigns (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token for getting the next set of campaigns (if they exist).
     ListCampaignsRequest:
       type: object
       title: ListCampaignsRequest
       properties:
         solutionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'The Amazon Resource Name (ARN) of the solution to list the campaigns for. When a solution is not specified, all the campaigns associated with the account are listed.'
+          $ref: '#/components/schemas/Arn'
+          description: 'The Amazon Resource Name (ARN) of the solution to list the campaigns for. When a solution is not specified, all the campaigns associated with the account are listed.'
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token returned from the previous call to <code>ListCampaigns</code> for getting the next set of campaigns (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token returned from the previous call to <code>ListCampaigns</code> for getting the next set of campaigns (if they exist).
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of campaigns to return.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of campaigns to return.
     ListDatasetExportJobsResponse:
       type: object
       properties:
         datasetExportJobs:
-          allOf:
-            - $ref: '#/components/schemas/DatasetExportJobs'
-            - description: The list of dataset export jobs.
+          $ref: '#/components/schemas/DatasetExportJobs'
+          description: The list of dataset export jobs.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token for getting the next set of dataset export jobs (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token for getting the next set of dataset export jobs (if they exist).
     ListDatasetExportJobsRequest:
       type: object
       title: ListDatasetExportJobsRequest
       properties:
         datasetArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset to list the dataset export jobs for.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset to list the dataset export jobs for.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token returned from the previous call to <code>ListDatasetExportJobs</code> for getting the next set of dataset export jobs (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token returned from the previous call to <code>ListDatasetExportJobs</code> for getting the next set of dataset export jobs (if they exist).
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of dataset export jobs to return.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of dataset export jobs to return.
     ListDatasetGroupsResponse:
       type: object
       properties:
         datasetGroups:
-          allOf:
-            - $ref: '#/components/schemas/DatasetGroups'
-            - description: The list of your dataset groups.
+          $ref: '#/components/schemas/DatasetGroups'
+          description: The list of your dataset groups.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token for getting the next set of dataset groups (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token for getting the next set of dataset groups (if they exist).
     ListDatasetGroupsRequest:
       type: object
       title: ListDatasetGroupsRequest
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token returned from the previous call to <code>ListDatasetGroups</code> for getting the next set of dataset groups (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token returned from the previous call to <code>ListDatasetGroups</code> for getting the next set of dataset groups (if they exist).
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of dataset groups to return.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of dataset groups to return.
     ListDatasetImportJobsResponse:
       type: object
       properties:
         datasetImportJobs:
-          allOf:
-            - $ref: '#/components/schemas/DatasetImportJobs'
-            - description: The list of dataset import jobs.
+          $ref: '#/components/schemas/DatasetImportJobs'
+          description: The list of dataset import jobs.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token for getting the next set of dataset import jobs (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token for getting the next set of dataset import jobs (if they exist).
     ListDatasetImportJobsRequest:
       type: object
       title: ListDatasetImportJobsRequest
       properties:
         datasetArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset to list the dataset import jobs for.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset to list the dataset import jobs for.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token returned from the previous call to <code>ListDatasetImportJobs</code> for getting the next set of dataset import jobs (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token returned from the previous call to <code>ListDatasetImportJobs</code> for getting the next set of dataset import jobs (if they exist).
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of dataset import jobs to return.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of dataset import jobs to return.
     ListDatasetsResponse:
       type: object
       properties:
         datasets:
-          allOf:
-            - $ref: '#/components/schemas/Datasets'
-            - description: An array of <code>Dataset</code> objects. Each object provides metadata information.
+          $ref: '#/components/schemas/Datasets'
+          description: An array of <code>Dataset</code> objects. Each object provides metadata information.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token for getting the next set of datasets (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token for getting the next set of datasets (if they exist).
     ListDatasetsRequest:
       type: object
       title: ListDatasetsRequest
       properties:
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset group that contains the datasets to list.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset group that contains the datasets to list.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token returned from the previous call to <code>ListDatasetImportJobs</code> for getting the next set of dataset import jobs (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token returned from the previous call to <code>ListDatasetImportJobs</code> for getting the next set of dataset import jobs (if they exist).
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of datasets to return.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of datasets to return.
     ListEventTrackersResponse:
       type: object
       properties:
         eventTrackers:
-          allOf:
-            - $ref: '#/components/schemas/EventTrackers'
-            - description: A list of event trackers.
+          $ref: '#/components/schemas/EventTrackers'
+          description: A list of event trackers.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token for getting the next set of event trackers (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token for getting the next set of event trackers (if they exist).
     ListEventTrackersRequest:
       type: object
       title: ListEventTrackersRequest
       properties:
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of a dataset group used to filter the response.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of a dataset group used to filter the response.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token returned from the previous call to <code>ListEventTrackers</code> for getting the next set of event trackers (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token returned from the previous call to <code>ListEventTrackers</code> for getting the next set of event trackers (if they exist).
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of event trackers to return.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of event trackers to return.
     ListFiltersResponse:
       type: object
       properties:
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/Filters'
-            - description: A list of returned filters.
+          $ref: '#/components/schemas/Filters'
+          description: A list of returned filters.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token for getting the next set of filters (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token for getting the next set of filters (if they exist).
     ListFiltersRequest:
       type: object
       title: ListFiltersRequest
       properties:
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the dataset group that contains the filters.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the dataset group that contains the filters.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token returned from the previous call to <code>ListFilters</code> for getting the next set of filters (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token returned from the previous call to <code>ListFilters</code> for getting the next set of filters (if they exist).
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of filters to return.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of filters to return.
     ListRecipesResponse:
       type: object
       properties:
         recipes:
-          allOf:
-            - $ref: '#/components/schemas/Recipes'
-            - description: The list of available recipes.
+          $ref: '#/components/schemas/Recipes'
+          description: The list of available recipes.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token for getting the next set of recipes.
+          $ref: '#/components/schemas/NextToken'
+          description: A token for getting the next set of recipes.
     ListRecipesRequest:
       type: object
       title: ListRecipesRequest
       properties:
         recipeProvider:
-          allOf:
-            - $ref: '#/components/schemas/RecipeProvider'
-            - description: The default is <code>SERVICE</code>.
+          $ref: '#/components/schemas/RecipeProvider'
+          description: The default is <code>SERVICE</code>.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token returned from the previous call to <code>ListRecipes</code> for getting the next set of recipes (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token returned from the previous call to <code>ListRecipes</code> for getting the next set of recipes (if they exist).
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of recipes to return.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of recipes to return.
     ListSchemasResponse:
       type: object
       properties:
         schemas:
-          allOf:
-            - $ref: '#/components/schemas/Schemas'
-            - description: A list of schemas.
+          $ref: '#/components/schemas/Schemas'
+          description: A list of schemas.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token used to get the next set of schemas (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token used to get the next set of schemas (if they exist).
     ListSchemasRequest:
       type: object
       title: ListSchemasRequest
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token returned from the previous call to <code>ListSchemas</code> for getting the next set of schemas (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token returned from the previous call to <code>ListSchemas</code> for getting the next set of schemas (if they exist).
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of schemas to return.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of schemas to return.
     ListSolutionVersionsResponse:
       type: object
       properties:
         solutionVersions:
-          allOf:
-            - $ref: '#/components/schemas/SolutionVersions'
-            - description: A list of solution versions describing the version properties.
+          $ref: '#/components/schemas/SolutionVersions'
+          description: A list of solution versions describing the version properties.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token for getting the next set of solution versions (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token for getting the next set of solution versions (if they exist).
     ListSolutionVersionsRequest:
       type: object
       title: ListSolutionVersionsRequest
       properties:
         solutionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the solution.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the solution.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token returned from the previous call to <code>ListSolutionVersions</code> for getting the next set of solution versions (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token returned from the previous call to <code>ListSolutionVersions</code> for getting the next set of solution versions (if they exist).
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of solution versions to return.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of solution versions to return.
     ListSolutionsResponse:
       type: object
       properties:
         solutions:
-          allOf:
-            - $ref: '#/components/schemas/Solutions'
-            - description: A list of the current solutions.
+          $ref: '#/components/schemas/Solutions'
+          description: A list of the current solutions.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token for getting the next set of solutions (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token for getting the next set of solutions (if they exist).
     ListSolutionsRequest:
       type: object
       title: ListSolutionsRequest
       properties:
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset group.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset group.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token returned from the previous call to <code>ListSolutions</code> for getting the next set of solutions (if they exist).
+          $ref: '#/components/schemas/NextToken'
+          description: A token returned from the previous call to <code>ListSolutions</code> for getting the next set of solutions (if they exist).
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of solutions to return.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of solutions to return.
     StopSolutionVersionCreationRequest:
       type: object
       required:
@@ -3604,16 +3452,14 @@ components:
       title: StopSolutionVersionCreationRequest
       properties:
         solutionVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the solution version you want to stop creating.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the solution version you want to stop creating.
     UpdateCampaignResponse:
       type: object
       properties:
         campaignArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The same campaign ARN as given in the request.
+          $ref: '#/components/schemas/Arn'
+          description: The same campaign ARN as given in the request.
     UpdateCampaignRequest:
       type: object
       required:
@@ -3621,21 +3467,17 @@ components:
       title: UpdateCampaignRequest
       properties:
         campaignArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the campaign.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the campaign.
         solutionVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of a new solution version to deploy.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of a new solution version to deploy.
         minProvisionedTPS:
-          allOf:
-            - $ref: '#/components/schemas/TransactionsPerSecond'
-            - description: Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
+          $ref: '#/components/schemas/TransactionsPerSecond'
+          description: Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
         campaignConfig:
-          allOf:
-            - $ref: '#/components/schemas/CampaignConfig'
-            - description: The configuration details of a campaign.
+          $ref: '#/components/schemas/CampaignConfig'
+          description: The configuration details of a campaign.
     AccountId:
       type: string
       maxLength: 256
@@ -3654,13 +3496,11 @@ components:
         - dockerURI
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the algorithm image.
+          $ref: '#/components/schemas/Name'
+          description: The name of the algorithm image.
         dockerURI:
-          allOf:
-            - $ref: '#/components/schemas/DockerURI'
-            - description: The URI of the Docker container for the algorithm image.
+          $ref: '#/components/schemas/DockerURI'
+          description: The URI of the Docker container for the algorithm image.
       description: Describes an algorithm image.
     HyperParameters:
       type: object
@@ -3671,17 +3511,14 @@ components:
       type: object
       properties:
         integerHyperParameterRanges:
-          allOf:
-            - $ref: '#/components/schemas/DefaultIntegerHyperParameterRanges'
-            - description: The integer-valued hyperparameters and their default ranges.
+          $ref: '#/components/schemas/DefaultIntegerHyperParameterRanges'
+          description: The integer-valued hyperparameters and their default ranges.
         continuousHyperParameterRanges:
-          allOf:
-            - $ref: '#/components/schemas/DefaultContinuousHyperParameterRanges'
-            - description: The continuous hyperparameters and their default ranges.
+          $ref: '#/components/schemas/DefaultContinuousHyperParameterRanges'
+          description: The continuous hyperparameters and their default ranges.
         categoricalHyperParameterRanges:
-          allOf:
-            - $ref: '#/components/schemas/DefaultCategoricalHyperParameterRanges'
-            - description: The categorical hyperparameters and their default ranges.
+          $ref: '#/components/schemas/DefaultCategoricalHyperParameterRanges'
+          description: The categorical hyperparameters and their default ranges.
       description: 'Specifies the hyperparameters and their default ranges. Hyperparameters can be categorical, continuous, or integer-valued.'
     ResourceConfig:
       type: object
@@ -3698,45 +3535,35 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the algorithm.
+          $ref: '#/components/schemas/Name'
+          description: The name of the algorithm.
         algorithmArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the algorithm.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the algorithm.
         algorithmImage:
-          allOf:
-            - $ref: '#/components/schemas/AlgorithmImage'
-            - description: The URI of the Docker container for the algorithm image.
+          $ref: '#/components/schemas/AlgorithmImage'
+          description: The URI of the Docker container for the algorithm image.
         defaultHyperParameters:
-          allOf:
-            - $ref: '#/components/schemas/HyperParameters'
-            - description: Specifies the default hyperparameters.
+          $ref: '#/components/schemas/HyperParameters'
+          description: Specifies the default hyperparameters.
         defaultHyperParameterRanges:
-          allOf:
-            - $ref: '#/components/schemas/DefaultHyperParameterRanges'
-            - description: 'Specifies the default hyperparameters, their ranges, and whether they are tunable. A tunable hyperparameter can have its value determined during hyperparameter optimization (HPO).'
+          $ref: '#/components/schemas/DefaultHyperParameterRanges'
+          description: 'Specifies the default hyperparameters, their ranges, and whether they are tunable. A tunable hyperparameter can have its value determined during hyperparameter optimization (HPO).'
         defaultResourceConfig:
-          allOf:
-            - $ref: '#/components/schemas/ResourceConfig'
-            - description: Specifies the default maximum number of training jobs and parallel training jobs.
+          $ref: '#/components/schemas/ResourceConfig'
+          description: Specifies the default maximum number of training jobs and parallel training jobs.
         trainingInputMode:
-          allOf:
-            - $ref: '#/components/schemas/TrainingInputMode'
-            - description: The training input mode.
+          $ref: '#/components/schemas/TrainingInputMode'
+          description: The training input mode.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the role.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the role.
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the algorithm was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the algorithm was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the algorithm was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the algorithm was last updated.
       description: Describes a custom algorithm.
     DockerURI:
       type: string
@@ -3753,21 +3580,18 @@ components:
       type: object
       properties:
         metricName:
-          allOf:
-            - $ref: '#/components/schemas/MetricName'
-            - description: The metric to optimize.
+          $ref: '#/components/schemas/MetricName'
+          description: The metric to optimize.
         recipeList:
-          allOf:
-            - $ref: '#/components/schemas/ArnList'
-            - description: The list of candidate recipes.
+          $ref: '#/components/schemas/ArnList'
+          description: The list of candidate recipes.
       description: 'When the solution performs AutoML (<code>performAutoML</code> is true in <a>CreateSolution</a>), Amazon Personalize determines which recipe, from the specified list, optimizes the given metric. Amazon Personalize then uses that recipe for the solution.'
     AutoMLResult:
       type: object
       properties:
         bestRecipeArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the best recipe.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the best recipe.
       description: 'When the solution performs AutoML (<code>performAutoML</code> is true in <a>CreateSolution</a>), specifies the recipe that best optimized the specified metric.'
     AvroSchema:
       type: string
@@ -3782,9 +3606,8 @@ components:
         - s3DataSource
       properties:
         s3DataSource:
-          allOf:
-            - $ref: '#/components/schemas/S3DataConfig'
-            - description: The URI of the Amazon S3 location that contains your input data. The Amazon S3 bucket must be in the same region as the API endpoint you are calling.
+          $ref: '#/components/schemas/S3DataConfig'
+          description: The URI of the Amazon S3 location that contains your input data. The Amazon S3 bucket must be in the same region as the API endpoint you are calling.
       description: The input configuration of a batch inference job.
     BatchInferenceJobOutput:
       type: object
@@ -3792,17 +3615,15 @@ components:
         - s3DataDestination
       properties:
         s3DataDestination:
-          allOf:
-            - $ref: '#/components/schemas/S3DataConfig'
-            - description: Information on the Amazon S3 bucket in which the batch inference job's output is stored.
+          $ref: '#/components/schemas/S3DataConfig'
+          description: Information on the Amazon S3 bucket in which the batch inference job's output is stored.
       description: The output configuration parameters of a batch inference job.
     BatchInferenceJobConfig:
       type: object
       properties:
         itemExplorationConfig:
-          allOf:
-            - $ref: '#/components/schemas/HyperParameters'
-            - description: 'A string to string map specifying the exploration configuration hyperparameters, including <code>explorationWeight</code> and <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when recommending items. See <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html">User-Personalization</a>.'
+          $ref: '#/components/schemas/HyperParameters'
+          description: 'A string to string map specifying the exploration configuration hyperparameters, including <code>explorationWeight</code> and <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when recommending items. See <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html">User-Personalization</a>.'
       description: The configuration details of a batch inference job.
     RoleArn:
       type: string
@@ -3815,57 +3636,44 @@ components:
       type: object
       properties:
         jobName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the batch inference job.
+          $ref: '#/components/schemas/Name'
+          description: The name of the batch inference job.
         batchInferenceJobArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the batch inference job.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the batch inference job.
         filterArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the filter used on the batch inference job.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the filter used on the batch inference job.
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/FailureReason'
-            - description: 'If the batch inference job failed, the reason for the failure.'
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If the batch inference job failed, the reason for the failure.'
         solutionVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the solution version from which the batch inference job was created.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the solution version from which the batch inference job was created.
         numResults:
-          allOf:
-            - $ref: '#/components/schemas/NumBatchResults'
-            - description: The number of recommendations generated by the batch inference job. This number includes the error messages generated for failed input records.
+          $ref: '#/components/schemas/NumBatchResults'
+          description: The number of recommendations generated by the batch inference job. This number includes the error messages generated for failed input records.
         jobInput:
-          allOf:
-            - $ref: '#/components/schemas/BatchInferenceJobInput'
-            - description: The Amazon S3 path that leads to the input data used to generate the batch inference job.
+          $ref: '#/components/schemas/BatchInferenceJobInput'
+          description: The Amazon S3 path that leads to the input data used to generate the batch inference job.
         jobOutput:
-          allOf:
-            - $ref: '#/components/schemas/BatchInferenceJobOutput'
-            - description: The Amazon S3 bucket that contains the output data generated by the batch inference job.
+          $ref: '#/components/schemas/BatchInferenceJobOutput'
+          description: The Amazon S3 bucket that contains the output data generated by the batch inference job.
         batchInferenceJobConfig:
-          allOf:
-            - $ref: '#/components/schemas/BatchInferenceJobConfig'
-            - description: A string to string map of the configuration details of a batch inference job.
+          $ref: '#/components/schemas/BatchInferenceJobConfig'
+          description: A string to string map of the configuration details of a batch inference job.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The ARN of the Amazon Identity and Access Management (IAM) role that requested the batch inference job.
+          $ref: '#/components/schemas/RoleArn'
+          description: The ARN of the Amazon Identity and Access Management (IAM) role that requested the batch inference job.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the batch inference job. The status is one of the following values:</p> <ul> <li> <p>PENDING</p> </li> <li> <p>IN PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the batch inference job. The status is one of the following values:</p> <ul> <li> <p>PENDING</p> </li> <li> <p>IN PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> </ul>'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The time at which the batch inference job was created.
+          $ref: '#/components/schemas/Date'
+          description: The time at which the batch inference job was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The time at which the batch inference job was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The time at which the batch inference job was last updated.
       description: Contains information on a batch inference job.
     S3DataConfig:
       type: object
@@ -3873,45 +3681,36 @@ components:
         - path
       properties:
         path:
-          allOf:
-            - $ref: '#/components/schemas/S3Location'
-            - description: The file path of the Amazon S3 bucket.
+          $ref: '#/components/schemas/S3Location'
+          description: The file path of the Amazon S3 bucket.
         kmsKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyArn'
-            - description: The Amazon Resource Name (ARN) of the Key Management Service (KMS) key that Amazon Personalize uses to encrypt or decrypt the input and output files of a batch inference job.
+          $ref: '#/components/schemas/KmsKeyArn'
+          description: The Amazon Resource Name (ARN) of the Key Management Service (KMS) key that Amazon Personalize uses to encrypt or decrypt the input and output files of a batch inference job.
       description: The configuration details of an Amazon S3 input or output bucket.
     BatchInferenceJobSummary:
       type: object
       properties:
         batchInferenceJobArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the batch inference job.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the batch inference job.
         jobName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the batch inference job.
+          $ref: '#/components/schemas/Name'
+          description: The name of the batch inference job.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the batch inference job. The status is one of the following values:</p> <ul> <li> <p>PENDING</p> </li> <li> <p>IN PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the batch inference job. The status is one of the following values:</p> <ul> <li> <p>PENDING</p> </li> <li> <p>IN PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> </ul>'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The time at which the batch inference job was created.
+          $ref: '#/components/schemas/Date'
+          description: The time at which the batch inference job was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The time at which the batch inference job was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The time at which the batch inference job was last updated.
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/FailureReason'
-            - description: 'If the batch inference job failed, the reason for the failure.'
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If the batch inference job failed, the reason for the failure.'
         solutionVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the solution version used by the batch inference job.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the solution version used by the batch inference job.
       description: A truncated version of the <a>BatchInferenceJob</a> datatype. The <a>ListBatchInferenceJobs</a> operation returns a list of batch inference job summaries.
     BatchInferenceJobs:
       type: array
@@ -3927,79 +3726,63 @@ components:
       type: object
       properties:
         itemExplorationConfig:
-          allOf:
-            - $ref: '#/components/schemas/HyperParameters'
-            - description: 'A string to string map specifying the exploration configuration hyperparameters, including <code>explorationWeight</code> and <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when recommending items. Provide <code>itemExplorationConfig</code> data only if your solution uses the <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html">User-Personalization</a> recipe.'
+          $ref: '#/components/schemas/HyperParameters'
+          description: 'A string to string map specifying the exploration configuration hyperparameters, including <code>explorationWeight</code> and <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when recommending items. Provide <code>itemExplorationConfig</code> data only if your solution uses the <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html">User-Personalization</a> recipe.'
       description: The configuration details of a campaign.
     CampaignUpdateSummary:
       type: object
       properties:
         solutionVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the deployed solution version.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the deployed solution version.
         minProvisionedTPS:
-          allOf:
-            - $ref: '#/components/schemas/TransactionsPerSecond'
-            - description: Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
+          $ref: '#/components/schemas/TransactionsPerSecond'
+          description: Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
         campaignConfig:
           $ref: '#/components/schemas/CampaignConfig'
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the campaign update.</p> <p>A campaign update can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the campaign update.</p> <p>A campaign update can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/FailureReason'
-            - description: 'If a campaign update fails, the reason behind the failure.'
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If a campaign update fails, the reason behind the failure.'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the campaign update was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the campaign update was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the campaign update was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the campaign update was last updated.
       description: 'Provides a summary of the properties of a campaign update. For a complete listing, call the <a>DescribeCampaign</a> API.'
     Campaign:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the campaign.
+          $ref: '#/components/schemas/Name'
+          description: The name of the campaign.
         campaignArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'The Amazon Resource Name (ARN) of the campaign. '
+          $ref: '#/components/schemas/Arn'
+          description: 'The Amazon Resource Name (ARN) of the campaign. '
         solutionVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of a specific version of the solution.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of a specific version of the solution.
         minProvisionedTPS:
-          allOf:
-            - $ref: '#/components/schemas/TransactionsPerSecond'
-            - description: Specifies the requested minimum provisioned transactions (recommendations) per second.
+          $ref: '#/components/schemas/TransactionsPerSecond'
+          description: Specifies the requested minimum provisioned transactions (recommendations) per second.
         campaignConfig:
-          allOf:
-            - $ref: '#/components/schemas/CampaignConfig'
-            - description: The configuration details of a campaign.
+          $ref: '#/components/schemas/CampaignConfig'
+          description: The configuration details of a campaign.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the campaign.</p> <p>A campaign can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the campaign.</p> <p>A campaign can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/FailureReason'
-            - description: 'If a campaign fails, the reason behind the failure.'
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If a campaign fails, the reason behind the failure.'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix format) that the campaign was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix format) that the campaign was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix format) that the campaign was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix format) that the campaign was last updated.
         latestCampaignUpdate:
           $ref: '#/components/schemas/CampaignUpdateSummary'
       description: 'Describes a deployed solution version, otherwise known as a campaign. For more information on campaigns, see <a>CreateCampaign</a>.'
@@ -4007,29 +3790,23 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the campaign.
+          $ref: '#/components/schemas/Name'
+          description: The name of the campaign.
         campaignArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the campaign.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the campaign.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the campaign.</p> <p>A campaign can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the campaign.</p> <p>A campaign can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the campaign was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the campaign was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the campaign was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the campaign was last updated.
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/FailureReason'
-            - description: 'If a campaign fails, the reason behind the failure.'
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If a campaign fails, the reason behind the failure.'
       description: 'Provides a summary of the properties of a campaign. For a complete listing, call the <a>DescribeCampaign</a> API.'
     Campaigns:
       type: array
@@ -4048,13 +3825,11 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ParameterName'
-            - description: The name of the hyperparameter.
+          $ref: '#/components/schemas/ParameterName'
+          description: The name of the hyperparameter.
         values:
-          allOf:
-            - $ref: '#/components/schemas/CategoricalValues'
-            - description: A list of the categories for the hyperparameter.
+          $ref: '#/components/schemas/CategoricalValues'
+          description: A list of the categories for the hyperparameter.
       description: Provides the name and range of a categorical hyperparameter.
     CategoricalHyperParameterRanges:
       type: array
@@ -4076,17 +3851,14 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ParameterName'
-            - description: The name of the hyperparameter.
+          $ref: '#/components/schemas/ParameterName'
+          description: The name of the hyperparameter.
         minValue:
-          allOf:
-            - $ref: '#/components/schemas/ContinuousMinValue'
-            - description: The minimum allowable value for the hyperparameter.
+          $ref: '#/components/schemas/ContinuousMinValue'
+          description: The minimum allowable value for the hyperparameter.
         maxValue:
-          allOf:
-            - $ref: '#/components/schemas/ContinuousMaxValue'
-            - description: The maximum allowable value for the hyperparameter.
+          $ref: '#/components/schemas/ContinuousMaxValue'
+          description: The maximum allowable value for the hyperparameter.
       description: Provides the name and range of a continuous hyperparameter.
     ContinuousHyperParameterRanges:
       type: array
@@ -4114,9 +3886,8 @@ components:
       type: object
       properties:
         dataLocation:
-          allOf:
-            - $ref: '#/components/schemas/S3Location'
-            - description: '<p>The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored. For example: </p> <p> <code>s3://bucket-name/folder-name/</code> </p>'
+          $ref: '#/components/schemas/S3Location'
+          description: '<p>The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored. For example: </p> <p> <code>s3://bucket-name/folder-name/</code> </p>'
       description: Describes the data source that contains the data to upload to a dataset.
     DatasetType:
       type: string
@@ -4138,29 +3909,23 @@ components:
       type: object
       properties:
         eventValueThreshold:
-          allOf:
-            - $ref: '#/components/schemas/EventValueThreshold'
-            - description: Only events with a value greater than or equal to this threshold are used for training a model.
+          $ref: '#/components/schemas/EventValueThreshold'
+          description: Only events with a value greater than or equal to this threshold are used for training a model.
         hpoConfig:
-          allOf:
-            - $ref: '#/components/schemas/HPOConfig'
-            - description: Describes the properties for hyperparameter optimization (HPO).
+          $ref: '#/components/schemas/HPOConfig'
+          description: Describes the properties for hyperparameter optimization (HPO).
         algorithmHyperParameters:
-          allOf:
-            - $ref: '#/components/schemas/HyperParameters'
-            - description: Lists the hyperparameter names and ranges.
+          $ref: '#/components/schemas/HyperParameters'
+          description: Lists the hyperparameter names and ranges.
         featureTransformationParameters:
-          allOf:
-            - $ref: '#/components/schemas/FeatureTransformationParameters'
-            - description: Lists the feature transformation parameters.
+          $ref: '#/components/schemas/FeatureTransformationParameters'
+          description: Lists the feature transformation parameters.
         autoMLConfig:
-          allOf:
-            - $ref: '#/components/schemas/AutoMLConfig'
-            - description: The <a>AutoMLConfig</a> object containing a list of recipes to search when AutoML is performed.
+          $ref: '#/components/schemas/AutoMLConfig'
+          description: The <a>AutoMLConfig</a> object containing a list of recipes to search when AutoML is performed.
         optimizationObjective:
-          allOf:
-            - $ref: '#/components/schemas/OptimizationObjective'
-            - description: 'Describes the additional objective for the solution, such as maximizing streaming minutes or increasing revenue. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html">Optimizing a solution</a>.'
+          $ref: '#/components/schemas/OptimizationObjective'
+          description: 'Describes the additional objective for the solution, such as maximizing streaming minutes or increasing revenue. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html">Optimizing a solution</a>.'
       description: Describes the configuration properties for the solution.
     TrainingMode:
       type: string
@@ -4175,109 +3940,85 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the dataset.
+          $ref: '#/components/schemas/Name'
+          description: The name of the dataset.
         datasetArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset that you want metadata for.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset that you want metadata for.
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset group.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset group.
         datasetType:
-          allOf:
-            - $ref: '#/components/schemas/DatasetType'
-            - description: '<p>One of the following values:</p> <ul> <li> <p>Interactions</p> </li> <li> <p>Items</p> </li> <li> <p>Users</p> </li> </ul>'
+          $ref: '#/components/schemas/DatasetType'
+          description: '<p>One of the following values:</p> <ul> <li> <p>Interactions</p> </li> <li> <p>Items</p> </li> <li> <p>Users</p> </li> </ul>'
         schemaArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the associated schema.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the associated schema.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the dataset.</p> <p>A dataset can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the dataset.</p> <p>A dataset can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The creation date and time (in Unix time) of the dataset.
+          $ref: '#/components/schemas/Date'
+          description: The creation date and time (in Unix time) of the dataset.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: A time stamp that shows when the dataset was updated.
+          $ref: '#/components/schemas/Date'
+          description: A time stamp that shows when the dataset was updated.
       description: Provides metadata for a dataset.
     DatasetExportJob:
       type: object
       properties:
         jobName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the export job.
+          $ref: '#/components/schemas/Name'
+          description: The name of the export job.
         datasetExportJobArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset export job.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset export job.
         datasetArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset to export.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset to export.
         ingestionMode:
-          allOf:
-            - $ref: '#/components/schemas/IngestionMode'
-            - description: 'The data to export, based on how you imported the data. You can choose to export <code>BULK</code> data that you imported using a dataset import job, <code>PUT</code> data that you imported incrementally (using the console, PutEvents, PutUsers and PutItems operations), or <code>ALL</code> for both types. The default value is <code>PUT</code>. '
+          $ref: '#/components/schemas/IngestionMode'
+          description: 'The data to export, based on how you imported the data. You can choose to export <code>BULK</code> data that you imported using a dataset import job, <code>PUT</code> data that you imported incrementally (using the console, PutEvents, PutUsers and PutItems operations), or <code>ALL</code> for both types. The default value is <code>PUT</code>. '
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the IAM service role that has permissions to add data to your output Amazon S3 bucket.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the IAM service role that has permissions to add data to your output Amazon S3 bucket.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the dataset export job.</p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the dataset export job.</p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
         jobOutput:
-          allOf:
-            - $ref: '#/components/schemas/DatasetExportJobOutput'
-            - description: '<p>The path to the Amazon S3 bucket where the job''s output is stored. For example:</p> <p> <code>s3://bucket-name/folder-name/</code> </p>'
+          $ref: '#/components/schemas/DatasetExportJobOutput'
+          description: '<p>The path to the Amazon S3 bucket where the job''s output is stored. For example:</p> <p> <code>s3://bucket-name/folder-name/</code> </p>'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The creation date and time (in Unix time) of the dataset export job.
+          $ref: '#/components/schemas/Date'
+          description: The creation date and time (in Unix time) of the dataset export job.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) the status of the dataset export job was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) the status of the dataset export job was last updated.
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/FailureReason'
-            - description: 'If a dataset export job fails, provides the reason why.'
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If a dataset export job fails, provides the reason why.'
       description: '<p>Describes a job that exports a dataset to an Amazon S3 bucket. For more information, see <a>CreateDatasetExportJob</a>.</p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
     DatasetExportJobSummary:
       type: object
       properties:
         datasetExportJobArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset export job.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset export job.
         jobName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the dataset export job.
+          $ref: '#/components/schemas/Name'
+          description: The name of the dataset export job.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the dataset export job.</p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the dataset export job.</p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the dataset export job was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the dataset export job was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the dataset export job status was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the dataset export job status was last updated.
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/FailureReason'
-            - description: 'If a dataset export job fails, the reason behind the failure.'
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If a dataset export job fails, the reason behind the failure.'
       description: 'Provides a summary of the properties of a dataset export job. For a complete listing, call the <a>DescribeDatasetExportJob</a> API.'
     DatasetExportJobs:
       type: array
@@ -4288,65 +4029,51 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the dataset group.
+          $ref: '#/components/schemas/Name'
+          description: The name of the dataset group.
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset group.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset group.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The current status of the dataset group.</p> <p>A dataset group can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The current status of the dataset group.</p> <p>A dataset group can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING</p> </li> </ul>'
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The ARN of the IAM role that has permissions to create the dataset group.
+          $ref: '#/components/schemas/RoleArn'
+          description: The ARN of the IAM role that has permissions to create the dataset group.
         kmsKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyArn'
-            - description: The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to encrypt the datasets.
+          $ref: '#/components/schemas/KmsKeyArn'
+          description: The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to encrypt the datasets.
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The creation date and time (in Unix time) of the dataset group.
+          $ref: '#/components/schemas/Date'
+          description: The creation date and time (in Unix time) of the dataset group.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The last update date and time (in Unix time) of the dataset group.
+          $ref: '#/components/schemas/Date'
+          description: The last update date and time (in Unix time) of the dataset group.
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/FailureReason'
-            - description: 'If creating a dataset group fails, provides the reason why.'
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If creating a dataset group fails, provides the reason why.'
       description: '<p>A dataset group is a collection of related datasets (Interactions, User, and Item). You create a dataset group by calling <a>CreateDatasetGroup</a>. You then create a dataset and add it to a dataset group by calling <a>CreateDataset</a>. The dataset group is used to create and train a solution by calling <a>CreateSolution</a>. A dataset group can contain only one of each type of dataset.</p> <p>You can specify an Key Management Service (KMS) key to encrypt the datasets in the group.</p>'
     DatasetGroupSummary:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the dataset group.
+          $ref: '#/components/schemas/Name'
+          description: The name of the dataset group.
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset group.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset group.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the dataset group.</p> <p>A dataset group can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the dataset group.</p> <p>A dataset group can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING</p> </li> </ul>'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the dataset group was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the dataset group was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the dataset group was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the dataset group was last updated.
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/FailureReason'
-            - description: 'If creating a dataset group fails, the reason behind the failure.'
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If creating a dataset group fails, the reason behind the failure.'
       description: 'Provides a summary of the properties of a dataset group. For a complete listing, call the <a>DescribeDatasetGroup</a> API.'
     DatasetGroups:
       type: array
@@ -4357,69 +4084,54 @@ components:
       type: object
       properties:
         jobName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the import job.
+          $ref: '#/components/schemas/Name'
+          description: The name of the import job.
         datasetImportJobArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the dataset import job.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the dataset import job.
         datasetArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset that receives the imported data.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset that receives the imported data.
         dataSource:
-          allOf:
-            - $ref: '#/components/schemas/DataSource'
-            - description: The Amazon S3 bucket that contains the training data to import.
+          $ref: '#/components/schemas/DataSource'
+          description: The Amazon S3 bucket that contains the training data to import.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the IAM role that has permissions to read from the Amazon S3 data source.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the IAM role that has permissions to read from the Amazon S3 data source.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the dataset import job.</p> <p>A dataset import job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the dataset import job.</p> <p>A dataset import job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The creation date and time (in Unix time) of the dataset import job.
+          $ref: '#/components/schemas/Date'
+          description: The creation date and time (in Unix time) of the dataset import job.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) the dataset was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) the dataset was last updated.
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/FailureReason'
-            - description: 'If a dataset import job fails, provides the reason why.'
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If a dataset import job fails, provides the reason why.'
       description: '<p>Describes a job that imports training data from a data source (Amazon S3 bucket) to an Amazon Personalize dataset. For more information, see <a>CreateDatasetImportJob</a>.</p> <p>A dataset import job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
     DatasetImportJobSummary:
       type: object
       properties:
         datasetImportJobArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset import job.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset import job.
         jobName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the dataset import job.
+          $ref: '#/components/schemas/Name'
+          description: The name of the dataset import job.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the dataset import job.</p> <p>A dataset import job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the dataset import job.</p> <p>A dataset import job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the dataset import job was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the dataset import job was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the dataset import job status was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the dataset import job status was last updated.
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/FailureReason'
-            - description: 'If a dataset import job fails, the reason behind the failure.'
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If a dataset import job fails, the reason behind the failure.'
       description: 'Provides a summary of the properties of a dataset import job. For a complete listing, call the <a>DescribeDatasetImportJob</a> API.'
     DatasetImportJobs:
       type: array
@@ -4430,73 +4142,58 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the schema.
+          $ref: '#/components/schemas/Name'
+          description: The name of the schema.
         schemaArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the schema.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the schema.
         schema:
-          allOf:
-            - $ref: '#/components/schemas/AvroSchema'
-            - description: The schema.
+          $ref: '#/components/schemas/AvroSchema'
+          description: The schema.
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the schema was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the schema was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the schema was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the schema was last updated.
       description: 'Describes the schema for a dataset. For more information on schemas, see <a>CreateSchema</a>.'
     DatasetSchemaSummary:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the schema.
+          $ref: '#/components/schemas/Name'
+          description: The name of the schema.
         schemaArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the schema.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the schema.
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the schema was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the schema was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the schema was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the schema was last updated.
       description: 'Provides a summary of the properties of a dataset schema. For a complete listing, call the <a>DescribeSchema</a> API.'
     DatasetSummary:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the dataset.
+          $ref: '#/components/schemas/Name'
+          description: The name of the dataset.
         datasetArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset.
         datasetType:
-          allOf:
-            - $ref: '#/components/schemas/DatasetType'
-            - description: '<p>The dataset type. One of the following values:</p> <ul> <li> <p>Interactions</p> </li> <li> <p>Items</p> </li> <li> <p>Users</p> </li> <li> <p>Event-Interactions</p> </li> </ul>'
+          $ref: '#/components/schemas/DatasetType'
+          description: '<p>The dataset type. One of the following values:</p> <ul> <li> <p>Interactions</p> </li> <li> <p>Items</p> </li> <li> <p>Users</p> </li> <li> <p>Event-Interactions</p> </li> </ul>'
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the dataset.</p> <p>A dataset can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the dataset.</p> <p>A dataset can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the dataset was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the dataset was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the dataset was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the dataset was last updated.
       description: 'Provides a summary of the properties of a dataset. For a complete listing, call the <a>DescribeDataset</a> API.'
     Datasets:
       type: array
@@ -4509,17 +4206,14 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ParameterName'
-            - description: The name of the hyperparameter.
+          $ref: '#/components/schemas/ParameterName'
+          description: The name of the hyperparameter.
         values:
-          allOf:
-            - $ref: '#/components/schemas/CategoricalValues'
-            - description: A list of the categories for the hyperparameter.
+          $ref: '#/components/schemas/CategoricalValues'
+          description: A list of the categories for the hyperparameter.
         isTunable:
-          allOf:
-            - $ref: '#/components/schemas/Tunable'
-            - description: Whether the hyperparameter is tunable.
+          $ref: '#/components/schemas/Tunable'
+          description: Whether the hyperparameter is tunable.
       description: Provides the name and default range of a categorical hyperparameter and whether the hyperparameter is tunable. A tunable hyperparameter can have its value determined during hyperparameter optimization (HPO).
     DefaultCategoricalHyperParameterRanges:
       type: array
@@ -4530,21 +4224,17 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ParameterName'
-            - description: The name of the hyperparameter.
+          $ref: '#/components/schemas/ParameterName'
+          description: The name of the hyperparameter.
         minValue:
-          allOf:
-            - $ref: '#/components/schemas/ContinuousMinValue'
-            - description: The minimum allowable value for the hyperparameter.
+          $ref: '#/components/schemas/ContinuousMinValue'
+          description: The minimum allowable value for the hyperparameter.
         maxValue:
-          allOf:
-            - $ref: '#/components/schemas/ContinuousMaxValue'
-            - description: The maximum allowable value for the hyperparameter.
+          $ref: '#/components/schemas/ContinuousMaxValue'
+          description: The maximum allowable value for the hyperparameter.
         isTunable:
-          allOf:
-            - $ref: '#/components/schemas/Tunable'
-            - description: Whether the hyperparameter is tunable.
+          $ref: '#/components/schemas/Tunable'
+          description: Whether the hyperparameter is tunable.
       description: Provides the name and default range of a continuous hyperparameter and whether the hyperparameter is tunable. A tunable hyperparameter can have its value determined during hyperparameter optimization (HPO).
     DefaultContinuousHyperParameterRanges:
       type: array
@@ -4566,281 +4256,218 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ParameterName'
-            - description: The name of the hyperparameter.
+          $ref: '#/components/schemas/ParameterName'
+          description: The name of the hyperparameter.
         minValue:
-          allOf:
-            - $ref: '#/components/schemas/IntegerMinValue'
-            - description: The minimum allowable value for the hyperparameter.
+          $ref: '#/components/schemas/IntegerMinValue'
+          description: The minimum allowable value for the hyperparameter.
         maxValue:
-          allOf:
-            - $ref: '#/components/schemas/IntegerMaxValue'
-            - description: The maximum allowable value for the hyperparameter.
+          $ref: '#/components/schemas/IntegerMaxValue'
+          description: The maximum allowable value for the hyperparameter.
         isTunable:
-          allOf:
-            - $ref: '#/components/schemas/Tunable'
-            - description: Indicates whether the hyperparameter is tunable.
+          $ref: '#/components/schemas/Tunable'
+          description: Indicates whether the hyperparameter is tunable.
       description: Provides the name and default range of a integer-valued hyperparameter and whether the hyperparameter is tunable. A tunable hyperparameter can have its value determined during hyperparameter optimization (HPO).
     EventTracker:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the event tracker.
+          $ref: '#/components/schemas/Name'
+          description: The name of the event tracker.
         eventTrackerArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the event tracker.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the event tracker.
         accountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: The Amazon Web Services account that owns the event tracker.
+          $ref: '#/components/schemas/AccountId'
+          description: The Amazon Web Services account that owns the event tracker.
         trackingId:
-          allOf:
-            - $ref: '#/components/schemas/TrackingId'
-            - description: 'The ID of the event tracker. Include this ID in requests to the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html">PutEvents</a> API.'
+          $ref: '#/components/schemas/TrackingId'
+          description: 'The ID of the event tracker. Include this ID in requests to the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html">PutEvents</a> API.'
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset group that receives the event data.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset group that receives the event data.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the event tracker.</p> <p>An event tracker can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the event tracker.</p> <p>An event tracker can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix format) that the event tracker was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix format) that the event tracker was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the event tracker was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the event tracker was last updated.
       description: Provides information about an event tracker.
     FeatureTransformation:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the feature transformation.
+          $ref: '#/components/schemas/Name'
+          description: The name of the feature transformation.
         featureTransformationArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the FeatureTransformation object.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the FeatureTransformation object.
         defaultParameters:
-          allOf:
-            - $ref: '#/components/schemas/FeaturizationParameters'
-            - description: Provides the default parameters for feature transformation.
+          $ref: '#/components/schemas/FeaturizationParameters'
+          description: Provides the default parameters for feature transformation.
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The creation date and time (in Unix time) of the feature transformation.
+          $ref: '#/components/schemas/Date'
+          description: The creation date and time (in Unix time) of the feature transformation.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The last update date and time (in Unix time) of the feature transformation.
+          $ref: '#/components/schemas/Date'
+          description: The last update date and time (in Unix time) of the feature transformation.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the feature transformation.</p> <p>A feature transformation can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the feature transformation.</p> <p>A feature transformation can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
       description: Provides feature transformation information. Feature transformation is the process of modifying raw input data into a form more suitable for model training.
     Filter:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the filter.
+          $ref: '#/components/schemas/Name'
+          description: The name of the filter.
         filterArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the filter.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the filter.
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The time at which the filter was created.
+          $ref: '#/components/schemas/Date'
+          description: The time at which the filter was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The time at which the filter was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The time at which the filter was last updated.
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the dataset group to which the filter belongs.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the dataset group to which the filter belongs.
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/FailureReason'
-            - description: 'If the filter failed, the reason for its failure.'
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If the filter failed, the reason for its failure.'
         filterExpression:
-          allOf:
-            - $ref: '#/components/schemas/FilterExpression'
-            - description: 'Specifies the type of item interactions to filter out of recommendation results. The filter expression must follow specific format rules. For information about filter expression structure and syntax, see <a>filter-expressions</a>.'
+          $ref: '#/components/schemas/FilterExpression'
+          description: 'Specifies the type of item interactions to filter out of recommendation results. The filter expression must follow specific format rules. For information about filter expression structure and syntax, see <a>filter-expressions</a>.'
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: The status of the filter.
+          $ref: '#/components/schemas/Status'
+          description: The status of the filter.
       description: 'Contains information on a recommendation filter, including its ARN, status, and filter expression.'
     Recipe:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the recipe.
+          $ref: '#/components/schemas/Name'
+          description: The name of the recipe.
         recipeArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the recipe.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the recipe.
         algorithmArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the algorithm that Amazon Personalize uses to train the model.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the algorithm that Amazon Personalize uses to train the model.
         featureTransformationArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the FeatureTransformation object.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the FeatureTransformation object.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: The status of the recipe.
+          $ref: '#/components/schemas/Status'
+          description: The status of the recipe.
         description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the recipe.
+          $ref: '#/components/schemas/Description'
+          description: The description of the recipe.
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix format) that the recipe was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix format) that the recipe was created.
         recipeType:
-          allOf:
-            - $ref: '#/components/schemas/RecipeType'
-            - description: '<p>One of the following values:</p> <ul> <li> <p>PERSONALIZED_RANKING</p> </li> <li> <p>RELATED_ITEMS</p> </li> <li> <p>USER_PERSONALIZATION</p> </li> </ul>'
+          $ref: '#/components/schemas/RecipeType'
+          description: '<p>One of the following values:</p> <ul> <li> <p>PERSONALIZED_RANKING</p> </li> <li> <p>RELATED_ITEMS</p> </li> <li> <p>USER_PERSONALIZATION</p> </li> </ul>'
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix format) that the recipe was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix format) that the recipe was last updated.
       description: 'Provides information about a recipe. Each recipe provides an algorithm that Amazon Personalize uses in model training when you use the <a>CreateSolution</a> operation. '
     Solution:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the solution.
+          $ref: '#/components/schemas/Name'
+          description: The name of the solution.
         solutionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the solution.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the solution.
         performHPO:
-          allOf:
-            - $ref: '#/components/schemas/PerformHPO'
-            - description: Whether to perform hyperparameter optimization (HPO) on the chosen recipe. The default is <code>false</code>.
+          $ref: '#/components/schemas/PerformHPO'
+          description: Whether to perform hyperparameter optimization (HPO) on the chosen recipe. The default is <code>false</code>.
         performAutoML:
-          allOf:
-            - $ref: '#/components/schemas/PerformAutoML'
-            - description: 'When true, Amazon Personalize performs a search for the best USER_PERSONALIZATION recipe from the list specified in the solution configuration (<code>recipeArn</code> must not be specified). When false (the default), Amazon Personalize uses <code>recipeArn</code> for training.'
+          $ref: '#/components/schemas/PerformAutoML'
+          description: 'When true, Amazon Personalize performs a search for the best USER_PERSONALIZATION recipe from the list specified in the solution configuration (<code>recipeArn</code> must not be specified). When false (the default), Amazon Personalize uses <code>recipeArn</code> for training.'
         recipeArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the recipe used to create the solution.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the recipe used to create the solution.
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset group that provides the training data.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset group that provides the training data.
         eventType:
-          allOf:
-            - $ref: '#/components/schemas/EventType'
-            - description: 'The event type (for example, ''click'' or ''like'') that is used for training the model. If no <code>eventType</code> is provided, Amazon Personalize uses all interactions for training with equal weight regardless of type.'
+          $ref: '#/components/schemas/EventType'
+          description: 'The event type (for example, ''click'' or ''like'') that is used for training the model. If no <code>eventType</code> is provided, Amazon Personalize uses all interactions for training with equal weight regardless of type.'
         solutionConfig:
-          allOf:
-            - $ref: '#/components/schemas/SolutionConfig'
-            - description: Describes the configuration properties for the solution.
+          $ref: '#/components/schemas/SolutionConfig'
+          description: Describes the configuration properties for the solution.
         autoMLResult:
-          allOf:
-            - $ref: '#/components/schemas/AutoMLResult'
-            - description: 'When <code>performAutoML</code> is true, specifies the best recipe found.'
+          $ref: '#/components/schemas/AutoMLResult'
+          description: 'When <code>performAutoML</code> is true, specifies the best recipe found.'
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the solution.</p> <p>A solution can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the solution.</p> <p>A solution can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The creation date and time (in Unix time) of the solution.
+          $ref: '#/components/schemas/Date'
+          description: The creation date and time (in Unix time) of the solution.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the solution was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the solution was last updated.
         latestSolutionVersion:
-          allOf:
-            - $ref: '#/components/schemas/SolutionVersionSummary'
-            - description: 'Describes the latest version of the solution, including the status and the ARN.'
+          $ref: '#/components/schemas/SolutionVersionSummary'
+          description: 'Describes the latest version of the solution, including the status and the ARN.'
       description: An object that provides information about a solution. A solution is a trained model that can be deployed as a campaign.
     SolutionVersion:
       type: object
       properties:
         solutionVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the solution version.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the solution version.
         solutionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the solution.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the solution.
         performHPO:
-          allOf:
-            - $ref: '#/components/schemas/PerformHPO'
-            - description: Whether to perform hyperparameter optimization (HPO) on the chosen recipe. The default is <code>false</code>.
+          $ref: '#/components/schemas/PerformHPO'
+          description: Whether to perform hyperparameter optimization (HPO) on the chosen recipe. The default is <code>false</code>.
         performAutoML:
-          allOf:
-            - $ref: '#/components/schemas/PerformAutoML'
-            - description: 'When true, Amazon Personalize searches for the most optimal recipe according to the solution configuration. When false (the default), Amazon Personalize uses <code>recipeArn</code>.'
+          $ref: '#/components/schemas/PerformAutoML'
+          description: 'When true, Amazon Personalize searches for the most optimal recipe according to the solution configuration. When false (the default), Amazon Personalize uses <code>recipeArn</code>.'
         recipeArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the recipe used in the solution.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the recipe used in the solution.
         eventType:
-          allOf:
-            - $ref: '#/components/schemas/EventType'
-            - description: 'The event type (for example, ''click'' or ''like'') that is used for training the model.'
+          $ref: '#/components/schemas/EventType'
+          description: 'The event type (for example, ''click'' or ''like'') that is used for training the model.'
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the dataset group providing the training data.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the dataset group providing the training data.
         solutionConfig:
-          allOf:
-            - $ref: '#/components/schemas/SolutionConfig'
-            - description: Describes the configuration properties for the solution.
+          $ref: '#/components/schemas/SolutionConfig'
+          description: Describes the configuration properties for the solution.
         trainingHours:
-          allOf:
-            - $ref: '#/components/schemas/TrainingHours'
-            - description: The time used to train the model. You are billed for the time it takes to train a model. This field is visible only after Amazon Personalize successfully trains a model.
+          $ref: '#/components/schemas/TrainingHours'
+          description: The time used to train the model. You are billed for the time it takes to train a model. This field is visible only after Amazon Personalize successfully trains a model.
         trainingMode:
-          allOf:
-            - $ref: '#/components/schemas/TrainingMode'
-            - description: '<p>The scope of training to be performed when creating the solution version. The <code>FULL</code> option trains the solution version based on the entirety of the input solution''s training data, while the <code>UPDATE</code> option processes only the data that has changed in comparison to the input solution. Choose <code>UPDATE</code> when you want to incrementally update your solution version instead of creating an entirely new one.</p> <important> <p>The <code>UPDATE</code> option can only be used when you already have an active solution version created from the input solution using the <code>FULL</code> option and the input solution was trained with the <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html">User-Personalization</a> recipe or the <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html">HRNN-Coldstart</a> recipe.</p> </important>'
+          $ref: '#/components/schemas/TrainingMode'
+          description: '<p>The scope of training to be performed when creating the solution version. The <code>FULL</code> option trains the solution version based on the entirety of the input solution''s training data, while the <code>UPDATE</code> option processes only the data that has changed in comparison to the input solution. Choose <code>UPDATE</code> when you want to incrementally update your solution version instead of creating an entirely new one.</p> <important> <p>The <code>UPDATE</code> option can only be used when you already have an active solution version created from the input solution using the <code>FULL</code> option and the input solution was trained with the <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html">User-Personalization</a> recipe or the <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html">HRNN-Coldstart</a> recipe.</p> </important>'
         tunedHPOParams:
-          allOf:
-            - $ref: '#/components/schemas/TunedHPOParams'
-            - description: 'If hyperparameter optimization was performed, contains the hyperparameter values of the best performing model.'
+          $ref: '#/components/schemas/TunedHPOParams'
+          description: 'If hyperparameter optimization was performed, contains the hyperparameter values of the best performing model.'
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the solution version.</p> <p>A solution version can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING</p> </li> <li> <p>CREATE IN_PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> <li> <p>CREATE STOPPING</p> </li> <li> <p>CREATE STOPPED</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the solution version.</p> <p>A solution version can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING</p> </li> <li> <p>CREATE IN_PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> <li> <p>CREATE STOPPING</p> </li> <li> <p>CREATE STOPPED</p> </li> </ul>'
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/FailureReason'
-            - description: 'If training a solution version fails, the reason for the failure.'
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If training a solution version fails, the reason for the failure.'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that this version of the solution was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that this version of the solution was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the solution was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the solution was last updated.
       description: An object that provides information about a specific version of a <a>Solution</a>.
     Description:
       type: string
@@ -4848,25 +4475,20 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the event tracker.
+          $ref: '#/components/schemas/Name'
+          description: The name of the event tracker.
         eventTrackerArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the event tracker.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the event tracker.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the event tracker.</p> <p>An event tracker can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the event tracker.</p> <p>An event tracker can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the event tracker was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the event tracker was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the event tracker was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the event tracker was last updated.
       description: 'Provides a summary of the properties of an event tracker. For a complete listing, call the <a>DescribeEventTracker</a> API.'
     EventTrackers:
       type: array
@@ -4893,33 +4515,26 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the filter.
+          $ref: '#/components/schemas/Name'
+          description: The name of the filter.
         filterArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the filter.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the filter.
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The time at which the filter was created.
+          $ref: '#/components/schemas/Date'
+          description: The time at which the filter was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The time at which the filter was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The time at which the filter was last updated.
         datasetGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the dataset group to which the filter belongs.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the dataset group to which the filter belongs.
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/FailureReason'
-            - description: 'If the filter failed, the reason for the failure.'
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If the filter failed, the reason for the failure.'
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: The status of the filter.
+          $ref: '#/components/schemas/Status'
+          description: The status of the filter.
       description: A short summary of a filter's attributes.
     Filters:
       type: array
@@ -4935,61 +4550,50 @@ components:
       type: object
       properties:
         type:
-          allOf:
-            - $ref: '#/components/schemas/HPOObjectiveType'
-            - description: The type of the metric. Valid values are <code>Maximize</code> and <code>Minimize</code>.
+          $ref: '#/components/schemas/HPOObjectiveType'
+          description: The type of the metric. Valid values are <code>Maximize</code> and <code>Minimize</code>.
         metricName:
-          allOf:
-            - $ref: '#/components/schemas/MetricName'
-            - description: The name of the metric.
+          $ref: '#/components/schemas/MetricName'
+          description: The name of the metric.
         metricRegex:
-          allOf:
-            - $ref: '#/components/schemas/MetricRegex'
-            - description: A regular expression for finding the metric in the training job logs.
+          $ref: '#/components/schemas/MetricRegex'
+          description: A regular expression for finding the metric in the training job logs.
       description: <p>The metric to optimize during hyperparameter optimization (HPO).</p> <note> <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> at this time.</p> </note>
     HPOResourceConfig:
       type: object
       properties:
         maxNumberOfTrainingJobs:
-          allOf:
-            - $ref: '#/components/schemas/HPOResource'
-            - description: The maximum number of training jobs when you create a solution version. The maximum value for <code>maxNumberOfTrainingJobs</code> is <code>40</code>.
+          $ref: '#/components/schemas/HPOResource'
+          description: The maximum number of training jobs when you create a solution version. The maximum value for <code>maxNumberOfTrainingJobs</code> is <code>40</code>.
         maxParallelTrainingJobs:
-          allOf:
-            - $ref: '#/components/schemas/HPOResource'
-            - description: The maximum number of parallel training jobs when you create a solution version. The maximum value for <code>maxParallelTrainingJobs</code> is <code>10</code>.
+          $ref: '#/components/schemas/HPOResource'
+          description: The maximum number of parallel training jobs when you create a solution version. The maximum value for <code>maxParallelTrainingJobs</code> is <code>10</code>.
       description: Describes the resource configuration for hyperparameter optimization (HPO).
     HyperParameterRanges:
       type: object
       properties:
         integerHyperParameterRanges:
-          allOf:
-            - $ref: '#/components/schemas/IntegerHyperParameterRanges'
-            - description: The integer-valued hyperparameters and their ranges.
+          $ref: '#/components/schemas/IntegerHyperParameterRanges'
+          description: The integer-valued hyperparameters and their ranges.
         continuousHyperParameterRanges:
-          allOf:
-            - $ref: '#/components/schemas/ContinuousHyperParameterRanges'
-            - description: The continuous hyperparameters and their ranges.
+          $ref: '#/components/schemas/ContinuousHyperParameterRanges'
+          description: The continuous hyperparameters and their ranges.
         categoricalHyperParameterRanges:
-          allOf:
-            - $ref: '#/components/schemas/CategoricalHyperParameterRanges'
-            - description: The categorical hyperparameters and their ranges.
+          $ref: '#/components/schemas/CategoricalHyperParameterRanges'
+          description: The categorical hyperparameters and their ranges.
       description: 'Specifies the hyperparameters and their ranges. Hyperparameters can be categorical, continuous, or integer-valued.'
     HPOConfig:
       type: object
       properties:
         hpoObjective:
-          allOf:
-            - $ref: '#/components/schemas/HPOObjective'
-            - description: <p>The metric to optimize during HPO.</p> <note> <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> at this time.</p> </note>
+          $ref: '#/components/schemas/HPOObjective'
+          description: <p>The metric to optimize during HPO.</p> <note> <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> at this time.</p> </note>
         hpoResourceConfig:
-          allOf:
-            - $ref: '#/components/schemas/HPOResourceConfig'
-            - description: Describes the resource configuration for HPO.
+          $ref: '#/components/schemas/HPOResourceConfig'
+          description: Describes the resource configuration for HPO.
         algorithmHyperParameterRanges:
-          allOf:
-            - $ref: '#/components/schemas/HyperParameterRanges'
-            - description: The hyperparameters and their allowable ranges.
+          $ref: '#/components/schemas/HyperParameterRanges'
+          description: The hyperparameters and their allowable ranges.
       description: Describes the properties for hyperparameter optimization (HPO).
     HPOObjectiveType:
       type: string
@@ -5009,17 +4613,14 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ParameterName'
-            - description: The name of the hyperparameter.
+          $ref: '#/components/schemas/ParameterName'
+          description: The name of the hyperparameter.
         minValue:
-          allOf:
-            - $ref: '#/components/schemas/IntegerMinValue'
-            - description: The minimum allowable value for the hyperparameter.
+          $ref: '#/components/schemas/IntegerMinValue'
+          description: The minimum allowable value for the hyperparameter.
         maxValue:
-          allOf:
-            - $ref: '#/components/schemas/IntegerMaxValue'
-            - description: The maximum allowable value for the hyperparameter.
+          $ref: '#/components/schemas/IntegerMaxValue'
+          description: The maximum allowable value for the hyperparameter.
       description: Provides the name and range of an integer-valued hyperparameter.
     ItemAttribute:
       type: string
@@ -5070,13 +4671,11 @@ components:
       type: object
       properties:
         itemAttribute:
-          allOf:
-            - $ref: '#/components/schemas/ItemAttribute'
-            - description: 'The numerical metadata column in an Items dataset related to the optimization objective. For example, VIDEO_LENGTH (to maximize streaming minutes), or PRICE (to maximize revenue).'
+          $ref: '#/components/schemas/ItemAttribute'
+          description: 'The numerical metadata column in an Items dataset related to the optimization objective. For example, VIDEO_LENGTH (to maximize streaming minutes), or PRICE (to maximize revenue).'
         objectiveSensitivity:
-          allOf:
-            - $ref: '#/components/schemas/ObjectiveSensitivity'
-            - description: Specifies how Amazon Personalize balances the importance of your optimization objective versus relevance.
+          $ref: '#/components/schemas/ObjectiveSensitivity'
+          description: Specifies how Amazon Personalize balances the importance of your optimization objective versus relevance.
       description: 'Describes the additional objective for the solution, such as maximizing streaming minutes or increasing revenue. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html">Optimizing a solution</a>.'
     PerformHPO:
       type: boolean
@@ -5087,73 +4686,58 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the recipe.
+          $ref: '#/components/schemas/Name'
+          description: The name of the recipe.
         recipeArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the recipe.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the recipe.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: The status of the recipe.
+          $ref: '#/components/schemas/Status'
+          description: The status of the recipe.
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the recipe was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the recipe was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the recipe was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the recipe was last updated.
       description: 'Provides a summary of the properties of a recipe. For a complete listing, call the <a>DescribeRecipe</a> API.'
     SolutionVersionSummary:
       type: object
       properties:
         solutionVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the solution version.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the solution version.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the solution version.</p> <p>A solution version can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the solution version.</p> <p>A solution version can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that this version of a solution was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that this version of a solution was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the solution version was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the solution version was last updated.
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/FailureReason'
-            - description: 'If a solution version fails, the reason behind the failure.'
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If a solution version fails, the reason behind the failure.'
       description: 'Provides a summary of the properties of a solution version. For a complete listing, call the <a>DescribeSolutionVersion</a> API.'
     SolutionSummary:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the solution.
+          $ref: '#/components/schemas/Name'
+          description: The name of the solution.
         solutionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the solution.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the solution.
         status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>The status of the solution.</p> <p>A solution can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>The status of the solution.</p> <p>A solution can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
         creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the solution was created.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the solution was created.
         lastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The date and time (in Unix time) that the solution was last updated.
+          $ref: '#/components/schemas/Date'
+          description: The date and time (in Unix time) that the solution was last updated.
       description: 'Provides a summary of the properties of a solution. For a complete listing, call the <a>DescribeSolution</a> API.'
     TrainingHours:
       type: number
@@ -5163,9 +4747,8 @@ components:
       type: object
       properties:
         algorithmHyperParameters:
-          allOf:
-            - $ref: '#/components/schemas/HyperParameters'
-            - description: A list of the hyperparameter values of the best performing model.
+          $ref: '#/components/schemas/HyperParameters'
+          description: A list of the hyperparameter values of the best performing model.
       description: 'If hyperparameter optimization (HPO) was performed, contains the hyperparameter values of the best performing model.'
 security:
   - hmac: []

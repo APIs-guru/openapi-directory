@@ -3342,9 +3342,8 @@ components:
         - MFAMode
       properties:
         MFAMode:
-          allOf:
-            - $ref: '#/components/schemas/MFAMode'
-            - description: 'Describes whether MFA should be [ON, OFF, or OPTIONAL] for authentication in your Amplify project.'
+          $ref: '#/components/schemas/MFAMode'
+          description: 'Describes whether MFA should be [ON, OFF, or OPTIONAL] for authentication in your Amplify project.'
         Settings:
           allOf:
             - $ref: '#/components/schemas/Settings'
@@ -3862,9 +3861,8 @@ components:
       type: object
       properties:
         MFAMode:
-          allOf:
-            - $ref: '#/components/schemas/MFAMode'
-            - description: The MFA mode for the backend of your Amplify project.
+          $ref: '#/components/schemas/MFAMode'
+          description: The MFA mode for the backend of your Amplify project.
         Settings:
           allOf:
             - $ref: '#/components/schemas/Settings'

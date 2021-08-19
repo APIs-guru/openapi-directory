@@ -2042,29 +2042,23 @@ components:
       title: AcceptPageRequest
       properties:
         PageId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the engagement to a contact channel.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the engagement to a contact channel.
         ContactChannelId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ARN of the contact channel.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The ARN of the contact channel.
         AcceptType:
-          allOf:
-            - $ref: '#/components/schemas/AcceptType'
-            - description: The type indicates if the page was <code>DELIVERED</code> or <code>READ</code>.
+          $ref: '#/components/schemas/AcceptType'
+          description: The type indicates if the page was <code>DELIVERED</code> or <code>READ</code>.
         Note:
-          allOf:
-            - $ref: '#/components/schemas/ReceiptInfo'
-            - description: Information provided by the user when the user acknowledges the page.
+          $ref: '#/components/schemas/ReceiptInfo'
+          description: Information provided by the user when the user acknowledges the page.
         AcceptCode:
-          allOf:
-            - $ref: '#/components/schemas/AcceptCode'
-            - description: The accept code is a 6-digit code used to acknowledge the page.
+          $ref: '#/components/schemas/AcceptCode'
+          description: The accept code is a 6-digit code used to acknowledge the page.
         AcceptCodeValidation:
-          allOf:
-            - $ref: '#/components/schemas/AcceptCodeValidation'
-            - description: '<p>An optional field that Incident Manager uses to <code>ENFORCE</code> <code>AcceptCode</code> validation when acknowledging an page. Acknowledgement can occur by replying to a page, or when entering the AcceptCode in the console. Enforcing AcceptCode validation causes Incident Manager to verify that the code entered by the user matches the code sent by Incident Manager with the page.</p> <p>Incident Manager can also <code>IGNORE</code> <code>AcceptCode</code> validation. Ignoring <code>AcceptCode</code> validation causes Incident Manager to accept any value entered for the <code>AcceptCode</code>.</p>'
+          $ref: '#/components/schemas/AcceptCodeValidation'
+          description: '<p>An optional field that Incident Manager uses to <code>ENFORCE</code> <code>AcceptCode</code> validation when acknowledging an page. Acknowledgement can occur by replying to a page, or when entering the AcceptCode in the console. Enforcing AcceptCode validation causes Incident Manager to verify that the code entered by the user matches the code sent by Incident Manager with the page.</p> <p>Incident Manager can also <code>IGNORE</code> <code>AcceptCode</code> validation. Ignoring <code>AcceptCode</code> validation causes Incident Manager to accept any value entered for the <code>AcceptCode</code>.</p>'
     AccessDeniedException: {}
     InternalServerException: {}
     ResourceNotFoundException: {}
@@ -2081,22 +2075,19 @@ components:
       title: ActivateContactChannelRequest
       properties:
         ContactChannelId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact channel.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact channel.
         ActivationCode:
-          allOf:
-            - $ref: '#/components/schemas/ActivationCode'
-            - description: 'The code sent to the contact channel when it was created in the contact. '
+          $ref: '#/components/schemas/ActivationCode'
+          description: 'The code sent to the contact channel when it was created in the contact. '
     CreateContactResult:
       type: object
       required:
         - ContactArn
       properties:
         ContactArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the created contact or escalation plan.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the created contact or escalation plan.
     CreateContactRequest:
       type: object
       required:
@@ -2106,29 +2097,23 @@ components:
       title: CreateContactRequest
       properties:
         Alias:
-          allOf:
-            - $ref: '#/components/schemas/ContactAlias'
-            - description: 'The short name to quickly identify a contact or escalation plan. The contact alias must be unique and identifiable. '
+          $ref: '#/components/schemas/ContactAlias'
+          description: 'The short name to quickly identify a contact or escalation plan. The contact alias must be unique and identifiable. '
         DisplayName:
-          allOf:
-            - $ref: '#/components/schemas/ContactName'
-            - description: 'The full name of the contact or escalation plan. '
+          $ref: '#/components/schemas/ContactName'
+          description: 'The full name of the contact or escalation plan. '
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ContactType'
-            - description: To create an escalation plan use <code>ESCALATION</code>. To create a contact use <code>PERSONAL</code>.
+          $ref: '#/components/schemas/ContactType'
+          description: To create an escalation plan use <code>ESCALATION</code>. To create a contact use <code>PERSONAL</code>.
         Plan:
-          allOf:
-            - $ref: '#/components/schemas/Plan'
-            - description: 'A list of stages. A contact has an engagement plan with stages that contact specified contact channels. An escalation plan uses stages that contact specified contacts. '
+          $ref: '#/components/schemas/Plan'
+          description: 'A list of stages. A contact has an engagement plan with stages that contact specified contact channels. An escalation plan uses stages that contact specified contacts. '
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsList'
-            - description: 'Adds a tag to the target. You can only tag resources created in the first Region of your replication set. '
+          $ref: '#/components/schemas/TagsList'
+          description: 'Adds a tag to the target. You can only tag resources created in the first Region of your replication set. '
         IdempotencyToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+          $ref: '#/components/schemas/IdempotencyToken'
+          description: A token ensuring that the action is called only once with the specified details.
     ConflictException: {}
     ServiceQuotaExceededException: {}
     DataEncryptionException: {}
@@ -2138,9 +2123,8 @@ components:
         - ContactChannelArn
       properties:
         ContactChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ARN of the contact channel.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The ARN of the contact channel.
     CreateContactChannelRequest:
       type: object
       required:
@@ -2151,29 +2135,23 @@ components:
       title: CreateContactChannelRequest
       properties:
         ContactId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact you are adding the contact channel to.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact you are adding the contact channel to.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ChannelName'
-            - description: The name of the contact channel.
+          $ref: '#/components/schemas/ChannelName'
+          description: The name of the contact channel.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ChannelType'
-            - description: '<p>Incident Manager supports three types of contact channels:</p> <ul> <li> <p> <code>SMS</code> </p> </li> <li> <p> <code>VOICE</code> </p> </li> <li> <p> <code>EMAIL</code> </p> </li> </ul>'
+          $ref: '#/components/schemas/ChannelType'
+          description: '<p>Incident Manager supports three types of contact channels:</p> <ul> <li> <p> <code>SMS</code> </p> </li> <li> <p> <code>VOICE</code> </p> </li> <li> <p> <code>EMAIL</code> </p> </li> </ul>'
         DeliveryAddress:
-          allOf:
-            - $ref: '#/components/schemas/ContactChannelAddress'
-            - description: '<p>The details that Incident Manager uses when trying to engage the contact channel. The format is dependent on the type of the contact channel. The following are the expected formats:</p> <ul> <li> <p>SMS - ''+'' followed by the country code and phone number</p> </li> <li> <p>VOICE - ''+'' followed by the country code and phone number</p> </li> <li> <p>EMAIL - any standard email format</p> </li> </ul>'
+          $ref: '#/components/schemas/ContactChannelAddress'
+          description: '<p>The details that Incident Manager uses when trying to engage the contact channel. The format is dependent on the type of the contact channel. The following are the expected formats:</p> <ul> <li> <p>SMS - ''+'' followed by the country code and phone number</p> </li> <li> <p>VOICE - ''+'' followed by the country code and phone number</p> </li> <li> <p>EMAIL - any standard email format</p> </li> </ul>'
         DeferActivation:
-          allOf:
-            - $ref: '#/components/schemas/DeferActivation'
-            - description: 'If you want to activate the channel at a later time, you can choose to defer activation. Incident Manager can''t engage your contact channel until it has been activated.'
+          $ref: '#/components/schemas/DeferActivation'
+          description: 'If you want to activate the channel at a later time, you can choose to defer activation. Incident Manager can''t engage your contact channel until it has been activated.'
         IdempotencyToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+          $ref: '#/components/schemas/IdempotencyToken'
+          description: A token ensuring that the action is called only once with the specified details.
     DeactivateContactChannelResult:
       type: object
       properties: {}
@@ -2184,9 +2162,8 @@ components:
       title: DeactivateContactChannelRequest
       properties:
         ContactChannelId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact channel you're deactivating.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact channel you're deactivating.
     DeleteContactResult:
       type: object
       properties: {}
@@ -2197,9 +2174,8 @@ components:
       title: DeleteContactRequest
       properties:
         ContactId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact that you're deleting.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact that you're deleting.
     DeleteContactChannelResult:
       type: object
       properties: {}
@@ -2210,9 +2186,8 @@ components:
       title: DeleteContactChannelRequest
       properties:
         ContactChannelId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact channel.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact channel.
     DescribeEngagementResult:
       type: object
       required:
@@ -2223,45 +2198,35 @@ components:
         - Content
       properties:
         ContactArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ARN of the escalation plan or contacts involved in the engagement.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The ARN of the escalation plan or contacts involved in the engagement.
         EngagementArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ARN of the engagement.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The ARN of the engagement.
         Sender:
-          allOf:
-            - $ref: '#/components/schemas/Sender'
-            - description: The user that started the engagement.
+          $ref: '#/components/schemas/Sender'
+          description: The user that started the engagement.
         Subject:
-          allOf:
-            - $ref: '#/components/schemas/Subject'
-            - description: The secure subject of the message that was sent to the contact. Use this field for engagements to <code>VOICE</code> and <code>EMAIL</code>.
+          $ref: '#/components/schemas/Subject'
+          description: The secure subject of the message that was sent to the contact. Use this field for engagements to <code>VOICE</code> and <code>EMAIL</code>.
         Content:
-          allOf:
-            - $ref: '#/components/schemas/Content'
-            - description: The secure content of the message that was sent to the contact. Use this field for engagements to <code>VOICE</code> and <code>EMAIL</code>.
+          $ref: '#/components/schemas/Content'
+          description: The secure content of the message that was sent to the contact. Use this field for engagements to <code>VOICE</code> and <code>EMAIL</code>.
         PublicSubject:
-          allOf:
-            - $ref: '#/components/schemas/PublicSubject'
-            - description: The insecure subject of the message that was sent to the contact. Use this field for engagements to <code>SMS</code>.
+          $ref: '#/components/schemas/PublicSubject'
+          description: The insecure subject of the message that was sent to the contact. Use this field for engagements to <code>SMS</code>.
         PublicContent:
-          allOf:
-            - $ref: '#/components/schemas/PublicContent'
-            - description: The insecure content of the message that was sent to the contact. Use this field for engagements to <code>SMS</code>.
+          $ref: '#/components/schemas/PublicContent'
+          description: The insecure content of the message that was sent to the contact. Use this field for engagements to <code>SMS</code>.
         IncidentId:
-          allOf:
-            - $ref: '#/components/schemas/IncidentId'
-            - description: The ARN of the incident in which the engagement occurred.
+          $ref: '#/components/schemas/IncidentId'
+          description: The ARN of the incident in which the engagement occurred.
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: The time that the engagement started.
+          $ref: '#/components/schemas/DateTime'
+          description: The time that the engagement started.
         StopTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: The time that the engagement ended.
+          $ref: '#/components/schemas/DateTime'
+          description: The time that the engagement ended.
     DescribeEngagementRequest:
       type: object
       required:
@@ -2269,9 +2234,8 @@ components:
       title: DescribeEngagementRequest
       properties:
         EngagementId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the engagement you want the details of.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the engagement you want the details of.
     DescribePageResult:
       type: object
       required:
@@ -2283,53 +2247,41 @@ components:
         - Content
       properties:
         PageArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the engagement to a contact channel.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the engagement to a contact channel.
         EngagementArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ARN of the engagement that engaged the contact channel.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The ARN of the engagement that engaged the contact channel.
         ContactArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ARN of the contact that was engaged.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The ARN of the contact that was engaged.
         Sender:
-          allOf:
-            - $ref: '#/components/schemas/Sender'
-            - description: The user that started the engagement.
+          $ref: '#/components/schemas/Sender'
+          description: The user that started the engagement.
         Subject:
-          allOf:
-            - $ref: '#/components/schemas/Subject'
-            - description: The secure subject of the message that was sent to the contact. Use this field for engagements to <code>VOICE</code> and <code>EMAIL</code>.
+          $ref: '#/components/schemas/Subject'
+          description: The secure subject of the message that was sent to the contact. Use this field for engagements to <code>VOICE</code> and <code>EMAIL</code>.
         Content:
-          allOf:
-            - $ref: '#/components/schemas/Content'
-            - description: The secure content of the message that was sent to the contact. Use this field for engagements to <code>VOICE</code> and <code>EMAIL</code>.
+          $ref: '#/components/schemas/Content'
+          description: The secure content of the message that was sent to the contact. Use this field for engagements to <code>VOICE</code> and <code>EMAIL</code>.
         PublicSubject:
-          allOf:
-            - $ref: '#/components/schemas/PublicSubject'
-            - description: The insecure subject of the message that was sent to the contact. Use this field for engagements to <code>SMS</code>.
+          $ref: '#/components/schemas/PublicSubject'
+          description: The insecure subject of the message that was sent to the contact. Use this field for engagements to <code>SMS</code>.
         PublicContent:
-          allOf:
-            - $ref: '#/components/schemas/PublicContent'
-            - description: The insecure content of the message that was sent to the contact. Use this field for engagements to <code>SMS</code>.
+          $ref: '#/components/schemas/PublicContent'
+          description: The insecure content of the message that was sent to the contact. Use this field for engagements to <code>SMS</code>.
         IncidentId:
-          allOf:
-            - $ref: '#/components/schemas/IncidentId'
-            - description: The ARN of the incident that engaged the contact channel.
+          $ref: '#/components/schemas/IncidentId'
+          description: The ARN of the incident that engaged the contact channel.
         SentTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: The time the engagement was sent to the contact channel.
+          $ref: '#/components/schemas/DateTime'
+          description: The time the engagement was sent to the contact channel.
         ReadTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: The time that the contact channel acknowledged the engagement.
+          $ref: '#/components/schemas/DateTime'
+          description: The time that the contact channel acknowledged the engagement.
         DeliveryTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: The time that the contact channel received the engagement.
+          $ref: '#/components/schemas/DateTime'
+          description: The time that the contact channel received the engagement.
     DescribePageRequest:
       type: object
       required:
@@ -2337,9 +2289,8 @@ components:
       title: DescribePageRequest
       properties:
         PageId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ID of the engagement to a contact channel.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The ID of the engagement to a contact channel.
     GetContactResult:
       type: object
       required:
@@ -2349,25 +2300,20 @@ components:
         - Plan
       properties:
         ContactArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ARN of the contact or escalation plan.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The ARN of the contact or escalation plan.
         Alias:
-          allOf:
-            - $ref: '#/components/schemas/ContactAlias'
-            - description: The alias of the contact or escalation plan. The alias is unique and identifiable.
+          $ref: '#/components/schemas/ContactAlias'
+          description: The alias of the contact or escalation plan. The alias is unique and identifiable.
         DisplayName:
-          allOf:
-            - $ref: '#/components/schemas/ContactName'
-            - description: The full name of the contact or escalation plan.
+          $ref: '#/components/schemas/ContactName'
+          description: The full name of the contact or escalation plan.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ContactType'
-            - description: 'The type of contact, either <code>PERSONAL</code> or <code>ESCALATION</code>. '
+          $ref: '#/components/schemas/ContactType'
+          description: 'The type of contact, either <code>PERSONAL</code> or <code>ESCALATION</code>. '
         Plan:
-          allOf:
-            - $ref: '#/components/schemas/Plan'
-            - description: Details about the specific timing or stages and targets of the escalation plan or engagement plan.
+          $ref: '#/components/schemas/Plan'
+          description: Details about the specific timing or stages and targets of the escalation plan or engagement plan.
     GetContactRequest:
       type: object
       required:
@@ -2375,9 +2321,8 @@ components:
       title: GetContactRequest
       properties:
         ContactId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact or escalation plan.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact or escalation plan.
     GetContactChannelResult:
       type: object
       required:
@@ -2388,29 +2333,23 @@ components:
         - DeliveryAddress
       properties:
         ContactArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ARN of the contact that the channel belongs to.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The ARN of the contact that the channel belongs to.
         ContactChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ARN of the contact channel.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The ARN of the contact channel.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ChannelName'
-            - description: The name of the contact channel
+          $ref: '#/components/schemas/ChannelName'
+          description: The name of the contact channel
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ChannelType'
-            - description: 'The type of contact channel. The type is <code>SMS</code>, <code>VOICE</code>, or <code>EMAIL</code>.'
+          $ref: '#/components/schemas/ChannelType'
+          description: 'The type of contact channel. The type is <code>SMS</code>, <code>VOICE</code>, or <code>EMAIL</code>.'
         DeliveryAddress:
-          allOf:
-            - $ref: '#/components/schemas/ContactChannelAddress'
-            - description: 'The details that Incident Manager uses when trying to engage the contact channel. '
+          $ref: '#/components/schemas/ContactChannelAddress'
+          description: 'The details that Incident Manager uses when trying to engage the contact channel. '
         ActivationStatus:
-          allOf:
-            - $ref: '#/components/schemas/ActivationStatus'
-            - description: A Boolean value indicating if the contact channel has been activated or not.
+          $ref: '#/components/schemas/ActivationStatus'
+          description: A Boolean value indicating if the contact channel has been activated or not.
     GetContactChannelRequest:
       type: object
       required:
@@ -2418,20 +2357,17 @@ components:
       title: GetContactChannelRequest
       properties:
         ContactChannelId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact channel you want information about.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact channel you want information about.
     GetContactPolicyResult:
       type: object
       properties:
         ContactArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ARN of the contact or escalation plan.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The ARN of the contact or escalation plan.
         Policy:
-          allOf:
-            - $ref: '#/components/schemas/Policy'
-            - description: Details about the resource policy attached to the contact or escalation plan.
+          $ref: '#/components/schemas/Policy'
+          description: Details about the resource policy attached to the contact or escalation plan.
     GetContactPolicyRequest:
       type: object
       required:
@@ -2439,22 +2375,19 @@ components:
       title: GetContactPolicyRequest
       properties:
         ContactArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact or escalation plan.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact or escalation plan.
     ListContactChannelsResult:
       type: object
       required:
         - ContactChannels
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The pagination token to continue to the next page of results.
         ContactChannels:
-          allOf:
-            - $ref: '#/components/schemas/ContactChannelList'
-            - description: A list of contact channels related to the specified contact.
+          $ref: '#/components/schemas/ContactChannelList'
+          description: A list of contact channels related to the specified contact.
     ListContactChannelsRequest:
       type: object
       required:
@@ -2462,92 +2395,75 @@ components:
       title: ListContactChannelsRequest
       properties:
         ContactId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: 'The Amazon Resource Name (ARN) of the contact. '
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: 'The Amazon Resource Name (ARN) of the contact. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The pagination token to continue to the next page of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of contact channels per page.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of contact channels per page.
     ListContactsResult:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The pagination token to continue to the next page of results.
         Contacts:
-          allOf:
-            - $ref: '#/components/schemas/ContactsList'
-            - description: A list of the contacts and escalation plans in your Incident Manager account.
+          $ref: '#/components/schemas/ContactsList'
+          description: A list of the contacts and escalation plans in your Incident Manager account.
     ListContactsRequest:
       type: object
       title: ListContactsRequest
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The pagination token to continue to the next page of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of contacts and escalation plans per page of results.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of contacts and escalation plans per page of results.
         AliasPrefix:
-          allOf:
-            - $ref: '#/components/schemas/ContactAlias'
-            - description: Used to list only contacts who's aliases start with the specified prefix.
+          $ref: '#/components/schemas/ContactAlias'
+          description: Used to list only contacts who's aliases start with the specified prefix.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ContactType'
-            - description: The type of contact. A contact is type <code>PERSONAL</code> and an escalation plan is type <code>ESCALATION</code>.
+          $ref: '#/components/schemas/ContactType'
+          description: The type of contact. A contact is type <code>PERSONAL</code> and an escalation plan is type <code>ESCALATION</code>.
     ListEngagementsResult:
       type: object
       required:
         - Engagements
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The pagination token to continue to the next page of results.
         Engagements:
-          allOf:
-            - $ref: '#/components/schemas/EngagementsList'
-            - description: A list of each engagement that occurred during the specified time range of an incident.
+          $ref: '#/components/schemas/EngagementsList'
+          description: A list of each engagement that occurred during the specified time range of an incident.
     ListEngagementsRequest:
       type: object
       title: ListEngagementsRequest
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The pagination token to continue to the next page of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of engagements per page of results.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of engagements per page of results.
         IncidentId:
-          allOf:
-            - $ref: '#/components/schemas/IncidentId'
-            - description: The Amazon Resource Name (ARN) of the incident you're listing engagements for.
+          $ref: '#/components/schemas/IncidentId'
+          description: The Amazon Resource Name (ARN) of the incident you're listing engagements for.
         TimeRangeValue:
-          allOf:
-            - $ref: '#/components/schemas/TimeRange'
-            - description: The time range to lists engagements for an incident.
+          $ref: '#/components/schemas/TimeRange'
+          description: The time range to lists engagements for an incident.
     ListPageReceiptsResult:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The pagination token to continue to the next page of results.
         Receipts:
-          allOf:
-            - $ref: '#/components/schemas/ReceiptsList'
-            - description: A list of each acknowledgement.
+          $ref: '#/components/schemas/ReceiptsList'
+          description: A list of each acknowledgement.
     ListPageReceiptsRequest:
       type: object
       required:
@@ -2555,30 +2471,25 @@ components:
       title: ListPageReceiptsRequest
       properties:
         PageId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the engagement to a specific contact channel.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the engagement to a specific contact channel.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The pagination token to continue to the next page of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of acknowledgements per page of results.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of acknowledgements per page of results.
     ListPagesByContactResult:
       type: object
       required:
         - Pages
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The pagination token to continue to the next page of results.
         Pages:
-          allOf:
-            - $ref: '#/components/schemas/PagesList'
-            - description: The list of engagements to a contact's contact channel.
+          $ref: '#/components/schemas/PagesList'
+          description: The list of engagements to a contact's contact channel.
     ListPagesByContactRequest:
       type: object
       required:
@@ -2586,30 +2497,25 @@ components:
       title: ListPagesByContactRequest
       properties:
         ContactId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact you are retrieving engagements for.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact you are retrieving engagements for.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The pagination token to continue to the next page of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of engagements to contact channels to list per page of results. '
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of engagements to contact channels to list per page of results. '
     ListPagesByEngagementResult:
       type: object
       required:
         - Pages
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The pagination token to continue to the next page of results.
         Pages:
-          allOf:
-            - $ref: '#/components/schemas/PagesList'
-            - description: The list of engagements to contact channels.
+          $ref: '#/components/schemas/PagesList'
+          description: The list of engagements to contact channels.
     ListPagesByEngagementRequest:
       type: object
       required:
@@ -2617,24 +2523,20 @@ components:
       title: ListPagesByEngagementRequest
       properties:
         EngagementId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the engagement.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the engagement.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The pagination token to continue to the next page of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of engagements to contact channels to list per page of results.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of engagements to contact channels to list per page of results.
     ListTagsForResourceResult:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsList'
-            - description: The tags related to the contact or escalation plan.
+          $ref: '#/components/schemas/TagsList'
+          description: The tags related to the contact or escalation plan.
     ListTagsForResourceRequest:
       type: object
       required:
@@ -2642,9 +2544,8 @@ components:
       title: ListTagsForResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: The Amazon Resource Name (ARN) of the contact or escalation plan.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The Amazon Resource Name (ARN) of the contact or escalation plan.
     PutContactPolicyResult:
       type: object
       properties: {}
@@ -2656,13 +2557,11 @@ components:
       title: PutContactPolicyRequest
       properties:
         ContactArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact or escalation plan.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact or escalation plan.
         Policy:
-          allOf:
-            - $ref: '#/components/schemas/Policy'
-            - description: Details of the resource policy.
+          $ref: '#/components/schemas/Policy'
+          description: Details of the resource policy.
     SendActivationCodeResult:
       type: object
       properties: {}
@@ -2673,18 +2572,16 @@ components:
       title: SendActivationCodeRequest
       properties:
         ContactChannelId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact channel.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact channel.
     StartEngagementResult:
       type: object
       required:
         - EngagementArn
       properties:
         EngagementArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ARN of the engagement.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The ARN of the engagement.
     StartEngagementRequest:
       type: object
       required:
@@ -2695,37 +2592,29 @@ components:
       title: StartEngagementRequest
       properties:
         ContactId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact being engaged.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact being engaged.
         Sender:
-          allOf:
-            - $ref: '#/components/schemas/Sender'
-            - description: The user that started the engagement.
+          $ref: '#/components/schemas/Sender'
+          description: The user that started the engagement.
         Subject:
-          allOf:
-            - $ref: '#/components/schemas/Subject'
-            - description: The secure subject of the message that was sent to the contact. Use this field for engagements to <code>VOICE</code> or <code>EMAIL</code>.
+          $ref: '#/components/schemas/Subject'
+          description: The secure subject of the message that was sent to the contact. Use this field for engagements to <code>VOICE</code> or <code>EMAIL</code>.
         Content:
-          allOf:
-            - $ref: '#/components/schemas/Content'
-            - description: The secure content of the message that was sent to the contact. Use this field for engagements to <code>VOICE</code> or <code>EMAIL</code>.
+          $ref: '#/components/schemas/Content'
+          description: The secure content of the message that was sent to the contact. Use this field for engagements to <code>VOICE</code> or <code>EMAIL</code>.
         PublicSubject:
-          allOf:
-            - $ref: '#/components/schemas/PublicSubject'
-            - description: The insecure subject of the message that was sent to the contact. Use this field for engagements to <code>SMS</code>.
+          $ref: '#/components/schemas/PublicSubject'
+          description: The insecure subject of the message that was sent to the contact. Use this field for engagements to <code>SMS</code>.
         PublicContent:
-          allOf:
-            - $ref: '#/components/schemas/PublicContent'
-            - description: The insecure content of the message that was sent to the contact. Use this field for engagements to <code>SMS</code>.
+          $ref: '#/components/schemas/PublicContent'
+          description: The insecure content of the message that was sent to the contact. Use this field for engagements to <code>SMS</code>.
         IncidentId:
-          allOf:
-            - $ref: '#/components/schemas/IncidentId'
-            - description: The ARN of the incident that the engagement is part of.
+          $ref: '#/components/schemas/IncidentId'
+          description: The ARN of the incident that the engagement is part of.
         IdempotencyToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+          $ref: '#/components/schemas/IdempotencyToken'
+          description: A token ensuring that the action is called only once with the specified details.
     StopEngagementResult:
       type: object
       properties: {}
@@ -2736,13 +2625,11 @@ components:
       title: StopEngagementRequest
       properties:
         EngagementId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the engagement.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the engagement.
         Reason:
-          allOf:
-            - $ref: '#/components/schemas/StopReason'
-            - description: 'The reason that you''re stopping the engagement. '
+          $ref: '#/components/schemas/StopReason'
+          description: 'The reason that you''re stopping the engagement. '
     TagResourceResult:
       type: object
       properties: {}
@@ -2754,13 +2641,11 @@ components:
       title: TagResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: The Amazon Resource Name (ARN) of the contact or escalation plan.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The Amazon Resource Name (ARN) of the contact or escalation plan.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsList'
-            - description: A list of tags that you are adding to the contact or escalation plan.
+          $ref: '#/components/schemas/TagsList'
+          description: A list of tags that you are adding to the contact or escalation plan.
     UntagResourceResult:
       type: object
       properties: {}
@@ -2772,13 +2657,11 @@ components:
       title: UntagResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: The Amazon Resource Name (ARN) of the contact or escalation plan.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The Amazon Resource Name (ARN) of the contact or escalation plan.
         TagKeys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyList'
-            - description: The key of the tag that you want to remove.
+          $ref: '#/components/schemas/TagKeyList'
+          description: The key of the tag that you want to remove.
     UpdateContactResult:
       type: object
       properties: {}
@@ -2789,17 +2672,14 @@ components:
       title: UpdateContactRequest
       properties:
         ContactId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact or escalation plan you're updating.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact or escalation plan you're updating.
         DisplayName:
-          allOf:
-            - $ref: '#/components/schemas/ContactName'
-            - description: The full name of the contact or escalation plan.
+          $ref: '#/components/schemas/ContactName'
+          description: The full name of the contact or escalation plan.
         Plan:
-          allOf:
-            - $ref: '#/components/schemas/Plan'
-            - description: 'A list of stages. A contact has an engagement plan with stages for specified contact channels. An escalation plan uses these stages to contact specified contacts. '
+          $ref: '#/components/schemas/Plan'
+          description: 'A list of stages. A contact has an engagement plan with stages for specified contact channels. An escalation plan uses these stages to contact specified contacts. '
     UpdateContactChannelResult:
       type: object
       properties: {}
@@ -2810,17 +2690,14 @@ components:
       title: UpdateContactChannelRequest
       properties:
         ContactChannelId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact channel you want to update.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact channel you want to update.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ChannelName'
-            - description: The name of the contact channel
+          $ref: '#/components/schemas/ChannelName'
+          description: The name of the contact channel
         DeliveryAddress:
-          allOf:
-            - $ref: '#/components/schemas/ContactChannelAddress'
-            - description: 'The details that Incident Manager uses when trying to engage the contact channel. '
+          $ref: '#/components/schemas/ContactChannelAddress'
+          description: 'The details that Incident Manager uses when trying to engage the contact channel. '
     AcceptCode:
       type: string
       pattern: '^[0-9]*$'
@@ -2875,13 +2752,11 @@ components:
         - ContactChannelId
       properties:
         ContactChannelId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact channel.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact channel.
         RetryIntervalInMinutes:
-          allOf:
-            - $ref: '#/components/schemas/RetryIntervalInMinutes'
-            - description: The number of minutes to wait to retry sending engagement in the case the engagement initially fails.
+          $ref: '#/components/schemas/RetryIntervalInMinutes'
+          description: The number of minutes to wait to retry sending engagement in the case the engagement initially fails.
       description: Information about the contact channel that Incident Manager uses to engage the contact.
     ChannelType:
       type: string
@@ -2912,29 +2787,24 @@ components:
         - Type
       properties:
         ContactArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact or escalation plan.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact or escalation plan.
         Alias:
-          allOf:
-            - $ref: '#/components/schemas/ContactAlias'
-            - description: The unique and identifiable alias of the contact or escalation plan.
+          $ref: '#/components/schemas/ContactAlias'
+          description: The unique and identifiable alias of the contact or escalation plan.
         DisplayName:
-          allOf:
-            - $ref: '#/components/schemas/ContactName'
-            - description: The full name of the contact or escalation plan.
+          $ref: '#/components/schemas/ContactName'
+          description: The full name of the contact or escalation plan.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ContactType'
-            - description: Refers to the type of contact. A single contact is type <code>PERSONAL</code> and an escalation plan is type <code>ESCALATION</code>.
+          $ref: '#/components/schemas/ContactType'
+          description: Refers to the type of contact. A single contact is type <code>PERSONAL</code> and an escalation plan is type <code>ESCALATION</code>.
       description: A personal contact or escalation plan that Incident Manager engages during an incident.
     ContactChannelAddress:
       type: object
       properties:
         SimpleAddress:
-          allOf:
-            - $ref: '#/components/schemas/SimpleAddress'
-            - description: '<p>The format is dependent on the type of the contact channel. The following are the expected formats:</p> <ul> <li> <p>SMS - ''+'' followed by the country code and phone number</p> </li> <li> <p>VOICE - ''+'' followed by the country code and phone number</p> </li> <li> <p>EMAIL - any standard email format</p> </li> </ul>'
+          $ref: '#/components/schemas/SimpleAddress'
+          description: '<p>The format is dependent on the type of the contact channel. The following are the expected formats:</p> <ul> <li> <p>SMS - ''+'' followed by the country code and phone number</p> </li> <li> <p>VOICE - ''+'' followed by the country code and phone number</p> </li> <li> <p>EMAIL - any standard email format</p> </li> </ul>'
       description: 'The details that Incident Manager uses when trying to engage the contact channel. '
     ContactChannel:
       type: object
@@ -2946,29 +2816,23 @@ components:
         - ActivationStatus
       properties:
         ContactChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact channel.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact channel.
         ContactArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ARN of the contact that contains the contact channel.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The ARN of the contact that contains the contact channel.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ChannelName'
-            - description: The name of the contact channel.
+          $ref: '#/components/schemas/ChannelName'
+          description: The name of the contact channel.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ChannelType'
-            - description: '<p>The type of the contact channel. Incident Manager supports three contact methods:</p> <ul> <li> <p>SMS</p> </li> <li> <p>VOICE</p> </li> <li> <p>EMAIL</p> </li> </ul>'
+          $ref: '#/components/schemas/ChannelType'
+          description: '<p>The type of the contact channel. Incident Manager supports three contact methods:</p> <ul> <li> <p>SMS</p> </li> <li> <p>VOICE</p> </li> <li> <p>EMAIL</p> </li> </ul>'
         DeliveryAddress:
-          allOf:
-            - $ref: '#/components/schemas/ContactChannelAddress'
-            - description: The details that Incident Manager uses when trying to engage the contact channel.
+          $ref: '#/components/schemas/ContactChannelAddress'
+          description: The details that Incident Manager uses when trying to engage the contact channel.
         ActivationStatus:
-          allOf:
-            - $ref: '#/components/schemas/ActivationStatus'
-            - description: 'A Boolean value describing if the contact channel has been activated or not. If the contact channel isn''t activated, Incident Manager can''t engage the contact through it. '
+          $ref: '#/components/schemas/ActivationStatus'
+          description: 'A Boolean value describing if the contact channel has been activated or not. If the contact channel isn''t activated, Incident Manager can''t engage the contact through it. '
       description: The method that Incident Manager uses to engage a contact.
     SimpleAddress:
       type: string
@@ -2986,13 +2850,11 @@ components:
         - IsEssential
       properties:
         ContactId:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact.
         IsEssential:
-          allOf:
-            - $ref: '#/components/schemas/IsEssential'
-            - description: A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.
+          $ref: '#/components/schemas/IsEssential'
+          description: A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.
       description: The contact that Incident Manager is engaging during an incident.
     ContactsList:
       type: array
@@ -3015,9 +2877,8 @@ components:
         - Stages
       properties:
         Stages:
-          allOf:
-            - $ref: '#/components/schemas/StagesList'
-            - description: A list of stages that the escalation plan or engagement plan uses to engage contacts and contact methods.
+          $ref: '#/components/schemas/StagesList'
+          description: A list of stages that the escalation plan or engagement plan uses to engage contacts and contact methods.
       description: The stages that an escalation plan or engagement plan engages contacts and contact methods in.
     TagsList:
       type: array
@@ -3059,29 +2920,23 @@ components:
         - Sender
       properties:
         EngagementArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the engagement.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the engagement.
         ContactArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ARN of the escalation plan or contact that Incident Manager is engaging.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The ARN of the escalation plan or contact that Incident Manager is engaging.
         Sender:
-          allOf:
-            - $ref: '#/components/schemas/Sender'
-            - description: The user that started the engagement.
+          $ref: '#/components/schemas/Sender'
+          description: The user that started the engagement.
         IncidentId:
-          allOf:
-            - $ref: '#/components/schemas/IncidentId'
-            - description: The ARN of the incident that's engaging the contact.
+          $ref: '#/components/schemas/IncidentId'
+          description: The ARN of the incident that's engaging the contact.
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: The time that the engagement began.
+          $ref: '#/components/schemas/DateTime'
+          description: The time that the engagement began.
         StopTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: The time that the engagement ended.
+          $ref: '#/components/schemas/DateTime'
+          description: The time that the engagement ended.
       description: Incident Manager reaching out to a contact or escalation plan to engage contact during an incident.
     EngagementsList:
       type: array
@@ -3104,13 +2959,11 @@ components:
       type: object
       properties:
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: The start of the time range.
+          $ref: '#/components/schemas/DateTime'
+          description: The start of the time range.
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: The end of the time range.
+          $ref: '#/components/schemas/DateTime'
+          description: The end of the time range.
       description: A range of between two set times
     ReceiptsList:
       type: array
@@ -3129,37 +2982,29 @@ components:
         - Sender
       properties:
         PageArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the page to the contact channel.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the page to the contact channel.
         EngagementArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ARN of the engagement that this page is part of.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The ARN of the engagement that this page is part of.
         ContactArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ARN of the contact that Incident Manager is engaging.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The ARN of the contact that Incident Manager is engaging.
         Sender:
-          allOf:
-            - $ref: '#/components/schemas/Sender'
-            - description: The user that started the engagement.
+          $ref: '#/components/schemas/Sender'
+          description: The user that started the engagement.
         IncidentId:
-          allOf:
-            - $ref: '#/components/schemas/IncidentId'
-            - description: The ARN of the incident that's engaging the contact channel.
+          $ref: '#/components/schemas/IncidentId'
+          description: The ARN of the incident that's engaging the contact channel.
         SentTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: The time that Incident Manager engaged the contact channel.
+          $ref: '#/components/schemas/DateTime'
+          description: The time that Incident Manager engaged the contact channel.
         DeliveryTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: The time the message was delivered to the contact channel.
+          $ref: '#/components/schemas/DateTime'
+          description: The time the message was delivered to the contact channel.
         ReadTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: The time that the contact channel acknowledged engagement.
+          $ref: '#/components/schemas/DateTime'
+          description: The time that the contact channel acknowledged engagement.
       description: Incident Manager engaging a contact's contact channel.
     StagesList:
       type: array
@@ -3180,21 +3025,17 @@ components:
         - ReceiptTime
       properties:
         ContactChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The Amazon Resource Name (ARN) of the contact channel Incident Manager engaged.
+          $ref: '#/components/schemas/SsmContactsArn'
+          description: The Amazon Resource Name (ARN) of the contact channel Incident Manager engaged.
         ReceiptType:
-          allOf:
-            - $ref: '#/components/schemas/ReceiptType'
-            - description: 'The type follows the engagement cycle, <code>SENT</code>, <code>DELIVERED</code>, and <code>READ</code>.'
+          $ref: '#/components/schemas/ReceiptType'
+          description: 'The type follows the engagement cycle, <code>SENT</code>, <code>DELIVERED</code>, and <code>READ</code>.'
         ReceiptInfo:
-          allOf:
-            - $ref: '#/components/schemas/ReceiptInfo'
-            - description: Information provided during the page acknowledgement.
+          $ref: '#/components/schemas/ReceiptInfo'
+          description: Information provided during the page acknowledgement.
         ReceiptTime:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: 'The time receipt was <code>SENT</code>, <code>DELIVERED</code>, or <code>READ</code>.'
+          $ref: '#/components/schemas/DateTime'
+          description: 'The time receipt was <code>SENT</code>, <code>DELIVERED</code>, or <code>READ</code>.'
       description: Records events during an engagement.
     StageDurationInMins:
       type: integer
@@ -3211,13 +3052,11 @@ components:
         - Targets
       properties:
         DurationInMinutes:
-          allOf:
-            - $ref: '#/components/schemas/StageDurationInMins'
-            - description: The time to wait until beginning the next stage. The duration can only be set to 0 if a target is specified.
+          $ref: '#/components/schemas/StageDurationInMins'
+          description: The time to wait until beginning the next stage. The duration can only be set to 0 if a target is specified.
         Targets:
-          allOf:
-            - $ref: '#/components/schemas/TargetsList'
-            - description: The contacts or contact methods that the escalation plan or engagement plan is engaging.
+          $ref: '#/components/schemas/TargetsList'
+          description: The contacts or contact methods that the escalation plan or engagement plan is engaging.
       description: A set amount of time that an escalation plan or engagement plan engages the specified contacts or contact methods.
     StopReason:
       type: string
@@ -3237,13 +3076,11 @@ components:
       type: object
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: Name of the object key.
+          $ref: '#/components/schemas/TagKey'
+          description: Name of the object key.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: Value of the tag.
+          $ref: '#/components/schemas/TagValue'
+          description: Value of the tag.
       description: A container of a key-value name pair.
     TagKeyList:
       type: array
@@ -3255,13 +3092,11 @@ components:
       type: object
       properties:
         ChannelTargetInfo:
-          allOf:
-            - $ref: '#/components/schemas/ChannelTargetInfo'
-            - description: Information about the contact channel Incident Manager is engaging.
+          $ref: '#/components/schemas/ChannelTargetInfo'
+          description: Information about the contact channel Incident Manager is engaging.
         ContactTargetInfo:
-          allOf:
-            - $ref: '#/components/schemas/ContactTargetInfo'
-            - description: Information about the contact that Incident Manager is engaging.
+          $ref: '#/components/schemas/ContactTargetInfo'
+          description: Information about the contact that Incident Manager is engaging.
       description: The contact or contact channel that is being engaged.
 security:
   - hmac: []

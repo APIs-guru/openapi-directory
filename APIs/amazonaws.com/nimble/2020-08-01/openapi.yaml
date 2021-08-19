@@ -380,21 +380,17 @@ paths:
                   type: object
                   properties:
                     clipboardMode:
-                      allOf:
-                        - $ref: '#/components/schemas/StreamingClipboardMode'
-                        - description: Enable or disable the use of the system clipboard to copy and paste between the streaming session and streaming client.
+                      $ref: '#/components/schemas/StreamingClipboardMode'
+                      description: Enable or disable the use of the system clipboard to copy and paste between the streaming session and streaming client.
                     ec2InstanceTypes:
-                      allOf:
-                        - $ref: '#/components/schemas/StreamingInstanceTypeList'
-                        - description: The EC2 instance types that users can select from when launching a streaming session with this launch profile.
+                      $ref: '#/components/schemas/StreamingInstanceTypeList'
+                      description: The EC2 instance types that users can select from when launching a streaming session with this launch profile.
                     maxSessionLengthInMinutes:
-                      allOf:
-                        - $ref: '#/components/schemas/StreamConfigurationMaxSessionLengthInMinutes'
-                        - description: 'The length of time, in minutes, that a streaming session can run. After this point, Nimble Studio automatically terminates the session.'
+                      $ref: '#/components/schemas/StreamConfigurationMaxSessionLengthInMinutes'
+                      description: 'The length of time, in minutes, that a streaming session can run. After this point, Nimble Studio automatically terminates the session.'
                     streamingImageIds:
-                      allOf:
-                        - $ref: '#/components/schemas/StreamingImageIdList'
-                        - description: The streaming images that users can select from when launching a streaming session with this launch profile.
+                      $ref: '#/components/schemas/StreamingImageIdList'
+                      description: The streaming images that users can select from when launching a streaming session with this launch profile.
                 studioComponentIds:
                   description: ''
                   type: array
@@ -1048,13 +1044,11 @@ paths:
                   type: object
                   properties:
                     keyArn:
-                      allOf:
-                        - $ref: '#/components/schemas/StudioEncryptionConfigurationKeyArn'
-                        - description: The ARN for a KMS key that is used to encrypt studio data.
+                      $ref: '#/components/schemas/StudioEncryptionConfigurationKeyArn'
+                      description: The ARN for a KMS key that is used to encrypt studio data.
                     keyType:
-                      allOf:
-                        - $ref: '#/components/schemas/StudioEncryptionConfigurationKeyType'
-                        - description: The type of KMS key that is used to encrypt studio data.
+                      $ref: '#/components/schemas/StudioEncryptionConfigurationKeyType'
+                      description: The type of KMS key that is used to encrypt studio data.
                 studioName:
                   description: ''
                   type: string
@@ -1219,21 +1213,17 @@ paths:
                   type: object
                   properties:
                     activeDirectoryConfiguration:
-                      allOf:
-                        - $ref: '#/components/schemas/ActiveDirectoryConfiguration'
-                        - description: The configuration for a Microsoft Active Directory (Microsoft AD) studio resource.
+                      $ref: '#/components/schemas/ActiveDirectoryConfiguration'
+                      description: The configuration for a Microsoft Active Directory (Microsoft AD) studio resource.
                     computeFarmConfiguration:
-                      allOf:
-                        - $ref: '#/components/schemas/ComputeFarmConfiguration'
-                        - description: The configuration for a render farm that is associated with a studio resource.
+                      $ref: '#/components/schemas/ComputeFarmConfiguration'
+                      description: The configuration for a render farm that is associated with a studio resource.
                     licenseServiceConfiguration:
-                      allOf:
-                        - $ref: '#/components/schemas/LicenseServiceConfiguration'
-                        - description: The configuration for a license service that is associated with a studio resource.
+                      $ref: '#/components/schemas/LicenseServiceConfiguration'
+                      description: The configuration for a license service that is associated with a studio resource.
                     sharedFileSystemConfiguration:
-                      allOf:
-                        - $ref: '#/components/schemas/SharedFileSystemConfiguration'
-                        - description: The configuration for a shared file storage system that is associated with a studio resource.
+                      $ref: '#/components/schemas/SharedFileSystemConfiguration'
+                      description: The configuration for a shared file storage system that is associated with a studio resource.
                 description:
                   description: ''
                   type: string
@@ -1624,21 +1614,17 @@ paths:
                   type: object
                   properties:
                     clipboardMode:
-                      allOf:
-                        - $ref: '#/components/schemas/StreamingClipboardMode'
-                        - description: Enable or disable the use of the system clipboard to copy and paste between the streaming session and streaming client.
+                      $ref: '#/components/schemas/StreamingClipboardMode'
+                      description: Enable or disable the use of the system clipboard to copy and paste between the streaming session and streaming client.
                     ec2InstanceTypes:
-                      allOf:
-                        - $ref: '#/components/schemas/StreamingInstanceTypeList'
-                        - description: The EC2 instance types that users can select from when launching a streaming session with this launch profile.
+                      $ref: '#/components/schemas/StreamingInstanceTypeList'
+                      description: The EC2 instance types that users can select from when launching a streaming session with this launch profile.
                     maxSessionLengthInMinutes:
-                      allOf:
-                        - $ref: '#/components/schemas/StreamConfigurationMaxSessionLengthInMinutes'
-                        - description: 'The length of time, in minutes, that a streaming session can run. After this point, Nimble Studio automatically terminates the session.'
+                      $ref: '#/components/schemas/StreamConfigurationMaxSessionLengthInMinutes'
+                      description: 'The length of time, in minutes, that a streaming session can run. After this point, Nimble Studio automatically terminates the session.'
                     streamingImageIds:
-                      allOf:
-                        - $ref: '#/components/schemas/StreamingImageIdList'
-                        - description: The streaming images that users can select from when launching a streaming session with this launch profile.
+                      $ref: '#/components/schemas/StreamingImageIdList'
+                      description: The streaming images that users can select from when launching a streaming session with this launch profile.
                 studioComponentIds:
                   description: ''
                   type: array
@@ -2731,21 +2717,17 @@ paths:
                   type: object
                   properties:
                     activeDirectoryConfiguration:
-                      allOf:
-                        - $ref: '#/components/schemas/ActiveDirectoryConfiguration'
-                        - description: The configuration for a Microsoft Active Directory (Microsoft AD) studio resource.
+                      $ref: '#/components/schemas/ActiveDirectoryConfiguration'
+                      description: The configuration for a Microsoft Active Directory (Microsoft AD) studio resource.
                     computeFarmConfiguration:
-                      allOf:
-                        - $ref: '#/components/schemas/ComputeFarmConfiguration'
-                        - description: The configuration for a render farm that is associated with a studio resource.
+                      $ref: '#/components/schemas/ComputeFarmConfiguration'
+                      description: The configuration for a render farm that is associated with a studio resource.
                     licenseServiceConfiguration:
-                      allOf:
-                        - $ref: '#/components/schemas/LicenseServiceConfiguration'
-                        - description: The configuration for a license service that is associated with a studio resource.
+                      $ref: '#/components/schemas/LicenseServiceConfiguration'
+                      description: The configuration for a license service that is associated with a studio resource.
                     sharedFileSystemConfiguration:
-                      allOf:
-                        - $ref: '#/components/schemas/SharedFileSystemConfiguration'
-                        - description: The configuration for a shared file storage system that is associated with a studio resource.
+                      $ref: '#/components/schemas/SharedFileSystemConfiguration'
+                      description: The configuration for a shared file storage system that is associated with a studio resource.
                 description:
                   description: ''
                   type: string
@@ -4025,9 +4007,8 @@ components:
       type: object
       properties:
         eulaAcceptances:
-          allOf:
-            - $ref: '#/components/schemas/EulaAcceptanceList'
-            - description: A collection of EULA acceptances.
+          $ref: '#/components/schemas/EulaAcceptanceList'
+          description: A collection of EULA acceptances.
     __string:
       type: string
     ValidationException: {}
@@ -4041,9 +4022,8 @@ components:
       type: object
       properties:
         launchProfile:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfile'
-            - description: The launch profile.
+          $ref: '#/components/schemas/LaunchProfile'
+          description: The launch profile.
     EC2SubnetId:
       type: string
     LaunchProfileProtocolVersion:
@@ -4079,30 +4059,26 @@ components:
       type: object
       properties:
         streamingImage:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImage'
-            - description: ''
+          $ref: '#/components/schemas/StreamingImage'
+          description: ''
     CreateStreamingSessionResponse:
       type: object
       properties:
         session:
-          allOf:
-            - $ref: '#/components/schemas/StreamingSession'
-            - description: The session.
+          $ref: '#/components/schemas/StreamingSession'
+          description: The session.
     CreateStreamingSessionStreamResponse:
       type: object
       properties:
         stream:
-          allOf:
-            - $ref: '#/components/schemas/StreamingSessionStream'
-            - description: The stream.
+          $ref: '#/components/schemas/StreamingSessionStream'
+          description: The stream.
     CreateStudioResponse:
       type: object
       properties:
         studio:
-          allOf:
-            - $ref: '#/components/schemas/Studio'
-            - description: Information about a studio.
+          $ref: '#/components/schemas/Studio'
+          description: Information about a studio.
     StudioEncryptionConfigurationKeyArn:
       type: string
       pattern: '^arn:.*'
@@ -4118,68 +4094,56 @@ components:
       type: object
       properties:
         studioComponent:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponent'
-            - description: Information about the studio component.
+          $ref: '#/components/schemas/StudioComponent'
+          description: Information about the studio component.
     ActiveDirectoryConfiguration:
       type: object
       properties:
         computerAttributes:
-          allOf:
-            - $ref: '#/components/schemas/ActiveDirectoryComputerAttributeList'
-            - description: A collection of custom attributes for an Active Directory computer.
+          $ref: '#/components/schemas/ActiveDirectoryComputerAttributeList'
+          description: A collection of custom attributes for an Active Directory computer.
         directoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The directory ID of the Directory Service for Microsoft Active Directory to access using this studio component.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The directory ID of the Directory Service for Microsoft Active Directory to access using this studio component.
         organizationalUnitDistinguishedName:
-          allOf:
-            - $ref: '#/components/schemas/ActiveDirectoryOrganizationalUnitDistinguishedName'
-            - description: The distinguished name (DN) and organizational unit (OU) of an Active Directory computer.
+          $ref: '#/components/schemas/ActiveDirectoryOrganizationalUnitDistinguishedName'
+          description: The distinguished name (DN) and organizational unit (OU) of an Active Directory computer.
       description: The configuration for a Microsoft Active Directory (Microsoft AD) studio resource.
     ComputeFarmConfiguration:
       type: object
       properties:
         activeDirectoryUser:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of an Active Directory user that is used on ComputeFarm worker instances.
+          $ref: '#/components/schemas/__string'
+          description: The name of an Active Directory user that is used on ComputeFarm worker instances.
         endpoint:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The endpoint of the ComputeFarm that is accessed by the studio component resource.
+          $ref: '#/components/schemas/__string'
+          description: The endpoint of the ComputeFarm that is accessed by the studio component resource.
       description: The configuration for a render farm that is associated with a studio resource.
     LicenseServiceConfiguration:
       type: object
       properties:
         endpoint:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The endpoint of the license service that is accessed by the studio component resource.
+          $ref: '#/components/schemas/__string'
+          description: The endpoint of the license service that is accessed by the studio component resource.
       description: The configuration for a license service that is associated with a studio resource.
     SharedFileSystemConfiguration:
       type: object
       properties:
         endpoint:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The endpoint of the shared file system that is accessed by the studio component resource.
+          $ref: '#/components/schemas/__string'
+          description: The endpoint of the shared file system that is accessed by the studio component resource.
         fileSystemId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The unique identifier for a file system.
+          $ref: '#/components/schemas/__string'
+          description: The unique identifier for a file system.
         linuxMountPoint:
-          allOf:
-            - $ref: '#/components/schemas/LinuxMountPoint'
-            - description: The mount location for a shared file system on a Linux virtual workstation.
+          $ref: '#/components/schemas/LinuxMountPoint'
+          description: The mount location for a shared file system on a Linux virtual workstation.
         shareName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the file share.
+          $ref: '#/components/schemas/__string'
+          description: The name of the file share.
         windowsMountDrive:
-          allOf:
-            - $ref: '#/components/schemas/WindowsMountDrive'
-            - description: The mount location for a shared file system on a Windows virtual workstation.
+          $ref: '#/components/schemas/WindowsMountDrive'
+          description: The mount location for a shared file system on a Windows virtual workstation.
       description: The configuration for a shared file storage system that is associated with a studio resource.
     SecurityGroupId:
       type: string
@@ -4188,41 +4152,34 @@ components:
       type: object
       properties:
         launchProfileProtocolVersion:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileProtocolVersion'
-            - description: The version number of the protocol that is used by the launch profile. The only valid version is "2021-03-31".
+          $ref: '#/components/schemas/LaunchProfileProtocolVersion'
+          description: The version number of the protocol that is used by the launch profile. The only valid version is "2021-03-31".
         platform:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfilePlatform'
-            - description: 'The platform of the initialization script, either WINDOWS or LINUX.'
+          $ref: '#/components/schemas/LaunchProfilePlatform'
+          description: 'The platform of the initialization script, either WINDOWS or LINUX.'
         runContext:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentInitializationScriptRunContext'
-            - description: The method to use when running the initialization script.
+          $ref: '#/components/schemas/StudioComponentInitializationScriptRunContext'
+          description: The method to use when running the initialization script.
         script:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentInitializationScriptContent'
-            - description: The initialization script.
+          $ref: '#/components/schemas/StudioComponentInitializationScriptContent'
+          description: The initialization script.
       description: Initialization scripts for studio components.
     ScriptParameterKeyValue:
       type: object
       properties:
         key:
-          allOf:
-            - $ref: '#/components/schemas/ScriptParameterKey'
-            - description: A script parameter key.
+          $ref: '#/components/schemas/ScriptParameterKey'
+          description: A script parameter key.
         value:
-          allOf:
-            - $ref: '#/components/schemas/ScriptParameterValue'
-            - description: A script parameter value.
+          $ref: '#/components/schemas/ScriptParameterValue'
+          description: A script parameter value.
       description: 'A parameter for a studio component script, in the form of a key:value pair.'
     DeleteLaunchProfileResponse:
       type: object
       properties:
         launchProfile:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfile'
-            - description: The launch profile.
+          $ref: '#/components/schemas/LaunchProfile'
+          description: The launch profile.
     DeleteLaunchProfileMemberResponse:
       type: object
       properties: {}
@@ -4230,30 +4187,26 @@ components:
       type: object
       properties:
         streamingImage:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImage'
-            - description: The streaming image.
+          $ref: '#/components/schemas/StreamingImage'
+          description: The streaming image.
     DeleteStreamingSessionResponse:
       type: object
       properties:
         session:
-          allOf:
-            - $ref: '#/components/schemas/StreamingSession'
-            - description: The session.
+          $ref: '#/components/schemas/StreamingSession'
+          description: The session.
     DeleteStudioResponse:
       type: object
       properties:
         studio:
-          allOf:
-            - $ref: '#/components/schemas/Studio'
-            - description: Information about a studio.
+          $ref: '#/components/schemas/Studio'
+          description: Information about a studio.
     DeleteStudioComponentResponse:
       type: object
       properties:
         studioComponent:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponent'
-            - description: Information about the studio component.
+          $ref: '#/components/schemas/StudioComponent'
+          description: Information about the studio component.
     DeleteStudioMemberResponse:
       type: object
       properties: {}
@@ -4261,193 +4214,161 @@ components:
       type: object
       properties:
         eula:
-          allOf:
-            - $ref: '#/components/schemas/Eula'
-            - description: The EULA.
+          $ref: '#/components/schemas/Eula'
+          description: The EULA.
     GetLaunchProfileResponse:
       type: object
       properties:
         launchProfile:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfile'
-            - description: The launch profile.
+          $ref: '#/components/schemas/LaunchProfile'
+          description: The launch profile.
     GetLaunchProfileDetailsResponse:
       type: object
       properties:
         launchProfile:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfile'
-            - description: The launch profile.
+          $ref: '#/components/schemas/LaunchProfile'
+          description: The launch profile.
         streamingImages:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageList'
-            - description: A collection of streaming images.
+          $ref: '#/components/schemas/StreamingImageList'
+          description: A collection of streaming images.
         studioComponentSummaries:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentSummaryList'
-            - description: A collection of studio component summaries.
+          $ref: '#/components/schemas/StudioComponentSummaryList'
+          description: A collection of studio component summaries.
     GetLaunchProfileInitializationResponse:
       type: object
       properties:
         launchProfileInitialization:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileInitialization'
-            - description: The launch profile initialization.
+          $ref: '#/components/schemas/LaunchProfileInitialization'
+          description: The launch profile initialization.
     GetLaunchProfileMemberResponse:
       type: object
       properties:
         member:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileMembership'
-            - description: The member.
+          $ref: '#/components/schemas/LaunchProfileMembership'
+          description: The member.
     GetStreamingImageResponse:
       type: object
       properties:
         streamingImage:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImage'
-            - description: The streaming image.
+          $ref: '#/components/schemas/StreamingImage'
+          description: The streaming image.
     GetStreamingSessionResponse:
       type: object
       properties:
         session:
-          allOf:
-            - $ref: '#/components/schemas/StreamingSession'
-            - description: The session.
+          $ref: '#/components/schemas/StreamingSession'
+          description: The session.
     GetStreamingSessionStreamResponse:
       type: object
       properties:
         stream:
-          allOf:
-            - $ref: '#/components/schemas/StreamingSessionStream'
-            - description: The stream.
+          $ref: '#/components/schemas/StreamingSessionStream'
+          description: The stream.
     GetStudioResponse:
       type: object
       properties:
         studio:
-          allOf:
-            - $ref: '#/components/schemas/Studio'
-            - description: Information about a studio.
+          $ref: '#/components/schemas/Studio'
+          description: Information about a studio.
     GetStudioComponentResponse:
       type: object
       properties:
         studioComponent:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponent'
-            - description: Information about the studio component.
+          $ref: '#/components/schemas/StudioComponent'
+          description: Information about the studio component.
     GetStudioMemberResponse:
       type: object
       properties:
         member:
-          allOf:
-            - $ref: '#/components/schemas/StudioMembership'
-            - description: The member.
+          $ref: '#/components/schemas/StudioMembership'
+          description: The member.
     ListEulaAcceptancesResponse:
       type: object
       properties:
         eulaAcceptances:
-          allOf:
-            - $ref: '#/components/schemas/EulaAcceptanceList'
-            - description: A collection of EULA acceptances.
+          $ref: '#/components/schemas/EulaAcceptanceList'
+          description: A collection of EULA acceptances.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'The token for the next set of results, or null if there are no more results.'
+          $ref: '#/components/schemas/__string'
+          description: 'The token for the next set of results, or null if there are no more results.'
     ListEulasResponse:
       type: object
       properties:
         eulas:
-          allOf:
-            - $ref: '#/components/schemas/EulaList'
-            - description: A collection of EULA resources.
+          $ref: '#/components/schemas/EulaList'
+          description: A collection of EULA resources.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'The token for the next set of results, or null if there are no more results.'
+          $ref: '#/components/schemas/__string'
+          description: 'The token for the next set of results, or null if there are no more results.'
     ListLaunchProfileMembersResponse:
       type: object
       properties:
         members:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileMembershipList'
-            - description: A list of members.
+          $ref: '#/components/schemas/LaunchProfileMembershipList'
+          description: A list of members.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'The token for the next set of results, or null if there are no more results.'
+          $ref: '#/components/schemas/__string'
+          description: 'The token for the next set of results, or null if there are no more results.'
     ListLaunchProfilesResponse:
       type: object
       properties:
         launchProfiles:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileList'
-            - description: A collection of launch profiles.
+          $ref: '#/components/schemas/LaunchProfileList'
+          description: A collection of launch profiles.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'The token for the next set of results, or null if there are no more results.'
+          $ref: '#/components/schemas/__string'
+          description: 'The token for the next set of results, or null if there are no more results.'
     ListStreamingImagesResponse:
       type: object
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'The token for the next set of results, or null if there are no more results.'
+          $ref: '#/components/schemas/__string'
+          description: 'The token for the next set of results, or null if there are no more results.'
         streamingImages:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageList'
-            - description: A collection of streaming images.
+          $ref: '#/components/schemas/StreamingImageList'
+          description: A collection of streaming images.
     ListStreamingSessionsResponse:
       type: object
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'The token for the next set of results, or null if there are no more results.'
+          $ref: '#/components/schemas/__string'
+          description: 'The token for the next set of results, or null if there are no more results.'
         sessions:
-          allOf:
-            - $ref: '#/components/schemas/StreamingSessionList'
-            - description: A collection of streaming sessions.
+          $ref: '#/components/schemas/StreamingSessionList'
+          description: A collection of streaming sessions.
     ListStudioComponentsResponse:
       type: object
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'The token for the next set of results, or null if there are no more results.'
+          $ref: '#/components/schemas/__string'
+          description: 'The token for the next set of results, or null if there are no more results.'
         studioComponents:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentList'
-            - description: A collection of studio components.
+          $ref: '#/components/schemas/StudioComponentList'
+          description: A collection of studio components.
     ListStudioMembersResponse:
       type: object
       properties:
         members:
-          allOf:
-            - $ref: '#/components/schemas/StudioMembershipList'
-            - description: A list of members.
+          $ref: '#/components/schemas/StudioMembershipList'
+          description: A list of members.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'The token for the next set of results, or null if there are no more results.'
+          $ref: '#/components/schemas/__string'
+          description: 'The token for the next set of results, or null if there are no more results.'
     ListStudiosResponse:
       type: object
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'The token for the next set of results, or null if there are no more results.'
+          $ref: '#/components/schemas/__string'
+          description: 'The token for the next set of results, or null if there are no more results.'
         studios:
-          allOf:
-            - $ref: '#/components/schemas/StudioList'
-            - description: A collection of studios.
+          $ref: '#/components/schemas/StudioList'
+          description: A collection of studios.
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
+          $ref: '#/components/schemas/Tags'
+          description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
     PutLaunchProfileMembersResponse:
       type: object
       properties: {}
@@ -4458,13 +4379,11 @@ components:
         - principalId
       properties:
         persona:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfilePersona'
-            - description: The persona.
+          $ref: '#/components/schemas/LaunchProfilePersona'
+          description: The persona.
         principalId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The principal ID.
+          $ref: '#/components/schemas/__string'
+          description: The principal ID.
       description: ''
     PutStudioMembersResponse:
       type: object
@@ -4476,21 +4395,18 @@ components:
         - principalId
       properties:
         persona:
-          allOf:
-            - $ref: '#/components/schemas/StudioPersona'
-            - description: The persona.
+          $ref: '#/components/schemas/StudioPersona'
+          description: The persona.
         principalId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The principal ID.
+          $ref: '#/components/schemas/__string'
+          description: The principal ID.
       description: ''
     StartStudioSSOConfigurationRepairResponse:
       type: object
       properties:
         studio:
-          allOf:
-            - $ref: '#/components/schemas/Studio'
-            - description: Information about a studio.
+          $ref: '#/components/schemas/Studio'
+          description: Information about a studio.
     TagResourceResponse:
       type: object
       properties: {}
@@ -4501,37 +4417,32 @@ components:
       type: object
       properties:
         launchProfile:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfile'
-            - description: The launch profile.
+          $ref: '#/components/schemas/LaunchProfile'
+          description: The launch profile.
     UpdateLaunchProfileMemberResponse:
       type: object
       properties:
         member:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileMembership'
-            - description: The member.
+          $ref: '#/components/schemas/LaunchProfileMembership'
+          description: The member.
     UpdateStreamingImageResponse:
       type: object
       properties:
         streamingImage:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImage'
-            - description: ''
+          $ref: '#/components/schemas/StreamingImage'
+          description: ''
     UpdateStudioResponse:
       type: object
       properties:
         studio:
-          allOf:
-            - $ref: '#/components/schemas/Studio'
-            - description: Information about a studio.
+          $ref: '#/components/schemas/Studio'
+          description: Information about a studio.
     UpdateStudioComponentResponse:
       type: object
       properties:
         studioComponent:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponent'
-            - description: Information about the studio component.
+          $ref: '#/components/schemas/StudioComponent'
+          description: Information about the studio component.
     ClientToken:
       type: string
       minLength: 1
@@ -4546,9 +4457,8 @@ components:
       title: AcceptEulasRequest
       properties:
         eulaIds:
-          allOf:
-            - $ref: '#/components/schemas/EulaIdList'
-            - description: The EULA ID.
+          $ref: '#/components/schemas/EulaIdList'
+          description: The EULA ID.
       description: A collection of EULA acceptances.
     EulaAcceptanceList:
       type: array
@@ -4569,13 +4479,11 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ActiveDirectoryComputerAttributeName'
-            - description: The name for the LDAP attribute.
+          $ref: '#/components/schemas/ActiveDirectoryComputerAttributeName'
+          description: The name for the LDAP attribute.
         value:
-          allOf:
-            - $ref: '#/components/schemas/ActiveDirectoryComputerAttributeValue'
-            - description: The value for the LDAP attribute.
+          $ref: '#/components/schemas/ActiveDirectoryComputerAttributeValue'
+          description: The value for the LDAP attribute.
       description: 'An LDAP attribute of an Active Directory computer account, in the form of a name:value pair.'
     ActiveDirectoryComputerAttributeList:
       type: array
@@ -4623,21 +4531,17 @@ components:
         - ec2InstanceTypes
       properties:
         clipboardMode:
-          allOf:
-            - $ref: '#/components/schemas/StreamingClipboardMode'
-            - description: Enable or disable the use of the system clipboard to copy and paste between the streaming session and streaming client.
+          $ref: '#/components/schemas/StreamingClipboardMode'
+          description: Enable or disable the use of the system clipboard to copy and paste between the streaming session and streaming client.
         ec2InstanceTypes:
-          allOf:
-            - $ref: '#/components/schemas/StreamingInstanceTypeList'
-            - description: The EC2 instance types that users can select from when launching a streaming session with this launch profile.
+          $ref: '#/components/schemas/StreamingInstanceTypeList'
+          description: The EC2 instance types that users can select from when launching a streaming session with this launch profile.
         maxSessionLengthInMinutes:
-          allOf:
-            - $ref: '#/components/schemas/StreamConfigurationMaxSessionLengthInMinutes'
-            - description: 'The length of time, in minutes, that a streaming session can run. After this point, Nimble Studio automatically terminates the session.'
+          $ref: '#/components/schemas/StreamConfigurationMaxSessionLengthInMinutes'
+          description: 'The length of time, in minutes, that a streaming session can run. After this point, Nimble Studio automatically terminates the session.'
         streamingImageIds:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageIdList'
-            - description: The streaming images that users can select from when launching a streaming session with this launch profile.
+          $ref: '#/components/schemas/StreamingImageIdList'
+          description: The streaming images that users can select from when launching a streaming session with this launch profile.
       description: ''
     LaunchProfileStudioComponentIdList:
       type: array
@@ -4662,101 +4566,78 @@ components:
       title: CreateLaunchProfileRequest
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileDescription'
-            - description: The description.
+          $ref: '#/components/schemas/LaunchProfileDescription'
+          description: The description.
         ec2SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/EC2SubnetIdList'
-            - description: ''
+          $ref: '#/components/schemas/EC2SubnetIdList'
+          description: ''
         launchProfileProtocolVersions:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileProtocolVersionList'
-            - description: The version number of the protocol that is used by the launch profile. The only valid version is "2021-03-31".
+          $ref: '#/components/schemas/LaunchProfileProtocolVersionList'
+          description: The version number of the protocol that is used by the launch profile. The only valid version is "2021-03-31".
         name:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileName'
-            - description: The name for the launch profile.
+          $ref: '#/components/schemas/LaunchProfileName'
+          description: The name for the launch profile.
         streamConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/StreamConfigurationCreate'
-            - description: A configuration for a streaming session.
+          $ref: '#/components/schemas/StreamConfigurationCreate'
+          description: A configuration for a streaming session.
         studioComponentIds:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileStudioComponentIdList'
-            - description: Unique identifiers for a collection of studio components that can be used with this launch profile.
+          $ref: '#/components/schemas/LaunchProfileStudioComponentIdList'
+          description: Unique identifiers for a collection of studio components that can be used with this launch profile.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
+          $ref: '#/components/schemas/Tags'
+          description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
       description: A collection of launch profiles.
     LaunchProfile:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the resource.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the resource.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the resource was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was created.
         createdBy:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The user ID of the user that created the launch profile.
+          $ref: '#/components/schemas/__string'
+          description: The user ID of the user that created the launch profile.
         description:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileDescription'
-            - description: A human-readable description of the launch profile.
+          $ref: '#/components/schemas/LaunchProfileDescription'
+          description: A human-readable description of the launch profile.
         ec2SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/EC2SubnetIdList'
-            - description: Unique identifiers for a collection of EC2 subnets.
+          $ref: '#/components/schemas/EC2SubnetIdList'
+          description: Unique identifiers for a collection of EC2 subnets.
         launchProfileId:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileId'
-            - description: The launch profile ID.
+          $ref: '#/components/schemas/LaunchProfileId'
+          description: The launch profile ID.
         launchProfileProtocolVersions:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileProtocolVersionList'
-            - description: The version number of the protocol that is used by the launch profile. The only valid version is "2021-03-31".
+          $ref: '#/components/schemas/LaunchProfileProtocolVersionList'
+          description: The version number of the protocol that is used by the launch profile. The only valid version is "2021-03-31".
         name:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileName'
-            - description: A friendly name for the launch profile.
+          $ref: '#/components/schemas/LaunchProfileName'
+          description: A friendly name for the launch profile.
         state:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileState'
-            - description: The current state.
+          $ref: '#/components/schemas/LaunchProfileState'
+          description: The current state.
         statusCode:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileStatusCode'
-            - description: The status code.
+          $ref: '#/components/schemas/LaunchProfileStatusCode'
+          description: The status code.
         statusMessage:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The status message for the launch profile.
+          $ref: '#/components/schemas/__string'
+          description: The status message for the launch profile.
         streamConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/StreamConfiguration'
-            - description: A configuration for a streaming session.
+          $ref: '#/components/schemas/StreamConfiguration'
+          description: A configuration for a streaming session.
         studioComponentIds:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileStudioComponentIdList'
-            - description: Unique identifiers for a collection of studio components that can be used with this launch profile.
+          $ref: '#/components/schemas/LaunchProfileStudioComponentIdList'
+          description: Unique identifiers for a collection of studio components that can be used with this launch profile.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
+          $ref: '#/components/schemas/Tags'
+          description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
         updatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the resource was updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was updated.
         updatedBy:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The user ID of the user that most recently updated the resource.
+          $ref: '#/components/schemas/__string'
+          description: The user ID of the user that most recently updated the resource.
       description: ''
     StreamingImageDescription:
       type: string
@@ -4778,77 +4659,60 @@ components:
       title: CreateStreamingImageRequest
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageDescription'
-            - description: A human-readable description of the streaming image.
+          $ref: '#/components/schemas/StreamingImageDescription'
+          description: A human-readable description of the streaming image.
         ec2ImageId:
-          allOf:
-            - $ref: '#/components/schemas/EC2ImageId'
-            - description: The ID of an EC2 machine image with which to create this streaming image.
+          $ref: '#/components/schemas/EC2ImageId'
+          description: The ID of an EC2 machine image with which to create this streaming image.
         name:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageName'
-            - description: A friendly name for a streaming image resource.
+          $ref: '#/components/schemas/StreamingImageName'
+          description: A friendly name for a streaming image resource.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
+          $ref: '#/components/schemas/Tags'
+          description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
       description: A collection of streaming images.
     StreamingImage:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the resource.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the resource.
         description:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageDescription'
-            - description: A human-readable description of the streaming image.
+          $ref: '#/components/schemas/StreamingImageDescription'
+          description: A human-readable description of the streaming image.
         ec2ImageId:
-          allOf:
-            - $ref: '#/components/schemas/EC2ImageId'
-            - description: The ID of an EC2 machine image with which to create the streaming image.
+          $ref: '#/components/schemas/EC2ImageId'
+          description: The ID of an EC2 machine image with which to create the streaming image.
         encryptionConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageEncryptionConfiguration'
-            - description: The encryption configuration.
+          $ref: '#/components/schemas/StreamingImageEncryptionConfiguration'
+          description: The encryption configuration.
         eulaIds:
-          allOf:
-            - $ref: '#/components/schemas/EulaIdList'
-            - description: The list of EULAs that must be accepted before a Streaming Session can be started using this streaming image.
+          $ref: '#/components/schemas/EulaIdList'
+          description: The list of EULAs that must be accepted before a Streaming Session can be started using this streaming image.
         name:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageName'
-            - description: A friendly name for a streaming image resource.
+          $ref: '#/components/schemas/StreamingImageName'
+          description: A friendly name for a streaming image resource.
         owner:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageOwner'
-            - description: 'The owner of the streaming image, either the studioId that contains the streaming image, or ''amazon'' for images that are provided by Amazon Nimble Studio.'
+          $ref: '#/components/schemas/StreamingImageOwner'
+          description: 'The owner of the streaming image, either the studioId that contains the streaming image, or ''amazon'' for images that are provided by Amazon Nimble Studio.'
         platform:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImagePlatform'
-            - description: 'The platform of the streaming image, either WINDOWS or LINUX.'
+          $ref: '#/components/schemas/StreamingImagePlatform'
+          description: 'The platform of the streaming image, either WINDOWS or LINUX.'
         state:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageState'
-            - description: The current state.
+          $ref: '#/components/schemas/StreamingImageState'
+          description: The current state.
         statusCode:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageStatusCode'
-            - description: The status code.
+          $ref: '#/components/schemas/StreamingImageStatusCode'
+          description: The status code.
         statusMessage:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The status message for the streaming image.
+          $ref: '#/components/schemas/__string'
+          description: The status message for the streaming image.
         streamingImageId:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageId'
-            - description: The ID of the streaming image.
+          $ref: '#/components/schemas/StreamingImageId'
+          description: The ID of the streaming image.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
+          $ref: '#/components/schemas/Tags'
+          description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
       description: ''
     StreamingInstanceType:
       type: string
@@ -4870,89 +4734,69 @@ components:
       title: CreateStreamingSessionRequest
       properties:
         ec2InstanceType:
-          allOf:
-            - $ref: '#/components/schemas/StreamingInstanceType'
-            - description: The EC2 Instance type used for the streaming session.
+          $ref: '#/components/schemas/StreamingInstanceType'
+          description: The EC2 Instance type used for the streaming session.
         launchProfileId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The launch profile ID.
+          $ref: '#/components/schemas/__string'
+          description: The launch profile ID.
         ownedBy:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The user ID of the user that owns the streaming session.
+          $ref: '#/components/schemas/__string'
+          description: The user ID of the user that owns the streaming session.
         streamingImageId:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageId'
-            - description: The ID of the streaming image.
+          $ref: '#/components/schemas/StreamingImageId'
+          description: The ID of the streaming image.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
+          $ref: '#/components/schemas/Tags'
+          description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
       description: A collection of streaming sessions.
     StreamingSession:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the resource.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the resource.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the resource was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was created.
         createdBy:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The user ID of the user that created the streaming session.
+          $ref: '#/components/schemas/__string'
+          description: The user ID of the user that created the streaming session.
         ec2InstanceType:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The EC2 Instance type used for the streaming session.
+          $ref: '#/components/schemas/__string'
+          description: The EC2 Instance type used for the streaming session.
         launchProfileId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ID of the launch profile used to control access from the streaming session.
+          $ref: '#/components/schemas/__string'
+          description: The ID of the launch profile used to control access from the streaming session.
         ownedBy:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The user ID of the user that owns the streaming session.
+          $ref: '#/components/schemas/__string'
+          description: The user ID of the user that owns the streaming session.
         sessionId:
-          allOf:
-            - $ref: '#/components/schemas/StreamingSessionId'
-            - description: The session ID.
+          $ref: '#/components/schemas/StreamingSessionId'
+          description: The session ID.
         state:
-          allOf:
-            - $ref: '#/components/schemas/StreamingSessionState'
-            - description: The current state.
+          $ref: '#/components/schemas/StreamingSessionState'
+          description: The current state.
         statusCode:
-          allOf:
-            - $ref: '#/components/schemas/StreamingSessionStatusCode'
-            - description: The status code.
+          $ref: '#/components/schemas/StreamingSessionStatusCode'
+          description: The status code.
         statusMessage:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The status message for the streaming session.
+          $ref: '#/components/schemas/__string'
+          description: The status message for the streaming session.
         streamingImageId:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageId'
-            - description: The ID of the streaming image.
+          $ref: '#/components/schemas/StreamingImageId'
+          description: The ID of the streaming image.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
+          $ref: '#/components/schemas/Tags'
+          description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
         terminateAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time the streaming session will automatically terminate if not terminated by the user.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time the streaming session will automatically terminate if not terminated by the user.
         updatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the resource was updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was updated.
         updatedBy:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The user ID of the user that most recently updated the resource.
+          $ref: '#/components/schemas/__string'
+          description: The user ID of the user that most recently updated the resource.
       description: ''
     StreamingSessionStreamExpirationInSeconds:
       type: integer
@@ -4964,65 +4808,52 @@ components:
       title: CreateStreamingSessionStreamRequest
       properties:
         expirationInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/StreamingSessionStreamExpirationInSeconds'
-            - description: The expiration time in seconds.
+          $ref: '#/components/schemas/StreamingSessionStreamExpirationInSeconds'
+          description: The expiration time in seconds.
       description: A list collection streams.
     StreamingSessionStream:
       type: object
       properties:
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the resource was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was created.
         createdBy:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The user ID of the user that created the streaming session stream.
+          $ref: '#/components/schemas/__string'
+          description: The user ID of the user that created the streaming session stream.
         expiresAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the resource expires.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource expires.
         ownedBy:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The user ID of the user that owns the streaming session.
+          $ref: '#/components/schemas/__string'
+          description: The user ID of the user that owns the streaming session.
         state:
-          allOf:
-            - $ref: '#/components/schemas/StreamingSessionStreamState'
-            - description: The current state.
+          $ref: '#/components/schemas/StreamingSessionStreamState'
+          description: The current state.
         statusCode:
-          allOf:
-            - $ref: '#/components/schemas/StreamingSessionStreamStatusCode'
-            - description: The streaming session stream status code.
+          $ref: '#/components/schemas/StreamingSessionStreamStatusCode'
+          description: The streaming session stream status code.
         streamId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The stream ID.
+          $ref: '#/components/schemas/__string'
+          description: The stream ID.
         url:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The URL to connect to this stream using the DCV client.
+          $ref: '#/components/schemas/__string'
+          description: The URL to connect to this stream using the DCV client.
       description: ''
     StudioComponentConfiguration:
       type: object
       properties:
         activeDirectoryConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/ActiveDirectoryConfiguration'
-            - description: The configuration for a Microsoft Active Directory (Microsoft AD) studio resource.
+          $ref: '#/components/schemas/ActiveDirectoryConfiguration'
+          description: The configuration for a Microsoft Active Directory (Microsoft AD) studio resource.
         computeFarmConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/ComputeFarmConfiguration'
-            - description: The configuration for a render farm that is associated with a studio resource.
+          $ref: '#/components/schemas/ComputeFarmConfiguration'
+          description: The configuration for a render farm that is associated with a studio resource.
         licenseServiceConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/LicenseServiceConfiguration'
-            - description: The configuration for a license service that is associated with a studio resource.
+          $ref: '#/components/schemas/LicenseServiceConfiguration'
+          description: The configuration for a license service that is associated with a studio resource.
         sharedFileSystemConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/SharedFileSystemConfiguration'
-            - description: The configuration for a shared file storage system that is associated with a studio resource.
+          $ref: '#/components/schemas/SharedFileSystemConfiguration'
+          description: The configuration for a shared file storage system that is associated with a studio resource.
       description: 'The configuration of the studio component, based on component type.'
     StudioComponentDescription:
       type: string
@@ -5075,117 +4906,90 @@ components:
       title: CreateStudioComponentRequest
       properties:
         configuration:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentConfiguration'
-            - description: 'The configuration of the studio component, based on component type.'
+          $ref: '#/components/schemas/StudioComponentConfiguration'
+          description: 'The configuration of the studio component, based on component type.'
         description:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentDescription'
-            - description: The description.
+          $ref: '#/components/schemas/StudioComponentDescription'
+          description: The description.
         ec2SecurityGroupIds:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentSecurityGroupIdList'
-            - description: The EC2 security groups that control access to the studio component.
+          $ref: '#/components/schemas/StudioComponentSecurityGroupIdList'
+          description: The EC2 security groups that control access to the studio component.
         initializationScripts:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentInitializationScriptList'
-            - description: Initialization scripts for studio components.
+          $ref: '#/components/schemas/StudioComponentInitializationScriptList'
+          description: Initialization scripts for studio components.
         name:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentName'
-            - description: The name for the studio component.
+          $ref: '#/components/schemas/StudioComponentName'
+          description: The name for the studio component.
         scriptParameters:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentScriptParameterKeyValueList'
-            - description: Parameters for the studio component scripts.
+          $ref: '#/components/schemas/StudioComponentScriptParameterKeyValueList'
+          description: Parameters for the studio component scripts.
         subtype:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentSubtype'
-            - description: The specific subtype of a studio component.
+          $ref: '#/components/schemas/StudioComponentSubtype'
+          description: The specific subtype of a studio component.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
+          $ref: '#/components/schemas/Tags'
+          description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
         type:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentType'
-            - description: The type of the studio component.
+          $ref: '#/components/schemas/StudioComponentType'
+          description: The type of the studio component.
       description: The studio components.
     StudioComponent:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the resource.
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the resource.
         configuration:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentConfiguration'
-            - description: 'The configuration of the studio component, based on component type.'
+          $ref: '#/components/schemas/StudioComponentConfiguration'
+          description: 'The configuration of the studio component, based on component type.'
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the resource was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was created.
         createdBy:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The user ID of the user that created the studio component.
+          $ref: '#/components/schemas/__string'
+          description: The user ID of the user that created the studio component.
         description:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentDescription'
-            - description: A human-readable description for the studio component resource.
+          $ref: '#/components/schemas/StudioComponentDescription'
+          description: A human-readable description for the studio component resource.
         ec2SecurityGroupIds:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentSecurityGroupIdList'
-            - description: The EC2 security groups that control access to the studio component.
+          $ref: '#/components/schemas/StudioComponentSecurityGroupIdList'
+          description: The EC2 security groups that control access to the studio component.
         initializationScripts:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentInitializationScriptList'
-            - description: Initialization scripts for studio components.
+          $ref: '#/components/schemas/StudioComponentInitializationScriptList'
+          description: Initialization scripts for studio components.
         name:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentName'
-            - description: A friendly name for the studio component resource.
+          $ref: '#/components/schemas/StudioComponentName'
+          description: A friendly name for the studio component resource.
         scriptParameters:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentScriptParameterKeyValueList'
-            - description: Parameters for the studio component scripts.
+          $ref: '#/components/schemas/StudioComponentScriptParameterKeyValueList'
+          description: Parameters for the studio component scripts.
         state:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentState'
-            - description: The current state.
+          $ref: '#/components/schemas/StudioComponentState'
+          description: The current state.
         statusCode:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentStatusCode'
-            - description: The status code.
+          $ref: '#/components/schemas/StudioComponentStatusCode'
+          description: The status code.
         statusMessage:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The status message for the studio component.
+          $ref: '#/components/schemas/__string'
+          description: The status message for the studio component.
         studioComponentId:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentId'
-            - description: The unique identifier for a studio component resource.
+          $ref: '#/components/schemas/StudioComponentId'
+          description: The unique identifier for a studio component resource.
         subtype:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentSubtype'
-            - description: The specific subtype of a studio component.
+          $ref: '#/components/schemas/StudioComponentSubtype'
+          description: The specific subtype of a studio component.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
+          $ref: '#/components/schemas/Tags'
+          description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
         type:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentType'
-            - description: The type of the studio component.
+          $ref: '#/components/schemas/StudioComponentType'
+          description: The type of the studio component.
         updatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the resource was updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was updated.
         updatedBy:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The user ID of the user that most recently updated the resource.
+          $ref: '#/components/schemas/__string'
+          description: The user ID of the user that most recently updated the resource.
       description: 'A network that is used by a studio’s users and workflows, including render farm, Active Directory, licensing, and file system.'
     StudioDisplayName:
       type: string
@@ -5196,13 +5000,11 @@ components:
         - keyType
       properties:
         keyArn:
-          allOf:
-            - $ref: '#/components/schemas/StudioEncryptionConfigurationKeyArn'
-            - description: The ARN for a KMS key that is used to encrypt studio data.
+          $ref: '#/components/schemas/StudioEncryptionConfigurationKeyArn'
+          description: The ARN for a KMS key that is used to encrypt studio data.
         keyType:
-          allOf:
-            - $ref: '#/components/schemas/StudioEncryptionConfigurationKeyType'
-            - description: The type of KMS key that is used to encrypt studio data.
+          $ref: '#/components/schemas/StudioEncryptionConfigurationKeyType'
+          description: The type of KMS key that is used to encrypt studio data.
       description: Configuration of the encryption method that is used for the studio.
     StudioName:
       type: string
@@ -5220,97 +5022,75 @@ components:
       title: CreateStudioRequest
       properties:
         adminRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The IAM role that Studio Admins will assume when logging in to the Nimble Studio portal.
+          $ref: '#/components/schemas/__string'
+          description: The IAM role that Studio Admins will assume when logging in to the Nimble Studio portal.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/StudioDisplayName'
-            - description: A friendly name for the studio.
+          $ref: '#/components/schemas/StudioDisplayName'
+          description: A friendly name for the studio.
         studioEncryptionConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/StudioEncryptionConfiguration'
-            - description: The studio encryption configuration.
+          $ref: '#/components/schemas/StudioEncryptionConfiguration'
+          description: The studio encryption configuration.
         studioName:
-          allOf:
-            - $ref: '#/components/schemas/StudioName'
-            - description: The studio name that is used in the URL of the Nimble Studio portal when accessed by Nimble Studio users.
+          $ref: '#/components/schemas/StudioName'
+          description: The studio name that is used in the URL of the Nimble Studio portal when accessed by Nimble Studio users.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
+          $ref: '#/components/schemas/Tags'
+          description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
         userRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The IAM role that Studio Users will assume when logging in to the Nimble Studio portal.
+          $ref: '#/components/schemas/__string'
+          description: The IAM role that Studio Users will assume when logging in to the Nimble Studio portal.
       description: A collection of studio resources.
     Studio:
       type: object
       properties:
         adminRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The IAM role that studio admins assume when logging in to the Nimble Studio portal.
+          $ref: '#/components/schemas/__string'
+          description: The IAM role that studio admins assume when logging in to the Nimble Studio portal.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The Amazon Resource Name (ARN) that is assigned to a studio resource and uniquely identifies it. ARNs are unique across all Regions.
+          $ref: '#/components/schemas/__string'
+          description: The Amazon Resource Name (ARN) that is assigned to a studio resource and uniquely identifies it. ARNs are unique across all Regions.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the resource was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was created.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/StudioDisplayName'
-            - description: A friendly name for the studio.
+          $ref: '#/components/schemas/StudioDisplayName'
+          description: A friendly name for the studio.
         homeRegion:
-          allOf:
-            - $ref: '#/components/schemas/Region'
-            - description: The Amazon Web Services Region where the studio resource is located.
+          $ref: '#/components/schemas/Region'
+          description: The Amazon Web Services Region where the studio resource is located.
         ssoClientId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The Amazon Web Services SSO application client ID used to integrate with Amazon Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble portal.
+          $ref: '#/components/schemas/__string'
+          description: The Amazon Web Services SSO application client ID used to integrate with Amazon Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble portal.
         state:
-          allOf:
-            - $ref: '#/components/schemas/StudioState'
-            - description: The current state of the studio resource.
+          $ref: '#/components/schemas/StudioState'
+          description: The current state of the studio resource.
         statusCode:
-          allOf:
-            - $ref: '#/components/schemas/StudioStatusCode'
-            - description: Status codes that provide additional detail on the studio state.
+          $ref: '#/components/schemas/StudioStatusCode'
+          description: Status codes that provide additional detail on the studio state.
         statusMessage:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: Additional detail on the studio state.
+          $ref: '#/components/schemas/__string'
+          description: Additional detail on the studio state.
         studioEncryptionConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/StudioEncryptionConfiguration'
-            - description: Configuration of the encryption method that is used for the studio.
+          $ref: '#/components/schemas/StudioEncryptionConfiguration'
+          description: Configuration of the encryption method that is used for the studio.
         studioId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'The unique identifier for a studio resource. In Nimble Studio, all other resources are contained in a studio resource.'
+          $ref: '#/components/schemas/__string'
+          description: 'The unique identifier for a studio resource. In Nimble Studio, all other resources are contained in a studio resource.'
         studioName:
-          allOf:
-            - $ref: '#/components/schemas/StudioName'
-            - description: 'The name of the studio, as included in the URL when accessing it in the Nimble Studio portal.'
+          $ref: '#/components/schemas/StudioName'
+          description: 'The name of the studio, as included in the URL when accessing it in the Nimble Studio portal.'
         studioUrl:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The address of the web page for the studio.
+          $ref: '#/components/schemas/__string'
+          description: The address of the web page for the studio.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
+          $ref: '#/components/schemas/Tags'
+          description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
         updatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the resource was updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was updated.
         userRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The IAM role that studio users assume when logging in to the Nimble Studio portal.
+          $ref: '#/components/schemas/__string'
+          description: The IAM role that studio users assume when logging in to the Nimble Studio portal.
       description: ''
     DeleteLaunchProfileMemberRequest:
       type: object
@@ -5356,25 +5136,20 @@ components:
       type: object
       properties:
         content:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The EULA content.
+          $ref: '#/components/schemas/__string'
+          description: The EULA content.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the resource was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was created.
         eulaId:
-          allOf:
-            - $ref: '#/components/schemas/EulaId'
-            - description: The EULA ID.
+          $ref: '#/components/schemas/EulaId'
+          description: The EULA ID.
         name:
-          allOf:
-            - $ref: '#/components/schemas/EulaName'
-            - description: The name for the EULA.
+          $ref: '#/components/schemas/EulaName'
+          description: The name for the EULA.
         updatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the resource was updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was updated.
       description: Represents a EULA resource.
     EulaAcceptanceId:
       type: string
@@ -5385,25 +5160,20 @@ components:
       type: object
       properties:
         acceptedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the EULA was accepted.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the EULA was accepted.
         acceptedBy:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ID of the person who accepted the EULA.
+          $ref: '#/components/schemas/__string'
+          description: The ID of the person who accepted the EULA.
         accepteeId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ID of the acceptee.
+          $ref: '#/components/schemas/__string'
+          description: The ID of the acceptee.
         eulaAcceptanceId:
-          allOf:
-            - $ref: '#/components/schemas/EulaAcceptanceId'
-            - description: The EULA acceptance ID.
+          $ref: '#/components/schemas/EulaAcceptanceId'
+          description: The EULA acceptance ID.
         eulaId:
-          allOf:
-            - $ref: '#/components/schemas/EulaId'
-            - description: The EULA ID.
+          $ref: '#/components/schemas/EulaId'
+          description: The EULA ID.
       description: ''
     EulaList:
       type: array
@@ -5440,41 +5210,32 @@ components:
       type: object
       properties:
         activeDirectory:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileInitializationActiveDirectory'
-            - description: A LaunchProfileInitializationActiveDirectory resource.
+          $ref: '#/components/schemas/LaunchProfileInitializationActiveDirectory'
+          description: A LaunchProfileInitializationActiveDirectory resource.
         ec2SecurityGroupIds:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileSecurityGroupIdList'
-            - description: The EC2 security groups that control access to the studio component.
+          $ref: '#/components/schemas/LaunchProfileSecurityGroupIdList'
+          description: The EC2 security groups that control access to the studio component.
         launchProfileId:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileId'
-            - description: The launch profile ID.
+          $ref: '#/components/schemas/LaunchProfileId'
+          description: The launch profile ID.
         launchProfileProtocolVersion:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileProtocolVersion'
-            - description: The version number of the protocol that is used by the launch profile. The only valid version is "2021-03-31".
+          $ref: '#/components/schemas/LaunchProfileProtocolVersion'
+          description: The version number of the protocol that is used by the launch profile. The only valid version is "2021-03-31".
         launchPurpose:
-          allOf:
-            - $ref: '#/components/schemas/LaunchPurpose'
-            - description: The launch purpose.
+          $ref: '#/components/schemas/LaunchPurpose'
+          description: The launch purpose.
         name:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileName'
-            - description: The name for the launch profile.
+          $ref: '#/components/schemas/LaunchProfileName'
+          description: The name for the launch profile.
         platform:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfilePlatform'
-            - description: 'The platform of the launch platform, either WINDOWS or LINUX.'
+          $ref: '#/components/schemas/LaunchProfilePlatform'
+          description: 'The platform of the launch platform, either WINDOWS or LINUX.'
         systemInitializationScripts:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileInitializationScriptList'
-            - description: The system initializtion scripts.
+          $ref: '#/components/schemas/LaunchProfileInitializationScriptList'
+          description: The system initializtion scripts.
         userInitializationScripts:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileInitializationScriptList'
-            - description: The user initializtion scripts.
+          $ref: '#/components/schemas/LaunchProfileInitializationScriptList'
+          description: The user initializtion scripts.
       description: ''
     GetLaunchProfileMemberRequest:
       type: object
@@ -5484,17 +5245,14 @@ components:
       type: object
       properties:
         identityStoreId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ID of the identity store.
+          $ref: '#/components/schemas/__string'
+          description: The ID of the identity store.
         persona:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfilePersona'
-            - description: The persona.
+          $ref: '#/components/schemas/LaunchProfilePersona'
+          description: The persona.
         principalId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The principal ID.
+          $ref: '#/components/schemas/__string'
+          description: The principal ID.
       description: ''
     GetLaunchProfileRequest:
       type: object
@@ -5524,17 +5282,14 @@ components:
       type: object
       properties:
         identityStoreId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ID of the identity store.
+          $ref: '#/components/schemas/__string'
+          description: The ID of the identity store.
         persona:
-          allOf:
-            - $ref: '#/components/schemas/StudioPersona'
-            - description: The persona.
+          $ref: '#/components/schemas/StudioPersona'
+          description: The persona.
         principalId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The principal ID.
+          $ref: '#/components/schemas/__string'
+          description: The principal ID.
       description: ''
     GetStudioRequest:
       type: object
@@ -5577,53 +5332,42 @@ components:
       type: object
       properties:
         clipboardMode:
-          allOf:
-            - $ref: '#/components/schemas/StreamingClipboardMode'
-            - description: Enable or disable the use of the system clipboard to copy and paste between the streaming session and streaming client.
+          $ref: '#/components/schemas/StreamingClipboardMode'
+          description: Enable or disable the use of the system clipboard to copy and paste between the streaming session and streaming client.
         ec2InstanceTypes:
-          allOf:
-            - $ref: '#/components/schemas/StreamingInstanceTypeList'
-            - description: The EC2 instance types that users can select from when launching a streaming session with this launch profile.
+          $ref: '#/components/schemas/StreamingInstanceTypeList'
+          description: The EC2 instance types that users can select from when launching a streaming session with this launch profile.
         maxSessionLengthInMinutes:
-          allOf:
-            - $ref: '#/components/schemas/StreamConfigurationMaxSessionLengthInMinutes'
-            - description: 'The length of time, in minutes, that a streaming session can run. After this point, Nimble Studio automatically terminates the session.'
+          $ref: '#/components/schemas/StreamConfigurationMaxSessionLengthInMinutes'
+          description: 'The length of time, in minutes, that a streaming session can run. After this point, Nimble Studio automatically terminates the session.'
         streamingImageIds:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageIdList'
-            - description: The streaming images that users can select from when launching a streaming session with this launch profile.
+          $ref: '#/components/schemas/StreamingImageIdList'
+          description: The streaming images that users can select from when launching a streaming session with this launch profile.
       description: A configuration for a streaming session.
     LaunchProfileInitializationActiveDirectory:
       type: object
       properties:
         computerAttributes:
-          allOf:
-            - $ref: '#/components/schemas/ActiveDirectoryComputerAttributeList'
-            - description: A collection of custom attributes for an Active Directory computer.
+          $ref: '#/components/schemas/ActiveDirectoryComputerAttributeList'
+          description: A collection of custom attributes for an Active Directory computer.
         directoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The directory ID of the Directory Service for Microsoft Active Directory to access using this launch profile.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The directory ID of the Directory Service for Microsoft Active Directory to access using this launch profile.
         directoryName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The directory name.
+          $ref: '#/components/schemas/__string'
+          description: The directory name.
         dnsIpAddresses:
-          allOf:
-            - $ref: '#/components/schemas/ActiveDirectoryDnsIpAddressList'
-            - description: The DNS IP address.
+          $ref: '#/components/schemas/ActiveDirectoryDnsIpAddressList'
+          description: The DNS IP address.
         organizationalUnitDistinguishedName:
-          allOf:
-            - $ref: '#/components/schemas/ActiveDirectoryOrganizationalUnitDistinguishedName'
-            - description: The name for the organizational unit distinguished name.
+          $ref: '#/components/schemas/ActiveDirectoryOrganizationalUnitDistinguishedName'
+          description: The name for the organizational unit distinguished name.
         studioComponentId:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentId'
-            - description: The unique identifier for a studio component resource.
+          $ref: '#/components/schemas/StudioComponentId'
+          description: The unique identifier for a studio component resource.
         studioComponentName:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentName'
-            - description: The name for the studio component.
+          $ref: '#/components/schemas/StudioComponentName'
+          description: The name for the studio component.
       description: ''
     LaunchProfileSecurityGroupIdList:
       type: array
@@ -5660,17 +5404,14 @@ components:
       type: object
       properties:
         script:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentInitializationScriptContent'
-            - description: The initialization script.
+          $ref: '#/components/schemas/StudioComponentInitializationScriptContent'
+          description: The initialization script.
         studioComponentId:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentId'
-            - description: The unique identifier for a studio component resource.
+          $ref: '#/components/schemas/StudioComponentId'
+          description: The unique identifier for a studio component resource.
         studioComponentName:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentName'
-            - description: The name for the studio component.
+          $ref: '#/components/schemas/StudioComponentName'
+          description: The name for the studio component.
       description: ''
     LaunchProfileList:
       type: array
@@ -5786,13 +5527,11 @@ components:
       title: PutLaunchProfileMembersRequest
       properties:
         identityStoreId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ID of the identity store.
+          $ref: '#/components/schemas/__string'
+          description: The ID of the identity store.
         members:
-          allOf:
-            - $ref: '#/components/schemas/NewLaunchProfileMemberList'
-            - description: A list of members.
+          $ref: '#/components/schemas/NewLaunchProfileMemberList'
+          description: A list of members.
       description: Information about a launch profile membership.
     PutStudioMembersRequest:
       type: object
@@ -5802,13 +5541,11 @@ components:
       title: PutStudioMembersRequest
       properties:
         identityStoreId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ID of the identity store.
+          $ref: '#/components/schemas/__string'
+          description: The ID of the identity store.
         members:
-          allOf:
-            - $ref: '#/components/schemas/NewStudioMemberList'
-            - description: A list of members.
+          $ref: '#/components/schemas/NewStudioMemberList'
+          description: A list of members.
       description: A launch profile membership collection.
     Region:
       type: string
@@ -5840,13 +5577,11 @@ components:
         - keyType
       properties:
         keyArn:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageEncryptionConfigurationKeyArn'
-            - description: The ARN for a KMS key that is used to encrypt studio data.
+          $ref: '#/components/schemas/StreamingImageEncryptionConfigurationKeyArn'
+          description: The ARN for a KMS key that is used to encrypt studio data.
         keyType:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageEncryptionConfigurationKeyType'
-            - description: The type of KMS key that is used to encrypt studio data.
+          $ref: '#/components/schemas/StreamingImageEncryptionConfigurationKeyType'
+          description: The type of KMS key that is used to encrypt studio data.
       description: ''
     StreamingImageOwner:
       type: string
@@ -6003,50 +5738,40 @@ components:
       type: object
       properties:
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the resource was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was created.
         createdBy:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The user ID of the user that created the studio component.
+          $ref: '#/components/schemas/__string'
+          description: The user ID of the user that created the studio component.
         description:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentDescription'
-            - description: The description.
+          $ref: '#/components/schemas/StudioComponentDescription'
+          description: The description.
         name:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentName'
-            - description: The name for the studio component.
+          $ref: '#/components/schemas/StudioComponentName'
+          description: The name for the studio component.
         studioComponentId:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentId'
-            - description: The unique identifier for a studio component resource.
+          $ref: '#/components/schemas/StudioComponentId'
+          description: The unique identifier for a studio component resource.
         subtype:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentSubtype'
-            - description: The specific subtype of a studio component.
+          $ref: '#/components/schemas/StudioComponentSubtype'
+          description: The specific subtype of a studio component.
         type:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentType'
-            - description: The type of the studio component.
+          $ref: '#/components/schemas/StudioComponentType'
+          description: The type of the studio component.
         updatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the resource was updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was updated.
         updatedBy:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The user ID of the user that most recently updated the resource.
+          $ref: '#/components/schemas/__string'
+          description: The user ID of the user that most recently updated the resource.
       description: ''
     TagResourceRequest:
       type: object
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
+          $ref: '#/components/schemas/Tags'
+          description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
       description: The ARN for the role that manages access.
     UntagResourceRequest:
       type: object
@@ -6059,101 +5784,82 @@ components:
       title: UpdateLaunchProfileMemberRequest
       properties:
         persona:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfilePersona'
-            - description: The persona.
+          $ref: '#/components/schemas/LaunchProfilePersona'
+          description: The persona.
       description: The principal ID.
     UpdateLaunchProfileRequest:
       type: object
       title: UpdateLaunchProfileRequest
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileDescription'
-            - description: The description.
+          $ref: '#/components/schemas/LaunchProfileDescription'
+          description: The description.
         launchProfileProtocolVersions:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileProtocolVersionList'
-            - description: The version number of the protocol that is used by the launch profile. The only valid version is "2021-03-31".
+          $ref: '#/components/schemas/LaunchProfileProtocolVersionList'
+          description: The version number of the protocol that is used by the launch profile. The only valid version is "2021-03-31".
         name:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileName'
-            - description: The name for the launch profile.
+          $ref: '#/components/schemas/LaunchProfileName'
+          description: The name for the launch profile.
         streamConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/StreamConfigurationCreate'
-            - description: A configuration for a streaming session.
+          $ref: '#/components/schemas/StreamConfigurationCreate'
+          description: A configuration for a streaming session.
         studioComponentIds:
-          allOf:
-            - $ref: '#/components/schemas/LaunchProfileStudioComponentIdList'
-            - description: Unique identifiers for a collection of studio components that can be used with this launch profile.
+          $ref: '#/components/schemas/LaunchProfileStudioComponentIdList'
+          description: Unique identifiers for a collection of studio components that can be used with this launch profile.
       description: The launch profile ID.
     UpdateStreamingImageRequest:
       type: object
       title: UpdateStreamingImageRequest
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageDescription'
-            - description: The description.
+          $ref: '#/components/schemas/StreamingImageDescription'
+          description: The description.
         name:
-          allOf:
-            - $ref: '#/components/schemas/StreamingImageName'
-            - description: The name for the streaming image.
+          $ref: '#/components/schemas/StreamingImageName'
+          description: The name for the streaming image.
       description: The streaming image ID.
     UpdateStudioComponentRequest:
       type: object
       title: UpdateStudioComponentRequest
       properties:
         configuration:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentConfiguration'
-            - description: 'The configuration of the studio component, based on component type.'
+          $ref: '#/components/schemas/StudioComponentConfiguration'
+          description: 'The configuration of the studio component, based on component type.'
         description:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentDescription'
-            - description: The description.
+          $ref: '#/components/schemas/StudioComponentDescription'
+          description: The description.
         ec2SecurityGroupIds:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentSecurityGroupIdList'
-            - description: The EC2 security groups that control access to the studio component.
+          $ref: '#/components/schemas/StudioComponentSecurityGroupIdList'
+          description: The EC2 security groups that control access to the studio component.
         initializationScripts:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentInitializationScriptList'
-            - description: Initialization scripts for studio components.
+          $ref: '#/components/schemas/StudioComponentInitializationScriptList'
+          description: Initialization scripts for studio components.
         name:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentName'
-            - description: The name for the studio component.
+          $ref: '#/components/schemas/StudioComponentName'
+          description: The name for the studio component.
         scriptParameters:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentScriptParameterKeyValueList'
-            - description: Parameters for the studio component scripts.
+          $ref: '#/components/schemas/StudioComponentScriptParameterKeyValueList'
+          description: Parameters for the studio component scripts.
         subtype:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentSubtype'
-            - description: The specific subtype of a studio component.
+          $ref: '#/components/schemas/StudioComponentSubtype'
+          description: The specific subtype of a studio component.
         type:
-          allOf:
-            - $ref: '#/components/schemas/StudioComponentType'
-            - description: The type of the studio component.
+          $ref: '#/components/schemas/StudioComponentType'
+          description: The type of the studio component.
       description: The studio component ID.
     UpdateStudioRequest:
       type: object
       title: UpdateStudioRequest
       properties:
         adminRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The IAM role that Studio Admins will assume when logging in to the Nimble Studio portal.
+          $ref: '#/components/schemas/__string'
+          description: The IAM role that Studio Admins will assume when logging in to the Nimble Studio portal.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/StudioDisplayName'
-            - description: A friendly name for the studio.
+          $ref: '#/components/schemas/StudioDisplayName'
+          description: A friendly name for the studio.
         userRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The IAM role that Studio Users will assume when logging in to the Nimble Studio portal.
+          $ref: '#/components/schemas/__string'
+          description: The IAM role that Studio Users will assume when logging in to the Nimble Studio portal.
       description: The studio ID.
 security:
   - hmac: []

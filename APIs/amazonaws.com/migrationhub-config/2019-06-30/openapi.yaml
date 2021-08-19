@@ -378,9 +378,8 @@ components:
       type: object
       properties:
         HomeRegionControl:
-          allOf:
-            - $ref: '#/components/schemas/HomeRegionControl'
-            - description: This object is the <code>HomeRegionControl</code> object that's returned by a successful call to <code>CreateHomeRegionControl</code>.
+          $ref: '#/components/schemas/HomeRegionControl'
+          description: This object is the <code>HomeRegionControl</code> object that's returned by a successful call to <code>CreateHomeRegionControl</code>.
     CreateHomeRegionControlRequest:
       type: object
       required:
@@ -389,17 +388,14 @@ components:
       title: CreateHomeRegionControlRequest
       properties:
         HomeRegion:
-          allOf:
-            - $ref: '#/components/schemas/HomeRegion'
-            - description: The name of the home region of the calling account.
+          $ref: '#/components/schemas/HomeRegion'
+          description: The name of the home region of the calling account.
         Target:
-          allOf:
-            - $ref: '#/components/schemas/Target'
-            - description: The account for which this command sets up a home region control. The <code>Target</code> is always of type <code>ACCOUNT</code>.
+          $ref: '#/components/schemas/Target'
+          description: The account for which this command sets up a home region control. The <code>Target</code> is always of type <code>ACCOUNT</code>.
         DryRun:
-          allOf:
-            - $ref: '#/components/schemas/DryRun'
-            - description: Optional Boolean flag to indicate whether any effect should take place. It tests whether the caller has permission to make the call.
+          $ref: '#/components/schemas/DryRun'
+          description: Optional Boolean flag to indicate whether any effect should take place. It tests whether the caller has permission to make the call.
     InternalServerError: {}
     ServiceUnavailableException: {}
     AccessDeniedException: {}
@@ -410,44 +406,36 @@ components:
       type: object
       properties:
         HomeRegionControls:
-          allOf:
-            - $ref: '#/components/schemas/HomeRegionControls'
-            - description: An array that contains your <code>HomeRegionControl</code> objects.
+          $ref: '#/components/schemas/HomeRegionControls'
+          description: An array that contains your <code>HomeRegionControl</code> objects.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: 'If a <code>NextToken</code> was returned by a previous call, more results are available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.'
+          $ref: '#/components/schemas/Token'
+          description: 'If a <code>NextToken</code> was returned by a previous call, more results are available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.'
     DescribeHomeRegionControlsRequest:
       type: object
       title: DescribeHomeRegionControlsRequest
       properties:
         ControlId:
-          allOf:
-            - $ref: '#/components/schemas/ControlId'
-            - description: The <code>ControlID</code> is a unique identifier string of your <code>HomeRegionControl</code> object.
+          $ref: '#/components/schemas/ControlId'
+          description: The <code>ControlID</code> is a unique identifier string of your <code>HomeRegionControl</code> object.
         HomeRegion:
-          allOf:
-            - $ref: '#/components/schemas/HomeRegion'
-            - description: The name of the home region you'd like to view.
+          $ref: '#/components/schemas/HomeRegion'
+          description: The name of the home region you'd like to view.
         Target:
-          allOf:
-            - $ref: '#/components/schemas/Target'
-            - description: 'The target parameter specifies the identifier to which the home region is applied, which is always of type <code>ACCOUNT</code>. It applies the home region to the current <code>ACCOUNT</code>.'
+          $ref: '#/components/schemas/Target'
+          description: 'The target parameter specifies the identifier to which the home region is applied, which is always of type <code>ACCOUNT</code>. It applies the home region to the current <code>ACCOUNT</code>.'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/DescribeHomeRegionControlsMaxResults'
-            - description: 'The maximum number of filtering results to display per page. '
+          $ref: '#/components/schemas/DescribeHomeRegionControlsMaxResults'
+          description: 'The maximum number of filtering results to display per page. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: 'If a <code>NextToken</code> was returned by a previous call, more results are available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.'
+          $ref: '#/components/schemas/Token'
+          description: 'If a <code>NextToken</code> was returned by a previous call, more results are available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.'
     GetHomeRegionResult:
       type: object
       properties:
         HomeRegion:
-          allOf:
-            - $ref: '#/components/schemas/HomeRegion'
-            - description: The name of the home region of the calling account.
+          $ref: '#/components/schemas/HomeRegion'
+          description: The name of the home region of the calling account.
     GetHomeRegionRequest:
       type: object
       title: GetHomeRegionRequest
@@ -468,13 +456,11 @@ components:
         - Type
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/TargetType'
-            - description: The target type is always an <code>ACCOUNT</code>.
+          $ref: '#/components/schemas/TargetType'
+          description: The target type is always an <code>ACCOUNT</code>.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/TargetId'
-            - description: 'The <code>TargetID</code> is a 12-character identifier of the <code>ACCOUNT</code> for which the control was created. (This must be the current account.) '
+          $ref: '#/components/schemas/TargetId'
+          description: 'The <code>TargetID</code> is a 12-character identifier of the <code>ACCOUNT</code> for which the control was created. (This must be the current account.) '
       description: 'The target parameter specifies the identifier to which the home region is applied, which is always an <code>ACCOUNT</code>. It applies the home region to the current <code>ACCOUNT</code>.'
     DryRun:
       type: boolean
@@ -482,21 +468,17 @@ components:
       type: object
       properties:
         ControlId:
-          allOf:
-            - $ref: '#/components/schemas/ControlId'
-            - description: A unique identifier that's generated for each home region control. It's always a string that begins with "hrc-" followed by 12 lowercase letters and numbers.
+          $ref: '#/components/schemas/ControlId'
+          description: A unique identifier that's generated for each home region control. It's always a string that begins with "hrc-" followed by 12 lowercase letters and numbers.
         HomeRegion:
-          allOf:
-            - $ref: '#/components/schemas/HomeRegion'
-            - description: 'The AWS Region that''s been set as home region. For example, "us-west-2" or "eu-central-1" are valid home regions.'
+          $ref: '#/components/schemas/HomeRegion'
+          description: 'The AWS Region that''s been set as home region. For example, "us-west-2" or "eu-central-1" are valid home regions.'
         Target:
-          allOf:
-            - $ref: '#/components/schemas/Target'
-            - description: 'The target parameter specifies the identifier to which the home region is applied, which is always an <code>ACCOUNT</code>. It applies the home region to the current <code>ACCOUNT</code>.'
+          $ref: '#/components/schemas/Target'
+          description: 'The target parameter specifies the identifier to which the home region is applied, which is always an <code>ACCOUNT</code>. It applies the home region to the current <code>ACCOUNT</code>.'
         RequestedTime:
-          allOf:
-            - $ref: '#/components/schemas/RequestedTime'
-            - description: A timestamp representing the time when the customer called <code>CreateHomeregionControl</code> and set the home region for the account.
+          $ref: '#/components/schemas/RequestedTime'
+          description: A timestamp representing the time when the customer called <code>CreateHomeregionControl</code> and set the home region for the account.
       description: 'A home region control is an object that specifies the home region for an account, with some additional information. It contains a target (always of type <code>ACCOUNT</code>), an ID, and a time at which the home region was set.'
     DescribeHomeRegionControlsMaxResults:
       type: integer

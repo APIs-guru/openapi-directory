@@ -1656,9 +1656,8 @@ components:
       type: object
       properties:
         ApplicationInfo:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationInfo'
-            - description: Information about the application.
+          $ref: '#/components/schemas/ApplicationInfo'
+          description: Information about the application.
     CreateApplicationRequest:
       type: object
       required:
@@ -1666,25 +1665,20 @@ components:
       title: CreateApplicationRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         OpsCenterEnabled:
-          allOf:
-            - $ref: '#/components/schemas/OpsCenterEnabled'
-            - description: ' When set to <code>true</code>, creates opsItems for any problems detected on an application. '
+          $ref: '#/components/schemas/OpsCenterEnabled'
+          description: ' When set to <code>true</code>, creates opsItems for any problems detected on an application. '
         CWEMonitorEnabled:
-          allOf:
-            - $ref: '#/components/schemas/CWEMonitorEnabled'
-            - description: ' Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as <code>instance terminated</code>, <code>failed deployment</code>, and others. '
+          $ref: '#/components/schemas/CWEMonitorEnabled'
+          description: ' Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as <code>instance terminated</code>, <code>failed deployment</code>, and others. '
         OpsItemSNSTopicArn:
-          allOf:
-            - $ref: '#/components/schemas/OpsItemSNSTopicArn'
-            - description: ' The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem. '
+          $ref: '#/components/schemas/OpsItemSNSTopicArn'
+          description: ' The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem. '
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: List of tags to add to the application. tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+          $ref: '#/components/schemas/TagList'
+          description: List of tags to add to the application. tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
     ResourceInUseException: {}
     ResourceNotFoundException: {}
     ValidationException: {}
@@ -1703,28 +1697,23 @@ components:
       title: CreateComponentRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         ComponentName:
-          allOf:
-            - $ref: '#/components/schemas/CustomComponentName'
-            - description: The name of the component.
+          $ref: '#/components/schemas/CustomComponentName'
+          description: The name of the component.
         ResourceList:
-          allOf:
-            - $ref: '#/components/schemas/ResourceList'
-            - description: The list of resource ARNs that belong to the component.
+          $ref: '#/components/schemas/ResourceList'
+          description: The list of resource ARNs that belong to the component.
     CreateLogPatternResponse:
       type: object
       properties:
         LogPattern:
-          allOf:
-            - $ref: '#/components/schemas/LogPattern'
-            - description: The successfully created log pattern.
+          $ref: '#/components/schemas/LogPattern'
+          description: The successfully created log pattern.
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
     CreateLogPatternRequest:
       type: object
       required:
@@ -1736,25 +1725,20 @@ components:
       title: CreateLogPatternRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         PatternSetName:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternSetName'
-            - description: The name of the log pattern set.
+          $ref: '#/components/schemas/LogPatternSetName'
+          description: The name of the log pattern set.
         PatternName:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternName'
-            - description: The name of the log pattern.
+          $ref: '#/components/schemas/LogPatternName'
+          description: The name of the log pattern.
         Pattern:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternRegex'
-            - description: The log pattern. The pattern must be DFA compatible. Patterns that utilize forward lookahead or backreference constructions are not supported.
+          $ref: '#/components/schemas/LogPatternRegex'
+          description: The log pattern. The pattern must be DFA compatible. Patterns that utilize forward lookahead or backreference constructions are not supported.
         Rank:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternRank'
-            - description: 'Rank of the log pattern. Must be a value between <code>1</code> and <code>1,000,000</code>. The patterns are sorted by rank, so we recommend that you set your highest priority patterns with the lowest rank. A pattern of rank <code>1</code> will be the first to get matched to a log line. A pattern of rank <code>1,000,000</code> will be last to get matched. When you configure custom log patterns from the console, a <code>Low</code> severity pattern translates to a <code>750,000</code> rank. A <code>Medium</code> severity pattern translates to a <code>500,000</code> rank. And a <code>High</code> severity pattern translates to a <code>250,000</code> rank. Rank values less than <code>1</code> or greater than <code>1,000,000</code> are reserved for AWS-provided patterns. '
+          $ref: '#/components/schemas/LogPatternRank'
+          description: 'Rank of the log pattern. Must be a value between <code>1</code> and <code>1,000,000</code>. The patterns are sorted by rank, so we recommend that you set your highest priority patterns with the lowest rank. A pattern of rank <code>1</code> will be the first to get matched to a log line. A pattern of rank <code>1,000,000</code> will be last to get matched. When you configure custom log patterns from the console, a <code>Low</code> severity pattern translates to a <code>750,000</code> rank. A <code>Medium</code> severity pattern translates to a <code>500,000</code> rank. And a <code>High</code> severity pattern translates to a <code>250,000</code> rank. Rank values less than <code>1</code> or greater than <code>1,000,000</code> are reserved for AWS-provided patterns. '
     DeleteApplicationResponse:
       type: object
       properties: {}
@@ -1765,9 +1749,8 @@ components:
       title: DeleteApplicationRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
     BadRequestException: {}
     DeleteComponentResponse:
       type: object
@@ -1780,13 +1763,11 @@ components:
       title: DeleteComponentRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         ComponentName:
-          allOf:
-            - $ref: '#/components/schemas/CustomComponentName'
-            - description: The name of the component.
+          $ref: '#/components/schemas/CustomComponentName'
+          description: The name of the component.
     DeleteLogPatternResponse:
       type: object
       properties: {}
@@ -1799,24 +1780,20 @@ components:
       title: DeleteLogPatternRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         PatternSetName:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternSetName'
-            - description: The name of the log pattern set.
+          $ref: '#/components/schemas/LogPatternSetName'
+          description: The name of the log pattern set.
         PatternName:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternName'
-            - description: The name of the log pattern.
+          $ref: '#/components/schemas/LogPatternName'
+          description: The name of the log pattern.
     DescribeApplicationResponse:
       type: object
       properties:
         ApplicationInfo:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationInfo'
-            - description: Information about the application.
+          $ref: '#/components/schemas/ApplicationInfo'
+          description: Information about the application.
     DescribeApplicationRequest:
       type: object
       required:
@@ -1824,18 +1801,16 @@ components:
       title: DescribeApplicationRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
     DescribeComponentResponse:
       type: object
       properties:
         ApplicationComponent:
           $ref: '#/components/schemas/ApplicationComponent'
         ResourceList:
-          allOf:
-            - $ref: '#/components/schemas/ResourceList'
-            - description: The list of resource ARNs that belong to the component.
+          $ref: '#/components/schemas/ResourceList'
+          description: The list of resource ARNs that belong to the component.
     DescribeComponentRequest:
       type: object
       required:
@@ -1844,28 +1819,23 @@ components:
       title: DescribeComponentRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         ComponentName:
-          allOf:
-            - $ref: '#/components/schemas/ComponentName'
-            - description: The name of the component.
+          $ref: '#/components/schemas/ComponentName'
+          description: The name of the component.
     DescribeComponentConfigurationResponse:
       type: object
       properties:
         Monitor:
-          allOf:
-            - $ref: '#/components/schemas/Monitor'
-            - description: Indicates whether the application component is monitored.
+          $ref: '#/components/schemas/Monitor'
+          description: Indicates whether the application component is monitored.
         Tier:
-          allOf:
-            - $ref: '#/components/schemas/Tier'
-            - description: 'The tier of the application component. Supported tiers include <code>DOT_NET_CORE</code>, <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code> '
+          $ref: '#/components/schemas/Tier'
+          description: 'The tier of the application component. Supported tiers include <code>DOT_NET_CORE</code>, <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code> '
         ComponentConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/ComponentConfiguration'
-            - description: The configuration settings of the component. The value is the escaped JSON of the configuration.
+          $ref: '#/components/schemas/ComponentConfiguration'
+          description: The configuration settings of the component. The value is the escaped JSON of the configuration.
     DescribeComponentConfigurationRequest:
       type: object
       required:
@@ -1874,20 +1844,17 @@ components:
       title: DescribeComponentConfigurationRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         ComponentName:
-          allOf:
-            - $ref: '#/components/schemas/ComponentName'
-            - description: The name of the component.
+          $ref: '#/components/schemas/ComponentName'
+          description: The name of the component.
     DescribeComponentConfigurationRecommendationResponse:
       type: object
       properties:
         ComponentConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/ComponentConfiguration'
-            - description: The recommended configuration settings of the component. The value is the escaped JSON of the configuration.
+          $ref: '#/components/schemas/ComponentConfiguration'
+          description: The recommended configuration settings of the component. The value is the escaped JSON of the configuration.
     DescribeComponentConfigurationRecommendationRequest:
       type: object
       required:
@@ -1897,28 +1864,23 @@ components:
       title: DescribeComponentConfigurationRecommendationRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         ComponentName:
-          allOf:
-            - $ref: '#/components/schemas/ComponentName'
-            - description: The name of the component.
+          $ref: '#/components/schemas/ComponentName'
+          description: The name of the component.
         Tier:
-          allOf:
-            - $ref: '#/components/schemas/Tier'
-            - description: 'The tier of the application component. Supported tiers include <code>DOT_NET_CORE</code>, <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.'
+          $ref: '#/components/schemas/Tier'
+          description: 'The tier of the application component. Supported tiers include <code>DOT_NET_CORE</code>, <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.'
     DescribeLogPatternResponse:
       type: object
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         LogPattern:
-          allOf:
-            - $ref: '#/components/schemas/LogPattern'
-            - description: The successfully created log pattern.
+          $ref: '#/components/schemas/LogPattern'
+          description: The successfully created log pattern.
     DescribeLogPatternRequest:
       type: object
       required:
@@ -1928,24 +1890,20 @@ components:
       title: DescribeLogPatternRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         PatternSetName:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternSetName'
-            - description: The name of the log pattern set.
+          $ref: '#/components/schemas/LogPatternSetName'
+          description: The name of the log pattern set.
         PatternName:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternName'
-            - description: The name of the log pattern.
+          $ref: '#/components/schemas/LogPatternName'
+          description: The name of the log pattern.
     DescribeObservationResponse:
       type: object
       properties:
         Observation:
-          allOf:
-            - $ref: '#/components/schemas/Observation'
-            - description: Information about the observation.
+          $ref: '#/components/schemas/Observation'
+          description: Information about the observation.
     DescribeObservationRequest:
       type: object
       required:
@@ -1953,16 +1911,14 @@ components:
       title: DescribeObservationRequest
       properties:
         ObservationId:
-          allOf:
-            - $ref: '#/components/schemas/ObservationId'
-            - description: The ID of the observation.
+          $ref: '#/components/schemas/ObservationId'
+          description: The ID of the observation.
     DescribeProblemResponse:
       type: object
       properties:
         Problem:
-          allOf:
-            - $ref: '#/components/schemas/Problem'
-            - description: 'Information about the problem. '
+          $ref: '#/components/schemas/Problem'
+          description: 'Information about the problem. '
     DescribeProblemRequest:
       type: object
       required:
@@ -1970,16 +1926,14 @@ components:
       title: DescribeProblemRequest
       properties:
         ProblemId:
-          allOf:
-            - $ref: '#/components/schemas/ProblemId'
-            - description: The ID of the problem.
+          $ref: '#/components/schemas/ProblemId'
+          description: The ID of the problem.
     DescribeProblemObservationsResponse:
       type: object
       properties:
         RelatedObservations:
-          allOf:
-            - $ref: '#/components/schemas/RelatedObservations'
-            - description: Observations related to the problem.
+          $ref: '#/components/schemas/RelatedObservations'
+          description: Observations related to the problem.
     DescribeProblemObservationsRequest:
       type: object
       required:
@@ -1987,43 +1941,36 @@ components:
       title: DescribeProblemObservationsRequest
       properties:
         ProblemId:
-          allOf:
-            - $ref: '#/components/schemas/ProblemId'
-            - description: The ID of the problem.
+          $ref: '#/components/schemas/ProblemId'
+          description: The ID of the problem.
     ListApplicationsResponse:
       type: object
       properties:
         ApplicationInfoList:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationInfoList'
-            - description: The list of applications.
+          $ref: '#/components/schemas/ApplicationInfoList'
+          description: The list of applications.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The token used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'The token used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
     ListApplicationsRequest:
       type: object
       title: ListApplicationsRequest
       properties:
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxEntities'
-            - description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
+          $ref: '#/components/schemas/MaxEntities'
+          description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The token to request the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The token to request the next page of results.
     ListComponentsResponse:
       type: object
       properties:
         ApplicationComponentList:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationComponentList'
-            - description: The list of application components.
+          $ref: '#/components/schemas/ApplicationComponentList'
+          description: The list of application components.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The token to request the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The token to request the next page of results.
     ListComponentsRequest:
       type: object
       required:
@@ -2031,71 +1978,57 @@ components:
       title: ListComponentsRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxEntities'
-            - description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
+          $ref: '#/components/schemas/MaxEntities'
+          description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The token to request the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The token to request the next page of results.
     ListConfigurationHistoryResponse:
       type: object
       properties:
         EventList:
-          allOf:
-            - $ref: '#/components/schemas/ConfigurationEventList'
-            - description: ' The list of configuration events and their corresponding details. '
+          $ref: '#/components/schemas/ConfigurationEventList'
+          description: ' The list of configuration events and their corresponding details. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The <code>NextToken</code> value to include in a future <code>ListConfigurationHistory</code> request. When the results of a <code>ListConfigurationHistory</code> request exceed <code>MaxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'The <code>NextToken</code> value to include in a future <code>ListConfigurationHistory</code> request. When the results of a <code>ListConfigurationHistory</code> request exceed <code>MaxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
     ListConfigurationHistoryRequest:
       type: object
       title: ListConfigurationHistoryRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: 'Resource group to which the application belongs. '
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: 'Resource group to which the application belongs. '
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/StartTime'
-            - description: 'The start time of the event. '
+          $ref: '#/components/schemas/StartTime'
+          description: 'The start time of the event. '
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/EndTime'
-            - description: The end time of the event.
+          $ref: '#/components/schemas/EndTime'
+          description: The end time of the event.
         EventStatus:
-          allOf:
-            - $ref: '#/components/schemas/ConfigurationEventStatus'
-            - description: 'The status of the configuration update event. Possible values include INFO, WARN, and ERROR.'
+          $ref: '#/components/schemas/ConfigurationEventStatus'
+          description: 'The status of the configuration update event. Possible values include INFO, WARN, and ERROR.'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxEntities'
-            - description: ' The maximum number of results returned by <code>ListConfigurationHistory</code> in paginated output. When this parameter is used, <code>ListConfigurationHistory</code> returns only <code>MaxResults</code> in a single page along with a <code>NextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListConfigurationHistory</code> request with the returned <code>NextToken</code> value. If this parameter is not used, then <code>ListConfigurationHistory</code> returns all results. '
+          $ref: '#/components/schemas/MaxEntities'
+          description: ' The maximum number of results returned by <code>ListConfigurationHistory</code> in paginated output. When this parameter is used, <code>ListConfigurationHistory</code> returns only <code>MaxResults</code> in a single page along with a <code>NextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListConfigurationHistory</code> request with the returned <code>NextToken</code> value. If this parameter is not used, then <code>ListConfigurationHistory</code> returns all results. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The <code>NextToken</code> value returned from a previous paginated <code>ListConfigurationHistory</code> request where <code>MaxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>NextToken</code> value. This value is <code>null</code> when there are no more results to return.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The <code>NextToken</code> value returned from a previous paginated <code>ListConfigurationHistory</code> request where <code>MaxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>NextToken</code> value. This value is <code>null</code> when there are no more results to return.
     ListLogPatternSetsResponse:
       type: object
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         LogPatternSets:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternSetList'
-            - description: The list of log pattern sets.
+          $ref: '#/components/schemas/LogPatternSetList'
+          description: The list of log pattern sets.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The token used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'The token used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
     ListLogPatternSetsRequest:
       type: object
       required:
@@ -2103,32 +2036,26 @@ components:
       title: ListLogPatternSetsRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxEntities'
-            - description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
+          $ref: '#/components/schemas/MaxEntities'
+          description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The token to request the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The token to request the next page of results.
     ListLogPatternsResponse:
       type: object
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         LogPatterns:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternList'
-            - description: The list of log patterns.
+          $ref: '#/components/schemas/LogPatternList'
+          description: The list of log patterns.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The token used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'The token used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
     ListLogPatternsRequest:
       type: object
       required:
@@ -2136,63 +2063,51 @@ components:
       title: ListLogPatternsRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         PatternSetName:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternSetName'
-            - description: The name of the log pattern set.
+          $ref: '#/components/schemas/LogPatternSetName'
+          description: The name of the log pattern set.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxEntities'
-            - description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
+          $ref: '#/components/schemas/MaxEntities'
+          description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The token to request the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The token to request the next page of results.
     ListProblemsResponse:
       type: object
       properties:
         ProblemList:
-          allOf:
-            - $ref: '#/components/schemas/ProblemList'
-            - description: 'The list of problems. '
+          $ref: '#/components/schemas/ProblemList'
+          description: 'The list of problems. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The token used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'The token used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
     ListProblemsRequest:
       type: object
       title: ListProblemsRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/StartTime'
-            - description: 'The time when the problem was detected, in epoch seconds. If you don''t specify a time frame for the request, problems within the past seven days are returned.'
+          $ref: '#/components/schemas/StartTime'
+          description: 'The time when the problem was detected, in epoch seconds. If you don''t specify a time frame for the request, problems within the past seven days are returned.'
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/EndTime'
-            - description: 'The time when the problem ended, in epoch seconds. If not specified, problems within the past seven days are returned.'
+          $ref: '#/components/schemas/EndTime'
+          description: 'The time when the problem ended, in epoch seconds. If not specified, problems within the past seven days are returned.'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxEntities'
-            - description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
+          $ref: '#/components/schemas/MaxEntities'
+          description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: The token to request the next page of results.
+          $ref: '#/components/schemas/PaginationToken'
+          description: The token to request the next page of results.
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: An array that lists all the tags that are associated with the application. Each tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>).
+          $ref: '#/components/schemas/TagList'
+          description: An array that lists all the tags that are associated with the application. Each tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>).
     ListTagsForResourceRequest:
       type: object
       required:
@@ -2200,9 +2115,8 @@ components:
       title: ListTagsForResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: The Amazon Resource Name (ARN) of the application that you want to retrieve tag information for.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The Amazon Resource Name (ARN) of the application that you want to retrieve tag information for.
     TagResourceResponse:
       type: object
       properties: {}
@@ -2214,13 +2128,11 @@ components:
       title: TagResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: The Amazon Resource Name (ARN) of the application that you want to add one or more tags to.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The Amazon Resource Name (ARN) of the application that you want to add one or more tags to.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: A list of tags that to add to the application. A tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+          $ref: '#/components/schemas/TagList'
+          description: A list of tags that to add to the application. A tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
     TooManyTagsException: {}
     UntagResourceResponse:
       type: object
@@ -2233,20 +2145,17 @@ components:
       title: UntagResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: The Amazon Resource Name (ARN) of the application that you want to remove one or more tags from.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The Amazon Resource Name (ARN) of the application that you want to remove one or more tags from.
         TagKeys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyList'
-            - description: '<p>The tags (tag keys) that you want to remove from the resource. When you specify a tag key, the action removes both that key and its associated tag value.</p> <p>To remove more than one tag from the application, append the <code>TagKeys</code> parameter and argument for each additional tag to remove, separated by an ampersand. </p>'
+          $ref: '#/components/schemas/TagKeyList'
+          description: '<p>The tags (tag keys) that you want to remove from the resource. When you specify a tag key, the action removes both that key and its associated tag value.</p> <p>To remove more than one tag from the application, append the <code>TagKeys</code> parameter and argument for each additional tag to remove, separated by an ampersand. </p>'
     UpdateApplicationResponse:
       type: object
       properties:
         ApplicationInfo:
-          allOf:
-            - $ref: '#/components/schemas/ApplicationInfo'
-            - description: 'Information about the application. '
+          $ref: '#/components/schemas/ApplicationInfo'
+          description: 'Information about the application. '
     UpdateApplicationRequest:
       type: object
       required:
@@ -2254,25 +2163,20 @@ components:
       title: UpdateApplicationRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         OpsCenterEnabled:
-          allOf:
-            - $ref: '#/components/schemas/OpsCenterEnabled'
-            - description: ' When set to <code>true</code>, creates opsItems for any problems detected on an application. '
+          $ref: '#/components/schemas/OpsCenterEnabled'
+          description: ' When set to <code>true</code>, creates opsItems for any problems detected on an application. '
         CWEMonitorEnabled:
-          allOf:
-            - $ref: '#/components/schemas/CWEMonitorEnabled'
-            - description: ' Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as <code>instance terminated</code>, <code>failed deployment</code>, and others. '
+          $ref: '#/components/schemas/CWEMonitorEnabled'
+          description: ' Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as <code>instance terminated</code>, <code>failed deployment</code>, and others. '
         OpsItemSNSTopicArn:
-          allOf:
-            - $ref: '#/components/schemas/OpsItemSNSTopicArn'
-            - description: ' The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem.'
+          $ref: '#/components/schemas/OpsItemSNSTopicArn'
+          description: ' The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem.'
         RemoveSNSTopic:
-          allOf:
-            - $ref: '#/components/schemas/RemoveSNSTopic'
-            - description: ' Disassociates the SNS topic from the opsItem created for detected problems.'
+          $ref: '#/components/schemas/RemoveSNSTopic'
+          description: ' Disassociates the SNS topic from the opsItem created for detected problems.'
     UpdateComponentResponse:
       type: object
       properties: {}
@@ -2284,21 +2188,17 @@ components:
       title: UpdateComponentRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         ComponentName:
-          allOf:
-            - $ref: '#/components/schemas/CustomComponentName'
-            - description: The name of the component.
+          $ref: '#/components/schemas/CustomComponentName'
+          description: The name of the component.
         NewComponentName:
-          allOf:
-            - $ref: '#/components/schemas/CustomComponentName'
-            - description: The new name of the component.
+          $ref: '#/components/schemas/CustomComponentName'
+          description: The new name of the component.
         ResourceList:
-          allOf:
-            - $ref: '#/components/schemas/ResourceList'
-            - description: The list of resource ARNs that belong to the component.
+          $ref: '#/components/schemas/ResourceList'
+          description: The list of resource ARNs that belong to the component.
     UpdateComponentConfigurationResponse:
       type: object
       properties: {}
@@ -2310,36 +2210,29 @@ components:
       title: UpdateComponentConfigurationRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         ComponentName:
-          allOf:
-            - $ref: '#/components/schemas/ComponentName'
-            - description: The name of the component.
+          $ref: '#/components/schemas/ComponentName'
+          description: The name of the component.
         Monitor:
-          allOf:
-            - $ref: '#/components/schemas/Monitor'
-            - description: Indicates whether the application component is monitored.
+          $ref: '#/components/schemas/Monitor'
+          description: Indicates whether the application component is monitored.
         Tier:
-          allOf:
-            - $ref: '#/components/schemas/Tier'
-            - description: 'The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>DOT_NET_CORE</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.'
+          $ref: '#/components/schemas/Tier'
+          description: 'The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>DOT_NET_CORE</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.'
         ComponentConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/ComponentConfiguration'
-            - description: 'The configuration settings of the component. The value is the escaped JSON of the configuration. For more information about the JSON format, see <a href="https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html">Working with JSON</a>. You can send a request to <code>DescribeComponentConfigurationRecommendation</code> to see the recommended configuration for a component. For the complete format of the component configuration file, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/component-config.html">Component Configuration</a>.'
+          $ref: '#/components/schemas/ComponentConfiguration'
+          description: 'The configuration settings of the component. The value is the escaped JSON of the configuration. For more information about the JSON format, see <a href="https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html">Working with JSON</a>. You can send a request to <code>DescribeComponentConfigurationRecommendation</code> to see the recommended configuration for a component. For the complete format of the component configuration file, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/component-config.html">Component Configuration</a>.'
     UpdateLogPatternResponse:
       type: object
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         LogPattern:
-          allOf:
-            - $ref: '#/components/schemas/LogPattern'
-            - description: The successfully created log pattern.
+          $ref: '#/components/schemas/LogPattern'
+          description: The successfully created log pattern.
     UpdateLogPatternRequest:
       type: object
       required:
@@ -2349,25 +2242,20 @@ components:
       title: UpdateLogPatternRequest
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group.
         PatternSetName:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternSetName'
-            - description: The name of the log pattern set.
+          $ref: '#/components/schemas/LogPatternSetName'
+          description: The name of the log pattern set.
         PatternName:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternName'
-            - description: The name of the log pattern.
+          $ref: '#/components/schemas/LogPatternName'
+          description: The name of the log pattern.
         Pattern:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternRegex'
-            - description: The log pattern. The pattern must be DFA compatible. Patterns that utilize forward lookahead or backreference constructions are not supported.
+          $ref: '#/components/schemas/LogPatternRegex'
+          description: The log pattern. The pattern must be DFA compatible. Patterns that utilize forward lookahead or backreference constructions are not supported.
         Rank:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternRank'
-            - description: 'Rank of the log pattern. Must be a value between <code>1</code> and <code>1,000,000</code>. The patterns are sorted by rank, so we recommend that you set your highest priority patterns with the lowest rank. A pattern of rank <code>1</code> will be the first to get matched to a log line. A pattern of rank <code>1,000,000</code> will be last to get matched. When you configure custom log patterns from the console, a <code>Low</code> severity pattern translates to a <code>750,000</code> rank. A <code>Medium</code> severity pattern translates to a <code>500,000</code> rank. And a <code>High</code> severity pattern translates to a <code>250,000</code> rank. Rank values less than <code>1</code> or greater than <code>1,000,000</code> are reserved for AWS-provided patterns. '
+          $ref: '#/components/schemas/LogPatternRank'
+          description: 'Rank of the log pattern. Must be a value between <code>1</code> and <code>1,000,000</code>. The patterns are sorted by rank, so we recommend that you set your highest priority patterns with the lowest rank. A pattern of rank <code>1</code> will be the first to get matched to a log line. A pattern of rank <code>1,000,000</code> will be last to get matched. When you configure custom log patterns from the console, a <code>Low</code> severity pattern translates to a <code>750,000</code> rank. A <code>Medium</code> severity pattern translates to a <code>500,000</code> rank. And a <code>High</code> severity pattern translates to a <code>250,000</code> rank. Rank values less than <code>1</code> or greater than <code>1,000,000</code> are reserved for AWS-provided patterns. '
     AffectedResource:
       type: string
     AmazonResourceName:
@@ -2419,33 +2307,26 @@ components:
       type: object
       properties:
         ComponentName:
-          allOf:
-            - $ref: '#/components/schemas/ComponentName'
-            - description: The name of the component.
+          $ref: '#/components/schemas/ComponentName'
+          description: The name of the component.
         ComponentRemarks:
-          allOf:
-            - $ref: '#/components/schemas/Remarks'
-            - description: ' If logging is supported for the resource type, indicates whether the component has configured logs to be monitored. '
+          $ref: '#/components/schemas/Remarks'
+          description: ' If logging is supported for the resource type, indicates whether the component has configured logs to be monitored. '
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: 'The resource type. Supported resource types include EC2 instances, Auto Scaling group, Classic ELB, Application ELB, and SQS Queue.'
+          $ref: '#/components/schemas/ResourceType'
+          description: 'The resource type. Supported resource types include EC2 instances, Auto Scaling group, Classic ELB, Application ELB, and SQS Queue.'
         OsType:
-          allOf:
-            - $ref: '#/components/schemas/OsType'
-            - description: ' The operating system of the component. '
+          $ref: '#/components/schemas/OsType'
+          description: ' The operating system of the component. '
         Tier:
-          allOf:
-            - $ref: '#/components/schemas/Tier'
-            - description: The stack tier of the application component.
+          $ref: '#/components/schemas/Tier'
+          description: The stack tier of the application component.
         Monitor:
-          allOf:
-            - $ref: '#/components/schemas/Monitor'
-            - description: 'Indicates whether the application component is monitored. '
+          $ref: '#/components/schemas/Monitor'
+          description: 'Indicates whether the application component is monitored. '
         DetectedWorkload:
-          allOf:
-            - $ref: '#/components/schemas/DetectedWorkload'
-            - description: ' Workloads detected in the application component. '
+          $ref: '#/components/schemas/DetectedWorkload'
+          description: ' Workloads detected in the application component. '
       description: Describes a standalone resource or similarly grouped resources that the application is made up of.
     ApplicationComponentList:
       type: array
@@ -2471,29 +2352,23 @@ components:
       type: object
       properties:
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group used for the application.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group used for the application.
         LifeCycle:
-          allOf:
-            - $ref: '#/components/schemas/LifeCycle'
-            - description: 'The lifecycle of the application. '
+          $ref: '#/components/schemas/LifeCycle'
+          description: 'The lifecycle of the application. '
         OpsItemSNSTopicArn:
-          allOf:
-            - $ref: '#/components/schemas/OpsItemSNSTopicArn'
-            - description: ' The SNS topic provided to Application Insights that is associated to the created opsItems to receive SNS notifications for opsItem updates. '
+          $ref: '#/components/schemas/OpsItemSNSTopicArn'
+          description: ' The SNS topic provided to Application Insights that is associated to the created opsItems to receive SNS notifications for opsItem updates. '
         OpsCenterEnabled:
-          allOf:
-            - $ref: '#/components/schemas/OpsCenterEnabled'
-            - description: ' Indicates whether Application Insights will create opsItems for any problem detected by Application Insights for an application. '
+          $ref: '#/components/schemas/OpsCenterEnabled'
+          description: ' Indicates whether Application Insights will create opsItems for any problem detected by Application Insights for an application. '
         CWEMonitorEnabled:
-          allOf:
-            - $ref: '#/components/schemas/CWEMonitorEnabled'
-            - description: ' Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as <code>instance terminated</code>, <code>failed deployment</code>, and others. '
+          $ref: '#/components/schemas/CWEMonitorEnabled'
+          description: ' Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as <code>instance terminated</code>, <code>failed deployment</code>, and others. '
         Remarks:
-          allOf:
-            - $ref: '#/components/schemas/Remarks'
-            - description: '<p>The issues on the user side that block Application Insights from successfully monitoring an application. Example remarks include:</p> <ul> <li> <p>“Configuring application, detected 1 Errors, 3 Warnings”</p> </li> <li> <p>“Configuring application, detected 1 Unconfigured Components”</p> </li> </ul>'
+          $ref: '#/components/schemas/Remarks'
+          description: '<p>The issues on the user side that block Application Insights from successfully monitoring an application. Example remarks include:</p> <ul> <li> <p>“Configuring application, detected 1 Errors, 3 Warnings”</p> </li> <li> <p>“Configuring application, detected 1 Unconfigured Components”</p> </li> </ul>'
       description: Describes the status of the application.
     ApplicationInfoList:
       type: array
@@ -2551,29 +2426,23 @@ components:
       type: object
       properties:
         MonitoredResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/ConfigurationEventMonitoredResourceARN'
-            - description: ' The resource monitored by Application Insights. '
+          $ref: '#/components/schemas/ConfigurationEventMonitoredResourceARN'
+          description: ' The resource monitored by Application Insights. '
         EventStatus:
-          allOf:
-            - $ref: '#/components/schemas/ConfigurationEventStatus'
-            - description: ' The status of the configuration update event. Possible values include INFO, WARN, and ERROR. '
+          $ref: '#/components/schemas/ConfigurationEventStatus'
+          description: ' The status of the configuration update event. Possible values include INFO, WARN, and ERROR. '
         EventResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ConfigurationEventResourceType'
-            - description: ' The resource type that Application Insights attempted to configure, for example, CLOUDWATCH_ALARM. '
+          $ref: '#/components/schemas/ConfigurationEventResourceType'
+          description: ' The resource type that Application Insights attempted to configure, for example, CLOUDWATCH_ALARM. '
         EventTime:
-          allOf:
-            - $ref: '#/components/schemas/ConfigurationEventTime'
-            - description: ' The timestamp of the event. '
+          $ref: '#/components/schemas/ConfigurationEventTime'
+          description: ' The timestamp of the event. '
         EventDetail:
-          allOf:
-            - $ref: '#/components/schemas/ConfigurationEventDetail'
-            - description: ' The details of the event in plain text. '
+          $ref: '#/components/schemas/ConfigurationEventDetail'
+          description: ' The details of the event in plain text. '
         EventResourceName:
-          allOf:
-            - $ref: '#/components/schemas/ConfigurationEventResourceName'
-            - description: ' The name of the resource Application Insights attempted to configure. '
+          $ref: '#/components/schemas/ConfigurationEventResourceName'
+          description: ' The name of the resource Application Insights attempted to configure. '
       description: ' The event information. '
     ConfigurationEventList:
       type: array
@@ -2615,21 +2484,17 @@ components:
       type: object
       properties:
         PatternSetName:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternSetName'
-            - description: 'The name of the log pattern. A log pattern name can contain as many as 30 characters, and it cannot be empty. The characters can be Unicode letters, digits, or one of the following symbols: period, dash, underscore.'
+          $ref: '#/components/schemas/LogPatternSetName'
+          description: 'The name of the log pattern. A log pattern name can contain as many as 30 characters, and it cannot be empty. The characters can be Unicode letters, digits, or one of the following symbols: period, dash, underscore.'
         PatternName:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternName'
-            - description: 'The name of the log pattern. A log pattern name can contain as many as 50 characters, and it cannot be empty. The characters can be Unicode letters, digits, or one of the following symbols: period, dash, underscore.'
+          $ref: '#/components/schemas/LogPatternName'
+          description: 'The name of the log pattern. A log pattern name can contain as many as 50 characters, and it cannot be empty. The characters can be Unicode letters, digits, or one of the following symbols: period, dash, underscore.'
         Pattern:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternRegex'
-            - description: 'A regular expression that defines the log pattern. A log pattern can contain as many as 50 characters, and it cannot be empty. The pattern must be DFA compatible. Patterns that utilize forward lookahead or backreference constructions are not supported.'
+          $ref: '#/components/schemas/LogPatternRegex'
+          description: 'A regular expression that defines the log pattern. A log pattern can contain as many as 50 characters, and it cannot be empty. The pattern must be DFA compatible. Patterns that utilize forward lookahead or backreference constructions are not supported.'
         Rank:
-          allOf:
-            - $ref: '#/components/schemas/LogPatternRank'
-            - description: 'Rank of the log pattern. Must be a value between <code>1</code> and <code>1,000,000</code>. The patterns are sorted by rank, so we recommend that you set your highest priority patterns with the lowest rank. A pattern of rank <code>1</code> will be the first to get matched to a log line. A pattern of rank <code>1,000,000</code> will be last to get matched. When you configure custom log patterns from the console, a <code>Low</code> severity pattern translates to a <code>750,000</code> rank. A <code>Medium</code> severity pattern translates to a <code>500,000</code> rank. And a <code>High</code> severity pattern translates to a <code>250,000</code> rank. Rank values less than <code>1</code> or greater than <code>1,000,000</code> are reserved for AWS-provided patterns. '
+          $ref: '#/components/schemas/LogPatternRank'
+          description: 'Rank of the log pattern. Must be a value between <code>1</code> and <code>1,000,000</code>. The patterns are sorted by rank, so we recommend that you set your highest priority patterns with the lowest rank. A pattern of rank <code>1</code> will be the first to get matched to a log line. A pattern of rank <code>1,000,000</code> will be last to get matched. When you configure custom log patterns from the console, a <code>Low</code> severity pattern translates to a <code>750,000</code> rank. A <code>Medium</code> severity pattern translates to a <code>500,000</code> rank. And a <code>High</code> severity pattern translates to a <code>250,000</code> rank. Rank values less than <code>1</code> or greater than <code>1,000,000</code> are reserved for AWS-provided patterns. '
       description: An object that defines the log patterns that belongs to a <code>LogPatternSet</code>.
     ObservationId:
       type: string
@@ -2640,185 +2505,140 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ObservationId'
-            - description: The ID of the observation type.
+          $ref: '#/components/schemas/ObservationId'
+          description: The ID of the observation type.
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/StartTime'
-            - description: 'The time when the observation was first detected, in epoch seconds.'
+          $ref: '#/components/schemas/StartTime'
+          description: 'The time when the observation was first detected, in epoch seconds.'
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/EndTime'
-            - description: 'The time when the observation ended, in epoch seconds.'
+          $ref: '#/components/schemas/EndTime'
+          description: 'The time when the observation ended, in epoch seconds.'
         SourceType:
-          allOf:
-            - $ref: '#/components/schemas/SourceType'
-            - description: The source type of the observation.
+          $ref: '#/components/schemas/SourceType'
+          description: The source type of the observation.
         SourceARN:
-          allOf:
-            - $ref: '#/components/schemas/SourceARN'
-            - description: The source resource ARN of the observation.
+          $ref: '#/components/schemas/SourceARN'
+          description: The source resource ARN of the observation.
         LogGroup:
-          allOf:
-            - $ref: '#/components/schemas/LogGroup'
-            - description: The log group name.
+          $ref: '#/components/schemas/LogGroup'
+          description: The log group name.
         LineTime:
-          allOf:
-            - $ref: '#/components/schemas/LineTime'
-            - description: The timestamp in the CloudWatch Logs that specifies when the matched line occurred.
+          $ref: '#/components/schemas/LineTime'
+          description: The timestamp in the CloudWatch Logs that specifies when the matched line occurred.
         LogText:
-          allOf:
-            - $ref: '#/components/schemas/LogText'
-            - description: The log text of the observation.
+          $ref: '#/components/schemas/LogText'
+          description: The log text of the observation.
         LogFilter:
-          allOf:
-            - $ref: '#/components/schemas/LogFilter'
-            - description: The log filter of the observation.
+          $ref: '#/components/schemas/LogFilter'
+          description: The log filter of the observation.
         MetricNamespace:
-          allOf:
-            - $ref: '#/components/schemas/MetricNamespace'
-            - description: The namespace of the observation metric.
+          $ref: '#/components/schemas/MetricNamespace'
+          description: The namespace of the observation metric.
         MetricName:
-          allOf:
-            - $ref: '#/components/schemas/MetricName'
-            - description: The name of the observation metric.
+          $ref: '#/components/schemas/MetricName'
+          description: The name of the observation metric.
         Unit:
-          allOf:
-            - $ref: '#/components/schemas/Unit'
-            - description: The unit of the source observation metric.
+          $ref: '#/components/schemas/Unit'
+          description: The unit of the source observation metric.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/Value'
-            - description: The value of the source observation metric.
+          $ref: '#/components/schemas/Value'
+          description: The value of the source observation metric.
         CloudWatchEventId:
-          allOf:
-            - $ref: '#/components/schemas/CloudWatchEventId'
-            - description: ' The ID of the CloudWatch Event-based observation related to the detected problem. '
+          $ref: '#/components/schemas/CloudWatchEventId'
+          description: ' The ID of the CloudWatch Event-based observation related to the detected problem. '
         CloudWatchEventSource:
-          allOf:
-            - $ref: '#/components/schemas/CloudWatchEventSource'
-            - description: ' The source of the CloudWatch Event. '
+          $ref: '#/components/schemas/CloudWatchEventSource'
+          description: ' The source of the CloudWatch Event. '
         CloudWatchEventDetailType:
-          allOf:
-            - $ref: '#/components/schemas/CloudWatchEventDetailType'
-            - description: ' The detail type of the CloudWatch Event-based observation, for example, <code>EC2 Instance State-change Notification</code>. '
+          $ref: '#/components/schemas/CloudWatchEventDetailType'
+          description: ' The detail type of the CloudWatch Event-based observation, for example, <code>EC2 Instance State-change Notification</code>. '
         HealthEventArn:
-          allOf:
-            - $ref: '#/components/schemas/HealthEventArn'
-            - description: ' The Amazon Resource Name (ARN) of the AWS Health Event-based observation.'
+          $ref: '#/components/schemas/HealthEventArn'
+          description: ' The Amazon Resource Name (ARN) of the AWS Health Event-based observation.'
         HealthService:
-          allOf:
-            - $ref: '#/components/schemas/HealthService'
-            - description: ' The service to which the AWS Health Event belongs, such as EC2. '
+          $ref: '#/components/schemas/HealthService'
+          description: ' The service to which the AWS Health Event belongs, such as EC2. '
         HealthEventTypeCode:
-          allOf:
-            - $ref: '#/components/schemas/HealthEventTypeCode'
-            - description: ' The type of the AWS Health event, for example, <code>AWS_EC2_POWER_CONNECTIVITY_ISSUE</code>. '
+          $ref: '#/components/schemas/HealthEventTypeCode'
+          description: ' The type of the AWS Health event, for example, <code>AWS_EC2_POWER_CONNECTIVITY_ISSUE</code>. '
         HealthEventTypeCategory:
-          allOf:
-            - $ref: '#/components/schemas/HealthEventTypeCategory'
-            - description: ' The category of the AWS Health event, such as <code>issue</code>. '
+          $ref: '#/components/schemas/HealthEventTypeCategory'
+          description: ' The category of the AWS Health event, such as <code>issue</code>. '
         HealthEventDescription:
-          allOf:
-            - $ref: '#/components/schemas/HealthEventDescription'
-            - description: ' The description of the AWS Health event provided by the service, such as Amazon EC2. '
+          $ref: '#/components/schemas/HealthEventDescription'
+          description: ' The description of the AWS Health event provided by the service, such as Amazon EC2. '
         CodeDeployDeploymentId:
-          allOf:
-            - $ref: '#/components/schemas/CodeDeployDeploymentId'
-            - description: ' The deployment ID of the CodeDeploy-based observation related to the detected problem. '
+          $ref: '#/components/schemas/CodeDeployDeploymentId'
+          description: ' The deployment ID of the CodeDeploy-based observation related to the detected problem. '
         CodeDeployDeploymentGroup:
-          allOf:
-            - $ref: '#/components/schemas/CodeDeployDeploymentGroup'
-            - description: ' The deployment group to which the CodeDeploy deployment belongs. '
+          $ref: '#/components/schemas/CodeDeployDeploymentGroup'
+          description: ' The deployment group to which the CodeDeploy deployment belongs. '
         CodeDeployState:
-          allOf:
-            - $ref: '#/components/schemas/CodeDeployState'
-            - description: ' The status of the CodeDeploy deployment, for example <code>SUCCESS</code> or <code> FAILURE</code>. '
+          $ref: '#/components/schemas/CodeDeployState'
+          description: ' The status of the CodeDeploy deployment, for example <code>SUCCESS</code> or <code> FAILURE</code>. '
         CodeDeployApplication:
-          allOf:
-            - $ref: '#/components/schemas/CodeDeployApplication'
-            - description: ' The CodeDeploy application to which the deployment belongs. '
+          $ref: '#/components/schemas/CodeDeployApplication'
+          description: ' The CodeDeploy application to which the deployment belongs. '
         CodeDeployInstanceGroupId:
-          allOf:
-            - $ref: '#/components/schemas/CodeDeployInstanceGroupId'
-            - description: ' The instance group to which the CodeDeploy instance belongs. '
+          $ref: '#/components/schemas/CodeDeployInstanceGroupId'
+          description: ' The instance group to which the CodeDeploy instance belongs. '
         Ec2State:
-          allOf:
-            - $ref: '#/components/schemas/Ec2State'
-            - description: ' The state of the instance, such as <code>STOPPING</code> or <code>TERMINATING</code>. '
+          $ref: '#/components/schemas/Ec2State'
+          description: ' The state of the instance, such as <code>STOPPING</code> or <code>TERMINATING</code>. '
         RdsEventCategories:
-          allOf:
-            - $ref: '#/components/schemas/RdsEventCategories'
-            - description: ' The category of an RDS event. '
+          $ref: '#/components/schemas/RdsEventCategories'
+          description: ' The category of an RDS event. '
         RdsEventMessage:
-          allOf:
-            - $ref: '#/components/schemas/RdsEventMessage'
-            - description: ' The message of an RDS event. '
+          $ref: '#/components/schemas/RdsEventMessage'
+          description: ' The message of an RDS event. '
         S3EventName:
-          allOf:
-            - $ref: '#/components/schemas/S3EventName'
-            - description: ' The name of the S3 CloudWatch Event-based observation. '
+          $ref: '#/components/schemas/S3EventName'
+          description: ' The name of the S3 CloudWatch Event-based observation. '
         StatesExecutionArn:
-          allOf:
-            - $ref: '#/components/schemas/StatesExecutionArn'
-            - description: ' The Amazon Resource Name (ARN) of the step function execution-based observation. '
+          $ref: '#/components/schemas/StatesExecutionArn'
+          description: ' The Amazon Resource Name (ARN) of the step function execution-based observation. '
         StatesArn:
-          allOf:
-            - $ref: '#/components/schemas/StatesArn'
-            - description: ' The Amazon Resource Name (ARN) of the step function-based observation. '
+          $ref: '#/components/schemas/StatesArn'
+          description: ' The Amazon Resource Name (ARN) of the step function-based observation. '
         StatesStatus:
-          allOf:
-            - $ref: '#/components/schemas/StatesStatus'
-            - description: ' The status of the step function-related observation. '
+          $ref: '#/components/schemas/StatesStatus'
+          description: ' The status of the step function-related observation. '
         StatesInput:
-          allOf:
-            - $ref: '#/components/schemas/StatesInput'
-            - description: ' The input to the step function-based observation. '
+          $ref: '#/components/schemas/StatesInput'
+          description: ' The input to the step function-based observation. '
         EbsEvent:
-          allOf:
-            - $ref: '#/components/schemas/EbsEvent'
-            - description: ' The type of EBS CloudWatch event, such as <code>createVolume</code>, <code>deleteVolume</code> or <code>attachVolume</code>. '
+          $ref: '#/components/schemas/EbsEvent'
+          description: ' The type of EBS CloudWatch event, such as <code>createVolume</code>, <code>deleteVolume</code> or <code>attachVolume</code>. '
         EbsResult:
-          allOf:
-            - $ref: '#/components/schemas/EbsResult'
-            - description: ' The result of an EBS CloudWatch event, such as <code>failed</code> or <code>succeeded</code>. '
+          $ref: '#/components/schemas/EbsResult'
+          description: ' The result of an EBS CloudWatch event, such as <code>failed</code> or <code>succeeded</code>. '
         EbsCause:
-          allOf:
-            - $ref: '#/components/schemas/EbsCause'
-            - description: ' The cause of an EBS CloudWatch event. '
+          $ref: '#/components/schemas/EbsCause'
+          description: ' The cause of an EBS CloudWatch event. '
         EbsRequestId:
-          allOf:
-            - $ref: '#/components/schemas/EbsRequestId'
-            - description: ' The request ID of an EBS CloudWatch event. '
+          $ref: '#/components/schemas/EbsRequestId'
+          description: ' The request ID of an EBS CloudWatch event. '
         XRayFaultPercent:
-          allOf:
-            - $ref: '#/components/schemas/XRayFaultPercent'
-            - description: ' The X-Ray request fault percentage for this node. '
+          $ref: '#/components/schemas/XRayFaultPercent'
+          description: ' The X-Ray request fault percentage for this node. '
         XRayThrottlePercent:
-          allOf:
-            - $ref: '#/components/schemas/XRayThrottlePercent'
-            - description: ' The X-Ray request throttle percentage for this node. '
+          $ref: '#/components/schemas/XRayThrottlePercent'
+          description: ' The X-Ray request throttle percentage for this node. '
         XRayErrorPercent:
-          allOf:
-            - $ref: '#/components/schemas/XRayErrorPercent'
-            - description: ' The X-Ray request error percentage for this node. '
+          $ref: '#/components/schemas/XRayErrorPercent'
+          description: ' The X-Ray request error percentage for this node. '
         XRayRequestCount:
-          allOf:
-            - $ref: '#/components/schemas/XRayRequestCount'
-            - description: ' The X-Ray request count for this node. '
+          $ref: '#/components/schemas/XRayRequestCount'
+          description: ' The X-Ray request count for this node. '
         XRayRequestAverageLatency:
-          allOf:
-            - $ref: '#/components/schemas/XRayRequestAverageLatency'
-            - description: ' The X-Ray node request average latency for this node. '
+          $ref: '#/components/schemas/XRayRequestAverageLatency'
+          description: ' The X-Ray node request average latency for this node. '
         XRayNodeName:
-          allOf:
-            - $ref: '#/components/schemas/XRayNodeName'
-            - description: ' The name of the X-Ray node. '
+          $ref: '#/components/schemas/XRayNodeName'
+          description: ' The name of the X-Ray node. '
         XRayNodeType:
-          allOf:
-            - $ref: '#/components/schemas/XRayNodeType'
-            - description: ' The type of the X-Ray node. '
+          $ref: '#/components/schemas/XRayNodeType'
+          description: ' The type of the X-Ray node. '
       description: Describes an anomaly or error with the application.
     ProblemId:
       type: string
@@ -2829,53 +2649,42 @@ components:
       type: object
       properties:
         ObservationList:
-          allOf:
-            - $ref: '#/components/schemas/ObservationList'
-            - description: The list of observations related to the problem.
+          $ref: '#/components/schemas/ObservationList'
+          description: The list of observations related to the problem.
       description: Describes observations related to the problem.
     Problem:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ProblemId'
-            - description: The ID of the problem.
+          $ref: '#/components/schemas/ProblemId'
+          description: The ID of the problem.
         Title:
-          allOf:
-            - $ref: '#/components/schemas/Title'
-            - description: The name of the problem.
+          $ref: '#/components/schemas/Title'
+          description: The name of the problem.
         Insights:
-          allOf:
-            - $ref: '#/components/schemas/Insights'
-            - description: A detailed analysis of the problem using machine learning.
+          $ref: '#/components/schemas/Insights'
+          description: A detailed analysis of the problem using machine learning.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: The status of the problem.
+          $ref: '#/components/schemas/Status'
+          description: The status of the problem.
         AffectedResource:
-          allOf:
-            - $ref: '#/components/schemas/AffectedResource'
-            - description: The resource affected by the problem.
+          $ref: '#/components/schemas/AffectedResource'
+          description: The resource affected by the problem.
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/StartTime'
-            - description: 'The time when the problem started, in epoch seconds.'
+          $ref: '#/components/schemas/StartTime'
+          description: 'The time when the problem started, in epoch seconds.'
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/EndTime'
-            - description: 'The time when the problem ended, in epoch seconds.'
+          $ref: '#/components/schemas/EndTime'
+          description: 'The time when the problem ended, in epoch seconds.'
         SeverityLevel:
-          allOf:
-            - $ref: '#/components/schemas/SeverityLevel'
-            - description: A measure of the level of impact of the problem.
+          $ref: '#/components/schemas/SeverityLevel'
+          description: A measure of the level of impact of the problem.
         ResourceGroupName:
-          allOf:
-            - $ref: '#/components/schemas/ResourceGroupName'
-            - description: The name of the resource group affected by the problem.
+          $ref: '#/components/schemas/ResourceGroupName'
+          description: The name of the resource group affected by the problem.
         Feedback:
-          allOf:
-            - $ref: '#/components/schemas/Feedback'
-            - description: Feedback provided by the user about the problem.
+          $ref: '#/components/schemas/Feedback'
+          description: Feedback provided by the user about the problem.
       description: Describes a problem that is detected by correlating observations.
     WorkloadMetaData:
       type: object
@@ -3045,13 +2854,11 @@ components:
         - Value
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: One part of a key-value pair that defines a tag. The maximum length of a tag key is 128 characters. The minimum length is 1 character.
+          $ref: '#/components/schemas/TagKey'
+          description: One part of a key-value pair that defines a tag. The maximum length of a tag key is 128 characters. The minimum length is 1 character.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: 'The optional part of a key-value pair that defines a tag. The maximum length of a tag value is 256 characters. The minimum length is 0 characters. If you don''t want an application to have a specific tag value, don''t specify a value for this parameter.'
+          $ref: '#/components/schemas/TagValue'
+          description: 'The optional part of a key-value pair that defines a tag. The maximum length of a tag value is 256 characters. The minimum length is 0 characters. If you don''t want an application to have a specific tag value, don''t specify a value for this parameter.'
       description: '<p>An object that defines the tags associated with an application. A <i>tag</i> is a label that you optionally define and associate with an application. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria.</p> <p>Each tag consists of a required <i>tag key</i> and an associated <i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for a more specific tag value. A tag value acts as a descriptor within a tag key. A tag key can contain as many as 128 characters. A tag value can contain as many as 256 characters. The characters can be Unicode letters, digits, white space, or one of the following symbols: _ . : / = + -. The following additional restrictions apply to tags:</p> <ul> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>For each associated resource, each tag key must be unique and it can have only one value.</p> </li> <li> <p>The <code>aws:</code> prefix is reserved for use by AWS; you can’t use it in any tag keys or values that you define. In addition, you can''t edit or remove tag keys or values that use this prefix. </p> </li> </ul>'
     TagKeyList:
       type: array

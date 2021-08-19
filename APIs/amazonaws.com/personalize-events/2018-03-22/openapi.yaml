@@ -340,35 +340,28 @@ components:
         - sentAt
       properties:
         eventId:
-          allOf:
-            - $ref: '#/components/schemas/StringType'
-            - description: 'An ID associated with the event. If an event ID is not provided, Amazon Personalize generates a unique ID for the event. An event ID is not used as an input to the model. Amazon Personalize uses the event ID to distinquish unique events. Any subsequent events after the first with the same event ID are not used in model training.'
+          $ref: '#/components/schemas/StringType'
+          description: 'An ID associated with the event. If an event ID is not provided, Amazon Personalize generates a unique ID for the event. An event ID is not used as an input to the model. Amazon Personalize uses the event ID to distinquish unique events. Any subsequent events after the first with the same event ID are not used in model training.'
         eventType:
-          allOf:
-            - $ref: '#/components/schemas/StringType'
-            - description: 'The type of event, such as click or download. This property corresponds to the <code>EVENT_TYPE</code> field of your Interactions schema and depends on the types of events you are tracking.'
+          $ref: '#/components/schemas/StringType'
+          description: 'The type of event, such as click or download. This property corresponds to the <code>EVENT_TYPE</code> field of your Interactions schema and depends on the types of events you are tracking.'
         eventValue:
-          allOf:
-            - $ref: '#/components/schemas/FloatType'
-            - description: The event value that corresponds to the <code>EVENT_VALUE</code> field of the Interactions schema.
+          $ref: '#/components/schemas/FloatType'
+          description: The event value that corresponds to the <code>EVENT_VALUE</code> field of the Interactions schema.
         itemId:
-          allOf:
-            - $ref: '#/components/schemas/ItemId'
-            - description: The item ID key that corresponds to the <code>ITEM_ID</code> field of the Interactions schema.
+          $ref: '#/components/schemas/ItemId'
+          description: The item ID key that corresponds to the <code>ITEM_ID</code> field of the Interactions schema.
         properties:
           description: '<p>A string map of event-specific data that you might choose to record. For example, if a user rates a movie on your site, other than movie ID (<code>itemId</code>) and rating (<code>eventValue</code>) , you might also send the number of movie ratings made by the user.</p> <p>Each item in the map consists of a key-value pair. For example,</p> <p> <code>{"numberOfRatings": "12"}</code> </p> <p>The keys use camel case names that match the fields in the Interactions schema. In the above example, the <code>numberOfRatings</code> would match the ''NUMBER_OF_RATINGS'' field defined in the Interactions schema.</p>'
         sentAt:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: The timestamp (in Unix time) on the client side when the event occurred.
+          $ref: '#/components/schemas/Date'
+          description: The timestamp (in Unix time) on the client side when the event occurred.
         recommendationId:
-          allOf:
-            - $ref: '#/components/schemas/RecommendationId'
-            - description: The ID of the recommendation.
+          $ref: '#/components/schemas/RecommendationId'
+          description: The ID of the recommendation.
         impression:
-          allOf:
-            - $ref: '#/components/schemas/Impression'
-            - description: 'A list of item IDs that represents the sequence of items you have shown the user. For example, <code>["itemId1", "itemId2", "itemId3"]</code>.'
+          $ref: '#/components/schemas/Impression'
+          description: 'A list of item IDs that represents the sequence of items you have shown the user. For example, <code>["itemId1", "itemId2", "itemId3"]</code>.'
       description: Represents user interaction event information sent using the <code>PutEvents</code> API.
     InvalidInputException: {}
     Item:
@@ -377,9 +370,8 @@ components:
         - itemId
       properties:
         itemId:
-          allOf:
-            - $ref: '#/components/schemas/StringType'
-            - description: The ID associated with the item.
+          $ref: '#/components/schemas/StringType'
+          description: The ID associated with the item.
         properties:
           description: '<p>A string map of item-specific metadata. Each element in the map consists of a key-value pair. For example, <code>{"numberOfRatings": "12"}</code>.</p> <p>The keys use camel case names that match the fields in the schema for the Items dataset. In the previous example, the <code>numberOfRatings</code> matches the ''NUMBER_OF_RATINGS'' field defined in the Items schema. For categorical string data, to include multiple categories for a single item, separate each category with a pipe separator (<code>|</code>). For example, <code>\"Horror|Action\"</code>.</p>'
       description: 'Represents item metadata added to an Items dataset using the <code>PutItems</code> API. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html">Importing Items Incrementally</a>. '
@@ -391,9 +383,8 @@ components:
         - userId
       properties:
         userId:
-          allOf:
-            - $ref: '#/components/schemas/StringType'
-            - description: The ID associated with the user.
+          $ref: '#/components/schemas/StringType'
+          description: The ID associated with the user.
         properties:
           description: '<p>A string map of user-specific metadata. Each element in the map consists of a key-value pair. For example, <code>{"numberOfVideosWatched": "45"}</code>.</p> <p>The keys use camel case names that match the fields in the schema for the Users dataset. In the previous example, the <code>numberOfVideosWatched</code> matches the ''NUMBER_OF_VIDEOS_WATCHED'' field defined in the Users schema. For categorical string data, to include multiple categories for a single user, separate each category with a pipe separator (<code>|</code>). For example, <code>\"Member|Frequent shopper\"</code>.</p>'
       description: 'Represents user metadata added to a Users dataset using the <code>PutUsers</code> API. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html">Importing Users Incrementally</a>.'
@@ -458,21 +449,17 @@ components:
       title: PutEventsRequest
       properties:
         trackingId:
-          allOf:
-            - $ref: '#/components/schemas/StringType'
-            - description: 'The tracking ID for the event. The ID is generated by a call to the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html">CreateEventTracker</a> API.'
+          $ref: '#/components/schemas/StringType'
+          description: 'The tracking ID for the event. The ID is generated by a call to the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html">CreateEventTracker</a> API.'
         userId:
-          allOf:
-            - $ref: '#/components/schemas/UserId'
-            - description: The user associated with the event.
+          $ref: '#/components/schemas/UserId'
+          description: The user associated with the event.
         sessionId:
-          allOf:
-            - $ref: '#/components/schemas/StringType'
-            - description: 'The session ID associated with the user''s visit. Your application generates the sessionId when a user first visits your website or uses your application. Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html">Recording Events</a>.'
+          $ref: '#/components/schemas/StringType'
+          description: 'The session ID associated with the user''s visit. Your application generates the sessionId when a user first visits your website or uses your application. Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html">Recording Events</a>.'
         eventList:
-          allOf:
-            - $ref: '#/components/schemas/EventList'
-            - description: A list of event data from the session.
+          $ref: '#/components/schemas/EventList'
+          description: A list of event data from the session.
     PutItemsRequest:
       type: object
       required:
@@ -481,13 +468,11 @@ components:
       title: PutItemsRequest
       properties:
         datasetArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the Items dataset you are adding the item or items to.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the Items dataset you are adding the item or items to.
         items:
-          allOf:
-            - $ref: '#/components/schemas/ItemList'
-            - description: A list of item data.
+          $ref: '#/components/schemas/ItemList'
+          description: A list of item data.
     UserList:
       type: array
       items:
@@ -502,13 +487,11 @@ components:
       title: PutUsersRequest
       properties:
         datasetArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the Users dataset you are adding the user or users to.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the Users dataset you are adding the user or users to.
         users:
-          allOf:
-            - $ref: '#/components/schemas/UserList'
-            - description: A list of user data.
+          $ref: '#/components/schemas/UserList'
+          description: A list of user data.
     UserProperties:
       type: string
       minLength: 1

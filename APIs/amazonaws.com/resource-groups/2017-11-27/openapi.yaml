@@ -181,13 +181,11 @@ paths:
                   type: object
                   properties:
                     Type:
-                      allOf:
-                        - $ref: '#/components/schemas/QueryType'
-                        - description: '<p>The type of the query. You can use the following values:</p> <ul> <li> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i>Specifies that the <code>Query</code> contains an ARN for a CloudFormation stack.</p> </li> <li> <p> <i> <code>TAG_FILTERS_1_0:</code> </i>Specifies that the <code>Query</code> parameter contains a JSON string that represents a collection of simple tag filters for resource types and tags. The JSON string uses a syntax similar to the <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> </code> operation, but uses only the <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters"> ResourceTypeFilters</a> </code> and <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters">TagFilters</a> </code> fields. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each:</p> <p> <code>[{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]</code> </p> <p>The results of this query could include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Stage":"Deploy"}</code>, and <code>{"Version":"2"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: <code>{"Stage":"Test"}</code>, and <code>{"Version":"1"}</code> </p> </li> </ul> <p>The query would not include the following items in the results, however. </p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Stage":"Deploy"}</code>.</p> <p>The instance does not have <b>all</b> of the tag keys specified in the filter, so it is excluded from the results.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Stage":"Archived"}</code> and <code>{"Version":"4"}</code> </p> <p>The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter.</p> </li> </ul> </li> </ul>'
+                      $ref: '#/components/schemas/QueryType'
+                      description: '<p>The type of the query. You can use the following values:</p> <ul> <li> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i>Specifies that the <code>Query</code> contains an ARN for a CloudFormation stack.</p> </li> <li> <p> <i> <code>TAG_FILTERS_1_0:</code> </i>Specifies that the <code>Query</code> parameter contains a JSON string that represents a collection of simple tag filters for resource types and tags. The JSON string uses a syntax similar to the <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> </code> operation, but uses only the <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters"> ResourceTypeFilters</a> </code> and <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters">TagFilters</a> </code> fields. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each:</p> <p> <code>[{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]</code> </p> <p>The results of this query could include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Stage":"Deploy"}</code>, and <code>{"Version":"2"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: <code>{"Stage":"Test"}</code>, and <code>{"Version":"1"}</code> </p> </li> </ul> <p>The query would not include the following items in the results, however. </p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Stage":"Deploy"}</code>.</p> <p>The instance does not have <b>all</b> of the tag keys specified in the filter, so it is excluded from the results.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Stage":"Archived"}</code> and <code>{"Version":"4"}</code> </p> <p>The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter.</p> </li> </ul> </li> </ul>'
                     Query:
-                      allOf:
-                        - $ref: '#/components/schemas/Query'
-                        - description: The query that defines a group or a search.
+                      $ref: '#/components/schemas/Query'
+                      description: The query that defines a group or a search.
                 Tags:
                   description: The tags to add to the group. A tag is key-value pair string.
                   type: object
@@ -1134,13 +1132,11 @@ paths:
                   type: object
                   properties:
                     Type:
-                      allOf:
-                        - $ref: '#/components/schemas/QueryType'
-                        - description: '<p>The type of the query. You can use the following values:</p> <ul> <li> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i>Specifies that the <code>Query</code> contains an ARN for a CloudFormation stack.</p> </li> <li> <p> <i> <code>TAG_FILTERS_1_0:</code> </i>Specifies that the <code>Query</code> parameter contains a JSON string that represents a collection of simple tag filters for resource types and tags. The JSON string uses a syntax similar to the <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> </code> operation, but uses only the <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters"> ResourceTypeFilters</a> </code> and <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters">TagFilters</a> </code> fields. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each:</p> <p> <code>[{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]</code> </p> <p>The results of this query could include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Stage":"Deploy"}</code>, and <code>{"Version":"2"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: <code>{"Stage":"Test"}</code>, and <code>{"Version":"1"}</code> </p> </li> </ul> <p>The query would not include the following items in the results, however. </p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Stage":"Deploy"}</code>.</p> <p>The instance does not have <b>all</b> of the tag keys specified in the filter, so it is excluded from the results.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Stage":"Archived"}</code> and <code>{"Version":"4"}</code> </p> <p>The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter.</p> </li> </ul> </li> </ul>'
+                      $ref: '#/components/schemas/QueryType'
+                      description: '<p>The type of the query. You can use the following values:</p> <ul> <li> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i>Specifies that the <code>Query</code> contains an ARN for a CloudFormation stack.</p> </li> <li> <p> <i> <code>TAG_FILTERS_1_0:</code> </i>Specifies that the <code>Query</code> parameter contains a JSON string that represents a collection of simple tag filters for resource types and tags. The JSON string uses a syntax similar to the <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> </code> operation, but uses only the <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters"> ResourceTypeFilters</a> </code> and <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters">TagFilters</a> </code> fields. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each:</p> <p> <code>[{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]</code> </p> <p>The results of this query could include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Stage":"Deploy"}</code>, and <code>{"Version":"2"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: <code>{"Stage":"Test"}</code>, and <code>{"Version":"1"}</code> </p> </li> </ul> <p>The query would not include the following items in the results, however. </p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Stage":"Deploy"}</code>.</p> <p>The instance does not have <b>all</b> of the tag keys specified in the filter, so it is excluded from the results.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Stage":"Archived"}</code> and <code>{"Version":"4"}</code> </p> <p>The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter.</p> </li> </ul> </li> </ul>'
                     Query:
-                      allOf:
-                        - $ref: '#/components/schemas/Query'
-                        - description: The query that defines a group or a search.
+                      $ref: '#/components/schemas/Query'
+                      description: The query that defines a group or a search.
                 MaxResults:
                   description: 'The total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
                   type: integer
@@ -1393,13 +1389,11 @@ paths:
                   type: object
                   properties:
                     Type:
-                      allOf:
-                        - $ref: '#/components/schemas/QueryType'
-                        - description: '<p>The type of the query. You can use the following values:</p> <ul> <li> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i>Specifies that the <code>Query</code> contains an ARN for a CloudFormation stack.</p> </li> <li> <p> <i> <code>TAG_FILTERS_1_0:</code> </i>Specifies that the <code>Query</code> parameter contains a JSON string that represents a collection of simple tag filters for resource types and tags. The JSON string uses a syntax similar to the <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> </code> operation, but uses only the <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters"> ResourceTypeFilters</a> </code> and <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters">TagFilters</a> </code> fields. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each:</p> <p> <code>[{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]</code> </p> <p>The results of this query could include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Stage":"Deploy"}</code>, and <code>{"Version":"2"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: <code>{"Stage":"Test"}</code>, and <code>{"Version":"1"}</code> </p> </li> </ul> <p>The query would not include the following items in the results, however. </p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Stage":"Deploy"}</code>.</p> <p>The instance does not have <b>all</b> of the tag keys specified in the filter, so it is excluded from the results.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Stage":"Archived"}</code> and <code>{"Version":"4"}</code> </p> <p>The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter.</p> </li> </ul> </li> </ul>'
+                      $ref: '#/components/schemas/QueryType'
+                      description: '<p>The type of the query. You can use the following values:</p> <ul> <li> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i>Specifies that the <code>Query</code> contains an ARN for a CloudFormation stack.</p> </li> <li> <p> <i> <code>TAG_FILTERS_1_0:</code> </i>Specifies that the <code>Query</code> parameter contains a JSON string that represents a collection of simple tag filters for resource types and tags. The JSON string uses a syntax similar to the <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> </code> operation, but uses only the <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters"> ResourceTypeFilters</a> </code> and <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters">TagFilters</a> </code> fields. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each:</p> <p> <code>[{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]</code> </p> <p>The results of this query could include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Stage":"Deploy"}</code>, and <code>{"Version":"2"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: <code>{"Stage":"Test"}</code>, and <code>{"Version":"1"}</code> </p> </li> </ul> <p>The query would not include the following items in the results, however. </p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Stage":"Deploy"}</code>.</p> <p>The instance does not have <b>all</b> of the tag keys specified in the filter, so it is excluded from the results.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Stage":"Archived"}</code> and <code>{"Version":"4"}</code> </p> <p>The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter.</p> </li> </ul> </li> </ul>'
                     Query:
-                      allOf:
-                        - $ref: '#/components/schemas/Query'
-                        - description: The query that defines a group or a search.
+                      $ref: '#/components/schemas/Query'
+                      description: The query that defines a group or a search.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1464,21 +1458,17 @@ components:
       type: object
       properties:
         Group:
-          allOf:
-            - $ref: '#/components/schemas/Group'
-            - description: The description of the resource group.
+          $ref: '#/components/schemas/Group'
+          description: The description of the resource group.
         ResourceQuery:
-          allOf:
-            - $ref: '#/components/schemas/ResourceQuery'
-            - description: 'The resource query associated with the group. For more information about resource queries, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag">Create a tag-based group in Resource Groups</a>. '
+          $ref: '#/components/schemas/ResourceQuery'
+          description: 'The resource query associated with the group. For more information about resource queries, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag">Create a tag-based group in Resource Groups</a>. '
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags associated with the group.
+          $ref: '#/components/schemas/Tags'
+          description: The tags associated with the group.
         GroupConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/GroupConfiguration'
-            - description: 'The service configuration associated with the resource group. For details about the syntax of a service configuration, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.'
+          $ref: '#/components/schemas/GroupConfiguration'
+          description: 'The service configuration associated with the resource group. For details about the syntax of a service configuration, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.'
     QueryType:
       type: string
       enum:
@@ -1502,13 +1492,11 @@ components:
         - Type
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/GroupConfigurationType'
-            - description: 'Specifies the type of group configuration item. Each item must have a unique value for <code>type</code>. For the list of types that you can specify for a configuration item, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types">Supported resource types and parameters</a>.'
+          $ref: '#/components/schemas/GroupConfigurationType'
+          description: 'Specifies the type of group configuration item. Each item must have a unique value for <code>type</code>. For the list of types that you can specify for a configuration item, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types">Supported resource types and parameters</a>.'
         Parameters:
-          allOf:
-            - $ref: '#/components/schemas/GroupParameterList'
-            - description: 'A collection of parameters for this group configuration item. For the list of parameters that you can use with each configuration item type, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types">Supported resource types and parameters</a>.'
+          $ref: '#/components/schemas/GroupParameterList'
+          description: 'A collection of parameters for this group configuration item. For the list of parameters that you can use with each configuration item type, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types">Supported resource types and parameters</a>.'
       description: 'An item in a group configuration. A group service configuration can have one or more items. For details about group service configuration syntax, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.'
     BadRequestException: {}
     ForbiddenException: {}
@@ -1519,57 +1507,48 @@ components:
       type: object
       properties:
         Group:
-          allOf:
-            - $ref: '#/components/schemas/Group'
-            - description: A full description of the deleted resource group.
+          $ref: '#/components/schemas/Group'
+          description: A full description of the deleted resource group.
     NotFoundException: {}
     GetGroupOutput:
       type: object
       properties:
         Group:
-          allOf:
-            - $ref: '#/components/schemas/Group'
-            - description: A full description of the resource group.
+          $ref: '#/components/schemas/Group'
+          description: A full description of the resource group.
     GetGroupConfigurationOutput:
       type: object
       properties:
         GroupConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/GroupConfiguration'
-            - description: 'The service configuration associated with the specified group. For details about the service configuration syntax, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.'
+          $ref: '#/components/schemas/GroupConfiguration'
+          description: 'The service configuration associated with the specified group. For details about the service configuration syntax, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.'
     GetGroupQueryOutput:
       type: object
       properties:
         GroupQuery:
-          allOf:
-            - $ref: '#/components/schemas/GroupQuery'
-            - description: 'The resource query associated with the specified group. For more information about resource queries, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag">Create a tag-based group in Resource Groups</a>.'
+          $ref: '#/components/schemas/GroupQuery'
+          description: 'The resource query associated with the specified group. For more information about resource queries, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag">Create a tag-based group in Resource Groups</a>.'
     GetTagsOutput:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/GroupArn'
-            - description: The ARN of the tagged resource group.
+          $ref: '#/components/schemas/GroupArn'
+          description: The ARN of the tagged resource group.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags associated with the specified resource group.
+          $ref: '#/components/schemas/Tags'
+          description: The tags associated with the specified resource group.
     GroupResourcesOutput:
       type: object
       properties:
         Succeeded:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArnList'
-            - description: A list of ARNs of resources that were successfully added to the group by this operation.
+          $ref: '#/components/schemas/ResourceArnList'
+          description: A list of ARNs of resources that were successfully added to the group by this operation.
         Failed:
-          allOf:
-            - $ref: '#/components/schemas/FailedResourceList'
-            - description: A list of ARNs of any resources that failed to be added to the group by this operation.
+          $ref: '#/components/schemas/FailedResourceList'
+          description: A list of ARNs of any resources that failed to be added to the group by this operation.
         Pending:
-          allOf:
-            - $ref: '#/components/schemas/PendingResourceList'
-            - description: 'A list of ARNs of any resources that are still in the process of being added to the group by this operation. These pending additions continue asynchronously. You can check the status of pending additions by using the <code> <a>ListGroupResources</a> </code> operation, and checking the <code>Resources</code> array in the response and the <code>Status</code> field of each object in that array. '
+          $ref: '#/components/schemas/PendingResourceList'
+          description: 'A list of ARNs of any resources that are still in the process of being added to the group by this operation. These pending additions continue asynchronously. You can check the status of pending additions by using the <code> <a>ListGroupResources</a> </code> operation, and checking the <code>Resources</code> array in the response and the <code>Status</code> field of each object in that array. '
     ResourceArn:
       type: string
       pattern: 'arn:aws(-[a-z]+)*:[a-z0-9\-]*:([a-z]{2}(-[a-z]+)+-\d{1})?:([0-9]{12})?:.+'
@@ -1577,22 +1556,19 @@ components:
       type: object
       properties:
         Resources:
-          allOf:
-            - $ref: '#/components/schemas/ListGroupResourcesItemList'
-            - description: 'An array of resources from which you can determine each resource''s identity, type, and group membership status.'
+          $ref: '#/components/schemas/ListGroupResourcesItemList'
+          description: 'An array of resources from which you can determine each resource''s identity, type, and group membership status.'
         ResourceIdentifiers:
           allOf:
             - $ref: '#/components/schemas/ResourceIdentifierList'
             - deprecated: true
               description: '<important> <p> <b> <i>Deprecated - don''t use this parameter. Use the <code>Resources</code> response field instead.</i> </b> </p> </important>This field is deprecated, use Resources instead.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
         QueryErrors:
-          allOf:
-            - $ref: '#/components/schemas/QueryErrorList'
-            - description: A list of <code>QueryError</code> objects. Each error is an object that contains <code>ErrorCode</code> and <code>Message</code> structures. Possible values for <code>ErrorCode</code> are <code>CLOUDFORMATION_STACK_INACTIVE</code> and <code>CLOUDFORMATION_STACK_NOT_EXISTING</code>.
+          $ref: '#/components/schemas/QueryErrorList'
+          description: A list of <code>QueryError</code> objects. Each error is an object that contains <code>ErrorCode</code> and <code>Message</code> structures. Possible values for <code>ErrorCode</code> are <code>CLOUDFORMATION_STACK_INACTIVE</code> and <code>CLOUDFORMATION_STACK_NOT_EXISTING</code>.
     ResourceFilter:
       type: object
       required:
@@ -1600,31 +1576,27 @@ components:
         - Values
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceFilterName'
-            - description: The name of the filter. Filter names are case-sensitive.
+          $ref: '#/components/schemas/ResourceFilterName'
+          description: The name of the filter. Filter names are case-sensitive.
         Values:
-          allOf:
-            - $ref: '#/components/schemas/ResourceFilterValues'
-            - description: 'One or more filter values. Allowed filter values vary by resource filter name, and are case-sensitive.'
+          $ref: '#/components/schemas/ResourceFilterValues'
+          description: 'One or more filter values. Allowed filter values vary by resource filter name, and are case-sensitive.'
       description: A filter name and value pair that is used to obtain more specific results from a list of resources.
     UnauthorizedException: {}
     ListGroupsOutput:
       type: object
       properties:
         GroupIdentifiers:
-          allOf:
-            - $ref: '#/components/schemas/GroupIdentifierList'
-            - description: A list of <a>GroupIdentifier</a> objects. Each identifier is an object that contains both the <code>Name</code> and the <code>GroupArn</code>.
+          $ref: '#/components/schemas/GroupIdentifierList'
+          description: A list of <a>GroupIdentifier</a> objects. Each identifier is an object that contains both the <code>Name</code> and the <code>GroupArn</code>.
         Groups:
           allOf:
             - $ref: '#/components/schemas/GroupList'
             - deprecated: true
               description: '<important> <p> <i> <b>Deprecated - don''t use this field. Use the <code>GroupIdentifiers</code> response field instead.</b> </i> </p> </important>This field is deprecated, use GroupIdentifiers instead.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
     GroupFilter:
       type: object
       required:
@@ -1632,13 +1604,11 @@ components:
         - Values
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/GroupFilterName'
-            - description: The name of the filter. Filter names are case-sensitive.
+          $ref: '#/components/schemas/GroupFilterName'
+          description: The name of the filter. Filter names are case-sensitive.
         Values:
-          allOf:
-            - $ref: '#/components/schemas/GroupFilterValues'
-            - description: 'One or more filter values. Allowed filter values vary by group filter name, and are case-sensitive.'
+          $ref: '#/components/schemas/GroupFilterValues'
+          description: 'One or more filter values. Allowed filter values vary by group filter name, and are case-sensitive.'
       description: A filter collection that you can use to restrict the results from a <code>List</code> operation to only those you want to include.
     PutGroupConfigurationOutput:
       type: object
@@ -1647,54 +1617,44 @@ components:
       type: object
       properties:
         ResourceIdentifiers:
-          allOf:
-            - $ref: '#/components/schemas/ResourceIdentifierList'
-            - description: The ARNs and resource types of resources that are members of the group that you specified.
+          $ref: '#/components/schemas/ResourceIdentifierList'
+          description: The ARNs and resource types of resources that are members of the group that you specified.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
         QueryErrors:
-          allOf:
-            - $ref: '#/components/schemas/QueryErrorList'
-            - description: A list of <code>QueryError</code> objects. Each error is an object that contains <code>ErrorCode</code> and <code>Message</code> structures. Possible values for <code>ErrorCode</code> are <code>CLOUDFORMATION_STACK_INACTIVE</code> and <code>CLOUDFORMATION_STACK_NOT_EXISTING</code>.
+          $ref: '#/components/schemas/QueryErrorList'
+          description: A list of <code>QueryError</code> objects. Each error is an object that contains <code>ErrorCode</code> and <code>Message</code> structures. Possible values for <code>ErrorCode</code> are <code>CLOUDFORMATION_STACK_INACTIVE</code> and <code>CLOUDFORMATION_STACK_NOT_EXISTING</code>.
     TagOutput:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/GroupArn'
-            - description: The ARN of the tagged resource.
+          $ref: '#/components/schemas/GroupArn'
+          description: The ARN of the tagged resource.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags that have been added to the specified resource group.
+          $ref: '#/components/schemas/Tags'
+          description: The tags that have been added to the specified resource group.
     UngroupResourcesOutput:
       type: object
       properties:
         Succeeded:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArnList'
-            - description: A list of resources that were successfully removed from the group by this operation.
+          $ref: '#/components/schemas/ResourceArnList'
+          description: A list of resources that were successfully removed from the group by this operation.
         Failed:
-          allOf:
-            - $ref: '#/components/schemas/FailedResourceList'
-            - description: A list of any resources that failed to be removed from the group by this operation.
+          $ref: '#/components/schemas/FailedResourceList'
+          description: A list of any resources that failed to be removed from the group by this operation.
         Pending:
-          allOf:
-            - $ref: '#/components/schemas/PendingResourceList'
-            - description: 'A list of any resources that are still in the process of being removed from the group by this operation. These pending removals continue asynchronously. You can check the status of pending removals by using the <code> <a>ListGroupResources</a> </code> operation. After the resource is successfully removed, it no longer appears in the response.'
+          $ref: '#/components/schemas/PendingResourceList'
+          description: 'A list of any resources that are still in the process of being removed from the group by this operation. These pending removals continue asynchronously. You can check the status of pending removals by using the <code> <a>ListGroupResources</a> </code> operation. After the resource is successfully removed, it no longer appears in the response.'
     UntagOutput:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/GroupArn'
-            - description: The ARN of the resource group from which tags have been removed.
+          $ref: '#/components/schemas/GroupArn'
+          description: The ARN of the resource group from which tags have been removed.
         Keys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyList'
-            - description: The keys of the tags that were removed.
+          $ref: '#/components/schemas/TagKeyList'
+          description: The keys of the tags that were removed.
     TagKey:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -1704,16 +1664,14 @@ components:
       type: object
       properties:
         Group:
-          allOf:
-            - $ref: '#/components/schemas/Group'
-            - description: The update description of the resource group.
+          $ref: '#/components/schemas/Group'
+          description: The update description of the resource group.
     UpdateGroupQueryOutput:
       type: object
       properties:
         GroupQuery:
-          allOf:
-            - $ref: '#/components/schemas/GroupQuery'
-            - description: The updated resource query associated with the resource group after the update.
+          $ref: '#/components/schemas/GroupQuery'
+          description: The updated resource query associated with the resource group after the update.
     GroupName:
       type: string
       pattern: '[a-zA-Z0-9_\.-]+'
@@ -1730,13 +1688,11 @@ components:
         - Query
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/QueryType'
-            - description: '<p>The type of the query. You can use the following values:</p> <ul> <li> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i>Specifies that the <code>Query</code> contains an ARN for a CloudFormation stack.</p> </li> <li> <p> <i> <code>TAG_FILTERS_1_0:</code> </i>Specifies that the <code>Query</code> parameter contains a JSON string that represents a collection of simple tag filters for resource types and tags. The JSON string uses a syntax similar to the <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> </code> operation, but uses only the <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters"> ResourceTypeFilters</a> </code> and <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters">TagFilters</a> </code> fields. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each:</p> <p> <code>[{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]</code> </p> <p>The results of this query could include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Stage":"Deploy"}</code>, and <code>{"Version":"2"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: <code>{"Stage":"Test"}</code>, and <code>{"Version":"1"}</code> </p> </li> </ul> <p>The query would not include the following items in the results, however. </p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Stage":"Deploy"}</code>.</p> <p>The instance does not have <b>all</b> of the tag keys specified in the filter, so it is excluded from the results.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Stage":"Archived"}</code> and <code>{"Version":"4"}</code> </p> <p>The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter.</p> </li> </ul> </li> </ul>'
+          $ref: '#/components/schemas/QueryType'
+          description: '<p>The type of the query. You can use the following values:</p> <ul> <li> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i>Specifies that the <code>Query</code> contains an ARN for a CloudFormation stack.</p> </li> <li> <p> <i> <code>TAG_FILTERS_1_0:</code> </i>Specifies that the <code>Query</code> parameter contains a JSON string that represents a collection of simple tag filters for resource types and tags. The JSON string uses a syntax similar to the <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> </code> operation, but uses only the <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters"> ResourceTypeFilters</a> </code> and <code> <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters">TagFilters</a> </code> fields. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each:</p> <p> <code>[{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]</code> </p> <p>The results of this query could include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Stage":"Deploy"}</code>, and <code>{"Version":"2"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: <code>{"Stage":"Test"}</code>, and <code>{"Version":"1"}</code> </p> </li> </ul> <p>The query would not include the following items in the results, however. </p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Stage":"Deploy"}</code>.</p> <p>The instance does not have <b>all</b> of the tag keys specified in the filter, so it is excluded from the results.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Stage":"Archived"}</code> and <code>{"Version":"4"}</code> </p> <p>The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter.</p> </li> </ul> </li> </ul>'
         Query:
-          allOf:
-            - $ref: '#/components/schemas/Query'
-            - description: The query that defines a group or a search.
+          $ref: '#/components/schemas/Query'
+          description: The query that defines a group or a search.
       description: '<p>The query that is used to define a resource group or a search for resources. A query specifies both a query type and a query string as a JSON object. See the examples section for example JSON strings.</p> <p>The examples that follow are shown as standard JSON strings. If you include such a string as a parameter to the AWS CLI or an SDK API, you might need to ''escape'' the string into a single line. For example, see the <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-quoting-strings.html">Quoting strings</a> in the <i>AWS CLI User Guide</i>.</p> <p> <b>Example 1</b> </p> <p>The following generic example shows a resource query JSON string that includes only resources that meet the following criteria:</p> <ul> <li> <p>The resource type must be either <code>resource_type1</code> or <code>resource_type2</code>.</p> </li> <li> <p>The resource must have a tag <code>Key1</code> with a value of either <code>ValueA</code> or <code>ValueB</code>.</p> </li> <li> <p>The resource must have a tag <code>Key2</code> with a value of either <code>ValueC</code> or <code>ValueD</code>.</p> </li> </ul> <p> <code>{ "Type": "TAG_FILTERS_1_0", "Query": { "ResourceTypeFilters": [ "resource_type1", "resource_type2"], "TagFilters": [ { "Key": "Key1", "Values": ["ValueA","ValueB"] }, { "Key":"Key2", "Values":["ValueC","ValueD"] } ] } }</code> </p> <p>This has the equivalent "shortcut" syntax of the following:</p> <p> <code>{ "Type": "TAG_FILTERS_1_0", "Query": { "ResourceTypeFilters": [ "resource_type1", "resource_type2"], "TagFilters": [ { "Key1": ["ValueA","ValueB"] }, { "Key2": ["ValueC","ValueD"] } ] } }</code> </p> <p> <b>Example 2</b> </p> <p>The following example shows a resource query JSON string that includes only Amazon EC2 instances that are tagged <code>Stage</code> with a value of <code>Test</code>.</p> <p> <code>{ "Type": "TAG_FILTERS_1_0", "Query": "{ "ResourceTypeFilters": "AWS::EC2::Instance", "TagFilters": { "Stage": "Test" } } }</code> </p> <p> <b>Example 3</b> </p> <p>The following example shows a resource query JSON string that includes resource of any supported type as long as it is tagged <code>Stage</code> with a value of <code>Prod</code>.</p> <p> <code>{ "Type": "TAG_FILTERS_1_0", "Query": { "ResourceTypeFilters": "AWS::AllSupported", "TagFilters": { "Stage": "Prod" } } }</code> </p> <p> <b>Example 4</b> </p> <p>The following example shows a resource query JSON string that includes only Amazon EC2 instances and Amazon S3 buckets that are part of the specified AWS CloudFormation stack.</p> <p> <code>{ "Type": "CLOUDFORMATION_STACK_1_0", "Query": { "ResourceTypeFilters": [ "AWS::EC2::Instance", "AWS::S3::Bucket" ], "StackIdentifier": "arn:aws:cloudformation:us-west-2:123456789012:stack/AWStestuseraccount/fb0d5000-aba8-00e8-aa9e-50d5cEXAMPLE" } }</code> </p>'
     Tags:
       type: object
@@ -1754,25 +1710,20 @@ components:
       title: CreateGroupInput
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/GroupName'
-            - description: 'The name of the group, which is the identifier of the group in other operations. You can''t change the name of a resource group after you create it. A resource group name can consist of letters, numbers, hyphens, periods, and underscores. The name cannot start with <code>AWS</code> or <code>aws</code>; these are reserved. A resource group name must be unique within each AWS Region in your AWS account.'
+          $ref: '#/components/schemas/GroupName'
+          description: 'The name of the group, which is the identifier of the group in other operations. You can''t change the name of a resource group after you create it. A resource group name can consist of letters, numbers, hyphens, periods, and underscores. The name cannot start with <code>AWS</code> or <code>aws</code>; these are reserved. A resource group name must be unique within each AWS Region in your AWS account.'
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: 'The description of the resource group. Descriptions can consist of letters, numbers, hyphens, underscores, periods, and spaces.'
+          $ref: '#/components/schemas/Description'
+          description: 'The description of the resource group. Descriptions can consist of letters, numbers, hyphens, underscores, periods, and spaces.'
         ResourceQuery:
-          allOf:
-            - $ref: '#/components/schemas/ResourceQuery'
-            - description: '<p>The resource query that determines which AWS resources are members of this group. For more information about resource queries, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag">Create a tag-based group in Resource Groups</a>. </p> <note> <p>A resource group can contain either a <code>ResourceQuery</code> or a <code>Configuration</code>, but not both.</p> </note>'
+          $ref: '#/components/schemas/ResourceQuery'
+          description: '<p>The resource query that determines which AWS resources are members of this group. For more information about resource queries, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag">Create a tag-based group in Resource Groups</a>. </p> <note> <p>A resource group can contain either a <code>ResourceQuery</code> or a <code>Configuration</code>, but not both.</p> </note>'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags to add to the group. A tag is key-value pair string.
+          $ref: '#/components/schemas/Tags'
+          description: The tags to add to the group. A tag is key-value pair string.
         Configuration:
-          allOf:
-            - $ref: '#/components/schemas/GroupConfigurationList'
-            - description: '<p>A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of <a>GroupConfigurationItem</a> elements. For details about the syntax of service configurations, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.</p> <note> <p>A resource group can contain either a <code>Configuration</code> or a <code>ResourceQuery</code>, but not both.</p> </note>'
+          $ref: '#/components/schemas/GroupConfigurationList'
+          description: '<p>A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of <a>GroupConfigurationItem</a> elements. For details about the syntax of service configurations, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.</p> <note> <p>A resource group can contain either a <code>Configuration</code> or a <code>ResourceQuery</code>, but not both.</p> </note>'
     Group:
       type: object
       required:
@@ -1780,37 +1731,30 @@ components:
         - Name
       properties:
         GroupArn:
-          allOf:
-            - $ref: '#/components/schemas/GroupArn'
-            - description: The ARN of the resource group.
+          $ref: '#/components/schemas/GroupArn'
+          description: The ARN of the resource group.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/GroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/GroupName'
+          description: The name of the resource group.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the resource group.
+          $ref: '#/components/schemas/Description'
+          description: The description of the resource group.
       description: '<p>A resource group that contains AWS resources. You can assign resources to the group by associating either of the following elements with the group:</p> <ul> <li> <p> <a>ResourceQuery</a> - Use a resource query to specify a set of tag keys and values. All resources in the same AWS Region and AWS account that have those keys with the same values are included in the group. You can add a resource query when you create the group, or later by using the <a>PutGroupConfiguration</a> operation.</p> </li> <li> <p> <a>GroupConfiguration</a> - Use a service configuration to associate the group with an AWS service. The configuration specifies which resource types can be included in the group.</p> </li> </ul>'
     GroupConfiguration:
       type: object
       properties:
         Configuration:
-          allOf:
-            - $ref: '#/components/schemas/GroupConfigurationList'
-            - description: The configuration currently associated with the group and in effect.
+          $ref: '#/components/schemas/GroupConfigurationList'
+          description: The configuration currently associated with the group and in effect.
         ProposedConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/GroupConfigurationList'
-            - description: 'If present, the new configuration that is in the process of being applied to the group.'
+          $ref: '#/components/schemas/GroupConfigurationList'
+          description: 'If present, the new configuration that is in the process of being applied to the group.'
         Status:
-          allOf:
-            - $ref: '#/components/schemas/GroupConfigurationStatus'
-            - description: The current status of an attempt to update the group configuration.
+          $ref: '#/components/schemas/GroupConfigurationStatus'
+          description: The current status of an attempt to update the group configuration.
         FailureReason:
-          allOf:
-            - $ref: '#/components/schemas/GroupConfigurationFailureReason'
-            - description: 'If present, the reason why a request to update the group configuration failed.'
+          $ref: '#/components/schemas/GroupConfigurationFailureReason'
+          description: 'If present, the reason why a request to update the group configuration failed.'
       description: 'A service configuration associated with a resource group. The configuration options are determined by the AWS service that defines the <code>Type</code>, and specifies which resources can be included in the group. You can add a service configuration when you create the group by using <a>CreateGroup</a>, or later by using the <a>PutGroupConfiguration</a> operation. For details about group service configuration syntax, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.'
     GroupString:
       type: string
@@ -1827,9 +1771,8 @@ components:
             - deprecated: true
               description: 'Deprecated - don''t use this parameter. Use <code>Group</code> instead.This field is deprecated, use Group instead.'
         Group:
-          allOf:
-            - $ref: '#/components/schemas/GroupString'
-            - description: The name or the ARN of the resource group to delete.
+          $ref: '#/components/schemas/GroupString'
+          description: The name or the ARN of the resource group to delete.
     ErrorCode:
       type: string
       minLength: 1
@@ -1842,17 +1785,14 @@ components:
       type: object
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArn'
-            - description: The ARN of the resource that failed to be added or removed.
+          $ref: '#/components/schemas/ResourceArn'
+          description: The ARN of the resource that failed to be added or removed.
         ErrorMessage:
-          allOf:
-            - $ref: '#/components/schemas/ErrorMessage'
-            - description: The error message text associated with the failure.
+          $ref: '#/components/schemas/ErrorMessage'
+          description: The error message text associated with the failure.
         ErrorCode:
-          allOf:
-            - $ref: '#/components/schemas/ErrorCode'
-            - description: The error code associated with the failure.
+          $ref: '#/components/schemas/ErrorCode'
+          description: The error code associated with the failure.
       description: A resource that failed to be added to or removed from a group.
     FailedResourceList:
       type: array
@@ -1863,9 +1803,8 @@ components:
       title: GetGroupConfigurationInput
       properties:
         Group:
-          allOf:
-            - $ref: '#/components/schemas/GroupString'
-            - description: The name or the ARN of the resource group.
+          $ref: '#/components/schemas/GroupString'
+          description: The name or the ARN of the resource group.
     GetGroupInput:
       type: object
       title: GetGroupInput
@@ -1876,9 +1815,8 @@ components:
             - deprecated: true
               description: 'Deprecated - don''t use this parameter. Use <code>Group</code> instead.This field is deprecated, use Group instead.'
         Group:
-          allOf:
-            - $ref: '#/components/schemas/GroupString'
-            - description: The name or the ARN of the resource group to retrieve.
+          $ref: '#/components/schemas/GroupString'
+          description: The name or the ARN of the resource group to retrieve.
     GetGroupQueryInput:
       type: object
       title: GetGroupQueryInput
@@ -1889,9 +1827,8 @@ components:
             - deprecated: true
               description: 'Don''t use this parameter. Use <code>Group</code> instead.This field is deprecated, use Group instead.'
         Group:
-          allOf:
-            - $ref: '#/components/schemas/GroupString'
-            - description: The name or the ARN of the resource group to query.
+          $ref: '#/components/schemas/GroupString'
+          description: The name or the ARN of the resource group to query.
     GroupQuery:
       type: object
       required:
@@ -1899,13 +1836,11 @@ components:
         - ResourceQuery
       properties:
         GroupName:
-          allOf:
-            - $ref: '#/components/schemas/GroupName'
-            - description: The name of the resource group that is associated with the specified resource query.
+          $ref: '#/components/schemas/GroupName'
+          description: The name of the resource group that is associated with the specified resource query.
         ResourceQuery:
-          allOf:
-            - $ref: '#/components/schemas/ResourceQuery'
-            - description: The resource query that determines which AWS resources are members of the associated resource group.
+          $ref: '#/components/schemas/ResourceQuery'
+          description: The resource query that determines which AWS resources are members of the associated resource group.
       description: A mapping of a query attached to a resource group that determines the AWS resources that are members of the group.
     GroupArn:
       type: string
@@ -1947,13 +1882,11 @@ components:
         - Name
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/GroupConfigurationParameterName'
-            - description: 'The name of the group configuration parameter. For the list of parameters that you can use with each configuration item type, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types">Supported resource types and parameters</a>.'
+          $ref: '#/components/schemas/GroupConfigurationParameterName'
+          description: 'The name of the group configuration parameter. For the list of parameters that you can use with each configuration item type, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types">Supported resource types and parameters</a>.'
         Values:
-          allOf:
-            - $ref: '#/components/schemas/GroupConfigurationParameterValueList'
-            - description: 'The value or values to be used for the specified parameter. For the list of values you can use with each parameter, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types">Supported resource types and parameters</a>.'
+          $ref: '#/components/schemas/GroupConfigurationParameterValueList'
+          description: 'The value or values to be used for the specified parameter. For the list of values you can use with each parameter, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types">Supported resource types and parameters</a>.'
       description: 'A parameter for a group configuration item. For details about group service configuration syntax, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.'
     GroupConfigurationParameterValue:
       type: string
@@ -1984,13 +1917,11 @@ components:
       type: object
       properties:
         GroupName:
-          allOf:
-            - $ref: '#/components/schemas/GroupName'
-            - description: The name of the resource group.
+          $ref: '#/components/schemas/GroupName'
+          description: The name of the resource group.
         GroupArn:
-          allOf:
-            - $ref: '#/components/schemas/GroupArn'
-            - description: The ARN of the resource group.
+          $ref: '#/components/schemas/GroupArn'
+          description: The ARN of the resource group.
       description: The unique identifiers for a resource group.
     GroupIdentifierList:
       type: array
@@ -2014,13 +1945,11 @@ components:
       title: GroupResourcesInput
       properties:
         Group:
-          allOf:
-            - $ref: '#/components/schemas/GroupString'
-            - description: The name or the ARN of the resource group to add resources to.
+          $ref: '#/components/schemas/GroupString'
+          description: The name or the ARN of the resource group to add resources to.
         ResourceArns:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArnList'
-            - description: 'The list of ARNs for resources to be added to the group. '
+          $ref: '#/components/schemas/ResourceArnList'
+          description: 'The list of ARNs for resources to be added to the group. '
     PendingResourceList:
       type: array
       items:
@@ -2048,40 +1977,33 @@ components:
             - deprecated: true
               description: '<important> <p> <i> <b>Deprecated - don''t use this parameter. Use the <code>Group</code> request field instead.</b> </i> </p> </important>This field is deprecated, use Group instead.'
         Group:
-          allOf:
-            - $ref: '#/components/schemas/GroupString'
-            - description: The name or the ARN of the resource group
+          $ref: '#/components/schemas/GroupString'
+          description: The name or the ARN of the resource group
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/ResourceFilterList'
-            - description: '<p>Filters, formatted as <a>ResourceFilter</a> objects, that you want to apply to a <code>ListGroupResources</code> operation. Filters the results to include only those of the specified resource types.</p> <ul> <li> <p> <code>resource-type</code> - Filter resources by their type. Specify up to five resource types in the format <code>AWS::ServiceCode::ResourceType</code>. For example, <code>AWS::EC2::Instance</code>, or <code>AWS::S3::Bucket</code>. </p> </li> </ul> <p>When you specify a <code>resource-type</code> filter for <code>ListGroupResources</code>, AWS Resource Groups validates your filter resource types against the types that are defined in the query associated with the group. For example, if a group contains only S3 buckets because its query specifies only that resource type, but your <code>resource-type</code> filter includes EC2 instances, AWS Resource Groups does not filter for EC2 instances. In this case, a <code>ListGroupResources</code> request returns a <code>BadRequestException</code> error with a message similar to the following:</p> <p> <code>The resource types specified as filters in the request are not valid.</code> </p> <p>The error includes a list of resource types that failed the validation because they are not part of the query associated with the group. This validation doesn''t occur when the group query specifies <code>AWS::AllSupported</code>, because a group based on such a query can contain any of the allowed resource types for the query type (tag-based or AWS CloudFormation stack-based queries).</p>'
+          $ref: '#/components/schemas/ResourceFilterList'
+          description: '<p>Filters, formatted as <a>ResourceFilter</a> objects, that you want to apply to a <code>ListGroupResources</code> operation. Filters the results to include only those of the specified resource types.</p> <ul> <li> <p> <code>resource-type</code> - Filter resources by their type. Specify up to five resource types in the format <code>AWS::ServiceCode::ResourceType</code>. For example, <code>AWS::EC2::Instance</code>, or <code>AWS::S3::Bucket</code>. </p> </li> </ul> <p>When you specify a <code>resource-type</code> filter for <code>ListGroupResources</code>, AWS Resource Groups validates your filter resource types against the types that are defined in the query associated with the group. For example, if a group contains only S3 buckets because its query specifies only that resource type, but your <code>resource-type</code> filter includes EC2 instances, AWS Resource Groups does not filter for EC2 instances. In this case, a <code>ListGroupResources</code> request returns a <code>BadRequestException</code> error with a message similar to the following:</p> <p> <code>The resource types specified as filters in the request are not valid.</code> </p> <p>The error includes a list of resource types that failed the validation because they are not part of the query associated with the group. This validation doesn''t occur when the group query specifies <code>AWS::AllSupported</code>, because a group based on such a query can contain any of the allowed resource types for the query type (tag-based or AWS CloudFormation stack-based queries).</p>'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value provided by a previous call's <code>NextToken</code> response to indicate where the output should continue from.
+          $ref: '#/components/schemas/NextToken'
+          description: The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value provided by a previous call's <code>NextToken</code> response to indicate where the output should continue from.
     ResourceIdentifier:
       type: object
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArn'
-            - description: The ARN of a resource.
+          $ref: '#/components/schemas/ResourceArn'
+          description: The ARN of a resource.
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: 'The resource type of a resource, such as <code>AWS::EC2::Instance</code>.'
+          $ref: '#/components/schemas/ResourceType'
+          description: 'The resource type of a resource, such as <code>AWS::EC2::Instance</code>.'
       description: A structure that contains the ARN of a resource and its resource type.
     ResourceStatus:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceStatusValue'
-            - description: The current status.
+          $ref: '#/components/schemas/ResourceStatusValue'
+          description: The current status.
       description: 'A structure that identifies the current group membership status for a resource. Adding a resource to a resource group is performed asynchronously as a background task. A <code>PENDING</code> status indicates, for this resource, that the process isn''t completed yet.'
     ListGroupResourcesItem:
       type: object
@@ -2089,9 +2011,8 @@ components:
         Identifier:
           $ref: '#/components/schemas/ResourceIdentifier'
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ResourceStatus'
-            - description: '<p>A structure that contains the status of this resource''s membership in the group.</p> <note> <p>This field is present in the response only if the group is of type <code>AWS::EC2::HostManagement</code>.</p> </note>'
+          $ref: '#/components/schemas/ResourceStatus'
+          description: '<p>A structure that contains the status of this resource''s membership in the group.</p> <note> <p>This field is present in the response only if the group is of type <code>AWS::EC2::HostManagement</code>.</p> </note>'
       description: A structure returned by the <a>ListGroupResources</a> operation that contains identity and group membership status information for one of the resources in the group.
     ListGroupResourcesItemList:
       type: array
@@ -2110,29 +2031,25 @@ components:
       title: ListGroupsInput
       properties:
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/GroupFilterList'
-            - description: '<p>Filters, formatted as <a>GroupFilter</a> objects, that you want to apply to a <code>ListGroups</code> operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter the results to include only those of the specified resource types. Specify up to five resource types in the format <code>AWS::<i>ServiceCode</i>::<i>ResourceType</i> </code>. For example, <code>AWS::EC2::Instance</code>, or <code>AWS::S3::Bucket</code>.</p> </li> <li> <p> <code>configuration-type</code> - Filter the results to include only those groups that have the specified configuration types attached. The current supported values are:</p> <ul> <li> <p> <code>AWS:EC2::CapacityReservationPool</code> </p> </li> <li> <p> <code>AWS:EC2::HostManagement</code> </p> </li> </ul> </li> </ul>'
+          $ref: '#/components/schemas/GroupFilterList'
+          description: '<p>Filters, formatted as <a>GroupFilter</a> objects, that you want to apply to a <code>ListGroups</code> operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter the results to include only those of the specified resource types. Specify up to five resource types in the format <code>AWS::<i>ServiceCode</i>::<i>ResourceType</i> </code>. For example, <code>AWS::EC2::Instance</code>, or <code>AWS::S3::Bucket</code>.</p> </li> <li> <p> <code>configuration-type</code> - Filter the results to include only those groups that have the specified configuration types attached. The current supported values are:</p> <ul> <li> <p> <code>AWS:EC2::CapacityReservationPool</code> </p> </li> <li> <p> <code>AWS:EC2::HostManagement</code> </p> </li> </ul> </li> </ul>'
     PendingResource:
       type: object
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArn'
-            - description: The Amazon resource name (ARN) of the resource that's in a pending state.
+          $ref: '#/components/schemas/ResourceArn'
+          description: The Amazon resource name (ARN) of the resource that's in a pending state.
       description: A structure that identifies a resource that is currently pending addition to the group as a member. Adding a resource to a resource group happens asynchronously as a background task and this one isn't completed yet.
     PutGroupConfigurationInput:
       type: object
       title: PutGroupConfigurationInput
       properties:
         Group:
-          allOf:
-            - $ref: '#/components/schemas/GroupString'
-            - description: The name or ARN of the resource group with the configuration that you want to update.
+          $ref: '#/components/schemas/GroupString'
+          description: The name or ARN of the resource group with the configuration that you want to update.
         Configuration:
-          allOf:
-            - $ref: '#/components/schemas/GroupConfigurationList'
-            - description: '<p>The new configuration to associate with the specified group. A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of <a>GroupConfigurationItem</a> elements.</p> <p>For information about the syntax of a service configuration, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.</p> <note> <p>A resource group can contain either a <code>Configuration</code> or a <code>ResourceQuery</code>, but not both.</p> </note>'
+          $ref: '#/components/schemas/GroupConfigurationList'
+          description: '<p>The new configuration to associate with the specified group. A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of <a>GroupConfigurationItem</a> elements.</p> <p>For information about the syntax of a service configuration, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.</p> <note> <p>A resource group can contain either a <code>Configuration</code> or a <code>ResourceQuery</code>, but not both.</p> </note>'
     QueryErrorCode:
       type: string
       enum:
@@ -2144,13 +2061,11 @@ components:
       type: object
       properties:
         ErrorCode:
-          allOf:
-            - $ref: '#/components/schemas/QueryErrorCode'
-            - description: Possible values are <code>CLOUDFORMATION_STACK_INACTIVE</code> and <code>CLOUDFORMATION_STACK_NOT_EXISTING</code>.
+          $ref: '#/components/schemas/QueryErrorCode'
+          description: Possible values are <code>CLOUDFORMATION_STACK_INACTIVE</code> and <code>CLOUDFORMATION_STACK_NOT_EXISTING</code>.
         Message:
-          allOf:
-            - $ref: '#/components/schemas/QueryErrorMessage'
-            - description: 'A message that explains the <code>ErrorCode</code> value. Messages might state that the specified CloudFormation stack does not exist (or no longer exists). For <code>CLOUDFORMATION_STACK_INACTIVE</code>, the message typically states that the CloudFormation stack has a status that is not (or no longer) active, such as <code>CREATE_FAILED</code>.'
+          $ref: '#/components/schemas/QueryErrorMessage'
+          description: 'A message that explains the <code>ErrorCode</code> value. Messages might state that the specified CloudFormation stack does not exist (or no longer exists). For <code>CLOUDFORMATION_STACK_INACTIVE</code>, the message typically states that the CloudFormation stack has a status that is not (or no longer) active, such as <code>CREATE_FAILED</code>.'
       description: 'A two-part error structure that can occur in <code>ListGroupResources</code> or <code>SearchResources</code> operations on CloudFormation stack-based queries. The error occurs if the CloudFormation stack on which the query is based either does not exist, or has a status that renders the stack inactive. A <code>QueryError</code> occurrence does not necessarily mean that AWS Resource Groups could not complete the operation, but the resulting group might have no member resources.'
     ResourceFilterName:
       type: string
@@ -2181,17 +2096,14 @@ components:
       title: SearchResourcesInput
       properties:
         ResourceQuery:
-          allOf:
-            - $ref: '#/components/schemas/ResourceQuery'
-            - description: 'The search query, using the same formats that are supported for resource group definition. For more information, see <a>CreateGroup</a>.'
+          $ref: '#/components/schemas/ResourceQuery'
+          description: 'The search query, using the same formats that are supported for resource group definition. For more information, see <a>CreateGroup</a>.'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value provided by a previous call's <code>NextToken</code> response to indicate where the output should continue from.
+          $ref: '#/components/schemas/NextToken'
+          description: The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value provided by a previous call's <code>NextToken</code> response to indicate where the output should continue from.
     TagInput:
       type: object
       required:
@@ -2199,9 +2111,8 @@ components:
       title: TagInput
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags to add to the specified resource group. A tag is a string-to-string map of key-value pairs.
+          $ref: '#/components/schemas/Tags'
+          description: The tags to add to the specified resource group. A tag is a string-to-string map of key-value pairs.
     TagKeyList:
       type: array
       items:
@@ -2214,13 +2125,11 @@ components:
       title: UngroupResourcesInput
       properties:
         Group:
-          allOf:
-            - $ref: '#/components/schemas/GroupString'
-            - description: The name or the ARN of the resource group from which to remove the resources.
+          $ref: '#/components/schemas/GroupString'
+          description: The name or the ARN of the resource group from which to remove the resources.
         ResourceArns:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArnList'
-            - description: The ARNs of the resources to be removed from the group.
+          $ref: '#/components/schemas/ResourceArnList'
+          description: The ARNs of the resources to be removed from the group.
     UntagInput:
       type: object
       required:
@@ -2228,9 +2137,8 @@ components:
       title: UntagInput
       properties:
         Keys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyList'
-            - description: The keys of the tags to be removed.
+          $ref: '#/components/schemas/TagKeyList'
+          description: The keys of the tags to be removed.
     UpdateGroupInput:
       type: object
       title: UpdateGroupInput
@@ -2241,13 +2149,11 @@ components:
             - deprecated: true
               description: 'Don''t use this parameter. Use <code>Group</code> instead.This field is deprecated, use Group instead.'
         Group:
-          allOf:
-            - $ref: '#/components/schemas/GroupString'
-            - description: The name or the ARN of the resource group to modify.
+          $ref: '#/components/schemas/GroupString'
+          description: The name or the ARN of the resource group to modify.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: 'The new description that you want to update the resource group with. Descriptions can contain letters, numbers, hyphens, underscores, periods, and spaces.'
+          $ref: '#/components/schemas/Description'
+          description: 'The new description that you want to update the resource group with. Descriptions can contain letters, numbers, hyphens, underscores, periods, and spaces.'
     UpdateGroupQueryInput:
       type: object
       required:
@@ -2260,12 +2166,10 @@ components:
             - deprecated: true
               description: 'Don''t use this parameter. Use <code>Group</code> instead.This field is deprecated, use Group instead.'
         Group:
-          allOf:
-            - $ref: '#/components/schemas/GroupString'
-            - description: The name or the ARN of the resource group to query.
+          $ref: '#/components/schemas/GroupString'
+          description: The name or the ARN of the resource group to query.
         ResourceQuery:
-          allOf:
-            - $ref: '#/components/schemas/ResourceQuery'
-            - description: '<p>The resource query to determine which AWS resources are members of this resource group.</p> <note> <p>A resource group can contain either a <code>Configuration</code> or a <code>ResourceQuery</code>, but not both.</p> </note>'
+          $ref: '#/components/schemas/ResourceQuery'
+          description: '<p>The resource query to determine which AWS resources are members of this resource group.</p> <note> <p>A resource group can contain either a <code>Configuration</code> or a <code>ResourceQuery</code>, but not both.</p> </note>'
 security:
   - hmac: []

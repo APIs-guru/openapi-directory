@@ -288,33 +288,26 @@ paths:
                   type: object
                   properties:
                     type:
-                      allOf:
-                        - $ref: '#/components/schemas/DialogActionType'
-                        - description: '<p>The next action that the bot should take in its interaction with the user. The possible values are:</p> <ul> <li> <p> <code>ConfirmIntent</code> - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"</p> </li> <li> <p> <code>Close</code> - Indicates that the there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.</p> </li> <li> <p> <code>Delegate</code> - The next action is determined by Amazon Lex.</p> </li> <li> <p> <code>ElicitIntent</code> - The next action is to determine the intent that the user wants to fulfill.</p> </li> <li> <p> <code>ElicitSlot</code> - The next action is to elicit a slot value from the user.</p> </li> </ul>'
+                      $ref: '#/components/schemas/DialogActionType'
+                      description: '<p>The next action that the bot should take in its interaction with the user. The possible values are:</p> <ul> <li> <p> <code>ConfirmIntent</code> - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"</p> </li> <li> <p> <code>Close</code> - Indicates that the there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.</p> </li> <li> <p> <code>Delegate</code> - The next action is determined by Amazon Lex.</p> </li> <li> <p> <code>ElicitIntent</code> - The next action is to determine the intent that the user wants to fulfill.</p> </li> <li> <p> <code>ElicitSlot</code> - The next action is to elicit a slot value from the user.</p> </li> </ul>'
                     intentName:
-                      allOf:
-                        - $ref: '#/components/schemas/IntentName'
-                        - description: The name of the intent.
+                      $ref: '#/components/schemas/IntentName'
+                      description: The name of the intent.
                     slots:
-                      allOf:
-                        - $ref: '#/components/schemas/StringMap'
-                        - description: 'Map of the slots that have been gathered and their values. '
+                      $ref: '#/components/schemas/StringMap'
+                      description: 'Map of the slots that have been gathered and their values. '
                     slotToElicit:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The name of the slot that should be elicited from the user.
+                      $ref: '#/components/schemas/String'
+                      description: The name of the slot that should be elicited from the user.
                     fulfillmentState:
-                      allOf:
-                        - $ref: '#/components/schemas/FulfillmentState'
-                        - description: '<p>The fulfillment state of the intent. The possible values are:</p> <ul> <li> <p> <code>Failed</code> - The Lambda function associated with the intent failed to fulfill the intent.</p> </li> <li> <p> <code>Fulfilled</code> - The intent has fulfilled by the Lambda function associated with the intent. </p> </li> <li> <p> <code>ReadyForFulfillment</code> - All of the information necessary for the intent is present and the intent ready to be fulfilled by the client application.</p> </li> </ul>'
+                      $ref: '#/components/schemas/FulfillmentState'
+                      description: '<p>The fulfillment state of the intent. The possible values are:</p> <ul> <li> <p> <code>Failed</code> - The Lambda function associated with the intent failed to fulfill the intent.</p> </li> <li> <p> <code>Fulfilled</code> - The intent has fulfilled by the Lambda function associated with the intent. </p> </li> <li> <p> <code>ReadyForFulfillment</code> - All of the information necessary for the intent is present and the intent ready to be fulfilled by the client application.</p> </li> </ul>'
                     message:
-                      allOf:
-                        - $ref: '#/components/schemas/Text'
-                        - description: 'The message that should be shown to the user. If you don''t specify a message, Amazon Lex will use the message configured for the intent.'
+                      $ref: '#/components/schemas/Text'
+                      description: 'The message that should be shown to the user. If you don''t specify a message, Amazon Lex will use the message configured for the intent.'
                     messageFormat:
-                      allOf:
-                        - $ref: '#/components/schemas/MessageFormatType'
-                        - description: '<ul> <li> <p> <code>PlainText</code> - The message contains plain UTF-8 text.</p> </li> <li> <p> <code>CustomPayload</code> - The message is a custom format for the client.</p> </li> <li> <p> <code>SSML</code> - The message contains text formatted for voice output.</p> </li> <li> <p> <code>Composite</code> - The message contains an escaped JSON object containing one or more messages. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/howitworks-manage-prompts.html">Message Groups</a>. </p> </li> </ul>'
+                      $ref: '#/components/schemas/MessageFormatType'
+                      description: '<ul> <li> <p> <code>PlainText</code> - The message contains plain UTF-8 text.</p> </li> <li> <p> <code>CustomPayload</code> - The message is a custom format for the client.</p> </li> <li> <p> <code>SSML</code> - The message contains text formatted for voice output.</p> </li> <li> <p> <code>Composite</code> - The message contains an escaped JSON object containing one or more messages. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/howitworks-manage-prompts.html">Message Groups</a>. </p> </li> </ul>'
                 recentIntentSummaryView:
                   description: '<p>A summary of the recent intents for the bot. You can use the intent summary view to set a checkpoint label on an intent and modify attributes of intents. You can also use it to remove or add intent summary objects to the list.</p> <p>An intent that you modify or add to the list must make sense for the bot. For example, the intent name must be valid for the bot. You must provide valid values for:</p> <ul> <li> <p> <code>intentName</code> </p> </li> <li> <p>slot names</p> </li> <li> <p> <code>slotToElict</code> </p> </li> </ul> <p>If you send the <code>recentIntentSummaryView</code> parameter in a <code>PutSession</code> request, the contents of the new summary view replaces the old summary view. For example, if a <code>GetSession</code> request returns three intents in the summary view and you call <code>PutSession</code> with one intent in the summary view, the next call to <code>GetSession</code> will only return one intent.</p>'
                   type: array
@@ -732,21 +725,17 @@ components:
       type: object
       properties:
         botName:
-          allOf:
-            - $ref: '#/components/schemas/BotName'
-            - description: The name of the bot associated with the session data.
+          $ref: '#/components/schemas/BotName'
+          description: The name of the bot associated with the session data.
         botAlias:
-          allOf:
-            - $ref: '#/components/schemas/BotAlias'
-            - description: The alias in use for the bot associated with the session data.
+          $ref: '#/components/schemas/BotAlias'
+          description: The alias in use for the bot associated with the session data.
         userId:
-          allOf:
-            - $ref: '#/components/schemas/UserId'
-            - description: The ID of the client application user.
+          $ref: '#/components/schemas/UserId'
+          description: The ID of the client application user.
         sessionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The unique identifier for the session.
+          $ref: '#/components/schemas/String'
+          description: The unique identifier for the session.
     NotFoundException: {}
     BadRequestException: {}
     LimitExceededException: {}
@@ -756,32 +745,26 @@ components:
       type: object
       properties:
         recentIntentSummaryView:
-          allOf:
-            - $ref: '#/components/schemas/IntentSummaryList'
-            - description: '<p>An array of information about the intents used in the session. The array can contain a maximum of three summaries. If more than three intents are used in the session, the <code>recentIntentSummaryView</code> operation contains information about the last three intents used.</p> <p>If you set the <code>checkpointLabelFilter</code> parameter in the request, the array contains only the intents with the specified label.</p>'
+          $ref: '#/components/schemas/IntentSummaryList'
+          description: '<p>An array of information about the intents used in the session. The array can contain a maximum of three summaries. If more than three intents are used in the session, the <code>recentIntentSummaryView</code> operation contains information about the last three intents used.</p> <p>If you set the <code>checkpointLabelFilter</code> parameter in the request, the array contains only the intents with the specified label.</p>'
         sessionAttributes:
-          allOf:
-            - $ref: '#/components/schemas/StringMap'
-            - description: Map of key/value pairs representing the session-specific context information. It contains application information passed between Amazon Lex and a client application.
+          $ref: '#/components/schemas/StringMap'
+          description: Map of key/value pairs representing the session-specific context information. It contains application information passed between Amazon Lex and a client application.
         sessionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A unique identifier for the session.
+          $ref: '#/components/schemas/String'
+          description: A unique identifier for the session.
         dialogAction:
-          allOf:
-            - $ref: '#/components/schemas/DialogAction'
-            - description: Describes the current state of the bot.
+          $ref: '#/components/schemas/DialogAction'
+          description: Describes the current state of the bot.
         activeContexts:
-          allOf:
-            - $ref: '#/components/schemas/ActiveContextsList'
-            - description: '<p>A list of active contexts for the session. A context can be set when an intent is fulfilled or by calling the <code>PostContent</code>, <code>PostText</code>, or <code>PutSession</code> operation.</p> <p>You can use a context to control the intents that can follow up an intent, or to modify the operation of your application.</p>'
+          $ref: '#/components/schemas/ActiveContextsList'
+          description: '<p>A list of active contexts for the session. A context can be set when an intent is fulfilled or by calling the <code>PostContent</code>, <code>PostText</code>, or <code>PutSession</code> operation.</p> <p>You can use a context to control the intents that can follow up an intent, or to modify the operation of your application.</p>'
     PostContentResponse:
       type: object
       properties:
         audioStream:
-          allOf:
-            - $ref: '#/components/schemas/BlobStream'
-            - description: 'The prompt (or statement) to convey to the user. This is based on the bot configuration and context. For example, if Amazon Lex did not understand the user intent, it sends the <code>clarificationPrompt</code> configured for the bot. If the intent requires confirmation before taking the fulfillment action, it sends the <code>confirmationPrompt</code>. Another example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message to convey to the user. Then Amazon Lex sends that message in the response. '
+          $ref: '#/components/schemas/BlobStream'
+          description: 'The prompt (or statement) to convey to the user. This is based on the bot configuration and context. For example, if Amazon Lex did not understand the user intent, it sends the <code>clarificationPrompt</code> configured for the bot. If the intent requires confirmation before taking the fulfillment action, it sends the <code>confirmationPrompt</code>. Another example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message to convey to the user. Then Amazon Lex sends that message in the response. '
     UnsupportedMediaTypeException: {}
     NotAcceptableException: {}
     RequestTimeoutException: {}
@@ -792,61 +775,47 @@ components:
       type: object
       properties:
         intentName:
-          allOf:
-            - $ref: '#/components/schemas/IntentName'
-            - description: The current user intent that Amazon Lex is aware of.
+          $ref: '#/components/schemas/IntentName'
+          description: The current user intent that Amazon Lex is aware of.
         nluIntentConfidence:
-          allOf:
-            - $ref: '#/components/schemas/IntentConfidence'
-            - description: '<p>Provides a score that indicates how confident Amazon Lex is that the returned intent is the one that matches the user''s intent. The score is between 0.0 and 1.0. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html">Confidence Scores</a>.</p> <p>The score is a relative score, not an absolute score. The score may change based on improvements to Amazon Lex.</p>'
+          $ref: '#/components/schemas/IntentConfidence'
+          description: '<p>Provides a score that indicates how confident Amazon Lex is that the returned intent is the one that matches the user''s intent. The score is between 0.0 and 1.0. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html">Confidence Scores</a>.</p> <p>The score is a relative score, not an absolute score. The score may change based on improvements to Amazon Lex.</p>'
         alternativeIntents:
-          allOf:
-            - $ref: '#/components/schemas/IntentList'
-            - description: <p>One to four alternative intents that may be applicable to the user's intent.</p> <p>Each alternative includes a score that indicates how confident Amazon Lex is that the intent matches the user's intent. The intents are sorted by the confidence score.</p>
+          $ref: '#/components/schemas/IntentList'
+          description: <p>One to four alternative intents that may be applicable to the user's intent.</p> <p>Each alternative includes a score that indicates how confident Amazon Lex is that the intent matches the user's intent. The intents are sorted by the confidence score.</p>
         slots:
-          allOf:
-            - $ref: '#/components/schemas/StringMap'
-            - description: '<p> The intent slots that Amazon Lex detected from the user input in the conversation. </p> <p>Amazon Lex creates a resolution list containing likely values for a slot. The value that it returns is determined by the <code>valueSelectionStrategy</code> selected when the slot type was created or updated. If <code>valueSelectionStrategy</code> is set to <code>ORIGINAL_VALUE</code>, the value provided by the user is returned, if the user value is similar to the slot values. If <code>valueSelectionStrategy</code> is set to <code>TOP_RESOLUTION</code> Amazon Lex returns the first value in the resolution list or, if there is no resolution list, null. If you don''t specify a <code>valueSelectionStrategy</code>, the default is <code>ORIGINAL_VALUE</code>.</p>'
+          $ref: '#/components/schemas/StringMap'
+          description: '<p> The intent slots that Amazon Lex detected from the user input in the conversation. </p> <p>Amazon Lex creates a resolution list containing likely values for a slot. The value that it returns is determined by the <code>valueSelectionStrategy</code> selected when the slot type was created or updated. If <code>valueSelectionStrategy</code> is set to <code>ORIGINAL_VALUE</code>, the value provided by the user is returned, if the user value is similar to the slot values. If <code>valueSelectionStrategy</code> is set to <code>TOP_RESOLUTION</code> Amazon Lex returns the first value in the resolution list or, if there is no resolution list, null. If you don''t specify a <code>valueSelectionStrategy</code>, the default is <code>ORIGINAL_VALUE</code>.</p>'
         sessionAttributes:
-          allOf:
-            - $ref: '#/components/schemas/StringMap'
-            - description: A map of key-value pairs representing the session-specific context information.
+          $ref: '#/components/schemas/StringMap'
+          description: A map of key-value pairs representing the session-specific context information.
         message:
-          allOf:
-            - $ref: '#/components/schemas/Text'
-            - description: '<p>The message to convey to the user. The message can come from the bot''s configuration or from a Lambda function.</p> <p>If the intent is not configured with a Lambda function, or if the Lambda function returned <code>Delegate</code> as the <code>dialogAction.type</code> its response, Amazon Lex decides on the next course of action and selects an appropriate message from the bot''s configuration based on the current interaction context. For example, if Amazon Lex isn''t able to understand user input, it uses a clarification prompt message.</p> <p>When you create an intent you can assign messages to groups. When messages are assigned to groups Amazon Lex returns one message from each group in the response. The message field is an escaped JSON string containing the messages. For more information about the structure of the JSON string returned, see <a>msg-prompts-formats</a>.</p> <p>If the Lambda function returns a message, Amazon Lex passes it to the client in its response.</p>'
+          $ref: '#/components/schemas/Text'
+          description: '<p>The message to convey to the user. The message can come from the bot''s configuration or from a Lambda function.</p> <p>If the intent is not configured with a Lambda function, or if the Lambda function returned <code>Delegate</code> as the <code>dialogAction.type</code> its response, Amazon Lex decides on the next course of action and selects an appropriate message from the bot''s configuration based on the current interaction context. For example, if Amazon Lex isn''t able to understand user input, it uses a clarification prompt message.</p> <p>When you create an intent you can assign messages to groups. When messages are assigned to groups Amazon Lex returns one message from each group in the response. The message field is an escaped JSON string containing the messages. For more information about the structure of the JSON string returned, see <a>msg-prompts-formats</a>.</p> <p>If the Lambda function returns a message, Amazon Lex passes it to the client in its response.</p>'
         sentimentResponse:
-          allOf:
-            - $ref: '#/components/schemas/SentimentResponse'
-            - description: '<p>The sentiment expressed in and utterance.</p> <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains the result of the analysis.</p>'
+          $ref: '#/components/schemas/SentimentResponse'
+          description: '<p>The sentiment expressed in and utterance.</p> <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains the result of the analysis.</p>'
         messageFormat:
-          allOf:
-            - $ref: '#/components/schemas/MessageFormatType'
-            - description: '<p>The format of the response message. One of the following values:</p> <ul> <li> <p> <code>PlainText</code> - The message contains plain UTF-8 text.</p> </li> <li> <p> <code>CustomPayload</code> - The message is a custom format defined by the Lambda function.</p> </li> <li> <p> <code>SSML</code> - The message contains text formatted for voice output.</p> </li> <li> <p> <code>Composite</code> - The message contains an escaped JSON object containing one or more messages from the groups that messages were assigned to when the intent was created.</p> </li> </ul>'
+          $ref: '#/components/schemas/MessageFormatType'
+          description: '<p>The format of the response message. One of the following values:</p> <ul> <li> <p> <code>PlainText</code> - The message contains plain UTF-8 text.</p> </li> <li> <p> <code>CustomPayload</code> - The message is a custom format defined by the Lambda function.</p> </li> <li> <p> <code>SSML</code> - The message contains text formatted for voice output.</p> </li> <li> <p> <code>Composite</code> - The message contains an escaped JSON object containing one or more messages from the groups that messages were assigned to when the intent was created.</p> </li> </ul>'
         dialogState:
-          allOf:
-            - $ref: '#/components/schemas/DialogState'
-            - description: '<p> Identifies the current state of the user interaction. Amazon Lex returns one of the following values as <code>dialogState</code>. The client can optionally use this information to customize the user interface. </p> <ul> <li> <p> <code>ElicitIntent</code> - Amazon Lex wants to elicit user intent. </p> <p>For example, a user might utter an intent ("I want to order a pizza"). If Amazon Lex cannot infer the user intent from this utterance, it will return this dialogState.</p> </li> <li> <p> <code>ConfirmIntent</code> - Amazon Lex is expecting a "yes" or "no" response. </p> <p> For example, Amazon Lex wants user confirmation before fulfilling an intent. </p> <p>Instead of a simple "yes" or "no," a user might respond with additional information. For example, "yes, but make it thick crust pizza" or "no, I want to order a drink". Amazon Lex can process such additional information (in these examples, update the crust type slot value, or change intent from OrderPizza to OrderDrink).</p> </li> <li> <p> <code>ElicitSlot</code> - Amazon Lex is expecting a slot value for the current intent. </p> <p>For example, suppose that in the response Amazon Lex sends this message: "What size pizza would you like?". A user might reply with the slot value (e.g., "medium"). The user might also provide additional information in the response (e.g., "medium thick crust pizza"). Amazon Lex can process such additional information appropriately. </p> </li> <li> <p> <code>Fulfilled</code> - Conveys that the Lambda function configured for the intent has successfully fulfilled the intent. </p> </li> <li> <p> <code>ReadyForFulfillment</code> - Conveys that the client has to fulfill the intent. </p> </li> <li> <p> <code>Failed</code> - Conveys that the conversation with the user failed. </p> <p> This can happen for various reasons including that the user did not provide an appropriate response to prompts from the service (you can configure how many times Amazon Lex can prompt a user for specific information), or the Lambda function failed to fulfill the intent. </p> </li> </ul>'
+          $ref: '#/components/schemas/DialogState'
+          description: '<p> Identifies the current state of the user interaction. Amazon Lex returns one of the following values as <code>dialogState</code>. The client can optionally use this information to customize the user interface. </p> <ul> <li> <p> <code>ElicitIntent</code> - Amazon Lex wants to elicit user intent. </p> <p>For example, a user might utter an intent ("I want to order a pizza"). If Amazon Lex cannot infer the user intent from this utterance, it will return this dialogState.</p> </li> <li> <p> <code>ConfirmIntent</code> - Amazon Lex is expecting a "yes" or "no" response. </p> <p> For example, Amazon Lex wants user confirmation before fulfilling an intent. </p> <p>Instead of a simple "yes" or "no," a user might respond with additional information. For example, "yes, but make it thick crust pizza" or "no, I want to order a drink". Amazon Lex can process such additional information (in these examples, update the crust type slot value, or change intent from OrderPizza to OrderDrink).</p> </li> <li> <p> <code>ElicitSlot</code> - Amazon Lex is expecting a slot value for the current intent. </p> <p>For example, suppose that in the response Amazon Lex sends this message: "What size pizza would you like?". A user might reply with the slot value (e.g., "medium"). The user might also provide additional information in the response (e.g., "medium thick crust pizza"). Amazon Lex can process such additional information appropriately. </p> </li> <li> <p> <code>Fulfilled</code> - Conveys that the Lambda function configured for the intent has successfully fulfilled the intent. </p> </li> <li> <p> <code>ReadyForFulfillment</code> - Conveys that the client has to fulfill the intent. </p> </li> <li> <p> <code>Failed</code> - Conveys that the conversation with the user failed. </p> <p> This can happen for various reasons including that the user did not provide an appropriate response to prompts from the service (you can configure how many times Amazon Lex can prompt a user for specific information), or the Lambda function failed to fulfill the intent. </p> </li> </ul>'
         slotToElicit:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'If the <code>dialogState</code> value is <code>ElicitSlot</code>, returns the name of the slot for which Amazon Lex is eliciting a value. '
+          $ref: '#/components/schemas/String'
+          description: 'If the <code>dialogState</code> value is <code>ElicitSlot</code>, returns the name of the slot for which Amazon Lex is eliciting a value. '
         responseCard:
-          allOf:
-            - $ref: '#/components/schemas/ResponseCard'
-            - description: 'Represents the options that the user has to respond to the current prompt. Response Card can come from the bot configuration (in the Amazon Lex console, choose the settings button next to a slot) or from a code hook (Lambda function). '
+          $ref: '#/components/schemas/ResponseCard'
+          description: 'Represents the options that the user has to respond to the current prompt. Response Card can come from the bot configuration (in the Amazon Lex console, choose the settings button next to a slot) or from a code hook (Lambda function). '
         sessionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A unique identifier for the session.
+          $ref: '#/components/schemas/String'
+          description: A unique identifier for the session.
         botVersion:
-          allOf:
-            - $ref: '#/components/schemas/BotVersion'
-            - description: The version of the bot that responded to the conversation. You can use this information to help determine if one version of a bot is performing better than another version.
+          $ref: '#/components/schemas/BotVersion'
+          description: The version of the bot that responded to the conversation. You can use this information to help determine if one version of a bot is performing better than another version.
         activeContexts:
-          allOf:
-            - $ref: '#/components/schemas/ActiveContextsList'
-            - description: '<p>A list of active contexts for the session. A context can be set when an intent is fulfilled or by calling the <code>PostContent</code>, <code>PostText</code>, or <code>PutSession</code> operation.</p> <p>You can use a context to control the intents that can follow up an intent, or to modify the operation of your application.</p>'
+          $ref: '#/components/schemas/ActiveContextsList'
+          description: '<p>A list of active contexts for the session. A context can be set when an intent is fulfilled or by calling the <code>PostContent</code>, <code>PostText</code>, or <code>PutSession</code> operation.</p> <p>You can use a context to control the intents that can follow up an intent, or to modify the operation of your application.</p>'
     String:
       type: string
     ActiveContext:
@@ -857,25 +826,21 @@ components:
         - parameters
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ActiveContextName'
-            - description: The name of the context.
+          $ref: '#/components/schemas/ActiveContextName'
+          description: The name of the context.
         timeToLive:
-          allOf:
-            - $ref: '#/components/schemas/ActiveContextTimeToLive'
-            - description: The length of time or number of turns that a context remains active.
+          $ref: '#/components/schemas/ActiveContextTimeToLive'
+          description: The length of time or number of turns that a context remains active.
         parameters:
-          allOf:
-            - $ref: '#/components/schemas/ActiveContextParametersMap'
-            - description: State variables for the current context. You can use these values as default values for slots in subsequent events.
+          $ref: '#/components/schemas/ActiveContextParametersMap'
+          description: State variables for the current context. You can use these values as default values for slots in subsequent events.
       description: 'A context is a variable that contains information about the current state of the conversation between a user and Amazon Lex. Context can be set automatically by Amazon Lex when an intent is fulfilled, or it can be set at runtime using the <code>PutContent</code>, <code>PutText</code>, or <code>PutSession</code> operation.'
     PutSessionResponse:
       type: object
       properties:
         audioStream:
-          allOf:
-            - $ref: '#/components/schemas/BlobStream'
-            - description: The audio version of the message to convey to the user.
+          $ref: '#/components/schemas/BlobStream'
+          description: The audio version of the message to convey to the user.
     DialogActionType:
       type: string
       enum:
@@ -914,33 +879,26 @@ components:
         - dialogActionType
       properties:
         intentName:
-          allOf:
-            - $ref: '#/components/schemas/IntentName'
-            - description: The name of the intent.
+          $ref: '#/components/schemas/IntentName'
+          description: The name of the intent.
         checkpointLabel:
-          allOf:
-            - $ref: '#/components/schemas/IntentSummaryCheckpointLabel'
-            - description: <p>A user-defined label that identifies a particular intent. You can use this label to return to a previous intent. </p> <p>Use the <code>checkpointLabelFilter</code> parameter of the <code>GetSessionRequest</code> operation to filter the intents returned by the operation to those with only the specified label.</p>
+          $ref: '#/components/schemas/IntentSummaryCheckpointLabel'
+          description: <p>A user-defined label that identifies a particular intent. You can use this label to return to a previous intent. </p> <p>Use the <code>checkpointLabelFilter</code> parameter of the <code>GetSessionRequest</code> operation to filter the intents returned by the operation to those with only the specified label.</p>
         slots:
-          allOf:
-            - $ref: '#/components/schemas/StringMap'
-            - description: 'Map of the slots that have been gathered and their values. '
+          $ref: '#/components/schemas/StringMap'
+          description: 'Map of the slots that have been gathered and their values. '
         confirmationStatus:
-          allOf:
-            - $ref: '#/components/schemas/ConfirmationStatus'
-            - description: '<p>The status of the intent after the user responds to the confirmation prompt. If the user confirms the intent, Amazon Lex sets this field to <code>Confirmed</code>. If the user denies the intent, Amazon Lex sets this value to <code>Denied</code>. The possible values are:</p> <ul> <li> <p> <code>Confirmed</code> - The user has responded "Yes" to the confirmation prompt, confirming that the intent is complete and that it is ready to be fulfilled.</p> </li> <li> <p> <code>Denied</code> - The user has responded "No" to the confirmation prompt.</p> </li> <li> <p> <code>None</code> - The user has never been prompted for confirmation; or, the user was prompted but did not confirm or deny the prompt.</p> </li> </ul>'
+          $ref: '#/components/schemas/ConfirmationStatus'
+          description: '<p>The status of the intent after the user responds to the confirmation prompt. If the user confirms the intent, Amazon Lex sets this field to <code>Confirmed</code>. If the user denies the intent, Amazon Lex sets this value to <code>Denied</code>. The possible values are:</p> <ul> <li> <p> <code>Confirmed</code> - The user has responded "Yes" to the confirmation prompt, confirming that the intent is complete and that it is ready to be fulfilled.</p> </li> <li> <p> <code>Denied</code> - The user has responded "No" to the confirmation prompt.</p> </li> <li> <p> <code>None</code> - The user has never been prompted for confirmation; or, the user was prompted but did not confirm or deny the prompt.</p> </li> </ul>'
         dialogActionType:
-          allOf:
-            - $ref: '#/components/schemas/DialogActionType'
-            - description: '<p>The next action that the bot should take in its interaction with the user. The possible values are:</p> <ul> <li> <p> <code>ConfirmIntent</code> - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"</p> </li> <li> <p> <code>Close</code> - Indicates that the there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.</p> </li> <li> <p> <code>ElicitIntent</code> - The next action is to determine the intent that the user wants to fulfill.</p> </li> <li> <p> <code>ElicitSlot</code> - The next action is to elicit a slot value from the user.</p> </li> </ul>'
+          $ref: '#/components/schemas/DialogActionType'
+          description: '<p>The next action that the bot should take in its interaction with the user. The possible values are:</p> <ul> <li> <p> <code>ConfirmIntent</code> - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"</p> </li> <li> <p> <code>Close</code> - Indicates that the there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.</p> </li> <li> <p> <code>ElicitIntent</code> - The next action is to determine the intent that the user wants to fulfill.</p> </li> <li> <p> <code>ElicitSlot</code> - The next action is to elicit a slot value from the user.</p> </li> </ul>'
         fulfillmentState:
-          allOf:
-            - $ref: '#/components/schemas/FulfillmentState'
-            - description: '<p>The fulfillment state of the intent. The possible values are:</p> <ul> <li> <p> <code>Failed</code> - The Lambda function associated with the intent failed to fulfill the intent.</p> </li> <li> <p> <code>Fulfilled</code> - The intent has fulfilled by the Lambda function associated with the intent. </p> </li> <li> <p> <code>ReadyForFulfillment</code> - All of the information necessary for the intent is present and the intent ready to be fulfilled by the client application.</p> </li> </ul>'
+          $ref: '#/components/schemas/FulfillmentState'
+          description: '<p>The fulfillment state of the intent. The possible values are:</p> <ul> <li> <p> <code>Failed</code> - The Lambda function associated with the intent failed to fulfill the intent.</p> </li> <li> <p> <code>Fulfilled</code> - The intent has fulfilled by the Lambda function associated with the intent. </p> </li> <li> <p> <code>ReadyForFulfillment</code> - All of the information necessary for the intent is present and the intent ready to be fulfilled by the client application.</p> </li> </ul>'
         slotToElicit:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The next slot to elicit from the user. If there is not slot to elicit, the field is blank.'
+          $ref: '#/components/schemas/String'
+          description: 'The next slot to elicit from the user. If there is not slot to elicit, the field is blank.'
       description: 'Provides information about the state of an intent. You can use this information to get the current state of an intent so that you can process the intent, or so that you can return the intent to its previous state.'
     Accept:
       type: string
@@ -953,13 +911,11 @@ components:
       type: object
       properties:
         timeToLiveInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/ActiveContextTimeToLiveInSeconds'
-            - description: 'The number of seconds that the context should be active after it is first sent in a <code>PostContent</code> or <code>PostText</code> response. You can set the value between 5 and 86,400 seconds (24 hours).'
+          $ref: '#/components/schemas/ActiveContextTimeToLiveInSeconds'
+          description: 'The number of seconds that the context should be active after it is first sent in a <code>PostContent</code> or <code>PostText</code> response. You can set the value between 5 and 86,400 seconds (24 hours).'
         turnsToLive:
-          allOf:
-            - $ref: '#/components/schemas/ActiveContextTurnsToLive'
-            - description: The number of conversation turns that the context should be active. A conversation turn is one <code>PostContent</code> or <code>PostText</code> request and the corresponding response from Amazon Lex.
+          $ref: '#/components/schemas/ActiveContextTurnsToLive'
+          description: The number of conversation turns that the context should be active. A conversation turn is one <code>PostContent</code> or <code>PostText</code> request and the corresponding response from Amazon Lex.
       description: The length of time or number of turns that a context remains active.
     ActiveContextParametersMap:
       type: object
@@ -1013,13 +969,11 @@ components:
         - value
       properties:
         text:
-          allOf:
-            - $ref: '#/components/schemas/ButtonTextStringWithLength'
-            - description: Text that is visible to the user on the button.
+          $ref: '#/components/schemas/ButtonTextStringWithLength'
+          description: Text that is visible to the user on the button.
         value:
-          allOf:
-            - $ref: '#/components/schemas/ButtonValueStringWithLength'
-            - description: 'The value sent to Amazon Lex when a user chooses the button. For example, consider button text "NYC." When the user chooses the button, the value sent can be "New York City."'
+          $ref: '#/components/schemas/ButtonValueStringWithLength'
+          description: 'The value sent to Amazon Lex when a user chooses the button. For example, consider button text "NYC." When the user chooses the button, the value sent can be "New York City."'
       description: 'Represents an option to be shown on the client platform (Facebook, Slack, etc.)'
     ConfirmationStatus:
       type: string
@@ -1046,33 +1000,26 @@ components:
         - type
       properties:
         type:
-          allOf:
-            - $ref: '#/components/schemas/DialogActionType'
-            - description: '<p>The next action that the bot should take in its interaction with the user. The possible values are:</p> <ul> <li> <p> <code>ConfirmIntent</code> - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"</p> </li> <li> <p> <code>Close</code> - Indicates that the there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.</p> </li> <li> <p> <code>Delegate</code> - The next action is determined by Amazon Lex.</p> </li> <li> <p> <code>ElicitIntent</code> - The next action is to determine the intent that the user wants to fulfill.</p> </li> <li> <p> <code>ElicitSlot</code> - The next action is to elicit a slot value from the user.</p> </li> </ul>'
+          $ref: '#/components/schemas/DialogActionType'
+          description: '<p>The next action that the bot should take in its interaction with the user. The possible values are:</p> <ul> <li> <p> <code>ConfirmIntent</code> - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"</p> </li> <li> <p> <code>Close</code> - Indicates that the there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.</p> </li> <li> <p> <code>Delegate</code> - The next action is determined by Amazon Lex.</p> </li> <li> <p> <code>ElicitIntent</code> - The next action is to determine the intent that the user wants to fulfill.</p> </li> <li> <p> <code>ElicitSlot</code> - The next action is to elicit a slot value from the user.</p> </li> </ul>'
         intentName:
-          allOf:
-            - $ref: '#/components/schemas/IntentName'
-            - description: The name of the intent.
+          $ref: '#/components/schemas/IntentName'
+          description: The name of the intent.
         slots:
-          allOf:
-            - $ref: '#/components/schemas/StringMap'
-            - description: 'Map of the slots that have been gathered and their values. '
+          $ref: '#/components/schemas/StringMap'
+          description: 'Map of the slots that have been gathered and their values. '
         slotToElicit:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the slot that should be elicited from the user.
+          $ref: '#/components/schemas/String'
+          description: The name of the slot that should be elicited from the user.
         fulfillmentState:
-          allOf:
-            - $ref: '#/components/schemas/FulfillmentState'
-            - description: '<p>The fulfillment state of the intent. The possible values are:</p> <ul> <li> <p> <code>Failed</code> - The Lambda function associated with the intent failed to fulfill the intent.</p> </li> <li> <p> <code>Fulfilled</code> - The intent has fulfilled by the Lambda function associated with the intent. </p> </li> <li> <p> <code>ReadyForFulfillment</code> - All of the information necessary for the intent is present and the intent ready to be fulfilled by the client application.</p> </li> </ul>'
+          $ref: '#/components/schemas/FulfillmentState'
+          description: '<p>The fulfillment state of the intent. The possible values are:</p> <ul> <li> <p> <code>Failed</code> - The Lambda function associated with the intent failed to fulfill the intent.</p> </li> <li> <p> <code>Fulfilled</code> - The intent has fulfilled by the Lambda function associated with the intent. </p> </li> <li> <p> <code>ReadyForFulfillment</code> - All of the information necessary for the intent is present and the intent ready to be fulfilled by the client application.</p> </li> </ul>'
         message:
-          allOf:
-            - $ref: '#/components/schemas/Text'
-            - description: 'The message that should be shown to the user. If you don''t specify a message, Amazon Lex will use the message configured for the intent.'
+          $ref: '#/components/schemas/Text'
+          description: 'The message that should be shown to the user. If you don''t specify a message, Amazon Lex will use the message configured for the intent.'
         messageFormat:
-          allOf:
-            - $ref: '#/components/schemas/MessageFormatType'
-            - description: '<ul> <li> <p> <code>PlainText</code> - The message contains plain UTF-8 text.</p> </li> <li> <p> <code>CustomPayload</code> - The message is a custom format for the client.</p> </li> <li> <p> <code>SSML</code> - The message contains text formatted for voice output.</p> </li> <li> <p> <code>Composite</code> - The message contains an escaped JSON object containing one or more messages. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/howitworks-manage-prompts.html">Message Groups</a>. </p> </li> </ul>'
+          $ref: '#/components/schemas/MessageFormatType'
+          description: '<ul> <li> <p> <code>PlainText</code> - The message contains plain UTF-8 text.</p> </li> <li> <p> <code>CustomPayload</code> - The message is a custom format for the client.</p> </li> <li> <p> <code>SSML</code> - The message contains text formatted for voice output.</p> </li> <li> <p> <code>Composite</code> - The message contains an escaped JSON object containing one or more messages. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/howitworks-manage-prompts.html">Message Groups</a>. </p> </li> </ul>'
       description: 'Describes the next action that the bot should take in its interaction with the user and provides information about the context in which the action takes place. Use the <code>DialogAction</code> data type to set the interaction to a specific state, or to return the interaction to a previous state.'
     DialogState:
       type: string
@@ -1104,25 +1051,20 @@ components:
       type: object
       properties:
         title:
-          allOf:
-            - $ref: '#/components/schemas/StringWithLength'
-            - description: The title of the option.
+          $ref: '#/components/schemas/StringWithLength'
+          description: The title of the option.
         subTitle:
-          allOf:
-            - $ref: '#/components/schemas/StringWithLength'
-            - description: The subtitle shown below the title.
+          $ref: '#/components/schemas/StringWithLength'
+          description: The subtitle shown below the title.
         attachmentLinkUrl:
-          allOf:
-            - $ref: '#/components/schemas/StringUrlWithLength'
-            - description: The URL of an attachment to the response card.
+          $ref: '#/components/schemas/StringUrlWithLength'
+          description: The URL of an attachment to the response card.
         imageUrl:
-          allOf:
-            - $ref: '#/components/schemas/StringUrlWithLength'
-            - description: The URL of an image that is displayed to the user.
+          $ref: '#/components/schemas/StringUrlWithLength'
+          description: The URL of an image that is displayed to the user.
         buttons:
-          allOf:
-            - $ref: '#/components/schemas/listOfButtons'
-            - description: The list of options to show to the user.
+          $ref: '#/components/schemas/listOfButtons'
+          description: The list of options to show to the user.
       description: 'Represents an option rendered to the user when a prompt is shown. It could be an image, a button, a link, or text. '
     IntentSummaryCheckpointLabel:
       type: string
@@ -1145,25 +1087,21 @@ components:
       type: object
       properties:
         score:
-          allOf:
-            - $ref: '#/components/schemas/Double'
-            - description: A score that indicates how confident Amazon Lex is that an intent satisfies the user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher confidence.
+          $ref: '#/components/schemas/Double'
+          description: A score that indicates how confident Amazon Lex is that an intent satisfies the user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher confidence.
       description: Provides a score that indicates the confidence that Amazon Lex has that an intent is the one that satisfies the user's intent.
     PredictedIntent:
       type: object
       properties:
         intentName:
-          allOf:
-            - $ref: '#/components/schemas/IntentName'
-            - description: The name of the intent that Amazon Lex suggests satisfies the user's intent.
+          $ref: '#/components/schemas/IntentName'
+          description: The name of the intent that Amazon Lex suggests satisfies the user's intent.
         nluIntentConfidence:
-          allOf:
-            - $ref: '#/components/schemas/IntentConfidence'
-            - description: Indicates how confident Amazon Lex is that an intent satisfies the user's intent.
+          $ref: '#/components/schemas/IntentConfidence'
+          description: Indicates how confident Amazon Lex is that an intent satisfies the user's intent.
         slots:
-          allOf:
-            - $ref: '#/components/schemas/StringMap'
-            - description: The slot and slot values associated with the predicted intent.
+          $ref: '#/components/schemas/StringMap'
+          description: The slot and slot values associated with the predicted intent.
       description: 'An intent that Amazon Lex suggests satisfies the user''s intent. Includes the name of the intent, the confidence that Amazon Lex has that the user''s intent is satisfied, and the slots defined for the intent.'
     IntentList:
       type: array
@@ -1181,9 +1119,8 @@ components:
       title: PostContentRequest
       properties:
         inputStream:
-          allOf:
-            - $ref: '#/components/schemas/BlobStream'
-            - description: '<p> User input in PCM or Opus audio format or text format as described in the <code>Content-Type</code> HTTP header. </p> <p>You can stream audio data to Amazon Lex or you can create a local buffer that captures all of the audio data before sending. In general, you get better performance if you stream audio data rather than buffering the data locally.</p>'
+          $ref: '#/components/schemas/BlobStream'
+          description: '<p> User input in PCM or Opus audio format or text format as described in the <code>Content-Type</code> HTTP header. </p> <p>You can stream audio data to Amazon Lex or you can create a local buffer that captures all of the audio data before sending. In general, you get better performance if you stream audio data rather than buffering the data locally.</p>'
     SensitiveString:
       type: string
       minLength: 1
@@ -1199,69 +1136,56 @@ components:
       title: PostTextRequest
       properties:
         sessionAttributes:
-          allOf:
-            - $ref: '#/components/schemas/StringMap'
-            - description: '<p>Application-specific information passed between Amazon Lex and a client application.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting Session Attributes</a>.</p>'
+          $ref: '#/components/schemas/StringMap'
+          description: '<p>Application-specific information passed between Amazon Lex and a client application.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting Session Attributes</a>.</p>'
         requestAttributes:
-          allOf:
-            - $ref: '#/components/schemas/StringMap'
-            - description: '<p>Request-specific information passed between Amazon Lex and a client application.</p> <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don''t create any request attributes with the prefix <code>x-amz-lex:</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting Request Attributes</a>.</p>'
+          $ref: '#/components/schemas/StringMap'
+          description: '<p>Request-specific information passed between Amazon Lex and a client application.</p> <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don''t create any request attributes with the prefix <code>x-amz-lex:</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting Request Attributes</a>.</p>'
         inputText:
-          allOf:
-            - $ref: '#/components/schemas/Text'
-            - description: The text that the user entered (Amazon Lex interprets this text).
+          $ref: '#/components/schemas/Text'
+          description: The text that the user entered (Amazon Lex interprets this text).
         activeContexts:
-          allOf:
-            - $ref: '#/components/schemas/ActiveContextsList'
-            - description: '<p>A list of contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request,</p> <p>If you don''t specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared.</p>'
+          $ref: '#/components/schemas/ActiveContextsList'
+          description: '<p>A list of contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request,</p> <p>If you don''t specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared.</p>'
     SentimentResponse:
       type: object
       properties:
         sentimentLabel:
-          allOf:
-            - $ref: '#/components/schemas/SentimentLabel'
-            - description: The inferred sentiment that Amazon Comprehend has the highest confidence in.
+          $ref: '#/components/schemas/SentimentLabel'
+          description: The inferred sentiment that Amazon Comprehend has the highest confidence in.
         sentimentScore:
-          allOf:
-            - $ref: '#/components/schemas/SentimentScore'
-            - description: The likelihood that the sentiment was correctly inferred.
+          $ref: '#/components/schemas/SentimentScore'
+          description: The likelihood that the sentiment was correctly inferred.
       description: '<p>The sentiment expressed in an utterance.</p> <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field structure contains the result of the analysis.</p>'
     ResponseCard:
       type: object
       properties:
         version:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The version of the response card format.
+          $ref: '#/components/schemas/String'
+          description: The version of the response card format.
         contentType:
-          allOf:
-            - $ref: '#/components/schemas/ContentType'
-            - description: The content type of the response.
+          $ref: '#/components/schemas/ContentType'
+          description: The content type of the response.
         genericAttachments:
-          allOf:
-            - $ref: '#/components/schemas/genericAttachmentList'
-            - description: An array of attachment objects representing options.
+          $ref: '#/components/schemas/genericAttachmentList'
+          description: An array of attachment objects representing options.
       description: 'If you configure a response card when creating your bots, Amazon Lex substitutes the session attributes and slot values that are available, and then returns it. The response card can also come from a Lambda function ( <code>dialogCodeHook</code> and <code>fulfillmentActivity</code> on an intent).'
     PutSessionRequest:
       type: object
       title: PutSessionRequest
       properties:
         sessionAttributes:
-          allOf:
-            - $ref: '#/components/schemas/StringMap'
-            - description: Map of key/value pairs representing the session-specific context information. It contains application information passed between Amazon Lex and a client application.
+          $ref: '#/components/schemas/StringMap'
+          description: Map of key/value pairs representing the session-specific context information. It contains application information passed between Amazon Lex and a client application.
         dialogAction:
-          allOf:
-            - $ref: '#/components/schemas/DialogAction'
-            - description: Sets the next action that the bot should take to fulfill the conversation.
+          $ref: '#/components/schemas/DialogAction'
+          description: Sets the next action that the bot should take to fulfill the conversation.
         recentIntentSummaryView:
-          allOf:
-            - $ref: '#/components/schemas/IntentSummaryList'
-            - description: '<p>A summary of the recent intents for the bot. You can use the intent summary view to set a checkpoint label on an intent and modify attributes of intents. You can also use it to remove or add intent summary objects to the list.</p> <p>An intent that you modify or add to the list must make sense for the bot. For example, the intent name must be valid for the bot. You must provide valid values for:</p> <ul> <li> <p> <code>intentName</code> </p> </li> <li> <p>slot names</p> </li> <li> <p> <code>slotToElict</code> </p> </li> </ul> <p>If you send the <code>recentIntentSummaryView</code> parameter in a <code>PutSession</code> request, the contents of the new summary view replaces the old summary view. For example, if a <code>GetSession</code> request returns three intents in the summary view and you call <code>PutSession</code> with one intent in the summary view, the next call to <code>GetSession</code> will only return one intent.</p>'
+          $ref: '#/components/schemas/IntentSummaryList'
+          description: '<p>A summary of the recent intents for the bot. You can use the intent summary view to set a checkpoint label on an intent and modify attributes of intents. You can also use it to remove or add intent summary objects to the list.</p> <p>An intent that you modify or add to the list must make sense for the bot. For example, the intent name must be valid for the bot. You must provide valid values for:</p> <ul> <li> <p> <code>intentName</code> </p> </li> <li> <p>slot names</p> </li> <li> <p> <code>slotToElict</code> </p> </li> </ul> <p>If you send the <code>recentIntentSummaryView</code> parameter in a <code>PutSession</code> request, the contents of the new summary view replaces the old summary view. For example, if a <code>GetSession</code> request returns three intents in the summary view and you call <code>PutSession</code> with one intent in the summary view, the next call to <code>GetSession</code> will only return one intent.</p>'
         activeContexts:
-          allOf:
-            - $ref: '#/components/schemas/ActiveContextsList'
-            - description: '<p>A list of contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request,</p> <p>If you don''t specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared.</p>'
+          $ref: '#/components/schemas/ActiveContextsList'
+          description: '<p>A list of contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request,</p> <p>If you don''t specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared.</p>'
     genericAttachmentList:
       type: array
       items:

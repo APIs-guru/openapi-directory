@@ -177,13 +177,11 @@ paths:
                   type: object
                   properties:
                     AmazonId:
-                      allOf:
-                        - $ref: '#/components/schemas/AmazonId'
-                        - description: The Sidewalk Amazon ID.
+                      $ref: '#/components/schemas/AmazonId'
+                      description: The Sidewalk Amazon ID.
                     AppServerPrivateKey:
-                      allOf:
-                        - $ref: '#/components/schemas/AppServerPrivateKey'
-                        - description: The Sidewalk application server private key.
+                      $ref: '#/components/schemas/AppServerPrivateKey'
+                      description: The Sidewalk application server private key.
                 ClientRequestToken:
                   description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
                   type: string
@@ -911,81 +909,62 @@ paths:
                   type: object
                   properties:
                     SupportsClassB:
-                      allOf:
-                        - $ref: '#/components/schemas/SupportsClassB'
-                        - description: The SupportsClassB value.
+                      $ref: '#/components/schemas/SupportsClassB'
+                      description: The SupportsClassB value.
                     ClassBTimeout:
-                      allOf:
-                        - $ref: '#/components/schemas/ClassBTimeout'
-                        - description: The ClassBTimeout value.
+                      $ref: '#/components/schemas/ClassBTimeout'
+                      description: The ClassBTimeout value.
                     PingSlotPeriod:
-                      allOf:
-                        - $ref: '#/components/schemas/PingSlotPeriod'
-                        - description: The PingSlotPeriod value.
+                      $ref: '#/components/schemas/PingSlotPeriod'
+                      description: The PingSlotPeriod value.
                     PingSlotDr:
-                      allOf:
-                        - $ref: '#/components/schemas/PingSlotDr'
-                        - description: The PingSlotDR value.
+                      $ref: '#/components/schemas/PingSlotDr'
+                      description: The PingSlotDR value.
                     PingSlotFreq:
-                      allOf:
-                        - $ref: '#/components/schemas/PingSlotFreq'
-                        - description: The PingSlotFreq value.
+                      $ref: '#/components/schemas/PingSlotFreq'
+                      description: The PingSlotFreq value.
                     SupportsClassC:
-                      allOf:
-                        - $ref: '#/components/schemas/SupportsClassC'
-                        - description: The SupportsClassC value.
+                      $ref: '#/components/schemas/SupportsClassC'
+                      description: The SupportsClassC value.
                     ClassCTimeout:
-                      allOf:
-                        - $ref: '#/components/schemas/ClassCTimeout'
-                        - description: The ClassCTimeout value.
+                      $ref: '#/components/schemas/ClassCTimeout'
+                      description: The ClassCTimeout value.
                     MacVersion:
-                      allOf:
-                        - $ref: '#/components/schemas/MacVersion'
-                        - description: The MAC version (such as OTAA 1.1 or OTAA 1.0.3) to use with this device profile.
+                      $ref: '#/components/schemas/MacVersion'
+                      description: The MAC version (such as OTAA 1.1 or OTAA 1.0.3) to use with this device profile.
                     RegParamsRevision:
-                      allOf:
-                        - $ref: '#/components/schemas/RegParamsRevision'
-                        - description: The version of regional parameters.
+                      $ref: '#/components/schemas/RegParamsRevision'
+                      description: The version of regional parameters.
                     RxDelay1:
-                      allOf:
-                        - $ref: '#/components/schemas/RxDelay1'
-                        - description: The RXDelay1 value.
+                      $ref: '#/components/schemas/RxDelay1'
+                      description: The RXDelay1 value.
                     RxDrOffset1:
-                      allOf:
-                        - $ref: '#/components/schemas/RxDrOffset1'
-                        - description: The RXDROffset1 value.
+                      $ref: '#/components/schemas/RxDrOffset1'
+                      description: The RXDROffset1 value.
                     RxDataRate2:
-                      allOf:
-                        - $ref: '#/components/schemas/RxDataRate2'
-                        - description: The RXDataRate2 value.
+                      $ref: '#/components/schemas/RxDataRate2'
+                      description: The RXDataRate2 value.
                     RxFreq2:
-                      allOf:
-                        - $ref: '#/components/schemas/RxFreq2'
-                        - description: The RXFreq2 value.
+                      $ref: '#/components/schemas/RxFreq2'
+                      description: The RXFreq2 value.
                     FactoryPresetFreqsList:
-                      allOf:
-                        - $ref: '#/components/schemas/FactoryPresetFreqsList'
-                        - description: The list of values that make up the FactoryPresetFreqs value.
+                      $ref: '#/components/schemas/FactoryPresetFreqsList'
+                      description: The list of values that make up the FactoryPresetFreqs value.
                     MaxEirp:
-                      allOf:
-                        - $ref: '#/components/schemas/MaxEirp'
-                        - description: The MaxEIRP value.
+                      $ref: '#/components/schemas/MaxEirp'
+                      description: The MaxEIRP value.
                     MaxDutyCycle:
-                      allOf:
-                        - $ref: '#/components/schemas/MaxDutyCycle'
-                        - description: The MaxDutyCycle value.
+                      $ref: '#/components/schemas/MaxDutyCycle'
+                      description: The MaxDutyCycle value.
                     RfRegion:
-                      allOf:
-                        - $ref: '#/components/schemas/RfRegion'
-                        - description: The frequency band (RFRegion) value.
+                      $ref: '#/components/schemas/RfRegion'
+                      description: The frequency band (RFRegion) value.
                     SupportsJoin:
-                      allOf:
-                        - $ref: '#/components/schemas/SupportsJoin'
-                        - description: The SupportsJoin value.
+                      $ref: '#/components/schemas/SupportsJoin'
+                      description: The SupportsJoin value.
                     Supports32BitFCnt:
-                      allOf:
-                        - $ref: '#/components/schemas/Supports32BitFCnt'
-                        - description: The Supports32BitFCnt value.
+                      $ref: '#/components/schemas/Supports32BitFCnt'
+                      description: The Supports32BitFCnt value.
                 Tags:
                   description: The tags to attach to the new device profile. Tags are metadata that you can use to manage a resource.
                   type: array
@@ -1127,9 +1106,8 @@ paths:
                   type: object
                   properties:
                     AddGwMetadata:
-                      allOf:
-                        - $ref: '#/components/schemas/AddGwMetadata'
-                        - description: The AddGWMetaData value.
+                      $ref: '#/components/schemas/AddGwMetadata'
+                      description: The AddGWMetaData value.
                 Tags:
                   description: The tags to attach to the new service profile. Tags are metadata that you can use to manage a resource.
                   type: array
@@ -1301,33 +1279,26 @@ paths:
                   type: object
                   properties:
                     DevEui:
-                      allOf:
-                        - $ref: '#/components/schemas/DevEui'
-                        - description: The DevEUI value.
+                      $ref: '#/components/schemas/DevEui'
+                      description: The DevEUI value.
                     DeviceProfileId:
-                      allOf:
-                        - $ref: '#/components/schemas/DeviceProfileId'
-                        - description: The ID of the device profile for the new wireless device.
+                      $ref: '#/components/schemas/DeviceProfileId'
+                      description: The ID of the device profile for the new wireless device.
                     ServiceProfileId:
-                      allOf:
-                        - $ref: '#/components/schemas/ServiceProfileId'
-                        - description: The ID of the service profile.
+                      $ref: '#/components/schemas/ServiceProfileId'
+                      description: The ID of the service profile.
                     OtaaV1_1:
-                      allOf:
-                        - $ref: '#/components/schemas/OtaaV1_1'
-                        - description: OTAA device object for v1.1 for create APIs
+                      $ref: '#/components/schemas/OtaaV1_1'
+                      description: OTAA device object for v1.1 for create APIs
                     OtaaV1_0_x:
-                      allOf:
-                        - $ref: '#/components/schemas/OtaaV1_0_x'
-                        - description: OTAA device object for create APIs for v1.0.x
+                      $ref: '#/components/schemas/OtaaV1_0_x'
+                      description: OTAA device object for create APIs for v1.0.x
                     AbpV1_1:
-                      allOf:
-                        - $ref: '#/components/schemas/AbpV1_1'
-                        - description: ABP device object for create APIs for v1.1
+                      $ref: '#/components/schemas/AbpV1_1'
+                      description: ABP device object for create APIs for v1.1
                     AbpV1_0_x:
-                      allOf:
-                        - $ref: '#/components/schemas/AbpV1_0_x'
-                        - description: LoRaWAN object for create APIs
+                      $ref: '#/components/schemas/AbpV1_0_x'
+                      description: LoRaWAN object for create APIs
                 Tags:
                   description: The tags to attach to the new wireless device. Tags are metadata that you can use to manage a resource.
                   type: array
@@ -1500,13 +1471,11 @@ paths:
                   type: object
                   properties:
                     GatewayEui:
-                      allOf:
-                        - $ref: '#/components/schemas/GatewayEui'
-                        - description: The gateway's EUI value.
+                      $ref: '#/components/schemas/GatewayEui'
+                      description: The gateway's EUI value.
                     RfRegion:
-                      allOf:
-                        - $ref: '#/components/schemas/RfRegion'
-                        - description: The frequency band (RFRegion) value.
+                      $ref: '#/components/schemas/RfRegion'
+                      description: The frequency band (RFRegion) value.
                     JoinEuiFilters:
                       $ref: '#/components/schemas/JoinEuiFilters'
                     NetIdFilters:
@@ -1839,17 +1808,14 @@ paths:
                   type: object
                   properties:
                     UpdateDataSource:
-                      allOf:
-                        - $ref: '#/components/schemas/UpdateDataSource'
-                        - description: The link to the S3 bucket.
+                      $ref: '#/components/schemas/UpdateDataSource'
+                      description: The link to the S3 bucket.
                     UpdateDataRole:
-                      allOf:
-                        - $ref: '#/components/schemas/UpdateDataSource'
-                        - description: The IAM role used to read data from the S3 bucket.
+                      $ref: '#/components/schemas/UpdateDataSource'
+                      description: The IAM role used to read data from the S3 bucket.
                     LoRaWAN:
-                      allOf:
-                        - $ref: '#/components/schemas/LoRaWANUpdateGatewayTaskCreate'
-                        - description: The properties that relate to the LoRaWAN wireless gateway.
+                      $ref: '#/components/schemas/LoRaWANUpdateGatewayTaskCreate'
+                      description: The properties that relate to the LoRaWAN wireless gateway.
                 ClientRequestToken:
                   description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
                   type: string
@@ -2469,13 +2435,11 @@ paths:
                   type: object
                   properties:
                     DeviceProfileId:
-                      allOf:
-                        - $ref: '#/components/schemas/DeviceProfileId'
-                        - description: The ID of the device profile for the wireless device.
+                      $ref: '#/components/schemas/DeviceProfileId'
+                      description: The ID of the device profile for the wireless device.
                     ServiceProfileId:
-                      allOf:
-                        - $ref: '#/components/schemas/ServiceProfileId'
-                        - description: The ID of the service profile.
+                      $ref: '#/components/schemas/ServiceProfileId'
+                      description: The ID of the service profile.
   '/wireless-gateways/{Id}':
     delete:
       operationId: DeleteWirelessGateway
@@ -2890,9 +2854,8 @@ paths:
                   type: object
                   properties:
                     AppServerPrivateKey:
-                      allOf:
-                        - $ref: '#/components/schemas/AppServerPrivateKey'
-                        - description: The new Sidewalk application server private key.
+                      $ref: '#/components/schemas/AppServerPrivateKey'
+                      description: The new Sidewalk application server private key.
   /log-levels:
     get:
       operationId: GetLogLevelsByResourceTypes
@@ -3801,13 +3764,11 @@ paths:
                   type: object
                   properties:
                     LoRaWAN:
-                      allOf:
-                        - $ref: '#/components/schemas/LoRaWANSendDataToDevice'
-                        - description: LoRaWAN device info.
+                      $ref: '#/components/schemas/LoRaWANSendDataToDevice'
+                      description: LoRaWAN device info.
                     Sidewalk:
-                      allOf:
-                        - $ref: '#/components/schemas/SidewalkSendDataToDevice'
-                        - description: The Sidewalk account credentials.
+                      $ref: '#/components/schemas/SidewalkSendDataToDevice'
+                      description: The Sidewalk account credentials.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3991,13 +3952,11 @@ components:
       type: object
       properties:
         Sidewalk:
-          allOf:
-            - $ref: '#/components/schemas/SidewalkAccountInfo'
-            - description: The Sidewalk account credentials.
+          $ref: '#/components/schemas/SidewalkAccountInfo'
+          description: The Sidewalk account credentials.
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/PartnerAccountArn'
-            - description: The Amazon Resource Name of the resource.
+          $ref: '#/components/schemas/PartnerAccountArn'
+          description: The Amazon Resource Name of the resource.
     AmazonId:
       type: string
       description: The Sidewalk Amazon ID.
@@ -4015,13 +3974,11 @@ components:
         - Value
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: The tag's key value.
+          $ref: '#/components/schemas/TagKey'
+          description: The tag's key value.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: The tag's value.
+          $ref: '#/components/schemas/TagValue'
+          description: The tag's value.
       description: A simple label consisting of a customer-defined key-value pair
     ValidationException: {}
     ResourceNotFoundException: {}
@@ -4036,9 +3993,8 @@ components:
       type: object
       properties:
         IotCertificateId:
-          allOf:
-            - $ref: '#/components/schemas/IotCertificateId'
-            - description: The ID of the certificate associated with the wireless gateway.
+          $ref: '#/components/schemas/IotCertificateId'
+          description: The ID of the certificate associated with the wireless gateway.
     AssociateWirelessGatewayWithThingResponse:
       type: object
       properties: {}
@@ -4046,24 +4002,20 @@ components:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/DestinationArn'
-            - description: The Amazon Resource Name of the new resource.
+          $ref: '#/components/schemas/DestinationArn'
+          description: The Amazon Resource Name of the new resource.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/DestinationName'
-            - description: The name of the new resource.
+          $ref: '#/components/schemas/DestinationName'
+          description: The name of the new resource.
     CreateDeviceProfileResponse:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/DeviceProfileArn'
-            - description: The Amazon Resource Name of the new resource.
+          $ref: '#/components/schemas/DeviceProfileArn'
+          description: The Amazon Resource Name of the new resource.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/DeviceProfileId'
-            - description: The ID of the new device profile.
+          $ref: '#/components/schemas/DeviceProfileId'
+          description: The ID of the new device profile.
     SupportsClassB:
       type: boolean
     ClassBTimeout:
@@ -4135,26 +4087,22 @@ components:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/ServiceProfileArn'
-            - description: The Amazon Resource Name of the new resource.
+          $ref: '#/components/schemas/ServiceProfileArn'
+          description: The Amazon Resource Name of the new resource.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ServiceProfileId'
-            - description: The ID of the new service profile.
+          $ref: '#/components/schemas/ServiceProfileId'
+          description: The ID of the new service profile.
     AddGwMetadata:
       type: boolean
     CreateWirelessDeviceResponse:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceArn'
-            - description: The Amazon Resource Name of the new resource.
+          $ref: '#/components/schemas/WirelessDeviceArn'
+          description: The Amazon Resource Name of the new resource.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceId'
-            - description: The ID of the new wireless device.
+          $ref: '#/components/schemas/WirelessDeviceId'
+          description: The ID of the new wireless device.
     DevEui:
       type: string
       pattern: '[a-fA-F0-9]{16}'
@@ -4168,65 +4116,54 @@ components:
       type: object
       properties:
         AppKey:
-          allOf:
-            - $ref: '#/components/schemas/AppKey'
-            - description: The AppKey value.
+          $ref: '#/components/schemas/AppKey'
+          description: The AppKey value.
         NwkKey:
-          allOf:
-            - $ref: '#/components/schemas/NwkKey'
-            - description: The NwkKey value.
+          $ref: '#/components/schemas/NwkKey'
+          description: The NwkKey value.
         JoinEui:
-          allOf:
-            - $ref: '#/components/schemas/JoinEui'
-            - description: The JoinEUI value.
+          $ref: '#/components/schemas/JoinEui'
+          description: The JoinEUI value.
       description: OTAA device object for v1.1
     OtaaV1_0_x:
       type: object
       properties:
         AppKey:
-          allOf:
-            - $ref: '#/components/schemas/AppKey'
-            - description: The AppKey value.
+          $ref: '#/components/schemas/AppKey'
+          description: The AppKey value.
         AppEui:
-          allOf:
-            - $ref: '#/components/schemas/AppEui'
-            - description: The AppEUI value.
+          $ref: '#/components/schemas/AppEui'
+          description: The AppEUI value.
       description: OTAA device object for v1.0.x
     AbpV1_1:
       type: object
       properties:
         DevAddr:
-          allOf:
-            - $ref: '#/components/schemas/DevAddr'
-            - description: The DevAddr value.
+          $ref: '#/components/schemas/DevAddr'
+          description: The DevAddr value.
         SessionKeys:
-          allOf:
-            - $ref: '#/components/schemas/SessionKeysAbpV1_1'
-            - description: Session keys for ABP v1.1
+          $ref: '#/components/schemas/SessionKeysAbpV1_1'
+          description: Session keys for ABP v1.1
       description: ABP device object for LoRaWAN specification v1.1
     AbpV1_0_x:
       type: object
       properties:
         DevAddr:
-          allOf:
-            - $ref: '#/components/schemas/DevAddr'
-            - description: The DevAddr value.
+          $ref: '#/components/schemas/DevAddr'
+          description: The DevAddr value.
         SessionKeys:
-          allOf:
-            - $ref: '#/components/schemas/SessionKeysAbpV1_0_x'
-            - description: Session keys for ABP v1.0.x
+          $ref: '#/components/schemas/SessionKeysAbpV1_0_x'
+          description: Session keys for ABP v1.0.x
       description: ABP device object for LoRaWAN specification v1.0.x
     CreateWirelessGatewayResponse:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayArn'
-            - description: The Amazon Resource Name of the new resource.
+          $ref: '#/components/schemas/WirelessGatewayArn'
+          description: The Amazon Resource Name of the new resource.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceId'
-            - description: The ID of the new wireless gateway.
+          $ref: '#/components/schemas/WirelessDeviceId'
+          description: The ID of the new wireless gateway.
     GatewayEui:
       type: string
       pattern: '^(([0-9A-Fa-f]{2}-){7}|([0-9A-Fa-f]{2}:){7}|([0-9A-Fa-f]{2}\s){7}|([0-9A-Fa-f]{2}){7})([0-9A-Fa-f]{2})$'
@@ -4255,24 +4192,20 @@ components:
       type: object
       properties:
         WirelessGatewayTaskDefinitionId:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayTaskDefinitionId'
-            - description: The ID of the WirelessGatewayTaskDefinition.
+          $ref: '#/components/schemas/WirelessGatewayTaskDefinitionId'
+          description: The ID of the WirelessGatewayTaskDefinition.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayTaskStatus'
-            - description: The status of the request.
+          $ref: '#/components/schemas/WirelessGatewayTaskStatus'
+          description: The status of the request.
     CreateWirelessGatewayTaskDefinitionResponse:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayTaskDefinitionId'
-            - description: The ID of the new wireless gateway task definition.
+          $ref: '#/components/schemas/WirelessGatewayTaskDefinitionId'
+          description: The ID of the new wireless gateway task definition.
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayTaskDefinitionArn'
-            - description: The Amazon Resource Name of the resource.
+          $ref: '#/components/schemas/WirelessGatewayTaskDefinitionArn'
+          description: The Amazon Resource Name of the resource.
     UpdateDataSource:
       type: string
       minLength: 1
@@ -4281,21 +4214,17 @@ components:
       type: object
       properties:
         UpdateSignature:
-          allOf:
-            - $ref: '#/components/schemas/UpdateSignature'
-            - description: The signature used to verify the update firmware.
+          $ref: '#/components/schemas/UpdateSignature'
+          description: The signature used to verify the update firmware.
         SigKeyCrc:
-          allOf:
-            - $ref: '#/components/schemas/Crc'
-            - description: The CRC of the signature private key to check.
+          $ref: '#/components/schemas/Crc'
+          description: The CRC of the signature private key to check.
         CurrentVersion:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANGatewayVersion'
-            - description: The version of the gateways that should receive the update.
+          $ref: '#/components/schemas/LoRaWANGatewayVersion'
+          description: The version of the gateways that should receive the update.
         UpdateVersion:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANGatewayVersion'
-            - description: The firmware version to update the gateway to.
+          $ref: '#/components/schemas/LoRaWANGatewayVersion'
+          description: The firmware version to update the gateway to.
       description: LoRaWANUpdateGatewayTaskCreate object.
     DeleteDestinationResponse:
       type: object
@@ -4334,48 +4263,38 @@ components:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/DestinationArn'
-            - description: The Amazon Resource Name of the resource.
+          $ref: '#/components/schemas/DestinationArn'
+          description: The Amazon Resource Name of the resource.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/DestinationName'
-            - description: The name of the resource.
+          $ref: '#/components/schemas/DestinationName'
+          description: The name of the resource.
         Expression:
-          allOf:
-            - $ref: '#/components/schemas/Expression'
-            - description: The rule name or topic rule to send messages to.
+          $ref: '#/components/schemas/Expression'
+          description: The rule name or topic rule to send messages to.
         ExpressionType:
-          allOf:
-            - $ref: '#/components/schemas/ExpressionType'
-            - description: The type of value in <code>Expression</code>.
+          $ref: '#/components/schemas/ExpressionType'
+          description: The type of value in <code>Expression</code>.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the resource.
+          $ref: '#/components/schemas/Description'
+          description: The description of the resource.
         RoleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The ARN of the IAM Role that authorizes the destination.
+          $ref: '#/components/schemas/RoleArn'
+          description: The ARN of the IAM Role that authorizes the destination.
     GetDeviceProfileResponse:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/DeviceProfileArn'
-            - description: The Amazon Resource Name of the resource.
+          $ref: '#/components/schemas/DeviceProfileArn'
+          description: The Amazon Resource Name of the resource.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/DeviceProfileName'
-            - description: The name of the resource.
+          $ref: '#/components/schemas/DeviceProfileName'
+          description: The name of the resource.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/DeviceProfileId'
-            - description: The ID of the device profile.
+          $ref: '#/components/schemas/DeviceProfileId'
+          description: The ID of the device profile.
         LoRaWAN:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANDeviceProfile'
-            - description: Information about the device profile.
+          $ref: '#/components/schemas/LoRaWANDeviceProfile'
+          description: Information about the device profile.
     GetLogLevelsByResourceTypesResponse:
       type: object
       properties:
@@ -4389,13 +4308,11 @@ components:
       type: object
       properties:
         Sidewalk:
-          allOf:
-            - $ref: '#/components/schemas/SidewalkAccountInfoWithFingerprint'
-            - description: The Sidewalk account credentials.
+          $ref: '#/components/schemas/SidewalkAccountInfoWithFingerprint'
+          description: The Sidewalk account credentials.
         AccountLinked:
-          allOf:
-            - $ref: '#/components/schemas/AccountLinked'
-            - description: Whether the partner account is linked to the AWS account.
+          $ref: '#/components/schemas/AccountLinked'
+          description: Whether the partner account is linked to the AWS account.
     GetResourceLogLevelResponse:
       type: object
       properties:
@@ -4405,288 +4322,230 @@ components:
       type: object
       properties:
         ServiceType:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayServiceType'
-            - description: The endpoint's service type.
+          $ref: '#/components/schemas/WirelessGatewayServiceType'
+          description: The endpoint's service type.
         ServiceEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/EndPoint'
-            - description: The service endpoint value.
+          $ref: '#/components/schemas/EndPoint'
+          description: The service endpoint value.
         ServerTrust:
-          allOf:
-            - $ref: '#/components/schemas/CertificatePEM'
-            - description: The Root CA of the server trust certificate.
+          $ref: '#/components/schemas/CertificatePEM'
+          description: The Root CA of the server trust certificate.
     GetServiceProfileResponse:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/ServiceProfileArn'
-            - description: The Amazon Resource Name of the resource.
+          $ref: '#/components/schemas/ServiceProfileArn'
+          description: The Amazon Resource Name of the resource.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ServiceProfileName'
-            - description: The name of the resource.
+          $ref: '#/components/schemas/ServiceProfileName'
+          description: The name of the resource.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ServiceProfileId'
-            - description: The ID of the service profile.
+          $ref: '#/components/schemas/ServiceProfileId'
+          description: The ID of the service profile.
         LoRaWAN:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANGetServiceProfileInfo'
-            - description: Information about the service profile.
+          $ref: '#/components/schemas/LoRaWANGetServiceProfileInfo'
+          description: Information about the service profile.
     GetWirelessDeviceResponse:
       type: object
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceType'
-            - description: The wireless device type.
+          $ref: '#/components/schemas/WirelessDeviceType'
+          description: The wireless device type.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceName'
-            - description: The name of the resource.
+          $ref: '#/components/schemas/WirelessDeviceName'
+          description: The name of the resource.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the resource.
+          $ref: '#/components/schemas/Description'
+          description: The description of the resource.
         DestinationName:
-          allOf:
-            - $ref: '#/components/schemas/DestinationName'
-            - description: The name of the destination to which the device is assigned.
+          $ref: '#/components/schemas/DestinationName'
+          description: The name of the destination to which the device is assigned.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceId'
-            - description: The ID of the wireless device.
+          $ref: '#/components/schemas/WirelessDeviceId'
+          description: The ID of the wireless device.
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceArn'
-            - description: The Amazon Resource Name of the resource.
+          $ref: '#/components/schemas/WirelessDeviceArn'
+          description: The Amazon Resource Name of the resource.
         ThingName:
-          allOf:
-            - $ref: '#/components/schemas/ThingName'
-            - description: The name of the thing associated with the wireless device. The value is empty if a thing isn't associated with the device.
+          $ref: '#/components/schemas/ThingName'
+          description: The name of the thing associated with the wireless device. The value is empty if a thing isn't associated with the device.
         ThingArn:
-          allOf:
-            - $ref: '#/components/schemas/ThingArn'
-            - description: The ARN of the thing associated with the wireless device.
+          $ref: '#/components/schemas/ThingArn'
+          description: The ARN of the thing associated with the wireless device.
         LoRaWAN:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANDevice'
-            - description: Information about the wireless device.
+          $ref: '#/components/schemas/LoRaWANDevice'
+          description: Information about the wireless device.
         Sidewalk:
-          allOf:
-            - $ref: '#/components/schemas/SidewalkDevice'
-            - description: Sidewalk device object.
+          $ref: '#/components/schemas/SidewalkDevice'
+          description: Sidewalk device object.
     GetWirelessDeviceStatisticsResponse:
       type: object
       properties:
         WirelessDeviceId:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceId'
-            - description: The ID of the wireless device.
+          $ref: '#/components/schemas/WirelessDeviceId'
+          description: The ID of the wireless device.
         LastUplinkReceivedAt:
-          allOf:
-            - $ref: '#/components/schemas/ISODateTimeString'
-            - description: The date and time when the most recent uplink was received.
+          $ref: '#/components/schemas/ISODateTimeString'
+          description: The date and time when the most recent uplink was received.
         LoRaWAN:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANDeviceMetadata'
-            - description: Information about the wireless device's operations.
+          $ref: '#/components/schemas/LoRaWANDeviceMetadata'
+          description: Information about the wireless device's operations.
         Sidewalk:
-          allOf:
-            - $ref: '#/components/schemas/SidewalkDeviceMetadata'
-            - description: MetaData for Sidewalk device.
+          $ref: '#/components/schemas/SidewalkDeviceMetadata'
+          description: MetaData for Sidewalk device.
     GetWirelessGatewayResponse:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayName'
-            - description: The name of the resource.
+          $ref: '#/components/schemas/WirelessGatewayName'
+          description: The name of the resource.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayId'
-            - description: The ID of the wireless gateway.
+          $ref: '#/components/schemas/WirelessGatewayId'
+          description: The ID of the wireless gateway.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the resource.
+          $ref: '#/components/schemas/Description'
+          description: The description of the resource.
         LoRaWAN:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANGateway'
-            - description: Information about the wireless gateway.
+          $ref: '#/components/schemas/LoRaWANGateway'
+          description: Information about the wireless gateway.
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayArn'
-            - description: The Amazon Resource Name of the resource.
+          $ref: '#/components/schemas/WirelessGatewayArn'
+          description: The Amazon Resource Name of the resource.
         ThingName:
-          allOf:
-            - $ref: '#/components/schemas/ThingName'
-            - description: The name of the thing associated with the wireless gateway. The value is empty if a thing isn't associated with the gateway.
+          $ref: '#/components/schemas/ThingName'
+          description: The name of the thing associated with the wireless gateway. The value is empty if a thing isn't associated with the gateway.
         ThingArn:
-          allOf:
-            - $ref: '#/components/schemas/ThingArn'
-            - description: The ARN of the thing associated with the wireless gateway.
+          $ref: '#/components/schemas/ThingArn'
+          description: The ARN of the thing associated with the wireless gateway.
     GetWirelessGatewayCertificateResponse:
       type: object
       properties:
         IotCertificateId:
-          allOf:
-            - $ref: '#/components/schemas/IotCertificateId'
-            - description: The ID of the certificate associated with the wireless gateway.
+          $ref: '#/components/schemas/IotCertificateId'
+          description: The ID of the certificate associated with the wireless gateway.
         LoRaWANNetworkServerCertificateId:
-          allOf:
-            - $ref: '#/components/schemas/IotCertificateId'
-            - description: The ID of the certificate that is associated with the wireless gateway and used for the LoRaWANNetworkServer endpoint.
+          $ref: '#/components/schemas/IotCertificateId'
+          description: The ID of the certificate that is associated with the wireless gateway and used for the LoRaWANNetworkServer endpoint.
     GetWirelessGatewayFirmwareInformationResponse:
       type: object
       properties:
         LoRaWAN:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANGatewayCurrentVersion'
-            - description: Information about the wireless gateway's firmware.
+          $ref: '#/components/schemas/LoRaWANGatewayCurrentVersion'
+          description: Information about the wireless gateway's firmware.
     GetWirelessGatewayStatisticsResponse:
       type: object
       properties:
         WirelessGatewayId:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayId'
-            - description: The ID of the wireless gateway.
+          $ref: '#/components/schemas/WirelessGatewayId'
+          description: The ID of the wireless gateway.
         LastUplinkReceivedAt:
-          allOf:
-            - $ref: '#/components/schemas/ISODateTimeString'
-            - description: The date and time when the most recent uplink was received.
+          $ref: '#/components/schemas/ISODateTimeString'
+          description: The date and time when the most recent uplink was received.
         ConnectionStatus:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionStatus'
-            - description: The connection status of the wireless gateway.
+          $ref: '#/components/schemas/ConnectionStatus'
+          description: The connection status of the wireless gateway.
     GetWirelessGatewayTaskResponse:
       type: object
       properties:
         WirelessGatewayId:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayId'
-            - description: The ID of the wireless gateway.
+          $ref: '#/components/schemas/WirelessGatewayId'
+          description: The ID of the wireless gateway.
         WirelessGatewayTaskDefinitionId:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayTaskDefinitionId'
-            - description: The ID of the WirelessGatewayTask.
+          $ref: '#/components/schemas/WirelessGatewayTaskDefinitionId'
+          description: The ID of the WirelessGatewayTask.
         LastUplinkReceivedAt:
-          allOf:
-            - $ref: '#/components/schemas/ISODateTimeString'
-            - description: The date and time when the most recent uplink was received.
+          $ref: '#/components/schemas/ISODateTimeString'
+          description: The date and time when the most recent uplink was received.
         TaskCreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/ISODateTimeString'
-            - description: The date and time when the task was created.
+          $ref: '#/components/schemas/ISODateTimeString'
+          description: The date and time when the task was created.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayTaskStatus'
-            - description: The status of the request.
+          $ref: '#/components/schemas/WirelessGatewayTaskStatus'
+          description: The status of the request.
     GetWirelessGatewayTaskDefinitionResponse:
       type: object
       properties:
         AutoCreateTasks:
-          allOf:
-            - $ref: '#/components/schemas/AutoCreateTasks'
-            - description: 'Whether to automatically create tasks using this task definition for all gateways with the specified current version. If <code>false</code>, the task must me created by calling <code>CreateWirelessGatewayTask</code>.'
+          $ref: '#/components/schemas/AutoCreateTasks'
+          description: 'Whether to automatically create tasks using this task definition for all gateways with the specified current version. If <code>false</code>, the task must me created by calling <code>CreateWirelessGatewayTask</code>.'
         Name:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayTaskName'
-            - description: The name of the resource.
+          $ref: '#/components/schemas/WirelessGatewayTaskName'
+          description: The name of the resource.
         Update:
-          allOf:
-            - $ref: '#/components/schemas/UpdateWirelessGatewayTaskCreate'
-            - description: Information about the gateways to update.
+          $ref: '#/components/schemas/UpdateWirelessGatewayTaskCreate'
+          description: Information about the gateways to update.
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayTaskDefinitionArn'
-            - description: The Amazon Resource Name of the resource.
+          $ref: '#/components/schemas/WirelessGatewayTaskDefinitionArn'
+          description: The Amazon Resource Name of the resource.
     ListDestinationsResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The token to use to get the next set of results, or <b>null</b> if there are no additional results.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'The token to use to get the next set of results, or <b>null</b> if there are no additional results.'
         DestinationList:
-          allOf:
-            - $ref: '#/components/schemas/DestinationList'
-            - description: The list of destinations.
+          $ref: '#/components/schemas/DestinationList'
+          description: The list of destinations.
     ListDeviceProfilesResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The token to use to get the next set of results, or <b>null</b> if there are no additional results.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'The token to use to get the next set of results, or <b>null</b> if there are no additional results.'
         DeviceProfileList:
-          allOf:
-            - $ref: '#/components/schemas/DeviceProfileList'
-            - description: The list of device profiles.
+          $ref: '#/components/schemas/DeviceProfileList'
+          description: The list of device profiles.
     ListPartnerAccountsResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The token to use to get the next set of results, or <b>null</b> if there are no additional results.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'The token to use to get the next set of results, or <b>null</b> if there are no additional results.'
         Sidewalk:
-          allOf:
-            - $ref: '#/components/schemas/SidewalkAccountList'
-            - description: The Sidewalk account credentials.
+          $ref: '#/components/schemas/SidewalkAccountList'
+          description: The Sidewalk account credentials.
     ListServiceProfilesResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The token to use to get the next set of results, or <b>null</b> if there are no additional results.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'The token to use to get the next set of results, or <b>null</b> if there are no additional results.'
         ServiceProfileList:
-          allOf:
-            - $ref: '#/components/schemas/ServiceProfileList'
-            - description: The list of service profiles.
+          $ref: '#/components/schemas/ServiceProfileList'
+          description: The list of service profiles.
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
+          $ref: '#/components/schemas/TagList'
+          description: The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
     ListWirelessDevicesResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The token to use to get the next set of results, or <b>null</b> if there are no additional results.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'The token to use to get the next set of results, or <b>null</b> if there are no additional results.'
         WirelessDeviceList:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceStatisticsList'
-            - description: The ID of the wireless device.
+          $ref: '#/components/schemas/WirelessDeviceStatisticsList'
+          description: The ID of the wireless device.
     ListWirelessGatewayTaskDefinitionsResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The token to use to get the next set of results, or <b>null</b> if there are no additional results.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'The token to use to get the next set of results, or <b>null</b> if there are no additional results.'
         TaskDefinitions:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayTaskDefinitionList'
-            - description: The list of task definitions.
+          $ref: '#/components/schemas/WirelessGatewayTaskDefinitionList'
+          description: The list of task definitions.
     ListWirelessGatewaysResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The token to use to get the next set of results, or <b>null</b> if there are no additional results.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'The token to use to get the next set of results, or <b>null</b> if there are no additional results.'
         WirelessGatewayList:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayStatisticsList'
-            - description: The ID of the wireless gateway.
+          $ref: '#/components/schemas/WirelessGatewayStatisticsList'
+          description: The ID of the wireless gateway.
     PutResourceLogLevelResponse:
       type: object
       properties: {}
@@ -4700,24 +4559,21 @@ components:
       type: object
       properties:
         MessageId:
-          allOf:
-            - $ref: '#/components/schemas/MessageId'
-            - description: The ID of the message sent to the wireless device.
+          $ref: '#/components/schemas/MessageId'
+          description: The ID of the message sent to the wireless device.
     LoRaWANSendDataToDevice:
       type: object
       properties:
         FPort:
-          allOf:
-            - $ref: '#/components/schemas/FPort'
-            - description: The Fport value.
+          $ref: '#/components/schemas/FPort'
+          description: The Fport value.
       description: LoRaWAN router info.
     SidewalkSendDataToDevice:
       type: object
       properties:
         Seq:
-          allOf:
-            - $ref: '#/components/schemas/Seq'
-            - description: The sequence number.
+          $ref: '#/components/schemas/Seq'
+          description: The sequence number.
         MessageType:
           $ref: '#/components/schemas/MessageType'
       description: Information about a Sidewalk router.
@@ -4729,9 +4585,8 @@ components:
       type: object
       properties:
         Result:
-          allOf:
-            - $ref: '#/components/schemas/Result'
-            - description: The result returned by the test.
+          $ref: '#/components/schemas/Result'
+          description: The result returned by the test.
     UntagResourceResponse:
       type: object
       properties: {}
@@ -4752,9 +4607,8 @@ components:
         - LogLevel
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceType'
-            - description: The wireless device type.
+          $ref: '#/components/schemas/WirelessDeviceType'
+          description: The wireless device type.
         LogLevel:
           $ref: '#/components/schemas/LogLevel'
         Events:
@@ -4800,33 +4654,27 @@ components:
       type: object
       properties:
         NwkSKey:
-          allOf:
-            - $ref: '#/components/schemas/NwkSKey'
-            - description: The NwkSKey value.
+          $ref: '#/components/schemas/NwkSKey'
+          description: The NwkSKey value.
         AppSKey:
-          allOf:
-            - $ref: '#/components/schemas/AppSKey'
-            - description: The AppSKey value.
+          $ref: '#/components/schemas/AppSKey'
+          description: The AppSKey value.
       description: Session keys for ABP v1.1
     SessionKeysAbpV1_1:
       type: object
       properties:
         FNwkSIntKey:
-          allOf:
-            - $ref: '#/components/schemas/FNwkSIntKey'
-            - description: The FNwkSIntKey value.
+          $ref: '#/components/schemas/FNwkSIntKey'
+          description: The FNwkSIntKey value.
         SNwkSIntKey:
-          allOf:
-            - $ref: '#/components/schemas/SNwkSIntKey'
-            - description: The SNwkSIntKey value.
+          $ref: '#/components/schemas/SNwkSIntKey'
+          description: The SNwkSIntKey value.
         NwkSEncKey:
-          allOf:
-            - $ref: '#/components/schemas/NwkSEncKey'
-            - description: The NwkSEncKey value.
+          $ref: '#/components/schemas/NwkSEncKey'
+          description: The NwkSEncKey value.
         AppSKey:
-          allOf:
-            - $ref: '#/components/schemas/AppSKey'
-            - description: The AppSKey value.
+          $ref: '#/components/schemas/AppSKey'
+          description: The AppSKey value.
       description: Session keys for ABP v1.1
     AccountLinked:
       type: boolean
@@ -4847,13 +4695,11 @@ components:
       type: object
       properties:
         AmazonId:
-          allOf:
-            - $ref: '#/components/schemas/AmazonId'
-            - description: The Sidewalk Amazon ID.
+          $ref: '#/components/schemas/AmazonId'
+          description: The Sidewalk Amazon ID.
         AppServerPrivateKey:
-          allOf:
-            - $ref: '#/components/schemas/AppServerPrivateKey'
-            - description: The Sidewalk application server private key.
+          $ref: '#/components/schemas/AppServerPrivateKey'
+          description: The Sidewalk application server private key.
       description: Information about a Sidewalk account.
     ClientRequestToken:
       type: string
@@ -4873,17 +4719,14 @@ components:
       title: AssociateAwsAccountWithPartnerAccountRequest
       properties:
         Sidewalk:
-          allOf:
-            - $ref: '#/components/schemas/SidewalkAccountInfo'
-            - description: The Sidewalk account credentials.
+          $ref: '#/components/schemas/SidewalkAccountInfo'
+          description: The Sidewalk account credentials.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
+          $ref: '#/components/schemas/TagList'
+          description: The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
     PartnerAccountArn:
       type: string
     WirelessDeviceId:
@@ -4898,9 +4741,8 @@ components:
       title: AssociateWirelessDeviceWithThingRequest
       properties:
         ThingArn:
-          allOf:
-            - $ref: '#/components/schemas/ThingArn'
-            - description: The ARN of the thing to associate with the wireless device.
+          $ref: '#/components/schemas/ThingArn'
+          description: The ARN of the thing to associate with the wireless device.
     WirelessGatewayId:
       type: string
       maxLength: 256
@@ -4915,9 +4757,8 @@ components:
       title: AssociateWirelessGatewayWithCertificateRequest
       properties:
         IotCertificateId:
-          allOf:
-            - $ref: '#/components/schemas/IotCertificateId'
-            - description: The ID of the certificate to associate with the wireless gateway.
+          $ref: '#/components/schemas/IotCertificateId'
+          description: The ID of the certificate to associate with the wireless gateway.
     AssociateWirelessGatewayWithThingRequest:
       type: object
       required:
@@ -4925,9 +4766,8 @@ components:
       title: AssociateWirelessGatewayWithThingRequest
       properties:
         ThingArn:
-          allOf:
-            - $ref: '#/components/schemas/ThingArn'
-            - description: The ARN of the thing to associate with the wireless gateway.
+          $ref: '#/components/schemas/ThingArn'
+          description: The ARN of the thing to associate with the wireless gateway.
     AutoCreateTasks:
       type: boolean
     BatteryLevel:
@@ -4955,13 +4795,11 @@ components:
         - Value
       properties:
         SigningAlg:
-          allOf:
-            - $ref: '#/components/schemas/SigningAlg'
-            - description: The certificate chain algorithm provided by sidewalk.
+          $ref: '#/components/schemas/SigningAlg'
+          description: The certificate chain algorithm provided by sidewalk.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/CertificateValue'
-            - description: The value of the chosen sidewalk certificate.
+          $ref: '#/components/schemas/CertificateValue'
+          description: The value of the chosen sidewalk certificate.
       description: List of sidewalk certificates.
     CertificatePEM:
       type: string
@@ -5009,33 +4847,26 @@ components:
       title: CreateDestinationRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/DestinationName'
-            - description: The name of the new resource.
+          $ref: '#/components/schemas/DestinationName'
+          description: The name of the new resource.
         ExpressionType:
-          allOf:
-            - $ref: '#/components/schemas/ExpressionType'
-            - description: The type of value in <code>Expression</code>.
+          $ref: '#/components/schemas/ExpressionType'
+          description: The type of value in <code>Expression</code>.
         Expression:
-          allOf:
-            - $ref: '#/components/schemas/Expression'
-            - description: The rule name or topic rule to send messages to.
+          $ref: '#/components/schemas/Expression'
+          description: The rule name or topic rule to send messages to.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the new resource.
+          $ref: '#/components/schemas/Description'
+          description: The description of the new resource.
         RoleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The ARN of the IAM Role that authorizes the destination.
+          $ref: '#/components/schemas/RoleArn'
+          description: The ARN of the IAM Role that authorizes the destination.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: The tags to attach to the new destination. Tags are metadata that you can use to manage a resource.
+          $ref: '#/components/schemas/TagList'
+          description: The tags to attach to the new destination. Tags are metadata that you can use to manage a resource.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
     DestinationArn:
       type: string
     DeviceProfileName:
@@ -5045,102 +4876,79 @@ components:
       type: object
       properties:
         SupportsClassB:
-          allOf:
-            - $ref: '#/components/schemas/SupportsClassB'
-            - description: The SupportsClassB value.
+          $ref: '#/components/schemas/SupportsClassB'
+          description: The SupportsClassB value.
         ClassBTimeout:
-          allOf:
-            - $ref: '#/components/schemas/ClassBTimeout'
-            - description: The ClassBTimeout value.
+          $ref: '#/components/schemas/ClassBTimeout'
+          description: The ClassBTimeout value.
         PingSlotPeriod:
-          allOf:
-            - $ref: '#/components/schemas/PingSlotPeriod'
-            - description: The PingSlotPeriod value.
+          $ref: '#/components/schemas/PingSlotPeriod'
+          description: The PingSlotPeriod value.
         PingSlotDr:
-          allOf:
-            - $ref: '#/components/schemas/PingSlotDr'
-            - description: The PingSlotDR value.
+          $ref: '#/components/schemas/PingSlotDr'
+          description: The PingSlotDR value.
         PingSlotFreq:
-          allOf:
-            - $ref: '#/components/schemas/PingSlotFreq'
-            - description: The PingSlotFreq value.
+          $ref: '#/components/schemas/PingSlotFreq'
+          description: The PingSlotFreq value.
         SupportsClassC:
-          allOf:
-            - $ref: '#/components/schemas/SupportsClassC'
-            - description: The SupportsClassC value.
+          $ref: '#/components/schemas/SupportsClassC'
+          description: The SupportsClassC value.
         ClassCTimeout:
-          allOf:
-            - $ref: '#/components/schemas/ClassCTimeout'
-            - description: The ClassCTimeout value.
+          $ref: '#/components/schemas/ClassCTimeout'
+          description: The ClassCTimeout value.
         MacVersion:
-          allOf:
-            - $ref: '#/components/schemas/MacVersion'
-            - description: The MAC version (such as OTAA 1.1 or OTAA 1.0.3) to use with this device profile.
+          $ref: '#/components/schemas/MacVersion'
+          description: The MAC version (such as OTAA 1.1 or OTAA 1.0.3) to use with this device profile.
         RegParamsRevision:
-          allOf:
-            - $ref: '#/components/schemas/RegParamsRevision'
-            - description: The version of regional parameters.
+          $ref: '#/components/schemas/RegParamsRevision'
+          description: The version of regional parameters.
         RxDelay1:
-          allOf:
-            - $ref: '#/components/schemas/RxDelay1'
-            - description: The RXDelay1 value.
+          $ref: '#/components/schemas/RxDelay1'
+          description: The RXDelay1 value.
         RxDrOffset1:
-          allOf:
-            - $ref: '#/components/schemas/RxDrOffset1'
-            - description: The RXDROffset1 value.
+          $ref: '#/components/schemas/RxDrOffset1'
+          description: The RXDROffset1 value.
         RxDataRate2:
-          allOf:
-            - $ref: '#/components/schemas/RxDataRate2'
-            - description: The RXDataRate2 value.
+          $ref: '#/components/schemas/RxDataRate2'
+          description: The RXDataRate2 value.
         RxFreq2:
-          allOf:
-            - $ref: '#/components/schemas/RxFreq2'
-            - description: The RXFreq2 value.
+          $ref: '#/components/schemas/RxFreq2'
+          description: The RXFreq2 value.
         FactoryPresetFreqsList:
-          allOf:
-            - $ref: '#/components/schemas/FactoryPresetFreqsList'
-            - description: The list of values that make up the FactoryPresetFreqs value.
+          $ref: '#/components/schemas/FactoryPresetFreqsList'
+          description: The list of values that make up the FactoryPresetFreqs value.
         MaxEirp:
-          allOf:
-            - $ref: '#/components/schemas/MaxEirp'
-            - description: The MaxEIRP value.
+          $ref: '#/components/schemas/MaxEirp'
+          description: The MaxEIRP value.
         MaxDutyCycle:
-          allOf:
-            - $ref: '#/components/schemas/MaxDutyCycle'
-            - description: The MaxDutyCycle value.
+          $ref: '#/components/schemas/MaxDutyCycle'
+          description: The MaxDutyCycle value.
         RfRegion:
-          allOf:
-            - $ref: '#/components/schemas/RfRegion'
-            - description: The frequency band (RFRegion) value.
+          $ref: '#/components/schemas/RfRegion'
+          description: The frequency band (RFRegion) value.
         SupportsJoin:
-          allOf:
-            - $ref: '#/components/schemas/SupportsJoin'
-            - description: The SupportsJoin value.
+          $ref: '#/components/schemas/SupportsJoin'
+          description: The SupportsJoin value.
         Supports32BitFCnt:
-          allOf:
-            - $ref: '#/components/schemas/Supports32BitFCnt'
-            - description: The Supports32BitFCnt value.
+          $ref: '#/components/schemas/Supports32BitFCnt'
+          description: The Supports32BitFCnt value.
       description: LoRaWANDeviceProfile object.
     CreateDeviceProfileRequest:
       type: object
       title: CreateDeviceProfileRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/DeviceProfileName'
-            - description: The name of the new resource.
+          $ref: '#/components/schemas/DeviceProfileName'
+          description: The name of the new resource.
         LoRaWAN:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANDeviceProfile'
-            - description: The device profile information to use to create the device profile.
+          $ref: '#/components/schemas/LoRaWANDeviceProfile'
+          description: The device profile information to use to create the device profile.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: The tags to attach to the new device profile. Tags are metadata that you can use to manage a resource.
+          $ref: '#/components/schemas/TagList'
+          description: The tags to attach to the new device profile. Tags are metadata that you can use to manage a resource.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
     DeviceProfileArn:
       type: string
     ServiceProfileName:
@@ -5150,30 +4958,25 @@ components:
       type: object
       properties:
         AddGwMetadata:
-          allOf:
-            - $ref: '#/components/schemas/AddGwMetadata'
-            - description: The AddGWMetaData value.
+          $ref: '#/components/schemas/AddGwMetadata'
+          description: The AddGWMetaData value.
       description: LoRaWANServiceProfile object.
     CreateServiceProfileRequest:
       type: object
       title: CreateServiceProfileRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ServiceProfileName'
-            - description: The name of the new resource.
+          $ref: '#/components/schemas/ServiceProfileName'
+          description: The name of the new resource.
         LoRaWAN:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANServiceProfile'
-            - description: The service profile information to use to create the service profile.
+          $ref: '#/components/schemas/LoRaWANServiceProfile'
+          description: The service profile information to use to create the service profile.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: The tags to attach to the new service profile. Tags are metadata that you can use to manage a resource.
+          $ref: '#/components/schemas/TagList'
+          description: The tags to attach to the new service profile. Tags are metadata that you can use to manage a resource.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
     ServiceProfileArn:
       type: string
     WirelessDeviceType:
@@ -5188,33 +4991,26 @@ components:
       type: object
       properties:
         DevEui:
-          allOf:
-            - $ref: '#/components/schemas/DevEui'
-            - description: The DevEUI value.
+          $ref: '#/components/schemas/DevEui'
+          description: The DevEUI value.
         DeviceProfileId:
-          allOf:
-            - $ref: '#/components/schemas/DeviceProfileId'
-            - description: The ID of the device profile for the new wireless device.
+          $ref: '#/components/schemas/DeviceProfileId'
+          description: The ID of the device profile for the new wireless device.
         ServiceProfileId:
-          allOf:
-            - $ref: '#/components/schemas/ServiceProfileId'
-            - description: The ID of the service profile.
+          $ref: '#/components/schemas/ServiceProfileId'
+          description: The ID of the service profile.
         OtaaV1_1:
-          allOf:
-            - $ref: '#/components/schemas/OtaaV1_1'
-            - description: OTAA device object for v1.1 for create APIs
+          $ref: '#/components/schemas/OtaaV1_1'
+          description: OTAA device object for v1.1 for create APIs
         OtaaV1_0_x:
-          allOf:
-            - $ref: '#/components/schemas/OtaaV1_0_x'
-            - description: OTAA device object for create APIs for v1.0.x
+          $ref: '#/components/schemas/OtaaV1_0_x'
+          description: OTAA device object for create APIs for v1.0.x
         AbpV1_1:
-          allOf:
-            - $ref: '#/components/schemas/AbpV1_1'
-            - description: ABP device object for create APIs for v1.1
+          $ref: '#/components/schemas/AbpV1_1'
+          description: ABP device object for create APIs for v1.1
         AbpV1_0_x:
-          allOf:
-            - $ref: '#/components/schemas/AbpV1_0_x'
-            - description: LoRaWAN object for create APIs
+          $ref: '#/components/schemas/AbpV1_0_x'
+          description: LoRaWAN object for create APIs
       description: LoRaWAN object for create functions.
     CreateWirelessDeviceRequest:
       type: object
@@ -5224,33 +5020,26 @@ components:
       title: CreateWirelessDeviceRequest
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceType'
-            - description: The wireless device type.
+          $ref: '#/components/schemas/WirelessDeviceType'
+          description: The wireless device type.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceName'
-            - description: The name of the new resource.
+          $ref: '#/components/schemas/WirelessDeviceName'
+          description: The name of the new resource.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the new resource.
+          $ref: '#/components/schemas/Description'
+          description: The description of the new resource.
         DestinationName:
-          allOf:
-            - $ref: '#/components/schemas/DestinationName'
-            - description: The name of the destination to assign to the new wireless device.
+          $ref: '#/components/schemas/DestinationName'
+          description: The name of the destination to assign to the new wireless device.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
         LoRaWAN:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANDevice'
-            - description: The device configuration information to use to create the wireless device.
+          $ref: '#/components/schemas/LoRaWANDevice'
+          description: The device configuration information to use to create the wireless device.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: The tags to attach to the new wireless device. Tags are metadata that you can use to manage a resource.
+          $ref: '#/components/schemas/TagList'
+          description: The tags to attach to the new wireless device. Tags are metadata that you can use to manage a resource.
     WirelessDeviceArn:
       type: string
     WirelessGatewayName:
@@ -5260,13 +5049,11 @@ components:
       type: object
       properties:
         GatewayEui:
-          allOf:
-            - $ref: '#/components/schemas/GatewayEui'
-            - description: The gateway's EUI value.
+          $ref: '#/components/schemas/GatewayEui'
+          description: The gateway's EUI value.
         RfRegion:
-          allOf:
-            - $ref: '#/components/schemas/RfRegion'
-            - description: The frequency band (RFRegion) value.
+          $ref: '#/components/schemas/RfRegion'
+          description: The frequency band (RFRegion) value.
         JoinEuiFilters:
           $ref: '#/components/schemas/JoinEuiFilters'
         NetIdFilters:
@@ -5281,25 +5068,20 @@ components:
       title: CreateWirelessGatewayRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayName'
-            - description: The name of the new resource.
+          $ref: '#/components/schemas/WirelessGatewayName'
+          description: The name of the new resource.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the new resource.
+          $ref: '#/components/schemas/Description'
+          description: The description of the new resource.
         LoRaWAN:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANGateway'
-            - description: The gateway configuration information to use to create the wireless gateway.
+          $ref: '#/components/schemas/LoRaWANGateway'
+          description: The gateway configuration information to use to create the wireless gateway.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: The tags to attach to the new wireless gateway. Tags are metadata that you can use to manage a resource.
+          $ref: '#/components/schemas/TagList'
+          description: The tags to attach to the new wireless gateway. Tags are metadata that you can use to manage a resource.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
     WirelessGatewayArn:
       type: string
     WirelessGatewayTaskName:
@@ -5310,17 +5092,14 @@ components:
       type: object
       properties:
         UpdateDataSource:
-          allOf:
-            - $ref: '#/components/schemas/UpdateDataSource'
-            - description: The link to the S3 bucket.
+          $ref: '#/components/schemas/UpdateDataSource'
+          description: The link to the S3 bucket.
         UpdateDataRole:
-          allOf:
-            - $ref: '#/components/schemas/UpdateDataSource'
-            - description: The IAM role used to read data from the S3 bucket.
+          $ref: '#/components/schemas/UpdateDataSource'
+          description: The IAM role used to read data from the S3 bucket.
         LoRaWAN:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANUpdateGatewayTaskCreate'
-            - description: The properties that relate to the LoRaWAN wireless gateway.
+          $ref: '#/components/schemas/LoRaWANUpdateGatewayTaskCreate'
+          description: The properties that relate to the LoRaWAN wireless gateway.
       description: UpdateWirelessGatewayTaskCreate object.
     CreateWirelessGatewayTaskDefinitionRequest:
       type: object
@@ -5329,25 +5108,20 @@ components:
       title: CreateWirelessGatewayTaskDefinitionRequest
       properties:
         AutoCreateTasks:
-          allOf:
-            - $ref: '#/components/schemas/AutoCreateTasks'
-            - description: 'Whether to automatically create tasks using this task definition for all gateways with the specified current version. If <code>false</code>, the task must me created by calling <code>CreateWirelessGatewayTask</code>.'
+          $ref: '#/components/schemas/AutoCreateTasks'
+          description: 'Whether to automatically create tasks using this task definition for all gateways with the specified current version. If <code>false</code>, the task must me created by calling <code>CreateWirelessGatewayTask</code>.'
         Name:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayTaskName'
-            - description: The name of the new resource.
+          $ref: '#/components/schemas/WirelessGatewayTaskName'
+          description: The name of the new resource.
         Update:
-          allOf:
-            - $ref: '#/components/schemas/UpdateWirelessGatewayTaskCreate'
-            - description: Information about the gateways to update.
+          $ref: '#/components/schemas/UpdateWirelessGatewayTaskCreate'
+          description: Information about the gateways to update.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
+          $ref: '#/components/schemas/TagList'
+          description: The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
     WirelessGatewayTaskDefinitionId:
       type: string
       pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
@@ -5361,9 +5135,8 @@ components:
       title: CreateWirelessGatewayTaskRequest
       properties:
         WirelessGatewayTaskDefinitionId:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayTaskDefinitionId'
-            - description: The ID of the WirelessGatewayTaskDefinition.
+          $ref: '#/components/schemas/WirelessGatewayTaskDefinitionId'
+          description: The ID of the WirelessGatewayTaskDefinition.
     WirelessGatewayTaskStatus:
       type: string
       enum:
@@ -5405,29 +5178,23 @@ components:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/DestinationArn'
-            - description: The Amazon Resource Name of the resource.
+          $ref: '#/components/schemas/DestinationArn'
+          description: The Amazon Resource Name of the resource.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/DestinationName'
-            - description: The name of the resource.
+          $ref: '#/components/schemas/DestinationName'
+          description: The name of the resource.
         ExpressionType:
-          allOf:
-            - $ref: '#/components/schemas/ExpressionType'
-            - description: The type of value in <code>Expression</code>.
+          $ref: '#/components/schemas/ExpressionType'
+          description: The type of value in <code>Expression</code>.
         Expression:
-          allOf:
-            - $ref: '#/components/schemas/Expression'
-            - description: The rule name or topic rule to send messages to.
+          $ref: '#/components/schemas/Expression'
+          description: The rule name or topic rule to send messages to.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the resource.
+          $ref: '#/components/schemas/Description'
+          description: The description of the resource.
         RoleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The ARN of the IAM Role that authorizes the destination.
+          $ref: '#/components/schemas/RoleArn'
+          description: The ARN of the IAM Role that authorizes the destination.
       description: Describes a destination.
     DestinationList:
       type: array
@@ -5446,17 +5213,14 @@ components:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/DeviceProfileArn'
-            - description: The Amazon Resource Name of the resource.
+          $ref: '#/components/schemas/DeviceProfileArn'
+          description: The Amazon Resource Name of the resource.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/DeviceProfileName'
-            - description: The name of the resource.
+          $ref: '#/components/schemas/DeviceProfileName'
+          description: The name of the resource.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/DeviceProfileId'
-            - description: The ID of the device profile.
+          $ref: '#/components/schemas/DeviceProfileId'
+          description: The ID of the device profile.
       description: Describes a device profile.
     DeviceProfileList:
       type: array
@@ -5582,17 +5346,14 @@ components:
       type: object
       properties:
         AmazonId:
-          allOf:
-            - $ref: '#/components/schemas/AmazonId'
-            - description: The Sidewalk Amazon ID.
+          $ref: '#/components/schemas/AmazonId'
+          description: The Sidewalk Amazon ID.
         Fingerprint:
-          allOf:
-            - $ref: '#/components/schemas/Fingerprint'
-            - description: The fingerprint of the Sidewalk application server private key.
+          $ref: '#/components/schemas/Fingerprint'
+          description: The fingerprint of the Sidewalk application server private key.
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/PartnerAccountArn'
-            - description: The Amazon Resource Name of the resource.
+          $ref: '#/components/schemas/PartnerAccountArn'
+          description: The Amazon Resource Name of the resource.
       description: Information about a Sidewalk account.
     ResourceIdentifier:
       type: string
@@ -5621,81 +5382,62 @@ components:
       type: object
       properties:
         UlRate:
-          allOf:
-            - $ref: '#/components/schemas/UlRate'
-            - description: The ULRate value.
+          $ref: '#/components/schemas/UlRate'
+          description: The ULRate value.
         UlBucketSize:
-          allOf:
-            - $ref: '#/components/schemas/UlBucketSize'
-            - description: The ULBucketSize value.
+          $ref: '#/components/schemas/UlBucketSize'
+          description: The ULBucketSize value.
         UlRatePolicy:
-          allOf:
-            - $ref: '#/components/schemas/UlRatePolicy'
-            - description: The ULRatePolicy value.
+          $ref: '#/components/schemas/UlRatePolicy'
+          description: The ULRatePolicy value.
         DlRate:
-          allOf:
-            - $ref: '#/components/schemas/DlRate'
-            - description: The DLRate value.
+          $ref: '#/components/schemas/DlRate'
+          description: The DLRate value.
         DlBucketSize:
-          allOf:
-            - $ref: '#/components/schemas/DlBucketSize'
-            - description: The DLBucketSize value.
+          $ref: '#/components/schemas/DlBucketSize'
+          description: The DLBucketSize value.
         DlRatePolicy:
-          allOf:
-            - $ref: '#/components/schemas/DlRatePolicy'
-            - description: The DLRatePolicy value.
+          $ref: '#/components/schemas/DlRatePolicy'
+          description: The DLRatePolicy value.
         AddGwMetadata:
-          allOf:
-            - $ref: '#/components/schemas/AddGwMetadata'
-            - description: The AddGWMetaData value.
+          $ref: '#/components/schemas/AddGwMetadata'
+          description: The AddGWMetaData value.
         DevStatusReqFreq:
-          allOf:
-            - $ref: '#/components/schemas/DevStatusReqFreq'
-            - description: The DevStatusReqFreq value.
+          $ref: '#/components/schemas/DevStatusReqFreq'
+          description: The DevStatusReqFreq value.
         ReportDevStatusBattery:
-          allOf:
-            - $ref: '#/components/schemas/ReportDevStatusBattery'
-            - description: The ReportDevStatusBattery value.
+          $ref: '#/components/schemas/ReportDevStatusBattery'
+          description: The ReportDevStatusBattery value.
         ReportDevStatusMargin:
-          allOf:
-            - $ref: '#/components/schemas/ReportDevStatusMargin'
-            - description: The ReportDevStatusMargin value.
+          $ref: '#/components/schemas/ReportDevStatusMargin'
+          description: The ReportDevStatusMargin value.
         DrMin:
-          allOf:
-            - $ref: '#/components/schemas/DrMin'
-            - description: The DRMin value.
+          $ref: '#/components/schemas/DrMin'
+          description: The DRMin value.
         DrMax:
-          allOf:
-            - $ref: '#/components/schemas/DrMax'
-            - description: The DRMax value.
+          $ref: '#/components/schemas/DrMax'
+          description: The DRMax value.
         ChannelMask:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMask'
-            - description: The ChannelMask value.
+          $ref: '#/components/schemas/ChannelMask'
+          description: The ChannelMask value.
         PrAllowed:
-          allOf:
-            - $ref: '#/components/schemas/PrAllowed'
-            - description: The PRAllowed value that describes whether passive roaming is allowed.
+          $ref: '#/components/schemas/PrAllowed'
+          description: The PRAllowed value that describes whether passive roaming is allowed.
         HrAllowed:
-          allOf:
-            - $ref: '#/components/schemas/HrAllowed'
-            - description: The HRAllowed value that describes whether handover roaming is allowed.
+          $ref: '#/components/schemas/HrAllowed'
+          description: The HRAllowed value that describes whether handover roaming is allowed.
         RaAllowed:
-          allOf:
-            - $ref: '#/components/schemas/RaAllowed'
-            - description: The RAAllowed value that describes whether roaming activation is allowed.
+          $ref: '#/components/schemas/RaAllowed'
+          description: The RAAllowed value that describes whether roaming activation is allowed.
         NwkGeoLoc:
-          allOf:
-            - $ref: '#/components/schemas/NwkGeoLoc'
-            - description: The NwkGeoLoc value.
+          $ref: '#/components/schemas/NwkGeoLoc'
+          description: The NwkGeoLoc value.
         TargetPer:
-          allOf:
-            - $ref: '#/components/schemas/TargetPer'
-            - description: The TargetPER value.
+          $ref: '#/components/schemas/TargetPer'
+          description: The TargetPER value.
         MinGwDiversity:
-          allOf:
-            - $ref: '#/components/schemas/MinGwDiversity'
-            - description: The MinGwDiversity value.
+          $ref: '#/components/schemas/MinGwDiversity'
+          description: The MinGwDiversity value.
       description: LoRaWANGetServiceProfileInfo object.
     Identifier:
       type: string
@@ -5719,17 +5461,14 @@ components:
         AmazonId:
           $ref: '#/components/schemas/AmazonId'
         SidewalkId:
-          allOf:
-            - $ref: '#/components/schemas/SidewalkId'
-            - description: The sidewalk device identification.
+          $ref: '#/components/schemas/SidewalkId'
+          description: The sidewalk device identification.
         SidewalkManufacturingSn:
-          allOf:
-            - $ref: '#/components/schemas/SidewalkManufacturingSn'
-            - description: The Sidewalk manufacturing series number.
+          $ref: '#/components/schemas/SidewalkManufacturingSn'
+          description: The Sidewalk manufacturing series number.
         DeviceCertificates:
-          allOf:
-            - $ref: '#/components/schemas/DeviceCertificateList'
-            - description: The sidewalk device certificates for Ed25519 and P256r1.
+          $ref: '#/components/schemas/DeviceCertificateList'
+          description: The sidewalk device certificates for Ed25519 and P256r1.
       description: Sidewalk device object.
     GetWirelessDeviceStatisticsRequest:
       type: object
@@ -5742,49 +5481,39 @@ components:
       type: object
       properties:
         DevEui:
-          allOf:
-            - $ref: '#/components/schemas/DevEui'
-            - description: The DevEUI value.
+          $ref: '#/components/schemas/DevEui'
+          description: The DevEUI value.
         FPort:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The FPort value.
+          $ref: '#/components/schemas/Integer'
+          description: The FPort value.
         DataRate:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The DataRate value.
+          $ref: '#/components/schemas/Integer'
+          description: The DataRate value.
         Frequency:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The device's channel frequency in Hz.
+          $ref: '#/components/schemas/Integer'
+          description: The device's channel frequency in Hz.
         Timestamp:
-          allOf:
-            - $ref: '#/components/schemas/ISODateTimeString'
-            - description: The date and time of the metadata.
+          $ref: '#/components/schemas/ISODateTimeString'
+          description: The date and time of the metadata.
         Gateways:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANGatewayMetadataList'
-            - description: Information about the gateways accessed by the device.
+          $ref: '#/components/schemas/LoRaWANGatewayMetadataList'
+          description: Information about the gateways accessed by the device.
       description: LoRaWAN device metatdata.
     SidewalkDeviceMetadata:
       type: object
       properties:
         Rssi:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The RSSI value.
+          $ref: '#/components/schemas/Integer'
+          description: The RSSI value.
         BatteryLevel:
-          allOf:
-            - $ref: '#/components/schemas/BatteryLevel'
-            - description: Sidewalk device battery level.
+          $ref: '#/components/schemas/BatteryLevel'
+          description: Sidewalk device battery level.
         Event:
-          allOf:
-            - $ref: '#/components/schemas/Event'
-            - description: Sidewalk device status notification.
+          $ref: '#/components/schemas/Event'
+          description: Sidewalk device status notification.
         DeviceState:
-          allOf:
-            - $ref: '#/components/schemas/DeviceState'
-            - description: Device state defines the device status of sidewalk device.
+          $ref: '#/components/schemas/DeviceState'
+          description: Device state defines the device status of sidewalk device.
       description: MetaData for Sidewalk device.
     GetWirelessGatewayCertificateRequest:
       type: object
@@ -5798,9 +5527,8 @@ components:
       type: object
       properties:
         CurrentVersion:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANGatewayVersion'
-            - description: The version of the gateways that should receive the update.
+          $ref: '#/components/schemas/LoRaWANGatewayVersion'
+          description: The version of the gateways that should receive the update.
       description: LoRaWANGatewayCurrentVersion object.
     WirelessGatewayIdType:
       type: string
@@ -5902,33 +5630,27 @@ components:
       type: object
       properties:
         PackageVersion:
-          allOf:
-            - $ref: '#/components/schemas/PackageVersion'
-            - description: The version of the wireless gateway firmware.
+          $ref: '#/components/schemas/PackageVersion'
+          description: The version of the wireless gateway firmware.
         Model:
-          allOf:
-            - $ref: '#/components/schemas/Model'
-            - description: The model number of the wireless gateway.
+          $ref: '#/components/schemas/Model'
+          description: The model number of the wireless gateway.
         Station:
-          allOf:
-            - $ref: '#/components/schemas/Station'
-            - description: The basic station version of the wireless gateway.
+          $ref: '#/components/schemas/Station'
+          description: The basic station version of the wireless gateway.
       description: LoRaWANGatewayVersion object.
     LoRaWANGatewayMetadata:
       type: object
       properties:
         GatewayEui:
-          allOf:
-            - $ref: '#/components/schemas/GatewayEui'
-            - description: The gateway's EUI value.
+          $ref: '#/components/schemas/GatewayEui'
+          description: The gateway's EUI value.
         Snr:
-          allOf:
-            - $ref: '#/components/schemas/Double'
-            - description: The SNR value.
+          $ref: '#/components/schemas/Double'
+          description: The SNR value.
         Rssi:
-          allOf:
-            - $ref: '#/components/schemas/Double'
-            - description: The RSSI value.
+          $ref: '#/components/schemas/Double'
+          description: The RSSI value.
       description: LoRaWAN gateway metatdata.
     PackageVersion:
       type: string
@@ -5975,21 +5697,18 @@ components:
       type: object
       properties:
         DevEui:
-          allOf:
-            - $ref: '#/components/schemas/DevEui'
-            - description: The DevEUI value.
+          $ref: '#/components/schemas/DevEui'
+          description: The DevEUI value.
       description: LoRaWAN object for list functions.
     LoRaWANUpdateDevice:
       type: object
       properties:
         DeviceProfileId:
-          allOf:
-            - $ref: '#/components/schemas/DeviceProfileId'
-            - description: The ID of the device profile for the wireless device.
+          $ref: '#/components/schemas/DeviceProfileId'
+          description: The ID of the device profile for the wireless device.
         ServiceProfileId:
-          allOf:
-            - $ref: '#/components/schemas/ServiceProfileId'
-            - description: The ID of the service profile.
+          $ref: '#/components/schemas/ServiceProfileId'
+          description: The ID of the service profile.
       description: LoRaWAN object for update functions.
     UpdateSignature:
       type: string
@@ -5999,13 +5718,11 @@ components:
       type: object
       properties:
         CurrentVersion:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANGatewayVersion'
-            - description: The version of the gateways that should receive the update.
+          $ref: '#/components/schemas/LoRaWANGatewayVersion'
+          description: The version of the gateways that should receive the update.
         UpdateVersion:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANGatewayVersion'
-            - description: The firmware version to update the gateway to.
+          $ref: '#/components/schemas/LoRaWANGatewayVersion'
+          description: The firmware version to update the gateway to.
       description: LoRaWANUpdateGatewayTaskEntry object.
     MessageId:
       type: string
@@ -6060,13 +5777,11 @@ components:
       type: object
       properties:
         LoRaWAN:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANSendDataToDevice'
-            - description: LoRaWAN device info.
+          $ref: '#/components/schemas/LoRaWANSendDataToDevice'
+          description: LoRaWAN device info.
         Sidewalk:
-          allOf:
-            - $ref: '#/components/schemas/SidewalkSendDataToDevice'
-            - description: The Sidewalk account credentials.
+          $ref: '#/components/schemas/SidewalkSendDataToDevice'
+          description: The Sidewalk account credentials.
       description: WirelessMetadata object.
     SendDataToWirelessDeviceRequest:
       type: object
@@ -6076,17 +5791,14 @@ components:
       title: SendDataToWirelessDeviceRequest
       properties:
         TransmitMode:
-          allOf:
-            - $ref: '#/components/schemas/TransmitMode'
-            - description: 'The transmit mode to use to send data to the wireless device. Can be: <code>0</code> for UM (unacknowledge mode) or <code>1</code> for AM (acknowledge mode).'
+          $ref: '#/components/schemas/TransmitMode'
+          description: 'The transmit mode to use to send data to the wireless device. Can be: <code>0</code> for UM (unacknowledge mode) or <code>1</code> for AM (acknowledge mode).'
         PayloadData:
-          allOf:
-            - $ref: '#/components/schemas/PayloadData'
-            - description: 'The binary to be sent to the end device, encoded in base64.'
+          $ref: '#/components/schemas/PayloadData'
+          description: 'The binary to be sent to the end device, encoded in base64.'
         WirelessMetadata:
-          allOf:
-            - $ref: '#/components/schemas/WirelessMetadata'
-            - description: Metadata about the message request.
+          $ref: '#/components/schemas/WirelessMetadata'
+          description: Metadata about the message request.
     Seq:
       type: integer
       minimum: 0
@@ -6095,17 +5807,14 @@ components:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/ServiceProfileArn'
-            - description: The Amazon Resource Name of the resource.
+          $ref: '#/components/schemas/ServiceProfileArn'
+          description: The Amazon Resource Name of the resource.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ServiceProfileName'
-            - description: The name of the resource.
+          $ref: '#/components/schemas/ServiceProfileName'
+          description: The name of the resource.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ServiceProfileId'
-            - description: The ID of the service profile.
+          $ref: '#/components/schemas/ServiceProfileId'
+          description: The ID of the service profile.
       description: Information about a service profile.
     SidewalkId:
       type: string
@@ -6118,29 +5827,24 @@ components:
       type: object
       properties:
         AmazonId:
-          allOf:
-            - $ref: '#/components/schemas/AmazonId'
-            - description: The Sidewalk Amazon ID.
+          $ref: '#/components/schemas/AmazonId'
+          description: The Sidewalk Amazon ID.
         SidewalkId:
-          allOf:
-            - $ref: '#/components/schemas/SidewalkId'
-            - description: The sidewalk device identification.
+          $ref: '#/components/schemas/SidewalkId'
+          description: The sidewalk device identification.
         SidewalkManufacturingSn:
-          allOf:
-            - $ref: '#/components/schemas/SidewalkManufacturingSn'
-            - description: The Sidewalk manufacturing series number.
+          $ref: '#/components/schemas/SidewalkManufacturingSn'
+          description: The Sidewalk manufacturing series number.
         DeviceCertificates:
-          allOf:
-            - $ref: '#/components/schemas/DeviceCertificateList'
-            - description: The sidewalk device certificates for Ed25519 and P256r1.
+          $ref: '#/components/schemas/DeviceCertificateList'
+          description: The sidewalk device certificates for Ed25519 and P256r1.
       description: Sidewalk object used by list functions.
     SidewalkUpdateAccount:
       type: object
       properties:
         AppServerPrivateKey:
-          allOf:
-            - $ref: '#/components/schemas/AppServerPrivateKey'
-            - description: The new Sidewalk application server private key.
+          $ref: '#/components/schemas/AppServerPrivateKey'
+          description: The new Sidewalk application server private key.
       description: Sidewalk update.
     SubBand:
       type: integer
@@ -6164,9 +5868,8 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: Adds to or modifies the tags of the given resource. Tags are metadata that you can use to manage a resource.
+          $ref: '#/components/schemas/TagList'
+          description: Adds to or modifies the tags of the given resource. Tags are metadata that you can use to manage a resource.
     TestWirelessDeviceRequest:
       type: object
       title: TestWirelessDeviceRequest
@@ -6180,21 +5883,17 @@ components:
       title: UpdateDestinationRequest
       properties:
         ExpressionType:
-          allOf:
-            - $ref: '#/components/schemas/ExpressionType'
-            - description: The type of value in <code>Expression</code>.
+          $ref: '#/components/schemas/ExpressionType'
+          description: The type of value in <code>Expression</code>.
         Expression:
-          allOf:
-            - $ref: '#/components/schemas/Expression'
-            - description: The new rule name or topic rule to send messages to.
+          $ref: '#/components/schemas/Expression'
+          description: The new rule name or topic rule to send messages to.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A new description of the resource.
+          $ref: '#/components/schemas/Description'
+          description: A new description of the resource.
         RoleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The ARN of the IAM Role that authorizes the destination.
+          $ref: '#/components/schemas/RoleArn'
+          description: The ARN of the IAM Role that authorizes the destination.
     UpdateLogLevelsByResourceTypesRequest:
       type: object
       title: UpdateLogLevelsByResourceTypesRequest
@@ -6212,41 +5911,34 @@ components:
       title: UpdatePartnerAccountRequest
       properties:
         Sidewalk:
-          allOf:
-            - $ref: '#/components/schemas/SidewalkUpdateAccount'
-            - description: The Sidewalk account credentials.
+          $ref: '#/components/schemas/SidewalkUpdateAccount'
+          description: The Sidewalk account credentials.
     UpdateWirelessDeviceRequest:
       type: object
       title: UpdateWirelessDeviceRequest
       properties:
         DestinationName:
-          allOf:
-            - $ref: '#/components/schemas/DestinationName'
-            - description: The name of the new destination for the device.
+          $ref: '#/components/schemas/DestinationName'
+          description: The name of the new destination for the device.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceName'
-            - description: The new name of the resource.
+          $ref: '#/components/schemas/WirelessDeviceName'
+          description: The new name of the resource.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A new description of the resource.
+          $ref: '#/components/schemas/Description'
+          description: A new description of the resource.
         LoRaWAN:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANUpdateDevice'
-            - description: The updated wireless device's configuration.
+          $ref: '#/components/schemas/LoRaWANUpdateDevice'
+          description: The updated wireless device's configuration.
     UpdateWirelessGatewayRequest:
       type: object
       title: UpdateWirelessGatewayRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayName'
-            - description: The new name of the resource.
+          $ref: '#/components/schemas/WirelessGatewayName'
+          description: The new name of the resource.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A new description of the resource.
+          $ref: '#/components/schemas/Description'
+          description: A new description of the resource.
         JoinEuiFilters:
           $ref: '#/components/schemas/JoinEuiFilters'
         NetIdFilters:
@@ -6255,17 +5947,14 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayTaskDefinitionId'
-            - description: The ID of the new wireless gateway task entry.
+          $ref: '#/components/schemas/WirelessGatewayTaskDefinitionId'
+          description: The ID of the new wireless gateway task entry.
         LoRaWAN:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANUpdateGatewayTaskEntry'
-            - description: The properties that relate to the LoRaWAN wireless gateway.
+          $ref: '#/components/schemas/LoRaWANUpdateGatewayTaskEntry'
+          description: The properties that relate to the LoRaWAN wireless gateway.
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayTaskDefinitionArn'
-            - description: The Amazon Resource Name of the resource.
+          $ref: '#/components/schemas/WirelessGatewayTaskDefinitionArn'
+          description: The Amazon Resource Name of the resource.
       description: UpdateWirelessGatewayTaskEntry object.
     WirelessDeviceEvent:
       type: string
@@ -6296,37 +5985,29 @@ components:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceArn'
-            - description: The Amazon Resource Name of the resource.
+          $ref: '#/components/schemas/WirelessDeviceArn'
+          description: The Amazon Resource Name of the resource.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceId'
-            - description: The ID of the wireless device reporting the data.
+          $ref: '#/components/schemas/WirelessDeviceId'
+          description: The ID of the wireless device reporting the data.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceType'
-            - description: The wireless device type.
+          $ref: '#/components/schemas/WirelessDeviceType'
+          description: The wireless device type.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/WirelessDeviceName'
-            - description: The name of the resource.
+          $ref: '#/components/schemas/WirelessDeviceName'
+          description: The name of the resource.
         DestinationName:
-          allOf:
-            - $ref: '#/components/schemas/DestinationName'
-            - description: The name of the destination to which the device is assigned.
+          $ref: '#/components/schemas/DestinationName'
+          description: The name of the destination to which the device is assigned.
         LastUplinkReceivedAt:
-          allOf:
-            - $ref: '#/components/schemas/ISODateTimeString'
-            - description: The date and time when the most recent uplink was received.
+          $ref: '#/components/schemas/ISODateTimeString'
+          description: The date and time when the most recent uplink was received.
         LoRaWAN:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANListDevice'
-            - description: LoRaWAN device info.
+          $ref: '#/components/schemas/LoRaWANListDevice'
+          description: LoRaWAN device info.
         Sidewalk:
-          allOf:
-            - $ref: '#/components/schemas/SidewalkListDevice'
-            - description: The Sidewalk account credentials.
+          $ref: '#/components/schemas/SidewalkListDevice'
+          description: The Sidewalk account credentials.
       description: Information about a wireless device's operation.
     WirelessGatewayEvent:
       type: string
@@ -6359,29 +6040,23 @@ components:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayArn'
-            - description: The Amazon Resource Name of the resource.
+          $ref: '#/components/schemas/WirelessGatewayArn'
+          description: The Amazon Resource Name of the resource.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayId'
-            - description: The ID of the wireless gateway reporting the data.
+          $ref: '#/components/schemas/WirelessGatewayId'
+          description: The ID of the wireless gateway reporting the data.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/WirelessGatewayName'
-            - description: The name of the resource.
+          $ref: '#/components/schemas/WirelessGatewayName'
+          description: The name of the resource.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the resource.
+          $ref: '#/components/schemas/Description'
+          description: The description of the resource.
         LoRaWAN:
-          allOf:
-            - $ref: '#/components/schemas/LoRaWANGateway'
-            - description: LoRaWAN gateway info.
+          $ref: '#/components/schemas/LoRaWANGateway'
+          description: LoRaWAN gateway info.
         LastUplinkReceivedAt:
-          allOf:
-            - $ref: '#/components/schemas/ISODateTimeString'
-            - description: The date and time when the most recent uplink was received.
+          $ref: '#/components/schemas/ISODateTimeString'
+          description: The date and time when the most recent uplink was received.
       description: Information about a wireless gateway's operation.
 security:
   - hmac: []

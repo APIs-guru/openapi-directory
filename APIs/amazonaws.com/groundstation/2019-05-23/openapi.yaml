@@ -245,33 +245,26 @@ paths:
                   type: object
                   properties:
                     antennaDownlinkConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/AntennaDownlinkConfig'
-                        - description: Information about how AWS Ground Station should configure an antenna for downlink during a contact.
+                      $ref: '#/components/schemas/AntennaDownlinkConfig'
+                      description: Information about how AWS Ground Station should configure an antenna for downlink during a contact.
                     antennaDownlinkDemodDecodeConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/AntennaDownlinkDemodDecodeConfig'
-                        - description: Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.
+                      $ref: '#/components/schemas/AntennaDownlinkDemodDecodeConfig'
+                      description: Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.
                     antennaUplinkConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/AntennaUplinkConfig'
-                        - description: Information about how AWS Ground Station should conﬁgure an antenna for uplink during a contact.
+                      $ref: '#/components/schemas/AntennaUplinkConfig'
+                      description: Information about how AWS Ground Station should conﬁgure an antenna for uplink during a contact.
                     dataflowEndpointConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/DataflowEndpointConfig'
-                        - description: Information about the dataflow endpoint <code>Config</code>.
+                      $ref: '#/components/schemas/DataflowEndpointConfig'
+                      description: Information about the dataflow endpoint <code>Config</code>.
                     s3RecordingConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/S3RecordingConfig'
-                        - description: Information about an S3 recording <code>Config</code>.
+                      $ref: '#/components/schemas/S3RecordingConfig'
+                      description: Information about an S3 recording <code>Config</code>.
                     trackingConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/TrackingConfig'
-                        - description: 'Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile. '
+                      $ref: '#/components/schemas/TrackingConfig'
+                      description: 'Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile. '
                     uplinkEchoConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/UplinkEchoConfig'
-                        - description: '<p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>'
+                      $ref: '#/components/schemas/UplinkEchoConfig'
+                      description: '<p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>'
                 name:
                   description: Name of a <code>Config</code>.
                   type: string
@@ -726,33 +719,26 @@ paths:
                   type: object
                   properties:
                     antennaDownlinkConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/AntennaDownlinkConfig'
-                        - description: Information about how AWS Ground Station should configure an antenna for downlink during a contact.
+                      $ref: '#/components/schemas/AntennaDownlinkConfig'
+                      description: Information about how AWS Ground Station should configure an antenna for downlink during a contact.
                     antennaDownlinkDemodDecodeConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/AntennaDownlinkDemodDecodeConfig'
-                        - description: Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.
+                      $ref: '#/components/schemas/AntennaDownlinkDemodDecodeConfig'
+                      description: Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.
                     antennaUplinkConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/AntennaUplinkConfig'
-                        - description: Information about how AWS Ground Station should conﬁgure an antenna for uplink during a contact.
+                      $ref: '#/components/schemas/AntennaUplinkConfig'
+                      description: Information about how AWS Ground Station should conﬁgure an antenna for uplink during a contact.
                     dataflowEndpointConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/DataflowEndpointConfig'
-                        - description: Information about the dataflow endpoint <code>Config</code>.
+                      $ref: '#/components/schemas/DataflowEndpointConfig'
+                      description: Information about the dataflow endpoint <code>Config</code>.
                     s3RecordingConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/S3RecordingConfig'
-                        - description: Information about an S3 recording <code>Config</code>.
+                      $ref: '#/components/schemas/S3RecordingConfig'
+                      description: Information about an S3 recording <code>Config</code>.
                     trackingConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/TrackingConfig'
-                        - description: 'Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile. '
+                      $ref: '#/components/schemas/TrackingConfig'
+                      description: 'Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile. '
                     uplinkEchoConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/UplinkEchoConfig'
-                        - description: '<p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>'
+                      $ref: '#/components/schemas/UplinkEchoConfig'
+                      description: '<p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>'
                 name:
                   description: Name of a <code>Config</code>.
                   type: string
@@ -1555,9 +1541,8 @@ components:
       type: object
       properties:
         contactId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: UUID of a contact.
+          $ref: '#/components/schemas/String'
+          description: UUID of a contact.
       description: <p/>
     InvalidParameterException: {}
     DependencyException: {}
@@ -1566,17 +1551,14 @@ components:
       type: object
       properties:
         configArn:
-          allOf:
-            - $ref: '#/components/schemas/ConfigArn'
-            - description: ARN of a <code>Config</code>.
+          $ref: '#/components/schemas/ConfigArn'
+          description: ARN of a <code>Config</code>.
         configId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: UUID of a <code>Config</code>.
+          $ref: '#/components/schemas/String'
+          description: UUID of a <code>Config</code>.
         configType:
-          allOf:
-            - $ref: '#/components/schemas/ConfigCapabilityType'
-            - description: Type of a <code>Config</code>.
+          $ref: '#/components/schemas/ConfigCapabilityType'
+          description: Type of a <code>Config</code>.
       description: <p/>
     AntennaDownlinkConfig:
       type: object
@@ -1584,9 +1566,8 @@ components:
         - spectrumConfig
       properties:
         spectrumConfig:
-          allOf:
-            - $ref: '#/components/schemas/SpectrumConfig'
-            - description: Object that describes a spectral <code>Config</code>.
+          $ref: '#/components/schemas/SpectrumConfig'
+          description: Object that describes a spectral <code>Config</code>.
       description: Information about how AWS Ground Station should configure an antenna for downlink during a contact.
     AntennaDownlinkDemodDecodeConfig:
       type: object
@@ -1596,17 +1577,14 @@ components:
         - spectrumConfig
       properties:
         decodeConfig:
-          allOf:
-            - $ref: '#/components/schemas/DecodeConfig'
-            - description: Information about the decode <code>Config</code>.
+          $ref: '#/components/schemas/DecodeConfig'
+          description: Information about the decode <code>Config</code>.
         demodulationConfig:
-          allOf:
-            - $ref: '#/components/schemas/DemodulationConfig'
-            - description: Information about the demodulation <code>Config</code>.
+          $ref: '#/components/schemas/DemodulationConfig'
+          description: Information about the demodulation <code>Config</code>.
         spectrumConfig:
-          allOf:
-            - $ref: '#/components/schemas/SpectrumConfig'
-            - description: Information about the spectral <code>Config</code>.
+          $ref: '#/components/schemas/SpectrumConfig'
+          description: Information about the spectral <code>Config</code>.
       description: Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.
     AntennaUplinkConfig:
       type: object
@@ -1615,17 +1593,14 @@ components:
         - targetEirp
       properties:
         spectrumConfig:
-          allOf:
-            - $ref: '#/components/schemas/UplinkSpectrumConfig'
-            - description: Information about the uplink spectral <code>Config</code>.
+          $ref: '#/components/schemas/UplinkSpectrumConfig'
+          description: Information about the uplink spectral <code>Config</code>.
         targetEirp:
-          allOf:
-            - $ref: '#/components/schemas/Eirp'
-            - description: EIRP of the target.
+          $ref: '#/components/schemas/Eirp'
+          description: EIRP of the target.
         transmitDisabled:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Whether or not uplink transmit is disabled.
+          $ref: '#/components/schemas/Boolean'
+          description: Whether or not uplink transmit is disabled.
       description: Information about the uplink <code>Config</code> of an antenna.
     DataflowEndpointConfig:
       type: object
@@ -1633,13 +1608,11 @@ components:
         - dataflowEndpointName
       properties:
         dataflowEndpointName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of a dataflow endpoint.
+          $ref: '#/components/schemas/String'
+          description: Name of a dataflow endpoint.
         dataflowEndpointRegion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Region of a dataflow endpoint.
+          $ref: '#/components/schemas/String'
+          description: Region of a dataflow endpoint.
       description: Information about the dataflow endpoint <code>Config</code>.
     S3RecordingConfig:
       type: object
@@ -1648,17 +1621,14 @@ components:
         - roleArn
       properties:
         bucketArn:
-          allOf:
-            - $ref: '#/components/schemas/BucketArn'
-            - description: ARN of the bucket to record to.
+          $ref: '#/components/schemas/BucketArn'
+          description: ARN of the bucket to record to.
         prefix:
-          allOf:
-            - $ref: '#/components/schemas/S3KeyPrefix'
-            - description: S3 Key prefix to prefice data files.
+          $ref: '#/components/schemas/S3KeyPrefix'
+          description: S3 Key prefix to prefice data files.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: ARN of the role Ground Station assumes to write data to the bucket.
+          $ref: '#/components/schemas/RoleArn'
+          description: ARN of the role Ground Station assumes to write data to the bucket.
       description: Information about an S3 recording <code>Config</code>.
     TrackingConfig:
       type: object
@@ -1666,9 +1636,8 @@ components:
         - autotrack
       properties:
         autotrack:
-          allOf:
-            - $ref: '#/components/schemas/Criticality'
-            - description: Current setting for autotrack.
+          $ref: '#/components/schemas/Criticality'
+          description: Current setting for autotrack.
       description: Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile.
     UplinkEchoConfig:
       type: object
@@ -1677,13 +1646,11 @@ components:
         - enabled
       properties:
         antennaUplinkConfigArn:
-          allOf:
-            - $ref: '#/components/schemas/ConfigArn'
-            - description: ARN of an uplink <code>Config</code>.
+          $ref: '#/components/schemas/ConfigArn'
+          description: ARN of an uplink <code>Config</code>.
         enabled:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Whether or not an uplink <code>Config</code> is enabled.
+          $ref: '#/components/schemas/Boolean'
+          description: Whether or not an uplink <code>Config</code> is enabled.
       description: '<p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>'
     String:
       type: string
@@ -1692,29 +1659,25 @@ components:
       type: object
       properties:
         dataflowEndpointGroupId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: UUID of a dataflow endpoint group.
+          $ref: '#/components/schemas/String'
+          description: UUID of a dataflow endpoint group.
       description: <p/>
     EndpointDetails:
       type: object
       properties:
         endpoint:
-          allOf:
-            - $ref: '#/components/schemas/DataflowEndpoint'
-            - description: A dataflow endpoint.
+          $ref: '#/components/schemas/DataflowEndpoint'
+          description: A dataflow endpoint.
         securityDetails:
-          allOf:
-            - $ref: '#/components/schemas/SecurityDetails'
-            - description: Endpoint security details.
+          $ref: '#/components/schemas/SecurityDetails'
+          description: Endpoint security details.
       description: Information about the endpoint details.
     MissionProfileIdResponse:
       type: object
       properties:
         missionProfileId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: UUID of a mission profile.
+          $ref: '#/components/schemas/String'
+          description: UUID of a mission profile.
       description: <p/>
     DataflowEdge:
       type: array
@@ -1726,61 +1689,47 @@ components:
       type: object
       properties:
         contactId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: UUID of a contact.
+          $ref: '#/components/schemas/String'
+          description: UUID of a contact.
         contactStatus:
-          allOf:
-            - $ref: '#/components/schemas/ContactStatus'
-            - description: Status of a contact.
+          $ref: '#/components/schemas/ContactStatus'
+          description: Status of a contact.
         dataflowList:
-          allOf:
-            - $ref: '#/components/schemas/DataflowList'
-            - description: List describing source and destination details for each dataflow edge.
+          $ref: '#/components/schemas/DataflowList'
+          description: List describing source and destination details for each dataflow edge.
         endTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: End time of a contact.
+          $ref: '#/components/schemas/Timestamp'
+          description: End time of a contact.
         errorMessage:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Error message for a contact.
+          $ref: '#/components/schemas/String'
+          description: Error message for a contact.
         groundStation:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Ground station for a contact.
+          $ref: '#/components/schemas/String'
+          description: Ground station for a contact.
         maximumElevation:
-          allOf:
-            - $ref: '#/components/schemas/Elevation'
-            - description: Maximum elevation angle of a contact.
+          $ref: '#/components/schemas/Elevation'
+          description: Maximum elevation angle of a contact.
         missionProfileArn:
-          allOf:
-            - $ref: '#/components/schemas/MissionProfileArn'
-            - description: ARN of a mission profile.
+          $ref: '#/components/schemas/MissionProfileArn'
+          description: ARN of a mission profile.
         postPassEndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+          $ref: '#/components/schemas/Timestamp'
+          description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
         prePassStartTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
+          $ref: '#/components/schemas/Timestamp'
+          description: Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
         region:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Region of a contact.
+          $ref: '#/components/schemas/String'
+          description: Region of a contact.
         satelliteArn:
-          allOf:
-            - $ref: '#/components/schemas/satelliteArn'
-            - description: ARN of a satellite.
+          $ref: '#/components/schemas/satelliteArn'
+          description: ARN of a satellite.
         startTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Start time of a contact.
+          $ref: '#/components/schemas/Timestamp'
+          description: Start time of a contact.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Tags assigned to a contact.
+          $ref: '#/components/schemas/TagsMap'
+          description: Tags assigned to a contact.
       description: <p/>
     GetConfigResponse:
       type: object
@@ -1791,161 +1740,128 @@ components:
         - name
       properties:
         configArn:
-          allOf:
-            - $ref: '#/components/schemas/ConfigArn'
-            - description: 'ARN of a <code>Config</code> '
+          $ref: '#/components/schemas/ConfigArn'
+          description: 'ARN of a <code>Config</code> '
         configData:
-          allOf:
-            - $ref: '#/components/schemas/ConfigTypeData'
-            - description: Data elements in a <code>Config</code>.
+          $ref: '#/components/schemas/ConfigTypeData'
+          description: Data elements in a <code>Config</code>.
         configId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: UUID of a <code>Config</code>.
+          $ref: '#/components/schemas/String'
+          description: UUID of a <code>Config</code>.
         configType:
-          allOf:
-            - $ref: '#/components/schemas/ConfigCapabilityType'
-            - description: Type of a <code>Config</code>.
+          $ref: '#/components/schemas/ConfigCapabilityType'
+          description: Type of a <code>Config</code>.
         name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of a <code>Config</code>.
+          $ref: '#/components/schemas/String'
+          description: Name of a <code>Config</code>.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Tags assigned to a <code>Config</code>.
+          $ref: '#/components/schemas/TagsMap'
+          description: Tags assigned to a <code>Config</code>.
       description: <p/>
     GetDataflowEndpointGroupResponse:
       type: object
       properties:
         dataflowEndpointGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/DataflowEndpointGroupArn'
-            - description: ARN of a dataflow endpoint group.
+          $ref: '#/components/schemas/DataflowEndpointGroupArn'
+          description: ARN of a dataflow endpoint group.
         dataflowEndpointGroupId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: UUID of a dataflow endpoint group.
+          $ref: '#/components/schemas/String'
+          description: UUID of a dataflow endpoint group.
         endpointsDetails:
-          allOf:
-            - $ref: '#/components/schemas/EndpointDetailsList'
-            - description: Details of a dataflow endpoint.
+          $ref: '#/components/schemas/EndpointDetailsList'
+          description: Details of a dataflow endpoint.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Tags assigned to a dataflow endpoint group.
+          $ref: '#/components/schemas/TagsMap'
+          description: Tags assigned to a dataflow endpoint group.
       description: <p/>
     GetMinuteUsageResponse:
       type: object
       properties:
         estimatedMinutesRemaining:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'Estimated number of minutes remaining for an account, specific to the month being requested.'
+          $ref: '#/components/schemas/Integer'
+          description: 'Estimated number of minutes remaining for an account, specific to the month being requested.'
         isReservedMinutesCustomer:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'Returns whether or not an account has signed up for the reserved minutes pricing plan, specific to the month being requested.'
+          $ref: '#/components/schemas/Boolean'
+          description: 'Returns whether or not an account has signed up for the reserved minutes pricing plan, specific to the month being requested.'
         totalReservedMinuteAllocation:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'Total number of reserved minutes allocated, specific to the month being requested.'
+          $ref: '#/components/schemas/Integer'
+          description: 'Total number of reserved minutes allocated, specific to the month being requested.'
         totalScheduledMinutes:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'Total scheduled minutes for an account, specific to the month being requested.'
+          $ref: '#/components/schemas/Integer'
+          description: 'Total scheduled minutes for an account, specific to the month being requested.'
         upcomingMinutesScheduled:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'Upcoming minutes scheduled for an account, specific to the month being requested.'
+          $ref: '#/components/schemas/Integer'
+          description: 'Upcoming minutes scheduled for an account, specific to the month being requested.'
       description: <p/>
     GetMissionProfileResponse:
       type: object
       properties:
         contactPostPassDurationSeconds:
-          allOf:
-            - $ref: '#/components/schemas/DurationInSeconds'
-            - description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+          $ref: '#/components/schemas/DurationInSeconds'
+          description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
         contactPrePassDurationSeconds:
-          allOf:
-            - $ref: '#/components/schemas/DurationInSeconds'
-            - description: Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
+          $ref: '#/components/schemas/DurationInSeconds'
+          description: Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
         dataflowEdges:
-          allOf:
-            - $ref: '#/components/schemas/DataflowEdgeList'
-            - description: 'A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code>Config</code> and a <i>to</i> <code>Config</code>.'
+          $ref: '#/components/schemas/DataflowEdgeList'
+          description: 'A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code>Config</code> and a <i>to</i> <code>Config</code>.'
         minimumViableContactDurationSeconds:
-          allOf:
-            - $ref: '#/components/schemas/DurationInSeconds'
-            - description: Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
+          $ref: '#/components/schemas/DurationInSeconds'
+          description: Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
         missionProfileArn:
-          allOf:
-            - $ref: '#/components/schemas/MissionProfileArn'
-            - description: ARN of a mission profile.
+          $ref: '#/components/schemas/MissionProfileArn'
+          description: ARN of a mission profile.
         missionProfileId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: UUID of a mission profile.
+          $ref: '#/components/schemas/String'
+          description: UUID of a mission profile.
         name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of a mission profile.
+          $ref: '#/components/schemas/String'
+          description: Name of a mission profile.
         region:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Region of a mission profile.
+          $ref: '#/components/schemas/String'
+          description: Region of a mission profile.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Tags assigned to a mission profile.
+          $ref: '#/components/schemas/TagsMap'
+          description: Tags assigned to a mission profile.
         trackingConfigArn:
-          allOf:
-            - $ref: '#/components/schemas/ConfigArn'
-            - description: ARN of a tracking <code>Config</code>.
+          $ref: '#/components/schemas/ConfigArn'
+          description: ARN of a tracking <code>Config</code>.
       description: <p/>
     GetSatelliteResponse:
       type: object
       properties:
         groundStations:
-          allOf:
-            - $ref: '#/components/schemas/GroundStationIdList'
-            - description: A list of ground stations to which the satellite is on-boarded.
+          $ref: '#/components/schemas/GroundStationIdList'
+          description: A list of ground stations to which the satellite is on-boarded.
         noradSatelliteID:
-          allOf:
-            - $ref: '#/components/schemas/noradSatelliteID'
-            - description: NORAD satellite ID number.
+          $ref: '#/components/schemas/noradSatelliteID'
+          description: NORAD satellite ID number.
         satelliteArn:
-          allOf:
-            - $ref: '#/components/schemas/satelliteArn'
-            - description: ARN of a satellite.
+          $ref: '#/components/schemas/satelliteArn'
+          description: ARN of a satellite.
         satelliteId:
-          allOf:
-            - $ref: '#/components/schemas/Uuid'
-            - description: UUID of a satellite.
+          $ref: '#/components/schemas/Uuid'
+          description: UUID of a satellite.
       description: <p/>
     ListConfigsResponse:
       type: object
       properties:
         configList:
-          allOf:
-            - $ref: '#/components/schemas/ConfigList'
-            - description: List of <code>Config</code> items.
+          $ref: '#/components/schemas/ConfigList'
+          description: List of <code>Config</code> items.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Next token returned in the response of a previous <code>ListConfigs</code> call. Used to get the next page of results.
+          $ref: '#/components/schemas/String'
+          description: Next token returned in the response of a previous <code>ListConfigs</code> call. Used to get the next page of results.
       description: <p/>
     ListContactsResponse:
       type: object
       properties:
         contactList:
-          allOf:
-            - $ref: '#/components/schemas/ContactList'
-            - description: List of contacts.
+          $ref: '#/components/schemas/ContactList'
+          description: List of contacts.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Next token returned in the response of a previous <code>ListContacts</code> call. Used to get the next page of results.
+          $ref: '#/components/schemas/String'
+          description: Next token returned in the response of a previous <code>ListContacts</code> call. Used to get the next page of results.
       description: <p/>
     ContactStatus:
       type: string
@@ -1967,57 +1883,48 @@ components:
       type: object
       properties:
         dataflowEndpointGroupList:
-          allOf:
-            - $ref: '#/components/schemas/DataflowEndpointGroupList'
-            - description: A list of dataflow endpoint groups.
+          $ref: '#/components/schemas/DataflowEndpointGroupList'
+          description: A list of dataflow endpoint groups.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Next token returned in the response of a previous <code>ListDataflowEndpointGroups</code> call. Used to get the next page of results.
+          $ref: '#/components/schemas/String'
+          description: Next token returned in the response of a previous <code>ListDataflowEndpointGroups</code> call. Used to get the next page of results.
       description: <p/>
     ListGroundStationsResponse:
       type: object
       properties:
         groundStationList:
-          allOf:
-            - $ref: '#/components/schemas/GroundStationList'
-            - description: List of ground stations.
+          $ref: '#/components/schemas/GroundStationList'
+          description: List of ground stations.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Next token that can be supplied in the next call to get the next page of ground stations.
+          $ref: '#/components/schemas/String'
+          description: Next token that can be supplied in the next call to get the next page of ground stations.
       description: <p/>
     ListMissionProfilesResponse:
       type: object
       properties:
         missionProfileList:
-          allOf:
-            - $ref: '#/components/schemas/MissionProfileList'
-            - description: List of mission profiles.
+          $ref: '#/components/schemas/MissionProfileList'
+          description: List of mission profiles.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Next token returned in the response of a previous <code>ListMissionProfiles</code> call. Used to get the next page of results.
+          $ref: '#/components/schemas/String'
+          description: Next token returned in the response of a previous <code>ListMissionProfiles</code> call. Used to get the next page of results.
       description: <p/>
     ListSatellitesResponse:
       type: object
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Next token that can be supplied in the next call to get the next page of satellites.
+          $ref: '#/components/schemas/String'
+          description: Next token that can be supplied in the next call to get the next page of satellites.
         satellites:
-          allOf:
-            - $ref: '#/components/schemas/SatelliteList'
-            - description: List of satellites.
+          $ref: '#/components/schemas/SatelliteList'
+          description: List of satellites.
       description: <p/>
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Tags assigned to a resource.
+          $ref: '#/components/schemas/TagsMap'
+          description: Tags assigned to a resource.
       description: <p/>
     TagResourceResponse:
       type: object
@@ -2036,9 +1943,8 @@ components:
       type: object
       properties:
         outputNode:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of an antenna demod decode output node used in a contact.
+          $ref: '#/components/schemas/String'
+          description: Name of an antenna demod decode output node used in a contact.
       description: Details about an antenna demod decode <code>Config</code> used in a contact.
     SpectrumConfig:
       type: object
@@ -2047,17 +1953,14 @@ components:
         - centerFrequency
       properties:
         bandwidth:
-          allOf:
-            - $ref: '#/components/schemas/FrequencyBandwidth'
-            - description: '<p>Bandwidth of a spectral <code>Config</code>. AWS Ground Station currently has the following bandwidth limitations:</p> <ul> <li> <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p> </li> <li> <p>For <code>AntennaDownlinkconfig</code> valid values are between 10 kHz to 54 MHz.</p> </li> <li> <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> </ul>'
+          $ref: '#/components/schemas/FrequencyBandwidth'
+          description: '<p>Bandwidth of a spectral <code>Config</code>. AWS Ground Station currently has the following bandwidth limitations:</p> <ul> <li> <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p> </li> <li> <p>For <code>AntennaDownlinkconfig</code> valid values are between 10 kHz to 54 MHz.</p> </li> <li> <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> </ul>'
         centerFrequency:
-          allOf:
-            - $ref: '#/components/schemas/Frequency'
-            - description: Center frequency of a spectral <code>Config</code>. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+          $ref: '#/components/schemas/Frequency'
+          description: Center frequency of a spectral <code>Config</code>. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
         polarization:
-          allOf:
-            - $ref: '#/components/schemas/Polarization'
-            - description: Polarization of a spectral <code>Config</code>. Capturing both <code>"RIGHT_HAND"</code> and <code>"LEFT_HAND"</code> polarization requires two separate configs.
+          $ref: '#/components/schemas/Polarization'
+          description: Polarization of a spectral <code>Config</code>. Capturing both <code>"RIGHT_HAND"</code> and <code>"LEFT_HAND"</code> polarization requires two separate configs.
       description: Object that describes a spectral <code>Config</code>.
     DecodeConfig:
       type: object
@@ -2065,9 +1968,8 @@ components:
         - unvalidatedJSON
       properties:
         unvalidatedJSON:
-          allOf:
-            - $ref: '#/components/schemas/JsonString'
-            - description: Unvalidated JSON of a decode <code>Config</code>.
+          $ref: '#/components/schemas/JsonString'
+          description: Unvalidated JSON of a decode <code>Config</code>.
       description: Information about the decode <code>Config</code>.
     DemodulationConfig:
       type: object
@@ -2075,9 +1977,8 @@ components:
         - unvalidatedJSON
       properties:
         unvalidatedJSON:
-          allOf:
-            - $ref: '#/components/schemas/JsonString'
-            - description: Unvalidated JSON of a demodulation <code>Config</code>.
+          $ref: '#/components/schemas/JsonString'
+          description: Unvalidated JSON of a demodulation <code>Config</code>.
       description: Information about the demodulation <code>Config</code>.
     UplinkSpectrumConfig:
       type: object
@@ -2085,13 +1986,11 @@ components:
         - centerFrequency
       properties:
         centerFrequency:
-          allOf:
-            - $ref: '#/components/schemas/Frequency'
-            - description: Center frequency of an uplink spectral <code>Config</code>. Valid values are between 2025 to 2120 MHz.
+          $ref: '#/components/schemas/Frequency'
+          description: Center frequency of an uplink spectral <code>Config</code>. Valid values are between 2025 to 2120 MHz.
         polarization:
-          allOf:
-            - $ref: '#/components/schemas/Polarization'
-            - description: Polarization of an uplink spectral <code>Config</code>. Capturing both <code>"RIGHT_HAND"</code> and <code>"LEFT_HAND"</code> polarization requires two separate configs.
+          $ref: '#/components/schemas/Polarization'
+          description: Polarization of an uplink spectral <code>Config</code>. Capturing both <code>"RIGHT_HAND"</code> and <code>"LEFT_HAND"</code> polarization requires two separate configs.
       description: Information about the uplink spectral <code>Config</code>.
     Eirp:
       type: object
@@ -2100,13 +1999,11 @@ components:
         - value
       properties:
         units:
-          allOf:
-            - $ref: '#/components/schemas/EirpUnits'
-            - description: Units of an EIRP.
+          $ref: '#/components/schemas/EirpUnits'
+          description: Units of an EIRP.
         value:
-          allOf:
-            - $ref: '#/components/schemas/Double'
-            - description: Value of an EIRP. Valid values are between 20.0 to 50.0 dBW.
+          $ref: '#/components/schemas/Double'
+          description: Value of an EIRP. Valid values are between 20.0 to 50.0 dBW.
       description: Object that represents EIRP.
     Boolean:
       type: boolean
@@ -2139,47 +2036,39 @@ components:
       type: object
       properties:
         bucketArn:
-          allOf:
-            - $ref: '#/components/schemas/BucketArn'
-            - description: ARN of the bucket used.
+          $ref: '#/components/schemas/BucketArn'
+          description: ARN of the bucket used.
         keyTemplate:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Template of the S3 key used.
+          $ref: '#/components/schemas/String'
+          description: Template of the S3 key used.
       description: Details about an S3 recording <code>Config</code> used in a contact.
     ConfigDetails:
       type: object
       properties:
         antennaDemodDecodeDetails:
-          allOf:
-            - $ref: '#/components/schemas/AntennaDemodDecodeDetails'
-            - description: Details for antenna demod decode <code>Config</code> in a contact.
+          $ref: '#/components/schemas/AntennaDemodDecodeDetails'
+          description: Details for antenna demod decode <code>Config</code> in a contact.
         endpointDetails:
           $ref: '#/components/schemas/EndpointDetails'
         s3RecordingDetails:
-          allOf:
-            - $ref: '#/components/schemas/S3RecordingDetails'
-            - description: Details for an S3 recording <code>Config</code> in a contact.
+          $ref: '#/components/schemas/S3RecordingDetails'
+          description: Details for an S3 recording <code>Config</code> in a contact.
       description: Details for certain <code>Config</code> object types in a contact.
     ConfigListItem:
       type: object
       properties:
         configArn:
-          allOf:
-            - $ref: '#/components/schemas/ConfigArn'
-            - description: ARN of a <code>Config</code>.
+          $ref: '#/components/schemas/ConfigArn'
+          description: ARN of a <code>Config</code>.
         configId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: UUID of a <code>Config</code>.
+          $ref: '#/components/schemas/String'
+          description: UUID of a <code>Config</code>.
         configType:
-          allOf:
-            - $ref: '#/components/schemas/ConfigCapabilityType'
-            - description: Type of a <code>Config</code>.
+          $ref: '#/components/schemas/ConfigCapabilityType'
+          description: Type of a <code>Config</code>.
         name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of a <code>Config</code>.
+          $ref: '#/components/schemas/String'
+          description: Name of a <code>Config</code>.
       description: An item in a list of <code>Config</code> objects.
     ConfigList:
       type: array
@@ -2189,33 +2078,26 @@ components:
       type: object
       properties:
         antennaDownlinkConfig:
-          allOf:
-            - $ref: '#/components/schemas/AntennaDownlinkConfig'
-            - description: Information about how AWS Ground Station should configure an antenna for downlink during a contact.
+          $ref: '#/components/schemas/AntennaDownlinkConfig'
+          description: Information about how AWS Ground Station should configure an antenna for downlink during a contact.
         antennaDownlinkDemodDecodeConfig:
-          allOf:
-            - $ref: '#/components/schemas/AntennaDownlinkDemodDecodeConfig'
-            - description: Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.
+          $ref: '#/components/schemas/AntennaDownlinkDemodDecodeConfig'
+          description: Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.
         antennaUplinkConfig:
-          allOf:
-            - $ref: '#/components/schemas/AntennaUplinkConfig'
-            - description: Information about how AWS Ground Station should conﬁgure an antenna for uplink during a contact.
+          $ref: '#/components/schemas/AntennaUplinkConfig'
+          description: Information about how AWS Ground Station should conﬁgure an antenna for uplink during a contact.
         dataflowEndpointConfig:
-          allOf:
-            - $ref: '#/components/schemas/DataflowEndpointConfig'
-            - description: Information about the dataflow endpoint <code>Config</code>.
+          $ref: '#/components/schemas/DataflowEndpointConfig'
+          description: Information about the dataflow endpoint <code>Config</code>.
         s3RecordingConfig:
-          allOf:
-            - $ref: '#/components/schemas/S3RecordingConfig'
-            - description: Information about an S3 recording <code>Config</code>.
+          $ref: '#/components/schemas/S3RecordingConfig'
+          description: Information about an S3 recording <code>Config</code>.
         trackingConfig:
-          allOf:
-            - $ref: '#/components/schemas/TrackingConfig'
-            - description: 'Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile. '
+          $ref: '#/components/schemas/TrackingConfig'
+          description: 'Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile. '
         uplinkEchoConfig:
-          allOf:
-            - $ref: '#/components/schemas/UplinkEchoConfig'
-            - description: '<p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>'
+          $ref: '#/components/schemas/UplinkEchoConfig'
+          description: '<p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>'
       description: <p>Object containing the parameters of a <code>Config</code>.</p> <p>See the subtype definitions for what each type of <code>Config</code> contains.</p>
     Timestamp:
       type: string
@@ -2227,13 +2109,11 @@ components:
         - value
       properties:
         unit:
-          allOf:
-            - $ref: '#/components/schemas/AngleUnits'
-            - description: Elevation angle units.
+          $ref: '#/components/schemas/AngleUnits'
+          description: Elevation angle units.
         value:
-          allOf:
-            - $ref: '#/components/schemas/Double'
-            - description: Elevation angle value.
+          $ref: '#/components/schemas/Double'
+          description: Elevation angle value.
       description: Elevation angle of the satellite in the sky during a contact.
     MissionProfileArn:
       type: string
@@ -2247,57 +2127,44 @@ components:
       type: object
       properties:
         contactId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: UUID of a contact.
+          $ref: '#/components/schemas/String'
+          description: UUID of a contact.
         contactStatus:
-          allOf:
-            - $ref: '#/components/schemas/ContactStatus'
-            - description: Status of a contact.
+          $ref: '#/components/schemas/ContactStatus'
+          description: Status of a contact.
         endTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: End time of a contact.
+          $ref: '#/components/schemas/Timestamp'
+          description: End time of a contact.
         errorMessage:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Error message of a contact.
+          $ref: '#/components/schemas/String'
+          description: Error message of a contact.
         groundStation:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of a ground station.
+          $ref: '#/components/schemas/String'
+          description: Name of a ground station.
         maximumElevation:
-          allOf:
-            - $ref: '#/components/schemas/Elevation'
-            - description: Maximum elevation angle of a contact.
+          $ref: '#/components/schemas/Elevation'
+          description: Maximum elevation angle of a contact.
         missionProfileArn:
-          allOf:
-            - $ref: '#/components/schemas/MissionProfileArn'
-            - description: ARN of a mission profile.
+          $ref: '#/components/schemas/MissionProfileArn'
+          description: ARN of a mission profile.
         postPassEndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+          $ref: '#/components/schemas/Timestamp'
+          description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
         prePassStartTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
+          $ref: '#/components/schemas/Timestamp'
+          description: Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
         region:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Region of a contact.
+          $ref: '#/components/schemas/String'
+          description: Region of a contact.
         satelliteArn:
-          allOf:
-            - $ref: '#/components/schemas/satelliteArn'
-            - description: ARN of a satellite.
+          $ref: '#/components/schemas/satelliteArn'
+          description: ARN of a satellite.
         startTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Start time of a contact.
+          $ref: '#/components/schemas/Timestamp'
+          description: Start time of a contact.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Tags assigned to a contact.
+          $ref: '#/components/schemas/TagsMap'
+          description: Tags assigned to a contact.
       description: Data describing a contact.
     ContactList:
       type: array
@@ -2316,17 +2183,14 @@ components:
       title: CreateConfigRequest
       properties:
         configData:
-          allOf:
-            - $ref: '#/components/schemas/ConfigTypeData'
-            - description: Parameters of a <code>Config</code>.
+          $ref: '#/components/schemas/ConfigTypeData'
+          description: Parameters of a <code>Config</code>.
         name:
-          allOf:
-            - $ref: '#/components/schemas/SafeName'
-            - description: Name of a <code>Config</code>.
+          $ref: '#/components/schemas/SafeName'
+          description: Name of a <code>Config</code>.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Tags assigned to a <code>Config</code>.
+          $ref: '#/components/schemas/TagsMap'
+          description: Tags assigned to a <code>Config</code>.
       description: <p/>
     EndpointDetailsList:
       type: array
@@ -2339,13 +2203,11 @@ components:
       title: CreateDataflowEndpointGroupRequest
       properties:
         endpointDetails:
-          allOf:
-            - $ref: '#/components/schemas/EndpointDetailsList'
-            - description: Endpoint details of each endpoint in the dataflow endpoint group.
+          $ref: '#/components/schemas/EndpointDetailsList'
+          description: Endpoint details of each endpoint in the dataflow endpoint group.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Tags of a dataflow endpoint group.
+          $ref: '#/components/schemas/TagsMap'
+          description: Tags of a dataflow endpoint group.
       description: <p/>
     DurationInSeconds:
       type: integer
@@ -2365,33 +2227,26 @@ components:
       title: CreateMissionProfileRequest
       properties:
         contactPostPassDurationSeconds:
-          allOf:
-            - $ref: '#/components/schemas/DurationInSeconds'
-            - description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+          $ref: '#/components/schemas/DurationInSeconds'
+          description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
         contactPrePassDurationSeconds:
-          allOf:
-            - $ref: '#/components/schemas/DurationInSeconds'
-            - description: Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
+          $ref: '#/components/schemas/DurationInSeconds'
+          description: Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
         dataflowEdges:
-          allOf:
-            - $ref: '#/components/schemas/DataflowEdgeList'
-            - description: 'A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code>Config</code> and a <i>to</i> <code>Config</code>.'
+          $ref: '#/components/schemas/DataflowEdgeList'
+          description: 'A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code>Config</code> and a <i>to</i> <code>Config</code>.'
         minimumViableContactDurationSeconds:
-          allOf:
-            - $ref: '#/components/schemas/DurationInSeconds'
-            - description: Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
+          $ref: '#/components/schemas/DurationInSeconds'
+          description: Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
         name:
-          allOf:
-            - $ref: '#/components/schemas/SafeName'
-            - description: Name of a mission profile.
+          $ref: '#/components/schemas/SafeName'
+          description: Name of a mission profile.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Tags assigned to a mission profile.
+          $ref: '#/components/schemas/TagsMap'
+          description: Tags assigned to a mission profile.
         trackingConfigArn:
-          allOf:
-            - $ref: '#/components/schemas/ConfigArn'
-            - description: ARN of a tracking <code>Config</code>.
+          $ref: '#/components/schemas/ConfigArn'
+          description: ARN of a tracking <code>Config</code>.
       description: <p/>
     Criticality:
       type: string
@@ -2403,41 +2258,33 @@ components:
       type: object
       properties:
         configDetails:
-          allOf:
-            - $ref: '#/components/schemas/ConfigDetails'
-            - description: 'Additional details for a <code>Config</code>, if type is dataflow endpoint or antenna demod decode.'
+          $ref: '#/components/schemas/ConfigDetails'
+          description: 'Additional details for a <code>Config</code>, if type is dataflow endpoint or antenna demod decode.'
         configId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: UUID of a <code>Config</code>.
+          $ref: '#/components/schemas/String'
+          description: UUID of a <code>Config</code>.
         configType:
-          allOf:
-            - $ref: '#/components/schemas/ConfigCapabilityType'
-            - description: Type of a <code>Config</code>.
+          $ref: '#/components/schemas/ConfigCapabilityType'
+          description: Type of a <code>Config</code>.
         dataflowDestinationRegion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Region of a dataflow destination.
+          $ref: '#/components/schemas/String'
+          description: Region of a dataflow destination.
       description: Dataflow details for the destination side.
     Source:
       type: object
       properties:
         configDetails:
-          allOf:
-            - $ref: '#/components/schemas/ConfigDetails'
-            - description: 'Additional details for a <code>Config</code>, if type is dataflow endpoint or antenna demod decode.'
+          $ref: '#/components/schemas/ConfigDetails'
+          description: 'Additional details for a <code>Config</code>, if type is dataflow endpoint or antenna demod decode.'
         configId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: UUID of a <code>Config</code>.
+          $ref: '#/components/schemas/String'
+          description: UUID of a <code>Config</code>.
         configType:
-          allOf:
-            - $ref: '#/components/schemas/ConfigCapabilityType'
-            - description: Type of a <code>Config</code>.
+          $ref: '#/components/schemas/ConfigCapabilityType'
+          description: Type of a <code>Config</code>.
         dataflowSourceRegion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Region of a dataflow source.
+          $ref: '#/components/schemas/String'
+          description: Region of a dataflow source.
       description: Dataflow details for the source side.
     DataflowDetail:
       type: object
@@ -2445,9 +2292,8 @@ components:
         destination:
           $ref: '#/components/schemas/Destination'
         errorMessage:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Error message for a dataflow.
+          $ref: '#/components/schemas/String'
+          description: Error message for a dataflow.
         source:
           $ref: '#/components/schemas/Source'
       description: Information about a dataflow edge used in a contact.
@@ -2458,13 +2304,11 @@ components:
         - port
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of a socket address.
+          $ref: '#/components/schemas/String'
+          description: Name of a socket address.
         port:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: Port of a socket address.
+          $ref: '#/components/schemas/Integer'
+          description: Port of a socket address.
       description: Information about the socket address.
     DataflowEndpointMtuInteger:
       type: integer
@@ -2482,21 +2326,17 @@ components:
       type: object
       properties:
         address:
-          allOf:
-            - $ref: '#/components/schemas/SocketAddress'
-            - description: Socket address of a dataflow endpoint.
+          $ref: '#/components/schemas/SocketAddress'
+          description: Socket address of a dataflow endpoint.
         mtu:
-          allOf:
-            - $ref: '#/components/schemas/DataflowEndpointMtuInteger'
-            - description: Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
+          $ref: '#/components/schemas/DataflowEndpointMtuInteger'
+          description: Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
         name:
-          allOf:
-            - $ref: '#/components/schemas/SafeName'
-            - description: Name of a dataflow endpoint.
+          $ref: '#/components/schemas/SafeName'
+          description: Name of a dataflow endpoint.
         status:
-          allOf:
-            - $ref: '#/components/schemas/EndpointStatus'
-            - description: Status of a dataflow endpoint.
+          $ref: '#/components/schemas/EndpointStatus'
+          description: Status of a dataflow endpoint.
       description: Information about a dataflow endpoint.
     DataflowEndpointGroupArn:
       type: string
@@ -2504,13 +2344,11 @@ components:
       type: object
       properties:
         dataflowEndpointGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/DataflowEndpointGroupArn'
-            - description: ARN of a dataflow endpoint group.
+          $ref: '#/components/schemas/DataflowEndpointGroupArn'
+          description: ARN of a dataflow endpoint group.
         dataflowEndpointGroupId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: UUID of a dataflow endpoint group.
+          $ref: '#/components/schemas/String'
+          description: UUID of a dataflow endpoint group.
       description: Item in a list of <code>DataflowEndpoint</code> groups.
     DataflowEndpointGroupList:
       type: array
@@ -2560,17 +2398,14 @@ components:
         - subnetIds
       properties:
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: 'ARN to a role needed for connecting streams to your instances. '
+          $ref: '#/components/schemas/RoleArn'
+          description: 'ARN to a role needed for connecting streams to your instances. '
         securityGroupIds:
-          allOf:
-            - $ref: '#/components/schemas/SecurityGroupIdList'
-            - description: The security groups to attach to the elastic network interfaces.
+          $ref: '#/components/schemas/SecurityGroupIdList'
+          description: The security groups to attach to the elastic network interfaces.
         subnetIds:
-          allOf:
-            - $ref: '#/components/schemas/SubnetList'
-            - description: A list of subnets where AWS Ground Station places elastic network interfaces to send streams to your instances.
+          $ref: '#/components/schemas/SubnetList'
+          description: A list of subnets where AWS Ground Station places elastic network interfaces to send streams to your instances.
       description: Information about endpoints.
     FrequencyUnits:
       type: string
@@ -2585,13 +2420,11 @@ components:
         - value
       properties:
         units:
-          allOf:
-            - $ref: '#/components/schemas/FrequencyUnits'
-            - description: Frequency units.
+          $ref: '#/components/schemas/FrequencyUnits'
+          description: Frequency units.
         value:
-          allOf:
-            - $ref: '#/components/schemas/Double'
-            - description: Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+          $ref: '#/components/schemas/Double'
+          description: Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
       description: Object that describes the frequency.
     FrequencyBandwidth:
       type: object
@@ -2600,13 +2433,11 @@ components:
         - value
       properties:
         units:
-          allOf:
-            - $ref: '#/components/schemas/BandwidthUnits'
-            - description: Frequency bandwidth units.
+          $ref: '#/components/schemas/BandwidthUnits'
+          description: Frequency bandwidth units.
         value:
-          allOf:
-            - $ref: '#/components/schemas/Double'
-            - description: '<p>Frequency bandwidth value. AWS Ground Station currently has the following bandwidth limitations:</p> <ul> <li> <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p> </li> <li> <p>For <code>AntennaDownlinkconfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> <li> <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> </ul>'
+          $ref: '#/components/schemas/Double'
+          description: '<p>Frequency bandwidth value. AWS Ground Station currently has the following bandwidth limitations:</p> <ul> <li> <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p> </li> <li> <p>For <code>AntennaDownlinkconfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> <li> <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> </ul>'
       description: 'Object that describes the frequency bandwidth. '
     GetConfigRequest:
       type: object
@@ -2628,13 +2459,11 @@ components:
       title: GetMinuteUsageRequest
       properties:
         month:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'The month being requested, with a value of 1-12.'
+          $ref: '#/components/schemas/Integer'
+          description: 'The month being requested, with a value of 1-12.'
         year:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'The year being requested, in the format of YYYY.'
+          $ref: '#/components/schemas/Integer'
+          description: 'The year being requested, in the format of YYYY.'
       description: <p/>
     GetMissionProfileRequest:
       type: object
@@ -2663,17 +2492,14 @@ components:
       type: object
       properties:
         groundStationId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: UUID of a ground station.
+          $ref: '#/components/schemas/String'
+          description: UUID of a ground station.
         groundStationName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of a ground station.
+          $ref: '#/components/schemas/String'
+          description: Name of a ground station.
         region:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Ground station Region.
+          $ref: '#/components/schemas/String'
+          description: Ground station Region.
       description: Information about the ground station data.
     GroundStationList:
       type: array
@@ -2697,37 +2523,29 @@ components:
       title: ListContactsRequest
       properties:
         endTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: End time of a contact.
+          $ref: '#/components/schemas/Timestamp'
+          description: End time of a contact.
         groundStation:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of a ground station.
+          $ref: '#/components/schemas/String'
+          description: Name of a ground station.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: Maximum number of contacts returned.
+          $ref: '#/components/schemas/Integer'
+          description: Maximum number of contacts returned.
         missionProfileArn:
-          allOf:
-            - $ref: '#/components/schemas/MissionProfileArn'
-            - description: ARN of a mission profile.
+          $ref: '#/components/schemas/MissionProfileArn'
+          description: ARN of a mission profile.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Next token returned in the request of a previous <code>ListContacts</code> call. Used to get the next page of results.
+          $ref: '#/components/schemas/String'
+          description: Next token returned in the request of a previous <code>ListContacts</code> call. Used to get the next page of results.
         satelliteArn:
-          allOf:
-            - $ref: '#/components/schemas/satelliteArn'
-            - description: ARN of a satellite.
+          $ref: '#/components/schemas/satelliteArn'
+          description: ARN of a satellite.
         startTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Start time of a contact.
+          $ref: '#/components/schemas/Timestamp'
+          description: Start time of a contact.
         statusList:
-          allOf:
-            - $ref: '#/components/schemas/StatusList'
-            - description: Status of a contact reservation.
+          $ref: '#/components/schemas/StatusList'
+          description: Status of a contact reservation.
       description: <p/>
     ListDataflowEndpointGroupsRequest:
       type: object
@@ -2766,21 +2584,17 @@ components:
       type: object
       properties:
         missionProfileArn:
-          allOf:
-            - $ref: '#/components/schemas/MissionProfileArn'
-            - description: ARN of a mission profile.
+          $ref: '#/components/schemas/MissionProfileArn'
+          description: ARN of a mission profile.
         missionProfileId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: UUID of a mission profile.
+          $ref: '#/components/schemas/String'
+          description: UUID of a mission profile.
         name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of a mission profile.
+          $ref: '#/components/schemas/String'
+          description: Name of a mission profile.
         region:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Region of a mission profile.
+          $ref: '#/components/schemas/String'
+          description: Region of a mission profile.
       description: Item in a list of mission profiles.
     Polarization:
       type: string
@@ -2799,29 +2613,23 @@ components:
       title: ReserveContactRequest
       properties:
         endTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: End time of a contact.
+          $ref: '#/components/schemas/Timestamp'
+          description: End time of a contact.
         groundStation:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Name of a ground station.
+          $ref: '#/components/schemas/String'
+          description: Name of a ground station.
         missionProfileArn:
-          allOf:
-            - $ref: '#/components/schemas/MissionProfileArn'
-            - description: ARN of a mission profile.
+          $ref: '#/components/schemas/MissionProfileArn'
+          description: ARN of a mission profile.
         satelliteArn:
-          allOf:
-            - $ref: '#/components/schemas/satelliteArn'
-            - description: ARN of a satellite
+          $ref: '#/components/schemas/satelliteArn'
+          description: ARN of a satellite
         startTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Start time of a contact.
+          $ref: '#/components/schemas/Timestamp'
+          description: Start time of a contact.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Tags assigned to a contact.
+          $ref: '#/components/schemas/TagsMap'
+          description: Tags assigned to a contact.
       description: <p/>
     RoleArn:
       type: string
@@ -2834,21 +2642,17 @@ components:
       type: object
       properties:
         groundStations:
-          allOf:
-            - $ref: '#/components/schemas/GroundStationIdList'
-            - description: A list of ground stations to which the satellite is on-boarded.
+          $ref: '#/components/schemas/GroundStationIdList'
+          description: A list of ground stations to which the satellite is on-boarded.
         noradSatelliteID:
-          allOf:
-            - $ref: '#/components/schemas/noradSatelliteID'
-            - description: NORAD satellite ID number.
+          $ref: '#/components/schemas/noradSatelliteID'
+          description: NORAD satellite ID number.
         satelliteArn:
-          allOf:
-            - $ref: '#/components/schemas/satelliteArn'
-            - description: ARN of a satellite.
+          $ref: '#/components/schemas/satelliteArn'
+          description: ARN of a satellite.
         satelliteId:
-          allOf:
-            - $ref: '#/components/schemas/Uuid'
-            - description: UUID of a satellite.
+          $ref: '#/components/schemas/Uuid'
+          description: UUID of a satellite.
       description: Item in a list of satellites.
     SecurityGroupIdList:
       type: array
@@ -2869,9 +2673,8 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: Tags assigned to a resource.
+          $ref: '#/components/schemas/TagsMap'
+          description: Tags assigned to a resource.
       description: <p/>
     UntagResourceRequest:
       type: object
@@ -2886,42 +2689,34 @@ components:
       title: UpdateConfigRequest
       properties:
         configData:
-          allOf:
-            - $ref: '#/components/schemas/ConfigTypeData'
-            - description: Parameters of a <code>Config</code>.
+          $ref: '#/components/schemas/ConfigTypeData'
+          description: Parameters of a <code>Config</code>.
         name:
-          allOf:
-            - $ref: '#/components/schemas/SafeName'
-            - description: Name of a <code>Config</code>.
+          $ref: '#/components/schemas/SafeName'
+          description: Name of a <code>Config</code>.
       description: <p/>
     UpdateMissionProfileRequest:
       type: object
       title: UpdateMissionProfileRequest
       properties:
         contactPostPassDurationSeconds:
-          allOf:
-            - $ref: '#/components/schemas/DurationInSeconds'
-            - description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+          $ref: '#/components/schemas/DurationInSeconds'
+          description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
         contactPrePassDurationSeconds:
-          allOf:
-            - $ref: '#/components/schemas/DurationInSeconds'
-            - description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+          $ref: '#/components/schemas/DurationInSeconds'
+          description: Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
         dataflowEdges:
-          allOf:
-            - $ref: '#/components/schemas/DataflowEdgeList'
-            - description: 'A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code>Config</code> and a <i>to</i> <code>Config</code>.'
+          $ref: '#/components/schemas/DataflowEdgeList'
+          description: 'A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code>Config</code> and a <i>to</i> <code>Config</code>.'
         minimumViableContactDurationSeconds:
-          allOf:
-            - $ref: '#/components/schemas/DurationInSeconds'
-            - description: Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
+          $ref: '#/components/schemas/DurationInSeconds'
+          description: Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
         name:
-          allOf:
-            - $ref: '#/components/schemas/SafeName'
-            - description: Name of a mission profile.
+          $ref: '#/components/schemas/SafeName'
+          description: Name of a mission profile.
         trackingConfigArn:
-          allOf:
-            - $ref: '#/components/schemas/ConfigArn'
-            - description: ARN of a tracking <code>Config</code>.
+          $ref: '#/components/schemas/ConfigArn'
+          description: ARN of a tracking <code>Config</code>.
       description: <p/>
 security:
   - hmac: []

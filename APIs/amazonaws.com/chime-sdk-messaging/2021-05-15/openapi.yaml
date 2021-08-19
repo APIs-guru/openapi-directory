@@ -2968,13 +2968,11 @@ components:
       type: object
       properties:
         BatchChannelMemberships:
-          allOf:
-            - $ref: '#/components/schemas/BatchChannelMemberships'
-            - description: The list of channel memberships in the response.
+          $ref: '#/components/schemas/BatchChannelMemberships'
+          description: The list of channel memberships in the response.
         Errors:
-          allOf:
-            - $ref: '#/components/schemas/BatchCreateChannelMembershipErrors'
-            - description: 'If the action fails for one or more of the memberships in the request, a list of the memberships is returned, along with error codes and error messages.'
+          $ref: '#/components/schemas/BatchCreateChannelMembershipErrors'
+          description: 'If the action fails for one or more of the memberships in the request, a list of the memberships is returned, along with error codes and error messages.'
     ChimeArn:
       type: string
       pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -2990,9 +2988,8 @@ components:
       type: object
       properties:
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel.
     Tag:
       type: object
       required:
@@ -3000,13 +2997,11 @@ components:
         - Value
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: The key of the tag.
+          $ref: '#/components/schemas/TagKey'
+          description: The key of the tag.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: The value of the tag.
+          $ref: '#/components/schemas/TagValue'
+          description: The value of the tag.
       description: Describes a tag applied to a resource.
     ConflictException: {}
     ResourceLimitExceededException: {}
@@ -3014,232 +3009,192 @@ components:
       type: object
       properties:
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the response to the ban request.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the response to the ban request.
         Member:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The <code>ChannelArn</code> and <code>BannedIdentity</code> of the member in the ban response.
+          $ref: '#/components/schemas/Identity'
+          description: The <code>ChannelArn</code> and <code>BannedIdentity</code> of the member in the ban response.
     CreateChannelMembershipResponse:
       type: object
       properties:
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel.
         Member:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The ARN and metadata of the member being added.
+          $ref: '#/components/schemas/Identity'
+          description: The ARN and metadata of the member being added.
     CreateChannelModeratorResponse:
       type: object
       properties:
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel.
         ChannelModerator:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The ARNs of the channel and the moderator.
+          $ref: '#/components/schemas/Identity'
+          description: The ARNs of the channel and the moderator.
     DescribeChannelResponse:
       type: object
       properties:
         Channel:
-          allOf:
-            - $ref: '#/components/schemas/Channel'
-            - description: The channel details.
+          $ref: '#/components/schemas/Channel'
+          description: The channel details.
     DescribeChannelBanResponse:
       type: object
       properties:
         ChannelBan:
-          allOf:
-            - $ref: '#/components/schemas/ChannelBan'
-            - description: The details of the ban.
+          $ref: '#/components/schemas/ChannelBan'
+          description: The details of the ban.
     NotFoundException: {}
     DescribeChannelMembershipResponse:
       type: object
       properties:
         ChannelMembership:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMembership'
-            - description: The details of the membership.
+          $ref: '#/components/schemas/ChannelMembership'
+          description: The details of the membership.
     DescribeChannelMembershipForAppInstanceUserResponse:
       type: object
       properties:
         ChannelMembership:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMembershipForAppInstanceUserSummary'
-            - description: The channel to which a user belongs.
+          $ref: '#/components/schemas/ChannelMembershipForAppInstanceUserSummary'
+          description: The channel to which a user belongs.
     DescribeChannelModeratedByAppInstanceUserResponse:
       type: object
       properties:
         Channel:
-          allOf:
-            - $ref: '#/components/schemas/ChannelModeratedByAppInstanceUserSummary'
-            - description: The moderated channel.
+          $ref: '#/components/schemas/ChannelModeratedByAppInstanceUserSummary'
+          description: The moderated channel.
     DescribeChannelModeratorResponse:
       type: object
       properties:
         ChannelModerator:
-          allOf:
-            - $ref: '#/components/schemas/ChannelModerator'
-            - description: The details of the channel moderator.
+          $ref: '#/components/schemas/ChannelModerator'
+          description: The details of the channel moderator.
     GetChannelMessageResponse:
       type: object
       properties:
         ChannelMessage:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMessage'
-            - description: The details of and content in the message.
+          $ref: '#/components/schemas/ChannelMessage'
+          description: The details of and content in the message.
     GetMessagingSessionEndpointResponse:
       type: object
       properties:
         Endpoint:
-          allOf:
-            - $ref: '#/components/schemas/MessagingSessionEndpoint'
-            - description: The endpoint returned in the response.
+          $ref: '#/components/schemas/MessagingSessionEndpoint'
+          description: The endpoint returned in the response.
     ListChannelBansResponse:
       type: object
       properties:
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token passed by previous API calls until all requested bans are returned.
+          $ref: '#/components/schemas/NextToken'
+          description: The token passed by previous API calls until all requested bans are returned.
         ChannelBans:
-          allOf:
-            - $ref: '#/components/schemas/ChannelBanSummaryList'
-            - description: The information for each requested ban.
+          $ref: '#/components/schemas/ChannelBanSummaryList'
+          description: The information for each requested ban.
     ListChannelMembershipsResponse:
       type: object
       properties:
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel.
         ChannelMemberships:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMembershipSummaryList'
-            - description: The information for the requested channel memberships.
+          $ref: '#/components/schemas/ChannelMembershipSummaryList'
+          description: The information for the requested channel memberships.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token passed by previous API calls until all requested channel memberships are returned.
+          $ref: '#/components/schemas/NextToken'
+          description: The token passed by previous API calls until all requested channel memberships are returned.
     ListChannelMembershipsForAppInstanceUserResponse:
       type: object
       properties:
         ChannelMemberships:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMembershipForAppInstanceUserSummaryList'
-            - description: The token passed by previous API calls until all requested users are returned.
+          $ref: '#/components/schemas/ChannelMembershipForAppInstanceUserSummaryList'
+          description: The token passed by previous API calls until all requested users are returned.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token passed by previous API calls until all requested users are returned.
+          $ref: '#/components/schemas/NextToken'
+          description: The token passed by previous API calls until all requested users are returned.
     ListChannelMessagesResponse:
       type: object
       properties:
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel containing the requested messages.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel containing the requested messages.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token passed by previous API calls until all requested messages are returned.
+          $ref: '#/components/schemas/NextToken'
+          description: The token passed by previous API calls until all requested messages are returned.
         ChannelMessages:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMessageSummaryList'
-            - description: 'The information about, and content of, each requested message.'
+          $ref: '#/components/schemas/ChannelMessageSummaryList'
+          description: 'The information about, and content of, each requested message.'
     ListChannelModeratorsResponse:
       type: object
       properties:
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token passed by previous API calls until all requested moderators are returned.
+          $ref: '#/components/schemas/NextToken'
+          description: The token passed by previous API calls until all requested moderators are returned.
         ChannelModerators:
-          allOf:
-            - $ref: '#/components/schemas/ChannelModeratorSummaryList'
-            - description: The information about and names of each moderator.
+          $ref: '#/components/schemas/ChannelModeratorSummaryList'
+          description: The information about and names of each moderator.
     ListChannelsResponse:
       type: object
       properties:
         Channels:
-          allOf:
-            - $ref: '#/components/schemas/ChannelSummaryList'
-            - description: The information about each channel.
+          $ref: '#/components/schemas/ChannelSummaryList'
+          description: The information about each channel.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token returned from previous API requests until the number of channels is reached.
+          $ref: '#/components/schemas/NextToken'
+          description: The token returned from previous API requests until the number of channels is reached.
     ListChannelsModeratedByAppInstanceUserResponse:
       type: object
       properties:
         Channels:
-          allOf:
-            - $ref: '#/components/schemas/ChannelModeratedByAppInstanceUserSummaryList'
-            - description: The moderated channels in the request.
+          $ref: '#/components/schemas/ChannelModeratedByAppInstanceUserSummaryList'
+          description: The moderated channels in the request.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token returned from previous API requests until the number of channels moderated by the user is reached.
+          $ref: '#/components/schemas/NextToken'
+          description: The token returned from previous API requests until the number of channels moderated by the user is reached.
     RedactChannelMessageResponse:
       type: object
       properties:
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel containing the messages that you want to redact.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel containing the messages that you want to redact.
         MessageId:
-          allOf:
-            - $ref: '#/components/schemas/MessageId'
-            - description: The ID of the message being redacted.
+          $ref: '#/components/schemas/MessageId'
+          description: The ID of the message being redacted.
     SendChannelMessageResponse:
       type: object
       properties:
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel.
         MessageId:
-          allOf:
-            - $ref: '#/components/schemas/MessageId'
-            - description: The ID string assigned to each message.
+          $ref: '#/components/schemas/MessageId'
+          description: The ID string assigned to each message.
     UpdateChannelResponse:
       type: object
       properties:
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel.
     UpdateChannelMessageResponse:
       type: object
       properties:
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel.
         MessageId:
-          allOf:
-            - $ref: '#/components/schemas/MessageId'
-            - description: The ID string of the message being updated.
+          $ref: '#/components/schemas/MessageId'
+          description: The ID string of the message being updated.
     UpdateChannelReadMarkerResponse:
       type: object
       properties:
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel.
     ChannelMembershipType:
       type: string
       enum:
@@ -3252,25 +3207,21 @@ components:
       type: object
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMembershipType'
-            - description: The type of <code>ChannelMembership</code>.
+          $ref: '#/components/schemas/ChannelMembershipType'
+          description: The type of <code>ChannelMembership</code>.
         ReadMarkerTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which a message was last read.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which a message was last read.
       description: Summary of the membership details of an <code>AppInstanceUser</code>.
     Identity:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN in an Identity.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN in an Identity.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name in an Identity.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name in an Identity.
       description: The details of a user.
     Members:
       type: array
@@ -3280,21 +3231,17 @@ components:
       type: object
       properties:
         InvitedBy:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The identifier of the member who invited another member.
+          $ref: '#/components/schemas/Identity'
+          description: The identifier of the member who invited another member.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMembershipType'
-            - description: The membership types set for the channel users.
+          $ref: '#/components/schemas/ChannelMembershipType'
+          description: The membership types set for the channel users.
         Members:
-          allOf:
-            - $ref: '#/components/schemas/Members'
-            - description: The users successfully added to the request.
+          $ref: '#/components/schemas/Members'
+          description: The users successfully added to the request.
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel to which you're adding users.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel to which you're adding users.
       description: 'The membership information, including member ARNs, the channel ARN, and membership types.'
     ErrorCode:
       type: string
@@ -3320,17 +3267,14 @@ components:
       type: object
       properties:
         MemberArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the member that the service couldn't add.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the member that the service couldn't add.
         ErrorCode:
-          allOf:
-            - $ref: '#/components/schemas/ErrorCode'
-            - description: The error code.
+          $ref: '#/components/schemas/ErrorCode'
+          description: The error code.
         ErrorMessage:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The error message.
+          $ref: '#/components/schemas/String'
+          description: The error message.
       description: 'A list of failed member ARNs, error codes, and error messages.'
     BatchCreateChannelMembershipErrors:
       type: array
@@ -3349,13 +3293,11 @@ components:
       title: BatchCreateChannelMembershipRequest
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMembershipType'
-            - description: 'The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.'
+          $ref: '#/components/schemas/ChannelMembershipType'
+          description: 'The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.'
         MemberArns:
-          allOf:
-            - $ref: '#/components/schemas/MemberArns'
-            - description: The ARNs of the members you want to add to the channel.
+          $ref: '#/components/schemas/MemberArns'
+          description: The ARNs of the members you want to add to the channel.
     NonEmptyResourceName:
       type: string
       pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
@@ -3382,69 +3324,55 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyResourceName'
-            - description: The name of a channel.
+          $ref: '#/components/schemas/NonEmptyResourceName'
+          description: The name of a channel.
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of a channel.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of a channel.
         Mode:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMode'
-            - description: The mode of the channel.
+          $ref: '#/components/schemas/ChannelMode'
+          description: The mode of the channel.
         Privacy:
-          allOf:
-            - $ref: '#/components/schemas/ChannelPrivacy'
-            - description: The channel's privacy setting.
+          $ref: '#/components/schemas/ChannelPrivacy'
+          description: The channel's privacy setting.
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The channel's metadata.
+          $ref: '#/components/schemas/Metadata'
+          description: The channel's metadata.
         CreatedBy:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The <code>AppInstanceUser</code> who created the channel.
+          $ref: '#/components/schemas/Identity'
+          description: The <code>AppInstanceUser</code> who created the channel.
         CreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the <code>AppInstanceUser</code> created the channel.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the <code>AppInstanceUser</code> created the channel.
         LastMessageTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which a member sent the last message in the channel.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which a member sent the last message in the channel.
         LastUpdatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which a channel was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which a channel was last updated.
       description: The details of a channel.
     ChannelBan:
       type: object
       properties:
         Member:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The member being banned from the channel.
+          $ref: '#/components/schemas/Identity'
+          description: The member being banned from the channel.
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel from which a member is being banned.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel from which a member is being banned.
         CreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the ban was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the ban was created.
         CreatedBy:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The <code>AppInstanceUser</code> who created the ban.
+          $ref: '#/components/schemas/Identity'
+          description: The <code>AppInstanceUser</code> who created the ban.
       description: The details of a channel ban.
     ChannelBanSummary:
       type: object
       properties:
         Member:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The member being banned from a channel.
+          $ref: '#/components/schemas/Identity'
+          description: The member being banned from a channel.
       description: Summary of the details of a <code>ChannelBan</code>.
     ChannelBanSummaryList:
       type: array
@@ -3454,69 +3382,55 @@ components:
       type: object
       properties:
         InvitedBy:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The identifier of the member who invited another member.
+          $ref: '#/components/schemas/Identity'
+          description: The identifier of the member who invited another member.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMembershipType'
-            - description: The membership type set for the channel member.
+          $ref: '#/components/schemas/ChannelMembershipType'
+          description: The membership type set for the channel member.
         Member:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The data of the channel member.
+          $ref: '#/components/schemas/Identity'
+          description: The data of the channel member.
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the member's channel.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the member's channel.
         CreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the channel membership was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the channel membership was created.
         LastUpdatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which a channel membership was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which a channel membership was last updated.
       description: The details of a channel member.
     ChannelSummary:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyResourceName'
-            - description: The name of the channel.
+          $ref: '#/components/schemas/NonEmptyResourceName'
+          description: The name of the channel.
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel.
         Mode:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMode'
-            - description: The mode of the channel.
+          $ref: '#/components/schemas/ChannelMode'
+          description: The mode of the channel.
         Privacy:
-          allOf:
-            - $ref: '#/components/schemas/ChannelPrivacy'
-            - description: The privacy setting of the channel.
+          $ref: '#/components/schemas/ChannelPrivacy'
+          description: The privacy setting of the channel.
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the channel.
+          $ref: '#/components/schemas/Metadata'
+          description: The metadata of the channel.
         LastMessageTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the last message in a channel was sent.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the last message in a channel was sent.
       description: Summary of the details of a <code>Channel</code>.
     ChannelMembershipForAppInstanceUserSummary:
       type: object
       properties:
         ChannelSummary:
-          allOf:
-            - $ref: '#/components/schemas/ChannelSummary'
-            - description: Returns the channel data for an <code>AppInstance</code>.
+          $ref: '#/components/schemas/ChannelSummary'
+          description: Returns the channel data for an <code>AppInstance</code>.
         AppInstanceUserMembershipSummary:
-          allOf:
-            - $ref: '#/components/schemas/AppInstanceUserMembershipSummary'
-            - description: Returns the channel membership data for an <code>AppInstance</code>.
+          $ref: '#/components/schemas/AppInstanceUserMembershipSummary'
+          description: Returns the channel membership data for an <code>AppInstance</code>.
       description: Summary of the channel membership details of an <code>AppInstanceUser</code>.
     ChannelMembershipForAppInstanceUserSummaryList:
       type: array
@@ -3526,9 +3440,8 @@ components:
       type: object
       properties:
         Member:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: A member's summary data.
+          $ref: '#/components/schemas/Identity'
+          description: A member's summary data.
       description: Summary of the details of a <code>ChannelMembership</code>.
     ChannelMembershipSummaryList:
       type: array
@@ -3561,89 +3474,69 @@ components:
       type: object
       properties:
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel.
         MessageId:
-          allOf:
-            - $ref: '#/components/schemas/MessageId'
-            - description: The ID of a message.
+          $ref: '#/components/schemas/MessageId'
+          description: The ID of a message.
         Content:
-          allOf:
-            - $ref: '#/components/schemas/Content'
-            - description: The message content.
+          $ref: '#/components/schemas/Content'
+          description: The message content.
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The message metadata.
+          $ref: '#/components/schemas/Metadata'
+          description: The message metadata.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMessageType'
-            - description: The message type.
+          $ref: '#/components/schemas/ChannelMessageType'
+          description: The message type.
         CreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the message was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the message was created.
         LastEditedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which a message was edited.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which a message was edited.
         LastUpdatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which a message was updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which a message was updated.
         Sender:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The message sender.
+          $ref: '#/components/schemas/Identity'
+          description: The message sender.
         Redacted:
-          allOf:
-            - $ref: '#/components/schemas/NonNullableBoolean'
-            - description: Hides the content of a message.
+          $ref: '#/components/schemas/NonNullableBoolean'
+          description: Hides the content of a message.
         Persistence:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMessagePersistenceType'
-            - description: The persistence setting for a channel message.
+          $ref: '#/components/schemas/ChannelMessagePersistenceType'
+          description: The persistence setting for a channel message.
       description: The details of a message in a channel.
     ChannelMessageSummary:
       type: object
       properties:
         MessageId:
-          allOf:
-            - $ref: '#/components/schemas/MessageId'
-            - description: The ID of the message.
+          $ref: '#/components/schemas/MessageId'
+          description: The ID of the message.
         Content:
-          allOf:
-            - $ref: '#/components/schemas/Content'
-            - description: The content of the message.
+          $ref: '#/components/schemas/Content'
+          description: The content of the message.
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the message.
+          $ref: '#/components/schemas/Metadata'
+          description: The metadata of the message.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMessageType'
-            - description: The type of message.
+          $ref: '#/components/schemas/ChannelMessageType'
+          description: The type of message.
         CreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the message summary was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the message summary was created.
         LastUpdatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which a message was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which a message was last updated.
         LastEditedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which a message was last edited.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which a message was last edited.
         Sender:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The message sender.
+          $ref: '#/components/schemas/Identity'
+          description: The message sender.
         Redacted:
-          allOf:
-            - $ref: '#/components/schemas/NonNullableBoolean'
-            - description: Indicates whether a message was redacted.
+          $ref: '#/components/schemas/NonNullableBoolean'
+          description: Indicates whether a message was redacted.
       description: Summary of the messages in a <code>Channel</code>.
     ChannelMessageSummaryList:
       type: array
@@ -3653,9 +3546,8 @@ components:
       type: object
       properties:
         ChannelSummary:
-          allOf:
-            - $ref: '#/components/schemas/ChannelSummary'
-            - description: Summary of the details of a <code>Channel</code>.
+          $ref: '#/components/schemas/ChannelSummary'
+          description: Summary of the details of a <code>Channel</code>.
       description: Summary of the details of a moderated channel.
     ChannelModeratedByAppInstanceUserSummaryList:
       type: array
@@ -3665,29 +3557,24 @@ components:
       type: object
       properties:
         Moderator:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The moderator's data.
+          $ref: '#/components/schemas/Identity'
+          description: The moderator's data.
         ChannelArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the moderator's channel.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the moderator's channel.
         CreatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the moderator was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the moderator was created.
         CreatedBy:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The <code>AppInstanceUser</code> who created the moderator.
+          $ref: '#/components/schemas/Identity'
+          description: The <code>AppInstanceUser</code> who created the moderator.
       description: The details of a channel moderator.
     ChannelModeratorSummary:
       type: object
       properties:
         Moderator:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The data for a moderator.
+          $ref: '#/components/schemas/Identity'
+          description: The data for a moderator.
       description: Summary of the details of a <code>ChannelModerator</code>.
     ChannelModeratorSummaryList:
       type: array
@@ -3710,9 +3597,8 @@ components:
       title: CreateChannelBanRequest
       properties:
         MemberArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the member being banned.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the member being banned.
     CreateChannelMembershipRequest:
       type: object
       required:
@@ -3721,13 +3607,11 @@ components:
       title: CreateChannelMembershipRequest
       properties:
         MemberArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the member you want to add to the channel.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the member you want to add to the channel.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMembershipType'
-            - description: 'The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.'
+          $ref: '#/components/schemas/ChannelMembershipType'
+          description: 'The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.'
     CreateChannelModeratorRequest:
       type: object
       required:
@@ -3735,9 +3619,8 @@ components:
       title: CreateChannelModeratorRequest
       properties:
         ChannelModeratorArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the moderator.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the moderator.
     TagList:
       type: array
       items:
@@ -3753,33 +3636,26 @@ components:
       title: CreateChannelRequest
       properties:
         AppInstanceArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel request.
+          $ref: '#/components/schemas/ChimeArn'
+          description: The ARN of the channel request.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyResourceName'
-            - description: The name of the channel.
+          $ref: '#/components/schemas/NonEmptyResourceName'
+          description: The name of the channel.
         Mode:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMode'
-            - description: 'The channel mode: <code>UNRESTRICTED</code> or <code>RESTRICTED</code>. Administrators, moderators, and channel members can add themselves and other members to unrestricted channels. Only administrators and moderators can add members to restricted channels.'
+          $ref: '#/components/schemas/ChannelMode'
+          description: 'The channel mode: <code>UNRESTRICTED</code> or <code>RESTRICTED</code>. Administrators, moderators, and channel members can add themselves and other members to unrestricted channels. Only administrators and moderators can add members to restricted channels.'
         Privacy:
-          allOf:
-            - $ref: '#/components/schemas/ChannelPrivacy'
-            - description: 'The channel''s privacy level: <code>PUBLIC</code> or <code>PRIVATE</code>. Private channels aren''t discoverable by users outside the channel. Public channels are discoverable by anyone in the <code>AppInstance</code>.'
+          $ref: '#/components/schemas/ChannelPrivacy'
+          description: 'The channel''s privacy level: <code>PUBLIC</code> or <code>PRIVATE</code>. Private channels aren''t discoverable by users outside the channel. Public channels are discoverable by anyone in the <code>AppInstance</code>.'
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the creation request. Limited to 1KB and UTF-8.
+          $ref: '#/components/schemas/Metadata'
+          description: The metadata of the creation request. Limited to 1KB and UTF-8.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: The client token for the request. An <code>Idempotency</code> token.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: The client token for the request. An <code>Idempotency</code> token.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: The tags for the creation request.
+          $ref: '#/components/schemas/TagList'
+          description: The tags for the creation request.
     DeleteChannelBanRequest:
       type: object
       title: DeleteChannelBanRequest
@@ -3836,9 +3712,8 @@ components:
       type: object
       properties:
         Url:
-          allOf:
-            - $ref: '#/components/schemas/UrlType'
-            - description: The endpoint to which you establish a websocket connection.
+          $ref: '#/components/schemas/UrlType'
+          description: The endpoint to which you establish a websocket connection.
       description: The websocket endpoint used to connect to Amazon Chime SDK messaging.
     ResourceName:
       type: string
@@ -3911,25 +3786,20 @@ components:
       title: SendChannelMessageRequest
       properties:
         Content:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyContent'
-            - description: The content of the message.
+          $ref: '#/components/schemas/NonEmptyContent'
+          description: The content of the message.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMessageType'
-            - description: 'The type of message, <code>STANDARD</code> or <code>CONTROL</code>.'
+          $ref: '#/components/schemas/ChannelMessageType'
+          description: 'The type of message, <code>STANDARD</code> or <code>CONTROL</code>.'
         Persistence:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMessagePersistenceType'
-            - description: Boolean that controls whether the message is persisted on the back end. Required.
+          $ref: '#/components/schemas/ChannelMessagePersistenceType'
+          description: Boolean that controls whether the message is persisted on the back end. Required.
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The optional metadata for each message.
+          $ref: '#/components/schemas/Metadata'
+          description: The optional metadata for each message.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: The <code>Idempotency</code> token for each client request.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: The <code>Idempotency</code> token for each client request.
     TagKey:
       type: string
       minLength: 1
@@ -3945,13 +3815,11 @@ components:
       title: UpdateChannelMessageRequest
       properties:
         Content:
-          allOf:
-            - $ref: '#/components/schemas/Content'
-            - description: The content of the message being updated.
+          $ref: '#/components/schemas/Content'
+          description: The content of the message being updated.
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the message being updated.
+          $ref: '#/components/schemas/Metadata'
+          description: The metadata of the message being updated.
     UpdateChannelReadMarkerRequest:
       type: object
       title: UpdateChannelReadMarkerRequest
@@ -3964,16 +3832,13 @@ components:
       title: UpdateChannelRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyResourceName'
-            - description: The name of the channel.
+          $ref: '#/components/schemas/NonEmptyResourceName'
+          description: The name of the channel.
         Mode:
-          allOf:
-            - $ref: '#/components/schemas/ChannelMode'
-            - description: The mode of the update request.
+          $ref: '#/components/schemas/ChannelMode'
+          description: The mode of the update request.
         Metadata:
-          allOf:
-            - $ref: '#/components/schemas/Metadata'
-            - description: The metadata for the update request.
+          $ref: '#/components/schemas/Metadata'
+          description: The metadata for the update request.
 security:
   - hmac: []

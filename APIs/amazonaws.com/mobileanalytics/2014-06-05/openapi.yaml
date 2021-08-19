@@ -221,37 +221,30 @@ components:
         - timestamp
       properties:
         eventType:
-          allOf:
-            - $ref: '#/components/schemas/String50Chars'
-            - description: A name signifying an event that occurred in your app. This is used for grouping and aggregating like events together for reporting purposes.
+          $ref: '#/components/schemas/String50Chars'
+          description: A name signifying an event that occurred in your app. This is used for grouping and aggregating like events together for reporting purposes.
         timestamp:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601Timestamp'
-            - description: 'The time the event occurred in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
+          $ref: '#/components/schemas/ISO8601Timestamp'
+          description: 'The time the event occurred in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
         session:
-          allOf:
-            - $ref: '#/components/schemas/Session'
-            - description: 'The session the event occured within. '
+          $ref: '#/components/schemas/Session'
+          description: 'The session the event occured within. '
         version:
-          allOf:
-            - $ref: '#/components/schemas/String10Chars'
-            - description: The version of the event.
+          $ref: '#/components/schemas/String10Chars'
+          description: The version of the event.
         attributes:
-          allOf:
-            - $ref: '#/components/schemas/MapOfStringToString'
-            - description: <p>A collection of key-value pairs that give additional context to the event. The key-value pairs are specified by the developer.</p> <p>This collection can be empty or the attribute object can be omitted.</p>
+          $ref: '#/components/schemas/MapOfStringToString'
+          description: <p>A collection of key-value pairs that give additional context to the event. The key-value pairs are specified by the developer.</p> <p>This collection can be empty or the attribute object can be omitted.</p>
         metrics:
-          allOf:
-            - $ref: '#/components/schemas/MapOfStringToNumber'
-            - description: '<p>A collection of key-value pairs that gives additional, measurable context to the event. The key-value pairs are specified by the developer.</p> <p>This collection can be empty or the attribute object can be omitted.</p>'
+          $ref: '#/components/schemas/MapOfStringToNumber'
+          description: '<p>A collection of key-value pairs that gives additional, measurable context to the event. The key-value pairs are specified by the developer.</p> <p>This collection can be empty or the attribute object can be omitted.</p>'
       description: A JSON object representing a batch of unique event occurrences in your app.
     BadRequestException:
       type: object
       properties:
         message:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A text description associated with the BadRequestException object.
+          $ref: '#/components/schemas/String'
+          description: A text description associated with the BadRequestException object.
       description: An exception object returned when a request fails.
     String:
       type: string
@@ -268,21 +261,17 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/String50Chars'
-            - description: A unique identifier for the session
+          $ref: '#/components/schemas/String50Chars'
+          description: A unique identifier for the session
         duration:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The duration of the session.
+          $ref: '#/components/schemas/Long'
+          description: The duration of the session.
         startTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601Timestamp'
-            - description: 'The time the event started in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
+          $ref: '#/components/schemas/ISO8601Timestamp'
+          description: 'The time the event started in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
         stopTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601Timestamp'
-            - description: 'The time the event terminated in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
+          $ref: '#/components/schemas/ISO8601Timestamp'
+          description: 'The time the event terminated in ISO 8601 standard date time format. For example, 2014-06-30T19:07:47.885Z'
       description: Describes the session. Session information is required on ALL events.
     String10Chars:
       type: string
@@ -317,9 +306,8 @@ components:
       title: PutEventsInput
       properties:
         events:
-          allOf:
-            - $ref: '#/components/schemas/EventListDefinition'
-            - description: An array of Event JSON objects
+          $ref: '#/components/schemas/EventListDefinition'
+          description: An array of Event JSON objects
       description: A container for the data needed for a PutEvent operation
 security:
   - hmac: []

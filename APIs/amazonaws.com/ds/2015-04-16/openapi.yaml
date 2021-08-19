@@ -4325,9 +4325,8 @@ components:
       type: object
       properties:
         SharedDirectory:
-          allOf:
-            - $ref: '#/components/schemas/SharedDirectory'
-            - description: The shared directory in the directory consumer account.
+          $ref: '#/components/schemas/SharedDirectory'
+          description: The shared directory in the directory consumer account.
     AcceptSharedDirectoryRequest:
       type: object
       required:
@@ -4335,9 +4334,8 @@ components:
       title: AcceptSharedDirectoryRequest
       properties:
         SharedDirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: 'Identifier of the shared directory in the directory consumer account. This identifier is different for each directory owner account. '
+          $ref: '#/components/schemas/DirectoryId'
+          description: 'Identifier of the shared directory in the directory consumer account. This identifier is different for each directory owner account. '
     InvalidParameterException: {}
     EntityDoesNotExistException: {}
     DirectoryAlreadySharedException: {}
@@ -4354,17 +4352,14 @@ components:
       title: AddIpRoutesRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier (ID) of the directory to which to add the address block.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier (ID) of the directory to which to add the address block.
         IpRoutes:
-          allOf:
-            - $ref: '#/components/schemas/IpRoutes'
-            - description: 'IP address blocks, using CIDR format, of the traffic to route. This is often the IP address block of the DNS server used for your self-managed domain.'
+          $ref: '#/components/schemas/IpRoutes'
+          description: 'IP address blocks, using CIDR format, of the traffic to route. This is often the IP address block of the DNS server used for your self-managed domain.'
         UpdateSecurityGroupForDirectoryControllers:
-          allOf:
-            - $ref: '#/components/schemas/UpdateSecurityGroupForDirectoryControllers'
-            - description: '<p>If set to true, updates the inbound and outbound rules of the security group that has the description: "Amazon Web Services created security group for <i>directory ID</i> directory controllers." Following are the new rules: </p> <p>Inbound:</p> <ul> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source: 0.0.0.0/0</p> </li> <li> <p>Type: DNS (UDP), Protocol: UDP, Range: 53, Source: 0.0.0.0/0</p> </li> <li> <p>Type: DNS (TCP), Protocol: TCP, Range: 53, Source: 0.0.0.0/0</p> </li> <li> <p>Type: LDAP, Protocol: TCP, Range: 389, Source: 0.0.0.0/0</p> </li> <li> <p>Type: All ICMP, Protocol: All, Range: N/A, Source: 0.0.0.0/0</p> </li> </ul> <p/> <p>Outbound:</p> <ul> <li> <p>Type: All traffic, Protocol: All, Range: All, Destination: 0.0.0.0/0</p> </li> </ul> <p>These security rules impact an internal network interface that is not exposed publicly.</p>'
+          $ref: '#/components/schemas/UpdateSecurityGroupForDirectoryControllers'
+          description: '<p>If set to true, updates the inbound and outbound rules of the security group that has the description: "Amazon Web Services created security group for <i>directory ID</i> directory controllers." Following are the new rules: </p> <p>Inbound:</p> <ul> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source: 0.0.0.0/0</p> </li> <li> <p>Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source: 0.0.0.0/0</p> </li> <li> <p>Type: DNS (UDP), Protocol: UDP, Range: 53, Source: 0.0.0.0/0</p> </li> <li> <p>Type: DNS (TCP), Protocol: TCP, Range: 53, Source: 0.0.0.0/0</p> </li> <li> <p>Type: LDAP, Protocol: TCP, Range: 389, Source: 0.0.0.0/0</p> </li> <li> <p>Type: All ICMP, Protocol: All, Range: N/A, Source: 0.0.0.0/0</p> </li> </ul> <p/> <p>Outbound:</p> <ul> <li> <p>Type: All traffic, Protocol: All, Range: All, Destination: 0.0.0.0/0</p> </li> </ul> <p>These security rules impact an internal network interface that is not exposed publicly.</p>'
     EntityAlreadyExistsException: {}
     DirectoryUnavailableException: {}
     IpRouteLimitExceededException: {}
@@ -4380,13 +4375,11 @@ components:
       title: AddRegionRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory to which you want to add Region replication.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory to which you want to add Region replication.
         RegionName:
-          allOf:
-            - $ref: '#/components/schemas/RegionName'
-            - description: 'The name of the Region where you want to add domain controllers for replication. For example, <code>us-east-1</code>.'
+          $ref: '#/components/schemas/RegionName'
+          description: 'The name of the Region where you want to add domain controllers for replication. For example, <code>us-east-1</code>.'
         VPCSettings:
           $ref: '#/components/schemas/DirectoryVpcSettings'
     DirectoryAlreadyInRegionException: {}
@@ -4405,13 +4398,11 @@ components:
       title: AddTagsToResourceRequest
       properties:
         ResourceId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: Identifier (ID) for the directory to which to add the tag.
+          $ref: '#/components/schemas/ResourceId'
+          description: Identifier (ID) for the directory to which to add the tag.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags to be assigned to the directory.
+          $ref: '#/components/schemas/Tags'
+          description: The tags to be assigned to the directory.
     TagLimitExceededException: {}
     CancelSchemaExtensionResult:
       type: object
@@ -4424,20 +4415,17 @@ components:
       title: CancelSchemaExtensionRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory whose schema extension will be canceled.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory whose schema extension will be canceled.
         SchemaExtensionId:
-          allOf:
-            - $ref: '#/components/schemas/SchemaExtensionId'
-            - description: The identifier of the schema extension that will be canceled.
+          $ref: '#/components/schemas/SchemaExtensionId'
+          description: The identifier of the schema extension that will be canceled.
     ConnectDirectoryResult:
       type: object
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the new directory.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the new directory.
       description: Contains the results of the <a>ConnectDirectory</a> operation.
     ConnectDirectoryRequest:
       type: object
@@ -4449,46 +4437,37 @@ components:
       title: ConnectDirectoryRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryName'
-            - description: 'The fully qualified name of your self-managed directory, such as <code>corp.example.com</code>.'
+          $ref: '#/components/schemas/DirectoryName'
+          description: 'The fully qualified name of your self-managed directory, such as <code>corp.example.com</code>.'
         ShortName:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryShortName'
-            - description: 'The NetBIOS name of your self-managed directory, such as <code>CORP</code>.'
+          $ref: '#/components/schemas/DirectoryShortName'
+          description: 'The NetBIOS name of your self-managed directory, such as <code>CORP</code>.'
         Password:
-          allOf:
-            - $ref: '#/components/schemas/ConnectPassword'
-            - description: The password for your self-managed user account.
+          $ref: '#/components/schemas/ConnectPassword'
+          description: The password for your self-managed user account.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description for the directory.
+          $ref: '#/components/schemas/Description'
+          description: A description for the directory.
         Size:
-          allOf:
-            - $ref: '#/components/schemas/DirectorySize'
-            - description: The size of the directory.
+          $ref: '#/components/schemas/DirectorySize'
+          description: The size of the directory.
         ConnectSettings:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryConnectSettings'
-            - description: A <a>DirectoryConnectSettings</a> object that contains additional information for the operation.
+          $ref: '#/components/schemas/DirectoryConnectSettings'
+          description: A <a>DirectoryConnectSettings</a> object that contains additional information for the operation.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags to be assigned to AD Connector.
+          $ref: '#/components/schemas/Tags'
+          description: The tags to be assigned to AD Connector.
       description: Contains the inputs for the <a>ConnectDirectory</a> operation.
     DirectoryLimitExceededException: {}
     CreateAliasResult:
       type: object
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory.
         Alias:
-          allOf:
-            - $ref: '#/components/schemas/AliasName'
-            - description: The alias for the directory.
+          $ref: '#/components/schemas/AliasName'
+          description: The alias for the directory.
       description: Contains the results of the <a>CreateAlias</a> operation.
     CreateAliasRequest:
       type: object
@@ -4498,21 +4477,18 @@ components:
       title: CreateAliasRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory for which to create the alias.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory for which to create the alias.
         Alias:
-          allOf:
-            - $ref: '#/components/schemas/AliasName'
-            - description: <p>The requested alias.</p> <p>The alias must be unique amongst all aliases in Amazon Web Services. This operation throws an <code>EntityAlreadyExistsException</code> error if the alias already exists.</p>
+          $ref: '#/components/schemas/AliasName'
+          description: <p>The requested alias.</p> <p>The alias must be unique amongst all aliases in Amazon Web Services. This operation throws an <code>EntityAlreadyExistsException</code> error if the alias already exists.</p>
       description: Contains the inputs for the <a>CreateAlias</a> operation.
     CreateComputerResult:
       type: object
       properties:
         Computer:
-          allOf:
-            - $ref: '#/components/schemas/Computer'
-            - description: A <a>Computer</a> object that represents the computer account.
+          $ref: '#/components/schemas/Computer'
+          description: A <a>Computer</a> object that represents the computer account.
       description: Contains the results for the <a>CreateComputer</a> operation.
     CreateComputerRequest:
       type: object
@@ -4523,25 +4499,20 @@ components:
       title: CreateComputerRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory in which to create the computer account.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory in which to create the computer account.
         ComputerName:
-          allOf:
-            - $ref: '#/components/schemas/ComputerName'
-            - description: The name of the computer account.
+          $ref: '#/components/schemas/ComputerName'
+          description: The name of the computer account.
         Password:
-          allOf:
-            - $ref: '#/components/schemas/ComputerPassword'
-            - description: 'A one-time password that is used to join the computer to the directory. You should generate a random, strong password to use for this parameter.'
+          $ref: '#/components/schemas/ComputerPassword'
+          description: 'A one-time password that is used to join the computer to the directory. You should generate a random, strong password to use for this parameter.'
         OrganizationalUnitDistinguishedName:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationalUnitDN'
-            - description: The fully-qualified distinguished name of the organizational unit to place the computer account in.
+          $ref: '#/components/schemas/OrganizationalUnitDN'
+          description: The fully-qualified distinguished name of the organizational unit to place the computer account in.
         ComputerAttributes:
-          allOf:
-            - $ref: '#/components/schemas/Attributes'
-            - description: An array of <a>Attribute</a> objects that contain any LDAP attributes to apply to the computer account.
+          $ref: '#/components/schemas/Attributes'
+          description: An array of <a>Attribute</a> objects that contain any LDAP attributes to apply to the computer account.
       description: Contains the inputs for the <a>CreateComputer</a> operation.
     AuthenticationFailedException: {}
     CreateConditionalForwarderResult:
@@ -4557,25 +4528,21 @@ components:
       title: CreateConditionalForwarderRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The directory ID of the Amazon Web Services directory for which you are creating the conditional forwarder.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The directory ID of the Amazon Web Services directory for which you are creating the conditional forwarder.
         RemoteDomainName:
-          allOf:
-            - $ref: '#/components/schemas/RemoteDomainName'
-            - description: The fully qualified domain name (FQDN) of the remote domain with which you will set up a trust relationship.
+          $ref: '#/components/schemas/RemoteDomainName'
+          description: The fully qualified domain name (FQDN) of the remote domain with which you will set up a trust relationship.
         DnsIpAddrs:
-          allOf:
-            - $ref: '#/components/schemas/DnsIpAddrs'
-            - description: The IP addresses of the remote DNS server associated with RemoteDomainName.
+          $ref: '#/components/schemas/DnsIpAddrs'
+          description: The IP addresses of the remote DNS server associated with RemoteDomainName.
       description: Initiates the creation of a conditional forwarder for your Directory Service for Microsoft Active Directory. Conditional forwarders are required in order to set up a trust relationship with another domain.
     CreateDirectoryResult:
       type: object
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory that was created.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory that was created.
       description: Contains the results of the <a>CreateDirectory</a> operation.
     CreateDirectoryRequest:
       type: object
@@ -4586,33 +4553,26 @@ components:
       title: CreateDirectoryRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryName'
-            - description: 'The fully qualified name for the directory, such as <code>corp.example.com</code>.'
+          $ref: '#/components/schemas/DirectoryName'
+          description: 'The fully qualified name for the directory, such as <code>corp.example.com</code>.'
         ShortName:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryShortName'
-            - description: 'The NetBIOS name of the directory, such as <code>CORP</code>.'
+          $ref: '#/components/schemas/DirectoryShortName'
+          description: 'The NetBIOS name of the directory, such as <code>CORP</code>.'
         Password:
-          allOf:
-            - $ref: '#/components/schemas/Password'
-            - description: '<p>The password for the directory administrator. The directory creation process creates a directory administrator account with the user name <code>Administrator</code> and this password.</p> <p>If you need to change the password for the administrator account, you can use the <a>ResetUserPassword</a> API call.</p> <p>The regex pattern for this string is made up of the following conditions:</p> <ul> <li> <p>Length (?=^.{8,64}$) – Must be between 8 and 64 characters</p> </li> </ul> <p>AND any 3 of the following password complexity rules required by Active Directory:</p> <ul> <li> <p>Numbers and upper case and lowercase (?=.*\d)(?=.*[A-Z])(?=.*[a-z])</p> </li> <li> <p>Numbers and special characters and lower case (?=.*\d)(?=.*[^A-Za-z0-9\s])(?=.*[a-z])</p> </li> <li> <p>Special characters and upper case and lower case (?=.*[^A-Za-z0-9\s])(?=.*[A-Z])(?=.*[a-z])</p> </li> <li> <p>Numbers and upper case and special characters (?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\s])</p> </li> </ul> <p>For additional information about how Active Directory passwords are enforced, see <a href="https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements">Password must meet complexity requirements</a> on the Microsoft website.</p>'
+          $ref: '#/components/schemas/Password'
+          description: '<p>The password for the directory administrator. The directory creation process creates a directory administrator account with the user name <code>Administrator</code> and this password.</p> <p>If you need to change the password for the administrator account, you can use the <a>ResetUserPassword</a> API call.</p> <p>The regex pattern for this string is made up of the following conditions:</p> <ul> <li> <p>Length (?=^.{8,64}$) – Must be between 8 and 64 characters</p> </li> </ul> <p>AND any 3 of the following password complexity rules required by Active Directory:</p> <ul> <li> <p>Numbers and upper case and lowercase (?=.*\d)(?=.*[A-Z])(?=.*[a-z])</p> </li> <li> <p>Numbers and special characters and lower case (?=.*\d)(?=.*[^A-Za-z0-9\s])(?=.*[a-z])</p> </li> <li> <p>Special characters and upper case and lower case (?=.*[^A-Za-z0-9\s])(?=.*[A-Z])(?=.*[a-z])</p> </li> <li> <p>Numbers and upper case and special characters (?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\s])</p> </li> </ul> <p>For additional information about how Active Directory passwords are enforced, see <a href="https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements">Password must meet complexity requirements</a> on the Microsoft website.</p>'
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description for the directory.
+          $ref: '#/components/schemas/Description'
+          description: A description for the directory.
         Size:
-          allOf:
-            - $ref: '#/components/schemas/DirectorySize'
-            - description: The size of the directory.
+          $ref: '#/components/schemas/DirectorySize'
+          description: The size of the directory.
         VpcSettings:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryVpcSettings'
-            - description: A <a>DirectoryVpcSettings</a> object that contains additional information for the operation.
+          $ref: '#/components/schemas/DirectoryVpcSettings'
+          description: A <a>DirectoryVpcSettings</a> object that contains additional information for the operation.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags to be assigned to the Simple AD directory.
+          $ref: '#/components/schemas/Tags'
+          description: The tags to be assigned to the Simple AD directory.
       description: 'Contains the inputs for the <a>CreateDirectory</a> operation. '
     CreateLogSubscriptionResult:
       type: object
@@ -4625,21 +4585,18 @@ components:
       title: CreateLogSubscriptionRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier of the directory to which you want to subscribe and receive real-time logs to your specified CloudWatch log group.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier of the directory to which you want to subscribe and receive real-time logs to your specified CloudWatch log group.
         LogGroupName:
-          allOf:
-            - $ref: '#/components/schemas/LogGroupName'
-            - description: The name of the CloudWatch log group where the real-time domain controller logs are forwarded.
+          $ref: '#/components/schemas/LogGroupName'
+          description: The name of the CloudWatch log group where the real-time domain controller logs are forwarded.
     InsufficientPermissionsException: {}
     CreateMicrosoftADResult:
       type: object
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory that was created.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory that was created.
       description: Result of a CreateMicrosoftAD request.
     CreateMicrosoftADRequest:
       type: object
@@ -4650,41 +4607,33 @@ components:
       title: CreateMicrosoftADRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryName'
-            - description: 'The fully qualified domain name for the Managed Microsoft AD directory, such as <code>corp.example.com</code>. This name will resolve inside your VPC only. It does not need to be publicly resolvable.'
+          $ref: '#/components/schemas/DirectoryName'
+          description: 'The fully qualified domain name for the Managed Microsoft AD directory, such as <code>corp.example.com</code>. This name will resolve inside your VPC only. It does not need to be publicly resolvable.'
         ShortName:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryShortName'
-            - description: 'The NetBIOS name for your domain, such as <code>CORP</code>. If you don''t specify a NetBIOS name, it will default to the first part of your directory DNS. For example, <code>CORP</code> for the directory DNS <code>corp.example.com</code>. '
+          $ref: '#/components/schemas/DirectoryShortName'
+          description: 'The NetBIOS name for your domain, such as <code>CORP</code>. If you don''t specify a NetBIOS name, it will default to the first part of your directory DNS. For example, <code>CORP</code> for the directory DNS <code>corp.example.com</code>. '
         Password:
-          allOf:
-            - $ref: '#/components/schemas/Password'
-            - description: '<p>The password for the default administrative user named <code>Admin</code>.</p> <p>If you need to change the password for the administrator account, you can use the <a>ResetUserPassword</a> API call.</p>'
+          $ref: '#/components/schemas/Password'
+          description: '<p>The password for the default administrative user named <code>Admin</code>.</p> <p>If you need to change the password for the administrator account, you can use the <a>ResetUserPassword</a> API call.</p>'
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description for the directory. This label will appear on the Amazon Web Services console <code>Directory Details</code> page after the directory is created.
+          $ref: '#/components/schemas/Description'
+          description: A description for the directory. This label will appear on the Amazon Web Services console <code>Directory Details</code> page after the directory is created.
         VpcSettings:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryVpcSettings'
-            - description: Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.
+          $ref: '#/components/schemas/DirectoryVpcSettings'
+          description: Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.
         Edition:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryEdition'
-            - description: 'Managed Microsoft AD is available in two editions: <code>Standard</code> and <code>Enterprise</code>. <code>Enterprise</code> is the default.'
+          $ref: '#/components/schemas/DirectoryEdition'
+          description: 'Managed Microsoft AD is available in two editions: <code>Standard</code> and <code>Enterprise</code>. <code>Enterprise</code> is the default.'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags to be assigned to the Managed Microsoft AD directory.
+          $ref: '#/components/schemas/Tags'
+          description: The tags to be assigned to the Managed Microsoft AD directory.
       description: Creates an Managed Microsoft AD directory.
     CreateSnapshotResult:
       type: object
       properties:
         SnapshotId:
-          allOf:
-            - $ref: '#/components/schemas/SnapshotId'
-            - description: The identifier of the snapshot that was created.
+          $ref: '#/components/schemas/SnapshotId'
+          description: The identifier of the snapshot that was created.
       description: Contains the results of the <a>CreateSnapshot</a> operation.
     CreateSnapshotRequest:
       type: object
@@ -4693,22 +4642,19 @@ components:
       title: CreateSnapshotRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory of which to take a snapshot.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory of which to take a snapshot.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/SnapshotName'
-            - description: The descriptive name to apply to the snapshot.
+          $ref: '#/components/schemas/SnapshotName'
+          description: The descriptive name to apply to the snapshot.
       description: Contains the inputs for the <a>CreateSnapshot</a> operation.
     SnapshotLimitExceededException: {}
     CreateTrustResult:
       type: object
       properties:
         TrustId:
-          allOf:
-            - $ref: '#/components/schemas/TrustId'
-            - description: A unique identifier for the trust relationship that was created.
+          $ref: '#/components/schemas/TrustId'
+          description: A unique identifier for the trust relationship that was created.
       description: The result of a CreateTrust request.
     CreateTrustRequest:
       type: object
@@ -4720,33 +4666,26 @@ components:
       title: CreateTrustRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The Directory ID of the Managed Microsoft AD directory for which to establish the trust relationship.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The Directory ID of the Managed Microsoft AD directory for which to establish the trust relationship.
         RemoteDomainName:
-          allOf:
-            - $ref: '#/components/schemas/RemoteDomainName'
-            - description: The Fully Qualified Domain Name (FQDN) of the external domain for which to create the trust relationship.
+          $ref: '#/components/schemas/RemoteDomainName'
+          description: The Fully Qualified Domain Name (FQDN) of the external domain for which to create the trust relationship.
         TrustPassword:
-          allOf:
-            - $ref: '#/components/schemas/TrustPassword'
-            - description: The trust password. The must be the same password that was used when creating the trust relationship on the external domain.
+          $ref: '#/components/schemas/TrustPassword'
+          description: The trust password. The must be the same password that was used when creating the trust relationship on the external domain.
         TrustDirection:
-          allOf:
-            - $ref: '#/components/schemas/TrustDirection'
-            - description: The direction of the trust relationship.
+          $ref: '#/components/schemas/TrustDirection'
+          description: The direction of the trust relationship.
         TrustType:
-          allOf:
-            - $ref: '#/components/schemas/TrustType'
-            - description: The trust relationship type. <code>Forest</code> is the default.
+          $ref: '#/components/schemas/TrustType'
+          description: The trust relationship type. <code>Forest</code> is the default.
         ConditionalForwarderIpAddrs:
-          allOf:
-            - $ref: '#/components/schemas/DnsIpAddrs'
-            - description: The IP addresses of the remote DNS server associated with RemoteDomainName.
+          $ref: '#/components/schemas/DnsIpAddrs'
+          description: The IP addresses of the remote DNS server associated with RemoteDomainName.
         SelectiveAuth:
-          allOf:
-            - $ref: '#/components/schemas/SelectiveAuth'
-            - description: Optional parameter to enable selective authentication for the trust.
+          $ref: '#/components/schemas/SelectiveAuth'
+          description: Optional parameter to enable selective authentication for the trust.
       description: '<p>Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your Managed Microsoft AD directory, and your existing self-managed Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p> <p>This action initiates the creation of the Amazon Web Services side of a trust relationship between an Managed Microsoft AD directory and an external domain.</p>'
     DeleteConditionalForwarderResult:
       type: object
@@ -4760,21 +4699,18 @@ components:
       title: DeleteConditionalForwarderRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The directory ID for which you are deleting the conditional forwarder.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The directory ID for which you are deleting the conditional forwarder.
         RemoteDomainName:
-          allOf:
-            - $ref: '#/components/schemas/RemoteDomainName'
-            - description: The fully qualified domain name (FQDN) of the remote domain with which you are deleting the conditional forwarder.
+          $ref: '#/components/schemas/RemoteDomainName'
+          description: The fully qualified domain name (FQDN) of the remote domain with which you are deleting the conditional forwarder.
       description: Deletes a conditional forwarder.
     DeleteDirectoryResult:
       type: object
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The directory identifier.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The directory identifier.
       description: Contains the results of the <a>DeleteDirectory</a> operation.
     DeleteDirectoryRequest:
       type: object
@@ -4783,9 +4719,8 @@ components:
       title: DeleteDirectoryRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory to delete.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory to delete.
       description: Contains the inputs for the <a>DeleteDirectory</a> operation.
     DeleteLogSubscriptionResult:
       type: object
@@ -4797,16 +4732,14 @@ components:
       title: DeleteLogSubscriptionRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier of the directory whose log subscription you want to delete.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier of the directory whose log subscription you want to delete.
     DeleteSnapshotResult:
       type: object
       properties:
         SnapshotId:
-          allOf:
-            - $ref: '#/components/schemas/SnapshotId'
-            - description: The identifier of the directory snapshot that was deleted.
+          $ref: '#/components/schemas/SnapshotId'
+          description: The identifier of the directory snapshot that was deleted.
       description: Contains the results of the <a>DeleteSnapshot</a> operation.
     DeleteSnapshotRequest:
       type: object
@@ -4815,17 +4748,15 @@ components:
       title: DeleteSnapshotRequest
       properties:
         SnapshotId:
-          allOf:
-            - $ref: '#/components/schemas/SnapshotId'
-            - description: The identifier of the directory snapshot to be deleted.
+          $ref: '#/components/schemas/SnapshotId'
+          description: The identifier of the directory snapshot to be deleted.
       description: Contains the inputs for the <a>DeleteSnapshot</a> operation.
     DeleteTrustResult:
       type: object
       properties:
         TrustId:
-          allOf:
-            - $ref: '#/components/schemas/TrustId'
-            - description: The Trust ID of the trust relationship that was deleted.
+          $ref: '#/components/schemas/TrustId'
+          description: The Trust ID of the trust relationship that was deleted.
       description: The result of a DeleteTrust request.
     DeleteTrustRequest:
       type: object
@@ -4834,13 +4765,11 @@ components:
       title: DeleteTrustRequest
       properties:
         TrustId:
-          allOf:
-            - $ref: '#/components/schemas/TrustId'
-            - description: The Trust ID of the trust relationship to be deleted.
+          $ref: '#/components/schemas/TrustId'
+          description: The Trust ID of the trust relationship to be deleted.
         DeleteAssociatedConditionalForwarder:
-          allOf:
-            - $ref: '#/components/schemas/DeleteAssociatedConditionalForwarder'
-            - description: Delete a conditional forwarder as part of a DeleteTrustRequest.
+          $ref: '#/components/schemas/DeleteAssociatedConditionalForwarder'
+          description: Delete a conditional forwarder as part of a DeleteTrustRequest.
       description: Deletes the local side of an existing trust relationship between the Managed Microsoft AD directory and the external domain.
     DeregisterCertificateResult:
       type: object
@@ -4853,13 +4782,11 @@ components:
       title: DeregisterCertificateRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory.
         CertificateId:
-          allOf:
-            - $ref: '#/components/schemas/CertificateId'
-            - description: The identifier of the certificate.
+          $ref: '#/components/schemas/CertificateId'
+          description: The identifier of the certificate.
     CertificateDoesNotExistException: {}
     CertificateInUseException: {}
     DeregisterEventTopicResult:
@@ -4874,21 +4801,18 @@ components:
       title: DeregisterEventTopicRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The Directory ID to remove as a publisher. This directory will no longer send messages to the specified Amazon SNS topic.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The Directory ID to remove as a publisher. This directory will no longer send messages to the specified Amazon SNS topic.
         TopicName:
-          allOf:
-            - $ref: '#/components/schemas/TopicName'
-            - description: The name of the Amazon SNS topic from which to remove the directory as a publisher.
+          $ref: '#/components/schemas/TopicName'
+          description: The name of the Amazon SNS topic from which to remove the directory as a publisher.
       description: Removes the specified directory as a publisher to the specified Amazon SNS topic.
     DescribeCertificateResult:
       type: object
       properties:
         Certificate:
-          allOf:
-            - $ref: '#/components/schemas/Certificate'
-            - description: 'Information about the certificate, including registered date time, certificate state, the reason for the state, expiration date time, and certificate common name.'
+          $ref: '#/components/schemas/Certificate'
+          description: 'Information about the certificate, including registered date time, certificate state, the reason for the state, expiration date time, and certificate common name.'
     DescribeCertificateRequest:
       type: object
       required:
@@ -4897,24 +4821,20 @@ components:
       title: DescribeCertificateRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory.
         CertificateId:
-          allOf:
-            - $ref: '#/components/schemas/CertificateId'
-            - description: The identifier of the certificate.
+          $ref: '#/components/schemas/CertificateId'
+          description: The identifier of the certificate.
     DescribeClientAuthenticationSettingsResult:
       type: object
       properties:
         ClientAuthenticationSettingsInfo:
-          allOf:
-            - $ref: '#/components/schemas/ClientAuthenticationSettingsInfo'
-            - description: 'Information about the type of client authentication for the specified directory. The following information is retrieved: The date and time when the status of the client authentication type was last updated, whether the client authentication type is enabled or disabled, and the type of client authentication.'
+          $ref: '#/components/schemas/ClientAuthenticationSettingsInfo'
+          description: 'Information about the type of client authentication for the specified directory. The following information is retrieved: The date and time when the status of the client authentication type was last updated, whether the client authentication type is enabled or disabled, and the type of client authentication.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The next token used to retrieve the client authentication settings if the number of setting types exceeds page limit and there is another page.
+          $ref: '#/components/schemas/NextToken'
+          description: The next token used to retrieve the client authentication settings if the number of setting types exceeds page limit and there is another page.
     DescribeClientAuthenticationSettingsRequest:
       type: object
       required:
@@ -4922,28 +4842,23 @@ components:
       title: DescribeClientAuthenticationSettingsRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory for which to retrieve information.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory for which to retrieve information.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ClientAuthenticationType'
-            - description: 'The type of client authentication for which to retrieve information. If no type is specified, a list of all client authentication types that are supported for the specified directory is retrieved.'
+          $ref: '#/components/schemas/ClientAuthenticationType'
+          description: 'The type of client authentication for which to retrieve information. If no type is specified, a list of all client authentication types that are supported for the specified directory is retrieved.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The <i>DescribeClientAuthenticationSettingsResult.NextToken</i> value from a previous call to <a>DescribeClientAuthenticationSettings</a>. Pass null if this is the first call.
+          $ref: '#/components/schemas/NextToken'
+          description: The <i>DescribeClientAuthenticationSettingsResult.NextToken</i> value from a previous call to <a>DescribeClientAuthenticationSettings</a>. Pass null if this is the first call.
         Limit:
-          allOf:
-            - $ref: '#/components/schemas/PageLimit'
-            - description: 'The maximum number of items to return. If this value is zero, the maximum number of items is specified by the limitations of the operation. '
+          $ref: '#/components/schemas/PageLimit'
+          description: 'The maximum number of items to return. If this value is zero, the maximum number of items is specified by the limitations of the operation. '
     DescribeConditionalForwardersResult:
       type: object
       properties:
         ConditionalForwarders:
-          allOf:
-            - $ref: '#/components/schemas/ConditionalForwarders'
-            - description: The list of conditional forwarders that have been created.
+          $ref: '#/components/schemas/ConditionalForwarders'
+          description: The list of conditional forwarders that have been created.
       description: The result of a DescribeConditionalForwarder request.
     DescribeConditionalForwardersRequest:
       type: object
@@ -4952,55 +4867,46 @@ components:
       title: DescribeConditionalForwardersRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The directory ID for which to get the list of associated conditional forwarders.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The directory ID for which to get the list of associated conditional forwarders.
         RemoteDomainNames:
-          allOf:
-            - $ref: '#/components/schemas/RemoteDomainNames'
-            - description: 'The fully qualified domain names (FQDN) of the remote domains for which to get the list of associated conditional forwarders. If this member is null, all conditional forwarders are returned.'
+          $ref: '#/components/schemas/RemoteDomainNames'
+          description: 'The fully qualified domain names (FQDN) of the remote domains for which to get the list of associated conditional forwarders. If this member is null, all conditional forwarders are returned.'
       description: Describes a conditional forwarder.
     DescribeDirectoriesResult:
       type: object
       properties:
         DirectoryDescriptions:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryDescriptions'
-            - description: '<p>The list of <a>DirectoryDescription</a> objects that were retrieved.</p> <p>It is possible that this list contains less than the number of items specified in the <code>Limit</code> member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.</p>'
+          $ref: '#/components/schemas/DirectoryDescriptions'
+          description: '<p>The list of <a>DirectoryDescription</a> objects that were retrieved.</p> <p>It is possible that this list contains less than the number of items specified in the <code>Limit</code> member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.</p>'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeDirectories</a> to retrieve the next set of items.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeDirectories</a> to retrieve the next set of items.'
       description: Contains the results of the <a>DescribeDirectories</a> operation.
     DescribeDirectoriesRequest:
       type: object
       title: DescribeDirectoriesRequest
       properties:
         DirectoryIds:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryIds'
-            - description: '<p>A list of identifiers of the directories for which to obtain the information. If this member is null, all directories that belong to the current account are returned.</p> <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>'
+          $ref: '#/components/schemas/DirectoryIds'
+          description: '<p>A list of identifiers of the directories for which to obtain the information. If this member is null, all directories that belong to the current account are returned.</p> <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The <code>DescribeDirectoriesResult.NextToken</code> value from a previous call to <a>DescribeDirectories</a>. Pass null if this is the first call.
+          $ref: '#/components/schemas/NextToken'
+          description: The <code>DescribeDirectoriesResult.NextToken</code> value from a previous call to <a>DescribeDirectories</a>. Pass null if this is the first call.
         Limit:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: 'The maximum number of items to return. If this value is zero, the maximum number of items is specified by the limitations of the operation.'
+          $ref: '#/components/schemas/Limit'
+          description: 'The maximum number of items to return. If this value is zero, the maximum number of items is specified by the limitations of the operation.'
       description: Contains the inputs for the <a>DescribeDirectories</a> operation.
     InvalidNextTokenException: {}
     DescribeDomainControllersResult:
       type: object
       properties:
         DomainControllers:
-          allOf:
-            - $ref: '#/components/schemas/DomainControllers'
-            - description: List of the <a>DomainController</a> objects that were retrieved.
+          $ref: '#/components/schemas/DomainControllers'
+          description: List of the <a>DomainController</a> objects that were retrieved.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeDomainControllers</a> retrieve the next set of items.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeDomainControllers</a> retrieve the next set of items.'
     DescribeDomainControllersRequest:
       type: object
       required:
@@ -5008,53 +4914,44 @@ components:
       title: DescribeDomainControllersRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier of the directory for which to retrieve the domain controller information.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier of the directory for which to retrieve the domain controller information.
         DomainControllerIds:
-          allOf:
-            - $ref: '#/components/schemas/DomainControllerIds'
-            - description: A list of identifiers for the domain controllers whose information will be provided.
+          $ref: '#/components/schemas/DomainControllerIds'
+          description: A list of identifiers for the domain controllers whose information will be provided.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The <i>DescribeDomainControllers.NextToken</i> value from a previous call to <a>DescribeDomainControllers</a>. Pass null if this is the first call. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'The <i>DescribeDomainControllers.NextToken</i> value from a previous call to <a>DescribeDomainControllers</a>. Pass null if this is the first call. '
         Limit:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: The maximum number of items to return.
+          $ref: '#/components/schemas/Limit'
+          description: The maximum number of items to return.
     DescribeEventTopicsResult:
       type: object
       properties:
         EventTopics:
-          allOf:
-            - $ref: '#/components/schemas/EventTopics'
-            - description: A list of Amazon SNS topic names that receive status messages from the specified Directory ID.
+          $ref: '#/components/schemas/EventTopics'
+          description: A list of Amazon SNS topic names that receive status messages from the specified Directory ID.
       description: The result of a DescribeEventTopic request.
     DescribeEventTopicsRequest:
       type: object
       title: DescribeEventTopicsRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: 'The Directory ID for which to get the list of associated Amazon SNS topics. If this member is null, associations for all Directory IDs are returned.'
+          $ref: '#/components/schemas/DirectoryId'
+          description: 'The Directory ID for which to get the list of associated Amazon SNS topics. If this member is null, associations for all Directory IDs are returned.'
         TopicNames:
-          allOf:
-            - $ref: '#/components/schemas/TopicNames'
-            - description: '<p>A list of Amazon SNS topic names for which to obtain the information. If this member is null, all associations for the specified Directory ID are returned.</p> <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>'
+          $ref: '#/components/schemas/TopicNames'
+          description: '<p>A list of Amazon SNS topic names for which to obtain the information. If this member is null, all associations for the specified Directory ID are returned.</p> <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>'
       description: Describes event topics.
     DescribeLDAPSSettingsResult:
       type: object
       properties:
         LDAPSSettingsInfo:
-          allOf:
-            - $ref: '#/components/schemas/LDAPSSettingsInfo'
-            - description: 'Information about LDAP security for the specified directory, including status of enablement, state last updated date time, and the reason for the state.'
+          $ref: '#/components/schemas/LDAPSSettingsInfo'
+          description: 'Information about LDAP security for the specified directory, including status of enablement, state last updated date time, and the reason for the state.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The next token used to retrieve the LDAPS settings if the number of setting types exceeds page limit and there is another page.
+          $ref: '#/components/schemas/NextToken'
+          description: The next token used to retrieve the LDAPS settings if the number of setting types exceeds page limit and there is another page.
     DescribeLDAPSSettingsRequest:
       type: object
       required:
@@ -5062,32 +4959,26 @@ components:
       title: DescribeLDAPSSettingsRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/LDAPSType'
-            - description: The type of LDAP security to enable. Currently only the value <code>Client</code> is supported.
+          $ref: '#/components/schemas/LDAPSType'
+          description: The type of LDAP security to enable. Currently only the value <code>Client</code> is supported.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The type of next token used for pagination.
+          $ref: '#/components/schemas/NextToken'
+          description: The type of next token used for pagination.
         Limit:
-          allOf:
-            - $ref: '#/components/schemas/PageLimit'
-            - description: Specifies the number of items that should be displayed on one page.
+          $ref: '#/components/schemas/PageLimit'
+          description: Specifies the number of items that should be displayed on one page.
     DescribeRegionsResult:
       type: object
       properties:
         RegionsDescription:
-          allOf:
-            - $ref: '#/components/schemas/RegionsDescription'
-            - description: List of Region information related to the directory for each replicated Region.
+          $ref: '#/components/schemas/RegionsDescription'
+          description: List of Region information related to the directory for each replicated Region.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeRegions</a> to retrieve the next set of items.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeRegions</a> to retrieve the next set of items.'
     DescribeRegionsRequest:
       type: object
       required:
@@ -5095,28 +4986,23 @@ components:
       title: DescribeRegionsRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory.
         RegionName:
-          allOf:
-            - $ref: '#/components/schemas/RegionName'
-            - description: 'The name of the Region. For example, <code>us-east-1</code>.'
+          $ref: '#/components/schemas/RegionName'
+          description: 'The name of the Region. For example, <code>us-east-1</code>.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The <code>DescribeRegionsResult.NextToken</code> value from a previous call to <a>DescribeRegions</a>. Pass null if this is the first call.
+          $ref: '#/components/schemas/NextToken'
+          description: The <code>DescribeRegionsResult.NextToken</code> value from a previous call to <a>DescribeRegions</a>. Pass null if this is the first call.
     DescribeSharedDirectoriesResult:
       type: object
       properties:
         SharedDirectories:
-          allOf:
-            - $ref: '#/components/schemas/SharedDirectories'
-            - description: A list of all shared directories in your account.
+          $ref: '#/components/schemas/SharedDirectories'
+          description: A list of all shared directories in your account.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'If not null, token that indicates that more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeSharedDirectories</a> to retrieve the next set of items.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'If not null, token that indicates that more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeSharedDirectories</a> to retrieve the next set of items.'
     DescribeSharedDirectoriesRequest:
       type: object
       required:
@@ -5124,86 +5010,70 @@ components:
       title: DescribeSharedDirectoriesRequest
       properties:
         OwnerDirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: 'Returns the identifier of the directory in the directory owner account. '
+          $ref: '#/components/schemas/DirectoryId'
+          description: 'Returns the identifier of the directory in the directory owner account. '
         SharedDirectoryIds:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryIds'
-            - description: 'A list of identifiers of all shared directories in your account. '
+          $ref: '#/components/schemas/DirectoryIds'
+          description: 'A list of identifiers of all shared directories in your account. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The <code>DescribeSharedDirectoriesResult.NextToken</code> value from a previous call to <a>DescribeSharedDirectories</a>. Pass null if this is the first call. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'The <code>DescribeSharedDirectoriesResult.NextToken</code> value from a previous call to <a>DescribeSharedDirectories</a>. Pass null if this is the first call. '
         Limit:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: The number of shared directories to return in the response object.
+          $ref: '#/components/schemas/Limit'
+          description: The number of shared directories to return in the response object.
     DescribeSnapshotsResult:
       type: object
       properties:
         Snapshots:
-          allOf:
-            - $ref: '#/components/schemas/Snapshots'
-            - description: '<p>The list of <a>Snapshot</a> objects that were retrieved.</p> <p>It is possible that this list contains less than the number of items specified in the <i>Limit</i> member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.</p>'
+          $ref: '#/components/schemas/Snapshots'
+          description: '<p>The list of <a>Snapshot</a> objects that were retrieved.</p> <p>It is possible that this list contains less than the number of items specified in the <i>Limit</i> member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.</p>'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'If not null, more results are available. Pass this value in the <i>NextToken</i> member of a subsequent call to <a>DescribeSnapshots</a>.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'If not null, more results are available. Pass this value in the <i>NextToken</i> member of a subsequent call to <a>DescribeSnapshots</a>.'
       description: Contains the results of the <a>DescribeSnapshots</a> operation.
     DescribeSnapshotsRequest:
       type: object
       title: DescribeSnapshotsRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory for which to retrieve snapshot information.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory for which to retrieve snapshot information.
         SnapshotIds:
-          allOf:
-            - $ref: '#/components/schemas/SnapshotIds'
-            - description: 'A list of identifiers of the snapshots to obtain the information for. If this member is null or empty, all snapshots are returned using the <i>Limit</i> and <i>NextToken</i> members.'
+          $ref: '#/components/schemas/SnapshotIds'
+          description: 'A list of identifiers of the snapshots to obtain the information for. If this member is null or empty, all snapshots are returned using the <i>Limit</i> and <i>NextToken</i> members.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The <i>DescribeSnapshotsResult.NextToken</i> value from a previous call to <a>DescribeSnapshots</a>. Pass null if this is the first call.
+          $ref: '#/components/schemas/NextToken'
+          description: The <i>DescribeSnapshotsResult.NextToken</i> value from a previous call to <a>DescribeSnapshots</a>. Pass null if this is the first call.
         Limit:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: The maximum number of objects to return.
+          $ref: '#/components/schemas/Limit'
+          description: The maximum number of objects to return.
       description: Contains the inputs for the <a>DescribeSnapshots</a> operation.
     DescribeTrustsResult:
       type: object
       properties:
         Trusts:
-          allOf:
-            - $ref: '#/components/schemas/Trusts'
-            - description: '<p>The list of Trust objects that were retrieved.</p> <p>It is possible that this list contains less than the number of items specified in the <i>Limit</i> member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.</p>'
+          $ref: '#/components/schemas/Trusts'
+          description: '<p>The list of Trust objects that were retrieved.</p> <p>It is possible that this list contains less than the number of items specified in the <i>Limit</i> member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.</p>'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>DescribeTrusts</a> to retrieve the next set of items.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>DescribeTrusts</a> to retrieve the next set of items.'
       description: The result of a DescribeTrust request.
     DescribeTrustsRequest:
       type: object
       title: DescribeTrustsRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The Directory ID of the Amazon Web Services directory that is a part of the requested trust relationship.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The Directory ID of the Amazon Web Services directory that is a part of the requested trust relationship.
         TrustIds:
-          allOf:
-            - $ref: '#/components/schemas/TrustIds'
-            - description: '<p>A list of identifiers of the trust relationships for which to obtain the information. If this member is null, all trust relationships that belong to the current account are returned.</p> <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>'
+          $ref: '#/components/schemas/TrustIds'
+          description: '<p>A list of identifiers of the trust relationships for which to obtain the information. If this member is null, all trust relationships that belong to the current account are returned.</p> <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The <i>DescribeTrustsResult.NextToken</i> value from a previous call to <a>DescribeTrusts</a>. Pass null if this is the first call.
+          $ref: '#/components/schemas/NextToken'
+          description: The <i>DescribeTrustsResult.NextToken</i> value from a previous call to <a>DescribeTrusts</a>. Pass null if this is the first call.
         Limit:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: The maximum number of objects to return.
+          $ref: '#/components/schemas/Limit'
+          description: The maximum number of objects to return.
       description: 'Describes the trust relationships for a particular Managed Microsoft AD directory. If no input parameters are provided, such as directory ID or trust ID, this request describes all the trust relationships.'
     DisableClientAuthenticationResult:
       type: object
@@ -5216,13 +5086,11 @@ components:
       title: DisableClientAuthenticationRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: 'The identifier of the directory '
+          $ref: '#/components/schemas/DirectoryId'
+          description: 'The identifier of the directory '
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ClientAuthenticationType'
-            - description: 'The type of client authentication to disable. Currently, only the parameter, <code>SmartCard</code> is supported.'
+          $ref: '#/components/schemas/ClientAuthenticationType'
+          description: 'The type of client authentication to disable. Currently, only the parameter, <code>SmartCard</code> is supported.'
     InvalidClientAuthStatusException: {}
     DisableLDAPSResult:
       type: object
@@ -5235,13 +5103,11 @@ components:
       title: DisableLDAPSRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/LDAPSType'
-            - description: The type of LDAP security to enable. Currently only the value <code>Client</code> is supported.
+          $ref: '#/components/schemas/LDAPSType'
+          description: The type of LDAP security to enable. Currently only the value <code>Client</code> is supported.
     InvalidLDAPSStatusException: {}
     DisableRadiusResult:
       type: object
@@ -5254,9 +5120,8 @@ components:
       title: DisableRadiusRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory for which to disable MFA.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory for which to disable MFA.
       description: Contains the inputs for the <a>DisableRadius</a> operation.
     DisableSsoResult:
       type: object
@@ -5269,17 +5134,14 @@ components:
       title: DisableSsoRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory for which to disable single-sign on.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory for which to disable single-sign on.
         UserName:
-          allOf:
-            - $ref: '#/components/schemas/UserName'
-            - description: '<p>The username of an alternate account to use to disable single-sign on. This is only used for AD Connector directories. This account must have privileges to remove a service principal name.</p> <p>If the AD Connector service account does not have privileges to remove a service principal name, you can specify an alternate account with the <i>UserName</i> and <i>Password</i> parameters. These credentials are only used to disable single sign-on and are not stored by the service. The AD Connector service account is not changed.</p>'
+          $ref: '#/components/schemas/UserName'
+          description: '<p>The username of an alternate account to use to disable single-sign on. This is only used for AD Connector directories. This account must have privileges to remove a service principal name.</p> <p>If the AD Connector service account does not have privileges to remove a service principal name, you can specify an alternate account with the <i>UserName</i> and <i>Password</i> parameters. These credentials are only used to disable single sign-on and are not stored by the service. The AD Connector service account is not changed.</p>'
         Password:
-          allOf:
-            - $ref: '#/components/schemas/ConnectPassword'
-            - description: 'The password of an alternate account to use to disable single-sign on. This is only used for AD Connector directories. For more information, see the <i>UserName</i> parameter.'
+          $ref: '#/components/schemas/ConnectPassword'
+          description: 'The password of an alternate account to use to disable single-sign on. This is only used for AD Connector directories. For more information, see the <i>UserName</i> parameter.'
       description: Contains the inputs for the <a>DisableSso</a> operation.
     EnableClientAuthenticationResult:
       type: object
@@ -5292,13 +5154,11 @@ components:
       title: EnableClientAuthenticationRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: 'The identifier of the specified directory. '
+          $ref: '#/components/schemas/DirectoryId'
+          description: 'The identifier of the specified directory. '
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ClientAuthenticationType'
-            - description: 'The type of client authentication to enable. Currently only the value <code>SmartCard</code> is supported. Smart card authentication in AD Connector requires that you enable Kerberos Constrained Delegation for the Service User to the LDAP service in your self-managed AD. '
+          $ref: '#/components/schemas/ClientAuthenticationType'
+          description: 'The type of client authentication to enable. Currently only the value <code>SmartCard</code> is supported. Smart card authentication in AD Connector requires that you enable Kerberos Constrained Delegation for the Service User to the LDAP service in your self-managed AD. '
     NoAvailableCertificateException: {}
     EnableLDAPSResult:
       type: object
@@ -5311,13 +5171,11 @@ components:
       title: EnableLDAPSRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/LDAPSType'
-            - description: The type of LDAP security to enable. Currently only the value <code>Client</code> is supported.
+          $ref: '#/components/schemas/LDAPSType'
+          description: The type of LDAP security to enable. Currently only the value <code>Client</code> is supported.
     EnableRadiusResult:
       type: object
       properties: {}
@@ -5330,13 +5188,11 @@ components:
       title: EnableRadiusRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory for which to enable MFA.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory for which to enable MFA.
         RadiusSettings:
-          allOf:
-            - $ref: '#/components/schemas/RadiusSettings'
-            - description: A <a>RadiusSettings</a> object that contains information about the RADIUS server.
+          $ref: '#/components/schemas/RadiusSettings'
+          description: A <a>RadiusSettings</a> object that contains information about the RADIUS server.
       description: Contains the inputs for the <a>EnableRadius</a> operation.
     EnableSsoResult:
       type: object
@@ -5349,25 +5205,21 @@ components:
       title: EnableSsoRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory for which to enable single-sign on.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory for which to enable single-sign on.
         UserName:
-          allOf:
-            - $ref: '#/components/schemas/UserName'
-            - description: '<p>The username of an alternate account to use to enable single-sign on. This is only used for AD Connector directories. This account must have privileges to add a service principal name.</p> <p>If the AD Connector service account does not have privileges to add a service principal name, you can specify an alternate account with the <i>UserName</i> and <i>Password</i> parameters. These credentials are only used to enable single sign-on and are not stored by the service. The AD Connector service account is not changed.</p>'
+          $ref: '#/components/schemas/UserName'
+          description: '<p>The username of an alternate account to use to enable single-sign on. This is only used for AD Connector directories. This account must have privileges to add a service principal name.</p> <p>If the AD Connector service account does not have privileges to add a service principal name, you can specify an alternate account with the <i>UserName</i> and <i>Password</i> parameters. These credentials are only used to enable single sign-on and are not stored by the service. The AD Connector service account is not changed.</p>'
         Password:
-          allOf:
-            - $ref: '#/components/schemas/ConnectPassword'
-            - description: 'The password of an alternate account to use to enable single-sign on. This is only used for AD Connector directories. For more information, see the <i>UserName</i> parameter.'
+          $ref: '#/components/schemas/ConnectPassword'
+          description: 'The password of an alternate account to use to enable single-sign on. This is only used for AD Connector directories. For more information, see the <i>UserName</i> parameter.'
       description: Contains the inputs for the <a>EnableSso</a> operation.
     GetDirectoryLimitsResult:
       type: object
       properties:
         DirectoryLimits:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryLimits'
-            - description: A <a>DirectoryLimits</a> object that contains the directory limits for the current Region.
+          $ref: '#/components/schemas/DirectoryLimits'
+          description: A <a>DirectoryLimits</a> object that contains the directory limits for the current Region.
       description: Contains the results of the <a>GetDirectoryLimits</a> operation.
     GetDirectoryLimitsRequest:
       type: object
@@ -5378,9 +5230,8 @@ components:
       type: object
       properties:
         SnapshotLimits:
-          allOf:
-            - $ref: '#/components/schemas/SnapshotLimits'
-            - description: A <a>SnapshotLimits</a> object that contains the manual snapshot limits for the specified directory.
+          $ref: '#/components/schemas/SnapshotLimits'
+          description: A <a>SnapshotLimits</a> object that contains the manual snapshot limits for the specified directory.
       description: Contains the results of the <a>GetSnapshotLimits</a> operation.
     GetSnapshotLimitsRequest:
       type: object
@@ -5389,21 +5240,18 @@ components:
       title: GetSnapshotLimitsRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Contains the identifier of the directory to obtain the limits for.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Contains the identifier of the directory to obtain the limits for.
       description: Contains the inputs for the <a>GetSnapshotLimits</a> operation.
     ListCertificatesResult:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: Indicates whether another page of certificates is available when the number of available certificates exceeds the page limit.
+          $ref: '#/components/schemas/NextToken'
+          description: Indicates whether another page of certificates is available when the number of available certificates exceeds the page limit.
         CertificatesInfo:
-          allOf:
-            - $ref: '#/components/schemas/CertificatesInfo'
-            - description: 'A list of certificates with basic details including certificate ID, certificate common name, certificate state.'
+          $ref: '#/components/schemas/CertificatesInfo'
+          description: 'A list of certificates with basic details including certificate ID, certificate common name, certificate state.'
     ListCertificatesRequest:
       type: object
       required:
@@ -5411,28 +5259,23 @@ components:
       title: ListCertificatesRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: A token for requesting another page of certificates if the <code>NextToken</code> response element indicates that more certificates are available. Use the value of the returned <code>NextToken</code> element in your request until the token comes back as <code>null</code>. Pass <code>null</code> if this is the first call.
+          $ref: '#/components/schemas/NextToken'
+          description: A token for requesting another page of certificates if the <code>NextToken</code> response element indicates that more certificates are available. Use the value of the returned <code>NextToken</code> element in your request until the token comes back as <code>null</code>. Pass <code>null</code> if this is the first call.
         Limit:
-          allOf:
-            - $ref: '#/components/schemas/PageLimit'
-            - description: The number of items that should show up on one page
+          $ref: '#/components/schemas/PageLimit'
+          description: The number of items that should show up on one page
     ListIpRoutesResult:
       type: object
       properties:
         IpRoutesInfo:
-          allOf:
-            - $ref: '#/components/schemas/IpRoutesInfo'
-            - description: A list of <a>IpRoute</a>s.
+          $ref: '#/components/schemas/IpRoutesInfo'
+          description: A list of <a>IpRoute</a>s.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>ListIpRoutes</a> to retrieve the next set of items.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>ListIpRoutes</a> to retrieve the next set of items.'
     ListIpRoutesRequest:
       type: object
       required:
@@ -5440,55 +5283,45 @@ components:
       title: ListIpRoutesRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier (ID) of the directory for which you want to retrieve the IP addresses.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier (ID) of the directory for which you want to retrieve the IP addresses.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The <i>ListIpRoutes.NextToken</i> value from a previous call to <a>ListIpRoutes</a>. Pass null if this is the first call.
+          $ref: '#/components/schemas/NextToken'
+          description: The <i>ListIpRoutes.NextToken</i> value from a previous call to <a>ListIpRoutes</a>. Pass null if this is the first call.
         Limit:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: 'Maximum number of items to return. If this value is zero, the maximum number of items is specified by the limitations of the operation.'
+          $ref: '#/components/schemas/Limit'
+          description: 'Maximum number of items to return. If this value is zero, the maximum number of items is specified by the limitations of the operation.'
     ListLogSubscriptionsResult:
       type: object
       properties:
         LogSubscriptions:
-          allOf:
-            - $ref: '#/components/schemas/LogSubscriptions'
-            - description: A list of active <a>LogSubscription</a> objects for calling the Amazon Web Services account.
+          $ref: '#/components/schemas/LogSubscriptions'
+          description: A list of active <a>LogSubscription</a> objects for calling the Amazon Web Services account.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token for the next set of items to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token for the next set of items to return.
     ListLogSubscriptionsRequest:
       type: object
       title: ListLogSubscriptionsRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: 'If a <i>DirectoryID</i> is provided, lists only the log subscription associated with that directory. If no <i>DirectoryId</i> is provided, lists all log subscriptions associated with your Amazon Web Services account. If there are no log subscriptions for the Amazon Web Services account or the directory, an empty list will be returned.'
+          $ref: '#/components/schemas/DirectoryId'
+          description: 'If a <i>DirectoryID</i> is provided, lists only the log subscription associated with that directory. If no <i>DirectoryId</i> is provided, lists all log subscriptions associated with your Amazon Web Services account. If there are no log subscriptions for the Amazon Web Services account or the directory, an empty list will be returned.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token for the next set of items to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token for the next set of items to return.
         Limit:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: The maximum number of items returned.
+          $ref: '#/components/schemas/Limit'
+          description: The maximum number of items returned.
     ListSchemaExtensionsResult:
       type: object
       properties:
         SchemaExtensionsInfo:
-          allOf:
-            - $ref: '#/components/schemas/SchemaExtensionsInfo'
-            - description: Information about the schema extensions applied to the directory.
+          $ref: '#/components/schemas/SchemaExtensionsInfo'
+          description: Information about the schema extensions applied to the directory.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <code>ListSchemaExtensions</code> to retrieve the next set of items.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <code>ListSchemaExtensions</code> to retrieve the next set of items.'
     ListSchemaExtensionsRequest:
       type: object
       required:
@@ -5496,28 +5329,23 @@ components:
       title: ListSchemaExtensionsRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory from which to retrieve the schema extension information.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory from which to retrieve the schema extension information.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The <code>ListSchemaExtensions.NextToken</code> value from a previous call to <code>ListSchemaExtensions</code>. Pass null if this is the first call.
+          $ref: '#/components/schemas/NextToken'
+          description: The <code>ListSchemaExtensions.NextToken</code> value from a previous call to <code>ListSchemaExtensions</code>. Pass null if this is the first call.
         Limit:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: The maximum number of items to return.
+          $ref: '#/components/schemas/Limit'
+          description: The maximum number of items to return.
     ListTagsForResourceResult:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: List of tags returned by the ListTagsForResource operation.
+          $ref: '#/components/schemas/Tags'
+          description: List of tags returned by the ListTagsForResource operation.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: Reserved for future use.
+          $ref: '#/components/schemas/NextToken'
+          description: Reserved for future use.
     ListTagsForResourceRequest:
       type: object
       required:
@@ -5525,24 +5353,20 @@ components:
       title: ListTagsForResourceRequest
       properties:
         ResourceId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: Identifier (ID) of the directory for which you want to retrieve tags.
+          $ref: '#/components/schemas/ResourceId'
+          description: Identifier (ID) of the directory for which you want to retrieve tags.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: Reserved for future use.
+          $ref: '#/components/schemas/NextToken'
+          description: Reserved for future use.
         Limit:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: Reserved for future use.
+          $ref: '#/components/schemas/Limit'
+          description: Reserved for future use.
     RegisterCertificateResult:
       type: object
       properties:
         CertificateId:
-          allOf:
-            - $ref: '#/components/schemas/CertificateId'
-            - description: The identifier of the certificate.
+          $ref: '#/components/schemas/CertificateId'
+          description: The identifier of the certificate.
     RegisterCertificateRequest:
       type: object
       required:
@@ -5551,21 +5375,17 @@ components:
       title: RegisterCertificateRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory.
         CertificateData:
-          allOf:
-            - $ref: '#/components/schemas/CertificateData'
-            - description: The certificate PEM string that needs to be registered.
+          $ref: '#/components/schemas/CertificateData'
+          description: The certificate PEM string that needs to be registered.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/CertificateType'
-            - description: The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.
+          $ref: '#/components/schemas/CertificateType'
+          description: The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.
         ClientCertAuthSettings:
-          allOf:
-            - $ref: '#/components/schemas/ClientCertAuthSettings'
-            - description: A <code>ClientCertAuthSettings</code> object that contains client certificate authentication settings.
+          $ref: '#/components/schemas/ClientCertAuthSettings'
+          description: A <code>ClientCertAuthSettings</code> object that contains client certificate authentication settings.
     InvalidCertificateException: {}
     CertificateLimitExceededException: {}
     CertificateAlreadyExistsException: {}
@@ -5581,21 +5401,18 @@ components:
       title: RegisterEventTopicRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The Directory ID that will publish status messages to the Amazon SNS topic.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The Directory ID that will publish status messages to the Amazon SNS topic.
         TopicName:
-          allOf:
-            - $ref: '#/components/schemas/TopicName'
-            - description: The Amazon SNS topic name to which the directory will publish status messages. This Amazon SNS topic must be in the same region as the specified Directory ID.
+          $ref: '#/components/schemas/TopicName'
+          description: The Amazon SNS topic name to which the directory will publish status messages. This Amazon SNS topic must be in the same region as the specified Directory ID.
       description: Registers a new event topic.
     RejectSharedDirectoryResult:
       type: object
       properties:
         SharedDirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier of the shared directory in the directory consumer account.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier of the shared directory in the directory consumer account.
     RejectSharedDirectoryRequest:
       type: object
       required:
@@ -5603,9 +5420,8 @@ components:
       title: RejectSharedDirectoryRequest
       properties:
         SharedDirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier of the shared directory in the directory consumer account. This identifier is different for each directory owner account.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier of the shared directory in the directory consumer account. This identifier is different for each directory owner account.
     RemoveIpRoutesResult:
       type: object
       properties: {}
@@ -5617,13 +5433,11 @@ components:
       title: RemoveIpRoutesRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier (ID) of the directory from which you want to remove the IP addresses.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier (ID) of the directory from which you want to remove the IP addresses.
         CidrIps:
-          allOf:
-            - $ref: '#/components/schemas/CidrIps'
-            - description: IP address blocks that you want to remove.
+          $ref: '#/components/schemas/CidrIps'
+          description: IP address blocks that you want to remove.
     RemoveRegionResult:
       type: object
       properties: {}
@@ -5634,9 +5448,8 @@ components:
       title: RemoveRegionRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory for which you want to remove Region replication.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory for which you want to remove Region replication.
     RemoveTagsFromResourceResult:
       type: object
       properties: {}
@@ -5648,13 +5461,11 @@ components:
       title: RemoveTagsFromResourceRequest
       properties:
         ResourceId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: Identifier (ID) of the directory from which to remove the tag.
+          $ref: '#/components/schemas/ResourceId'
+          description: Identifier (ID) of the directory from which to remove the tag.
         TagKeys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeys'
-            - description: The tag key (name) of the tag to be removed.
+          $ref: '#/components/schemas/TagKeys'
+          description: The tag key (name) of the tag to be removed.
     ResetUserPasswordResult:
       type: object
       properties: {}
@@ -5667,17 +5478,14 @@ components:
       title: ResetUserPasswordRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier of the Managed Microsoft AD or Simple AD directory in which the user resides.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier of the Managed Microsoft AD or Simple AD directory in which the user resides.
         UserName:
-          allOf:
-            - $ref: '#/components/schemas/CustomerUserName'
-            - description: The user name of the user whose password will be reset.
+          $ref: '#/components/schemas/CustomerUserName'
+          description: The user name of the user whose password will be reset.
         NewPassword:
-          allOf:
-            - $ref: '#/components/schemas/UserPassword'
-            - description: The new password that will be reset.
+          $ref: '#/components/schemas/UserPassword'
+          description: The new password that will be reset.
     UserDoesNotExistException: {}
     InvalidPasswordException: {}
     RestoreFromSnapshotResult:
@@ -5691,17 +5499,15 @@ components:
       title: RestoreFromSnapshotRequest
       properties:
         SnapshotId:
-          allOf:
-            - $ref: '#/components/schemas/SnapshotId'
-            - description: The identifier of the snapshot to restore from.
+          $ref: '#/components/schemas/SnapshotId'
+          description: The identifier of the snapshot to restore from.
       description: An object representing the inputs for the <a>RestoreFromSnapshot</a> operation.
     ShareDirectoryResult:
       type: object
       properties:
         SharedDirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier of the directory that is stored in the directory consumer account that is shared from the specified directory (<code>DirectoryId</code>).
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier of the directory that is stored in the directory consumer account that is shared from the specified directory (<code>DirectoryId</code>).
     ShareDirectoryRequest:
       type: object
       required:
@@ -5711,21 +5517,17 @@ components:
       title: ShareDirectoryRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier of the Managed Microsoft AD directory that you want to share with other Amazon Web Services accounts.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier of the Managed Microsoft AD directory that you want to share with other Amazon Web Services accounts.
         ShareNotes:
-          allOf:
-            - $ref: '#/components/schemas/Notes'
-            - description: A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.
+          $ref: '#/components/schemas/Notes'
+          description: A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.
         ShareTarget:
-          allOf:
-            - $ref: '#/components/schemas/ShareTarget'
-            - description: Identifier for the directory consumer account with whom the directory is to be shared.
+          $ref: '#/components/schemas/ShareTarget'
+          description: Identifier for the directory consumer account with whom the directory is to be shared.
         ShareMethod:
-          allOf:
-            - $ref: '#/components/schemas/ShareMethod'
-            - description: The method used when sharing a directory to determine whether the directory should be shared within your Amazon Web Services organization (<code>ORGANIZATIONS</code>) or with any Amazon Web Services account by sending a directory sharing request (<code>HANDSHAKE</code>).
+          $ref: '#/components/schemas/ShareMethod'
+          description: The method used when sharing a directory to determine whether the directory should be shared within your Amazon Web Services organization (<code>ORGANIZATIONS</code>) or with any Amazon Web Services account by sending a directory sharing request (<code>HANDSHAKE</code>).
     InvalidTargetException: {}
     ShareLimitExceededException: {}
     OrganizationsException: {}
@@ -5733,9 +5535,8 @@ components:
       type: object
       properties:
         SchemaExtensionId:
-          allOf:
-            - $ref: '#/components/schemas/SchemaExtensionId'
-            - description: The identifier of the schema extension that will be applied.
+          $ref: '#/components/schemas/SchemaExtensionId'
+          description: The identifier of the schema extension that will be applied.
     StartSchemaExtensionRequest:
       type: object
       required:
@@ -5746,28 +5547,23 @@ components:
       title: StartSchemaExtensionRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory for which the schema extension will be applied to.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory for which the schema extension will be applied to.
         CreateSnapshotBeforeSchemaExtension:
-          allOf:
-            - $ref: '#/components/schemas/CreateSnapshotBeforeSchemaExtension'
-            - description: 'If true, creates a snapshot of the directory before applying the schema extension.'
+          $ref: '#/components/schemas/CreateSnapshotBeforeSchemaExtension'
+          description: 'If true, creates a snapshot of the directory before applying the schema extension.'
         LdifContent:
-          allOf:
-            - $ref: '#/components/schemas/LdifContent'
-            - description: 'The LDIF file represented as a string. To construct the LdifContent string, precede each line as it would be formatted in an ldif file with \n. See the example request below for more details. The file size can be no larger than 1MB.'
+          $ref: '#/components/schemas/LdifContent'
+          description: 'The LDIF file represented as a string. To construct the LdifContent string, precede each line as it would be formatted in an ldif file with \n. See the example request below for more details. The file size can be no larger than 1MB.'
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the schema extension.
+          $ref: '#/components/schemas/Description'
+          description: A description of the schema extension.
     UnshareDirectoryResult:
       type: object
       properties:
         SharedDirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier of the directory stored in the directory consumer account that is to be unshared from the specified directory (<code>DirectoryId</code>).
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier of the directory stored in the directory consumer account that is to be unshared from the specified directory (<code>DirectoryId</code>).
     UnshareDirectoryRequest:
       type: object
       required:
@@ -5776,13 +5572,11 @@ components:
       title: UnshareDirectoryRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the Managed Microsoft AD directory that you want to stop sharing.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the Managed Microsoft AD directory that you want to stop sharing.
         UnshareTarget:
-          allOf:
-            - $ref: '#/components/schemas/UnshareTarget'
-            - description: Identifier for the directory consumer account with whom the directory has to be unshared.
+          $ref: '#/components/schemas/UnshareTarget'
+          description: Identifier for the directory consumer account with whom the directory has to be unshared.
     DirectoryNotSharedException: {}
     UpdateConditionalForwarderResult:
       type: object
@@ -5797,17 +5591,14 @@ components:
       title: UpdateConditionalForwarderRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The directory ID of the Amazon Web Services directory for which to update the conditional forwarder.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The directory ID of the Amazon Web Services directory for which to update the conditional forwarder.
         RemoteDomainName:
-          allOf:
-            - $ref: '#/components/schemas/RemoteDomainName'
-            - description: The fully qualified domain name (FQDN) of the remote domain with which you will set up a trust relationship.
+          $ref: '#/components/schemas/RemoteDomainName'
+          description: The fully qualified domain name (FQDN) of the remote domain with which you will set up a trust relationship.
         DnsIpAddrs:
-          allOf:
-            - $ref: '#/components/schemas/DnsIpAddrs'
-            - description: The updated IP addresses of the remote DNS server associated with the conditional forwarder.
+          $ref: '#/components/schemas/DnsIpAddrs'
+          description: The updated IP addresses of the remote DNS server associated with the conditional forwarder.
       description: Updates a conditional forwarder.
     UpdateNumberOfDomainControllersResult:
       type: object
@@ -5820,13 +5611,11 @@ components:
       title: UpdateNumberOfDomainControllersRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier of the directory to which the domain controllers will be added or removed.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier of the directory to which the domain controllers will be added or removed.
         DesiredNumber:
-          allOf:
-            - $ref: '#/components/schemas/DesiredNumberOfDomainControllers'
-            - description: The number of domain controllers desired in the directory.
+          $ref: '#/components/schemas/DesiredNumberOfDomainControllers'
+          description: The number of domain controllers desired in the directory.
     DomainControllerLimitExceededException: {}
     UpdateRadiusResult:
       type: object
@@ -5840,13 +5629,11 @@ components:
       title: UpdateRadiusRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory for which to update the RADIUS server information.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory for which to update the RADIUS server information.
         RadiusSettings:
-          allOf:
-            - $ref: '#/components/schemas/RadiusSettings'
-            - description: A <a>RadiusSettings</a> object that contains information about the RADIUS server.
+          $ref: '#/components/schemas/RadiusSettings'
+          description: A <a>RadiusSettings</a> object that contains information about the RADIUS server.
       description: Contains the inputs for the <a>UpdateRadius</a> operation.
     UpdateTrustResult:
       type: object
@@ -5854,9 +5641,8 @@ components:
         RequestId:
           $ref: '#/components/schemas/RequestId'
         TrustId:
-          allOf:
-            - $ref: '#/components/schemas/TrustId'
-            - description: Identifier of the trust relationship.
+          $ref: '#/components/schemas/TrustId'
+          description: Identifier of the trust relationship.
     UpdateTrustRequest:
       type: object
       required:
@@ -5864,20 +5650,17 @@ components:
       title: UpdateTrustRequest
       properties:
         TrustId:
-          allOf:
-            - $ref: '#/components/schemas/TrustId'
-            - description: Identifier of the trust relationship.
+          $ref: '#/components/schemas/TrustId'
+          description: Identifier of the trust relationship.
         SelectiveAuth:
-          allOf:
-            - $ref: '#/components/schemas/SelectiveAuth'
-            - description: Updates selective authentication for the trust.
+          $ref: '#/components/schemas/SelectiveAuth'
+          description: Updates selective authentication for the trust.
     VerifyTrustResult:
       type: object
       properties:
         TrustId:
-          allOf:
-            - $ref: '#/components/schemas/TrustId'
-            - description: The unique Trust ID of the trust relationship that was verified.
+          $ref: '#/components/schemas/TrustId'
+          description: The unique Trust ID of the trust relationship that was verified.
       description: Result of a VerifyTrust request.
     VerifyTrustRequest:
       type: object
@@ -5886,9 +5669,8 @@ components:
       title: VerifyTrustRequest
       properties:
         TrustId:
-          allOf:
-            - $ref: '#/components/schemas/TrustId'
-            - description: The unique Trust ID of the trust relationship to verify.
+          $ref: '#/components/schemas/TrustId'
+          description: The unique Trust ID of the trust relationship to verify.
       description: Initiates the verification of an existing trust relationship between an Managed Microsoft AD directory and an external domain.
     DirectoryId:
       type: string
@@ -5897,41 +5679,32 @@ components:
       type: object
       properties:
         OwnerAccountId:
-          allOf:
-            - $ref: '#/components/schemas/CustomerId'
-            - description: 'Identifier of the directory owner account, which contains the directory that has been shared to the consumer account.'
+          $ref: '#/components/schemas/CustomerId'
+          description: 'Identifier of the directory owner account, which contains the directory that has been shared to the consumer account.'
         OwnerDirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: 'Identifier of the directory in the directory owner account. '
+          $ref: '#/components/schemas/DirectoryId'
+          description: 'Identifier of the directory in the directory owner account. '
         ShareMethod:
-          allOf:
-            - $ref: '#/components/schemas/ShareMethod'
-            - description: The method used when sharing a directory to determine whether the directory should be shared within your Amazon Web Services organization (<code>ORGANIZATIONS</code>) or with any Amazon Web Services account by sending a shared directory request (<code>HANDSHAKE</code>).
+          $ref: '#/components/schemas/ShareMethod'
+          description: The method used when sharing a directory to determine whether the directory should be shared within your Amazon Web Services organization (<code>ORGANIZATIONS</code>) or with any Amazon Web Services account by sending a shared directory request (<code>HANDSHAKE</code>).
         SharedAccountId:
-          allOf:
-            - $ref: '#/components/schemas/CustomerId'
-            - description: Identifier of the directory consumer account that has access to the shared directory (<code>OwnerDirectoryId</code>) in the directory owner account.
+          $ref: '#/components/schemas/CustomerId'
+          description: Identifier of the directory consumer account that has access to the shared directory (<code>OwnerDirectoryId</code>) in the directory owner account.
         SharedDirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier of the shared directory in the directory consumer account. This identifier is different for each directory owner account.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier of the shared directory in the directory consumer account. This identifier is different for each directory owner account.
         ShareStatus:
-          allOf:
-            - $ref: '#/components/schemas/ShareStatus'
-            - description: Current directory status of the shared Managed Microsoft AD directory.
+          $ref: '#/components/schemas/ShareStatus'
+          description: Current directory status of the shared Managed Microsoft AD directory.
         ShareNotes:
-          allOf:
-            - $ref: '#/components/schemas/Notes'
-            - description: A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.
+          $ref: '#/components/schemas/Notes'
+          description: A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.
         CreatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/CreatedDateTime'
-            - description: The date and time that the shared directory was created.
+          $ref: '#/components/schemas/CreatedDateTime'
+          description: The date and time that the shared directory was created.
         LastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/LastUpdatedDateTime'
-            - description: The date and time that the shared directory was last updated.
+          $ref: '#/components/schemas/LastUpdatedDateTime'
+          description: The date and time that the shared directory was last updated.
       description: Details about the shared directory in the directory owner account for which the share request in the directory consumer account has been accepted.
     AccessUrl:
       type: string
@@ -5954,13 +5727,11 @@ components:
         - SubnetIds
       properties:
         VpcId:
-          allOf:
-            - $ref: '#/components/schemas/VpcId'
-            - description: The identifier of the VPC in which to create the directory.
+          $ref: '#/components/schemas/VpcId'
+          description: The identifier of the VPC in which to create the directory.
         SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/SubnetIds'
-            - description: The identifiers of the subnets for the directory servers. The two subnets must be in different Availability Zones. Directory Service creates a directory server and a DNS server in each of these subnets.
+          $ref: '#/components/schemas/SubnetIds'
+          description: The identifiers of the subnets for the directory servers. The two subnets must be in different Availability Zones. Directory Service creates a directory server and a DNS server in each of these subnets.
       description: Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.
     ResourceId:
       type: string
@@ -5990,13 +5761,11 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/AttributeName'
-            - description: The name of the attribute.
+          $ref: '#/components/schemas/AttributeName'
+          description: The name of the attribute.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/AttributeValue'
-            - description: The value of the attribute.
+          $ref: '#/components/schemas/AttributeValue'
+          description: The value of the attribute.
       description: Represents a named directory attribute.
     Attributes:
       type: array
@@ -6042,45 +5811,36 @@ components:
       type: object
       properties:
         OCSPUrl:
-          allOf:
-            - $ref: '#/components/schemas/OCSPUrl'
-            - description: Specifies the URL of the default OCSP server used to check for revocation status. A secondary value to any OCSP address found in the AIA extension of the user certificate.
+          $ref: '#/components/schemas/OCSPUrl'
+          description: Specifies the URL of the default OCSP server used to check for revocation status. A secondary value to any OCSP address found in the AIA extension of the user certificate.
       description: 'Contains information about the client certificate authentication settings for the <code>RegisterCertificate</code> and <code>DescribeCertificate</code> operations. '
     Certificate:
       type: object
       properties:
         CertificateId:
-          allOf:
-            - $ref: '#/components/schemas/CertificateId'
-            - description: The identifier of the certificate.
+          $ref: '#/components/schemas/CertificateId'
+          description: The identifier of the certificate.
         State:
-          allOf:
-            - $ref: '#/components/schemas/CertificateState'
-            - description: The state of the certificate.
+          $ref: '#/components/schemas/CertificateState'
+          description: The state of the certificate.
         StateReason:
-          allOf:
-            - $ref: '#/components/schemas/CertificateStateReason'
-            - description: Describes a state change for the certificate.
+          $ref: '#/components/schemas/CertificateStateReason'
+          description: Describes a state change for the certificate.
         CommonName:
-          allOf:
-            - $ref: '#/components/schemas/CertificateCN'
-            - description: The common name for the certificate.
+          $ref: '#/components/schemas/CertificateCN'
+          description: The common name for the certificate.
         RegisteredDateTime:
-          allOf:
-            - $ref: '#/components/schemas/CertificateRegisteredDateTime'
-            - description: The date and time that the certificate was registered.
+          $ref: '#/components/schemas/CertificateRegisteredDateTime'
+          description: The date and time that the certificate was registered.
         ExpiryDateTime:
-          allOf:
-            - $ref: '#/components/schemas/CertificateExpiryDateTime'
-            - description: The date and time when the certificate will expire.
+          $ref: '#/components/schemas/CertificateExpiryDateTime'
+          description: The date and time when the certificate will expire.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/CertificateType'
-            - description: The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.
+          $ref: '#/components/schemas/CertificateType'
+          description: The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.
         ClientCertAuthSettings:
-          allOf:
-            - $ref: '#/components/schemas/ClientCertAuthSettings'
-            - description: A <code>ClientCertAuthSettings</code> object that contains client certificate authentication settings.
+          $ref: '#/components/schemas/ClientCertAuthSettings'
+          description: A <code>ClientCertAuthSettings</code> object that contains client certificate authentication settings.
       description: Information about the certificate.
     CertificateData:
       type: string
@@ -6090,25 +5850,20 @@ components:
       type: object
       properties:
         CertificateId:
-          allOf:
-            - $ref: '#/components/schemas/CertificateId'
-            - description: The identifier of the certificate.
+          $ref: '#/components/schemas/CertificateId'
+          description: The identifier of the certificate.
         CommonName:
-          allOf:
-            - $ref: '#/components/schemas/CertificateCN'
-            - description: The common name for the certificate.
+          $ref: '#/components/schemas/CertificateCN'
+          description: The common name for the certificate.
         State:
-          allOf:
-            - $ref: '#/components/schemas/CertificateState'
-            - description: The state of the certificate.
+          $ref: '#/components/schemas/CertificateState'
+          description: The state of the certificate.
         ExpiryDateTime:
-          allOf:
-            - $ref: '#/components/schemas/CertificateExpiryDateTime'
-            - description: The date and time when the certificate will expire.
+          $ref: '#/components/schemas/CertificateExpiryDateTime'
+          description: The date and time when the certificate will expire.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/CertificateType'
-            - description: The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.
+          $ref: '#/components/schemas/CertificateType'
+          description: The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.
       description: Contains general information about a certificate.
     CertificatesInfo:
       type: array
@@ -6137,17 +5892,14 @@ components:
       type: object
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ClientAuthenticationType'
-            - description: 'The type of client authentication for the specified directory. If no type is specified, a list of all client authentication types that are supported for the directory is retrieved. '
+          $ref: '#/components/schemas/ClientAuthenticationType'
+          description: 'The type of client authentication for the specified directory. If no type is specified, a list of all client authentication types that are supported for the directory is retrieved. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ClientAuthenticationStatus'
-            - description: Whether the client authentication type is enabled or disabled for the specified directory.
+          $ref: '#/components/schemas/ClientAuthenticationStatus'
+          description: Whether the client authentication type is enabled or disabled for the specified directory.
         LastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/LastUpdatedDateTime'
-            - description: The date and time when the status of the client authentication type was last updated.
+          $ref: '#/components/schemas/LastUpdatedDateTime'
+          description: The date and time when the status of the client authentication type was last updated.
       description: Contains information about a client authentication method for a directory.
     ClientAuthenticationSettingsInfo:
       type: array
@@ -6173,17 +5925,14 @@ components:
       type: object
       properties:
         ComputerId:
-          allOf:
-            - $ref: '#/components/schemas/SID'
-            - description: The identifier of the computer.
+          $ref: '#/components/schemas/SID'
+          description: The identifier of the computer.
         ComputerName:
-          allOf:
-            - $ref: '#/components/schemas/ComputerName'
-            - description: The computer name.
+          $ref: '#/components/schemas/ComputerName'
+          description: The computer name.
         ComputerAttributes:
-          allOf:
-            - $ref: '#/components/schemas/Attributes'
-            - description: An array of <a>Attribute</a> objects containing the LDAP attributes that belong to the computer account.
+          $ref: '#/components/schemas/Attributes'
+          description: An array of <a>Attribute</a> objects containing the LDAP attributes that belong to the computer account.
       description: Contains information about a computer account in a directory.
     ComputerPassword:
       type: string
@@ -6206,17 +5955,14 @@ components:
       type: object
       properties:
         RemoteDomainName:
-          allOf:
-            - $ref: '#/components/schemas/RemoteDomainName'
-            - description: The fully qualified domain name (FQDN) of the remote domains pointed to by the conditional forwarder.
+          $ref: '#/components/schemas/RemoteDomainName'
+          description: The fully qualified domain name (FQDN) of the remote domains pointed to by the conditional forwarder.
         DnsIpAddrs:
-          allOf:
-            - $ref: '#/components/schemas/DnsIpAddrs'
-            - description: The IP addresses of the remote DNS server associated with RemoteDomainName. This is the IP address of the DNS server that your conditional forwarder points to.
+          $ref: '#/components/schemas/DnsIpAddrs'
+          description: The IP addresses of the remote DNS server associated with RemoteDomainName. This is the IP address of the DNS server that your conditional forwarder points to.
         ReplicationScope:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationScope'
-            - description: 'The replication scope of the conditional forwarder. The only allowed value is <code>Domain</code>, which will replicate the conditional forwarder to all of the domain controllers for your Amazon Web Services directory.'
+          $ref: '#/components/schemas/ReplicationScope'
+          description: 'The replication scope of the conditional forwarder. The only allowed value is <code>Domain</code>, which will replicate the conditional forwarder to all of the domain controllers for your Amazon Web Services directory.'
       description: Points to a remote domain with which you are setting up a trust relationship. Conditional forwarders are required in order to set up a trust relationship with another domain.
     ConditionalForwarders:
       type: array
@@ -6252,21 +5998,17 @@ components:
         - CustomerUserName
       properties:
         VpcId:
-          allOf:
-            - $ref: '#/components/schemas/VpcId'
-            - description: The identifier of the VPC in which the AD Connector is created.
+          $ref: '#/components/schemas/VpcId'
+          description: The identifier of the VPC in which the AD Connector is created.
         SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/SubnetIds'
-            - description: A list of subnet identifiers in the VPC in which the AD Connector is created.
+          $ref: '#/components/schemas/SubnetIds'
+          description: A list of subnet identifiers in the VPC in which the AD Connector is created.
         CustomerDnsIps:
-          allOf:
-            - $ref: '#/components/schemas/DnsIpAddrs'
-            - description: A list of one or more IP addresses of DNS servers or domain controllers in your self-managed directory.
+          $ref: '#/components/schemas/DnsIpAddrs'
+          description: A list of one or more IP addresses of DNS servers or domain controllers in your self-managed directory.
         CustomerUserName:
-          allOf:
-            - $ref: '#/components/schemas/UserName'
-            - description: '<p>The user name of an account in your self-managed directory that is used to connect to the directory. This account must have the following permissions:</p> <ul> <li> <p>Read users and groups</p> </li> <li> <p>Create computer objects</p> </li> <li> <p>Join computers to the domain</p> </li> </ul>'
+          $ref: '#/components/schemas/UserName'
+          description: '<p>The user name of an account in your self-managed directory that is used to connect to the directory. This account must have the following permissions:</p> <ul> <li> <p>Read users and groups</p> </li> <li> <p>Create computer objects</p> </li> <li> <p>Join computers to the domain</p> </li> </ul>'
       description: Contains information for the <a>ConnectDirectory</a> operation when an AD Connector directory is being created.
     ConnectedDirectoriesLimitReached:
       type: boolean
@@ -6439,29 +6181,23 @@ components:
       type: object
       properties:
         VpcId:
-          allOf:
-            - $ref: '#/components/schemas/VpcId'
-            - description: The identifier of the VPC that the AD Connector is in.
+          $ref: '#/components/schemas/VpcId'
+          description: The identifier of the VPC that the AD Connector is in.
         SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/SubnetIds'
-            - description: A list of subnet identifiers in the VPC that the AD Connector is in.
+          $ref: '#/components/schemas/SubnetIds'
+          description: A list of subnet identifiers in the VPC that the AD Connector is in.
         CustomerUserName:
-          allOf:
-            - $ref: '#/components/schemas/UserName'
-            - description: The user name of the service account in your self-managed directory.
+          $ref: '#/components/schemas/UserName'
+          description: The user name of the service account in your self-managed directory.
         SecurityGroupId:
-          allOf:
-            - $ref: '#/components/schemas/SecurityGroupId'
-            - description: The security group identifier for the AD Connector directory.
+          $ref: '#/components/schemas/SecurityGroupId'
+          description: The security group identifier for the AD Connector directory.
         AvailabilityZones:
-          allOf:
-            - $ref: '#/components/schemas/AvailabilityZones'
-            - description: A list of the Availability Zones that the directory is in.
+          $ref: '#/components/schemas/AvailabilityZones'
+          description: A list of the Availability Zones that the directory is in.
         ConnectIps:
-          allOf:
-            - $ref: '#/components/schemas/IpAddrs'
-            - description: The IP addresses of the AD Connector servers.
+          $ref: '#/components/schemas/IpAddrs'
+          description: The IP addresses of the AD Connector servers.
       description: Contains information about an AD Connector directory.
     DirectoryStage:
       type: string
@@ -6512,57 +6248,45 @@ components:
       type: object
       properties:
         VpcId:
-          allOf:
-            - $ref: '#/components/schemas/VpcId'
-            - description: The identifier of the VPC that the directory is in.
+          $ref: '#/components/schemas/VpcId'
+          description: The identifier of the VPC that the directory is in.
         SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/SubnetIds'
-            - description: The identifiers of the subnets for the directory servers.
+          $ref: '#/components/schemas/SubnetIds'
+          description: The identifiers of the subnets for the directory servers.
         SecurityGroupId:
-          allOf:
-            - $ref: '#/components/schemas/SecurityGroupId'
-            - description: The domain controller security group identifier for the directory.
+          $ref: '#/components/schemas/SecurityGroupId'
+          description: The domain controller security group identifier for the directory.
         AvailabilityZones:
-          allOf:
-            - $ref: '#/components/schemas/AvailabilityZones'
-            - description: The list of Availability Zones that the directory is in.
+          $ref: '#/components/schemas/AvailabilityZones'
+          description: The list of Availability Zones that the directory is in.
       description: Contains information about the directory.
     RadiusSettings:
       type: object
       properties:
         RadiusServers:
-          allOf:
-            - $ref: '#/components/schemas/Servers'
-            - description: 'An array of strings that contains the fully qualified domain name (FQDN) or IP addresses of the RADIUS server endpoints, or the FQDN or IP addresses of your RADIUS server load balancer.'
+          $ref: '#/components/schemas/Servers'
+          description: 'An array of strings that contains the fully qualified domain name (FQDN) or IP addresses of the RADIUS server endpoints, or the FQDN or IP addresses of your RADIUS server load balancer.'
         RadiusPort:
-          allOf:
-            - $ref: '#/components/schemas/PortNumber'
-            - description: The port that your RADIUS server is using for communications. Your self-managed network must allow inbound traffic over this port from the Directory Service servers.
+          $ref: '#/components/schemas/PortNumber'
+          description: The port that your RADIUS server is using for communications. Your self-managed network must allow inbound traffic over this port from the Directory Service servers.
         RadiusTimeout:
-          allOf:
-            - $ref: '#/components/schemas/RadiusTimeout'
-            - description: 'The amount of time, in seconds, to wait for the RADIUS server to respond.'
+          $ref: '#/components/schemas/RadiusTimeout'
+          description: 'The amount of time, in seconds, to wait for the RADIUS server to respond.'
         RadiusRetries:
-          allOf:
-            - $ref: '#/components/schemas/RadiusRetries'
-            - description: The maximum number of times that communication with the RADIUS server is attempted.
+          $ref: '#/components/schemas/RadiusRetries'
+          description: The maximum number of times that communication with the RADIUS server is attempted.
         SharedSecret:
-          allOf:
-            - $ref: '#/components/schemas/RadiusSharedSecret'
-            - description: Required for enabling RADIUS on the directory.
+          $ref: '#/components/schemas/RadiusSharedSecret'
+          description: Required for enabling RADIUS on the directory.
         AuthenticationProtocol:
-          allOf:
-            - $ref: '#/components/schemas/RadiusAuthenticationProtocol'
-            - description: The protocol specified for your RADIUS endpoints.
+          $ref: '#/components/schemas/RadiusAuthenticationProtocol'
+          description: The protocol specified for your RADIUS endpoints.
         DisplayLabel:
-          allOf:
-            - $ref: '#/components/schemas/RadiusDisplayLabel'
-            - description: Not currently used.
+          $ref: '#/components/schemas/RadiusDisplayLabel'
+          description: Not currently used.
         UseSameUsername:
-          allOf:
-            - $ref: '#/components/schemas/UseSameUsername'
-            - description: Not currently used.
+          $ref: '#/components/schemas/UseSameUsername'
+          description: Not currently used.
       description: Contains information about a Remote Authentication Dial In User Service (RADIUS) server.
     RadiusStatus:
       type: string
@@ -6578,185 +6302,143 @@ components:
       type: object
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier of the Managed Microsoft AD directory in the directory owner account.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier of the Managed Microsoft AD directory in the directory owner account.
         AccountId:
-          allOf:
-            - $ref: '#/components/schemas/CustomerId'
-            - description: Identifier of the directory owner account.
+          $ref: '#/components/schemas/CustomerId'
+          description: Identifier of the directory owner account.
         DnsIpAddrs:
-          allOf:
-            - $ref: '#/components/schemas/DnsIpAddrs'
-            - description: IP address of the directory’s domain controllers.
+          $ref: '#/components/schemas/DnsIpAddrs'
+          description: IP address of the directory’s domain controllers.
         VpcSettings:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryVpcSettingsDescription'
-            - description: Information about the VPC settings for the directory.
+          $ref: '#/components/schemas/DirectoryVpcSettingsDescription'
+          description: Information about the VPC settings for the directory.
         RadiusSettings:
-          allOf:
-            - $ref: '#/components/schemas/RadiusSettings'
-            - description: A <a>RadiusSettings</a> object that contains information about the RADIUS server.
+          $ref: '#/components/schemas/RadiusSettings'
+          description: A <a>RadiusSettings</a> object that contains information about the RADIUS server.
         RadiusStatus:
-          allOf:
-            - $ref: '#/components/schemas/RadiusStatus'
-            - description: Information about the status of the RADIUS server.
+          $ref: '#/components/schemas/RadiusStatus'
+          description: Information about the status of the RADIUS server.
       description: Describes the directory owner account details that have been shared to the directory consumer account.
     RegionsInfo:
       type: object
       properties:
         PrimaryRegion:
-          allOf:
-            - $ref: '#/components/schemas/RegionName'
-            - description: The Region where the Managed Microsoft AD directory was originally created.
+          $ref: '#/components/schemas/RegionName'
+          description: The Region where the Managed Microsoft AD directory was originally created.
         AdditionalRegions:
-          allOf:
-            - $ref: '#/components/schemas/AdditionalRegions'
-            - description: 'Lists the Regions where the directory has been replicated, excluding the primary Region.'
+          $ref: '#/components/schemas/AdditionalRegions'
+          description: 'Lists the Regions where the directory has been replicated, excluding the primary Region.'
       description: Provides information about the Regions that are configured for multi-Region replication.
     DirectoryDescription:
       type: object
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The directory identifier.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The directory identifier.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryName'
-            - description: The fully qualified name of the directory.
+          $ref: '#/components/schemas/DirectoryName'
+          description: The fully qualified name of the directory.
         ShortName:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryShortName'
-            - description: The short name of the directory.
+          $ref: '#/components/schemas/DirectoryShortName'
+          description: The short name of the directory.
         Size:
-          allOf:
-            - $ref: '#/components/schemas/DirectorySize'
-            - description: The directory size.
+          $ref: '#/components/schemas/DirectorySize'
+          description: The directory size.
         Edition:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryEdition'
-            - description: The edition associated with this directory.
+          $ref: '#/components/schemas/DirectoryEdition'
+          description: The edition associated with this directory.
         Alias:
-          allOf:
-            - $ref: '#/components/schemas/AliasName'
-            - description: 'The alias for the directory. If no alias has been created for the directory, the alias is the directory identifier, such as <code>d-XXXXXXXXXX</code>.'
+          $ref: '#/components/schemas/AliasName'
+          description: 'The alias for the directory. If no alias has been created for the directory, the alias is the directory identifier, such as <code>d-XXXXXXXXXX</code>.'
         AccessUrl:
-          allOf:
-            - $ref: '#/components/schemas/AccessUrl'
-            - description: 'The access URL for the directory, such as <code>http://&lt;alias&gt;.awsapps.com</code>. If no alias has been created for the directory, <code>&lt;alias&gt;</code> is the directory identifier, such as <code>d-XXXXXXXXXX</code>.'
+          $ref: '#/components/schemas/AccessUrl'
+          description: 'The access URL for the directory, such as <code>http://&lt;alias&gt;.awsapps.com</code>. If no alias has been created for the directory, <code>&lt;alias&gt;</code> is the directory identifier, such as <code>d-XXXXXXXXXX</code>.'
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description for the directory.
+          $ref: '#/components/schemas/Description'
+          description: The description for the directory.
         DnsIpAddrs:
-          allOf:
-            - $ref: '#/components/schemas/DnsIpAddrs'
-            - description: 'The IP addresses of the DNS servers for the directory. For a Simple AD or Microsoft AD directory, these are the IP addresses of the Simple AD or Microsoft AD directory servers. For an AD Connector directory, these are the IP addresses of the DNS servers or domain controllers in your self-managed directory to which the AD Connector is connected.'
+          $ref: '#/components/schemas/DnsIpAddrs'
+          description: 'The IP addresses of the DNS servers for the directory. For a Simple AD or Microsoft AD directory, these are the IP addresses of the Simple AD or Microsoft AD directory servers. For an AD Connector directory, these are the IP addresses of the DNS servers or domain controllers in your self-managed directory to which the AD Connector is connected.'
         Stage:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryStage'
-            - description: The current stage of the directory.
+          $ref: '#/components/schemas/DirectoryStage'
+          description: The current stage of the directory.
         ShareStatus:
-          allOf:
-            - $ref: '#/components/schemas/ShareStatus'
-            - description: Current directory status of the shared Managed Microsoft AD directory.
+          $ref: '#/components/schemas/ShareStatus'
+          description: Current directory status of the shared Managed Microsoft AD directory.
         ShareMethod:
-          allOf:
-            - $ref: '#/components/schemas/ShareMethod'
-            - description: The method used when sharing a directory to determine whether the directory should be shared within your Amazon Web Services organization (<code>ORGANIZATIONS</code>) or with any Amazon Web Services account by sending a shared directory request (<code>HANDSHAKE</code>).
+          $ref: '#/components/schemas/ShareMethod'
+          description: The method used when sharing a directory to determine whether the directory should be shared within your Amazon Web Services organization (<code>ORGANIZATIONS</code>) or with any Amazon Web Services account by sending a shared directory request (<code>HANDSHAKE</code>).
         ShareNotes:
-          allOf:
-            - $ref: '#/components/schemas/Notes'
-            - description: A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.
+          $ref: '#/components/schemas/Notes'
+          description: A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.
         LaunchTime:
-          allOf:
-            - $ref: '#/components/schemas/LaunchTime'
-            - description: Specifies when the directory was created.
+          $ref: '#/components/schemas/LaunchTime'
+          description: Specifies when the directory was created.
         StageLastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/LastUpdatedDateTime'
-            - description: The date and time that the stage was last updated.
+          $ref: '#/components/schemas/LastUpdatedDateTime'
+          description: The date and time that the stage was last updated.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryType'
-            - description: The directory size.
+          $ref: '#/components/schemas/DirectoryType'
+          description: The directory size.
         VpcSettings:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryVpcSettingsDescription'
-            - description: A <a>DirectoryVpcSettingsDescription</a> object that contains additional information about a directory. This member is only present if the directory is a Simple AD or Managed Microsoft AD directory.
+          $ref: '#/components/schemas/DirectoryVpcSettingsDescription'
+          description: A <a>DirectoryVpcSettingsDescription</a> object that contains additional information about a directory. This member is only present if the directory is a Simple AD or Managed Microsoft AD directory.
         ConnectSettings:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryConnectSettingsDescription'
-            - description: A <a>DirectoryConnectSettingsDescription</a> object that contains additional information about an AD Connector directory. This member is only present if the directory is an AD Connector directory.
+          $ref: '#/components/schemas/DirectoryConnectSettingsDescription'
+          description: A <a>DirectoryConnectSettingsDescription</a> object that contains additional information about an AD Connector directory. This member is only present if the directory is an AD Connector directory.
         RadiusSettings:
-          allOf:
-            - $ref: '#/components/schemas/RadiusSettings'
-            - description: A <a>RadiusSettings</a> object that contains information about the RADIUS server configured for this directory.
+          $ref: '#/components/schemas/RadiusSettings'
+          description: A <a>RadiusSettings</a> object that contains information about the RADIUS server configured for this directory.
         RadiusStatus:
-          allOf:
-            - $ref: '#/components/schemas/RadiusStatus'
-            - description: The status of the RADIUS MFA server connection.
+          $ref: '#/components/schemas/RadiusStatus'
+          description: The status of the RADIUS MFA server connection.
         StageReason:
-          allOf:
-            - $ref: '#/components/schemas/StageReason'
-            - description: Additional information about the directory stage.
+          $ref: '#/components/schemas/StageReason'
+          description: Additional information about the directory stage.
         SsoEnabled:
-          allOf:
-            - $ref: '#/components/schemas/SsoEnabled'
-            - description: 'Indicates if single sign-on is enabled for the directory. For more information, see <a>EnableSso</a> and <a>DisableSso</a>.'
+          $ref: '#/components/schemas/SsoEnabled'
+          description: 'Indicates if single sign-on is enabled for the directory. For more information, see <a>EnableSso</a> and <a>DisableSso</a>.'
         DesiredNumberOfDomainControllers:
-          allOf:
-            - $ref: '#/components/schemas/DesiredNumberOfDomainControllers'
-            - description: The desired number of domain controllers in the directory if the directory is Microsoft AD.
+          $ref: '#/components/schemas/DesiredNumberOfDomainControllers'
+          description: The desired number of domain controllers in the directory if the directory is Microsoft AD.
         OwnerDirectoryDescription:
-          allOf:
-            - $ref: '#/components/schemas/OwnerDirectoryDescription'
-            - description: Describes the Managed Microsoft AD directory in the directory owner account.
+          $ref: '#/components/schemas/OwnerDirectoryDescription'
+          description: Describes the Managed Microsoft AD directory in the directory owner account.
         RegionsInfo:
-          allOf:
-            - $ref: '#/components/schemas/RegionsInfo'
-            - description: Lists the Regions where the directory has replicated.
+          $ref: '#/components/schemas/RegionsInfo'
+          description: Lists the Regions where the directory has replicated.
       description: Contains information about an Directory Service directory.
     DirectoryLimits:
       type: object
       properties:
         CloudOnlyDirectoriesLimit:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: The maximum number of cloud directories allowed in the Region.
+          $ref: '#/components/schemas/Limit'
+          description: The maximum number of cloud directories allowed in the Region.
         CloudOnlyDirectoriesCurrentCount:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: The current number of cloud directories in the Region.
+          $ref: '#/components/schemas/Limit'
+          description: The current number of cloud directories in the Region.
         CloudOnlyDirectoriesLimitReached:
-          allOf:
-            - $ref: '#/components/schemas/CloudOnlyDirectoriesLimitReached'
-            - description: Indicates if the cloud directory limit has been reached.
+          $ref: '#/components/schemas/CloudOnlyDirectoriesLimitReached'
+          description: Indicates if the cloud directory limit has been reached.
         CloudOnlyMicrosoftADLimit:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: The maximum number of Managed Microsoft AD directories allowed in the region.
+          $ref: '#/components/schemas/Limit'
+          description: The maximum number of Managed Microsoft AD directories allowed in the region.
         CloudOnlyMicrosoftADCurrentCount:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: The current number of Managed Microsoft AD directories in the region.
+          $ref: '#/components/schemas/Limit'
+          description: The current number of Managed Microsoft AD directories in the region.
         CloudOnlyMicrosoftADLimitReached:
-          allOf:
-            - $ref: '#/components/schemas/CloudOnlyDirectoriesLimitReached'
-            - description: Indicates if the Managed Microsoft AD directory limit has been reached.
+          $ref: '#/components/schemas/CloudOnlyDirectoriesLimitReached'
+          description: Indicates if the Managed Microsoft AD directory limit has been reached.
         ConnectedDirectoriesLimit:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: The maximum number of connected directories allowed in the Region.
+          $ref: '#/components/schemas/Limit'
+          description: The maximum number of connected directories allowed in the Region.
         ConnectedDirectoriesCurrentCount:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: The current number of connected directories in the Region.
+          $ref: '#/components/schemas/Limit'
+          description: The current number of connected directories in the Region.
         ConnectedDirectoriesLimitReached:
-          allOf:
-            - $ref: '#/components/schemas/ConnectedDirectoriesLimitReached'
-            - description: Indicates if the connected directory limit has been reached.
+          $ref: '#/components/schemas/ConnectedDirectoriesLimitReached'
+          description: Indicates if the connected directory limit has been reached.
       description: Contains directory limit information for a Region.
     IpAddr:
       type: string
@@ -6783,45 +6465,35 @@ components:
       type: object
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier of the directory where the domain controller resides.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier of the directory where the domain controller resides.
         DomainControllerId:
-          allOf:
-            - $ref: '#/components/schemas/DomainControllerId'
-            - description: Identifies a specific domain controller in the directory.
+          $ref: '#/components/schemas/DomainControllerId'
+          description: Identifies a specific domain controller in the directory.
         DnsIpAddr:
-          allOf:
-            - $ref: '#/components/schemas/IpAddr'
-            - description: The IP address of the domain controller.
+          $ref: '#/components/schemas/IpAddr'
+          description: The IP address of the domain controller.
         VpcId:
-          allOf:
-            - $ref: '#/components/schemas/VpcId'
-            - description: The identifier of the VPC that contains the domain controller.
+          $ref: '#/components/schemas/VpcId'
+          description: The identifier of the VPC that contains the domain controller.
         SubnetId:
-          allOf:
-            - $ref: '#/components/schemas/SubnetId'
-            - description: Identifier of the subnet in the VPC that contains the domain controller.
+          $ref: '#/components/schemas/SubnetId'
+          description: Identifier of the subnet in the VPC that contains the domain controller.
         AvailabilityZone:
-          allOf:
-            - $ref: '#/components/schemas/AvailabilityZone'
-            - description: The Availability Zone where the domain controller is located.
+          $ref: '#/components/schemas/AvailabilityZone'
+          description: The Availability Zone where the domain controller is located.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/DomainControllerStatus'
-            - description: The status of the domain controller.
+          $ref: '#/components/schemas/DomainControllerStatus'
+          description: The status of the domain controller.
         StatusReason:
-          allOf:
-            - $ref: '#/components/schemas/DomainControllerStatusReason'
-            - description: A description of the domain controller state.
+          $ref: '#/components/schemas/DomainControllerStatusReason'
+          description: A description of the domain controller state.
         LaunchTime:
-          allOf:
-            - $ref: '#/components/schemas/LaunchTime'
-            - description: Specifies when the domain controller was created.
+          $ref: '#/components/schemas/LaunchTime'
+          description: Specifies when the domain controller was created.
         StatusLastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/LastUpdatedDateTime'
-            - description: The date and time that the status was last updated.
+          $ref: '#/components/schemas/LastUpdatedDateTime'
+          description: The date and time that the status was last updated.
       description: Contains information about the domain controllers for a specified directory.
     EndDateTime:
       type: string
@@ -6839,53 +6511,43 @@ components:
       type: object
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The Directory ID of an Directory Service directory that will publish status messages to an Amazon SNS topic.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The Directory ID of an Directory Service directory that will publish status messages to an Amazon SNS topic.
         TopicName:
-          allOf:
-            - $ref: '#/components/schemas/TopicName'
-            - description: The name of an Amazon SNS topic the receives status messages from the directory.
+          $ref: '#/components/schemas/TopicName'
+          description: The name of an Amazon SNS topic the receives status messages from the directory.
         TopicArn:
-          allOf:
-            - $ref: '#/components/schemas/TopicArn'
-            - description: The Amazon SNS topic ARN (Amazon Resource Name).
+          $ref: '#/components/schemas/TopicArn'
+          description: The Amazon SNS topic ARN (Amazon Resource Name).
         CreatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/CreatedDateTime'
-            - description: The date and time of when you associated your directory with the Amazon SNS topic.
+          $ref: '#/components/schemas/CreatedDateTime'
+          description: The date and time of when you associated your directory with the Amazon SNS topic.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/TopicStatus'
-            - description: The topic registration status.
+          $ref: '#/components/schemas/TopicStatus'
+          description: The topic registration status.
       description: Information about Amazon SNS topic and Directory Service directory associations.
     SnapshotLimits:
       type: object
       properties:
         ManualSnapshotsLimit:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: The maximum number of manual snapshots allowed.
+          $ref: '#/components/schemas/Limit'
+          description: The maximum number of manual snapshots allowed.
         ManualSnapshotsCurrentCount:
-          allOf:
-            - $ref: '#/components/schemas/Limit'
-            - description: The current number of manual snapshots of the directory.
+          $ref: '#/components/schemas/Limit'
+          description: The current number of manual snapshots of the directory.
         ManualSnapshotsLimitReached:
-          allOf:
-            - $ref: '#/components/schemas/ManualSnapshotsLimitReached'
-            - description: Indicates if the manual snapshot limit has been reached.
+          $ref: '#/components/schemas/ManualSnapshotsLimitReached'
+          description: Indicates if the manual snapshot limit has been reached.
       description: Contains manual snapshot limit information for a directory.
     IpRoute:
       type: object
       properties:
         CidrIp:
-          allOf:
-            - $ref: '#/components/schemas/CidrIp'
-            - description: 'IP address block using CIDR format, for example 10.0.0.0/24. This is often the address block of the DNS server used for your self-managed domain. For a single IP address use a CIDR address block with /32. For example 10.0.0.0/32.'
+          $ref: '#/components/schemas/CidrIp'
+          description: 'IP address block using CIDR format, for example 10.0.0.0/24. This is often the address block of the DNS server used for your self-managed domain. For a single IP address use a CIDR address block with /32. For example 10.0.0.0/32.'
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: Description of the address block.
+          $ref: '#/components/schemas/Description'
+          description: Description of the address block.
       description: 'IP address block. This is often the address block of the DNS server used for your self-managed domain. '
     IpRouteStatusMsg:
       type: string
@@ -6902,29 +6564,23 @@ components:
       type: object
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier (ID) of the directory associated with the IP addresses.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier (ID) of the directory associated with the IP addresses.
         CidrIp:
-          allOf:
-            - $ref: '#/components/schemas/CidrIp'
-            - description: IP address block in the <a>IpRoute</a>.
+          $ref: '#/components/schemas/CidrIp'
+          description: IP address block in the <a>IpRoute</a>.
         IpRouteStatusMsg:
-          allOf:
-            - $ref: '#/components/schemas/IpRouteStatusMsg'
-            - description: The status of the IP address block.
+          $ref: '#/components/schemas/IpRouteStatusMsg'
+          description: The status of the IP address block.
         AddedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/AddedDateTime'
-            - description: The date and time the address block was added to the directory.
+          $ref: '#/components/schemas/AddedDateTime'
+          description: The date and time the address block was added to the directory.
         IpRouteStatusReason:
-          allOf:
-            - $ref: '#/components/schemas/IpRouteStatusReason'
-            - description: The reason for the IpRouteStatusMsg.
+          $ref: '#/components/schemas/IpRouteStatusReason'
+          description: The reason for the IpRouteStatusMsg.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: Description of the <a>IpRouteInfo</a>.
+          $ref: '#/components/schemas/Description'
+          description: Description of the <a>IpRouteInfo</a>.
       description: Information about one or more IP address blocks.
     IpRoutesInfo:
       type: array
@@ -6943,17 +6599,14 @@ components:
       type: object
       properties:
         LDAPSStatus:
-          allOf:
-            - $ref: '#/components/schemas/LDAPSStatus'
-            - description: The state of the LDAPS settings.
+          $ref: '#/components/schemas/LDAPSStatus'
+          description: The state of the LDAPS settings.
         LDAPSStatusReason:
-          allOf:
-            - $ref: '#/components/schemas/LDAPSStatusReason'
-            - description: Describes a state change for LDAPS.
+          $ref: '#/components/schemas/LDAPSStatusReason'
+          description: Describes a state change for LDAPS.
         LastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/LastUpdatedDateTime'
-            - description: The date and time when the LDAPS settings were last updated.
+          $ref: '#/components/schemas/LastUpdatedDateTime'
+          description: The date and time when the LDAPS settings were last updated.
       description: Contains general information about the LDAPS settings.
     LdifContent:
       type: string
@@ -6974,17 +6627,14 @@ components:
       type: object
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: Identifier (ID) of the directory that you want to associate with the log subscription.
+          $ref: '#/components/schemas/DirectoryId'
+          description: Identifier (ID) of the directory that you want to associate with the log subscription.
         LogGroupName:
-          allOf:
-            - $ref: '#/components/schemas/LogGroupName'
-            - description: The name of the log group.
+          $ref: '#/components/schemas/LogGroupName'
+          description: The name of the log group.
         SubscriptionCreatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/SubscriptionCreatedDateTime'
-            - description: The date and time that the log subscription was created.
+          $ref: '#/components/schemas/SubscriptionCreatedDateTime'
+          description: The date and time that the log subscription was created.
       description: 'Represents a log subscription, which tracks real-time data from a chosen log group to a specified destination.'
     ManualSnapshotsLimitReached:
       type: boolean
@@ -7035,39 +6685,31 @@ components:
       type: object
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory.
         RegionName:
-          allOf:
-            - $ref: '#/components/schemas/RegionName'
-            - description: 'The name of the Region. For example, <code>us-east-1</code>.'
+          $ref: '#/components/schemas/RegionName'
+          description: 'The name of the Region. For example, <code>us-east-1</code>.'
         RegionType:
-          allOf:
-            - $ref: '#/components/schemas/RegionType'
-            - description: Specifies whether the Region is the primary Region or an additional Region.
+          $ref: '#/components/schemas/RegionType'
+          description: Specifies whether the Region is the primary Region or an additional Region.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryStage'
-            - description: The status of the replication process for the specified Region.
+          $ref: '#/components/schemas/DirectoryStage'
+          description: The status of the replication process for the specified Region.
         VpcSettings:
           $ref: '#/components/schemas/DirectoryVpcSettings'
         DesiredNumberOfDomainControllers:
-          allOf:
-            - $ref: '#/components/schemas/DesiredNumberOfDomainControllers'
-            - description: The desired number of domain controllers in the specified Region for the specified directory.
+          $ref: '#/components/schemas/DesiredNumberOfDomainControllers'
+          description: The desired number of domain controllers in the specified Region for the specified directory.
         LaunchTime:
-          allOf:
-            - $ref: '#/components/schemas/LaunchTime'
-            - description: Specifies when the Region replication began.
+          $ref: '#/components/schemas/LaunchTime'
+          description: Specifies when the Region replication began.
         StatusLastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/StateLastUpdatedDateTime'
-            - description: The date and time that the Region status was last updated.
+          $ref: '#/components/schemas/StateLastUpdatedDateTime'
+          description: The date and time that the Region status was last updated.
         LastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/LastUpdatedDateTime'
-            - description: The date and time that the Region description was last updated.
+          $ref: '#/components/schemas/LastUpdatedDateTime'
+          description: The date and time that the Region description was last updated.
       description: The replicated Region information for a directory.
     TagKeys:
       type: array
@@ -7103,33 +6745,26 @@ components:
       type: object
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the directory to which the schema extension is applied.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The identifier of the directory to which the schema extension is applied.
         SchemaExtensionId:
-          allOf:
-            - $ref: '#/components/schemas/SchemaExtensionId'
-            - description: The identifier of the schema extension.
+          $ref: '#/components/schemas/SchemaExtensionId'
+          description: The identifier of the schema extension.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: A description of the schema extension.
+          $ref: '#/components/schemas/Description'
+          description: A description of the schema extension.
         SchemaExtensionStatus:
-          allOf:
-            - $ref: '#/components/schemas/SchemaExtensionStatus'
-            - description: The current status of the schema extension.
+          $ref: '#/components/schemas/SchemaExtensionStatus'
+          description: The current status of the schema extension.
         SchemaExtensionStatusReason:
-          allOf:
-            - $ref: '#/components/schemas/SchemaExtensionStatusReason'
-            - description: The reason for the <code>SchemaExtensionStatus</code>.
+          $ref: '#/components/schemas/SchemaExtensionStatusReason'
+          description: The reason for the <code>SchemaExtensionStatus</code>.
         StartDateTime:
-          allOf:
-            - $ref: '#/components/schemas/StartDateTime'
-            - description: The date and time that the schema extension started being applied to the directory.
+          $ref: '#/components/schemas/StartDateTime'
+          description: The date and time that the schema extension started being applied to the directory.
         EndDateTime:
-          allOf:
-            - $ref: '#/components/schemas/EndDateTime'
-            - description: The date and time that the schema extension was completed.
+          $ref: '#/components/schemas/EndDateTime'
+          description: The date and time that the schema extension was completed.
       description: Information about a schema extension.
     Server:
       type: string
@@ -7142,13 +6777,11 @@ components:
         - Type
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/TargetId'
-            - description: Identifier of the directory consumer account.
+          $ref: '#/components/schemas/TargetId'
+          description: Identifier of the directory consumer account.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/TargetType'
-            - description: Type of identifier to be used in the <code>Id</code> field.
+          $ref: '#/components/schemas/TargetType'
+          description: Type of identifier to be used in the <code>Id</code> field.
       description: Identifier that contains details about the directory consumer account.
     TargetId:
       type: string
@@ -7176,29 +6809,23 @@ components:
       type: object
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The directory identifier.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The directory identifier.
         SnapshotId:
-          allOf:
-            - $ref: '#/components/schemas/SnapshotId'
-            - description: The snapshot identifier.
+          $ref: '#/components/schemas/SnapshotId'
+          description: The snapshot identifier.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/SnapshotType'
-            - description: The snapshot type.
+          $ref: '#/components/schemas/SnapshotType'
+          description: The snapshot type.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/SnapshotName'
-            - description: The descriptive name of the snapshot.
+          $ref: '#/components/schemas/SnapshotName'
+          description: The descriptive name of the snapshot.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/SnapshotStatus'
-            - description: The snapshot status.
+          $ref: '#/components/schemas/SnapshotStatus'
+          description: The snapshot status.
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/StartTime'
-            - description: The date and time that the snapshot was taken.
+          $ref: '#/components/schemas/StartTime'
+          description: The date and time that the snapshot was taken.
       description: Describes a directory snapshot.
     TagKey:
       type: string
@@ -7217,13 +6844,11 @@ components:
         - Value
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: 'Required name of the tag. The string value can be Unicode characters and cannot be prefixed with "aws:". The string can contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
+          $ref: '#/components/schemas/TagKey'
+          description: 'Required name of the tag. The string value can be Unicode characters and cannot be prefixed with "aws:". The string can contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: 'The optional value of the tag. The string value can be Unicode characters. The string can contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
+          $ref: '#/components/schemas/TagValue'
+          description: 'The optional value of the tag. The string value can be Unicode characters. The string can contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
       description: Metadata assigned to a directory consisting of a key-value pair.
     TrustState:
       type: string
@@ -7245,49 +6870,38 @@ components:
       type: object
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The Directory ID of the Amazon Web Services directory involved in the trust relationship.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The Directory ID of the Amazon Web Services directory involved in the trust relationship.
         TrustId:
-          allOf:
-            - $ref: '#/components/schemas/TrustId'
-            - description: The unique ID of the trust relationship.
+          $ref: '#/components/schemas/TrustId'
+          description: The unique ID of the trust relationship.
         RemoteDomainName:
-          allOf:
-            - $ref: '#/components/schemas/RemoteDomainName'
-            - description: The Fully Qualified Domain Name (FQDN) of the external domain involved in the trust relationship.
+          $ref: '#/components/schemas/RemoteDomainName'
+          description: The Fully Qualified Domain Name (FQDN) of the external domain involved in the trust relationship.
         TrustType:
-          allOf:
-            - $ref: '#/components/schemas/TrustType'
-            - description: The trust relationship type. <code>Forest</code> is the default.
+          $ref: '#/components/schemas/TrustType'
+          description: The trust relationship type. <code>Forest</code> is the default.
         TrustDirection:
-          allOf:
-            - $ref: '#/components/schemas/TrustDirection'
-            - description: The trust relationship direction.
+          $ref: '#/components/schemas/TrustDirection'
+          description: The trust relationship direction.
         TrustState:
-          allOf:
-            - $ref: '#/components/schemas/TrustState'
-            - description: The trust relationship state.
+          $ref: '#/components/schemas/TrustState'
+          description: The trust relationship state.
         CreatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/CreatedDateTime'
-            - description: The date and time that the trust relationship was created.
+          $ref: '#/components/schemas/CreatedDateTime'
+          description: The date and time that the trust relationship was created.
         LastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/LastUpdatedDateTime'
-            - description: The date and time that the trust relationship was last updated.
+          $ref: '#/components/schemas/LastUpdatedDateTime'
+          description: The date and time that the trust relationship was last updated.
         StateLastUpdatedDateTime:
-          allOf:
-            - $ref: '#/components/schemas/StateLastUpdatedDateTime'
-            - description: The date and time that the TrustState was last updated.
+          $ref: '#/components/schemas/StateLastUpdatedDateTime'
+          description: The date and time that the TrustState was last updated.
         TrustStateReason:
-          allOf:
-            - $ref: '#/components/schemas/TrustStateReason'
-            - description: The reason for the TrustState.
+          $ref: '#/components/schemas/TrustStateReason'
+          description: The reason for the TrustState.
         SelectiveAuth:
-          allOf:
-            - $ref: '#/components/schemas/SelectiveAuth'
-            - description: Current state of selective authentication for the trust.
+          $ref: '#/components/schemas/SelectiveAuth'
+          description: Current state of selective authentication for the trust.
       description: Describes a trust relationship between an Managed Microsoft AD directory and an external domain.
     UnshareTarget:
       type: object
@@ -7296,13 +6910,11 @@ components:
         - Type
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/TargetId'
-            - description: Identifier of the directory consumer account.
+          $ref: '#/components/schemas/TargetId'
+          description: Identifier of the directory consumer account.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/TargetType'
-            - description: Type of identifier to be used in the <i>Id</i> field.
+          $ref: '#/components/schemas/TargetType'
+          description: Type of identifier to be used in the <i>Id</i> field.
       description: Identifier that contains details about the directory consumer account with whom the directory is being unshared.
 security:
   - hmac: []

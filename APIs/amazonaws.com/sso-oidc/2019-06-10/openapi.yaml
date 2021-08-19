@@ -429,25 +429,20 @@ components:
       type: object
       properties:
         accessToken:
-          allOf:
-            - $ref: '#/components/schemas/AccessToken'
-            - description: An opaque token to access AWS SSO resources assigned to a user.
+          $ref: '#/components/schemas/AccessToken'
+          description: An opaque token to access AWS SSO resources assigned to a user.
         tokenType:
-          allOf:
-            - $ref: '#/components/schemas/TokenType'
-            - description: Used to notify the client that the returned token is an access token. The supported type is <code>BearerToken</code>.
+          $ref: '#/components/schemas/TokenType'
+          description: Used to notify the client that the returned token is an access token. The supported type is <code>BearerToken</code>.
         expiresIn:
-          allOf:
-            - $ref: '#/components/schemas/ExpirationInSeconds'
-            - description: Indicates the time in seconds when an access token will expire.
+          $ref: '#/components/schemas/ExpirationInSeconds'
+          description: Indicates the time in seconds when an access token will expire.
         refreshToken:
-          allOf:
-            - $ref: '#/components/schemas/RefreshToken'
-            - description: 'A token that, if present, can be used to refresh a previously issued access token that might have expired.'
+          $ref: '#/components/schemas/RefreshToken'
+          description: 'A token that, if present, can be used to refresh a previously issued access token that might have expired.'
         idToken:
-          allOf:
-            - $ref: '#/components/schemas/IdToken'
-            - description: 'The identifier of the user that associated with the access token, if present.'
+          $ref: '#/components/schemas/IdToken'
+          description: 'The identifier of the user that associated with the access token, if present.'
     Scope:
       type: string
     InvalidRequestException: {}
@@ -465,57 +460,45 @@ components:
       type: object
       properties:
         clientId:
-          allOf:
-            - $ref: '#/components/schemas/ClientId'
-            - description: The unique identifier string for each client. This client uses this identifier to get authenticated by the service in subsequent calls.
+          $ref: '#/components/schemas/ClientId'
+          description: The unique identifier string for each client. This client uses this identifier to get authenticated by the service in subsequent calls.
         clientSecret:
-          allOf:
-            - $ref: '#/components/schemas/ClientSecret'
-            - description: A secret string generated for the client. The client will use this string to get authenticated by the service in subsequent calls.
+          $ref: '#/components/schemas/ClientSecret'
+          description: A secret string generated for the client. The client will use this string to get authenticated by the service in subsequent calls.
         clientIdIssuedAt:
-          allOf:
-            - $ref: '#/components/schemas/LongTimeStampType'
-            - description: Indicates the time at which the <code>clientId</code> and <code>clientSecret</code> were issued.
+          $ref: '#/components/schemas/LongTimeStampType'
+          description: Indicates the time at which the <code>clientId</code> and <code>clientSecret</code> were issued.
         clientSecretExpiresAt:
-          allOf:
-            - $ref: '#/components/schemas/LongTimeStampType'
-            - description: Indicates the time at which the <code>clientId</code> and <code>clientSecret</code> will become invalid.
+          $ref: '#/components/schemas/LongTimeStampType'
+          description: Indicates the time at which the <code>clientId</code> and <code>clientSecret</code> will become invalid.
         authorizationEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/URI'
-            - description: The endpoint where the client can request authorization.
+          $ref: '#/components/schemas/URI'
+          description: The endpoint where the client can request authorization.
         tokenEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/URI'
-            - description: The endpoint where the client can get an access token.
+          $ref: '#/components/schemas/URI'
+          description: The endpoint where the client can get an access token.
     InvalidClientMetadataException: {}
     StartDeviceAuthorizationResponse:
       type: object
       properties:
         deviceCode:
-          allOf:
-            - $ref: '#/components/schemas/DeviceCode'
-            - description: The short-lived code that is used by the device when polling for a session token.
+          $ref: '#/components/schemas/DeviceCode'
+          description: The short-lived code that is used by the device when polling for a session token.
         userCode:
-          allOf:
-            - $ref: '#/components/schemas/UserCode'
-            - description: A one-time user verification code. This is needed to authorize an in-use device.
+          $ref: '#/components/schemas/UserCode'
+          description: A one-time user verification code. This is needed to authorize an in-use device.
         verificationUri:
-          allOf:
-            - $ref: '#/components/schemas/URI'
-            - description: The URI of the verification page that takes the <code>userCode</code> to authorize the device.
+          $ref: '#/components/schemas/URI'
+          description: The URI of the verification page that takes the <code>userCode</code> to authorize the device.
         verificationUriComplete:
-          allOf:
-            - $ref: '#/components/schemas/URI'
-            - description: An alternate URL that the client can use to automatically launch a browser. This process skips the manual step in which the user visits the verification page and enters their code.
+          $ref: '#/components/schemas/URI'
+          description: An alternate URL that the client can use to automatically launch a browser. This process skips the manual step in which the user visits the verification page and enters their code.
         expiresIn:
-          allOf:
-            - $ref: '#/components/schemas/ExpirationInSeconds'
-            - description: Indicates the number of seconds in which the verification code will become invalid.
+          $ref: '#/components/schemas/ExpirationInSeconds'
+          description: Indicates the number of seconds in which the verification code will become invalid.
         interval:
-          allOf:
-            - $ref: '#/components/schemas/IntervalInSeconds'
-            - description: Indicates the number of seconds the client must wait between attempts when polling for a session.
+          $ref: '#/components/schemas/IntervalInSeconds'
+          description: Indicates the number of seconds the client must wait between attempts when polling for a session.
     AccessToken:
       type: string
     AuthCode:
@@ -550,37 +533,29 @@ components:
       title: CreateTokenRequest
       properties:
         clientId:
-          allOf:
-            - $ref: '#/components/schemas/ClientId'
-            - description: The unique identifier string for each client. This value should come from the persisted result of the <a>RegisterClient</a> API.
+          $ref: '#/components/schemas/ClientId'
+          description: The unique identifier string for each client. This value should come from the persisted result of the <a>RegisterClient</a> API.
         clientSecret:
-          allOf:
-            - $ref: '#/components/schemas/ClientSecret'
-            - description: A secret string generated for the client. This value should come from the persisted result of the <a>RegisterClient</a> API.
+          $ref: '#/components/schemas/ClientSecret'
+          description: A secret string generated for the client. This value should come from the persisted result of the <a>RegisterClient</a> API.
         grantType:
-          allOf:
-            - $ref: '#/components/schemas/GrantType'
-            - description: 'Supports grant types for authorization code, refresh token, and device code request.'
+          $ref: '#/components/schemas/GrantType'
+          description: 'Supports grant types for authorization code, refresh token, and device code request.'
         deviceCode:
-          allOf:
-            - $ref: '#/components/schemas/DeviceCode'
-            - description: Used only when calling this API for the device code grant type. This short-term code is used to identify this authentication attempt. This should come from an in-memory reference to the result of the <a>StartDeviceAuthorization</a> API.
+          $ref: '#/components/schemas/DeviceCode'
+          description: Used only when calling this API for the device code grant type. This short-term code is used to identify this authentication attempt. This should come from an in-memory reference to the result of the <a>StartDeviceAuthorization</a> API.
         code:
-          allOf:
-            - $ref: '#/components/schemas/AuthCode'
-            - description: The authorization code received from the authorization service. This parameter is required to perform an authorization grant request to get access to a token.
+          $ref: '#/components/schemas/AuthCode'
+          description: The authorization code received from the authorization service. This parameter is required to perform an authorization grant request to get access to a token.
         refreshToken:
-          allOf:
-            - $ref: '#/components/schemas/RefreshToken'
-            - description: The token used to obtain an access token in the event that the access token is invalid or expired. This token is not issued by the service.
+          $ref: '#/components/schemas/RefreshToken'
+          description: The token used to obtain an access token in the event that the access token is invalid or expired. This token is not issued by the service.
         scope:
-          allOf:
-            - $ref: '#/components/schemas/Scopes'
-            - description: 'The list of scopes that is defined by the client. Upon authorization, this list is used to restrict permissions when granting an access token.'
+          $ref: '#/components/schemas/Scopes'
+          description: 'The list of scopes that is defined by the client. Upon authorization, this list is used to restrict permissions when granting an access token.'
         redirectUri:
-          allOf:
-            - $ref: '#/components/schemas/URI'
-            - description: The location of the application that will receive the authorization code. Users authorize the service to send the request to this location.
+          $ref: '#/components/schemas/URI'
+          description: The location of the application that will receive the authorization code. Users authorize the service to send the request to this location.
     TokenType:
       type: string
     ExpirationInSeconds:
@@ -599,17 +574,14 @@ components:
       title: RegisterClientRequest
       properties:
         clientName:
-          allOf:
-            - $ref: '#/components/schemas/ClientName'
-            - description: The friendly name of the client.
+          $ref: '#/components/schemas/ClientName'
+          description: The friendly name of the client.
         clientType:
-          allOf:
-            - $ref: '#/components/schemas/ClientType'
-            - description: The type of client. The service supports only <code>public</code> as a client type. Anything other than public will be rejected by the service.
+          $ref: '#/components/schemas/ClientType'
+          description: The type of client. The service supports only <code>public</code> as a client type. Anything other than public will be rejected by the service.
         scopes:
-          allOf:
-            - $ref: '#/components/schemas/Scopes'
-            - description: 'The list of scopes that are defined by the client. Upon authorization, this list is used to restrict permissions when granting an access token.'
+          $ref: '#/components/schemas/Scopes'
+          description: 'The list of scopes that are defined by the client. Upon authorization, this list is used to restrict permissions when granting an access token.'
     StartDeviceAuthorizationRequest:
       type: object
       required:
@@ -619,17 +591,14 @@ components:
       title: StartDeviceAuthorizationRequest
       properties:
         clientId:
-          allOf:
-            - $ref: '#/components/schemas/ClientId'
-            - description: The unique identifier string for the client that is registered with AWS SSO. This value should come from the persisted result of the <a>RegisterClient</a> API operation.
+          $ref: '#/components/schemas/ClientId'
+          description: The unique identifier string for the client that is registered with AWS SSO. This value should come from the persisted result of the <a>RegisterClient</a> API operation.
         clientSecret:
-          allOf:
-            - $ref: '#/components/schemas/ClientSecret'
-            - description: A secret string that is generated for the client. This value should come from the persisted result of the <a>RegisterClient</a> API operation.
+          $ref: '#/components/schemas/ClientSecret'
+          description: A secret string that is generated for the client. This value should come from the persisted result of the <a>RegisterClient</a> API operation.
         startUrl:
-          allOf:
-            - $ref: '#/components/schemas/URI'
-            - description: 'The URL for the AWS SSO user portal. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/using-the-portal.html">Using the User Portal</a> in the <i>AWS Single Sign-On User Guide</i>.'
+          $ref: '#/components/schemas/URI'
+          description: 'The URL for the AWS SSO user portal. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/using-the-portal.html">Using the User Portal</a> in the <i>AWS Single Sign-On User Guide</i>.'
     UserCode:
       type: string
 security:

@@ -291,13 +291,11 @@ paths:
                   type: object
                   properties:
                     bucket:
-                      allOf:
-                        - $ref: '#/components/schemas/S3Bucket'
-                        - description: Name of the S3 bucket.
+                      $ref: '#/components/schemas/S3Bucket'
+                      description: Name of the S3 bucket.
                     prefix:
-                      allOf:
-                        - $ref: '#/components/schemas/S3Prefix'
-                        - description: Prefix for the location to write to.
+                      $ref: '#/components/schemas/S3Prefix'
+                      description: Prefix for the location to write to.
   /importApplicationUsage:
     post:
       operationId: ImportApplicationUsage
@@ -348,17 +346,14 @@ paths:
                   type: object
                   properties:
                     bucket:
-                      allOf:
-                        - $ref: '#/components/schemas/S3Bucket'
-                        - description: Name of the bucket.
+                      $ref: '#/components/schemas/S3Bucket'
+                      description: Name of the bucket.
                     key:
-                      allOf:
-                        - $ref: '#/components/schemas/S3Key'
-                        - description: Key of the object.
+                      $ref: '#/components/schemas/S3Key'
+                      description: Key of the object.
                     region:
-                      allOf:
-                        - $ref: '#/components/schemas/S3BucketRegion'
-                        - description: 'Region of the bucket. Only required for Regions that are disabled by default. For more infomration about Regions that are disabled by default, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable"> Enabling a Region</a> in the <i>AWS General Reference guide</i>.'
+                      $ref: '#/components/schemas/S3BucketRegion'
+                      description: 'Region of the bucket. Only required for Regions that are disabled by default. For more infomration about Regions that are disabled by default, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable"> Enabling a Region</a> in the <i>AWS General Reference guide</i>.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -512,13 +507,11 @@ paths:
                   type: object
                   properties:
                     bucket:
-                      allOf:
-                        - $ref: '#/components/schemas/S3Bucket'
-                        - description: Name of the S3 bucket.
+                      $ref: '#/components/schemas/S3Bucket'
+                      description: Name of the S3 bucket.
                     prefix:
-                      allOf:
-                        - $ref: '#/components/schemas/S3Prefix'
-                        - description: Prefix for the location to write to.
+                      $ref: '#/components/schemas/S3Prefix'
+                      description: Prefix for the location to write to.
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -575,9 +568,8 @@ components:
       type: object
       properties:
         reportId:
-          allOf:
-            - $ref: '#/components/schemas/ReportId'
-            - description: ID of the report that was deleted.
+          $ref: '#/components/schemas/ReportId'
+          description: ID of the report that was deleted.
     InternalServerException: {}
     ThrottlingException: {}
     ValidationException: {}
@@ -594,42 +586,34 @@ components:
         - lastUpdated
       properties:
         reportId:
-          allOf:
-            - $ref: '#/components/schemas/ReportId'
-            - description: ID of the report retrieved.
+          $ref: '#/components/schemas/ReportId'
+          description: ID of the report retrieved.
         reportDescription:
-          allOf:
-            - $ref: '#/components/schemas/ReportDescription'
-            - description: Description of the report.
+          $ref: '#/components/schemas/ReportDescription'
+          description: Description of the report.
         reportFrequency:
-          allOf:
-            - $ref: '#/components/schemas/ReportFrequency'
-            - description: Cadence used to generate the report.
+          $ref: '#/components/schemas/ReportFrequency'
+          description: Cadence used to generate the report.
         format:
-          allOf:
-            - $ref: '#/components/schemas/Format'
-            - description: Format of the generated report.
+          $ref: '#/components/schemas/Format'
+          description: Format of the generated report.
         destinationS3Location:
-          allOf:
-            - $ref: '#/components/schemas/S3Location'
-            - description: Amazon Simple Storage Service (Amazon S3) location where the report is uploaded.
+          $ref: '#/components/schemas/S3Location'
+          description: Amazon Simple Storage Service (Amazon S3) location where the report is uploaded.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Timestamp (milliseconds) when this report definition was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: Timestamp (milliseconds) when this report definition was created.
         lastUpdated:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Timestamp (milliseconds) when this report definition was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: Timestamp (milliseconds) when this report definition was last updated.
     ImportApplicationUsageResult:
       type: object
       required:
         - importId
       properties:
         importId:
-          allOf:
-            - $ref: '#/components/schemas/ImportId'
-            - description: ID of the import request.
+          $ref: '#/components/schemas/ImportId'
+          description: ID of the import request.
     S3Bucket:
       type: string
       pattern: '(?=^.{3,63}$)(?!^(\d+\.)+\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)*([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])$)'
@@ -651,20 +635,17 @@ components:
       type: object
       properties:
         reportDefinitions:
-          allOf:
-            - $ref: '#/components/schemas/ReportDefinitionList'
-            - description: The retrieved reports.
+          $ref: '#/components/schemas/ReportDefinitionList'
+          description: The retrieved reports.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: 'The value of the next token, if it exists. Null if there are no more results.'
+          $ref: '#/components/schemas/Token'
+          description: 'The value of the next token, if it exists. Null if there are no more results.'
     PutReportDefinitionResult:
       type: object
       properties:
         reportId:
-          allOf:
-            - $ref: '#/components/schemas/ReportId'
-            - description: ID of the report.
+          $ref: '#/components/schemas/ReportId'
+          description: ID of the report.
     S3Prefix:
       type: string
       pattern: .*\S.*
@@ -675,9 +656,8 @@ components:
       type: object
       properties:
         reportId:
-          allOf:
-            - $ref: '#/components/schemas/ReportId'
-            - description: ID of the report.
+          $ref: '#/components/schemas/ReportId'
+          description: ID of the report.
     ReportId:
       type: string
       pattern: '^[0-9A-Za-z\.\-_]+$'
@@ -714,13 +694,11 @@ components:
         - prefix
       properties:
         bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3Bucket'
-            - description: Name of the S3 bucket.
+          $ref: '#/components/schemas/S3Bucket'
+          description: Name of the S3 bucket.
         prefix:
-          allOf:
-            - $ref: '#/components/schemas/S3Prefix'
-            - description: Prefix for the location to write to.
+          $ref: '#/components/schemas/S3Prefix'
+          description: Prefix for the location to write to.
       description: Represents the Amazon Simple Storage Service (Amazon S3) location where AWS Application Cost Profiler reports are generated and then written to.
     Timestamp:
       type: string
@@ -732,17 +710,14 @@ components:
         - key
       properties:
         bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3Bucket'
-            - description: Name of the bucket.
+          $ref: '#/components/schemas/S3Bucket'
+          description: Name of the bucket.
         key:
-          allOf:
-            - $ref: '#/components/schemas/S3Key'
-            - description: Key of the object.
+          $ref: '#/components/schemas/S3Key'
+          description: Key of the object.
         region:
-          allOf:
-            - $ref: '#/components/schemas/S3BucketRegion'
-            - description: 'Region of the bucket. Only required for Regions that are disabled by default. For more infomration about Regions that are disabled by default, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable"> Enabling a Region</a> in the <i>AWS General Reference guide</i>.'
+          $ref: '#/components/schemas/S3BucketRegion'
+          description: 'Region of the bucket. Only required for Regions that are disabled by default. For more infomration about Regions that are disabled by default, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable"> Enabling a Region</a> in the <i>AWS General Reference guide</i>.'
       description: Represents the Amazon Simple Storage Service (Amazon S3) location where usage data is read from.
     ImportApplicationUsageRequest:
       type: object
@@ -751,9 +726,8 @@ components:
       title: ImportApplicationUsageRequest
       properties:
         sourceS3Location:
-          allOf:
-            - $ref: '#/components/schemas/SourceS3Location'
-            - description: Amazon S3 location to import application usage data from.
+          $ref: '#/components/schemas/SourceS3Location'
+          description: Amazon S3 location to import application usage data from.
     ImportId:
       type: string
       pattern: '[0-9A-Za-z\.\-_]*'
@@ -787,56 +761,44 @@ components:
       title: PutReportDefinitionRequest
       properties:
         reportId:
-          allOf:
-            - $ref: '#/components/schemas/ReportId'
-            - description: Required. ID of the report. You can choose any valid string matching the pattern for the ID.
+          $ref: '#/components/schemas/ReportId'
+          description: Required. ID of the report. You can choose any valid string matching the pattern for the ID.
         reportDescription:
-          allOf:
-            - $ref: '#/components/schemas/ReportDescription'
-            - description: Required. Description of the report.
+          $ref: '#/components/schemas/ReportDescription'
+          description: Required. Description of the report.
         reportFrequency:
-          allOf:
-            - $ref: '#/components/schemas/ReportFrequency'
-            - description: Required. The cadence to generate the report.
+          $ref: '#/components/schemas/ReportFrequency'
+          description: Required. The cadence to generate the report.
         format:
-          allOf:
-            - $ref: '#/components/schemas/Format'
-            - description: Required. The format to use for the generated report.
+          $ref: '#/components/schemas/Format'
+          description: Required. The format to use for the generated report.
         destinationS3Location:
-          allOf:
-            - $ref: '#/components/schemas/S3Location'
-            - description: Required. Amazon Simple Storage Service (Amazon S3) location where Application Cost Profiler uploads the report.
+          $ref: '#/components/schemas/S3Location'
+          description: Required. Amazon Simple Storage Service (Amazon S3) location where Application Cost Profiler uploads the report.
     ReportDefinition:
       type: object
       properties:
         reportId:
-          allOf:
-            - $ref: '#/components/schemas/ReportId'
-            - description: The ID of the report.
+          $ref: '#/components/schemas/ReportId'
+          description: The ID of the report.
         reportDescription:
-          allOf:
-            - $ref: '#/components/schemas/ReportDescription'
-            - description: Description of the report
+          $ref: '#/components/schemas/ReportDescription'
+          description: Description of the report
         reportFrequency:
-          allOf:
-            - $ref: '#/components/schemas/ReportFrequency'
-            - description: The cadence at which the report is generated.
+          $ref: '#/components/schemas/ReportFrequency'
+          description: The cadence at which the report is generated.
         format:
-          allOf:
-            - $ref: '#/components/schemas/Format'
-            - description: The format used for the generated reports.
+          $ref: '#/components/schemas/Format'
+          description: The format used for the generated reports.
         destinationS3Location:
-          allOf:
-            - $ref: '#/components/schemas/S3Location'
-            - description: The location in Amazon Simple Storage Service (Amazon S3) the reports should be saved to.
+          $ref: '#/components/schemas/S3Location'
+          description: The location in Amazon Simple Storage Service (Amazon S3) the reports should be saved to.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Timestamp (milliseconds) when this report definition was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: Timestamp (milliseconds) when this report definition was created.
         lastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Timestamp (milliseconds) when this report definition was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: Timestamp (milliseconds) when this report definition was last updated.
       description: The configuration of a report in AWS Application Cost Profiler.
     UpdateReportDefinitionRequest:
       type: object
@@ -848,20 +810,16 @@ components:
       title: UpdateReportDefinitionRequest
       properties:
         reportDescription:
-          allOf:
-            - $ref: '#/components/schemas/ReportDescription'
-            - description: Required. Description of the report.
+          $ref: '#/components/schemas/ReportDescription'
+          description: Required. Description of the report.
         reportFrequency:
-          allOf:
-            - $ref: '#/components/schemas/ReportFrequency'
-            - description: Required. The cadence to generate the report.
+          $ref: '#/components/schemas/ReportFrequency'
+          description: Required. The cadence to generate the report.
         format:
-          allOf:
-            - $ref: '#/components/schemas/Format'
-            - description: Required. The format to use for the generated report.
+          $ref: '#/components/schemas/Format'
+          description: Required. The format to use for the generated report.
         destinationS3Location:
-          allOf:
-            - $ref: '#/components/schemas/S3Location'
-            - description: Required. Amazon Simple Storage Service (Amazon S3) location where Application Cost Profiler uploads the report.
+          $ref: '#/components/schemas/S3Location'
+          description: Required. Amazon Simple Storage Service (Amazon S3) location where Application Cost Profiler uploads the report.
 security:
   - hmac: []

@@ -616,25 +616,21 @@ paths:
                   type: object
                   properties:
                     destinationType:
-                      allOf:
-                        - $ref: '#/components/schemas/AssessmentReportDestinationType'
-                        - description: ' The destination type, such as Amazon S3. '
+                      $ref: '#/components/schemas/AssessmentReportDestinationType'
+                      description: ' The destination type, such as Amazon S3. '
                     destination:
-                      allOf:
-                        - $ref: '#/components/schemas/S3Url'
-                        - description: ' The destination of the assessment report. '
+                      $ref: '#/components/schemas/S3Url'
+                      description: ' The destination of the assessment report. '
                 scope:
                   description: ' The wrapper that contains the accounts and services in scope for the assessment. '
                   type: object
                   properties:
                     awsAccounts:
-                      allOf:
-                        - $ref: '#/components/schemas/AWSAccounts'
-                        - description: ' The accounts included in the scope of the assessment. '
+                      $ref: '#/components/schemas/AWSAccounts'
+                      description: ' The accounts included in the scope of the assessment. '
                     awsServices:
-                      allOf:
-                        - $ref: '#/components/schemas/AWSServices'
-                        - description: ' The Amazon Web Services services included in the scope of the assessment. '
+                      $ref: '#/components/schemas/AWSServices'
+                      description: ' The Amazon Web Services services included in the scope of the assessment. '
                 roles:
                   description: ' The list of roles for the specified assessment. '
                   type: array
@@ -1124,25 +1120,21 @@ paths:
                   type: object
                   properties:
                     awsAccounts:
-                      allOf:
-                        - $ref: '#/components/schemas/AWSAccounts'
-                        - description: ' The accounts included in the scope of the assessment. '
+                      $ref: '#/components/schemas/AWSAccounts'
+                      description: ' The accounts included in the scope of the assessment. '
                     awsServices:
-                      allOf:
-                        - $ref: '#/components/schemas/AWSServices'
-                        - description: ' The Amazon Web Services services included in the scope of the assessment. '
+                      $ref: '#/components/schemas/AWSServices'
+                      description: ' The Amazon Web Services services included in the scope of the assessment. '
                 assessmentReportsDestination:
                   description: ' The location in which Audit Manager saves assessment reports for the given assessment. '
                   type: object
                   properties:
                     destinationType:
-                      allOf:
-                        - $ref: '#/components/schemas/AssessmentReportDestinationType'
-                        - description: ' The destination type, such as Amazon S3. '
+                      $ref: '#/components/schemas/AssessmentReportDestinationType'
+                      description: ' The destination type, such as Amazon S3. '
                     destination:
-                      allOf:
-                        - $ref: '#/components/schemas/S3Url'
-                        - description: ' The destination of the assessment report. '
+                      $ref: '#/components/schemas/S3Url'
+                      description: ' The destination of the assessment report. '
                 roles:
                   description: ' The list of roles for the specified assessment. '
                   type: array
@@ -3374,13 +3366,11 @@ paths:
                   type: object
                   properties:
                     destinationType:
-                      allOf:
-                        - $ref: '#/components/schemas/AssessmentReportDestinationType'
-                        - description: ' The destination type, such as Amazon S3. '
+                      $ref: '#/components/schemas/AssessmentReportDestinationType'
+                      description: ' The destination type, such as Amazon S3. '
                     destination:
-                      allOf:
-                        - $ref: '#/components/schemas/S3Url'
-                        - description: ' The destination of the assessment report. '
+                      $ref: '#/components/schemas/S3Url'
+                      description: ' The destination of the assessment report. '
                 defaultProcessOwners:
                   description: ' A list of the default audit owners. '
                   type: array
@@ -3522,13 +3512,11 @@ components:
       type: object
       properties:
         evidenceIds:
-          allOf:
-            - $ref: '#/components/schemas/EvidenceIds'
-            - description: ' The identifier for the evidence. '
+          $ref: '#/components/schemas/EvidenceIds'
+          description: ' The identifier for the evidence. '
         errors:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportEvidenceErrors'
-            - description: ' A list of errors returned by the <code>BatchAssociateAssessmentReportEvidence</code> API. '
+          $ref: '#/components/schemas/AssessmentReportEvidenceErrors'
+          description: ' A list of errors returned by the <code>BatchAssociateAssessmentReportEvidence</code> API. '
     UUID:
       type: string
       pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
@@ -3538,65 +3526,54 @@ components:
       type: object
       properties:
         delegations:
-          allOf:
-            - $ref: '#/components/schemas/Delegations'
-            - description: ' The delegations associated with the assessment. '
+          $ref: '#/components/schemas/Delegations'
+          description: ' The delegations associated with the assessment. '
         errors:
-          allOf:
-            - $ref: '#/components/schemas/BatchCreateDelegationByAssessmentErrors'
-            - description: ' A list of errors returned by the <code>BatchCreateDelegationByAssessment</code> API. '
+          $ref: '#/components/schemas/BatchCreateDelegationByAssessmentErrors'
+          description: ' A list of errors returned by the <code>BatchCreateDelegationByAssessment</code> API. '
     CreateDelegationRequest:
       type: object
       properties:
         comment:
-          allOf:
-            - $ref: '#/components/schemas/DelegationComment'
-            - description: ' A comment related to the delegation request. '
+          $ref: '#/components/schemas/DelegationComment'
+          description: ' A comment related to the delegation request. '
         controlSetId:
-          allOf:
-            - $ref: '#/components/schemas/ControlSetId'
-            - description: ' The unique identifier for the control set. '
+          $ref: '#/components/schemas/ControlSetId'
+          description: ' The unique identifier for the control set. '
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamArn'
-            - description: ' The Amazon Resource Name (ARN) of the IAM role. '
+          $ref: '#/components/schemas/IamArn'
+          description: ' The Amazon Resource Name (ARN) of the IAM role. '
         roleType:
-          allOf:
-            - $ref: '#/components/schemas/RoleType'
-            - description: '<p> The type of customer persona. </p> <note> <p>In <code>CreateAssessment</code>, <code>roleType</code> can only be <code>PROCESS_OWNER</code>. </p> <p>In <code>UpdateSettings</code>, <code>roleType</code> can only be <code>PROCESS_OWNER</code>.</p> <p>In <code>BatchCreateDelegationByAssessment</code>, <code>roleType</code> can only be <code>RESOURCE_OWNER</code>.</p> </note>'
+          $ref: '#/components/schemas/RoleType'
+          description: '<p> The type of customer persona. </p> <note> <p>In <code>CreateAssessment</code>, <code>roleType</code> can only be <code>PROCESS_OWNER</code>. </p> <p>In <code>UpdateSettings</code>, <code>roleType</code> can only be <code>PROCESS_OWNER</code>.</p> <p>In <code>BatchCreateDelegationByAssessment</code>, <code>roleType</code> can only be <code>RESOURCE_OWNER</code>.</p> </note>'
       description: ' A collection of attributes used to create a delegation for an assessment in Audit Manager. '
     BatchDeleteDelegationByAssessmentResponse:
       type: object
       properties:
         errors:
-          allOf:
-            - $ref: '#/components/schemas/BatchDeleteDelegationByAssessmentErrors'
-            - description: ' A list of errors returned by the <code>BatchDeleteDelegationByAssessment</code> API. '
+          $ref: '#/components/schemas/BatchDeleteDelegationByAssessmentErrors'
+          description: ' A list of errors returned by the <code>BatchDeleteDelegationByAssessment</code> API. '
     BatchDisassociateAssessmentReportEvidenceResponse:
       type: object
       properties:
         evidenceIds:
-          allOf:
-            - $ref: '#/components/schemas/EvidenceIds'
-            - description: ' The identifier for the evidence. '
+          $ref: '#/components/schemas/EvidenceIds'
+          description: ' The identifier for the evidence. '
         errors:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportEvidenceErrors'
-            - description: ' A list of errors returned by the <code>BatchDisassociateAssessmentReportEvidence</code> API. '
+          $ref: '#/components/schemas/AssessmentReportEvidenceErrors'
+          description: ' A list of errors returned by the <code>BatchDisassociateAssessmentReportEvidence</code> API. '
     BatchImportEvidenceToAssessmentControlResponse:
       type: object
       properties:
         errors:
-          allOf:
-            - $ref: '#/components/schemas/BatchImportEvidenceToAssessmentControlErrors'
-            - description: ' A list of errors returned by the <code>BatchImportEvidenceToAssessmentControl</code> API. '
+          $ref: '#/components/schemas/BatchImportEvidenceToAssessmentControlErrors'
+          description: ' A list of errors returned by the <code>BatchImportEvidenceToAssessmentControl</code> API. '
     ManualEvidence:
       type: object
       properties:
         s3ResourcePath:
-          allOf:
-            - $ref: '#/components/schemas/S3Url'
-            - description: ' The Amazon S3 URL that points to a manual evidence object. '
+          $ref: '#/components/schemas/S3Url'
+          description: ' The Amazon S3 URL that points to a manual evidence object. '
       description: ' Evidence that is uploaded to Audit Manager manually. '
     CreateAssessmentResponse:
       type: object
@@ -3624,13 +3601,11 @@ components:
       type: object
       properties:
         roleType:
-          allOf:
-            - $ref: '#/components/schemas/RoleType'
-            - description: '<p> The type of customer persona. </p> <note> <p>In <code>CreateAssessment</code>, <code>roleType</code> can only be <code>PROCESS_OWNER</code>. </p> <p>In <code>UpdateSettings</code>, <code>roleType</code> can only be <code>PROCESS_OWNER</code>.</p> <p>In <code>BatchCreateDelegationByAssessment</code>, <code>roleType</code> can only be <code>RESOURCE_OWNER</code>.</p> </note>'
+          $ref: '#/components/schemas/RoleType'
+          description: '<p> The type of customer persona. </p> <note> <p>In <code>CreateAssessment</code>, <code>roleType</code> can only be <code>PROCESS_OWNER</code>. </p> <p>In <code>UpdateSettings</code>, <code>roleType</code> can only be <code>PROCESS_OWNER</code>.</p> <p>In <code>BatchCreateDelegationByAssessment</code>, <code>roleType</code> can only be <code>RESOURCE_OWNER</code>.</p> </note>'
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamArn'
-            - description: ' The Amazon Resource Name (ARN) of the IAM role. '
+          $ref: '#/components/schemas/IamArn'
+          description: ' The Amazon Resource Name (ARN) of the IAM role. '
       description: ' The wrapper that contains the Audit Manager role information of the current user, such as the role type and IAM Amazon Resource Name (ARN). '
     TagValue:
       type: string
@@ -3641,66 +3616,55 @@ components:
       type: object
       properties:
         framework:
-          allOf:
-            - $ref: '#/components/schemas/Framework'
-            - description: ' The name of the new framework returned by the <code>CreateAssessmentFramework</code> API. '
+          $ref: '#/components/schemas/Framework'
+          description: ' The name of the new framework returned by the <code>CreateAssessmentFramework</code> API. '
     CreateAssessmentFrameworkControlSet:
       type: object
       required:
         - name
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ControlSetName'
-            - description: ' The name of the specified control set. '
+          $ref: '#/components/schemas/ControlSetName'
+          description: ' The name of the specified control set. '
         controls:
-          allOf:
-            - $ref: '#/components/schemas/CreateAssessmentFrameworkControls'
-            - description: ' The list of controls within the control set. This does not contain the control set ID. '
+          $ref: '#/components/schemas/CreateAssessmentFrameworkControls'
+          description: ' The list of controls within the control set. This does not contain the control set ID. '
       description: ' A <code>controlSet</code> entity that represents a collection of controls in Audit Manager. This does not contain the control set ID. '
     CreateAssessmentReportResponse:
       type: object
       properties:
         assessmentReport:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReport'
-            - description: ' The new assessment report returned by the <code>CreateAssessmentReport</code> API. '
+          $ref: '#/components/schemas/AssessmentReport'
+          description: ' The new assessment report returned by the <code>CreateAssessmentReport</code> API. '
     CreateControlResponse:
       type: object
       properties:
         control:
-          allOf:
-            - $ref: '#/components/schemas/Control'
-            - description: ' The new control returned by the <code>CreateControl</code> API. '
+          $ref: '#/components/schemas/Control'
+          description: ' The new control returned by the <code>CreateControl</code> API. '
     CreateControlMappingSource:
       type: object
       properties:
         sourceName:
-          allOf:
-            - $ref: '#/components/schemas/SourceName'
-            - description: ' The name of the control mapping data source. '
+          $ref: '#/components/schemas/SourceName'
+          description: ' The name of the control mapping data source. '
         sourceDescription:
-          allOf:
-            - $ref: '#/components/schemas/SourceDescription'
-            - description: ' The description of the data source that determines from where Audit Manager collects evidence for the control. '
+          $ref: '#/components/schemas/SourceDescription'
+          description: ' The description of the data source that determines from where Audit Manager collects evidence for the control. '
         sourceSetUpOption:
-          allOf:
-            - $ref: '#/components/schemas/SourceSetUpOption'
-            - description: ' The setup option for the data source, which reflects if the evidence collection is automated or manual. '
+          $ref: '#/components/schemas/SourceSetUpOption'
+          description: ' The setup option for the data source, which reflects if the evidence collection is automated or manual. '
         sourceType:
-          allOf:
-            - $ref: '#/components/schemas/SourceType'
-            - description: ' Specifies one of the five types of data sources for evidence collection. '
+          $ref: '#/components/schemas/SourceType'
+          description: ' Specifies one of the five types of data sources for evidence collection. '
         sourceKeyword:
           $ref: '#/components/schemas/SourceKeyword'
         sourceFrequency:
-          allOf:
-            - $ref: '#/components/schemas/SourceFrequency'
-            - description: ' The frequency of evidence collection for the specified control mapping source. '
+          $ref: '#/components/schemas/SourceFrequency'
+          description: ' The frequency of evidence collection for the specified control mapping source. '
         troubleshootingText:
-          allOf:
-            - $ref: '#/components/schemas/TroubleshootingText'
-            - description: ' The instructions for troubleshooting the specified control. '
+          $ref: '#/components/schemas/TroubleshootingText'
+          description: ' The instructions for troubleshooting the specified control. '
       description: ' Control mapping fields that represent the source for evidence collection, along with related parameters and metadata. This does not contain <code>mappingID</code>. '
     DeleteAssessmentResponse:
       type: object
@@ -3718,9 +3682,8 @@ components:
       type: object
       properties:
         status:
-          allOf:
-            - $ref: '#/components/schemas/AccountStatus'
-            - description: ' The registration status of the account. '
+          $ref: '#/components/schemas/AccountStatus'
+          description: ' The registration status of the account. '
     DeregisterOrganizationAdminAccountResponse:
       type: object
       properties: {}
@@ -3731,9 +3694,8 @@ components:
       type: object
       properties:
         status:
-          allOf:
-            - $ref: '#/components/schemas/AccountStatus'
-            - description: ' The status of the specified account. '
+          $ref: '#/components/schemas/AccountStatus'
+          description: ' The status of the specified account. '
     GetAssessmentResponse:
       type: object
       properties:
@@ -3745,9 +3707,8 @@ components:
       type: object
       properties:
         framework:
-          allOf:
-            - $ref: '#/components/schemas/Framework'
-            - description: ' The framework returned by the <code>GetAssessmentFramework</code> API. '
+          $ref: '#/components/schemas/Framework'
+          description: ' The framework returned by the <code>GetAssessmentFramework</code> API. '
     GetAssessmentReportUrlResponse:
       type: object
       properties:
@@ -3757,194 +3718,161 @@ components:
       type: object
       properties:
         changeLogs:
-          allOf:
-            - $ref: '#/components/schemas/ChangeLogs'
-            - description: ' The list of user activity for the control. '
+          $ref: '#/components/schemas/ChangeLogs'
+          description: ' The list of user activity for the control. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: ' The pagination token used to fetch the next set of results. '
+          $ref: '#/components/schemas/Token'
+          description: ' The pagination token used to fetch the next set of results. '
     GetControlResponse:
       type: object
       properties:
         control:
-          allOf:
-            - $ref: '#/components/schemas/Control'
-            - description: ' The name of the control returned by the <code>GetControl</code> API. '
+          $ref: '#/components/schemas/Control'
+          description: ' The name of the control returned by the <code>GetControl</code> API. '
     GetDelegationsResponse:
       type: object
       properties:
         delegations:
-          allOf:
-            - $ref: '#/components/schemas/DelegationMetadataList'
-            - description: ' The list of delegations returned by the <code>GetDelegations</code> API. '
+          $ref: '#/components/schemas/DelegationMetadataList'
+          description: ' The list of delegations returned by the <code>GetDelegations</code> API. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: ' The pagination token used to fetch the next set of results. '
+          $ref: '#/components/schemas/Token'
+          description: ' The pagination token used to fetch the next set of results. '
     GetEvidenceResponse:
       type: object
       properties:
         evidence:
-          allOf:
-            - $ref: '#/components/schemas/Evidence'
-            - description: ' The evidence returned by the <code>GetEvidenceResponse</code> API. '
+          $ref: '#/components/schemas/Evidence'
+          description: ' The evidence returned by the <code>GetEvidenceResponse</code> API. '
     GetEvidenceByEvidenceFolderResponse:
       type: object
       properties:
         evidence:
-          allOf:
-            - $ref: '#/components/schemas/EvidenceList'
-            - description: ' The list of evidence returned by the <code>GetEvidenceByEvidenceFolder</code> API. '
+          $ref: '#/components/schemas/EvidenceList'
+          description: ' The list of evidence returned by the <code>GetEvidenceByEvidenceFolder</code> API. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: ' The pagination token used to fetch the next set of results. '
+          $ref: '#/components/schemas/Token'
+          description: ' The pagination token used to fetch the next set of results. '
     GetEvidenceFolderResponse:
       type: object
       properties:
         evidenceFolder:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentEvidenceFolder'
-            - description: ' The folder in which evidence is stored. '
+          $ref: '#/components/schemas/AssessmentEvidenceFolder'
+          description: ' The folder in which evidence is stored. '
     GetEvidenceFoldersByAssessmentResponse:
       type: object
       properties:
         evidenceFolders:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentEvidenceFolders'
-            - description: ' The list of evidence folders returned by the <code>GetEvidenceFoldersByAssessment</code> API. '
+          $ref: '#/components/schemas/AssessmentEvidenceFolders'
+          description: ' The list of evidence folders returned by the <code>GetEvidenceFoldersByAssessment</code> API. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: ' The pagination token used to fetch the next set of results. '
+          $ref: '#/components/schemas/Token'
+          description: ' The pagination token used to fetch the next set of results. '
     GetEvidenceFoldersByAssessmentControlResponse:
       type: object
       properties:
         evidenceFolders:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentEvidenceFolders'
-            - description: ' The list of evidence folders returned by the <code>GetEvidenceFoldersByAssessmentControl</code> API. '
+          $ref: '#/components/schemas/AssessmentEvidenceFolders'
+          description: ' The list of evidence folders returned by the <code>GetEvidenceFoldersByAssessmentControl</code> API. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: ' The pagination token used to fetch the next set of results. '
+          $ref: '#/components/schemas/Token'
+          description: ' The pagination token used to fetch the next set of results. '
     GetOrganizationAdminAccountResponse:
       type: object
       properties:
         adminAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: ' The identifier for the specified administrator account. '
+          $ref: '#/components/schemas/AccountId'
+          description: ' The identifier for the specified administrator account. '
         organizationId:
-          allOf:
-            - $ref: '#/components/schemas/organizationId'
-            - description: ' The identifier for the specified organization. '
+          $ref: '#/components/schemas/organizationId'
+          description: ' The identifier for the specified organization. '
     GetServicesInScopeResponse:
       type: object
       properties:
         serviceMetadata:
-          allOf:
-            - $ref: '#/components/schemas/ServiceMetadataList'
-            - description: ' The metadata associated with the Amazon Web Service. '
+          $ref: '#/components/schemas/ServiceMetadataList'
+          description: ' The metadata associated with the Amazon Web Service. '
     GetSettingsResponse:
       type: object
       properties:
         settings:
-          allOf:
-            - $ref: '#/components/schemas/Settings'
-            - description: ' The settings object that holds all supported Audit Manager settings. '
+          $ref: '#/components/schemas/Settings'
+          description: ' The settings object that holds all supported Audit Manager settings. '
     ListAssessmentFrameworksResponse:
       type: object
       properties:
         frameworkMetadataList:
-          allOf:
-            - $ref: '#/components/schemas/FrameworkMetadataList'
-            - description: ' The list of metadata objects for the specified framework. '
+          $ref: '#/components/schemas/FrameworkMetadataList'
+          description: ' The list of metadata objects for the specified framework. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: ' The pagination token used to fetch the next set of results. '
+          $ref: '#/components/schemas/Token'
+          description: ' The pagination token used to fetch the next set of results. '
     ListAssessmentReportsResponse:
       type: object
       properties:
         assessmentReports:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportsMetadata'
-            - description: ' The list of assessment reports returned by the <code>ListAssessmentReports</code> API. '
+          $ref: '#/components/schemas/AssessmentReportsMetadata'
+          description: ' The list of assessment reports returned by the <code>ListAssessmentReports</code> API. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: ' The pagination token used to fetch the next set of results. '
+          $ref: '#/components/schemas/Token'
+          description: ' The pagination token used to fetch the next set of results. '
     ListAssessmentsResponse:
       type: object
       properties:
         assessmentMetadata:
-          allOf:
-            - $ref: '#/components/schemas/ListAssessmentMetadata'
-            - description: ' The metadata associated with the assessment. '
+          $ref: '#/components/schemas/ListAssessmentMetadata'
+          description: ' The metadata associated with the assessment. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: ' The pagination token used to fetch the next set of results. '
+          $ref: '#/components/schemas/Token'
+          description: ' The pagination token used to fetch the next set of results. '
     ListControlsResponse:
       type: object
       properties:
         controlMetadataList:
-          allOf:
-            - $ref: '#/components/schemas/ControlMetadataList'
-            - description: ' The list of control metadata objects returned by the <code>ListControls</code> API. '
+          $ref: '#/components/schemas/ControlMetadataList'
+          description: ' The list of control metadata objects returned by the <code>ListControls</code> API. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: ' The pagination token used to fetch the next set of results. '
+          $ref: '#/components/schemas/Token'
+          description: ' The pagination token used to fetch the next set of results. '
     ListKeywordsForDataSourceResponse:
       type: object
       properties:
         keywords:
-          allOf:
-            - $ref: '#/components/schemas/Keywords'
-            - description: ' The list of keywords for the specified event mapping source. '
+          $ref: '#/components/schemas/Keywords'
+          description: ' The list of keywords for the specified event mapping source. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: ' The pagination token used to fetch the next set of results. '
+          $ref: '#/components/schemas/Token'
+          description: ' The pagination token used to fetch the next set of results. '
     ListNotificationsResponse:
       type: object
       properties:
         notifications:
-          allOf:
-            - $ref: '#/components/schemas/Notifications'
-            - description: ' The returned list of notifications. '
+          $ref: '#/components/schemas/Notifications'
+          description: ' The returned list of notifications. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: ' The pagination token used to fetch the next set of results. '
+          $ref: '#/components/schemas/Token'
+          description: ' The pagination token used to fetch the next set of results. '
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: ' The list of tags returned by the <code>ListTagsForResource</code> API. '
+          $ref: '#/components/schemas/TagMap'
+          description: ' The list of tags returned by the <code>ListTagsForResource</code> API. '
     RegisterAccountResponse:
       type: object
       properties:
         status:
-          allOf:
-            - $ref: '#/components/schemas/AccountStatus'
-            - description: ' The status of the account registration request. '
+          $ref: '#/components/schemas/AccountStatus'
+          description: ' The status of the account registration request. '
     RegisterOrganizationAdminAccountResponse:
       type: object
       properties:
         adminAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: ' The identifier for the specified delegated administrator account. '
+          $ref: '#/components/schemas/AccountId'
+          description: ' The identifier for the specified delegated administrator account. '
         organizationId:
-          allOf:
-            - $ref: '#/components/schemas/organizationId'
-            - description: ' The identifier for the specified organization. '
+          $ref: '#/components/schemas/organizationId'
+          description: ' The identifier for the specified organization. '
     TagResourceResponse:
       type: object
       properties: {}
@@ -3960,126 +3888,104 @@ components:
       type: object
       properties:
         assessment:
-          allOf:
-            - $ref: '#/components/schemas/Assessment'
-            - description: ' The response object (name of the updated assessment) for the <code>UpdateAssessmentRequest</code> API. '
+          $ref: '#/components/schemas/Assessment'
+          description: ' The response object (name of the updated assessment) for the <code>UpdateAssessmentRequest</code> API. '
     UpdateAssessmentControlResponse:
       type: object
       properties:
         control:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentControl'
-            - description: ' The name of the updated control set returned by the <code>UpdateAssessmentControl</code> API. '
+          $ref: '#/components/schemas/AssessmentControl'
+          description: ' The name of the updated control set returned by the <code>UpdateAssessmentControl</code> API. '
     UpdateAssessmentControlSetStatusResponse:
       type: object
       properties:
         controlSet:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentControlSet'
-            - description: ' The name of the updated control set returned by the <code>UpdateAssessmentControlSetStatus</code> API. '
+          $ref: '#/components/schemas/AssessmentControlSet'
+          description: ' The name of the updated control set returned by the <code>UpdateAssessmentControlSetStatus</code> API. '
     UpdateAssessmentFrameworkResponse:
       type: object
       properties:
         framework:
-          allOf:
-            - $ref: '#/components/schemas/Framework'
-            - description: ' The name of the specified framework. '
+          $ref: '#/components/schemas/Framework'
+          description: ' The name of the specified framework. '
     UpdateAssessmentFrameworkControlSet:
       type: object
       required:
         - name
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ControlSetName'
-            - description: ' The unique identifier for the control set. '
+          $ref: '#/components/schemas/ControlSetName'
+          description: ' The unique identifier for the control set. '
         name:
-          allOf:
-            - $ref: '#/components/schemas/ControlSetName'
-            - description: ' The name of the control set. '
+          $ref: '#/components/schemas/ControlSetName'
+          description: ' The name of the control set. '
         controls:
-          allOf:
-            - $ref: '#/components/schemas/CreateAssessmentFrameworkControls'
-            - description: ' The list of controls contained within the control set. '
+          $ref: '#/components/schemas/CreateAssessmentFrameworkControls'
+          description: ' The list of controls contained within the control set. '
       description: ' A <code>controlSet</code> entity that represents a collection of controls in Audit Manager. This does not contain the control set ID. '
     UpdateAssessmentStatusResponse:
       type: object
       properties:
         assessment:
-          allOf:
-            - $ref: '#/components/schemas/Assessment'
-            - description: ' The name of the updated assessment returned by the <code>UpdateAssessmentStatus</code> API. '
+          $ref: '#/components/schemas/Assessment'
+          description: ' The name of the updated assessment returned by the <code>UpdateAssessmentStatus</code> API. '
     UpdateControlResponse:
       type: object
       properties:
         control:
-          allOf:
-            - $ref: '#/components/schemas/Control'
-            - description: ' The name of the updated control set returned by the <code>UpdateControl</code> API. '
+          $ref: '#/components/schemas/Control'
+          description: ' The name of the updated control set returned by the <code>UpdateControl</code> API. '
     ControlMappingSource:
       type: object
       properties:
         sourceId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The unique identifier for the specified source. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The unique identifier for the specified source. '
         sourceName:
-          allOf:
-            - $ref: '#/components/schemas/SourceName'
-            - description: ' The name of the specified source. '
+          $ref: '#/components/schemas/SourceName'
+          description: ' The name of the specified source. '
         sourceDescription:
-          allOf:
-            - $ref: '#/components/schemas/SourceDescription'
-            - description: ' The description of the specified source. '
+          $ref: '#/components/schemas/SourceDescription'
+          description: ' The description of the specified source. '
         sourceSetUpOption:
-          allOf:
-            - $ref: '#/components/schemas/SourceSetUpOption'
-            - description: ' The setup option for the data source, which reflects if the evidence collection is automated or manual. '
+          $ref: '#/components/schemas/SourceSetUpOption'
+          description: ' The setup option for the data source, which reflects if the evidence collection is automated or manual. '
         sourceType:
-          allOf:
-            - $ref: '#/components/schemas/SourceType'
-            - description: ' Specifies one of the five types of data sources for evidence collection. '
+          $ref: '#/components/schemas/SourceType'
+          description: ' Specifies one of the five types of data sources for evidence collection. '
         sourceKeyword:
           $ref: '#/components/schemas/SourceKeyword'
         sourceFrequency:
-          allOf:
-            - $ref: '#/components/schemas/SourceFrequency'
-            - description: ' The frequency of evidence collection for the specified control mapping source. '
+          $ref: '#/components/schemas/SourceFrequency'
+          description: ' The frequency of evidence collection for the specified control mapping source. '
         troubleshootingText:
-          allOf:
-            - $ref: '#/components/schemas/TroubleshootingText'
-            - description: ' The instructions for troubleshooting the specified control. '
+          $ref: '#/components/schemas/TroubleshootingText'
+          description: ' The instructions for troubleshooting the specified control. '
       description: ' The data source that determines from where Audit Manager collects evidence for the control. '
     UpdateSettingsResponse:
       type: object
       properties:
         settings:
-          allOf:
-            - $ref: '#/components/schemas/Settings'
-            - description: ' The current list of settings. '
+          $ref: '#/components/schemas/Settings'
+          description: ' The current list of settings. '
     ValidateAssessmentReportIntegrityResponse:
       type: object
       properties:
         signatureValid:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: ' Specifies whether the signature key is valid. '
+          $ref: '#/components/schemas/Boolean'
+          description: ' Specifies whether the signature key is valid. '
         signatureAlgorithm:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The signature algorithm used to code sign the assessment report file. '
+          $ref: '#/components/schemas/String'
+          description: ' The signature algorithm used to code sign the assessment report file. '
         signatureDateTime:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The date and time signature that specifies when the assessment report was created. '
+          $ref: '#/components/schemas/String'
+          description: ' The date and time signature that specifies when the assessment report was created. '
         signatureKeyId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The unique identifier for the validation signature key. '
+          $ref: '#/components/schemas/String'
+          description: ' The unique identifier for the validation signature key. '
         validationErrors:
-          allOf:
-            - $ref: '#/components/schemas/ValidationErrors'
-            - description: ' Represents any errors that occurred when validating the assessment report. '
+          $ref: '#/components/schemas/ValidationErrors'
+          description: ' Represents any errors that occurred when validating the assessment report. '
     AccountId:
       type: string
       pattern: '^[0-9]{12}$'
@@ -4099,17 +4005,14 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: ' The identifier for the specified account. '
+          $ref: '#/components/schemas/AccountId'
+          description: ' The identifier for the specified account. '
         emailAddress:
-          allOf:
-            - $ref: '#/components/schemas/EmailAddress'
-            - description: ' The email address associated with the specified account. '
+          $ref: '#/components/schemas/EmailAddress'
+          description: ' The email address associated with the specified account. '
         name:
-          allOf:
-            - $ref: '#/components/schemas/AccountName'
-            - description: ' The name of the specified account. '
+          $ref: '#/components/schemas/AccountName'
+          description: ' The name of the specified account. '
       description: ' The wrapper of account details, such as account ID, email address, and so on. '
     AWSServiceName:
       type: string
@@ -4120,9 +4023,8 @@ components:
       type: object
       properties:
         serviceName:
-          allOf:
-            - $ref: '#/components/schemas/AWSServiceName'
-            - description: ' The name of the Amazon Web Service. '
+          $ref: '#/components/schemas/AWSServiceName'
+          description: ' The name of the Amazon Web Service. '
       description: ' An Amazon Web Service such as Amazon S3, CloudTrail, and so on. '
     AccountStatus:
       type: string
@@ -4158,67 +4060,53 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentName'
-            - description: ' The name of the assessment. '
+          $ref: '#/components/schemas/AssessmentName'
+          description: ' The name of the assessment. '
         id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The unique identifier for the assessment. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The unique identifier for the assessment. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentDescription'
-            - description: ' The description of the assessment. '
+          $ref: '#/components/schemas/AssessmentDescription'
+          description: ' The description of the assessment. '
         complianceType:
-          allOf:
-            - $ref: '#/components/schemas/ComplianceType'
-            - description: ' The name of a compliance standard related to the assessment, such as PCI-DSS. '
+          $ref: '#/components/schemas/ComplianceType'
+          description: ' The name of a compliance standard related to the assessment, such as PCI-DSS. '
         status:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentStatus'
-            - description: ' The overall status of the assessment. '
+          $ref: '#/components/schemas/AssessmentStatus'
+          description: ' The overall status of the assessment. '
         assessmentReportsDestination:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportsDestination'
-            - description: ' The destination in which evidence reports are stored for the specified assessment. '
+          $ref: '#/components/schemas/AssessmentReportsDestination'
+          description: ' The destination in which evidence reports are stored for the specified assessment. '
         scope:
-          allOf:
-            - $ref: '#/components/schemas/Scope'
-            - description: ' The wrapper of accounts and services in scope for the assessment. '
+          $ref: '#/components/schemas/Scope'
+          description: ' The wrapper of accounts and services in scope for the assessment. '
         roles:
-          allOf:
-            - $ref: '#/components/schemas/Roles'
-            - description: ' The roles associated with the assessment. '
+          $ref: '#/components/schemas/Roles'
+          description: ' The roles associated with the assessment. '
         delegations:
-          allOf:
-            - $ref: '#/components/schemas/Delegations'
-            - description: ' The delegations associated with the assessment. '
+          $ref: '#/components/schemas/Delegations'
+          description: ' The delegations associated with the assessment. '
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Specifies when the assessment was created. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Specifies when the assessment was created. '
         lastUpdated:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time of the most recent update. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time of the most recent update. '
       description: ' The metadata associated with the specified assessment. '
     AssessmentFramework:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The unique identifier for the framework. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The unique identifier for the framework. '
         arn:
-          allOf:
-            - $ref: '#/components/schemas/AuditManagerArn'
-            - description: ' The Amazon Resource Name (ARN) of the specified framework. '
+          $ref: '#/components/schemas/AuditManagerArn'
+          description: ' The Amazon Resource Name (ARN) of the specified framework. '
         metadata:
           $ref: '#/components/schemas/FrameworkMetadata'
         controlSets:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentControlSets'
-            - description: ' The control sets associated with the framework. '
+          $ref: '#/components/schemas/AssessmentControlSets'
+          description: ' The control sets associated with the framework. '
       description: ' The file used to structure and automate Audit Manager assessments for a given compliance standard. '
     TagMap:
       type: object
@@ -4230,25 +4118,20 @@ components:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/AuditManagerArn'
-            - description: ' The Amazon Resource Name (ARN) of the assessment. '
+          $ref: '#/components/schemas/AuditManagerArn'
+          description: ' The Amazon Resource Name (ARN) of the assessment. '
         awsAccount:
-          allOf:
-            - $ref: '#/components/schemas/AWSAccount'
-            - description: ' The account associated with the assessment. '
+          $ref: '#/components/schemas/AWSAccount'
+          description: ' The account associated with the assessment. '
         metadata:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentMetadata'
-            - description: ' The metadata for the specified assessment. '
+          $ref: '#/components/schemas/AssessmentMetadata'
+          description: ' The metadata for the specified assessment. '
         framework:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentFramework'
-            - description: ' The framework from which the assessment was created. '
+          $ref: '#/components/schemas/AssessmentFramework'
+          description: ' The framework from which the assessment was created. '
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: ' The tags associated with the assessment. '
+          $ref: '#/components/schemas/TagMap'
+          description: ' The tags associated with the assessment. '
       description: ' An entity that defines the scope of audit evidence collected by Audit Manager. An Audit Manager assessment is an implementation of an Audit Manager framework. '
     ControlName:
       type: string
@@ -4286,41 +4169,32 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The identifier for the specified control. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The identifier for the specified control. '
         name:
-          allOf:
-            - $ref: '#/components/schemas/ControlName'
-            - description: ' The name of the specified control. '
+          $ref: '#/components/schemas/ControlName'
+          description: ' The name of the specified control. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/ControlDescription'
-            - description: ' The description of the specified control. '
+          $ref: '#/components/schemas/ControlDescription'
+          description: ' The description of the specified control. '
         status:
-          allOf:
-            - $ref: '#/components/schemas/ControlStatus'
-            - description: ' The status of the specified control. '
+          $ref: '#/components/schemas/ControlStatus'
+          description: ' The status of the specified control. '
         response:
-          allOf:
-            - $ref: '#/components/schemas/ControlResponse'
-            - description: ' The response of the specified control. '
+          $ref: '#/components/schemas/ControlResponse'
+          description: ' The response of the specified control. '
         comments:
-          allOf:
-            - $ref: '#/components/schemas/ControlComments'
-            - description: ' The list of comments attached to the specified control. '
+          $ref: '#/components/schemas/ControlComments'
+          description: ' The list of comments attached to the specified control. '
         evidenceSources:
-          allOf:
-            - $ref: '#/components/schemas/EvidenceSources'
-            - description: ' The list of data sources for the specified evidence. '
+          $ref: '#/components/schemas/EvidenceSources'
+          description: ' The list of data sources for the specified evidence. '
         evidenceCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The amount of evidence generated for the control. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The amount of evidence generated for the control. '
         assessmentReportEvidenceCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The amount of evidence in the assessment report. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The amount of evidence in the assessment report. '
       description: ' The control entity that represents a standard or custom control used in an Audit Manager assessment. '
     ControlSetId:
       type: string
@@ -4354,37 +4228,29 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/ControlSetId'
-            - description: ' The identifier of the control set in the assessment. This is the control set name in a plain string format. '
+          $ref: '#/components/schemas/ControlSetId'
+          description: ' The identifier of the control set in the assessment. This is the control set name in a plain string format. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The description for the control set. '
+          $ref: '#/components/schemas/NonEmptyString'
+          description: ' The description for the control set. '
         status:
-          allOf:
-            - $ref: '#/components/schemas/ControlSetStatus'
-            - description: ' Specifies the current status of the control set. '
+          $ref: '#/components/schemas/ControlSetStatus'
+          description: ' Specifies the current status of the control set. '
         roles:
-          allOf:
-            - $ref: '#/components/schemas/Roles'
-            - description: ' The roles associated with the control set. '
+          $ref: '#/components/schemas/Roles'
+          description: ' The roles associated with the control set. '
         controls:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentControls'
-            - description: ' The list of controls contained with the control set. '
+          $ref: '#/components/schemas/AssessmentControls'
+          description: ' The list of controls contained with the control set. '
         delegations:
-          allOf:
-            - $ref: '#/components/schemas/Delegations'
-            - description: ' The delegations associated with the control set. '
+          $ref: '#/components/schemas/Delegations'
+          description: ' The delegations associated with the control set. '
         systemEvidenceCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The total number of evidence objects retrieved automatically for the control set. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The total number of evidence objects retrieved automatically for the control set. '
         manualEvidenceCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The total number of evidence objects uploaded manually to the control set. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The total number of evidence objects uploaded manually to the control set. '
       description: ' Represents a set of controls in an Audit Manager assessment. '
     AssessmentControlSets:
       type: array
@@ -4411,77 +4277,59 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentEvidenceFolderName'
-            - description: ' The name of the specified evidence folder. '
+          $ref: '#/components/schemas/AssessmentEvidenceFolderName'
+          description: ' The name of the specified evidence folder. '
         date:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The date when the first evidence was added to the evidence folder. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The date when the first evidence was added to the evidence folder. '
         assessmentId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The identifier for the specified assessment. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The identifier for the specified assessment. '
         controlSetId:
-          allOf:
-            - $ref: '#/components/schemas/ControlSetId'
-            - description: ' The identifier for the control set. '
+          $ref: '#/components/schemas/ControlSetId'
+          description: ' The identifier for the control set. '
         controlId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The unique identifier for the specified control. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The unique identifier for the specified control. '
         id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The identifier for the folder in which evidence is stored. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The identifier for the folder in which evidence is stored. '
         dataSource:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The Amazon Web Service from which the evidence was collected. '
+          $ref: '#/components/schemas/String'
+          description: ' The Amazon Web Service from which the evidence was collected. '
         author:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The name of the user who created the evidence folder. '
+          $ref: '#/components/schemas/String'
+          description: ' The name of the user who created the evidence folder. '
         totalEvidence:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The total amount of evidence in the evidence folder. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The total amount of evidence in the evidence folder. '
         assessmentReportSelectionCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The total count of evidence included in the assessment report. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The total count of evidence included in the assessment report. '
         controlName:
-          allOf:
-            - $ref: '#/components/schemas/ControlName'
-            - description: ' The name of the control. '
+          $ref: '#/components/schemas/ControlName'
+          description: ' The name of the control. '
         evidenceResourcesIncludedCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The amount of evidence included in the evidence folder. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The amount of evidence included in the evidence folder. '
         evidenceByTypeConfigurationDataCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The number of evidence that falls under the configuration data category. This evidence is collected from configuration snapshots of other Amazon Web Services services such as Amazon EC2, Amazon S3, or IAM. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The number of evidence that falls under the configuration data category. This evidence is collected from configuration snapshots of other Amazon Web Services services such as Amazon EC2, Amazon S3, or IAM. '
         evidenceByTypeManualCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The number of evidence that falls under the manual category. This evidence is imported manually. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The number of evidence that falls under the manual category. This evidence is imported manually. '
         evidenceByTypeComplianceCheckCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The number of evidence that falls under the compliance check category. This evidence is collected from Config or Security Hub. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The number of evidence that falls under the compliance check category. This evidence is collected from Config or Security Hub. '
         evidenceByTypeComplianceCheckIssuesCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The total number of issues that were reported directly from Security Hub, Config, or both. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The total number of issues that were reported directly from Security Hub, Config, or both. '
         evidenceByTypeUserActivityCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The number of evidence that falls under the user activity category. This evidence is collected from CloudTrail logs. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The number of evidence that falls under the user activity category. This evidence is collected from CloudTrail logs. '
         evidenceAwsServiceSourceCount:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The total number of Amazon Web Services resources assessed to generate the evidence. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The total number of Amazon Web Services resources assessed to generate the evidence. '
       description: ' The folder in which Audit Manager stores evidence for an assessment. '
     AssessmentEvidenceFolders:
       type: array
@@ -4491,21 +4339,17 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentName'
-            - description: ' The name of the framework. '
+          $ref: '#/components/schemas/AssessmentName'
+          description: ' The name of the framework. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentFrameworkDescription'
-            - description: ' The description of the framework. '
+          $ref: '#/components/schemas/AssessmentFrameworkDescription'
+          description: ' The description of the framework. '
         logo:
-          allOf:
-            - $ref: '#/components/schemas/Filename'
-            - description: ' The logo associated with the framework. '
+          $ref: '#/components/schemas/Filename'
+          description: ' The logo associated with the framework. '
         complianceType:
-          allOf:
-            - $ref: '#/components/schemas/ComplianceType'
-            - description: ' The compliance standard associated with the framework, such as PCI-DSS or HIPAA. '
+          $ref: '#/components/schemas/ComplianceType'
+          description: ' The compliance standard associated with the framework, such as PCI-DSS or HIPAA. '
       description: ' The metadata of a framework, such as the name, ID, description, and so on. '
     AssessmentFrameworkDescription:
       type: string
@@ -4544,49 +4388,38 @@ components:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/AuditManagerArn'
-            - description: ' The Amazon Resource Name (ARN) of the framework. '
+          $ref: '#/components/schemas/AuditManagerArn'
+          description: ' The Amazon Resource Name (ARN) of the framework. '
         id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The unique identified for the specified framework. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The unique identified for the specified framework. '
         type:
-          allOf:
-            - $ref: '#/components/schemas/FrameworkType'
-            - description: ' The framework type, such as standard or custom. '
+          $ref: '#/components/schemas/FrameworkType'
+          description: ' The framework type, such as standard or custom. '
         name:
-          allOf:
-            - $ref: '#/components/schemas/FrameworkName'
-            - description: ' The name of the specified framework. '
+          $ref: '#/components/schemas/FrameworkName'
+          description: ' The name of the specified framework. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/FrameworkDescription'
-            - description: ' The description of the specified framework. '
+          $ref: '#/components/schemas/FrameworkDescription'
+          description: ' The description of the specified framework. '
         logo:
-          allOf:
-            - $ref: '#/components/schemas/Filename'
-            - description: ' The logo associated with the framework. '
+          $ref: '#/components/schemas/Filename'
+          description: ' The logo associated with the framework. '
         complianceType:
-          allOf:
-            - $ref: '#/components/schemas/ComplianceType'
-            - description: ' The compliance type that the new custom framework supports, such as CIS or HIPAA. '
+          $ref: '#/components/schemas/ComplianceType'
+          description: ' The compliance type that the new custom framework supports, such as CIS or HIPAA. '
         controlsCount:
-          allOf:
-            - $ref: '#/components/schemas/ControlsCount'
-            - description: ' The number of controls associated with the specified framework. '
+          $ref: '#/components/schemas/ControlsCount'
+          description: ' The number of controls associated with the specified framework. '
         controlSetsCount:
-          allOf:
-            - $ref: '#/components/schemas/ControlSetsCount'
-            - description: ' The number of control sets associated with the specified framework. '
+          $ref: '#/components/schemas/ControlSetsCount'
+          description: ' The number of control sets associated with the specified framework. '
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Specifies when the framework was created. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Specifies when the framework was created. '
         lastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Specifies when the framework was most recently updated. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Specifies when the framework was most recently updated. '
       description: ' The metadata associated with a standard or custom framework. '
     AssessmentName:
       type: string
@@ -4602,61 +4435,49 @@ components:
       type: object
       properties:
         destinationType:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportDestinationType'
-            - description: ' The destination type, such as Amazon S3. '
+          $ref: '#/components/schemas/AssessmentReportDestinationType'
+          description: ' The destination type, such as Amazon S3. '
         destination:
-          allOf:
-            - $ref: '#/components/schemas/S3Url'
-            - description: ' The destination of the assessment report. '
+          $ref: '#/components/schemas/S3Url'
+          description: ' The destination of the assessment report. '
       description: ' The location in which Audit Manager saves assessment reports for the given assessment. '
     Scope:
       type: object
       properties:
         awsAccounts:
-          allOf:
-            - $ref: '#/components/schemas/AWSAccounts'
-            - description: ' The accounts included in the scope of the assessment. '
+          $ref: '#/components/schemas/AWSAccounts'
+          description: ' The accounts included in the scope of the assessment. '
         awsServices:
-          allOf:
-            - $ref: '#/components/schemas/AWSServices'
-            - description: ' The Amazon Web Services services included in the scope of the assessment. '
+          $ref: '#/components/schemas/AWSServices'
+          description: ' The Amazon Web Services services included in the scope of the assessment. '
       description: ' The wrapper that contains the accounts and services in scope for the assessment. '
     AssessmentMetadataItem:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentName'
-            - description: ' The name of the assessment. '
+          $ref: '#/components/schemas/AssessmentName'
+          description: ' The name of the assessment. '
         id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The unique identifier for the assessment. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The unique identifier for the assessment. '
         complianceType:
-          allOf:
-            - $ref: '#/components/schemas/ComplianceType'
-            - description: ' The name of the compliance standard related to the assessment, such as PCI-DSS. '
+          $ref: '#/components/schemas/ComplianceType'
+          description: ' The name of the compliance standard related to the assessment, such as PCI-DSS. '
         status:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentStatus'
-            - description: ' The current status of the assessment. '
+          $ref: '#/components/schemas/AssessmentStatus'
+          description: ' The current status of the assessment. '
         roles:
-          allOf:
-            - $ref: '#/components/schemas/Roles'
-            - description: ' The roles associated with the assessment. '
+          $ref: '#/components/schemas/Roles'
+          description: ' The roles associated with the assessment. '
         delegations:
-          allOf:
-            - $ref: '#/components/schemas/Delegations'
-            - description: ' The delegations associated with the assessment. '
+          $ref: '#/components/schemas/Delegations'
+          description: ' The delegations associated with the assessment. '
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Specifies when the assessment was created. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Specifies when the assessment was created. '
         lastUpdated:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time of the most recent update. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time of the most recent update. '
       description: ' A metadata object associated with an assessment in Audit Manager. '
     AssessmentReportName:
       type: string
@@ -4682,41 +4503,32 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The unique identifier for the specified assessment report. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The unique identifier for the specified assessment report. '
         name:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportName'
-            - description: ' The name given to the assessment report. '
+          $ref: '#/components/schemas/AssessmentReportName'
+          description: ' The name given to the assessment report. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportDescription'
-            - description: ' The description of the specified assessment report. '
+          $ref: '#/components/schemas/AssessmentReportDescription'
+          description: ' The description of the specified assessment report. '
         awsAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: ' The identifier for the specified account. '
+          $ref: '#/components/schemas/AccountId'
+          description: ' The identifier for the specified account. '
         assessmentId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The identifier for the specified assessment. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The identifier for the specified assessment. '
         assessmentName:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentName'
-            - description: ' The name of the associated assessment. '
+          $ref: '#/components/schemas/AssessmentName'
+          description: ' The name of the associated assessment. '
         author:
-          allOf:
-            - $ref: '#/components/schemas/Username'
-            - description: ' The name of the user who created the assessment report. '
+          $ref: '#/components/schemas/Username'
+          description: ' The name of the user who created the assessment report. '
         status:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportStatus'
-            - description: ' The current status of the specified assessment report. '
+          $ref: '#/components/schemas/AssessmentReportStatus'
+          description: ' The current status of the specified assessment report. '
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Specifies when the assessment report was created. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Specifies when the assessment report was created. '
       description: ' A finalized document generated from an Audit Manager assessment. These reports summarize the relevant evidence collected for your audit, and link to the relevant evidence folders which are named and organized according to the controls specified in your assessment. '
     ErrorCode:
       type: string
@@ -4731,17 +4543,14 @@ components:
       type: object
       properties:
         evidenceId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The identifier for the evidence. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The identifier for the evidence. '
         errorCode:
-          allOf:
-            - $ref: '#/components/schemas/ErrorCode'
-            - description: ' The error code returned by the <code>AssessmentReportEvidence</code> API. '
+          $ref: '#/components/schemas/ErrorCode'
+          description: ' The error code returned by the <code>AssessmentReportEvidence</code> API. '
         errorMessage:
-          allOf:
-            - $ref: '#/components/schemas/ErrorMessage'
-            - description: ' The error message returned by the <code>AssessmentReportEvidence</code> API. '
+          $ref: '#/components/schemas/ErrorMessage'
+          description: ' The error message returned by the <code>AssessmentReportEvidence</code> API. '
       description: ' An error entity for the <code>AssessmentReportEvidence</code> API. This is used to provide more meaningful errors than a simple string message. '
     AssessmentReportEvidenceErrors:
       type: array
@@ -4751,37 +4560,29 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The unique identifier for the assessment report. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The unique identifier for the assessment report. '
         name:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportName'
-            - description: ' The name of the assessment report. '
+          $ref: '#/components/schemas/AssessmentReportName'
+          description: ' The name of the assessment report. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportDescription'
-            - description: ' The description of the specified assessment report. '
+          $ref: '#/components/schemas/AssessmentReportDescription'
+          description: ' The description of the specified assessment report. '
         assessmentId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The unique identifier for the associated assessment. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The unique identifier for the associated assessment. '
         assessmentName:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentName'
-            - description: 'The name of the associated assessment. '
+          $ref: '#/components/schemas/AssessmentName'
+          description: 'The name of the associated assessment. '
         author:
-          allOf:
-            - $ref: '#/components/schemas/Username'
-            - description: ' The name of the user who created the assessment report. '
+          $ref: '#/components/schemas/Username'
+          description: ' The name of the user who created the assessment report. '
         status:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportStatus'
-            - description: ' The current status of the assessment report. '
+          $ref: '#/components/schemas/AssessmentReportStatus'
+          description: ' The current status of the assessment report. '
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Specifies when the assessment report was created. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Specifies when the assessment report was created. '
       description: ' The metadata objects associated with the specified assessment report. '
     AssessmentReportsMetadata:
       type: array
@@ -4794,9 +4595,8 @@ components:
       title: AssociateAssessmentReportEvidenceFolderRequest
       properties:
         evidenceFolderId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The identifier for the folder in which evidence is stored. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The identifier for the folder in which evidence is stored. '
     EvidenceIds:
       type: array
       items:
@@ -4811,28 +4611,23 @@ components:
       title: BatchAssociateAssessmentReportEvidenceRequest
       properties:
         evidenceFolderId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The identifier for the folder in which the evidence is stored. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The identifier for the folder in which the evidence is stored. '
         evidenceIds:
-          allOf:
-            - $ref: '#/components/schemas/EvidenceIds'
-            - description: ' The list of evidence identifiers. '
+          $ref: '#/components/schemas/EvidenceIds'
+          description: ' The list of evidence identifiers. '
     BatchCreateDelegationByAssessmentError:
       type: object
       properties:
         createDelegationRequest:
-          allOf:
-            - $ref: '#/components/schemas/CreateDelegationRequest'
-            - description: ' The API request to batch create delegations in Audit Manager. '
+          $ref: '#/components/schemas/CreateDelegationRequest'
+          description: ' The API request to batch create delegations in Audit Manager. '
         errorCode:
-          allOf:
-            - $ref: '#/components/schemas/ErrorCode'
-            - description: ' The error code returned by the <code>BatchCreateDelegationByAssessment</code> API. '
+          $ref: '#/components/schemas/ErrorCode'
+          description: ' The error code returned by the <code>BatchCreateDelegationByAssessment</code> API. '
         errorMessage:
-          allOf:
-            - $ref: '#/components/schemas/ErrorMessage'
-            - description: ' The error message returned by the <code>BatchCreateDelegationByAssessment</code> API. '
+          $ref: '#/components/schemas/ErrorMessage'
+          description: ' The error message returned by the <code>BatchCreateDelegationByAssessment</code> API. '
       description: ' An error entity for the <code>BatchCreateDelegationByAssessment</code> API. This is used to provide more meaningful errors than a simple string message. '
     BatchCreateDelegationByAssessmentErrors:
       type: array
@@ -4851,24 +4646,20 @@ components:
       title: BatchCreateDelegationByAssessmentRequest
       properties:
         createDelegationRequests:
-          allOf:
-            - $ref: '#/components/schemas/CreateDelegationRequests'
-            - description: ' The API request to batch create delegations in Audit Manager. '
+          $ref: '#/components/schemas/CreateDelegationRequests'
+          description: ' The API request to batch create delegations in Audit Manager. '
     BatchDeleteDelegationByAssessmentError:
       type: object
       properties:
         delegationId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The identifier for the specified delegation. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The identifier for the specified delegation. '
         errorCode:
-          allOf:
-            - $ref: '#/components/schemas/ErrorCode'
-            - description: ' The error code returned by the <code>BatchDeleteDelegationByAssessment</code> API. '
+          $ref: '#/components/schemas/ErrorCode'
+          description: ' The error code returned by the <code>BatchDeleteDelegationByAssessment</code> API. '
         errorMessage:
-          allOf:
-            - $ref: '#/components/schemas/ErrorMessage'
-            - description: ' The error message returned by the <code>BatchDeleteDelegationByAssessment</code> API. '
+          $ref: '#/components/schemas/ErrorMessage'
+          description: ' The error message returned by the <code>BatchDeleteDelegationByAssessment</code> API. '
       description: ' An error entity for the <code>BatchDeleteDelegationByAssessment</code> API. This is used to provide more meaningful errors than a simple string message. '
     BatchDeleteDelegationByAssessmentErrors:
       type: array
@@ -4887,9 +4678,8 @@ components:
       title: BatchDeleteDelegationByAssessmentRequest
       properties:
         delegationIds:
-          allOf:
-            - $ref: '#/components/schemas/DelegationIds'
-            - description: ' The identifiers for the specified delegations. '
+          $ref: '#/components/schemas/DelegationIds'
+          description: ' The identifiers for the specified delegations. '
     BatchDisassociateAssessmentReportEvidenceRequest:
       type: object
       required:
@@ -4898,28 +4688,23 @@ components:
       title: BatchDisassociateAssessmentReportEvidenceRequest
       properties:
         evidenceFolderId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The identifier for the folder in which evidence is stored. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The identifier for the folder in which evidence is stored. '
         evidenceIds:
-          allOf:
-            - $ref: '#/components/schemas/EvidenceIds'
-            - description: ' The list of evidence identifiers. '
+          $ref: '#/components/schemas/EvidenceIds'
+          description: ' The list of evidence identifiers. '
     BatchImportEvidenceToAssessmentControlError:
       type: object
       properties:
         manualEvidence:
-          allOf:
-            - $ref: '#/components/schemas/ManualEvidence'
-            - description: ' Manual evidence that cannot be collected automatically by Audit Manager. '
+          $ref: '#/components/schemas/ManualEvidence'
+          description: ' Manual evidence that cannot be collected automatically by Audit Manager. '
         errorCode:
-          allOf:
-            - $ref: '#/components/schemas/ErrorCode'
-            - description: ' The error code returned by the <code>BatchImportEvidenceToAssessmentControl</code> API. '
+          $ref: '#/components/schemas/ErrorCode'
+          description: ' The error code returned by the <code>BatchImportEvidenceToAssessmentControl</code> API. '
         errorMessage:
-          allOf:
-            - $ref: '#/components/schemas/ErrorMessage'
-            - description: ' The error message returned by the <code>BatchImportEvidenceToAssessmentControl</code> API. '
+          $ref: '#/components/schemas/ErrorMessage'
+          description: ' The error message returned by the <code>BatchImportEvidenceToAssessmentControl</code> API. '
       description: ' An error entity for the <code>BatchImportEvidenceToAssessmentControl</code> API. This is used to provide more meaningful errors than a simple string message. '
     BatchImportEvidenceToAssessmentControlErrors:
       type: array
@@ -4938,9 +4723,8 @@ components:
       title: BatchImportEvidenceToAssessmentControlRequest
       properties:
         manualEvidence:
-          allOf:
-            - $ref: '#/components/schemas/ManualEvidenceList'
-            - description: ' The list of manual evidence objects. '
+          $ref: '#/components/schemas/ManualEvidenceList'
+          description: ' The list of manual evidence objects. '
     Boolean:
       type: boolean
     ObjectTypeEnum:
@@ -4960,25 +4744,20 @@ components:
       type: object
       properties:
         objectType:
-          allOf:
-            - $ref: '#/components/schemas/ObjectTypeEnum'
-            - description: ' The changelog object type, such as an assessment, control, or control set. '
+          $ref: '#/components/schemas/ObjectTypeEnum'
+          description: ' The changelog object type, such as an assessment, control, or control set. '
         objectName:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The name of the changelog object. '
+          $ref: '#/components/schemas/NonEmptyString'
+          description: ' The name of the changelog object. '
         action:
-          allOf:
-            - $ref: '#/components/schemas/ActionEnum'
-            - description: ' The action performed. '
+          $ref: '#/components/schemas/ActionEnum'
+          description: ' The action performed. '
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time of creation for the changelog object. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time of creation for the changelog object. '
         createdBy:
-          allOf:
-            - $ref: '#/components/schemas/IamArn'
-            - description: ' The IAM user or role that performed the action. '
+          $ref: '#/components/schemas/IamArn'
+          description: ' The IAM user or role that performed the action. '
       description: ' The record of a change within Audit Manager, such as a modified assessment, a delegated control set, and so on. '
     ChangeLogs:
       type: array
@@ -5017,65 +4796,50 @@ components:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/AuditManagerArn'
-            - description: ' The Amazon Resource Name (ARN) of the specified control. '
+          $ref: '#/components/schemas/AuditManagerArn'
+          description: ' The Amazon Resource Name (ARN) of the specified control. '
         id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The unique identifier for the control. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The unique identifier for the control. '
         type:
-          allOf:
-            - $ref: '#/components/schemas/ControlType'
-            - description: ' The type of control, such as custom or standard. '
+          $ref: '#/components/schemas/ControlType'
+          description: ' The type of control, such as custom or standard. '
         name:
-          allOf:
-            - $ref: '#/components/schemas/ControlName'
-            - description: ' The name of the specified control. '
+          $ref: '#/components/schemas/ControlName'
+          description: ' The name of the specified control. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/ControlDescription'
-            - description: ' The description of the specified control. '
+          $ref: '#/components/schemas/ControlDescription'
+          description: ' The description of the specified control. '
         testingInformation:
-          allOf:
-            - $ref: '#/components/schemas/TestingInformation'
-            - description: ' The steps to follow to determine if the control has been satisfied. '
+          $ref: '#/components/schemas/TestingInformation'
+          description: ' The steps to follow to determine if the control has been satisfied. '
         actionPlanTitle:
-          allOf:
-            - $ref: '#/components/schemas/ActionPlanTitle'
-            - description: ' The title of the action plan for remediating the control. '
+          $ref: '#/components/schemas/ActionPlanTitle'
+          description: ' The title of the action plan for remediating the control. '
         actionPlanInstructions:
-          allOf:
-            - $ref: '#/components/schemas/ActionPlanInstructions'
-            - description: ' The recommended actions to carry out if the control is not fulfilled. '
+          $ref: '#/components/schemas/ActionPlanInstructions'
+          description: ' The recommended actions to carry out if the control is not fulfilled. '
         controlSources:
-          allOf:
-            - $ref: '#/components/schemas/ControlSources'
-            - description: ' The data source that determines from where Audit Manager collects evidence for the control. '
+          $ref: '#/components/schemas/ControlSources'
+          description: ' The data source that determines from where Audit Manager collects evidence for the control. '
         controlMappingSources:
-          allOf:
-            - $ref: '#/components/schemas/ControlMappingSources'
-            - description: ' The data mapping sources for the specified control. '
+          $ref: '#/components/schemas/ControlMappingSources'
+          description: ' The data mapping sources for the specified control. '
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Specifies when the control was created. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Specifies when the control was created. '
         lastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Specifies when the control was most recently updated. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Specifies when the control was most recently updated. '
         createdBy:
-          allOf:
-            - $ref: '#/components/schemas/CreatedBy'
-            - description: ' The IAM user or role that created the control. '
+          $ref: '#/components/schemas/CreatedBy'
+          description: ' The IAM user or role that created the control. '
         lastUpdatedBy:
-          allOf:
-            - $ref: '#/components/schemas/LastUpdatedBy'
-            - description: ' The IAM user or role that most recently updated the control. '
+          $ref: '#/components/schemas/LastUpdatedBy'
+          description: ' The IAM user or role that most recently updated the control. '
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: ' The tags associated with the control. '
+          $ref: '#/components/schemas/TagMap'
+          description: ' The tags associated with the control. '
       description: ' A control in Audit Manager. '
     ControlCommentBody:
       type: string
@@ -5085,17 +4849,14 @@ components:
       type: object
       properties:
         authorName:
-          allOf:
-            - $ref: '#/components/schemas/Username'
-            - description: ' The name of the user who authored the comment. '
+          $ref: '#/components/schemas/Username'
+          description: ' The name of the user who authored the comment. '
         commentBody:
-          allOf:
-            - $ref: '#/components/schemas/ControlCommentBody'
-            - description: ' The body text of a control comment. '
+          $ref: '#/components/schemas/ControlCommentBody'
+          description: ' The body text of a control comment. '
         postedDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time when the comment was posted. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time when the comment was posted. '
       description: ' A comment posted by a user on a control. This includes the author''s name, the comment text, and a timestamp. '
     SourceName:
       type: string
@@ -5122,13 +4883,11 @@ components:
       type: object
       properties:
         keywordInputType:
-          allOf:
-            - $ref: '#/components/schemas/KeywordInputType'
-            - description: ' The method of input for the specified keyword. '
+          $ref: '#/components/schemas/KeywordInputType'
+          description: ' The method of input for the specified keyword. '
         keywordValue:
-          allOf:
-            - $ref: '#/components/schemas/KeywordValue'
-            - description: ' The value of the keyword used to search CloudTrail logs, Config rules, Security Hub checks, and Amazon Web Services API names when mapping a control data source. '
+          $ref: '#/components/schemas/KeywordValue'
+          description: ' The value of the keyword used to search CloudTrail logs, Config rules, Security Hub checks, and Amazon Web Services API names when mapping a control data source. '
       description: ' The keyword to search for in CloudTrail logs, Config rules, Security Hub checks, and Amazon Web Services API names. '
     SourceFrequency:
       type: string
@@ -5144,29 +4903,23 @@ components:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/AuditManagerArn'
-            - description: ' The Amazon Resource Name (ARN) of the specified control. '
+          $ref: '#/components/schemas/AuditManagerArn'
+          description: ' The Amazon Resource Name (ARN) of the specified control. '
         id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The unique identifier for the specified control. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The unique identifier for the specified control. '
         name:
-          allOf:
-            - $ref: '#/components/schemas/ControlName'
-            - description: ' The name of the specified control. '
+          $ref: '#/components/schemas/ControlName'
+          description: ' The name of the specified control. '
         controlSources:
-          allOf:
-            - $ref: '#/components/schemas/ControlSources'
-            - description: ' The data source that determines from where Audit Manager collects evidence for the control. '
+          $ref: '#/components/schemas/ControlSources'
+          description: ' The data source that determines from where Audit Manager collects evidence for the control. '
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Specifies when the control was created. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Specifies when the control was created. '
         lastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Specifies when the control was most recently updated. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Specifies when the control was most recently updated. '
       description: ' The metadata associated with the specified standard or custom control. '
     ControlMetadataList:
       type: array
@@ -5186,17 +4939,14 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The identifier of the control set in the assessment. This is the control set name in a plain string format. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The identifier of the control set in the assessment. This is the control set name in a plain string format. '
         name:
-          allOf:
-            - $ref: '#/components/schemas/ControlSetName'
-            - description: ' The name of the control set. '
+          $ref: '#/components/schemas/ControlSetName'
+          description: ' The name of the control set. '
         controls:
-          allOf:
-            - $ref: '#/components/schemas/Controls'
-            - description: ' The list of controls within the control set. '
+          $ref: '#/components/schemas/Controls'
+          description: ' The list of controls within the control set. '
       description: ' A set of controls in Audit Manager. '
     ControlSets:
       type: array
@@ -5207,9 +4957,8 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The unique identifier of the control. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The unique identifier of the control. '
       description: ' Control entity attributes that uniquely identify an existing control to be added to a framework in Audit Manager. '
     CreateAssessmentFrameworkControls:
       type: array
@@ -5229,84 +4978,65 @@ components:
       title: CreateAssessmentFrameworkRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/FrameworkName'
-            - description: ' The name of the new custom framework. '
+          $ref: '#/components/schemas/FrameworkName'
+          description: ' The name of the new custom framework. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/FrameworkDescription'
-            - description: ' An optional description for the new custom framework. '
+          $ref: '#/components/schemas/FrameworkDescription'
+          description: ' An optional description for the new custom framework. '
         complianceType:
-          allOf:
-            - $ref: '#/components/schemas/ComplianceType'
-            - description: ' The compliance type that the new custom framework supports, such as CIS or HIPAA. '
+          $ref: '#/components/schemas/ComplianceType'
+          description: ' The compliance type that the new custom framework supports, such as CIS or HIPAA. '
         controlSets:
-          allOf:
-            - $ref: '#/components/schemas/CreateAssessmentFrameworkControlSets'
-            - description: ' The control sets to be associated with the framework. '
+          $ref: '#/components/schemas/CreateAssessmentFrameworkControlSets'
+          description: ' The control sets to be associated with the framework. '
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: ' The tags associated with the framework. '
+          $ref: '#/components/schemas/TagMap'
+          description: ' The tags associated with the framework. '
     Framework:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/AuditManagerArn'
-            - description: ' The Amazon Resource Name (ARN) of the specified framework. '
+          $ref: '#/components/schemas/AuditManagerArn'
+          description: ' The Amazon Resource Name (ARN) of the specified framework. '
         id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The unique identifier for the specified framework. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The unique identifier for the specified framework. '
         name:
-          allOf:
-            - $ref: '#/components/schemas/FrameworkName'
-            - description: ' The name of the specified framework. '
+          $ref: '#/components/schemas/FrameworkName'
+          description: ' The name of the specified framework. '
         type:
-          allOf:
-            - $ref: '#/components/schemas/FrameworkType'
-            - description: ' The framework type, such as custom or standard. '
+          $ref: '#/components/schemas/FrameworkType'
+          description: ' The framework type, such as custom or standard. '
         complianceType:
-          allOf:
-            - $ref: '#/components/schemas/ComplianceType'
-            - description: ' The compliance type that the new custom framework supports, such as CIS or HIPAA. '
+          $ref: '#/components/schemas/ComplianceType'
+          description: ' The compliance type that the new custom framework supports, such as CIS or HIPAA. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/FrameworkDescription'
-            - description: ' The description of the specified framework. '
+          $ref: '#/components/schemas/FrameworkDescription'
+          description: ' The description of the specified framework. '
         logo:
-          allOf:
-            - $ref: '#/components/schemas/Filename'
-            - description: ' The logo associated with the framework. '
+          $ref: '#/components/schemas/Filename'
+          description: ' The logo associated with the framework. '
         controlSources:
-          allOf:
-            - $ref: '#/components/schemas/ControlSources'
-            - description: ' The sources from which Audit Manager collects evidence for the control. '
+          $ref: '#/components/schemas/ControlSources'
+          description: ' The sources from which Audit Manager collects evidence for the control. '
         controlSets:
-          allOf:
-            - $ref: '#/components/schemas/ControlSets'
-            - description: ' The control sets associated with the framework. '
+          $ref: '#/components/schemas/ControlSets'
+          description: ' The control sets associated with the framework. '
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Specifies when the framework was created. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Specifies when the framework was created. '
         lastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Specifies when the framework was most recently updated. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Specifies when the framework was most recently updated. '
         createdBy:
-          allOf:
-            - $ref: '#/components/schemas/CreatedBy'
-            - description: ' The IAM user or role that created the framework. '
+          $ref: '#/components/schemas/CreatedBy'
+          description: ' The IAM user or role that created the framework. '
         lastUpdatedBy:
-          allOf:
-            - $ref: '#/components/schemas/LastUpdatedBy'
-            - description: ' The IAM user or role that most recently updated the framework. '
+          $ref: '#/components/schemas/LastUpdatedBy'
+          description: ' The IAM user or role that most recently updated the framework. '
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: ' The tags associated with the framework. '
+          $ref: '#/components/schemas/TagMap'
+          description: ' The tags associated with the framework. '
       description: ' The file used to structure and automate Audit Manager assessments for a given compliance standard. '
     CreateAssessmentReportRequest:
       type: object
@@ -5315,13 +5045,11 @@ components:
       title: CreateAssessmentReportRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportName'
-            - description: ' The name of the new assessment report. '
+          $ref: '#/components/schemas/AssessmentReportName'
+          description: ' The name of the new assessment report. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportDescription'
-            - description: ' The description of the assessment report. '
+          $ref: '#/components/schemas/AssessmentReportDescription'
+          description: ' The description of the assessment report. '
     CreateAssessmentRequest:
       type: object
       required:
@@ -5333,31 +5061,25 @@ components:
       title: CreateAssessmentRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentName'
-            - description: ' The name of the assessment to be created. '
+          $ref: '#/components/schemas/AssessmentName'
+          description: ' The name of the assessment to be created. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentDescription'
-            - description: ' The optional description of the assessment to be created. '
+          $ref: '#/components/schemas/AssessmentDescription'
+          description: ' The optional description of the assessment to be created. '
         assessmentReportsDestination:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportsDestination'
-            - description: ' The assessment report storage destination for the specified assessment that is being created. '
+          $ref: '#/components/schemas/AssessmentReportsDestination'
+          description: ' The assessment report storage destination for the specified assessment that is being created. '
         scope:
           $ref: '#/components/schemas/Scope'
         roles:
-          allOf:
-            - $ref: '#/components/schemas/Roles'
-            - description: ' The list of roles for the specified assessment. '
+          $ref: '#/components/schemas/Roles'
+          description: ' The list of roles for the specified assessment. '
         frameworkId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The identifier for the specified framework. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The identifier for the specified framework. '
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: ' The tags associated with the assessment. '
+          $ref: '#/components/schemas/TagMap'
+          description: ' The tags associated with the assessment. '
     CreateControlMappingSources:
       type: array
       items:
@@ -5371,33 +5093,26 @@ components:
       title: CreateControlRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ControlName'
-            - description: ' The name of the control. '
+          $ref: '#/components/schemas/ControlName'
+          description: ' The name of the control. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/ControlDescription'
-            - description: ' The description of the control. '
+          $ref: '#/components/schemas/ControlDescription'
+          description: ' The description of the control. '
         testingInformation:
-          allOf:
-            - $ref: '#/components/schemas/TestingInformation'
-            - description: ' The steps to follow to determine if the control has been satisfied. '
+          $ref: '#/components/schemas/TestingInformation'
+          description: ' The steps to follow to determine if the control has been satisfied. '
         actionPlanTitle:
-          allOf:
-            - $ref: '#/components/schemas/ActionPlanTitle'
-            - description: ' The title of the action plan for remediating the control. '
+          $ref: '#/components/schemas/ActionPlanTitle'
+          description: ' The title of the action plan for remediating the control. '
         actionPlanInstructions:
-          allOf:
-            - $ref: '#/components/schemas/ActionPlanInstructions'
-            - description: ' The recommended actions to carry out if the control is not fulfilled. '
+          $ref: '#/components/schemas/ActionPlanInstructions'
+          description: ' The recommended actions to carry out if the control is not fulfilled. '
         controlMappingSources:
-          allOf:
-            - $ref: '#/components/schemas/CreateControlMappingSources'
-            - description: ' The data mapping sources for the specified control. '
+          $ref: '#/components/schemas/CreateControlMappingSources'
+          description: ' The data mapping sources for the specified control. '
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: ' The tags associated with the control. '
+          $ref: '#/components/schemas/TagMap'
+          description: ' The tags associated with the control. '
     DelegationComment:
       type: string
       pattern: '^[\w\W\s\S]*$'
@@ -5417,81 +5132,63 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The unique identifier for the delegation. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The unique identifier for the delegation. '
         assessmentName:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentName'
-            - description: ' The name of the associated assessment. '
+          $ref: '#/components/schemas/AssessmentName'
+          description: ' The name of the associated assessment. '
         assessmentId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The identifier for the associated assessment. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The identifier for the associated assessment. '
         status:
-          allOf:
-            - $ref: '#/components/schemas/DelegationStatus'
-            - description: ' The status of the delegation. '
+          $ref: '#/components/schemas/DelegationStatus'
+          description: ' The status of the delegation. '
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamArn'
-            - description: ' The Amazon Resource Name (ARN) of the IAM role. '
+          $ref: '#/components/schemas/IamArn'
+          description: ' The Amazon Resource Name (ARN) of the IAM role. '
         roleType:
-          allOf:
-            - $ref: '#/components/schemas/RoleType'
-            - description: '<p> The type of customer persona. </p> <note> <p>In <code>CreateAssessment</code>, <code>roleType</code> can only be <code>PROCESS_OWNER</code>. </p> <p>In <code>UpdateSettings</code>, <code>roleType</code> can only be <code>PROCESS_OWNER</code>.</p> <p>In <code>BatchCreateDelegationByAssessment</code>, <code>roleType</code> can only be <code>RESOURCE_OWNER</code>.</p> </note>'
+          $ref: '#/components/schemas/RoleType'
+          description: '<p> The type of customer persona. </p> <note> <p>In <code>CreateAssessment</code>, <code>roleType</code> can only be <code>PROCESS_OWNER</code>. </p> <p>In <code>UpdateSettings</code>, <code>roleType</code> can only be <code>PROCESS_OWNER</code>.</p> <p>In <code>BatchCreateDelegationByAssessment</code>, <code>roleType</code> can only be <code>RESOURCE_OWNER</code>.</p> </note>'
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Specifies when the delegation was created. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Specifies when the delegation was created. '
         lastUpdated:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Specifies when the delegation was last updated. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Specifies when the delegation was last updated. '
         controlSetId:
-          allOf:
-            - $ref: '#/components/schemas/ControlSetId'
-            - description: ' The identifier for the associated control set. '
+          $ref: '#/components/schemas/ControlSetId'
+          description: ' The identifier for the associated control set. '
         comment:
-          allOf:
-            - $ref: '#/components/schemas/DelegationComment'
-            - description: ' The comment related to the delegation. '
+          $ref: '#/components/schemas/DelegationComment'
+          description: ' The comment related to the delegation. '
         createdBy:
-          allOf:
-            - $ref: '#/components/schemas/CreatedBy'
-            - description: ' The IAM user or role that created the delegation. '
+          $ref: '#/components/schemas/CreatedBy'
+          description: ' The IAM user or role that created the delegation. '
       description: ' The assignment of a control set to a delegate for review. '
     DelegationMetadata:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The unique identifier for the delegation. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The unique identifier for the delegation. '
         assessmentName:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentName'
-            - description: ' The name of the associated assessment. '
+          $ref: '#/components/schemas/AssessmentName'
+          description: ' The name of the associated assessment. '
         assessmentId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The unique identifier for the specified assessment. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The unique identifier for the specified assessment. '
         status:
-          allOf:
-            - $ref: '#/components/schemas/DelegationStatus'
-            - description: ' The current status of the delgation. '
+          $ref: '#/components/schemas/DelegationStatus'
+          description: ' The current status of the delgation. '
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamArn'
-            - description: ' The Amazon Resource Name (ARN) of the IAM role. '
+          $ref: '#/components/schemas/IamArn'
+          description: ' The Amazon Resource Name (ARN) of the IAM role. '
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' Specifies when the delegation was created. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' Specifies when the delegation was created. '
         controlSetName:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' Specifies the name of the control set delegated for review. '
+          $ref: '#/components/schemas/NonEmptyString'
+          description: ' Specifies the name of the control set delegated for review. '
       description: ' The metadata associated with the specified delegation. '
     DelegationMetadataList:
       type: array
@@ -5522,9 +5219,8 @@ components:
       title: DeregisterOrganizationAdminAccountRequest
       properties:
         adminAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: ' The identifier for the specified administrator account. '
+          $ref: '#/components/schemas/AccountId'
+          description: ' The identifier for the specified administrator account. '
     DisassociateAssessmentReportEvidenceFolderRequest:
       type: object
       required:
@@ -5532,9 +5228,8 @@ components:
       title: DisassociateAssessmentReportEvidenceFolderRequest
       properties:
         evidenceFolderId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The identifier for the folder in which evidence is stored. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The identifier for the folder in which evidence is stored. '
     EventName:
       type: string
       pattern: '^[\w\W\s\S]*$'
@@ -5551,65 +5246,50 @@ components:
       type: object
       properties:
         dataSource:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The data source from which the specified evidence was collected. '
+          $ref: '#/components/schemas/String'
+          description: ' The data source from which the specified evidence was collected. '
         evidenceAwsAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: ' The identifier for the specified account. '
+          $ref: '#/components/schemas/AccountId'
+          description: ' The identifier for the specified account. '
         time:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The timestamp that represents when the evidence was collected. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The timestamp that represents when the evidence was collected. '
         eventSource:
-          allOf:
-            - $ref: '#/components/schemas/AWSServiceName'
-            - description: ' The Amazon Web Service from which the evidence is collected. '
+          $ref: '#/components/schemas/AWSServiceName'
+          description: ' The Amazon Web Service from which the evidence is collected. '
         eventName:
-          allOf:
-            - $ref: '#/components/schemas/EventName'
-            - description: ' The name of the specified evidence event. '
+          $ref: '#/components/schemas/EventName'
+          description: ' The name of the specified evidence event. '
         evidenceByType:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The type of automated evidence. '
+          $ref: '#/components/schemas/String'
+          description: ' The type of automated evidence. '
         resourcesIncluded:
-          allOf:
-            - $ref: '#/components/schemas/Resources'
-            - description: ' The list of resources assessed to generate the evidence. '
+          $ref: '#/components/schemas/Resources'
+          description: ' The list of resources assessed to generate the evidence. '
         attributes:
-          allOf:
-            - $ref: '#/components/schemas/EvidenceAttributes'
-            - description: ' The names and values used by the evidence event, including an attribute name (such as <code>allowUsersToChangePassword</code>) and value (such as <code>true</code> or <code>false</code>). '
+          $ref: '#/components/schemas/EvidenceAttributes'
+          description: ' The names and values used by the evidence event, including an attribute name (such as <code>allowUsersToChangePassword</code>) and value (such as <code>true</code> or <code>false</code>). '
         iamId:
-          allOf:
-            - $ref: '#/components/schemas/IamArn'
-            - description: ' The unique identifier for the IAM user or role associated with the evidence. '
+          $ref: '#/components/schemas/IamArn'
+          description: ' The unique identifier for the IAM user or role associated with the evidence. '
         complianceCheck:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The evaluation status for evidence that falls under the compliance check category. For evidence collected from Security Hub, a <i>Pass</i> or <i>Fail</i> result is shown. For evidence collected from Config, a <i>Compliant</i> or <i>Noncompliant</i> result is shown. '
+          $ref: '#/components/schemas/String'
+          description: ' The evaluation status for evidence that falls under the compliance check category. For evidence collected from Security Hub, a <i>Pass</i> or <i>Fail</i> result is shown. For evidence collected from Config, a <i>Compliant</i> or <i>Noncompliant</i> result is shown. '
         awsOrganization:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The account from which the evidence is collected, and its organization path. '
+          $ref: '#/components/schemas/String'
+          description: ' The account from which the evidence is collected, and its organization path. '
         awsAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: ' The identifier for the specified account. '
+          $ref: '#/components/schemas/AccountId'
+          description: ' The identifier for the specified account. '
         evidenceFolderId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The identifier for the folder in which the evidence is stored. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The identifier for the folder in which the evidence is stored. '
         id:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The identifier for the evidence. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The identifier for the evidence. '
         assessmentReportSelection:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' Specifies whether the evidence is included in the assessment report. '
+          $ref: '#/components/schemas/String'
+          description: ' Specifies whether the evidence is included in the assessment report. '
       description: ' A record that contains the information needed to demonstrate compliance with the requirements specified by a control. Examples of evidence include change activity triggered by a user, or a system configuration snapshot. '
     EvidenceAttributeKey:
       type: string
@@ -5648,13 +5328,11 @@ components:
       type: object
       properties:
         hyperlinkName:
-          allOf:
-            - $ref: '#/components/schemas/HyperlinkName'
-            - description: ' The name or word used as a hyperlink to the URL. '
+          $ref: '#/components/schemas/HyperlinkName'
+          description: ' The name or word used as a hyperlink to the URL. '
         link:
-          allOf:
-            - $ref: '#/components/schemas/UrlLink'
-            - description: ' The unique identifier for the internet resource. '
+          $ref: '#/components/schemas/UrlLink'
+          description: ' The unique identifier for the internet resource. '
       description: ' A uniform resource locator, used as a unique identifier to locate a resource on the internet. '
     GetAssessmentRequest:
       type: object
@@ -5735,25 +5413,20 @@ components:
       type: object
       properties:
         isAwsOrgEnabled:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: ' Specifies whether Organizations is enabled. '
+          $ref: '#/components/schemas/Boolean'
+          description: ' Specifies whether Organizations is enabled. '
         snsTopic:
-          allOf:
-            - $ref: '#/components/schemas/SNSTopic'
-            - description: ' The designated Amazon Simple Notification Service (Amazon SNS) topic. '
+          $ref: '#/components/schemas/SNSTopic'
+          description: ' The designated Amazon Simple Notification Service (Amazon SNS) topic. '
         defaultAssessmentReportsDestination:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportsDestination'
-            - description: ' The default storage destination for assessment reports. '
+          $ref: '#/components/schemas/AssessmentReportsDestination'
+          description: ' The default storage destination for assessment reports. '
         defaultProcessOwners:
-          allOf:
-            - $ref: '#/components/schemas/Roles'
-            - description: ' The designated default audit owners. '
+          $ref: '#/components/schemas/Roles'
+          description: ' The designated default audit owners. '
         kmsKey:
-          allOf:
-            - $ref: '#/components/schemas/KmsKey'
-            - description: ' The KMS key details. '
+          $ref: '#/components/schemas/KmsKey'
+          description: ' The KMS key details. '
       description: ' The settings object that holds all supported Audit Manager settings. '
     HyperlinkName:
       type: string
@@ -5823,50 +5496,40 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/TimestampUUID'
-            - description: ' The unique identifier for the notification. '
+          $ref: '#/components/schemas/TimestampUUID'
+          description: ' The unique identifier for the notification. '
         assessmentId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: ' The identifier for the specified assessment. '
+          $ref: '#/components/schemas/UUID'
+          description: ' The identifier for the specified assessment. '
         assessmentName:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentName'
-            - description: ' The name of the related assessment. '
+          $ref: '#/components/schemas/AssessmentName'
+          description: ' The name of the related assessment. '
         controlSetId:
-          allOf:
-            - $ref: '#/components/schemas/ControlSetId'
-            - description: ' The identifier for the specified control set. '
+          $ref: '#/components/schemas/ControlSetId'
+          description: ' The identifier for the specified control set. '
         controlSetName:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' Specifies the name of the control set that the notification is about. '
+          $ref: '#/components/schemas/NonEmptyString'
+          description: ' Specifies the name of the control set that the notification is about. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The description of the notification. '
+          $ref: '#/components/schemas/NonEmptyString'
+          description: ' The description of the notification. '
         eventTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' The time when the notification was sent. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The time when the notification was sent. '
         source:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The sender of the notification. '
+          $ref: '#/components/schemas/NonEmptyString'
+          description: ' The sender of the notification. '
       description: ' The notification used to inform a user of an update in Audit Manager. For example, this includes the notification that is sent when a control set is delegated for review. '
     RegisterAccountRequest:
       type: object
       title: RegisterAccountRequest
       properties:
         kmsKey:
-          allOf:
-            - $ref: '#/components/schemas/KmsKey'
-            - description: ' The KMS key details. '
+          $ref: '#/components/schemas/KmsKey'
+          description: ' The KMS key details. '
         delegatedAdminAccount:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: ' The delegated administrator account for Audit Manager. '
+          $ref: '#/components/schemas/AccountId'
+          description: ' The delegated administrator account for Audit Manager. '
     RegisterOrganizationAdminAccountRequest:
       type: object
       required:
@@ -5874,20 +5537,17 @@ components:
       title: RegisterOrganizationAdminAccountRequest
       properties:
         adminAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: ' The identifier for the specified delegated administrator account. '
+          $ref: '#/components/schemas/AccountId'
+          description: ' The identifier for the specified delegated administrator account. '
     Resource:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/GenericArn'
-            - description: ' The Amazon Resource Name (ARN) for the specified resource. '
+          $ref: '#/components/schemas/GenericArn'
+          description: ' The Amazon Resource Name (ARN) for the specified resource. '
         value:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The value of the specified resource. '
+          $ref: '#/components/schemas/String'
+          description: ' The value of the specified resource. '
       description: ' A system asset that is evaluated in an Audit Manager assessment. '
     SNSTopic:
       type: string
@@ -5898,21 +5558,17 @@ components:
       type: object
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/AWSServiceName'
-            - description: ' The name of the Amazon Web Service. '
+          $ref: '#/components/schemas/AWSServiceName'
+          description: ' The name of the Amazon Web Service. '
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The display name of the Amazon Web Service. '
+          $ref: '#/components/schemas/NonEmptyString'
+          description: ' The display name of the Amazon Web Service. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The description of the specified Amazon Web Service. '
+          $ref: '#/components/schemas/NonEmptyString'
+          description: ' The description of the specified Amazon Web Service. '
         category:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The category in which the Amazon Web Service belongs, such as compute, storage, database, and so on. '
+          $ref: '#/components/schemas/NonEmptyString'
+          description: ' The category in which the Amazon Web Service belongs, such as compute, storage, database, and so on. '
       description: ' The metadata associated with the specified Amazon Web Service. '
     SnsArn:
       type: string
@@ -5932,9 +5588,8 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: ' The tags to be associated with the resource. '
+          $ref: '#/components/schemas/TagMap'
+          description: ' The tags to be associated with the resource. '
     UrlLink:
       type: string
       pattern: '^(https?:\/\/)?(www\.)?[a-zA-Z0-9-_]+([\.]+[a-zA-Z]+)+[\/\w]*$'
@@ -5949,13 +5604,11 @@ components:
       title: UpdateAssessmentControlRequest
       properties:
         controlStatus:
-          allOf:
-            - $ref: '#/components/schemas/ControlStatus'
-            - description: ' The status of the specified control. '
+          $ref: '#/components/schemas/ControlStatus'
+          description: ' The status of the specified control. '
         commentBody:
-          allOf:
-            - $ref: '#/components/schemas/ControlCommentBody'
-            - description: ' The comment body text for the specified control. '
+          $ref: '#/components/schemas/ControlCommentBody'
+          description: ' The comment body text for the specified control. '
     UpdateAssessmentControlSetStatusRequest:
       type: object
       required:
@@ -5964,13 +5617,11 @@ components:
       title: UpdateAssessmentControlSetStatusRequest
       properties:
         status:
-          allOf:
-            - $ref: '#/components/schemas/ControlSetStatus'
-            - description: ' The status of the control set that is being updated. '
+          $ref: '#/components/schemas/ControlSetStatus'
+          description: ' The status of the control set that is being updated. '
         comment:
-          allOf:
-            - $ref: '#/components/schemas/DelegationComment'
-            - description: ' The comment related to the status update. '
+          $ref: '#/components/schemas/DelegationComment'
+          description: ' The comment related to the status update. '
     UpdateAssessmentFrameworkControlSets:
       type: array
       items:
@@ -5983,21 +5634,17 @@ components:
       title: UpdateAssessmentFrameworkRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/FrameworkName'
-            - description: ' The name of the framework to be updated. '
+          $ref: '#/components/schemas/FrameworkName'
+          description: ' The name of the framework to be updated. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/FrameworkDescription'
-            - description: ' The description of the framework that is to be updated. '
+          $ref: '#/components/schemas/FrameworkDescription'
+          description: ' The description of the framework that is to be updated. '
         complianceType:
-          allOf:
-            - $ref: '#/components/schemas/ComplianceType'
-            - description: ' The compliance type that the new custom framework supports, such as CIS or HIPAA. '
+          $ref: '#/components/schemas/ComplianceType'
+          description: ' The compliance type that the new custom framework supports, such as CIS or HIPAA. '
         controlSets:
-          allOf:
-            - $ref: '#/components/schemas/UpdateAssessmentFrameworkControlSets'
-            - description: ' The control sets associated with the framework. '
+          $ref: '#/components/schemas/UpdateAssessmentFrameworkControlSets'
+          description: ' The control sets associated with the framework. '
     UpdateAssessmentRequest:
       type: object
       required:
@@ -6005,25 +5652,20 @@ components:
       title: UpdateAssessmentRequest
       properties:
         assessmentName:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentName'
-            - description: ' The name of the specified assessment to be updated. '
+          $ref: '#/components/schemas/AssessmentName'
+          description: ' The name of the specified assessment to be updated. '
         assessmentDescription:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentDescription'
-            - description: ' The description of the specified assessment. '
+          $ref: '#/components/schemas/AssessmentDescription'
+          description: ' The description of the specified assessment. '
         scope:
-          allOf:
-            - $ref: '#/components/schemas/Scope'
-            - description: ' The scope of the specified assessment. '
+          $ref: '#/components/schemas/Scope'
+          description: ' The scope of the specified assessment. '
         assessmentReportsDestination:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportsDestination'
-            - description: ' The assessment report storage destination for the specified assessment that is being updated. '
+          $ref: '#/components/schemas/AssessmentReportsDestination'
+          description: ' The assessment report storage destination for the specified assessment that is being updated. '
         roles:
-          allOf:
-            - $ref: '#/components/schemas/Roles'
-            - description: ' The list of roles for the specified assessment. '
+          $ref: '#/components/schemas/Roles'
+          description: ' The list of roles for the specified assessment. '
     UpdateAssessmentStatusRequest:
       type: object
       required:
@@ -6031,9 +5673,8 @@ components:
       title: UpdateAssessmentStatusRequest
       properties:
         status:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentStatus'
-            - description: ' The current status of the specified assessment. '
+          $ref: '#/components/schemas/AssessmentStatus'
+          description: ' The current status of the specified assessment. '
     UpdateControlRequest:
       type: object
       required:
@@ -6042,49 +5683,39 @@ components:
       title: UpdateControlRequest
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ControlName'
-            - description: ' The name of the control to be updated. '
+          $ref: '#/components/schemas/ControlName'
+          description: ' The name of the control to be updated. '
         description:
-          allOf:
-            - $ref: '#/components/schemas/ControlDescription'
-            - description: ' The optional description of the control. '
+          $ref: '#/components/schemas/ControlDescription'
+          description: ' The optional description of the control. '
         testingInformation:
-          allOf:
-            - $ref: '#/components/schemas/TestingInformation'
-            - description: ' The steps that to follow to determine if the control has been satisfied. '
+          $ref: '#/components/schemas/TestingInformation'
+          description: ' The steps that to follow to determine if the control has been satisfied. '
         actionPlanTitle:
-          allOf:
-            - $ref: '#/components/schemas/ActionPlanTitle'
-            - description: ' The title of the action plan for remediating the control. '
+          $ref: '#/components/schemas/ActionPlanTitle'
+          description: ' The title of the action plan for remediating the control. '
         actionPlanInstructions:
-          allOf:
-            - $ref: '#/components/schemas/ActionPlanInstructions'
-            - description: ' The recommended actions to carry out if the control is not fulfilled. '
+          $ref: '#/components/schemas/ActionPlanInstructions'
+          description: ' The recommended actions to carry out if the control is not fulfilled. '
         controlMappingSources:
-          allOf:
-            - $ref: '#/components/schemas/ControlMappingSources'
-            - description: ' The data mapping sources for the specified control. '
+          $ref: '#/components/schemas/ControlMappingSources'
+          description: ' The data mapping sources for the specified control. '
     UpdateSettingsRequest:
       type: object
       title: UpdateSettingsRequest
       properties:
         snsTopic:
-          allOf:
-            - $ref: '#/components/schemas/SnsArn'
-            - description: ' The Amazon Simple Notification Service (Amazon SNS) topic to which Audit Manager sends notifications. '
+          $ref: '#/components/schemas/SnsArn'
+          description: ' The Amazon Simple Notification Service (Amazon SNS) topic to which Audit Manager sends notifications. '
         defaultAssessmentReportsDestination:
-          allOf:
-            - $ref: '#/components/schemas/AssessmentReportsDestination'
-            - description: ' The default storage destination for assessment reports. '
+          $ref: '#/components/schemas/AssessmentReportsDestination'
+          description: ' The default storage destination for assessment reports. '
         defaultProcessOwners:
-          allOf:
-            - $ref: '#/components/schemas/Roles'
-            - description: ' A list of the default audit owners. '
+          $ref: '#/components/schemas/Roles'
+          description: ' A list of the default audit owners. '
         kmsKey:
-          allOf:
-            - $ref: '#/components/schemas/KmsKey'
-            - description: ' The KMS key details. '
+          $ref: '#/components/schemas/KmsKey'
+          description: ' The KMS key details. '
     ValidateAssessmentReportIntegrityRequest:
       type: object
       required:
@@ -6092,9 +5723,8 @@ components:
       title: ValidateAssessmentReportIntegrityRequest
       properties:
         s3RelativePath:
-          allOf:
-            - $ref: '#/components/schemas/S3Url'
-            - description: ' The relative path of the specified Amazon S3 bucket in which the assessment report is stored. '
+          $ref: '#/components/schemas/S3Url'
+          description: ' The relative path of the specified Amazon S3 bucket in which the assessment report is stored. '
     ValidationErrors:
       type: array
       items:

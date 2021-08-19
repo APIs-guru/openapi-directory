@@ -462,25 +462,20 @@ paths:
                   type: object
                   properties:
                     ExportAssetToSignedUrl:
-                      allOf:
-                        - $ref: '#/components/schemas/ExportAssetToSignedUrlRequestDetails'
-                        - description: Details about the export to signed URL request.
+                      $ref: '#/components/schemas/ExportAssetToSignedUrlRequestDetails'
+                      description: Details about the export to signed URL request.
                     ExportAssetsToS3:
-                      allOf:
-                        - $ref: '#/components/schemas/ExportAssetsToS3RequestDetails'
-                        - description: Details about the export to Amazon S3 request.
+                      $ref: '#/components/schemas/ExportAssetsToS3RequestDetails'
+                      description: Details about the export to Amazon S3 request.
                     ExportRevisionsToS3:
-                      allOf:
-                        - $ref: '#/components/schemas/ExportRevisionsToS3RequestDetails'
-                        - description: Details about the export to Amazon S3 request.
+                      $ref: '#/components/schemas/ExportRevisionsToS3RequestDetails'
+                      description: Details about the export to Amazon S3 request.
                     ImportAssetFromSignedUrl:
-                      allOf:
-                        - $ref: '#/components/schemas/ImportAssetFromSignedUrlRequestDetails'
-                        - description: Details about the import from signed URL request.
+                      $ref: '#/components/schemas/ImportAssetFromSignedUrlRequestDetails'
+                      description: Details about the import from signed URL request.
                     ImportAssetsFromS3:
-                      allOf:
-                        - $ref: '#/components/schemas/ImportAssetsFromS3RequestDetails'
-                        - description: Details about the import from Amazon S3 request.
+                      $ref: '#/components/schemas/ImportAssetsFromS3RequestDetails'
+                      description: Details about the import from Amazon S3 request.
                 Type:
                   description: The type of job to be created.
                   type: string
@@ -1481,49 +1476,38 @@ components:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN for the data set.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN for the data set.
         AssetType:
-          allOf:
-            - $ref: '#/components/schemas/AssetType'
-            - description: 'The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.'
+          $ref: '#/components/schemas/AssetType'
+          description: 'The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.'
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the data set was created, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the data set was created, in ISO 8601 format.'
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description for the data set.
+          $ref: '#/components/schemas/Description'
+          description: The description for the data set.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the data set.
+          $ref: '#/components/schemas/Name'
+          description: The name of the data set.
         Origin:
-          allOf:
-            - $ref: '#/components/schemas/Origin'
-            - description: A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).
+          $ref: '#/components/schemas/Origin'
+          description: A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).
         OriginDetails:
-          allOf:
-            - $ref: '#/components/schemas/OriginDetails'
-            - description: 'If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.'
+          $ref: '#/components/schemas/OriginDetails'
+          description: 'If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.'
         SourceId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.
+          $ref: '#/components/schemas/Id'
+          description: The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/MapOf__string'
-            - description: The tags for the data set.
+          $ref: '#/components/schemas/MapOf__string'
+          description: The tags for the data set.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the data set was last updated, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the data set was last updated, in ISO 8601 format.'
     __string:
       type: string
     ServiceLimitExceededException: {}
@@ -1532,37 +1516,29 @@ components:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN for the job.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN for the job.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the job was created, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the job was created, in ISO 8601 format.'
         Details:
-          allOf:
-            - $ref: '#/components/schemas/ResponseDetails'
-            - description: Details about the job.
+          $ref: '#/components/schemas/ResponseDetails'
+          description: Details about the job.
         Errors:
-          allOf:
-            - $ref: '#/components/schemas/ListOfJobError'
-            - description: The errors associated with jobs.
+          $ref: '#/components/schemas/ListOfJobError'
+          description: The errors associated with jobs.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the job.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the job.
         State:
-          allOf:
-            - $ref: '#/components/schemas/State'
-            - description: The state of the job.
+          $ref: '#/components/schemas/State'
+          description: The state of the job.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/Type'
-            - description: The job type.
+          $ref: '#/components/schemas/Type'
+          description: The job type.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the job was last updated, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the job was last updated, in ISO 8601 format.'
     ExportAssetToSignedUrlRequestDetails:
       type: object
       required:
@@ -1571,17 +1547,14 @@ components:
         - RevisionId
       properties:
         AssetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the asset that is exported to a signed URL.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the asset that is exported to a signed URL.
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this export job.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this export job.
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the revision associated with this export request.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the revision associated with this export request.
       description: Details of the operation to be performed by the job.
     ExportAssetsToS3RequestDetails:
       type: object
@@ -1591,21 +1564,17 @@ components:
         - RevisionId
       properties:
         AssetDestinations:
-          allOf:
-            - $ref: '#/components/schemas/ListOfAssetDestinationEntry'
-            - description: The destination for the asset.
+          $ref: '#/components/schemas/ListOfAssetDestinationEntry'
+          description: The destination for the asset.
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this export job.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this export job.
         Encryption:
-          allOf:
-            - $ref: '#/components/schemas/ExportServerSideEncryption'
-            - description: Encryption configuration for the export job.
+          $ref: '#/components/schemas/ExportServerSideEncryption'
+          description: Encryption configuration for the export job.
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the revision associated with this export request.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the revision associated with this export request.
       description: Details of the operation to be performed by the job.
     ExportRevisionsToS3RequestDetails:
       type: object
@@ -1614,17 +1583,14 @@ components:
         - DataSetId
       properties:
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this export job.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this export job.
         Encryption:
-          allOf:
-            - $ref: '#/components/schemas/ExportServerSideEncryption'
-            - description: Encryption configuration for the export job.
+          $ref: '#/components/schemas/ExportServerSideEncryption'
+          description: Encryption configuration for the export job.
         RevisionDestinations:
-          allOf:
-            - $ref: '#/components/schemas/ListOfRevisionDestinationEntry'
-            - description: The destination for the revision.
+          $ref: '#/components/schemas/ListOfRevisionDestinationEntry'
+          description: The destination for the revision.
       description: Details of the operation to be performed by the job.
     ImportAssetFromSignedUrlRequestDetails:
       type: object
@@ -1635,21 +1601,17 @@ components:
         - AssetName
       properties:
         AssetName:
-          allOf:
-            - $ref: '#/components/schemas/AssetName'
-            - description: 'The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name.'
+          $ref: '#/components/schemas/AssetName'
+          description: 'The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name.'
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this import job.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this import job.
         Md5Hash:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093'
-            - description: 'The Base64-encoded Md5 hash for the asset, used to ensure the integrity of the file at that location.'
+          $ref: '#/components/schemas/__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093'
+          description: 'The Base64-encoded Md5 hash for the asset, used to ensure the integrity of the file at that location.'
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the revision associated with this import request.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the revision associated with this import request.
       description: Details of the operation to be performed by the job.
     ImportAssetsFromS3RequestDetails:
       type: object
@@ -1659,265 +1621,207 @@ components:
         - RevisionId
       properties:
         AssetSources:
-          allOf:
-            - $ref: '#/components/schemas/ListOfAssetSourceEntry'
-            - description: Is a list of S3 bucket and object key pairs.
+          $ref: '#/components/schemas/ListOfAssetSourceEntry'
+          description: Is a list of S3 bucket and object key pairs.
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this import job.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this import job.
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the revision associated with this import request.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the revision associated with this import request.
       description: Details of the operation to be performed by the job.
     CreateRevisionResponse:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN for the revision
+          $ref: '#/components/schemas/Arn'
+          description: The ARN for the revision
         Comment:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin0Max16384'
-            - description: An optional comment about the revision.
+          $ref: '#/components/schemas/__stringMin0Max16384'
+          description: An optional comment about the revision.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the revision was created, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the revision was created, in ISO 8601 format.'
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this revision.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this revision.
         Finalized:
-          allOf:
-            - $ref: '#/components/schemas/__boolean'
-            - description: '<p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it''s in this read-only state, you can publish the revision to your products.</p> <p>Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>'
+          $ref: '#/components/schemas/__boolean'
+          description: '<p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it''s in this read-only state, you can publish the revision to your products.</p> <p>Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>'
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the revision.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the revision.
         SourceId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.
+          $ref: '#/components/schemas/Id'
+          description: The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/MapOf__string'
-            - description: The tags for the revision.
+          $ref: '#/components/schemas/MapOf__string'
+          description: The tags for the revision.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the revision was last updated, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the revision was last updated, in ISO 8601 format.'
     GetAssetResponse:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN for the asset.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN for the asset.
         AssetDetails:
-          allOf:
-            - $ref: '#/components/schemas/AssetDetails'
-            - description: 'Information about the asset, including its size.'
+          $ref: '#/components/schemas/AssetDetails'
+          description: 'Information about the asset, including its size.'
         AssetType:
-          allOf:
-            - $ref: '#/components/schemas/AssetType'
-            - description: 'The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.'
+          $ref: '#/components/schemas/AssetType'
+          description: 'The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.'
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the asset was created, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the asset was created, in ISO 8601 format.'
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this asset.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this asset.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the asset.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the asset.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/AssetName'
-            - description: 'The name of the asset When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.'
+          $ref: '#/components/schemas/AssetName'
+          description: 'The name of the asset When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.'
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the revision associated with this asset.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the revision associated with this asset.
         SourceId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The asset ID of the owned asset corresponding to the entitled asset being viewed. This parameter is returned when an asset owner is viewing the entitled copy of its owned asset.
+          $ref: '#/components/schemas/Id'
+          description: The asset ID of the owned asset corresponding to the entitled asset being viewed. This parameter is returned when an asset owner is viewing the entitled copy of its owned asset.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the asset was last updated, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the asset was last updated, in ISO 8601 format.'
     GetDataSetResponse:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN for the data set.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN for the data set.
         AssetType:
-          allOf:
-            - $ref: '#/components/schemas/AssetType'
-            - description: 'The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.'
+          $ref: '#/components/schemas/AssetType'
+          description: 'The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.'
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the data set was created, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the data set was created, in ISO 8601 format.'
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description for the data set.
+          $ref: '#/components/schemas/Description'
+          description: The description for the data set.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the data set.
+          $ref: '#/components/schemas/Name'
+          description: The name of the data set.
         Origin:
-          allOf:
-            - $ref: '#/components/schemas/Origin'
-            - description: A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).
+          $ref: '#/components/schemas/Origin'
+          description: A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).
         OriginDetails:
-          allOf:
-            - $ref: '#/components/schemas/OriginDetails'
-            - description: 'If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.'
+          $ref: '#/components/schemas/OriginDetails'
+          description: 'If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.'
         SourceId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.
+          $ref: '#/components/schemas/Id'
+          description: The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/MapOf__string'
-            - description: The tags for the data set.
+          $ref: '#/components/schemas/MapOf__string'
+          description: The tags for the data set.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the data set was last updated, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the data set was last updated, in ISO 8601 format.'
     GetJobResponse:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN for the job.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN for the job.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the job was created, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the job was created, in ISO 8601 format.'
         Details:
-          allOf:
-            - $ref: '#/components/schemas/ResponseDetails'
-            - description: Details about the job.
+          $ref: '#/components/schemas/ResponseDetails'
+          description: Details about the job.
         Errors:
-          allOf:
-            - $ref: '#/components/schemas/ListOfJobError'
-            - description: The errors associated with jobs.
+          $ref: '#/components/schemas/ListOfJobError'
+          description: The errors associated with jobs.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the job.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the job.
         State:
-          allOf:
-            - $ref: '#/components/schemas/State'
-            - description: The state of the job.
+          $ref: '#/components/schemas/State'
+          description: The state of the job.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/Type'
-            - description: The job type.
+          $ref: '#/components/schemas/Type'
+          description: The job type.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the job was last updated, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the job was last updated, in ISO 8601 format.'
     GetRevisionResponse:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN for the revision
+          $ref: '#/components/schemas/Arn'
+          description: The ARN for the revision
         Comment:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin0Max16384'
-            - description: An optional comment about the revision.
+          $ref: '#/components/schemas/__stringMin0Max16384'
+          description: An optional comment about the revision.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the revision was created, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the revision was created, in ISO 8601 format.'
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this revision.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this revision.
         Finalized:
-          allOf:
-            - $ref: '#/components/schemas/__boolean'
-            - description: '<p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it''s in this read-only state, you can publish the revision to your products.</p> <p>Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>'
+          $ref: '#/components/schemas/__boolean'
+          description: '<p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it''s in this read-only state, you can publish the revision to your products.</p> <p>Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>'
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the revision.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the revision.
         SourceId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.
+          $ref: '#/components/schemas/Id'
+          description: The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/MapOf__string'
-            - description: The tags for the revision.
+          $ref: '#/components/schemas/MapOf__string'
+          description: The tags for the revision.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the revision was last updated, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the revision was last updated, in ISO 8601 format.'
     ListDataSetRevisionsResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token value retrieved from a previous call to access the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token value retrieved from a previous call to access the next page of results.
         Revisions:
-          allOf:
-            - $ref: '#/components/schemas/ListOfRevisionEntry'
-            - description: The asset objects listed by the request.
+          $ref: '#/components/schemas/ListOfRevisionEntry'
+          description: The asset objects listed by the request.
     ListDataSetsResponse:
       type: object
       properties:
         DataSets:
-          allOf:
-            - $ref: '#/components/schemas/ListOfDataSetEntry'
-            - description: The data set objects listed by the request.
+          $ref: '#/components/schemas/ListOfDataSetEntry'
+          description: The data set objects listed by the request.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token value retrieved from a previous call to access the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token value retrieved from a previous call to access the next page of results.
     ListJobsResponse:
       type: object
       properties:
         Jobs:
-          allOf:
-            - $ref: '#/components/schemas/ListOfJobEntry'
-            - description: The jobs listed by the request.
+          $ref: '#/components/schemas/ListOfJobEntry'
+          description: The jobs listed by the request.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token value retrieved from a previous call to access the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token value retrieved from a previous call to access the next page of results.
     ListRevisionAssetsResponse:
       type: object
       properties:
         Assets:
-          allOf:
-            - $ref: '#/components/schemas/ListOfAssetEntry'
-            - description: The asset objects listed by the request.
+          $ref: '#/components/schemas/ListOfAssetEntry'
+          description: The asset objects listed by the request.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token value retrieved from a previous call to access the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token value retrieved from a previous call to access the next page of results.
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -1934,123 +1838,95 @@ components:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN for the asset.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN for the asset.
         AssetDetails:
-          allOf:
-            - $ref: '#/components/schemas/AssetDetails'
-            - description: 'Information about the asset, including its size.'
+          $ref: '#/components/schemas/AssetDetails'
+          description: 'Information about the asset, including its size.'
         AssetType:
-          allOf:
-            - $ref: '#/components/schemas/AssetType'
-            - description: 'The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.'
+          $ref: '#/components/schemas/AssetType'
+          description: 'The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.'
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the asset was created, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the asset was created, in ISO 8601 format.'
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this asset.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this asset.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the asset.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the asset.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/AssetName'
-            - description: 'The name of the asset When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.'
+          $ref: '#/components/schemas/AssetName'
+          description: 'The name of the asset When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.'
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the revision associated with this asset.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the revision associated with this asset.
         SourceId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The asset ID of the owned asset corresponding to the entitled asset being viewed. This parameter is returned when an asset owner is viewing the entitled copy of its owned asset.
+          $ref: '#/components/schemas/Id'
+          description: The asset ID of the owned asset corresponding to the entitled asset being viewed. This parameter is returned when an asset owner is viewing the entitled copy of its owned asset.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the asset was last updated, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the asset was last updated, in ISO 8601 format.'
     UpdateDataSetResponse:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN for the data set.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN for the data set.
         AssetType:
-          allOf:
-            - $ref: '#/components/schemas/AssetType'
-            - description: 'The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.'
+          $ref: '#/components/schemas/AssetType'
+          description: 'The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.'
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the data set was created, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the data set was created, in ISO 8601 format.'
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description for the data set.
+          $ref: '#/components/schemas/Description'
+          description: The description for the data set.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the data set.
+          $ref: '#/components/schemas/Name'
+          description: The name of the data set.
         Origin:
-          allOf:
-            - $ref: '#/components/schemas/Origin'
-            - description: A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).
+          $ref: '#/components/schemas/Origin'
+          description: A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).
         OriginDetails:
-          allOf:
-            - $ref: '#/components/schemas/OriginDetails'
-            - description: 'If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.'
+          $ref: '#/components/schemas/OriginDetails'
+          description: 'If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.'
         SourceId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.
+          $ref: '#/components/schemas/Id'
+          description: The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the data set was last updated, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the data set was last updated, in ISO 8601 format.'
     UpdateRevisionResponse:
       type: object
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN for the revision.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN for the revision.
         Comment:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin0Max16384'
-            - description: An optional comment about the revision.
+          $ref: '#/components/schemas/__stringMin0Max16384'
+          description: An optional comment about the revision.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the revision was created, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the revision was created, in ISO 8601 format.'
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this revision.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this revision.
         Finalized:
-          allOf:
-            - $ref: '#/components/schemas/__boolean'
-            - description: '<p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that changes to the assets in the revision are complete. After it''s in this read-only state, you can publish the revision to your products.</p> <p>Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>'
+          $ref: '#/components/schemas/__boolean'
+          description: '<p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that changes to the assets in the revision are complete. After it''s in this read-only state, you can publish the revision to your products.</p> <p>Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>'
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the revision.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the revision.
         SourceId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.
+          $ref: '#/components/schemas/Id'
+          description: The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the revision was last updated, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the revision was last updated, in ISO 8601 format.'
     Arn:
       type: string
       description: An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.
@@ -2064,17 +1940,14 @@ components:
         - AssetId
       properties:
         AssetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the asset.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the asset.
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The S3 bucket that is the destination for the asset.
+          $ref: '#/components/schemas/__string'
+          description: The S3 bucket that is the destination for the asset.
         Key:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the object in Amazon S3 for the asset.
+          $ref: '#/components/schemas/__string'
+          description: The name of the object in Amazon S3 for the asset.
       description: The destination for the asset.
     S3SnapshotAsset:
       type: object
@@ -2082,9 +1955,8 @@ components:
         - Size
       properties:
         Size:
-          allOf:
-            - $ref: '#/components/schemas/__doubleMin0'
-            - description: The size of the S3 object that is the object.
+          $ref: '#/components/schemas/__doubleMin0'
+          description: The size of the S3 object that is the object.
       description: The S3 object that is the asset.
     AssetDetails:
       type: object
@@ -2117,45 +1989,35 @@ components:
         - Name
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN for the asset.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN for the asset.
         AssetDetails:
-          allOf:
-            - $ref: '#/components/schemas/AssetDetails'
-            - description: 'Information about the asset, including its size.'
+          $ref: '#/components/schemas/AssetDetails'
+          description: 'Information about the asset, including its size.'
         AssetType:
-          allOf:
-            - $ref: '#/components/schemas/AssetType'
-            - description: 'The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.'
+          $ref: '#/components/schemas/AssetType'
+          description: 'The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.'
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the asset was created, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the asset was created, in ISO 8601 format.'
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this asset.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this asset.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the asset.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the asset.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/AssetName'
-            - description: 'The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.'
+          $ref: '#/components/schemas/AssetName'
+          description: 'The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.'
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the revision associated with this asset.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the revision associated with this asset.
         SourceId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The asset ID of the owned asset corresponding to the entitled asset being viewed. This parameter is returned when an asset owner is viewing the entitled copy of its owned asset.
+          $ref: '#/components/schemas/Id'
+          description: The asset ID of the owned asset corresponding to the entitled asset being viewed. This parameter is returned when an asset owner is viewing the entitled copy of its owned asset.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the asset was last updated, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the asset was last updated, in ISO 8601 format.'
       description: 'An asset in AWS Data Exchange is a piece of data that can be stored as an S3 object. The asset can be a structured data file, an image file, or some other data file. When you create an import job for your files, you create an asset in AWS Data Exchange for each of those files.'
     AssetSourceEntry:
       type: object
@@ -2164,13 +2026,11 @@ components:
         - Key
       properties:
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The S3 bucket that's part of the source of the asset.
+          $ref: '#/components/schemas/__string'
+          description: The S3 bucket that's part of the source of the asset.
         Key:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the object in Amazon S3 for the asset.
+          $ref: '#/components/schemas/__string'
+          description: The name of the object in Amazon S3 for the asset.
       description: The source of the assets.
     CancelJobRequest:
       type: object
@@ -2205,21 +2065,17 @@ components:
       title: CreateDataSetRequest
       properties:
         AssetType:
-          allOf:
-            - $ref: '#/components/schemas/AssetType'
-            - description: 'The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.'
+          $ref: '#/components/schemas/AssetType'
+          description: 'The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.'
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: 'A description for the data set. This value can be up to 16,348 characters long.'
+          $ref: '#/components/schemas/Description'
+          description: 'A description for the data set. This value can be up to 16,348 characters long.'
         Name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the data set.
+          $ref: '#/components/schemas/Name'
+          description: The name of the data set.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/MapOf__string'
-            - description: 'A data set tag is an optional label that you can assign to a data set when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to these data sets and revisions.'
+          $ref: '#/components/schemas/MapOf__string'
+          description: 'A data set tag is an optional label that you can assign to a data set when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to these data sets and revisions.'
       description: The request body for CreateDataSet.
     Origin:
       type: string
@@ -2238,25 +2094,20 @@ components:
       type: object
       properties:
         ExportAssetToSignedUrl:
-          allOf:
-            - $ref: '#/components/schemas/ExportAssetToSignedUrlRequestDetails'
-            - description: Details about the export to signed URL request.
+          $ref: '#/components/schemas/ExportAssetToSignedUrlRequestDetails'
+          description: Details about the export to signed URL request.
         ExportAssetsToS3:
-          allOf:
-            - $ref: '#/components/schemas/ExportAssetsToS3RequestDetails'
-            - description: Details about the export to Amazon S3 request.
+          $ref: '#/components/schemas/ExportAssetsToS3RequestDetails'
+          description: Details about the export to Amazon S3 request.
         ExportRevisionsToS3:
-          allOf:
-            - $ref: '#/components/schemas/ExportRevisionsToS3RequestDetails'
-            - description: Details about the export to Amazon S3 request.
+          $ref: '#/components/schemas/ExportRevisionsToS3RequestDetails'
+          description: Details about the export to Amazon S3 request.
         ImportAssetFromSignedUrl:
-          allOf:
-            - $ref: '#/components/schemas/ImportAssetFromSignedUrlRequestDetails'
-            - description: Details about the import from signed URL request.
+          $ref: '#/components/schemas/ImportAssetFromSignedUrlRequestDetails'
+          description: Details about the import from signed URL request.
         ImportAssetsFromS3:
-          allOf:
-            - $ref: '#/components/schemas/ImportAssetsFromS3RequestDetails'
-            - description: Details about the import from Amazon S3 request.
+          $ref: '#/components/schemas/ImportAssetsFromS3RequestDetails'
+          description: Details about the import from Amazon S3 request.
       description: The details for the request.
     Type:
       type: string
@@ -2274,37 +2125,30 @@ components:
       title: CreateJobRequest
       properties:
         Details:
-          allOf:
-            - $ref: '#/components/schemas/RequestDetails'
-            - description: The details for the CreateJob request.
+          $ref: '#/components/schemas/RequestDetails'
+          description: The details for the CreateJob request.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/Type'
-            - description: The type of job to be created.
+          $ref: '#/components/schemas/Type'
+          description: The type of job to be created.
       description: The request body for CreateJob.
     ResponseDetails:
       type: object
       properties:
         ExportAssetToSignedUrl:
-          allOf:
-            - $ref: '#/components/schemas/ExportAssetToSignedUrlResponseDetails'
-            - description: Details for the export to signed URL response.
+          $ref: '#/components/schemas/ExportAssetToSignedUrlResponseDetails'
+          description: Details for the export to signed URL response.
         ExportAssetsToS3:
-          allOf:
-            - $ref: '#/components/schemas/ExportAssetsToS3ResponseDetails'
-            - description: Details for the export to Amazon S3 response.
+          $ref: '#/components/schemas/ExportAssetsToS3ResponseDetails'
+          description: Details for the export to Amazon S3 response.
         ExportRevisionsToS3:
-          allOf:
-            - $ref: '#/components/schemas/ExportRevisionsToS3ResponseDetails'
-            - description: Details for the export revisions to Amazon S3 response.
+          $ref: '#/components/schemas/ExportRevisionsToS3ResponseDetails'
+          description: Details for the export revisions to Amazon S3 response.
         ImportAssetFromSignedUrl:
-          allOf:
-            - $ref: '#/components/schemas/ImportAssetFromSignedUrlResponseDetails'
-            - description: Details for the import from signed URL response.
+          $ref: '#/components/schemas/ImportAssetFromSignedUrlResponseDetails'
+          description: Details for the import from signed URL response.
         ImportAssetsFromS3:
-          allOf:
-            - $ref: '#/components/schemas/ImportAssetsFromS3ResponseDetails'
-            - description: Details for the import from Amazon S3 response.
+          $ref: '#/components/schemas/ImportAssetsFromS3ResponseDetails'
+          description: Details for the import from Amazon S3 response.
       description: Details for the response.
     ListOfJobError:
       type: array
@@ -2328,13 +2172,11 @@ components:
       title: CreateRevisionRequest
       properties:
         Comment:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin0Max16384'
-            - description: An optional comment about the revision.
+          $ref: '#/components/schemas/__stringMin0Max16384'
+          description: An optional comment about the revision.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/MapOf__string'
-            - description: 'A revision tag is an optional label that you can assign to a revision when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to these data sets and revisions.'
+          $ref: '#/components/schemas/MapOf__string'
+          description: 'A revision tag is an optional label that you can assign to a revision when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to these data sets and revisions.'
       description: The request body for CreateRevision.
     __boolean:
       type: boolean
@@ -2351,45 +2193,35 @@ components:
         - Name
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN for the data set.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN for the data set.
         AssetType:
-          allOf:
-            - $ref: '#/components/schemas/AssetType'
-            - description: 'The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.'
+          $ref: '#/components/schemas/AssetType'
+          description: 'The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.'
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the data set was created, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the data set was created, in ISO 8601 format.'
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description for the data set.
+          $ref: '#/components/schemas/Description'
+          description: The description for the data set.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the data set.
+          $ref: '#/components/schemas/Name'
+          description: The name of the data set.
         Origin:
-          allOf:
-            - $ref: '#/components/schemas/Origin'
-            - description: A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).
+          $ref: '#/components/schemas/Origin'
+          description: A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).
         OriginDetails:
-          allOf:
-            - $ref: '#/components/schemas/OriginDetails'
-            - description: 'If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.'
+          $ref: '#/components/schemas/OriginDetails'
+          description: 'If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.'
         SourceId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.
+          $ref: '#/components/schemas/Id'
+          description: The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the data set was last updated, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the data set was last updated, in ISO 8601 format.'
       description: A data set is an AWS resource with one or more revisions.
     DeleteAssetRequest:
       type: object
@@ -2430,25 +2262,20 @@ components:
         - RevisionId
       properties:
         AssetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the asset associated with this export job.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the asset associated with this export job.
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this export job.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this export job.
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the revision associated with this export response.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the revision associated with this export response.
         SignedUrl:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The signed URL for the export request.
+          $ref: '#/components/schemas/__string'
+          description: The signed URL for the export request.
         SignedUrlExpiresAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the signed URL expires, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the signed URL expires, in ISO 8601 format.'
       description: The details of the export to signed URL response.
     ListOfAssetDestinationEntry:
       type: array
@@ -2461,13 +2288,11 @@ components:
         - Type
       properties:
         KmsKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'The Amazon Resource Name (ARN) of the the AWS KMS key you want to use to encrypt the Amazon S3 objects. This parameter is required if you choose aws:kms as an encryption type.'
+          $ref: '#/components/schemas/__string'
+          description: 'The Amazon Resource Name (ARN) of the the AWS KMS key you want to use to encrypt the Amazon S3 objects. This parameter is required if you choose aws:kms as an encryption type.'
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ServerSideEncryptionTypes'
-            - description: The type of server side encryption used for encrypting the objects in Amazon S3.
+          $ref: '#/components/schemas/ServerSideEncryptionTypes'
+          description: The type of server side encryption used for encrypting the objects in Amazon S3.
       description: Encryption configuration of the export job. Includes the encryption type as well as the AWS KMS key. The KMS key is only necessary if you chose the KMS encryption type.
     ExportAssetsToS3ResponseDetails:
       type: object
@@ -2477,21 +2302,17 @@ components:
         - RevisionId
       properties:
         AssetDestinations:
-          allOf:
-            - $ref: '#/components/schemas/ListOfAssetDestinationEntry'
-            - description: The destination in Amazon S3 where the asset is exported.
+          $ref: '#/components/schemas/ListOfAssetDestinationEntry'
+          description: The destination in Amazon S3 where the asset is exported.
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this export job.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this export job.
         Encryption:
-          allOf:
-            - $ref: '#/components/schemas/ExportServerSideEncryption'
-            - description: Encryption configuration of the export job.
+          $ref: '#/components/schemas/ExportServerSideEncryption'
+          description: Encryption configuration of the export job.
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the revision associated with this export response.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the revision associated with this export response.
       description: Details about the export to Amazon S3 response.
     ListOfRevisionDestinationEntry:
       type: array
@@ -2505,17 +2326,14 @@ components:
         - DataSetId
       properties:
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this export job.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this export job.
         Encryption:
-          allOf:
-            - $ref: '#/components/schemas/ExportServerSideEncryption'
-            - description: Encryption configuration of the export job.
+          $ref: '#/components/schemas/ExportServerSideEncryption'
+          description: Encryption configuration of the export job.
         RevisionDestinations:
-          allOf:
-            - $ref: '#/components/schemas/ListOfRevisionDestinationEntry'
-            - description: The destination in Amazon S3 where the revision is exported.
+          $ref: '#/components/schemas/ListOfRevisionDestinationEntry'
+          description: The destination in Amazon S3 where the revision is exported.
       description: Details about the export revisions to Amazon S3 response.
     ServerSideEncryptionTypes:
       type: string
@@ -2552,29 +2370,23 @@ components:
         - RevisionId
       properties:
         AssetName:
-          allOf:
-            - $ref: '#/components/schemas/AssetName'
-            - description: The name for the asset associated with this import response.
+          $ref: '#/components/schemas/AssetName'
+          description: The name for the asset associated with this import response.
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this import job.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this import job.
         Md5Hash:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093'
-            - description: 'The Base64-encoded Md5 hash for the asset, used to ensure the integrity of the file at that location.'
+          $ref: '#/components/schemas/__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093'
+          description: 'The Base64-encoded Md5 hash for the asset, used to ensure the integrity of the file at that location.'
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the revision associated with this import response.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the revision associated with this import response.
         SignedUrl:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The signed URL.
+          $ref: '#/components/schemas/__string'
+          description: The signed URL.
         SignedUrlExpiresAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time and date at which the signed URL expires, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time and date at which the signed URL expires, in ISO 8601 format.'
       description: 'The details in the response for an import request, including the signed URL and other information.'
     ImportAssetsFromS3ResponseDetails:
       type: object
@@ -2584,17 +2396,14 @@ components:
         - RevisionId
       properties:
         AssetSources:
-          allOf:
-            - $ref: '#/components/schemas/ListOfAssetSourceEntry'
-            - description: Is a list of Amazon S3 bucket and object key pairs.
+          $ref: '#/components/schemas/ListOfAssetSourceEntry'
+          description: Is a list of Amazon S3 bucket and object key pairs.
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this import job.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this import job.
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the revision associated with this import response.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the revision associated with this import response.
       description: Details from an import from Amazon S3 response.
     JobEntry:
       type: object
@@ -2608,37 +2417,29 @@ components:
         - UpdatedAt
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN for the job.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN for the job.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the job was created, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the job was created, in ISO 8601 format.'
         Details:
-          allOf:
-            - $ref: '#/components/schemas/ResponseDetails'
-            - description: 'Details of the operation to be performed by the job, such as export destination details or import source details.'
+          $ref: '#/components/schemas/ResponseDetails'
+          description: 'Details of the operation to be performed by the job, such as export destination details or import source details.'
         Errors:
-          allOf:
-            - $ref: '#/components/schemas/ListOfJobError'
-            - description: Errors for jobs.
+          $ref: '#/components/schemas/ListOfJobError'
+          description: Errors for jobs.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the job.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the job.
         State:
-          allOf:
-            - $ref: '#/components/schemas/State'
-            - description: The state of the job.
+          $ref: '#/components/schemas/State'
+          description: The state of the job.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/Type'
-            - description: The job type.
+          $ref: '#/components/schemas/Type'
+          description: The job type.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the job was last updated, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the job was last updated, in ISO 8601 format.'
       description: AWS Data Exchange Jobs are asynchronous import or export operations used to create or copy assets. A data set owner can both import and export as they see fit. Someone with an entitlement to a data set can only export. Jobs are deleted 90 days after they are created.
     JobErrorLimitName:
       type: string
@@ -2662,31 +2463,25 @@ components:
         - Code
       properties:
         Code:
-          allOf:
-            - $ref: '#/components/schemas/Code'
-            - description: The code for the job error.
+          $ref: '#/components/schemas/Code'
+          description: The code for the job error.
         Details:
           $ref: '#/components/schemas/Details'
         LimitName:
-          allOf:
-            - $ref: '#/components/schemas/JobErrorLimitName'
-            - description: The name of the limit that was reached.
+          $ref: '#/components/schemas/JobErrorLimitName'
+          description: The name of the limit that was reached.
         LimitValue:
-          allOf:
-            - $ref: '#/components/schemas/__double'
-            - description: The value of the exceeded limit.
+          $ref: '#/components/schemas/__double'
+          description: The value of the exceeded limit.
         Message:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The message related to the job error.
+          $ref: '#/components/schemas/__string'
+          description: The message related to the job error.
         ResourceId:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The unique identifier for the resource related to the error.
+          $ref: '#/components/schemas/__string'
+          description: The unique identifier for the resource related to the error.
         ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/JobErrorResourceTypes'
-            - description: The type of resource related to the error.
+          $ref: '#/components/schemas/JobErrorResourceTypes'
+          description: The type of resource related to the error.
       description: An error that occurred with the job request.
     MaxResults:
       type: integer
@@ -2726,17 +2521,14 @@ components:
         - RevisionId
       properties:
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The S3 bucket that is the destination for the assets in the revision.
+          $ref: '#/components/schemas/__string'
+          description: The S3 bucket that is the destination for the assets in the revision.
         KeyPattern:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: 'A string representing the pattern for generated names of the individual assets in the revision. For more information about key patterns, see <a href="https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns">Key patterns when exporting revisions</a>.'
+          $ref: '#/components/schemas/__string'
+          description: 'A string representing the pattern for generated names of the individual assets in the revision. For more information about key patterns, see <a href="https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns">Key patterns when exporting revisions</a>.'
         RevisionId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the revision.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the revision.
       description: The destination where the assets in the revision will be exported.
     ListRevisionAssetsRequest:
       type: object
@@ -2760,37 +2552,29 @@ components:
         - UpdatedAt
       properties:
         Arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN for the revision.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN for the revision.
         Comment:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin0Max16384'
-            - description: An optional comment about the revision.
+          $ref: '#/components/schemas/__stringMin0Max16384'
+          description: An optional comment about the revision.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the revision was created, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the revision was created, in ISO 8601 format.'
         DataSetId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the data set associated with this revision.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the data set associated with this revision.
         Finalized:
-          allOf:
-            - $ref: '#/components/schemas/__boolean'
-            - description: '<p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it''s in this read-only state, you can publish the revision to your products.</p> <p>Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>'
+          $ref: '#/components/schemas/__boolean'
+          description: '<p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it''s in this read-only state, you can publish the revision to your products.</p> <p>Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>'
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The unique identifier for the revision.
+          $ref: '#/components/schemas/Id'
+          description: The unique identifier for the revision.
         SourceId:
-          allOf:
-            - $ref: '#/components/schemas/Id'
-            - description: The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.
+          $ref: '#/components/schemas/Id'
+          description: The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.
         UpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that the revision was last updated, in ISO 8601 format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that the revision was last updated, in ISO 8601 format.'
       description: A revision is a container for one or more assets.
     __doubleMin0:
       type: number
@@ -2827,35 +2611,30 @@ components:
       title: UpdateAssetRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/AssetName'
-            - description: 'The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.'
+          $ref: '#/components/schemas/AssetName'
+          description: 'The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.'
       description: The request body for UpdateAsset.
     UpdateDataSetRequest:
       type: object
       title: UpdateDataSetRequest
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description for the data set.
+          $ref: '#/components/schemas/Description'
+          description: The description for the data set.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the data set.
+          $ref: '#/components/schemas/Name'
+          description: The name of the data set.
       description: The request body for UpdateDataSet.
     UpdateRevisionRequest:
       type: object
       title: UpdateRevisionRequest
       properties:
         Comment:
-          allOf:
-            - $ref: '#/components/schemas/__stringMin0Max16384'
-            - description: An optional comment about the revision.
+          $ref: '#/components/schemas/__stringMin0Max16384'
+          description: An optional comment about the revision.
         Finalized:
-          allOf:
-            - $ref: '#/components/schemas/__boolean'
-            - description: 'Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it''s in this read-only state, you can publish the revision to your products.'
+          $ref: '#/components/schemas/__boolean'
+          description: 'Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it''s in this read-only state, you can publish the revision to your products.'
       description: The request body for UpdateRevision.
 security:
   - hmac: []

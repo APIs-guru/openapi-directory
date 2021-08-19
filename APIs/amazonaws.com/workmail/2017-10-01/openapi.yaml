@@ -3634,17 +3634,14 @@ components:
       title: AssociateDelegateToResourceRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The organization under which the resource exists.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization under which the resource exists.
         ResourceId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The resource for which members (users or groups) are associated.
+          $ref: '#/components/schemas/ResourceId'
+          description: The resource for which members (users or groups) are associated.
         EntityId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The member (user or group) to associate to the resource.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The member (user or group) to associate to the resource.
     EntityNotFoundException: {}
     EntityStateException: {}
     InvalidParameterException: {}
@@ -3662,17 +3659,14 @@ components:
       title: AssociateMemberToGroupRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The organization under which the group exists.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization under which the group exists.
         GroupId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The group to which the member (user or group) is associated.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The group to which the member (user or group) is associated.
         MemberId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The member (user or group) to associate to the group.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The member (user or group) to associate to the group.
     DirectoryServiceAuthenticationFailedException: {}
     DirectoryUnavailableException: {}
     UnsupportedOperationException: {}
@@ -3688,17 +3682,14 @@ components:
       title: CancelMailboxExportJobRequest
       properties:
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyClientToken'
-            - description: The idempotency token for the client request.
+          $ref: '#/components/schemas/IdempotencyClientToken'
+          description: The idempotency token for the client request.
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/MailboxExportJobId'
-            - description: The job ID.
+          $ref: '#/components/schemas/MailboxExportJobId'
+          description: The job ID.
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The organization ID.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization ID.
     CreateAliasResponse:
       type: object
       properties: {}
@@ -3711,17 +3702,14 @@ components:
       title: CreateAliasRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The organization under which the member (user or group) exists.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization under which the member (user or group) exists.
         EntityId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The member (user or group) to which this alias is added.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The member (user or group) to which this alias is added.
         Alias:
-          allOf:
-            - $ref: '#/components/schemas/EmailAddress'
-            - description: The alias to add to the member set.
+          $ref: '#/components/schemas/EmailAddress'
+          description: The alias to add to the member set.
     EmailAddressInUseException: {}
     MailDomainNotFoundException: {}
     MailDomainStateException: {}
@@ -3730,9 +3718,8 @@ components:
       type: object
       properties:
         GroupId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier of the group.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier of the group.
     CreateGroupRequest:
       type: object
       required:
@@ -3741,22 +3728,19 @@ components:
       title: CreateGroupRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The organization under which the group is to be created.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization under which the group is to be created.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/GroupName'
-            - description: The name of the group.
+          $ref: '#/components/schemas/GroupName'
+          description: The name of the group.
     NameAvailabilityException: {}
     ReservedNameException: {}
     CreateMobileDeviceAccessRuleResponse:
       type: object
       properties:
         MobileDeviceAccessRuleId:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRuleId'
-            - description: The identifier for the newly created mobile device access rule.
+          $ref: '#/components/schemas/MobileDeviceAccessRuleId'
+          description: The identifier for the newly created mobile device access rule.
     CreateMobileDeviceAccessRuleRequest:
       type: object
       required:
@@ -3766,64 +3750,50 @@ components:
       title: CreateMobileDeviceAccessRuleRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The Amazon WorkMail organization under which the rule will be created.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The Amazon WorkMail organization under which the rule will be created.
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyClientToken'
-            - description: The idempotency token for the client request.
+          $ref: '#/components/schemas/IdempotencyClientToken'
+          description: The idempotency token for the client request.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRuleName'
-            - description: The rule name.
+          $ref: '#/components/schemas/MobileDeviceAccessRuleName'
+          description: The rule name.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRuleDescription'
-            - description: The rule description.
+          $ref: '#/components/schemas/MobileDeviceAccessRuleDescription'
+          description: The rule description.
         Effect:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRuleEffect'
-            - description: The effect of the rule when it matches. Allowed values are <code>ALLOW</code> or <code>DENY</code>.
+          $ref: '#/components/schemas/MobileDeviceAccessRuleEffect'
+          description: The effect of the rule when it matches. Allowed values are <code>ALLOW</code> or <code>DENY</code>.
         DeviceTypes:
-          allOf:
-            - $ref: '#/components/schemas/DeviceTypeList'
-            - description: Device types that the rule will match.
+          $ref: '#/components/schemas/DeviceTypeList'
+          description: Device types that the rule will match.
         NotDeviceTypes:
-          allOf:
-            - $ref: '#/components/schemas/DeviceTypeList'
-            - description: Device types that the rule <b>will not</b> match. All other device types will match.
+          $ref: '#/components/schemas/DeviceTypeList'
+          description: Device types that the rule <b>will not</b> match. All other device types will match.
         DeviceModels:
-          allOf:
-            - $ref: '#/components/schemas/DeviceModelList'
-            - description: Device models that the rule will match.
+          $ref: '#/components/schemas/DeviceModelList'
+          description: Device models that the rule will match.
         NotDeviceModels:
-          allOf:
-            - $ref: '#/components/schemas/DeviceModelList'
-            - description: Device models that the rule <b>will not</b> match. All other device models will match.
+          $ref: '#/components/schemas/DeviceModelList'
+          description: Device models that the rule <b>will not</b> match. All other device models will match.
         DeviceOperatingSystems:
-          allOf:
-            - $ref: '#/components/schemas/DeviceOperatingSystemList'
-            - description: Device operating systems that the rule will match.
+          $ref: '#/components/schemas/DeviceOperatingSystemList'
+          description: Device operating systems that the rule will match.
         NotDeviceOperatingSystems:
-          allOf:
-            - $ref: '#/components/schemas/DeviceOperatingSystemList'
-            - description: Device operating systems that the rule <b>will not</b> match. All other device operating systems will match.
+          $ref: '#/components/schemas/DeviceOperatingSystemList'
+          description: Device operating systems that the rule <b>will not</b> match. All other device operating systems will match.
         DeviceUserAgents:
-          allOf:
-            - $ref: '#/components/schemas/DeviceUserAgentList'
-            - description: Device user agents that the rule will match.
+          $ref: '#/components/schemas/DeviceUserAgentList'
+          description: Device user agents that the rule will match.
         NotDeviceUserAgents:
-          allOf:
-            - $ref: '#/components/schemas/DeviceUserAgentList'
-            - description: Device user agents that the rule <b>will not</b> match. All other device user agents will match.
+          $ref: '#/components/schemas/DeviceUserAgentList'
+          description: Device user agents that the rule <b>will not</b> match. All other device user agents will match.
     CreateOrganizationResponse:
       type: object
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The organization ID.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization ID.
     CreateOrganizationRequest:
       type: object
       required:
@@ -3831,37 +3801,30 @@ components:
       title: CreateOrganizationRequest
       properties:
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The AWS Directory Service directory ID.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The AWS Directory Service directory ID.
         Alias:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationName'
-            - description: The organization alias.
+          $ref: '#/components/schemas/OrganizationName'
+          description: The organization alias.
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyClientToken'
-            - description: The idempotency token associated with the request.
+          $ref: '#/components/schemas/IdempotencyClientToken'
+          description: The idempotency token associated with the request.
         Domains:
-          allOf:
-            - $ref: '#/components/schemas/Domains'
-            - description: The email domains to associate with the organization.
+          $ref: '#/components/schemas/Domains'
+          description: The email domains to associate with the organization.
         KmsKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyArn'
-            - description: The Amazon Resource Name (ARN) of a customer managed master key from AWS KMS.
+          $ref: '#/components/schemas/KmsKeyArn'
+          description: The Amazon Resource Name (ARN) of a customer managed master key from AWS KMS.
         EnableInteroperability:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'When <code>true</code>, allows organization interoperability between Amazon WorkMail and Microsoft Exchange. Can only be set to <code>true</code> if an AD Connector directory ID is included in the request.'
+          $ref: '#/components/schemas/Boolean'
+          description: 'When <code>true</code>, allows organization interoperability between Amazon WorkMail and Microsoft Exchange. Can only be set to <code>true</code> if an AD Connector directory ID is included in the request.'
     DirectoryInUseException: {}
     CreateResourceResponse:
       type: object
       properties:
         ResourceId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The identifier of the new resource.
+          $ref: '#/components/schemas/ResourceId'
+          description: The identifier of the new resource.
     CreateResourceRequest:
       type: object
       required:
@@ -3871,24 +3834,20 @@ components:
       title: CreateResourceRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier associated with the organization for which the resource is created.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier associated with the organization for which the resource is created.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the new resource.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the new resource.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: The type of the new resource. The available types are <code>equipment</code> and <code>room</code>.
+          $ref: '#/components/schemas/ResourceType'
+          description: The type of the new resource. The available types are <code>equipment</code> and <code>room</code>.
     CreateUserResponse:
       type: object
       properties:
         UserId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier for the new user.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier for the new user.
     CreateUserRequest:
       type: object
       required:
@@ -3899,21 +3858,17 @@ components:
       title: CreateUserRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier of the organization for which the user is created.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier of the organization for which the user is created.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/UserName'
-            - description: The name for the new user. WorkMail directory user names have a maximum length of 64. All others have a maximum length of 20.
+          $ref: '#/components/schemas/UserName'
+          description: The name for the new user. WorkMail directory user names have a maximum length of 64. All others have a maximum length of 20.
         DisplayName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The display name for the new user.
+          $ref: '#/components/schemas/String'
+          description: The display name for the new user.
         Password:
-          allOf:
-            - $ref: '#/components/schemas/Password'
-            - description: The password for the new user.
+          $ref: '#/components/schemas/Password'
+          description: The password for the new user.
     InvalidPasswordException: {}
     DeleteAccessControlRuleResponse:
       type: object
@@ -3926,13 +3881,11 @@ components:
       title: DeleteAccessControlRuleRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/AccessControlRuleName'
-            - description: The name of the access control rule.
+          $ref: '#/components/schemas/AccessControlRuleName'
+          description: The name of the access control rule.
     DeleteAliasResponse:
       type: object
       properties: {}
@@ -3945,17 +3898,14 @@ components:
       title: DeleteAliasRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization under which the user exists.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization under which the user exists.
         EntityId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier for the member (user or group) from which to have the aliases removed.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier for the member (user or group) from which to have the aliases removed.
         Alias:
-          allOf:
-            - $ref: '#/components/schemas/EmailAddress'
-            - description: The aliases to be removed from the user's set of aliases. Duplicate entries in the list are collapsed into single entries (the list is transformed into a set).
+          $ref: '#/components/schemas/EmailAddress'
+          description: The aliases to be removed from the user's set of aliases. Duplicate entries in the list are collapsed into single entries (the list is transformed into a set).
     DeleteGroupResponse:
       type: object
       properties: {}
@@ -3967,13 +3917,11 @@ components:
       title: DeleteGroupRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The organization that contains the group.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization that contains the group.
         GroupId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier of the group to be deleted.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier of the group to be deleted.
     DeleteMailboxPermissionsResponse:
       type: object
       properties: {}
@@ -3986,17 +3934,14 @@ components:
       title: DeleteMailboxPermissionsRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier of the organization under which the member (user or group) exists.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier of the organization under which the member (user or group) exists.
         EntityId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier of the member (user or group) that owns the mailbox.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier of the member (user or group) that owns the mailbox.
         GranteeId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier of the member (user or group) for which to delete granted permissions.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier of the member (user or group) for which to delete granted permissions.
     DeleteMobileDeviceAccessRuleResponse:
       type: object
       properties: {}
@@ -4008,24 +3953,20 @@ components:
       title: DeleteMobileDeviceAccessRuleRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The Amazon WorkMail organization under which the rule will be deleted.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The Amazon WorkMail organization under which the rule will be deleted.
         MobileDeviceAccessRuleId:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRuleId'
-            - description: The identifier of the rule to be deleted.
+          $ref: '#/components/schemas/MobileDeviceAccessRuleId'
+          description: The identifier of the rule to be deleted.
     DeleteOrganizationResponse:
       type: object
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The organization ID.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization ID.
         State:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The state of the organization.
+          $ref: '#/components/schemas/String'
+          description: The state of the organization.
     DeleteOrganizationRequest:
       type: object
       required:
@@ -4034,17 +3975,14 @@ components:
       title: DeleteOrganizationRequest
       properties:
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyClientToken'
-            - description: The idempotency token associated with the request.
+          $ref: '#/components/schemas/IdempotencyClientToken'
+          description: The idempotency token associated with the request.
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The organization ID.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization ID.
         DeleteDirectory:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'If true, deletes the AWS Directory Service directory associated with the organization.'
+          $ref: '#/components/schemas/Boolean'
+          description: 'If true, deletes the AWS Directory Service directory associated with the organization.'
     DeleteResourceResponse:
       type: object
       properties: {}
@@ -4056,13 +3994,11 @@ components:
       title: DeleteResourceRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier associated with the organization from which the resource is deleted.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier associated with the organization from which the resource is deleted.
         ResourceId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The identifier of the resource to be deleted.
+          $ref: '#/components/schemas/ResourceId'
+          description: The identifier of the resource to be deleted.
     DeleteRetentionPolicyResponse:
       type: object
       properties: {}
@@ -4074,13 +4010,11 @@ components:
       title: DeleteRetentionPolicyRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The organization ID.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization ID.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ShortString'
-            - description: The retention policy ID.
+          $ref: '#/components/schemas/ShortString'
+          description: The retention policy ID.
     DeleteUserResponse:
       type: object
       properties: {}
@@ -4092,13 +4026,11 @@ components:
       title: DeleteUserRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The organization that contains the user to be deleted.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization that contains the user to be deleted.
         UserId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier of the user to be deleted.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier of the user to be deleted.
     DeregisterFromWorkMailResponse:
       type: object
       properties: {}
@@ -4110,40 +4042,32 @@ components:
       title: DeregisterFromWorkMailRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization under which the Amazon WorkMail entity exists.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization under which the Amazon WorkMail entity exists.
         EntityId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier for the member (user or group) to be updated.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier for the member (user or group) to be updated.
     DescribeGroupResponse:
       type: object
       properties:
         GroupId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier of the described group.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier of the described group.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/GroupName'
-            - description: The name of the described group.
+          $ref: '#/components/schemas/GroupName'
+          description: The name of the described group.
         Email:
-          allOf:
-            - $ref: '#/components/schemas/EmailAddress'
-            - description: The email of the described group.
+          $ref: '#/components/schemas/EmailAddress'
+          description: The email of the described group.
         State:
-          allOf:
-            - $ref: '#/components/schemas/EntityState'
-            - description: 'The state of the user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).'
+          $ref: '#/components/schemas/EntityState'
+          description: 'The state of the user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).'
         EnabledDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time when a user was registered to WorkMail, in UNIX epoch time format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time when a user was registered to WorkMail, in UNIX epoch time format.'
         DisabledDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time when a user was deregistered from WorkMail, in UNIX epoch time format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time when a user was deregistered from WorkMail, in UNIX epoch time format.'
     DescribeGroupRequest:
       type: object
       required:
@@ -4152,64 +4076,50 @@ components:
       title: DescribeGroupRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization under which the group exists.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization under which the group exists.
         GroupId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier for the group to be described.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier for the group to be described.
     DescribeMailboxExportJobResponse:
       type: object
       properties:
         EntityId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier of the user or resource associated with the mailbox.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier of the user or resource associated with the mailbox.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The mailbox export job description.
+          $ref: '#/components/schemas/Description'
+          description: The mailbox export job description.
         RoleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The ARN of the AWS Identity and Access Management (IAM) role that grants write permission to the Amazon Simple Storage Service (Amazon S3) bucket.
+          $ref: '#/components/schemas/RoleArn'
+          description: The ARN of the AWS Identity and Access Management (IAM) role that grants write permission to the Amazon Simple Storage Service (Amazon S3) bucket.
         KmsKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyArn'
-            - description: The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS KMS) key that encrypts the exported mailbox content.
+          $ref: '#/components/schemas/KmsKeyArn'
+          description: The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS KMS) key that encrypts the exported mailbox content.
         S3BucketName:
-          allOf:
-            - $ref: '#/components/schemas/S3BucketName'
-            - description: The name of the S3 bucket.
+          $ref: '#/components/schemas/S3BucketName'
+          description: The name of the S3 bucket.
         S3Prefix:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectKey'
-            - description: The S3 bucket prefix.
+          $ref: '#/components/schemas/S3ObjectKey'
+          description: The S3 bucket prefix.
         S3Path:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectKey'
-            - description: The path to the S3 bucket and file that the mailbox export job is exporting to.
+          $ref: '#/components/schemas/S3ObjectKey'
+          description: The path to the S3 bucket and file that the mailbox export job is exporting to.
         EstimatedProgress:
-          allOf:
-            - $ref: '#/components/schemas/Percentage'
-            - description: 'The estimated progress of the mailbox export job, in percentage points.'
+          $ref: '#/components/schemas/Percentage'
+          description: 'The estimated progress of the mailbox export job, in percentage points.'
         State:
-          allOf:
-            - $ref: '#/components/schemas/MailboxExportJobState'
-            - description: The state of the mailbox export job.
+          $ref: '#/components/schemas/MailboxExportJobState'
+          description: The state of the mailbox export job.
         ErrorInfo:
-          allOf:
-            - $ref: '#/components/schemas/MailboxExportErrorInfo'
-            - description: Error information for failed mailbox export jobs.
+          $ref: '#/components/schemas/MailboxExportErrorInfo'
+          description: Error information for failed mailbox export jobs.
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The mailbox export job start timestamp.
+          $ref: '#/components/schemas/Timestamp'
+          description: The mailbox export job start timestamp.
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The mailbox export job end timestamp.
+          $ref: '#/components/schemas/Timestamp'
+          description: The mailbox export job end timestamp.
     DescribeMailboxExportJobRequest:
       type: object
       required:
@@ -4218,52 +4128,41 @@ components:
       title: DescribeMailboxExportJobRequest
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/MailboxExportJobId'
-            - description: The mailbox export job ID.
+          $ref: '#/components/schemas/MailboxExportJobId'
+          description: The mailbox export job ID.
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The organization ID.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization ID.
     DescribeOrganizationResponse:
       type: object
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier of an organization.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier of an organization.
         Alias:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationName'
-            - description: The alias for an organization.
+          $ref: '#/components/schemas/OrganizationName'
+          description: The alias for an organization.
         State:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The state of an organization.
+          $ref: '#/components/schemas/String'
+          description: The state of an organization.
         DirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The identifier for the directory associated with an Amazon WorkMail organization.
+          $ref: '#/components/schemas/String'
+          description: The identifier for the directory associated with an Amazon WorkMail organization.
         DirectoryType:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The type of directory associated with the WorkMail organization.
+          $ref: '#/components/schemas/String'
+          description: The type of directory associated with the WorkMail organization.
         DefaultMailDomain:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The default mail domain associated with the organization.
+          $ref: '#/components/schemas/String'
+          description: The default mail domain associated with the organization.
         CompletedDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date at which the organization became usable in the WorkMail context, in UNIX epoch time format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date at which the organization became usable in the WorkMail context, in UNIX epoch time format.'
         ErrorMessage:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: (Optional) The error message indicating if unexpected behavior was encountered with regards to the organization.
+          $ref: '#/components/schemas/String'
+          description: (Optional) The error message indicating if unexpected behavior was encountered with regards to the organization.
         ARN:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: The Amazon Resource Name (ARN) of the organization.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The Amazon Resource Name (ARN) of the organization.
     DescribeOrganizationRequest:
       type: object
       required:
@@ -4271,44 +4170,35 @@ components:
       title: DescribeOrganizationRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization to be described.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization to be described.
     DescribeResourceResponse:
       type: object
       properties:
         ResourceId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The identifier of the described resource.
+          $ref: '#/components/schemas/ResourceId'
+          description: The identifier of the described resource.
         Email:
-          allOf:
-            - $ref: '#/components/schemas/EmailAddress'
-            - description: The email of the described resource.
+          $ref: '#/components/schemas/EmailAddress'
+          description: The email of the described resource.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the described resource.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the described resource.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: The type of the described resource.
+          $ref: '#/components/schemas/ResourceType'
+          description: The type of the described resource.
         BookingOptions:
-          allOf:
-            - $ref: '#/components/schemas/BookingOptions'
-            - description: The booking options for the described resource.
+          $ref: '#/components/schemas/BookingOptions'
+          description: The booking options for the described resource.
         State:
-          allOf:
-            - $ref: '#/components/schemas/EntityState'
-            - description: 'The state of the resource: enabled (registered to Amazon WorkMail), disabled (deregistered or never registered to WorkMail), or deleted.'
+          $ref: '#/components/schemas/EntityState'
+          description: 'The state of the resource: enabled (registered to Amazon WorkMail), disabled (deregistered or never registered to WorkMail), or deleted.'
         EnabledDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time when a resource was enabled for WorkMail, in UNIX epoch time format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time when a resource was enabled for WorkMail, in UNIX epoch time format.'
         DisabledDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time when a resource was disabled from WorkMail, in UNIX epoch time format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time when a resource was disabled from WorkMail, in UNIX epoch time format.'
     DescribeResourceRequest:
       type: object
       required:
@@ -4317,48 +4207,38 @@ components:
       title: DescribeResourceRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier associated with the organization for which the resource is described.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier associated with the organization for which the resource is described.
         ResourceId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The identifier of the resource to be described.
+          $ref: '#/components/schemas/ResourceId'
+          description: The identifier of the resource to be described.
     DescribeUserResponse:
       type: object
       properties:
         UserId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier for the described user.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier for the described user.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/UserName'
-            - description: The name for the user.
+          $ref: '#/components/schemas/UserName'
+          description: The name for the user.
         Email:
-          allOf:
-            - $ref: '#/components/schemas/EmailAddress'
-            - description: The email of the user.
+          $ref: '#/components/schemas/EmailAddress'
+          description: The email of the user.
         DisplayName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The display name of the user.
+          $ref: '#/components/schemas/String'
+          description: The display name of the user.
         State:
-          allOf:
-            - $ref: '#/components/schemas/EntityState'
-            - description: 'The state of a user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).'
+          $ref: '#/components/schemas/EntityState'
+          description: 'The state of a user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).'
         UserRole:
-          allOf:
-            - $ref: '#/components/schemas/UserRole'
-            - description: 'In certain cases, other entities are modeled as users. If interoperability is enabled, resources are imported into Amazon WorkMail as users. Because different WorkMail organizations rely on different directory types, administrators can distinguish between an unregistered user (account is disabled and has a user role) and the directory administrators. The values are USER, RESOURCE, and SYSTEM_USER.'
+          $ref: '#/components/schemas/UserRole'
+          description: 'In certain cases, other entities are modeled as users. If interoperability is enabled, resources are imported into Amazon WorkMail as users. Because different WorkMail organizations rely on different directory types, administrators can distinguish between an unregistered user (account is disabled and has a user role) and the directory administrators. The values are USER, RESOURCE, and SYSTEM_USER.'
         EnabledDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time at which the user was enabled for Amazon WorkMail usage, in UNIX epoch time format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time at which the user was enabled for Amazon WorkMail usage, in UNIX epoch time format.'
         DisabledDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time at which the user was disabled for Amazon WorkMail usage, in UNIX epoch time format.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time at which the user was disabled for Amazon WorkMail usage, in UNIX epoch time format.'
     DescribeUserRequest:
       type: object
       required:
@@ -4367,13 +4247,11 @@ components:
       title: DescribeUserRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization under which the user exists.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization under which the user exists.
         UserId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier for the user to be described.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier for the user to be described.
     DisassociateDelegateFromResourceResponse:
       type: object
       properties: {}
@@ -4386,17 +4264,14 @@ components:
       title: DisassociateDelegateFromResourceRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization under which the resource exists.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization under which the resource exists.
         ResourceId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: 'The identifier of the resource from which delegates'' set members are removed. '
+          $ref: '#/components/schemas/ResourceId'
+          description: 'The identifier of the resource from which delegates'' set members are removed. '
         EntityId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: 'The identifier for the member (user, group) to be removed from the resource''s delegates.'
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: 'The identifier for the member (user, group) to be removed from the resource''s delegates.'
     DisassociateMemberFromGroupResponse:
       type: object
       properties: {}
@@ -4409,28 +4284,23 @@ components:
       title: DisassociateMemberFromGroupRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization under which the group exists.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization under which the group exists.
         GroupId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier for the group from which members are removed.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier for the group from which members are removed.
         MemberId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier for the member to be removed to the group.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier for the member to be removed to the group.
     GetAccessControlEffectResponse:
       type: object
       properties:
         Effect:
-          allOf:
-            - $ref: '#/components/schemas/AccessControlRuleEffect'
-            - description: The rule effect.
+          $ref: '#/components/schemas/AccessControlRuleEffect'
+          description: The rule effect.
         MatchedRules:
-          allOf:
-            - $ref: '#/components/schemas/AccessControlRuleNameList'
-            - description: 'The rules that match the given parameters, resulting in an effect.'
+          $ref: '#/components/schemas/AccessControlRuleNameList'
+          description: 'The rules that match the given parameters, resulting in an effect.'
     GetAccessControlEffectRequest:
       type: object
       required:
@@ -4441,40 +4311,32 @@ components:
       title: GetAccessControlEffectRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization.
         IpAddress:
-          allOf:
-            - $ref: '#/components/schemas/IpAddress'
-            - description: The IPv4 address.
+          $ref: '#/components/schemas/IpAddress'
+          description: The IPv4 address.
         Action:
-          allOf:
-            - $ref: '#/components/schemas/AccessControlRuleAction'
-            - description: 'The access protocol action. Valid values include <code>ActiveSync</code>, <code>AutoDiscover</code>, <code>EWS</code>, <code>IMAP</code>, <code>SMTP</code>, <code>WindowsOutlook</code>, and <code>WebMail</code>.'
+          $ref: '#/components/schemas/AccessControlRuleAction'
+          description: 'The access protocol action. Valid values include <code>ActiveSync</code>, <code>AutoDiscover</code>, <code>EWS</code>, <code>IMAP</code>, <code>SMTP</code>, <code>WindowsOutlook</code>, and <code>WebMail</code>.'
         UserId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The user ID.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The user ID.
     GetDefaultRetentionPolicyResponse:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ShortString'
-            - description: The retention policy ID.
+          $ref: '#/components/schemas/ShortString'
+          description: The retention policy ID.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ShortString'
-            - description: The retention policy name.
+          $ref: '#/components/schemas/ShortString'
+          description: The retention policy name.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The retention policy description.
+          $ref: '#/components/schemas/String'
+          description: The retention policy description.
         FolderConfigurations:
-          allOf:
-            - $ref: '#/components/schemas/FolderConfigurations'
-            - description: The retention policy folder configurations.
+          $ref: '#/components/schemas/FolderConfigurations'
+          description: The retention policy folder configurations.
     GetDefaultRetentionPolicyRequest:
       type: object
       required:
@@ -4482,20 +4344,17 @@ components:
       title: GetDefaultRetentionPolicyRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The organization ID.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization ID.
     GetMailboxDetailsResponse:
       type: object
       properties:
         MailboxQuota:
-          allOf:
-            - $ref: '#/components/schemas/MailboxQuota'
-            - description: 'The maximum allowed mailbox size, in MB, for the specified user.'
+          $ref: '#/components/schemas/MailboxQuota'
+          description: 'The maximum allowed mailbox size, in MB, for the specified user.'
         MailboxSize:
-          allOf:
-            - $ref: '#/components/schemas/MailboxSize'
-            - description: 'The current mailbox size, in MB, for the specified user.'
+          $ref: '#/components/schemas/MailboxSize'
+          description: 'The current mailbox size, in MB, for the specified user.'
     GetMailboxDetailsRequest:
       type: object
       required:
@@ -4504,24 +4363,20 @@ components:
       title: GetMailboxDetailsRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization that contains the user whose mailbox details are being requested.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization that contains the user whose mailbox details are being requested.
         UserId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier for the user whose mailbox details are being requested.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier for the user whose mailbox details are being requested.
     GetMobileDeviceAccessEffectResponse:
       type: object
       properties:
         Effect:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRuleEffect'
-            - description: 'The effect of the simulated access, <code>ALLOW</code> or <code>DENY</code>, after evaluating mobile device access rules in the Amazon WorkMail organization for the simulated user parameters.'
+          $ref: '#/components/schemas/MobileDeviceAccessRuleEffect'
+          description: 'The effect of the simulated access, <code>ALLOW</code> or <code>DENY</code>, after evaluating mobile device access rules in the Amazon WorkMail organization for the simulated user parameters.'
         MatchedRules:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessMatchedRuleList'
-            - description: A list of the rules which matched the simulated user input and produced the effect.
+          $ref: '#/components/schemas/MobileDeviceAccessMatchedRuleList'
+          description: A list of the rules which matched the simulated user input and produced the effect.
     GetMobileDeviceAccessEffectRequest:
       type: object
       required:
@@ -4529,32 +4384,26 @@ components:
       title: GetMobileDeviceAccessEffectRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The Amazon WorkMail organization to simulate the access effect for.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The Amazon WorkMail organization to simulate the access effect for.
         DeviceType:
-          allOf:
-            - $ref: '#/components/schemas/DeviceType'
-            - description: Device type the simulated user will report.
+          $ref: '#/components/schemas/DeviceType'
+          description: Device type the simulated user will report.
         DeviceModel:
-          allOf:
-            - $ref: '#/components/schemas/DeviceModel'
-            - description: Device model the simulated user will report.
+          $ref: '#/components/schemas/DeviceModel'
+          description: Device model the simulated user will report.
         DeviceOperatingSystem:
-          allOf:
-            - $ref: '#/components/schemas/DeviceOperatingSystem'
-            - description: Device operating system the simulated user will report.
+          $ref: '#/components/schemas/DeviceOperatingSystem'
+          description: Device operating system the simulated user will report.
         DeviceUserAgent:
-          allOf:
-            - $ref: '#/components/schemas/DeviceUserAgent'
-            - description: Device user agent the simulated user will report.
+          $ref: '#/components/schemas/DeviceUserAgent'
+          description: Device user agent the simulated user will report.
     ListAccessControlRulesResponse:
       type: object
       properties:
         Rules:
-          allOf:
-            - $ref: '#/components/schemas/AccessControlRulesList'
-            - description: The access control rules.
+          $ref: '#/components/schemas/AccessControlRulesList'
+          description: The access control rules.
     ListAccessControlRulesRequest:
       type: object
       required:
@@ -4562,20 +4411,17 @@ components:
       title: ListAccessControlRulesRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization.
     ListAliasesResponse:
       type: object
       properties:
         Aliases:
-          allOf:
-            - $ref: '#/components/schemas/Aliases'
-            - description: The entity's paginated aliases.
+          $ref: '#/components/schemas/Aliases'
+          description: The entity's paginated aliases.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
     ListAliasesRequest:
       type: object
       required:
@@ -4584,32 +4430,26 @@ components:
       title: ListAliasesRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization under which the entity exists.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization under which the entity exists.
         EntityId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier for the entity for which to list the aliases.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier for the entity for which to list the aliases.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in a single call.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in a single call.
     ListGroupMembersResponse:
       type: object
       properties:
         Members:
-          allOf:
-            - $ref: '#/components/schemas/Members'
-            - description: The members associated to the group.
+          $ref: '#/components/schemas/Members'
+          description: The members associated to the group.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
     ListGroupMembersRequest:
       type: object
       required:
@@ -4618,32 +4458,26 @@ components:
       title: ListGroupMembersRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization under which the group exists.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization under which the group exists.
         GroupId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier for the group to which the members (users or groups) are associated.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier for the group to which the members (users or groups) are associated.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' The token to use to retrieve the next page of results. The first call does not contain any tokens.'
+          $ref: '#/components/schemas/NextToken'
+          description: ' The token to use to retrieve the next page of results. The first call does not contain any tokens.'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in a single call.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in a single call.
     ListGroupsResponse:
       type: object
       properties:
         Groups:
-          allOf:
-            - $ref: '#/components/schemas/Groups'
-            - description: The overview of groups for an organization.
+          $ref: '#/components/schemas/Groups'
+          description: The overview of groups for an organization.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
     ListGroupsRequest:
       type: object
       required:
@@ -4651,28 +4485,23 @@ components:
       title: ListGroupsRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization under which the groups exist.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization under which the groups exist.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in a single call.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in a single call.
     ListMailboxExportJobsResponse:
       type: object
       properties:
         Jobs:
-          allOf:
-            - $ref: '#/components/schemas/Jobs'
-            - description: The mailbox export job details.
+          $ref: '#/components/schemas/Jobs'
+          description: The mailbox export job details.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results.
     ListMailboxExportJobsRequest:
       type: object
       required:
@@ -4680,28 +4509,23 @@ components:
       title: ListMailboxExportJobsRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The organization ID.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization ID.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in a single call.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in a single call.
     ListMailboxPermissionsResponse:
       type: object
       properties:
         Permissions:
-          allOf:
-            - $ref: '#/components/schemas/Permissions'
-            - description: 'One page of the user, group, or resource mailbox permissions.'
+          $ref: '#/components/schemas/Permissions'
+          description: 'One page of the user, group, or resource mailbox permissions.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
     ListMailboxPermissionsRequest:
       type: object
       required:
@@ -4710,28 +4534,23 @@ components:
       title: ListMailboxPermissionsRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: 'The identifier of the organization under which the user, group, or resource exists.'
+          $ref: '#/components/schemas/OrganizationId'
+          description: 'The identifier of the organization under which the user, group, or resource exists.'
         EntityId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: 'The identifier of the user, group, or resource for which to list mailbox permissions.'
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: 'The identifier of the user, group, or resource for which to list mailbox permissions.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in a single call.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in a single call.
     ListMobileDeviceAccessRulesResponse:
       type: object
       properties:
         Rules:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRulesList'
-            - description: The list of mobile device access rules that exist under the specified Amazon WorkMail organization.
+          $ref: '#/components/schemas/MobileDeviceAccessRulesList'
+          description: The list of mobile device access rules that exist under the specified Amazon WorkMail organization.
     ListMobileDeviceAccessRulesRequest:
       type: object
       required:
@@ -4739,43 +4558,36 @@ components:
       title: ListMobileDeviceAccessRulesRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The Amazon WorkMail organization for which to list the rules.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The Amazon WorkMail organization for which to list the rules.
     ListOrganizationsResponse:
       type: object
       properties:
         OrganizationSummaries:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationSummaries'
-            - description: The overview of owned organizations presented as a list of organization summaries.
+          $ref: '#/components/schemas/OrganizationSummaries'
+          description: The overview of owned organizations presented as a list of organization summaries.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
     ListOrganizationsRequest:
       type: object
       title: ListOrganizationsRequest
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in a single call.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in a single call.
     ListResourceDelegatesResponse:
       type: object
       properties:
         Delegates:
-          allOf:
-            - $ref: '#/components/schemas/ResourceDelegates'
-            - description: One page of the resource's delegates.
+          $ref: '#/components/schemas/ResourceDelegates'
+          description: One page of the resource's delegates.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The token used to paginate through the delegates associated with a resource. While results are still available, it has an associated value. When the last page is reached, the token is empty. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'The token used to paginate through the delegates associated with a resource. While results are still available, it has an associated value. When the last page is reached, the token is empty. '
     ListResourceDelegatesRequest:
       type: object
       required:
@@ -4784,32 +4596,26 @@ components:
       title: ListResourceDelegatesRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization that contains the resource for which delegates are listed.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization that contains the resource for which delegates are listed.
         ResourceId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier for the resource whose delegates are listed.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier for the resource whose delegates are listed.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token used to paginate through the delegates associated with a resource.
+          $ref: '#/components/schemas/NextToken'
+          description: The token used to paginate through the delegates associated with a resource.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The number of maximum results in a page.
+          $ref: '#/components/schemas/MaxResults'
+          description: The number of maximum results in a page.
     ListResourcesResponse:
       type: object
       properties:
         Resources:
-          allOf:
-            - $ref: '#/components/schemas/Resources'
-            - description: One page of the organization's resource representation.
+          $ref: '#/components/schemas/Resources'
+          description: One page of the organization's resource representation.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' The token used to paginate through all the organization''s resources. While results are still available, it has an associated value. When the last page is reached, the token is empty.'
+          $ref: '#/components/schemas/NextToken'
+          description: ' The token used to paginate through all the organization''s resources. While results are still available, it has an associated value. When the last page is reached, the token is empty.'
     ListResourcesRequest:
       type: object
       required:
@@ -4817,24 +4623,20 @@ components:
       title: ListResourcesRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization under which the resources exist.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization under which the resources exist.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in a single call.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in a single call.
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: A list of tag key-value pairs.
+          $ref: '#/components/schemas/TagList'
+          description: A list of tag key-value pairs.
     ListTagsForResourceRequest:
       type: object
       required:
@@ -4842,21 +4644,18 @@ components:
       title: ListTagsForResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: The resource ARN.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The resource ARN.
     ResourceNotFoundException: {}
     ListUsersResponse:
       type: object
       properties:
         Users:
-          allOf:
-            - $ref: '#/components/schemas/Users'
-            - description: The overview of users for an organization.
+          $ref: '#/components/schemas/Users'
+          description: The overview of users for an organization.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' The token to use to retrieve the next page of results. This value is `null` when there are no more results to return.'
+          $ref: '#/components/schemas/NextToken'
+          description: ' The token to use to retrieve the next page of results. This value is `null` when there are no more results to return.'
     ListUsersRequest:
       type: object
       required:
@@ -4864,17 +4663,14 @@ components:
       title: ListUsersRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization under which the users exist.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization under which the users exist.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. The first call does not contain any tokens.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to return in a single call.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in a single call.
     PutAccessControlRuleResponse:
       type: object
       properties: {}
@@ -4888,45 +4684,35 @@ components:
       title: PutAccessControlRuleRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/AccessControlRuleName'
-            - description: The rule name.
+          $ref: '#/components/schemas/AccessControlRuleName'
+          description: The rule name.
         Effect:
-          allOf:
-            - $ref: '#/components/schemas/AccessControlRuleEffect'
-            - description: The rule effect.
+          $ref: '#/components/schemas/AccessControlRuleEffect'
+          description: The rule effect.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/AccessControlRuleDescription'
-            - description: The rule description.
+          $ref: '#/components/schemas/AccessControlRuleDescription'
+          description: The rule description.
         IpRanges:
-          allOf:
-            - $ref: '#/components/schemas/IpRangeList'
-            - description: IPv4 CIDR ranges to include in the rule.
+          $ref: '#/components/schemas/IpRangeList'
+          description: IPv4 CIDR ranges to include in the rule.
         NotIpRanges:
-          allOf:
-            - $ref: '#/components/schemas/IpRangeList'
-            - description: IPv4 CIDR ranges to exclude from the rule.
+          $ref: '#/components/schemas/IpRangeList'
+          description: IPv4 CIDR ranges to exclude from the rule.
         Actions:
-          allOf:
-            - $ref: '#/components/schemas/ActionsList'
-            - description: 'Access protocol actions to include in the rule. Valid values include <code>ActiveSync</code>, <code>AutoDiscover</code>, <code>EWS</code>, <code>IMAP</code>, <code>SMTP</code>, <code>WindowsOutlook</code>, and <code>WebMail</code>.'
+          $ref: '#/components/schemas/ActionsList'
+          description: 'Access protocol actions to include in the rule. Valid values include <code>ActiveSync</code>, <code>AutoDiscover</code>, <code>EWS</code>, <code>IMAP</code>, <code>SMTP</code>, <code>WindowsOutlook</code>, and <code>WebMail</code>.'
         NotActions:
-          allOf:
-            - $ref: '#/components/schemas/ActionsList'
-            - description: 'Access protocol actions to exclude from the rule. Valid values include <code>ActiveSync</code>, <code>AutoDiscover</code>, <code>EWS</code>, <code>IMAP</code>, <code>SMTP</code>, <code>WindowsOutlook</code>, and <code>WebMail</code>.'
+          $ref: '#/components/schemas/ActionsList'
+          description: 'Access protocol actions to exclude from the rule. Valid values include <code>ActiveSync</code>, <code>AutoDiscover</code>, <code>EWS</code>, <code>IMAP</code>, <code>SMTP</code>, <code>WindowsOutlook</code>, and <code>WebMail</code>.'
         UserIds:
-          allOf:
-            - $ref: '#/components/schemas/UserIdList'
-            - description: User IDs to include in the rule.
+          $ref: '#/components/schemas/UserIdList'
+          description: User IDs to include in the rule.
         NotUserIds:
-          allOf:
-            - $ref: '#/components/schemas/UserIdList'
-            - description: User IDs to exclude from the rule.
+          $ref: '#/components/schemas/UserIdList'
+          description: User IDs to exclude from the rule.
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier of the organization.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier of the organization.
     PutMailboxPermissionsResponse:
       type: object
       properties: {}
@@ -4940,21 +4726,17 @@ components:
       title: PutMailboxPermissionsRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: 'The identifier of the organization under which the user, group, or resource exists.'
+          $ref: '#/components/schemas/OrganizationId'
+          description: 'The identifier of the organization under which the user, group, or resource exists.'
         EntityId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: 'The identifier of the user, group, or resource for which to update mailbox permissions.'
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: 'The identifier of the user, group, or resource for which to update mailbox permissions.'
         GranteeId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: 'The identifier of the user, group, or resource to which to grant the permissions.'
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: 'The identifier of the user, group, or resource to which to grant the permissions.'
         PermissionValues:
-          allOf:
-            - $ref: '#/components/schemas/PermissionValues'
-            - description: 'The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.'
+          $ref: '#/components/schemas/PermissionValues'
+          description: 'The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.'
     PutRetentionPolicyResponse:
       type: object
       properties: {}
@@ -4967,25 +4749,20 @@ components:
       title: PutRetentionPolicyRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The organization ID.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization ID.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/ShortString'
-            - description: The retention policy ID.
+          $ref: '#/components/schemas/ShortString'
+          description: The retention policy ID.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ShortString'
-            - description: The retention policy name.
+          $ref: '#/components/schemas/ShortString'
+          description: The retention policy name.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/PolicyDescription'
-            - description: The retention policy description.
+          $ref: '#/components/schemas/PolicyDescription'
+          description: The retention policy description.
         FolderConfigurations:
-          allOf:
-            - $ref: '#/components/schemas/FolderConfigurations'
-            - description: The retention policy folder configurations.
+          $ref: '#/components/schemas/FolderConfigurations'
+          description: The retention policy folder configurations.
     RegisterToWorkMailResponse:
       type: object
       properties: {}
@@ -4998,17 +4775,14 @@ components:
       title: RegisterToWorkMailRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: 'The identifier for the organization under which the user, group, or resource exists.'
+          $ref: '#/components/schemas/OrganizationId'
+          description: 'The identifier for the organization under which the user, group, or resource exists.'
         EntityId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: 'The identifier for the user, group, or resource to be updated.'
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: 'The identifier for the user, group, or resource to be updated.'
         Email:
-          allOf:
-            - $ref: '#/components/schemas/EmailAddress'
-            - description: 'The email for the user, group, or resource to be updated.'
+          $ref: '#/components/schemas/EmailAddress'
+          description: 'The email for the user, group, or resource to be updated.'
     EntityAlreadyRegisteredException: {}
     ResetPasswordResponse:
       type: object
@@ -5022,24 +4796,20 @@ components:
       title: ResetPasswordRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier of the organization that contains the user for which the password is reset.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier of the organization that contains the user for which the password is reset.
         UserId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier of the user for whom the password is reset.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier of the user for whom the password is reset.
         Password:
-          allOf:
-            - $ref: '#/components/schemas/Password'
-            - description: The new password for the user.
+          $ref: '#/components/schemas/Password'
+          description: The new password for the user.
     StartMailboxExportJobResponse:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/MailboxExportJobId'
-            - description: The job ID.
+          $ref: '#/components/schemas/MailboxExportJobId'
+          description: The job ID.
     StartMailboxExportJobRequest:
       type: object
       required:
@@ -5053,37 +4823,29 @@ components:
       title: StartMailboxExportJobRequest
       properties:
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyClientToken'
-            - description: The idempotency token for the client request.
+          $ref: '#/components/schemas/IdempotencyClientToken'
+          description: The idempotency token for the client request.
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier associated with the organization.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier associated with the organization.
         EntityId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier of the user or resource associated with the mailbox.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier of the user or resource associated with the mailbox.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The mailbox export job description.
+          $ref: '#/components/schemas/Description'
+          description: The mailbox export job description.
         RoleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The ARN of the AWS Identity and Access Management (IAM) role that grants write permission to the S3 bucket.
+          $ref: '#/components/schemas/RoleArn'
+          description: The ARN of the AWS Identity and Access Management (IAM) role that grants write permission to the S3 bucket.
         KmsKeyArn:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyArn'
-            - description: The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS KMS) key that encrypts the exported mailbox content.
+          $ref: '#/components/schemas/KmsKeyArn'
+          description: The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS KMS) key that encrypts the exported mailbox content.
         S3BucketName:
-          allOf:
-            - $ref: '#/components/schemas/S3BucketName'
-            - description: The name of the S3 bucket.
+          $ref: '#/components/schemas/S3BucketName'
+          description: The name of the S3 bucket.
         S3Prefix:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectKey'
-            - description: The S3 bucket prefix.
+          $ref: '#/components/schemas/S3ObjectKey'
+          description: The S3 bucket prefix.
     TagResourceResponse:
       type: object
       properties: {}
@@ -5095,13 +4857,11 @@ components:
       title: TagResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: The resource ARN.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The resource ARN.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: The tag key-value pairs.
+          $ref: '#/components/schemas/TagList'
+          description: The tag key-value pairs.
     TooManyTagsException: {}
     UntagResourceResponse:
       type: object
@@ -5114,13 +4874,11 @@ components:
       title: UntagResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: The resource ARN.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The resource ARN.
         TagKeys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyList'
-            - description: The tag keys.
+          $ref: '#/components/schemas/TagKeyList'
+          description: The tag keys.
     UpdateMailboxQuotaResponse:
       type: object
       properties: {}
@@ -5133,17 +4891,14 @@ components:
       title: UpdateMailboxQuotaRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization that contains the user for whom to update the mailbox quota.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier for the organization that contains the user for whom to update the mailbox quota.
         UserId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifer for the user for whom to update the mailbox quota.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifer for the user for whom to update the mailbox quota.
         MailboxQuota:
-          allOf:
-            - $ref: '#/components/schemas/MailboxQuota'
-            - description: 'The updated mailbox quota, in MB, for the specified user.'
+          $ref: '#/components/schemas/MailboxQuota'
+          description: 'The updated mailbox quota, in MB, for the specified user.'
     UpdateMobileDeviceAccessRuleResponse:
       type: object
       properties: {}
@@ -5157,57 +4912,44 @@ components:
       title: UpdateMobileDeviceAccessRuleRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The Amazon WorkMail organization under which the rule will be updated.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The Amazon WorkMail organization under which the rule will be updated.
         MobileDeviceAccessRuleId:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRuleId'
-            - description: The identifier of the rule to be updated.
+          $ref: '#/components/schemas/MobileDeviceAccessRuleId'
+          description: The identifier of the rule to be updated.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRuleName'
-            - description: The updated rule name.
+          $ref: '#/components/schemas/MobileDeviceAccessRuleName'
+          description: The updated rule name.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRuleDescription'
-            - description: The updated rule description.
+          $ref: '#/components/schemas/MobileDeviceAccessRuleDescription'
+          description: The updated rule description.
         Effect:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRuleEffect'
-            - description: The effect of the rule when it matches. Allowed values are <code>ALLOW</code> or <code>DENY</code>.
+          $ref: '#/components/schemas/MobileDeviceAccessRuleEffect'
+          description: The effect of the rule when it matches. Allowed values are <code>ALLOW</code> or <code>DENY</code>.
         DeviceTypes:
-          allOf:
-            - $ref: '#/components/schemas/DeviceTypeList'
-            - description: Device types that the updated rule will match.
+          $ref: '#/components/schemas/DeviceTypeList'
+          description: Device types that the updated rule will match.
         NotDeviceTypes:
-          allOf:
-            - $ref: '#/components/schemas/DeviceTypeList'
-            - description: Device types that the updated rule <b>will not</b> match. All other device types will match.
+          $ref: '#/components/schemas/DeviceTypeList'
+          description: Device types that the updated rule <b>will not</b> match. All other device types will match.
         DeviceModels:
-          allOf:
-            - $ref: '#/components/schemas/DeviceModelList'
-            - description: Device models that the updated rule will match.
+          $ref: '#/components/schemas/DeviceModelList'
+          description: Device models that the updated rule will match.
         NotDeviceModels:
-          allOf:
-            - $ref: '#/components/schemas/DeviceModelList'
-            - description: Device models that the updated rule <b>will not</b> match. All other device models will match.
+          $ref: '#/components/schemas/DeviceModelList'
+          description: Device models that the updated rule <b>will not</b> match. All other device models will match.
         DeviceOperatingSystems:
-          allOf:
-            - $ref: '#/components/schemas/DeviceOperatingSystemList'
-            - description: Device operating systems that the updated rule will match.
+          $ref: '#/components/schemas/DeviceOperatingSystemList'
+          description: Device operating systems that the updated rule will match.
         NotDeviceOperatingSystems:
-          allOf:
-            - $ref: '#/components/schemas/DeviceOperatingSystemList'
-            - description: Device operating systems that the updated rule <b>will not</b> match. All other device operating systems will match.
+          $ref: '#/components/schemas/DeviceOperatingSystemList'
+          description: Device operating systems that the updated rule <b>will not</b> match. All other device operating systems will match.
         DeviceUserAgents:
-          allOf:
-            - $ref: '#/components/schemas/DeviceUserAgentList'
-            - description: User agents that the updated rule will match.
+          $ref: '#/components/schemas/DeviceUserAgentList'
+          description: User agents that the updated rule will match.
         NotDeviceUserAgents:
-          allOf:
-            - $ref: '#/components/schemas/DeviceUserAgentList'
-            - description: User agents that the updated rule <b>will not</b> match. All other user agents will match.
+          $ref: '#/components/schemas/DeviceUserAgentList'
+          description: User agents that the updated rule <b>will not</b> match. All other user agents will match.
     UpdatePrimaryEmailAddressResponse:
       type: object
       properties: {}
@@ -5220,17 +4962,14 @@ components:
       title: UpdatePrimaryEmailAddressRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: 'The organization that contains the user, group, or resource to update.'
+          $ref: '#/components/schemas/OrganizationId'
+          description: 'The organization that contains the user, group, or resource to update.'
         EntityId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: 'The user, group, or resource to update.'
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: 'The user, group, or resource to update.'
         Email:
-          allOf:
-            - $ref: '#/components/schemas/EmailAddress'
-            - description: The value of the email to be updated as primary.
+          $ref: '#/components/schemas/EmailAddress'
+          description: The value of the email to be updated as primary.
     UpdateResourceResponse:
       type: object
       properties: {}
@@ -5242,21 +4981,17 @@ components:
       title: UpdateResourceRequest
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier associated with the organization for which the resource is updated.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier associated with the organization for which the resource is updated.
         ResourceId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The identifier of the resource to be updated.
+          $ref: '#/components/schemas/ResourceId'
+          description: The identifier of the resource to be updated.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the resource to be updated.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the resource to be updated.
         BookingOptions:
-          allOf:
-            - $ref: '#/components/schemas/BookingOptions'
-            - description: The resource's booking options to be updated.
+          $ref: '#/components/schemas/BookingOptions'
+          description: The resource's booking options to be updated.
     InvalidConfigurationException: {}
     AccessControlRuleName:
       type: string
@@ -5298,49 +5033,38 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/AccessControlRuleName'
-            - description: The rule name.
+          $ref: '#/components/schemas/AccessControlRuleName'
+          description: The rule name.
         Effect:
-          allOf:
-            - $ref: '#/components/schemas/AccessControlRuleEffect'
-            - description: The rule effect.
+          $ref: '#/components/schemas/AccessControlRuleEffect'
+          description: The rule effect.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/AccessControlRuleDescription'
-            - description: The rule description.
+          $ref: '#/components/schemas/AccessControlRuleDescription'
+          description: The rule description.
         IpRanges:
-          allOf:
-            - $ref: '#/components/schemas/IpRangeList'
-            - description: IPv4 CIDR ranges to include in the rule.
+          $ref: '#/components/schemas/IpRangeList'
+          description: IPv4 CIDR ranges to include in the rule.
         NotIpRanges:
-          allOf:
-            - $ref: '#/components/schemas/IpRangeList'
-            - description: IPv4 CIDR ranges to exclude from the rule.
+          $ref: '#/components/schemas/IpRangeList'
+          description: IPv4 CIDR ranges to exclude from the rule.
         Actions:
-          allOf:
-            - $ref: '#/components/schemas/ActionsList'
-            - description: 'Access protocol actions to include in the rule. Valid values include <code>ActiveSync</code>, <code>AutoDiscover</code>, <code>EWS</code>, <code>IMAP</code>, <code>SMTP</code>, <code>WindowsOutlook</code>, and <code>WebMail</code>.'
+          $ref: '#/components/schemas/ActionsList'
+          description: 'Access protocol actions to include in the rule. Valid values include <code>ActiveSync</code>, <code>AutoDiscover</code>, <code>EWS</code>, <code>IMAP</code>, <code>SMTP</code>, <code>WindowsOutlook</code>, and <code>WebMail</code>.'
         NotActions:
-          allOf:
-            - $ref: '#/components/schemas/ActionsList'
-            - description: 'Access protocol actions to exclude from the rule. Valid values include <code>ActiveSync</code>, <code>AutoDiscover</code>, <code>EWS</code>, <code>IMAP</code>, <code>SMTP</code>, <code>WindowsOutlook</code>, and <code>WebMail</code>.'
+          $ref: '#/components/schemas/ActionsList'
+          description: 'Access protocol actions to exclude from the rule. Valid values include <code>ActiveSync</code>, <code>AutoDiscover</code>, <code>EWS</code>, <code>IMAP</code>, <code>SMTP</code>, <code>WindowsOutlook</code>, and <code>WebMail</code>.'
         UserIds:
-          allOf:
-            - $ref: '#/components/schemas/UserIdList'
-            - description: User IDs to include in the rule.
+          $ref: '#/components/schemas/UserIdList'
+          description: User IDs to include in the rule.
         NotUserIds:
-          allOf:
-            - $ref: '#/components/schemas/UserIdList'
-            - description: User IDs to exclude from the rule.
+          $ref: '#/components/schemas/UserIdList'
+          description: User IDs to exclude from the rule.
         DateCreated:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date that the rule was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date that the rule was created.
         DateModified:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date that the rule was modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date that the rule was modified.
       description: A rule that controls access to an Amazon WorkMail organization.
     AccessControlRuleAction:
       type: string
@@ -5392,17 +5116,14 @@ components:
       type: object
       properties:
         AutoAcceptRequests:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'The resource''s ability to automatically reply to requests. If disabled, delegates must be associated to the resource.'
+          $ref: '#/components/schemas/Boolean'
+          description: 'The resource''s ability to automatically reply to requests. If disabled, delegates must be associated to the resource.'
         AutoDeclineRecurringRequests:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: The resource's ability to automatically decline any recurring requests.
+          $ref: '#/components/schemas/Boolean'
+          description: The resource's ability to automatically decline any recurring requests.
         AutoDeclineConflictingRequests:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: The resource's ability to automatically decline any conflicting requests.
+          $ref: '#/components/schemas/Boolean'
+          description: The resource's ability to automatically decline any conflicting requests.
       description: At least one delegate must be associated to the resource to disable automatic replies from the resource.
     IdempotencyClientToken:
       type: string
@@ -5519,13 +5240,11 @@ components:
         - Type
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The identifier for the user or group associated as the resource's delegate.
+          $ref: '#/components/schemas/String'
+          description: The identifier for the user or group associated as the resource's delegate.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/MemberType'
-            - description: 'The type of the delegate: user or group.'
+          $ref: '#/components/schemas/MemberType'
+          description: 'The type of the delegate: user or group.'
       description: 'The name of the attribute, which is one of the values defined in the UserAttribute enumeration.'
     ShortString:
       type: string
@@ -5613,13 +5332,11 @@ components:
       type: object
       properties:
         DomainName:
-          allOf:
-            - $ref: '#/components/schemas/DomainName'
-            - description: The fully qualified domain name.
+          $ref: '#/components/schemas/DomainName'
+          description: The fully qualified domain name.
         HostedZoneId:
-          allOf:
-            - $ref: '#/components/schemas/HostedZoneId'
-            - description: The hosted zone ID for a domain hosted in Route 53. Required when configuring a domain hosted in Route 53.
+          $ref: '#/components/schemas/HostedZoneId'
+          description: The hosted zone ID for a domain hosted in Route 53. Required when configuring a domain hosted in Route 53.
       description: '<p>The domain to associate with an Amazon WorkMail organization.</p> <p>When you configure a domain hosted in Amazon Route 53 (Route 53), all recommended DNS records are added to the organization when you create it. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html">Adding a domain</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p>'
     FolderName:
       type: string
@@ -5646,17 +5363,14 @@ components:
         - Action
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/FolderName'
-            - description: The folder name.
+          $ref: '#/components/schemas/FolderName'
+          description: The folder name.
         Action:
-          allOf:
-            - $ref: '#/components/schemas/RetentionAction'
-            - description: The action to take on the folder contents at the end of the folder configuration period.
+          $ref: '#/components/schemas/RetentionAction'
+          description: The action to take on the folder contents at the end of the folder configuration period.
         Period:
-          allOf:
-            - $ref: '#/components/schemas/RetentionPeriod'
-            - description: The period of time at which the folder configuration action is applied.
+          $ref: '#/components/schemas/RetentionPeriod'
+          description: The period of time at which the folder configuration action is applied.
       description: The configuration applied to an organization's folders by its retention policy.
     FolderConfigurations:
       type: array
@@ -5684,29 +5398,23 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier of the group.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier of the group.
         Email:
-          allOf:
-            - $ref: '#/components/schemas/EmailAddress'
-            - description: The email of the group.
+          $ref: '#/components/schemas/EmailAddress'
+          description: The email of the group.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/GroupName'
-            - description: The name of the group.
+          $ref: '#/components/schemas/GroupName'
+          description: The name of the group.
         State:
-          allOf:
-            - $ref: '#/components/schemas/EntityState'
-            - description: 'The state of the group, which can be ENABLED, DISABLED, or DELETED.'
+          $ref: '#/components/schemas/EntityState'
+          description: 'The state of the group, which can be ENABLED, DISABLED, or DELETED.'
         EnabledDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date indicating when the group was enabled for Amazon WorkMail use.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date indicating when the group was enabled for Amazon WorkMail use.
         DisabledDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date indicating when the group was disabled from Amazon WorkMail use.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date indicating when the group was disabled from Amazon WorkMail use.
       description: The representation of an Amazon WorkMail group.
     Groups:
       type: array
@@ -5721,41 +5429,32 @@ components:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/MailboxExportJobId'
-            - description: The identifier of the mailbox export job.
+          $ref: '#/components/schemas/MailboxExportJobId'
+          description: The identifier of the mailbox export job.
         EntityId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier of the user or resource associated with the mailbox.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier of the user or resource associated with the mailbox.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The mailbox export job description.
+          $ref: '#/components/schemas/Description'
+          description: The mailbox export job description.
         S3BucketName:
-          allOf:
-            - $ref: '#/components/schemas/S3BucketName'
-            - description: The name of the S3 bucket.
+          $ref: '#/components/schemas/S3BucketName'
+          description: The name of the S3 bucket.
         S3Path:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectKey'
-            - description: The path to the S3 bucket and file that the mailbox export job exports to.
+          $ref: '#/components/schemas/S3ObjectKey'
+          description: The path to the S3 bucket and file that the mailbox export job exports to.
         EstimatedProgress:
-          allOf:
-            - $ref: '#/components/schemas/Percentage'
-            - description: 'The estimated progress of the mailbox export job, in percentage points.'
+          $ref: '#/components/schemas/Percentage'
+          description: 'The estimated progress of the mailbox export job, in percentage points.'
         State:
-          allOf:
-            - $ref: '#/components/schemas/MailboxExportJobState'
-            - description: The state of the mailbox export job.
+          $ref: '#/components/schemas/MailboxExportJobState'
+          description: The state of the mailbox export job.
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The mailbox export job start timestamp.
+          $ref: '#/components/schemas/Timestamp'
+          description: The mailbox export job start timestamp.
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The mailbox export job end timestamp.
+          $ref: '#/components/schemas/Timestamp'
+          description: The mailbox export job end timestamp.
       description: 'The details of a mailbox export job, including the user or resource ID associated with the mailbox and the S3 bucket that the mailbox contents are exported to.'
     Jobs:
       type: array
@@ -5810,125 +5509,98 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The identifier of the member.
+          $ref: '#/components/schemas/String'
+          description: The identifier of the member.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the member.
+          $ref: '#/components/schemas/String'
+          description: The name of the member.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/MemberType'
-            - description: A member can be a user or group.
+          $ref: '#/components/schemas/MemberType'
+          description: A member can be a user or group.
         State:
-          allOf:
-            - $ref: '#/components/schemas/EntityState'
-            - description: 'The state of the member, which can be ENABLED, DISABLED, or DELETED.'
+          $ref: '#/components/schemas/EntityState'
+          description: 'The state of the member, which can be ENABLED, DISABLED, or DELETED.'
         EnabledDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date indicating when the member was enabled for Amazon WorkMail use.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date indicating when the member was enabled for Amazon WorkMail use.
         DisabledDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date indicating when the member was disabled from Amazon WorkMail use.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date indicating when the member was disabled from Amazon WorkMail use.
       description: The representation of a user or group.
     MobileDeviceAccessMatchedRule:
       type: object
       properties:
         MobileDeviceAccessRuleId:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRuleId'
-            - description: Identifier of the rule that a simulated user matches.
+          $ref: '#/components/schemas/MobileDeviceAccessRuleId'
+          description: Identifier of the rule that a simulated user matches.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRuleName'
-            - description: Name of a rule that a simulated user matches.
+          $ref: '#/components/schemas/MobileDeviceAccessRuleName'
+          description: Name of a rule that a simulated user matches.
       description: The rule that a simulated user matches.
     MobileDeviceAccessRule:
       type: object
       properties:
         MobileDeviceAccessRuleId:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRuleId'
-            - description: 'The ID assigned to a mobile access rule. '
+          $ref: '#/components/schemas/MobileDeviceAccessRuleId'
+          description: 'The ID assigned to a mobile access rule. '
         Name:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRuleName'
-            - description: The name of a mobile access rule.
+          $ref: '#/components/schemas/MobileDeviceAccessRuleName'
+          description: The name of a mobile access rule.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRuleDescription'
-            - description: The description of a mobile access rule.
+          $ref: '#/components/schemas/MobileDeviceAccessRuleDescription'
+          description: The description of a mobile access rule.
         Effect:
-          allOf:
-            - $ref: '#/components/schemas/MobileDeviceAccessRuleEffect'
-            - description: The effect of the rule when it matches. Allowed values are <code>ALLOW</code> or <code>DENY</code>.
+          $ref: '#/components/schemas/MobileDeviceAccessRuleEffect'
+          description: The effect of the rule when it matches. Allowed values are <code>ALLOW</code> or <code>DENY</code>.
         DeviceTypes:
-          allOf:
-            - $ref: '#/components/schemas/DeviceTypeList'
-            - description: 'Device types that a rule will match. '
+          $ref: '#/components/schemas/DeviceTypeList'
+          description: 'Device types that a rule will match. '
         NotDeviceTypes:
-          allOf:
-            - $ref: '#/components/schemas/DeviceTypeList'
-            - description: Device types that a rule <b>will not</b> match. All other device types will match.
+          $ref: '#/components/schemas/DeviceTypeList'
+          description: Device types that a rule <b>will not</b> match. All other device types will match.
         DeviceModels:
-          allOf:
-            - $ref: '#/components/schemas/DeviceModelList'
-            - description: Device models that a rule will match.
+          $ref: '#/components/schemas/DeviceModelList'
+          description: Device models that a rule will match.
         NotDeviceModels:
-          allOf:
-            - $ref: '#/components/schemas/DeviceModelList'
-            - description: Device models that a rule <b>will not</b> match. All other device models will match.
+          $ref: '#/components/schemas/DeviceModelList'
+          description: Device models that a rule <b>will not</b> match. All other device models will match.
         DeviceOperatingSystems:
-          allOf:
-            - $ref: '#/components/schemas/DeviceOperatingSystemList'
-            - description: Device operating systems that a rule will match.
+          $ref: '#/components/schemas/DeviceOperatingSystemList'
+          description: Device operating systems that a rule will match.
         NotDeviceOperatingSystems:
-          allOf:
-            - $ref: '#/components/schemas/DeviceOperatingSystemList'
-            - description: Device operating systems that a rule <b>will not</b> match. All other device types will match.
+          $ref: '#/components/schemas/DeviceOperatingSystemList'
+          description: Device operating systems that a rule <b>will not</b> match. All other device types will match.
         DeviceUserAgents:
-          allOf:
-            - $ref: '#/components/schemas/DeviceUserAgentList'
-            - description: Device user agents that a rule will match.
+          $ref: '#/components/schemas/DeviceUserAgentList'
+          description: Device user agents that a rule will match.
         NotDeviceUserAgents:
-          allOf:
-            - $ref: '#/components/schemas/DeviceUserAgentList'
-            - description: Device user agents that a rule <b>will not</b> match. All other device user agents will match.
+          $ref: '#/components/schemas/DeviceUserAgentList'
+          description: Device user agents that a rule <b>will not</b> match. All other device user agents will match.
         DateCreated:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date and time at which an access rule was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time at which an access rule was created.
         DateModified:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date and time at which an access rule was modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time at which an access rule was modified.
       description: A rule that controls access to mobile devices for an Amazon WorkMail group.
     OrganizationSummary:
       type: object
       properties:
         OrganizationId:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier associated with the organization.
+          $ref: '#/components/schemas/OrganizationId'
+          description: The identifier associated with the organization.
         Alias:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationName'
-            - description: The alias associated with the organization.
+          $ref: '#/components/schemas/OrganizationName'
+          description: The alias associated with the organization.
         DefaultMailDomain:
-          allOf:
-            - $ref: '#/components/schemas/DomainName'
-            - description: The default email domain associated with the organization.
+          $ref: '#/components/schemas/DomainName'
+          description: The default email domain associated with the organization.
         ErrorMessage:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The error message associated with the organization. It is only present if unexpected behavior has occurred with regards to the organization. It provides insight or solutions regarding unexpected behavior.
+          $ref: '#/components/schemas/String'
+          description: The error message associated with the organization. It is only present if unexpected behavior has occurred with regards to the organization. It provides insight or solutions regarding unexpected behavior.
         State:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The state associated with the organization.
+          $ref: '#/components/schemas/String'
+          description: The state associated with the organization.
       description: The representation of an organization.
     PermissionValues:
       type: array
@@ -5942,17 +5614,14 @@ components:
         - PermissionValues
       properties:
         GranteeId:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: 'The identifier of the user, group, or resource to which the permissions are granted.'
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: 'The identifier of the user, group, or resource to which the permissions are granted.'
         GranteeType:
-          allOf:
-            - $ref: '#/components/schemas/MemberType'
-            - description: 'The type of user, group, or resource referred to in GranteeId.'
+          $ref: '#/components/schemas/MemberType'
+          description: 'The type of user, group, or resource referred to in GranteeId.'
         PermissionValues:
-          allOf:
-            - $ref: '#/components/schemas/PermissionValues'
-            - description: 'The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.'
+          $ref: '#/components/schemas/PermissionValues'
+          description: 'The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.'
       description: 'Permission granted to a user, group, or resource to access a certain aspect of another user, group, or resource mailbox.'
     PermissionType:
       type: string
@@ -5969,33 +5638,26 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier of the resource.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier of the resource.
         Email:
-          allOf:
-            - $ref: '#/components/schemas/EmailAddress'
-            - description: The email of the resource.
+          $ref: '#/components/schemas/EmailAddress'
+          description: The email of the resource.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the resource.
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the resource.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of the resource: equipment or room.'
+          $ref: '#/components/schemas/ResourceType'
+          description: 'The type of the resource: equipment or room.'
         State:
-          allOf:
-            - $ref: '#/components/schemas/EntityState'
-            - description: 'The state of the resource, which can be ENABLED, DISABLED, or DELETED.'
+          $ref: '#/components/schemas/EntityState'
+          description: 'The state of the resource, which can be ENABLED, DISABLED, or DELETED.'
         EnabledDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date indicating when the resource was enabled for Amazon WorkMail use.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date indicating when the resource was enabled for Amazon WorkMail use.
         DisabledDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date indicating when the resource was disabled from Amazon WorkMail use.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date indicating when the resource was disabled from Amazon WorkMail use.
       description: The representation of a resource.
     TagKey:
       type: string
@@ -6012,13 +5674,11 @@ components:
         - Value
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: The key of the tag.
+          $ref: '#/components/schemas/TagKey'
+          description: The key of the tag.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: The value of the tag.
+          $ref: '#/components/schemas/TagValue'
+          description: The value of the tag.
       description: Describes a tag applied to a resource.
     TagKeyList:
       type: array
@@ -6030,37 +5690,29 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier of the user.
+          $ref: '#/components/schemas/WorkMailIdentifier'
+          description: The identifier of the user.
         Email:
-          allOf:
-            - $ref: '#/components/schemas/EmailAddress'
-            - description: The email of the user.
+          $ref: '#/components/schemas/EmailAddress'
+          description: The email of the user.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/UserName'
-            - description: The name of the user.
+          $ref: '#/components/schemas/UserName'
+          description: The name of the user.
         DisplayName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The display name of the user.
+          $ref: '#/components/schemas/String'
+          description: The display name of the user.
         State:
-          allOf:
-            - $ref: '#/components/schemas/EntityState'
-            - description: 'The state of the user, which can be ENABLED, DISABLED, or DELETED.'
+          $ref: '#/components/schemas/EntityState'
+          description: 'The state of the user, which can be ENABLED, DISABLED, or DELETED.'
         UserRole:
-          allOf:
-            - $ref: '#/components/schemas/UserRole'
-            - description: The role of the user.
+          $ref: '#/components/schemas/UserRole'
+          description: The role of the user.
         EnabledDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date indicating when the user was enabled for Amazon WorkMail use.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date indicating when the user was enabled for Amazon WorkMail use.
         DisabledDate:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date indicating when the user was disabled from Amazon WorkMail use.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date indicating when the user was disabled from Amazon WorkMail use.
       description: The representation of an Amazon WorkMail user.
 security:
   - hmac: []

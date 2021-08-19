@@ -450,13 +450,11 @@ components:
         - DisplayName
       properties:
         GroupId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The identifier for a group in the identity store.
+          $ref: '#/components/schemas/ResourceId'
+          description: The identifier for a group in the identity store.
         DisplayName:
-          allOf:
-            - $ref: '#/components/schemas/GroupDisplayName'
-            - description: 'Contains the group’s display name value. The length limit is 1,024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space, and nonbreaking space in this attribute. The characters <code>&lt;&gt;;:%</code> are excluded. This value is specified at the time that the group is created and stored as an attribute of the group object in the identity store.'
+          $ref: '#/components/schemas/GroupDisplayName'
+          description: 'Contains the group’s display name value. The length limit is 1,024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space, and nonbreaking space in this attribute. The characters <code>&lt;&gt;;:%</code> are excluded. This value is specified at the time that the group is created and stored as an attribute of the group object in the identity store.'
     DescribeGroupRequest:
       type: object
       required:
@@ -465,13 +463,11 @@ components:
       title: DescribeGroupRequest
       properties:
         IdentityStoreId:
-          allOf:
-            - $ref: '#/components/schemas/IdentityStoreId'
-            - description: 'The globally unique identifier for the identity store, such as <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and <code>1234567890</code> is a randomly generated string that contains number and lower case letters. This value is generated at the time that a new identity store is created.'
+          $ref: '#/components/schemas/IdentityStoreId'
+          description: 'The globally unique identifier for the identity store, such as <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and <code>1234567890</code> is a randomly generated string that contains number and lower case letters. This value is generated at the time that a new identity store is created.'
         GroupId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The identifier for a group in the identity store.
+          $ref: '#/components/schemas/ResourceId'
+          description: The identifier for a group in the identity store.
     ResourceNotFoundException: {}
     ValidationException: {}
     AccessDeniedException: {}
@@ -484,13 +480,11 @@ components:
         - UserId
       properties:
         UserName:
-          allOf:
-            - $ref: '#/components/schemas/UserName'
-            - description: 'Contains the user’s user name value. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. The characters <code>&lt;&gt;;:%</code> are excluded. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.'
+          $ref: '#/components/schemas/UserName'
+          description: 'Contains the user’s user name value. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. The characters <code>&lt;&gt;;:%</code> are excluded. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.'
         UserId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The identifier for a user in the identity store.
+          $ref: '#/components/schemas/ResourceId'
+          description: The identifier for a user in the identity store.
     DescribeUserRequest:
       type: object
       required:
@@ -499,26 +493,22 @@ components:
       title: DescribeUserRequest
       properties:
         IdentityStoreId:
-          allOf:
-            - $ref: '#/components/schemas/IdentityStoreId'
-            - description: 'The globally unique identifier for the identity store, such as <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and <code>1234567890</code> is a randomly generated string that contains number and lower case letters. This value is generated at the time that a new identity store is created.'
+          $ref: '#/components/schemas/IdentityStoreId'
+          description: 'The globally unique identifier for the identity store, such as <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and <code>1234567890</code> is a randomly generated string that contains number and lower case letters. This value is generated at the time that a new identity store is created.'
         UserId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The identifier for a user in the identity store.
+          $ref: '#/components/schemas/ResourceId'
+          description: The identifier for a user in the identity store.
     ListGroupsResponse:
       type: object
       required:
         - Groups
       properties:
         Groups:
-          allOf:
-            - $ref: '#/components/schemas/Groups'
-            - description: A list of <code>Group</code> objects in the identity store.
+          $ref: '#/components/schemas/Groups'
+          description: A list of <code>Group</code> objects in the identity store.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it1 is used in the API request to search for the next page.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it1 is used in the API request to search for the next page.
     ListGroupsRequest:
       type: object
       required:
@@ -526,34 +516,28 @@ components:
       title: ListGroupsRequest
       properties:
         IdentityStoreId:
-          allOf:
-            - $ref: '#/components/schemas/IdentityStoreId'
-            - description: 'The globally unique identifier for the identity store, such as <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and <code>1234567890</code> is a randomly generated string that contains number and lower case letters. This value is generated at the time that a new identity store is created.'
+          $ref: '#/components/schemas/IdentityStoreId'
+          description: 'The globally unique identifier for the identity store, such as <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and <code>1234567890</code> is a randomly generated string that contains number and lower case letters. This value is generated at the time that a new identity store is created.'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to be returned per request. This parameter is used in the <code>ListUsers</code> and <code>ListGroups</code> request to specify how many results to return in one page. The length limit is 50 characters.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to be returned per request. This parameter is used in the <code>ListUsers</code> and <code>ListGroups</code> request to specify how many results to return in one page. The length limit is 50 characters.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/Filters'
-            - description: 'A list of <code>Filter</code> objects, which is used in the <code>ListUsers</code> and <code>ListGroups</code> request. '
+          $ref: '#/components/schemas/Filters'
+          description: 'A list of <code>Filter</code> objects, which is used in the <code>ListUsers</code> and <code>ListGroups</code> request. '
     ListUsersResponse:
       type: object
       required:
         - Users
       properties:
         Users:
-          allOf:
-            - $ref: '#/components/schemas/Users'
-            - description: A list of <code>User</code> objects in the identity store.
+          $ref: '#/components/schemas/Users'
+          description: A list of <code>User</code> objects in the identity store.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.
     ListUsersRequest:
       type: object
       required:
@@ -561,21 +545,17 @@ components:
       title: ListUsersRequest
       properties:
         IdentityStoreId:
-          allOf:
-            - $ref: '#/components/schemas/IdentityStoreId'
-            - description: 'The globally unique identifier for the identity store, such as <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and <code>1234567890</code> is a randomly generated string that contains number and lower case letters. This value is generated at the time that a new identity store is created.'
+          $ref: '#/components/schemas/IdentityStoreId'
+          description: 'The globally unique identifier for the identity store, such as <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and <code>1234567890</code> is a randomly generated string that contains number and lower case letters. This value is generated at the time that a new identity store is created.'
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results to be returned per request. This parameter is used in the <code>ListUsers</code> and <code>ListGroups</code> request to specify how many results to return in one page. The length limit is 50 characters.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to be returned per request. This parameter is used in the <code>ListUsers</code> and <code>ListGroups</code> request to specify how many results to return in one page. The length limit is 50 characters.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/Filters'
-            - description: 'A list of <code>Filter</code> objects, which is used in the <code>ListUsers</code> and <code>ListGroups</code> request. '
+          $ref: '#/components/schemas/Filters'
+          description: 'A list of <code>Filter</code> objects, which is used in the <code>ListUsers</code> and <code>ListGroups</code> request. '
     AttributePath:
       type: string
       pattern: "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P} \_]+"
@@ -615,13 +595,11 @@ components:
         - AttributeValue
       properties:
         AttributePath:
-          allOf:
-            - $ref: '#/components/schemas/AttributePath'
-            - description: 'The attribute path that is used to specify which attribute name to search. Length limit is 255 characters. For example, <code>UserName</code> is a valid attribute path for the <code>ListUsers</code> API, and <code>DisplayName</code> is a valid attribute path for the <code>ListGroups</code> API.'
+          $ref: '#/components/schemas/AttributePath'
+          description: 'The attribute path that is used to specify which attribute name to search. Length limit is 255 characters. For example, <code>UserName</code> is a valid attribute path for the <code>ListUsers</code> API, and <code>DisplayName</code> is a valid attribute path for the <code>ListGroups</code> API.'
         AttributeValue:
-          allOf:
-            - $ref: '#/components/schemas/SensitiveStringType'
-            - description: 'Represents the data for an attribute. Each attribute value is described as a name-value pair. '
+          $ref: '#/components/schemas/SensitiveStringType'
+          description: 'Represents the data for an attribute. Each attribute value is described as a name-value pair. '
       description: A query filter used by <code>ListUsers</code> and <code>ListGroup</code>. This filter object provides the attribute name and attribute value to search users or groups.
     Filters:
       type: array
@@ -634,13 +612,11 @@ components:
         - DisplayName
       properties:
         GroupId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The identifier for a group in the identity store.
+          $ref: '#/components/schemas/ResourceId'
+          description: The identifier for a group in the identity store.
         DisplayName:
-          allOf:
-            - $ref: '#/components/schemas/GroupDisplayName'
-            - description: 'Contains the group’s display name value. The length limit is 1,024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space, and nonbreaking space in this attribute. The characters <code>&lt;&gt;;:%</code> are excluded. This value is specified at the time the group is created and stored as an attribute of the group object in the identity store.'
+          $ref: '#/components/schemas/GroupDisplayName'
+          description: 'Contains the group’s display name value. The length limit is 1,024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space, and nonbreaking space in this attribute. The characters <code>&lt;&gt;;:%</code> are excluded. This value is specified at the time the group is created and stored as an attribute of the group object in the identity store.'
       description: 'A group object, which contains a specified group’s metadata and attributes.'
     Groups:
       type: array
@@ -666,13 +642,11 @@ components:
         - UserId
       properties:
         UserName:
-          allOf:
-            - $ref: '#/components/schemas/UserName'
-            - description: 'Contains the user’s user name value. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. The characters <code>&lt;&gt;;:%</code> are excluded. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.'
+          $ref: '#/components/schemas/UserName'
+          description: 'Contains the user’s user name value. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. The characters <code>&lt;&gt;;:%</code> are excluded. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.'
         UserId:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The identifier for a user in the identity store.
+          $ref: '#/components/schemas/ResourceId'
+          description: The identifier for a user in the identity store.
       description: 'A user object, which contains a specified user’s metadata and attributes.'
 security:
   - hmac: []

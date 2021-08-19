@@ -947,21 +947,17 @@ components:
         - DatastoreEndpoint
       properties:
         DatastoreId:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS-generated Data Store id. This id is in the output from the initial Data Store creation call.
+          $ref: '#/components/schemas/DatastoreId'
+          description: The AWS-generated Data Store id. This id is in the output from the initial Data Store creation call.
         DatastoreArn:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreArn'
-            - description: The datastore ARN is generated during the creation of the Data Store and can be found in the output from the initial Data Store creation call.
+          $ref: '#/components/schemas/DatastoreArn'
+          description: The datastore ARN is generated during the creation of the Data Store and can be found in the output from the initial Data Store creation call.
         DatastoreStatus:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreStatus'
-            - description: 'The status of the FHIR Data Store. Possible statuses are ‘CREATING’, ‘ACTIVE’, ‘DELETING’, ‘DELETED’.'
+          $ref: '#/components/schemas/DatastoreStatus'
+          description: 'The status of the FHIR Data Store. Possible statuses are ‘CREATING’, ‘ACTIVE’, ‘DELETING’, ‘DELETED’.'
         DatastoreEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/BoundedLengthString'
-            - description: 'The AWS endpoint for the created Data Store. For preview, only US-east-1 endpoints are supported.'
+          $ref: '#/components/schemas/BoundedLengthString'
+          description: 'The AWS endpoint for the created Data Store. For preview, only US-east-1 endpoints are supported.'
     CreateFHIRDatastoreRequest:
       type: object
       required:
@@ -969,29 +965,23 @@ components:
       title: CreateFHIRDatastoreRequest
       properties:
         DatastoreName:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreName'
-            - description: The user generated name for the Data Store.
+          $ref: '#/components/schemas/DatastoreName'
+          description: The user generated name for the Data Store.
         DatastoreTypeVersion:
-          allOf:
-            - $ref: '#/components/schemas/FHIRVersion'
-            - description: The FHIR version of the Data Store. The only supported version is R4.
+          $ref: '#/components/schemas/FHIRVersion'
+          description: The FHIR version of the Data Store. The only supported version is R4.
         SseConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/SseConfiguration'
-            - description: ' The server-side encryption key configuration for a customer provided encryption key specified for creating a Data Store. '
+          $ref: '#/components/schemas/SseConfiguration'
+          description: ' The server-side encryption key configuration for a customer provided encryption key specified for creating a Data Store. '
         PreloadDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/PreloadDataConfig'
-            - description: 'Optional parameter to preload data upon creation of the Data Store. Currently, the only supported preloaded data is synthetic data generated from Synthea.'
+          $ref: '#/components/schemas/PreloadDataConfig'
+          description: 'Optional parameter to preload data upon creation of the Data Store. Currently, the only supported preloaded data is synthetic data generated from Synthea.'
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientTokenString'
-            - description: Optional user provided token used for ensuring idempotency.
+          $ref: '#/components/schemas/ClientTokenString'
+          description: Optional user provided token used for ensuring idempotency.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: ' Resource tags that are applied to a Data Store when it is created. '
+          $ref: '#/components/schemas/TagList'
+          description: ' Resource tags that are applied to a Data Store when it is created. '
     ValidationException: {}
     ThrottlingException: {}
     AccessDeniedException: {}
@@ -1005,29 +995,24 @@ components:
         - DatastoreEndpoint
       properties:
         DatastoreId:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS-generated ID for the Data Store to be deleted.
+          $ref: '#/components/schemas/DatastoreId'
+          description: The AWS-generated ID for the Data Store to be deleted.
         DatastoreArn:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreArn'
-            - description: The Amazon Resource Name (ARN) that gives Amazon HealthLake access permission.
+          $ref: '#/components/schemas/DatastoreArn'
+          description: The Amazon Resource Name (ARN) that gives Amazon HealthLake access permission.
         DatastoreStatus:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreStatus'
-            - description: 'The status of the Data Store that the user has requested to be deleted. '
+          $ref: '#/components/schemas/DatastoreStatus'
+          description: 'The status of the Data Store that the user has requested to be deleted. '
         DatastoreEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/BoundedLengthString'
-            - description: The AWS endpoint for the Data Store the user has requested to be deleted.
+          $ref: '#/components/schemas/BoundedLengthString'
+          description: The AWS endpoint for the Data Store the user has requested to be deleted.
     DeleteFHIRDatastoreRequest:
       type: object
       title: DeleteFHIRDatastoreRequest
       properties:
         DatastoreId:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreId'
-            - description: ' The AWS-generated ID for the Data Store to be deleted.'
+          $ref: '#/components/schemas/DatastoreId'
+          description: ' The AWS-generated ID for the Data Store to be deleted.'
     ConflictException: {}
     ResourceNotFoundException: {}
     DescribeFHIRDatastoreResponse:
@@ -1036,26 +1021,23 @@ components:
         - DatastoreProperties
       properties:
         DatastoreProperties:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreProperties'
-            - description: 'All properties associated with a Data Store, including the Data Store ID, Data Store ARN, Data Store name, Data Store status, created at, Data Store type version, and Data Store endpoint.'
+          $ref: '#/components/schemas/DatastoreProperties'
+          description: 'All properties associated with a Data Store, including the Data Store ID, Data Store ARN, Data Store name, Data Store status, created at, Data Store type version, and Data Store endpoint.'
     DescribeFHIRDatastoreRequest:
       type: object
       title: DescribeFHIRDatastoreRequest
       properties:
         DatastoreId:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS-generated Data Store id. This is part of the ‘CreateFHIRDatastore’ output.
+          $ref: '#/components/schemas/DatastoreId'
+          description: The AWS-generated Data Store id. This is part of the ‘CreateFHIRDatastore’ output.
     DescribeFHIRExportJobResponse:
       type: object
       required:
         - ExportJobProperties
       properties:
         ExportJobProperties:
-          allOf:
-            - $ref: '#/components/schemas/ExportJobProperties'
-            - description: 'Displays the properties of the export job, including the ID, Arn, Name, and the status of the job. '
+          $ref: '#/components/schemas/ExportJobProperties'
+          description: 'Displays the properties of the export job, including the ID, Arn, Name, and the status of the job. '
     DescribeFHIRExportJobRequest:
       type: object
       required:
@@ -1064,22 +1046,19 @@ components:
       title: DescribeFHIRExportJobRequest
       properties:
         DatastoreId:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS generated ID for the Data Store from which files are being exported from for an export job.
+          $ref: '#/components/schemas/DatastoreId'
+          description: The AWS generated ID for the Data Store from which files are being exported from for an export job.
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The AWS generated ID for an export job.
+          $ref: '#/components/schemas/JobId'
+          description: The AWS generated ID for an export job.
     DescribeFHIRImportJobResponse:
       type: object
       required:
         - ImportJobProperties
       properties:
         ImportJobProperties:
-          allOf:
-            - $ref: '#/components/schemas/ImportJobProperties'
-            - description: 'The properties of the Import job request, including the ID, ARN, name, and the status of the job.'
+          $ref: '#/components/schemas/ImportJobProperties'
+          description: 'The properties of the Import job request, including the ID, ARN, name, and the status of the job.'
     DescribeFHIRImportJobRequest:
       type: object
       required:
@@ -1088,55 +1067,46 @@ components:
       title: DescribeFHIRImportJobRequest
       properties:
         DatastoreId:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS-generated ID of the Data Store.
+          $ref: '#/components/schemas/DatastoreId'
+          description: The AWS-generated ID of the Data Store.
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The AWS-generated job ID.
+          $ref: '#/components/schemas/JobId'
+          description: The AWS-generated job ID.
     ListFHIRDatastoresResponse:
       type: object
       required:
         - DatastorePropertiesList
       properties:
         DatastorePropertiesList:
-          allOf:
-            - $ref: '#/components/schemas/DatastorePropertiesList'
-            - description: All properties associated with the listed Data Stores.
+          $ref: '#/components/schemas/DatastorePropertiesList'
+          description: All properties associated with the listed Data Stores.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: Pagination token that can be used to retrieve the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: Pagination token that can be used to retrieve the next page of results.
     ListFHIRDatastoresRequest:
       type: object
       title: ListFHIRDatastoresRequest
       properties:
         Filter:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreFilter'
-            - description: Lists all filters associated with a FHIR Data Store request.
+          $ref: '#/components/schemas/DatastoreFilter'
+          description: Lists all filters associated with a FHIR Data Store request.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: Fetches the next page of Data Stores when results are paginated.
+          $ref: '#/components/schemas/NextToken'
+          description: Fetches the next page of Data Stores when results are paginated.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResultsInteger'
-            - description: The maximum number of Data Stores returned in a single page of a ListFHIRDatastoresRequest call.
+          $ref: '#/components/schemas/MaxResultsInteger'
+          description: The maximum number of Data Stores returned in a single page of a ListFHIRDatastoresRequest call.
     ListFHIRExportJobsResponse:
       type: object
       required:
         - ExportJobPropertiesList
       properties:
         ExportJobPropertiesList:
-          allOf:
-            - $ref: '#/components/schemas/ExportJobPropertiesList'
-            - description: ' The properties of listed FHIR export jobs, including the ID, ARN, name, and the status of the job. '
+          $ref: '#/components/schemas/ExportJobPropertiesList'
+          description: ' The properties of listed FHIR export jobs, including the ID, ARN, name, and the status of the job. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' A pagination token used to identify the next page of results to return for a ListFHIRExportJobs query. '
+          $ref: '#/components/schemas/NextToken'
+          description: ' A pagination token used to identify the next page of results to return for a ListFHIRExportJobs query. '
     ListFHIRExportJobsRequest:
       type: object
       required:
@@ -1144,46 +1114,37 @@ components:
       title: ListFHIRExportJobsRequest
       properties:
         DatastoreId:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreId'
-            - description: ' This parameter limits the response to the export job with the specified Data Store ID. '
+          $ref: '#/components/schemas/DatastoreId'
+          description: ' This parameter limits the response to the export job with the specified Data Store ID. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' A pagination token used to identify the next page of results to return for a ListFHIRExportJobs query. '
+          $ref: '#/components/schemas/NextToken'
+          description: ' A pagination token used to identify the next page of results to return for a ListFHIRExportJobs query. '
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResultsInteger'
-            - description: ' This parameter limits the number of results returned for a ListFHIRExportJobs to a maximum quantity specified by the user. '
+          $ref: '#/components/schemas/MaxResultsInteger'
+          description: ' This parameter limits the number of results returned for a ListFHIRExportJobs to a maximum quantity specified by the user. '
         JobName:
-          allOf:
-            - $ref: '#/components/schemas/JobName'
-            - description: ' This parameter limits the response to the export job with the specified job name. '
+          $ref: '#/components/schemas/JobName'
+          description: ' This parameter limits the response to the export job with the specified job name. '
         JobStatus:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: ' This parameter limits the response to the export jobs with the specified job status. '
+          $ref: '#/components/schemas/JobStatus'
+          description: ' This parameter limits the response to the export jobs with the specified job status. '
         SubmittedBefore:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' This parameter limits the response to FHIR export jobs submitted before a user specified date. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' This parameter limits the response to FHIR export jobs submitted before a user specified date. '
         SubmittedAfter:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' This parameter limits the response to FHIR export jobs submitted after a user specified date. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' This parameter limits the response to FHIR export jobs submitted after a user specified date. '
     ListFHIRImportJobsResponse:
       type: object
       required:
         - ImportJobPropertiesList
       properties:
         ImportJobPropertiesList:
-          allOf:
-            - $ref: '#/components/schemas/ImportJobPropertiesList'
-            - description: ' The properties of a listed FHIR import jobs, including the ID, ARN, name, and the status of the job. '
+          $ref: '#/components/schemas/ImportJobPropertiesList'
+          description: ' The properties of a listed FHIR import jobs, including the ID, ARN, name, and the status of the job. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' A pagination token used to identify the next page of results to return for a ListFHIRImportJobs query. '
+          $ref: '#/components/schemas/NextToken'
+          description: ' A pagination token used to identify the next page of results to return for a ListFHIRImportJobs query. '
     ListFHIRImportJobsRequest:
       type: object
       required:
@@ -1191,40 +1152,32 @@ components:
       title: ListFHIRImportJobsRequest
       properties:
         DatastoreId:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreId'
-            - description: ' This parameter limits the response to the import job with the specified Data Store ID. '
+          $ref: '#/components/schemas/DatastoreId'
+          description: ' This parameter limits the response to the import job with the specified Data Store ID. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: ' A pagination token used to identify the next page of results to return for a ListFHIRImportJobs query. '
+          $ref: '#/components/schemas/NextToken'
+          description: ' A pagination token used to identify the next page of results to return for a ListFHIRImportJobs query. '
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResultsInteger'
-            - description: ' This parameter limits the number of results returned for a ListFHIRImportJobs to a maximum quantity specified by the user. '
+          $ref: '#/components/schemas/MaxResultsInteger'
+          description: ' This parameter limits the number of results returned for a ListFHIRImportJobs to a maximum quantity specified by the user. '
         JobName:
-          allOf:
-            - $ref: '#/components/schemas/JobName'
-            - description: ' This parameter limits the response to the import job with the specified job name. '
+          $ref: '#/components/schemas/JobName'
+          description: ' This parameter limits the response to the import job with the specified job name. '
         JobStatus:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: ' This parameter limits the response to the import job with the specified job status. '
+          $ref: '#/components/schemas/JobStatus'
+          description: ' This parameter limits the response to the import job with the specified job status. '
         SubmittedBefore:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' This parameter limits the response to FHIR import jobs submitted before a user specified date. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' This parameter limits the response to FHIR import jobs submitted before a user specified date. '
         SubmittedAfter:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: ' This parameter limits the response to FHIR import jobs submitted after a user specified date. '
+          $ref: '#/components/schemas/Timestamp'
+          description: ' This parameter limits the response to FHIR import jobs submitted after a user specified date. '
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: ' Returns a list of tags associated with a Data Store. '
+          $ref: '#/components/schemas/TagList'
+          description: ' Returns a list of tags associated with a Data Store. '
     ListTagsForResourceRequest:
       type: object
       required:
@@ -1232,9 +1185,8 @@ components:
       title: ListTagsForResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: ' The Amazon Resource Name(ARN) of the Data Store for which tags are being added. '
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: ' The Amazon Resource Name(ARN) of the Data Store for which tags are being added. '
     StartFHIRExportJobResponse:
       type: object
       required:
@@ -1242,17 +1194,14 @@ components:
         - JobStatus
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The AWS generated ID for an export job.
+          $ref: '#/components/schemas/JobId'
+          description: The AWS generated ID for an export job.
         JobStatus:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: 'The status of a FHIR export job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, or FAILED.'
+          $ref: '#/components/schemas/JobStatus'
+          description: 'The status of a FHIR export job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, or FAILED.'
         DatastoreId:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS generated ID for the Data Store from which files are being exported for an export job.
+          $ref: '#/components/schemas/DatastoreId'
+          description: The AWS generated ID for the Data Store from which files are being exported for an export job.
     StartFHIRExportJobRequest:
       type: object
       required:
@@ -1263,25 +1212,20 @@ components:
       title: StartFHIRExportJobRequest
       properties:
         JobName:
-          allOf:
-            - $ref: '#/components/schemas/JobName'
-            - description: The user generated name for an export job.
+          $ref: '#/components/schemas/JobName'
+          description: The user generated name for an export job.
         OutputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/OutputDataConfig'
-            - description: The output data configuration that was supplied when the export job was created.
+          $ref: '#/components/schemas/OutputDataConfig'
+          description: The output data configuration that was supplied when the export job was created.
         DatastoreId:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS generated ID for the Data Store from which files are being exported for an export job.
+          $ref: '#/components/schemas/DatastoreId'
+          description: The AWS generated ID for the Data Store from which files are being exported for an export job.
         DataAccessRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name used during the initiation of the job.
+          $ref: '#/components/schemas/IamRoleArn'
+          description: The Amazon Resource Name used during the initiation of the job.
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientTokenString'
-            - description: An optional user provided token used for ensuring idempotency.
+          $ref: '#/components/schemas/ClientTokenString'
+          description: An optional user provided token used for ensuring idempotency.
     StartFHIRImportJobResponse:
       type: object
       required:
@@ -1289,17 +1233,14 @@ components:
         - JobStatus
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The AWS-generated job ID.
+          $ref: '#/components/schemas/JobId'
+          description: The AWS-generated job ID.
         JobStatus:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: The status of an import job.
+          $ref: '#/components/schemas/JobStatus'
+          description: The status of an import job.
         DatastoreId:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS-generated Data Store ID.
+          $ref: '#/components/schemas/DatastoreId'
+          description: The AWS-generated Data Store ID.
     StartFHIRImportJobRequest:
       type: object
       required:
@@ -1311,27 +1252,22 @@ components:
       title: StartFHIRImportJobRequest
       properties:
         JobName:
-          allOf:
-            - $ref: '#/components/schemas/JobName'
-            - description: The name of the FHIR Import job in the StartFHIRImport job request.
+          $ref: '#/components/schemas/JobName'
+          description: The name of the FHIR Import job in the StartFHIRImport job request.
         InputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/InputDataConfig'
-            - description: The input properties of the FHIR Import job in the StartFHIRImport job request.
+          $ref: '#/components/schemas/InputDataConfig'
+          description: The input properties of the FHIR Import job in the StartFHIRImport job request.
         JobOutputDataConfig:
           $ref: '#/components/schemas/OutputDataConfig'
         DatastoreId:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS-generated Data Store ID.
+          $ref: '#/components/schemas/DatastoreId'
+          description: The AWS-generated Data Store ID.
         DataAccessRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) that gives Amazon HealthLake access permission.
+          $ref: '#/components/schemas/IamRoleArn'
+          description: The Amazon Resource Name (ARN) that gives Amazon HealthLake access permission.
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientTokenString'
-            - description: Optional user provided token used for ensuring idempotency.
+          $ref: '#/components/schemas/ClientTokenString'
+          description: Optional user provided token used for ensuring idempotency.
     TagResourceResponse:
       type: object
       properties: {}
@@ -1343,13 +1279,11 @@ components:
       title: TagResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: ' The Amazon Resource Name(ARN)that gives Amazon HealthLake access to the Data Store which tags are being added to. '
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: ' The Amazon Resource Name(ARN)that gives Amazon HealthLake access to the Data Store which tags are being added to. '
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: ' The user specified key and value pair tags being added to a Data Store. '
+          $ref: '#/components/schemas/TagList'
+          description: ' The user specified key and value pair tags being added to a Data Store. '
     UntagResourceResponse:
       type: object
       properties: {}
@@ -1361,13 +1295,11 @@ components:
       title: UntagResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: ' "The Amazon Resource Name(ARN) of the Data Store for which tags are being removed '
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: ' "The Amazon Resource Name(ARN) of the Data Store for which tags are being removed '
         TagKeys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyList'
-            - description: ' The keys for the tags to be removed from the Healthlake Data Store. '
+          $ref: '#/components/schemas/TagKeyList'
+          description: ' The keys for the tags to be removed from the Healthlake Data Store. '
     AmazonResourceName:
       type: string
       pattern: '^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}'
@@ -1403,9 +1335,8 @@ components:
         - KmsEncryptionConfig
       properties:
         KmsEncryptionConfig:
-          allOf:
-            - $ref: '#/components/schemas/KmsEncryptionConfig'
-            - description: ' The KMS encryption configuration used to provide details for data encryption. '
+          $ref: '#/components/schemas/KmsEncryptionConfig'
+          description: ' The KMS encryption configuration used to provide details for data encryption. '
       description: ' The server-side encryption key configuration for a customer provided encryption key. '
     PreloadDataConfig:
       type: object
@@ -1413,9 +1344,8 @@ components:
         - PreloadDataType
       properties:
         PreloadDataType:
-          allOf:
-            - $ref: '#/components/schemas/PreloadDataType'
-            - description: The type of preloaded data. Only Synthea preloaded data is supported.
+          $ref: '#/components/schemas/PreloadDataType'
+          description: The type of preloaded data. Only Synthea preloaded data is supported.
       description: ' The input properties for the preloaded Data Store. Only data preloaded from Synthea is supported.'
     TagList:
       type: array
@@ -1445,21 +1375,17 @@ components:
       type: object
       properties:
         DatastoreName:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreName'
-            - description: Allows the user to filter Data Store results by name.
+          $ref: '#/components/schemas/DatastoreName'
+          description: Allows the user to filter Data Store results by name.
         DatastoreStatus:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreStatus'
-            - description: Allows the user to filter Data Store results by status.
+          $ref: '#/components/schemas/DatastoreStatus'
+          description: Allows the user to filter Data Store results by status.
         CreatedBefore:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'A filter that allows the user to set cutoff dates for records. All Data Stores created before the specified date will be included in the results. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'A filter that allows the user to set cutoff dates for records. All Data Stores created before the specified date will be included in the results. '
         CreatedAfter:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: A filter that allows the user to set cutoff dates for records. All Data Stores created after the specified date will be included in the results.
+          $ref: '#/components/schemas/Timestamp'
+          description: A filter that allows the user to set cutoff dates for records. All Data Stores created after the specified date will be included in the results.
       description: The filters applied to Data Store query.
     String:
       type: string
@@ -1475,41 +1401,32 @@ components:
         - DatastoreEndpoint
       properties:
         DatastoreId:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS-generated ID number for the Data Store.
+          $ref: '#/components/schemas/DatastoreId'
+          description: The AWS-generated ID number for the Data Store.
         DatastoreArn:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreArn'
-            - description: The Amazon Resource Name used in the creation of the Data Store.
+          $ref: '#/components/schemas/DatastoreArn'
+          description: The Amazon Resource Name used in the creation of the Data Store.
         DatastoreName:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreName'
-            - description: The user-generated name for the Data Store.
+          $ref: '#/components/schemas/DatastoreName'
+          description: The user-generated name for the Data Store.
         DatastoreStatus:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreStatus'
-            - description: 'The status of the Data Store. Possible statuses are ''CREATING'', ''ACTIVE'', ''DELETING'', or ''DELETED''.'
+          $ref: '#/components/schemas/DatastoreStatus'
+          description: 'The status of the Data Store. Possible statuses are ''CREATING'', ''ACTIVE'', ''DELETING'', or ''DELETED''.'
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time that a Data Store was created. '
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The time that a Data Store was created. '
         DatastoreTypeVersion:
-          allOf:
-            - $ref: '#/components/schemas/FHIRVersion'
-            - description: The FHIR version. Only R4 version data is supported.
+          $ref: '#/components/schemas/FHIRVersion'
+          description: The FHIR version. Only R4 version data is supported.
         DatastoreEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint with Data Store ID in the endpoint URL.
+          $ref: '#/components/schemas/String'
+          description: The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint with Data Store ID in the endpoint URL.
         SseConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/SseConfiguration'
-            - description: ' The server-side encryption key configuration for a customer provided encryption key (CMK). '
+          $ref: '#/components/schemas/SseConfiguration'
+          description: ' The server-side encryption key configuration for a customer provided encryption key (CMK). '
         PreloadDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/PreloadDataConfig'
-            - description: The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported.
+          $ref: '#/components/schemas/PreloadDataConfig'
+          description: The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported.
       description: 'Displays the properties of the Data Store, including the ID, Arn, name, and the status of the Data Store.'
     DatastorePropertiesList:
       type: array
@@ -1530,41 +1447,32 @@ components:
         - OutputDataConfig
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The AWS generated ID for an export job.
+          $ref: '#/components/schemas/JobId'
+          description: The AWS generated ID for an export job.
         JobName:
-          allOf:
-            - $ref: '#/components/schemas/JobName'
-            - description: The user generated name for an export job.
+          $ref: '#/components/schemas/JobName'
+          description: The user generated name for an export job.
         JobStatus:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: 'The status of a FHIR export job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, or FAILED.'
+          $ref: '#/components/schemas/JobStatus'
+          description: 'The status of a FHIR export job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, or FAILED.'
         SubmitTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time an export job was initiated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time an export job was initiated.
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time an export job completed.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time an export job completed.
         DatastoreId:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS generated ID for the Data Store from which files are being exported for an export job.
+          $ref: '#/components/schemas/DatastoreId'
+          description: The AWS generated ID for the Data Store from which files are being exported for an export job.
         OutputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/OutputDataConfig'
-            - description: The output data configuration that was supplied when the export job was created.
+          $ref: '#/components/schemas/OutputDataConfig'
+          description: The output data configuration that was supplied when the export job was created.
         DataAccessRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name used during the initiation of the job.
+          $ref: '#/components/schemas/IamRoleArn'
+          description: The Amazon Resource Name used during the initiation of the job.
         Message:
-          allOf:
-            - $ref: '#/components/schemas/Message'
-            - description: An explanation of any errors that may have occurred during the export job.
+          $ref: '#/components/schemas/Message'
+          description: An explanation of any errors that may have occurred during the export job.
       description: 'The properties of a FHIR export job, including the ID, ARN, name, and the status of the job.'
     ImportJobProperties:
       type: object
@@ -1576,43 +1484,34 @@ components:
         - InputDataConfig
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The AWS-generated id number for the Import job.
+          $ref: '#/components/schemas/JobId'
+          description: The AWS-generated id number for the Import job.
         JobName:
-          allOf:
-            - $ref: '#/components/schemas/JobName'
-            - description: The user-generated name for an Import job.
+          $ref: '#/components/schemas/JobName'
+          description: The user-generated name for an Import job.
         JobStatus:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: 'The job status for an Import job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, FAILED.'
+          $ref: '#/components/schemas/JobStatus'
+          description: 'The job status for an Import job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, FAILED.'
         SubmitTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time that the Import job was submitted for processing.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the Import job was submitted for processing.
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time that the Import job was completed.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the Import job was completed.
         DatastoreId:
-          allOf:
-            - $ref: '#/components/schemas/DatastoreId'
-            - description: 'The datastore id used when the Import job was created. '
+          $ref: '#/components/schemas/DatastoreId'
+          description: 'The datastore id used when the Import job was created. '
         InputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/InputDataConfig'
-            - description: The input data configuration that was supplied when the Import job was created.
+          $ref: '#/components/schemas/InputDataConfig'
+          description: The input data configuration that was supplied when the Import job was created.
         JobOutputDataConfig:
           $ref: '#/components/schemas/OutputDataConfig'
         DataAccessRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) that gives Amazon HealthLake access to your input data.
+          $ref: '#/components/schemas/IamRoleArn'
+          description: The Amazon Resource Name (ARN) that gives Amazon HealthLake access to your input data.
         Message:
-          allOf:
-            - $ref: '#/components/schemas/Message'
-            - description: 'An explanation of any errors that may have occurred during the FHIR import job. '
+          $ref: '#/components/schemas/Message'
+          description: 'An explanation of any errors that may have occurred during the FHIR import job. '
       description: 'Displays the properties of the import job, including the ID, Arn, Name, and the status of the Data Store.'
     EncryptionKeyID:
       type: string
@@ -1636,9 +1535,8 @@ components:
       type: object
       properties:
         S3Configuration:
-          allOf:
-            - $ref: '#/components/schemas/S3Configuration'
-            - description: ' The output data configuration that was supplied when the export job was created. '
+          $ref: '#/components/schemas/S3Configuration'
+          description: ' The output data configuration that was supplied when the export job was created. '
       description: The output data configuration that was supplied when the export job was created.
     IamRoleArn:
       type: string
@@ -1658,9 +1556,8 @@ components:
       type: object
       properties:
         S3Uri:
-          allOf:
-            - $ref: '#/components/schemas/S3Uri'
-            - description: 'The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. '
+          $ref: '#/components/schemas/S3Uri'
+          description: 'The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. '
       description: ' The input properties for an import job.'
     ImportJobPropertiesList:
       type: array
@@ -1676,13 +1573,11 @@ components:
         - CmkType
       properties:
         CmkType:
-          allOf:
-            - $ref: '#/components/schemas/CmkType'
-            - description: ' The type of customer-managed-key(CMK) used for encyrption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs. '
+          $ref: '#/components/schemas/CmkType'
+          description: ' The type of customer-managed-key(CMK) used for encyrption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs. '
         KmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/EncryptionKeyID'
-            - description: ' The KMS encryption key id/alias used to encrypt the Data Store contents at rest. '
+          $ref: '#/components/schemas/EncryptionKeyID'
+          description: ' The KMS encryption key id/alias used to encrypt the Data Store contents at rest. '
       description: ' The customer-managed-key(CMK) used when creating a Data Store. If a customer owned key is not specified, an AWS owned key will be used for encryption. '
     NextToken:
       type: string
@@ -1699,13 +1594,11 @@ components:
         - KmsKeyId
       properties:
         S3Uri:
-          allOf:
-            - $ref: '#/components/schemas/S3Uri'
-            - description: ' The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. '
+          $ref: '#/components/schemas/S3Uri'
+          description: ' The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. '
         KmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/EncryptionKeyID'
-            - description: ' The KMS key ID used to access the S3 bucket. '
+          $ref: '#/components/schemas/EncryptionKeyID'
+          description: ' The KMS key ID used to access the S3 bucket. '
       description: ' The configuration of the S3 bucket for either an import or export job. This includes assigning permissions for access. '
     PreloadDataType:
       type: string
@@ -1728,13 +1621,11 @@ components:
         - Value
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: ' The key portion of a tag. Tag keys are case sensitive. '
+          $ref: '#/components/schemas/TagKey'
+          description: ' The key portion of a tag. Tag keys are case sensitive. '
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: ' The value portion of tag. Tag values are case sensitive. '
+          $ref: '#/components/schemas/TagValue'
+          description: ' The value portion of tag. Tag values are case sensitive. '
       description: ' A tag is a label consisting of a user-defined key and value. The form for tags is {"Key", "Value"} '
     TagKeyList:
       type: array

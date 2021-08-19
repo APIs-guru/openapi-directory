@@ -707,13 +707,11 @@ components:
         - ConnectionArn
       properties:
         ConnectionArn:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionArn'
-            - description: <p>The Amazon Resource Name (ARN) of the connection to be created. The ARN is used as the connection reference when the connection is shared between AWS services.</p> <note> <p>The ARN is never reused if the connection is deleted.</p> </note>
+          $ref: '#/components/schemas/ConnectionArn'
+          description: <p>The Amazon Resource Name (ARN) of the connection to be created. The ARN is used as the connection reference when the connection is shared between AWS services.</p> <note> <p>The ARN is never reused if the connection is deleted.</p> </note>
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: Specifies the tags applied to the resource.
+          $ref: '#/components/schemas/TagList'
+          description: Specifies the tags applied to the resource.
     CreateConnectionInput:
       type: object
       required:
@@ -721,21 +719,17 @@ components:
       title: CreateConnectionInput
       properties:
         ProviderType:
-          allOf:
-            - $ref: '#/components/schemas/ProviderType'
-            - description: The name of the external provider where your third-party code repository is configured.
+          $ref: '#/components/schemas/ProviderType'
+          description: The name of the external provider where your third-party code repository is configured.
         ConnectionName:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionName'
-            - description: The name of the connection to be created. The name must be unique in the calling AWS account.
+          $ref: '#/components/schemas/ConnectionName'
+          description: The name of the connection to be created. The name must be unique in the calling AWS account.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: The key-value pair to use when tagging the resource.
+          $ref: '#/components/schemas/TagList'
+          description: The key-value pair to use when tagging the resource.
         HostArn:
-          allOf:
-            - $ref: '#/components/schemas/HostArn'
-            - description: The Amazon Resource Name (ARN) of the host associated with the connection to be created.
+          $ref: '#/components/schemas/HostArn'
+          description: The Amazon Resource Name (ARN) of the host associated with the connection to be created.
     LimitExceededException: {}
     ResourceNotFoundException: {}
     ResourceUnavailableException: {}
@@ -743,9 +737,8 @@ components:
       type: object
       properties:
         HostArn:
-          allOf:
-            - $ref: '#/components/schemas/HostArn'
-            - description: The Amazon Resource Name (ARN) of the host to be created.
+          $ref: '#/components/schemas/HostArn'
+          description: The Amazon Resource Name (ARN) of the host to be created.
         Tags:
           $ref: '#/components/schemas/TagList'
     CreateHostInput:
@@ -757,21 +750,17 @@ components:
       title: CreateHostInput
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/HostName'
-            - description: The name of the host to be created. The name must be unique in the calling AWS account.
+          $ref: '#/components/schemas/HostName'
+          description: The name of the host to be created. The name must be unique in the calling AWS account.
         ProviderType:
-          allOf:
-            - $ref: '#/components/schemas/ProviderType'
-            - description: The name of the installed provider to be associated with your connection. The host resource represents the infrastructure where your provider type is installed. The valid provider type is GitHub Enterprise Server.
+          $ref: '#/components/schemas/ProviderType'
+          description: The name of the installed provider to be associated with your connection. The host resource represents the infrastructure where your provider type is installed. The valid provider type is GitHub Enterprise Server.
         ProviderEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/Url'
-            - description: The endpoint of the infrastructure to be represented by the host after it is created.
+          $ref: '#/components/schemas/Url'
+          description: The endpoint of the infrastructure to be represented by the host after it is created.
         VpcConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/VpcConfiguration'
-            - description: The VPC configuration to be provisioned for the host. A VPC must be configured and the infrastructure to be represented by the host must already be connected to the VPC.
+          $ref: '#/components/schemas/VpcConfiguration'
+          description: The VPC configuration to be provisioned for the host. A VPC must be configured and the infrastructure to be represented by the host must already be connected to the VPC.
         Tags:
           $ref: '#/components/schemas/TagList'
     DeleteConnectionOutput:
@@ -784,9 +773,8 @@ components:
       title: DeleteConnectionInput
       properties:
         ConnectionArn:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionArn'
-            - description: <p>The Amazon Resource Name (ARN) of the connection to be deleted.</p> <note> <p>The ARN is never reused if the connection is deleted.</p> </note>
+          $ref: '#/components/schemas/ConnectionArn'
+          description: <p>The Amazon Resource Name (ARN) of the connection to be deleted.</p> <note> <p>The ARN is never reused if the connection is deleted.</p> </note>
     DeleteHostOutput:
       type: object
       properties: {}
@@ -797,16 +785,14 @@ components:
       title: DeleteHostInput
       properties:
         HostArn:
-          allOf:
-            - $ref: '#/components/schemas/HostArn'
-            - description: The Amazon Resource Name (ARN) of the host to be deleted.
+          $ref: '#/components/schemas/HostArn'
+          description: The Amazon Resource Name (ARN) of the host to be deleted.
     GetConnectionOutput:
       type: object
       properties:
         Connection:
-          allOf:
-            - $ref: '#/components/schemas/Connection'
-            - description: 'The connection details, such as status, owner, and provider type.'
+          $ref: '#/components/schemas/Connection'
+          description: 'The connection details, such as status, owner, and provider type.'
     GetConnectionInput:
       type: object
       required:
@@ -814,32 +800,26 @@ components:
       title: GetConnectionInput
       properties:
         ConnectionArn:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionArn'
-            - description: The Amazon Resource Name (ARN) of a connection.
+          $ref: '#/components/schemas/ConnectionArn'
+          description: The Amazon Resource Name (ARN) of a connection.
     GetHostOutput:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/HostName'
-            - description: The name of the requested host.
+          $ref: '#/components/schemas/HostName'
+          description: The name of the requested host.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/HostStatus'
-            - description: The status of the requested host.
+          $ref: '#/components/schemas/HostStatus'
+          description: The status of the requested host.
         ProviderType:
-          allOf:
-            - $ref: '#/components/schemas/ProviderType'
-            - description: 'The provider type of the requested host, such as GitHub Enterprise Server.'
+          $ref: '#/components/schemas/ProviderType'
+          description: 'The provider type of the requested host, such as GitHub Enterprise Server.'
         ProviderEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/Url'
-            - description: The endpoint of the infrastructure represented by the requested host.
+          $ref: '#/components/schemas/Url'
+          description: The endpoint of the infrastructure represented by the requested host.
         VpcConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/VpcConfiguration'
-            - description: The VPC configuration of the requested host.
+          $ref: '#/components/schemas/VpcConfiguration'
+          description: The VPC configuration of the requested host.
     GetHostInput:
       type: object
       required:
@@ -847,70 +827,58 @@ components:
       title: GetHostInput
       properties:
         HostArn:
-          allOf:
-            - $ref: '#/components/schemas/HostArn'
-            - description: The Amazon Resource Name (ARN) of the requested host.
+          $ref: '#/components/schemas/HostArn'
+          description: The Amazon Resource Name (ARN) of the requested host.
     ListConnectionsOutput:
       type: object
       properties:
         Connections:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionList'
-            - description: 'A list of connections and the details for each connection, such as status, owner, and provider type.'
+          $ref: '#/components/schemas/ConnectionList'
+          description: 'A list of connections and the details for each connection, such as status, owner, and provider type.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token that can be used in the next <code>ListConnections</code> call. To view all items in the list, continue to call this operation with each subsequent token until no more <code>nextToken</code> values are returned.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token that can be used in the next <code>ListConnections</code> call. To view all items in the list, continue to call this operation with each subsequent token until no more <code>nextToken</code> values are returned.'
     ListConnectionsInput:
       type: object
       title: ListConnectionsInput
       properties:
         ProviderTypeFilter:
-          allOf:
-            - $ref: '#/components/schemas/ProviderType'
-            - description: 'Filters the list of connections to those associated with a specified provider, such as Bitbucket.'
+          $ref: '#/components/schemas/ProviderType'
+          description: 'Filters the list of connections to those associated with a specified provider, such as Bitbucket.'
         HostArnFilter:
-          allOf:
-            - $ref: '#/components/schemas/HostArn'
-            - description: Filters the list of connections to those associated with a specified host.
+          $ref: '#/components/schemas/HostArn'
+          description: Filters the list of connections to those associated with a specified host.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The token that was returned from the previous <code>ListConnections</code> call, which can be used to return the next set of connections in the list.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'The token that was returned from the previous <code>ListConnections</code> call, which can be used to return the next set of connections in the list.'
     ListHostsOutput:
       type: object
       properties:
         Hosts:
-          allOf:
-            - $ref: '#/components/schemas/HostList'
-            - description: 'A list of hosts and the details for each host, such as status, endpoint, and provider type.'
+          $ref: '#/components/schemas/HostList'
+          description: 'A list of hosts and the details for each host, such as status, endpoint, and provider type.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'A token that can be used in the next <code>ListHosts</code> call. To view all items in the list, continue to call this operation with each subsequent token until no more <code>nextToken</code> values are returned.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token that can be used in the next <code>ListHosts</code> call. To view all items in the list, continue to call this operation with each subsequent token until no more <code>nextToken</code> values are returned.'
     ListHostsInput:
       type: object
       title: ListHostsInput
       properties:
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The token that was returned from the previous <code>ListHosts</code> call, which can be used to return the next set of hosts in the list.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'The token that was returned from the previous <code>ListHosts</code> call, which can be used to return the next set of hosts in the list.'
     ListTagsForResourceOutput:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: A list of tag key and value pairs associated with the specified resource.
+          $ref: '#/components/schemas/TagList'
+          description: A list of tag key and value pairs associated with the specified resource.
     ListTagsForResourceInput:
       type: object
       required:
@@ -918,9 +886,8 @@ components:
       title: ListTagsForResourceInput
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: 'The Amazon Resource Name (ARN) of the resource for which you want to get information about tags, if any.'
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: 'The Amazon Resource Name (ARN) of the resource for which you want to get information about tags, if any.'
     TagResourceOutput:
       type: object
       properties: {}
@@ -932,13 +899,11 @@ components:
       title: TagResourceInput
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: The Amazon Resource Name (ARN) of the resource to which you want to add or update tags.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The Amazon Resource Name (ARN) of the resource to which you want to add or update tags.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: The tags you want to modify or add to the resource.
+          $ref: '#/components/schemas/TagList'
+          description: The tags you want to modify or add to the resource.
     UntagResourceOutput:
       type: object
       properties: {}
@@ -950,13 +915,11 @@ components:
       title: UntagResourceInput
       properties:
         ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/AmazonResourceName'
-            - description: The Amazon Resource Name (ARN) of the resource to remove tags from.
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The Amazon Resource Name (ARN) of the resource to remove tags from.
         TagKeys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyList'
-            - description: The list of keys for the tags to be removed from the resource.
+          $ref: '#/components/schemas/TagKeyList'
+          description: The list of keys for the tags to be removed from the resource.
     UpdateHostOutput:
       type: object
       properties: {}
@@ -967,17 +930,14 @@ components:
       title: UpdateHostInput
       properties:
         HostArn:
-          allOf:
-            - $ref: '#/components/schemas/HostArn'
-            - description: The Amazon Resource Name (ARN) of the host to be updated.
+          $ref: '#/components/schemas/HostArn'
+          description: The Amazon Resource Name (ARN) of the host to be updated.
         ProviderEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/Url'
-            - description: The URL or endpoint of the host to be updated.
+          $ref: '#/components/schemas/Url'
+          description: The URL or endpoint of the host to be updated.
         VpcConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/VpcConfiguration'
-            - description: The VPC configuration of the host to be updated. A VPC must be configured and the infrastructure to be represented by the host must already be connected to the VPC.
+          $ref: '#/components/schemas/VpcConfiguration'
+          description: The VPC configuration of the host to be updated. A VPC must be configured and the infrastructure to be represented by the host must already be connected to the VPC.
     ConflictException: {}
     UnsupportedOperationException: {}
     AccountId:
@@ -1021,29 +981,23 @@ components:
       type: object
       properties:
         ConnectionName:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionName'
-            - description: The name of the connection. Connection names must be unique in an AWS user account.
+          $ref: '#/components/schemas/ConnectionName'
+          description: The name of the connection. Connection names must be unique in an AWS user account.
         ConnectionArn:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionArn'
-            - description: <p>The Amazon Resource Name (ARN) of the connection. The ARN is used as the connection reference when the connection is shared between AWS services.</p> <note> <p>The ARN is never reused if the connection is deleted.</p> </note>
+          $ref: '#/components/schemas/ConnectionArn'
+          description: <p>The Amazon Resource Name (ARN) of the connection. The ARN is used as the connection reference when the connection is shared between AWS services.</p> <note> <p>The ARN is never reused if the connection is deleted.</p> </note>
         ProviderType:
-          allOf:
-            - $ref: '#/components/schemas/ProviderType'
-            - description: The name of the external provider where your third-party code repository is configured.
+          $ref: '#/components/schemas/ProviderType'
+          description: The name of the external provider where your third-party code repository is configured.
         OwnerAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: 'The identifier of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.'
+          $ref: '#/components/schemas/AccountId'
+          description: 'The identifier of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.'
         ConnectionStatus:
-          allOf:
-            - $ref: '#/components/schemas/ConnectionStatus'
-            - description: 'The current status of the connection. '
+          $ref: '#/components/schemas/ConnectionStatus'
+          description: 'The current status of the connection. '
         HostArn:
-          allOf:
-            - $ref: '#/components/schemas/HostArn'
-            - description: The Amazon Resource Name (ARN) of the host associated with the connection.
+          $ref: '#/components/schemas/HostArn'
+          description: The Amazon Resource Name (ARN) of the host associated with the connection.
       description: '<p>A resource that is used to connect third-party source providers with services like AWS CodePipeline.</p> <p>Note: A connection created through CloudFormation, the CLI, or the SDK is in `PENDING` status by default. You can make its status `AVAILABLE` by updating the connection in the console.</p>'
     ConnectionList:
       type: array
@@ -1073,21 +1027,17 @@ components:
         - SecurityGroupIds
       properties:
         VpcId:
-          allOf:
-            - $ref: '#/components/schemas/VpcId'
-            - description: The ID of the Amazon VPC connected to the infrastructure where your provider type is installed.
+          $ref: '#/components/schemas/VpcId'
+          description: The ID of the Amazon VPC connected to the infrastructure where your provider type is installed.
         SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/SubnetIds'
-            - description: The ID of the subnet or subnets associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+          $ref: '#/components/schemas/SubnetIds'
+          description: The ID of the subnet or subnets associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
         SecurityGroupIds:
-          allOf:
-            - $ref: '#/components/schemas/SecurityGroupIds'
-            - description: The ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+          $ref: '#/components/schemas/SecurityGroupIds'
+          description: The ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
         TlsCertificate:
-          allOf:
-            - $ref: '#/components/schemas/TlsCertificate'
-            - description: The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.
+          $ref: '#/components/schemas/TlsCertificate'
+          description: The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.
       description: The VPC configuration provisioned for the host.
     HostStatus:
       type: string
@@ -1100,33 +1050,26 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/HostName'
-            - description: The name of the host.
+          $ref: '#/components/schemas/HostName'
+          description: The name of the host.
         HostArn:
-          allOf:
-            - $ref: '#/components/schemas/HostArn'
-            - description: The Amazon Resource Name (ARN) of the host.
+          $ref: '#/components/schemas/HostArn'
+          description: The Amazon Resource Name (ARN) of the host.
         ProviderType:
-          allOf:
-            - $ref: '#/components/schemas/ProviderType'
-            - description: The name of the installed provider to be associated with your connection. The host resource represents the infrastructure where your provider type is installed. The valid provider type is GitHub Enterprise Server.
+          $ref: '#/components/schemas/ProviderType'
+          description: The name of the installed provider to be associated with your connection. The host resource represents the infrastructure where your provider type is installed. The valid provider type is GitHub Enterprise Server.
         ProviderEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/Url'
-            - description: The endpoint of the infrastructure where your provider type is installed.
+          $ref: '#/components/schemas/Url'
+          description: The endpoint of the infrastructure where your provider type is installed.
         VpcConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/VpcConfiguration'
-            - description: The VPC configuration provisioned for the host.
+          $ref: '#/components/schemas/VpcConfiguration'
+          description: The VPC configuration provisioned for the host.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/HostStatus'
-            - description: 'The status of the host, such as PENDING, AVAILABLE, VPC_CONFIG_DELETING, VPC_CONFIG_INITIALIZING, and VPC_CONFIG_FAILED_INITIALIZATION.'
+          $ref: '#/components/schemas/HostStatus'
+          description: 'The status of the host, such as PENDING, AVAILABLE, VPC_CONFIG_DELETING, VPC_CONFIG_INITIALIZING, and VPC_CONFIG_FAILED_INITIALIZATION.'
         StatusMessage:
-          allOf:
-            - $ref: '#/components/schemas/HostStatusMessage'
-            - description: The status description for the host.
+          $ref: '#/components/schemas/HostStatusMessage'
+          description: The status description for the host.
       description: '<p>A resource that represents the infrastructure where a third-party provider is installed. The host is used when you create connections to an installed third-party provider type, such as GitHub Enterprise Server. You create one host for all connections to that provider.</p> <note> <p>A host created through the CLI or the SDK is in `PENDING` status by default. You can make its status `AVAILABLE` by setting up the host in the console.</p> </note>'
     HostList:
       type: array
@@ -1180,13 +1123,11 @@ components:
         - Value
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: The tag's key.
+          $ref: '#/components/schemas/TagKey'
+          description: The tag's key.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: The tag's value.
+          $ref: '#/components/schemas/TagValue'
+          description: The tag's value.
       description: <p>A tag is a key-value pair that is used to manage the resource.</p> <p>This tag is available for use by AWS services that support tags.</p>
     TagKeyList:
       type: array

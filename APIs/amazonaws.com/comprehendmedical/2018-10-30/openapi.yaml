@@ -1405,9 +1405,8 @@ components:
       type: object
       properties:
         ComprehendMedicalAsyncJobProperties:
-          allOf:
-            - $ref: '#/components/schemas/ComprehendMedicalAsyncJobProperties'
-            - description: An object that contains the properties associated with a detection job.
+          $ref: '#/components/schemas/ComprehendMedicalAsyncJobProperties'
+          description: An object that contains the properties associated with a detection job.
     DescribeEntitiesDetectionV2JobRequest:
       type: object
       required:
@@ -1415,9 +1414,8 @@ components:
       title: DescribeEntitiesDetectionV2JobRequest
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The identifier that Amazon Comprehend Medical generated for the job. The <code>StartEntitiesDetectionV2Job</code> operation returns this identifier in its response.
+          $ref: '#/components/schemas/JobId'
+          description: The identifier that Amazon Comprehend Medical generated for the job. The <code>StartEntitiesDetectionV2Job</code> operation returns this identifier in its response.
     InvalidRequestException: {}
     TooManyRequestsException: {}
     ResourceNotFoundException: {}
@@ -1426,9 +1424,8 @@ components:
       type: object
       properties:
         ComprehendMedicalAsyncJobProperties:
-          allOf:
-            - $ref: '#/components/schemas/ComprehendMedicalAsyncJobProperties'
-            - description: An object that contains the properties associated with a detection job.
+          $ref: '#/components/schemas/ComprehendMedicalAsyncJobProperties'
+          description: An object that contains the properties associated with a detection job.
     DescribeICD10CMInferenceJobRequest:
       type: object
       required:
@@ -1436,16 +1433,14 @@ components:
       title: DescribeICD10CMInferenceJobRequest
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The identifier that Amazon Comprehend Medical generated for the job. <code>The StartICD10CMInferenceJob</code> operation returns this identifier in its response.
+          $ref: '#/components/schemas/JobId'
+          description: The identifier that Amazon Comprehend Medical generated for the job. <code>The StartICD10CMInferenceJob</code> operation returns this identifier in its response.
     DescribePHIDetectionJobResponse:
       type: object
       properties:
         ComprehendMedicalAsyncJobProperties:
-          allOf:
-            - $ref: '#/components/schemas/ComprehendMedicalAsyncJobProperties'
-            - description: An object that contains the properties associated with a detection job.
+          $ref: '#/components/schemas/ComprehendMedicalAsyncJobProperties'
+          description: An object that contains the properties associated with a detection job.
     DescribePHIDetectionJobRequest:
       type: object
       required:
@@ -1453,16 +1448,14 @@ components:
       title: DescribePHIDetectionJobRequest
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The identifier that Amazon Comprehend Medical generated for the job. The <code>StartPHIDetectionJob</code> operation returns this identifier in its response.
+          $ref: '#/components/schemas/JobId'
+          description: The identifier that Amazon Comprehend Medical generated for the job. The <code>StartPHIDetectionJob</code> operation returns this identifier in its response.
     DescribeRxNormInferenceJobResponse:
       type: object
       properties:
         ComprehendMedicalAsyncJobProperties:
-          allOf:
-            - $ref: '#/components/schemas/ComprehendMedicalAsyncJobProperties'
-            - description: An object that contains the properties associated with a detection job.
+          $ref: '#/components/schemas/ComprehendMedicalAsyncJobProperties'
+          description: An object that contains the properties associated with a detection job.
     DescribeRxNormInferenceJobRequest:
       type: object
       required:
@@ -1470,9 +1463,8 @@ components:
       title: DescribeRxNormInferenceJobRequest
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The identifier that Amazon Comprehend Medical generated for the job. The StartRxNormInferenceJob operation returns this identifier in its response.
+          $ref: '#/components/schemas/JobId'
+          description: The identifier that Amazon Comprehend Medical generated for the job. The StartRxNormInferenceJob operation returns this identifier in its response.
     DetectEntitiesResponse:
       type: object
       required:
@@ -1480,21 +1472,17 @@ components:
         - ModelVersion
       properties:
         Entities:
-          allOf:
-            - $ref: '#/components/schemas/EntityList'
-            - description: ' The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned.'
+          $ref: '#/components/schemas/EntityList'
+          description: ' The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned.'
         UnmappedAttributes:
-          allOf:
-            - $ref: '#/components/schemas/UnmappedAttributeList'
-            - description: ' Attributes extracted from the input text that we were unable to relate to an entity.'
+          $ref: '#/components/schemas/UnmappedAttributeList'
+          description: ' Attributes extracted from the input text that we were unable to relate to an entity.'
         PaginationToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' If the result of the previous request to <code>DetectEntities</code> was truncated, include the <code>PaginationToken</code> to fetch the next page of entities.'
+          $ref: '#/components/schemas/String'
+          description: ' If the result of the previous request to <code>DetectEntities</code> was truncated, include the <code>PaginationToken</code> to fetch the next page of entities.'
         ModelVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The version of the model used to analyze the documents. The version number looks like X.X.X. You can use this information to track the model used for a particular batch of documents.
+          $ref: '#/components/schemas/String'
+          description: The version of the model used to analyze the documents. The version number looks like X.X.X. You can use this information to track the model used for a particular batch of documents.
     DetectEntitiesRequest:
       type: object
       required:
@@ -1502,9 +1490,8 @@ components:
       title: DetectEntitiesRequest
       properties:
         Text:
-          allOf:
-            - $ref: '#/components/schemas/BoundedLengthString'
-            - description: ' A UTF-8 text string containing the clinical content being examined for entities. Each string must contain fewer than 20,000 bytes of characters.'
+          $ref: '#/components/schemas/BoundedLengthString'
+          description: ' A UTF-8 text string containing the clinical content being examined for entities. Each string must contain fewer than 20,000 bytes of characters.'
     ServiceUnavailableException: {}
     InvalidEncodingException: {}
     TextSizeLimitExceededException: {}
@@ -1515,21 +1502,17 @@ components:
         - ModelVersion
       properties:
         Entities:
-          allOf:
-            - $ref: '#/components/schemas/EntityList'
-            - description: 'The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence in the detection and analysis. Attributes and traits of the entity are also returned.'
+          $ref: '#/components/schemas/EntityList'
+          description: 'The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence in the detection and analysis. Attributes and traits of the entity are also returned.'
         UnmappedAttributes:
-          allOf:
-            - $ref: '#/components/schemas/UnmappedAttributeList'
-            - description: Attributes extracted from the input text that couldn't be related to an entity.
+          $ref: '#/components/schemas/UnmappedAttributeList'
+          description: Attributes extracted from the input text that couldn't be related to an entity.
         PaginationToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'If the result to the <code>DetectEntitiesV2</code> operation was truncated, include the <code>PaginationToken</code> to fetch the next page of entities.'
+          $ref: '#/components/schemas/String'
+          description: 'If the result to the <code>DetectEntitiesV2</code> operation was truncated, include the <code>PaginationToken</code> to fetch the next page of entities.'
         ModelVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The version of the model used to analyze the documents. The version number looks like X.X.X. You can use this information to track the model used for a particular batch of documents.
+          $ref: '#/components/schemas/String'
+          description: The version of the model used to analyze the documents. The version number looks like X.X.X. You can use this information to track the model used for a particular batch of documents.
     DetectEntitiesV2Request:
       type: object
       required:
@@ -1537,9 +1520,8 @@ components:
       title: DetectEntitiesV2Request
       properties:
         Text:
-          allOf:
-            - $ref: '#/components/schemas/BoundedLengthString'
-            - description: 'A UTF-8 string containing the clinical content being examined for entities. Each string must contain fewer than 20,000 bytes of characters.'
+          $ref: '#/components/schemas/BoundedLengthString'
+          description: 'A UTF-8 string containing the clinical content being examined for entities. Each string must contain fewer than 20,000 bytes of characters.'
     DetectPHIResponse:
       type: object
       required:
@@ -1547,17 +1529,14 @@ components:
         - ModelVersion
       properties:
         Entities:
-          allOf:
-            - $ref: '#/components/schemas/EntityList'
-            - description: ' The collection of PHI entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in its detection. '
+          $ref: '#/components/schemas/EntityList'
+          description: ' The collection of PHI entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in its detection. '
         PaginationToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' If the result of the previous request to <code>DetectPHI</code> was truncated, include the <code>PaginationToken</code> to fetch the next page of PHI entities. '
+          $ref: '#/components/schemas/String'
+          description: ' If the result of the previous request to <code>DetectPHI</code> was truncated, include the <code>PaginationToken</code> to fetch the next page of PHI entities. '
         ModelVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The version of the model used to analyze the documents. The version number looks like X.X.X. You can use this information to track the model used for a particular batch of documents.
+          $ref: '#/components/schemas/String'
+          description: The version of the model used to analyze the documents. The version number looks like X.X.X. You can use this information to track the model used for a particular batch of documents.
     DetectPHIRequest:
       type: object
       required:
@@ -1565,26 +1544,22 @@ components:
       title: DetectPHIRequest
       properties:
         Text:
-          allOf:
-            - $ref: '#/components/schemas/BoundedLengthString'
-            - description: ' A UTF-8 text string containing the clinical content being examined for PHI entities. Each string must contain fewer than 20,000 bytes of characters.'
+          $ref: '#/components/schemas/BoundedLengthString'
+          description: ' A UTF-8 text string containing the clinical content being examined for PHI entities. Each string must contain fewer than 20,000 bytes of characters.'
     InferICD10CMResponse:
       type: object
       required:
         - Entities
       properties:
         Entities:
-          allOf:
-            - $ref: '#/components/schemas/ICD10CMEntityList'
-            - description: 'The medical conditions detected in the text linked to ICD-10-CM concepts. If the action is successful, the service sends back an HTTP 200 response, as well as the entities detected.'
+          $ref: '#/components/schemas/ICD10CMEntityList'
+          description: 'The medical conditions detected in the text linked to ICD-10-CM concepts. If the action is successful, the service sends back an HTTP 200 response, as well as the entities detected.'
         PaginationToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'If the result of the previous request to <code>InferICD10CM</code> was truncated, include the <code>PaginationToken</code> to fetch the next page of medical condition entities. '
+          $ref: '#/components/schemas/String'
+          description: 'If the result of the previous request to <code>InferICD10CM</code> was truncated, include the <code>PaginationToken</code> to fetch the next page of medical condition entities. '
         ModelVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The version of the model used to analyze the documents, in the format <i>n</i>.<i>n</i>.<i>n</i> You can use this information to track the model used for a particular batch of documents.'
+          $ref: '#/components/schemas/String'
+          description: 'The version of the model used to analyze the documents, in the format <i>n</i>.<i>n</i>.<i>n</i> You can use this information to track the model used for a particular batch of documents.'
     InferICD10CMRequest:
       type: object
       required:
@@ -1592,26 +1567,22 @@ components:
       title: InferICD10CMRequest
       properties:
         Text:
-          allOf:
-            - $ref: '#/components/schemas/OntologyLinkingBoundedLengthString'
-            - description: The input text used for analysis. The input for InferICD10CM is a string from 1 to 10000 characters.
+          $ref: '#/components/schemas/OntologyLinkingBoundedLengthString'
+          description: The input text used for analysis. The input for InferICD10CM is a string from 1 to 10000 characters.
     InferRxNormResponse:
       type: object
       required:
         - Entities
       properties:
         Entities:
-          allOf:
-            - $ref: '#/components/schemas/RxNormEntityList'
-            - description: 'The medication entities detected in the text linked to RxNorm concepts. If the action is successful, the service sends back an HTTP 200 response, as well as the entities detected.'
+          $ref: '#/components/schemas/RxNormEntityList'
+          description: 'The medication entities detected in the text linked to RxNorm concepts. If the action is successful, the service sends back an HTTP 200 response, as well as the entities detected.'
         PaginationToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'If the result of the previous request to <code>InferRxNorm</code> was truncated, include the <code>PaginationToken</code> to fetch the next page of medication entities.'
+          $ref: '#/components/schemas/String'
+          description: 'If the result of the previous request to <code>InferRxNorm</code> was truncated, include the <code>PaginationToken</code> to fetch the next page of medication entities.'
         ModelVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The version of the model used to analyze the documents, in the format <i>n</i>.<i>n</i>.<i>n</i> You can use this information to track the model used for a particular batch of documents.'
+          $ref: '#/components/schemas/String'
+          description: 'The version of the model used to analyze the documents, in the format <i>n</i>.<i>n</i>.<i>n</i> You can use this information to track the model used for a particular batch of documents.'
     InferRxNormRequest:
       type: object
       required:
@@ -1619,125 +1590,103 @@ components:
       title: InferRxNormRequest
       properties:
         Text:
-          allOf:
-            - $ref: '#/components/schemas/OntologyLinkingBoundedLengthString'
-            - description: The input text used for analysis. The input for InferRxNorm is a string from 1 to 10000 characters.
+          $ref: '#/components/schemas/OntologyLinkingBoundedLengthString'
+          description: The input text used for analysis. The input for InferRxNorm is a string from 1 to 10000 characters.
     ListEntitiesDetectionV2JobsResponse:
       type: object
       properties:
         ComprehendMedicalAsyncJobPropertiesList:
-          allOf:
-            - $ref: '#/components/schemas/ComprehendMedicalAsyncJobPropertiesList'
-            - description: A list containing the properties of each job returned.
+          $ref: '#/components/schemas/ComprehendMedicalAsyncJobPropertiesList'
+          description: A list containing the properties of each job returned.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Identifies the next page of results to return.
+          $ref: '#/components/schemas/String'
+          description: Identifies the next page of results to return.
     ListEntitiesDetectionV2JobsRequest:
       type: object
       title: ListEntitiesDetectionV2JobsRequest
       properties:
         Filter:
-          allOf:
-            - $ref: '#/components/schemas/ComprehendMedicalAsyncJobFilter'
-            - description: 'Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.'
+          $ref: '#/components/schemas/ComprehendMedicalAsyncJobFilter'
+          description: 'Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Identifies the next page of results to return.
+          $ref: '#/components/schemas/String'
+          description: Identifies the next page of results to return.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResultsInteger'
-            - description: The maximum number of results to return in each page. The default is 100.
+          $ref: '#/components/schemas/MaxResultsInteger'
+          description: The maximum number of results to return in each page. The default is 100.
     ValidationException: {}
     ListICD10CMInferenceJobsResponse:
       type: object
       properties:
         ComprehendMedicalAsyncJobPropertiesList:
-          allOf:
-            - $ref: '#/components/schemas/ComprehendMedicalAsyncJobPropertiesList'
-            - description: A list containing the properties of each job that is returned.
+          $ref: '#/components/schemas/ComprehendMedicalAsyncJobPropertiesList'
+          description: A list containing the properties of each job that is returned.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Identifies the next page of results to return.
+          $ref: '#/components/schemas/String'
+          description: Identifies the next page of results to return.
     ListICD10CMInferenceJobsRequest:
       type: object
       title: ListICD10CMInferenceJobsRequest
       properties:
         Filter:
-          allOf:
-            - $ref: '#/components/schemas/ComprehendMedicalAsyncJobFilter'
-            - description: 'Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.'
+          $ref: '#/components/schemas/ComprehendMedicalAsyncJobFilter'
+          description: 'Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Identifies the next page of results to return.
+          $ref: '#/components/schemas/String'
+          description: Identifies the next page of results to return.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResultsInteger'
-            - description: The maximum number of results to return in each page. The default is 100.
+          $ref: '#/components/schemas/MaxResultsInteger'
+          description: The maximum number of results to return in each page. The default is 100.
     ListPHIDetectionJobsResponse:
       type: object
       properties:
         ComprehendMedicalAsyncJobPropertiesList:
-          allOf:
-            - $ref: '#/components/schemas/ComprehendMedicalAsyncJobPropertiesList'
-            - description: A list containing the properties of each job returned.
+          $ref: '#/components/schemas/ComprehendMedicalAsyncJobPropertiesList'
+          description: A list containing the properties of each job returned.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Identifies the next page of results to return.
+          $ref: '#/components/schemas/String'
+          description: Identifies the next page of results to return.
     ListPHIDetectionJobsRequest:
       type: object
       title: ListPHIDetectionJobsRequest
       properties:
         Filter:
-          allOf:
-            - $ref: '#/components/schemas/ComprehendMedicalAsyncJobFilter'
-            - description: 'Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.'
+          $ref: '#/components/schemas/ComprehendMedicalAsyncJobFilter'
+          description: 'Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Identifies the next page of results to return.
+          $ref: '#/components/schemas/String'
+          description: Identifies the next page of results to return.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResultsInteger'
-            - description: The maximum number of results to return in each page. The default is 100.
+          $ref: '#/components/schemas/MaxResultsInteger'
+          description: The maximum number of results to return in each page. The default is 100.
     ListRxNormInferenceJobsResponse:
       type: object
       properties:
         ComprehendMedicalAsyncJobPropertiesList:
-          allOf:
-            - $ref: '#/components/schemas/ComprehendMedicalAsyncJobPropertiesList'
-            - description: The maximum number of results to return in each page. The default is 100.
+          $ref: '#/components/schemas/ComprehendMedicalAsyncJobPropertiesList'
+          description: The maximum number of results to return in each page. The default is 100.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Identifies the next page of results to return.
+          $ref: '#/components/schemas/String'
+          description: Identifies the next page of results to return.
     ListRxNormInferenceJobsRequest:
       type: object
       title: ListRxNormInferenceJobsRequest
       properties:
         Filter:
-          allOf:
-            - $ref: '#/components/schemas/ComprehendMedicalAsyncJobFilter'
-            - description: 'Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.'
+          $ref: '#/components/schemas/ComprehendMedicalAsyncJobFilter'
+          description: 'Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.'
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Identifies the next page of results to return.
+          $ref: '#/components/schemas/String'
+          description: Identifies the next page of results to return.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResultsInteger'
-            - description: Identifies the next page of results to return.
+          $ref: '#/components/schemas/MaxResultsInteger'
+          description: Identifies the next page of results to return.
     StartEntitiesDetectionV2JobResponse:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: 'The identifier generated for the job. To get the status of a job, use this identifier with the <code>DescribeEntitiesDetectionV2Job</code> operation.'
+          $ref: '#/components/schemas/JobId'
+          description: 'The identifier generated for the job. To get the status of a job, use this identifier with the <code>DescribeEntitiesDetectionV2Job</code> operation.'
     StartEntitiesDetectionV2JobRequest:
       type: object
       required:
@@ -1748,40 +1697,32 @@ components:
       title: StartEntitiesDetectionV2JobRequest
       properties:
         InputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/InputDataConfig'
-            - description: Specifies the format and location of the input data for the job.
+          $ref: '#/components/schemas/InputDataConfig'
+          description: Specifies the format and location of the input data for the job.
         OutputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/OutputDataConfig'
-            - description: Specifies where to send the output files.
+          $ref: '#/components/schemas/OutputDataConfig'
+          description: Specifies where to send the output files.
         DataAccessRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
+          $ref: '#/components/schemas/IamRoleArn'
+          description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
         JobName:
-          allOf:
-            - $ref: '#/components/schemas/JobName'
-            - description: The identifier of the job.
+          $ref: '#/components/schemas/JobName'
+          description: The identifier of the job.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestTokenString'
-            - description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend Medical generates one.'
+          $ref: '#/components/schemas/ClientRequestTokenString'
+          description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend Medical generates one.'
         KMSKey:
-          allOf:
-            - $ref: '#/components/schemas/KMSKey'
-            - description: 'An AWS Key Management Service key to encrypt your output files. If you do not specify a key, the files are written in plain text.'
+          $ref: '#/components/schemas/KMSKey'
+          description: 'An AWS Key Management Service key to encrypt your output files. If you do not specify a key, the files are written in plain text.'
         LanguageCode:
-          allOf:
-            - $ref: '#/components/schemas/LanguageCode'
-            - description: The language of the input documents. All documents must be in the same language.
+          $ref: '#/components/schemas/LanguageCode'
+          description: The language of the input documents. All documents must be in the same language.
     StartICD10CMInferenceJobResponse:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: 'The identifier generated for the job. To get the status of a job, use this identifier with the <code>StartICD10CMInferenceJob</code> operation.'
+          $ref: '#/components/schemas/JobId'
+          description: 'The identifier generated for the job. To get the status of a job, use this identifier with the <code>StartICD10CMInferenceJob</code> operation.'
     StartICD10CMInferenceJobRequest:
       type: object
       required:
@@ -1792,40 +1733,32 @@ components:
       title: StartICD10CMInferenceJobRequest
       properties:
         InputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/InputDataConfig'
-            - description: Specifies the format and location of the input data for the job.
+          $ref: '#/components/schemas/InputDataConfig'
+          description: Specifies the format and location of the input data for the job.
         OutputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/OutputDataConfig'
-            - description: Specifies where to send the output files.
+          $ref: '#/components/schemas/OutputDataConfig'
+          description: Specifies where to send the output files.
         DataAccessRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
+          $ref: '#/components/schemas/IamRoleArn'
+          description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
         JobName:
-          allOf:
-            - $ref: '#/components/schemas/JobName'
-            - description: The identifier of the job.
+          $ref: '#/components/schemas/JobName'
+          description: The identifier of the job.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestTokenString'
-            - description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend Medical generates one.'
+          $ref: '#/components/schemas/ClientRequestTokenString'
+          description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend Medical generates one.'
         KMSKey:
-          allOf:
-            - $ref: '#/components/schemas/KMSKey'
-            - description: 'An AWS Key Management Service key to encrypt your output files. If you do not specify a key, the files are written in plain text.'
+          $ref: '#/components/schemas/KMSKey'
+          description: 'An AWS Key Management Service key to encrypt your output files. If you do not specify a key, the files are written in plain text.'
         LanguageCode:
-          allOf:
-            - $ref: '#/components/schemas/LanguageCode'
-            - description: The language of the input documents. All documents must be in the same language.
+          $ref: '#/components/schemas/LanguageCode'
+          description: The language of the input documents. All documents must be in the same language.
     StartPHIDetectionJobResponse:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: 'The identifier generated for the job. To get the status of a job, use this identifier with the <code>DescribePHIDetectionJob</code> operation.'
+          $ref: '#/components/schemas/JobId'
+          description: 'The identifier generated for the job. To get the status of a job, use this identifier with the <code>DescribePHIDetectionJob</code> operation.'
     StartPHIDetectionJobRequest:
       type: object
       required:
@@ -1836,40 +1769,32 @@ components:
       title: StartPHIDetectionJobRequest
       properties:
         InputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/InputDataConfig'
-            - description: Specifies the format and location of the input data for the job.
+          $ref: '#/components/schemas/InputDataConfig'
+          description: Specifies the format and location of the input data for the job.
         OutputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/OutputDataConfig'
-            - description: Specifies where to send the output files.
+          $ref: '#/components/schemas/OutputDataConfig'
+          description: Specifies where to send the output files.
         DataAccessRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
+          $ref: '#/components/schemas/IamRoleArn'
+          description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
         JobName:
-          allOf:
-            - $ref: '#/components/schemas/JobName'
-            - description: The identifier of the job.
+          $ref: '#/components/schemas/JobName'
+          description: The identifier of the job.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestTokenString'
-            - description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend Medical generates one.'
+          $ref: '#/components/schemas/ClientRequestTokenString'
+          description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend Medical generates one.'
         KMSKey:
-          allOf:
-            - $ref: '#/components/schemas/KMSKey'
-            - description: 'An AWS Key Management Service key to encrypt your output files. If you do not specify a key, the files are written in plain text.'
+          $ref: '#/components/schemas/KMSKey'
+          description: 'An AWS Key Management Service key to encrypt your output files. If you do not specify a key, the files are written in plain text.'
         LanguageCode:
-          allOf:
-            - $ref: '#/components/schemas/LanguageCode'
-            - description: The language of the input documents. All documents must be in the same language.
+          $ref: '#/components/schemas/LanguageCode'
+          description: The language of the input documents. All documents must be in the same language.
     StartRxNormInferenceJobResponse:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The identifier of the job.
+          $ref: '#/components/schemas/JobId'
+          description: The identifier of the job.
     StartRxNormInferenceJobRequest:
       type: object
       required:
@@ -1880,40 +1805,32 @@ components:
       title: StartRxNormInferenceJobRequest
       properties:
         InputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/InputDataConfig'
-            - description: Specifies the format and location of the input data for the job.
+          $ref: '#/components/schemas/InputDataConfig'
+          description: Specifies the format and location of the input data for the job.
         OutputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/OutputDataConfig'
-            - description: Specifies where to send the output files.
+          $ref: '#/components/schemas/OutputDataConfig'
+          description: Specifies where to send the output files.
         DataAccessRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
+          $ref: '#/components/schemas/IamRoleArn'
+          description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
         JobName:
-          allOf:
-            - $ref: '#/components/schemas/JobName'
-            - description: The identifier of the job.
+          $ref: '#/components/schemas/JobName'
+          description: The identifier of the job.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestTokenString'
-            - description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend Medical generates one.'
+          $ref: '#/components/schemas/ClientRequestTokenString'
+          description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend Medical generates one.'
         KMSKey:
-          allOf:
-            - $ref: '#/components/schemas/KMSKey'
-            - description: 'An AWS Key Management Service key to encrypt your output files. If you do not specify a key, the files are written in plain text.'
+          $ref: '#/components/schemas/KMSKey'
+          description: 'An AWS Key Management Service key to encrypt your output files. If you do not specify a key, the files are written in plain text.'
         LanguageCode:
-          allOf:
-            - $ref: '#/components/schemas/LanguageCode'
-            - description: The language of the input documents. All documents must be in the same language.
+          $ref: '#/components/schemas/LanguageCode'
+          description: The language of the input documents. All documents must be in the same language.
     StopEntitiesDetectionV2JobResponse:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The identifier of the medical entities detection job that was stopped.
+          $ref: '#/components/schemas/JobId'
+          description: The identifier of the medical entities detection job that was stopped.
     StopEntitiesDetectionV2JobRequest:
       type: object
       required:
@@ -1921,16 +1838,14 @@ components:
       title: StopEntitiesDetectionV2JobRequest
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The identifier of the medical entities job to stop.
+          $ref: '#/components/schemas/JobId'
+          description: The identifier of the medical entities job to stop.
     StopICD10CMInferenceJobResponse:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: 'The identifier generated for the job. To get the status of job, use this identifier with the <code>DescribeICD10CMInferenceJob</code> operation.'
+          $ref: '#/components/schemas/JobId'
+          description: 'The identifier generated for the job. To get the status of job, use this identifier with the <code>DescribeICD10CMInferenceJob</code> operation.'
     StopICD10CMInferenceJobRequest:
       type: object
       required:
@@ -1938,16 +1853,14 @@ components:
       title: StopICD10CMInferenceJobRequest
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The identifier of the job.
+          $ref: '#/components/schemas/JobId'
+          description: The identifier of the job.
     StopPHIDetectionJobResponse:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The identifier of the PHI detection job that was stopped.
+          $ref: '#/components/schemas/JobId'
+          description: The identifier of the PHI detection job that was stopped.
     StopPHIDetectionJobRequest:
       type: object
       required:
@@ -1955,16 +1868,14 @@ components:
       title: StopPHIDetectionJobRequest
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The identifier of the PHI detection job to stop.
+          $ref: '#/components/schemas/JobId'
+          description: The identifier of the PHI detection job to stop.
     StopRxNormInferenceJobResponse:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: 'The identifier generated for the job. To get the status of job, use this identifier with the <code>DescribeRxNormInferenceJob</code> operation.'
+          $ref: '#/components/schemas/JobId'
+          description: 'The identifier generated for the job. To get the status of job, use this identifier with the <code>DescribeRxNormInferenceJob</code> operation.'
     StopRxNormInferenceJobRequest:
       type: object
       required:
@@ -1972,9 +1883,8 @@ components:
       title: StopRxNormInferenceJobRequest
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The identifier of the job.
+          $ref: '#/components/schemas/JobId'
+          description: The identifier of the job.
     AnyLengthString:
       type: string
     EntitySubType:
@@ -2060,45 +1970,35 @@ components:
       type: object
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/EntitySubType'
-            - description: ' The type of attribute. '
+          $ref: '#/components/schemas/EntitySubType'
+          description: ' The type of attribute. '
         Score:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: ' The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as an attribute. '
+          $ref: '#/components/schemas/Float'
+          description: ' The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as an attribute. '
         RelationshipScore:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: ' The level of confidence that Amazon Comprehend Medical has that this attribute is correctly related to this entity. '
+          $ref: '#/components/schemas/Float'
+          description: ' The level of confidence that Amazon Comprehend Medical has that this attribute is correctly related to this entity. '
         RelationshipType:
-          allOf:
-            - $ref: '#/components/schemas/RelationshipType'
-            - description: 'The type of relationship between the entity and attribute. Type for the relationship is <code>OVERLAP</code>, indicating that the entity occurred at the same time as the <code>Date_Expression</code>. '
+          $ref: '#/components/schemas/RelationshipType'
+          description: 'The type of relationship between the entity and attribute. Type for the relationship is <code>OVERLAP</code>, indicating that the entity occurred at the same time as the <code>Date_Expression</code>. '
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The numeric identifier for this attribute. This is a monotonically increasing id unique within this response rather than a global unique identifier. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The numeric identifier for this attribute. This is a monotonically increasing id unique within this response rather than a global unique identifier. '
         BeginOffset:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The 0-based character offset in the input text that shows where the attribute begins. The offset returns the UTF-8 code point in the string. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The 0-based character offset in the input text that shows where the attribute begins. The offset returns the UTF-8 code point in the string. '
         EndOffset:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The 0-based character offset in the input text that shows where the attribute ends. The offset returns the UTF-8 code point in the string.'
+          $ref: '#/components/schemas/Integer'
+          description: ' The 0-based character offset in the input text that shows where the attribute ends. The offset returns the UTF-8 code point in the string.'
         Text:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The segment of input text extracted as this attribute.'
+          $ref: '#/components/schemas/String'
+          description: ' The segment of input text extracted as this attribute.'
         Category:
-          allOf:
-            - $ref: '#/components/schemas/EntityType'
-            - description: ' The category of attribute. '
+          $ref: '#/components/schemas/EntityType'
+          description: ' The category of attribute. '
         Traits:
-          allOf:
-            - $ref: '#/components/schemas/TraitList'
-            - description: ' Contextual information for this attribute. '
+          $ref: '#/components/schemas/TraitList'
+          description: ' Contextual information for this attribute. '
       description: ' An extracted segment of the text that is an attribute of an entity, or otherwise related to an entity, such as the dosage of a medication taken. It contains information about the attribute such as id, begin and end offset within the input text, and the segment of the input text. '
     AttributeList:
       type: array
@@ -2142,21 +2042,17 @@ components:
       type: object
       properties:
         JobName:
-          allOf:
-            - $ref: '#/components/schemas/JobName'
-            - description: Filters on the name of the job.
+          $ref: '#/components/schemas/JobName'
+          description: Filters on the name of the job.
         JobStatus:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: Filters the list of jobs based on job status. Returns only jobs with the specified status.
+          $ref: '#/components/schemas/JobStatus'
+          description: Filters the list of jobs based on job status. Returns only jobs with the specified status.
         SubmitTimeBefore:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.'
         SubmitTimeAfter:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.'
       description: Provides information for filtering a list of detection jobs.
     JobId:
       type: string
@@ -2169,13 +2065,11 @@ components:
         - S3Bucket
       properties:
         S3Bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3Bucket'
-            - description: <p>The URI of the S3 bucket that contains the input data. The bucket must be in the same region as the API endpoint that you are calling.</p> <p>Each file in the document collection must be less than 40 KB. You can store a maximum of 30 GB in the bucket.</p>
+          $ref: '#/components/schemas/S3Bucket'
+          description: <p>The URI of the S3 bucket that contains the input data. The bucket must be in the same region as the API endpoint that you are calling.</p> <p>Each file in the document collection must be less than 40 KB. You can store a maximum of 30 GB in the bucket.</p>
         S3Key:
-          allOf:
-            - $ref: '#/components/schemas/S3Key'
-            - description: The path to the input data files in the S3 bucket.
+          $ref: '#/components/schemas/S3Key'
+          description: The path to the input data files in the S3 bucket.
       description: 'The input properties for an entities detection job. This includes the name of the S3 bucket and the path to the files to be analyzed. '
     OutputDataConfig:
       type: object
@@ -2183,13 +2077,11 @@ components:
         - S3Bucket
       properties:
         S3Bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3Bucket'
-            - description: 'When you use the <code>OutputDataConfig</code> object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. The URI must be in the same region as the API endpoint that you are calling. The location is used as the prefix for the actual location of the output.'
+          $ref: '#/components/schemas/S3Bucket'
+          description: 'When you use the <code>OutputDataConfig</code> object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. The URI must be in the same region as the API endpoint that you are calling. The location is used as the prefix for the actual location of the output.'
         S3Key:
-          allOf:
-            - $ref: '#/components/schemas/S3Key'
-            - description: The path to the output data files in the S3 bucket. Amazon Comprehend Medical creates an output directory using the job ID so that the output from one job does not overwrite the output of another.
+          $ref: '#/components/schemas/S3Key'
+          description: The path to the output data files in the S3 bucket. Amazon Comprehend Medical creates an output directory using the job ID so that the output from one job does not overwrite the output of another.
       description: The output properties for a detection job.
     LanguageCode:
       type: string
@@ -2215,61 +2107,47 @@ components:
       type: object
       properties:
         JobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The identifier assigned to the detection job.
+          $ref: '#/components/schemas/JobId'
+          description: The identifier assigned to the detection job.
         JobName:
-          allOf:
-            - $ref: '#/components/schemas/JobName'
-            - description: The name that you assigned to the detection job.
+          $ref: '#/components/schemas/JobName'
+          description: The name that you assigned to the detection job.
         JobStatus:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: 'The current status of the detection job. If the status is <code>FAILED</code>, the <code>Message</code> field shows the reason for the failure.'
+          $ref: '#/components/schemas/JobStatus'
+          description: 'The current status of the detection job. If the status is <code>FAILED</code>, the <code>Message</code> field shows the reason for the failure.'
         Message:
-          allOf:
-            - $ref: '#/components/schemas/AnyLengthString'
-            - description: A description of the status of a job.
+          $ref: '#/components/schemas/AnyLengthString'
+          description: A description of the status of a job.
         SubmitTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time that the detection job was submitted for processing.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the detection job was submitted for processing.
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time that the detection job completed.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the detection job completed.
         ExpirationTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time that job metadata is deleted from the server. Output files in your S3 bucket will not be deleted. After the metadata is deleted, the job will no longer appear in the results of the <code>ListEntitiesDetectionV2Job</code> or the <code>ListPHIDetectionJobs</code> operation.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time that job metadata is deleted from the server. Output files in your S3 bucket will not be deleted. After the metadata is deleted, the job will no longer appear in the results of the <code>ListEntitiesDetectionV2Job</code> or the <code>ListPHIDetectionJobs</code> operation.'
         InputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/InputDataConfig'
-            - description: The input data configuration that you supplied when you created the detection job.
+          $ref: '#/components/schemas/InputDataConfig'
+          description: The input data configuration that you supplied when you created the detection job.
         OutputDataConfig:
-          allOf:
-            - $ref: '#/components/schemas/OutputDataConfig'
-            - description: The output data configuration that you supplied when you created the detection job.
+          $ref: '#/components/schemas/OutputDataConfig'
+          description: The output data configuration that you supplied when you created the detection job.
         LanguageCode:
-          allOf:
-            - $ref: '#/components/schemas/LanguageCode'
-            - description: The language code of the input documents.
+          $ref: '#/components/schemas/LanguageCode'
+          description: The language code of the input documents.
         DataAccessRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) that gives Amazon Comprehend Medical read access to your input data.
+          $ref: '#/components/schemas/IamRoleArn'
+          description: The Amazon Resource Name (ARN) that gives Amazon Comprehend Medical read access to your input data.
         ManifestFilePath:
-          allOf:
-            - $ref: '#/components/schemas/ManifestFilePath'
-            - description: The path to the file that describes the results of a batch job.
+          $ref: '#/components/schemas/ManifestFilePath'
+          description: The path to the file that describes the results of a batch job.
         KMSKey:
-          allOf:
-            - $ref: '#/components/schemas/KMSKey'
-            - description: 'The AWS Key Management Service key, if any, used to encrypt the output files. '
+          $ref: '#/components/schemas/KMSKey'
+          description: 'The AWS Key Management Service key, if any, used to encrypt the output files. '
         ModelVersion:
-          allOf:
-            - $ref: '#/components/schemas/ModelVersion'
-            - description: The version of the model used to analyze the documents. The version number looks like X.X.X. You can use this information to track the model used for a particular batch of documents.
+          $ref: '#/components/schemas/ModelVersion'
+          description: The version of the model used to analyze the documents. The version number looks like X.X.X. You can use this information to track the model used for a particular batch of documents.
       description: Provides information about a detection job.
     ComprehendMedicalAsyncJobPropertiesList:
       type: array
@@ -2287,41 +2165,32 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The numeric identifier for the entity. This is a monotonically increasing id unique within this response rather than a global unique identifier. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The numeric identifier for the entity. This is a monotonically increasing id unique within this response rather than a global unique identifier. '
         BeginOffset:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The 0-based character offset in the input text that shows where the entity begins. The offset returns the UTF-8 code point in the string. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The 0-based character offset in the input text that shows where the entity begins. The offset returns the UTF-8 code point in the string. '
         EndOffset:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: ' The 0-based character offset in the input text that shows where the entity ends. The offset returns the UTF-8 code point in the string. '
+          $ref: '#/components/schemas/Integer'
+          description: ' The 0-based character offset in the input text that shows where the entity ends. The offset returns the UTF-8 code point in the string. '
         Score:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The level of confidence that Amazon Comprehend Medical has in the accuracy of the detection.
+          $ref: '#/components/schemas/Float'
+          description: The level of confidence that Amazon Comprehend Medical has in the accuracy of the detection.
         Text:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: ' The segment of input text extracted as this entity.'
+          $ref: '#/components/schemas/String'
+          description: ' The segment of input text extracted as this entity.'
         Category:
-          allOf:
-            - $ref: '#/components/schemas/EntityType'
-            - description: ' The category of the entity.'
+          $ref: '#/components/schemas/EntityType'
+          description: ' The category of the entity.'
         Type:
-          allOf:
-            - $ref: '#/components/schemas/EntitySubType'
-            - description: ' Describes the specific type of entity with category of entities.'
+          $ref: '#/components/schemas/EntitySubType'
+          description: ' Describes the specific type of entity with category of entities.'
         Traits:
-          allOf:
-            - $ref: '#/components/schemas/TraitList'
-            - description: Contextual information for the entity.
+          $ref: '#/components/schemas/TraitList'
+          description: Contextual information for the entity.
         Attributes:
-          allOf:
-            - $ref: '#/components/schemas/AttributeList'
-            - description: ' The extracted attributes that relate to this entity.'
+          $ref: '#/components/schemas/AttributeList'
+          description: ' The extracted attributes that relate to this entity.'
       description: ' Provides information about an extracted medical entity.'
     ICD10CMAttributeType:
       type: string
@@ -2351,45 +2220,35 @@ components:
       type: object
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ICD10CMAttributeType'
-            - description: 'The type of attribute. InferICD10CM detects entities of the type <code>DX_NAME</code>. '
+          $ref: '#/components/schemas/ICD10CMAttributeType'
+          description: 'The type of attribute. InferICD10CM detects entities of the type <code>DX_NAME</code>. '
         Score:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as an attribute.
+          $ref: '#/components/schemas/Float'
+          description: The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as an attribute.
         RelationshipScore:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The level of confidence that Amazon Comprehend Medical has that this attribute is correctly related to this entity.
+          $ref: '#/components/schemas/Float'
+          description: The level of confidence that Amazon Comprehend Medical has that this attribute is correctly related to this entity.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The numeric identifier for this attribute. This is a monotonically increasing id unique within this response rather than a global unique identifier.
+          $ref: '#/components/schemas/Integer'
+          description: The numeric identifier for this attribute. This is a monotonically increasing id unique within this response rather than a global unique identifier.
         BeginOffset:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The 0-based character offset in the input text that shows where the attribute begins. The offset returns the UTF-8 code point in the string.
+          $ref: '#/components/schemas/Integer'
+          description: The 0-based character offset in the input text that shows where the attribute begins. The offset returns the UTF-8 code point in the string.
         EndOffset:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The 0-based character offset in the input text that shows where the attribute ends. The offset returns the UTF-8 code point in the string.
+          $ref: '#/components/schemas/Integer'
+          description: The 0-based character offset in the input text that shows where the attribute ends. The offset returns the UTF-8 code point in the string.
         Text:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The segment of input text which contains the detected attribute.
+          $ref: '#/components/schemas/String'
+          description: The segment of input text which contains the detected attribute.
         Traits:
-          allOf:
-            - $ref: '#/components/schemas/ICD10CMTraitList'
-            - description: 'The contextual information for the attribute. The traits recognized by InferICD10CM are <code>DIAGNOSIS</code>, <code>SIGN</code>, <code>SYMPTOM</code>, and <code>NEGATION</code>.'
+          $ref: '#/components/schemas/ICD10CMTraitList'
+          description: 'The contextual information for the attribute. The traits recognized by InferICD10CM are <code>DIAGNOSIS</code>, <code>SIGN</code>, <code>SYMPTOM</code>, and <code>NEGATION</code>.'
         Category:
-          allOf:
-            - $ref: '#/components/schemas/ICD10CMEntityType'
-            - description: The category of attribute. Can be either of <code>DX_NAME</code> or <code>TIME_EXPRESSION</code>.
+          $ref: '#/components/schemas/ICD10CMEntityType'
+          description: The category of attribute. Can be either of <code>DX_NAME</code> or <code>TIME_EXPRESSION</code>.
         RelationshipType:
-          allOf:
-            - $ref: '#/components/schemas/ICD10CMRelationshipType'
-            - description: The type of relationship between the entity and attribute. Type for the relationship can be either of <code>OVERLAP</code> or <code>SYSTEM_ORGAN_SITE</code>.
+          $ref: '#/components/schemas/ICD10CMRelationshipType'
+          description: The type of relationship between the entity and attribute. Type for the relationship can be either of <code>OVERLAP</code> or <code>SYSTEM_ORGAN_SITE</code>.
       description: 'The detected attributes that relate to an entity. This includes an extracted segment of the text that is an attribute of an entity, or otherwise related to an entity. InferICD10CM detects the following attributes: <code>Direction</code>, <code>System, Organ or Site</code>, and <code>Acuity</code>.'
     ICD10CMAttributeList:
       type: array
@@ -2399,17 +2258,14 @@ components:
       type: object
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The long description of the ICD-10-CM code in the ontology.
+          $ref: '#/components/schemas/String'
+          description: The long description of the ICD-10-CM code in the ontology.
         Code:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The ICD-10-CM code that identifies the concept found in the knowledge base from the Centers for Disease Control.
+          $ref: '#/components/schemas/String'
+          description: The ICD-10-CM code that identifies the concept found in the knowledge base from the Centers for Disease Control.
         Score:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The level of confidence that Amazon Comprehend Medical has that the entity is accurately linked to an ICD-10-CM concept.
+          $ref: '#/components/schemas/Float'
+          description: The level of confidence that Amazon Comprehend Medical has that the entity is accurately linked to an ICD-10-CM concept.
       description: ' The ICD-10-CM concepts that the entity could refer to, along with a score indicating the likelihood of the match.'
     ICD10CMConceptList:
       type: array
@@ -2427,45 +2283,35 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The numeric identifier for the entity. This is a monotonically increasing id unique within this response rather than a global unique identifier.
+          $ref: '#/components/schemas/Integer'
+          description: The numeric identifier for the entity. This is a monotonically increasing id unique within this response rather than a global unique identifier.
         Text:
-          allOf:
-            - $ref: '#/components/schemas/OntologyLinkingBoundedLengthString'
-            - description: The segment of input text that is matched to the detected entity.
+          $ref: '#/components/schemas/OntologyLinkingBoundedLengthString'
+          description: The segment of input text that is matched to the detected entity.
         Category:
-          allOf:
-            - $ref: '#/components/schemas/ICD10CMEntityCategory'
-            - description: ' The category of the entity. InferICD10CM detects entities in the <code>MEDICAL_CONDITION</code> category. '
+          $ref: '#/components/schemas/ICD10CMEntityCategory'
+          description: ' The category of the entity. InferICD10CM detects entities in the <code>MEDICAL_CONDITION</code> category. '
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ICD10CMEntityType'
-            - description: Describes the specific type of entity with category of entities. InferICD10CM detects entities of the type <code>DX_NAME</code> and <code>TIME_EXPRESSION</code>.
+          $ref: '#/components/schemas/ICD10CMEntityType'
+          description: Describes the specific type of entity with category of entities. InferICD10CM detects entities of the type <code>DX_NAME</code> and <code>TIME_EXPRESSION</code>.
         Score:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The level of confidence that Amazon Comprehend Medical has in the accuracy of the detection.
+          $ref: '#/components/schemas/Float'
+          description: The level of confidence that Amazon Comprehend Medical has in the accuracy of the detection.
         BeginOffset:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The 0-based character offset in the input text that shows where the entity begins. The offset returns the UTF-8 code point in the string.
+          $ref: '#/components/schemas/Integer'
+          description: The 0-based character offset in the input text that shows where the entity begins. The offset returns the UTF-8 code point in the string.
         EndOffset:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The 0-based character offset in the input text that shows where the entity ends. The offset returns the UTF-8 code point in the string.
+          $ref: '#/components/schemas/Integer'
+          description: The 0-based character offset in the input text that shows where the entity ends. The offset returns the UTF-8 code point in the string.
         Attributes:
-          allOf:
-            - $ref: '#/components/schemas/ICD10CMAttributeList'
-            - description: 'The detected attributes that relate to the entity. An extracted segment of the text that is an attribute of an entity, or otherwise related to an entity, such as the nature of a medical condition.'
+          $ref: '#/components/schemas/ICD10CMAttributeList'
+          description: 'The detected attributes that relate to the entity. An extracted segment of the text that is an attribute of an entity, or otherwise related to an entity, such as the nature of a medical condition.'
         Traits:
-          allOf:
-            - $ref: '#/components/schemas/ICD10CMTraitList'
-            - description: 'Provides Contextual information for the entity. The traits recognized by InferICD10CM are <code>DIAGNOSIS</code>, <code>SIGN</code>, <code>SYMPTOM</code>, and <code>NEGATION.</code> '
+          $ref: '#/components/schemas/ICD10CMTraitList'
+          description: 'Provides Contextual information for the entity. The traits recognized by InferICD10CM are <code>DIAGNOSIS</code>, <code>SIGN</code>, <code>SYMPTOM</code>, and <code>NEGATION.</code> '
         ICD10CMConcepts:
-          allOf:
-            - $ref: '#/components/schemas/ICD10CMConceptList'
-            - description: 'The ICD-10-CM concepts that the entity could refer to, along with a score indicating the likelihood of the match.'
+          $ref: '#/components/schemas/ICD10CMConceptList'
+          description: 'The ICD-10-CM concepts that the entity could refer to, along with a score indicating the likelihood of the match.'
       description: 'The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned. '
     ICD10CMEntityList:
       type: array
@@ -2482,13 +2328,11 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/ICD10CMTraitName'
-            - description: Provides a name or contextual description about the trait.
+          $ref: '#/components/schemas/ICD10CMTraitName'
+          description: Provides a name or contextual description about the trait.
         Score:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as a trait.
+          $ref: '#/components/schemas/Float'
+          description: The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as a trait.
       description: 'Contextual information for the entity. The traits recognized by InferICD10CM are <code>DIAGNOSIS</code>, <code>SIGN</code>, <code>SYMPTOM</code>, and <code>NEGATION</code>.'
     RxNormEntityList:
       type: array
@@ -2525,37 +2369,29 @@ components:
       type: object
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/RxNormAttributeType'
-            - description: The type of attribute. The types of attributes recognized by InferRxNorm are <code>BRAND_NAME</code> and <code>GENERIC_NAME</code>.
+          $ref: '#/components/schemas/RxNormAttributeType'
+          description: The type of attribute. The types of attributes recognized by InferRxNorm are <code>BRAND_NAME</code> and <code>GENERIC_NAME</code>.
         Score:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The level of confidence that Comprehend Medical has that the segment of text is correctly recognized as an attribute.
+          $ref: '#/components/schemas/Float'
+          description: The level of confidence that Comprehend Medical has that the segment of text is correctly recognized as an attribute.
         RelationshipScore:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The level of confidence that Amazon Comprehend Medical has that the attribute is accurately linked to an entity.
+          $ref: '#/components/schemas/Float'
+          description: The level of confidence that Amazon Comprehend Medical has that the attribute is accurately linked to an entity.
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The numeric identifier for this attribute. This is a monotonically increasing id unique within this response rather than a global unique identifier.
+          $ref: '#/components/schemas/Integer'
+          description: The numeric identifier for this attribute. This is a monotonically increasing id unique within this response rather than a global unique identifier.
         BeginOffset:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The 0-based character offset in the input text that shows where the attribute begins. The offset returns the UTF-8 code point in the string.
+          $ref: '#/components/schemas/Integer'
+          description: The 0-based character offset in the input text that shows where the attribute begins. The offset returns the UTF-8 code point in the string.
         EndOffset:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The 0-based character offset in the input text that shows where the attribute ends. The offset returns the UTF-8 code point in the string.
+          $ref: '#/components/schemas/Integer'
+          description: The 0-based character offset in the input text that shows where the attribute ends. The offset returns the UTF-8 code point in the string.
         Text:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The segment of input text which corresponds to the detected attribute.
+          $ref: '#/components/schemas/String'
+          description: The segment of input text which corresponds to the detected attribute.
         Traits:
-          allOf:
-            - $ref: '#/components/schemas/RxNormTraitList'
-            - description: 'Contextual information for the attribute. InferRxNorm recognizes the trait <code>NEGATION</code> for attributes, i.e. that the patient is not taking a specific dose or form of a medication.'
+          $ref: '#/components/schemas/RxNormTraitList'
+          description: 'Contextual information for the attribute. InferRxNorm recognizes the trait <code>NEGATION</code> for attributes, i.e. that the patient is not taking a specific dose or form of a medication.'
       description: 'The extracted attributes that relate to this entity. The attributes recognized by InferRxNorm are <code>DOSAGE</code>, <code>DURATION</code>, <code>FORM</code>, <code>FREQUENCY</code>, <code>RATE</code>, <code>ROUTE_OR_MODE</code>.'
     RxNormAttributeList:
       type: array
@@ -2565,17 +2401,14 @@ components:
       type: object
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The description of the RxNorm concept.
+          $ref: '#/components/schemas/String'
+          description: The description of the RxNorm concept.
         Code:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'RxNorm concept ID, also known as the RxCUI.'
+          $ref: '#/components/schemas/String'
+          description: 'RxNorm concept ID, also known as the RxCUI.'
         Score:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The level of confidence that Amazon Comprehend Medical has that the entity is accurately linked to the reported RxNorm concept.
+          $ref: '#/components/schemas/Float'
+          description: The level of confidence that Amazon Comprehend Medical has that the entity is accurately linked to the reported RxNorm concept.
       description: 'The RxNorm concept that the entity could refer to, along with a score indicating the likelihood of the match.'
     RxNormConceptList:
       type: array
@@ -2594,45 +2427,35 @@ components:
       type: object
       properties:
         Id:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The numeric identifier for the entity. This is a monotonically increasing id unique within this response rather than a global unique identifier.
+          $ref: '#/components/schemas/Integer'
+          description: The numeric identifier for the entity. This is a monotonically increasing id unique within this response rather than a global unique identifier.
         Text:
-          allOf:
-            - $ref: '#/components/schemas/OntologyLinkingBoundedLengthString'
-            - description: The segment of input text extracted from which the entity was detected.
+          $ref: '#/components/schemas/OntologyLinkingBoundedLengthString'
+          description: The segment of input text extracted from which the entity was detected.
         Category:
-          allOf:
-            - $ref: '#/components/schemas/RxNormEntityCategory'
-            - description: The category of the entity. The recognized categories are <code>GENERIC</code> or <code>BRAND_NAME</code>.
+          $ref: '#/components/schemas/RxNormEntityCategory'
+          description: The category of the entity. The recognized categories are <code>GENERIC</code> or <code>BRAND_NAME</code>.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/RxNormEntityType'
-            - description: ' Describes the specific type of entity. For InferRxNorm, the recognized entity type is <code>MEDICATION</code>.'
+          $ref: '#/components/schemas/RxNormEntityType'
+          description: ' Describes the specific type of entity. For InferRxNorm, the recognized entity type is <code>MEDICATION</code>.'
         Score:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The level of confidence that Amazon Comprehend Medical has in the accuracy of the detected entity.
+          $ref: '#/components/schemas/Float'
+          description: The level of confidence that Amazon Comprehend Medical has in the accuracy of the detected entity.
         BeginOffset:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The 0-based character offset in the input text that shows where the entity begins. The offset returns the UTF-8 code point in the string.
+          $ref: '#/components/schemas/Integer'
+          description: The 0-based character offset in the input text that shows where the entity begins. The offset returns the UTF-8 code point in the string.
         EndOffset:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The 0-based character offset in the input text that shows where the entity ends. The offset returns the UTF-8 code point in the string.
+          $ref: '#/components/schemas/Integer'
+          description: The 0-based character offset in the input text that shows where the entity ends. The offset returns the UTF-8 code point in the string.
         Attributes:
-          allOf:
-            - $ref: '#/components/schemas/RxNormAttributeList'
-            - description: 'The extracted attributes that relate to the entity. The attributes recognized by InferRxNorm are <code>DOSAGE</code>, <code>DURATION</code>, <code>FORM</code>, <code>FREQUENCY</code>, <code>RATE</code>, <code>ROUTE_OR_MODE</code>, and <code>STRENGTH</code>.'
+          $ref: '#/components/schemas/RxNormAttributeList'
+          description: 'The extracted attributes that relate to the entity. The attributes recognized by InferRxNorm are <code>DOSAGE</code>, <code>DURATION</code>, <code>FORM</code>, <code>FREQUENCY</code>, <code>RATE</code>, <code>ROUTE_OR_MODE</code>, and <code>STRENGTH</code>.'
         Traits:
-          allOf:
-            - $ref: '#/components/schemas/RxNormTraitList'
-            - description: ' Contextual information for the entity.'
+          $ref: '#/components/schemas/RxNormTraitList'
+          description: ' Contextual information for the entity.'
         RxNormConcepts:
-          allOf:
-            - $ref: '#/components/schemas/RxNormConceptList'
-            - description: ' The RxNorm concepts that the entity could refer to, along with a score indicating the likelihood of the match.'
+          $ref: '#/components/schemas/RxNormConceptList'
+          description: ' The RxNorm concepts that the entity could refer to, along with a score indicating the likelihood of the match.'
       description: 'The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned. '
     RxNormTraitName:
       type: string
@@ -2642,37 +2465,31 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/RxNormTraitName'
-            - description: Provides a name or contextual description about the trait.
+          $ref: '#/components/schemas/RxNormTraitName'
+          description: Provides a name or contextual description about the trait.
         Score:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The level of confidence that Amazon Comprehend Medical has in the accuracy of the detected trait.
+          $ref: '#/components/schemas/Float'
+          description: The level of confidence that Amazon Comprehend Medical has in the accuracy of the detected trait.
       description: 'The contextual information for the entity. InferRxNorm recognizes the trait <code>NEGATION</code>, which is any indication that the patient is not taking a medication. '
     Trait:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/AttributeName'
-            - description: ' Provides a name or contextual description about the trait. '
+          $ref: '#/components/schemas/AttributeName'
+          description: ' Provides a name or contextual description about the trait. '
         Score:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: ' The level of confidence that Amazon Comprehend Medical has in the accuracy of this trait.'
+          $ref: '#/components/schemas/Float'
+          description: ' The level of confidence that Amazon Comprehend Medical has in the accuracy of this trait.'
       description: ' Provides contextual information about the extracted entity. '
     UnmappedAttribute:
       type: object
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/EntityType'
-            - description: ' The type of the attribute, could be one of the following values: "MEDICATION", "MEDICAL_CONDITION", "ANATOMY", "TEST_AND_TREATMENT_PROCEDURE" or "PROTECTED_HEALTH_INFORMATION". '
+          $ref: '#/components/schemas/EntityType'
+          description: ' The type of the attribute, could be one of the following values: "MEDICATION", "MEDICAL_CONDITION", "ANATOMY", "TEST_AND_TREATMENT_PROCEDURE" or "PROTECTED_HEALTH_INFORMATION". '
         Attribute:
-          allOf:
-            - $ref: '#/components/schemas/Attribute'
-            - description: ' The specific attribute that has been extracted but not mapped to an entity. '
+          $ref: '#/components/schemas/Attribute'
+          description: ' The specific attribute that has been extracted but not mapped to an entity. '
       description: ' An attribute that we extracted, but were unable to relate to an entity. '
 security:
   - hmac: []

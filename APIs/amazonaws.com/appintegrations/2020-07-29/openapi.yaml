@@ -191,9 +191,8 @@ paths:
                   type: object
                   properties:
                     Source:
-                      allOf:
-                        - $ref: '#/components/schemas/Source'
-                        - description: The source of the events.
+                      $ref: '#/components/schemas/Source'
+                      description: The source of the events.
                 EventBridgeBus:
                   description: The EventBridge bus.
                   type: string
@@ -753,9 +752,8 @@ components:
       type: object
       properties:
         EventIntegrationArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'The Amazon Resource Name (ARN) of the event integration. '
+          $ref: '#/components/schemas/Arn'
+          description: 'The Amazon Resource Name (ARN) of the event integration. '
     Source:
       type: string
       pattern: ^aws\.partner\/.*$
@@ -778,58 +776,47 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: 'The name of the event integration. '
+          $ref: '#/components/schemas/Name'
+          description: 'The name of the event integration. '
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the event integration.
+          $ref: '#/components/schemas/Description'
+          description: The description of the event integration.
         EventIntegrationArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) for the event integration.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) for the event integration.
         EventBridgeBus:
-          allOf:
-            - $ref: '#/components/schemas/EventBridgeBus'
-            - description: The EventBridge bus.
+          $ref: '#/components/schemas/EventBridgeBus'
+          description: The EventBridge bus.
         EventFilter:
-          allOf:
-            - $ref: '#/components/schemas/EventFilter'
-            - description: The event filter.
+          $ref: '#/components/schemas/EventFilter'
+          description: The event filter.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: One or more tags.
+          $ref: '#/components/schemas/TagMap'
+          description: One or more tags.
     ListEventIntegrationAssociationsResponse:
       type: object
       properties:
         EventIntegrationAssociations:
-          allOf:
-            - $ref: '#/components/schemas/EventIntegrationAssociationsList'
-            - description: The event integration associations.
+          $ref: '#/components/schemas/EventIntegrationAssociationsList'
+          description: The event integration associations.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'If there are additional results, this is the token for the next set of results.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'If there are additional results, this is the token for the next set of results.'
     ListEventIntegrationsResponse:
       type: object
       properties:
         EventIntegrations:
-          allOf:
-            - $ref: '#/components/schemas/EventIntegrationsList'
-            - description: The event integrations.
+          $ref: '#/components/schemas/EventIntegrationsList'
+          description: The event integrations.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'If there are additional results, this is the token for the next set of results.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'If there are additional results, this is the token for the next set of results.'
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: Information about the tags.
+          $ref: '#/components/schemas/TagMap'
+          description: Information about the tags.
     TagResourceResponse:
       type: object
       properties: {}
@@ -879,9 +866,8 @@ components:
         - Source
       properties:
         Source:
-          allOf:
-            - $ref: '#/components/schemas/Source'
-            - description: The source of the events.
+          $ref: '#/components/schemas/Source'
+          description: The source of the events.
       description: The event filter.
     EventBridgeBus:
       type: string
@@ -908,29 +894,23 @@ components:
       title: CreateEventIntegrationRequest
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the event integration.
+          $ref: '#/components/schemas/Name'
+          description: The name of the event integration.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the event integration.
+          $ref: '#/components/schemas/Description'
+          description: The description of the event integration.
         EventFilter:
-          allOf:
-            - $ref: '#/components/schemas/EventFilter'
-            - description: The event filter.
+          $ref: '#/components/schemas/EventFilter'
+          description: The event filter.
         EventBridgeBus:
-          allOf:
-            - $ref: '#/components/schemas/EventBridgeBus'
-            - description: The EventBridge bus.
+          $ref: '#/components/schemas/EventBridgeBus'
+          description: The EventBridge bus.
         ClientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyToken'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          $ref: '#/components/schemas/IdempotencyToken'
+          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: One or more tags.
+          $ref: '#/components/schemas/TagMap'
+          description: One or more tags.
     DeleteEventIntegrationRequest:
       type: object
       title: DeleteEventIntegrationRequest
@@ -944,29 +924,23 @@ components:
       type: object
       properties:
         EventIntegrationArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the event integration.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the event integration.
         Name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the event integration.
+          $ref: '#/components/schemas/Name'
+          description: The name of the event integration.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The event integration description.
+          $ref: '#/components/schemas/Description'
+          description: The event integration description.
         EventFilter:
-          allOf:
-            - $ref: '#/components/schemas/EventFilter'
-            - description: The event integration filter.
+          $ref: '#/components/schemas/EventFilter'
+          description: The event integration filter.
         EventBridgeBus:
-          allOf:
-            - $ref: '#/components/schemas/EventBridgeBus'
-            - description: The Amazon EventBridge bus for the event integration.
+          $ref: '#/components/schemas/EventBridgeBus'
+          description: The Amazon EventBridge bus for the event integration.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags.
       description: The event integration.
     UUID:
       type: string
@@ -975,29 +949,23 @@ components:
       type: object
       properties:
         EventIntegrationAssociationArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) for the event integration association.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) for the event integration association.
         EventIntegrationAssociationId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: The identifier for the event integration association.
+          $ref: '#/components/schemas/UUID'
+          description: The identifier for the event integration association.
         EventIntegrationName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the event integration.
+          $ref: '#/components/schemas/Name'
+          description: The name of the event integration.
         ClientId:
-          allOf:
-            - $ref: '#/components/schemas/ClientId'
-            - description: The identifier for the client that is associated with the event integration.
+          $ref: '#/components/schemas/ClientId'
+          description: The identifier for the client that is associated with the event integration.
         EventBridgeRuleName:
-          allOf:
-            - $ref: '#/components/schemas/EventBridgeRuleName'
-            - description: The name of the EventBridge rule.
+          $ref: '#/components/schemas/EventBridgeRuleName'
+          description: The name of the EventBridge rule.
         ClientAssociationMetadata:
-          allOf:
-            - $ref: '#/components/schemas/ClientAssociationMetadata'
-            - description: The metadata associated with the client.
+          $ref: '#/components/schemas/ClientAssociationMetadata'
+          description: The metadata associated with the client.
       description: The event integration association.
     EventIntegrationAssociationsList:
       type: array
@@ -1049,9 +1017,8 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'One or more tags. '
+          $ref: '#/components/schemas/TagMap'
+          description: 'One or more tags. '
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -1061,8 +1028,7 @@ components:
       title: UpdateEventIntegrationRequest
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/Description'
-            - description: The description of the event inegration.
+          $ref: '#/components/schemas/Description'
+          description: The description of the event inegration.
 security:
   - hmac: []

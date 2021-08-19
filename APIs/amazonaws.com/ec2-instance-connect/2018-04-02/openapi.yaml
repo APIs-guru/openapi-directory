@@ -323,13 +323,11 @@ components:
         Success: true
       properties:
         RequestId:
-          allOf:
-            - $ref: '#/components/schemas/RequestId'
-            - description: The ID of the request. Please provide this ID when contacting AWS Support for assistance.
+          $ref: '#/components/schemas/RequestId'
+          description: The ID of the request. Please provide this ID when contacting AWS Support for assistance.
         Success:
-          allOf:
-            - $ref: '#/components/schemas/Success'
-            - description: Is true if the request succeeds and an error otherwise.
+          $ref: '#/components/schemas/Success'
+          description: Is true if the request succeeds and an error otherwise.
     SendSSHPublicKeyRequest:
       type: object
       required:
@@ -340,21 +338,17 @@ components:
       title: SendSSHPublicKeyRequest
       properties:
         InstanceId:
-          allOf:
-            - $ref: '#/components/schemas/InstanceId'
-            - description: The ID of the EC2 instance.
+          $ref: '#/components/schemas/InstanceId'
+          description: The ID of the EC2 instance.
         InstanceOSUser:
-          allOf:
-            - $ref: '#/components/schemas/InstanceOSUser'
-            - description: The OS user on the EC2 instance for whom the key can be used to authenticate.
+          $ref: '#/components/schemas/InstanceOSUser'
+          description: The OS user on the EC2 instance for whom the key can be used to authenticate.
         SSHPublicKey:
-          allOf:
-            - $ref: '#/components/schemas/SSHPublicKey'
-            - description: 'The public key material. To use the public key, you must have the matching private key.'
+          $ref: '#/components/schemas/SSHPublicKey'
+          description: 'The public key material. To use the public key, you must have the matching private key.'
         AvailabilityZone:
-          allOf:
-            - $ref: '#/components/schemas/AvailabilityZone'
-            - description: The Availability Zone in which the EC2 instance was launched.
+          $ref: '#/components/schemas/AvailabilityZone'
+          description: The Availability Zone in which the EC2 instance was launched.
     AuthException: {}
     InvalidArgsException: {}
     ServiceException: {}
@@ -364,13 +358,11 @@ components:
       type: object
       properties:
         RequestId:
-          allOf:
-            - $ref: '#/components/schemas/RequestId'
-            - description: The ID of the request. Please provide this ID when contacting AWS Support for assistance.
+          $ref: '#/components/schemas/RequestId'
+          description: The ID of the request. Please provide this ID when contacting AWS Support for assistance.
         Success:
-          allOf:
-            - $ref: '#/components/schemas/Success'
-            - description: Is true if the request succeeds and an error otherwise.
+          $ref: '#/components/schemas/Success'
+          description: Is true if the request succeeds and an error otherwise.
     SendSerialConsoleSSHPublicKeyRequest:
       type: object
       required:
@@ -379,17 +371,14 @@ components:
       title: SendSerialConsoleSSHPublicKeyRequest
       properties:
         InstanceId:
-          allOf:
-            - $ref: '#/components/schemas/InstanceId'
-            - description: The ID of the EC2 instance.
+          $ref: '#/components/schemas/InstanceId'
+          description: The ID of the EC2 instance.
         SerialPort:
-          allOf:
-            - $ref: '#/components/schemas/SerialPort'
-            - description: '<p>The serial port of the EC2 instance. Currently only port 0 is supported.</p> <p>Default: 0</p>'
+          $ref: '#/components/schemas/SerialPort'
+          description: '<p>The serial port of the EC2 instance. Currently only port 0 is supported.</p> <p>Default: 0</p>'
         SSHPublicKey:
-          allOf:
-            - $ref: '#/components/schemas/SSHPublicKey'
-            - description: 'The public key material. To use the public key, you must have the matching private key. For information about the supported key formats and lengths, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws">Requirements for key pairs</a> in the <i>Amazon EC2 User Guide</i>.'
+          $ref: '#/components/schemas/SSHPublicKey'
+          description: 'The public key material. To use the public key, you must have the matching private key. For information about the supported key formats and lengths, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws">Requirements for key pairs</a> in the <i>Amazon EC2 User Guide</i>.'
     SerialConsoleAccessDisabledException: {}
     EC2InstanceTypeInvalidException: {}
     SerialConsoleSessionLimitExceededException: {}

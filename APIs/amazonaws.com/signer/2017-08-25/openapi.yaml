@@ -437,21 +437,18 @@ paths:
                   type: object
                   properties:
                     certificateArn:
-                      allOf:
-                        - $ref: '#/components/schemas/CertificateArn'
-                        - description: The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+                      $ref: '#/components/schemas/CertificateArn'
+                      description: The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
                 signatureValidityPeriod:
                   description: The validity period for a signing job.
                   type: object
                   properties:
                     value:
-                      allOf:
-                        - $ref: '#/components/schemas/Integer'
-                        - description: The numerical value of the time unit for signature validity.
+                      $ref: '#/components/schemas/Integer'
+                      description: The numerical value of the time unit for signature validity.
                     type:
-                      allOf:
-                        - $ref: '#/components/schemas/ValidityType'
-                        - description: The time unit for signature validity.
+                      $ref: '#/components/schemas/ValidityType'
+                      description: The time unit for signature validity.
                 platformId:
                   description: The ID of the signing platform to be created.
                   type: string
@@ -460,13 +457,11 @@ paths:
                   type: object
                   properties:
                     signingConfiguration:
-                      allOf:
-                        - $ref: '#/components/schemas/SigningConfigurationOverrides'
-                        - description: A signing configuration that overrides the default encryption or hash algorithm of a signing job.
+                      $ref: '#/components/schemas/SigningConfigurationOverrides'
+                      description: A signing configuration that overrides the default encryption or hash algorithm of a signing job.
                     signingImageFormat:
-                      allOf:
-                        - $ref: '#/components/schemas/ImageFormat'
-                        - description: 'A signed image is a JSON object. When overriding the default signing platform configuration, a customer can select either of two signing formats, <code>JSONEmbedded</code> or <code>JSONDetached</code>. (A third format value, <code>JSON</code>, is reserved for future use.) With <code>JSONEmbedded</code>, the signing image has the payload embedded in it. With <code>JSONDetached</code>, the payload is not be embedded in the signing image.'
+                      $ref: '#/components/schemas/ImageFormat'
+                      description: 'A signed image is a JSON object. When overriding the default signing platform configuration, a customer can select either of two signing formats, <code>JSONEmbedded</code> or <code>JSONDetached</code>. (A third format value, <code>JSON</code>, is reserved for future use.) With <code>JSONEmbedded</code>, the signing image has the payload embedded in it. With <code>JSONDetached</code>, the payload is not be embedded in the signing image.'
                 signingParameters:
                   description: Map of key-value pairs for signing. These can include any information that you want to use during signing.
                   type: object
@@ -752,17 +747,15 @@ paths:
                   type: object
                   properties:
                     s3:
-                      allOf:
-                        - $ref: '#/components/schemas/S3Source'
-                        - description: The <code>S3Source</code> object.
+                      $ref: '#/components/schemas/S3Source'
+                      description: The <code>S3Source</code> object.
                 destination:
                   description: Points to an <code>S3Destination</code> object that contains information about your S3 bucket.
                   type: object
                   properties:
                     s3:
-                      allOf:
-                        - $ref: '#/components/schemas/S3Destination'
-                        - description: The <code>S3Destination</code> object.
+                      $ref: '#/components/schemas/S3Destination'
+                      description: The <code>S3Destination</code> object.
                 profileName:
                   description: The name of the signing profile.
                   type: string
@@ -1379,9 +1372,8 @@ components:
       type: object
       properties:
         revisionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A unique identifier for the current profile revision.
+          $ref: '#/components/schemas/String'
+          description: A unique identifier for the current profile revision.
     ValidationException: {}
     ResourceNotFoundException: {}
     AccessDeniedException: {}
@@ -1393,227 +1385,177 @@ components:
       type: object
       properties:
         jobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The ID of the signing job on output.
+          $ref: '#/components/schemas/JobId'
+          description: The ID of the signing job on output.
         source:
-          allOf:
-            - $ref: '#/components/schemas/Source'
-            - description: The object that contains the name of your S3 bucket or your raw code.
+          $ref: '#/components/schemas/Source'
+          description: The object that contains the name of your S3 bucket or your raw code.
         signingMaterial:
-          allOf:
-            - $ref: '#/components/schemas/SigningMaterial'
-            - description: The Amazon Resource Name (ARN) of your code signing certificate.
+          $ref: '#/components/schemas/SigningMaterial'
+          description: The Amazon Resource Name (ARN) of your code signing certificate.
         platformId:
-          allOf:
-            - $ref: '#/components/schemas/PlatformId'
-            - description: The microcontroller platform to which your signed code image will be distributed.
+          $ref: '#/components/schemas/PlatformId'
+          description: The microcontroller platform to which your signed code image will be distributed.
         platformDisplayName:
-          allOf:
-            - $ref: '#/components/schemas/DisplayName'
-            - description: A human-readable name for the signing platform associated with the signing job.
+          $ref: '#/components/schemas/DisplayName'
+          description: A human-readable name for the signing platform associated with the signing job.
         profileName:
-          allOf:
-            - $ref: '#/components/schemas/ProfileName'
-            - description: The name of the profile that initiated the signing operation.
+          $ref: '#/components/schemas/ProfileName'
+          description: The name of the profile that initiated the signing operation.
         profileVersion:
-          allOf:
-            - $ref: '#/components/schemas/ProfileVersion'
-            - description: The version of the signing profile used to initiate the signing job.
+          $ref: '#/components/schemas/ProfileVersion'
+          description: The version of the signing profile used to initiate the signing job.
         overrides:
-          allOf:
-            - $ref: '#/components/schemas/SigningPlatformOverrides'
-            - description: A list of any overrides that were applied to the signing operation.
+          $ref: '#/components/schemas/SigningPlatformOverrides'
+          description: A list of any overrides that were applied to the signing operation.
         signingParameters:
-          allOf:
-            - $ref: '#/components/schemas/SigningParameters'
-            - description: 'Map of user-assigned key-value pairs used during signing. These values contain any information that you specified for use in your signing job. '
+          $ref: '#/components/schemas/SigningParameters'
+          description: 'Map of user-assigned key-value pairs used during signing. These values contain any information that you specified for use in your signing job. '
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Date and time that the signing job was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: Date and time that the signing job was created.
         completedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Date and time that the signing job was completed.
+          $ref: '#/components/schemas/Timestamp'
+          description: Date and time that the signing job was completed.
         signatureExpiresAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Thr expiration timestamp for the signature generated by the signing job.
+          $ref: '#/components/schemas/Timestamp'
+          description: Thr expiration timestamp for the signature generated by the signing job.
         requestedBy:
-          allOf:
-            - $ref: '#/components/schemas/RequestedBy'
-            - description: The IAM principal that requested the signing job.
+          $ref: '#/components/schemas/RequestedBy'
+          description: The IAM principal that requested the signing job.
         status:
-          allOf:
-            - $ref: '#/components/schemas/SigningStatus'
-            - description: Status of the signing job.
+          $ref: '#/components/schemas/SigningStatus'
+          description: Status of the signing job.
         statusReason:
-          allOf:
-            - $ref: '#/components/schemas/StatusReason'
-            - description: String value that contains the status reason.
+          $ref: '#/components/schemas/StatusReason'
+          description: String value that contains the status reason.
         revocationRecord:
-          allOf:
-            - $ref: '#/components/schemas/SigningJobRevocationRecord'
-            - description: A revocation record if the signature generated by the signing job has been revoked. Contains a timestamp and the ID of the IAM entity that revoked the signature.
+          $ref: '#/components/schemas/SigningJobRevocationRecord'
+          description: A revocation record if the signature generated by the signing job has been revoked. Contains a timestamp and the ID of the IAM entity that revoked the signature.
         signedObject:
-          allOf:
-            - $ref: '#/components/schemas/SignedObject'
-            - description: Name of the S3 bucket where the signed code image is saved by code signing.
+          $ref: '#/components/schemas/SignedObject'
+          description: Name of the S3 bucket where the signed code image is saved by code signing.
         jobOwner:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: The AWS account ID of the job owner.
+          $ref: '#/components/schemas/AccountId'
+          description: The AWS account ID of the job owner.
         jobInvoker:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: The IAM entity that initiated the signing job.
+          $ref: '#/components/schemas/AccountId'
+          description: The IAM entity that initiated the signing job.
     GetSigningPlatformResponse:
       type: object
       properties:
         platformId:
-          allOf:
-            - $ref: '#/components/schemas/PlatformId'
-            - description: The ID of the target signing platform.
+          $ref: '#/components/schemas/PlatformId'
+          description: The ID of the target signing platform.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/DisplayName'
-            - description: The display name of the target signing platform.
+          $ref: '#/components/schemas/DisplayName'
+          description: The display name of the target signing platform.
         partner:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A list of partner entities that use the target signing platform.
+          $ref: '#/components/schemas/String'
+          description: A list of partner entities that use the target signing platform.
         target:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The validation template that is used by the target signing platform.
+          $ref: '#/components/schemas/String'
+          description: The validation template that is used by the target signing platform.
         category:
-          allOf:
-            - $ref: '#/components/schemas/Category'
-            - description: The category type of the target signing platform.
+          $ref: '#/components/schemas/Category'
+          description: The category type of the target signing platform.
         signingConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/SigningConfiguration'
-            - description: A list of configurations applied to the target platform at signing.
+          $ref: '#/components/schemas/SigningConfiguration'
+          description: A list of configurations applied to the target platform at signing.
         signingImageFormat:
-          allOf:
-            - $ref: '#/components/schemas/SigningImageFormat'
-            - description: The format of the target platform's signing image.
+          $ref: '#/components/schemas/SigningImageFormat'
+          description: The format of the target platform's signing image.
         maxSizeInMB:
-          allOf:
-            - $ref: '#/components/schemas/MaxSizeInMB'
-            - description: The maximum size (in MB) of the payload that can be signed by the target platform.
+          $ref: '#/components/schemas/MaxSizeInMB'
+          description: The maximum size (in MB) of the payload that can be signed by the target platform.
         revocationSupported:
-          allOf:
-            - $ref: '#/components/schemas/bool'
-            - description: A flag indicating whether signatures generated for the signing platform can be revoked.
+          $ref: '#/components/schemas/bool'
+          description: A flag indicating whether signatures generated for the signing platform can be revoked.
     GetSigningProfileResponse:
       type: object
       properties:
         profileName:
-          allOf:
-            - $ref: '#/components/schemas/ProfileName'
-            - description: The name of the target signing profile.
+          $ref: '#/components/schemas/ProfileName'
+          description: The name of the target signing profile.
         profileVersion:
-          allOf:
-            - $ref: '#/components/schemas/ProfileVersion'
-            - description: The current version of the signing profile.
+          $ref: '#/components/schemas/ProfileVersion'
+          description: The current version of the signing profile.
         profileVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'The signing profile ARN, including the profile version.'
+          $ref: '#/components/schemas/Arn'
+          description: 'The signing profile ARN, including the profile version.'
         revocationRecord:
           $ref: '#/components/schemas/SigningProfileRevocationRecord'
         signingMaterial:
-          allOf:
-            - $ref: '#/components/schemas/SigningMaterial'
-            - description: The ARN of the certificate that the target profile uses for signing operations.
+          $ref: '#/components/schemas/SigningMaterial'
+          description: The ARN of the certificate that the target profile uses for signing operations.
         platformId:
-          allOf:
-            - $ref: '#/components/schemas/PlatformId'
-            - description: The ID of the platform that is used by the target signing profile.
+          $ref: '#/components/schemas/PlatformId'
+          description: The ID of the platform that is used by the target signing profile.
         platformDisplayName:
-          allOf:
-            - $ref: '#/components/schemas/DisplayName'
-            - description: A human-readable name for the signing platform associated with the signing profile.
+          $ref: '#/components/schemas/DisplayName'
+          description: A human-readable name for the signing platform associated with the signing profile.
         signatureValidityPeriod:
           $ref: '#/components/schemas/SignatureValidityPeriod'
         overrides:
-          allOf:
-            - $ref: '#/components/schemas/SigningPlatformOverrides'
-            - description: A list of overrides applied by the target signing profile for signing operations.
+          $ref: '#/components/schemas/SigningPlatformOverrides'
+          description: A list of overrides applied by the target signing profile for signing operations.
         signingParameters:
-          allOf:
-            - $ref: '#/components/schemas/SigningParameters'
-            - description: A map of key-value pairs for signing operations that is attached to the target signing profile.
+          $ref: '#/components/schemas/SigningParameters'
+          description: A map of key-value pairs for signing operations that is attached to the target signing profile.
         status:
-          allOf:
-            - $ref: '#/components/schemas/SigningProfileStatus'
-            - description: The status of the target signing profile.
+          $ref: '#/components/schemas/SigningProfileStatus'
+          description: The status of the target signing profile.
         statusReason:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Reason for the status of the target signing profile.
+          $ref: '#/components/schemas/String'
+          description: Reason for the status of the target signing profile.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The Amazon Resource Name (ARN) for the signing profile.
+          $ref: '#/components/schemas/string'
+          description: The Amazon Resource Name (ARN) for the signing profile.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: A list of tags associated with the signing profile.
+          $ref: '#/components/schemas/TagMap'
+          description: A list of tags associated with the signing profile.
     ListProfilePermissionsResponse:
       type: object
       properties:
         revisionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The identifier for the current revision of profile permissions.
+          $ref: '#/components/schemas/String'
+          description: The identifier for the current revision of profile permissions.
         policySizeBytes:
-          allOf:
-            - $ref: '#/components/schemas/PolicySizeBytes'
-            - description: Total size of the policy associated with the Signing Profile in bytes.
+          $ref: '#/components/schemas/PolicySizeBytes'
+          description: Total size of the policy associated with the Signing Profile in bytes.
         permissions:
-          allOf:
-            - $ref: '#/components/schemas/Permissions'
-            - description: List of permissions associated with the Signing Profile.
+          $ref: '#/components/schemas/Permissions'
+          description: List of permissions associated with the Signing Profile.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: String for specifying the next set of paginated results.
+          $ref: '#/components/schemas/String'
+          description: String for specifying the next set of paginated results.
     ListSigningJobsResponse:
       type: object
       properties:
         jobs:
-          allOf:
-            - $ref: '#/components/schemas/SigningJobs'
-            - description: A list of your signing jobs.
+          $ref: '#/components/schemas/SigningJobs'
+          description: A list of your signing jobs.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: String for specifying the next set of paginated results.
+          $ref: '#/components/schemas/NextToken'
+          description: String for specifying the next set of paginated results.
     ListSigningPlatformsResponse:
       type: object
       properties:
         platforms:
-          allOf:
-            - $ref: '#/components/schemas/SigningPlatforms'
-            - description: A list of all platforms that match the request parameters.
+          $ref: '#/components/schemas/SigningPlatforms'
+          description: A list of all platforms that match the request parameters.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Value for specifying the next set of paginated results to return.
+          $ref: '#/components/schemas/String'
+          description: Value for specifying the next set of paginated results to return.
     ListSigningProfilesResponse:
       type: object
       properties:
         profiles:
-          allOf:
-            - $ref: '#/components/schemas/SigningProfiles'
-            - description: A list of profiles that are available in the AWS account. This includes profiles with the status of <code>CANCELED</code> if the <code>includeCanceled</code> parameter is set to <code>true</code>.
+          $ref: '#/components/schemas/SigningProfiles'
+          description: A list of profiles that are available in the AWS account. This includes profiles with the status of <code>CANCELED</code> if the <code>includeCanceled</code> parameter is set to <code>true</code>.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: Value for specifying the next set of paginated results to return.
+          $ref: '#/components/schemas/NextToken'
+          description: Value for specifying the next set of paginated results to return.
     SigningProfileStatus:
       type: string
       enum:
@@ -1624,26 +1566,22 @@ components:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: A list of tags associated with the signing profile.
+          $ref: '#/components/schemas/TagMap'
+          description: A list of tags associated with the signing profile.
     BadRequestException: {}
     NotFoundException: {}
     PutSigningProfileResponse:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The Amazon Resource Name (ARN) of the signing profile created.
+          $ref: '#/components/schemas/string'
+          description: The Amazon Resource Name (ARN) of the signing profile created.
         profileVersion:
-          allOf:
-            - $ref: '#/components/schemas/ProfileVersion'
-            - description: The version of the signing profile being created.
+          $ref: '#/components/schemas/ProfileVersion'
+          description: The version of the signing profile being created.
         profileVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'The signing profile ARN, including the profile version.'
+          $ref: '#/components/schemas/Arn'
+          description: 'The signing profile ARN, including the profile version.'
     CertificateArn:
       type: string
     Integer:
@@ -1658,13 +1596,11 @@ components:
       type: object
       properties:
         encryptionAlgorithm:
-          allOf:
-            - $ref: '#/components/schemas/EncryptionAlgorithm'
-            - description: A specified override of the default encryption algorithm that is used in a code signing job.
+          $ref: '#/components/schemas/EncryptionAlgorithm'
+          description: A specified override of the default encryption algorithm that is used in a code signing job.
         hashAlgorithm:
-          allOf:
-            - $ref: '#/components/schemas/HashAlgorithm'
-            - description: A specified override of the default hash algorithm that is used in a code signing job.
+          $ref: '#/components/schemas/HashAlgorithm'
+          description: A specified override of the default hash algorithm that is used in a code signing job.
       description: A signing configuration that overrides the default encryption or hash algorithm of a signing job.
     ImageFormat:
       type: string
@@ -1681,20 +1617,17 @@ components:
       type: object
       properties:
         revisionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: An identifier for the current revision of the profile permissions.
+          $ref: '#/components/schemas/String'
+          description: An identifier for the current revision of the profile permissions.
     StartSigningJobResponse:
       type: object
       properties:
         jobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The ID of your signing job.
+          $ref: '#/components/schemas/JobId'
+          description: The ID of your signing job.
         jobOwner:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: The AWS account ID of the signing job owner.
+          $ref: '#/components/schemas/AccountId'
+          description: The AWS account ID of the signing job owner.
     S3Source:
       type: object
       required:
@@ -1703,29 +1636,24 @@ components:
         - version
       properties:
         bucketName:
-          allOf:
-            - $ref: '#/components/schemas/BucketName'
-            - description: Name of the S3 bucket.
+          $ref: '#/components/schemas/BucketName'
+          description: Name of the S3 bucket.
         key:
-          allOf:
-            - $ref: '#/components/schemas/Key'
-            - description: Key name of the bucket object that contains your unsigned code.
+          $ref: '#/components/schemas/Key'
+          description: Key name of the bucket object that contains your unsigned code.
         version:
-          allOf:
-            - $ref: '#/components/schemas/Version'
-            - description: Version of your source image in your version enabled S3 bucket.
+          $ref: '#/components/schemas/Version'
+          description: Version of your source image in your version enabled S3 bucket.
       description: Information about the S3 bucket where you saved your unsigned code.
     S3Destination:
       type: object
       properties:
         bucketName:
-          allOf:
-            - $ref: '#/components/schemas/BucketName'
-            - description: Name of the S3 bucket.
+          $ref: '#/components/schemas/BucketName'
+          description: Name of the S3 bucket.
         prefix:
-          allOf:
-            - $ref: '#/components/schemas/Prefix'
-            - description: An Amazon S3 prefix that you can use to limit responses to those that begin with the specified prefix.
+          $ref: '#/components/schemas/Prefix'
+          description: An Amazon S3 prefix that you can use to limit responses to those that begin with the specified prefix.
       description: The name and prefix of the S3 bucket where code signing saves your signed objects.
     ThrottlingException: {}
     TagResourceResponse:
@@ -1765,25 +1693,20 @@ components:
       title: AddProfilePermissionRequest
       properties:
         profileVersion:
-          allOf:
-            - $ref: '#/components/schemas/ProfileVersion'
-            - description: The version of the signing profile.
+          $ref: '#/components/schemas/ProfileVersion'
+          description: The version of the signing profile.
         action:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The AWS Signer action permitted as part of cross-account permissions.
+          $ref: '#/components/schemas/String'
+          description: The AWS Signer action permitted as part of cross-account permissions.
         principal:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The AWS principal receiving cross-account permissions. This may be an IAM role or another AWS account ID.
+          $ref: '#/components/schemas/String'
+          description: The AWS principal receiving cross-account permissions. This may be an IAM role or another AWS account ID.
         revisionId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A unique identifier for the current profile revision.
+          $ref: '#/components/schemas/String'
+          description: A unique identifier for the current profile revision.
         statementId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A unique identifier for the cross-account permission statement.
+          $ref: '#/components/schemas/String'
+          description: A unique identifier for the cross-account permission statement.
     Arn:
       type: string
       minLength: 20
@@ -1810,9 +1733,8 @@ components:
       type: object
       properties:
         s3:
-          allOf:
-            - $ref: '#/components/schemas/S3Source'
-            - description: The <code>S3Source</code> object.
+          $ref: '#/components/schemas/S3Source'
+          description: The <code>S3Source</code> object.
       description: An <code>S3Source</code> object that contains information about the S3 bucket where you saved your unsigned code.
     SigningMaterial:
       type: object
@@ -1820,9 +1742,8 @@ components:
         - certificateArn
       properties:
         certificateArn:
-          allOf:
-            - $ref: '#/components/schemas/CertificateArn'
-            - description: The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+          $ref: '#/components/schemas/CertificateArn'
+          description: The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
       description: The ACM certificate that is used to sign your code.
     PlatformId:
       type: string
@@ -1832,13 +1753,11 @@ components:
       type: object
       properties:
         signingConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/SigningConfigurationOverrides'
-            - description: A signing configuration that overrides the default encryption or hash algorithm of a signing job.
+          $ref: '#/components/schemas/SigningConfigurationOverrides'
+          description: A signing configuration that overrides the default encryption or hash algorithm of a signing job.
         signingImageFormat:
-          allOf:
-            - $ref: '#/components/schemas/ImageFormat'
-            - description: 'A signed image is a JSON object. When overriding the default signing platform configuration, a customer can select either of two signing formats, <code>JSONEmbedded</code> or <code>JSONDetached</code>. (A third format value, <code>JSON</code>, is reserved for future use.) With <code>JSONEmbedded</code>, the signing image has the payload embedded in it. With <code>JSONDetached</code>, the payload is not be embedded in the signing image.'
+          $ref: '#/components/schemas/ImageFormat'
+          description: 'A signed image is a JSON object. When overriding the default signing platform configuration, a customer can select either of two signing formats, <code>JSONEmbedded</code> or <code>JSONDetached</code>. (A third format value, <code>JSON</code>, is reserved for future use.) With <code>JSONEmbedded</code>, the signing image has the payload embedded in it. With <code>JSONDetached</code>, the payload is not be embedded in the signing image.'
       description: Any overrides that are applied to the signing configuration of a code signing platform.
     SigningParameters:
       type: object
@@ -1861,33 +1780,28 @@ components:
       type: object
       properties:
         reason:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A caller-supplied reason for revocation.
+          $ref: '#/components/schemas/String'
+          description: A caller-supplied reason for revocation.
         revokedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time of revocation.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time of revocation.
         revokedBy:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The identity of the revoker.
+          $ref: '#/components/schemas/String'
+          description: The identity of the revoker.
       description: Revocation information for a signing job.
     SignedObject:
       type: object
       properties:
         s3:
-          allOf:
-            - $ref: '#/components/schemas/S3SignedObject'
-            - description: The <code>S3SignedObject</code>.
+          $ref: '#/components/schemas/S3SignedObject'
+          description: The <code>S3SignedObject</code>.
       description: Points to an <code>S3SignedObject</code> object that contains information about your signed code image.
     Destination:
       type: object
       properties:
         s3:
-          allOf:
-            - $ref: '#/components/schemas/S3Destination'
-            - description: The <code>S3Destination</code> object.
+          $ref: '#/components/schemas/S3Destination'
+          description: The <code>S3Destination</code> object.
       description: Points to an <code>S3Destination</code> object that contains information about your S3 bucket.
     EncryptionAlgorithm:
       type: string
@@ -1905,13 +1819,11 @@ components:
         - defaultValue
       properties:
         allowedValues:
-          allOf:
-            - $ref: '#/components/schemas/EncryptionAlgorithms'
-            - description: The set of accepted encryption algorithms that are allowed in a code signing job.
+          $ref: '#/components/schemas/EncryptionAlgorithms'
+          description: The set of accepted encryption algorithms that are allowed in a code signing job.
         defaultValue:
-          allOf:
-            - $ref: '#/components/schemas/EncryptionAlgorithm'
-            - description: The default encryption algorithm that is used by a code signing job.
+          $ref: '#/components/schemas/EncryptionAlgorithm'
+          description: The default encryption algorithm that is used by a code signing job.
       description: The encryption algorithm options that are available to a code signing job.
     GetSigningPlatformRequest:
       type: object
@@ -1924,13 +1836,11 @@ components:
         - hashAlgorithmOptions
       properties:
         encryptionAlgorithmOptions:
-          allOf:
-            - $ref: '#/components/schemas/EncryptionAlgorithmOptions'
-            - description: The encryption algorithm options that are available for a code signing job.
+          $ref: '#/components/schemas/EncryptionAlgorithmOptions'
+          description: The encryption algorithm options that are available for a code signing job.
         hashAlgorithmOptions:
-          allOf:
-            - $ref: '#/components/schemas/HashAlgorithmOptions'
-            - description: The hash algorithm options that are available for a code signing job.
+          $ref: '#/components/schemas/HashAlgorithmOptions'
+          description: The hash algorithm options that are available for a code signing job.
       description: The configuration of a code signing operation.
     SigningImageFormat:
       type: object
@@ -1939,13 +1849,11 @@ components:
         - defaultFormat
       properties:
         supportedFormats:
-          allOf:
-            - $ref: '#/components/schemas/ImageFormats'
-            - description: The supported formats of a code signing image.
+          $ref: '#/components/schemas/ImageFormats'
+          description: The supported formats of a code signing image.
         defaultFormat:
-          allOf:
-            - $ref: '#/components/schemas/ImageFormat'
-            - description: The default format of a code signing image.
+          $ref: '#/components/schemas/ImageFormat'
+          description: The default format of a code signing image.
       description: The image format of a code signing platform or profile.
     MaxSizeInMB:
       type: integer
@@ -1959,29 +1867,24 @@ components:
       type: object
       properties:
         revocationEffectiveFrom:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when revocation becomes effective.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when revocation becomes effective.
         revokedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the signing profile was revoked.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the signing profile was revoked.
         revokedBy:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The identity of the revoker.
+          $ref: '#/components/schemas/String'
+          description: The identity of the revoker.
       description: Revocation information for a signing profile.
     SignatureValidityPeriod:
       type: object
       properties:
         value:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The numerical value of the time unit for signature validity.
+          $ref: '#/components/schemas/Integer'
+          description: The numerical value of the time unit for signature validity.
         type:
-          allOf:
-            - $ref: '#/components/schemas/ValidityType'
-            - description: The time unit for signature validity.
+          $ref: '#/components/schemas/ValidityType'
+          description: The time unit for signature validity.
       description: The validity period for a signing job.
     string:
       type: string
@@ -2007,13 +1910,11 @@ components:
         - defaultValue
       properties:
         allowedValues:
-          allOf:
-            - $ref: '#/components/schemas/HashAlgorithms'
-            - description: The set of accepted hash algorithms allowed in a code signing job.
+          $ref: '#/components/schemas/HashAlgorithms'
+          description: The set of accepted hash algorithms allowed in a code signing job.
         defaultValue:
-          allOf:
-            - $ref: '#/components/schemas/HashAlgorithm'
-            - description: The default hash algorithm that is used in a code signing job.
+          $ref: '#/components/schemas/HashAlgorithm'
+          description: The default hash algorithm that is used in a code signing job.
       description: The hash algorithms that are available to a code signing job.
     ImageFormats:
       type: array
@@ -2073,21 +1974,17 @@ components:
       type: object
       properties:
         action:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: An AWS Signer action permitted as part of cross-account permissions.
+          $ref: '#/components/schemas/String'
+          description: An AWS Signer action permitted as part of cross-account permissions.
         principal:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The AWS principal that has been granted a cross-account permission.
+          $ref: '#/components/schemas/String'
+          description: The AWS principal that has been granted a cross-account permission.
         statementId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A unique identifier for a cross-account permission statement.
+          $ref: '#/components/schemas/String'
+          description: A unique identifier for a cross-account permission statement.
         profileVersion:
-          allOf:
-            - $ref: '#/components/schemas/ProfileVersion'
-            - description: The signing profile version that a permission applies to.
+          $ref: '#/components/schemas/ProfileVersion'
+          description: The signing profile version that a permission applies to.
       description: A cross-account permission for a signing profile.
     Prefix:
       type: string
@@ -2098,29 +1995,23 @@ components:
       title: PutSigningProfileRequest
       properties:
         signingMaterial:
-          allOf:
-            - $ref: '#/components/schemas/SigningMaterial'
-            - description: The AWS Certificate Manager certificate that will be used to sign code with the new signing profile.
+          $ref: '#/components/schemas/SigningMaterial'
+          description: The AWS Certificate Manager certificate that will be used to sign code with the new signing profile.
         signatureValidityPeriod:
-          allOf:
-            - $ref: '#/components/schemas/SignatureValidityPeriod'
-            - description: 'The default validity period override for any signature generated using this signing profile. If unspecified, the default is 135 months.'
+          $ref: '#/components/schemas/SignatureValidityPeriod'
+          description: 'The default validity period override for any signature generated using this signing profile. If unspecified, the default is 135 months.'
         platformId:
-          allOf:
-            - $ref: '#/components/schemas/PlatformId'
-            - description: The ID of the signing platform to be created.
+          $ref: '#/components/schemas/PlatformId'
+          description: The ID of the signing platform to be created.
         overrides:
-          allOf:
-            - $ref: '#/components/schemas/SigningPlatformOverrides'
-            - description: A subfield of <code>platform</code>. This specifies any different configuration options that you want to apply to the chosen platform (such as a different <code>hash-algorithm</code> or <code>signing-algorithm</code>).
+          $ref: '#/components/schemas/SigningPlatformOverrides'
+          description: A subfield of <code>platform</code>. This specifies any different configuration options that you want to apply to the chosen platform (such as a different <code>hash-algorithm</code> or <code>signing-algorithm</code>).
         signingParameters:
-          allOf:
-            - $ref: '#/components/schemas/SigningParameters'
-            - description: Map of key-value pairs for signing. These can include any information that you want to use during signing.
+          $ref: '#/components/schemas/SigningParameters'
+          description: Map of key-value pairs for signing. These can include any information that you want to use during signing.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: Tags to be associated with the signing profile that is being created.
+          $ref: '#/components/schemas/TagMap'
+          description: Tags to be associated with the signing profile that is being created.
     RemoveProfilePermissionRequest:
       type: object
       title: RemoveProfilePermissionRequest
@@ -2136,13 +2027,11 @@ components:
       title: RevokeSignatureRequest
       properties:
         jobOwner:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: AWS account ID of the job owner.
+          $ref: '#/components/schemas/AccountId'
+          description: AWS account ID of the job owner.
         reason:
-          allOf:
-            - $ref: '#/components/schemas/RevocationReasonString'
-            - description: The reason for revoking the signing job.
+          $ref: '#/components/schemas/RevocationReasonString'
+          description: The reason for revoking the signing job.
     RevokeSigningProfileRequest:
       type: object
       required:
@@ -2152,28 +2041,23 @@ components:
       title: RevokeSigningProfileRequest
       properties:
         profileVersion:
-          allOf:
-            - $ref: '#/components/schemas/ProfileVersion'
-            - description: The version of the signing profile to be revoked.
+          $ref: '#/components/schemas/ProfileVersion'
+          description: The version of the signing profile to be revoked.
         reason:
-          allOf:
-            - $ref: '#/components/schemas/RevocationReasonString'
-            - description: The reason for revoking a signing profile.
+          $ref: '#/components/schemas/RevocationReasonString'
+          description: The reason for revoking a signing profile.
         effectiveTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp for when revocation of a Signing Profile should become effective. Signatures generated using the signing profile after this timestamp are not trusted.
+          $ref: '#/components/schemas/Timestamp'
+          description: A timestamp for when revocation of a Signing Profile should become effective. Signatures generated using the signing profile after this timestamp are not trusted.
     S3SignedObject:
       type: object
       properties:
         bucketName:
-          allOf:
-            - $ref: '#/components/schemas/BucketName'
-            - description: Name of the S3 bucket.
+          $ref: '#/components/schemas/BucketName'
+          description: Name of the S3 bucket.
         key:
-          allOf:
-            - $ref: '#/components/schemas/Key'
-            - description: Key name that uniquely identifies a signed code image in your bucket.
+          $ref: '#/components/schemas/Key'
+          description: Key name that uniquely identifies a signed code image in your bucket.
       description: The S3 bucket name and key where code signing saved your signed code image.
     Version:
       type: string
@@ -2181,61 +2065,47 @@ components:
       type: object
       properties:
         jobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The ID of the signing job.
+          $ref: '#/components/schemas/JobId'
+          description: The ID of the signing job.
         source:
-          allOf:
-            - $ref: '#/components/schemas/Source'
-            - description: A <code>Source</code> that contains information about a signing job's code image source.
+          $ref: '#/components/schemas/Source'
+          description: A <code>Source</code> that contains information about a signing job's code image source.
         signedObject:
-          allOf:
-            - $ref: '#/components/schemas/SignedObject'
-            - description: A <code>SignedObject</code> structure that contains information about a signing job's signed code image.
+          $ref: '#/components/schemas/SignedObject'
+          description: A <code>SignedObject</code> structure that contains information about a signing job's signed code image.
         signingMaterial:
-          allOf:
-            - $ref: '#/components/schemas/SigningMaterial'
-            - description: A <code>SigningMaterial</code> object that contains the Amazon Resource Name (ARN) of the certificate used for the signing job.
+          $ref: '#/components/schemas/SigningMaterial'
+          description: A <code>SigningMaterial</code> object that contains the Amazon Resource Name (ARN) of the certificate used for the signing job.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The date and time that the signing job was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time that the signing job was created.
         status:
-          allOf:
-            - $ref: '#/components/schemas/SigningStatus'
-            - description: The status of the signing job.
+          $ref: '#/components/schemas/SigningStatus'
+          description: The status of the signing job.
         isRevoked:
-          allOf:
-            - $ref: '#/components/schemas/bool'
-            - description: Indicates whether the signing job is revoked.
+          $ref: '#/components/schemas/bool'
+          description: Indicates whether the signing job is revoked.
         profileName:
-          allOf:
-            - $ref: '#/components/schemas/ProfileName'
-            - description: The name of the signing profile that created a signing job.
+          $ref: '#/components/schemas/ProfileName'
+          description: The name of the signing profile that created a signing job.
         profileVersion:
-          allOf:
-            - $ref: '#/components/schemas/ProfileVersion'
-            - description: The version of the signing profile that created a signing job.
+          $ref: '#/components/schemas/ProfileVersion'
+          description: The version of the signing profile that created a signing job.
         platformId:
-          allOf:
-            - $ref: '#/components/schemas/PlatformId'
-            - description: The unique identifier for a signing platform.
+          $ref: '#/components/schemas/PlatformId'
+          description: The unique identifier for a signing platform.
         platformDisplayName:
-          allOf:
-            - $ref: '#/components/schemas/DisplayName'
-            - description: The name of a signing platform.
+          $ref: '#/components/schemas/DisplayName'
+          description: The name of a signing platform.
         signatureExpiresAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the signature of a signing job expires.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time when the signature of a signing job expires.
         jobOwner:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: The AWS account ID of the job owner.
+          $ref: '#/components/schemas/AccountId'
+          description: The AWS account ID of the job owner.
         jobInvoker:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: The AWS account ID of the job invoker.
+          $ref: '#/components/schemas/AccountId'
+          description: The AWS account ID of the job invoker.
       description: Contains information about a signing job.
     SigningParameterKey:
       type: string
@@ -2243,87 +2113,68 @@ components:
       type: object
       properties:
         platformId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The ID of a code signing; platform.
+          $ref: '#/components/schemas/String'
+          description: The ID of a code signing; platform.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The display name of a code signing platform.
+          $ref: '#/components/schemas/String'
+          description: The display name of a code signing platform.
         partner:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Any partner entities linked to a code signing platform.
+          $ref: '#/components/schemas/String'
+          description: Any partner entities linked to a code signing platform.
         target:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The types of targets that can be signed by a code signing platform.
+          $ref: '#/components/schemas/String'
+          description: The types of targets that can be signed by a code signing platform.
         category:
-          allOf:
-            - $ref: '#/components/schemas/Category'
-            - description: The category of a code signing platform.
+          $ref: '#/components/schemas/Category'
+          description: The category of a code signing platform.
         signingConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/SigningConfiguration'
-            - description: The configuration of a code signing platform. This includes the designated hash algorithm and encryption algorithm of a signing platform.
+          $ref: '#/components/schemas/SigningConfiguration'
+          description: The configuration of a code signing platform. This includes the designated hash algorithm and encryption algorithm of a signing platform.
         signingImageFormat:
           $ref: '#/components/schemas/SigningImageFormat'
         maxSizeInMB:
-          allOf:
-            - $ref: '#/components/schemas/MaxSizeInMB'
-            - description: The maximum size (in MB) of code that can be signed by a code signing platform.
+          $ref: '#/components/schemas/MaxSizeInMB'
+          description: The maximum size (in MB) of code that can be signed by a code signing platform.
         revocationSupported:
-          allOf:
-            - $ref: '#/components/schemas/bool'
-            - description: Indicates whether revocation is supported for the platform.
+          $ref: '#/components/schemas/bool'
+          description: Indicates whether revocation is supported for the platform.
       description: Contains information about the signing configurations and parameters that are used to perform a code signing job.
     SigningProfile:
       type: object
       properties:
         profileName:
-          allOf:
-            - $ref: '#/components/schemas/ProfileName'
-            - description: The name of the signing profile.
+          $ref: '#/components/schemas/ProfileName'
+          description: The name of the signing profile.
         profileVersion:
-          allOf:
-            - $ref: '#/components/schemas/ProfileVersion'
-            - description: The version of a signing profile.
+          $ref: '#/components/schemas/ProfileVersion'
+          description: The version of a signing profile.
         profileVersionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'The ARN of a signing profile, including the profile version.'
+          $ref: '#/components/schemas/Arn'
+          description: 'The ARN of a signing profile, including the profile version.'
         signingMaterial:
-          allOf:
-            - $ref: '#/components/schemas/SigningMaterial'
-            - description: The ACM certificate that is available for use by a signing profile.
+          $ref: '#/components/schemas/SigningMaterial'
+          description: The ACM certificate that is available for use by a signing profile.
         signatureValidityPeriod:
-          allOf:
-            - $ref: '#/components/schemas/SignatureValidityPeriod'
-            - description: The validity period for a signing job created using this signing profile.
+          $ref: '#/components/schemas/SignatureValidityPeriod'
+          description: The validity period for a signing job created using this signing profile.
         platformId:
-          allOf:
-            - $ref: '#/components/schemas/PlatformId'
-            - description: The ID of a platform that is available for use by a signing profile.
+          $ref: '#/components/schemas/PlatformId'
+          description: The ID of a platform that is available for use by a signing profile.
         platformDisplayName:
-          allOf:
-            - $ref: '#/components/schemas/DisplayName'
-            - description: The name of the signing platform.
+          $ref: '#/components/schemas/DisplayName'
+          description: The name of the signing platform.
         signingParameters:
-          allOf:
-            - $ref: '#/components/schemas/SigningParameters'
-            - description: The parameters that are available for use by a code signing user.
+          $ref: '#/components/schemas/SigningParameters'
+          description: The parameters that are available for use by a code signing user.
         status:
-          allOf:
-            - $ref: '#/components/schemas/SigningProfileStatus'
-            - description: The status of a code signing profile.
+          $ref: '#/components/schemas/SigningProfileStatus'
+          description: The status of a code signing profile.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/string'
-            - description: The Amazon Resource Name (ARN) for the signing profile.
+          $ref: '#/components/schemas/string'
+          description: The Amazon Resource Name (ARN) for the signing profile.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: A list of tags associated with the signing profile.
+          $ref: '#/components/schemas/TagMap'
+          description: A list of tags associated with the signing profile.
       description: Contains information about the ACM certificates and code signing configuration parameters that can be used by a given code signing user.
     StartSigningJobRequest:
       type: object
@@ -2335,25 +2186,20 @@ components:
       title: StartSigningJobRequest
       properties:
         source:
-          allOf:
-            - $ref: '#/components/schemas/Source'
-            - description: The S3 bucket that contains the object to sign or a BLOB that contains your raw code.
+          $ref: '#/components/schemas/Source'
+          description: The S3 bucket that contains the object to sign or a BLOB that contains your raw code.
         destination:
-          allOf:
-            - $ref: '#/components/schemas/Destination'
-            - description: The S3 bucket in which to save your signed object. The destination contains the name of your bucket and an optional prefix.
+          $ref: '#/components/schemas/Destination'
+          description: The S3 bucket in which to save your signed object. The destination contains the name of your bucket and an optional prefix.
         profileName:
-          allOf:
-            - $ref: '#/components/schemas/ProfileName'
-            - description: The name of the signing profile.
+          $ref: '#/components/schemas/ProfileName'
+          description: The name of the signing profile.
         clientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: String that identifies the signing request. All calls after the first that use this token return the same response as the first call.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: String that identifies the signing request. All calls after the first that use this token return the same response as the first call.
         profileOwner:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-            - description: The AWS account ID of the signing profile owner.
+          $ref: '#/components/schemas/AccountId'
+          description: The AWS account ID of the signing profile owner.
     TagKeyList:
       type: array
       items:
@@ -2367,9 +2213,8 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: One or more tags to be associated with the signing profile.
+          $ref: '#/components/schemas/TagMap'
+          description: One or more tags to be associated with the signing profile.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest

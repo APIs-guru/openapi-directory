@@ -1511,13 +1511,11 @@ paths:
                   type: object
                   properties:
                     attributeName:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The name of the attribute to sort on.
+                      $ref: '#/components/schemas/String'
+                      description: The name of the attribute to sort on.
                     orderBy:
-                      allOf:
-                        - $ref: '#/components/schemas/OrderBy'
-                        - description: 'The sort order, ascending or descending.'
+                      $ref: '#/components/schemas/OrderBy'
+                      description: 'The sort order, ascending or descending.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1723,29 +1721,24 @@ paths:
                   type: object
                   properties:
                     accessRole:
-                      allOf:
-                        - $ref: '#/components/schemas/RoleArn'
-                        - description: The ARN of the service role that Access Analyzer uses to access your CloudTrail trail and service last accessed information.
+                      $ref: '#/components/schemas/RoleArn'
+                      description: The ARN of the service role that Access Analyzer uses to access your CloudTrail trail and service last accessed information.
                     endTime:
-                      allOf:
-                        - $ref: '#/components/schemas/Timestamp'
-                        - description: 'The end of the time range for which Access Analyzer reviews your CloudTrail events. Events with a timestamp after this time are not considered to generate a policy. If this is not included in the request, the default value is the current time.'
+                      $ref: '#/components/schemas/Timestamp'
+                      description: 'The end of the time range for which Access Analyzer reviews your CloudTrail events. Events with a timestamp after this time are not considered to generate a policy. If this is not included in the request, the default value is the current time.'
                     startTime:
-                      allOf:
-                        - $ref: '#/components/schemas/Timestamp'
-                        - description: The start of the time range for which Access Analyzer reviews your CloudTrail events. Events with a timestamp before this time are not considered to generate a policy.
+                      $ref: '#/components/schemas/Timestamp'
+                      description: The start of the time range for which Access Analyzer reviews your CloudTrail events. Events with a timestamp before this time are not considered to generate a policy.
                     trails:
-                      allOf:
-                        - $ref: '#/components/schemas/TrailList'
-                        - description: A <code>Trail</code> object that contains settings for a trail.
+                      $ref: '#/components/schemas/TrailList'
+                      description: A <code>Trail</code> object that contains settings for a trail.
                 policyGenerationDetails:
                   description: Contains the ARN details about the IAM entity for which the policy is generated.
                   type: object
                   properties:
                     principalArn:
-                      allOf:
-                        - $ref: '#/components/schemas/PrincipalArn'
-                        - description: The ARN of the IAM entity (user or role) for which you are generating a policy.
+                      $ref: '#/components/schemas/PrincipalArn'
+                      description: The ARN of the IAM entity (user or role) for which you are generating a policy.
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
@@ -2147,32 +2140,26 @@ components:
         - id
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/AccessPreviewId'
-            - description: The unique ID for the access preview.
+          $ref: '#/components/schemas/AccessPreviewId'
+          description: The unique ID for the access preview.
     Configuration:
       type: object
       properties:
         iamRole:
-          allOf:
-            - $ref: '#/components/schemas/IamRoleConfiguration'
-            - description: 'The access control configuration is for an IAM role. '
+          $ref: '#/components/schemas/IamRoleConfiguration'
+          description: 'The access control configuration is for an IAM role. '
         kmsKey:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyConfiguration'
-            - description: 'The access control configuration is for a KMS key. '
+          $ref: '#/components/schemas/KmsKeyConfiguration'
+          description: 'The access control configuration is for a KMS key. '
         s3Bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3BucketConfiguration'
-            - description: 'The access control configuration is for an Amazon S3 Bucket. '
+          $ref: '#/components/schemas/S3BucketConfiguration'
+          description: 'The access control configuration is for an Amazon S3 Bucket. '
         secretsManagerSecret:
-          allOf:
-            - $ref: '#/components/schemas/SecretsManagerSecretConfiguration'
-            - description: The access control configuration is for a Secrets Manager secret.
+          $ref: '#/components/schemas/SecretsManagerSecretConfiguration'
+          description: The access control configuration is for a Secrets Manager secret.
         sqsQueue:
-          allOf:
-            - $ref: '#/components/schemas/SqsQueueConfiguration'
-            - description: 'The access control configuration is for an SQS queue. '
+          $ref: '#/components/schemas/SqsQueueConfiguration'
+          description: 'The access control configuration is for an SQS queue. '
       description: Access control configuration structures for your resource. You specify the configuration as a type-value pair. You can specify only one type of access control configuration.
     ConflictException: {}
     ServiceQuotaExceededException: {}
@@ -2180,9 +2167,8 @@ components:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/AnalyzerArn'
-            - description: The ARN of the analyzer that was created by the request.
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: The ARN of the analyzer that was created by the request.
       description: The response to the request to create an analyzer.
     InlineArchiveRule:
       type: object
@@ -2191,13 +2177,11 @@ components:
         - ruleName
       properties:
         filter:
-          allOf:
-            - $ref: '#/components/schemas/FilterCriteriaMap'
-            - description: The condition and values for a criterion.
+          $ref: '#/components/schemas/FilterCriteriaMap'
+          description: The condition and values for a criterion.
         ruleName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the rule.
+          $ref: '#/components/schemas/Name'
+          description: The name of the rule.
       description: An criterion statement in an archive rule. Each archive rule may have multiple criteria.
     String:
       type: string
@@ -2205,21 +2189,17 @@ components:
       type: object
       properties:
         contains:
-          allOf:
-            - $ref: '#/components/schemas/ValueList'
-            - description: A "contains" operator to match for the filter used to create the rule.
+          $ref: '#/components/schemas/ValueList'
+          description: A "contains" operator to match for the filter used to create the rule.
         eq:
-          allOf:
-            - $ref: '#/components/schemas/ValueList'
-            - description: An "equals" operator to match for the filter used to create the rule.
+          $ref: '#/components/schemas/ValueList'
+          description: An "equals" operator to match for the filter used to create the rule.
         exists:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'An "exists" operator to match for the filter used to create the rule. '
+          $ref: '#/components/schemas/Boolean'
+          description: 'An "exists" operator to match for the filter used to create the rule. '
         neq:
-          allOf:
-            - $ref: '#/components/schemas/ValueList'
-            - description: A "not equals" operator to match for the filter used to create the rule.
+          $ref: '#/components/schemas/ValueList'
+          description: A "not equals" operator to match for the filter used to create the rule.
       description: The criteria to use in the filter that defines the archive rule.
     GetAccessPreviewResponse:
       type: object
@@ -2227,16 +2207,14 @@ components:
         - accessPreview
       properties:
         accessPreview:
-          allOf:
-            - $ref: '#/components/schemas/AccessPreview'
-            - description: An object that contains information about the access preview.
+          $ref: '#/components/schemas/AccessPreview'
+          description: An object that contains information about the access preview.
     GetAnalyzedResourceResponse:
       type: object
       properties:
         resource:
-          allOf:
-            - $ref: '#/components/schemas/AnalyzedResource'
-            - description: An <code>AnalyzedResource</code> object that contains information that Access Analyzer found when it analyzed the resource.
+          $ref: '#/components/schemas/AnalyzedResource'
+          description: An <code>AnalyzedResource</code> object that contains information that Access Analyzer found when it analyzed the resource.
       description: The response to the request.
     GetAnalyzerResponse:
       type: object
@@ -2244,9 +2222,8 @@ components:
         - analyzer
       properties:
         analyzer:
-          allOf:
-            - $ref: '#/components/schemas/AnalyzerSummary'
-            - description: An <code>AnalyzerSummary</code> object that contains information about the analyzer.
+          $ref: '#/components/schemas/AnalyzerSummary'
+          description: An <code>AnalyzerSummary</code> object that contains information about the analyzer.
       description: The response to the request.
     GetArchiveRuleResponse:
       type: object
@@ -2260,9 +2237,8 @@ components:
       type: object
       properties:
         finding:
-          allOf:
-            - $ref: '#/components/schemas/Finding'
-            - description: A <code>finding</code> object that contains finding details.
+          $ref: '#/components/schemas/Finding'
+          description: A <code>finding</code> object that contains finding details.
       description: The response to the request.
     GetGeneratedPolicyResponse:
       type: object
@@ -2271,52 +2247,44 @@ components:
         - jobDetails
       properties:
         generatedPolicyResult:
-          allOf:
-            - $ref: '#/components/schemas/GeneratedPolicyResult'
-            - description: A <code>GeneratedPolicyResult</code> object that contains the generated policies and associated details.
+          $ref: '#/components/schemas/GeneratedPolicyResult'
+          description: A <code>GeneratedPolicyResult</code> object that contains the generated policies and associated details.
         jobDetails:
-          allOf:
-            - $ref: '#/components/schemas/JobDetails'
-            - description: A <code>GeneratedPolicyDetails</code> object that contains details about the generated policy.
+          $ref: '#/components/schemas/JobDetails'
+          description: A <code>GeneratedPolicyDetails</code> object that contains details about the generated policy.
     ListAccessPreviewFindingsResponse:
       type: object
       required:
         - findings
       properties:
         findings:
-          allOf:
-            - $ref: '#/components/schemas/AccessPreviewFindingsList'
-            - description: A list of access preview findings that match the specified filter criteria.
+          $ref: '#/components/schemas/AccessPreviewFindingsList'
+          description: A list of access preview findings that match the specified filter criteria.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: A token used for pagination of results returned.
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
     ListAccessPreviewsResponse:
       type: object
       required:
         - accessPreviews
       properties:
         accessPreviews:
-          allOf:
-            - $ref: '#/components/schemas/AccessPreviewsList'
-            - description: A list of access previews retrieved for the analyzer.
+          $ref: '#/components/schemas/AccessPreviewsList'
+          description: A list of access previews retrieved for the analyzer.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: A token used for pagination of results returned.
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
     ListAnalyzedResourcesResponse:
       type: object
       required:
         - analyzedResources
       properties:
         analyzedResources:
-          allOf:
-            - $ref: '#/components/schemas/AnalyzedResourcesList'
-            - description: A list of resources that were analyzed.
+          $ref: '#/components/schemas/AnalyzedResourcesList'
+          description: A list of resources that were analyzed.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: A token used for pagination of results returned.
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
       description: The response to the request.
     ListAnalyzersResponse:
       type: object
@@ -2324,13 +2292,11 @@ components:
         - analyzers
       properties:
         analyzers:
-          allOf:
-            - $ref: '#/components/schemas/AnalyzersList'
-            - description: The analyzers retrieved.
+          $ref: '#/components/schemas/AnalyzersList'
+          description: The analyzers retrieved.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: A token used for pagination of results returned.
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
       description: The response to the request.
     ListArchiveRulesResponse:
       type: object
@@ -2338,13 +2304,11 @@ components:
         - archiveRules
       properties:
         archiveRules:
-          allOf:
-            - $ref: '#/components/schemas/ArchiveRulesList'
-            - description: A list of archive rules created for the specified analyzer.
+          $ref: '#/components/schemas/ArchiveRulesList'
+          description: A list of archive rules created for the specified analyzer.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: A token used for pagination of results returned.
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
       description: The response to the request.
     ListFindingsResponse:
       type: object
@@ -2352,13 +2316,11 @@ components:
         - findings
       properties:
         findings:
-          allOf:
-            - $ref: '#/components/schemas/FindingsList'
-            - description: 'A list of findings retrieved from the analyzer that match the filter criteria specified, if any.'
+          $ref: '#/components/schemas/FindingsList'
+          description: 'A list of findings retrieved from the analyzer that match the filter criteria specified, if any.'
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: A token used for pagination of results returned.
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
       description: The response to the request.
     OrderBy:
       type: string
@@ -2371,20 +2333,17 @@ components:
         - policyGenerations
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: A token used for pagination of results returned.
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
         policyGenerations:
-          allOf:
-            - $ref: '#/components/schemas/PolicyGenerationList'
-            - description: A <code>PolicyGeneration</code> object that contains details about the generated policy.
+          $ref: '#/components/schemas/PolicyGenerationList'
+          description: A <code>PolicyGeneration</code> object that contains details about the generated policy.
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: The tags that are applied to the specified resource.
+          $ref: '#/components/schemas/TagsMap'
+          description: The tags that are applied to the specified resource.
       description: The response to the request.
     StartPolicyGenerationResponse:
       type: object
@@ -2392,9 +2351,8 @@ components:
         - jobId
       properties:
         jobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The <code>JobId</code> that is returned by the <code>StartPolicyGeneration</code> operation. The <code>JobId</code> can be used with <code>GetGeneratedPolicy</code> to retrieve the generated policies or used with <code>CancelPolicyGeneration</code> to cancel the policy generation request.
+          $ref: '#/components/schemas/JobId'
+          description: The <code>JobId</code> that is returned by the <code>StartPolicyGeneration</code> operation. The <code>JobId</code> can be used with <code>GetGeneratedPolicy</code> to retrieve the generated policies or used with <code>CancelPolicyGeneration</code> to cancel the policy generation request.
     RoleArn:
       type: string
       pattern: 'arn:[^:]*:iam::[^:]*:role/.{1,576}$'
@@ -2424,13 +2382,11 @@ components:
         - findings
       properties:
         findings:
-          allOf:
-            - $ref: '#/components/schemas/ValidatePolicyFindingList'
-            - description: The list of findings in a policy returned by Access Analyzer based on its suite of policy checks.
+          $ref: '#/components/schemas/ValidatePolicyFindingList'
+          description: The list of findings in a policy returned by Access Analyzer based on its suite of policy checks.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: A token used for pagination of results returned.
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
     AccessPointArn:
       type: string
       pattern: 'arn:[^:]*:s3:[^:]*:[^:]*:accesspoint/.*$'
@@ -2458,9 +2414,8 @@ components:
         - code
       properties:
         code:
-          allOf:
-            - $ref: '#/components/schemas/AccessPreviewStatusReasonCode'
-            - description: The reason code for the current status of the access preview.
+          $ref: '#/components/schemas/AccessPreviewStatusReasonCode'
+          description: The reason code for the current status of the access preview.
       description: 'Provides more details about the current status of the access preview. For example, if the creation of the access preview fails, a <code>Failed</code> status is returned. This failure can be due to an internal issue with the analysis or due to an invalid proposed resource configuration.'
     AccessPreview:
       type: object
@@ -2472,29 +2427,23 @@ components:
         - status
       properties:
         analyzerArn:
-          allOf:
-            - $ref: '#/components/schemas/AnalyzerArn'
-            - description: The ARN of the analyzer used to generate the access preview.
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: The ARN of the analyzer used to generate the access preview.
         configurations:
-          allOf:
-            - $ref: '#/components/schemas/ConfigurationsMap'
-            - description: A map of resource ARNs for the proposed resource configuration.
+          $ref: '#/components/schemas/ConfigurationsMap'
+          description: A map of resource ARNs for the proposed resource configuration.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the access preview was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the access preview was created.
         id:
-          allOf:
-            - $ref: '#/components/schemas/AccessPreviewId'
-            - description: The unique ID for the access preview.
+          $ref: '#/components/schemas/AccessPreviewId'
+          description: The unique ID for the access preview.
         status:
-          allOf:
-            - $ref: '#/components/schemas/AccessPreviewStatus'
-            - description: <p>The status of the access preview.</p> <ul> <li> <p> <code>Creating</code> - The access preview creation is in progress.</p> </li> <li> <p> <code>Completed</code> - The access preview is complete. You can preview findings for external access to the resource.</p> </li> <li> <p> <code>Failed</code> - The access preview creation has failed.</p> </li> </ul>
+          $ref: '#/components/schemas/AccessPreviewStatus'
+          description: <p>The status of the access preview.</p> <ul> <li> <p> <code>Creating</code> - The access preview creation is in progress.</p> </li> <li> <p> <code>Completed</code> - The access preview is complete. You can preview findings for external access to the resource.</p> </li> <li> <p> <code>Failed</code> - The access preview creation has failed.</p> </li> </ul>
         statusReason:
-          allOf:
-            - $ref: '#/components/schemas/AccessPreviewStatusReason'
-            - description: '<p>Provides more details about the current status of the access preview.</p> <p>For example, if the creation of the access preview fails, a <code>Failed</code> status is returned. This failure can be due to an internal issue with the analysis or due to an invalid resource configuration.</p>'
+          $ref: '#/components/schemas/AccessPreviewStatusReason'
+          description: '<p>Provides more details about the current status of the access preview.</p> <p>For example, if the creation of the access preview fails, a <code>Failed</code> status is returned. This failure can be due to an internal issue with the analysis or due to an invalid resource configuration.</p>'
       description: Contains information about an access preview.
     ActionList:
       type: array
@@ -2549,65 +2498,50 @@ components:
         - status
       properties:
         action:
-          allOf:
-            - $ref: '#/components/schemas/ActionList'
-            - description: The action in the analyzed policy statement that an external principal has permission to perform.
+          $ref: '#/components/schemas/ActionList'
+          description: The action in the analyzed policy statement that an external principal has permission to perform.
         changeType:
-          allOf:
-            - $ref: '#/components/schemas/FindingChangeType'
-            - description: '<p>Provides context on how the access preview finding compares to existing access identified in Access Analyzer.</p> <ul> <li> <p> <code>New</code> - The finding is for newly-introduced access.</p> </li> <li> <p> <code>Unchanged</code> - The preview finding is an existing finding that would remain unchanged.</p> </li> <li> <p> <code>Changed</code> - The preview finding is an existing finding with a change in status.</p> </li> </ul> <p>For example, a <code>Changed</code> finding with preview status <code>Resolved</code> and existing status <code>Active</code> indicates the existing <code>Active</code> finding would become <code>Resolved</code> as a result of the proposed permissions change.</p>'
+          $ref: '#/components/schemas/FindingChangeType'
+          description: '<p>Provides context on how the access preview finding compares to existing access identified in Access Analyzer.</p> <ul> <li> <p> <code>New</code> - The finding is for newly-introduced access.</p> </li> <li> <p> <code>Unchanged</code> - The preview finding is an existing finding that would remain unchanged.</p> </li> <li> <p> <code>Changed</code> - The preview finding is an existing finding with a change in status.</p> </li> </ul> <p>For example, a <code>Changed</code> finding with preview status <code>Resolved</code> and existing status <code>Active</code> indicates the existing <code>Active</code> finding would become <code>Resolved</code> as a result of the proposed permissions change.</p>'
         condition:
-          allOf:
-            - $ref: '#/components/schemas/ConditionKeyMap'
-            - description: The condition in the analyzed policy statement that resulted in a finding.
+          $ref: '#/components/schemas/ConditionKeyMap'
+          description: The condition in the analyzed policy statement that resulted in a finding.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the access preview finding was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the access preview finding was created.
         error:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: An error.
+          $ref: '#/components/schemas/String'
+          description: An error.
         existingFindingId:
-          allOf:
-            - $ref: '#/components/schemas/FindingId'
-            - description: 'The existing ID of the finding in Access Analyzer, provided only for existing findings.'
+          $ref: '#/components/schemas/FindingId'
+          description: 'The existing ID of the finding in Access Analyzer, provided only for existing findings.'
         existingFindingStatus:
-          allOf:
-            - $ref: '#/components/schemas/FindingStatus'
-            - description: 'The existing status of the finding, provided only for existing findings.'
+          $ref: '#/components/schemas/FindingStatus'
+          description: 'The existing status of the finding, provided only for existing findings.'
         id:
-          allOf:
-            - $ref: '#/components/schemas/AccessPreviewFindingId'
-            - description: The ID of the access preview finding. This ID uniquely identifies the element in the list of access preview findings and is not related to the finding ID in Access Analyzer.
+          $ref: '#/components/schemas/AccessPreviewFindingId'
+          description: The ID of the access preview finding. This ID uniquely identifies the element in the list of access preview findings and is not related to the finding ID in Access Analyzer.
         isPublic:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether the policy that generated the finding allows public access to the resource.
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates whether the policy that generated the finding allows public access to the resource.
         principal:
-          allOf:
-            - $ref: '#/components/schemas/PrincipalMap'
-            - description: The external principal that has access to a resource within the zone of trust.
+          $ref: '#/components/schemas/PrincipalMap'
+          description: The external principal that has access to a resource within the zone of trust.
         resource:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The resource that an external principal has access to. This is the resource associated with the access preview.
+          $ref: '#/components/schemas/String'
+          description: The resource that an external principal has access to. This is the resource associated with the access preview.
         resourceOwnerAccount:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The AWS account ID that owns the resource. For most AWS resources, the owning account is the account in which the resource was created.'
+          $ref: '#/components/schemas/String'
+          description: 'The AWS account ID that owns the resource. For most AWS resources, the owning account is the account in which the resource was created.'
         resourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: The type of the resource that can be accessed in the finding.
+          $ref: '#/components/schemas/ResourceType'
+          description: The type of the resource that can be accessed in the finding.
         sources:
-          allOf:
-            - $ref: '#/components/schemas/FindingSourceList'
-            - description: The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
+          $ref: '#/components/schemas/FindingSourceList'
+          description: The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
         status:
-          allOf:
-            - $ref: '#/components/schemas/FindingStatus'
-            - description: 'The preview status of the finding. This is what the status of the finding would be after permissions deployment. For example, a <code>Changed</code> finding with preview status <code>Resolved</code> and existing status <code>Active</code> indicates the existing <code>Active</code> finding would become <code>Resolved</code> as a result of the proposed permissions change.'
+          $ref: '#/components/schemas/FindingStatus'
+          description: 'The preview status of the finding. This is what the status of the finding would be after permissions deployment. For example, a <code>Changed</code> finding with preview status <code>Resolved</code> and existing status <code>Active</code> indicates the existing <code>Active</code> finding would become <code>Resolved</code> as a result of the proposed permissions change.'
       description: An access preview finding generated by the access preview.
     AccessPreviewFindingsList:
       type: array
@@ -2627,21 +2561,17 @@ components:
         - status
       properties:
         analyzerArn:
-          allOf:
-            - $ref: '#/components/schemas/AnalyzerArn'
-            - description: The ARN of the analyzer used to generate the access preview.
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: The ARN of the analyzer used to generate the access preview.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the access preview was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the access preview was created.
         id:
-          allOf:
-            - $ref: '#/components/schemas/AccessPreviewId'
-            - description: The unique ID for the access preview.
+          $ref: '#/components/schemas/AccessPreviewId'
+          description: The unique ID for the access preview.
         status:
-          allOf:
-            - $ref: '#/components/schemas/AccessPreviewStatus'
-            - description: <p>The status of the access preview.</p> <ul> <li> <p> <code>Creating</code> - The access preview creation is in progress.</p> </li> <li> <p> <code>Completed</code> - The access preview is complete and previews the findings for external access to the resource.</p> </li> <li> <p> <code>Failed</code> - The access preview creation has failed.</p> </li> </ul>
+          $ref: '#/components/schemas/AccessPreviewStatus'
+          description: <p>The status of the access preview.</p> <ul> <li> <p> <code>Creating</code> - The access preview creation is in progress.</p> </li> <li> <p> <code>Completed</code> - The access preview is complete and previews the findings for external access to the resource.</p> </li> <li> <p> <code>Failed</code> - The access preview creation has failed.</p> </li> </ul>
         statusReason:
           $ref: '#/components/schemas/AccessPreviewStatusReason'
       description: Contains a summary of information about an access preview.
@@ -2657,13 +2587,11 @@ components:
       type: object
       properties:
         id:
-          allOf:
-            - $ref: '#/components/schemas/AclCanonicalId'
-            - description: The value specified is the canonical user ID of an AWS account.
+          $ref: '#/components/schemas/AclCanonicalId'
+          description: The value specified is the canonical user ID of an AWS account.
         uri:
-          allOf:
-            - $ref: '#/components/schemas/AclUri'
-            - description: Used for granting permissions to a predefined group.
+          $ref: '#/components/schemas/AclUri'
+          description: Used for granting permissions to a predefined group.
       description: 'You specify each grantee as a type-value pair using one of these types. You can specify only one type of grantee. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAcl.html">PutBucketAcl</a>.'
     AclPermission:
       type: string
@@ -2692,49 +2620,38 @@ components:
         - updatedAt
       properties:
         actions:
-          allOf:
-            - $ref: '#/components/schemas/ActionList'
-            - description: The actions that an external principal is granted permission to use by the policy that generated the finding.
+          $ref: '#/components/schemas/ActionList'
+          description: The actions that an external principal is granted permission to use by the policy that generated the finding.
         analyzedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the resource was analyzed.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the resource was analyzed.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the finding was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the finding was created.
         error:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: An error message.
+          $ref: '#/components/schemas/String'
+          description: An error message.
         isPublic:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether the policy that generated the finding grants public access to the resource.
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates whether the policy that generated the finding grants public access to the resource.
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArn'
-            - description: The ARN of the resource that was analyzed.
+          $ref: '#/components/schemas/ResourceArn'
+          description: The ARN of the resource that was analyzed.
         resourceOwnerAccount:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The AWS account ID that owns the resource.
+          $ref: '#/components/schemas/String'
+          description: The AWS account ID that owns the resource.
         resourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: The type of the resource that was analyzed.
+          $ref: '#/components/schemas/ResourceType'
+          description: The type of the resource that was analyzed.
         sharedVia:
-          allOf:
-            - $ref: '#/components/schemas/SharedViaList'
-            - description: Indicates how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.
+          $ref: '#/components/schemas/SharedViaList'
+          description: Indicates how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.
         status:
-          allOf:
-            - $ref: '#/components/schemas/FindingStatus'
-            - description: The current status of the finding generated from the analyzed resource.
+          $ref: '#/components/schemas/FindingStatus'
+          description: The current status of the finding generated from the analyzed resource.
         updatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the finding was updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the finding was updated.
       description: Contains details about the analyzed resource.
     AnalyzedResourceSummary:
       type: object
@@ -2744,17 +2661,14 @@ components:
         - resourceType
       properties:
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArn'
-            - description: The ARN of the analyzed resource.
+          $ref: '#/components/schemas/ResourceArn'
+          description: The ARN of the analyzed resource.
         resourceOwnerAccount:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The AWS account ID that owns the resource.
+          $ref: '#/components/schemas/String'
+          description: The AWS account ID that owns the resource.
         resourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: The type of resource that was analyzed.
+          $ref: '#/components/schemas/ResourceType'
+          description: The type of resource that was analyzed.
       description: Contains the ARN of the analyzed resource.
     AnalyzedResourcesList:
       type: array
@@ -2778,9 +2692,8 @@ components:
         - code
       properties:
         code:
-          allOf:
-            - $ref: '#/components/schemas/ReasonCode'
-            - description: The reason code for the current status of the analyzer.
+          $ref: '#/components/schemas/ReasonCode'
+          description: The reason code for the current status of the analyzer.
       description: 'Provides more details about the current status of the analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status is returned. For an analyzer with organization as the type, this failure can be due to an issue with creating the service-linked roles required in the member accounts of the AWS organization.'
     TagsMap:
       type: object
@@ -2801,41 +2714,32 @@ components:
         - type
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/AnalyzerArn'
-            - description: The ARN of the analyzer.
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: The ARN of the analyzer.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp for the time at which the analyzer was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: A timestamp for the time at which the analyzer was created.
         lastResourceAnalyzed:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The resource that was most recently analyzed by the analyzer.
+          $ref: '#/components/schemas/String'
+          description: The resource that was most recently analyzed by the analyzer.
         lastResourceAnalyzedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the most recently analyzed resource was analyzed.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the most recently analyzed resource was analyzed.
         name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the analyzer.
+          $ref: '#/components/schemas/Name'
+          description: The name of the analyzer.
         status:
-          allOf:
-            - $ref: '#/components/schemas/AnalyzerStatus'
-            - description: 'The status of the analyzer. An <code>Active</code> analyzer successfully monitors supported resources and generates new findings. The analyzer is <code>Disabled</code> when a user action, such as removing trusted access for AWS IAM Access Analyzer from AWS Organizations, causes the analyzer to stop generating new findings. The status is <code>Creating</code> when the analyzer creation is in progress and <code>Failed</code> when the analyzer creation has failed. '
+          $ref: '#/components/schemas/AnalyzerStatus'
+          description: 'The status of the analyzer. An <code>Active</code> analyzer successfully monitors supported resources and generates new findings. The analyzer is <code>Disabled</code> when a user action, such as removing trusted access for AWS IAM Access Analyzer from AWS Organizations, causes the analyzer to stop generating new findings. The status is <code>Creating</code> when the analyzer creation is in progress and <code>Failed</code> when the analyzer creation has failed. '
         statusReason:
-          allOf:
-            - $ref: '#/components/schemas/StatusReason'
-            - description: 'The <code>statusReason</code> provides more details about the current status of the analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status is returned. For an analyzer with organization as the type, this failure can be due to an issue with creating the service-linked roles required in the member accounts of the AWS organization.'
+          $ref: '#/components/schemas/StatusReason'
+          description: 'The <code>statusReason</code> provides more details about the current status of the analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status is returned. For an analyzer with organization as the type, this failure can be due to an issue with creating the service-linked roles required in the member accounts of the AWS organization.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: The tags added to the analyzer.
+          $ref: '#/components/schemas/TagsMap'
+          description: The tags added to the analyzer.
         type:
-          allOf:
-            - $ref: '#/components/schemas/Type'
-            - description: 'The type of analyzer, which corresponds to the zone of trust chosen for the analyzer.'
+          $ref: '#/components/schemas/Type'
+          description: 'The type of analyzer, which corresponds to the zone of trust chosen for the analyzer.'
       description: Contains information about the analyzer.
     AnalyzersList:
       type: array
@@ -2849,17 +2753,14 @@ components:
       title: ApplyArchiveRuleRequest
       properties:
         analyzerArn:
-          allOf:
-            - $ref: '#/components/schemas/AnalyzerArn'
-            - description: The Amazon resource name (ARN) of the analyzer.
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: The Amazon resource name (ARN) of the analyzer.
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A client token.
+          $ref: '#/components/schemas/String'
+          description: A client token.
         ruleName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the rule to apply.
+          $ref: '#/components/schemas/Name'
+          description: The name of the rule to apply.
       description: Retroactively applies an archive rule.
     FilterCriteriaMap:
       type: object
@@ -2874,21 +2775,17 @@ components:
         - updatedAt
       properties:
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the archive rule was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the archive rule was created.
         filter:
-          allOf:
-            - $ref: '#/components/schemas/FilterCriteriaMap'
-            - description: A filter used to define the archive rule.
+          $ref: '#/components/schemas/FilterCriteriaMap'
+          description: A filter used to define the archive rule.
         ruleName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the archive rule.
+          $ref: '#/components/schemas/Name'
+          description: The name of the archive rule.
         updatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the archive rule was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the archive rule was last updated.
       description: Contains information about an archive rule.
     ArchiveRulesList:
       type: array
@@ -2911,21 +2808,17 @@ components:
         - trails
       properties:
         accessRole:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The ARN of the service role that Access Analyzer uses to access your CloudTrail trail and service last accessed information.
+          $ref: '#/components/schemas/RoleArn'
+          description: The ARN of the service role that Access Analyzer uses to access your CloudTrail trail and service last accessed information.
         endTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The end of the time range for which Access Analyzer reviews your CloudTrail events. Events with a timestamp after this time are not considered to generate a policy. If this is not included in the request, the default value is the current time.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The end of the time range for which Access Analyzer reviews your CloudTrail events. Events with a timestamp after this time are not considered to generate a policy. If this is not included in the request, the default value is the current time.'
         startTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The start of the time range for which Access Analyzer reviews your CloudTrail events. Events with a timestamp before this time are not considered to generate a policy.
+          $ref: '#/components/schemas/Timestamp'
+          description: The start of the time range for which Access Analyzer reviews your CloudTrail events. Events with a timestamp before this time are not considered to generate a policy.
         trails:
-          allOf:
-            - $ref: '#/components/schemas/TrailList'
-            - description: A <code>Trail</code> object that contains settings for a trail.
+          $ref: '#/components/schemas/TrailList'
+          description: A <code>Trail</code> object that contains settings for a trail.
       description: Contains information about CloudTrail access.
     TrailPropertiesList:
       type: array
@@ -2939,77 +2832,64 @@ components:
         - trailProperties
       properties:
         endTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: 'The end of the time range for which Access Analyzer reviews your CloudTrail events. Events with a timestamp after this time are not considered to generate a policy. If this is not included in the request, the default value is the current time.'
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The end of the time range for which Access Analyzer reviews your CloudTrail events. Events with a timestamp after this time are not considered to generate a policy. If this is not included in the request, the default value is the current time.'
         startTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The start of the time range for which Access Analyzer reviews your CloudTrail events. Events with a timestamp before this time are not considered to generate a policy.
+          $ref: '#/components/schemas/Timestamp'
+          description: The start of the time range for which Access Analyzer reviews your CloudTrail events. Events with a timestamp before this time are not considered to generate a policy.
         trailProperties:
-          allOf:
-            - $ref: '#/components/schemas/TrailPropertiesList'
-            - description: A <code>TrailProperties</code> object that contains settings for trail properties.
+          $ref: '#/components/schemas/TrailPropertiesList'
+          description: A <code>TrailProperties</code> object that contains settings for trail properties.
       description: Contains information about CloudTrail access.
     IamRoleConfiguration:
       type: object
       properties:
         trustPolicy:
-          allOf:
-            - $ref: '#/components/schemas/IamTrustPolicy'
-            - description: The proposed trust policy for the IAM role.
+          $ref: '#/components/schemas/IamTrustPolicy'
+          description: The proposed trust policy for the IAM role.
       description: 'The proposed access control configuration for an IAM role. You can propose a configuration for a new IAM role or an existing IAM role that you own by specifying the trust policy. If the configuration is for a new IAM role, you must specify the trust policy. If the configuration is for an existing IAM role that you own and you do not propose the trust policy, the access preview uses the existing trust policy for the role. The proposed trust policy cannot be an empty string. For more information about role trust policy limits, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html">IAM and STS quotas</a>.'
     KmsKeyConfiguration:
       type: object
       properties:
         grants:
-          allOf:
-            - $ref: '#/components/schemas/KmsGrantConfigurationsList'
-            - description: 'A list of proposed grant configurations for the KMS key. If the proposed grant configuration is for an existing key, the access preview uses the proposed list of grant configurations in place of the existing grants. Otherwise, the access preview uses the existing grants for the key.'
+          $ref: '#/components/schemas/KmsGrantConfigurationsList'
+          description: 'A list of proposed grant configurations for the KMS key. If the proposed grant configuration is for an existing key, the access preview uses the proposed list of grant configurations in place of the existing grants. Otherwise, the access preview uses the existing grants for the key.'
         keyPolicies:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyPoliciesMap'
-            - description: 'Resource policy configuration for the KMS key. The only valid value for the name of the key policy is <code>default</code>. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default">Default key policy</a>.'
+          $ref: '#/components/schemas/KmsKeyPoliciesMap'
+          description: 'Resource policy configuration for the KMS key. The only valid value for the name of the key policy is <code>default</code>. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default">Default key policy</a>.'
       description: '<p>Proposed access control configuration for a KMS key. You can propose a configuration for a new KMS key or an existing KMS key that you own by specifying the key policy and KMS grant configuration. If the configuration is for an existing key and you do not specify the key policy, the access preview uses the existing policy for the key. If the access preview is for a new resource and you do not specify the key policy, then the access preview uses the default key policy. The proposed key policy cannot be an empty string. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default">Default key policy</a>. For more information about key policy limits, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html">Resource quotas</a>.</p> <p/>'
     S3BucketConfiguration:
       type: object
       properties:
         accessPoints:
-          allOf:
-            - $ref: '#/components/schemas/S3AccessPointConfigurationsMap'
-            - description: The configuration of Amazon S3 access points for the bucket.
+          $ref: '#/components/schemas/S3AccessPointConfigurationsMap'
+          description: The configuration of Amazon S3 access points for the bucket.
         bucketAclGrants:
-          allOf:
-            - $ref: '#/components/schemas/S3BucketAclGrantConfigurationsList'
-            - description: 'The proposed list of ACL grants for the Amazon S3 bucket. You can propose up to 100 ACL grants per bucket. If the proposed grant configuration is for an existing bucket, the access preview uses the proposed list of grant configurations in place of the existing grants. Otherwise, the access preview uses the existing grants for the bucket.'
+          $ref: '#/components/schemas/S3BucketAclGrantConfigurationsList'
+          description: 'The proposed list of ACL grants for the Amazon S3 bucket. You can propose up to 100 ACL grants per bucket. If the proposed grant configuration is for an existing bucket, the access preview uses the proposed list of grant configurations in place of the existing grants. Otherwise, the access preview uses the existing grants for the bucket.'
         bucketPolicy:
-          allOf:
-            - $ref: '#/components/schemas/S3BucketPolicy'
-            - description: The proposed bucket policy for the Amazon S3 bucket.
+          $ref: '#/components/schemas/S3BucketPolicy'
+          description: The proposed bucket policy for the Amazon S3 bucket.
         bucketPublicAccessBlock:
-          allOf:
-            - $ref: '#/components/schemas/S3PublicAccessBlockConfiguration'
-            - description: The proposed block public access configuration for the Amazon S3 bucket.
+          $ref: '#/components/schemas/S3PublicAccessBlockConfiguration'
+          description: The proposed block public access configuration for the Amazon S3 bucket.
       description: 'Proposed access control configuration for an Amazon S3 bucket. You can propose a configuration for a new Amazon S3 bucket or an existing Amazon S3 bucket that you own by specifying the Amazon S3 bucket policy, bucket ACLs, bucket BPA settings, and Amazon S3 access points attached to the bucket. If the configuration is for an existing Amazon S3 bucket and you do not specify the Amazon S3 bucket policy, the access preview uses the existing policy attached to the bucket. If the access preview is for a new resource and you do not specify the Amazon S3 bucket policy, the access preview assumes a bucket without a policy. To propose deletion of an existing bucket policy, you can specify an empty string. For more information about bucket policy limits, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html">Bucket Policy Examples</a>.'
     SecretsManagerSecretConfiguration:
       type: object
       properties:
         kmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/SecretsManagerSecretKmsId'
-            - description: 'The proposed ARN, key ID, or alias of the AWS KMS customer master key (CMK).'
+          $ref: '#/components/schemas/SecretsManagerSecretKmsId'
+          description: 'The proposed ARN, key ID, or alias of the AWS KMS customer master key (CMK).'
         secretPolicy:
-          allOf:
-            - $ref: '#/components/schemas/SecretsManagerSecretPolicy'
-            - description: The proposed resource policy defining who can access or manage the secret.
+          $ref: '#/components/schemas/SecretsManagerSecretPolicy'
+          description: The proposed resource policy defining who can access or manage the secret.
       description: '<p>The configuration for a Secrets Manager secret. For more information, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html">CreateSecret</a>.</p> <p>You can propose a configuration for a new secret or an existing secret that you own by specifying the secret policy and optional KMS encryption key. If the configuration is for an existing secret and you do not specify the secret policy, the access preview uses the existing policy for the secret. If the access preview is for a new resource and you do not specify the policy, the access preview assumes a secret without a policy. To propose deletion of an existing policy, you can specify an empty string. If the proposed configuration is for a new secret and you do not specify the KMS key ID, the access preview uses the default CMK of the AWS account. If you specify an empty string for the KMS key ID, the access preview uses the default CMK of the AWS account. For more information about secret policy limits, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_limits.html">Quotas for AWS Secrets Manager.</a>.</p>'
     SqsQueueConfiguration:
       type: object
       properties:
         queuePolicy:
-          allOf:
-            - $ref: '#/components/schemas/SqsQueuePolicy'
-            - description: ' The proposed resource policy for the SQS queue. '
+          $ref: '#/components/schemas/SqsQueuePolicy'
+          description: ' The proposed resource policy for the SQS queue. '
       description: 'The proposed access control configuration for an SQS queue. You can propose a configuration for a new SQS queue or an existing SQS queue that you own by specifying the SQS policy. If the configuration is for an existing SQS queue and you do not specify the SQS policy, the access preview uses the existing SQS policy for the queue. If the access preview is for a new resource and you do not specify the policy, the access preview assumes an SQS queue without a policy. To propose deletion of an existing SQS queue policy, you can specify an empty string for the SQS policy. For more information about SQS policy limits, see <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-policies.html">Quotas related to policies</a>.'
     ConfigurationsMapKey:
       type: string
@@ -3021,17 +2901,14 @@ components:
       title: CreateAccessPreviewRequest
       properties:
         analyzerArn:
-          allOf:
-            - $ref: '#/components/schemas/AnalyzerArn'
-            - description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the account analyzer</a> used to generate the access preview. You can only create an access preview for analyzers with an <code>Account</code> type and <code>Active</code> status.'
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the account analyzer</a> used to generate the access preview. You can only create an access preview for analyzers with an <code>Account</code> type and <code>Active</code> status.'
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A client token.
+          $ref: '#/components/schemas/String'
+          description: A client token.
         configurations:
-          allOf:
-            - $ref: '#/components/schemas/ConfigurationsMap'
-            - description: Access control configuration for your resource that is used to generate the access preview. The access preview includes findings for external access allowed to the resource with the proposed access control configuration. The configuration must contain exactly one element.
+          $ref: '#/components/schemas/ConfigurationsMap'
+          description: Access control configuration for your resource that is used to generate the access preview. The access preview includes findings for external access allowed to the resource with the proposed access control configuration. The configuration must contain exactly one element.
     InlineArchiveRulesList:
       type: array
       items:
@@ -3044,25 +2921,20 @@ components:
       title: CreateAnalyzerRequest
       properties:
         analyzerName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the analyzer to create.
+          $ref: '#/components/schemas/Name'
+          description: The name of the analyzer to create.
         archiveRules:
-          allOf:
-            - $ref: '#/components/schemas/InlineArchiveRulesList'
-            - description: Specifies the archive rules to add for the analyzer. Archive rules automatically archive findings that meet the criteria you define for the rule.
+          $ref: '#/components/schemas/InlineArchiveRulesList'
+          description: Specifies the archive rules to add for the analyzer. Archive rules automatically archive findings that meet the criteria you define for the rule.
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A client token.
+          $ref: '#/components/schemas/String'
+          description: A client token.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: The tags to apply to the analyzer.
+          $ref: '#/components/schemas/TagsMap'
+          description: The tags to apply to the analyzer.
         type:
-          allOf:
-            - $ref: '#/components/schemas/Type'
-            - description: The type of analyzer to create. Only ACCOUNT and ORGANIZATION analyzers are supported. You can create only one analyzer per account per Region. You can create up to 5 analyzers per organization per Region.
+          $ref: '#/components/schemas/Type'
+          description: The type of analyzer to create. Only ACCOUNT and ORGANIZATION analyzers are supported. You can create only one analyzer per account per Region. You can create up to 5 analyzers per organization per Region.
       description: Creates an analyzer.
     CreateArchiveRuleRequest:
       type: object
@@ -3072,17 +2944,14 @@ components:
       title: CreateArchiveRuleRequest
       properties:
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A client token.
+          $ref: '#/components/schemas/String'
+          description: A client token.
         filter:
-          allOf:
-            - $ref: '#/components/schemas/FilterCriteriaMap'
-            - description: The criteria for the rule.
+          $ref: '#/components/schemas/FilterCriteriaMap'
+          description: The criteria for the rule.
         ruleName:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the rule to create.
+          $ref: '#/components/schemas/Name'
+          description: The name of the rule to create.
       description: Creates an archive rule.
     ValueList:
       type: array
@@ -3113,61 +2982,47 @@ components:
         - updatedAt
       properties:
         action:
-          allOf:
-            - $ref: '#/components/schemas/ActionList'
-            - description: The action in the analyzed policy statement that an external principal has permission to use.
+          $ref: '#/components/schemas/ActionList'
+          description: The action in the analyzed policy statement that an external principal has permission to use.
         analyzedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the resource was analyzed.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the resource was analyzed.
         condition:
-          allOf:
-            - $ref: '#/components/schemas/ConditionKeyMap'
-            - description: The condition in the analyzed policy statement that resulted in a finding.
+          $ref: '#/components/schemas/ConditionKeyMap'
+          description: The condition in the analyzed policy statement that resulted in a finding.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the finding was generated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the finding was generated.
         error:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: An error.
+          $ref: '#/components/schemas/String'
+          description: An error.
         id:
-          allOf:
-            - $ref: '#/components/schemas/FindingId'
-            - description: The ID of the finding.
+          $ref: '#/components/schemas/FindingId'
+          description: The ID of the finding.
         isPublic:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether the policy that generated the finding allows public access to the resource.
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates whether the policy that generated the finding allows public access to the resource.
         principal:
-          allOf:
-            - $ref: '#/components/schemas/PrincipalMap'
-            - description: The external principal that access to a resource within the zone of trust.
+          $ref: '#/components/schemas/PrincipalMap'
+          description: The external principal that access to a resource within the zone of trust.
         resource:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The resource that an external principal has access to.
+          $ref: '#/components/schemas/String'
+          description: The resource that an external principal has access to.
         resourceOwnerAccount:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The AWS account ID that owns the resource.
+          $ref: '#/components/schemas/String'
+          description: The AWS account ID that owns the resource.
         resourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: The type of the resource identified in the finding.
+          $ref: '#/components/schemas/ResourceType'
+          description: The type of the resource identified in the finding.
         sources:
-          allOf:
-            - $ref: '#/components/schemas/FindingSourceList'
-            - description: The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
+          $ref: '#/components/schemas/FindingSourceList'
+          description: The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
         status:
-          allOf:
-            - $ref: '#/components/schemas/FindingStatus'
-            - description: The current status of the finding.
+          $ref: '#/components/schemas/FindingStatus'
+          description: The current status of the finding.
         updatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the finding was updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the finding was updated.
       description: Contains information about a finding.
     FindingIdList:
       type: array
@@ -3177,9 +3032,8 @@ components:
       type: object
       properties:
         accessPointArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The ARN of the access point that generated the finding.
+          $ref: '#/components/schemas/String'
+          description: The ARN of the access point that generated the finding.
       description: Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.
     FindingSourceType:
       type: string
@@ -3193,13 +3047,11 @@ components:
         - type
       properties:
         detail:
-          allOf:
-            - $ref: '#/components/schemas/FindingSourceDetail'
-            - description: Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.
+          $ref: '#/components/schemas/FindingSourceDetail'
+          description: Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.
         type:
-          allOf:
-            - $ref: '#/components/schemas/FindingSourceType'
-            - description: Indicates the type of access that generated the finding.
+          $ref: '#/components/schemas/FindingSourceType'
+          description: Indicates the type of access that generated the finding.
       description: The source of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
     FindingStatusUpdate:
       type: string
@@ -3219,61 +3071,47 @@ components:
         - updatedAt
       properties:
         action:
-          allOf:
-            - $ref: '#/components/schemas/ActionList'
-            - description: The action in the analyzed policy statement that an external principal has permission to use.
+          $ref: '#/components/schemas/ActionList'
+          description: The action in the analyzed policy statement that an external principal has permission to use.
         analyzedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the resource-based policy that generated the finding was analyzed.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the resource-based policy that generated the finding was analyzed.
         condition:
-          allOf:
-            - $ref: '#/components/schemas/ConditionKeyMap'
-            - description: The condition in the analyzed policy statement that resulted in a finding.
+          $ref: '#/components/schemas/ConditionKeyMap'
+          description: The condition in the analyzed policy statement that resulted in a finding.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the finding was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the finding was created.
         error:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The error that resulted in an Error finding.
+          $ref: '#/components/schemas/String'
+          description: The error that resulted in an Error finding.
         id:
-          allOf:
-            - $ref: '#/components/schemas/FindingId'
-            - description: The ID of the finding.
+          $ref: '#/components/schemas/FindingId'
+          description: The ID of the finding.
         isPublic:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether the finding reports a resource that has a policy that allows public access.
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates whether the finding reports a resource that has a policy that allows public access.
         principal:
-          allOf:
-            - $ref: '#/components/schemas/PrincipalMap'
-            - description: The external principal that has access to a resource within the zone of trust.
+          $ref: '#/components/schemas/PrincipalMap'
+          description: The external principal that has access to a resource within the zone of trust.
         resource:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The resource that the external principal has access to.
+          $ref: '#/components/schemas/String'
+          description: The resource that the external principal has access to.
         resourceOwnerAccount:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The AWS account ID that owns the resource.
+          $ref: '#/components/schemas/String'
+          description: The AWS account ID that owns the resource.
         resourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: The type of the resource that the external principal has access to.
+          $ref: '#/components/schemas/ResourceType'
+          description: The type of the resource that the external principal has access to.
         sources:
-          allOf:
-            - $ref: '#/components/schemas/FindingSourceList'
-            - description: The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
+          $ref: '#/components/schemas/FindingSourceList'
+          description: The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
         status:
-          allOf:
-            - $ref: '#/components/schemas/FindingStatus'
-            - description: The status of the finding.
+          $ref: '#/components/schemas/FindingStatus'
+          description: The status of the finding.
         updatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the finding was most recently updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the finding was most recently updated.
       description: Contains information about a finding.
     FindingsList:
       type: array
@@ -3285,9 +3123,8 @@ components:
         - policy
       properties:
         policy:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The text to use as the content for the new policy. The policy is created using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html">CreatePolicy</a> action.'
+          $ref: '#/components/schemas/String'
+          description: 'The text to use as the content for the new policy. The policy is created using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html">CreatePolicy</a> action.'
       description: Contains the text for the generated policy.
     GeneratedPolicyList:
       type: array
@@ -3299,17 +3136,14 @@ components:
         - principalArn
       properties:
         cloudTrailProperties:
-          allOf:
-            - $ref: '#/components/schemas/CloudTrailProperties'
-            - description: Lists details about the <code>Trail</code> used to generated policy.
+          $ref: '#/components/schemas/CloudTrailProperties'
+          description: Lists details about the <code>Trail</code> used to generated policy.
         isComplete:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'This value is set to <code>true</code> if the generated policy contains all possible actions for a service that Access Analyzer identified from the CloudTrail trail that you specified, and <code>false</code> otherwise.'
+          $ref: '#/components/schemas/Boolean'
+          description: 'This value is set to <code>true</code> if the generated policy contains all possible actions for a service that Access Analyzer identified from the CloudTrail trail that you specified, and <code>false</code> otherwise.'
         principalArn:
-          allOf:
-            - $ref: '#/components/schemas/PrincipalArn'
-            - description: The ARN of the IAM entity (user or role) for which you are generating a policy.
+          $ref: '#/components/schemas/PrincipalArn'
+          description: The ARN of the IAM entity (user or role) for which you are generating a policy.
       description: Contains the generated policy details.
     GeneratedPolicyResult:
       type: object
@@ -3317,9 +3151,8 @@ components:
         - properties
       properties:
         generatedPolicies:
-          allOf:
-            - $ref: '#/components/schemas/GeneratedPolicyList'
-            - description: 'The text to use as the content for the new policy. The policy is created using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html">CreatePolicy</a> action.'
+          $ref: '#/components/schemas/GeneratedPolicyList'
+          description: 'The text to use as the content for the new policy. The policy is created using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html">CreatePolicy</a> action.'
         properties:
           description: A <code>GeneratedPolicyProperties</code> object that contains properties of the generated policy.
       description: Contains the text for the generated policy and its details.
@@ -3359,23 +3192,19 @@ components:
         - status
       properties:
         completedOn:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp of when the job was completed.
+          $ref: '#/components/schemas/Timestamp'
+          description: A timestamp of when the job was completed.
         jobError:
           $ref: '#/components/schemas/JobError'
         jobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The <code>JobId</code> that is returned by the <code>StartPolicyGeneration</code> operation. The <code>JobId</code> can be used with <code>GetGeneratedPolicy</code> to retrieve the generated policies or used with <code>CancelPolicyGeneration</code> to cancel the policy generation request.
+          $ref: '#/components/schemas/JobId'
+          description: The <code>JobId</code> that is returned by the <code>StartPolicyGeneration</code> operation. The <code>JobId</code> can be used with <code>GetGeneratedPolicy</code> to retrieve the generated policies or used with <code>CancelPolicyGeneration</code> to cancel the policy generation request.
         startedOn:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp of when the job was started.
+          $ref: '#/components/schemas/Timestamp'
+          description: A timestamp of when the job was started.
         status:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: The status of the job request.
+          $ref: '#/components/schemas/JobStatus'
+          description: The status of the job request.
       description: Contains details about the policy generation request.
     GranteePrincipal:
       type: string
@@ -3398,13 +3227,11 @@ components:
         - message
       properties:
         code:
-          allOf:
-            - $ref: '#/components/schemas/JobErrorCode'
-            - description: The job error code.
+          $ref: '#/components/schemas/JobErrorCode'
+          description: The job error code.
         message:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'Specific information about the error. For example, which service quota was exceeded or which resource was not found.'
+          $ref: '#/components/schemas/String'
+          description: 'Specific information about the error. For example, which service quota was exceeded or which resource was not found.'
       description: Contains the details about the policy generation error.
     JobStatus:
       type: string
@@ -3432,13 +3259,11 @@ components:
       type: object
       properties:
         encryptionContextEquals:
-          allOf:
-            - $ref: '#/components/schemas/KmsConstraintsMap'
-            - description: 'A list of key-value pairs that must match the encryption context in the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations">cryptographic operation</a> request. The grant allows the operation only when the encryption context in the request is the same as the encryption context specified in this constraint.'
+          $ref: '#/components/schemas/KmsConstraintsMap'
+          description: 'A list of key-value pairs that must match the encryption context in the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations">cryptographic operation</a> request. The grant allows the operation only when the encryption context in the request is the same as the encryption context specified in this constraint.'
         encryptionContextSubset:
-          allOf:
-            - $ref: '#/components/schemas/KmsConstraintsMap'
-            - description: 'A list of key-value pairs that must be included in the encryption context of the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations">cryptographic operation</a> request. The grant allows the cryptographic operation only when the encryption context in the request includes the key-value pairs specified in this constraint, although it can include additional key-value pairs.'
+          $ref: '#/components/schemas/KmsConstraintsMap'
+          description: 'A list of key-value pairs that must be included in the encryption context of the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations">cryptographic operation</a> request. The grant allows the cryptographic operation only when the encryption context in the request includes the key-value pairs specified in this constraint, although it can include additional key-value pairs.'
       description: 'Use this structure to propose allowing <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations">cryptographic operations</a> in the grant only when the operation request includes the specified <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context">encryption context</a>. You can specify only one type of encryption context. An empty map is treated as not specified. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_GrantConstraints.html">GrantConstraints</a>.'
     KmsGrantOperationsList:
       type: array
@@ -3454,25 +3279,20 @@ components:
         - operations
       properties:
         constraints:
-          allOf:
-            - $ref: '#/components/schemas/KmsGrantConstraints'
-            - description: 'Use this structure to propose allowing <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations">cryptographic operations</a> in the grant only when the operation request includes the specified <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context">encryption context</a>.'
+          $ref: '#/components/schemas/KmsGrantConstraints'
+          description: 'Use this structure to propose allowing <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations">cryptographic operations</a> in the grant only when the operation request includes the specified <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context">encryption context</a>.'
         granteePrincipal:
-          allOf:
-            - $ref: '#/components/schemas/GranteePrincipal'
-            - description: The principal that is given permission to perform the operations that the grant permits.
+          $ref: '#/components/schemas/GranteePrincipal'
+          description: The principal that is given permission to perform the operations that the grant permits.
         issuingAccount:
-          allOf:
-            - $ref: '#/components/schemas/IssuingAccount'
-            - description: ' The AWS account under which the grant was issued. The account is used to propose KMS grants issued by accounts other than the owner of the key.'
+          $ref: '#/components/schemas/IssuingAccount'
+          description: ' The AWS account under which the grant was issued. The account is used to propose KMS grants issued by accounts other than the owner of the key.'
         operations:
-          allOf:
-            - $ref: '#/components/schemas/KmsGrantOperationsList'
-            - description: A list of operations that the grant permits.
+          $ref: '#/components/schemas/KmsGrantOperationsList'
+          description: A list of operations that the grant permits.
         retiringPrincipal:
-          allOf:
-            - $ref: '#/components/schemas/RetiringPrincipal'
-            - description: 'The principal that is given permission to retire the grant by using <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_RetireGrant.html">RetireGrant</a> operation.'
+          $ref: '#/components/schemas/RetiringPrincipal'
+          description: 'The principal that is given permission to retire the grant by using <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_RetireGrant.html">RetireGrant</a> operation.'
       description: 'A proposed grant configuration for a KMS key. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html">CreateGrant</a>.'
     KmsGrantConfigurationsList:
       type: array
@@ -3512,21 +3332,17 @@ components:
       title: ListAccessPreviewFindingsRequest
       properties:
         analyzerArn:
-          allOf:
-            - $ref: '#/components/schemas/AnalyzerArn'
-            - description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> used to generate the access.'
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> used to generate the access.'
         filter:
-          allOf:
-            - $ref: '#/components/schemas/FilterCriteriaMap'
-            - description: Criteria to filter the returned findings.
+          $ref: '#/components/schemas/FilterCriteriaMap'
+          description: Criteria to filter the returned findings.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The maximum number of results to return in the response.
+          $ref: '#/components/schemas/Integer'
+          description: The maximum number of results to return in the response.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: A token used for pagination of results returned.
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
     ListAccessPreviewsRequest:
       type: object
       title: ListAccessPreviewsRequest
@@ -3538,21 +3354,17 @@ components:
       title: ListAnalyzedResourcesRequest
       properties:
         analyzerArn:
-          allOf:
-            - $ref: '#/components/schemas/AnalyzerArn'
-            - description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> to retrieve a list of analyzed resources from.'
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> to retrieve a list of analyzed resources from.'
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The maximum number of results to return in the response.
+          $ref: '#/components/schemas/Integer'
+          description: The maximum number of results to return in the response.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: A token used for pagination of results returned.
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
         resourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: The type of resource.
+          $ref: '#/components/schemas/ResourceType'
+          description: The type of resource.
       description: Retrieves a list of resources that have been analyzed.
     ListAnalyzersRequest:
       type: object
@@ -3568,13 +3380,11 @@ components:
       type: object
       properties:
         attributeName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the attribute to sort on.
+          $ref: '#/components/schemas/String'
+          description: The name of the attribute to sort on.
         orderBy:
-          allOf:
-            - $ref: '#/components/schemas/OrderBy'
-            - description: 'The sort order, ascending or descending.'
+          $ref: '#/components/schemas/OrderBy'
+          description: 'The sort order, ascending or descending.'
       description: The criteria used to sort.
     ListFindingsRequest:
       type: object
@@ -3583,25 +3393,20 @@ components:
       title: ListFindingsRequest
       properties:
         analyzerArn:
-          allOf:
-            - $ref: '#/components/schemas/AnalyzerArn'
-            - description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> to retrieve findings from.'
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> to retrieve findings from.'
         filter:
-          allOf:
-            - $ref: '#/components/schemas/FilterCriteriaMap'
-            - description: A filter to match for the findings to return.
+          $ref: '#/components/schemas/FilterCriteriaMap'
+          description: A filter to match for the findings to return.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The maximum number of results to return in the response.
+          $ref: '#/components/schemas/Integer'
+          description: The maximum number of results to return in the response.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/Token'
-            - description: A token used for pagination of results returned.
+          $ref: '#/components/schemas/Token'
+          description: A token used for pagination of results returned.
         sort:
-          allOf:
-            - $ref: '#/components/schemas/SortCriteria'
-            - description: The sort order for the findings returned.
+          $ref: '#/components/schemas/SortCriteria'
+          description: The sort order for the findings returned.
       description: Retrieves a list of findings generated by the specified analyzer.
     ListPolicyGenerationsRequestMaxResultsInteger:
       type: integer
@@ -3643,13 +3448,11 @@ components:
         - start
       properties:
         end:
-          allOf:
-            - $ref: '#/components/schemas/Position'
-            - description: The end position of the span (exclusive).
+          $ref: '#/components/schemas/Position'
+          description: The end position of the span (exclusive).
         start:
-          allOf:
-            - $ref: '#/components/schemas/Position'
-            - description: The start position of the span (inclusive).
+          $ref: '#/components/schemas/Position'
+          description: The start position of the span (inclusive).
       description: A span in a policy. The span consists of a start position (inclusive) and end position (exclusive).
     Location:
       type: object
@@ -3658,13 +3461,11 @@ components:
         - span
       properties:
         path:
-          allOf:
-            - $ref: '#/components/schemas/PathElementList'
-            - description: 'A path in a policy, represented as a sequence of path elements.'
+          $ref: '#/components/schemas/PathElementList'
+          description: 'A path in a policy, represented as a sequence of path elements.'
         span:
-          allOf:
-            - $ref: '#/components/schemas/Span'
-            - description: A span in a policy.
+          $ref: '#/components/schemas/Span'
+          description: A span in a policy.
       description: A location in a policy that is represented as a path through the JSON representation and a corresponding span.
     LocationList:
       type: array
@@ -3676,17 +3477,15 @@ components:
         - vpcId
       properties:
         vpcId:
-          allOf:
-            - $ref: '#/components/schemas/VpcId'
-            - description: ' If this field is specified, this access point will only allow connections from the specified VPC ID. '
+          $ref: '#/components/schemas/VpcId'
+          description: ' If this field is specified, this access point will only allow connections from the specified VPC ID. '
       description: ' The proposed virtual private cloud (VPC) configuration for the Amazon S3 access point. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_VpcConfiguration.html">VpcConfiguration</a>. '
     NetworkOriginConfiguration:
       type: object
       properties:
         internetConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/InternetConfiguration'
-            - description: The configuration for the Amazon S3 access point with an <code>Internet</code> origin.
+          $ref: '#/components/schemas/InternetConfiguration'
+          description: The configuration for the Amazon S3 access point with an <code>Internet</code> origin.
         vpcConfiguration:
           $ref: '#/components/schemas/VpcConfiguration'
       description: 'The proposed <code>InternetConfiguration</code> or <code>VpcConfiguration</code> to apply to the Amazon S3 Access point. You can make the access point accessible from the internet, or you can specify that all requests made through that access point must originate from a specific virtual private cloud (VPC). You can specify only one type of network configuration. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html">Creating access points</a>.'
@@ -3697,33 +3496,27 @@ components:
         - start
       properties:
         length:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The length of the substring.
+          $ref: '#/components/schemas/Integer'
+          description: The length of the substring.
         start:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'The start index of the substring, starting from 0.'
+          $ref: '#/components/schemas/Integer'
+          description: 'The start index of the substring, starting from 0.'
       description: A reference to a substring of a literal string in a JSON document.
     PathElement:
       type: object
       properties:
         index:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: Refers to an index in a JSON array.
+          $ref: '#/components/schemas/Integer'
+          description: Refers to an index in a JSON array.
         key:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Refers to a key in a JSON object.
+          $ref: '#/components/schemas/String'
+          description: Refers to a key in a JSON object.
         substring:
-          allOf:
-            - $ref: '#/components/schemas/Substring'
-            - description: Refers to a substring of a literal string in a JSON object.
+          $ref: '#/components/schemas/Substring'
+          description: Refers to a substring of a literal string in a JSON object.
         value:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Refers to the value associated with a given key in a JSON object.
+          $ref: '#/components/schemas/String'
+          description: Refers to the value associated with a given key in a JSON object.
       description: A single element in a path through the JSON representation of a policy.
     PolicyDocument:
       type: string
@@ -3736,25 +3529,20 @@ components:
         - status
       properties:
         completedOn:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp of when the policy generation was completed.
+          $ref: '#/components/schemas/Timestamp'
+          description: A timestamp of when the policy generation was completed.
         jobId:
-          allOf:
-            - $ref: '#/components/schemas/JobId'
-            - description: The <code>JobId</code> that is returned by the <code>StartPolicyGeneration</code> operation. The <code>JobId</code> can be used with <code>GetGeneratedPolicy</code> to retrieve the generated policies or used with <code>CancelPolicyGeneration</code> to cancel the policy generation request.
+          $ref: '#/components/schemas/JobId'
+          description: The <code>JobId</code> that is returned by the <code>StartPolicyGeneration</code> operation. The <code>JobId</code> can be used with <code>GetGeneratedPolicy</code> to retrieve the generated policies or used with <code>CancelPolicyGeneration</code> to cancel the policy generation request.
         principalArn:
-          allOf:
-            - $ref: '#/components/schemas/PrincipalArn'
-            - description: The ARN of the IAM entity (user or role) for which you are generating a policy.
+          $ref: '#/components/schemas/PrincipalArn'
+          description: The ARN of the IAM entity (user or role) for which you are generating a policy.
         startedOn:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp of when the policy generation started.
+          $ref: '#/components/schemas/Timestamp'
+          description: A timestamp of when the policy generation started.
         status:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: The status of the policy generation request.
+          $ref: '#/components/schemas/JobStatus'
+          description: The status of the policy generation request.
       description: Contains details about the policy generation status and properties.
     PolicyGenerationDetails:
       type: object
@@ -3762,9 +3550,8 @@ components:
         - principalArn
       properties:
         principalArn:
-          allOf:
-            - $ref: '#/components/schemas/PrincipalArn'
-            - description: The ARN of the IAM entity (user or role) for which you are generating a policy.
+          $ref: '#/components/schemas/PrincipalArn'
+          description: The ARN of the IAM entity (user or role) for which you are generating a policy.
       description: Contains the ARN details about the IAM entity for which the policy is generated.
     PolicyName:
       type: string
@@ -3782,17 +3569,14 @@ components:
         - offset
       properties:
         column:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'The column of the position, starting from 0.'
+          $ref: '#/components/schemas/Integer'
+          description: 'The column of the position, starting from 0.'
         line:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'The line of the position, starting from 1.'
+          $ref: '#/components/schemas/Integer'
+          description: 'The line of the position, starting from 1.'
         offset:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: 'The offset within the policy that corresponds to the position, starting from 0.'
+          $ref: '#/components/schemas/Integer'
+          description: 'The offset within the policy that corresponds to the position, starting from 0.'
       description: A position in a policy.
     ReasonCode:
       type: string
@@ -3812,29 +3596,24 @@ components:
         - restrictPublicBuckets
       properties:
         ignorePublicAcls:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: ' Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. '
+          $ref: '#/components/schemas/Boolean'
+          description: ' Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. '
         restrictPublicBuckets:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: ' Specifies whether Amazon S3 should restrict public bucket policies for this bucket. '
+          $ref: '#/components/schemas/Boolean'
+          description: ' Specifies whether Amazon S3 should restrict public bucket policies for this bucket. '
       description: 'The <code>PublicAccessBlock</code> configuration to apply to this Amazon S3 bucket. If the proposed configuration is for an existing Amazon S3 bucket and the configuration is not specified, the access preview uses the existing setting. If the proposed configuration is for a new bucket and the configuration is not specified, the access preview uses <code>false</code>. If the proposed configuration is for a new access point and the access point BPA configuration is not specified, the access preview uses <code>true</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html">PublicAccessBlockConfiguration</a>. '
     S3AccessPointConfiguration:
       type: object
       properties:
         accessPointPolicy:
-          allOf:
-            - $ref: '#/components/schemas/AccessPointPolicy'
-            - description: The access point policy.
+          $ref: '#/components/schemas/AccessPointPolicy'
+          description: The access point policy.
         networkOrigin:
-          allOf:
-            - $ref: '#/components/schemas/NetworkOriginConfiguration'
-            - description: 'The proposed <code>Internet</code> and <code>VpcConfiguration</code> to apply to this Amazon S3 access point. If the access preview is for a new resource and neither is specified, the access preview uses <code>Internet</code> for the network origin. If the access preview is for an existing resource and neither is specified, the access preview uses the exiting network origin.'
+          $ref: '#/components/schemas/NetworkOriginConfiguration'
+          description: 'The proposed <code>Internet</code> and <code>VpcConfiguration</code> to apply to this Amazon S3 access point. If the access preview is for a new resource and neither is specified, the access preview uses <code>Internet</code> for the network origin. If the access preview is for an existing resource and neither is specified, the access preview uses the exiting network origin.'
         publicAccessBlock:
-          allOf:
-            - $ref: '#/components/schemas/S3PublicAccessBlockConfiguration'
-            - description: The proposed <code>S3PublicAccessBlock</code> configuration to apply to this Amazon S3 Access Point.
+          $ref: '#/components/schemas/S3PublicAccessBlockConfiguration'
+          description: The proposed <code>S3PublicAccessBlock</code> configuration to apply to this Amazon S3 Access Point.
       description: 'The configuration for an Amazon S3 access point for the bucket. You can propose up to 10 access points per bucket. If the proposed Amazon S3 access point configuration is for an existing bucket, the access preview uses the proposed access point configuration in place of the existing access points. To propose an access point without a policy, you can provide an empty string as the access point policy. For more information, see <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html">Creating access points</a>. For more information about access point policy limits, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points-restrictions-limitations.html">Access points restrictions and limitations</a>.'
     S3AccessPointConfigurationsMap:
       type: object
@@ -3847,13 +3626,11 @@ components:
         - permission
       properties:
         grantee:
-          allOf:
-            - $ref: '#/components/schemas/AclGrantee'
-            - description: The grantee to whom you’re assigning access rights.
+          $ref: '#/components/schemas/AclGrantee'
+          description: The grantee to whom you’re assigning access rights.
         permission:
-          allOf:
-            - $ref: '#/components/schemas/AclPermission'
-            - description: The permissions being granted.
+          $ref: '#/components/schemas/AclPermission'
+          description: The permissions being granted.
       description: 'A proposed access control list grant configuration for an Amazon S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#setting-acls">How to Specify an ACL</a>.'
     S3BucketAclGrantConfigurationsList:
       type: array
@@ -3874,17 +3651,14 @@ components:
       title: StartPolicyGenerationRequest
       properties:
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: '<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect.</p> <p>If you do not specify a client token, one is automatically generated by the AWS SDK.</p>'
+          $ref: '#/components/schemas/String'
+          description: '<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect.</p> <p>If you do not specify a client token, one is automatically generated by the AWS SDK.</p>'
         cloudTrailDetails:
-          allOf:
-            - $ref: '#/components/schemas/CloudTrailDetails'
-            - description: A <code>CloudTrailDetails</code> object that contains details about a <code>Trail</code> that you want to analyze to generate policies.
+          $ref: '#/components/schemas/CloudTrailDetails'
+          description: A <code>CloudTrailDetails</code> object that contains details about a <code>Trail</code> that you want to analyze to generate policies.
         policyGenerationDetails:
-          allOf:
-            - $ref: '#/components/schemas/PolicyGenerationDetails'
-            - description: Contains the ARN of the IAM entity (user or role) for which you are generating a policy.
+          $ref: '#/components/schemas/PolicyGenerationDetails'
+          description: Contains the ARN of the IAM entity (user or role) for which you are generating a policy.
     StartResourceScanRequest:
       type: object
       required:
@@ -3893,13 +3667,11 @@ components:
       title: StartResourceScanRequest
       properties:
         analyzerArn:
-          allOf:
-            - $ref: '#/components/schemas/AnalyzerArn'
-            - description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> to use to scan the policies applied to the specified resource.'
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> to use to scan the policies applied to the specified resource.'
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArn'
-            - description: The ARN of the resource to scan.
+          $ref: '#/components/schemas/ResourceArn'
+          description: The ARN of the resource to scan.
       description: Starts a scan of the policies applied to the specified resource.
     TagKeys:
       type: array
@@ -3912,9 +3684,8 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: The tags to add to the resource.
+          $ref: '#/components/schemas/TagsMap'
+          description: The tags to add to the resource.
       description: Adds a tag to the specified resource.
     Trail:
       type: object
@@ -3922,17 +3693,14 @@ components:
         - cloudTrailArn
       properties:
         allRegions:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'Possible values are <code>true</code> or <code>false</code>. If set to <code>true</code>, Access Analyzer retrieves CloudTrail data from all regions to analyze and generate a policy.'
+          $ref: '#/components/schemas/Boolean'
+          description: 'Possible values are <code>true</code> or <code>false</code>. If set to <code>true</code>, Access Analyzer retrieves CloudTrail data from all regions to analyze and generate a policy.'
         cloudTrailArn:
-          allOf:
-            - $ref: '#/components/schemas/CloudTrailArn'
-            - description: 'Specifies the ARN of the trail. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>.'
+          $ref: '#/components/schemas/CloudTrailArn'
+          description: 'Specifies the ARN of the trail. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>.'
         regions:
-          allOf:
-            - $ref: '#/components/schemas/RegionList'
-            - description: A list of regions to get CloudTrail data from and analyze to generate a policy.
+          $ref: '#/components/schemas/RegionList'
+          description: A list of regions to get CloudTrail data from and analyze to generate a policy.
       description: Contains details about the CloudTrail trail being analyzed to generate a policy.
     TrailProperties:
       type: object
@@ -3940,17 +3708,14 @@ components:
         - cloudTrailArn
       properties:
         allRegions:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'Possible values are <code>true</code> or <code>false</code>. If set to <code>true</code>, Access Analyzer retrieves CloudTrail data from all regions to analyze and generate a policy.'
+          $ref: '#/components/schemas/Boolean'
+          description: 'Possible values are <code>true</code> or <code>false</code>. If set to <code>true</code>, Access Analyzer retrieves CloudTrail data from all regions to analyze and generate a policy.'
         cloudTrailArn:
-          allOf:
-            - $ref: '#/components/schemas/CloudTrailArn'
-            - description: 'Specifies the ARN of the trail. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>.'
+          $ref: '#/components/schemas/CloudTrailArn'
+          description: 'Specifies the ARN of the trail. The format of a trail ARN is <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>.'
         regions:
-          allOf:
-            - $ref: '#/components/schemas/RegionList'
-            - description: A list of regions to get CloudTrail data from and analyze to generate a policy.
+          $ref: '#/components/schemas/RegionList'
+          description: A list of regions to get CloudTrail data from and analyze to generate a policy.
       description: Contains details about the CloudTrail trail being analyzed to generate a policy.
     UntagResourceRequest:
       type: object
@@ -3964,13 +3729,11 @@ components:
       title: UpdateArchiveRuleRequest
       properties:
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A client token.
+          $ref: '#/components/schemas/String'
+          description: A client token.
         filter:
-          allOf:
-            - $ref: '#/components/schemas/FilterCriteriaMap'
-            - description: A filter to match for the rules to update. Only rules that match the filter are updated.
+          $ref: '#/components/schemas/FilterCriteriaMap'
+          description: A filter to match for the rules to update. Only rules that match the filter are updated.
       description: Updates the specified archive rule.
     UpdateFindingsRequest:
       type: object
@@ -3980,25 +3743,20 @@ components:
       title: UpdateFindingsRequest
       properties:
         analyzerArn:
-          allOf:
-            - $ref: '#/components/schemas/AnalyzerArn'
-            - description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> that generated the findings to update.'
+          $ref: '#/components/schemas/AnalyzerArn'
+          description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> that generated the findings to update.'
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A client token.
+          $ref: '#/components/schemas/String'
+          description: A client token.
         ids:
-          allOf:
-            - $ref: '#/components/schemas/FindingIdList'
-            - description: The IDs of the findings to update.
+          $ref: '#/components/schemas/FindingIdList'
+          description: The IDs of the findings to update.
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArn'
-            - description: The ARN of the resource identified in the finding.
+          $ref: '#/components/schemas/ResourceArn'
+          description: The ARN of the resource identified in the finding.
         status:
-          allOf:
-            - $ref: '#/components/schemas/FindingStatusUpdate'
-            - description: The state represents the action to take to update the finding Status. Use <code>ARCHIVE</code> to change an Active finding to an Archived finding. Use <code>ACTIVE</code> to change an Archived finding to an Active finding.
+          $ref: '#/components/schemas/FindingStatusUpdate'
+          description: The state represents the action to take to update the finding Status. Use <code>ARCHIVE</code> to change an Active finding to an Archived finding. Use <code>ACTIVE</code> to change an Archived finding to an Active finding.
       description: Updates findings with the new values provided in the request.
     ValidatePolicyFindingType:
       type: string
@@ -4017,25 +3775,20 @@ components:
         - locations
       properties:
         findingDetails:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A localized message that explains the finding and provides guidance on how to address it.
+          $ref: '#/components/schemas/String'
+          description: A localized message that explains the finding and provides guidance on how to address it.
         findingType:
-          allOf:
-            - $ref: '#/components/schemas/ValidatePolicyFindingType'
-            - description: <p>The impact of the finding.</p> <p>Security warnings report when the policy allows access that we consider overly permissive.</p> <p>Errors report when a part of the policy is not functional.</p> <p>Warnings report non-security issues when a policy does not conform to policy writing best practices.</p> <p>Suggestions recommend stylistic improvements in the policy that do not impact access.</p>
+          $ref: '#/components/schemas/ValidatePolicyFindingType'
+          description: <p>The impact of the finding.</p> <p>Security warnings report when the policy allows access that we consider overly permissive.</p> <p>Errors report when a part of the policy is not functional.</p> <p>Warnings report non-security issues when a policy does not conform to policy writing best practices.</p> <p>Suggestions recommend stylistic improvements in the policy that do not impact access.</p>
         issueCode:
-          allOf:
-            - $ref: '#/components/schemas/IssueCode'
-            - description: The issue code provides an identifier of the issue associated with this finding.
+          $ref: '#/components/schemas/IssueCode'
+          description: The issue code provides an identifier of the issue associated with this finding.
         learnMoreLink:
-          allOf:
-            - $ref: '#/components/schemas/LearnMoreLink'
-            - description: A link to additional documentation about the type of finding.
+          $ref: '#/components/schemas/LearnMoreLink'
+          description: A link to additional documentation about the type of finding.
         locations:
-          allOf:
-            - $ref: '#/components/schemas/LocationList'
-            - description: The list of locations in the policy document that are related to the finding. The issue code provides a summary of an issue identified by the finding.
+          $ref: '#/components/schemas/LocationList'
+          description: The list of locations in the policy document that are related to the finding. The issue code provides a summary of an issue identified by the finding.
       description: A finding in a policy. Each finding is an actionable recommendation that can be used to improve the policy.
     ValidatePolicyFindingList:
       type: array
@@ -4049,17 +3802,14 @@ components:
       title: ValidatePolicyRequest
       properties:
         locale:
-          allOf:
-            - $ref: '#/components/schemas/Locale'
-            - description: The locale to use for localizing the findings.
+          $ref: '#/components/schemas/Locale'
+          description: The locale to use for localizing the findings.
         policyDocument:
-          allOf:
-            - $ref: '#/components/schemas/PolicyDocument'
-            - description: The JSON policy document to use as the content for the policy.
+          $ref: '#/components/schemas/PolicyDocument'
+          description: The JSON policy document to use as the content for the policy.
         policyType:
-          allOf:
-            - $ref: '#/components/schemas/PolicyType'
-            - description: '<p>The type of policy to validate. Identity policies grant permissions to IAM principals. Identity policies include managed and inline policies for IAM roles, users, and groups. They also include service-control policies (SCPs) that are attached to an AWS organization, organizational unit (OU), or an account.</p> <p>Resource policies grant permissions on AWS resources. Resource policies include trust policies for IAM roles and bucket policies for S3 buckets. You can provide a generic input such as identity policy or resource policy or a specific input such as managed policy or S3 bucket policy. </p>'
+          $ref: '#/components/schemas/PolicyType'
+          description: '<p>The type of policy to validate. Identity policies grant permissions to IAM principals. Identity policies include managed and inline policies for IAM roles, users, and groups. They also include service-control policies (SCPs) that are attached to an AWS organization, organizational unit (OU), or an account.</p> <p>Resource policies grant permissions on AWS resources. Resource policies include trust policies for IAM roles and bucket policies for S3 buckets. You can provide a generic input such as identity policy or resource policy or a specific input such as managed policy or S3 bucket policy. </p>'
     VpcId:
       type: string
       pattern: '^vpc-([0-9a-f]){8}(([0-9a-f]){9})?$'

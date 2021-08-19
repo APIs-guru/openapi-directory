@@ -380,9 +380,8 @@ components:
       type: object
       properties:
         EndpointArn:
-          allOf:
-            - $ref: '#/components/schemas/EndpointArn'
-            - description: The Amazon Resource Name (ARN) of the endpoint.
+          $ref: '#/components/schemas/EndpointArn'
+          description: The Amazon Resource Name (ARN) of the endpoint.
     InternalServerException: {}
     ValidationException: {}
     AccessDeniedException: {}
@@ -392,13 +391,11 @@ components:
       type: object
       properties:
         Endpoints:
-          allOf:
-            - $ref: '#/components/schemas/Endpoints'
-            - description: Returns an array of endpoints associated with AWS Outposts.
+          $ref: '#/components/schemas/Endpoints'
+          description: Returns an array of endpoints associated with AWS Outposts.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The next endpoint returned in the list.
+          $ref: '#/components/schemas/NextToken'
+          description: The next endpoint returned in the list.
     CidrBlock:
       type: string
     OutpostId:
@@ -427,25 +424,20 @@ components:
       title: CreateEndpointRequest
       properties:
         OutpostId:
-          allOf:
-            - $ref: '#/components/schemas/OutpostId'
-            - description: 'The ID of the AWS Outposts. '
+          $ref: '#/components/schemas/OutpostId'
+          description: 'The ID of the AWS Outposts. '
         SubnetId:
-          allOf:
-            - $ref: '#/components/schemas/SubnetId'
-            - description: The ID of the subnet in the selected VPC. The endpoint subnet must belong to the Outpost that has the Amazon S3 on Outposts provisioned.
+          $ref: '#/components/schemas/SubnetId'
+          description: The ID of the subnet in the selected VPC. The endpoint subnet must belong to the Outpost that has the Amazon S3 on Outposts provisioned.
         SecurityGroupId:
-          allOf:
-            - $ref: '#/components/schemas/SecurityGroupId'
-            - description: The ID of the security group to use with the endpoint.
+          $ref: '#/components/schemas/SecurityGroupId'
+          description: The ID of the security group to use with the endpoint.
         AccessType:
-          allOf:
-            - $ref: '#/components/schemas/EndpointAccessType'
-            - description: 'The type of access for the on-premise network connectivity for the Outpost endpoint. To access the endpoint from an on-premises network, you must specify the access type and provide the customer owned IPv4 pool.'
+          $ref: '#/components/schemas/EndpointAccessType'
+          description: 'The type of access for the on-premise network connectivity for the Outpost endpoint. To access the endpoint from an on-premises network, you must specify the access type and provide the customer owned IPv4 pool.'
         CustomerOwnedIpv4Pool:
-          allOf:
-            - $ref: '#/components/schemas/CustomerOwnedIpv4Pool'
-            - description: The ID of the customer-owned IPv4 pool for the endpoint. IP addresses will be allocated from this pool for the endpoint.
+          $ref: '#/components/schemas/CustomerOwnedIpv4Pool'
+          description: The ID of the customer-owned IPv4 pool for the endpoint. IP addresses will be allocated from this pool for the endpoint.
     EndpointArn:
       type: string
       pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3-outposts:[a-z\-0-9]*:[0-9]{12}:outpost/(op-[a-f0-9]{17}|ec2)/endpoint/[a-zA-Z0-9]{19}$'
@@ -475,49 +467,38 @@ components:
       type: object
       properties:
         EndpointArn:
-          allOf:
-            - $ref: '#/components/schemas/EndpointArn'
-            - description: The Amazon Resource Name (ARN) of the endpoint.
+          $ref: '#/components/schemas/EndpointArn'
+          description: The Amazon Resource Name (ARN) of the endpoint.
         OutpostsId:
-          allOf:
-            - $ref: '#/components/schemas/OutpostId'
-            - description: The ID of the AWS Outposts.
+          $ref: '#/components/schemas/OutpostId'
+          description: The ID of the AWS Outposts.
         CidrBlock:
-          allOf:
-            - $ref: '#/components/schemas/CidrBlock'
-            - description: The VPC CIDR committed by this endpoint.
+          $ref: '#/components/schemas/CidrBlock'
+          description: The VPC CIDR committed by this endpoint.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/EndpointStatus'
-            - description: The status of the endpoint.
+          $ref: '#/components/schemas/EndpointStatus'
+          description: The status of the endpoint.
         CreationTime:
-          allOf:
-            - $ref: '#/components/schemas/CreationTime'
-            - description: The time the endpoint was created.
+          $ref: '#/components/schemas/CreationTime'
+          description: The time the endpoint was created.
         NetworkInterfaces:
-          allOf:
-            - $ref: '#/components/schemas/NetworkInterfaces'
-            - description: The network interface of the endpoint.
+          $ref: '#/components/schemas/NetworkInterfaces'
+          description: The network interface of the endpoint.
         VpcId:
-          allOf:
-            - $ref: '#/components/schemas/VpcId'
-            - description: The ID of the VPC used for the endpoint.
+          $ref: '#/components/schemas/VpcId'
+          description: The ID of the VPC used for the endpoint.
         SubnetId:
-          allOf:
-            - $ref: '#/components/schemas/SubnetId'
-            - description: The ID of the subnet used for the endpoint.
+          $ref: '#/components/schemas/SubnetId'
+          description: The ID of the subnet used for the endpoint.
         SecurityGroupId:
-          allOf:
-            - $ref: '#/components/schemas/SecurityGroupId'
-            - description: The ID of the security group used for the endpoint.
+          $ref: '#/components/schemas/SecurityGroupId'
+          description: The ID of the security group used for the endpoint.
         AccessType:
-          allOf:
-            - $ref: '#/components/schemas/EndpointAccessType'
-            - description: <p/>
+          $ref: '#/components/schemas/EndpointAccessType'
+          description: <p/>
         CustomerOwnedIpv4Pool:
-          allOf:
-            - $ref: '#/components/schemas/CustomerOwnedIpv4Pool'
-            - description: The ID of the customer-owned IPv4 pool used for the endpoint.
+          $ref: '#/components/schemas/CustomerOwnedIpv4Pool'
+          description: The ID of the customer-owned IPv4 pool used for the endpoint.
       description: 'Amazon S3 on Outposts Access Points simplify managing data access at scale for shared datasets in S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC). For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/AccessingS3Outposts.html"> Accessing S3 on Outposts using VPC only access points</a>.'
     Endpoints:
       type: array
@@ -542,9 +523,8 @@ components:
       type: object
       properties:
         NetworkInterfaceId:
-          allOf:
-            - $ref: '#/components/schemas/NetworkInterfaceId'
-            - description: The ID for the network interface.
+          $ref: '#/components/schemas/NetworkInterfaceId'
+          description: The ID for the network interface.
       description: The container for the network interface.
 security:
   - hmac: []

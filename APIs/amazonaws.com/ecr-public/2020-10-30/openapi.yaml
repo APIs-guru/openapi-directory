@@ -1584,13 +1584,11 @@ components:
       type: object
       properties:
         layers:
-          allOf:
-            - $ref: '#/components/schemas/LayerList'
-            - description: A list of image layer objects corresponding to the image layer references in the request.
+          $ref: '#/components/schemas/LayerList'
+          description: A list of image layer objects corresponding to the image layer references in the request.
         failures:
-          allOf:
-            - $ref: '#/components/schemas/LayerFailureList'
-            - description: Any failures associated with the call.
+          $ref: '#/components/schemas/LayerFailureList'
+          description: Any failures associated with the call.
     BatchCheckLayerAvailabilityRequest:
       type: object
       required:
@@ -1599,17 +1597,14 @@ components:
       title: BatchCheckLayerAvailabilityRequest
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryIdOrAlias'
-            - description: 'The AWS account ID associated with the public registry that contains the image layers to check. If you do not specify a registry, the default public registry is assumed.'
+          $ref: '#/components/schemas/RegistryIdOrAlias'
+          description: 'The AWS account ID associated with the public registry that contains the image layers to check. If you do not specify a registry, the default public registry is assumed.'
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name of the repository that is associated with the image layers to check.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name of the repository that is associated with the image layers to check.
         layerDigests:
-          allOf:
-            - $ref: '#/components/schemas/BatchedOperationLayerDigestList'
-            - description: The digests of the image layers to check.
+          $ref: '#/components/schemas/BatchedOperationLayerDigestList'
+          description: The digests of the image layers to check.
     RepositoryNotFoundException: {}
     InvalidParameterException: {}
     ServerException: {}
@@ -1618,13 +1613,11 @@ components:
       type: object
       properties:
         imageIds:
-          allOf:
-            - $ref: '#/components/schemas/ImageIdentifierList'
-            - description: The image IDs of the deleted images.
+          $ref: '#/components/schemas/ImageIdentifierList'
+          description: The image IDs of the deleted images.
         failures:
-          allOf:
-            - $ref: '#/components/schemas/ImageFailureList'
-            - description: Any failures associated with the call.
+          $ref: '#/components/schemas/ImageFailureList'
+          description: Any failures associated with the call.
     BatchDeleteImageRequest:
       type: object
       required:
@@ -1633,36 +1626,29 @@ components:
       title: BatchDeleteImageRequest
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: 'The AWS account ID associated with the registry that contains the image to delete. If you do not specify a registry, the default public registry is assumed.'
+          $ref: '#/components/schemas/RegistryId'
+          description: 'The AWS account ID associated with the registry that contains the image to delete. If you do not specify a registry, the default public registry is assumed.'
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The repository in a public registry that contains the image to delete.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The repository in a public registry that contains the image to delete.
         imageIds:
-          allOf:
-            - $ref: '#/components/schemas/ImageIdentifierList'
-            - description: A list of image ID references that correspond to images to delete. The format of the <code>imageIds</code> reference is <code>imageTag=tag</code> or <code>imageDigest=digest</code>.
+          $ref: '#/components/schemas/ImageIdentifierList'
+          description: A list of image ID references that correspond to images to delete. The format of the <code>imageIds</code> reference is <code>imageTag=tag</code> or <code>imageDigest=digest</code>.
     CompleteLayerUploadResponse:
       type: object
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: The public registry ID associated with the request.
+          $ref: '#/components/schemas/RegistryId'
+          description: The public registry ID associated with the request.
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The repository name associated with the request.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The repository name associated with the request.
         uploadId:
-          allOf:
-            - $ref: '#/components/schemas/UploadId'
-            - description: The upload ID associated with the layer.
+          $ref: '#/components/schemas/UploadId'
+          description: The upload ID associated with the layer.
         layerDigest:
-          allOf:
-            - $ref: '#/components/schemas/LayerDigest'
-            - description: The <code>sha256</code> digest of the image layer.
+          $ref: '#/components/schemas/LayerDigest'
+          description: The <code>sha256</code> digest of the image layer.
     CompleteLayerUploadRequest:
       type: object
       required:
@@ -1672,21 +1658,17 @@ components:
       title: CompleteLayerUploadRequest
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryIdOrAlias'
-            - description: 'The AWS account ID associated with the registry to which to upload layers. If you do not specify a registry, the default public registry is assumed.'
+          $ref: '#/components/schemas/RegistryIdOrAlias'
+          description: 'The AWS account ID associated with the registry to which to upload layers. If you do not specify a registry, the default public registry is assumed.'
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name of the repository in a public registry to associate with the image layer.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name of the repository in a public registry to associate with the image layer.
         uploadId:
-          allOf:
-            - $ref: '#/components/schemas/UploadId'
-            - description: The upload ID from a previous <a>InitiateLayerUpload</a> operation to associate with the image layer.
+          $ref: '#/components/schemas/UploadId'
+          description: The upload ID from a previous <a>InitiateLayerUpload</a> operation to associate with the image layer.
         layerDigests:
-          allOf:
-            - $ref: '#/components/schemas/LayerDigestList'
-            - description: The <code>sha256</code> digest of the image layer.
+          $ref: '#/components/schemas/LayerDigestList'
+          description: The <code>sha256</code> digest of the image layer.
     UploadNotFoundException: {}
     InvalidLayerException: {}
     LayerPartTooSmallException: {}
@@ -1697,9 +1679,8 @@ components:
       type: object
       properties:
         repository:
-          allOf:
-            - $ref: '#/components/schemas/Repository'
-            - description: The repository that was created.
+          $ref: '#/components/schemas/Repository'
+          description: The repository that was created.
         catalogData:
           $ref: '#/components/schemas/RepositoryCatalogData'
     CreateRepositoryRequest:
@@ -1709,17 +1690,14 @@ components:
       title: CreateRepositoryRequest
       properties:
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name to use for the repository. This appears publicly in the Amazon ECR Public Gallery. The repository name may be specified on its own (such as <code>nginx-web-app</code>) or it can be prepended with a namespace to group the repository into a category (such as <code>project-a/nginx-web-app</code>).
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name to use for the repository. This appears publicly in the Amazon ECR Public Gallery. The repository name may be specified on its own (such as <code>nginx-web-app</code>) or it can be prepended with a namespace to group the repository into a category (such as <code>project-a/nginx-web-app</code>).
         catalogData:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryCatalogDataInput'
-            - description: The details about the repository that are publicly visible in the Amazon ECR Public Gallery.
+          $ref: '#/components/schemas/RepositoryCatalogDataInput'
+          description: The details about the repository that are publicly visible in the Amazon ECR Public Gallery.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: 'The metadata that you apply to the repository to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+          $ref: '#/components/schemas/TagList'
+          description: 'The metadata that you apply to the repository to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
     InvalidTagParameterException: {}
     TooManyTagsException: {}
     RepositoryAlreadyExistsException: {}
@@ -1728,9 +1706,8 @@ components:
       type: object
       properties:
         repository:
-          allOf:
-            - $ref: '#/components/schemas/Repository'
-            - description: The repository that was deleted.
+          $ref: '#/components/schemas/Repository'
+          description: The repository that was deleted.
     DeleteRepositoryRequest:
       type: object
       required:
@@ -1738,33 +1715,27 @@ components:
       title: DeleteRepositoryRequest
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: 'The AWS account ID associated with the public registry that contains the repository to delete. If you do not specify a registry, the default public registry is assumed.'
+          $ref: '#/components/schemas/RegistryId'
+          description: 'The AWS account ID associated with the public registry that contains the repository to delete. If you do not specify a registry, the default public registry is assumed.'
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name of the repository to delete.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name of the repository to delete.
         force:
-          allOf:
-            - $ref: '#/components/schemas/ForceFlag'
-            - description: ' If a repository contains images, forces the deletion.'
+          $ref: '#/components/schemas/ForceFlag'
+          description: ' If a repository contains images, forces the deletion.'
     RepositoryNotEmptyException: {}
     DeleteRepositoryPolicyResponse:
       type: object
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: The registry ID associated with the request.
+          $ref: '#/components/schemas/RegistryId'
+          description: The registry ID associated with the request.
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The repository name associated with the request.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The repository name associated with the request.
         policyText:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryPolicyText'
-            - description: The JSON repository policy that was deleted from the repository.
+          $ref: '#/components/schemas/RepositoryPolicyText'
+          description: The JSON repository policy that was deleted from the repository.
     DeleteRepositoryPolicyRequest:
       type: object
       required:
@@ -1772,25 +1743,21 @@ components:
       title: DeleteRepositoryPolicyRequest
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: 'The AWS account ID associated with the public registry that contains the repository policy to delete. If you do not specify a registry, the default public registry is assumed.'
+          $ref: '#/components/schemas/RegistryId'
+          description: 'The AWS account ID associated with the public registry that contains the repository policy to delete. If you do not specify a registry, the default public registry is assumed.'
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name of the repository that is associated with the repository policy to delete.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name of the repository that is associated with the repository policy to delete.
     RepositoryPolicyNotFoundException: {}
     DescribeImageTagsResponse:
       type: object
       properties:
         imageTagDetails:
-          allOf:
-            - $ref: '#/components/schemas/ImageTagDetailList'
-            - description: The image tag details for the images in the requested repository.
+          $ref: '#/components/schemas/ImageTagDetailList'
+          description: The image tag details for the images in the requested repository.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The <code>nextToken</code> value to include in a future <code>DescribeImageTags</code> request. When the results of a <code>DescribeImageTags</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'The <code>nextToken</code> value to include in a future <code>DescribeImageTags</code> request. When the results of a <code>DescribeImageTags</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
     DescribeImageTagsRequest:
       type: object
       required:
@@ -1798,32 +1765,26 @@ components:
       title: DescribeImageTagsRequest
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: 'The AWS account ID associated with the public registry that contains the repository in which to describe images. If you do not specify a registry, the default public registry is assumed.'
+          $ref: '#/components/schemas/RegistryId'
+          description: 'The AWS account ID associated with the public registry that contains the repository in which to describe images. If you do not specify a registry, the default public registry is assumed.'
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name of the repository that contains the image tag details to describe.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name of the repository that contains the image tag details to describe.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The <code>nextToken</code> value returned from a previous paginated <code>DescribeImageTags</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return. This option cannot be used when you specify images with <code>imageIds</code>.
+          $ref: '#/components/schemas/NextToken'
+          description: The <code>nextToken</code> value returned from a previous paginated <code>DescribeImageTags</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return. This option cannot be used when you specify images with <code>imageIds</code>.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of repository results returned by <code>DescribeImageTags</code> in paginated output. When this parameter is used, <code>DescribeImageTags</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeImageTags</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>DescribeImageTags</code> returns up to 100 results and a <code>nextToken</code> value, if applicable. This option cannot be used when you specify images with <code>imageIds</code>.'
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of repository results returned by <code>DescribeImageTags</code> in paginated output. When this parameter is used, <code>DescribeImageTags</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeImageTags</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>DescribeImageTags</code> returns up to 100 results and a <code>nextToken</code> value, if applicable. This option cannot be used when you specify images with <code>imageIds</code>.'
     DescribeImagesResponse:
       type: object
       properties:
         imageDetails:
-          allOf:
-            - $ref: '#/components/schemas/ImageDetailList'
-            - description: A list of <a>ImageDetail</a> objects that contain data about the image.
+          $ref: '#/components/schemas/ImageDetailList'
+          description: A list of <a>ImageDetail</a> objects that contain data about the image.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The <code>nextToken</code> value to include in a future <code>DescribeImages</code> request. When the results of a <code>DescribeImages</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'The <code>nextToken</code> value to include in a future <code>DescribeImages</code> request. When the results of a <code>DescribeImages</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
     DescribeImagesRequest:
       type: object
       required:
@@ -1831,25 +1792,20 @@ components:
       title: DescribeImagesRequest
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: 'The AWS account ID associated with the public registry that contains the repository in which to describe images. If you do not specify a registry, the default public registry is assumed.'
+          $ref: '#/components/schemas/RegistryId'
+          description: 'The AWS account ID associated with the public registry that contains the repository in which to describe images. If you do not specify a registry, the default public registry is assumed.'
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The repository that contains the images to describe.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The repository that contains the images to describe.
         imageIds:
-          allOf:
-            - $ref: '#/components/schemas/ImageIdentifierList'
-            - description: The list of image IDs for the requested repository.
+          $ref: '#/components/schemas/ImageIdentifierList'
+          description: The list of image IDs for the requested repository.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The <code>nextToken</code> value returned from a previous paginated <code>DescribeImages</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return. This option cannot be used when you specify images with <code>imageIds</code>.
+          $ref: '#/components/schemas/NextToken'
+          description: The <code>nextToken</code> value returned from a previous paginated <code>DescribeImages</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return. This option cannot be used when you specify images with <code>imageIds</code>.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of repository results returned by <code>DescribeImages</code> in paginated output. When this parameter is used, <code>DescribeImages</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeImages</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>DescribeImages</code> returns up to 100 results and a <code>nextToken</code> value, if applicable. This option cannot be used when you specify images with <code>imageIds</code>.'
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of repository results returned by <code>DescribeImages</code> in paginated output. When this parameter is used, <code>DescribeImages</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeImages</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>DescribeImages</code> returns up to 100 results and a <code>nextToken</code> value, if applicable. This option cannot be used when you specify images with <code>imageIds</code>.'
     ImageNotFoundException: {}
     DescribeRegistriesResponse:
       type: object
@@ -1857,63 +1813,52 @@ components:
         - registries
       properties:
         registries:
-          allOf:
-            - $ref: '#/components/schemas/RegistryList'
-            - description: An object containing the details for a public registry.
+          $ref: '#/components/schemas/RegistryList'
+          description: An object containing the details for a public registry.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The <code>nextToken</code> value to include in a future <code>DescribeRepositories</code> request. When the results of a <code>DescribeRepositories</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'The <code>nextToken</code> value to include in a future <code>DescribeRepositories</code> request. When the results of a <code>DescribeRepositories</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
     DescribeRegistriesRequest:
       type: object
       title: DescribeRegistriesRequest
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeRegistries</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+          $ref: '#/components/schemas/NextToken'
+          description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeRegistries</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of repository results returned by <code>DescribeRegistries</code> in paginated output. When this parameter is used, <code>DescribeRegistries</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeRegistries</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>DescribeRegistries</code> returns up to 100 results and a <code>nextToken</code> value, if applicable.'
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of repository results returned by <code>DescribeRegistries</code> in paginated output. When this parameter is used, <code>DescribeRegistries</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeRegistries</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>DescribeRegistries</code> returns up to 100 results and a <code>nextToken</code> value, if applicable.'
     DescribeRepositoriesResponse:
       type: object
       properties:
         repositories:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryList'
-            - description: A list of repository objects corresponding to valid repositories.
+          $ref: '#/components/schemas/RepositoryList'
+          description: A list of repository objects corresponding to valid repositories.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'The <code>nextToken</code> value to include in a future <code>DescribeRepositories</code> request. When the results of a <code>DescribeRepositories</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'The <code>nextToken</code> value to include in a future <code>DescribeRepositories</code> request. When the results of a <code>DescribeRepositories</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
     DescribeRepositoriesRequest:
       type: object
       title: DescribeRepositoriesRequest
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: 'The AWS account ID associated with the registry that contains the repositories to be described. If you do not specify a registry, the default public registry is assumed.'
+          $ref: '#/components/schemas/RegistryId'
+          description: 'The AWS account ID associated with the registry that contains the repositories to be described. If you do not specify a registry, the default public registry is assumed.'
         repositoryNames:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryNameList'
-            - description: 'A list of repositories to describe. If this parameter is omitted, then all repositories in a registry are described.'
+          $ref: '#/components/schemas/RepositoryNameList'
+          description: 'A list of repositories to describe. If this parameter is omitted, then all repositories in a registry are described.'
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeRepositories</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return. This option cannot be used when you specify repositories with <code>repositoryNames</code>.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+          $ref: '#/components/schemas/NextToken'
+          description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeRepositories</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return. This option cannot be used when you specify repositories with <code>repositoryNames</code>.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of repository results returned by <code>DescribeRepositories</code> in paginated output. When this parameter is used, <code>DescribeRepositories</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeRepositories</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>DescribeRepositories</code> returns up to 100 results and a <code>nextToken</code> value, if applicable. This option cannot be used when you specify repositories with <code>repositoryNames</code>.'
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of repository results returned by <code>DescribeRepositories</code> in paginated output. When this parameter is used, <code>DescribeRepositories</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeRepositories</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>DescribeRepositories</code> returns up to 100 results and a <code>nextToken</code> value, if applicable. This option cannot be used when you specify repositories with <code>repositoryNames</code>.'
     GetAuthorizationTokenResponse:
       type: object
       properties:
         authorizationData:
-          allOf:
-            - $ref: '#/components/schemas/AuthorizationData'
-            - description: An authorization token data object that corresponds to a public registry.
+          $ref: '#/components/schemas/AuthorizationData'
+          description: An authorization token data object that corresponds to a public registry.
     GetAuthorizationTokenRequest:
       type: object
       title: GetAuthorizationTokenRequest
@@ -1924,9 +1869,8 @@ components:
         - registryCatalogData
       properties:
         registryCatalogData:
-          allOf:
-            - $ref: '#/components/schemas/RegistryCatalogData'
-            - description: The catalog metadata for the public registry.
+          $ref: '#/components/schemas/RegistryCatalogData'
+          description: The catalog metadata for the public registry.
     GetRegistryCatalogDataRequest:
       type: object
       title: GetRegistryCatalogDataRequest
@@ -1935,9 +1879,8 @@ components:
       type: object
       properties:
         catalogData:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryCatalogData'
-            - description: The catalog metadata for the repository.
+          $ref: '#/components/schemas/RepositoryCatalogData'
+          description: The catalog metadata for the repository.
     GetRepositoryCatalogDataRequest:
       type: object
       required:
@@ -1945,28 +1888,23 @@ components:
       title: GetRepositoryCatalogDataRequest
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: 'The AWS account ID associated with the registry that contains the repositories to be described. If you do not specify a registry, the default public registry is assumed.'
+          $ref: '#/components/schemas/RegistryId'
+          description: 'The AWS account ID associated with the registry that contains the repositories to be described. If you do not specify a registry, the default public registry is assumed.'
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name of the repository to retrieve the catalog metadata for.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name of the repository to retrieve the catalog metadata for.
     GetRepositoryPolicyResponse:
       type: object
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: The registry ID associated with the request.
+          $ref: '#/components/schemas/RegistryId'
+          description: The registry ID associated with the request.
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The repository name associated with the request.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The repository name associated with the request.
         policyText:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryPolicyText'
-            - description: The repository policy text associated with the repository. The policy text will be in JSON format.
+          $ref: '#/components/schemas/RepositoryPolicyText'
+          description: The repository policy text associated with the repository. The policy text will be in JSON format.
     GetRepositoryPolicyRequest:
       type: object
       required:
@@ -1974,24 +1912,20 @@ components:
       title: GetRepositoryPolicyRequest
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: 'The AWS account ID associated with the public registry that contains the repository. If you do not specify a registry, the default public registry is assumed.'
+          $ref: '#/components/schemas/RegistryId'
+          description: 'The AWS account ID associated with the public registry that contains the repository. If you do not specify a registry, the default public registry is assumed.'
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name of the repository with the policy to retrieve.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name of the repository with the policy to retrieve.
     InitiateLayerUploadResponse:
       type: object
       properties:
         uploadId:
-          allOf:
-            - $ref: '#/components/schemas/UploadId'
-            - description: The upload ID for the layer upload. This parameter is passed to further <a>UploadLayerPart</a> and <a>CompleteLayerUpload</a> operations.
+          $ref: '#/components/schemas/UploadId'
+          description: The upload ID for the layer upload. This parameter is passed to further <a>UploadLayerPart</a> and <a>CompleteLayerUpload</a> operations.
         partSize:
-          allOf:
-            - $ref: '#/components/schemas/PartSize'
-            - description: 'The size, in bytes, that Amazon ECR expects future layer part uploads to be.'
+          $ref: '#/components/schemas/PartSize'
+          description: 'The size, in bytes, that Amazon ECR expects future layer part uploads to be.'
     InitiateLayerUploadRequest:
       type: object
       required:
@@ -1999,20 +1933,17 @@ components:
       title: InitiateLayerUploadRequest
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryIdOrAlias'
-            - description: 'The AWS account ID associated with the registry to which you intend to upload layers. If you do not specify a registry, the default public registry is assumed.'
+          $ref: '#/components/schemas/RegistryIdOrAlias'
+          description: 'The AWS account ID associated with the registry to which you intend to upload layers. If you do not specify a registry, the default public registry is assumed.'
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name of the repository to which you intend to upload layers.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name of the repository to which you intend to upload layers.
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: The tags for the resource.
+          $ref: '#/components/schemas/TagList'
+          description: The tags for the resource.
     ListTagsForResourceRequest:
       type: object
       required:
@@ -2020,16 +1951,14 @@ components:
       title: ListTagsForResourceRequest
       properties:
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resource is an Amazon ECR Public repository.'
+          $ref: '#/components/schemas/Arn'
+          description: 'The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resource is an Amazon ECR Public repository.'
     PutImageResponse:
       type: object
       properties:
         image:
-          allOf:
-            - $ref: '#/components/schemas/Image'
-            - description: Details of the image uploaded.
+          $ref: '#/components/schemas/Image'
+          description: Details of the image uploaded.
     PutImageRequest:
       type: object
       required:
@@ -2038,29 +1967,23 @@ components:
       title: PutImageRequest
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryIdOrAlias'
-            - description: 'The AWS account ID associated with the public registry that contains the repository in which to put the image. If you do not specify a registry, the default public registry is assumed.'
+          $ref: '#/components/schemas/RegistryIdOrAlias'
+          description: 'The AWS account ID associated with the public registry that contains the repository in which to put the image. If you do not specify a registry, the default public registry is assumed.'
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name of the repository in which to put the image.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name of the repository in which to put the image.
         imageManifest:
-          allOf:
-            - $ref: '#/components/schemas/ImageManifest'
-            - description: The image manifest corresponding to the image to be uploaded.
+          $ref: '#/components/schemas/ImageManifest'
+          description: The image manifest corresponding to the image to be uploaded.
         imageManifestMediaType:
-          allOf:
-            - $ref: '#/components/schemas/MediaType'
-            - description: 'The media type of the image manifest. If you push an image manifest that does not contain the <code>mediaType</code> field, you must specify the <code>imageManifestMediaType</code> in the request.'
+          $ref: '#/components/schemas/MediaType'
+          description: 'The media type of the image manifest. If you push an image manifest that does not contain the <code>mediaType</code> field, you must specify the <code>imageManifestMediaType</code> in the request.'
         imageTag:
-          allOf:
-            - $ref: '#/components/schemas/ImageTag'
-            - description: The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or Open Container Initiative (OCI) formats.
+          $ref: '#/components/schemas/ImageTag'
+          description: The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or Open Container Initiative (OCI) formats.
         imageDigest:
-          allOf:
-            - $ref: '#/components/schemas/ImageDigest'
-            - description: The image digest of the image manifest corresponding to the image.
+          $ref: '#/components/schemas/ImageDigest'
+          description: The image digest of the image manifest corresponding to the image.
     ImageAlreadyExistsException: {}
     LayersNotFoundException: {}
     ReferencedImagesNotFoundException: {}
@@ -2072,24 +1995,21 @@ components:
         - registryCatalogData
       properties:
         registryCatalogData:
-          allOf:
-            - $ref: '#/components/schemas/RegistryCatalogData'
-            - description: The catalog data for the public registry.
+          $ref: '#/components/schemas/RegistryCatalogData'
+          description: The catalog data for the public registry.
     PutRegistryCatalogDataRequest:
       type: object
       title: PutRegistryCatalogDataRequest
       properties:
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/RegistryDisplayName'
-            - description: <p>The display name for a public registry. The display name is shown as the repository author in the Amazon ECR Public Gallery.</p> <note> <p>The registry display name is only publicly visible in the Amazon ECR Public Gallery for verified accounts.</p> </note>
+          $ref: '#/components/schemas/RegistryDisplayName'
+          description: <p>The display name for a public registry. The display name is shown as the repository author in the Amazon ECR Public Gallery.</p> <note> <p>The registry display name is only publicly visible in the Amazon ECR Public Gallery for verified accounts.</p> </note>
     PutRepositoryCatalogDataResponse:
       type: object
       properties:
         catalogData:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryCatalogData'
-            - description: The catalog data for the repository.
+          $ref: '#/components/schemas/RepositoryCatalogData'
+          description: The catalog data for the repository.
     PutRepositoryCatalogDataRequest:
       type: object
       required:
@@ -2098,32 +2018,26 @@ components:
       title: PutRepositoryCatalogDataRequest
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: 'The AWS account ID associated with the public registry the repository is in. If you do not specify a registry, the default public registry is assumed.'
+          $ref: '#/components/schemas/RegistryId'
+          description: 'The AWS account ID associated with the public registry the repository is in. If you do not specify a registry, the default public registry is assumed.'
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name of the repository to create or update the catalog data for.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name of the repository to create or update the catalog data for.
         catalogData:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryCatalogDataInput'
-            - description: An object containing the catalog data for a repository. This data is publicly visible in the Amazon ECR Public Gallery.
+          $ref: '#/components/schemas/RepositoryCatalogDataInput'
+          description: An object containing the catalog data for a repository. This data is publicly visible in the Amazon ECR Public Gallery.
     SetRepositoryPolicyResponse:
       type: object
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: The registry ID associated with the request.
+          $ref: '#/components/schemas/RegistryId'
+          description: The registry ID associated with the request.
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The repository name associated with the request.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The repository name associated with the request.
         policyText:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryPolicyText'
-            - description: The JSON repository policy text applied to the repository.
+          $ref: '#/components/schemas/RepositoryPolicyText'
+          description: The JSON repository policy text applied to the repository.
     SetRepositoryPolicyRequest:
       type: object
       required:
@@ -2132,21 +2046,17 @@ components:
       title: SetRepositoryPolicyRequest
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default public registry is assumed.'
+          $ref: '#/components/schemas/RegistryId'
+          description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default public registry is assumed.'
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name of the repository to receive the policy.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name of the repository to receive the policy.
         policyText:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryPolicyText'
-            - description: 'The JSON repository policy text to apply to the repository. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html">Amazon ECR Repository Policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.'
+          $ref: '#/components/schemas/RepositoryPolicyText'
+          description: 'The JSON repository policy text to apply to the repository. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html">Amazon ECR Repository Policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.'
         force:
-          allOf:
-            - $ref: '#/components/schemas/ForceFlag'
-            - description: 'If the policy you are attempting to set on a repository policy would prevent you from setting another policy in the future, you must force the <a>SetRepositoryPolicy</a> operation. This is intended to prevent accidental repository lock outs.'
+          $ref: '#/components/schemas/ForceFlag'
+          description: 'If the policy you are attempting to set on a repository policy would prevent you from setting another policy in the future, you must force the <a>SetRepositoryPolicy</a> operation. This is intended to prevent accidental repository lock outs.'
     TagResourceResponse:
       type: object
       properties: {}
@@ -2158,13 +2068,11 @@ components:
       title: TagResourceRequest
       properties:
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'The Amazon Resource Name (ARN) of the resource to which to add tags. Currently, the supported resource is an Amazon ECR Public repository.'
+          $ref: '#/components/schemas/Arn'
+          description: 'The Amazon Resource Name (ARN) of the resource to which to add tags. Currently, the supported resource is an Amazon ECR Public repository.'
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: 'The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+          $ref: '#/components/schemas/TagList'
+          description: 'The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
     UntagResourceResponse:
       type: object
       properties: {}
@@ -2176,32 +2084,26 @@ components:
       title: UntagResourceRequest
       properties:
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported resource is an Amazon ECR Public repository.'
+          $ref: '#/components/schemas/Arn'
+          description: 'The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported resource is an Amazon ECR Public repository.'
         tagKeys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeyList'
-            - description: The keys of the tags to be removed.
+          $ref: '#/components/schemas/TagKeyList'
+          description: The keys of the tags to be removed.
     UploadLayerPartResponse:
       type: object
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: The registry ID associated with the request.
+          $ref: '#/components/schemas/RegistryId'
+          description: The registry ID associated with the request.
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The repository name associated with the request.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The repository name associated with the request.
         uploadId:
-          allOf:
-            - $ref: '#/components/schemas/UploadId'
-            - description: The upload ID associated with the request.
+          $ref: '#/components/schemas/UploadId'
+          description: The upload ID associated with the request.
         lastByteReceived:
-          allOf:
-            - $ref: '#/components/schemas/PartSize'
-            - description: The integer value of the last byte received in the request.
+          $ref: '#/components/schemas/PartSize'
+          description: The integer value of the last byte received in the request.
     UploadLayerPartRequest:
       type: object
       required:
@@ -2213,29 +2115,23 @@ components:
       title: UploadLayerPartRequest
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryIdOrAlias'
-            - description: 'The AWS account ID associated with the registry to which you are uploading layer parts. If you do not specify a registry, the default public registry is assumed.'
+          $ref: '#/components/schemas/RegistryIdOrAlias'
+          description: 'The AWS account ID associated with the registry to which you are uploading layer parts. If you do not specify a registry, the default public registry is assumed.'
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name of the repository to which you are uploading layer parts.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name of the repository to which you are uploading layer parts.
         uploadId:
-          allOf:
-            - $ref: '#/components/schemas/UploadId'
-            - description: The upload ID from a previous <a>InitiateLayerUpload</a> operation to associate with the layer part upload.
+          $ref: '#/components/schemas/UploadId'
+          description: The upload ID from a previous <a>InitiateLayerUpload</a> operation to associate with the layer part upload.
         partFirstByte:
-          allOf:
-            - $ref: '#/components/schemas/PartSize'
-            - description: The position of the first byte of the layer part witin the overall image layer.
+          $ref: '#/components/schemas/PartSize'
+          description: The position of the first byte of the layer part witin the overall image layer.
         partLastByte:
-          allOf:
-            - $ref: '#/components/schemas/PartSize'
-            - description: The position of the last byte of the layer part within the overall image layer.
+          $ref: '#/components/schemas/PartSize'
+          description: The position of the last byte of the layer part within the overall image layer.
         layerPartBlob:
-          allOf:
-            - $ref: '#/components/schemas/LayerPartBlob'
-            - description: The base64-encoded layer part payload.
+          $ref: '#/components/schemas/LayerPartBlob'
+          description: The base64-encoded layer part payload.
     InvalidLayerPartException: {}
     AboutText:
       type: string
@@ -2261,13 +2157,11 @@ components:
       type: object
       properties:
         authorizationToken:
-          allOf:
-            - $ref: '#/components/schemas/Base64'
-            - description: 'A base64-encoded string that contains authorization data for a public Amazon ECR registry. When the string is decoded, it is presented in the format <code>user:password</code> for public registry authentication using <code>docker login</code>.'
+          $ref: '#/components/schemas/Base64'
+          description: 'A base64-encoded string that contains authorization data for a public Amazon ECR registry. When the string is decoded, it is presented in the format <code>user:password</code> for public registry authentication using <code>docker login</code>.'
         expiresAt:
-          allOf:
-            - $ref: '#/components/schemas/ExpirationTimestamp'
-            - description: The Unix time in seconds and milliseconds when the authorization token expires. Authorization tokens are valid for 12 hours.
+          $ref: '#/components/schemas/ExpirationTimestamp'
+          description: The Unix time in seconds and milliseconds when the authorization token expires. Authorization tokens are valid for 12 hours.
       description: An authorization token data object that corresponds to a public registry.
     RegistryIdOrAlias:
       type: string
@@ -2325,29 +2219,23 @@ components:
       type: object
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryDescription'
-            - description: A short description of the contents of the repository. This text appears in both the image details and also when searching for repositories on the Amazon ECR Public Gallery.
+          $ref: '#/components/schemas/RepositoryDescription'
+          description: A short description of the contents of the repository. This text appears in both the image details and also when searching for repositories on the Amazon ECR Public Gallery.
         architectures:
-          allOf:
-            - $ref: '#/components/schemas/ArchitectureList'
-            - description: '<p>The system architecture that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported architectures will appear as badges on the repository and are used as search filters.</p> <ul> <li> <p> <code>Linux</code> </p> </li> <li> <p> <code>Windows</code> </p> </li> </ul> <note> <p>If an unsupported tag is added to your repository catalog data, it will be associated with the repository and can be retrieved using the API but will not be discoverable in the Amazon ECR Public Gallery.</p> </note>'
+          $ref: '#/components/schemas/ArchitectureList'
+          description: '<p>The system architecture that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported architectures will appear as badges on the repository and are used as search filters.</p> <ul> <li> <p> <code>Linux</code> </p> </li> <li> <p> <code>Windows</code> </p> </li> </ul> <note> <p>If an unsupported tag is added to your repository catalog data, it will be associated with the repository and can be retrieved using the API but will not be discoverable in the Amazon ECR Public Gallery.</p> </note>'
         operatingSystems:
-          allOf:
-            - $ref: '#/components/schemas/OperatingSystemList'
-            - description: '<p>The operating systems that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported operating systems will appear as badges on the repository and are used as search filters.</p> <ul> <li> <p> <code>ARM</code> </p> </li> <li> <p> <code>ARM 64</code> </p> </li> <li> <p> <code>x86</code> </p> </li> <li> <p> <code>x86-64</code> </p> </li> </ul> <note> <p>If an unsupported tag is added to your repository catalog data, it will be associated with the repository and can be retrieved using the API but will not be discoverable in the Amazon ECR Public Gallery.</p> </note>'
+          $ref: '#/components/schemas/OperatingSystemList'
+          description: '<p>The operating systems that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported operating systems will appear as badges on the repository and are used as search filters.</p> <ul> <li> <p> <code>ARM</code> </p> </li> <li> <p> <code>ARM 64</code> </p> </li> <li> <p> <code>x86</code> </p> </li> <li> <p> <code>x86-64</code> </p> </li> </ul> <note> <p>If an unsupported tag is added to your repository catalog data, it will be associated with the repository and can be retrieved using the API but will not be discoverable in the Amazon ECR Public Gallery.</p> </note>'
         logoImageBlob:
-          allOf:
-            - $ref: '#/components/schemas/LogoImageBlob'
-            - description: <p>The base64-encoded repository logo payload.</p> <note> <p>The repository logo is only publicly visible in the Amazon ECR Public Gallery for verified accounts.</p> </note>
+          $ref: '#/components/schemas/LogoImageBlob'
+          description: <p>The base64-encoded repository logo payload.</p> <note> <p>The repository logo is only publicly visible in the Amazon ECR Public Gallery for verified accounts.</p> </note>
         aboutText:
-          allOf:
-            - $ref: '#/components/schemas/AboutText'
-            - description: A detailed description of the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The text must be in markdown format.
+          $ref: '#/components/schemas/AboutText'
+          description: A detailed description of the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The text must be in markdown format.
         usageText:
-          allOf:
-            - $ref: '#/components/schemas/UsageText'
-            - description: 'Detailed information on how to use the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The usage text provides context, support information, and additional usage details for users of the repository. The text must be in markdown format.'
+          $ref: '#/components/schemas/UsageText'
+          description: 'Detailed information on how to use the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The usage text provides context, support information, and additional usage details for users of the repository. The text must be in markdown format.'
       description: An object containing the catalog data for a repository. This data is publicly visible in the Amazon ECR Public Gallery.
     TagList:
       type: array
@@ -2359,57 +2247,45 @@ components:
       type: object
       properties:
         repositoryArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.'
+          $ref: '#/components/schemas/Arn'
+          description: 'The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.'
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: The AWS account ID associated with the public registry that contains the repository.
+          $ref: '#/components/schemas/RegistryId'
+          description: The AWS account ID associated with the public registry that contains the repository.
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name of the repository.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name of the repository.
         repositoryUri:
-          allOf:
-            - $ref: '#/components/schemas/Url'
-            - description: The URI for the repository. You can use this URI for container image <code>push</code> and <code>pull</code> operations.
+          $ref: '#/components/schemas/Url'
+          description: The URI for the repository. You can use this URI for container image <code>push</code> and <code>pull</code> operations.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/CreationTimestamp'
-            - description: 'The date and time, in JavaScript date format, when the repository was created.'
+          $ref: '#/components/schemas/CreationTimestamp'
+          description: 'The date and time, in JavaScript date format, when the repository was created.'
       description: An object representing a repository.
     RepositoryCatalogData:
       type: object
       properties:
         description:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryDescription'
-            - description: The short description of the repository.
+          $ref: '#/components/schemas/RepositoryDescription'
+          description: The short description of the repository.
         architectures:
-          allOf:
-            - $ref: '#/components/schemas/ArchitectureList'
-            - description: '<p>The architecture tags that are associated with the repository.</p> <note> <p>Only supported operating system tags appear publicly in the Amazon ECR Public Gallery. For more information, see <a>RepositoryCatalogDataInput</a>.</p> </note>'
+          $ref: '#/components/schemas/ArchitectureList'
+          description: '<p>The architecture tags that are associated with the repository.</p> <note> <p>Only supported operating system tags appear publicly in the Amazon ECR Public Gallery. For more information, see <a>RepositoryCatalogDataInput</a>.</p> </note>'
         operatingSystems:
-          allOf:
-            - $ref: '#/components/schemas/OperatingSystemList'
-            - description: '<p>The operating system tags that are associated with the repository.</p> <note> <p>Only supported operating system tags appear publicly in the Amazon ECR Public Gallery. For more information, see <a>RepositoryCatalogDataInput</a>.</p> </note>'
+          $ref: '#/components/schemas/OperatingSystemList'
+          description: '<p>The operating system tags that are associated with the repository.</p> <note> <p>Only supported operating system tags appear publicly in the Amazon ECR Public Gallery. For more information, see <a>RepositoryCatalogDataInput</a>.</p> </note>'
         logoUrl:
-          allOf:
-            - $ref: '#/components/schemas/ResourceUrl'
-            - description: The URL containing the logo associated with the repository.
+          $ref: '#/components/schemas/ResourceUrl'
+          description: The URL containing the logo associated with the repository.
         aboutText:
-          allOf:
-            - $ref: '#/components/schemas/AboutText'
-            - description: The longform description of the contents of the repository. This text appears in the repository details on the Amazon ECR Public Gallery.
+          $ref: '#/components/schemas/AboutText'
+          description: The longform description of the contents of the repository. This text appears in the repository details on the Amazon ECR Public Gallery.
         usageText:
-          allOf:
-            - $ref: '#/components/schemas/UsageText'
-            - description: The longform usage details of the contents of the repository. The usage text provides context for users of the repository.
+          $ref: '#/components/schemas/UsageText'
+          description: The longform usage details of the contents of the repository. The usage text provides context for users of the repository.
         marketplaceCertified:
-          allOf:
-            - $ref: '#/components/schemas/MarketplaceCertified'
-            - description: Whether or not the repository is certified by AWS Marketplace.
+          $ref: '#/components/schemas/MarketplaceCertified'
+          description: Whether or not the repository is certified by AWS Marketplace.
       description: The catalog data for a repository. This data is publicly visible in the Amazon ECR Public Gallery.
     CreationTimestamp:
       type: string
@@ -2454,21 +2330,18 @@ components:
       type: object
       properties:
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/RegistryDisplayName'
-            - description: <p>The display name for a public registry. This appears on the Amazon ECR Public Gallery.</p> <important> <p>Only accounts that have the verified account badge can have a registry display name.</p> </important>
+          $ref: '#/components/schemas/RegistryDisplayName'
+          description: <p>The display name for a public registry. This appears on the Amazon ECR Public Gallery.</p> <important> <p>Only accounts that have the verified account badge can have a registry display name.</p> </important>
       description: The metadata for a public registry.
     ImageIdentifier:
       type: object
       properties:
         imageDigest:
-          allOf:
-            - $ref: '#/components/schemas/ImageDigest'
-            - description: The <code>sha256</code> digest of the image manifest.
+          $ref: '#/components/schemas/ImageDigest'
+          description: The <code>sha256</code> digest of the image manifest.
         imageTag:
-          allOf:
-            - $ref: '#/components/schemas/ImageTag'
-            - description: The tag used for the image.
+          $ref: '#/components/schemas/ImageTag'
+          description: The tag used for the image.
       description: An object with identifying information for an Amazon ECR image.
     ImageManifest:
       type: string
@@ -2480,25 +2353,20 @@ components:
       type: object
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryIdOrAlias'
-            - description: The AWS account ID associated with the registry containing the image.
+          $ref: '#/components/schemas/RegistryIdOrAlias'
+          description: The AWS account ID associated with the registry containing the image.
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name of the repository associated with the image.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name of the repository associated with the image.
         imageId:
-          allOf:
-            - $ref: '#/components/schemas/ImageIdentifier'
-            - description: An object containing the image tag and image digest associated with an image.
+          $ref: '#/components/schemas/ImageIdentifier'
+          description: An object containing the image tag and image digest associated with an image.
         imageManifest:
-          allOf:
-            - $ref: '#/components/schemas/ImageManifest'
-            - description: The image manifest associated with the image.
+          $ref: '#/components/schemas/ImageManifest'
+          description: The image manifest associated with the image.
         imageManifestMediaType:
-          allOf:
-            - $ref: '#/components/schemas/MediaType'
-            - description: The manifest media type of the image.
+          $ref: '#/components/schemas/MediaType'
+          description: The manifest media type of the image.
       description: An object representing an Amazon ECR image.
     ImageDigest:
       type: string
@@ -2515,37 +2383,29 @@ components:
       type: object
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: The AWS account ID associated with the public registry to which this image belongs.
+          $ref: '#/components/schemas/RegistryId'
+          description: The AWS account ID associated with the public registry to which this image belongs.
         repositoryName:
-          allOf:
-            - $ref: '#/components/schemas/RepositoryName'
-            - description: The name of the repository to which this image belongs.
+          $ref: '#/components/schemas/RepositoryName'
+          description: The name of the repository to which this image belongs.
         imageDigest:
-          allOf:
-            - $ref: '#/components/schemas/ImageDigest'
-            - description: The <code>sha256</code> digest of the image manifest.
+          $ref: '#/components/schemas/ImageDigest'
+          description: The <code>sha256</code> digest of the image manifest.
         imageTags:
-          allOf:
-            - $ref: '#/components/schemas/ImageTagList'
-            - description: The list of tags associated with this image.
+          $ref: '#/components/schemas/ImageTagList'
+          description: The list of tags associated with this image.
         imageSizeInBytes:
-          allOf:
-            - $ref: '#/components/schemas/ImageSizeInBytes'
-            - description: '<p>The size, in bytes, of the image in the repository.</p> <p>If the image is a manifest list, this will be the max size of all manifests in the list.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>'
+          $ref: '#/components/schemas/ImageSizeInBytes'
+          description: '<p>The size, in bytes, of the image in the repository.</p> <p>If the image is a manifest list, this will be the max size of all manifests in the list.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>'
         imagePushedAt:
-          allOf:
-            - $ref: '#/components/schemas/PushTimestamp'
-            - description: 'The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository. '
+          $ref: '#/components/schemas/PushTimestamp'
+          description: 'The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository. '
         imageManifestMediaType:
-          allOf:
-            - $ref: '#/components/schemas/MediaType'
-            - description: The media type of the image manifest.
+          $ref: '#/components/schemas/MediaType'
+          description: The media type of the image manifest.
         artifactMediaType:
-          allOf:
-            - $ref: '#/components/schemas/MediaType'
-            - description: The artifact media type of the image.
+          $ref: '#/components/schemas/MediaType'
+          description: The artifact media type of the image.
       description: An object that describes an image returned by a <a>DescribeImages</a> operation.
     ImageFailureCode:
       type: string
@@ -2563,17 +2423,14 @@ components:
       type: object
       properties:
         imageId:
-          allOf:
-            - $ref: '#/components/schemas/ImageIdentifier'
-            - description: The image ID associated with the failure.
+          $ref: '#/components/schemas/ImageIdentifier'
+          description: The image ID associated with the failure.
         failureCode:
-          allOf:
-            - $ref: '#/components/schemas/ImageFailureCode'
-            - description: The code associated with the failure.
+          $ref: '#/components/schemas/ImageFailureCode'
+          description: The code associated with the failure.
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/ImageFailureReason'
-            - description: The reason for the failure.
+          $ref: '#/components/schemas/ImageFailureReason'
+          description: The reason for the failure.
       description: An object representing an Amazon ECR image failure.
     ImageTag:
       type: string
@@ -2583,41 +2440,33 @@ components:
       type: object
       properties:
         imageDigest:
-          allOf:
-            - $ref: '#/components/schemas/ImageDigest'
-            - description: The <code>sha256</code> digest of the image manifest.
+          $ref: '#/components/schemas/ImageDigest'
+          description: The <code>sha256</code> digest of the image manifest.
         imageSizeInBytes:
-          allOf:
-            - $ref: '#/components/schemas/ImageSizeInBytes'
-            - description: '<p>The size, in bytes, of the image in the repository.</p> <p>If the image is a manifest list, this will be the max size of all manifests in the list.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>'
+          $ref: '#/components/schemas/ImageSizeInBytes'
+          description: '<p>The size, in bytes, of the image in the repository.</p> <p>If the image is a manifest list, this will be the max size of all manifests in the list.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>'
         imagePushedAt:
-          allOf:
-            - $ref: '#/components/schemas/PushTimestamp'
-            - description: 'The date and time, expressed in standard JavaScript date format, at which the current image tag was pushed to the repository.'
+          $ref: '#/components/schemas/PushTimestamp'
+          description: 'The date and time, expressed in standard JavaScript date format, at which the current image tag was pushed to the repository.'
         imageManifestMediaType:
-          allOf:
-            - $ref: '#/components/schemas/MediaType'
-            - description: The media type of the image manifest.
+          $ref: '#/components/schemas/MediaType'
+          description: The media type of the image manifest.
         artifactMediaType:
-          allOf:
-            - $ref: '#/components/schemas/MediaType'
-            - description: The artifact media type of the image.
+          $ref: '#/components/schemas/MediaType'
+          description: The artifact media type of the image.
       description: An object that describes the image tag details returned by a <a>DescribeImageTags</a> action.
     ImageTagDetail:
       type: object
       properties:
         imageTag:
-          allOf:
-            - $ref: '#/components/schemas/ImageTag'
-            - description: The tag associated with the image.
+          $ref: '#/components/schemas/ImageTag'
+          description: The tag associated with the image.
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/CreationTimestamp'
-            - description: The time stamp indicating when the image tag was created.
+          $ref: '#/components/schemas/CreationTimestamp'
+          description: The time stamp indicating when the image tag was created.
         imageDetail:
-          allOf:
-            - $ref: '#/components/schemas/ReferencedImageDetail'
-            - description: An object that describes the details of an image.
+          $ref: '#/components/schemas/ReferencedImageDetail'
+          description: An object that describes the details of an image.
       description: An object representing the image tag details for an image.
     PartSize:
       type: integer
@@ -2633,21 +2482,17 @@ components:
       type: object
       properties:
         layerDigest:
-          allOf:
-            - $ref: '#/components/schemas/LayerDigest'
-            - description: The <code>sha256</code> digest of the image layer.
+          $ref: '#/components/schemas/LayerDigest'
+          description: The <code>sha256</code> digest of the image layer.
         layerAvailability:
-          allOf:
-            - $ref: '#/components/schemas/LayerAvailability'
-            - description: The availability status of the image layer.
+          $ref: '#/components/schemas/LayerAvailability'
+          description: The availability status of the image layer.
         layerSize:
-          allOf:
-            - $ref: '#/components/schemas/LayerSizeInBytes'
-            - description: 'The size, in bytes, of the image layer.'
+          $ref: '#/components/schemas/LayerSizeInBytes'
+          description: 'The size, in bytes, of the image layer.'
         mediaType:
-          allOf:
-            - $ref: '#/components/schemas/MediaType'
-            - description: 'The media type of the layer, such as <code>application/vnd.docker.image.rootfs.diff.tar.gzip</code> or <code>application/vnd.oci.image.layer.v1.tar+gzip</code>.'
+          $ref: '#/components/schemas/MediaType'
+          description: 'The media type of the layer, such as <code>application/vnd.docker.image.rootfs.diff.tar.gzip</code> or <code>application/vnd.oci.image.layer.v1.tar+gzip</code>.'
       description: An object representing an Amazon ECR image layer.
     LayerFailureCode:
       type: string
@@ -2660,17 +2505,14 @@ components:
       type: object
       properties:
         layerDigest:
-          allOf:
-            - $ref: '#/components/schemas/BatchedOperationLayerDigest'
-            - description: The layer digest associated with the failure.
+          $ref: '#/components/schemas/BatchedOperationLayerDigest'
+          description: The layer digest associated with the failure.
         failureCode:
-          allOf:
-            - $ref: '#/components/schemas/LayerFailureCode'
-            - description: The failure code associated with the failure.
+          $ref: '#/components/schemas/LayerFailureCode'
+          description: The failure code associated with the failure.
         failureReason:
-          allOf:
-            - $ref: '#/components/schemas/LayerFailureReason'
-            - description: The reason for the failure.
+          $ref: '#/components/schemas/LayerFailureReason'
+          description: The reason for the failure.
       description: An object representing an Amazon ECR image layer failure.
     LayerPartBlob:
       type: string
@@ -2715,25 +2557,20 @@ components:
         - aliases
       properties:
         registryId:
-          allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: 'The AWS account ID associated with the registry. If you do not specify a registry, the default public registry is assumed.'
+          $ref: '#/components/schemas/RegistryId'
+          description: 'The AWS account ID associated with the registry. If you do not specify a registry, the default public registry is assumed.'
         registryArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the public registry.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the public registry.
         registryUri:
-          allOf:
-            - $ref: '#/components/schemas/Url'
-            - description: The URI of a public registry. The URI contains a universal prefix and the registry alias.
+          $ref: '#/components/schemas/Url'
+          description: The URI of a public registry. The URI contains a universal prefix and the registry alias.
         verified:
-          allOf:
-            - $ref: '#/components/schemas/RegistryVerified'
-            - description: 'Whether the account is verified. This indicates whether the account is an AWS Marketplace vendor. If an account is verified, each public repository will received a verified account badge on the Amazon ECR Public Gallery.'
+          $ref: '#/components/schemas/RegistryVerified'
+          description: 'Whether the account is verified. This indicates whether the account is an AWS Marketplace vendor. If an account is verified, each public repository will received a verified account badge on the Amazon ECR Public Gallery.'
         aliases:
-          allOf:
-            - $ref: '#/components/schemas/RegistryAliasList'
-            - description: An array of objects representing the aliases for a public registry.
+          $ref: '#/components/schemas/RegistryAliasList'
+          description: An array of objects representing the aliases for a public registry.
       description: The details of a public registry.
     RegistryAliasName:
       type: string
@@ -2755,21 +2592,17 @@ components:
         - defaultRegistryAlias
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/RegistryAliasName'
-            - description: The name of the registry alias.
+          $ref: '#/components/schemas/RegistryAliasName'
+          description: The name of the registry alias.
         status:
-          allOf:
-            - $ref: '#/components/schemas/RegistryAliasStatus'
-            - description: The status of the registry alias.
+          $ref: '#/components/schemas/RegistryAliasStatus'
+          description: The status of the registry alias.
         primaryRegistryAlias:
-          allOf:
-            - $ref: '#/components/schemas/PrimaryRegistryAliasFlag'
-            - description: '<p>Whether or not the registry alias is the primary alias for the registry. If true, the alias is the primary registry alias and is displayed in both the repository URL and the image URI used in the <code>docker pull</code> commands on the Amazon ECR Public Gallery.</p> <note> <p>A registry alias that is not the primary registry alias can be used in the repository URI in a <code>docker pull</code> command.</p> </note>'
+          $ref: '#/components/schemas/PrimaryRegistryAliasFlag'
+          description: '<p>Whether or not the registry alias is the primary alias for the registry. If true, the alias is the primary registry alias and is displayed in both the repository URL and the image URI used in the <code>docker pull</code> commands on the Amazon ECR Public Gallery.</p> <note> <p>A registry alias that is not the primary registry alias can be used in the repository URI in a <code>docker pull</code> command.</p> </note>'
         defaultRegistryAlias:
-          allOf:
-            - $ref: '#/components/schemas/DefaultRegistryAliasFlag'
-            - description: 'Whether or not the registry alias is the default alias for the registry. When the first public repository is created, your public registry is assigned a default registry alias.'
+          $ref: '#/components/schemas/DefaultRegistryAliasFlag'
+          description: 'Whether or not the registry alias is the default alias for the registry. When the first public repository is created, your public registry is assigned a default registry alias.'
       description: 'An object representing the aliases for a public registry. A public registry is given an alias upon creation but a custom alias can be set using the Amazon ECR console. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html">Registries</a> in the <i>Amazon Elastic Container Registry User Guide</i>.'
     RepositoryDescription:
       type: string
@@ -2792,13 +2625,11 @@ components:
       type: object
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: One part of a key-value pair that make up a tag. A <code>key</code> is a general label that acts like a category for more specific tag values.
+          $ref: '#/components/schemas/TagKey'
+          description: One part of a key-value pair that make up a tag. A <code>key</code> is a general label that acts like a category for more specific tag values.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: The optional part of a key-value pair that make up a tag. A <code>value</code> acts as a descriptor within a tag category (key).
+          $ref: '#/components/schemas/TagValue'
+          description: The optional part of a key-value pair that make up a tag. A <code>value</code> acts as a descriptor within a tag category (key).
       description: 'The metadata that you apply to a resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
     TagKeyList:
       type: array

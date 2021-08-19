@@ -207,9 +207,8 @@ paths:
                   type: object
                   properties:
                     GroundTruthManifest:
-                      allOf:
-                        - $ref: '#/components/schemas/DatasetGroundTruthManifest'
-                        - description: Location information for the manifest file.
+                      $ref: '#/components/schemas/DatasetGroundTruthManifest'
+                      description: Location information for the manifest file.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -310,9 +309,8 @@ paths:
                   type: object
                   properties:
                     S3Location:
-                      allOf:
-                        - $ref: '#/components/schemas/S3Location'
-                        - description: The S3 location for the output.
+                      $ref: '#/components/schemas/S3Location'
+                      description: The S3 location for the output.
                 KmsKeyId:
                   description: 'The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK). The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. If this parameter is not specified, the copied images are encrypted by a key that AWS owns and manages.'
                   type: string
@@ -1784,16 +1782,14 @@ components:
       type: object
       properties:
         DatasetMetadata:
-          allOf:
-            - $ref: '#/components/schemas/DatasetMetadata'
-            - description: Information about the dataset.
+          $ref: '#/components/schemas/DatasetMetadata'
+          description: Information about the dataset.
     DatasetGroundTruthManifest:
       type: object
       properties:
         S3Object:
-          allOf:
-            - $ref: '#/components/schemas/InputS3Object'
-            - description: The S3 bucket location for the manifest file.
+          $ref: '#/components/schemas/InputS3Object'
+          description: The S3 bucket location for the manifest file.
       description: Location information about a manifest file. You can use a manifest file to create a dataset.
     AccessDeniedException: {}
     InternalServerException: {}
@@ -1806,22 +1802,19 @@ components:
       type: object
       properties:
         ModelMetadata:
-          allOf:
-            - $ref: '#/components/schemas/ModelMetadata'
-            - description: The response from a call to <code>CreateModel</code>.
+          $ref: '#/components/schemas/ModelMetadata'
+          description: The response from a call to <code>CreateModel</code>.
     S3Location:
       type: object
       required:
         - Bucket
       properties:
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3BucketName'
-            - description: The S3 bucket that contains the training output.
+          $ref: '#/components/schemas/S3BucketName'
+          description: The S3 bucket that contains the training output.
         Prefix:
-          allOf:
-            - $ref: '#/components/schemas/S3KeyPrefix'
-            - description: 'The path of the folder, within the S3 bucket, that contains the training output.'
+          $ref: '#/components/schemas/S3KeyPrefix'
+          description: 'The path of the folder, within the S3 bucket, that contains the training output.'
       description: Information about the location training output.
     Tag:
       type: object
@@ -1830,21 +1823,18 @@ components:
         - Value
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: The key of the tag that is attached to the specified model.
+          $ref: '#/components/schemas/TagKey'
+          description: The key of the tag that is attached to the specified model.
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: The value of the tag that is attached to the specified model.
+          $ref: '#/components/schemas/TagValue'
+          description: The value of the tag that is attached to the specified model.
       description: A key and value pair that is attached to the specified Amazon Lookout for Vision model.
     CreateProjectResponse:
       type: object
       properties:
         ProjectMetadata:
-          allOf:
-            - $ref: '#/components/schemas/ProjectMetadata'
-            - description: Information about the project.
+          $ref: '#/components/schemas/ProjectMetadata'
+          description: Information about the project.
     DeleteDatasetResponse:
       type: object
       properties: {}
@@ -1852,98 +1842,83 @@ components:
       type: object
       properties:
         ModelArn:
-          allOf:
-            - $ref: '#/components/schemas/ModelArn'
-            - description: The Amazon Resource Name (ARN) of the model that was deleted.
+          $ref: '#/components/schemas/ModelArn'
+          description: The Amazon Resource Name (ARN) of the model that was deleted.
     DeleteProjectResponse:
       type: object
       properties:
         ProjectArn:
-          allOf:
-            - $ref: '#/components/schemas/ProjectArn'
-            - description: The Amazon Resource Name (ARN) of the project that was deleted.
+          $ref: '#/components/schemas/ProjectArn'
+          description: The Amazon Resource Name (ARN) of the project that was deleted.
     DescribeDatasetResponse:
       type: object
       properties:
         DatasetDescription:
-          allOf:
-            - $ref: '#/components/schemas/DatasetDescription'
-            - description: 'The description of the requested dataset. '
+          $ref: '#/components/schemas/DatasetDescription'
+          description: 'The description of the requested dataset. '
     DescribeModelResponse:
       type: object
       properties:
         ModelDescription:
-          allOf:
-            - $ref: '#/components/schemas/ModelDescription'
-            - description: Contains the description of the model.
+          $ref: '#/components/schemas/ModelDescription'
+          description: Contains the description of the model.
     DescribeProjectResponse:
       type: object
       properties:
         ProjectDescription:
-          allOf:
-            - $ref: '#/components/schemas/ProjectDescription'
-            - description: The description of the project.
+          $ref: '#/components/schemas/ProjectDescription'
+          description: The description of the project.
     DetectAnomaliesResponse:
       type: object
       properties:
         DetectAnomalyResult:
-          allOf:
-            - $ref: '#/components/schemas/DetectAnomalyResult'
-            - description: The results of the <code>DetectAnomalies</code> operation.
+          $ref: '#/components/schemas/DetectAnomalyResult'
+          description: The results of the <code>DetectAnomalies</code> operation.
     ListDatasetEntriesResponse:
       type: object
       properties:
         DatasetEntries:
-          allOf:
-            - $ref: '#/components/schemas/DatasetEntryList'
-            - description: A list of the entries (JSON Lines) within the dataset.
+          $ref: '#/components/schemas/DatasetEntryList'
+          description: A list of the entries (JSON Lines) within the dataset.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'If the response is truncated, Amazon Lookout for Vision returns this token that you can use in the subsequent request to retrieve the next set ofdataset entries.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If the response is truncated, Amazon Lookout for Vision returns this token that you can use in the subsequent request to retrieve the next set ofdataset entries.'
     ListModelsResponse:
       type: object
       properties:
         Models:
-          allOf:
-            - $ref: '#/components/schemas/ModelMetadataList'
-            - description: 'A list of model versions in the specified project. '
+          $ref: '#/components/schemas/ModelMetadataList'
+          description: 'A list of model versions in the specified project. '
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'If the response is truncated, Amazon Lookout for Vision returns this token that you can use in the subsequent request to retrieve the next set of models. '
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If the response is truncated, Amazon Lookout for Vision returns this token that you can use in the subsequent request to retrieve the next set of models. '
     ListProjectsResponse:
       type: object
       properties:
         Projects:
-          allOf:
-            - $ref: '#/components/schemas/ProjectMetadataList'
-            - description: A list of projects in your AWS account.
+          $ref: '#/components/schemas/ProjectMetadataList'
+          description: A list of projects in your AWS account.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: 'If the response is truncated, Amazon Lookout for Vision returns this token that you can use in the subsequent request to retrieve the next set of projects.'
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If the response is truncated, Amazon Lookout for Vision returns this token that you can use in the subsequent request to retrieve the next set of projects.'
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: A map of tag keys and values attached to the specified model.
+          $ref: '#/components/schemas/TagList'
+          description: A map of tag keys and values attached to the specified model.
     StartModelResponse:
       type: object
       properties:
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ModelHostingStatus'
-            - description: The current running status of the model.
+          $ref: '#/components/schemas/ModelHostingStatus'
+          description: The current running status of the model.
     StopModelResponse:
       type: object
       properties:
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ModelHostingStatus'
-            - description: The status of the model.
+          $ref: '#/components/schemas/ModelHostingStatus'
+          description: The status of the model.
     TagResourceResponse:
       type: object
       properties: {}
@@ -1959,9 +1934,8 @@ components:
       type: object
       properties:
         Status:
-          allOf:
-            - $ref: '#/components/schemas/DatasetStatus'
-            - description: The status of the dataset update.
+          $ref: '#/components/schemas/DatasetStatus'
+          description: The status of the dataset update.
     AnomalyClassFilter:
       type: string
       pattern: (normal|anomaly)
@@ -1993,9 +1967,8 @@ components:
       type: object
       properties:
         GroundTruthManifest:
-          allOf:
-            - $ref: '#/components/schemas/DatasetGroundTruthManifest'
-            - description: Location information for the manifest file.
+          $ref: '#/components/schemas/DatasetGroundTruthManifest'
+          description: Location information for the manifest file.
       description: Information about the location of a manifest file that Amazon Lookout for Vision uses to to create a dataset.
     CreateDatasetRequest:
       type: object
@@ -2004,32 +1977,26 @@ components:
       title: CreateDatasetRequest
       properties:
         DatasetType:
-          allOf:
-            - $ref: '#/components/schemas/DatasetType'
-            - description: The type of the dataset. Specify <code>train</code> for a training dataset. Specify <code>test</code> for a test dataset.
+          $ref: '#/components/schemas/DatasetType'
+          description: The type of the dataset. Specify <code>train</code> for a training dataset. Specify <code>test</code> for a test dataset.
         DatasetSource:
-          allOf:
-            - $ref: '#/components/schemas/DatasetSource'
-            - description: '<p>The location of the manifest file that Amazon Lookout for Vision uses to create the dataset.</p> <p>If you don''t specify <code>DatasetSource</code>, an empty dataset is created and the operation synchronously returns. Later, you can add JSON Lines by calling <a>UpdateDatasetEntries</a>. </p> <p>If you specify a value for <code>DataSource</code>, the manifest at the S3 location is validated and used to create the dataset. The call to <code>CreateDataset</code> is asynchronous and might take a while to complete. To find out the current status, Check the value of <code>Status</code> returned in a call to <a>DescribeDataset</a>.</p>'
+          $ref: '#/components/schemas/DatasetSource'
+          description: '<p>The location of the manifest file that Amazon Lookout for Vision uses to create the dataset.</p> <p>If you don''t specify <code>DatasetSource</code>, an empty dataset is created and the operation synchronously returns. Later, you can add JSON Lines by calling <a>UpdateDatasetEntries</a>. </p> <p>If you specify a value for <code>DataSource</code>, the manifest at the S3 location is validated and used to create the dataset. The call to <code>CreateDataset</code> is asynchronous and might take a while to complete. To find out the current status, Check the value of <code>Status</code> returned in a call to <a>DescribeDataset</a>.</p>'
     DatasetMetadata:
       type: object
       properties:
         DatasetType:
-          allOf:
-            - $ref: '#/components/schemas/DatasetType'
-            - description: The type of the dataset.
+          $ref: '#/components/schemas/DatasetType'
+          description: The type of the dataset.
         CreationTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: 'The Unix timestamp for the date and time that the dataset was created. '
+          $ref: '#/components/schemas/DateTime'
+          description: 'The Unix timestamp for the date and time that the dataset was created. '
         Status:
-          allOf:
-            - $ref: '#/components/schemas/DatasetStatus'
-            - description: The status for the dataset.
+          $ref: '#/components/schemas/DatasetStatus'
+          description: The status for the dataset.
         StatusMessage:
-          allOf:
-            - $ref: '#/components/schemas/DatasetStatusMessage'
-            - description: The status message for the dataset.
+          $ref: '#/components/schemas/DatasetStatusMessage'
+          description: The status message for the dataset.
       description: Sumary information for an Amazon Lookout for Vision dataset.
     ModelDescriptionMessage:
       type: string
@@ -2042,9 +2009,8 @@ components:
         - S3Location
       properties:
         S3Location:
-          allOf:
-            - $ref: '#/components/schemas/S3Location'
-            - description: The S3 location for the output.
+          $ref: '#/components/schemas/S3Location'
+          description: The S3 location for the output.
       description: The S3 location where Amazon Lookout for Vision saves model training files.
     KmsKeyId:
       type: string
@@ -2064,52 +2030,41 @@ components:
       title: CreateModelRequest
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/ModelDescriptionMessage'
-            - description: A description for the version of the model.
+          $ref: '#/components/schemas/ModelDescriptionMessage'
+          description: A description for the version of the model.
         OutputConfig:
-          allOf:
-            - $ref: '#/components/schemas/OutputConfig'
-            - description: The location where Amazon Lookout for Vision saves the training results.
+          $ref: '#/components/schemas/OutputConfig'
+          description: The location where Amazon Lookout for Vision saves the training results.
         KmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyId'
-            - description: 'The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK). The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. If this parameter is not specified, the copied images are encrypted by a key that AWS owns and manages.'
+          $ref: '#/components/schemas/KmsKeyId'
+          description: 'The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK). The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. If this parameter is not specified, the copied images are encrypted by a key that AWS owns and manages.'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: A set of tags (key-value pairs) that you want to attach to the model.
+          $ref: '#/components/schemas/TagList'
+          description: A set of tags (key-value pairs) that you want to attach to the model.
     ModelMetadata:
       type: object
       properties:
         CreationTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: 'The unix timestamp for the date and time that the model was created. '
+          $ref: '#/components/schemas/DateTime'
+          description: 'The unix timestamp for the date and time that the model was created. '
         ModelVersion:
-          allOf:
-            - $ref: '#/components/schemas/ModelVersion'
-            - description: The version of the model.
+          $ref: '#/components/schemas/ModelVersion'
+          description: The version of the model.
         ModelArn:
-          allOf:
-            - $ref: '#/components/schemas/ModelArn'
-            - description: The Amazon Resource Name (ARN) of the model.
+          $ref: '#/components/schemas/ModelArn'
+          description: The Amazon Resource Name (ARN) of the model.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/ModelDescriptionMessage'
-            - description: The description for the model.
+          $ref: '#/components/schemas/ModelDescriptionMessage'
+          description: The description for the model.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ModelStatus'
-            - description: The status of the model.
+          $ref: '#/components/schemas/ModelStatus'
+          description: The status of the model.
         StatusMessage:
-          allOf:
-            - $ref: '#/components/schemas/ModelStatusMessage'
-            - description: The status message for the model.
+          $ref: '#/components/schemas/ModelStatusMessage'
+          description: The status message for the model.
         Performance:
-          allOf:
-            - $ref: '#/components/schemas/ModelPerformance'
-            - description: Performance metrics for the model. Not available until training has successfully completed.
+          $ref: '#/components/schemas/ModelPerformance'
+          description: Performance metrics for the model. Not available until training has successfully completed.
       description: Describes an Amazon Lookout for Vision model.
     CreateProjectRequest:
       type: object
@@ -2118,24 +2073,20 @@ components:
       title: CreateProjectRequest
       properties:
         ProjectName:
-          allOf:
-            - $ref: '#/components/schemas/ProjectName'
-            - description: The name for the project.
+          $ref: '#/components/schemas/ProjectName'
+          description: The name for the project.
     ProjectMetadata:
       type: object
       properties:
         ProjectArn:
-          allOf:
-            - $ref: '#/components/schemas/ProjectArn'
-            - description: The Amazon Resource Name (ARN) of the project.
+          $ref: '#/components/schemas/ProjectArn'
+          description: The Amazon Resource Name (ARN) of the project.
         ProjectName:
-          allOf:
-            - $ref: '#/components/schemas/ProjectName'
-            - description: The name of the project.
+          $ref: '#/components/schemas/ProjectName'
+          description: The name of the project.
         CreationTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: 'The unix timestamp for the date and time that the project was created. '
+          $ref: '#/components/schemas/DateTime'
+          description: 'The unix timestamp for the date and time that the project was created. '
       description: Metadata about an Amazon Lookout for Vision project.
     DatasetChanges:
       type: string
@@ -2163,53 +2114,42 @@ components:
       type: object
       properties:
         Total:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The total number of images in the dataset.
+          $ref: '#/components/schemas/Integer'
+          description: The total number of images in the dataset.
         Labeled:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The total number of labeled images.
+          $ref: '#/components/schemas/Integer'
+          description: The total number of labeled images.
         Normal:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The total number of images labeled as normal.
+          $ref: '#/components/schemas/Integer'
+          description: The total number of images labeled as normal.
         Anomaly:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: the total number of images labeled as an anomaly.
+          $ref: '#/components/schemas/Integer'
+          description: the total number of images labeled as an anomaly.
       description: Statistics about the images in a dataset.
     DatasetDescription:
       type: object
       properties:
         ProjectName:
-          allOf:
-            - $ref: '#/components/schemas/ProjectName'
-            - description: The name of the project that contains the dataset.
+          $ref: '#/components/schemas/ProjectName'
+          description: The name of the project that contains the dataset.
         DatasetType:
-          allOf:
-            - $ref: '#/components/schemas/DatasetType'
-            - description: The type of the dataset. The value <code>train</code> represents a training dataset or single dataset project. The value <code>test</code> represents a test dataset.
+          $ref: '#/components/schemas/DatasetType'
+          description: The type of the dataset. The value <code>train</code> represents a training dataset or single dataset project. The value <code>test</code> represents a test dataset.
         CreationTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: The Unix timestamp for the time and date that the dataset was created.
+          $ref: '#/components/schemas/DateTime'
+          description: The Unix timestamp for the time and date that the dataset was created.
         LastUpdatedTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: The Unix timestamp for the date and time that the dataset was last updated.
+          $ref: '#/components/schemas/DateTime'
+          description: The Unix timestamp for the date and time that the dataset was last updated.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/DatasetStatus'
-            - description: The status of the dataset.
+          $ref: '#/components/schemas/DatasetStatus'
+          description: The status of the dataset.
         StatusMessage:
-          allOf:
-            - $ref: '#/components/schemas/DatasetStatusMessage'
-            - description: 'The status message for the dataset. '
+          $ref: '#/components/schemas/DatasetStatusMessage'
+          description: 'The status message for the dataset. '
         ImageStats:
-          allOf:
-            - $ref: '#/components/schemas/DatasetImageStats'
-            - description: <p/>
+          $ref: '#/components/schemas/DatasetImageStats'
+          description: <p/>
       description: 'The description for a dataset. For more information, see <a>DescribeDataset</a>.'
     DatasetEntry:
       type: string
@@ -2227,17 +2167,14 @@ components:
         - Key
       properties:
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3BucketName'
-            - description: The Amazon S3 bucket that contains the manifest.
+          $ref: '#/components/schemas/S3BucketName'
+          description: The Amazon S3 bucket that contains the manifest.
         Key:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectKey'
-            - description: The name and location of the manifest file withiin the bucket.
+          $ref: '#/components/schemas/S3ObjectKey'
+          description: The name and location of the manifest file withiin the bucket.
         VersionId:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectVersion'
-            - description: The version ID of the bucket.
+          $ref: '#/components/schemas/S3ObjectVersion'
+          description: The version ID of the bucket.
       description: 'Amazon S3 Location information for an input manifest file. '
     Integer:
       type: integer
@@ -2278,53 +2215,41 @@ components:
       type: object
       properties:
         ModelVersion:
-          allOf:
-            - $ref: '#/components/schemas/ModelVersion'
-            - description: The version of the model
+          $ref: '#/components/schemas/ModelVersion'
+          description: The version of the model
         ModelArn:
-          allOf:
-            - $ref: '#/components/schemas/ModelArn'
-            - description: The Amazon Resource Name (ARN) of the model.
+          $ref: '#/components/schemas/ModelArn'
+          description: The Amazon Resource Name (ARN) of the model.
         CreationTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: 'The unix timestamp for the date and time that the model was created. '
+          $ref: '#/components/schemas/DateTime'
+          description: 'The unix timestamp for the date and time that the model was created. '
         Description:
-          allOf:
-            - $ref: '#/components/schemas/ModelDescriptionMessage'
-            - description: The description for the model.
+          $ref: '#/components/schemas/ModelDescriptionMessage'
+          description: The description for the model.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/ModelStatus'
-            - description: The status of the model.
+          $ref: '#/components/schemas/ModelStatus'
+          description: The status of the model.
         StatusMessage:
-          allOf:
-            - $ref: '#/components/schemas/ModelStatusMessage'
-            - description: The status message for the model.
+          $ref: '#/components/schemas/ModelStatusMessage'
+          description: The status message for the model.
         Performance:
-          allOf:
-            - $ref: '#/components/schemas/ModelPerformance'
-            - description: Performance metrics for the model. Created during training.
+          $ref: '#/components/schemas/ModelPerformance'
+          description: Performance metrics for the model. Created during training.
         OutputConfig:
-          allOf:
-            - $ref: '#/components/schemas/OutputConfig'
-            - description: The S3 location where Amazon Lookout for Vision saves model training files.
+          $ref: '#/components/schemas/OutputConfig'
+          description: The S3 location where Amazon Lookout for Vision saves model training files.
         EvaluationManifest:
-          allOf:
-            - $ref: '#/components/schemas/OutputS3Object'
-            - description: The S3 location where Amazon Lookout for Vision saves the manifest file that was used to test the trained model and generate the performance scores.
+          $ref: '#/components/schemas/OutputS3Object'
+          description: The S3 location where Amazon Lookout for Vision saves the manifest file that was used to test the trained model and generate the performance scores.
         EvaluationResult:
-          allOf:
-            - $ref: '#/components/schemas/OutputS3Object'
-            - description: The S3 location where Amazon Lookout for Vision saves the performance metrics.
+          $ref: '#/components/schemas/OutputS3Object'
+          description: The S3 location where Amazon Lookout for Vision saves the performance metrics.
         EvaluationEndTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: 'The unix timestamp for the date and time that the evaluation ended. '
+          $ref: '#/components/schemas/DateTime'
+          description: 'The unix timestamp for the date and time that the evaluation ended. '
         KmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyId'
-            - description: The identifer for the AWS Key Management Service (AWS KMS) key that was used to encrypt the model during training.
+          $ref: '#/components/schemas/KmsKeyId'
+          description: The identifer for the AWS Key Management Service (AWS KMS) key that was used to encrypt the model during training.
       description: Describes an Amazon Lookout for Vision model.
     DescribeProjectRequest:
       type: object
@@ -2334,21 +2259,17 @@ components:
       type: object
       properties:
         ProjectArn:
-          allOf:
-            - $ref: '#/components/schemas/ProjectArn'
-            - description: The Amazon Resource Name (ARN) of the project.
+          $ref: '#/components/schemas/ProjectArn'
+          description: The Amazon Resource Name (ARN) of the project.
         ProjectName:
-          allOf:
-            - $ref: '#/components/schemas/ProjectName'
-            - description: The name of the project.
+          $ref: '#/components/schemas/ProjectName'
+          description: The name of the project.
         CreationTimestamp:
-          allOf:
-            - $ref: '#/components/schemas/DateTime'
-            - description: 'The unix timestamp for the date and time that the project was created. '
+          $ref: '#/components/schemas/DateTime'
+          description: 'The unix timestamp for the date and time that the project was created. '
         Datasets:
-          allOf:
-            - $ref: '#/components/schemas/DatasetMetadataList'
-            - description: A list of datasets in the project.
+          $ref: '#/components/schemas/DatasetMetadataList'
+          description: A list of datasets in the project.
       description: 'Describe an Amazon Lookout for Vision project. For more information, see <a>DescribeProject</a>.'
     Stream:
       type: string
@@ -2359,32 +2280,27 @@ components:
       title: DetectAnomaliesRequest
       properties:
         Body:
-          allOf:
-            - $ref: '#/components/schemas/Stream'
-            - description: 'The unencrypted image bytes that you want to analyze. '
+          $ref: '#/components/schemas/Stream'
+          description: 'The unencrypted image bytes that you want to analyze. '
     DetectAnomalyResult:
       type: object
       properties:
         Source:
-          allOf:
-            - $ref: '#/components/schemas/ImageSource'
-            - description: The source of the image that was analyzed. <code>direct</code> means that the images was supplied from the local computer. No other values are supported.
+          $ref: '#/components/schemas/ImageSource'
+          description: The source of the image that was analyzed. <code>direct</code> means that the images was supplied from the local computer. No other values are supported.
         IsAnomalous:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'True if the image contains an anomaly, otherwise false.'
+          $ref: '#/components/schemas/Boolean'
+          description: 'True if the image contains an anomaly, otherwise false.'
         Confidence:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The confidence that Amazon Lookout for Vision has in the accuracy of the prediction.
+          $ref: '#/components/schemas/Float'
+          description: The confidence that Amazon Lookout for Vision has in the accuracy of the prediction.
       description: The prediction results from a call to <a>DetectAnomalies</a>.
     ImageSource:
       type: object
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/ImageSourceType'
-            - description: The type of the image.
+          $ref: '#/components/schemas/ImageSourceType'
+          description: The type of the image.
       description: The source for an image.
     Float:
       type: number
@@ -2471,17 +2387,14 @@ components:
       type: object
       properties:
         F1Score:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The overall F1 score metric for the trained model.
+          $ref: '#/components/schemas/Float'
+          description: The overall F1 score metric for the trained model.
         Recall:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: 'The overall recall metric value for the trained model. '
+          $ref: '#/components/schemas/Float'
+          description: 'The overall recall metric value for the trained model. '
         Precision:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The overall precision metric value for the trained model.
+          $ref: '#/components/schemas/Float'
+          description: The overall precision metric value for the trained model.
       description: 'Information about the evaluation performance of a trained model. '
     OutputS3Object:
       type: object
@@ -2490,13 +2403,11 @@ components:
         - Key
       properties:
         Bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3BucketName'
-            - description: The bucket that contains the training output.
+          $ref: '#/components/schemas/S3BucketName'
+          description: The bucket that contains the training output.
         Key:
-          allOf:
-            - $ref: '#/components/schemas/S3ObjectKey'
-            - description: The location of the training output in the bucket.
+          $ref: '#/components/schemas/S3ObjectKey'
+          description: The location of the training output in the bucket.
       description: The S3 location where Amazon Lookout for Vision saves training output.
     ModelHostingStatus:
       type: string
@@ -2517,9 +2428,8 @@ components:
       title: StartModelRequest
       properties:
         MinInferenceUnits:
-          allOf:
-            - $ref: '#/components/schemas/InferenceUnits'
-            - description: 'The minimum number of inference units to use. A single inference unit represents 1 hour of processing and can support up to 5 Transaction Pers Second (TPS). Use a higher number to increase the TPS throughput of your model. You are charged for the number of inference units that you use. '
+          $ref: '#/components/schemas/InferenceUnits'
+          description: 'The minimum number of inference units to use. A single inference unit represents 1 hour of processing and can support up to 5 Transaction Pers Second (TPS). Use a higher number to increase the TPS throughput of your model. You are charged for the number of inference units that you use. '
     StopModelRequest:
       type: object
       title: StopModelRequest
@@ -2542,9 +2452,8 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagList'
-            - description: The key-value tags to assign to the model.
+          $ref: '#/components/schemas/TagList'
+          description: The key-value tags to assign to the model.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -2556,8 +2465,7 @@ components:
       title: UpdateDatasetEntriesRequest
       properties:
         Changes:
-          allOf:
-            - $ref: '#/components/schemas/DatasetChanges'
-            - description: The entries to add to the dataset.
+          $ref: '#/components/schemas/DatasetChanges'
+          description: The entries to add to the dataset.
 security:
   - hmac: []

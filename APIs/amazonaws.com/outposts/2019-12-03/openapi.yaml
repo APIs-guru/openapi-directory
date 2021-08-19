@@ -871,9 +871,8 @@ components:
       type: object
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The resource tags.
+          $ref: '#/components/schemas/TagMap'
+          description: The resource tags.
     TagResourceResponse:
       type: object
       properties: {}
@@ -949,9 +948,8 @@ components:
         AvailabilityZoneId:
           $ref: '#/components/schemas/AvailabilityZoneId'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags to apply to the Outpost.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags to apply to the Outpost.
     Outpost:
       type: object
       properties:
@@ -974,9 +972,8 @@ components:
         AvailabilityZoneId:
           $ref: '#/components/schemas/AvailabilityZoneId'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The Outpost tags.
+          $ref: '#/components/schemas/TagMap'
+          description: The Outpost tags.
         SiteArn:
           $ref: '#/components/schemas/SiteArn'
       description: Information about an Outpost.
@@ -1097,9 +1094,8 @@ components:
         Description:
           $ref: '#/components/schemas/SiteDescription'
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The site tags.
+          $ref: '#/components/schemas/TagMap'
+          description: The site tags.
         SiteArn:
           $ref: '#/components/schemas/SiteArn'
       description: Information about a site.
@@ -1116,9 +1112,8 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: The tags to add to the resource.
+          $ref: '#/components/schemas/TagMap'
+          description: The tags to add to the resource.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest

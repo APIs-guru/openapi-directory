@@ -1431,9 +1431,8 @@ components:
       type: object
       properties:
         Aliases:
-          allOf:
-            - $ref: '#/components/schemas/Aliases'
-            - description: An array of the DNS aliases that Amazon FSx is associating with the file system.
+          $ref: '#/components/schemas/Aliases'
+          description: An array of the DNS aliases that Amazon FSx is associating with the file system.
       description: 'The system generated response showing the DNS aliases that Amazon FSx is attempting to associate with the file system. Use the API operation to monitor the status of the aliases Amazon FSx is associating with the file system. It can take up to 2.5 minutes for the alias status to change from <code>CREATING</code> to <code>AVAILABLE</code>. '
     AssociateFileSystemAliasesRequest:
       type: object
@@ -1445,13 +1444,11 @@ components:
         ClientRequestToken:
           $ref: '#/components/schemas/ClientRequestToken'
         FileSystemId:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemId'
-            - description: Specifies the file system with which you want to associate one or more DNS aliases.
+          $ref: '#/components/schemas/FileSystemId'
+          description: Specifies the file system with which you want to associate one or more DNS aliases.
         Aliases:
-          allOf:
-            - $ref: '#/components/schemas/AlternateDNSNames'
-            - description: '<p>An array of one or more DNS alias names to associate with the file system. The alias name has to comply with the following formatting requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <i> <code>hostname.domain</code> </i>, for example, <code>accounting.corp.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>'
+          $ref: '#/components/schemas/AlternateDNSNames'
+          description: '<p>An array of one or more DNS alias names to associate with the file system. The alias name has to comply with the following formatting requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <i> <code>hostname.domain</code> </i>, for example, <code>accounting.corp.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>'
       description: The request object specifying one or more DNS alias names to associate with an Amazon FSx for Windows File Server file system.
     BadRequest: {}
     FileSystemNotFound: {}
@@ -1460,13 +1457,11 @@ components:
       type: object
       properties:
         Lifecycle:
-          allOf:
-            - $ref: '#/components/schemas/DataRepositoryTaskLifecycle'
-            - description: '<p>The lifecycle status of the data repository task, as follows:</p> <ul> <li> <p> <code>PENDING</code> - Amazon FSx has not started the task.</p> </li> <li> <p> <code>EXECUTING</code> - Amazon FSx is processing the task.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx was not able to complete the task. For example, there may be files the task failed to process. The <a>DataRepositoryTaskFailureDetails</a> property provides more information about task failures.</p> </li> <li> <p> <code>SUCCEEDED</code> - FSx completed the task successfully.</p> </li> <li> <p> <code>CANCELED</code> - Amazon FSx canceled the task and it did not complete.</p> </li> <li> <p> <code>CANCELING</code> - FSx is in process of canceling the task.</p> </li> </ul>'
+          $ref: '#/components/schemas/DataRepositoryTaskLifecycle'
+          description: '<p>The lifecycle status of the data repository task, as follows:</p> <ul> <li> <p> <code>PENDING</code> - Amazon FSx has not started the task.</p> </li> <li> <p> <code>EXECUTING</code> - Amazon FSx is processing the task.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx was not able to complete the task. For example, there may be files the task failed to process. The <a>DataRepositoryTaskFailureDetails</a> property provides more information about task failures.</p> </li> <li> <p> <code>SUCCEEDED</code> - FSx completed the task successfully.</p> </li> <li> <p> <code>CANCELED</code> - Amazon FSx canceled the task and it did not complete.</p> </li> <li> <p> <code>CANCELING</code> - FSx is in process of canceling the task.</p> </li> </ul>'
         TaskId:
-          allOf:
-            - $ref: '#/components/schemas/TaskId'
-            - description: The ID of the task being canceled.
+          $ref: '#/components/schemas/TaskId'
+          description: The ID of the task being canceled.
     CancelDataRepositoryTaskRequest:
       type: object
       required:
@@ -1474,9 +1469,8 @@ components:
       title: CancelDataRepositoryTaskRequest
       properties:
         TaskId:
-          allOf:
-            - $ref: '#/components/schemas/TaskId'
-            - description: Specifies the data repository task to cancel.
+          $ref: '#/components/schemas/TaskId'
+          description: Specifies the data repository task to cancel.
       description: Cancels a data repository task.
     UnsupportedOperation: {}
     DataRepositoryTaskNotFound: {}
@@ -1518,19 +1512,16 @@ components:
         ClientRequestToken:
           $ref: '#/components/schemas/ClientRequestToken'
         SourceBackupId:
-          allOf:
-            - $ref: '#/components/schemas/SourceBackupId'
-            - description: The ID of the source backup. Specifies the ID of the backup that is being copied.
+          $ref: '#/components/schemas/SourceBackupId'
+          description: The ID of the source backup. Specifies the ID of the backup that is being copied.
         SourceRegion:
-          allOf:
-            - $ref: '#/components/schemas/Region'
-            - description: 'The source AWS Region of the backup. Specifies the AWS Region from which the backup is being copied. The source and destination Regions must be in the same AWS partition. If you don''t specify a Region, it defaults to the Region where the request is sent from (in-Region copy).'
+          $ref: '#/components/schemas/Region'
+          description: 'The source AWS Region of the backup. Specifies the AWS Region from which the backup is being copied. The source and destination Regions must be in the same AWS partition. If you don''t specify a Region, it defaults to the Region where the request is sent from (in-Region copy).'
         KmsKeyId:
           $ref: '#/components/schemas/KmsKeyId'
         CopyTags:
-          allOf:
-            - $ref: '#/components/schemas/Flag'
-            - description: '<p>A boolean flag indicating whether tags from the source backup should be copied to the backup copy. This value defaults to false.</p> <p>If you set <code>CopyTags</code> to true and the source backup has existing tags, you can use the <code>Tags</code> parameter to create new tags, provided that the sum of the source backup tags and the new tags doesn''t exceed 50. Both sets of tags are merged. If there are tag conflicts (for example, two tags with the same key but different values), the tags created with the <code>Tags</code> parameter take precedence.</p>'
+          $ref: '#/components/schemas/Flag'
+          description: '<p>A boolean flag indicating whether tags from the source backup should be copied to the backup copy. This value defaults to false.</p> <p>If you set <code>CopyTags</code> to true and the source backup has existing tags, you can use the <code>Tags</code> parameter to create new tags, provided that the sum of the source backup tags and the new tags doesn''t exceed 50. Both sets of tags are merged. If there are tag conflicts (for example, two tags with the same key but different values), the tags created with the <code>Tags</code> parameter take precedence.</p>'
         Tags:
           $ref: '#/components/schemas/Tags'
     BackupNotFound: {}
@@ -1565,9 +1556,8 @@ components:
           Type: USER_INITIATED
       properties:
         Backup:
-          allOf:
-            - $ref: '#/components/schemas/Backup'
-            - description: A description of the backup.
+          $ref: '#/components/schemas/Backup'
+          description: A description of the backup.
       description: The response object for the <code>CreateBackup</code> operation.
     CreateBackupRequest:
       type: object
@@ -1576,26 +1566,22 @@ components:
       title: CreateBackupRequest
       properties:
         FileSystemId:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemId'
-            - description: The ID of the file system to back up.
+          $ref: '#/components/schemas/FileSystemId'
+          description: The ID of the file system to back up.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: '(Optional) The tags to apply to the backup at backup creation. The key value of the <code>Name</code> tag appears in the console as the backup name. If you have set <code>CopyTagsToBackups</code> to true, and you specify one or more tags using the <code>CreateBackup</code> action, no existing file system tags are copied from the file system to the backup.'
+          $ref: '#/components/schemas/Tags'
+          description: '(Optional) The tags to apply to the backup at backup creation. The key value of the <code>Name</code> tag appears in the console as the backup name. If you have set <code>CopyTagsToBackups</code> to true, and you specify one or more tags using the <code>CreateBackup</code> action, no existing file system tags are copied from the file system to the backup.'
       description: The request object for the <code>CreateBackup</code> operation.
     BackupInProgress: {}
     CreateDataRepositoryTaskResponse:
       type: object
       properties:
         DataRepositoryTask:
-          allOf:
-            - $ref: '#/components/schemas/DataRepositoryTask'
-            - description: The description of the data repository task that you just created.
+          $ref: '#/components/schemas/DataRepositoryTask'
+          description: The description of the data repository task that you just created.
     CreateDataRepositoryTaskRequest:
       type: object
       required:
@@ -1605,19 +1591,16 @@ components:
       title: CreateDataRepositoryTaskRequest
       properties:
         Type:
-          allOf:
-            - $ref: '#/components/schemas/DataRepositoryTaskType'
-            - description: Specifies the type of data repository task to create.
+          $ref: '#/components/schemas/DataRepositoryTaskType'
+          description: Specifies the type of data repository task to create.
         Paths:
-          allOf:
-            - $ref: '#/components/schemas/DataRepositoryTaskPaths'
-            - description: '(Optional) The path or paths on the Amazon FSx file system to use when the data repository task is processed. The default path is the file system root directory. The paths you provide need to be relative to the mount point of the file system. If the mount point is <code>/mnt/fsx</code> and <code>/mnt/fsx/path1</code> is a directory or file on the file system you want to export, then the path to provide is <code>path1</code>. If a path that you provide isn''t valid, the task fails.'
+          $ref: '#/components/schemas/DataRepositoryTaskPaths'
+          description: '(Optional) The path or paths on the Amazon FSx file system to use when the data repository task is processed. The default path is the file system root directory. The paths you provide need to be relative to the mount point of the file system. If the mount point is <code>/mnt/fsx</code> and <code>/mnt/fsx/path1</code> is a directory or file on the file system you want to export, then the path to provide is <code>path1</code>. If a path that you provide isn''t valid, the task fails.'
         FileSystemId:
           $ref: '#/components/schemas/FileSystemId'
         Report:
-          allOf:
-            - $ref: '#/components/schemas/CompletionReport'
-            - description: 'Defines whether or not Amazon FSx provides a CompletionReport once the task has completed. A CompletionReport provides a detailed report on the files that Amazon FSx processed that meet the criteria specified by the <code>Scope</code> parameter. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html">Working with Task Completion Reports</a>.'
+          $ref: '#/components/schemas/CompletionReport'
+          description: 'Defines whether or not Amazon FSx provides a CompletionReport once the task has completed. A CompletionReport provides a detailed report on the files that Amazon FSx processed that meet the criteria specified by the <code>Scope</code> parameter. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html">Working with Task Completion Reports</a>.'
         ClientRequestToken:
           $ref: '#/components/schemas/ClientRequestToken'
         Tags:
@@ -1653,9 +1636,8 @@ components:
             WeeklyMaintenanceStartTime: '1:05:00'
       properties:
         FileSystem:
-          allOf:
-            - $ref: '#/components/schemas/FileSystem'
-            - description: The configuration of the file system that was created.
+          $ref: '#/components/schemas/FileSystem'
+          description: The configuration of the file system that was created.
       description: The response object returned after the file system is created.
     CreateFileSystemRequest:
       type: object
@@ -1666,39 +1648,31 @@ components:
       title: CreateFileSystemRequest
       properties:
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
         FileSystemType:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemType'
-            - description: 'The type of Amazon FSx file system to create, either <code>WINDOWS</code> or <code>LUSTRE</code>.'
+          $ref: '#/components/schemas/FileSystemType'
+          description: 'The type of Amazon FSx file system to create, either <code>WINDOWS</code> or <code>LUSTRE</code>.'
         StorageCapacity:
-          allOf:
-            - $ref: '#/components/schemas/StorageCapacity'
-            - description: '<p>Sets the storage capacity of the file system that you''re creating.</p> <p>For Lustre file systems:</p> <ul> <li> <p>For <code>SCRATCH_2</code> and <code>PERSISTENT_1 SSD</code> deployment types, valid values are 1200 GiB, 2400 GiB, and increments of 2400 GiB.</p> </li> <li> <p>For <code>PERSISTENT HDD</code> file systems, valid values are increments of 6000 GiB for 12 MB/s/TiB file systems and increments of 1800 GiB for 40 MB/s/TiB file systems.</p> </li> <li> <p>For <code>SCRATCH_1</code> deployment type, valid values are 1200 GiB, 2400 GiB, and increments of 3600 GiB.</p> </li> </ul> <p>For Windows file systems:</p> <ul> <li> <p>If <code>StorageType=SSD</code>, valid values are 32 GiB - 65,536 GiB (64 TiB).</p> </li> <li> <p>If <code>StorageType=HDD</code>, valid values are 2000 GiB - 65,536 GiB (64 TiB).</p> </li> </ul>'
+          $ref: '#/components/schemas/StorageCapacity'
+          description: '<p>Sets the storage capacity of the file system that you''re creating.</p> <p>For Lustre file systems:</p> <ul> <li> <p>For <code>SCRATCH_2</code> and <code>PERSISTENT_1 SSD</code> deployment types, valid values are 1200 GiB, 2400 GiB, and increments of 2400 GiB.</p> </li> <li> <p>For <code>PERSISTENT HDD</code> file systems, valid values are increments of 6000 GiB for 12 MB/s/TiB file systems and increments of 1800 GiB for 40 MB/s/TiB file systems.</p> </li> <li> <p>For <code>SCRATCH_1</code> deployment type, valid values are 1200 GiB, 2400 GiB, and increments of 3600 GiB.</p> </li> </ul> <p>For Windows file systems:</p> <ul> <li> <p>If <code>StorageType=SSD</code>, valid values are 32 GiB - 65,536 GiB (64 TiB).</p> </li> <li> <p>If <code>StorageType=HDD</code>, valid values are 2000 GiB - 65,536 GiB (64 TiB).</p> </li> </ul>'
         StorageType:
-          allOf:
-            - $ref: '#/components/schemas/StorageType'
-            - description: '<p>Sets the storage type for the file system you''re creating. Valid values are <code>SSD</code> and <code>HDD</code>.</p> <ul> <li> <p>Set to <code>SSD</code> to use solid state drive storage. SSD is supported on all Windows and Lustre deployment types.</p> </li> <li> <p>Set to <code>HDD</code> to use hard disk drive storage. HDD is supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types, and on <code>PERSISTENT</code> Lustre file system deployment types. </p> </li> </ul> <p> Default value is <code>SSD</code>. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options"> Storage Type Options</a> in the <i>Amazon FSx for Windows User Guide</i> and <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html#storage-options">Multiple Storage Options</a> in the <i>Amazon FSx for Lustre User Guide</i>. </p>'
+          $ref: '#/components/schemas/StorageType'
+          description: '<p>Sets the storage type for the file system you''re creating. Valid values are <code>SSD</code> and <code>HDD</code>.</p> <ul> <li> <p>Set to <code>SSD</code> to use solid state drive storage. SSD is supported on all Windows and Lustre deployment types.</p> </li> <li> <p>Set to <code>HDD</code> to use hard disk drive storage. HDD is supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types, and on <code>PERSISTENT</code> Lustre file system deployment types. </p> </li> </ul> <p> Default value is <code>SSD</code>. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options"> Storage Type Options</a> in the <i>Amazon FSx for Windows User Guide</i> and <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html#storage-options">Multiple Storage Options</a> in the <i>Amazon FSx for Lustre User Guide</i>. </p>'
         SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/SubnetIds'
-            - description: '<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the <code>WindowsConfiguration &gt; PreferredSubnetID</code> property. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html"> Availability and durability: Single-AZ and Multi-AZ file systems</a>.</p> <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet''s Availability Zone.</p>'
+          $ref: '#/components/schemas/SubnetIds'
+          description: '<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the <code>WindowsConfiguration &gt; PreferredSubnetID</code> property. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html"> Availability and durability: Single-AZ and Multi-AZ file systems</a>.</p> <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet''s Availability Zone.</p>'
         SecurityGroupIds:
-          allOf:
-            - $ref: '#/components/schemas/SecurityGroupIds'
-            - description: A list of IDs specifying the security groups to apply to all network interfaces created for file system access. This list isn't returned in later requests to describe the file system.
+          $ref: '#/components/schemas/SecurityGroupIds'
+          description: A list of IDs specifying the security groups to apply to all network interfaces created for file system access. This list isn't returned in later requests to describe the file system.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags to apply to the file system being created. The key value of the <code>Name</code> tag appears in the console as the file system name.
+          $ref: '#/components/schemas/Tags'
+          description: The tags to apply to the file system being created. The key value of the <code>Name</code> tag appears in the console as the file system name.
         KmsKeyId:
           $ref: '#/components/schemas/KmsKeyId'
         WindowsConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/CreateFileSystemWindowsConfiguration'
-            - description: 'The Microsoft Windows configuration for the file system being created. '
+          $ref: '#/components/schemas/CreateFileSystemWindowsConfiguration'
+          description: 'The Microsoft Windows configuration for the file system being created. '
         LustreConfiguration:
           $ref: '#/components/schemas/CreateFileSystemLustreConfiguration'
       description: The request object used to create a new Amazon FSx file system.
@@ -1734,9 +1708,8 @@ components:
             WeeklyMaintenanceStartTime: '1:05:00'
       properties:
         FileSystem:
-          allOf:
-            - $ref: '#/components/schemas/FileSystem'
-            - description: A description of the file system.
+          $ref: '#/components/schemas/FileSystem'
+          description: A description of the file system.
       description: The response object for the <code>CreateFileSystemFromBackup</code> operation.
     CreateFileSystemFromBackupRequest:
       type: object
@@ -1748,31 +1721,25 @@ components:
         BackupId:
           $ref: '#/components/schemas/BackupId'
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
         SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/SubnetIds'
-            - description: '<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the <code>WindowsConfiguration &gt; PreferredSubnetID</code> property.</p> <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet''s Availability Zone.</p>'
+          $ref: '#/components/schemas/SubnetIds'
+          description: '<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the <code>WindowsConfiguration &gt; PreferredSubnetID</code> property.</p> <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet''s Availability Zone.</p>'
         SecurityGroupIds:
-          allOf:
-            - $ref: '#/components/schemas/SecurityGroupIds'
-            - description: A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups apply to all network interfaces. This value isn't returned in later DescribeFileSystem requests.
+          $ref: '#/components/schemas/SecurityGroupIds'
+          description: A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups apply to all network interfaces. This value isn't returned in later DescribeFileSystem requests.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The tags to be applied to the file system at file system creation. The key value of the <code>Name</code> tag appears in the console as the file system name.
+          $ref: '#/components/schemas/Tags'
+          description: The tags to be applied to the file system at file system creation. The key value of the <code>Name</code> tag appears in the console as the file system name.
         WindowsConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/CreateFileSystemWindowsConfiguration'
-            - description: The configuration for this Microsoft Windows file system.
+          $ref: '#/components/schemas/CreateFileSystemWindowsConfiguration'
+          description: The configuration for this Microsoft Windows file system.
         LustreConfiguration:
           $ref: '#/components/schemas/CreateFileSystemLustreConfiguration'
         StorageType:
-          allOf:
-            - $ref: '#/components/schemas/StorageType'
-            - description: <p>Sets the storage type for the Windows file system you're creating from a backup. Valid values are <code>SSD</code> and <code>HDD</code>.</p> <ul> <li> <p>Set to <code>SSD</code> to use solid state drive storage. Supported on all Windows deployment types.</p> </li> <li> <p>Set to <code>HDD</code> to use hard disk drive storage. Supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types. </p> </li> </ul> <p> Default value is <code>SSD</code>. </p> <note> <p>HDD and SSD storage types have different minimum storage capacity requirements. A restored file system's storage capacity is tied to the file system that was backed up. You can create a file system that uses HDD storage from a backup of a file system that used SSD storage only if the original SSD file system had a storage capacity of at least 2000 GiB. </p> </note>
+          $ref: '#/components/schemas/StorageType'
+          description: <p>Sets the storage type for the Windows file system you're creating from a backup. Valid values are <code>SSD</code> and <code>HDD</code>.</p> <ul> <li> <p>Set to <code>SSD</code> to use solid state drive storage. Supported on all Windows deployment types.</p> </li> <li> <p>Set to <code>HDD</code> to use hard disk drive storage. Supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types. </p> </li> </ul> <p> Default value is <code>SSD</code>. </p> <note> <p>HDD and SSD storage types have different minimum storage capacity requirements. A restored file system's storage capacity is tied to the file system that was backed up. You can create a file system that uses HDD storage from a backup of a file system that used SSD storage only if the original SSD file system had a storage capacity of at least 2000 GiB. </p> </note>
         KmsKeyId:
           $ref: '#/components/schemas/KmsKeyId'
       description: The request object for the <code>CreateFileSystemFromBackup</code> operation.
@@ -1783,13 +1750,11 @@ components:
         Lifecycle: DELETED
       properties:
         BackupId:
-          allOf:
-            - $ref: '#/components/schemas/BackupId'
-            - description: The ID of the backup deleted.
+          $ref: '#/components/schemas/BackupId'
+          description: The ID of the backup deleted.
         Lifecycle:
-          allOf:
-            - $ref: '#/components/schemas/BackupLifecycle'
-            - description: The lifecycle of the backup. Should be <code>DELETED</code>.
+          $ref: '#/components/schemas/BackupLifecycle'
+          description: The lifecycle of the backup. Should be <code>DELETED</code>.
       description: The response object for <code>DeleteBackup</code> operation.
     DeleteBackupRequest:
       type: object
@@ -1798,13 +1763,11 @@ components:
       title: DeleteBackupRequest
       properties:
         BackupId:
-          allOf:
-            - $ref: '#/components/schemas/BackupId'
-            - description: The ID of the backup you want to delete.
+          $ref: '#/components/schemas/BackupId'
+          description: The ID of the backup you want to delete.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent deletion. This is automatically filled on your behalf when using the AWS CLI or SDK.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent deletion. This is automatically filled on your behalf when using the AWS CLI or SDK.
       description: The request object for <code>DeleteBackup</code> operation.
     BackupRestoring: {}
     BackupBeingCopied: {}
@@ -1815,13 +1778,11 @@ components:
         Lifecycle: DELETING
       properties:
         FileSystemId:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemId'
-            - description: The ID of the file system being deleted.
+          $ref: '#/components/schemas/FileSystemId'
+          description: The ID of the file system being deleted.
         Lifecycle:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemLifecycle'
-            - description: The file system lifecycle for the deletion request. Should be <code>DELETING</code>.
+          $ref: '#/components/schemas/FileSystemLifecycle'
+          description: The file system lifecycle for the deletion request. Should be <code>DELETING</code>.
         WindowsResponse:
           $ref: '#/components/schemas/DeleteFileSystemWindowsResponse'
         LustreResponse:
@@ -1834,13 +1795,11 @@ components:
       title: DeleteFileSystemRequest
       properties:
         FileSystemId:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemId'
-            - description: The ID of the file system you want to delete.
+          $ref: '#/components/schemas/FileSystemId'
+          description: The ID of the file system you want to delete.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent deletion. This is automatically filled on your behalf when using the AWS CLI or SDK.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent deletion. This is automatically filled on your behalf when using the AWS CLI or SDK.
         WindowsConfiguration:
           $ref: '#/components/schemas/DeleteFileSystemWindowsConfiguration'
         LustreConfiguration:
@@ -1869,42 +1828,35 @@ components:
             Type: USER_INITIATED
       properties:
         Backups:
-          allOf:
-            - $ref: '#/components/schemas/Backups'
-            - description: An array of backups.
+          $ref: '#/components/schemas/Backups'
+          description: An array of backups.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'This is present if there are more backups than returned in the response (String). You can use the <code>NextToken</code> value in the later request to fetch the backups. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'This is present if there are more backups than returned in the response (String). You can use the <code>NextToken</code> value in the later request to fetch the backups. '
       description: Response object for <code>DescribeBackups</code> operation.
     DescribeBackupsRequest:
       type: object
       title: DescribeBackupsRequest
       properties:
         BackupIds:
-          allOf:
-            - $ref: '#/components/schemas/BackupIds'
-            - description: 'IDs of the backups you want to retrieve (String). This overrides any filters. If any IDs are not found, BackupNotFound will be thrown.'
+          $ref: '#/components/schemas/BackupIds'
+          description: 'IDs of the backups you want to retrieve (String). This overrides any filters. If any IDs are not found, BackupNotFound will be thrown.'
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/Filters'
-            - description: Filters structure. Supported names are file-system-id and backup-type.
+          $ref: '#/components/schemas/Filters'
+          description: Filters structure. Supported names are file-system-id and backup-type.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: Maximum number of backups to return in the response (integer). This parameter value must be greater than 0. The number of items that Amazon FSx returns is the minimum of the <code>MaxResults</code> parameter specified in the request and the service's internal maximum number of items per page.
+          $ref: '#/components/schemas/MaxResults'
+          description: Maximum number of backups to return in the response (integer). This parameter value must be greater than 0. The number of items that Amazon FSx returns is the minimum of the <code>MaxResults</code> parameter specified in the request and the service's internal maximum number of items per page.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'Opaque pagination token returned from a previous <code>DescribeBackups</code> operation (String). If a token present, the action continues the list from where the returning call left off.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'Opaque pagination token returned from a previous <code>DescribeBackups</code> operation (String). If a token present, the action continues the list from where the returning call left off.'
       description: The request object for <code>DescribeBackups</code> operation.
     DescribeDataRepositoryTasksResponse:
       type: object
       properties:
         DataRepositoryTasks:
-          allOf:
-            - $ref: '#/components/schemas/DataRepositoryTasks'
-            - description: The collection of data repository task descriptions returned.
+          $ref: '#/components/schemas/DataRepositoryTasks'
+          description: The collection of data repository task descriptions returned.
         NextToken:
           $ref: '#/components/schemas/NextToken'
     DescribeDataRepositoryTasksRequest:
@@ -1912,13 +1864,11 @@ components:
       title: DescribeDataRepositoryTasksRequest
       properties:
         TaskIds:
-          allOf:
-            - $ref: '#/components/schemas/TaskIds'
-            - description: (Optional) IDs of the tasks whose descriptions you want to retrieve (String).
+          $ref: '#/components/schemas/TaskIds'
+          description: (Optional) IDs of the tasks whose descriptions you want to retrieve (String).
         Filters:
-          allOf:
-            - $ref: '#/components/schemas/DataRepositoryTaskFilters'
-            - description: '(Optional) You can use filters to narrow the <code>DescribeDataRepositoryTasks</code> response to include just tasks for specific file systems, or tasks in a specific lifecycle state.'
+          $ref: '#/components/schemas/DataRepositoryTaskFilters'
+          description: '(Optional) You can use filters to narrow the <code>DescribeDataRepositoryTasks</code> response to include just tasks for specific file systems, or tasks in a specific lifecycle state.'
         MaxResults:
           $ref: '#/components/schemas/MaxResults'
         NextToken:
@@ -1927,13 +1877,11 @@ components:
       type: object
       properties:
         Aliases:
-          allOf:
-            - $ref: '#/components/schemas/Aliases'
-            - description: An array of one or more DNS aliases currently associated with the specified file system.
+          $ref: '#/components/schemas/Aliases'
+          description: An array of one or more DNS aliases currently associated with the specified file system.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'Present if there are more DNS aliases than returned in the response (String). You can use the <code>NextToken</code> value in a later request to fetch additional descriptions. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'Present if there are more DNS aliases than returned in the response (String). You can use the <code>NextToken</code> value in a later request to fetch additional descriptions. '
       description: The response object for <code>DescribeFileSystemAliases</code> operation.
     DescribeFileSystemAliasesRequest:
       type: object
@@ -1944,17 +1892,14 @@ components:
         ClientRequestToken:
           $ref: '#/components/schemas/ClientRequestToken'
         FileSystemId:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemId'
-            - description: The ID of the file system to return the associated DNS aliases for (String).
+          $ref: '#/components/schemas/FileSystemId'
+          description: The ID of the file system to return the associated DNS aliases for (String).
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: Maximum number of DNS aliases to return in the response (integer). This parameter value must be greater than 0. The number of items that Amazon FSx returns is the minimum of the <code>MaxResults</code> parameter specified in the request and the service's internal maximum number of items per page.
+          $ref: '#/components/schemas/MaxResults'
+          description: Maximum number of DNS aliases to return in the response (integer). This parameter value must be greater than 0. The number of items that Amazon FSx returns is the minimum of the <code>MaxResults</code> parameter specified in the request and the service's internal maximum number of items per page.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'Opaque pagination token returned from a previous <code>DescribeFileSystemAliases</code> operation (String). If a token is included in the request, the action continues the list from where the previous returning call left off.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'Opaque pagination token returned from a previous <code>DescribeFileSystemAliases</code> operation (String). If a token is included in the request, the action continues the list from where the previous returning call left off.'
       description: The request object for <code>DescribeFileSystemAliases</code> operation.
     DescribeFileSystemsResponse:
       type: object
@@ -1984,38 +1929,32 @@ components:
               WeeklyMaintenanceStartTime: '1:05:00'
       properties:
         FileSystems:
-          allOf:
-            - $ref: '#/components/schemas/FileSystems'
-            - description: An array of file system descriptions.
+          $ref: '#/components/schemas/FileSystems'
+          description: An array of file system descriptions.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'Present if there are more file systems than returned in the response (String). You can use the <code>NextToken</code> value in the later request to fetch the descriptions. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'Present if there are more file systems than returned in the response (String). You can use the <code>NextToken</code> value in the later request to fetch the descriptions. '
       description: The response object for <code>DescribeFileSystems</code> operation.
     DescribeFileSystemsRequest:
       type: object
       title: DescribeFileSystemsRequest
       properties:
         FileSystemIds:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemIds'
-            - description: IDs of the file systems whose descriptions you want to retrieve (String).
+          $ref: '#/components/schemas/FileSystemIds'
+          description: IDs of the file systems whose descriptions you want to retrieve (String).
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: Maximum number of file systems to return in the response (integer). This parameter value must be greater than 0. The number of items that Amazon FSx returns is the minimum of the <code>MaxResults</code> parameter specified in the request and the service's internal maximum number of items per page.
+          $ref: '#/components/schemas/MaxResults'
+          description: Maximum number of file systems to return in the response (integer). This parameter value must be greater than 0. The number of items that Amazon FSx returns is the minimum of the <code>MaxResults</code> parameter specified in the request and the service's internal maximum number of items per page.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'Opaque pagination token returned from a previous <code>DescribeFileSystems</code> operation (String). If a token present, the action continues the list from where the returning call left off.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'Opaque pagination token returned from a previous <code>DescribeFileSystems</code> operation (String). If a token present, the action continues the list from where the returning call left off.'
       description: The request object for <code>DescribeFileSystems</code> operation.
     DisassociateFileSystemAliasesResponse:
       type: object
       properties:
         Aliases:
-          allOf:
-            - $ref: '#/components/schemas/Aliases'
-            - description: An array of one or more DNS aliases that Amazon FSx is attempting to disassociate from the file system.
+          $ref: '#/components/schemas/Aliases'
+          description: An array of one or more DNS aliases that Amazon FSx is attempting to disassociate from the file system.
       description: The system generated response showing the DNS aliases that Amazon FSx is attempting to disassociate from the file system. Use the API operation to monitor the status of the aliases Amazon FSx is removing from the file system.
     DisassociateFileSystemAliasesRequest:
       type: object
@@ -2027,13 +1966,11 @@ components:
         ClientRequestToken:
           $ref: '#/components/schemas/ClientRequestToken'
         FileSystemId:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemId'
-            - description: Specifies the file system from which to disassociate the DNS aliases.
+          $ref: '#/components/schemas/FileSystemId'
+          description: Specifies the file system from which to disassociate the DNS aliases.
         Aliases:
-          allOf:
-            - $ref: '#/components/schemas/AlternateDNSNames'
-            - description: 'An array of one or more DNS alias names to disassociate, or remove, from the file system.'
+          $ref: '#/components/schemas/AlternateDNSNames'
+          description: 'An array of one or more DNS alias names to disassociate, or remove, from the file system.'
       description: The request object of DNS aliases to disassociate from an Amazon FSx for Windows File Server file system.
     ListTagsForResourceResponse:
       type: object
@@ -2043,13 +1980,11 @@ components:
             Value: MyFileSystem
       properties:
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: A list of tags on the resource.
+          $ref: '#/components/schemas/Tags'
+          description: A list of tags on the resource.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'This is present if there are more tags than returned in the response (String). You can use the <code>NextToken</code> value in the later request to fetch the tags. '
+          $ref: '#/components/schemas/NextToken'
+          description: 'This is present if there are more tags than returned in the response (String). You can use the <code>NextToken</code> value in the later request to fetch the tags. '
       description: The response object for <code>ListTagsForResource</code> operation.
     ListTagsForResourceRequest:
       type: object
@@ -2058,17 +1993,14 @@ components:
       title: ListTagsForResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/ResourceARN'
-            - description: The ARN of the Amazon FSx resource that will have its tags listed.
+          $ref: '#/components/schemas/ResourceARN'
+          description: The ARN of the Amazon FSx resource that will have its tags listed.
         MaxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: Maximum number of tags to return in the response (integer). This parameter value must be greater than 0. The number of items that Amazon FSx returns is the minimum of the <code>MaxResults</code> parameter specified in the request and the service's internal maximum number of items per page.
+          $ref: '#/components/schemas/MaxResults'
+          description: Maximum number of tags to return in the response (integer). This parameter value must be greater than 0. The number of items that Amazon FSx returns is the minimum of the <code>MaxResults</code> parameter specified in the request and the service's internal maximum number of items per page.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: 'Opaque pagination token returned from a previous <code>ListTagsForResource</code> operation (String). If a token present, the action continues the list from where the returning call left off.'
+          $ref: '#/components/schemas/NextToken'
+          description: 'Opaque pagination token returned from a previous <code>ListTagsForResource</code> operation (String). If a token present, the action continues the list from where the returning call left off.'
       description: The request object for <code>ListTagsForResource</code> operation.
     ResourceNotFound: {}
     NotServiceResourceError: {}
@@ -2085,13 +2017,11 @@ components:
       title: TagResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/ResourceARN'
-            - description: The Amazon Resource Name (ARN) of the Amazon FSx resource that you want to tag.
+          $ref: '#/components/schemas/ResourceARN'
+          description: The Amazon Resource Name (ARN) of the Amazon FSx resource that you want to tag.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'A list of tags for the resource. If a tag with a given key already exists, the value is replaced by the one specified in this parameter.'
+          $ref: '#/components/schemas/Tags'
+          description: 'A list of tags for the resource. If a tag with a given key already exists, the value is replaced by the one specified in this parameter.'
       description: The request object for the <code>TagResource</code> operation.
     UntagResourceResponse:
       type: object
@@ -2105,13 +2035,11 @@ components:
       title: UntagResourceRequest
       properties:
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/ResourceARN'
-            - description: The ARN of the Amazon FSx resource to untag.
+          $ref: '#/components/schemas/ResourceARN'
+          description: The ARN of the Amazon FSx resource to untag.
         TagKeys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeys'
-            - description: 'A list of keys of tags on the resource to untag. In case the tag key doesn''t exist, the call will still succeed to be idempotent.'
+          $ref: '#/components/schemas/TagKeys'
+          description: 'A list of keys of tags on the resource to untag. In case the tag key doesn''t exist, the call will still succeed to be idempotent.'
       description: The request object for <code>UntagResource</code> action.
     UpdateFileSystemResponse:
       type: object
@@ -2138,9 +2066,8 @@ components:
             WeeklyMaintenanceStartTime: '3:06:00'
       properties:
         FileSystem:
-          allOf:
-            - $ref: '#/components/schemas/FileSystem'
-            - description: A description of the file system that was updated.
+          $ref: '#/components/schemas/FileSystem'
+          description: A description of the file system that was updated.
       description: The response object for the <code>UpdateFileSystem</code> operation.
     UpdateFileSystemRequest:
       type: object
@@ -2149,21 +2076,17 @@ components:
       title: UpdateFileSystemRequest
       properties:
         FileSystemId:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemId'
-            - description: Identifies the file system that you are updating.
+          $ref: '#/components/schemas/FileSystemId'
+          description: Identifies the file system that you are updating.
         ClientRequestToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientRequestToken'
-            - description: A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent updates. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent updates. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
         StorageCapacity:
-          allOf:
-            - $ref: '#/components/schemas/StorageCapacity'
-            - description: '<p>Use this parameter to increase the storage capacity of an Amazon FSx file system. Specifies the storage capacity target value, GiB, to increase the storage capacity for the file system that you''re updating. You cannot make a storage capacity increase request if there is an existing storage capacity increase request in progress.</p> <p>For Windows file systems, the storage capacity target value must be at least 10 percent (%) greater than the current storage capacity value. In order to increase storage capacity, the file system must have at least 16 MB/s of throughput capacity.</p> <p>For Lustre file systems, the storage capacity target value can be the following:</p> <ul> <li> <p>For <code>SCRATCH_2</code> and <code>PERSISTENT_1 SSD</code> deployment types, valid values are in multiples of 2400 GiB. The value must be greater than the current storage capacity.</p> </li> <li> <p>For <code>PERSISTENT HDD</code> file systems, valid values are multiples of 6000 GiB for 12 MB/s/TiB file systems and multiples of 1800 GiB for 40 MB/s/TiB file systems. The values must be greater than the current storage capacity.</p> </li> <li> <p>For <code>SCRATCH_1</code> file systems, you cannot increase the storage capacity.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html">Managing storage capacity</a> in the <i>Amazon FSx for Windows File Server User Guide</i> and <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html">Managing storage and throughput capacity</a> in the <i>Amazon FSx for Lustre User Guide</i>.</p>'
+          $ref: '#/components/schemas/StorageCapacity'
+          description: '<p>Use this parameter to increase the storage capacity of an Amazon FSx file system. Specifies the storage capacity target value, GiB, to increase the storage capacity for the file system that you''re updating. You cannot make a storage capacity increase request if there is an existing storage capacity increase request in progress.</p> <p>For Windows file systems, the storage capacity target value must be at least 10 percent (%) greater than the current storage capacity value. In order to increase storage capacity, the file system must have at least 16 MB/s of throughput capacity.</p> <p>For Lustre file systems, the storage capacity target value can be the following:</p> <ul> <li> <p>For <code>SCRATCH_2</code> and <code>PERSISTENT_1 SSD</code> deployment types, valid values are in multiples of 2400 GiB. The value must be greater than the current storage capacity.</p> </li> <li> <p>For <code>PERSISTENT HDD</code> file systems, valid values are multiples of 6000 GiB for 12 MB/s/TiB file systems and multiples of 1800 GiB for 40 MB/s/TiB file systems. The values must be greater than the current storage capacity.</p> </li> <li> <p>For <code>SCRATCH_1</code> file systems, you cannot increase the storage capacity.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html">Managing storage capacity</a> in the <i>Amazon FSx for Windows File Server User Guide</i> and <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html">Managing storage and throughput capacity</a> in the <i>Amazon FSx for Lustre User Guide</i>.</p>'
         WindowsConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/UpdateFileSystemWindowsConfiguration'
-            - description: The configuration updates for an Amazon FSx for Windows File Server file system.
+          $ref: '#/components/schemas/UpdateFileSystemWindowsConfiguration'
+          description: The configuration updates for an Amazon FSx for Windows File Server file system.
         LustreConfiguration:
           $ref: '#/components/schemas/UpdateFileSystemLustreConfiguration'
       description: The request object for the <code>UpdateFileSystem</code> operation.
@@ -2193,13 +2116,11 @@ components:
       type: object
       properties:
         DomainName:
-          allOf:
-            - $ref: '#/components/schemas/ActiveDirectoryFullyQualifiedName'
-            - description: The fully qualified domain name of the self-managed AD directory.
+          $ref: '#/components/schemas/ActiveDirectoryFullyQualifiedName'
+          description: The fully qualified domain name of the self-managed AD directory.
         ActiveDirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The ID of the AWS Managed Microsoft Active Directory instance to which the file system is joined.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The ID of the AWS Managed Microsoft Active Directory instance to which the file system is joined.
         ResourceARN:
           $ref: '#/components/schemas/ResourceARN'
       description: The Microsoft AD attributes of the Amazon FSx for Windows File Server file system.
@@ -2231,81 +2152,64 @@ components:
       type: object
       properties:
         OwnerId:
-          allOf:
-            - $ref: '#/components/schemas/AWSAccountId'
-            - description: 'The AWS account that created the file system. If the file system was created by an AWS Identity and Access Management (IAM) user, the AWS account to which the IAM user belongs is the owner.'
+          $ref: '#/components/schemas/AWSAccountId'
+          description: 'The AWS account that created the file system. If the file system was created by an AWS Identity and Access Management (IAM) user, the AWS account to which the IAM user belongs is the owner.'
         CreationTime:
-          allOf:
-            - $ref: '#/components/schemas/CreationTime'
-            - description: 'The time that the file system was created, in seconds (since 1970-01-01T00:00:00Z), also known as Unix time.'
+          $ref: '#/components/schemas/CreationTime'
+          description: 'The time that the file system was created, in seconds (since 1970-01-01T00:00:00Z), also known as Unix time.'
         FileSystemId:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemId'
-            - description: 'The system-generated, unique 17-digit ID of the file system.'
+          $ref: '#/components/schemas/FileSystemId'
+          description: 'The system-generated, unique 17-digit ID of the file system.'
         FileSystemType:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemType'
-            - description: 'The type of Amazon FSx file system, either <code>LUSTRE</code> or <code>WINDOWS</code>.'
+          $ref: '#/components/schemas/FileSystemType'
+          description: 'The type of Amazon FSx file system, either <code>LUSTRE</code> or <code>WINDOWS</code>.'
         Lifecycle:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemLifecycle'
-            - description: '<p>The lifecycle status of the file system, following are the possible values and what they mean:</p> <ul> <li> <p> <code>AVAILABLE</code> - The file system is in a healthy state, and is reachable and available for use.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the new file system.</p> </li> <li> <p> <code>DELETING</code> - Amazon FSx is deleting an existing file system.</p> </li> <li> <p> <code>FAILED</code> - An existing file system has experienced an unrecoverable failure. When creating a new file system, Amazon FSx was unable to create the file system.</p> </li> <li> <p> <code>MISCONFIGURED</code> indicates that the file system is in a failed but recoverable state.</p> </li> <li> <p> <code>UPDATING</code> indicates that the file system is undergoing a customer initiated update.</p> </li> </ul>'
+          $ref: '#/components/schemas/FileSystemLifecycle'
+          description: '<p>The lifecycle status of the file system, following are the possible values and what they mean:</p> <ul> <li> <p> <code>AVAILABLE</code> - The file system is in a healthy state, and is reachable and available for use.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the new file system.</p> </li> <li> <p> <code>DELETING</code> - Amazon FSx is deleting an existing file system.</p> </li> <li> <p> <code>FAILED</code> - An existing file system has experienced an unrecoverable failure. When creating a new file system, Amazon FSx was unable to create the file system.</p> </li> <li> <p> <code>MISCONFIGURED</code> indicates that the file system is in a failed but recoverable state.</p> </li> <li> <p> <code>UPDATING</code> indicates that the file system is undergoing a customer initiated update.</p> </li> </ul>'
         FailureDetails:
           $ref: '#/components/schemas/FileSystemFailureDetails'
         StorageCapacity:
-          allOf:
-            - $ref: '#/components/schemas/StorageCapacity'
-            - description: The storage capacity of the file system in gibibytes (GiB).
+          $ref: '#/components/schemas/StorageCapacity'
+          description: The storage capacity of the file system in gibibytes (GiB).
         StorageType:
-          allOf:
-            - $ref: '#/components/schemas/StorageType'
-            - description: 'The storage type of the file system. Valid values are <code>SSD</code> and <code>HDD</code>. If set to <code>SSD</code>, the file system uses solid state drive storage. If set to <code>HDD</code>, the file system uses hard disk drive storage. '
+          $ref: '#/components/schemas/StorageType'
+          description: 'The storage type of the file system. Valid values are <code>SSD</code> and <code>HDD</code>. If set to <code>SSD</code>, the file system uses solid state drive storage. If set to <code>HDD</code>, the file system uses hard disk drive storage. '
         VpcId:
-          allOf:
-            - $ref: '#/components/schemas/VpcId'
-            - description: The ID of the primary VPC for the file system.
+          $ref: '#/components/schemas/VpcId'
+          description: The ID of the primary VPC for the file system.
         SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/SubnetIds'
-            - description: '<p>Specifies the IDs of the subnets that the file system is accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment type, there are two subnet IDs, one for the preferred file server and one for the standby file server. The preferred file server subnet identified in the <code>PreferredSubnetID</code> property. All other file systems have only one subnet ID.</p> <p>For Lustre file systems, and Single-AZ Windows file systems, this is the ID of the subnet that contains the endpoint for the file system. For <code>MULTI_AZ_1</code> Windows file systems, the endpoint for the file system is available in the <code>PreferredSubnetID</code>.</p>'
+          $ref: '#/components/schemas/SubnetIds'
+          description: '<p>Specifies the IDs of the subnets that the file system is accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment type, there are two subnet IDs, one for the preferred file server and one for the standby file server. The preferred file server subnet identified in the <code>PreferredSubnetID</code> property. All other file systems have only one subnet ID.</p> <p>For Lustre file systems, and Single-AZ Windows file systems, this is the ID of the subnet that contains the endpoint for the file system. For <code>MULTI_AZ_1</code> Windows file systems, the endpoint for the file system is available in the <code>PreferredSubnetID</code>.</p>'
         NetworkInterfaceIds:
-          allOf:
-            - $ref: '#/components/schemas/NetworkInterfaceIds'
-            - description: '<p>The IDs of the elastic network interface from which a specific file system is accessible. The elastic network interface is automatically created in the same VPC that the Amazon FSx file system was created in. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html">Elastic Network Interfaces</a> in the <i>Amazon EC2 User Guide.</i> </p> <p>For an Amazon FSx for Windows File Server file system, you can have one network interface ID. For an Amazon FSx for Lustre file system, you can have more than one.</p>'
+          $ref: '#/components/schemas/NetworkInterfaceIds'
+          description: '<p>The IDs of the elastic network interface from which a specific file system is accessible. The elastic network interface is automatically created in the same VPC that the Amazon FSx file system was created in. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html">Elastic Network Interfaces</a> in the <i>Amazon EC2 User Guide.</i> </p> <p>For an Amazon FSx for Windows File Server file system, you can have one network interface ID. For an Amazon FSx for Lustre file system, you can have more than one.</p>'
         DNSName:
-          allOf:
-            - $ref: '#/components/schemas/DNSName'
-            - description: The DNS name for the file system.
+          $ref: '#/components/schemas/DNSName'
+          description: The DNS name for the file system.
         KmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyId'
-            - description: 'The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system''s data for Amazon FSx for Windows File Server file systems and persistent Amazon FSx for Lustre file systems at rest. In either case, if not specified, the Amazon FSx managed key is used. The scratch Amazon FSx for Lustre file systems are always encrypted at rest using Amazon FSx managed keys. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html">Encrypt</a> in the <i>AWS Key Management Service API Reference</i>.'
+          $ref: '#/components/schemas/KmsKeyId'
+          description: 'The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system''s data for Amazon FSx for Windows File Server file systems and persistent Amazon FSx for Lustre file systems at rest. In either case, if not specified, the Amazon FSx managed key is used. The scratch Amazon FSx for Lustre file systems are always encrypted at rest using Amazon FSx managed keys. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html">Encrypt</a> in the <i>AWS Key Management Service API Reference</i>.'
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/ResourceARN'
-            - description: The Amazon Resource Name (ARN) for the file system resource.
+          $ref: '#/components/schemas/ResourceARN'
+          description: The Amazon Resource Name (ARN) for the file system resource.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'The tags to associate with the file system. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging Your Amazon EC2 Resources</a> in the <i>Amazon EC2 User Guide</i>.'
+          $ref: '#/components/schemas/Tags'
+          description: 'The tags to associate with the file system. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging Your Amazon EC2 Resources</a> in the <i>Amazon EC2 User Guide</i>.'
         WindowsConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/WindowsFileSystemConfiguration'
-            - description: The configuration for this Microsoft Windows file system.
+          $ref: '#/components/schemas/WindowsFileSystemConfiguration'
+          description: The configuration for this Microsoft Windows file system.
         LustreConfiguration:
           $ref: '#/components/schemas/LustreFileSystemConfiguration'
         AdministrativeActions:
-          allOf:
-            - $ref: '#/components/schemas/AdministrativeActions'
-            - description: 'A list of administrative actions for the file system that are in process or waiting to be processed. Administrative actions describe changes to the Windows file system that you have initiated using the <code>UpdateFileSystem</code> action. '
+          $ref: '#/components/schemas/AdministrativeActions'
+          description: 'A list of administrative actions for the file system that are in process or waiting to be processed. Administrative actions describe changes to the Windows file system that you have initiated using the <code>UpdateFileSystem</code> action. '
       description: A description of a specific Amazon FSx file system.
     AdministrativeActionFailureDetails:
       type: object
       properties:
         Message:
-          allOf:
-            - $ref: '#/components/schemas/ErrorMessage'
-            - description: Error message providing details about the failed administrative action.
+          $ref: '#/components/schemas/ErrorMessage'
+          description: Error message providing details about the failed administrative action.
       description: Provides information about a failed administrative action.
     AdministrativeAction:
       type: object
@@ -2313,21 +2217,17 @@ components:
         AdministrativeActionType:
           $ref: '#/components/schemas/AdministrativeActionType'
         ProgressPercent:
-          allOf:
-            - $ref: '#/components/schemas/ProgressPercent'
-            - description: Provides the percent complete of a <code>STORAGE_OPTIMIZATION</code> administrative action. Does not apply to any other administrative action type.
+          $ref: '#/components/schemas/ProgressPercent'
+          description: Provides the percent complete of a <code>STORAGE_OPTIMIZATION</code> administrative action. Does not apply to any other administrative action type.
         RequestTime:
-          allOf:
-            - $ref: '#/components/schemas/RequestTime'
-            - description: Time that the administrative action request was received.
+          $ref: '#/components/schemas/RequestTime'
+          description: Time that the administrative action request was received.
         Status:
-          allOf:
-            - $ref: '#/components/schemas/Status'
-            - description: '<p>Describes the status of the administrative action, as follows:</p> <ul> <li> <p> <code>FAILED</code> - Amazon FSx failed to process the administrative action successfully.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Amazon FSx is processing the administrative action.</p> </li> <li> <p> <code>PENDING</code> - Amazon FSx is waiting to process the administrative action.</p> </li> <li> <p> <code>COMPLETED</code> - Amazon FSx has finished processing the administrative task.</p> </li> <li> <p> <code>UPDATED_OPTIMIZING</code> - For a storage capacity increase update, Amazon FSx has updated the file system with the new storage capacity, and is now performing the storage optimization process. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html">Managing storage capacity</a> in the <i>Amazon FSx for Windows File Server User Guide</i> and <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html">Managing storage and throughput capacity</a> in the <i>Amazon FSx for Lustre User Guide</i>.</p> </li> </ul>'
+          $ref: '#/components/schemas/Status'
+          description: '<p>Describes the status of the administrative action, as follows:</p> <ul> <li> <p> <code>FAILED</code> - Amazon FSx failed to process the administrative action successfully.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Amazon FSx is processing the administrative action.</p> </li> <li> <p> <code>PENDING</code> - Amazon FSx is waiting to process the administrative action.</p> </li> <li> <p> <code>COMPLETED</code> - Amazon FSx has finished processing the administrative task.</p> </li> <li> <p> <code>UPDATED_OPTIMIZING</code> - For a storage capacity increase update, Amazon FSx has updated the file system with the new storage capacity, and is now performing the storage optimization process. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html">Managing storage capacity</a> in the <i>Amazon FSx for Windows File Server User Guide</i> and <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html">Managing storage and throughput capacity</a> in the <i>Amazon FSx for Lustre User Guide</i>.</p> </li> </ul>'
         TargetFileSystemValues:
-          allOf:
-            - $ref: '#/components/schemas/FileSystem'
-            - description: 'Describes the target value for the administration action, provided in the <code>UpdateFileSystem</code> operation. Returned for <code>FILE_SYSTEM_UPDATE</code> administrative actions. '
+          $ref: '#/components/schemas/FileSystem'
+          description: 'Describes the target value for the administration action, provided in the <code>UpdateFileSystem</code> operation. Returned for <code>FILE_SYSTEM_UPDATE</code> administrative actions. '
         FailureDetails:
           $ref: '#/components/schemas/AdministrativeActionFailureDetails'
       description: Describes a specific Amazon FSx administrative action for the current Windows or Lustre file system.
@@ -2358,13 +2258,11 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/AlternateDNSName'
-            - description: '<p>The name of the DNS alias. The alias name has to meet the following requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters, the underscore (_), and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>'
+          $ref: '#/components/schemas/AlternateDNSName'
+          description: '<p>The name of the DNS alias. The alias name has to meet the following requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters, the underscore (_), and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>'
         Lifecycle:
-          allOf:
-            - $ref: '#/components/schemas/AliasLifecycle'
-            - description: <p>Describes the state of the DNS alias.</p> <ul> <li> <p>AVAILABLE - The DNS alias is associated with an Amazon FSx file system.</p> </li> <li> <p>CREATING - Amazon FSx is creating the DNS alias and associating it with the file system.</p> </li> <li> <p>CREATE_FAILED - Amazon FSx was unable to associate the DNS alias with the file system.</p> </li> <li> <p>DELETING - Amazon FSx is disassociating the DNS alias from the file system and deleting it.</p> </li> <li> <p>DELETE_FAILED - Amazon FSx was unable to disassocate the DNS alias from the file system.</p> </li> </ul>
+          $ref: '#/components/schemas/AliasLifecycle'
+          description: <p>Describes the state of the DNS alias.</p> <ul> <li> <p>AVAILABLE - The DNS alias is associated with an Amazon FSx file system.</p> </li> <li> <p>CREATING - Amazon FSx is creating the DNS alias and associating it with the file system.</p> </li> <li> <p>CREATE_FAILED - Amazon FSx was unable to associate the DNS alias with the file system.</p> </li> <li> <p>DELETING - Amazon FSx is disassociating the DNS alias from the file system and deleting it.</p> </li> <li> <p>DELETE_FAILED - Amazon FSx was unable to disassocate the DNS alias from the file system.</p> </li> </ul>
       description: 'A DNS alias that is associated with the file system. You can use a DNS alias to access a file system using user-defined DNS names, in addition to the default DNS name that Amazon FSx assigns to the file system. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html">DNS aliases</a> in the <i>FSx for Windows File Server User Guide</i>.'
     Aliases:
       type: array
@@ -2426,9 +2324,8 @@ components:
       type: object
       properties:
         Message:
-          allOf:
-            - $ref: '#/components/schemas/ErrorMessage'
-            - description: A message describing the backup creation failure.
+          $ref: '#/components/schemas/ErrorMessage'
+          description: A message describing the backup creation failure.
       description: 'If backup creation fails, this structure contains the details of that failure.'
     BackupType:
       type: string
@@ -2469,55 +2366,44 @@ components:
         - FileSystem
       properties:
         BackupId:
-          allOf:
-            - $ref: '#/components/schemas/BackupId'
-            - description: The ID of the backup.
+          $ref: '#/components/schemas/BackupId'
+          description: The ID of the backup.
         Lifecycle:
-          allOf:
-            - $ref: '#/components/schemas/BackupLifecycle'
-            - description: <p>The lifecycle status of the backup.</p> <ul> <li> <p> <code>AVAILABLE</code> - The backup is fully available.</p> </li> <li> <p> <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the backup.</p> </li> <li> <p> <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is transferring the backup to S3.</p> </li> <li> <p> <code>COPYING</code> - Amazon FSx is copying the backup.</p> </li> <li> <p> <code>DELETED</code> - Amazon FSx deleted the backup and it is no longer available.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx could not complete the backup.</p> </li> </ul>
+          $ref: '#/components/schemas/BackupLifecycle'
+          description: <p>The lifecycle status of the backup.</p> <ul> <li> <p> <code>AVAILABLE</code> - The backup is fully available.</p> </li> <li> <p> <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the backup.</p> </li> <li> <p> <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is transferring the backup to S3.</p> </li> <li> <p> <code>COPYING</code> - Amazon FSx is copying the backup.</p> </li> <li> <p> <code>DELETED</code> - Amazon FSx deleted the backup and it is no longer available.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx could not complete the backup.</p> </li> </ul>
         FailureDetails:
-          allOf:
-            - $ref: '#/components/schemas/BackupFailureDetails'
-            - description: Details explaining any failures that occur when creating a backup.
+          $ref: '#/components/schemas/BackupFailureDetails'
+          description: Details explaining any failures that occur when creating a backup.
         Type:
-          allOf:
-            - $ref: '#/components/schemas/BackupType'
-            - description: The type of the file system backup.
+          $ref: '#/components/schemas/BackupType'
+          description: The type of the file system backup.
         ProgressPercent:
           $ref: '#/components/schemas/ProgressPercent'
         CreationTime:
-          allOf:
-            - $ref: '#/components/schemas/CreationTime'
-            - description: The time when a particular backup was created.
+          $ref: '#/components/schemas/CreationTime'
+          description: The time when a particular backup was created.
         KmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyId'
-            - description: 'The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the backup of the Amazon FSx file system''s data at rest. '
+          $ref: '#/components/schemas/KmsKeyId'
+          description: 'The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the backup of the Amazon FSx file system''s data at rest. '
         ResourceARN:
-          allOf:
-            - $ref: '#/components/schemas/ResourceARN'
-            - description: The Amazon Resource Name (ARN) for the backup resource.
+          $ref: '#/components/schemas/ResourceARN'
+          description: The Amazon Resource Name (ARN) for the backup resource.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: Tags associated with a particular file system.
+          $ref: '#/components/schemas/Tags'
+          description: Tags associated with a particular file system.
         FileSystem:
-          allOf:
-            - $ref: '#/components/schemas/FileSystem'
-            - description: Metadata of the file system associated with the backup. This metadata is persisted even if the file system is deleted.
+          $ref: '#/components/schemas/FileSystem'
+          description: Metadata of the file system associated with the backup. This metadata is persisted even if the file system is deleted.
         DirectoryInformation:
-          allOf:
-            - $ref: '#/components/schemas/ActiveDirectoryBackupAttributes'
-            - description: The configuration of the self-managed Microsoft Active Directory (AD) to which the Windows File Server instance is joined.
+          $ref: '#/components/schemas/ActiveDirectoryBackupAttributes'
+          description: The configuration of the self-managed Microsoft Active Directory (AD) to which the Windows File Server instance is joined.
         OwnerId:
           $ref: '#/components/schemas/AWSAccountId'
         SourceBackupId:
           $ref: '#/components/schemas/BackupId'
         SourceBackupRegion:
-          allOf:
-            - $ref: '#/components/schemas/Region'
-            - description: The source Region of the backup. Specifies the Region from where this backup is copied.
+          $ref: '#/components/schemas/Region'
+          description: The source Region of the backup. Specifies the Region from where this backup is copied.
       description: A backup of an Amazon FSx file system.
     BackupIds:
       type: array
@@ -2561,21 +2447,17 @@ components:
         - Enabled
       properties:
         Enabled:
-          allOf:
-            - $ref: '#/components/schemas/Flag'
-            - description: 'Set <code>Enabled</code> to <code>True</code> to generate a <code>CompletionReport</code> when the task completes. If set to <code>true</code>, then you need to provide a report <code>Scope</code>, <code>Path</code>, and <code>Format</code>. Set <code>Enabled</code> to <code>False</code> if you do not want a <code>CompletionReport</code> generated when the task completes.'
+          $ref: '#/components/schemas/Flag'
+          description: 'Set <code>Enabled</code> to <code>True</code> to generate a <code>CompletionReport</code> when the task completes. If set to <code>true</code>, then you need to provide a report <code>Scope</code>, <code>Path</code>, and <code>Format</code>. Set <code>Enabled</code> to <code>False</code> if you do not want a <code>CompletionReport</code> generated when the task completes.'
         Path:
-          allOf:
-            - $ref: '#/components/schemas/ArchivePath'
-            - description: 'Required if <code>Enabled</code> is set to <code>true</code>. Specifies the location of the report on the file system''s linked S3 data repository. An absolute path that defines where the completion report will be stored in the destination location. The <code>Path</code> you provide must be located within the file system’s ExportPath. An example <code>Path</code> value is "s3://myBucket/myExportPath/optionalPrefix". The report provides the following information for each file in the report: FilePath, FileStatus, and ErrorCode. To learn more about a file system''s <code>ExportPath</code>, see . '
+          $ref: '#/components/schemas/ArchivePath'
+          description: 'Required if <code>Enabled</code> is set to <code>true</code>. Specifies the location of the report on the file system''s linked S3 data repository. An absolute path that defines where the completion report will be stored in the destination location. The <code>Path</code> you provide must be located within the file system’s ExportPath. An example <code>Path</code> value is "s3://myBucket/myExportPath/optionalPrefix". The report provides the following information for each file in the report: FilePath, FileStatus, and ErrorCode. To learn more about a file system''s <code>ExportPath</code>, see . '
         Format:
-          allOf:
-            - $ref: '#/components/schemas/ReportFormat'
-            - description: 'Required if <code>Enabled</code> is set to <code>true</code>. Specifies the format of the <code>CompletionReport</code>. <code>REPORT_CSV_20191124</code> is the only format currently supported. When <code>Format</code> is set to <code>REPORT_CSV_20191124</code>, the <code>CompletionReport</code> is provided in CSV format, and is delivered to <code>{path}/task-{id}/failures.csv</code>. '
+          $ref: '#/components/schemas/ReportFormat'
+          description: 'Required if <code>Enabled</code> is set to <code>true</code>. Specifies the format of the <code>CompletionReport</code>. <code>REPORT_CSV_20191124</code> is the only format currently supported. When <code>Format</code> is set to <code>REPORT_CSV_20191124</code>, the <code>CompletionReport</code> is provided in CSV format, and is delivered to <code>{path}/task-{id}/failures.csv</code>. '
         Scope:
-          allOf:
-            - $ref: '#/components/schemas/ReportScope'
-            - description: 'Required if <code>Enabled</code> is set to <code>true</code>. Specifies the scope of the <code>CompletionReport</code>; <code>FAILED_FILES_ONLY</code> is the only scope currently supported. When <code>Scope</code> is set to <code>FAILED_FILES_ONLY</code>, the <code>CompletionReport</code> only contains information about files that the data repository task failed to process.'
+          $ref: '#/components/schemas/ReportScope'
+          description: 'Required if <code>Enabled</code> is set to <code>true</code>. Specifies the scope of the <code>CompletionReport</code>; <code>FAILED_FILES_ONLY</code> is the only scope currently supported. When <code>Scope</code> is set to <code>FAILED_FILES_ONLY</code>, the <code>CompletionReport</code> only contains information about files that the data repository task failed to process.'
       description: 'Provides a report detailing the data repository task results of the files processed that match the criteria specified in the report <code>Scope</code> parameter. FSx delivers the report to the file system''s linked data repository in Amazon S3, using the path specified in the report <code>Path</code> parameter. You can specify whether or not a report gets generated for a task using the <code>Enabled</code> parameter.'
     SourceBackupId:
       type: string
@@ -2601,27 +2483,22 @@ components:
         - FileSystemId
       properties:
         TaskId:
-          allOf:
-            - $ref: '#/components/schemas/TaskId'
-            - description: 'The system-generated, unique 17-digit ID of the data repository task.'
+          $ref: '#/components/schemas/TaskId'
+          description: 'The system-generated, unique 17-digit ID of the data repository task.'
         Lifecycle:
-          allOf:
-            - $ref: '#/components/schemas/DataRepositoryTaskLifecycle'
-            - description: '<p>The lifecycle status of the data repository task, as follows:</p> <ul> <li> <p> <code>PENDING</code> - Amazon FSx has not started the task.</p> </li> <li> <p> <code>EXECUTING</code> - Amazon FSx is processing the task.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx was not able to complete the task. For example, there may be files the task failed to process. The <a>DataRepositoryTaskFailureDetails</a> property provides more information about task failures.</p> </li> <li> <p> <code>SUCCEEDED</code> - FSx completed the task successfully.</p> </li> <li> <p> <code>CANCELED</code> - Amazon FSx canceled the task and it did not complete.</p> </li> <li> <p> <code>CANCELING</code> - FSx is in process of canceling the task.</p> </li> </ul> <note> <p>You cannot delete an FSx for Lustre file system if there are data repository tasks for the file system in the <code>PENDING</code> or <code>EXECUTING</code> states. Please retry when the data repository task is finished (with a status of <code>CANCELED</code>, <code>SUCCEEDED</code>, or <code>FAILED</code>). You can use the DescribeDataRepositoryTask action to monitor the task status. Contact the FSx team if you need to delete your file system immediately.</p> </note>'
+          $ref: '#/components/schemas/DataRepositoryTaskLifecycle'
+          description: '<p>The lifecycle status of the data repository task, as follows:</p> <ul> <li> <p> <code>PENDING</code> - Amazon FSx has not started the task.</p> </li> <li> <p> <code>EXECUTING</code> - Amazon FSx is processing the task.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx was not able to complete the task. For example, there may be files the task failed to process. The <a>DataRepositoryTaskFailureDetails</a> property provides more information about task failures.</p> </li> <li> <p> <code>SUCCEEDED</code> - FSx completed the task successfully.</p> </li> <li> <p> <code>CANCELED</code> - Amazon FSx canceled the task and it did not complete.</p> </li> <li> <p> <code>CANCELING</code> - FSx is in process of canceling the task.</p> </li> </ul> <note> <p>You cannot delete an FSx for Lustre file system if there are data repository tasks for the file system in the <code>PENDING</code> or <code>EXECUTING</code> states. Please retry when the data repository task is finished (with a status of <code>CANCELED</code>, <code>SUCCEEDED</code>, or <code>FAILED</code>). You can use the DescribeDataRepositoryTask action to monitor the task status. Contact the FSx team if you need to delete your file system immediately.</p> </note>'
         Type:
-          allOf:
-            - $ref: '#/components/schemas/DataRepositoryTaskType'
-            - description: The type of data repository task; EXPORT_TO_REPOSITORY is the only type currently supported.
+          $ref: '#/components/schemas/DataRepositoryTaskType'
+          description: The type of data repository task; EXPORT_TO_REPOSITORY is the only type currently supported.
         CreationTime:
           $ref: '#/components/schemas/CreationTime'
         StartTime:
-          allOf:
-            - $ref: '#/components/schemas/StartTime'
-            - description: The time that Amazon FSx began processing the task.
+          $ref: '#/components/schemas/StartTime'
+          description: The time that Amazon FSx began processing the task.
         EndTime:
-          allOf:
-            - $ref: '#/components/schemas/EndTime'
-            - description: 'The time that Amazon FSx completed processing the task, populated after the task is complete.'
+          $ref: '#/components/schemas/EndTime'
+          description: 'The time that Amazon FSx completed processing the task, populated after the task is complete.'
         ResourceARN:
           $ref: '#/components/schemas/ResourceARN'
         Tags:
@@ -2629,17 +2506,14 @@ components:
         FileSystemId:
           $ref: '#/components/schemas/FileSystemId'
         Paths:
-          allOf:
-            - $ref: '#/components/schemas/DataRepositoryTaskPaths'
-            - description: '<p>An array of paths on the Amazon FSx for Lustre file system that specify the data for the data repository task to process. For example, in an EXPORT_TO_REPOSITORY task, the paths specify which data to export to the linked data repository.</p> <p>(Default) If <code>Paths</code> is not specified, Amazon FSx uses the file system root directory.</p>'
+          $ref: '#/components/schemas/DataRepositoryTaskPaths'
+          description: '<p>An array of paths on the Amazon FSx for Lustre file system that specify the data for the data repository task to process. For example, in an EXPORT_TO_REPOSITORY task, the paths specify which data to export to the linked data repository.</p> <p>(Default) If <code>Paths</code> is not specified, Amazon FSx uses the file system root directory.</p>'
         FailureDetails:
-          allOf:
-            - $ref: '#/components/schemas/DataRepositoryTaskFailureDetails'
-            - description: 'Failure message describing why the task failed, it is populated only when <code>Lifecycle</code> is set to <code>FAILED</code>.'
+          $ref: '#/components/schemas/DataRepositoryTaskFailureDetails'
+          description: 'Failure message describing why the task failed, it is populated only when <code>Lifecycle</code> is set to <code>FAILED</code>.'
         Status:
-          allOf:
-            - $ref: '#/components/schemas/DataRepositoryTaskStatus'
-            - description: Provides the status of the number of files that the task has processed successfully and failed to process.
+          $ref: '#/components/schemas/DataRepositoryTaskStatus'
+          description: Provides the status of the number of files that the task has processed successfully and failed to process.
         Report:
           $ref: '#/components/schemas/CompletionReport'
       description: A description of the data repository task. You use data repository tasks to perform bulk transfer operations between your Amazon FSx file system and its linked data repository.
@@ -2661,95 +2535,75 @@ components:
         - ThroughputCapacity
       properties:
         ActiveDirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The ID for an existing AWS Managed Microsoft Active Directory (AD) instance that the file system should join when it's created.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The ID for an existing AWS Managed Microsoft Active Directory (AD) instance that the file system should join when it's created.
         SelfManagedActiveDirectoryConfiguration:
           $ref: '#/components/schemas/SelfManagedActiveDirectoryConfiguration'
         DeploymentType:
-          allOf:
-            - $ref: '#/components/schemas/WindowsDeploymentType'
-            - description: '<p>Specifies the file system deployment type, valid values are the following:</p> <ul> <li> <p> <code>MULTI_AZ_1</code> - Deploys a high availability file system that is configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability. You can only deploy a Multi-AZ file system in AWS Regions that have a minimum of three Availability Zones. Also supports HDD storage type</p> </li> <li> <p> <code>SINGLE_AZ_1</code> - (Default) Choose to deploy a file system that is configured for single AZ redundancy.</p> </li> <li> <p> <code>SINGLE_AZ_2</code> - The latest generation Single AZ file system. Specifies a file system that is configured for single AZ redundancy and supports HDD storage type.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html"> Availability and Durability: Single-AZ and Multi-AZ File Systems</a>.</p>'
+          $ref: '#/components/schemas/WindowsDeploymentType'
+          description: '<p>Specifies the file system deployment type, valid values are the following:</p> <ul> <li> <p> <code>MULTI_AZ_1</code> - Deploys a high availability file system that is configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability. You can only deploy a Multi-AZ file system in AWS Regions that have a minimum of three Availability Zones. Also supports HDD storage type</p> </li> <li> <p> <code>SINGLE_AZ_1</code> - (Default) Choose to deploy a file system that is configured for single AZ redundancy.</p> </li> <li> <p> <code>SINGLE_AZ_2</code> - The latest generation Single AZ file system. Specifies a file system that is configured for single AZ redundancy and supports HDD storage type.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html"> Availability and Durability: Single-AZ and Multi-AZ File Systems</a>.</p>'
         PreferredSubnetId:
-          allOf:
-            - $ref: '#/components/schemas/SubnetId'
-            - description: 'Required when <code>DeploymentType</code> is set to <code>MULTI_AZ_1</code>. This specifies the subnet in which you want the preferred file server to be located. For in-AWS applications, we recommend that you launch your clients in the same Availability Zone (AZ) as your preferred file server to reduce cross-AZ data transfer costs and minimize latency. '
+          $ref: '#/components/schemas/SubnetId'
+          description: 'Required when <code>DeploymentType</code> is set to <code>MULTI_AZ_1</code>. This specifies the subnet in which you want the preferred file server to be located. For in-AWS applications, we recommend that you launch your clients in the same Availability Zone (AZ) as your preferred file server to reduce cross-AZ data transfer costs and minimize latency. '
         ThroughputCapacity:
-          allOf:
-            - $ref: '#/components/schemas/MegabytesPerSecond'
-            - description: 'The throughput of an Amazon FSx file system, measured in megabytes per second, in 2 to the <i>n</i>th increments, between 2^3 (8) and 2^11 (2048).'
+          $ref: '#/components/schemas/MegabytesPerSecond'
+          description: 'The throughput of an Amazon FSx file system, measured in megabytes per second, in 2 to the <i>n</i>th increments, between 2^3 (8) and 2^11 (2048).'
         WeeklyMaintenanceStartTime:
-          allOf:
-            - $ref: '#/components/schemas/WeeklyTime'
-            - description: 'The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone, where d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.'
+          $ref: '#/components/schemas/WeeklyTime'
+          description: 'The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone, where d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.'
         DailyAutomaticBackupStartTime:
-          allOf:
-            - $ref: '#/components/schemas/DailyTime'
-            - description: 'The preferred time to take daily automatic backups, formatted HH:MM in the UTC time zone.'
+          $ref: '#/components/schemas/DailyTime'
+          description: 'The preferred time to take daily automatic backups, formatted HH:MM in the UTC time zone.'
         AutomaticBackupRetentionDays:
-          allOf:
-            - $ref: '#/components/schemas/AutomaticBackupRetentionDays'
-            - description: The number of days to retain automatic backups. The default is to retain backups for 7 days. Setting this value to 0 disables the creation of automatic backups. The maximum retention period for backups is 90 days.
+          $ref: '#/components/schemas/AutomaticBackupRetentionDays'
+          description: The number of days to retain automatic backups. The default is to retain backups for 7 days. Setting this value to 0 disables the creation of automatic backups. The maximum retention period for backups is 90 days.
         CopyTagsToBackups:
-          allOf:
-            - $ref: '#/components/schemas/Flag'
-            - description: 'A boolean flag indicating whether tags for the file system should be copied to backups. This value defaults to false. If it''s set to true, all tags for the file system are copied to all automatic and user-initiated backups where the user doesn''t specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value.'
+          $ref: '#/components/schemas/Flag'
+          description: 'A boolean flag indicating whether tags for the file system should be copied to backups. This value defaults to false. If it''s set to true, all tags for the file system are copied to all automatic and user-initiated backups where the user doesn''t specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value.'
         Aliases:
-          allOf:
-            - $ref: '#/components/schemas/AlternateDNSNames'
-            - description: '<p>An array of one or more DNS alias names that you want to associate with the Amazon FSx file system. Aliases allow you to use existing DNS names to access the data in your Amazon FSx file system. You can associate up to 50 aliases with a file system at any time. You can associate additional DNS aliases after you create the file system using the AssociateFileSystemAliases operation. You can remove DNS aliases from the file system after it is created using the DisassociateFileSystemAliases operation. You only need to specify the alias name in the request payload.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html">Working with DNS Aliases</a> and <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html">Walkthrough 5: Using DNS aliases to access your file system</a>, including additional steps you must take to be able to access your file system using a DNS alias.</p> <p>An alias name has to meet the following requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters, the underscore (_), and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>'
+          $ref: '#/components/schemas/AlternateDNSNames'
+          description: '<p>An array of one or more DNS alias names that you want to associate with the Amazon FSx file system. Aliases allow you to use existing DNS names to access the data in your Amazon FSx file system. You can associate up to 50 aliases with a file system at any time. You can associate additional DNS aliases after you create the file system using the AssociateFileSystemAliases operation. You can remove DNS aliases from the file system after it is created using the DisassociateFileSystemAliases operation. You only need to specify the alias name in the request payload.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html">Working with DNS Aliases</a> and <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html">Walkthrough 5: Using DNS aliases to access your file system</a>, including additional steps you must take to be able to access your file system using a DNS alias.</p> <p>An alias name has to meet the following requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters, the underscore (_), and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>'
         AuditLogConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/WindowsAuditLogCreateConfiguration'
-            - description: 'The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system.'
+          $ref: '#/components/schemas/WindowsAuditLogCreateConfiguration'
+          description: 'The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system.'
       description: The configuration object for the Microsoft Windows file system used in <code>CreateFileSystem</code> and <code>CreateFileSystemFromBackup</code> operations.
     CreateFileSystemLustreConfiguration:
       type: object
       properties:
         WeeklyMaintenanceStartTime:
-          allOf:
-            - $ref: '#/components/schemas/WeeklyTime'
-            - description: '(Optional) The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone, where d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.'
+          $ref: '#/components/schemas/WeeklyTime'
+          description: '(Optional) The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone, where d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.'
         ImportPath:
-          allOf:
-            - $ref: '#/components/schemas/ArchivePath'
-            - description: '(Optional) The path to the Amazon S3 bucket (including the optional prefix) that you''re using as the data repository for your Amazon FSx for Lustre file system. The root of your FSx for Lustre file system will be mapped to the root of the Amazon S3 bucket you select. An example is <code>s3://import-bucket/optional-prefix</code>. If you specify a prefix after the Amazon S3 bucket name, only object keys with that prefix are loaded into the file system.'
+          $ref: '#/components/schemas/ArchivePath'
+          description: '(Optional) The path to the Amazon S3 bucket (including the optional prefix) that you''re using as the data repository for your Amazon FSx for Lustre file system. The root of your FSx for Lustre file system will be mapped to the root of the Amazon S3 bucket you select. An example is <code>s3://import-bucket/optional-prefix</code>. If you specify a prefix after the Amazon S3 bucket name, only object keys with that prefix are loaded into the file system.'
         ExportPath:
-          allOf:
-            - $ref: '#/components/schemas/ArchivePath'
-            - description: '<p>(Optional) The path in Amazon S3 where the root of your Amazon FSx file system is exported. The path must use the same Amazon S3 bucket as specified in ImportPath. You can provide an optional prefix to which new and changed data is to be exported from your Amazon FSx for Lustre file system. If an <code>ExportPath</code> value is not provided, Amazon FSx sets a default export path, <code>s3://import-bucket/FSxLustre[creation-timestamp]</code>. The timestamp is in UTC format, for example <code>s3://import-bucket/FSxLustre20181105T222312Z</code>.</p> <p>The Amazon S3 export bucket must be the same as the import bucket specified by <code>ImportPath</code>. If you only specify a bucket name, such as <code>s3://import-bucket</code>, you get a 1:1 mapping of file system objects to S3 bucket objects. This mapping means that the input data in S3 is overwritten on export. If you provide a custom prefix in the export path, such as <code>s3://import-bucket/[custom-optional-prefix]</code>, Amazon FSx exports the contents of your file system to that export prefix in the Amazon S3 bucket.</p>'
+          $ref: '#/components/schemas/ArchivePath'
+          description: '<p>(Optional) The path in Amazon S3 where the root of your Amazon FSx file system is exported. The path must use the same Amazon S3 bucket as specified in ImportPath. You can provide an optional prefix to which new and changed data is to be exported from your Amazon FSx for Lustre file system. If an <code>ExportPath</code> value is not provided, Amazon FSx sets a default export path, <code>s3://import-bucket/FSxLustre[creation-timestamp]</code>. The timestamp is in UTC format, for example <code>s3://import-bucket/FSxLustre20181105T222312Z</code>.</p> <p>The Amazon S3 export bucket must be the same as the import bucket specified by <code>ImportPath</code>. If you only specify a bucket name, such as <code>s3://import-bucket</code>, you get a 1:1 mapping of file system objects to S3 bucket objects. This mapping means that the input data in S3 is overwritten on export. If you provide a custom prefix in the export path, such as <code>s3://import-bucket/[custom-optional-prefix]</code>, Amazon FSx exports the contents of your file system to that export prefix in the Amazon S3 bucket.</p>'
         ImportedFileChunkSize:
-          allOf:
-            - $ref: '#/components/schemas/Megabytes'
-            - description: '<p>(Optional) For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.</p> <p>The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.</p>'
+          $ref: '#/components/schemas/Megabytes'
+          description: '<p>(Optional) For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.</p> <p>The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.</p>'
         DeploymentType:
-          allOf:
-            - $ref: '#/components/schemas/LustreDeploymentType'
-            - description: '<p> Choose <code>SCRATCH_1</code> and <code>SCRATCH_2</code> deployment types when you need temporary storage and shorter-term processing of data. The <code>SCRATCH_2</code> deployment type provides in-transit encryption of data and higher burst throughput capacity than <code>SCRATCH_1</code>.</p> <p>Choose <code>PERSISTENT_1</code> deployment type for longer-term storage and workloads and encryption of data in transit. To learn more about deployment types, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html"> FSx for Lustre Deployment Options</a>.</p> <p>Encryption of data in-transit is automatically enabled when you access a <code>SCRATCH_2</code> or <code>PERSISTENT_1</code> file system from Amazon EC2 instances that <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data- protection.html">support this feature</a>. (Default = <code>SCRATCH_1</code>) </p> <p>Encryption of data in-transit for <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> deployment types is supported when accessed from supported instance types in supported AWS Regions. To learn more, <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html">Encrypting Data in Transit</a>.</p>'
+          $ref: '#/components/schemas/LustreDeploymentType'
+          description: '<p> Choose <code>SCRATCH_1</code> and <code>SCRATCH_2</code> deployment types when you need temporary storage and shorter-term processing of data. The <code>SCRATCH_2</code> deployment type provides in-transit encryption of data and higher burst throughput capacity than <code>SCRATCH_1</code>.</p> <p>Choose <code>PERSISTENT_1</code> deployment type for longer-term storage and workloads and encryption of data in transit. To learn more about deployment types, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html"> FSx for Lustre Deployment Options</a>.</p> <p>Encryption of data in-transit is automatically enabled when you access a <code>SCRATCH_2</code> or <code>PERSISTENT_1</code> file system from Amazon EC2 instances that <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data- protection.html">support this feature</a>. (Default = <code>SCRATCH_1</code>) </p> <p>Encryption of data in-transit for <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> deployment types is supported when accessed from supported instance types in supported AWS Regions. To learn more, <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html">Encrypting Data in Transit</a>.</p>'
         AutoImportPolicy:
-          allOf:
-            - $ref: '#/components/schemas/AutoImportPolicyType'
-            - description: '<p> (Optional) When you create your file system, your existing S3 objects appear as file and directory listings. Use this property to choose how Amazon FSx keeps your file and directory listings up to date as you add or modify objects in your linked S3 bucket. <code>AutoImportPolicy</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - (Default) AutoImport is off. Amazon FSx only updates file and directory listings from the linked S3 bucket when the file system is created. FSx does not update file and directory listings for any new or changed objects after choosing this option.</p> </li> <li> <p> <code>NEW</code> - AutoImport is on. Amazon FSx automatically imports directory listings of any new objects added to the linked S3 bucket that do not currently exist in the FSx file system. </p> </li> <li> <p> <code>NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports file and directory listings of any new objects added to the S3 bucket and any existing objects that are changed in the S3 bucket after you choose this option. </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html">Automatically import updates from your S3 bucket</a>.</p>'
+          $ref: '#/components/schemas/AutoImportPolicyType'
+          description: '<p> (Optional) When you create your file system, your existing S3 objects appear as file and directory listings. Use this property to choose how Amazon FSx keeps your file and directory listings up to date as you add or modify objects in your linked S3 bucket. <code>AutoImportPolicy</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - (Default) AutoImport is off. Amazon FSx only updates file and directory listings from the linked S3 bucket when the file system is created. FSx does not update file and directory listings for any new or changed objects after choosing this option.</p> </li> <li> <p> <code>NEW</code> - AutoImport is on. Amazon FSx automatically imports directory listings of any new objects added to the linked S3 bucket that do not currently exist in the FSx file system. </p> </li> <li> <p> <code>NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports file and directory listings of any new objects added to the S3 bucket and any existing objects that are changed in the S3 bucket after you choose this option. </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html">Automatically import updates from your S3 bucket</a>.</p>'
         PerUnitStorageThroughput:
-          allOf:
-            - $ref: '#/components/schemas/PerUnitStorageThroughput'
-            - description: '<p> Required for the <code>PERSISTENT_1</code> deployment type, describes the amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB. File system throughput capacity is calculated by multiplying ﬁle system storage capacity (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system, provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 120 MB/s of ﬁle system throughput. You pay for the amount of throughput that you provision. </p> <p>Valid values for SSD storage: 50, 100, 200. Valid values for HDD storage: 12, 40.</p>'
+          $ref: '#/components/schemas/PerUnitStorageThroughput'
+          description: '<p> Required for the <code>PERSISTENT_1</code> deployment type, describes the amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB. File system throughput capacity is calculated by multiplying ﬁle system storage capacity (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system, provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 120 MB/s of ﬁle system throughput. You pay for the amount of throughput that you provision. </p> <p>Valid values for SSD storage: 50, 100, 200. Valid values for HDD storage: 12, 40.</p>'
         DailyAutomaticBackupStartTime:
           $ref: '#/components/schemas/DailyTime'
         AutomaticBackupRetentionDays:
           $ref: '#/components/schemas/AutomaticBackupRetentionDays'
         CopyTagsToBackups:
-          allOf:
-            - $ref: '#/components/schemas/Flag'
-            - description: '<p>(Optional) Not available to use with file systems that are linked to a data repository. A boolean flag indicating whether tags for the file system should be copied to backups. The default value is false. If it''s set to true, all file system tags are copied to all automatic and user-initiated backups when the user doesn''t specify any backup-specific tags. If this value is true, and you specify one or more backup tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html">Working with backups</a>.</p>'
+          $ref: '#/components/schemas/Flag'
+          description: '<p>(Optional) Not available to use with file systems that are linked to a data repository. A boolean flag indicating whether tags for the file system should be copied to backups. The default value is false. If it''s set to true, all file system tags are copied to all automatic and user-initiated backups when the user doesn''t specify any backup-specific tags. If this value is true, and you specify one or more backup tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html">Working with backups</a>.</p>'
         DriveCacheType:
-          allOf:
-            - $ref: '#/components/schemas/DriveCacheType'
-            - description: '<p>The type of drive cache used by PERSISTENT_1 file systems that are provisioned with HDD storage devices. This parameter is required when storage type is HDD. Set to <code>READ</code>, improve the performance for frequently accessed files and allows 20% of the total storage capacity of the file system to be cached. </p> <p>This parameter is required when <code>StorageType</code> is set to HDD.</p>'
+          $ref: '#/components/schemas/DriveCacheType'
+          description: '<p>The type of drive cache used by PERSISTENT_1 file systems that are provisioned with HDD storage devices. This parameter is required when storage type is HDD. Set to <code>READ</code>, improve the performance for frequently accessed files and allows 20% of the total storage capacity of the file system to be cached. </p> <p>This parameter is required when <code>StorageType</code> is set to HDD.</p>'
         DataCompressionType:
-          allOf:
-            - $ref: '#/components/schemas/DataCompressionType'
-            - description: '<p>Sets the data compression configuration for the file system. <code>DataCompressionType</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - (Default) Data compression is turned off when the file system is created.</p> </li> <li> <p> <code>LZ4</code> - Data compression is turned on with the LZ4 algorithm.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html">Lustre data compression</a>.</p>'
+          $ref: '#/components/schemas/DataCompressionType'
+          description: '<p>Sets the data compression configuration for the file system. <code>DataCompressionType</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - (Default) Data compression is turned off when the file system is created.</p> </li> <li> <p> <code>LZ4</code> - Data compression is turned on with the LZ4 algorithm.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html">Lustre data compression</a>.</p>'
       description: 'The Lustre configuration for the file system being created. '
     StorageType:
       type: string
@@ -2813,29 +2667,23 @@ components:
         - DnsIps
       properties:
         DomainName:
-          allOf:
-            - $ref: '#/components/schemas/ActiveDirectoryFullyQualifiedName'
-            - description: 'The fully qualified domain name of the self-managed AD directory, such as <code>corp.example.com</code>.'
+          $ref: '#/components/schemas/ActiveDirectoryFullyQualifiedName'
+          description: 'The fully qualified domain name of the self-managed AD directory, such as <code>corp.example.com</code>.'
         OrganizationalUnitDistinguishedName:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationalUnitDistinguishedName'
-            - description: '<p>(Optional) The fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. Amazon FSx only accepts OU as the direct parent of the file system. An example is <code>OU=FSx,DC=yourdomain,DC=corp,DC=com</code>. To learn more, see <a href="https://tools.ietf.org/html/rfc2253">RFC 2253</a>. If none is provided, the FSx file system is created in the default location of your self-managed AD directory. </p> <important> <p>Only Organizational Unit (OU) objects can be the direct parent of the file system that you''re creating.</p> </important>'
+          $ref: '#/components/schemas/OrganizationalUnitDistinguishedName'
+          description: '<p>(Optional) The fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. Amazon FSx only accepts OU as the direct parent of the file system. An example is <code>OU=FSx,DC=yourdomain,DC=corp,DC=com</code>. To learn more, see <a href="https://tools.ietf.org/html/rfc2253">RFC 2253</a>. If none is provided, the FSx file system is created in the default location of your self-managed AD directory. </p> <important> <p>Only Organizational Unit (OU) objects can be the direct parent of the file system that you''re creating.</p> </important>'
         FileSystemAdministratorsGroup:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemAdministratorsGroupName'
-            - description: '(Optional) The name of the domain group whose members are granted administrative privileges for the file system. Administrative privileges include taking ownership of files and folders, setting audit controls (audit ACLs) on files and folders, and administering the file system remotely by using the FSx Remote PowerShell. The group that you specify must already exist in your domain. If you don''t provide one, your AD domain''s Domain Admins group is used.'
+          $ref: '#/components/schemas/FileSystemAdministratorsGroupName'
+          description: '(Optional) The name of the domain group whose members are granted administrative privileges for the file system. Administrative privileges include taking ownership of files and folders, setting audit controls (audit ACLs) on files and folders, and administering the file system remotely by using the FSx Remote PowerShell. The group that you specify must already exist in your domain. If you don''t provide one, your AD domain''s Domain Admins group is used.'
         UserName:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryUserName'
-            - description: 'The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This account must have the permission to join computers to the domain in the organizational unit provided in <code>OrganizationalUnitDistinguishedName</code>, or in the default location of your AD domain.'
+          $ref: '#/components/schemas/DirectoryUserName'
+          description: 'The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This account must have the permission to join computers to the domain in the organizational unit provided in <code>OrganizationalUnitDistinguishedName</code>, or in the default location of your AD domain.'
         Password:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryPassword'
-            - description: The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
+          $ref: '#/components/schemas/DirectoryPassword'
+          description: The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
         DnsIps:
-          allOf:
-            - $ref: '#/components/schemas/DnsIps'
-            - description: 'A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. '
+          $ref: '#/components/schemas/DnsIps'
+          description: 'A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. '
       description: 'The configuration that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html"> Using Amazon FSx with your self-managed Microsoft Active Directory</a>.'
     WindowsDeploymentType:
       type: string
@@ -2861,17 +2709,14 @@ components:
         - FileShareAccessAuditLogLevel
       properties:
         FileAccessAuditLogLevel:
-          allOf:
-            - $ref: '#/components/schemas/WindowsAccessAuditLogLevel'
-            - description: <p>Sets which attempt type is logged by Amazon FSx for file and folder accesses.</p> <ul> <li> <p> <code>SUCCESS_ONLY</code> - only successful attempts to access files or folders are logged.</p> </li> <li> <p> <code>FAILURE_ONLY</code> - only failed attempts to access files or folders are logged.</p> </li> <li> <p> <code>SUCCESS_AND_FAILURE</code> - both successful attempts and failed attempts to access files or folders are logged.</p> </li> <li> <p> <code>DISABLED</code> - access auditing of files and folders is turned off.</p> </li> </ul>
+          $ref: '#/components/schemas/WindowsAccessAuditLogLevel'
+          description: <p>Sets which attempt type is logged by Amazon FSx for file and folder accesses.</p> <ul> <li> <p> <code>SUCCESS_ONLY</code> - only successful attempts to access files or folders are logged.</p> </li> <li> <p> <code>FAILURE_ONLY</code> - only failed attempts to access files or folders are logged.</p> </li> <li> <p> <code>SUCCESS_AND_FAILURE</code> - both successful attempts and failed attempts to access files or folders are logged.</p> </li> <li> <p> <code>DISABLED</code> - access auditing of files and folders is turned off.</p> </li> </ul>
         FileShareAccessAuditLogLevel:
-          allOf:
-            - $ref: '#/components/schemas/WindowsAccessAuditLogLevel'
-            - description: <p>Sets which attempt type is logged by Amazon FSx for file share accesses.</p> <ul> <li> <p> <code>SUCCESS_ONLY</code> - only successful attempts to access file shares are logged.</p> </li> <li> <p> <code>FAILURE_ONLY</code> - only failed attempts to access file shares are logged.</p> </li> <li> <p> <code>SUCCESS_AND_FAILURE</code> - both successful attempts and failed attempts to access file shares are logged.</p> </li> <li> <p> <code>DISABLED</code> - access auditing of file shares is turned off.</p> </li> </ul>
+          $ref: '#/components/schemas/WindowsAccessAuditLogLevel'
+          description: <p>Sets which attempt type is logged by Amazon FSx for file share accesses.</p> <ul> <li> <p> <code>SUCCESS_ONLY</code> - only successful attempts to access file shares are logged.</p> </li> <li> <p> <code>FAILURE_ONLY</code> - only failed attempts to access file shares are logged.</p> </li> <li> <p> <code>SUCCESS_AND_FAILURE</code> - both successful attempts and failed attempts to access file shares are logged.</p> </li> <li> <p> <code>DISABLED</code> - access auditing of file shares is turned off.</p> </li> </ul>
         AuditLogDestination:
-          allOf:
-            - $ref: '#/components/schemas/GeneralARN'
-            - description: '<p>The Amazon Resource Name (ARN) that specifies the destination of the audit logs.</p> <p>The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN, with the following requirements:</p> <ul> <li> <p>The destination ARN that you provide (either CloudWatch Logs log group or Kinesis Data Firehose delivery stream) must be in the same AWS partition, AWS region, and AWS account as your Amazon FSx file system.</p> </li> <li> <p>The name of the Amazon CloudWatch Logs log group must begin with the <code>/aws/fsx</code> prefix. The name of the Amazon Kinesis Data Firehouse delivery stream must begin with the <code>aws-fsx</code> prefix.</p> </li> <li> <p>If you do not provide a destination in <code>AuditLogDestination</code>, Amazon FSx will create and use a log stream in the CloudWatch Logs <code>/aws/fsx/windows</code> log group.</p> </li> <li> <p>If <code>AuditLogDestination</code> is provided and the resource does not exist, the request will fail with a <code>BadRequest</code> error.</p> </li> <li> <p>If <code>FileAccessAuditLogLevel</code> and <code>FileShareAccessAuditLogLevel</code> are both set to <code>DISABLED</code>, you cannot specify a destination in <code>AuditLogDestination</code>.</p> </li> </ul>'
+          $ref: '#/components/schemas/GeneralARN'
+          description: '<p>The Amazon Resource Name (ARN) that specifies the destination of the audit logs.</p> <p>The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN, with the following requirements:</p> <ul> <li> <p>The destination ARN that you provide (either CloudWatch Logs log group or Kinesis Data Firehose delivery stream) must be in the same AWS partition, AWS region, and AWS account as your Amazon FSx file system.</p> </li> <li> <p>The name of the Amazon CloudWatch Logs log group must begin with the <code>/aws/fsx</code> prefix. The name of the Amazon Kinesis Data Firehouse delivery stream must begin with the <code>aws-fsx</code> prefix.</p> </li> <li> <p>If you do not provide a destination in <code>AuditLogDestination</code>, Amazon FSx will create and use a log stream in the CloudWatch Logs <code>/aws/fsx/windows</code> log group.</p> </li> <li> <p>If <code>AuditLogDestination</code> is provided and the resource does not exist, the request will fail with a <code>BadRequest</code> error.</p> </li> <li> <p>If <code>FileAccessAuditLogLevel</code> and <code>FileShareAccessAuditLogLevel</code> are both set to <code>DISABLED</code>, you cannot specify a destination in <code>AuditLogDestination</code>.</p> </li> </ul>'
       description: The Windows file access auditing configuration used when creating or updating an Amazon FSx for Windows File Server file system.
     DNSName:
       type: string
@@ -2897,25 +2742,20 @@ components:
       type: object
       properties:
         Lifecycle:
-          allOf:
-            - $ref: '#/components/schemas/DataRepositoryLifecycle'
-            - description: '<p>Describes the state of the file system''s S3 durable data repository, if it is configured with an S3 repository. The lifecycle can have the following values:</p> <ul> <li> <p> <code>CREATING</code> - The data repository configuration between the FSx file system and the linked S3 data repository is being created. The data repository is unavailable.</p> </li> <li> <p> <code>AVAILABLE</code> - The data repository is available for use.</p> </li> <li> <p> <code>MISCONFIGURED</code> - Amazon FSx cannot automatically import updates from the S3 bucket until the data repository configuration is corrected. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/troubleshooting.html#troubleshooting-misconfigured-data-repository">Troubleshooting a Misconfigured linked S3 bucket</a>. </p> </li> <li> <p> <code>UPDATING</code> - The data repository is undergoing a customer initiated update and availability may be impacted.</p> </li> </ul>'
+          $ref: '#/components/schemas/DataRepositoryLifecycle'
+          description: '<p>Describes the state of the file system''s S3 durable data repository, if it is configured with an S3 repository. The lifecycle can have the following values:</p> <ul> <li> <p> <code>CREATING</code> - The data repository configuration between the FSx file system and the linked S3 data repository is being created. The data repository is unavailable.</p> </li> <li> <p> <code>AVAILABLE</code> - The data repository is available for use.</p> </li> <li> <p> <code>MISCONFIGURED</code> - Amazon FSx cannot automatically import updates from the S3 bucket until the data repository configuration is corrected. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/troubleshooting.html#troubleshooting-misconfigured-data-repository">Troubleshooting a Misconfigured linked S3 bucket</a>. </p> </li> <li> <p> <code>UPDATING</code> - The data repository is undergoing a customer initiated update and availability may be impacted.</p> </li> </ul>'
         ImportPath:
-          allOf:
-            - $ref: '#/components/schemas/ArchivePath'
-            - description: 'The import path to the Amazon S3 bucket (and optional prefix) that you''re using as the data repository for your FSx for Lustre file system, for example <code>s3://import-bucket/optional-prefix</code>. If a prefix is specified after the Amazon S3 bucket name, only object keys with that prefix are loaded into the file system.'
+          $ref: '#/components/schemas/ArchivePath'
+          description: 'The import path to the Amazon S3 bucket (and optional prefix) that you''re using as the data repository for your FSx for Lustre file system, for example <code>s3://import-bucket/optional-prefix</code>. If a prefix is specified after the Amazon S3 bucket name, only object keys with that prefix are loaded into the file system.'
         ExportPath:
-          allOf:
-            - $ref: '#/components/schemas/ArchivePath'
-            - description: The export path to the Amazon S3 bucket (and prefix) that you are using to store new and changed Lustre file system files in S3.
+          $ref: '#/components/schemas/ArchivePath'
+          description: The export path to the Amazon S3 bucket (and prefix) that you are using to store new and changed Lustre file system files in S3.
         ImportedFileChunkSize:
-          allOf:
-            - $ref: '#/components/schemas/Megabytes'
-            - description: '<p>For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.</p> <p>The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.</p>'
+          $ref: '#/components/schemas/Megabytes'
+          description: '<p>For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.</p> <p>The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.</p>'
         AutoImportPolicy:
-          allOf:
-            - $ref: '#/components/schemas/AutoImportPolicyType'
-            - description: '<p>Describes the file system''s linked S3 data repository''s <code>AutoImportPolicy</code>. The AutoImportPolicy configures how Amazon FSx keeps your file and directory listings up to date as you add or modify objects in your linked S3 bucket. <code>AutoImportPolicy</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - (Default) AutoImport is off. Amazon FSx only updates file and directory listings from the linked S3 bucket when the file system is created. FSx does not update file and directory listings for any new or changed objects after choosing this option.</p> </li> <li> <p> <code>NEW</code> - AutoImport is on. Amazon FSx automatically imports directory listings of any new objects added to the linked S3 bucket that do not currently exist in the FSx file system. </p> </li> <li> <p> <code>NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports file and directory listings of any new objects added to the S3 bucket and any existing objects that are changed in the S3 bucket after you choose this option. </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html">Automatically import updates from your S3 bucket</a>.</p>'
+          $ref: '#/components/schemas/AutoImportPolicyType'
+          description: '<p>Describes the file system''s linked S3 data repository''s <code>AutoImportPolicy</code>. The AutoImportPolicy configures how Amazon FSx keeps your file and directory listings up to date as you add or modify objects in your linked S3 bucket. <code>AutoImportPolicy</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - (Default) AutoImport is off. Amazon FSx only updates file and directory listings from the linked S3 bucket when the file system is created. FSx does not update file and directory listings for any new or changed objects after choosing this option.</p> </li> <li> <p> <code>NEW</code> - AutoImport is on. Amazon FSx automatically imports directory listings of any new objects added to the linked S3 bucket that do not currently exist in the FSx file system. </p> </li> <li> <p> <code>NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports file and directory listings of any new objects added to the S3 bucket and any existing objects that are changed in the S3 bucket after you choose this option. </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html">Automatically import updates from your S3 bucket</a>.</p>'
         FailureDetails:
           $ref: '#/components/schemas/DataRepositoryFailureDetails'
       description: The data repository configuration object for Lustre file systems returned in the response of the <code>CreateFileSystem</code> operation.
@@ -2935,21 +2775,17 @@ components:
       type: object
       properties:
         TotalCount:
-          allOf:
-            - $ref: '#/components/schemas/TotalCount'
-            - description: 'The total number of files that the task will process. While a task is executing, the sum of <code>SucceededCount</code> plus <code>FailedCount</code> may not equal <code>TotalCount</code>. When the task is complete, <code>TotalCount</code> equals the sum of <code>SucceededCount</code> plus <code>FailedCount</code>.'
+          $ref: '#/components/schemas/TotalCount'
+          description: 'The total number of files that the task will process. While a task is executing, the sum of <code>SucceededCount</code> plus <code>FailedCount</code> may not equal <code>TotalCount</code>. When the task is complete, <code>TotalCount</code> equals the sum of <code>SucceededCount</code> plus <code>FailedCount</code>.'
         SucceededCount:
-          allOf:
-            - $ref: '#/components/schemas/SucceededCount'
-            - description: A running total of the number of files that the task has successfully processed.
+          $ref: '#/components/schemas/SucceededCount'
+          description: A running total of the number of files that the task has successfully processed.
         FailedCount:
-          allOf:
-            - $ref: '#/components/schemas/FailedCount'
-            - description: A running total of the number of files that the task failed to process.
+          $ref: '#/components/schemas/FailedCount'
+          description: A running total of the number of files that the task failed to process.
         LastUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/LastUpdatedTime'
-            - description: The time at which the task status was last updated.
+          $ref: '#/components/schemas/LastUpdatedTime'
+          description: The time at which the task status was last updated.
       description: 'Provides the task status showing a running total of the total number of files to be processed, the number successfully processed, and the number of files the task failed to process.'
     DataRepositoryTaskFilterName:
       type: string
@@ -2965,13 +2801,11 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/DataRepositoryTaskFilterName'
-            - description: '<p>Name of the task property to use in filtering the tasks returned in the response.</p> <ul> <li> <p>Use <code>file-system-id</code> to retrieve data repository tasks for specific file systems.</p> </li> <li> <p>Use <code>task-lifecycle</code> to retrieve data repository tasks with one or more specific lifecycle states, as follows: CANCELED, EXECUTING, FAILED, PENDING, and SUCCEEDED.</p> </li> </ul>'
+          $ref: '#/components/schemas/DataRepositoryTaskFilterName'
+          description: '<p>Name of the task property to use in filtering the tasks returned in the response.</p> <ul> <li> <p>Use <code>file-system-id</code> to retrieve data repository tasks for specific file systems.</p> </li> <li> <p>Use <code>task-lifecycle</code> to retrieve data repository tasks with one or more specific lifecycle states, as follows: CANCELED, EXECUTING, FAILED, PENDING, and SUCCEEDED.</p> </li> </ul>'
         Values:
-          allOf:
-            - $ref: '#/components/schemas/DataRepositoryTaskFilterValues'
-            - description: Use Values to include the specific file system IDs and task lifecycle states for the filters you are using.
+          $ref: '#/components/schemas/DataRepositoryTaskFilterValues'
+          description: Use Values to include the specific file system IDs and task lifecycle states for the filters you are using.
       description: '(Optional) An array of filter objects you can use to filter the response of data repository tasks you will see in the the response. You can filter the tasks returned in the response by one or more file system IDs, task lifecycles, and by task type. A filter object consists of a filter <code>Name</code>, and one or more <code>Values</code> for the filter.'
     DataRepositoryTaskFilterValue:
       type: string
@@ -3006,37 +2840,31 @@ components:
       type: object
       properties:
         SkipFinalBackup:
-          allOf:
-            - $ref: '#/components/schemas/Flag'
-            - description: 'Set <code>SkipFinalBackup</code> to false if you want to take a final backup of the file system you are deleting. By default, Amazon FSx will not take a final backup on your behalf when the <code>DeleteFileSystem</code> operation is invoked. (Default = true)'
+          $ref: '#/components/schemas/Flag'
+          description: 'Set <code>SkipFinalBackup</code> to false if you want to take a final backup of the file system you are deleting. By default, Amazon FSx will not take a final backup on your behalf when the <code>DeleteFileSystem</code> operation is invoked. (Default = true)'
         FinalBackupTags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: 'Use if <code>SkipFinalBackup</code> is set to <code>false</code>, and you want to apply an array of tags to the final backup. If you have set the file system property <code>CopyTagsToBackups</code> to true, and you specify one or more <code>FinalBackupTags</code> when deleting a file system, Amazon FSx will not copy any existing file system tags to the backup.'
+          $ref: '#/components/schemas/Tags'
+          description: 'Use if <code>SkipFinalBackup</code> is set to <code>false</code>, and you want to apply an array of tags to the final backup. If you have set the file system property <code>CopyTagsToBackups</code> to true, and you specify one or more <code>FinalBackupTags</code> when deleting a file system, Amazon FSx will not copy any existing file system tags to the backup.'
       description: The configuration object for the Amazon FSx for Lustre file system being deleted in the <code>DeleteFileSystem</code> operation.
     DeleteFileSystemLustreResponse:
       type: object
       properties:
         FinalBackupId:
-          allOf:
-            - $ref: '#/components/schemas/BackupId'
-            - description: The ID of the final backup for this file system.
+          $ref: '#/components/schemas/BackupId'
+          description: The ID of the final backup for this file system.
         FinalBackupTags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The set of tags applied to the final backup.
+          $ref: '#/components/schemas/Tags'
+          description: The set of tags applied to the final backup.
       description: The response object for the Amazon FSx for Lustre file system being deleted in the <code>DeleteFileSystem</code> operation.
     DeleteFileSystemWindowsConfiguration:
       type: object
       properties:
         SkipFinalBackup:
-          allOf:
-            - $ref: '#/components/schemas/Flag'
-            - description: 'By default, Amazon FSx for Windows takes a final backup on your behalf when the <code>DeleteFileSystem</code> operation is invoked. Doing this helps protect you from data loss, and we highly recommend taking the final backup. If you want to skip this backup, use this flag to do so.'
+          $ref: '#/components/schemas/Flag'
+          description: 'By default, Amazon FSx for Windows takes a final backup on your behalf when the <code>DeleteFileSystem</code> operation is invoked. Doing this helps protect you from data loss, and we highly recommend taking the final backup. If you want to skip this backup, use this flag to do so.'
         FinalBackupTags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: A set of tags for your final backup.
+          $ref: '#/components/schemas/Tags'
+          description: A set of tags for your final backup.
       description: The configuration object for the Microsoft Windows file system used in the <code>DeleteFileSystem</code> operation.
     FileSystemLifecycle:
       type: string
@@ -3052,13 +2880,11 @@ components:
       type: object
       properties:
         FinalBackupId:
-          allOf:
-            - $ref: '#/components/schemas/BackupId'
-            - description: The ID of the final backup for this file system.
+          $ref: '#/components/schemas/BackupId'
+          description: The ID of the final backup for this file system.
         FinalBackupTags:
-          allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: The set of tags applied to the final backup.
+          $ref: '#/components/schemas/Tags'
+          description: The set of tags applied to the final backup.
       description: The response object for the Microsoft Windows file system used in the <code>DeleteFileSystem</code> operation.
     Filters:
       type: array
@@ -3120,9 +2946,8 @@ components:
       type: object
       properties:
         Message:
-          allOf:
-            - $ref: '#/components/schemas/ErrorMessage'
-            - description: A message describing any failures that occurred during file system creation.
+          $ref: '#/components/schemas/ErrorMessage'
+          description: A message describing any failures that occurred during file system creation.
       description: A structure providing details of any failures that occur when creating the file system has failed.
     VpcId:
       type: string
@@ -3140,95 +2965,76 @@ components:
       type: object
       properties:
         ActiveDirectoryId:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryId'
-            - description: The ID for an existing AWS Managed Microsoft Active Directory instance that the file system is joined to.
+          $ref: '#/components/schemas/DirectoryId'
+          description: The ID for an existing AWS Managed Microsoft Active Directory instance that the file system is joined to.
         SelfManagedActiveDirectoryConfiguration:
           $ref: '#/components/schemas/SelfManagedActiveDirectoryAttributes'
         DeploymentType:
-          allOf:
-            - $ref: '#/components/schemas/WindowsDeploymentType'
-            - description: '<p>Specifies the file system deployment type, valid values are the following:</p> <ul> <li> <p> <code>MULTI_AZ_1</code> - Specifies a high availability file system that is configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability, and supports SSD and HDD storage.</p> </li> <li> <p> <code>SINGLE_AZ_1</code> - (Default) Specifies a file system that is configured for single AZ redundancy, only supports SSD storage.</p> </li> <li> <p> <code>SINGLE_AZ_2</code> - Latest generation Single AZ file system. Specifies a file system that is configured for single AZ redundancy and supports SSD and HDD storage.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html">Single-AZ and Multi-AZ File Systems</a>.</p>'
+          $ref: '#/components/schemas/WindowsDeploymentType'
+          description: '<p>Specifies the file system deployment type, valid values are the following:</p> <ul> <li> <p> <code>MULTI_AZ_1</code> - Specifies a high availability file system that is configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability, and supports SSD and HDD storage.</p> </li> <li> <p> <code>SINGLE_AZ_1</code> - (Default) Specifies a file system that is configured for single AZ redundancy, only supports SSD storage.</p> </li> <li> <p> <code>SINGLE_AZ_2</code> - Latest generation Single AZ file system. Specifies a file system that is configured for single AZ redundancy and supports SSD and HDD storage.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html">Single-AZ and Multi-AZ File Systems</a>.</p>'
         RemoteAdministrationEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/DNSName'
-            - description: '<p>For <code>MULTI_AZ_1</code> deployment types, use this endpoint when performing administrative tasks on the file system using Amazon FSx Remote PowerShell.</p> <p>For <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types, this is the DNS name of the file system.</p> <p>This endpoint is temporarily unavailable when the file system is undergoing maintenance.</p>'
+          $ref: '#/components/schemas/DNSName'
+          description: '<p>For <code>MULTI_AZ_1</code> deployment types, use this endpoint when performing administrative tasks on the file system using Amazon FSx Remote PowerShell.</p> <p>For <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types, this is the DNS name of the file system.</p> <p>This endpoint is temporarily unavailable when the file system is undergoing maintenance.</p>'
         PreferredSubnetId:
-          allOf:
-            - $ref: '#/components/schemas/SubnetId'
-            - description: '<p>For <code>MULTI_AZ_1</code> deployment types, it specifies the ID of the subnet where the preferred file server is located. Must be one of the two subnet IDs specified in <code>SubnetIds</code> property. Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server.</p> <p>For <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types, this value is the same as that for <code>SubnetIDs</code>. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources">Availability and durability: Single-AZ and Multi-AZ file systems</a>.</p>'
+          $ref: '#/components/schemas/SubnetId'
+          description: '<p>For <code>MULTI_AZ_1</code> deployment types, it specifies the ID of the subnet where the preferred file server is located. Must be one of the two subnet IDs specified in <code>SubnetIds</code> property. Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server.</p> <p>For <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types, this value is the same as that for <code>SubnetIDs</code>. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources">Availability and durability: Single-AZ and Multi-AZ file systems</a>.</p>'
         PreferredFileServerIp:
-          allOf:
-            - $ref: '#/components/schemas/IpAddress'
-            - description: '<p>For <code>MULTI_AZ_1</code> deployment types, the IP address of the primary, or preferred, file server.</p> <p>Use this IP address when mounting the file system on Linux SMB clients or Windows SMB clients that are not joined to a Microsoft Active Directory. Applicable for all Windows file system deployment types. This IP address is temporarily unavailable when the file system is undergoing maintenance. For Linux and Windows SMB clients that are joined to an Active Directory, use the file system''s DNSName instead. For more information on mapping and mounting file shares, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html">Accessing File Shares</a>.</p>'
+          $ref: '#/components/schemas/IpAddress'
+          description: '<p>For <code>MULTI_AZ_1</code> deployment types, the IP address of the primary, or preferred, file server.</p> <p>Use this IP address when mounting the file system on Linux SMB clients or Windows SMB clients that are not joined to a Microsoft Active Directory. Applicable for all Windows file system deployment types. This IP address is temporarily unavailable when the file system is undergoing maintenance. For Linux and Windows SMB clients that are joined to an Active Directory, use the file system''s DNSName instead. For more information on mapping and mounting file shares, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html">Accessing File Shares</a>.</p>'
         ThroughputCapacity:
-          allOf:
-            - $ref: '#/components/schemas/MegabytesPerSecond'
-            - description: 'The throughput of the Amazon FSx file system, measured in megabytes per second.'
+          $ref: '#/components/schemas/MegabytesPerSecond'
+          description: 'The throughput of the Amazon FSx file system, measured in megabytes per second.'
         MaintenanceOperationsInProgress:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemMaintenanceOperations'
-            - description: The list of maintenance operations in progress for this file system.
+          $ref: '#/components/schemas/FileSystemMaintenanceOperations'
+          description: The list of maintenance operations in progress for this file system.
         WeeklyMaintenanceStartTime:
-          allOf:
-            - $ref: '#/components/schemas/WeeklyTime'
-            - description: 'The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.'
+          $ref: '#/components/schemas/WeeklyTime'
+          description: 'The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.'
         DailyAutomaticBackupStartTime:
-          allOf:
-            - $ref: '#/components/schemas/DailyTime'
-            - description: 'The preferred time to take daily automatic backups, in the UTC time zone.'
+          $ref: '#/components/schemas/DailyTime'
+          description: 'The preferred time to take daily automatic backups, in the UTC time zone.'
         AutomaticBackupRetentionDays:
-          allOf:
-            - $ref: '#/components/schemas/AutomaticBackupRetentionDays'
-            - description: The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 90 days.
+          $ref: '#/components/schemas/AutomaticBackupRetentionDays'
+          description: The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 90 days.
         CopyTagsToBackups:
-          allOf:
-            - $ref: '#/components/schemas/Flag'
-            - description: 'A boolean flag indicating whether tags on the file system should be copied to backups. This value defaults to false. If it''s set to true, all tags on the file system are copied to all automatic backups and any user-initiated backups where the user doesn''t specify any tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value.'
+          $ref: '#/components/schemas/Flag'
+          description: 'A boolean flag indicating whether tags on the file system should be copied to backups. This value defaults to false. If it''s set to true, all tags on the file system are copied to all automatic backups and any user-initiated backups where the user doesn''t specify any tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value.'
         Aliases:
           $ref: '#/components/schemas/Aliases'
         AuditLogConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/WindowsAuditLogConfiguration'
-            - description: 'The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system.'
+          $ref: '#/components/schemas/WindowsAuditLogConfiguration'
+          description: 'The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system.'
       description: The configuration for this Microsoft Windows file system.
     LustreFileSystemConfiguration:
       type: object
       properties:
         WeeklyMaintenanceStartTime:
-          allOf:
-            - $ref: '#/components/schemas/WeeklyTime'
-            - description: 'The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.'
+          $ref: '#/components/schemas/WeeklyTime'
+          description: 'The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.'
         DataRepositoryConfiguration:
           $ref: '#/components/schemas/DataRepositoryConfiguration'
         DeploymentType:
-          allOf:
-            - $ref: '#/components/schemas/LustreDeploymentType'
-            - description: '<p>The deployment type of the FSX for Lustre file system. <i>Scratch deployment type</i> is designed for temporary storage and shorter-term processing of data.</p> <p> <code>SCRATCH_1</code> and <code>SCRATCH_2</code> deployment types are best suited for when you need temporary storage and shorter-term processing of data. The <code>SCRATCH_2</code> deployment type provides in-transit encryption of data and higher burst throughput capacity than <code>SCRATCH_1</code>.</p> <p>The <code>PERSISTENT_1</code> deployment type is used for longer-term storage and workloads and encryption of data in transit. To learn more about deployment types, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html"> FSx for Lustre Deployment Options</a>. (Default = <code>SCRATCH_1</code>)</p>'
+          $ref: '#/components/schemas/LustreDeploymentType'
+          description: '<p>The deployment type of the FSX for Lustre file system. <i>Scratch deployment type</i> is designed for temporary storage and shorter-term processing of data.</p> <p> <code>SCRATCH_1</code> and <code>SCRATCH_2</code> deployment types are best suited for when you need temporary storage and shorter-term processing of data. The <code>SCRATCH_2</code> deployment type provides in-transit encryption of data and higher burst throughput capacity than <code>SCRATCH_1</code>.</p> <p>The <code>PERSISTENT_1</code> deployment type is used for longer-term storage and workloads and encryption of data in transit. To learn more about deployment types, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html"> FSx for Lustre Deployment Options</a>. (Default = <code>SCRATCH_1</code>)</p>'
         PerUnitStorageThroughput:
-          allOf:
-            - $ref: '#/components/schemas/PerUnitStorageThroughput'
-            - description: '<p> Per unit storage throughput represents the megabytes per second of read or write throughput per 1 tebibyte of storage provisioned. File system throughput capacity is equal to Storage capacity (TiB) * PerUnitStorageThroughput (MB/s/TiB). This option is only valid for <code>PERSISTENT_1</code> deployment types. </p> <p>Valid values for SSD storage: 50, 100, 200. Valid values for HDD storage: 12, 40. </p>'
+          $ref: '#/components/schemas/PerUnitStorageThroughput'
+          description: '<p> Per unit storage throughput represents the megabytes per second of read or write throughput per 1 tebibyte of storage provisioned. File system throughput capacity is equal to Storage capacity (TiB) * PerUnitStorageThroughput (MB/s/TiB). This option is only valid for <code>PERSISTENT_1</code> deployment types. </p> <p>Valid values for SSD storage: 50, 100, 200. Valid values for HDD storage: 12, 40. </p>'
         MountName:
-          allOf:
-            - $ref: '#/components/schemas/LustreFileSystemMountName'
-            - description: '<p>You use the <code>MountName</code> value when mounting the file system.</p> <p>For the <code>SCRATCH_1</code> deployment type, this value is always "<code>fsx</code>". For <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> deployment types, this value is a string that is unique within an AWS Region. </p>'
+          $ref: '#/components/schemas/LustreFileSystemMountName'
+          description: '<p>You use the <code>MountName</code> value when mounting the file system.</p> <p>For the <code>SCRATCH_1</code> deployment type, this value is always "<code>fsx</code>". For <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> deployment types, this value is a string that is unique within an AWS Region. </p>'
         DailyAutomaticBackupStartTime:
           $ref: '#/components/schemas/DailyTime'
         AutomaticBackupRetentionDays:
           $ref: '#/components/schemas/AutomaticBackupRetentionDays'
         CopyTagsToBackups:
-          allOf:
-            - $ref: '#/components/schemas/Flag'
-            - description: 'A boolean flag indicating whether tags on the file system should be copied to backups. If it''s set to true, all tags on the file system are copied to all automatic backups and any user-initiated backups where the user doesn''t specify any tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value. (Default = false)'
+          $ref: '#/components/schemas/Flag'
+          description: 'A boolean flag indicating whether tags on the file system should be copied to backups. If it''s set to true, all tags on the file system are copied to all automatic backups and any user-initiated backups where the user doesn''t specify any tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value. (Default = false)'
         DriveCacheType:
-          allOf:
-            - $ref: '#/components/schemas/DriveCacheType'
-            - description: '<p>The type of drive cache used by PERSISTENT_1 file systems that are provisioned with HDD storage devices. This parameter is required when storage type is HDD. Set to <code>READ</code>, improve the performance for frequently accessed files and allows 20% of the total storage capacity of the file system to be cached. </p> <p>This parameter is required when <code>StorageType</code> is set to HDD.</p>'
+          $ref: '#/components/schemas/DriveCacheType'
+          description: '<p>The type of drive cache used by PERSISTENT_1 file systems that are provisioned with HDD storage devices. This parameter is required when storage type is HDD. Set to <code>READ</code>, improve the performance for frequently accessed files and allows 20% of the total storage capacity of the file system to be cached. </p> <p>This parameter is required when <code>StorageType</code> is set to HDD.</p>'
         DataCompressionType:
-          allOf:
-            - $ref: '#/components/schemas/DataCompressionType'
-            - description: '<p>The data compression configuration for the file system. <code>DataCompressionType</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - Data compression is turned off for the file system.</p> </li> <li> <p> <code>LZ4</code> - Data compression is turned on with the LZ4 algorithm.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html">Lustre data compression</a>.</p>'
+          $ref: '#/components/schemas/DataCompressionType'
+          description: '<p>The data compression configuration for the file system. <code>DataCompressionType</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - Data compression is turned off for the file system.</p> </li> <li> <p> <code>LZ4</code> - Data compression is turned on with the LZ4 algorithm.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html">Lustre data compression</a>.</p>'
       description: The configuration for the Amazon FSx for Lustre file system.
     FileSystemAdministratorsGroupName:
       type: string
@@ -3264,13 +3070,11 @@ components:
       type: object
       properties:
         Name:
-          allOf:
-            - $ref: '#/components/schemas/FilterName'
-            - description: The name for this filter.
+          $ref: '#/components/schemas/FilterName'
+          description: The name for this filter.
         Values:
-          allOf:
-            - $ref: '#/components/schemas/FilterValues'
-            - description: The values of the filter. These are all the values for any of the applied filters.
+          $ref: '#/components/schemas/FilterValues'
+          description: The values of the filter. These are all the values for any of the applied filters.
       description: A filter used to restrict the results of describe calls. You can use multiple filters to return results that meet all applied filter requirements.
     FilterValue:
       type: string
@@ -3309,41 +3113,33 @@ components:
       type: object
       properties:
         DomainName:
-          allOf:
-            - $ref: '#/components/schemas/ActiveDirectoryFullyQualifiedName'
-            - description: The fully qualified domain name of the self-managed AD directory.
+          $ref: '#/components/schemas/ActiveDirectoryFullyQualifiedName'
+          description: The fully qualified domain name of the self-managed AD directory.
         OrganizationalUnitDistinguishedName:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationalUnitDistinguishedName'
-            - description: The fully qualified distinguished name of the organizational unit within the self-managed AD directory to which the Windows File Server instance is joined.
+          $ref: '#/components/schemas/OrganizationalUnitDistinguishedName'
+          description: The fully qualified distinguished name of the organizational unit within the self-managed AD directory to which the Windows File Server instance is joined.
         FileSystemAdministratorsGroup:
-          allOf:
-            - $ref: '#/components/schemas/FileSystemAdministratorsGroupName'
-            - description: The name of the domain group whose members have administrative privileges for the FSx file system.
+          $ref: '#/components/schemas/FileSystemAdministratorsGroupName'
+          description: The name of the domain group whose members have administrative privileges for the FSx file system.
         UserName:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryUserName'
-            - description: The user name for the service account on your self-managed AD domain that FSx uses to join to your AD domain.
+          $ref: '#/components/schemas/DirectoryUserName'
+          description: The user name for the service account on your self-managed AD domain that FSx uses to join to your AD domain.
         DnsIps:
-          allOf:
-            - $ref: '#/components/schemas/DnsIps'
-            - description: A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory.
+          $ref: '#/components/schemas/DnsIps'
+          description: A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory.
       description: The configuration of the self-managed Microsoft Active Directory (AD) directory to which the Windows File Server instance is joined.
     SelfManagedActiveDirectoryConfigurationUpdates:
       type: object
       properties:
         UserName:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryUserName'
-            - description: The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This account must have the permission to join computers to the domain in the organizational unit provided in <code>OrganizationalUnitDistinguishedName</code>.
+          $ref: '#/components/schemas/DirectoryUserName'
+          description: The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This account must have the permission to join computers to the domain in the organizational unit provided in <code>OrganizationalUnitDistinguishedName</code>.
         Password:
-          allOf:
-            - $ref: '#/components/schemas/DirectoryPassword'
-            - description: The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
+          $ref: '#/components/schemas/DirectoryPassword'
+          description: The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
         DnsIps:
-          allOf:
-            - $ref: '#/components/schemas/DnsIps'
-            - description: A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory.
+          $ref: '#/components/schemas/DnsIps'
+          description: A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory.
       description: The configuration that Amazon FSx uses to join the Windows File Server instance to a self-managed Microsoft Active Directory (AD) directory.
     TagKey:
       type: string
@@ -3364,13 +3160,11 @@ components:
         - Value
       properties:
         Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: 'A value that specifies the <code>TagKey</code>, the name of the tag. Tag keys must be unique for the resource to which they are attached.'
+          $ref: '#/components/schemas/TagKey'
+          description: 'A value that specifies the <code>TagKey</code>, the name of the tag. Tag keys must be unique for the resource to which they are attached.'
         Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: 'A value that specifies the <code>TagValue</code>, the value assigned to the corresponding tag key. Tag values can be null and don''t have to be unique in a tag set. For example, you can have a key-value pair in a tag set of <code>finances : April</code> and also of <code>payroll : April</code>.'
+          $ref: '#/components/schemas/TagValue'
+          description: 'A value that specifies the <code>TagValue</code>, the value assigned to the corresponding tag key. Tag values can be null and don''t have to be unique in a tag set. For example, you can have a key-value pair in a tag set of <code>finances : April</code> and also of <code>payroll : April</code>.'
       description: Specifies a key-value pair for a resource tag.
     TagKeys:
       type: array
@@ -3383,49 +3177,40 @@ components:
       type: object
       properties:
         WeeklyMaintenanceStartTime:
-          allOf:
-            - $ref: '#/components/schemas/WeeklyTime'
-            - description: '(Optional) The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.'
+          $ref: '#/components/schemas/WeeklyTime'
+          description: '(Optional) The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.'
         DailyAutomaticBackupStartTime:
           $ref: '#/components/schemas/DailyTime'
         AutomaticBackupRetentionDays:
           $ref: '#/components/schemas/AutomaticBackupRetentionDays'
         AutoImportPolicy:
-          allOf:
-            - $ref: '#/components/schemas/AutoImportPolicyType'
-            - description: '<p> (Optional) When you create your file system, your existing S3 objects appear as file and directory listings. Use this property to choose how Amazon FSx keeps your file and directory listing up to date as you add or modify objects in your linked S3 bucket. <code>AutoImportPolicy</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - (Default) AutoImport is off. Amazon FSx only updates file and directory listings from the linked S3 bucket when the file system is created. FSx does not update the file and directory listing for any new or changed objects after choosing this option.</p> </li> <li> <p> <code>NEW</code> - AutoImport is on. Amazon FSx automatically imports directory listings of any new objects added to the linked S3 bucket that do not currently exist in the FSx file system. </p> </li> <li> <p> <code>NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports file and directory listings of any new objects added to the S3 bucket and any existing objects that are changed in the S3 bucket after you choose this option. </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html">Automatically import updates from your S3 bucket</a>.</p>'
+          $ref: '#/components/schemas/AutoImportPolicyType'
+          description: '<p> (Optional) When you create your file system, your existing S3 objects appear as file and directory listings. Use this property to choose how Amazon FSx keeps your file and directory listing up to date as you add or modify objects in your linked S3 bucket. <code>AutoImportPolicy</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - (Default) AutoImport is off. Amazon FSx only updates file and directory listings from the linked S3 bucket when the file system is created. FSx does not update the file and directory listing for any new or changed objects after choosing this option.</p> </li> <li> <p> <code>NEW</code> - AutoImport is on. Amazon FSx automatically imports directory listings of any new objects added to the linked S3 bucket that do not currently exist in the FSx file system. </p> </li> <li> <p> <code>NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports file and directory listings of any new objects added to the S3 bucket and any existing objects that are changed in the S3 bucket after you choose this option. </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html">Automatically import updates from your S3 bucket</a>.</p>'
         DataCompressionType:
-          allOf:
-            - $ref: '#/components/schemas/DataCompressionType'
-            - description: '<p>Sets the data compression configuration for the file system. <code>DataCompressionType</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - Data compression is turned off for the file system.</p> </li> <li> <p> <code>LZ4</code> - Data compression is turned on with the LZ4 algorithm.</p> </li> </ul> <p>If you don''t use <code>DataCompressionType</code>, the file system retains its current data compression configuration.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html">Lustre data compression</a>.</p>'
+          $ref: '#/components/schemas/DataCompressionType'
+          description: '<p>Sets the data compression configuration for the file system. <code>DataCompressionType</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - Data compression is turned off for the file system.</p> </li> <li> <p> <code>LZ4</code> - Data compression is turned on with the LZ4 algorithm.</p> </li> </ul> <p>If you don''t use <code>DataCompressionType</code>, the file system retains its current data compression configuration.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html">Lustre data compression</a>.</p>'
       description: The configuration object for Amazon FSx for Lustre file systems used in the <code>UpdateFileSystem</code> operation.
     UpdateFileSystemWindowsConfiguration:
       type: object
       properties:
         WeeklyMaintenanceStartTime:
-          allOf:
-            - $ref: '#/components/schemas/WeeklyTime'
-            - description: 'The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. Where d is the weekday number, from 1 through 7, with 1 = Monday and 7 = Sunday.'
+          $ref: '#/components/schemas/WeeklyTime'
+          description: 'The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. Where d is the weekday number, from 1 through 7, with 1 = Monday and 7 = Sunday.'
         DailyAutomaticBackupStartTime:
-          allOf:
-            - $ref: '#/components/schemas/DailyTime'
-            - description: 'The preferred time to start the daily automatic backup, in the UTC time zone, for example, <code>02:00</code> '
+          $ref: '#/components/schemas/DailyTime'
+          description: 'The preferred time to start the daily automatic backup, in the UTC time zone, for example, <code>02:00</code> '
         AutomaticBackupRetentionDays:
-          allOf:
-            - $ref: '#/components/schemas/AutomaticBackupRetentionDays'
-            - description: 'The number of days to retain automatic daily backups. Setting this to zero (0) disables automatic daily backups. You can retain automatic daily backups for a maximum of 90 days. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#automatic-backups">Working with Automatic Daily Backups</a>.'
+          $ref: '#/components/schemas/AutomaticBackupRetentionDays'
+          description: 'The number of days to retain automatic daily backups. Setting this to zero (0) disables automatic daily backups. You can retain automatic daily backups for a maximum of 90 days. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#automatic-backups">Working with Automatic Daily Backups</a>.'
         ThroughputCapacity:
-          allOf:
-            - $ref: '#/components/schemas/MegabytesPerSecond'
-            - description: 'Sets the target value for a file system''s throughput capacity, in MB/s, that you are updating the file system to. Valid values are 8, 16, 32, 64, 128, 256, 512, 1024, 2048. You cannot make a throughput capacity update request if there is an existing throughput capacity update request in progress. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html">Managing Throughput Capacity</a>.'
+          $ref: '#/components/schemas/MegabytesPerSecond'
+          description: 'Sets the target value for a file system''s throughput capacity, in MB/s, that you are updating the file system to. Valid values are 8, 16, 32, 64, 128, 256, 512, 1024, 2048. You cannot make a throughput capacity update request if there is an existing throughput capacity update request in progress. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html">Managing Throughput Capacity</a>.'
         SelfManagedActiveDirectoryConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/SelfManagedActiveDirectoryConfigurationUpdates'
-            - description: The configuration Amazon FSx uses to join the Windows File Server instance to the self-managed Microsoft AD directory. You cannot make a self-managed Microsoft AD update request if there is an existing self-managed Microsoft AD update request in progress.
+          $ref: '#/components/schemas/SelfManagedActiveDirectoryConfigurationUpdates'
+          description: The configuration Amazon FSx uses to join the Windows File Server instance to the self-managed Microsoft AD directory. You cannot make a self-managed Microsoft AD update request if there is an existing self-managed Microsoft AD update request in progress.
         AuditLogConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/WindowsAuditLogCreateConfiguration'
-            - description: 'The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system..'
+          $ref: '#/components/schemas/WindowsAuditLogCreateConfiguration'
+          description: 'The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system..'
       description: Updates the configuration for an existing Amazon FSx for Windows File Server file system. Amazon FSx only overwrites existing properties with non-null values provided in the request.
     WindowsAccessAuditLogLevel:
       type: string
@@ -3441,17 +3226,14 @@ components:
         - FileShareAccessAuditLogLevel
       properties:
         FileAccessAuditLogLevel:
-          allOf:
-            - $ref: '#/components/schemas/WindowsAccessAuditLogLevel'
-            - description: <p>Sets which attempt type is logged by Amazon FSx for file and folder accesses.</p> <ul> <li> <p> <code>SUCCESS_ONLY</code> - only successful attempts to access files or folders are logged.</p> </li> <li> <p> <code>FAILURE_ONLY</code> - only failed attempts to access files or folders are logged.</p> </li> <li> <p> <code>SUCCESS_AND_FAILURE</code> - both successful attempts and failed attempts to access files or folders are logged.</p> </li> <li> <p> <code>DISABLED</code> - access auditing of files and folders is turned off.</p> </li> </ul>
+          $ref: '#/components/schemas/WindowsAccessAuditLogLevel'
+          description: <p>Sets which attempt type is logged by Amazon FSx for file and folder accesses.</p> <ul> <li> <p> <code>SUCCESS_ONLY</code> - only successful attempts to access files or folders are logged.</p> </li> <li> <p> <code>FAILURE_ONLY</code> - only failed attempts to access files or folders are logged.</p> </li> <li> <p> <code>SUCCESS_AND_FAILURE</code> - both successful attempts and failed attempts to access files or folders are logged.</p> </li> <li> <p> <code>DISABLED</code> - access auditing of files and folders is turned off.</p> </li> </ul>
         FileShareAccessAuditLogLevel:
-          allOf:
-            - $ref: '#/components/schemas/WindowsAccessAuditLogLevel'
-            - description: <p>Sets which attempt type is logged by Amazon FSx for file share accesses.</p> <ul> <li> <p> <code>SUCCESS_ONLY</code> - only successful attempts to access file shares are logged.</p> </li> <li> <p> <code>FAILURE_ONLY</code> - only failed attempts to access file shares are logged.</p> </li> <li> <p> <code>SUCCESS_AND_FAILURE</code> - both successful attempts and failed attempts to access file shares are logged.</p> </li> <li> <p> <code>DISABLED</code> - access auditing of file shares is turned off.</p> </li> </ul>
+          $ref: '#/components/schemas/WindowsAccessAuditLogLevel'
+          description: <p>Sets which attempt type is logged by Amazon FSx for file share accesses.</p> <ul> <li> <p> <code>SUCCESS_ONLY</code> - only successful attempts to access file shares are logged.</p> </li> <li> <p> <code>FAILURE_ONLY</code> - only failed attempts to access file shares are logged.</p> </li> <li> <p> <code>SUCCESS_AND_FAILURE</code> - both successful attempts and failed attempts to access file shares are logged.</p> </li> <li> <p> <code>DISABLED</code> - access auditing of file shares is turned off.</p> </li> </ul>
         AuditLogDestination:
-          allOf:
-            - $ref: '#/components/schemas/GeneralARN'
-            - description: '<p>The Amazon Resource Name (ARN) for the destination of the audit logs. The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN.</p> <p>The name of the Amazon CloudWatch Logs log group must begin with the <code>/aws/fsx</code> prefix. The name of the Amazon Kinesis Data Firehouse delivery stream must begin with the <code>aws-fsx</code> prefix.</p> <p>The destination ARN (either CloudWatch Logs log group or Kinesis Data Firehose delivery stream) must be in the same AWS partition, AWS region, and AWS account as your Amazon FSx file system.</p>'
+          $ref: '#/components/schemas/GeneralARN'
+          description: '<p>The Amazon Resource Name (ARN) for the destination of the audit logs. The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN.</p> <p>The name of the Amazon CloudWatch Logs log group must begin with the <code>/aws/fsx</code> prefix. The name of the Amazon Kinesis Data Firehouse delivery stream must begin with the <code>aws-fsx</code> prefix.</p> <p>The destination ARN (either CloudWatch Logs log group or Kinesis Data Firehose delivery stream) must be in the same AWS partition, AWS region, and AWS account as your Amazon FSx file system.</p>'
       description: 'The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/file-access-auditing.html"> File access auditing</a>.'
 security:
   - hmac: []

@@ -280,9 +280,8 @@ paths:
                   type: object
                   properties:
                     Enabled:
-                      allOf:
-                        - $ref: '#/components/schemas/optionalBoolean'
-                        - description: The flag that enables the matching process of duplicate profiles.
+                      $ref: '#/components/schemas/optionalBoolean'
+                      description: The flag that enables the matching process of duplicate profiles.
                 Tags:
                   description: 'The tags used to organize, track, or control access for this resource.'
                   type: object
@@ -475,9 +474,8 @@ paths:
                   type: object
                   properties:
                     Enabled:
-                      allOf:
-                        - $ref: '#/components/schemas/optionalBoolean'
-                        - description: The flag that enables the matching process of duplicate profiles.
+                      $ref: '#/components/schemas/optionalBoolean'
+                      description: The flag that enables the matching process of duplicate profiles.
                 Tags:
                   description: 'The tags used to organize, track, or control access for this resource.'
                   type: object
@@ -632,177 +630,137 @@ paths:
                   type: object
                   properties:
                     Address1:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The first line of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The first line of a customer address.
                     Address2:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The second line of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The second line of a customer address.
                     Address3:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The third line of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The third line of a customer address.
                     Address4:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The fourth line of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The fourth line of a customer address.
                     City:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The city in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The city in which a customer lives.
                     County:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The county in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The county in which a customer lives.
                     State:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The state in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The state in which a customer lives.
                     Province:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The province in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The province in which a customer lives.
                     Country:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The country in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The country in which a customer lives.
                     PostalCode:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The postal code of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The postal code of a customer address.
                 ShippingAddress:
                   description: 'A generic address associated with the customer that is not mailing, shipping, or billing.'
                   type: object
                   properties:
                     Address1:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The first line of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The first line of a customer address.
                     Address2:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The second line of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The second line of a customer address.
                     Address3:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The third line of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The third line of a customer address.
                     Address4:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The fourth line of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The fourth line of a customer address.
                     City:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The city in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The city in which a customer lives.
                     County:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The county in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The county in which a customer lives.
                     State:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The state in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The state in which a customer lives.
                     Province:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The province in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The province in which a customer lives.
                     Country:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The country in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The country in which a customer lives.
                     PostalCode:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The postal code of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The postal code of a customer address.
                 MailingAddress:
                   description: 'A generic address associated with the customer that is not mailing, shipping, or billing.'
                   type: object
                   properties:
                     Address1:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The first line of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The first line of a customer address.
                     Address2:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The second line of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The second line of a customer address.
                     Address3:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The third line of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The third line of a customer address.
                     Address4:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The fourth line of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The fourth line of a customer address.
                     City:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The city in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The city in which a customer lives.
                     County:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The county in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The county in which a customer lives.
                     State:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The state in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The state in which a customer lives.
                     Province:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The province in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The province in which a customer lives.
                     Country:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The country in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The country in which a customer lives.
                     PostalCode:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The postal code of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The postal code of a customer address.
                 BillingAddress:
                   description: 'A generic address associated with the customer that is not mailing, shipping, or billing.'
                   type: object
                   properties:
                     Address1:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The first line of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The first line of a customer address.
                     Address2:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The second line of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The second line of a customer address.
                     Address3:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The third line of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The third line of a customer address.
                     Address4:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The fourth line of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The fourth line of a customer address.
                     City:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The city in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The city in which a customer lives.
                     County:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The county in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The county in which a customer lives.
                     State:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The state in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The state in which a customer lives.
                     Province:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The province in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The province in which a customer lives.
                     Country:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The country in which a customer lives.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The country in which a customer lives.
                     PostalCode:
-                      allOf:
-                        - $ref: '#/components/schemas/string1To255'
-                        - description: The postal code of a customer address.
+                      $ref: '#/components/schemas/string1To255'
+                      description: The postal code of a customer address.
                 Attributes:
                   description: A key value pair of attributes of a customer profile.
                   type: object
@@ -968,177 +926,137 @@ paths:
                   type: object
                   properties:
                     Address1:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The first line of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The first line of a customer address.
                     Address2:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The second line of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The second line of a customer address.
                     Address3:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The third line of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The third line of a customer address.
                     Address4:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The fourth line of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The fourth line of a customer address.
                     City:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The city in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The city in which a customer lives.
                     County:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The county in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The county in which a customer lives.
                     State:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The state in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The state in which a customer lives.
                     Province:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The province in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The province in which a customer lives.
                     Country:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The country in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The country in which a customer lives.
                     PostalCode:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The postal code of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The postal code of a customer address.
                 ShippingAddress:
                   description: Updates associated with the address properties of a customer profile.
                   type: object
                   properties:
                     Address1:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The first line of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The first line of a customer address.
                     Address2:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The second line of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The second line of a customer address.
                     Address3:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The third line of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The third line of a customer address.
                     Address4:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The fourth line of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The fourth line of a customer address.
                     City:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The city in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The city in which a customer lives.
                     County:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The county in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The county in which a customer lives.
                     State:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The state in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The state in which a customer lives.
                     Province:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The province in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The province in which a customer lives.
                     Country:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The country in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The country in which a customer lives.
                     PostalCode:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The postal code of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The postal code of a customer address.
                 MailingAddress:
                   description: Updates associated with the address properties of a customer profile.
                   type: object
                   properties:
                     Address1:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The first line of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The first line of a customer address.
                     Address2:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The second line of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The second line of a customer address.
                     Address3:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The third line of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The third line of a customer address.
                     Address4:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The fourth line of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The fourth line of a customer address.
                     City:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The city in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The city in which a customer lives.
                     County:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The county in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The county in which a customer lives.
                     State:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The state in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The state in which a customer lives.
                     Province:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The province in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The province in which a customer lives.
                     Country:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The country in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The country in which a customer lives.
                     PostalCode:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The postal code of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The postal code of a customer address.
                 BillingAddress:
                   description: Updates associated with the address properties of a customer profile.
                   type: object
                   properties:
                     Address1:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The first line of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The first line of a customer address.
                     Address2:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The second line of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The second line of a customer address.
                     Address3:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The third line of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The third line of a customer address.
                     Address4:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The fourth line of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The fourth line of a customer address.
                     City:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The city in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The city in which a customer lives.
                     County:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The county in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The county in which a customer lives.
                     State:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The state in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The state in which a customer lives.
                     Province:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The province in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The province in which a customer lives.
                     Country:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The country in which a customer lives.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The country in which a customer lives.
                     PostalCode:
-                      allOf:
-                        - $ref: '#/components/schemas/string0To255'
-                        - description: The postal code of a customer address.
+                      $ref: '#/components/schemas/string0To255'
+                      description: The postal code of a customer address.
                 Attributes:
                   description: A key value pair of attributes of a customer profile.
                   type: object
@@ -1916,29 +1834,23 @@ paths:
                   type: object
                   properties:
                     Description:
-                      allOf:
-                        - $ref: '#/components/schemas/FlowDescription'
-                        - description: A description of the flow you want to create.
+                      $ref: '#/components/schemas/FlowDescription'
+                      description: A description of the flow you want to create.
                     FlowName:
-                      allOf:
-                        - $ref: '#/components/schemas/FlowName'
-                        - description: The specified name of the flow. Use underscores (_) or hyphens (-) only. Spaces are not allowed.
+                      $ref: '#/components/schemas/FlowName'
+                      description: The specified name of the flow. Use underscores (_) or hyphens (-) only. Spaces are not allowed.
                     KmsArn:
-                      allOf:
-                        - $ref: '#/components/schemas/KmsArn'
-                        - description: The Amazon Resource Name of the AWS Key Management Service (KMS) key you provide for encryption.
+                      $ref: '#/components/schemas/KmsArn'
+                      description: The Amazon Resource Name of the AWS Key Management Service (KMS) key you provide for encryption.
                     SourceFlowConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/SourceFlowConfig'
-                        - description: The configuration that controls how Customer Profiles retrieves data from the source.
+                      $ref: '#/components/schemas/SourceFlowConfig'
+                      description: The configuration that controls how Customer Profiles retrieves data from the source.
                     Tasks:
-                      allOf:
-                        - $ref: '#/components/schemas/Tasks'
-                        - description: A list of tasks that Customer Profiles performs while transferring the data in the flow run.
+                      $ref: '#/components/schemas/Tasks'
+                      description: A list of tasks that Customer Profiles performs while transferring the data in the flow run.
                     TriggerConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/TriggerConfig'
-                        - description: The trigger settings that determine how and when the flow runs.
+                      $ref: '#/components/schemas/TriggerConfig'
+                      description: The trigger settings that determine how and when the flow runs.
   '/domains/{DomainName}/matches':
     get:
       operationId: GetMatches
@@ -2452,13 +2364,11 @@ paths:
                   type: object
                   properties:
                     KeyName:
-                      allOf:
-                        - $ref: '#/components/schemas/name'
-                        - description: 'A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId.'
+                      $ref: '#/components/schemas/name'
+                      description: 'A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId.'
                     Values:
-                      allOf:
-                        - $ref: '#/components/schemas/requestValueList'
-                        - description: A list of key values.
+                      $ref: '#/components/schemas/requestValueList'
+                      description: A list of key values.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2708,89 +2618,68 @@ paths:
                   type: object
                   properties:
                     AccountNumber:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: 'A unique identifier for the account number field to be merged. '
+                      $ref: '#/components/schemas/uuid'
+                      description: 'A unique identifier for the account number field to be merged. '
                     AdditionalInformation:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the additional information field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the additional information field to be merged.
                     PartyType:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the party type field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the party type field to be merged.
                     BusinessName:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the business name field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the business name field to be merged.
                     FirstName:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the first name field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the first name field to be merged.
                     MiddleName:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the middle name field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the middle name field to be merged.
                     LastName:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the last name field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the last name field to be merged.
                     BirthDate:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the birthdate field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the birthdate field to be merged.
                     Gender:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the gender field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the gender field to be merged.
                     PhoneNumber:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the phone number field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the phone number field to be merged.
                     MobilePhoneNumber:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the mobile phone number field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the mobile phone number field to be merged.
                     HomePhoneNumber:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the home phone number field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the home phone number field to be merged.
                     BusinessPhoneNumber:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the business phone number field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the business phone number field to be merged.
                     EmailAddress:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the email address field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the email address field to be merged.
                     PersonalEmailAddress:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the personal email address field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the personal email address field to be merged.
                     BusinessEmailAddress:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the party type field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the party type field to be merged.
                     Address:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the party type field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the party type field to be merged.
                     ShippingAddress:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the shipping address field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the shipping address field to be merged.
                     MailingAddress:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the mailing address field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the mailing address field to be merged.
                     BillingAddress:
-                      allOf:
-                        - $ref: '#/components/schemas/uuid'
-                        - description: A unique identifier for the billing type field to be merged.
+                      $ref: '#/components/schemas/uuid'
+                      description: A unique identifier for the billing type field to be merged.
                     Attributes:
-                      allOf:
-                        - $ref: '#/components/schemas/AttributeSourceIdMap'
-                        - description: A unique identifier for the attributes field to be merged.
+                      $ref: '#/components/schemas/AttributeSourceIdMap'
+                      description: A unique identifier for the attributes field to be merged.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3007,13 +2896,11 @@ components:
       type: object
       properties:
         KeyName:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: A searchable identifier of a customer profile.
+          $ref: '#/components/schemas/name'
+          description: A searchable identifier of a customer profile.
         Values:
-          allOf:
-            - $ref: '#/components/schemas/requestValueList'
-            - description: A list of key values.
+          $ref: '#/components/schemas/requestValueList'
+          description: A list of key values.
     string1To255:
       type: string
       minLength: 1
@@ -3032,37 +2919,29 @@ components:
         - LastUpdatedAt
       properties:
         DomainName:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: The unique name of the domain.
+          $ref: '#/components/schemas/name'
+          description: The unique name of the domain.
         DefaultExpirationDays:
-          allOf:
-            - $ref: '#/components/schemas/expirationDaysInteger'
-            - description: The default number of days until the data within the domain expires.
+          $ref: '#/components/schemas/expirationDaysInteger'
+          description: The default number of days until the data within the domain expires.
         DefaultEncryptionKey:
-          allOf:
-            - $ref: '#/components/schemas/encryptionKey'
-            - description: 'The default encryption key, which is an AWS managed key, is used when no specific type of encryption key is specified. It is used to encrypt all data before it is placed in permanent or semi-permanent storage.'
+          $ref: '#/components/schemas/encryptionKey'
+          description: 'The default encryption key, which is an AWS managed key, is used when no specific type of encryption key is specified. It is used to encrypt all data before it is placed in permanent or semi-permanent storage.'
         DeadLetterQueueUrl:
-          allOf:
-            - $ref: '#/components/schemas/sqsQueueUrl'
-            - description: 'The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.'
+          $ref: '#/components/schemas/sqsQueueUrl'
+          description: 'The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.'
         Matching:
-          allOf:
-            - $ref: '#/components/schemas/MatchingResponse'
-            - description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
+          $ref: '#/components/schemas/MatchingResponse'
+          description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was created.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was created.
         LastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was most recently edited.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was most recently edited.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags used to organize, track, or control access for this resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags used to organize, track, or control access for this resource.'
     optionalBoolean:
       type: boolean
     TagValue:
@@ -3074,57 +2953,50 @@ components:
         - ProfileId
       properties:
         ProfileId:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: The unique identifier of a customer profile.
+          $ref: '#/components/schemas/uuid'
+          description: The unique identifier of a customer profile.
     DeleteDomainResponse:
       type: object
       required:
         - Message
       properties:
         Message:
-          allOf:
-            - $ref: '#/components/schemas/message'
-            - description: A message that indicates the delete request is done.
+          $ref: '#/components/schemas/message'
+          description: A message that indicates the delete request is done.
     DeleteIntegrationResponse:
       type: object
       required:
         - Message
       properties:
         Message:
-          allOf:
-            - $ref: '#/components/schemas/message'
-            - description: A message that indicates the delete request is done.
+          $ref: '#/components/schemas/message'
+          description: A message that indicates the delete request is done.
     DeleteProfileResponse:
       type: object
       properties:
         Message:
-          allOf:
-            - $ref: '#/components/schemas/message'
-            - description: A message that indicates the delete request is done.
+          $ref: '#/components/schemas/message'
+          description: A message that indicates the delete request is done.
     DeleteProfileKeyResponse:
       type: object
       properties:
         Message:
-          allOf:
-            - $ref: '#/components/schemas/message'
-            - description: A message that indicates the delete request is done.
+          $ref: '#/components/schemas/message'
+          description: A message that indicates the delete request is done.
     DeleteProfileObjectResponse:
       type: object
       properties:
         Message:
-          allOf:
-            - $ref: '#/components/schemas/message'
-            - description: A message that indicates the delete request is done.
+          $ref: '#/components/schemas/message'
+          description: A message that indicates the delete request is done.
     DeleteProfileObjectTypeResponse:
       type: object
       required:
         - Message
       properties:
         Message:
-          allOf:
-            - $ref: '#/components/schemas/message'
-            - description: A message that indicates the delete request is done.
+          $ref: '#/components/schemas/message'
+          description: A message that indicates the delete request is done.
     GetDomainResponse:
       type: object
       required:
@@ -3133,41 +3005,32 @@ components:
         - LastUpdatedAt
       properties:
         DomainName:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: The unique name of the domain.
+          $ref: '#/components/schemas/name'
+          description: The unique name of the domain.
         DefaultExpirationDays:
-          allOf:
-            - $ref: '#/components/schemas/expirationDaysInteger'
-            - description: The default number of days until the data within the domain expires.
+          $ref: '#/components/schemas/expirationDaysInteger'
+          description: The default number of days until the data within the domain expires.
         DefaultEncryptionKey:
-          allOf:
-            - $ref: '#/components/schemas/encryptionKey'
-            - description: 'The default encryption key, which is an AWS managed key, is used when no specific type of encryption key is specified. It is used to encrypt all data before it is placed in permanent or semi-permanent storage.'
+          $ref: '#/components/schemas/encryptionKey'
+          description: 'The default encryption key, which is an AWS managed key, is used when no specific type of encryption key is specified. It is used to encrypt all data before it is placed in permanent or semi-permanent storage.'
         DeadLetterQueueUrl:
-          allOf:
-            - $ref: '#/components/schemas/sqsQueueUrl'
-            - description: 'The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.'
+          $ref: '#/components/schemas/sqsQueueUrl'
+          description: 'The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.'
         Stats:
-          allOf:
-            - $ref: '#/components/schemas/DomainStats'
-            - description: Usage-specific statistics about the domain.
+          $ref: '#/components/schemas/DomainStats'
+          description: Usage-specific statistics about the domain.
         Matching:
-          allOf:
-            - $ref: '#/components/schemas/MatchingResponse'
-            - description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
+          $ref: '#/components/schemas/MatchingResponse'
+          description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was created.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was created.
         LastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was most recently edited.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was most recently edited.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags used to organize, track, or control access for this resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags used to organize, track, or control access for this resource.'
     GetIntegrationResponse:
       type: object
       required:
@@ -3178,48 +3041,38 @@ components:
         - LastUpdatedAt
       properties:
         DomainName:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: The unique name of the domain.
+          $ref: '#/components/schemas/name'
+          description: The unique name of the domain.
         Uri:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The URI of the S3 bucket or any other type of data source.
+          $ref: '#/components/schemas/string1To255'
+          description: The URI of the S3 bucket or any other type of data source.
         ObjectTypeName:
-          allOf:
-            - $ref: '#/components/schemas/typeName'
-            - description: The name of the profile object type.
+          $ref: '#/components/schemas/typeName'
+          description: The name of the profile object type.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was created.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was created.
         LastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was most recently edited.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was most recently edited.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags used to organize, track, or control access for this resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags used to organize, track, or control access for this resource.'
     GetMatchesResponse:
       type: object
       properties:
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/token'
-            - description: 'If there are additional results, this is the token for the next set of results.'
+          $ref: '#/components/schemas/token'
+          description: 'If there are additional results, this is the token for the next set of results.'
         MatchGenerationDate:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp this version of Match Result generated.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp this version of Match Result generated.
         PotentialMatches:
-          allOf:
-            - $ref: '#/components/schemas/matchesNumber'
-            - description: The number of potential matches found.
+          $ref: '#/components/schemas/matchesNumber'
+          description: The number of potential matches found.
         Matches:
-          allOf:
-            - $ref: '#/components/schemas/MatchesList'
-            - description: The list of matched profiles for this instance.
+          $ref: '#/components/schemas/MatchesList'
+          description: The list of matched profiles for this instance.
     GetProfileObjectTypeResponse:
       type: object
       required:
@@ -3227,142 +3080,113 @@ components:
         - Description
       properties:
         ObjectTypeName:
-          allOf:
-            - $ref: '#/components/schemas/typeName'
-            - description: The name of the profile object type.
+          $ref: '#/components/schemas/typeName'
+          description: The name of the profile object type.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/text'
-            - description: The description of the profile object type.
+          $ref: '#/components/schemas/text'
+          description: The description of the profile object type.
         TemplateId:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: A unique identifier for the object template.
+          $ref: '#/components/schemas/name'
+          description: A unique identifier for the object template.
         ExpirationDays:
-          allOf:
-            - $ref: '#/components/schemas/expirationDaysInteger'
-            - description: The number of days until the data in the object expires.
+          $ref: '#/components/schemas/expirationDaysInteger'
+          description: The number of days until the data in the object expires.
         EncryptionKey:
-          allOf:
-            - $ref: '#/components/schemas/encryptionKey'
-            - description: The customer-provided key to encrypt the profile object that will be created in this profile object type.
+          $ref: '#/components/schemas/encryptionKey'
+          description: The customer-provided key to encrypt the profile object that will be created in this profile object type.
         AllowProfileCreation:
-          allOf:
-            - $ref: '#/components/schemas/boolean'
-            - description: 'Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.'
+          $ref: '#/components/schemas/boolean'
+          description: 'Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.'
         Fields:
-          allOf:
-            - $ref: '#/components/schemas/FieldMap'
-            - description: A map of the name and ObjectType field.
+          $ref: '#/components/schemas/FieldMap'
+          description: A map of the name and ObjectType field.
         Keys:
-          allOf:
-            - $ref: '#/components/schemas/KeyMap'
-            - description: A list of unique keys that can be used to map data to the profile.
+          $ref: '#/components/schemas/KeyMap'
+          description: A list of unique keys that can be used to map data to the profile.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was created.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was created.
         LastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was most recently edited.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was most recently edited.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags used to organize, track, or control access for this resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags used to organize, track, or control access for this resource.'
     GetProfileObjectTypeTemplateResponse:
       type: object
       properties:
         TemplateId:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: A unique identifier for the object template.
+          $ref: '#/components/schemas/name'
+          description: A unique identifier for the object template.
         SourceName:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: The name of the source of the object template.
+          $ref: '#/components/schemas/name'
+          description: The name of the source of the object template.
         SourceObject:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: The source of the object template.
+          $ref: '#/components/schemas/name'
+          description: The source of the object template.
         AllowProfileCreation:
-          allOf:
-            - $ref: '#/components/schemas/boolean'
-            - description: 'Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.'
+          $ref: '#/components/schemas/boolean'
+          description: 'Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.'
         Fields:
-          allOf:
-            - $ref: '#/components/schemas/FieldMap'
-            - description: A map of the name and ObjectType field.
+          $ref: '#/components/schemas/FieldMap'
+          description: A map of the name and ObjectType field.
         Keys:
-          allOf:
-            - $ref: '#/components/schemas/KeyMap'
-            - description: A list of unique keys that can be used to map data to the profile.
+          $ref: '#/components/schemas/KeyMap'
+          description: A list of unique keys that can be used to map data to the profile.
     ListAccountIntegrationsResponse:
       type: object
       properties:
         Items:
-          allOf:
-            - $ref: '#/components/schemas/IntegrationList'
-            - description: The list of ListAccountIntegration instances.
+          $ref: '#/components/schemas/IntegrationList'
+          description: The list of ListAccountIntegration instances.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/token'
-            - description: The pagination token from the previous ListAccountIntegrations API call.
+          $ref: '#/components/schemas/token'
+          description: The pagination token from the previous ListAccountIntegrations API call.
     ListDomainsResponse:
       type: object
       properties:
         Items:
-          allOf:
-            - $ref: '#/components/schemas/DomainList'
-            - description: The list of ListDomains instances.
+          $ref: '#/components/schemas/DomainList'
+          description: The list of ListDomains instances.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/token'
-            - description: The pagination token from the previous ListDomains API call.
+          $ref: '#/components/schemas/token'
+          description: The pagination token from the previous ListDomains API call.
     ListIntegrationsResponse:
       type: object
       properties:
         Items:
-          allOf:
-            - $ref: '#/components/schemas/IntegrationList'
-            - description: The list of ListIntegrations instances.
+          $ref: '#/components/schemas/IntegrationList'
+          description: The list of ListIntegrations instances.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/token'
-            - description: The pagination token from the previous ListIntegrations API call.
+          $ref: '#/components/schemas/token'
+          description: The pagination token from the previous ListIntegrations API call.
     ListProfileObjectTypeTemplatesResponse:
       type: object
       properties:
         Items:
-          allOf:
-            - $ref: '#/components/schemas/ProfileObjectTypeTemplateList'
-            - description: The list of ListProfileObjectType template instances.
+          $ref: '#/components/schemas/ProfileObjectTypeTemplateList'
+          description: The list of ListProfileObjectType template instances.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/token'
-            - description: 'The pagination token from the previous ListObjectTypeTemplates API call. '
+          $ref: '#/components/schemas/token'
+          description: 'The pagination token from the previous ListObjectTypeTemplates API call. '
     ListProfileObjectTypesResponse:
       type: object
       properties:
         Items:
-          allOf:
-            - $ref: '#/components/schemas/ProfileObjectTypeList'
-            - description: The list of ListProfileObjectTypes instances.
+          $ref: '#/components/schemas/ProfileObjectTypeList'
+          description: The list of ListProfileObjectTypes instances.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/token'
-            - description: Identifies the next page of results to return.
+          $ref: '#/components/schemas/token'
+          description: Identifies the next page of results to return.
     ListProfileObjectsResponse:
       type: object
       properties:
         Items:
-          allOf:
-            - $ref: '#/components/schemas/ProfileObjectList'
-            - description: The list of ListProfileObject instances.
+          $ref: '#/components/schemas/ProfileObjectList'
+          description: The list of ListProfileObject instances.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/token'
-            - description: The pagination token from the previous call to ListProfileObjects.
+          $ref: '#/components/schemas/token'
+          description: The pagination token from the previous call to ListProfileObjects.
     name:
       type: string
       pattern: '^[a-zA-Z0-9_-]+$'
@@ -3376,16 +3200,14 @@ components:
       type: object
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags used to organize, track, or control access for this resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags used to organize, track, or control access for this resource.'
     MergeProfilesResponse:
       type: object
       properties:
         Message:
-          allOf:
-            - $ref: '#/components/schemas/message'
-            - description: A message that indicates the merge request is complete.
+          $ref: '#/components/schemas/message'
+          description: A message that indicates the merge request is complete.
     uuid:
       type: string
       pattern: '[a-f0-9]{32}'
@@ -3403,29 +3225,23 @@ components:
         - LastUpdatedAt
       properties:
         DomainName:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: The unique name of the domain.
+          $ref: '#/components/schemas/name'
+          description: The unique name of the domain.
         Uri:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The URI of the S3 bucket or any other type of data source.
+          $ref: '#/components/schemas/string1To255'
+          description: The URI of the S3 bucket or any other type of data source.
         ObjectTypeName:
-          allOf:
-            - $ref: '#/components/schemas/typeName'
-            - description: The name of the profile object type.
+          $ref: '#/components/schemas/typeName'
+          description: The name of the profile object type.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was created.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was created.
         LastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was most recently edited.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was most recently edited.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags used to organize, track, or control access for this resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags used to organize, track, or control access for this resource.'
     FlowDescription:
       type: string
       pattern: '[\w!@#\-.?,\s]*'
@@ -3446,21 +3262,17 @@ components:
         - SourceConnectorProperties
       properties:
         ConnectorProfileName:
-          allOf:
-            - $ref: '#/components/schemas/ConnectorProfileName'
-            - description: The name of the AppFlow connector profile. This name must be unique for each connector profile in the AWS account.
+          $ref: '#/components/schemas/ConnectorProfileName'
+          description: The name of the AppFlow connector profile. This name must be unique for each connector profile in the AWS account.
         ConnectorType:
-          allOf:
-            - $ref: '#/components/schemas/SourceConnectorType'
-            - description: 'The type of connector, such as Salesforce, Marketo, and so on.'
+          $ref: '#/components/schemas/SourceConnectorType'
+          description: 'The type of connector, such as Salesforce, Marketo, and so on.'
         IncrementalPullConfig:
-          allOf:
-            - $ref: '#/components/schemas/IncrementalPullConfig'
-            - description: 'Defines the configuration for a scheduled incremental data pull. If a valid configuration is provided, the fields specified in the configuration are used when querying for the incremental data pull.'
+          $ref: '#/components/schemas/IncrementalPullConfig'
+          description: 'Defines the configuration for a scheduled incremental data pull. If a valid configuration is provided, the fields specified in the configuration are used when querying for the incremental data pull.'
         SourceConnectorProperties:
-          allOf:
-            - $ref: '#/components/schemas/SourceConnectorProperties'
-            - description: Specifies the information that is required to query a particular source connector.
+          $ref: '#/components/schemas/SourceConnectorProperties'
+          description: Specifies the information that is required to query a particular source connector.
       description: Contains information about the configuration of the source connector used in the flow.
     Tasks:
       type: array
@@ -3472,21 +3284,18 @@ components:
         - TriggerType
       properties:
         TriggerType:
-          allOf:
-            - $ref: '#/components/schemas/TriggerType'
-            - description: 'Specifies the type of flow trigger. It can be OnDemand, Scheduled, or Event.'
+          $ref: '#/components/schemas/TriggerType'
+          description: 'Specifies the type of flow trigger. It can be OnDemand, Scheduled, or Event.'
         TriggerProperties:
-          allOf:
-            - $ref: '#/components/schemas/TriggerProperties'
-            - description: 'Specifies the configuration details of a schedule-triggered flow that you define. Currently, these settings only apply to the Scheduled trigger type.'
+          $ref: '#/components/schemas/TriggerProperties'
+          description: 'Specifies the configuration details of a schedule-triggered flow that you define. Currently, these settings only apply to the Scheduled trigger type.'
       description: The trigger settings that determine how and when Amazon AppFlow runs the specified flow.
     PutProfileObjectResponse:
       type: object
       properties:
         ProfileObjectUniqueKey:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The unique identifier of the profile object generated by the service.
+          $ref: '#/components/schemas/string1To255'
+          description: The unique identifier of the profile object generated by the service.
     PutProfileObjectTypeResponse:
       type: object
       required:
@@ -3494,64 +3303,50 @@ components:
         - Description
       properties:
         ObjectTypeName:
-          allOf:
-            - $ref: '#/components/schemas/typeName'
-            - description: The name of the profile object type.
+          $ref: '#/components/schemas/typeName'
+          description: The name of the profile object type.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/text'
-            - description: Description of the profile object type.
+          $ref: '#/components/schemas/text'
+          description: Description of the profile object type.
         TemplateId:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: A unique identifier for the object template.
+          $ref: '#/components/schemas/name'
+          description: A unique identifier for the object template.
         ExpirationDays:
-          allOf:
-            - $ref: '#/components/schemas/expirationDaysInteger'
-            - description: The number of days until the data in the object expires.
+          $ref: '#/components/schemas/expirationDaysInteger'
+          description: The number of days until the data in the object expires.
         EncryptionKey:
-          allOf:
-            - $ref: '#/components/schemas/encryptionKey'
-            - description: The customer-provided key to encrypt the profile object that will be created in this profile object type.
+          $ref: '#/components/schemas/encryptionKey'
+          description: The customer-provided key to encrypt the profile object that will be created in this profile object type.
         AllowProfileCreation:
-          allOf:
-            - $ref: '#/components/schemas/boolean'
-            - description: 'Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.'
+          $ref: '#/components/schemas/boolean'
+          description: 'Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.'
         Fields:
-          allOf:
-            - $ref: '#/components/schemas/FieldMap'
-            - description: A map of the name and ObjectType field.
+          $ref: '#/components/schemas/FieldMap'
+          description: A map of the name and ObjectType field.
         Keys:
-          allOf:
-            - $ref: '#/components/schemas/KeyMap'
-            - description: A list of unique keys that can be used to map data to the profile.
+          $ref: '#/components/schemas/KeyMap'
+          description: A list of unique keys that can be used to map data to the profile.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was created.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was created.
         LastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was most recently edited.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was most recently edited.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags used to organize, track, or control access for this resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags used to organize, track, or control access for this resource.'
     ObjectTypeField:
       type: object
       properties:
         Source:
-          allOf:
-            - $ref: '#/components/schemas/text'
-            - description: 'A field of a ProfileObject. For example: _source.FirstName, where “_source” is a ProfileObjectType of a Zendesk user and “FirstName” is a field in that ObjectType.'
+          $ref: '#/components/schemas/text'
+          description: 'A field of a ProfileObject. For example: _source.FirstName, where “_source” is a ProfileObjectType of a Zendesk user and “FirstName” is a field in that ObjectType.'
         Target:
-          allOf:
-            - $ref: '#/components/schemas/text'
-            - description: 'The location of the data in the standard ProfileObject model. For example: _profile.Address.PostalCode.'
+          $ref: '#/components/schemas/text'
+          description: 'The location of the data in the standard ProfileObject model. For example: _profile.Address.PostalCode.'
         ContentType:
-          allOf:
-            - $ref: '#/components/schemas/FieldContentType'
-            - description: The content type of the field. Used for determining equality when searching.
+          $ref: '#/components/schemas/FieldContentType'
+          description: The content type of the field. Used for determining equality when searching.
       description: Represents a field in a ProfileObjectType.
     ObjectTypeKeyList:
       type: array
@@ -3561,13 +3356,11 @@ components:
       type: object
       properties:
         Items:
-          allOf:
-            - $ref: '#/components/schemas/ProfileList'
-            - description: The list of SearchProfiles instances.
+          $ref: '#/components/schemas/ProfileList'
+          description: The list of SearchProfiles instances.
         NextToken:
-          allOf:
-            - $ref: '#/components/schemas/token'
-            - description: The pagination token from the previous SearchProfiles API call.
+          $ref: '#/components/schemas/token'
+          description: The pagination token from the previous SearchProfiles API call.
     TagResourceResponse:
       type: object
       properties: {}
@@ -3587,46 +3380,37 @@ components:
         - LastUpdatedAt
       properties:
         DomainName:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: The unique name of the domain.
+          $ref: '#/components/schemas/name'
+          description: The unique name of the domain.
         DefaultExpirationDays:
-          allOf:
-            - $ref: '#/components/schemas/expirationDaysInteger'
-            - description: The default number of days until the data within the domain expires.
+          $ref: '#/components/schemas/expirationDaysInteger'
+          description: The default number of days until the data within the domain expires.
         DefaultEncryptionKey:
-          allOf:
-            - $ref: '#/components/schemas/encryptionKey'
-            - description: 'The default encryption key, which is an AWS managed key, is used when no specific type of encryption key is specified. It is used to encrypt all data before it is placed in permanent or semi-permanent storage.'
+          $ref: '#/components/schemas/encryptionKey'
+          description: 'The default encryption key, which is an AWS managed key, is used when no specific type of encryption key is specified. It is used to encrypt all data before it is placed in permanent or semi-permanent storage.'
         DeadLetterQueueUrl:
-          allOf:
-            - $ref: '#/components/schemas/sqsQueueUrl'
-            - description: 'The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.'
+          $ref: '#/components/schemas/sqsQueueUrl'
+          description: 'The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.'
         Matching:
-          allOf:
-            - $ref: '#/components/schemas/MatchingResponse'
-            - description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
+          $ref: '#/components/schemas/MatchingResponse'
+          description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was created.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was created.
         LastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was most recently edited.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was most recently edited.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags used to organize, track, or control access for this resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags used to organize, track, or control access for this resource.'
     UpdateProfileResponse:
       type: object
       required:
         - ProfileId
       properties:
         ProfileId:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: The unique identifier of a customer profile.
+          $ref: '#/components/schemas/uuid'
+          description: The unique identifier of a customer profile.
     string0To255:
       type: string
       minLength: 0
@@ -3640,60 +3424,47 @@ components:
       title: AddProfileKeyRequest
       properties:
         ProfileId:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: The unique identifier of a customer profile.
+          $ref: '#/components/schemas/uuid'
+          description: The unique identifier of a customer profile.
         KeyName:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: A searchable identifier of a customer profile.
+          $ref: '#/components/schemas/name'
+          description: A searchable identifier of a customer profile.
         Values:
-          allOf:
-            - $ref: '#/components/schemas/requestValueList'
-            - description: A list of key values.
+          $ref: '#/components/schemas/requestValueList'
+          description: A list of key values.
     Address:
       type: object
       properties:
         Address1:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The first line of a customer address.
+          $ref: '#/components/schemas/string1To255'
+          description: The first line of a customer address.
         Address2:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The second line of a customer address.
+          $ref: '#/components/schemas/string1To255'
+          description: The second line of a customer address.
         Address3:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The third line of a customer address.
+          $ref: '#/components/schemas/string1To255'
+          description: The third line of a customer address.
         Address4:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The fourth line of a customer address.
+          $ref: '#/components/schemas/string1To255'
+          description: The fourth line of a customer address.
         City:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The city in which a customer lives.
+          $ref: '#/components/schemas/string1To255'
+          description: The city in which a customer lives.
         County:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The county in which a customer lives.
+          $ref: '#/components/schemas/string1To255'
+          description: The county in which a customer lives.
         State:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The state in which a customer lives.
+          $ref: '#/components/schemas/string1To255'
+          description: The state in which a customer lives.
         Province:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The province in which a customer lives.
+          $ref: '#/components/schemas/string1To255'
+          description: The province in which a customer lives.
         Country:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The country in which a customer lives.
+          $ref: '#/components/schemas/string1To255'
+          description: The country in which a customer lives.
         PostalCode:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The postal code of a customer address.
+          $ref: '#/components/schemas/string1To255'
+          description: The postal code of a customer address.
       description: 'A generic address associated with the customer that is not mailing, shipping, or billing.'
     Attributes:
       type: object
@@ -3819,25 +3590,20 @@ components:
       type: object
       properties:
         Marketo:
-          allOf:
-            - $ref: '#/components/schemas/MarketoConnectorOperator'
-            - description: The operation to be performed on the provided Marketo source fields.
+          $ref: '#/components/schemas/MarketoConnectorOperator'
+          description: The operation to be performed on the provided Marketo source fields.
         S3:
-          allOf:
-            - $ref: '#/components/schemas/S3ConnectorOperator'
-            - description: The operation to be performed on the provided Amazon S3 source fields.
+          $ref: '#/components/schemas/S3ConnectorOperator'
+          description: The operation to be performed on the provided Amazon S3 source fields.
         Salesforce:
-          allOf:
-            - $ref: '#/components/schemas/SalesforceConnectorOperator'
-            - description: The operation to be performed on the provided Salesforce source fields.
+          $ref: '#/components/schemas/SalesforceConnectorOperator'
+          description: The operation to be performed on the provided Salesforce source fields.
         ServiceNow:
-          allOf:
-            - $ref: '#/components/schemas/ServiceNowConnectorOperator'
-            - description: The operation to be performed on the provided ServiceNow source fields.
+          $ref: '#/components/schemas/ServiceNowConnectorOperator'
+          description: The operation to be performed on the provided ServiceNow source fields.
         Zendesk:
-          allOf:
-            - $ref: '#/components/schemas/ZendeskConnectorOperator'
-            - description: The operation to be performed on the provided Zendesk source fields.
+          $ref: '#/components/schemas/ZendeskConnectorOperator'
+          description: The operation to be performed on the provided Zendesk source fields.
       description: The operation to be performed on the provided source fields.
     ConnectorProfileName:
       type: string
@@ -3861,9 +3627,8 @@ components:
         - Enabled
       properties:
         Enabled:
-          allOf:
-            - $ref: '#/components/schemas/optionalBoolean'
-            - description: The flag that enables the matching process of duplicate profiles.
+          $ref: '#/components/schemas/optionalBoolean'
+          description: The flag that enables the matching process of duplicate profiles.
       description: The flag that enables the matching process of duplicate profiles.
     TagMap:
       type: object
@@ -3878,32 +3643,26 @@ components:
       title: CreateDomainRequest
       properties:
         DefaultExpirationDays:
-          allOf:
-            - $ref: '#/components/schemas/expirationDaysInteger'
-            - description: The default number of days until the data within the domain expires.
+          $ref: '#/components/schemas/expirationDaysInteger'
+          description: The default number of days until the data within the domain expires.
         DefaultEncryptionKey:
-          allOf:
-            - $ref: '#/components/schemas/encryptionKey'
-            - description: 'The default encryption key, which is an AWS managed key, is used when no specific type of encryption key is specified. It is used to encrypt all data before it is placed in permanent or semi-permanent storage.'
+          $ref: '#/components/schemas/encryptionKey'
+          description: 'The default encryption key, which is an AWS managed key, is used when no specific type of encryption key is specified. It is used to encrypt all data before it is placed in permanent or semi-permanent storage.'
         DeadLetterQueueUrl:
-          allOf:
-            - $ref: '#/components/schemas/sqsQueueUrl'
-            - description: 'The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications. You must set up a policy on the DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to send messages to the DeadLetterQueue.'
+          $ref: '#/components/schemas/sqsQueueUrl'
+          description: 'The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications. You must set up a policy on the DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to send messages to the DeadLetterQueue.'
         Matching:
-          allOf:
-            - $ref: '#/components/schemas/MatchingRequest'
-            - description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
+          $ref: '#/components/schemas/MatchingRequest'
+          description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags used to organize, track, or control access for this resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags used to organize, track, or control access for this resource.'
     MatchingResponse:
       type: object
       properties:
         Enabled:
-          allOf:
-            - $ref: '#/components/schemas/optionalBoolean'
-            - description: The flag that enables the matching process of duplicate profiles.
+          $ref: '#/components/schemas/optionalBoolean'
+          description: The flag that enables the matching process of duplicate profiles.
       description: The flag that enables the matching process of duplicate profiles.
     timestamp:
       type: string
@@ -3929,89 +3688,68 @@ components:
       title: CreateProfileRequest
       properties:
         AccountNumber:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: A unique account number that you have given to the customer.
+          $ref: '#/components/schemas/string1To255'
+          description: A unique account number that you have given to the customer.
         AdditionalInformation:
-          allOf:
-            - $ref: '#/components/schemas/string1To1000'
-            - description: Any additional information relevant to the customer’s profile.
+          $ref: '#/components/schemas/string1To1000'
+          description: Any additional information relevant to the customer’s profile.
         PartyType:
-          allOf:
-            - $ref: '#/components/schemas/PartyType'
-            - description: The type of profile used to describe the customer.
+          $ref: '#/components/schemas/PartyType'
+          description: The type of profile used to describe the customer.
         BusinessName:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The name of the customer’s business.
+          $ref: '#/components/schemas/string1To255'
+          description: The name of the customer’s business.
         FirstName:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s first name.
+          $ref: '#/components/schemas/string1To255'
+          description: The customer’s first name.
         MiddleName:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s middle name.
+          $ref: '#/components/schemas/string1To255'
+          description: The customer’s middle name.
         LastName:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s last name.
+          $ref: '#/components/schemas/string1To255'
+          description: The customer’s last name.
         BirthDate:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: 'The customer’s birth date. '
+          $ref: '#/components/schemas/string1To255'
+          description: 'The customer’s birth date. '
         Gender:
-          allOf:
-            - $ref: '#/components/schemas/Gender'
-            - description: 'The gender with which the customer identifies. '
+          $ref: '#/components/schemas/Gender'
+          description: 'The gender with which the customer identifies. '
         PhoneNumber:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: 'The customer’s phone number, which has not been specified as a mobile, home, or business number. '
+          $ref: '#/components/schemas/string1To255'
+          description: 'The customer’s phone number, which has not been specified as a mobile, home, or business number. '
         MobilePhoneNumber:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s mobile phone number.
+          $ref: '#/components/schemas/string1To255'
+          description: The customer’s mobile phone number.
         HomePhoneNumber:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s home phone number.
+          $ref: '#/components/schemas/string1To255'
+          description: The customer’s home phone number.
         BusinessPhoneNumber:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s business phone number.
+          $ref: '#/components/schemas/string1To255'
+          description: The customer’s business phone number.
         EmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: 'The customer’s email address, which has not been specified as a personal or business address. '
+          $ref: '#/components/schemas/string1To255'
+          description: 'The customer’s email address, which has not been specified as a personal or business address. '
         PersonalEmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s personal email address.
+          $ref: '#/components/schemas/string1To255'
+          description: The customer’s personal email address.
         BusinessEmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s business email address.
+          $ref: '#/components/schemas/string1To255'
+          description: The customer’s business email address.
         Address:
-          allOf:
-            - $ref: '#/components/schemas/Address'
-            - description: 'A generic address associated with the customer that is not mailing, shipping, or billing.'
+          $ref: '#/components/schemas/Address'
+          description: 'A generic address associated with the customer that is not mailing, shipping, or billing.'
         ShippingAddress:
-          allOf:
-            - $ref: '#/components/schemas/Address'
-            - description: The customer’s shipping address.
+          $ref: '#/components/schemas/Address'
+          description: The customer’s shipping address.
         MailingAddress:
-          allOf:
-            - $ref: '#/components/schemas/Address'
-            - description: The customer’s mailing address.
+          $ref: '#/components/schemas/Address'
+          description: The customer’s mailing address.
         BillingAddress:
-          allOf:
-            - $ref: '#/components/schemas/Address'
-            - description: The customer’s billing address.
+          $ref: '#/components/schemas/Address'
+          description: The customer’s billing address.
         Attributes:
-          allOf:
-            - $ref: '#/components/schemas/Attributes'
-            - description: A key value pair of attributes of a customer profile.
+          $ref: '#/components/schemas/Attributes'
+          description: A key value pair of attributes of a customer profile.
     DataPullMode:
       type: string
       enum:
@@ -4037,9 +3775,8 @@ components:
       title: DeleteIntegrationRequest
       properties:
         Uri:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The URI of the S3 bucket or any other type of data source.
+          $ref: '#/components/schemas/string1To255'
+          description: The URI of the S3 bucket or any other type of data source.
     DeleteProfileKeyRequest:
       type: object
       required:
@@ -4049,17 +3786,14 @@ components:
       title: DeleteProfileKeyRequest
       properties:
         ProfileId:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: The unique identifier of a customer profile.
+          $ref: '#/components/schemas/uuid'
+          description: The unique identifier of a customer profile.
         KeyName:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: A searchable identifier of a customer profile.
+          $ref: '#/components/schemas/name'
+          description: A searchable identifier of a customer profile.
         Values:
-          allOf:
-            - $ref: '#/components/schemas/requestValueList'
-            - description: A list of key values.
+          $ref: '#/components/schemas/requestValueList'
+          description: A list of key values.
     typeName:
       type: string
       pattern: '^[a-zA-Z_][a-zA-Z_0-9-]*$'
@@ -4074,17 +3808,14 @@ components:
       title: DeleteProfileObjectRequest
       properties:
         ProfileId:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: The unique identifier of a customer profile.
+          $ref: '#/components/schemas/uuid'
+          description: The unique identifier of a customer profile.
         ProfileObjectUniqueKey:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The unique identifier of the profile object generated by the service.
+          $ref: '#/components/schemas/string1To255'
+          description: The unique identifier of the profile object generated by the service.
         ObjectTypeName:
-          allOf:
-            - $ref: '#/components/schemas/typeName'
-            - description: The name of the profile object type.
+          $ref: '#/components/schemas/typeName'
+          description: The name of the profile object type.
     DeleteProfileObjectTypeRequest:
       type: object
       title: DeleteProfileObjectTypeRequest
@@ -4096,9 +3827,8 @@ components:
       title: DeleteProfileRequest
       properties:
         ProfileId:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: The unique identifier of a customer profile.
+          $ref: '#/components/schemas/uuid'
+          description: The unique identifier of a customer profile.
     DestinationField:
       type: string
       pattern: .*
@@ -4111,21 +3841,17 @@ components:
         - LastUpdatedAt
       properties:
         DomainName:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: The unique name of the domain.
+          $ref: '#/components/schemas/name'
+          description: The unique name of the domain.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was created.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was created.
         LastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was most recently edited.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was most recently edited.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags used to organize, track, or control access for this resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags used to organize, track, or control access for this resource.'
       description: An object in a list that represents a domain.
     DomainList:
       type: array
@@ -4137,21 +3863,17 @@ components:
       type: object
       properties:
         ProfileCount:
-          allOf:
-            - $ref: '#/components/schemas/long'
-            - description: The total number of profiles currently in the domain.
+          $ref: '#/components/schemas/long'
+          description: The total number of profiles currently in the domain.
         MeteringProfileCount:
-          allOf:
-            - $ref: '#/components/schemas/long'
-            - description: 'The number of profiles that you are currently paying for in the domain. If you have more than 100 objects associated with a single profile, that profile counts as two profiles. If you have more than 200 objects, that profile counts as three, and so on.'
+          $ref: '#/components/schemas/long'
+          description: 'The number of profiles that you are currently paying for in the domain. If you have more than 100 objects associated with a single profile, that profile counts as two profiles. If you have more than 200 objects, that profile counts as three, and so on.'
         ObjectCount:
-          allOf:
-            - $ref: '#/components/schemas/long'
-            - description: The total number of objects in domain.
+          $ref: '#/components/schemas/long'
+          description: The total number of objects in domain.
         TotalSize:
-          allOf:
-            - $ref: '#/components/schemas/long'
-            - description: 'The total size, in bytes, of all objects in the domain.'
+          $ref: '#/components/schemas/long'
+          description: 'The total size, in bytes, of all objects in the domain.'
       description: Usage-specific statistics about the domain.
     FieldContentType:
       type: string
@@ -4173,89 +3895,68 @@ components:
       type: object
       properties:
         AccountNumber:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: 'A unique identifier for the account number field to be merged. '
+          $ref: '#/components/schemas/uuid'
+          description: 'A unique identifier for the account number field to be merged. '
         AdditionalInformation:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the additional information field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the additional information field to be merged.
         PartyType:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the party type field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the party type field to be merged.
         BusinessName:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the business name field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the business name field to be merged.
         FirstName:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the first name field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the first name field to be merged.
         MiddleName:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the middle name field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the middle name field to be merged.
         LastName:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the last name field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the last name field to be merged.
         BirthDate:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the birthdate field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the birthdate field to be merged.
         Gender:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the gender field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the gender field to be merged.
         PhoneNumber:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the phone number field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the phone number field to be merged.
         MobilePhoneNumber:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the mobile phone number field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the mobile phone number field to be merged.
         HomePhoneNumber:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the home phone number field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the home phone number field to be merged.
         BusinessPhoneNumber:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the business phone number field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the business phone number field to be merged.
         EmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the email address field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the email address field to be merged.
         PersonalEmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the personal email address field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the personal email address field to be merged.
         BusinessEmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the party type field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the party type field to be merged.
         Address:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the party type field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the party type field to be merged.
         ShippingAddress:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the shipping address field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the shipping address field to be merged.
         MailingAddress:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the mailing address field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the mailing address field to be merged.
         BillingAddress:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: A unique identifier for the billing type field to be merged.
+          $ref: '#/components/schemas/uuid'
+          description: A unique identifier for the billing type field to be merged.
         Attributes:
-          allOf:
-            - $ref: '#/components/schemas/AttributeSourceIdMap'
-            - description: A unique identifier for the attributes field to be merged.
+          $ref: '#/components/schemas/AttributeSourceIdMap'
+          description: A unique identifier for the attributes field to be merged.
       description: 'A duplicate customer profile that is to be merged into a main profile. '
     FlowDefinition:
       type: object
@@ -4267,29 +3968,23 @@ components:
         - TriggerConfig
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/FlowDescription'
-            - description: A description of the flow you want to create.
+          $ref: '#/components/schemas/FlowDescription'
+          description: A description of the flow you want to create.
         FlowName:
-          allOf:
-            - $ref: '#/components/schemas/FlowName'
-            - description: The specified name of the flow. Use underscores (_) or hyphens (-) only. Spaces are not allowed.
+          $ref: '#/components/schemas/FlowName'
+          description: The specified name of the flow. Use underscores (_) or hyphens (-) only. Spaces are not allowed.
         KmsArn:
-          allOf:
-            - $ref: '#/components/schemas/KmsArn'
-            - description: The Amazon Resource Name of the AWS Key Management Service (KMS) key you provide for encryption.
+          $ref: '#/components/schemas/KmsArn'
+          description: The Amazon Resource Name of the AWS Key Management Service (KMS) key you provide for encryption.
         SourceFlowConfig:
-          allOf:
-            - $ref: '#/components/schemas/SourceFlowConfig'
-            - description: The configuration that controls how Customer Profiles retrieves data from the source.
+          $ref: '#/components/schemas/SourceFlowConfig'
+          description: The configuration that controls how Customer Profiles retrieves data from the source.
         Tasks:
-          allOf:
-            - $ref: '#/components/schemas/Tasks'
-            - description: A list of tasks that Customer Profiles performs while transferring the data in the flow run.
+          $ref: '#/components/schemas/Tasks'
+          description: A list of tasks that Customer Profiles performs while transferring the data in the flow run.
         TriggerConfig:
-          allOf:
-            - $ref: '#/components/schemas/TriggerConfig'
-            - description: The trigger settings that determine how and when the flow runs.
+          $ref: '#/components/schemas/TriggerConfig'
+          description: The trigger settings that determine how and when the flow runs.
       description: 'The configurations that control how Customer Profiles retrieves data from the source, Amazon AppFlow. Customer Profiles uses this information to create an AppFlow flow on behalf of customers.'
     GetDomainRequest:
       type: object
@@ -4302,9 +3997,8 @@ components:
       title: GetIntegrationRequest
       properties:
         Uri:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The URI of the S3 bucket or any other type of data source.
+          $ref: '#/components/schemas/string1To255'
+          description: The URI of the S3 bucket or any other type of data source.
     token:
       type: string
       minLength: 1
@@ -4346,9 +4040,8 @@ components:
       type: object
       properties:
         DatetimeTypeFieldName:
-          allOf:
-            - $ref: '#/components/schemas/DatetimeTypeFieldName'
-            - description: A field that specifies the date time or timestamp field as the criteria to use when importing incremental records from the source.
+          $ref: '#/components/schemas/DatetimeTypeFieldName'
+          description: A field that specifies the date time or timestamp field as the criteria to use when importing incremental records from the source.
       description: Specifies the configuration used when importing incremental records from the source.
     ListIntegrationItem:
       type: object
@@ -4360,29 +4053,23 @@ components:
         - LastUpdatedAt
       properties:
         DomainName:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: The unique name of the domain.
+          $ref: '#/components/schemas/name'
+          description: The unique name of the domain.
         Uri:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The URI of the S3 bucket or any other type of data source.
+          $ref: '#/components/schemas/string1To255'
+          description: The URI of the S3 bucket or any other type of data source.
         ObjectTypeName:
-          allOf:
-            - $ref: '#/components/schemas/typeName'
-            - description: The name of the profile object type.
+          $ref: '#/components/schemas/typeName'
+          description: The name of the profile object type.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was created.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was created.
         LastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was most recently edited.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was most recently edited.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags used to organize, track, or control access for this resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags used to organize, track, or control access for this resource.'
       description: An integration in list of integrations.
     IntegrationList:
       type: array
@@ -4395,9 +4082,8 @@ components:
       title: ListAccountIntegrationsRequest
       properties:
         Uri:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The URI of the S3 bucket or any other type of data source.
+          $ref: '#/components/schemas/string1To255'
+          description: The URI of the S3 bucket or any other type of data source.
     ListDomainsRequest:
       type: object
       title: ListDomainsRequest
@@ -4413,41 +4099,33 @@ components:
         - Description
       properties:
         ObjectTypeName:
-          allOf:
-            - $ref: '#/components/schemas/typeName'
-            - description: The name of the profile object type.
+          $ref: '#/components/schemas/typeName'
+          description: The name of the profile object type.
         Description:
-          allOf:
-            - $ref: '#/components/schemas/text'
-            - description: Description of the profile object type.
+          $ref: '#/components/schemas/text'
+          description: Description of the profile object type.
         CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was created.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was created.
         LastUpdatedAt:
-          allOf:
-            - $ref: '#/components/schemas/timestamp'
-            - description: The timestamp of when the domain was most recently edited.
+          $ref: '#/components/schemas/timestamp'
+          description: The timestamp of when the domain was most recently edited.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags used to organize, track, or control access for this resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags used to organize, track, or control access for this resource.'
       description: A ProfileObjectType instance.
     ListProfileObjectTypeTemplateItem:
       type: object
       properties:
         TemplateId:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: A unique identifier for the object template.
+          $ref: '#/components/schemas/name'
+          description: A unique identifier for the object template.
         SourceName:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: The name of the source of the object template.
+          $ref: '#/components/schemas/name'
+          description: The name of the source of the object template.
         SourceObject:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: The source of the object template.
+          $ref: '#/components/schemas/name'
+          description: The source of the object template.
       description: A ProfileObjectTypeTemplate in a list of ProfileObjectTypeTemplates.
     ListProfileObjectTypeTemplatesRequest:
       type: object
@@ -4473,17 +4151,14 @@ components:
       type: object
       properties:
         ObjectTypeName:
-          allOf:
-            - $ref: '#/components/schemas/typeName'
-            - description: 'Specifies the kind of object being added to a profile, such as "Salesforce-Account."'
+          $ref: '#/components/schemas/typeName'
+          description: 'Specifies the kind of object being added to a profile, such as "Salesforce-Account."'
         ProfileObjectUniqueKey:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The unique identifier of the ProfileObject generated by the service.
+          $ref: '#/components/schemas/string1To255'
+          description: The unique identifier of the ProfileObject generated by the service.
         Object:
-          allOf:
-            - $ref: '#/components/schemas/stringifiedJson'
-            - description: A JSON representation of a ProfileObject that belongs to a profile.
+          $ref: '#/components/schemas/stringifiedJson'
+          description: A JSON representation of a ProfileObject that belongs to a profile.
       description: A ProfileObject in a list of ProfileObjects.
     ObjectFilter:
       type: object
@@ -4492,13 +4167,11 @@ components:
         - Values
       properties:
         KeyName:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: 'A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId.'
+          $ref: '#/components/schemas/name'
+          description: 'A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId.'
         Values:
-          allOf:
-            - $ref: '#/components/schemas/requestValueList'
-            - description: A list of key values.
+          $ref: '#/components/schemas/requestValueList'
+          description: A list of key values.
       description: The filter applied to ListProfileObjects response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset and _case.
     ListProfileObjectsRequest:
       type: object
@@ -4508,17 +4181,14 @@ components:
       title: ListProfileObjectsRequest
       properties:
         ObjectTypeName:
-          allOf:
-            - $ref: '#/components/schemas/typeName'
-            - description: The name of the profile object type.
+          $ref: '#/components/schemas/typeName'
+          description: The name of the profile object type.
         ProfileId:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: The unique identifier of a customer profile.
+          $ref: '#/components/schemas/uuid'
+          description: The unique identifier of a customer profile.
         ObjectFilter:
-          allOf:
-            - $ref: '#/components/schemas/ObjectFilter'
-            - description: Applies a filter to the response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset and _case.
+          $ref: '#/components/schemas/ObjectFilter'
+          description: Applies a filter to the response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset and _case.
     ProfileObjectList:
       type: array
       items:
@@ -4541,9 +4211,8 @@ components:
         - Object
       properties:
         Object:
-          allOf:
-            - $ref: '#/components/schemas/Object'
-            - description: The object specified in the Marketo flow source.
+          $ref: '#/components/schemas/Object'
+          description: The object specified in the Marketo flow source.
       description: The properties that are applied when Marketo is being used as a source.
     ProfileIdList:
       type: array
@@ -4553,13 +4222,11 @@ components:
       type: object
       properties:
         MatchId:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The unique identifiers for this group of profiles that match.
+          $ref: '#/components/schemas/string1To255'
+          description: The unique identifiers for this group of profiles that match.
         ProfileIds:
-          allOf:
-            - $ref: '#/components/schemas/ProfileIdList'
-            - description: A list of identifiers for profiles that match.
+          $ref: '#/components/schemas/ProfileIdList'
+          description: A list of identifiers for profiles that match.
       description: The Match group object.
     ProfileIdToBeMergedList:
       type: array
@@ -4575,17 +4242,14 @@ components:
       title: MergeProfilesRequest
       properties:
         MainProfileId:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: The identifier of the profile to be taken.
+          $ref: '#/components/schemas/uuid'
+          description: The identifier of the profile to be taken.
         ProfileIdsToBeMerged:
-          allOf:
-            - $ref: '#/components/schemas/ProfileIdToBeMergedList'
-            - description: The identifier of the profile to be merged into MainProfileId.
+          $ref: '#/components/schemas/ProfileIdToBeMergedList'
+          description: The identifier of the profile to be merged into MainProfileId.
         FieldSourceProfileIds:
-          allOf:
-            - $ref: '#/components/schemas/FieldSourceProfileIds'
-            - description: 'The identifiers of the fields in the profile that has the information you want to apply to the merge. For example, say you want to merge EmailAddress from Profile1 into MainProfile. This would be the identifier of the EmailAddress field in Profile1. '
+          $ref: '#/components/schemas/FieldSourceProfileIds'
+          description: 'The identifiers of the fields in the profile that has the information you want to apply to the merge. For example, say you want to merge EmailAddress from Profile1 into MainProfile. This would be the identifier of the EmailAddress field in Profile1. '
     StandardIdentifierList:
       type: array
       items:
@@ -4594,13 +4258,11 @@ components:
       type: object
       properties:
         StandardIdentifiers:
-          allOf:
-            - $ref: '#/components/schemas/StandardIdentifierList'
-            - description: 'The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE, ASSET or CASE means that this key can be used to tie an object to a PROFILE, ASSET or CASE respectively. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.'
+          $ref: '#/components/schemas/StandardIdentifierList'
+          description: 'The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE, ASSET or CASE means that this key can be used to tie an object to a PROFILE, ASSET or CASE respectively. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.'
         FieldNames:
-          allOf:
-            - $ref: '#/components/schemas/FieldNameList'
-            - description: The reference for the key name of the fields map.
+          $ref: '#/components/schemas/FieldNameList'
+          description: The reference for the key name of the fields map.
       description: An object that defines the Key element of a ProfileObject. A Key is a special element that can be used to search for a customer profile.
     OperatorPropertiesKeys:
       type: string
@@ -4623,93 +4285,71 @@ components:
       type: object
       properties:
         ProfileId:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: The unique identifier of a customer profile.
+          $ref: '#/components/schemas/uuid'
+          description: The unique identifier of a customer profile.
         AccountNumber:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: A unique account number that you have given to the customer.
+          $ref: '#/components/schemas/string1To255'
+          description: A unique account number that you have given to the customer.
         AdditionalInformation:
-          allOf:
-            - $ref: '#/components/schemas/string1To1000'
-            - description: Any additional information relevant to the customer’s profile.
+          $ref: '#/components/schemas/string1To1000'
+          description: Any additional information relevant to the customer’s profile.
         PartyType:
-          allOf:
-            - $ref: '#/components/schemas/PartyType'
-            - description: The type of profile used to describe the customer.
+          $ref: '#/components/schemas/PartyType'
+          description: The type of profile used to describe the customer.
         BusinessName:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The name of the customer’s business.
+          $ref: '#/components/schemas/string1To255'
+          description: The name of the customer’s business.
         FirstName:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s first name.
+          $ref: '#/components/schemas/string1To255'
+          description: The customer’s first name.
         MiddleName:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s middle name.
+          $ref: '#/components/schemas/string1To255'
+          description: The customer’s middle name.
         LastName:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s last name.
+          $ref: '#/components/schemas/string1To255'
+          description: The customer’s last name.
         BirthDate:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: 'The customer’s birth date. '
+          $ref: '#/components/schemas/string1To255'
+          description: 'The customer’s birth date. '
         Gender:
-          allOf:
-            - $ref: '#/components/schemas/Gender'
-            - description: 'The gender with which the customer identifies. '
+          $ref: '#/components/schemas/Gender'
+          description: 'The gender with which the customer identifies. '
         PhoneNumber:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: 'The customer''s phone number, which has not been specified as a mobile, home, or business number.'
+          $ref: '#/components/schemas/string1To255'
+          description: 'The customer''s phone number, which has not been specified as a mobile, home, or business number.'
         MobilePhoneNumber:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s mobile phone number.
+          $ref: '#/components/schemas/string1To255'
+          description: The customer’s mobile phone number.
         HomePhoneNumber:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s home phone number.
+          $ref: '#/components/schemas/string1To255'
+          description: The customer’s home phone number.
         BusinessPhoneNumber:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s home phone number.
+          $ref: '#/components/schemas/string1To255'
+          description: The customer’s home phone number.
         EmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: 'The customer’s email address, which has not been specified as a personal or business address. '
+          $ref: '#/components/schemas/string1To255'
+          description: 'The customer’s email address, which has not been specified as a personal or business address. '
         PersonalEmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s personal email address.
+          $ref: '#/components/schemas/string1To255'
+          description: The customer’s personal email address.
         BusinessEmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The customer’s business email address.
+          $ref: '#/components/schemas/string1To255'
+          description: The customer’s business email address.
         Address:
-          allOf:
-            - $ref: '#/components/schemas/Address'
-            - description: 'A generic address associated with the customer that is not mailing, shipping, or billing.'
+          $ref: '#/components/schemas/Address'
+          description: 'A generic address associated with the customer that is not mailing, shipping, or billing.'
         ShippingAddress:
-          allOf:
-            - $ref: '#/components/schemas/Address'
-            - description: The customer’s shipping address.
+          $ref: '#/components/schemas/Address'
+          description: The customer’s shipping address.
         MailingAddress:
-          allOf:
-            - $ref: '#/components/schemas/Address'
-            - description: The customer’s mailing address.
+          $ref: '#/components/schemas/Address'
+          description: The customer’s mailing address.
         BillingAddress:
-          allOf:
-            - $ref: '#/components/schemas/Address'
-            - description: The customer’s billing address.
+          $ref: '#/components/schemas/Address'
+          description: The customer’s billing address.
         Attributes:
-          allOf:
-            - $ref: '#/components/schemas/Attributes'
-            - description: A key value pair of attributes of a customer profile.
+          $ref: '#/components/schemas/Attributes'
+          description: A key value pair of attributes of a customer profile.
       description: The standard profile of a customer.
     ProfileList:
       type: array
@@ -4726,21 +4366,17 @@ components:
       title: PutIntegrationRequest
       properties:
         Uri:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The URI of the S3 bucket or any other type of data source.
+          $ref: '#/components/schemas/string1To255'
+          description: The URI of the S3 bucket or any other type of data source.
         ObjectTypeName:
-          allOf:
-            - $ref: '#/components/schemas/typeName'
-            - description: The name of the profile object type.
+          $ref: '#/components/schemas/typeName'
+          description: The name of the profile object type.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags used to organize, track, or control access for this resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags used to organize, track, or control access for this resource.'
         FlowDefinition:
-          allOf:
-            - $ref: '#/components/schemas/FlowDefinition'
-            - description: The configuration that controls how Customer Profiles retrieves data from the source.
+          $ref: '#/components/schemas/FlowDefinition'
+          description: The configuration that controls how Customer Profiles retrieves data from the source.
     PutProfileObjectRequest:
       type: object
       required:
@@ -4749,13 +4385,11 @@ components:
       title: PutProfileObjectRequest
       properties:
         ObjectTypeName:
-          allOf:
-            - $ref: '#/components/schemas/typeName'
-            - description: The name of the profile object type.
+          $ref: '#/components/schemas/typeName'
+          description: The name of the profile object type.
         Object:
-          allOf:
-            - $ref: '#/components/schemas/stringifiedJson'
-            - description: A string that is serialized from a JSON object.
+          $ref: '#/components/schemas/stringifiedJson'
+          description: A string that is serialized from a JSON object.
     PutProfileObjectTypeRequest:
       type: object
       required:
@@ -4763,50 +4397,40 @@ components:
       title: PutProfileObjectTypeRequest
       properties:
         Description:
-          allOf:
-            - $ref: '#/components/schemas/text'
-            - description: Description of the profile object type.
+          $ref: '#/components/schemas/text'
+          description: Description of the profile object type.
         TemplateId:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: A unique identifier for the object template.
+          $ref: '#/components/schemas/name'
+          description: A unique identifier for the object template.
         ExpirationDays:
-          allOf:
-            - $ref: '#/components/schemas/expirationDaysInteger'
-            - description: The number of days until the data in the object expires.
+          $ref: '#/components/schemas/expirationDaysInteger'
+          description: The number of days until the data in the object expires.
         EncryptionKey:
-          allOf:
-            - $ref: '#/components/schemas/encryptionKey'
-            - description: The customer-provided key to encrypt the profile object that will be created in this profile object type.
+          $ref: '#/components/schemas/encryptionKey'
+          description: The customer-provided key to encrypt the profile object that will be created in this profile object type.
         AllowProfileCreation:
-          allOf:
-            - $ref: '#/components/schemas/boolean'
-            - description: 'Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.'
+          $ref: '#/components/schemas/boolean'
+          description: 'Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.'
         Fields:
-          allOf:
-            - $ref: '#/components/schemas/FieldMap'
-            - description: A map of the name and ObjectType field.
+          $ref: '#/components/schemas/FieldMap'
+          description: A map of the name and ObjectType field.
         Keys:
-          allOf:
-            - $ref: '#/components/schemas/KeyMap'
-            - description: A list of unique keys that can be used to map data to the profile.
+          $ref: '#/components/schemas/KeyMap'
+          description: A list of unique keys that can be used to map data to the profile.
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags used to organize, track, or control access for this resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags used to organize, track, or control access for this resource.'
     S3SourceProperties:
       type: object
       required:
         - BucketName
       properties:
         BucketName:
-          allOf:
-            - $ref: '#/components/schemas/BucketName'
-            - description: The Amazon S3 bucket name where the source files are stored.
+          $ref: '#/components/schemas/BucketName'
+          description: The Amazon S3 bucket name where the source files are stored.
         BucketPrefix:
-          allOf:
-            - $ref: '#/components/schemas/BucketPrefix'
-            - description: The object key for the Amazon S3 bucket in which the source files are stored.
+          $ref: '#/components/schemas/BucketPrefix'
+          description: The object key for the Amazon S3 bucket in which the source files are stored.
       description: The properties that are applied when Amazon S3 is being used as the flow source.
     SalesforceSourceProperties:
       type: object
@@ -4814,17 +4438,14 @@ components:
         - Object
       properties:
         Object:
-          allOf:
-            - $ref: '#/components/schemas/Object'
-            - description: The object specified in the Salesforce flow source.
+          $ref: '#/components/schemas/Object'
+          description: The object specified in the Salesforce flow source.
         EnableDynamicFieldUpdate:
-          allOf:
-            - $ref: '#/components/schemas/boolean'
-            - description: The flag that enables dynamic fetching of new (recently added) fields in the Salesforce objects while running a flow.
+          $ref: '#/components/schemas/boolean'
+          description: The flag that enables dynamic fetching of new (recently added) fields in the Salesforce objects while running a flow.
         IncludeDeletedRecords:
-          allOf:
-            - $ref: '#/components/schemas/boolean'
-            - description: Indicates whether Amazon AppFlow includes deleted files in the flow run.
+          $ref: '#/components/schemas/boolean'
+          description: Indicates whether Amazon AppFlow includes deleted files in the flow run.
       description: The properties that are applied when Salesforce is being used as a source.
     ScheduleExpression:
       type: string
@@ -4844,33 +4465,26 @@ components:
         - ScheduleExpression
       properties:
         ScheduleExpression:
-          allOf:
-            - $ref: '#/components/schemas/ScheduleExpression'
-            - description: 'The scheduling expression that determines the rate at which the schedule will run, for example rate (5 minutes).'
+          $ref: '#/components/schemas/ScheduleExpression'
+          description: 'The scheduling expression that determines the rate at which the schedule will run, for example rate (5 minutes).'
         DataPullMode:
-          allOf:
-            - $ref: '#/components/schemas/DataPullMode'
-            - description: Specifies whether a scheduled flow has an incremental data transfer or a complete data transfer for each flow run.
+          $ref: '#/components/schemas/DataPullMode'
+          description: Specifies whether a scheduled flow has an incremental data transfer or a complete data transfer for each flow run.
         ScheduleStartTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: Specifies the scheduled start time for a scheduled-trigger flow.
+          $ref: '#/components/schemas/Date'
+          description: Specifies the scheduled start time for a scheduled-trigger flow.
         ScheduleEndTime:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: Specifies the scheduled end time for a scheduled-trigger flow.
+          $ref: '#/components/schemas/Date'
+          description: Specifies the scheduled end time for a scheduled-trigger flow.
         Timezone:
-          allOf:
-            - $ref: '#/components/schemas/Timezone'
-            - description: 'Specifies the time zone used when referring to the date and time of a scheduled-triggered flow, such as America/New_York.'
+          $ref: '#/components/schemas/Timezone'
+          description: 'Specifies the time zone used when referring to the date and time of a scheduled-triggered flow, such as America/New_York.'
         ScheduleOffset:
-          allOf:
-            - $ref: '#/components/schemas/ScheduleOffset'
-            - description: Specifies the optional offset that is added to the time interval for a schedule-triggered flow.
+          $ref: '#/components/schemas/ScheduleOffset'
+          description: Specifies the optional offset that is added to the time interval for a schedule-triggered flow.
         FirstExecutionFrom:
-          allOf:
-            - $ref: '#/components/schemas/Date'
-            - description: Specifies the date range for the records to import from the connector in the first flow run.
+          $ref: '#/components/schemas/Date'
+          description: Specifies the date range for the records to import from the connector in the first flow run.
       description: 'Specifies the configuration details of a scheduled-trigger flow that you define. Currently, these settings only apply to the scheduled-trigger type.'
     SearchProfilesRequest:
       type: object
@@ -4880,22 +4494,19 @@ components:
       title: SearchProfilesRequest
       properties:
         KeyName:
-          allOf:
-            - $ref: '#/components/schemas/name'
-            - description: 'A searchable identifier of a customer profile. The predefined keys you can use to search include: _account, _profileId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId, _zendeskUserId, _zendeskExternalId, _serviceNowSystemId.'
+          $ref: '#/components/schemas/name'
+          description: 'A searchable identifier of a customer profile. The predefined keys you can use to search include: _account, _profileId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId, _zendeskUserId, _zendeskExternalId, _serviceNowSystemId.'
         Values:
-          allOf:
-            - $ref: '#/components/schemas/requestValueList'
-            - description: A list of key values.
+          $ref: '#/components/schemas/requestValueList'
+          description: A list of key values.
     ServiceNowSourceProperties:
       type: object
       required:
         - Object
       properties:
         Object:
-          allOf:
-            - $ref: '#/components/schemas/Object'
-            - description: The object specified in the ServiceNow flow source.
+          $ref: '#/components/schemas/Object'
+          description: The object specified in the ServiceNow flow source.
       description: The properties that are applied when ServiceNow is being used as a source.
     ZendeskSourceProperties:
       type: object
@@ -4903,33 +4514,27 @@ components:
         - Object
       properties:
         Object:
-          allOf:
-            - $ref: '#/components/schemas/Object'
-            - description: The object specified in the Zendesk flow source.
+          $ref: '#/components/schemas/Object'
+          description: The object specified in the Zendesk flow source.
       description: The properties that are applied when using Zendesk as a flow source.
     SourceConnectorProperties:
       type: object
       properties:
         Marketo:
-          allOf:
-            - $ref: '#/components/schemas/MarketoSourceProperties'
-            - description: The properties that are applied when Marketo is being used as a source.
+          $ref: '#/components/schemas/MarketoSourceProperties'
+          description: The properties that are applied when Marketo is being used as a source.
         S3:
-          allOf:
-            - $ref: '#/components/schemas/S3SourceProperties'
-            - description: The properties that are applied when Amazon S3 is being used as the flow source.
+          $ref: '#/components/schemas/S3SourceProperties'
+          description: The properties that are applied when Amazon S3 is being used as the flow source.
         Salesforce:
-          allOf:
-            - $ref: '#/components/schemas/SalesforceSourceProperties'
-            - description: The properties that are applied when Salesforce is being used as a source.
+          $ref: '#/components/schemas/SalesforceSourceProperties'
+          description: The properties that are applied when Salesforce is being used as a source.
         ServiceNow:
-          allOf:
-            - $ref: '#/components/schemas/ServiceNowSourceProperties'
-            - description: The properties that are applied when ServiceNow is being used as a source.
+          $ref: '#/components/schemas/ServiceNowSourceProperties'
+          description: The properties that are applied when ServiceNow is being used as a source.
         Zendesk:
-          allOf:
-            - $ref: '#/components/schemas/ZendeskSourceProperties'
-            - description: The properties that are applied when using Zendesk as a flow source.
+          $ref: '#/components/schemas/ZendeskSourceProperties'
+          description: The properties that are applied when using Zendesk as a flow source.
       description: 'Specifies the information that is required to query a particular Amazon AppFlow connector. Customer Profiles supports Salesforce, Zendesk, Marketo, ServiceNow and Amazon S3.'
     SourceConnectorType:
       type: string
@@ -4970,9 +4575,8 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags used to organize, track, or control access for this resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags used to organize, track, or control access for this resource.'
     TaskPropertiesMap:
       type: object
       additionalProperties:
@@ -4994,25 +4598,20 @@ components:
         - TaskType
       properties:
         ConnectorOperator:
-          allOf:
-            - $ref: '#/components/schemas/ConnectorOperator'
-            - description: The operation to be performed on the provided source fields.
+          $ref: '#/components/schemas/ConnectorOperator'
+          description: The operation to be performed on the provided source fields.
         DestinationField:
-          allOf:
-            - $ref: '#/components/schemas/DestinationField'
-            - description: 'A field in a destination connector, or a field value against which Amazon AppFlow validates a source field.'
+          $ref: '#/components/schemas/DestinationField'
+          description: 'A field in a destination connector, or a field value against which Amazon AppFlow validates a source field.'
         SourceFields:
-          allOf:
-            - $ref: '#/components/schemas/SourceFields'
-            - description: The source fields to which a particular task is applied.
+          $ref: '#/components/schemas/SourceFields'
+          description: The source fields to which a particular task is applied.
         TaskProperties:
-          allOf:
-            - $ref: '#/components/schemas/TaskPropertiesMap'
-            - description: A map used to store task-related information. The service looks for particular information based on the TaskType.
+          $ref: '#/components/schemas/TaskPropertiesMap'
+          description: A map used to store task-related information. The service looks for particular information based on the TaskType.
         TaskType:
-          allOf:
-            - $ref: '#/components/schemas/TaskType'
-            - description: Specifies the particular task implementation that Amazon AppFlow performs.
+          $ref: '#/components/schemas/TaskType'
+          description: Specifies the particular task implementation that Amazon AppFlow performs.
       description: A class for modeling different type of tasks. Task implementation varies based on the TaskType.
     TriggerType:
       type: string
@@ -5024,9 +4623,8 @@ components:
       type: object
       properties:
         Scheduled:
-          allOf:
-            - $ref: '#/components/schemas/ScheduledTriggerProperties'
-            - description: Specifies the configuration details of a schedule-triggered flow that you define.
+          $ref: '#/components/schemas/ScheduledTriggerProperties'
+          description: Specifies the configuration details of a schedule-triggered flow that you define.
       description: 'Specifies the configuration details that control the trigger for a flow. Currently, these settings only apply to the Scheduled trigger type.'
     UntagResourceRequest:
       type: object
@@ -5036,45 +4634,35 @@ components:
       type: object
       properties:
         Address1:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The first line of a customer address.
+          $ref: '#/components/schemas/string0To255'
+          description: The first line of a customer address.
         Address2:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The second line of a customer address.
+          $ref: '#/components/schemas/string0To255'
+          description: The second line of a customer address.
         Address3:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The third line of a customer address.
+          $ref: '#/components/schemas/string0To255'
+          description: The third line of a customer address.
         Address4:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The fourth line of a customer address.
+          $ref: '#/components/schemas/string0To255'
+          description: The fourth line of a customer address.
         City:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The city in which a customer lives.
+          $ref: '#/components/schemas/string0To255'
+          description: The city in which a customer lives.
         County:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The county in which a customer lives.
+          $ref: '#/components/schemas/string0To255'
+          description: The county in which a customer lives.
         State:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The state in which a customer lives.
+          $ref: '#/components/schemas/string0To255'
+          description: The state in which a customer lives.
         Province:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The province in which a customer lives.
+          $ref: '#/components/schemas/string0To255'
+          description: The province in which a customer lives.
         Country:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The country in which a customer lives.
+          $ref: '#/components/schemas/string0To255'
+          description: The country in which a customer lives.
         PostalCode:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The postal code of a customer address.
+          $ref: '#/components/schemas/string0To255'
+          description: The postal code of a customer address.
       description: Updates associated with the address properties of a customer profile.
     UpdateAttributes:
       type: object
@@ -5085,25 +4673,20 @@ components:
       title: UpdateDomainRequest
       properties:
         DefaultExpirationDays:
-          allOf:
-            - $ref: '#/components/schemas/expirationDaysInteger'
-            - description: The default number of days until the data within the domain expires.
+          $ref: '#/components/schemas/expirationDaysInteger'
+          description: The default number of days until the data within the domain expires.
         DefaultEncryptionKey:
-          allOf:
-            - $ref: '#/components/schemas/encryptionKey'
-            - description: 'The default encryption key, which is an AWS managed key, is used when no specific type of encryption key is specified. It is used to encrypt all data before it is placed in permanent or semi-permanent storage. If specified as an empty string, it will clear any existing value.'
+          $ref: '#/components/schemas/encryptionKey'
+          description: 'The default encryption key, which is an AWS managed key, is used when no specific type of encryption key is specified. It is used to encrypt all data before it is placed in permanent or semi-permanent storage. If specified as an empty string, it will clear any existing value.'
         DeadLetterQueueUrl:
-          allOf:
-            - $ref: '#/components/schemas/sqsQueueUrl'
-            - description: 'The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications. If specified as an empty string, it will clear any existing value. You must set up a policy on the DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to send messages to the DeadLetterQueue.'
+          $ref: '#/components/schemas/sqsQueueUrl'
+          description: 'The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications. If specified as an empty string, it will clear any existing value. You must set up a policy on the DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to send messages to the DeadLetterQueue.'
         Matching:
-          allOf:
-            - $ref: '#/components/schemas/MatchingRequest'
-            - description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
+          $ref: '#/components/schemas/MatchingRequest'
+          description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
         Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags used to organize, track, or control access for this resource.'
+          $ref: '#/components/schemas/TagMap'
+          description: 'The tags used to organize, track, or control access for this resource.'
     string0To1000:
       type: string
       minLength: 0
@@ -5115,92 +4698,70 @@ components:
       title: UpdateProfileRequest
       properties:
         ProfileId:
-          allOf:
-            - $ref: '#/components/schemas/uuid'
-            - description: The unique identifier of a customer profile.
+          $ref: '#/components/schemas/uuid'
+          description: The unique identifier of a customer profile.
         AdditionalInformation:
-          allOf:
-            - $ref: '#/components/schemas/string0To1000'
-            - description: Any additional information relevant to the customer’s profile.
+          $ref: '#/components/schemas/string0To1000'
+          description: Any additional information relevant to the customer’s profile.
         AccountNumber:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: A unique account number that you have given to the customer.
+          $ref: '#/components/schemas/string0To255'
+          description: A unique account number that you have given to the customer.
         PartyType:
-          allOf:
-            - $ref: '#/components/schemas/PartyType'
-            - description: The type of profile used to describe the customer.
+          $ref: '#/components/schemas/PartyType'
+          description: The type of profile used to describe the customer.
         BusinessName:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The name of the customer’s business.
+          $ref: '#/components/schemas/string0To255'
+          description: The name of the customer’s business.
         FirstName:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The customer’s first name.
+          $ref: '#/components/schemas/string0To255'
+          description: The customer’s first name.
         MiddleName:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The customer’s middle name.
+          $ref: '#/components/schemas/string0To255'
+          description: The customer’s middle name.
         LastName:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The customer’s last name.
+          $ref: '#/components/schemas/string0To255'
+          description: The customer’s last name.
         BirthDate:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: 'The customer’s birth date. '
+          $ref: '#/components/schemas/string0To255'
+          description: 'The customer’s birth date. '
         Gender:
-          allOf:
-            - $ref: '#/components/schemas/Gender'
-            - description: 'The gender with which the customer identifies. '
+          $ref: '#/components/schemas/Gender'
+          description: 'The gender with which the customer identifies. '
         PhoneNumber:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: 'The customer’s phone number, which has not been specified as a mobile, home, or business number. '
+          $ref: '#/components/schemas/string0To255'
+          description: 'The customer’s phone number, which has not been specified as a mobile, home, or business number. '
         MobilePhoneNumber:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The customer’s mobile phone number.
+          $ref: '#/components/schemas/string0To255'
+          description: The customer’s mobile phone number.
         HomePhoneNumber:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The customer’s home phone number.
+          $ref: '#/components/schemas/string0To255'
+          description: The customer’s home phone number.
         BusinessPhoneNumber:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The customer’s business phone number.
+          $ref: '#/components/schemas/string0To255'
+          description: The customer’s business phone number.
         EmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: 'The customer’s email address, which has not been specified as a personal or business address. '
+          $ref: '#/components/schemas/string0To255'
+          description: 'The customer’s email address, which has not been specified as a personal or business address. '
         PersonalEmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The customer’s personal email address.
+          $ref: '#/components/schemas/string0To255'
+          description: The customer’s personal email address.
         BusinessEmailAddress:
-          allOf:
-            - $ref: '#/components/schemas/string0To255'
-            - description: The customer’s business email address.
+          $ref: '#/components/schemas/string0To255'
+          description: The customer’s business email address.
         Address:
-          allOf:
-            - $ref: '#/components/schemas/UpdateAddress'
-            - description: 'A generic address associated with the customer that is not mailing, shipping, or billing.'
+          $ref: '#/components/schemas/UpdateAddress'
+          description: 'A generic address associated with the customer that is not mailing, shipping, or billing.'
         ShippingAddress:
-          allOf:
-            - $ref: '#/components/schemas/UpdateAddress'
-            - description: The customer’s shipping address.
+          $ref: '#/components/schemas/UpdateAddress'
+          description: The customer’s shipping address.
         MailingAddress:
-          allOf:
-            - $ref: '#/components/schemas/UpdateAddress'
-            - description: The customer’s mailing address.
+          $ref: '#/components/schemas/UpdateAddress'
+          description: The customer’s mailing address.
         BillingAddress:
-          allOf:
-            - $ref: '#/components/schemas/UpdateAddress'
-            - description: The customer’s billing address.
+          $ref: '#/components/schemas/UpdateAddress'
+          description: The customer’s billing address.
         Attributes:
-          allOf:
-            - $ref: '#/components/schemas/UpdateAttributes'
-            - description: A key value pair of attributes of a customer profile.
+          $ref: '#/components/schemas/UpdateAttributes'
+          description: A key value pair of attributes of a customer profile.
 security:
   - hmac: []

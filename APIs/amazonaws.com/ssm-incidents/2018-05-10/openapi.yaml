@@ -262,13 +262,11 @@ paths:
                   type: object
                   properties:
                     chatbotSns:
-                      allOf:
-                        - $ref: '#/components/schemas/ChatbotSnsConfigurationSet'
-                        - description: 'The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel by using the SNS topics. '
+                      $ref: '#/components/schemas/ChatbotSnsConfigurationSet'
+                      description: 'The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel by using the SNS topics. '
                     empty:
-                      allOf:
-                        - $ref: '#/components/schemas/EmptyChatChannel'
-                        - description: Used to remove the chat channel from an incident record or response plan.
+                      $ref: '#/components/schemas/EmptyChatChannel'
+                      description: Used to remove the chat channel from an incident record or response plan.
                 clientToken:
                   description: A token ensuring that the action is called only once with the specified details.
                   type: string
@@ -291,25 +289,20 @@ paths:
                   type: object
                   properties:
                     dedupeString:
-                      allOf:
-                        - $ref: '#/components/schemas/DedupeString'
-                        - description: 'Used to stop Incident Manager from creating multiple incident records for the same incident. '
+                      $ref: '#/components/schemas/DedupeString'
+                      description: 'Used to stop Incident Manager from creating multiple incident records for the same incident. '
                     impact:
-                      allOf:
-                        - $ref: '#/components/schemas/Impact'
-                        - description: 'The impact of the incident on your customers and applications. '
+                      $ref: '#/components/schemas/Impact'
+                      description: 'The impact of the incident on your customers and applications. '
                     notificationTargets:
-                      allOf:
-                        - $ref: '#/components/schemas/NotificationTargetSet'
-                        - description: The SNS targets that are notified when updates are made to an incident.
+                      $ref: '#/components/schemas/NotificationTargetSet'
+                      description: The SNS targets that are notified when updates are made to an incident.
                     summary:
-                      allOf:
-                        - $ref: '#/components/schemas/IncidentSummary'
-                        - description: 'The summary of the incident. The summary is a brief synopsis of what occurred, what''s currently happening, and context.'
+                      $ref: '#/components/schemas/IncidentSummary'
+                      description: 'The summary of the incident. The summary is a brief synopsis of what occurred, what''s currently happening, and context.'
                     title:
-                      allOf:
-                        - $ref: '#/components/schemas/IncidentTitle'
-                        - description: 'The title of the incident. '
+                      $ref: '#/components/schemas/IncidentTitle'
+                      description: 'The title of the incident. '
                 name:
                   description: The short format name of the response plan. Can't include spaces.
                   type: string
@@ -1767,21 +1760,17 @@ paths:
                   type: object
                   properties:
                     rawData:
-                      allOf:
-                        - $ref: '#/components/schemas/RawData'
-                        - description: 'Raw data passed from either EventBridge, CloudWatch, or Incident Manager when an incident is created.'
+                      $ref: '#/components/schemas/RawData'
+                      description: 'Raw data passed from either EventBridge, CloudWatch, or Incident Manager when an incident is created.'
                     source:
-                      allOf:
-                        - $ref: '#/components/schemas/IncidentSource'
-                        - description: 'Identifies the service that sourced the event. All events sourced from within AWS begin with "aws." Customer-generated events can have any value here, as long as it doesn''t begin with "aws." We recommend the use of Java package-name style reverse domain-name strings. '
+                      $ref: '#/components/schemas/IncidentSource'
+                      description: 'Identifies the service that sourced the event. All events sourced from within AWS begin with "aws." Customer-generated events can have any value here, as long as it doesn''t begin with "aws." We recommend the use of Java package-name style reverse domain-name strings. '
                     timestamp:
-                      allOf:
-                        - $ref: '#/components/schemas/Timestamp'
-                        - description: The time that the incident was detected.
+                      $ref: '#/components/schemas/Timestamp'
+                      description: The time that the incident was detected.
                     triggerArn:
-                      allOf:
-                        - $ref: '#/components/schemas/Arn'
-                        - description: The ARN of the source that detected the incident.
+                      $ref: '#/components/schemas/Arn'
+                      description: The ARN of the source that detected the incident.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2004,13 +1993,11 @@ paths:
                   type: object
                   properties:
                     chatbotSns:
-                      allOf:
-                        - $ref: '#/components/schemas/ChatbotSnsConfigurationSet'
-                        - description: 'The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel by using the SNS topics. '
+                      $ref: '#/components/schemas/ChatbotSnsConfigurationSet'
+                      description: 'The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel by using the SNS topics. '
                     empty:
-                      allOf:
-                        - $ref: '#/components/schemas/EmptyChatChannel'
-                        - description: Used to remove the chat channel from an incident record or response plan.
+                      $ref: '#/components/schemas/EmptyChatChannel'
+                      description: Used to remove the chat channel from an incident record or response plan.
                 clientToken:
                   description: A token ensuring that the action is called only once with the specified details.
                   type: string
@@ -2126,13 +2113,11 @@ paths:
                   type: object
                   properties:
                     itemToAdd:
-                      allOf:
-                        - $ref: '#/components/schemas/RelatedItem'
-                        - description: Details about the related item you're adding.
+                      $ref: '#/components/schemas/RelatedItem'
+                      description: Details about the related item you're adding.
                     itemToRemove:
-                      allOf:
-                        - $ref: '#/components/schemas/ItemIdentifier'
-                        - description: Details about the related item you're deleting.
+                      $ref: '#/components/schemas/ItemIdentifier'
+                      description: Details about the related item you're deleting.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2294,13 +2279,11 @@ paths:
                   type: object
                   properties:
                     chatbotSns:
-                      allOf:
-                        - $ref: '#/components/schemas/ChatbotSnsConfigurationSet'
-                        - description: 'The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel by using the SNS topics. '
+                      $ref: '#/components/schemas/ChatbotSnsConfigurationSet'
+                      description: 'The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel by using the SNS topics. '
                     empty:
-                      allOf:
-                        - $ref: '#/components/schemas/EmptyChatChannel'
-                        - description: Used to remove the chat channel from an incident record or response plan.
+                      $ref: '#/components/schemas/EmptyChatChannel'
+                      description: Used to remove the chat channel from an incident record or response plan.
                 clientToken:
                   description: A token ensuring that the action is called only once with the specified details.
                   type: string
@@ -2507,16 +2490,14 @@ components:
         - arn
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'The Amazon Resource Name (ARN) of the replication set. '
+          $ref: '#/components/schemas/Arn'
+          description: 'The Amazon Resource Name (ARN) of the replication set. '
     RegionMapInputValue:
       type: object
       properties:
         sseKmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/SseKmsKey'
-            - description: The KMS key used to encrypt the data in your replication set.
+          $ref: '#/components/schemas/SseKmsKey'
+          description: The KMS key used to encrypt the data in your replication set.
       description: The mapping between a Region and the key that's used to encrypt the data.
     ServiceQuotaExceededException: {}
     ThrottlingException: {}
@@ -2530,16 +2511,14 @@ components:
         - arn
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the response plan.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the response plan.
     Action:
       type: object
       properties:
         ssmAutomation:
-          allOf:
-            - $ref: '#/components/schemas/SsmAutomation'
-            - description: The Systems Manager automation document to start as the runbook at the beginning of the incident.
+          $ref: '#/components/schemas/SsmAutomation'
+          description: The Systems Manager automation document to start as the runbook at the beginning of the incident.
       description: The action that starts at the beginning of an incident. The response plan defines the action.
     ChatbotSnsConfigurationSet:
       type: array
@@ -2591,13 +2570,11 @@ components:
         - incidentRecordArn
       properties:
         eventId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: 'The ID of the event for easy reference later. '
+          $ref: '#/components/schemas/UUID'
+          description: 'The ID of the event for easy reference later. '
         incidentRecordArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the incident record that you added the event to.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the incident record that you added the event to.
     DeleteIncidentRecordOutput:
       type: object
       properties: {}
@@ -2619,31 +2596,27 @@ components:
         - incidentRecord
       properties:
         incidentRecord:
-          allOf:
-            - $ref: '#/components/schemas/IncidentRecord'
-            - description: Details structure of the incident record.
+          $ref: '#/components/schemas/IncidentRecord'
+          description: Details structure of the incident record.
     GetReplicationSetOutput:
       type: object
       required:
         - replicationSet
       properties:
         replicationSet:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationSet'
-            - description: Details of the replication set.
+          $ref: '#/components/schemas/ReplicationSet'
+          description: Details of the replication set.
     GetResourcePoliciesOutput:
       type: object
       required:
         - resourcePolicies
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token to continue to the next page of results.
         resourcePolicies:
-          allOf:
-            - $ref: '#/components/schemas/ResourcePolicyList'
-            - description: Details about the resource policy attached to the response plan.
+          $ref: '#/components/schemas/ResourcePolicyList'
+          description: Details about the resource policy attached to the response plan.
     GetResponsePlanOutput:
       type: object
       required:
@@ -2652,55 +2625,45 @@ components:
         - name
       properties:
         actions:
-          allOf:
-            - $ref: '#/components/schemas/ActionsList'
-            - description: The actions that this response plan takes at the beginning of the incident.
+          $ref: '#/components/schemas/ActionsList'
+          description: The actions that this response plan takes at the beginning of the incident.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the response plan.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the response plan.
         chatChannel:
-          allOf:
-            - $ref: '#/components/schemas/ChatChannel'
-            - description: The AWS Chatbot chat channel used for collaboration during an incident.
+          $ref: '#/components/schemas/ChatChannel'
+          description: The AWS Chatbot chat channel used for collaboration during an incident.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/ResponsePlanDisplayName'
-            - description: The long format name of the response plan. Can contain spaces.
+          $ref: '#/components/schemas/ResponsePlanDisplayName'
+          description: The long format name of the response plan. Can contain spaces.
         engagements:
-          allOf:
-            - $ref: '#/components/schemas/EngagementSet'
-            - description: The contacts and escalation plans that the response plan engages during an incident.
+          $ref: '#/components/schemas/EngagementSet'
+          description: The contacts and escalation plans that the response plan engages during an incident.
         incidentTemplate:
-          allOf:
-            - $ref: '#/components/schemas/IncidentTemplate'
-            - description: Details used to create the incident when using this response plan.
+          $ref: '#/components/schemas/IncidentTemplate'
+          description: Details used to create the incident when using this response plan.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResponsePlanName'
-            - description: The short format name of the response plan. Can't contain spaces.
+          $ref: '#/components/schemas/ResponsePlanName'
+          description: The short format name of the response plan. Can't contain spaces.
     GetTimelineEventOutput:
       type: object
       required:
         - event
       properties:
         event:
-          allOf:
-            - $ref: '#/components/schemas/TimelineEvent'
-            - description: Details about the timeline event.
+          $ref: '#/components/schemas/TimelineEvent'
+          description: Details about the timeline event.
     ListIncidentRecordsOutput:
       type: object
       required:
         - incidentRecordSummaries
       properties:
         incidentRecordSummaries:
-          allOf:
-            - $ref: '#/components/schemas/IncidentRecordSummaryList'
-            - description: The details of each listed incident record.
+          $ref: '#/components/schemas/IncidentRecordSummaryList'
+          description: The details of each listed incident record.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token to continue to the next page of results.
     Filter:
       type: object
       required:
@@ -2708,13 +2671,11 @@ components:
         - key
       properties:
         condition:
-          allOf:
-            - $ref: '#/components/schemas/Condition'
-            - description: 'The condition accepts before or after a specified time, equal to a string, or equal to an integer.'
+          $ref: '#/components/schemas/Condition'
+          description: 'The condition accepts before or after a specified time, equal to a string, or equal to an integer.'
         key:
-          allOf:
-            - $ref: '#/components/schemas/FilterKeyString'
-            - description: The key that you're filtering on.
+          $ref: '#/components/schemas/FilterKeyString'
+          description: The key that you're filtering on.
       description: Filter the selection by using a condition.
     ListRelatedItemsOutput:
       type: object
@@ -2722,92 +2683,79 @@ components:
         - relatedItems
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token to continue to the next page of results.
         relatedItems:
-          allOf:
-            - $ref: '#/components/schemas/RelatedItemList'
-            - description: Details about each related item.
+          $ref: '#/components/schemas/RelatedItemList'
+          description: Details about each related item.
     ListReplicationSetsOutput:
       type: object
       required:
         - replicationSetArns
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token to continue to the next page of results.
         replicationSetArns:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationSetArnList'
-            - description: The Amazon Resource Name (ARN) of the list replication set.
+          $ref: '#/components/schemas/ReplicationSetArnList'
+          description: The Amazon Resource Name (ARN) of the list replication set.
     ListResponsePlansOutput:
       type: object
       required:
         - responsePlanSummaries
       properties:
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token to continue to the next page of results.
         responsePlanSummaries:
-          allOf:
-            - $ref: '#/components/schemas/ResponsePlanSummaryList'
-            - description: Details of each response plan.
+          $ref: '#/components/schemas/ResponsePlanSummaryList'
+          description: Details of each response plan.
     ListTagsForResourceResponse:
       type: object
       required:
         - tags
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: A list of tags for the response plan.
+          $ref: '#/components/schemas/TagMap'
+          description: A list of tags for the response plan.
     ListTimelineEventsOutput:
       type: object
       required:
         - eventSummaries
       properties:
         eventSummaries:
-          allOf:
-            - $ref: '#/components/schemas/EventSummaryList'
-            - description: Details about each event that occurred during the incident.
+          $ref: '#/components/schemas/EventSummaryList'
+          description: Details about each event that occurred during the incident.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token to continue to the next page of results.
     PutResourcePolicyOutput:
       type: object
       required:
         - policyId
       properties:
         policyId:
-          allOf:
-            - $ref: '#/components/schemas/PolicyId'
-            - description: The ID of the resource policy.
+          $ref: '#/components/schemas/PolicyId'
+          description: The ID of the resource policy.
     StartIncidentOutput:
       type: object
       required:
         - incidentRecordArn
       properties:
         incidentRecordArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the newly created incident record.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the newly created incident record.
     RelatedItem:
       type: object
       required:
         - identifier
       properties:
         identifier:
-          allOf:
-            - $ref: '#/components/schemas/ItemIdentifier'
-            - description: Details about the related item.
+          $ref: '#/components/schemas/ItemIdentifier'
+          description: Details about the related item.
         title:
-          allOf:
-            - $ref: '#/components/schemas/RelatedItemTitleString'
-            - description: The title of the related item.
+          $ref: '#/components/schemas/RelatedItemTitleString'
+          description: The title of the related item.
       description: Resources that responders use to triage and mitigate the incident.
     RawData:
       type: string
@@ -2846,9 +2794,8 @@ components:
       type: object
       properties:
         snsTopicArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the SNS topic.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the SNS topic.
       description: The SNS targets that are notified when updates are made to an incident.
     UpdateRelatedItemsOutput:
       type: object
@@ -2860,13 +2807,11 @@ components:
         - value
       properties:
         type:
-          allOf:
-            - $ref: '#/components/schemas/ItemType'
-            - description: '<p>The type of related item. Incident Manager supports the following types:</p> <ul> <li> <p> <code>ANALYSIS</code> </p> </li> <li> <p> <code>INCIDENT</code> </p> </li> <li> <p> <code>METRIC</code> </p> </li> <li> <p> <code>PARENT</code> </p> </li> <li> <p> <code>ATTACHMENT</code> </p> </li> <li> <p> <code>OTHER</code> </p> </li> </ul>'
+          $ref: '#/components/schemas/ItemType'
+          description: '<p>The type of related item. Incident Manager supports the following types:</p> <ul> <li> <p> <code>ANALYSIS</code> </p> </li> <li> <p> <code>INCIDENT</code> </p> </li> <li> <p> <code>METRIC</code> </p> </li> <li> <p> <code>PARENT</code> </p> </li> <li> <p> <code>ATTACHMENT</code> </p> </li> <li> <p> <code>OTHER</code> </p> </li> </ul>'
         value:
-          allOf:
-            - $ref: '#/components/schemas/ItemValue'
-            - description: Details about the related item.
+          $ref: '#/components/schemas/ItemValue'
+          description: Details about the related item.
       description: Details and type of a related item.
     UpdateReplicationSetOutput:
       type: object
@@ -2875,13 +2820,11 @@ components:
       type: object
       properties:
         addRegionAction:
-          allOf:
-            - $ref: '#/components/schemas/AddRegionAction'
-            - description: Details about the Region that you're adding to the replication set.
+          $ref: '#/components/schemas/AddRegionAction'
+          description: Details about the Region that you're adding to the replication set.
         deleteRegionAction:
-          allOf:
-            - $ref: '#/components/schemas/DeleteRegionAction'
-            - description: Details about the Region that you're deleting to the replication set.
+          $ref: '#/components/schemas/DeleteRegionAction'
+          description: Details about the Region that you're deleting to the replication set.
       description: Details used when updating the replication set.
     UpdateResponsePlanOutput:
       type: object
@@ -2896,25 +2839,20 @@ components:
         - roleArn
       properties:
         documentName:
-          allOf:
-            - $ref: '#/components/schemas/SsmAutomationDocumentNameString'
-            - description: The automation document's name.
+          $ref: '#/components/schemas/SsmAutomationDocumentNameString'
+          description: The automation document's name.
         documentVersion:
-          allOf:
-            - $ref: '#/components/schemas/SsmAutomationDocumentVersionString'
-            - description: The automation document's version to use when running.
+          $ref: '#/components/schemas/SsmAutomationDocumentVersionString'
+          description: The automation document's version to use when running.
         parameters:
-          allOf:
-            - $ref: '#/components/schemas/SsmParameters'
-            - description: The key-value pair parameters to use when running the automation document.
+          $ref: '#/components/schemas/SsmParameters'
+          description: The key-value pair parameters to use when running the automation document.
         roleArn:
-          allOf:
-            - $ref: '#/components/schemas/RoleArn'
-            - description: The Amazon Resource Name (ARN) of the role that the automation document will assume when running commands.
+          $ref: '#/components/schemas/RoleArn'
+          description: The Amazon Resource Name (ARN) of the role that the automation document will assume when running commands.
         targetAccount:
-          allOf:
-            - $ref: '#/components/schemas/SsmTargetAccount'
-            - description: The account that the automation document will be run in. This can be in either the management account or an application account.
+          $ref: '#/components/schemas/SsmTargetAccount'
+          description: The account that the automation document will be run in. This can be in either the management account or an application account.
       description: Details about the Systems Manager automation document that will be used as a runbook during an incident.
     ActionsList:
       type: array
@@ -2936,13 +2874,11 @@ components:
         - regionName
       properties:
         regionName:
-          allOf:
-            - $ref: '#/components/schemas/RegionName'
-            - description: The Region name to add to the replication set.
+          $ref: '#/components/schemas/RegionName'
+          description: The Region name to add to the replication set.
         sseKmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/SseKmsKey'
-            - description: The KMS key ID to use to encrypt your replication set.
+          $ref: '#/components/schemas/SseKmsKey'
+          description: The KMS key ID to use to encrypt your replication set.
       description: 'Defines the Region and KMS key to add to the replication set. '
     IntegerList:
       type: array
@@ -2960,21 +2896,18 @@ components:
       type: object
       properties:
         integerValues:
-          allOf:
-            - $ref: '#/components/schemas/IntegerList'
-            - description: The list of integer values that the filter matches.
+          $ref: '#/components/schemas/IntegerList'
+          description: The list of integer values that the filter matches.
         stringValues:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: The list of string values that the filter matches.
+          $ref: '#/components/schemas/StringList'
+          description: The list of string values that the filter matches.
       description: Use the AttributeValueList to filter by string or integer values.
     AutomationExecution:
       type: object
       properties:
         ssmExecutionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the automation process.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the automation process.
       description: The Systems Manager automation document process to start as the runbook at the beginning of the incident.
     AutomationExecutionSet:
       type: array
@@ -2988,13 +2921,11 @@ components:
       type: object
       properties:
         chatbotSns:
-          allOf:
-            - $ref: '#/components/schemas/ChatbotSnsConfigurationSet'
-            - description: 'The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel by using the SNS topics. '
+          $ref: '#/components/schemas/ChatbotSnsConfigurationSet'
+          description: 'The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel by using the SNS topics. '
         empty:
-          allOf:
-            - $ref: '#/components/schemas/EmptyChatChannel'
-            - description: Used to remove the chat channel from an incident record or response plan.
+          $ref: '#/components/schemas/EmptyChatChannel'
+          description: Used to remove the chat channel from an incident record or response plan.
       description: The AWS Chatbot chat channel used for collaboration during an incident.
     SnsArn:
       type: string
@@ -3008,17 +2939,14 @@ components:
       type: object
       properties:
         after:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: After the specified timestamp.
+          $ref: '#/components/schemas/Timestamp'
+          description: After the specified timestamp.
         before:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: Before the specified timestamp
+          $ref: '#/components/schemas/Timestamp'
+          description: Before the specified timestamp
         equals:
-          allOf:
-            - $ref: '#/components/schemas/AttributeValueList'
-            - description: 'The value is equal to the provided string or integer. '
+          $ref: '#/components/schemas/AttributeValueList'
+          description: 'The value is equal to the provided string or integer. '
       description: 'A conditional statement with which to compare a value, after a timestamp, before a timestamp, or equal to a string or integer. If multiple conditions are specified, the conditionals become an <code>AND</code>ed statement. If multiple values are specified for a conditional, the values are <code>OR</code>d.'
     RegionMapInput:
       type: object
@@ -3033,13 +2961,11 @@ components:
       title: CreateReplicationSetInput
       properties:
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+          $ref: '#/components/schemas/ClientToken'
+          description: A token ensuring that the action is called only once with the specified details.
         regions:
-          allOf:
-            - $ref: '#/components/schemas/RegionMapInput'
-            - description: The Regions that Incident Manager replicates your data to. You can have up to three Regions in your replication set.
+          $ref: '#/components/schemas/RegionMapInput'
+          description: The Regions that Incident Manager replicates your data to. You can have up to three Regions in your replication set.
     ResponsePlanDisplayName:
       type: string
       minLength: 0
@@ -3057,25 +2983,20 @@ components:
         - title
       properties:
         dedupeString:
-          allOf:
-            - $ref: '#/components/schemas/DedupeString'
-            - description: 'Used to stop Incident Manager from creating multiple incident records for the same incident. '
+          $ref: '#/components/schemas/DedupeString'
+          description: 'Used to stop Incident Manager from creating multiple incident records for the same incident. '
         impact:
-          allOf:
-            - $ref: '#/components/schemas/Impact'
-            - description: 'The impact of the incident on your customers and applications. '
+          $ref: '#/components/schemas/Impact'
+          description: 'The impact of the incident on your customers and applications. '
         notificationTargets:
-          allOf:
-            - $ref: '#/components/schemas/NotificationTargetSet'
-            - description: The SNS targets that are notified when updates are made to an incident.
+          $ref: '#/components/schemas/NotificationTargetSet'
+          description: The SNS targets that are notified when updates are made to an incident.
         summary:
-          allOf:
-            - $ref: '#/components/schemas/IncidentSummary'
-            - description: 'The summary of the incident. The summary is a brief synopsis of what occurred, what''s currently happening, and context.'
+          $ref: '#/components/schemas/IncidentSummary'
+          description: 'The summary of the incident. The summary is a brief synopsis of what occurred, what''s currently happening, and context.'
         title:
-          allOf:
-            - $ref: '#/components/schemas/IncidentTitle'
-            - description: 'The title of the incident. '
+          $ref: '#/components/schemas/IncidentTitle'
+          description: 'The title of the incident. '
       description: Basic details used in creating a response plan. The response plan is then used to create an incident record.
     ResponsePlanName:
       type: string
@@ -3096,37 +3017,29 @@ components:
       title: CreateResponsePlanInput
       properties:
         actions:
-          allOf:
-            - $ref: '#/components/schemas/ActionsList'
-            - description: The actions that the response plan starts at the beginning of an incident.
+          $ref: '#/components/schemas/ActionsList'
+          description: The actions that the response plan starts at the beginning of an incident.
         chatChannel:
-          allOf:
-            - $ref: '#/components/schemas/ChatChannel'
-            - description: The AWS Chatbot chat channel used for collaboration during an incident.
+          $ref: '#/components/schemas/ChatChannel'
+          description: The AWS Chatbot chat channel used for collaboration during an incident.
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+          $ref: '#/components/schemas/ClientToken'
+          description: A token ensuring that the action is called only once with the specified details.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/ResponsePlanDisplayName'
-            - description: The long format of the response plan name. This field can contain spaces.
+          $ref: '#/components/schemas/ResponsePlanDisplayName'
+          description: The long format of the response plan name. This field can contain spaces.
         engagements:
-          allOf:
-            - $ref: '#/components/schemas/EngagementSet'
-            - description: The contacts and escalation plans that the response plan engages during an incident.
+          $ref: '#/components/schemas/EngagementSet'
+          description: The contacts and escalation plans that the response plan engages during an incident.
         incidentTemplate:
-          allOf:
-            - $ref: '#/components/schemas/IncidentTemplate'
-            - description: Details used to create an incident when using this response plan.
+          $ref: '#/components/schemas/IncidentTemplate'
+          description: Details used to create an incident when using this response plan.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResponsePlanName'
-            - description: The short format name of the response plan. Can't include spaces.
+          $ref: '#/components/schemas/ResponsePlanName'
+          description: The short format name of the response plan. Can't include spaces.
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: A list of tags that you are adding to the response plan.
+          $ref: '#/components/schemas/TagMap'
+          description: A list of tags that you are adding to the response plan.
     EventData:
       type: string
       minLength: 0
@@ -3145,25 +3058,20 @@ components:
       title: CreateTimelineEventInput
       properties:
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+          $ref: '#/components/schemas/ClientToken'
+          description: A token ensuring that the action is called only once with the specified details.
         eventData:
-          allOf:
-            - $ref: '#/components/schemas/EventData'
-            - description: A valid JSON string. There is no other schema imposed. A short description of the event.
+          $ref: '#/components/schemas/EventData'
+          description: A valid JSON string. There is no other schema imposed. A short description of the event.
         eventTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time that the event occurred.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the event occurred.
         eventType:
-          allOf:
-            - $ref: '#/components/schemas/TimelineEventType'
-            - description: The type of the event. You can create timeline events of type <code>Custom Event</code>.
+          $ref: '#/components/schemas/TimelineEventType'
+          description: The type of the event. You can create timeline events of type <code>Custom Event</code>.
         incidentRecordArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the incident record you are adding the event to.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the incident record you are adding the event to.
     UUID:
       type: string
       minLength: 0
@@ -3175,18 +3083,16 @@ components:
       title: DeleteIncidentRecordInput
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the incident record you are deleting.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the incident record you are deleting.
     DeleteRegionAction:
       type: object
       required:
         - regionName
       properties:
         regionName:
-          allOf:
-            - $ref: '#/components/schemas/RegionName'
-            - description: The name of the Region you're deleting from the replication set.
+          $ref: '#/components/schemas/RegionName'
+          description: The name of the Region you're deleting from the replication set.
       description: Defines the information about the Region you're deleting from your replication set.
     DeleteReplicationSetInput:
       type: object
@@ -3204,13 +3110,11 @@ components:
       title: DeleteResourcePolicyInput
       properties:
         policyId:
-          allOf:
-            - $ref: '#/components/schemas/PolicyId'
-            - description: The ID of the resource policy you're deleting.
+          $ref: '#/components/schemas/PolicyId'
+          description: The ID of the resource policy you're deleting.
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the resource you're deleting the policy from.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the resource you're deleting the policy from.
     DeleteResponsePlanInput:
       type: object
       required:
@@ -3218,9 +3122,8 @@ components:
       title: DeleteResponsePlanInput
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the response plan.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the response plan.
     DeleteTimelineEventInput:
       type: object
       required:
@@ -3229,13 +3132,11 @@ components:
       title: DeleteTimelineEventInput
       properties:
         eventId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: The ID of the event you are updating. You can find this by using <code>ListTimelineEvents</code>.
+          $ref: '#/components/schemas/UUID'
+          description: The ID of the event you are updating. You can find this by using <code>ListTimelineEvents</code>.
         incidentRecordArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the incident that the event is part of.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the incident that the event is part of.
     EventSummary:
       type: object
       required:
@@ -3246,25 +3147,20 @@ components:
         - incidentRecordArn
       properties:
         eventId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: The timeline event ID.
+          $ref: '#/components/schemas/UUID'
+          description: The timeline event ID.
         eventTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time that the event occurred.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the event occurred.
         eventType:
-          allOf:
-            - $ref: '#/components/schemas/TimelineEventType'
-            - description: The type of event. The timeline event must be <code>Custom Event</code>.
+          $ref: '#/components/schemas/TimelineEventType'
+          description: The type of event. The timeline event must be <code>Custom Event</code>.
         eventUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time that the timeline event was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the timeline event was last updated.
         incidentRecordArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the incident that the event happened during.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the incident that the event happened during.
       description: Details about a timeline event during an incident.
     EventSummaryList:
       type: array
@@ -3300,61 +3196,47 @@ components:
         - title
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the incident record.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the incident record.
         automationExecutions:
-          allOf:
-            - $ref: '#/components/schemas/AutomationExecutionSet'
-            - description: 'The runbook, or automation document, that''s run at the beginning of the incident.'
+          $ref: '#/components/schemas/AutomationExecutionSet'
+          description: 'The runbook, or automation document, that''s run at the beginning of the incident.'
         chatChannel:
-          allOf:
-            - $ref: '#/components/schemas/ChatChannel'
-            - description: The chat channel used for collaboration during an incident.
+          $ref: '#/components/schemas/ChatChannel'
+          description: The chat channel used for collaboration during an incident.
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time that Incident Manager created the incident record.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that Incident Manager created the incident record.
         dedupeString:
-          allOf:
-            - $ref: '#/components/schemas/DedupeString'
-            - description: The string Incident Manager uses to prevent duplicate incidents from being created by the same incident.
+          $ref: '#/components/schemas/DedupeString'
+          description: The string Incident Manager uses to prevent duplicate incidents from being created by the same incident.
         impact:
-          allOf:
-            - $ref: '#/components/schemas/Impact'
-            - description: The impact of the incident on customers and applications.
+          $ref: '#/components/schemas/Impact'
+          description: The impact of the incident on customers and applications.
         incidentRecordSource:
-          allOf:
-            - $ref: '#/components/schemas/IncidentRecordSource'
-            - description: Details about the action that started the incident.
+          $ref: '#/components/schemas/IncidentRecordSource'
+          description: Details about the action that started the incident.
         lastModifiedBy:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Who modified the incident most recently.
+          $ref: '#/components/schemas/Arn'
+          description: Who modified the incident most recently.
         lastModifiedTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the incident was most recently modified.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the incident was most recently modified.
         notificationTargets:
-          allOf:
-            - $ref: '#/components/schemas/NotificationTargetSet'
-            - description: The SNS targets that are notified when updates are made to an incident.
+          $ref: '#/components/schemas/NotificationTargetSet'
+          description: The SNS targets that are notified when updates are made to an incident.
         resolvedTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the incident was resolved. This appears as a timeline event.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time at which the incident was resolved. This appears as a timeline event.
         status:
-          allOf:
-            - $ref: '#/components/schemas/IncidentRecordStatus'
-            - description: The current status of the incident.
+          $ref: '#/components/schemas/IncidentRecordStatus'
+          description: The current status of the incident.
         summary:
-          allOf:
-            - $ref: '#/components/schemas/IncidentSummary'
-            - description: 'The summary of the incident. The summary is a brief synopsis of what occurred, what is currently happening, and context.'
+          $ref: '#/components/schemas/IncidentSummary'
+          description: 'The summary of the incident. The summary is a brief synopsis of what occurred, what is currently happening, and context.'
         title:
-          allOf:
-            - $ref: '#/components/schemas/IncidentTitle'
-            - description: The title of the incident.
+          $ref: '#/components/schemas/IncidentTitle'
+          description: The title of the incident.
       description: The record of the incident that's created when an incident occurs.
     GetReplicationSetInput:
       type: object
@@ -3372,37 +3254,29 @@ components:
         - status
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the replication set.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the replication set.
         createdBy:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Details about who created the replication set.
+          $ref: '#/components/schemas/Arn'
+          description: Details about who created the replication set.
         createdTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: When the replication set was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: When the replication set was created.
         deletionProtected:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: 'Determines if the replication set deletion protection is enabled or not. If deletion protection is enabled, you can''t delete the last Region in the replication set. '
+          $ref: '#/components/schemas/Boolean'
+          description: 'Determines if the replication set deletion protection is enabled or not. If deletion protection is enabled, you can''t delete the last Region in the replication set. '
         lastModifiedBy:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: Who last modified the replication set.
+          $ref: '#/components/schemas/Arn'
+          description: Who last modified the replication set.
         lastModifiedTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: When the replication set was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: When the replication set was last updated.
         regionMap:
-          allOf:
-            - $ref: '#/components/schemas/RegionInfoMap'
-            - description: The map between each Region in your replication set and the KMS key that is used to encrypt the data in that Region.
+          $ref: '#/components/schemas/RegionInfoMap'
+          description: The map between each Region in your replication set and the KMS key that is used to encrypt the data in that Region.
         status:
-          allOf:
-            - $ref: '#/components/schemas/ReplicationSetStatus'
-            - description: 'The status of the replication set. If the replication set is still pending, you can''t use Incident Manager functionality.'
+          $ref: '#/components/schemas/ReplicationSetStatus'
+          description: 'The status of the replication set. If the replication set is still pending, you can''t use Incident Manager functionality.'
       description: 'The set of Regions that your Incident Manager data will be replicated to and the KMS key used to encrypt the data. '
     MaxResults:
       type: integer
@@ -3417,13 +3291,11 @@ components:
       title: GetResourcePoliciesInput
       properties:
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of resource policies to display per page of results.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of resource policies to display per page of results.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token to continue to the next page of results.
     ResourcePolicyList:
       type: array
       items:
@@ -3449,29 +3321,23 @@ components:
         - incidentRecordArn
       properties:
         eventData:
-          allOf:
-            - $ref: '#/components/schemas/EventData'
-            - description: A short description of the event.
+          $ref: '#/components/schemas/EventData'
+          description: A short description of the event.
         eventId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: The ID of the timeline event.
+          $ref: '#/components/schemas/UUID'
+          description: The ID of the timeline event.
         eventTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time that the event occurred.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the event occurred.
         eventType:
-          allOf:
-            - $ref: '#/components/schemas/TimelineEventType'
-            - description: The type of event that occurred. Currently Incident Manager supports only the <code>Custom Event</code> type.
+          $ref: '#/components/schemas/TimelineEventType'
+          description: The type of event that occurred. Currently Incident Manager supports only the <code>Custom Event</code> type.
         eventUpdatedTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time that the timeline event was last updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the timeline event was last updated.
         incidentRecordArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the incident that the event occurred during.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the incident that the event occurred during.
       description: 'A significant event that happened during the incident. '
     IncidentRecordSource:
       type: object
@@ -3480,21 +3346,17 @@ components:
         - source
       properties:
         createdBy:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The principal that started the incident.
+          $ref: '#/components/schemas/Arn'
+          description: The principal that started the incident.
         invokedBy:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The principal the assumed the role specified of the <code>createdBy</code>.
+          $ref: '#/components/schemas/Arn'
+          description: The principal the assumed the role specified of the <code>createdBy</code>.
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The resource that caused the incident to be created.
+          $ref: '#/components/schemas/Arn'
+          description: The resource that caused the incident to be created.
         source:
-          allOf:
-            - $ref: '#/components/schemas/IncidentSource'
-            - description: 'The service that started the incident. This can be manually created from Incident Manager, automatically created using an AWS CloudWatch alarm, or Amazon EventBridge event.'
+          $ref: '#/components/schemas/IncidentSource'
+          description: 'The service that started the incident. This can be manually created from Incident Manager, automatically created using an AWS CloudWatch alarm, or Amazon EventBridge event.'
       description: Details about how the incident record was created and when.
     IncidentRecordStatus:
       type: string
@@ -3512,33 +3374,26 @@ components:
         - title
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the incident.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the incident.
         creationTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time the incident was created.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time the incident was created.
         impact:
-          allOf:
-            - $ref: '#/components/schemas/Impact'
-            - description: Defines the impact to customers and applications.
+          $ref: '#/components/schemas/Impact'
+          description: Defines the impact to customers and applications.
         incidentRecordSource:
-          allOf:
-            - $ref: '#/components/schemas/IncidentRecordSource'
-            - description: What caused Incident Manager to create the incident.
+          $ref: '#/components/schemas/IncidentRecordSource'
+          description: What caused Incident Manager to create the incident.
         resolvedTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time the incident was resolved.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time the incident was resolved.
         status:
-          allOf:
-            - $ref: '#/components/schemas/IncidentRecordStatus'
-            - description: The current status of the incident.
+          $ref: '#/components/schemas/IncidentRecordStatus'
+          description: The current status of the incident.
         title:
-          allOf:
-            - $ref: '#/components/schemas/IncidentTitle'
-            - description: The title of the incident. This value is either provided by the response plan or overwritten on creation.
+          $ref: '#/components/schemas/IncidentTitle'
+          description: The title of the incident. This value is either provided by the response plan or overwritten on creation.
       description: Details describing an incident record.
     IncidentRecordSummaryList:
       type: array
@@ -3561,17 +3416,14 @@ components:
       type: object
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'The Amazon Resource Name (ARN) of the related item, if the related item is an Amazon resource.'
+          $ref: '#/components/schemas/Arn'
+          description: 'The Amazon Resource Name (ARN) of the related item, if the related item is an Amazon resource.'
         metricDefinition:
-          allOf:
-            - $ref: '#/components/schemas/MetricDefinition'
-            - description: 'The metric definition, if the related item is a metric in CloudWatch.'
+          $ref: '#/components/schemas/MetricDefinition'
+          description: 'The metric definition, if the related item is a metric in CloudWatch.'
         url:
-          allOf:
-            - $ref: '#/components/schemas/Url'
-            - description: 'The URL, if the related item is a non-AWS resource.'
+          $ref: '#/components/schemas/Url'
+          description: 'The URL, if the related item is a non-AWS resource.'
       description: Describes a related item.
     MetricDefinition:
       type: string
@@ -3586,17 +3438,14 @@ components:
       title: ListIncidentRecordsInput
       properties:
         filters:
-          allOf:
-            - $ref: '#/components/schemas/FilterList'
-            - description: '<p>Filter the list of incident records you are searching through. You can filter on the following keys:</p> <ul> <li> <p> <code>creationTime</code> </p> </li> <li> <p> <code>impact</code> </p> </li> <li> <p> <code>status</code> </p> </li> <li> <p> <code>createdBy</code> </p> </li> </ul>'
+          $ref: '#/components/schemas/FilterList'
+          description: '<p>Filter the list of incident records you are searching through. You can filter on the following keys:</p> <ul> <li> <p> <code>creationTime</code> </p> </li> <li> <p> <code>impact</code> </p> </li> <li> <p> <code>status</code> </p> </li> <li> <p> <code>createdBy</code> </p> </li> </ul>'
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results per page.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results per page.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token to continue to the next page of results.
     ListRelatedItemsInput:
       type: object
       required:
@@ -3604,17 +3453,14 @@ components:
       title: ListRelatedItemsInput
       properties:
         incidentRecordArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the incident record that you are listing related items for.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the incident record that you are listing related items for.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of related items per page.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of related items per page.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token to continue to the next page of results.
     RelatedItemList:
       type: array
       items:
@@ -3626,13 +3472,11 @@ components:
       title: ListReplicationSetsInput
       properties:
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results per page. '
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of results per page. '
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token to continue to the next page of results.
     ReplicationSetArnList:
       type: array
       items:
@@ -3642,13 +3486,11 @@ components:
       title: ListResponsePlansInput
       properties:
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of response plans per page.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of response plans per page.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token to continue to the next page of results.
     ResponsePlanSummaryList:
       type: array
       items:
@@ -3677,29 +3519,23 @@ components:
       title: ListTimelineEventsInput
       properties:
         filters:
-          allOf:
-            - $ref: '#/components/schemas/FilterList'
-            - description: '<p>Filters the timeline events based on the provided conditional values. You can filter timeline events using the following keys:</p> <ul> <li> <p> <code>eventTime</code> </p> </li> <li> <p> <code>eventType</code> </p> </li> </ul>'
+          $ref: '#/components/schemas/FilterList'
+          description: '<p>Filters the timeline events based on the provided conditional values. You can filter timeline events using the following keys:</p> <ul> <li> <p> <code>eventTime</code> </p> </li> <li> <p> <code>eventType</code> </p> </li> </ul>'
         incidentRecordArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the incident that the event is part of.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the incident that the event is part of.
         maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of results per page.
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results per page.
         nextToken:
-          allOf:
-            - $ref: '#/components/schemas/NextToken'
-            - description: The pagination token to continue to the next page of results.
+          $ref: '#/components/schemas/NextToken'
+          description: The pagination token to continue to the next page of results.
         sortBy:
-          allOf:
-            - $ref: '#/components/schemas/TimelineEventSort'
-            - description: Sort by the specified key value pair.
+          $ref: '#/components/schemas/TimelineEventSort'
+          description: Sort by the specified key value pair.
         sortOrder:
-          allOf:
-            - $ref: '#/components/schemas/SortOrder'
-            - description: Sorts the order of timeline events by the value specified in the <code>sortBy</code> field.
+          $ref: '#/components/schemas/SortOrder'
+          description: Sorts the order of timeline events by the value specified in the <code>sortBy</code> field.
     Policy:
       type: string
       minLength: 0
@@ -3712,13 +3548,11 @@ components:
       title: PutResourcePolicyInput
       properties:
         policy:
-          allOf:
-            - $ref: '#/components/schemas/Policy'
-            - description: Details of the resource policy.
+          $ref: '#/components/schemas/Policy'
+          description: Details of the resource policy.
         resourceArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the response plan you're adding the resource policy to.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the response plan you're adding the resource policy to.
     RegionStatus:
       type: string
       enum:
@@ -3733,21 +3567,17 @@ components:
         - statusUpdateDateTime
       properties:
         sseKmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/SseKmsKey'
-            - description: The ID of the KMS key used to encrypt the data in this Region.
+          $ref: '#/components/schemas/SseKmsKey'
+          description: The ID of the KMS key used to encrypt the data in this Region.
         status:
-          allOf:
-            - $ref: '#/components/schemas/RegionStatus'
-            - description: The status of the Region in the replication set.
+          $ref: '#/components/schemas/RegionStatus'
+          description: The status of the Region in the replication set.
         statusMessage:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Information displayed about the status of the Region.
+          $ref: '#/components/schemas/String'
+          description: Information displayed about the status of the Region.
         statusUpdateDateTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The most recent date and time that the Region's status was updated.
+          $ref: '#/components/schemas/Timestamp'
+          description: The most recent date and time that the Region's status was updated.
       description: Information about a Region in your replication set.
     RegionInfoMap:
       type: object
@@ -3761,13 +3591,11 @@ components:
       type: object
       properties:
         itemToAdd:
-          allOf:
-            - $ref: '#/components/schemas/RelatedItem'
-            - description: Details about the related item you're adding.
+          $ref: '#/components/schemas/RelatedItem'
+          description: Details about the related item you're adding.
         itemToRemove:
-          allOf:
-            - $ref: '#/components/schemas/ItemIdentifier'
-            - description: Details about the related item you're deleting.
+          $ref: '#/components/schemas/ItemIdentifier'
+          description: Details about the related item you're deleting.
       description: Details about the related item you're adding.
     ReplicationSetStatus:
       type: string
@@ -3785,17 +3613,14 @@ components:
         - ramResourceShareRegion
       properties:
         policyDocument:
-          allOf:
-            - $ref: '#/components/schemas/Policy'
-            - description: The JSON blob that describes the policy.
+          $ref: '#/components/schemas/Policy'
+          description: The JSON blob that describes the policy.
         policyId:
-          allOf:
-            - $ref: '#/components/schemas/PolicyId'
-            - description: The ID of the resource policy.
+          $ref: '#/components/schemas/PolicyId'
+          description: The ID of the resource policy.
         ramResourceShareRegion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Region that policy allows resources to be used in.
+          $ref: '#/components/schemas/String'
+          description: The Region that policy allows resources to be used in.
       description: The resource policy that allows Incident Manager to perform actions on resources on your behalf.
     ResponsePlanSummary:
       type: object
@@ -3804,17 +3629,14 @@ components:
         - name
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the response plan.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the response plan.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/ResponsePlanDisplayName'
-            - description: The human readable name of the response plan. This can include spaces.
+          $ref: '#/components/schemas/ResponsePlanDisplayName'
+          description: The human readable name of the response plan. This can include spaces.
         name:
-          allOf:
-            - $ref: '#/components/schemas/ResponsePlanName'
-            - description: The name of the response plan. This can't include spaces.
+          $ref: '#/components/schemas/ResponsePlanName'
+          description: The name of the response plan. This can't include spaces.
       description: Details of the response plan that are used when creating an incident.
     RoleArn:
       type: string
@@ -3860,21 +3682,17 @@ components:
         - timestamp
       properties:
         rawData:
-          allOf:
-            - $ref: '#/components/schemas/RawData'
-            - description: 'Raw data passed from either EventBridge, CloudWatch, or Incident Manager when an incident is created.'
+          $ref: '#/components/schemas/RawData'
+          description: 'Raw data passed from either EventBridge, CloudWatch, or Incident Manager when an incident is created.'
         source:
-          allOf:
-            - $ref: '#/components/schemas/IncidentSource'
-            - description: 'Identifies the service that sourced the event. All events sourced from within AWS begin with "aws." Customer-generated events can have any value here, as long as it doesn''t begin with "aws." We recommend the use of Java package-name style reverse domain-name strings. '
+          $ref: '#/components/schemas/IncidentSource'
+          description: 'Identifies the service that sourced the event. All events sourced from within AWS begin with "aws." Customer-generated events can have any value here, as long as it doesn''t begin with "aws." We recommend the use of Java package-name style reverse domain-name strings. '
         timestamp:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time that the incident was detected.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the incident was detected.
         triggerArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the source that detected the incident.
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the source that detected the incident.
       description: Details about what caused the incident to be created in Incident Manager.
     StartIncidentInput:
       type: object
@@ -3883,29 +3701,23 @@ components:
       title: StartIncidentInput
       properties:
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+          $ref: '#/components/schemas/ClientToken'
+          description: A token ensuring that the action is called only once with the specified details.
         impact:
-          allOf:
-            - $ref: '#/components/schemas/Impact'
-            - description: '<p>Defines the impact to the customers. Providing an impact overwrites the impact provided by a response plan.</p> <p class="title"> <b>Possible impacts:</b> </p> <ul> <li> <p> <code>1</code> - Critical impact, this typically relates to full application failure that impacts many to all customers. </p> </li> <li> <p> <code>2</code> - High impact, partial application failure with impact to many customers.</p> </li> <li> <p> <code>3</code> - Medium impact, the application is providing reduced service to customers.</p> </li> <li> <p> <code>4</code> - Low impact, customer might aren''t impacted by the problem yet.</p> </li> <li> <p> <code>5</code> - No impact, customers aren''t currently impacted but urgent action is needed to avoid impact.</p> </li> </ul>'
+          $ref: '#/components/schemas/Impact'
+          description: '<p>Defines the impact to the customers. Providing an impact overwrites the impact provided by a response plan.</p> <p class="title"> <b>Possible impacts:</b> </p> <ul> <li> <p> <code>1</code> - Critical impact, this typically relates to full application failure that impacts many to all customers. </p> </li> <li> <p> <code>2</code> - High impact, partial application failure with impact to many customers.</p> </li> <li> <p> <code>3</code> - Medium impact, the application is providing reduced service to customers.</p> </li> <li> <p> <code>4</code> - Low impact, customer might aren''t impacted by the problem yet.</p> </li> <li> <p> <code>5</code> - No impact, customers aren''t currently impacted but urgent action is needed to avoid impact.</p> </li> </ul>'
         relatedItems:
-          allOf:
-            - $ref: '#/components/schemas/RelatedItemList'
-            - description: 'Add related items to the incident for other responders to use. Related items are AWS resources, external links, or files uploaded to an S3 bucket. '
+          $ref: '#/components/schemas/RelatedItemList'
+          description: 'Add related items to the incident for other responders to use. Related items are AWS resources, external links, or files uploaded to an S3 bucket. '
         responsePlanArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: 'The Amazon Resource Name (ARN) of the response plan that pre-defines summary, chat channels, SNS topics, runbooks, title, and impact of the incident. '
+          $ref: '#/components/schemas/Arn'
+          description: 'The Amazon Resource Name (ARN) of the response plan that pre-defines summary, chat channels, SNS topics, runbooks, title, and impact of the incident. '
         title:
-          allOf:
-            - $ref: '#/components/schemas/IncidentTitle'
-            - description: 'Provide a title for the incident. Providing a title overwrites the title provided by the response plan. '
+          $ref: '#/components/schemas/IncidentTitle'
+          description: 'Provide a title for the incident. Providing a title overwrites the title provided by the response plan. '
         triggerDetails:
-          allOf:
-            - $ref: '#/components/schemas/TriggerDetails'
-            - description: Details of what created the incident record in Incident Manager.
+          $ref: '#/components/schemas/TriggerDetails'
+          description: Details of what created the incident record in Incident Manager.
     StringListMemberString:
       type: string
       minLength: 0
@@ -3923,9 +3735,8 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          allOf:
-            - $ref: '#/components/schemas/TagMap'
-            - description: A list of tags that you are adding to the response plan.
+          $ref: '#/components/schemas/TagMap'
+          description: A list of tags that you are adding to the response plan.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -3938,17 +3749,14 @@ components:
       title: UpdateDeletionProtectionInput
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the replication set you're updating.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the replication set you're updating.
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+          $ref: '#/components/schemas/ClientToken'
+          description: A token ensuring that the action is called only once with the specified details.
         deletionProtected:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Details if deletion protection is enabled or disabled in your account.
+          $ref: '#/components/schemas/Boolean'
+          description: Details if deletion protection is enabled or disabled in your account.
     UpdateIncidentRecordInput:
       type: object
       required:
@@ -3956,37 +3764,29 @@ components:
       title: UpdateIncidentRecordInput
       properties:
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the incident record you are updating.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the incident record you are updating.
         chatChannel:
-          allOf:
-            - $ref: '#/components/schemas/ChatChannel'
-            - description: The AWS Chatbot chat channel for responders to collaborate in.
+          $ref: '#/components/schemas/ChatChannel'
+          description: The AWS Chatbot chat channel for responders to collaborate in.
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+          $ref: '#/components/schemas/ClientToken'
+          description: A token ensuring that the action is called only once with the specified details.
         impact:
-          allOf:
-            - $ref: '#/components/schemas/Impact'
-            - description: '<p>Defines the impact to customers and applications. Providing an impact overwrites the impact provided by the response plan.</p> <p class="title"> <b>Possible impacts:</b> </p> <ul> <li> <p> <code>1</code> - Critical impact, this typically relates to full application failure that impacts many to all customers. </p> </li> <li> <p> <code>2</code> - High impact, partial application failure with impact to many customers.</p> </li> <li> <p> <code>3</code> - Medium impact, the application is providing reduced service to customers.</p> </li> <li> <p> <code>4</code> - Low impact, customer might aren''t impacted by the problem yet.</p> </li> <li> <p> <code>5</code> - No impact, customers aren''t currently impacted but urgent action is needed to avoid impact.</p> </li> </ul>'
+          $ref: '#/components/schemas/Impact'
+          description: '<p>Defines the impact to customers and applications. Providing an impact overwrites the impact provided by the response plan.</p> <p class="title"> <b>Possible impacts:</b> </p> <ul> <li> <p> <code>1</code> - Critical impact, this typically relates to full application failure that impacts many to all customers. </p> </li> <li> <p> <code>2</code> - High impact, partial application failure with impact to many customers.</p> </li> <li> <p> <code>3</code> - Medium impact, the application is providing reduced service to customers.</p> </li> <li> <p> <code>4</code> - Low impact, customer might aren''t impacted by the problem yet.</p> </li> <li> <p> <code>5</code> - No impact, customers aren''t currently impacted but urgent action is needed to avoid impact.</p> </li> </ul>'
         notificationTargets:
-          allOf:
-            - $ref: '#/components/schemas/NotificationTargetSet'
-            - description: <p>The SNS targets that are notified when updates are made to an incident.</p> <p>Using multiple SNS topics creates redundancy in the case that a Region is down during the incident.</p>
+          $ref: '#/components/schemas/NotificationTargetSet'
+          description: <p>The SNS targets that are notified when updates are made to an incident.</p> <p>Using multiple SNS topics creates redundancy in the case that a Region is down during the incident.</p>
         status:
-          allOf:
-            - $ref: '#/components/schemas/IncidentRecordStatus'
-            - description: The status of the incident. An incident can be <code>Open</code> or <code>Resolved</code>.
+          $ref: '#/components/schemas/IncidentRecordStatus'
+          description: The status of the incident. An incident can be <code>Open</code> or <code>Resolved</code>.
         summary:
-          allOf:
-            - $ref: '#/components/schemas/IncidentSummary'
-            - description: The summary describes what has happened during the incident.
+          $ref: '#/components/schemas/IncidentSummary'
+          description: The summary describes what has happened during the incident.
         title:
-          allOf:
-            - $ref: '#/components/schemas/IncidentTitle'
-            - description: The title of the incident is a brief and easily recognizable.
+          $ref: '#/components/schemas/IncidentTitle'
+          description: The title of the incident is a brief and easily recognizable.
     UpdateRelatedItemsInput:
       type: object
       required:
@@ -3995,17 +3795,14 @@ components:
       title: UpdateRelatedItemsInput
       properties:
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+          $ref: '#/components/schemas/ClientToken'
+          description: A token ensuring that the action is called only once with the specified details.
         incidentRecordArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the incident record you are updating related items in.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the incident record you are updating related items in.
         relatedItemsUpdate:
-          allOf:
-            - $ref: '#/components/schemas/RelatedItemsUpdate'
-            - description: Details about the item you are adding or deleting.
+          $ref: '#/components/schemas/RelatedItemsUpdate'
+          description: Details about the item you are adding or deleting.
     UpdateReplicationSetInputActionsList:
       type: array
       items:
@@ -4020,17 +3817,14 @@ components:
       title: UpdateReplicationSetInput
       properties:
         actions:
-          allOf:
-            - $ref: '#/components/schemas/UpdateReplicationSetInputActionsList'
-            - description: An action to add or delete a Region.
+          $ref: '#/components/schemas/UpdateReplicationSetInputActionsList'
+          description: An action to add or delete a Region.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the replication set you're updating.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the replication set you're updating.
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+          $ref: '#/components/schemas/ClientToken'
+          description: A token ensuring that the action is called only once with the specified details.
     UpdateResponsePlanInput:
       type: object
       required:
@@ -4038,49 +3832,38 @@ components:
       title: UpdateResponsePlanInput
       properties:
         actions:
-          allOf:
-            - $ref: '#/components/schemas/ActionsList'
-            - description: The actions that this response plan takes at the beginning of an incident.
+          $ref: '#/components/schemas/ActionsList'
+          description: The actions that this response plan takes at the beginning of an incident.
         arn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the response plan.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the response plan.
         chatChannel:
-          allOf:
-            - $ref: '#/components/schemas/ChatChannel'
-            - description: <p>The AWS Chatbot chat channel used for collaboration during an incident.</p> <p>Use the empty structure to remove the chat channel from the response plan.</p>
+          $ref: '#/components/schemas/ChatChannel'
+          description: <p>The AWS Chatbot chat channel used for collaboration during an incident.</p> <p>Use the empty structure to remove the chat channel from the response plan.</p>
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+          $ref: '#/components/schemas/ClientToken'
+          description: A token ensuring that the action is called only once with the specified details.
         displayName:
-          allOf:
-            - $ref: '#/components/schemas/ResponsePlanDisplayName'
-            - description: The long format name of the response plan. Can't contain spaces.
+          $ref: '#/components/schemas/ResponsePlanDisplayName'
+          description: The long format name of the response plan. Can't contain spaces.
         engagements:
-          allOf:
-            - $ref: '#/components/schemas/EngagementSet'
-            - description: The contacts and escalation plans that Incident Manager engages at the start of the incident.
+          $ref: '#/components/schemas/EngagementSet'
+          description: The contacts and escalation plans that Incident Manager engages at the start of the incident.
         incidentTemplateDedupeString:
-          allOf:
-            - $ref: '#/components/schemas/DedupeString'
-            - description: Used to create only one incident record for an incident.
+          $ref: '#/components/schemas/DedupeString'
+          description: Used to create only one incident record for an incident.
         incidentTemplateImpact:
-          allOf:
-            - $ref: '#/components/schemas/Impact'
-            - description: '<p>Defines the impact to the customers. Providing an impact overwrites the impact provided by a response plan.</p> <p class="title"> <b>Possible impacts:</b> </p> <ul> <li> <p> <code>5</code> - Severe impact</p> </li> <li> <p> <code>4</code> - High impact</p> </li> <li> <p> <code>3</code> - Medium impact</p> </li> <li> <p> <code>2</code> - Low impact</p> </li> <li> <p> <code>1</code> - No impact</p> </li> </ul>'
+          $ref: '#/components/schemas/Impact'
+          description: '<p>Defines the impact to the customers. Providing an impact overwrites the impact provided by a response plan.</p> <p class="title"> <b>Possible impacts:</b> </p> <ul> <li> <p> <code>5</code> - Severe impact</p> </li> <li> <p> <code>4</code> - High impact</p> </li> <li> <p> <code>3</code> - Medium impact</p> </li> <li> <p> <code>2</code> - Low impact</p> </li> <li> <p> <code>1</code> - No impact</p> </li> </ul>'
         incidentTemplateNotificationTargets:
-          allOf:
-            - $ref: '#/components/schemas/NotificationTargetSet'
-            - description: The SNS targets that are notified when updates are made to an incident.
+          $ref: '#/components/schemas/NotificationTargetSet'
+          description: The SNS targets that are notified when updates are made to an incident.
         incidentTemplateSummary:
-          allOf:
-            - $ref: '#/components/schemas/IncidentSummary'
-            - description: 'A brief summary of the incident. This typically contains what has happened, what''s currently happening, and next steps.'
+          $ref: '#/components/schemas/IncidentSummary'
+          description: 'A brief summary of the incident. This typically contains what has happened, what''s currently happening, and next steps.'
         incidentTemplateTitle:
-          allOf:
-            - $ref: '#/components/schemas/IncidentTitle'
-            - description: The short format name of the incident. Can't contain spaces.
+          $ref: '#/components/schemas/IncidentTitle'
+          description: The short format name of the incident. Can't contain spaces.
     UpdateTimelineEventInput:
       type: object
       required:
@@ -4089,28 +3872,22 @@ components:
       title: UpdateTimelineEventInput
       properties:
         clientToken:
-          allOf:
-            - $ref: '#/components/schemas/ClientToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+          $ref: '#/components/schemas/ClientToken'
+          description: A token ensuring that the action is called only once with the specified details.
         eventData:
-          allOf:
-            - $ref: '#/components/schemas/EventData'
-            - description: A short description of the event.
+          $ref: '#/components/schemas/EventData'
+          description: A short description of the event.
         eventId:
-          allOf:
-            - $ref: '#/components/schemas/UUID'
-            - description: The ID of the event you are updating. You can find this by using <code>ListTimelineEvents</code>.
+          $ref: '#/components/schemas/UUID'
+          description: The ID of the event you are updating. You can find this by using <code>ListTimelineEvents</code>.
         eventTime:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time that the event occurred.
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the event occurred.
         eventType:
-          allOf:
-            - $ref: '#/components/schemas/TimelineEventType'
-            - description: The type of the event. You can update events of type <code>Custom Event</code>.
+          $ref: '#/components/schemas/TimelineEventType'
+          description: The type of the event. You can update events of type <code>Custom Event</code>.
         incidentRecordArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the incident that the timeline event is part of.
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the incident that the timeline event is part of.
 security:
   - hmac: []

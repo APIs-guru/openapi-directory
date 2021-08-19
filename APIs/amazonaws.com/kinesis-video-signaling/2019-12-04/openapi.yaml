@@ -330,9 +330,8 @@ components:
       type: object
       properties:
         IceServerList:
-          allOf:
-            - $ref: '#/components/schemas/IceServerList'
-            - description: The list of ICE server information objects.
+          $ref: '#/components/schemas/IceServerList'
+          description: The list of ICE server information objects.
     InvalidClientException: {}
     SessionExpiredException: {}
     ClientLimitExceededException: {}
@@ -343,9 +342,8 @@ components:
       type: object
       properties:
         Answer:
-          allOf:
-            - $ref: '#/components/schemas/Answer'
-            - description: The base64-encoded SDP answer content.
+          $ref: '#/components/schemas/Answer'
+          description: The base64-encoded SDP answer content.
     Answer:
       type: string
       minLength: 1
@@ -376,21 +374,17 @@ components:
       title: GetIceServerConfigRequest
       properties:
         ChannelARN:
-          allOf:
-            - $ref: '#/components/schemas/ResourceARN'
-            - description: 'The ARN of the signaling channel to be used for the peer-to-peer connection between configured peers. '
+          $ref: '#/components/schemas/ResourceARN'
+          description: 'The ARN of the signaling channel to be used for the peer-to-peer connection between configured peers. '
         ClientId:
-          allOf:
-            - $ref: '#/components/schemas/ClientId'
-            - description: Unique identifier for the viewer. Must be unique within the signaling channel.
+          $ref: '#/components/schemas/ClientId'
+          description: Unique identifier for the viewer. Must be unique within the signaling channel.
         Service:
-          allOf:
-            - $ref: '#/components/schemas/Service'
-            - description: 'Specifies the desired service. Currently, <code>TURN</code> is the only valid value.'
+          $ref: '#/components/schemas/Service'
+          description: 'Specifies the desired service. Currently, <code>TURN</code> is the only valid value.'
         Username:
-          allOf:
-            - $ref: '#/components/schemas/Username'
-            - description: An optional user ID to be associated with the credentials.
+          $ref: '#/components/schemas/Username'
+          description: An optional user ID to be associated with the credentials.
     IceServerList:
       type: array
       items:
@@ -412,21 +406,17 @@ components:
       type: object
       properties:
         Uris:
-          allOf:
-            - $ref: '#/components/schemas/Uris'
-            - description: 'An array of URIs, in the form specified in the <a href="https://tools.ietf.org/html/draft-petithuguenin-behave-turn-uris-03">I-D.petithuguenin-behave-turn-uris</a> spec. These URIs provide the different addresses and/or protocols that can be used to reach the TURN server.'
+          $ref: '#/components/schemas/Uris'
+          description: 'An array of URIs, in the form specified in the <a href="https://tools.ietf.org/html/draft-petithuguenin-behave-turn-uris-03">I-D.petithuguenin-behave-turn-uris</a> spec. These URIs provide the different addresses and/or protocols that can be used to reach the TURN server.'
         Username:
-          allOf:
-            - $ref: '#/components/schemas/Username'
-            - description: A username to login to the ICE server.
+          $ref: '#/components/schemas/Username'
+          description: A username to login to the ICE server.
         Password:
-          allOf:
-            - $ref: '#/components/schemas/Password'
-            - description: A password to login to the ICE server.
+          $ref: '#/components/schemas/Password'
+          description: A password to login to the ICE server.
         Ttl:
-          allOf:
-            - $ref: '#/components/schemas/Ttl'
-            - description: 'The period of time, in seconds, during which the username and password are valid.'
+          $ref: '#/components/schemas/Ttl'
+          description: 'The period of time, in seconds, during which the username and password are valid.'
       description: A structure for the ICE server connection data.
     MessagePayload:
       type: string
@@ -442,17 +432,14 @@ components:
       title: SendAlexaOfferToMasterRequest
       properties:
         ChannelARN:
-          allOf:
-            - $ref: '#/components/schemas/ResourceARN'
-            - description: The ARN of the signaling channel by which Alexa and the master peer communicate.
+          $ref: '#/components/schemas/ResourceARN'
+          description: The ARN of the signaling channel by which Alexa and the master peer communicate.
         SenderClientId:
-          allOf:
-            - $ref: '#/components/schemas/ClientId'
-            - description: The unique identifier for the sender client.
+          $ref: '#/components/schemas/ClientId'
+          description: The unique identifier for the sender client.
         MessagePayload:
-          allOf:
-            - $ref: '#/components/schemas/MessagePayload'
-            - description: The base64-encoded SDP offer content.
+          $ref: '#/components/schemas/MessagePayload'
+          description: The base64-encoded SDP offer content.
     Uri:
       type: string
       minLength: 1
