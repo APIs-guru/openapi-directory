@@ -1,0 +1,4511 @@
+openapi: 3.0.0
+info:
+  version: '2021-01-01'
+  x-release: v4
+  title: Amazon MemoryDB
+  description: 'Amazon MemoryDB for Redis is a fully managed, Redis-compatible, in-memory database that delivers ultra-fast performance and Multi-AZ durability for modern applications built using microservices architectures. MemoryDB stores the entire database in-memory, enabling low latency and high throughput data access. It is compatible with Redis, a popular open source data store, enabling you to leverage Redis’ flexible and friendly data structures, APIs, and commands.'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: memorydb
+  x-aws-signingName: memorydb
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/memorydb-2021-01-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/memory-db/'
+servers:
+  - url: 'http://memory-db.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon MemoryDB multi-region endpoint
+  - url: 'https://memory-db.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon MemoryDB multi-region endpoint
+  - url: 'http://memory-db.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon MemoryDB endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://memory-db.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon MemoryDB endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /#X-Amz-Target=AmazonMemoryDB.BatchUpdateCluster:
+    post:
+      operationId: BatchUpdateCluster
+      description: 'Apply the service update to a list of clusters supplied. For more information on service updates and applying them, see <a href="https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/managing-updates.html#applying-updates">Applying the service updates</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchUpdateClusterResponse'
+        '480':
+          description: ServiceUpdateNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUpdateNotFoundFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchUpdateClusterRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.BatchUpdateCluster
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.CopySnapshot:
+    post:
+      operationId: CopySnapshot
+      description: Makes a copy of an existing snapshot.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CopySnapshotResponse'
+        '480':
+          description: SnapshotAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotAlreadyExistsFault'
+        '481':
+          description: SnapshotNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotNotFoundFault'
+        '482':
+          description: SnapshotQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotQuotaExceededFault'
+        '483':
+          description: InvalidSnapshotStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidSnapshotStateFault'
+        '484':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '485':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '486':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '487':
+          description: TagQuotaPerResourceExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopySnapshotRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.CopySnapshot
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.CreateACL:
+    post:
+      operationId: CreateACL
+      description: 'Creates an Access Control List. For more information, see <a href="https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Clusters.ACLs.html">Authenticating users with Access Contol Lists (ACLs)</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateACLResponse'
+        '480':
+          description: UserNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '481':
+          description: DuplicateUserNameFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateUserNameFault'
+        '482':
+          description: ACLAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ACLAlreadyExistsFault'
+        '483':
+          description: DefaultUserRequired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultUserRequired'
+        '484':
+          description: ACLQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ACLQuotaExceededFault'
+        '485':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '486':
+          description: TagQuotaPerResourceExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateACLRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.CreateACL
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.CreateCluster:
+    post:
+      operationId: CreateCluster
+      description: Creates a cluster. All nodes in the cluster run the same protocol-compliant engine software.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateClusterResponse'
+        '480':
+          description: ClusterAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterAlreadyExistsFault'
+        '481':
+          description: SubnetGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubnetGroupNotFoundFault'
+        '482':
+          description: ClusterQuotaForCustomerExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterQuotaForCustomerExceededFault'
+        '483':
+          description: NodeQuotaForClusterExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeQuotaForClusterExceededFault'
+        '484':
+          description: NodeQuotaForCustomerExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeQuotaForCustomerExceededFault'
+        '485':
+          description: ParameterGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterGroupNotFoundFault'
+        '486':
+          description: InsufficientClusterCapacityFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsufficientClusterCapacityFault'
+        '487':
+          description: InvalidVPCNetworkStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidVPCNetworkStateFault'
+        '488':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '489':
+          description: ShardsPerClusterQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShardsPerClusterQuotaExceededFault'
+        '490':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '491':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '492':
+          description: InvalidCredentialsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCredentialsException'
+        '493':
+          description: TagQuotaPerResourceExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '494':
+          description: ACLNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ACLNotFoundFault'
+        '495':
+          description: InvalidACLStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidACLStateFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateClusterRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.CreateCluster
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.CreateParameterGroup:
+    post:
+      operationId: CreateParameterGroup
+      description: 'Creates a new MemoryDB parameter group. A parameter group is a collection of parameters and their values that are applied to all of the nodes in any cluster. For more information, see <a href="https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/ParameterGroups.html">Configuring engine parameters using parameter groups</a>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateParameterGroupResponse'
+        '480':
+          description: ParameterGroupQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterGroupQuotaExceededFault'
+        '481':
+          description: ParameterGroupAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterGroupAlreadyExistsFault'
+        '482':
+          description: InvalidParameterGroupStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterGroupStateFault'
+        '483':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '484':
+          description: TagQuotaPerResourceExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '485':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '486':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateParameterGroupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.CreateParameterGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.CreateSnapshot:
+    post:
+      operationId: CreateSnapshot
+      description: Creates a copy of an entire cluster at a specific moment in time.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSnapshotResponse'
+        '480':
+          description: SnapshotAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotAlreadyExistsFault'
+        '481':
+          description: ClusterNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '482':
+          description: InvalidClusterStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '483':
+          description: SnapshotQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotQuotaExceededFault'
+        '484':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '485':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '486':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '487':
+          description: TagQuotaPerResourceExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSnapshotRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.CreateSnapshot
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.CreateSubnetGroup:
+    post:
+      operationId: CreateSubnetGroup
+      description: 'Creates a subnet group. A subnet group is a collection of subnets (typically private) that you can designate for your clusters running in an Amazon Virtual Private Cloud (VPC) environment. When you create a cluster in an Amazon VPC, you must specify a subnet group. MemoryDB uses that subnet group to choose a subnet and IP addresses within that subnet to associate with your nodes. For more information, see <a href="https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/SubnetGroups.html">Subnets and subnet groups</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSubnetGroupResponse'
+        '480':
+          description: SubnetGroupAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubnetGroupAlreadyExistsFault'
+        '481':
+          description: SubnetGroupQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubnetGroupQuotaExceededFault'
+        '482':
+          description: SubnetQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubnetQuotaExceededFault'
+        '483':
+          description: InvalidSubnet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+        '484':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '485':
+          description: SubnetNotAllowedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubnetNotAllowedFault'
+        '486':
+          description: TagQuotaPerResourceExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSubnetGroupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.CreateSubnetGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.CreateUser:
+    post:
+      operationId: CreateUser
+      description: 'Creates a MemoryDB user. For more information, see <a href="https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Clusters.ACLs.html">Authenticating users with Access Contol Lists (ACLs)</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUserResponse'
+        '480':
+          description: UserAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAlreadyExistsFault'
+        '481':
+          description: UserQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserQuotaExceededFault'
+        '482':
+          description: DuplicateUserNameFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateUserNameFault'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '484':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '485':
+          description: TagQuotaPerResourceExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.CreateUser
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DeleteACL:
+    post:
+      operationId: DeleteACL
+      description: 'Deletes an Access Control List. The ACL must first be disassociated from the cluster before it can be deleted. For more information, see <a href="https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Clusters.ACLs.html">Authenticating users with Access Contol Lists (ACLs)</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteACLResponse'
+        '480':
+          description: ACLNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ACLNotFoundFault'
+        '481':
+          description: InvalidACLStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidACLStateFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteACLRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DeleteACL
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DeleteCluster:
+    post:
+      operationId: DeleteCluster
+      description: Deletes a cluster. It also deletes all associated nodes and node endpoints
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteClusterResponse'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '482':
+          description: SnapshotAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotAlreadyExistsFault'
+        '483':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteClusterRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DeleteCluster
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DeleteParameterGroup:
+    post:
+      operationId: DeleteParameterGroup
+      description: Deletes the specified parameter group. You cannot delete a parameter group if it is associated with any clusters. You cannot delete the default parameter groups in your account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteParameterGroupResponse'
+        '480':
+          description: InvalidParameterGroupStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterGroupStateFault'
+        '481':
+          description: ParameterGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterGroupNotFoundFault'
+        '482':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '484':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteParameterGroupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DeleteParameterGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DeleteSnapshot:
+    post:
+      operationId: DeleteSnapshot
+      description: 'Deletes an existing snapshot. When you receive a successful response from this operation, MemoryDB immediately begins deleting the snapshot; you cannot cancel or revert this operation.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSnapshotResponse'
+        '480':
+          description: SnapshotNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotNotFoundFault'
+        '481':
+          description: InvalidSnapshotStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidSnapshotStateFault'
+        '482':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '484':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSnapshotRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DeleteSnapshot
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DeleteSubnetGroup:
+    post:
+      operationId: DeleteSubnetGroup
+      description: Deletes a subnet group. You cannot delete a default subnet group or one that is associated with any clusters.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSubnetGroupResponse'
+        '480':
+          description: SubnetGroupInUseFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubnetGroupInUseFault'
+        '481':
+          description: SubnetGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubnetGroupNotFoundFault'
+        '482':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSubnetGroupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DeleteSubnetGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DeleteUser:
+    post:
+      operationId: DeleteUser
+      description: Deletes a user. The user will be removed from all ACLs and in turn removed from all clusters.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteUserResponse'
+        '480':
+          description: InvalidUserStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidUserStateFault'
+        '481':
+          description: UserNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteUserRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DeleteUser
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DescribeACLs:
+    post:
+      operationId: DescribeACLs
+      description: Returns a list of ACLs
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeACLsResponse'
+        '480':
+          description: ACLNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ACLNotFoundFault'
+        '481':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeACLsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DescribeACLs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DescribeClusters:
+    post:
+      operationId: DescribeClusters
+      description: 'Returns information about all provisioned clusters if no cluster identifier is specified, or about a specific cluster if a cluster name is supplied.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeClustersResponse'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeClustersRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DescribeClusters
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DescribeEngineVersions:
+    post:
+      operationId: DescribeEngineVersions
+      description: Returns a list of the available Redis engine versions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEngineVersionsResponse'
+        '480':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEngineVersionsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DescribeEngineVersions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DescribeEvents:
+    post:
+      operationId: DescribeEvents
+      description: 'Returns events related to clusters, security groups, and parameter groups. You can obtain events specific to a particular cluster, security group, or parameter group by providing the name as a parameter. By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days'' worth of events if necessary.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEventsResponse'
+        '480':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEventsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DescribeEvents
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DescribeParameterGroups:
+    post:
+      operationId: DescribeParameterGroups
+      description: 'Returns a list of parameter group descriptions. If a parameter group name is specified, the list contains only the descriptions for that group.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeParameterGroupsResponse'
+        '480':
+          description: ParameterGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterGroupNotFoundFault'
+        '481':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeParameterGroupsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DescribeParameterGroups
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DescribeParameters:
+    post:
+      operationId: DescribeParameters
+      description: Returns the detailed parameter list for a particular parameter group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeParametersResponse'
+        '480':
+          description: ParameterGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterGroupNotFoundFault'
+        '481':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeParametersRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DescribeParameters
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DescribeServiceUpdates:
+    post:
+      operationId: DescribeServiceUpdates
+      description: Returns details of the service updates
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeServiceUpdatesResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeServiceUpdatesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DescribeServiceUpdates
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DescribeSnapshots:
+    post:
+      operationId: DescribeSnapshots
+      description: 'Returns information about cluster snapshots. By default, DescribeSnapshots lists all of your snapshots; it can optionally describe a single snapshot, or just the snapshots associated with a particular cluster.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeSnapshotsResponse'
+        '480':
+          description: SnapshotNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotNotFoundFault'
+        '481':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeSnapshotsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DescribeSnapshots
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DescribeSubnetGroups:
+    post:
+      operationId: DescribeSubnetGroups
+      description: 'Returns a list of subnet group descriptions. If a subnet group name is specified, the list contains only the description of that group.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeSubnetGroupsResponse'
+        '480':
+          description: SubnetGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubnetGroupNotFoundFault'
+        '481':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeSubnetGroupsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DescribeSubnetGroups
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DescribeUsers:
+    post:
+      operationId: DescribeUsers
+      description: Returns a list of users.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeUsersResponse'
+        '480':
+          description: UserNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '481':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeUsersRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DescribeUsers
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.FailoverShard:
+    post:
+      operationId: FailoverShard
+      description: Used to failover a shard
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailoverShardResponse'
+        '480':
+          description: APICallRateForCustomerExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APICallRateForCustomerExceededFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '482':
+          description: ShardNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShardNotFoundFault'
+        '483':
+          description: ClusterNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '484':
+          description: TestFailoverNotAvailableFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestFailoverNotAvailableFault'
+        '485':
+          description: InvalidKMSKeyFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidKMSKeyFault'
+        '486':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '487':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FailoverShardRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.FailoverShard
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.ListAllowedNodeTypeUpdates:
+    post:
+      operationId: ListAllowedNodeTypeUpdates
+      description: 'Lists all available node types that you can scale to from your cluster''s current node type. When you use the UpdateCluster operation to scale your cluster, the value of the NodeType parameter must be one of the node types returned by this operation.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAllowedNodeTypeUpdatesResponse'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '482':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListAllowedNodeTypeUpdatesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.ListAllowedNodeTypeUpdates
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.ListTags:
+    post:
+      operationId: ListTags
+      description: 'Lists all tags currently on a named resource. A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track your MemoryDB resources. For more information, see <a href="https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Tagging-Resources.html">Tagging your MemoryDB resources</a> '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsResponse'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '482':
+          description: ParameterGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterGroupNotFoundFault'
+        '483':
+          description: SubnetGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubnetGroupNotFoundFault'
+        '484':
+          description: SnapshotNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotNotFoundFault'
+        '485':
+          description: InvalidARNFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidARNFault'
+        '486':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '487':
+          description: UserNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '488':
+          description: ACLNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ACLNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.ListTags
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.ResetParameterGroup:
+    post:
+      operationId: ResetParameterGroup
+      description: 'Modifies the parameters of a parameter group to the engine or system default value. You can reset specific parameters by submitting a list of parameter names. To reset the entire parameter group, specify the AllParameters and ParameterGroupName parameters.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResetParameterGroupResponse'
+        '480':
+          description: InvalidParameterGroupStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterGroupStateFault'
+        '481':
+          description: ParameterGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterGroupNotFoundFault'
+        '482':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '484':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetParameterGroupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.ResetParameterGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.TagResource:
+    post:
+      operationId: TagResource
+      description: '<p>A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your MemoryDB resources. When you add or remove tags on clusters, those actions will be replicated to all nodes in the cluster. For more information, see <a href="https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/IAM.ResourceLevelPermissions.html">Resource-level permissions</a>.</p> <p>For example, you can use cost-allocation tags to your MemoryDB resources, Amazon generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services. For more information, see <a href="https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Tagging.html">Using Cost Allocation Tags</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: ParameterGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterGroupNotFoundFault'
+        '482':
+          description: SubnetGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubnetGroupNotFoundFault'
+        '483':
+          description: InvalidClusterStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '484':
+          description: SnapshotNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotNotFoundFault'
+        '485':
+          description: UserNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '486':
+          description: ACLNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ACLNotFoundFault'
+        '487':
+          description: TagQuotaPerResourceExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '488':
+          description: InvalidARNFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidARNFault'
+        '489':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.TagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.UntagResource:
+    post:
+      operationId: UntagResource
+      description: Use this operation to remove tags on a resource
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '482':
+          description: ParameterGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterGroupNotFoundFault'
+        '483':
+          description: SubnetGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubnetGroupNotFoundFault'
+        '484':
+          description: SnapshotNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotNotFoundFault'
+        '485':
+          description: InvalidARNFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidARNFault'
+        '486':
+          description: TagNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagNotFoundFault'
+        '487':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '488':
+          description: UserNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '489':
+          description: ACLNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ACLNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UntagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.UpdateACL:
+    post:
+      operationId: UpdateACL
+      description: Changes the list of users that belong to the Access Control List.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateACLResponse'
+        '480':
+          description: ACLNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ACLNotFoundFault'
+        '481':
+          description: UserNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '482':
+          description: DuplicateUserNameFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateUserNameFault'
+        '483':
+          description: DefaultUserRequired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultUserRequired'
+        '484':
+          description: InvalidACLStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidACLStateFault'
+        '485':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '486':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateACLRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.UpdateACL
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.UpdateCluster:
+    post:
+      operationId: UpdateCluster
+      description: Modifies the settings for a cluster. You can use this operation to change one or more cluster configuration settings by specifying the settings and the new values.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateClusterResponse'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '482':
+          description: InvalidNodeStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNodeStateFault'
+        '483':
+          description: ParameterGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterGroupNotFoundFault'
+        '484':
+          description: InvalidVPCNetworkStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidVPCNetworkStateFault'
+        '485':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '486':
+          description: InvalidKMSKeyFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidKMSKeyFault'
+        '487':
+          description: NodeQuotaForClusterExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeQuotaForClusterExceededFault'
+        '488':
+          description: ClusterQuotaForCustomerExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterQuotaForCustomerExceededFault'
+        '489':
+          description: ShardsPerClusterQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShardsPerClusterQuotaExceededFault'
+        '490':
+          description: NodeQuotaForCustomerExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeQuotaForCustomerExceededFault'
+        '491':
+          description: NoOperationFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoOperationFault'
+        '492':
+          description: InvalidACLStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidACLStateFault'
+        '493':
+          description: ACLNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ACLNotFoundFault'
+        '494':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '495':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateClusterRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.UpdateCluster
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.UpdateParameterGroup:
+    post:
+      operationId: UpdateParameterGroup
+      description: Updates the parameters of a parameter group. You can modify up to 20 parameters in a single request by submitting a list parameter name and value pairs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateParameterGroupResponse'
+        '480':
+          description: ParameterGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterGroupNotFoundFault'
+        '481':
+          description: InvalidParameterGroupStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterGroupStateFault'
+        '482':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '484':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateParameterGroupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.UpdateParameterGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.UpdateSubnetGroup:
+    post:
+      operationId: UpdateSubnetGroup
+      description: 'Updates a subnet group. For more information, see <a href="https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/SubnetGroups.Modifying.html">Updating a subnet group</a> '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSubnetGroupResponse'
+        '480':
+          description: SubnetGroupNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubnetGroupNotFoundFault'
+        '481':
+          description: SubnetQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubnetQuotaExceededFault'
+        '482':
+          description: SubnetInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubnetInUse'
+        '483':
+          description: InvalidSubnet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+        '484':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '485':
+          description: SubnetNotAllowedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubnetNotAllowedFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSubnetGroupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.UpdateSubnetGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.UpdateUser:
+    post:
+      operationId: UpdateUser
+      description: Changes user password(s) and/or access string.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateUserResponse'
+        '480':
+          description: UserNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '481':
+          description: InvalidUserStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidUserStateFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.UpdateUser
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    BatchUpdateClusterResponse:
+      type: object
+      properties:
+        ProcessedClusters:
+          allOf:
+            - $ref: '#/components/schemas/ClusterList'
+            - description: The list of clusters that have been updated.
+        UnprocessedClusters:
+          allOf:
+            - $ref: '#/components/schemas/UnprocessedClusterList'
+            - description: The list of clusters where updates have not been applied.
+    BatchUpdateClusterRequest:
+      type: object
+      required:
+        - ClusterNames
+      title: BatchUpdateClusterRequest
+      properties:
+        ClusterNames:
+          allOf:
+            - $ref: '#/components/schemas/ClusterNameList'
+            - description: The cluster names to apply the updates.
+        ServiceUpdate:
+          allOf:
+            - $ref: '#/components/schemas/ServiceUpdateRequest'
+            - description: The unique ID of the service update
+    ServiceUpdateNotFoundFault: {}
+    InvalidParameterValueException: {}
+    CopySnapshotResponse:
+      type: object
+      properties:
+        Snapshot:
+          allOf:
+            - $ref: '#/components/schemas/Snapshot'
+            - description: Represents a copy of an entire cluster as of the time when the snapshot was taken.
+    CopySnapshotRequest:
+      type: object
+      required:
+        - SourceSnapshotName
+        - TargetSnapshotName
+      title: CopySnapshotRequest
+      properties:
+        SourceSnapshotName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of an existing snapshot from which to make a copy.
+        TargetSnapshotName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A name for the snapshot copy. MemoryDB does not permit overwriting a snapshot, therefore this name must be unique within its context - MemoryDB or an Amazon S3 bucket if exporting.'
+        TargetBucket:
+          allOf:
+            - $ref: '#/components/schemas/TargetBucket'
+            - description: 'The Amazon S3 bucket to which the snapshot is exported. This parameter is used only when exporting a snapshot for external access. When using this parameter to export a snapshot, be sure MemoryDB has the needed permissions to this S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/snapshots-exporting.html">Step 2: Grant MemoryDB Access to Your Amazon S3 Bucket</a>. '
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: The ID of the KMS key used to encrypt the target snapshot.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
+    SnapshotAlreadyExistsFault: {}
+    SnapshotNotFoundFault: {}
+    SnapshotQuotaExceededFault: {}
+    InvalidSnapshotStateFault: {}
+    ServiceLinkedRoleNotFoundFault: {}
+    InvalidParameterCombinationException: {}
+    TagQuotaPerResourceExceeded: {}
+    CreateACLResponse:
+      type: object
+      properties:
+        ACL:
+          allOf:
+            - $ref: '#/components/schemas/ACL'
+            - description: The newly-created Access Control List.
+    CreateACLRequest:
+      type: object
+      required:
+        - ACLName
+      title: CreateACLRequest
+      properties:
+        ACLName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Access Control List.
+        UserNames:
+          allOf:
+            - $ref: '#/components/schemas/UserNameListInput'
+            - description: The list of users that belong to the Access Control List.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
+    UserNotFoundFault: {}
+    DuplicateUserNameFault: {}
+    ACLAlreadyExistsFault: {}
+    DefaultUserRequired: {}
+    ACLQuotaExceededFault: {}
+    CreateClusterResponse:
+      type: object
+      properties:
+        Cluster:
+          allOf:
+            - $ref: '#/components/schemas/Cluster'
+            - description: The newly-created cluster.
+    CreateClusterRequest:
+      type: object
+      required:
+        - ClusterName
+        - NodeType
+        - ACLName
+      title: CreateClusterRequest
+      properties:
+        ClusterName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the cluster. This value must be unique as it also serves as the cluster identifier.
+        NodeType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The compute and memory capacity of the nodes in the cluster.
+        ParameterGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter group associated with the cluster.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An optional description of the cluster.
+        NumShards:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: '<p>The number of shards the cluster will contain.</p> <p>Clusters can have up to 500 shards, with your data partitioned across the shards. For example, you can choose to configure a 500 node cluster that ranges between 83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and no replicas). Make sure there are enough available IP addresses to accommodate the increase. Common pitfalls include the subnets in the subnet group have too small a CIDR range or the subnets are shared and heavily used by other clusters. </p>'
+        NumReplicasPerShard:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The number of replicas to apply to each shard. The limit is 5.
+        SubnetGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the subnet group to be used for the cluster.
+        SecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIdsList'
+            - description: A list of security group names to associate with this cluster.
+        MaintenanceWindow:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format <code>ddd:hh24:mi-ddd:hh24:mi</code> (24H Clock UTC). The minimum maintenance window is a 60 minute period.'
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The port number on which each of the nodes accepts connections.
+        SnsTopicArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.
+        TLSEnabled:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: A flag to enable in-transit encryption on the cluster.
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the KMS key used to encrypt the cluster.
+        SnapshotArns:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotArnsList'
+            - description: A list of Amazon Resource Names (ARN) that uniquely identify the RDB snapshot files stored in Amazon S3. The snapshot files are used to populate the new cluster. The Amazon S3 object name in the ARN cannot contain any commas.
+        SnapshotName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of a snapshot from which to restore data into the new cluster. The snapshot status changes to restoring while the new cluster is being created.
+        SnapshotRetentionLimit:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The number of days for which MemoryDB retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. Tags are comma-separated key,value pairs (e.g. Key=myKey, Value=myKeyValue. You can include multiple tags as shown following: Key=myKey, Value=myKeyValue Key=mySecondKey, Value=mySecondKeyValue.'
+        SnapshotWindow:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard.</p> <p> Example: 05:00-09:00</p> <p> If you do not specify this parameter, MemoryDB automatically chooses an appropriate time range.</p>'
+        ACLName:
+          allOf:
+            - $ref: '#/components/schemas/ACLName'
+            - description: The name of the Access Control List to associate with the cluster.
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The version number of the Redis engine to be used for the cluster.
+        AutoMinorVersionUpgrade:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'When set to true, the cluster will automatically receive minor engine version upgrades after launch.'
+    ClusterAlreadyExistsFault: {}
+    SubnetGroupNotFoundFault: {}
+    ClusterQuotaForCustomerExceededFault: {}
+    NodeQuotaForClusterExceededFault: {}
+    NodeQuotaForCustomerExceededFault: {}
+    ParameterGroupNotFoundFault: {}
+    InsufficientClusterCapacityFault: {}
+    InvalidVPCNetworkStateFault: {}
+    ShardsPerClusterQuotaExceededFault: {}
+    InvalidCredentialsException: {}
+    ACLNotFoundFault: {}
+    InvalidACLStateFault: {}
+    CreateParameterGroupResponse:
+      type: object
+      properties:
+        ParameterGroup:
+          allOf:
+            - $ref: '#/components/schemas/ParameterGroup'
+            - description: The newly-created parameter group.
+    CreateParameterGroupRequest:
+      type: object
+      required:
+        - ParameterGroupName
+        - Family
+      title: CreateParameterGroupRequest
+      properties:
+        ParameterGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter group.
+        Family:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter group family that the parameter group can be used with.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An optional description of the parameter group.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
+    ParameterGroupQuotaExceededFault: {}
+    ParameterGroupAlreadyExistsFault: {}
+    InvalidParameterGroupStateFault: {}
+    CreateSnapshotResponse:
+      type: object
+      properties:
+        Snapshot:
+          allOf:
+            - $ref: '#/components/schemas/Snapshot'
+            - description: The newly-created snapshot.
+    CreateSnapshotRequest:
+      type: object
+      required:
+        - ClusterName
+        - SnapshotName
+      title: CreateSnapshotRequest
+      properties:
+        ClusterName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The snapshot is created from this cluster.
+        SnapshotName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A name for the snapshot being created.
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the KMS key used to encrypt the snapshot.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
+    ClusterNotFoundFault: {}
+    InvalidClusterStateFault: {}
+    CreateSubnetGroupResponse:
+      type: object
+      properties:
+        SubnetGroup:
+          allOf:
+            - $ref: '#/components/schemas/SubnetGroup'
+            - description: The newly-created subnet group
+    CreateSubnetGroupRequest:
+      type: object
+      required:
+        - SubnetGroupName
+        - SubnetIds
+      title: CreateSubnetGroupRequest
+      properties:
+        SubnetGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the subnet group.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description for the subnet group.
+        SubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIdentifierList'
+            - description: A list of VPC subnet IDs for the subnet group.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
+    SubnetGroupAlreadyExistsFault: {}
+    SubnetGroupQuotaExceededFault: {}
+    SubnetQuotaExceededFault: {}
+    InvalidSubnet: {}
+    SubnetNotAllowedFault: {}
+    CreateUserResponse:
+      type: object
+      properties:
+        User:
+          allOf:
+            - $ref: '#/components/schemas/User'
+            - description: The newly-created user.
+    CreateUserRequest:
+      type: object
+      required:
+        - UserName
+        - AuthenticationMode
+        - AccessString
+      title: CreateUserRequest
+      properties:
+        UserName:
+          allOf:
+            - $ref: '#/components/schemas/UserName'
+            - description: The name of the user. This value must be unique as it also serves as the user identifier.
+        AuthenticationMode:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationMode'
+            - description: 'Denotes the user''s authentication properties, such as whether it requires a password to authenticate.'
+        AccessString:
+          allOf:
+            - $ref: '#/components/schemas/AccessString'
+            - description: Access permissions string used for this user.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
+    UserAlreadyExistsFault: {}
+    UserQuotaExceededFault: {}
+    DeleteACLResponse:
+      type: object
+      properties:
+        ACL:
+          allOf:
+            - $ref: '#/components/schemas/ACL'
+            - description: The Access Control List object that has been deleted.
+    DeleteACLRequest:
+      type: object
+      required:
+        - ACLName
+      title: DeleteACLRequest
+      properties:
+        ACLName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Access Control List to delete
+    DeleteClusterResponse:
+      type: object
+      properties:
+        Cluster:
+          allOf:
+            - $ref: '#/components/schemas/Cluster'
+            - description: The cluster object that has been deleted
+    DeleteClusterRequest:
+      type: object
+      required:
+        - ClusterName
+      title: DeleteClusterRequest
+      properties:
+        ClusterName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the cluster to be deleted
+        FinalSnapshotName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The user-supplied name of a final cluster snapshot. This is the unique name that identifies the snapshot. MemoryDB creates the snapshot, and then deletes the cluster immediately afterward.'
+    DeleteParameterGroupResponse:
+      type: object
+      properties:
+        ParameterGroup:
+          allOf:
+            - $ref: '#/components/schemas/ParameterGroup'
+            - description: The parameter group that has been deleted.
+    DeleteParameterGroupRequest:
+      type: object
+      required:
+        - ParameterGroupName
+      title: DeleteParameterGroupRequest
+      properties:
+        ParameterGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter group to delete.
+    DeleteSnapshotResponse:
+      type: object
+      properties:
+        Snapshot:
+          allOf:
+            - $ref: '#/components/schemas/Snapshot'
+            - description: The snapshot object that has been deleted.
+    DeleteSnapshotRequest:
+      type: object
+      required:
+        - SnapshotName
+      title: DeleteSnapshotRequest
+      properties:
+        SnapshotName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the snapshot to delete
+    DeleteSubnetGroupResponse:
+      type: object
+      properties:
+        SubnetGroup:
+          allOf:
+            - $ref: '#/components/schemas/SubnetGroup'
+            - description: The subnet group object that has been deleted.
+    DeleteSubnetGroupRequest:
+      type: object
+      required:
+        - SubnetGroupName
+      title: DeleteSubnetGroupRequest
+      properties:
+        SubnetGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the subnet group to delete
+    SubnetGroupInUseFault: {}
+    DeleteUserResponse:
+      type: object
+      properties:
+        User:
+          allOf:
+            - $ref: '#/components/schemas/User'
+            - description: The user object that has been deleted.
+    DeleteUserRequest:
+      type: object
+      required:
+        - UserName
+      title: DeleteUserRequest
+      properties:
+        UserName:
+          allOf:
+            - $ref: '#/components/schemas/UserName'
+            - description: The name of the user to delete
+    InvalidUserStateFault: {}
+    DescribeACLsResponse:
+      type: object
+      properties:
+        ACLs:
+          allOf:
+            - $ref: '#/components/schemas/ACLList'
+            - description: The list of ACLs
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+    DescribeACLsRequest:
+      type: object
+      title: DescribeACLsRequest
+      properties:
+        ACLName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the ACL
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+    DescribeClustersResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+        Clusters:
+          allOf:
+            - $ref: '#/components/schemas/ClusterList'
+            - description: A list of clusters
+    DescribeClustersRequest:
+      type: object
+      title: DescribeClustersRequest
+      properties:
+        ClusterName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the cluster
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+        ShowShardDetails:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: An optional flag that can be included in the request to retrieve information about the individual shard(s).
+    DescribeEngineVersionsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+        EngineVersions:
+          allOf:
+            - $ref: '#/components/schemas/EngineVersionInfoList'
+            - description: A list of engine version details. Each element in the list contains detailed information about one engine version.
+    DescribeEngineVersionsRequest:
+      type: object
+      title: DescribeEngineVersionsRequest
+      properties:
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Redis engine version
+        ParameterGroupFamily:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of a specific parameter group family to return details for.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+        DefaultOnly:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'If true, specifies that only the default version of the specified engine or engine and major version combination is to be returned.'
+    DescribeEventsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+        Events:
+          allOf:
+            - $ref: '#/components/schemas/EventList'
+            - description: A list of events. Each element in the list contains detailed information about one event.
+    DescribeEventsRequest:
+      type: object
+      title: DescribeEventsRequest
+      properties:
+        SourceName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The identifier of the event source for which events are returned. If not specified, all sources are included in the response.'
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/SourceType'
+            - description: 'The event source to retrieve events for. If no value is specified, all events are returned.'
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: 'The beginning of the time interval to retrieve events for, specified in ISO 8601 format. Example: 2017-03-30T07:03:49.555Z'
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: 'The end of the time interval for which to retrieve events, specified in ISO 8601 format. Example: 2017-03-30T07:03:49.555Z'
+        Duration:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The number of minutes worth of events to retrieve.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+    DescribeParameterGroupsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+        ParameterGroups:
+          allOf:
+            - $ref: '#/components/schemas/ParameterGroupList'
+            - description: A list of parameter groups. Each element in the list contains detailed information about one parameter group.
+    DescribeParameterGroupsRequest:
+      type: object
+      title: DescribeParameterGroupsRequest
+      properties:
+        ParameterGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of a specific parameter group to return details for.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+    DescribeParametersResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+        Parameters:
+          allOf:
+            - $ref: '#/components/schemas/ParametersList'
+            - description: A list of parameters specific to a particular parameter group. Each element in the list contains detailed information about one parameter.
+    DescribeParametersRequest:
+      type: object
+      required:
+        - ParameterGroupName
+      title: DescribeParametersRequest
+      properties:
+        ParameterGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: he name of a specific parameter group to return details for.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+    DescribeServiceUpdatesResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+        ServiceUpdates:
+          allOf:
+            - $ref: '#/components/schemas/ServiceUpdateList'
+            - description: A list of service updates
+    DescribeServiceUpdatesRequest:
+      type: object
+      title: DescribeServiceUpdatesRequest
+      properties:
+        ServiceUpdateName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique ID of the service update to describe.
+        ClusterNames:
+          allOf:
+            - $ref: '#/components/schemas/ClusterNameList'
+            - description: The list of cluster names to identify service updates to apply
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ServiceUpdateStatusList'
+            - description: The status(es) of the service updates to filter on
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+    DescribeSnapshotsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+        Snapshots:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotList'
+            - description: A list of snapshots. Each item in the list contains detailed information about one snapshot.
+    DescribeSnapshotsRequest:
+      type: object
+      title: DescribeSnapshotsRequest
+      properties:
+        ClusterName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A user-supplied cluster identifier. If this parameter is specified, only snapshots associated with that specific cluster are described.'
+        SnapshotName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A user-supplied name of the snapshot. If this parameter is specified, only this named snapshot is described.'
+        Source:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If set to system, the output shows snapshots that were automatically created by MemoryDB. If set to user the output shows snapshots that were manually created. If omitted, the output shows both automatically and manually created snapshots.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
+        ShowDetail:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'A Boolean value which if true, the shard configuration is included in the snapshot description.'
+    DescribeSubnetGroupsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+        SubnetGroups:
+          allOf:
+            - $ref: '#/components/schemas/SubnetGroupList'
+            - description: A list of subnet groups. Each element in the list contains detailed information about one group.
+    DescribeSubnetGroupsRequest:
+      type: object
+      title: DescribeSubnetGroupsRequest
+      properties:
+        SubnetGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the subnet group to return details for.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+    DescribeUsersResponse:
+      type: object
+      properties:
+        Users:
+          allOf:
+            - $ref: '#/components/schemas/UserList'
+            - description: A list of users.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+    DescribeUsersRequest:
+      type: object
+      title: DescribeUsersRequest
+      properties:
+        UserName:
+          allOf:
+            - $ref: '#/components/schemas/UserName'
+            - description: The name of the user
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: Filter to determine the list of users to return.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+    FailoverShardResponse:
+      type: object
+      properties:
+        Cluster:
+          allOf:
+            - $ref: '#/components/schemas/Cluster'
+            - description: The cluster being failed over
+    FailoverShardRequest:
+      type: object
+      required:
+        - ClusterName
+        - ShardName
+      title: FailoverShardRequest
+      properties:
+        ClusterName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The cluster being failed over
+        ShardName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the shard
+    APICallRateForCustomerExceededFault: {}
+    ShardNotFoundFault: {}
+    TestFailoverNotAvailableFault: {}
+    InvalidKMSKeyFault: {}
+    ListAllowedNodeTypeUpdatesResponse:
+      type: object
+      properties:
+        ScaleUpNodeTypes:
+          allOf:
+            - $ref: '#/components/schemas/NodeTypeList'
+            - description: A list node types which you can use to scale up your cluster.
+        ScaleDownNodeTypes:
+          allOf:
+            - $ref: '#/components/schemas/NodeTypeList'
+            - description: A list node types which you can use to scale down your cluster.
+    ListAllowedNodeTypeUpdatesRequest:
+      type: object
+      required:
+        - ClusterName
+      title: ListAllowedNodeTypeUpdatesRequest
+      properties:
+        ClusterName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name of the cluster you want to scale. MemoryDB uses the cluster name to identify the current node type being used by this cluster, and from that to create a list of node types you can scale up to.'
+    ListTagsResponse:
+      type: object
+      properties:
+        TagList:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of tags as key-value pairs.
+    ListTagsRequest:
+      type: object
+      required:
+        - ResourceArn
+      title: ListTagsRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource for which you want the list of tags
+    InvalidARNFault: {}
+    ResetParameterGroupResponse:
+      type: object
+      properties:
+        ParameterGroup:
+          allOf:
+            - $ref: '#/components/schemas/ParameterGroup'
+            - description: The parameter group being reset.
+    ResetParameterGroupRequest:
+      type: object
+      required:
+        - ParameterGroupName
+      title: ResetParameterGroupRequest
+      properties:
+        ParameterGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter group to reset.
+        AllParameters:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'If true, all parameters in the parameter group are reset to their default values. If false, only the parameters listed by ParameterNames are reset to their default values.'
+        ParameterNames:
+          allOf:
+            - $ref: '#/components/schemas/ParameterNameList'
+            - description: 'An array of parameter names to reset to their default values. If AllParameters is true, do not use ParameterNames. If AllParameters is false, you must specify the name of at least one parameter to reset.'
+    TagResourceResponse:
+      type: object
+      properties:
+        TagList:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of tags as key-value pairs.
+    TagResourceRequest:
+      type: object
+      required:
+        - ResourceArn
+        - Tags
+      title: TagResourceRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource to which the tags are to be added
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
+    UntagResourceResponse:
+      type: object
+      properties:
+        TagList:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The list of tags removed
+    UntagResourceRequest:
+      type: object
+      required:
+        - ResourceArn
+        - TagKeys
+      title: UntagResourceRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource to which the tags are to be removed
+        TagKeys:
+          allOf:
+            - $ref: '#/components/schemas/KeyList'
+            - description: The list of keys of the tags that are to be removed
+    TagNotFoundFault: {}
+    UpdateACLResponse:
+      type: object
+      properties:
+        ACL:
+          allOf:
+            - $ref: '#/components/schemas/ACL'
+            - description: The updated Access Control List
+    UpdateACLRequest:
+      type: object
+      required:
+        - ACLName
+      title: UpdateACLRequest
+      properties:
+        ACLName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Access Control List
+        UserNamesToAdd:
+          allOf:
+            - $ref: '#/components/schemas/UserNameListInput'
+            - description: The list of users to add to the Access Control List
+        UserNamesToRemove:
+          allOf:
+            - $ref: '#/components/schemas/UserNameListInput'
+            - description: The list of users to remove from the Access Control List
+    UpdateClusterResponse:
+      type: object
+      properties:
+        Cluster:
+          allOf:
+            - $ref: '#/components/schemas/Cluster'
+            - description: The updated cluster
+    UpdateClusterRequest:
+      type: object
+      required:
+        - ClusterName
+      title: UpdateClusterRequest
+      properties:
+        ClusterName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the cluster to update
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the cluster to update
+        SecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIdsList'
+            - description: The SecurityGroupIds to update
+        MaintenanceWindow:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The maintenance window to update
+        SnsTopicArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The SNS topic ARN to update
+        SnsTopicStatus:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status of the Amazon SNS notification topic. Notifications are sent only if the status is active.
+        ParameterGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter group to update
+        SnapshotWindow:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your cluster.
+        SnapshotRetentionLimit:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The number of days for which MemoryDB retains automatic cluster snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.'
+        NodeType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A valid node type that you want to scale this cluster up or down to.
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The upgraded version of the engine to be run on the nodes. You can upgrade to a newer engine version, but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing cluster and create it anew with the earlier engine version.'
+        ReplicaConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ReplicaConfigurationRequest'
+            - description: The number of replicas that will reside in each shard
+        ShardConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ShardConfigurationRequest'
+            - description: The number of shards in the cluster
+        ACLName:
+          allOf:
+            - $ref: '#/components/schemas/ACLName'
+            - description: The Access Control List that is associated with the cluster
+    InvalidNodeStateFault: {}
+    NoOperationFault: {}
+    UpdateParameterGroupResponse:
+      type: object
+      properties:
+        ParameterGroup:
+          allOf:
+            - $ref: '#/components/schemas/ParameterGroup'
+            - description: The updated parameter group
+    UpdateParameterGroupRequest:
+      type: object
+      required:
+        - ParameterGroupName
+        - ParameterNameValues
+      title: UpdateParameterGroupRequest
+      properties:
+        ParameterGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter group to update.
+        ParameterNameValues:
+          allOf:
+            - $ref: '#/components/schemas/ParameterNameValueList'
+            - description: An array of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional. A maximum of 20 parameters may be updated per request.
+    UpdateSubnetGroupResponse:
+      type: object
+      properties:
+        SubnetGroup:
+          allOf:
+            - $ref: '#/components/schemas/SubnetGroup'
+            - description: The updated subnet group
+    UpdateSubnetGroupRequest:
+      type: object
+      required:
+        - SubnetGroupName
+      title: UpdateSubnetGroupRequest
+      properties:
+        SubnetGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the subnet group
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the subnet group
+        SubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIdentifierList'
+            - description: The EC2 subnet IDs for the subnet group.
+    SubnetInUse: {}
+    UpdateUserResponse:
+      type: object
+      properties:
+        User:
+          allOf:
+            - $ref: '#/components/schemas/User'
+            - description: The updated user
+    UpdateUserRequest:
+      type: object
+      required:
+        - UserName
+      title: UpdateUserRequest
+      properties:
+        UserName:
+          allOf:
+            - $ref: '#/components/schemas/UserName'
+            - description: The name of the user
+        AuthenticationMode:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationMode'
+            - description: 'Denotes the user''s authentication properties, such as whether it requires a password to authenticate.'
+        AccessString:
+          allOf:
+            - $ref: '#/components/schemas/AccessString'
+            - description: Access permissions string used for this user.
+    String:
+      type: string
+    UserNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserName'
+    ACLPendingChanges:
+      type: object
+      properties:
+        UserNamesToRemove:
+          allOf:
+            - $ref: '#/components/schemas/UserNameList'
+            - description: A list of user names being removed from the ACL
+        UserNamesToAdd:
+          allOf:
+            - $ref: '#/components/schemas/UserNameList'
+            - description: A list of users being added to the ACL
+      description: Returns the updates being applied to the ACL.
+    ACLClusterNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ACL:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Access Control List
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Indicates ACL status. Can be "creating", "active", "modifying", "deleting".'
+        UserNames:
+          allOf:
+            - $ref: '#/components/schemas/UserNameList'
+            - description: The list of user names that belong to the ACL.
+        MinimumEngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The minimum engine version supported for the ACL
+        PendingChanges:
+          allOf:
+            - $ref: '#/components/schemas/ACLPendingChanges'
+            - description: A list of updates being applied to the ACL.
+        Clusters:
+          allOf:
+            - $ref: '#/components/schemas/ACLClusterNameList'
+            - description: A list of clusters associated with the ACL.
+        ARN:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the ACL
+      description: An Access Control List. You can authenticate users with Access Contol Lists. ACLs enable you to control cluster access by grouping users. These Access control lists are designed as a way to organize access to clusters.
+    ACLList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ACL'
+    ACLName:
+      type: string
+      pattern: '[a-zA-Z][a-zA-Z0-9\-]*'
+      minLength: 1
+    ACLNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ACLName'
+    ACLsUpdateStatus:
+      type: object
+      properties:
+        ACLToApply:
+          allOf:
+            - $ref: '#/components/schemas/ACLName'
+            - description: A list of ACLs pending to be applied.
+      description: The status of the ACL update
+    AZStatus:
+      type: string
+      enum:
+        - singleaz
+        - multiaz
+    AccessString:
+      type: string
+      pattern: .*\S.*
+    AuthenticationType:
+      type: string
+      enum:
+        - password
+        - no-password
+    IntegerOptional:
+      type: integer
+    Authentication:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationType'
+            - description: Indicates whether the user requires a password to authenticate.
+        PasswordCount:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The number of passwords belonging to the user. The maximum is two.
+      description: 'Denotes the user''s authentication properties, such as whether it requires a password to authenticate. Used in output responses.'
+    InputAuthenticationType:
+      type: string
+      enum:
+        - password
+    PasswordListInput:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+      minItems: 1
+    AuthenticationMode:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/InputAuthenticationType'
+            - description: Indicates whether the user requires a password to authenticate. All newly-created users require a password.
+        Passwords:
+          allOf:
+            - $ref: '#/components/schemas/PasswordListInput'
+            - description: The password(s) used for authentication
+      description: 'Denotes the user''s authentication properties, such as whether it requires a password to authenticate. Used in output responses.'
+    AvailabilityZone:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Availability Zone.
+      description: Indicates if the cluster has a Multi-AZ configuration (multiaz) or not (singleaz).
+    ClusterNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+      maxItems: 20
+    ServiceUpdateRequest:
+      type: object
+      properties:
+        ServiceUpdateNameToApply:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique ID of the service update
+      description: A request to apply a service update
+    ClusterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Cluster'
+    UnprocessedClusterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UnprocessedCluster'
+    Boolean:
+      type: boolean
+    BooleanOptional:
+      type: boolean
+    ClusterPendingUpdates:
+      type: object
+      properties:
+        Resharding:
+          allOf:
+            - $ref: '#/components/schemas/ReshardingStatus'
+            - description: The status of an online resharding operation.
+        ACLs:
+          allOf:
+            - $ref: '#/components/schemas/ACLsUpdateStatus'
+            - description: A list of ACLs associated with the cluster that are being updated
+        ServiceUpdates:
+          allOf:
+            - $ref: '#/components/schemas/PendingModifiedServiceUpdateList'
+            - description: A list of service updates being applied to the cluster
+      description: A list of updates being applied to the cluster
+    ShardList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Shard'
+    Endpoint:
+      type: object
+      properties:
+        Address:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The DNS hostname of the node.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The port number that the engine is listening on.
+      description: Represents the information required for client programs to connect to the cluster and its nodes.
+    SecurityGroupMembershipList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityGroupMembership'
+    Cluster:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user-supplied name of the cluster. This identifier is a unique key that identifies a cluster.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the cluster
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The status of the cluster. For example, Available, Updating, Creating.'
+        PendingUpdates:
+          allOf:
+            - $ref: '#/components/schemas/ClusterPendingUpdates'
+            - description: A group of settings that are currently being applied.
+        NumberOfShards:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The number of shards in the cluster
+        Shards:
+          allOf:
+            - $ref: '#/components/schemas/ShardList'
+            - description: A list of shards that are members of the cluster.
+        AvailabilityMode:
+          allOf:
+            - $ref: '#/components/schemas/AZStatus'
+            - description: Indicates if the cluster has a Multi-AZ configuration (multiaz) or not (singleaz).
+        ClusterEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/Endpoint'
+            - description: The cluster's configuration endpoint
+        NodeType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The cluster's node type
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Redis engine version used by the cluster
+        EnginePatchVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Redis engine patch version used by the cluster
+        ParameterGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter group used by the cluster
+        ParameterGroupStatus:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The status of the parameter group used by the cluster, for example ''active'' or ''applying''.'
+        SecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupMembershipList'
+            - description: A list of security groups used by the cluster
+        SubnetGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the subnet group used by the cluster
+        TLSEnabled:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: A flag to indicate if In-transit encryption is enabled
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the KMS key used to encrypt the cluster
+        ARN:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the cluster.
+        SnsTopicArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the SNS notification topic
+        SnsTopicStatus:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The SNS topic must be in Active status to receive notifications
+        SnapshotRetentionLimit:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The number of days for which MemoryDB retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.'
+        MaintenanceWindow:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. '
+        SnapshotWindow:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard. Example: 05:00-09:00 If you do not specify this parameter, MemoryDB automatically chooses an appropriate time range.'
+        ACLName:
+          allOf:
+            - $ref: '#/components/schemas/ACLName'
+            - description: The name of the Access Control List associated with this cluster.
+        AutoMinorVersionUpgrade:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'When set to true, the cluster will automatically receive minor engine version upgrades after launch.'
+      description: Contains all of the attributes of a specific cluster.
+    ShardDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/ShardDetail'
+    ClusterConfiguration:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the cluster
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the cluster configuration
+        NodeType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The node type used for the cluster
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Redis engine version used by the cluster
+        MaintenanceWindow:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The specified maintenance window for the cluster
+        TopicArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the SNS notification topic for the cluster
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The port used by the cluster
+        ParameterGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of parameter group used by the cluster
+        SubnetGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the subnet group used by the cluster
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the VPC the cluster belongs to
+        SnapshotRetentionLimit:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The snapshot retention limit set by the cluster
+        SnapshotWindow:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The snapshot window set by the cluster
+        NumShards:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The number of shards in the cluster
+        Shards:
+          allOf:
+            - $ref: '#/components/schemas/ShardDetails'
+            - description: The list of shards in the cluster
+      description: 'A list of cluster configuration options. '
+    ReshardingStatus:
+      type: object
+      properties:
+        SlotMigration:
+          allOf:
+            - $ref: '#/components/schemas/SlotMigration'
+            - description: The status of the online resharding slot migration
+      description: The status of the online resharding
+    PendingModifiedServiceUpdateList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PendingModifiedServiceUpdate'
+    TargetBucket:
+      type: string
+      pattern: '^[A-Za-z0-9._-]+$'
+      maxLength: 255
+    KmsKeyId:
+      type: string
+      maxLength: 2048
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      maxItems: 200
+    Snapshot:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the snapshot
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The status of the snapshot. Valid values: creating | available | restoring | copying | deleting.'
+        Source:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Indicates whether the snapshot is from an automatic backup (automated) or was created manually (manual).
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the KMS key used to encrypt the snapshot.
+        ARN:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN (Amazon Resource Name) of the snapshot.
+        ClusterConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ClusterConfiguration'
+            - description: The configuration of the cluster from which the snapshot was taken
+      description: Represents a copy of an entire cluster as of the time when the snapshot was taken.
+    UserNameListInput:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserName'
+      minItems: 1
+    SecurityGroupIdsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    SnapshotArnsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ParameterGroup:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter group
+        Family:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter group family that this parameter group is compatible with.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the parameter group
+        ARN:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the parameter group
+      description: Represents the output of a CreateParameterGroup operation. A parameter group represents a combination of specific values for the parameters that are passed to the engine software during startup.
+    SubnetIdentifierList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    SubnetGroup:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the subnet group
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the subnet group
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Virtual Private Cloud identifier (VPC ID) of the subnet group.
+        Subnets:
+          allOf:
+            - $ref: '#/components/schemas/SubnetList'
+            - description: A list of subnets associated with the subnet group.
+        ARN:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN (Amazon Resource Name) of the subnet group.
+      description: '<p>Represents the output of one of the following operations:</p> <ul> <li> <p>CreateSubnetGroup</p> </li> <li> <p>UpdateSubnetGroup</p> </li> </ul> <p>A subnet group is a collection of subnets (typically private) that you can designate for your clusters running in an Amazon Virtual Private Cloud (VPC) environment.</p>'
+    UserName:
+      type: string
+      pattern: '[a-zA-Z][a-zA-Z0-9\-]*'
+      minLength: 1
+    User:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the user
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Indicates the user status. Can be "active", "modifying" or "deleting".'
+        AccessString:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Access permissions string used for this user.
+        ACLNames:
+          allOf:
+            - $ref: '#/components/schemas/ACLNameList'
+            - description: The names of the Access Control Lists to which the user belongs
+        MinimumEngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The minimum engine version supported for the user
+        Authentication:
+          allOf:
+            - $ref: '#/components/schemas/Authentication'
+            - description: Denotes whether the user requires a password to authenticate.
+        ARN:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon Resource Name (ARN) of the user. '
+      description: 'You create users and assign them specific permissions by using an access string. You assign the users to Access Control Lists aligned with a specific role (administrators, human resources) that are then deployed to one or more MemoryDB clusters.'
+    EngineVersionInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EngineVersionInfo'
+    SourceType:
+      type: string
+      enum:
+        - node
+        - parameter-group
+        - subnet-group
+        - cluster
+        - user
+        - acl
+    TStamp:
+      type: string
+      format: date-time
+    EventList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Event'
+    ParameterGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ParameterGroup'
+    ParametersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Parameter'
+    ServiceUpdateStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServiceUpdateStatus'
+      maxItems: 4
+    ServiceUpdateList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServiceUpdate'
+    SnapshotList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Snapshot'
+    SubnetGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubnetGroup'
+    FilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filter'
+    UserList:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+    Double:
+      type: number
+      format: double
+    Integer:
+      type: integer
+    EngineVersionInfo:
+      type: object
+      properties:
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The engine version
+        EnginePatchVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The patched engine version
+        ParameterGroupFamily:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Specifies the name of the parameter group family to which the engine default parameters apply.
+      description: Provides details of the Redis engine version
+    Event:
+      type: object
+      properties:
+        SourceName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name for the source of the event. For example, if the event occurred at the cluster level, the identifier would be the name of the cluster.'
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/SourceType'
+            - description: 'Specifies the origin of this event - a cluster, a parameter group, a security group, etc.'
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The text of the event.
+        Date:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date and time when the event occurred.
+      description: Represents a single occurrence of something interesting within the system. Some examples of events are creating a cluster or adding or removing a node.
+    FilterName:
+      type: string
+      pattern: .*\S.*
+    FilterValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FilterValue'
+      minItems: 1
+    Filter:
+      type: object
+      required:
+        - Name
+        - Values
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/FilterName'
+            - description: 'The property being filtered. For example, UserName.'
+        Values:
+          allOf:
+            - $ref: '#/components/schemas/FilterValueList'
+            - description: 'The property values to filter on. For example, "user-123".'
+      description: Used to streamline results of a search based on the property being filtered.
+    FilterValue:
+      type: string
+      pattern: .*\S.*
+    KeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    NodeTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    Node:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The node identifier. A node name is a numeric identifier (0001, 0002, etc.). The combination of cluster name, shard name and node name uniquely identifies every node used in a customer''s Amazon account.'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status of the service update on the node
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Availability Zone in which the node resides
+        CreateTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date and time when the node was created.
+        Endpoint:
+          allOf:
+            - $ref: '#/components/schemas/Endpoint'
+            - description: The hostname for connecting to this node.
+      description: Represents an individual node within a cluster. Each node runs its own instance of the cluster's protocol-compliant caching software.
+    NodeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Node'
+    Parameter:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The value of the parameter
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the parameter
+        DataType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The parameter's data type
+        AllowedValues:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The valid range of values for the parameter.
+        MinimumEngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The earliest engine version to which the parameter can apply.
+      description: Describes an individual setting that controls some aspect of MemoryDB behavior.
+    ParameterNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ParameterNameValue:
+      type: object
+      properties:
+        ParameterName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter
+        ParameterValue:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The value of the parameter
+      description: Describes a name-value pair that is used to update the value of a parameter.
+    ParameterNameValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ParameterNameValue'
+    ServiceUpdateStatus:
+      type: string
+      enum:
+        - available
+        - in-progress
+        - complete
+        - scheduled
+    PendingModifiedServiceUpdate:
+      type: object
+      properties:
+        ServiceUpdateName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique ID of the service update
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ServiceUpdateStatus'
+            - description: The status of the service update
+      description: Update action that has yet to be processed for the corresponding apply/stop request
+    ReplicaConfigurationRequest:
+      type: object
+      properties:
+        ReplicaCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of replicas to scale up or down to
+      description: A request to configure the number of replicas in a shard
+    SlotMigration:
+      type: object
+      properties:
+        ProgressPercentage:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The percentage of the slot migration that is complete.
+      description: Represents the progress of an online resharding operation.
+    SecurityGroupMembership:
+      type: object
+      properties:
+        SecurityGroupId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the security group.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The status of the security group membership. The status changes whenever a security group is modified, or when the security groups assigned to a cluster are modified.'
+      description: Represents a single security group and its status.
+    ServiceUpdateType:
+      type: string
+      enum:
+        - security-update
+    ServiceUpdate:
+      type: object
+      properties:
+        ClusterName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the cluster to which the service update applies
+        ServiceUpdateName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique ID of the service update
+        ReleaseDate:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date when the service update is initially available
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Provides details of the service update
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ServiceUpdateStatus'
+            - description: The status of the service update
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ServiceUpdateType'
+            - description: Reflects the nature of the service update
+        NodesUpdated:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A list of nodes updated by the service update
+        AutoUpdateStartDate:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date at which the service update will be automatically applied
+      description: An update that you can apply to your MemoryDB clusters.
+    Shard:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the shard
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The current state of this replication group - creating, available, modifying, deleting.'
+        Slots:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The keyspace for this shard.
+        Nodes:
+          allOf:
+            - $ref: '#/components/schemas/NodeList'
+            - description: A list containing information about individual nodes within the shard
+        NumberOfNodes:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The number of nodes in the shard
+      description: Represents a collection of nodes in a cluster. One node in the node group is the read/write primary node. All the other nodes are read-only Replica nodes.
+    ShardConfiguration:
+      type: object
+      properties:
+        Slots:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A string that specifies the keyspace for a particular node group. Keyspaces range from 0 to 16,383. The string is in the format startkey-endkey.'
+        ReplicaCount:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The number of read replica nodes in this shard.
+      description: 'Shard configuration options. Each shard configuration has the following: Slots and ReplicaCount.'
+    ShardConfigurationRequest:
+      type: object
+      properties:
+        ShardCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of shards in the cluster
+      description: A request to configure the sharding properties of a cluster
+    ShardDetail:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the shard
+        Configuration:
+          allOf:
+            - $ref: '#/components/schemas/ShardConfiguration'
+            - description: The configuration details of the shard
+        Size:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The size of the shard's snapshot
+        SnapshotCreationTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date and time that the shard's snapshot was created
+      description: Provides details of a shard in a snapshot
+    Subnet:
+      type: object
+      properties:
+        Identifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique identifier for the subnet.
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZone'
+            - description: The Availability Zone where the subnet resides
+      description: Represents the subnet associated with a cluster. This parameter refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with MemoryDB.
+    SubnetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Subnet'
+    Tag:
+      type: object
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The key for the tag. May not be null.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The tag's value. May be null.
+      description: 'A tag that can be added to an MemoryDB resource. Tags are composed of a Key/Value pair. You can use tags to categorize and track all your MemoryDB resources. When you add or remove tags on clusters, those actions will be replicated to all nodes in the cluster. A tag with a null Value is permitted. For more information, see <a href="https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Tagging-Resources.html">Tagging your MemoryDB resources</a> '
+    UnprocessedCluster:
+      type: object
+      properties:
+        ClusterName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the cluster
+        ErrorType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error type associated with the update failure
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error message associated with the update failure
+      description: A cluster whose updates have failed
+security:
+  - hmac: []

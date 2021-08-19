@@ -3,7 +3,7 @@ info:
   version: '2020-08-23'
   x-release: v4
   title: Amazon Appflow
-  description: '<p>Welcome to the Amazon AppFlow API reference. This guide is for developers who need detailed information about the Amazon AppFlow API operations, data types, and errors. </p> <p>Amazon AppFlow is a fully managed integration service that enables you to securely transfer data between software as a service (SaaS) applications like Salesforce, Marketo, Slack, and ServiceNow, and AWS services like Amazon S3 and Amazon Redshift. </p> <p>Use the following links to get started on the Amazon AppFlow API:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Operations.html">Actions</a>: An alphabetical list of all Amazon AppFlow API operations.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Types.html">Data types</a>: An alphabetical list of all Amazon AppFlow data types.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonParameters.html">Common parameters</a>: Parameters that all Query operations can use.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonErrors.html">Common errors</a>: Client and server errors that all operations can return.</p> </li> </ul> <p>If you''re new to Amazon AppFlow, we recommend that you review the <a href="https://docs.aws.amazon.com/appflow/latest/userguide/what-is-appflow.html">Amazon AppFlow User Guide</a>.</p> <p>Amazon AppFlow API users can use vendor-specific mechanisms for OAuth, and include applicable OAuth attributes (such as <code>auth-code</code> and <code>redirecturi</code>) with the connector-specific <code>ConnectorProfileProperties</code> when creating a new connector profile using Amazon AppFlow API operations. For example, Salesforce users can refer to the <a href="https://help.salesforce.com/articleView?id=remoteaccess_authenticate.htm"> <i>Authorize Apps with OAuth</i> </a> documentation.</p>'
+  description: '<p>Welcome to the Amazon AppFlow API reference. This guide is for developers who need detailed information about the Amazon AppFlow API operations, data types, and errors. </p> <p>Amazon AppFlow is a fully managed integration service that enables you to securely transfer data between software as a service (SaaS) applications like Salesforce, Marketo, Slack, and ServiceNow, and Amazon Web Services like Amazon S3 and Amazon Redshift. </p> <p>Use the following links to get started on the Amazon AppFlow API:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Operations.html">Actions</a>: An alphabetical list of all Amazon AppFlow API operations.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Types.html">Data types</a>: An alphabetical list of all Amazon AppFlow data types.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonParameters.html">Common parameters</a>: Parameters that all Query operations can use.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonErrors.html">Common errors</a>: Client and server errors that all operations can return.</p> </li> </ul> <p>If you''re new to Amazon AppFlow, we recommend that you review the <a href="https://docs.aws.amazon.com/appflow/latest/userguide/what-is-appflow.html">Amazon AppFlow User Guide</a>.</p> <p>Amazon AppFlow API users can use vendor-specific mechanisms for OAuth, and include applicable OAuth attributes (such as <code>auth-code</code> and <code>redirecturi</code>) with the connector-specific <code>ConnectorProfileProperties</code> when creating a new connector profile using Amazon AppFlow API operations. For example, Salesforce users can refer to the <a href="https://help.salesforce.com/articleView?id=remoteaccess_authenticate.htm"> <i>Authorize Apps with OAuth</i> </a> documentation.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -118,7 +118,7 @@ paths:
   /create-connector-profile:
     post:
       operationId: CreateConnectorProfile
-      description: ' Creates a new connector profile associated with your AWS account. There is a soft quota of 100 connector profiles per AWS account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. '
+      description: ' Creates a new connector profile associated with your Amazon Web Services account. There is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. '
       responses:
         '200':
           description: Success
@@ -170,7 +170,7 @@ paths:
                 - connectorProfileConfig
               properties:
                 connectorProfileName:
-                  description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in your AWS account. '
+                  description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in your Amazon Web Services account. '
                   type: string
                   pattern: '[\w/!@#+=.-]+'
                   maxLength: 256
@@ -205,8 +205,9 @@ paths:
                     - Upsolver
                     - Honeycode
                     - CustomerProfiles
+                    - SAPOData
                 connectionMode:
-                  description: ' Indicates the connection mode and specifies whether it is public or private. Private flows use AWS PrivateLink to route data over AWS infrastructure without exposing it to the public internet. '
+                  description: ' Indicates the connection mode and specifies whether it is public or private. Private flows use Amazon Web Services PrivateLink to route data over Amazon Web Services infrastructure without exposing it to the public internet. '
                   type: string
                   enum:
                     - Public
@@ -337,7 +338,7 @@ paths:
                     connectorProfileName:
                       allOf:
                         - $ref: '#/components/schemas/ConnectorProfileName'
-                        - description: ' The name of the connector profile. This name must be unique for each connector profile in the AWS account. '
+                        - description: ' The name of the connector profile. This name must be unique for each connector profile in the Amazon Web Services account. '
                     sourceConnectorProperties:
                       allOf:
                         - $ref: '#/components/schemas/SourceConnectorProperties'
@@ -562,8 +563,9 @@ paths:
                     - Upsolver
                     - Honeycode
                     - CustomerProfiles
+                    - SAPOData
                 connectorProfileName:
-                  description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account. '
+                  description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the Amazon Web Services account. '
                   type: string
                   pattern: '[\w/!@#+=.-]+'
                   maxLength: 256
@@ -619,7 +621,7 @@ paths:
               type: object
               properties:
                 connectorProfileNames:
-                  description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account. '
+                  description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the Amazon Web Services account. '
                   type: array
                   items:
                     $ref: '#/components/schemas/ConnectorProfileName'
@@ -650,6 +652,7 @@ paths:
                     - Upsolver
                     - Honeycode
                     - CustomerProfiles
+                    - SAPOData
                 maxResults:
                   description: ' Specifies the maximum number of items that should be returned in the result set. The default for <code>maxResults</code> is 20 (for all paginated API operations). '
                   type: integer
@@ -895,7 +898,7 @@ paths:
               type: object
               properties:
                 connectorProfileName:
-                  description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account, and is used to query the downstream connector. '
+                  description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the Amazon Web Services account, and is used to query the downstream connector. '
                   type: string
                   pattern: '[\w/!@#+=.-]+'
                   maxLength: 256
@@ -924,6 +927,7 @@ paths:
                     - Upsolver
                     - Honeycode
                     - CustomerProfiles
+                    - SAPOData
                 entitiesPath:
                   description: ' This optional parameter is specific to connector implementation. Some connectors support multiple levels or categories of entities. You can find out the list of roots for such providers by sending a request without the <code>entitiesPath</code> parameter. If the connector supports entities at different roots, this initial request returns the list of roots. Otherwise, this request returns all entities supported by the provider. '
                   type: string
@@ -1323,7 +1327,7 @@ paths:
                 - connectorProfileConfig
               properties:
                 connectorProfileName:
-                  description: ' The name of the connector profile and is unique for each <code>ConnectorProfile</code> in the AWS Account. '
+                  description: ' The name of the connector profile and is unique for each <code>ConnectorProfile</code> in the Amazon Web Services account. '
                   type: string
                   pattern: '[\w/!@#+=.-]+'
                   maxLength: 256
@@ -1416,6 +1420,7 @@ paths:
               required:
                 - flowName
                 - triggerConfig
+                - sourceFlowConfig
                 - destinationFlowConfigList
                 - tasks
               properties:
@@ -1452,7 +1457,7 @@ paths:
                     connectorProfileName:
                       allOf:
                         - $ref: '#/components/schemas/ConnectorProfileName'
-                        - description: ' The name of the connector profile. This name must be unique for each connector profile in the AWS account. '
+                        - description: ' The name of the connector profile. This name must be unique for each connector profile in the Amazon Web Services account. '
                     sourceConnectorProperties:
                       allOf:
                         - $ref: '#/components/schemas/SourceConnectorProperties'
@@ -1605,6 +1610,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/ZendeskConnectorProfileProperties'
             - description: ' The connector-specific properties required by Zendesk. '
+        SAPOData:
+          $ref: '#/components/schemas/SAPODataConnectorProfileProperties'
       description: ' The connector-specific profile properties required by each connector. '
     ConnectorProfileCredentials:
       type: object
@@ -1673,6 +1680,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/ZendeskConnectorProfileCredentials'
             - description: ' The connector-specific credentials required when using Zendesk. '
+        SAPOData:
+          $ref: '#/components/schemas/SAPODataConnectorProfileCredentials'
       description: ' The connector-specific credentials required by a connector. '
     ValidationException: {}
     ConflictException: {}
@@ -1728,6 +1737,7 @@ components:
         - Upsolver
         - Honeycode
         - CustomerProfiles
+        - SAPOData
     ConnectorProfileName:
       type: string
       pattern: '[\w/!@#+=.-]+'
@@ -1791,6 +1801,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/ZendeskSourceProperties'
             - description: ' Specifies the information that is required for querying Zendesk. '
+        SAPOData:
+          $ref: '#/components/schemas/SAPODataSourceProperties'
       description: ' Specifies the information that is required to query a particular connector. '
     IncrementalPullConfig:
       type: object
@@ -1813,7 +1825,7 @@ components:
         connectorProfileName:
           allOf:
             - $ref: '#/components/schemas/ConnectorProfileName'
-            - description: ' The name of the connector profile. This name must be unique for each connector profile in the AWS account. '
+            - description: ' The name of the connector profile. This name must be unique for each connector profile in the Amazon Web Services account. '
         destinationConnectorProperties:
           allOf:
             - $ref: '#/components/schemas/DestinationConnectorProperties'
@@ -2136,7 +2148,15 @@ components:
       type: string
       pattern: \S+
       maxLength: 256
+    ApplicationHostUrl:
+      type: string
+      pattern: '^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]'
+      maxLength: 256
     ApplicationKey:
+      type: string
+      pattern: \S+
+      maxLength: 512
+    ApplicationServicePath:
       type: string
       pattern: \S+
       maxLength: 512
@@ -2144,6 +2164,34 @@ components:
       type: string
       pattern: \S+
       maxLength: 512
+    AuthCodeUrl:
+      type: string
+      pattern: '^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]'
+      maxLength: 256
+    Username:
+      type: string
+      pattern: \S+
+      maxLength: 512
+    Password:
+      type: string
+      pattern: .*
+      maxLength: 512
+      format: password
+    BasicAuthCredentials:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          allOf:
+            - $ref: '#/components/schemas/Username'
+            - description: ' The username to use to connect to a resource. '
+        password:
+          allOf:
+            - $ref: '#/components/schemas/Password'
+            - description: ' The password to use to connect to a resource.'
+      description: ' The basic auth credentials required for basic authentication. '
     Boolean:
       type: boolean
     BucketName:
@@ -2165,6 +2213,11 @@ components:
       type: string
       pattern: \S+
       maxLength: 512
+    ClientNumber:
+      type: string
+      pattern: '^\d{3}$'
+      minLength: 3
+      maxLength: 3
     ClientSecret:
       type: string
       pattern: \S+
@@ -2272,6 +2325,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/HoneycodeMetadata'
             - description: ' The connector metadata specific to Amazon Honeycode. '
+        SAPOData:
+          $ref: '#/components/schemas/SAPODataMetadata'
       description: ' A structure to specify connector-specific metadata such as <code>oAuthScopes</code>, <code>supportedRegions</code>, <code>privateLinkServiceUrl</code>, and so on. '
     ConnectorConfiguration:
       type: object
@@ -2497,7 +2552,7 @@ components:
         supportedRegions:
           allOf:
             - $ref: '#/components/schemas/RegionList'
-            - description: ' Specifies the supported AWS Regions when using Snowflake. '
+            - description: ' Specifies the supported Amazon Web Services Regions when using Snowflake. '
       description: ' The connector metadata specific to Snowflake. '
     TrendmicroMetadata:
       type: object
@@ -2535,6 +2590,10 @@ components:
             - $ref: '#/components/schemas/OAuthScopeList'
             - description: ' The desired authorization scope for the Amazon Honeycode account. '
       description: ' The connector metadata specific to Amazon Honeycode. '
+    SAPODataMetadata:
+      type: object
+      properties: {}
+      description: ' The connector metadata specific to SAPOData. '
     RedirectUri:
       type: string
       pattern: \S+
@@ -2797,6 +2856,30 @@ components:
         - VALIDATE_NON_NEGATIVE
         - VALIDATE_NUMERIC
         - NO_OP
+    SAPODataConnectorOperator:
+      type: string
+      enum:
+        - PROJECTION
+        - LESS_THAN
+        - CONTAINS
+        - GREATER_THAN
+        - BETWEEN
+        - LESS_THAN_OR_EQUAL_TO
+        - GREATER_THAN_OR_EQUAL_TO
+        - EQUAL_TO
+        - NOT_EQUAL_TO
+        - ADDITION
+        - MULTIPLICATION
+        - DIVISION
+        - SUBTRACTION
+        - MASK_ALL
+        - MASK_FIRST_N
+        - MASK_LAST_N
+        - VALIDATE_NON_NULL
+        - VALIDATE_NON_ZERO
+        - VALIDATE_NON_NEGATIVE
+        - VALIDATE_NUMERIC
+        - NO_OP
     ConnectorOperator:
       type: object
       properties:
@@ -2856,6 +2939,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ZendeskConnectorOperator'
             - description: ' The operation to be performed on the provided Zendesk source fields. '
+        SAPOData:
+          allOf:
+            - $ref: '#/components/schemas/SAPODataConnectorOperator'
+            - description: ' The operation to be performed on the provided SAPOData source fields. '
       description: ' The operation to be performed on the provided source fields. '
     ConnectorProfileArn:
       type: string
@@ -2864,6 +2951,22 @@ components:
     Date:
       type: string
       format: date-time
+    PrivateConnectionProvisioningState:
+      type: object
+      properties:
+        status:
+          allOf:
+            - $ref: '#/components/schemas/PrivateConnectionProvisioningStatus'
+            - description: ' Specifies the private connection provisioning status. '
+        failureMessage:
+          allOf:
+            - $ref: '#/components/schemas/PrivateConnectionProvisioningFailureMessage'
+            - description: ' Specifies the private connection provisioning failure reason. '
+        failureCause:
+          allOf:
+            - $ref: '#/components/schemas/PrivateConnectionProvisioningFailureCause'
+            - description: ' Specifies the private connection provisioning failure cause. '
+      description: ' Specifies the private connection provisioning state. '
     ConnectorProfile:
       type: object
       properties:
@@ -2874,7 +2977,7 @@ components:
         connectorProfileName:
           allOf:
             - $ref: '#/components/schemas/ConnectorProfileName'
-            - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account. '
+            - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the Amazon Web Services account. '
         connectorType:
           allOf:
             - $ref: '#/components/schemas/ConnectorType'
@@ -2899,6 +3002,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Date'
             - description: ' Specifies when the connector profile was last updated. '
+        privateConnectionProvisioningState:
+          allOf:
+            - $ref: '#/components/schemas/PrivateConnectionProvisioningState'
+            - description: ' Specifies the private connection provisioning state. '
       description: ' Describes an instance of a connector. This includes the provided name, credentials ARN, connection-mode, and so on. To keep the API intuitive and extensible, the fields that are common to all types of connector profiles are explicitly specified at the top level. The rest of the connector-specific properties are available via the <code>connectorProfileProperties</code> field. '
     ConnectorProfileConfig:
       type: object
@@ -3175,6 +3282,18 @@ components:
             - $ref: '#/components/schemas/ConnectorOAuthRequest'
             - description: ' The OAuth requirement needed to request security tokens from the connector endpoint. '
       description: ' The connector-specific profile credentials required when using Zendesk. '
+    SAPODataConnectorProfileCredentials:
+      type: object
+      properties:
+        basicAuthCredentials:
+          allOf:
+            - $ref: '#/components/schemas/BasicAuthCredentials'
+            - description: ' The SAPOData basic authentication credentials. '
+        oAuthCredentials:
+          allOf:
+            - $ref: '#/components/schemas/OAuthCredentials'
+            - description: ' The SAPOData OAuth type authentication credentials. '
+      description: ' The connector-specific profile credentials required when using SAPOData. '
     ConnectorProfileDetailList:
       type: array
       items:
@@ -3327,7 +3446,7 @@ components:
         region:
           allOf:
             - $ref: '#/components/schemas/Region'
-            - description: ' The AWS Region of the Snowflake account. '
+            - description: ' The Amazon Web Services Region of the Snowflake account. '
       description: ' The connector-specific profile properties required when using Snowflake. '
     TrendmicroConnectorProfileProperties:
       type: object
@@ -3353,6 +3472,43 @@ components:
             - $ref: '#/components/schemas/InstanceUrl'
             - description: ' The location of the Zendesk resource. '
       description: ' The connector-specific profile properties required when using Zendesk. '
+    SAPODataConnectorProfileProperties:
+      type: object
+      required:
+        - applicationHostUrl
+        - applicationServicePath
+        - portNumber
+        - clientNumber
+      properties:
+        applicationHostUrl:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationHostUrl'
+            - description: ' The location of the SAPOData resource. '
+        applicationServicePath:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationServicePath'
+            - description: ' The application path to catalog service. '
+        portNumber:
+          allOf:
+            - $ref: '#/components/schemas/PortNumber'
+            - description: ' The port number of the SAPOData instance. '
+        clientNumber:
+          allOf:
+            - $ref: '#/components/schemas/ClientNumber'
+            - description: ' The client number for the client creating the connection. '
+        logonLanguage:
+          allOf:
+            - $ref: '#/components/schemas/LogonLanguage'
+            - description: ' The logon language of SAPOData instance. '
+        privateLinkServiceName:
+          allOf:
+            - $ref: '#/components/schemas/PrivateLinkServiceName'
+            - description: ' The SAPOData Private Link service name to be used for private data transfers. '
+        oAuthProperties:
+          allOf:
+            - $ref: '#/components/schemas/OAuthProperties'
+            - description: ' The SAPOData OAuth properties required for OAuth type authentication. '
+      description: ' The connector-specific profile properties required when using SAPOData. '
     KMSArn:
       type: string
       pattern: 'arn:aws:kms:.*:[0-9]+:.*'
@@ -3370,7 +3526,7 @@ components:
         connectorProfileName:
           allOf:
             - $ref: '#/components/schemas/ConnectorProfileName'
-            - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in your AWS account. '
+            - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in your Amazon Web Services account. '
         kmsArn:
           allOf:
             - $ref: '#/components/schemas/KMSArn'
@@ -3382,7 +3538,7 @@ components:
         connectionMode:
           allOf:
             - $ref: '#/components/schemas/ConnectionMode'
-            - description: ' Indicates the connection mode and specifies whether it is public or private. Private flows use AWS PrivateLink to route data over AWS infrastructure without exposing it to the public internet. '
+            - description: ' Indicates the connection mode and specifies whether it is public or private. Private flows use Amazon Web Services PrivateLink to route data over Amazon Web Services infrastructure without exposing it to the public internet. '
         connectorProfileConfig:
           allOf:
             - $ref: '#/components/schemas/ConnectorProfileConfig'
@@ -3422,7 +3578,7 @@ components:
         connectorProfileName:
           allOf:
             - $ref: '#/components/schemas/ConnectorProfileName'
-            - description: ' The name of the connector profile. This name must be unique for each connector profile in the AWS account. '
+            - description: ' The name of the connector profile. This name must be unique for each connector profile in the Amazon Web Services account. '
         sourceConnectorProperties:
           allOf:
             - $ref: '#/components/schemas/SourceConnectorProperties'
@@ -3599,7 +3755,7 @@ components:
         connectorProfileName:
           allOf:
             - $ref: '#/components/schemas/ConnectorProfileName'
-            - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account. '
+            - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the Amazon Web Services account. '
     MaxResults:
       type: integer
       minimum: 1
@@ -3615,7 +3771,7 @@ components:
         connectorProfileNames:
           allOf:
             - $ref: '#/components/schemas/ConnectorProfileNameList'
-            - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account. '
+            - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the Amazon Web Services account. '
         connectorType:
           allOf:
             - $ref: '#/components/schemas/ConnectorType'
@@ -3895,6 +4051,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/WriteOperationType'
+    DocumentType:
+      type: string
+      pattern: '[\s\w_-]+'
+      maxLength: 512
     DynatraceSourceProperties:
       type: object
       required:
@@ -4157,10 +4317,6 @@ components:
         $ref: '#/components/schemas/Name'
       minItems: 0
       maxItems: 1
-    Username:
-      type: string
-      pattern: \S+
-      maxLength: 512
     Key:
       type: string
       pattern: \S+
@@ -4182,7 +4338,7 @@ components:
         connectorProfileName:
           allOf:
             - $ref: '#/components/schemas/ConnectorProfileName'
-            - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account, and is used to query the downstream connector. '
+            - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the Amazon Web Services account, and is used to query the downstream connector. '
         connectorType:
           allOf:
             - $ref: '#/components/schemas/ConnectorType'
@@ -4207,6 +4363,10 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    LogonLanguage:
+      type: string
+      pattern: '^[a-zA-Z0-9_]*$'
+      maxLength: 2
     MarketoSourceProperties:
       type: object
       required:
@@ -4217,9 +4377,60 @@ components:
             - $ref: '#/components/schemas/Object'
             - description: ' The object specified in the Marketo flow source. '
       description: ' The properties that are applied when Marketo is being used as a source. '
+    OAuthCredentials:
+      type: object
+      required:
+        - clientId
+        - clientSecret
+      properties:
+        clientId:
+          allOf:
+            - $ref: '#/components/schemas/ClientId'
+            - description: ' The identifier for the desired client. '
+        clientSecret:
+          allOf:
+            - $ref: '#/components/schemas/ClientSecret'
+            - description: ' The client secret used by the OAuth client to authenticate to the authorization server. '
+        accessToken:
+          allOf:
+            - $ref: '#/components/schemas/AccessToken'
+            - description: ' The access token used to access protected SAPOData resources. '
+        refreshToken:
+          allOf:
+            - $ref: '#/components/schemas/RefreshToken'
+            - description: ' The refresh token used to refresh expired access token. '
+        oAuthRequest:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorOAuthRequest'
+            - description: ' The OAuth requirement needed to request security tokens from the connector endpoint. '
+      description: ' The OAuth credentials required for OAuth type authentication. '
+    TokenUrl:
+      type: string
+      pattern: '^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]'
+      maxLength: 256
+    OAuthProperties:
+      type: object
+      required:
+        - tokenUrl
+        - authCodeUrl
+        - oAuthScopes
+      properties:
+        tokenUrl:
+          allOf:
+            - $ref: '#/components/schemas/TokenUrl'
+            - description: ' The token url required to fetch access/refresh tokens using authorization code and also to refresh expired access token using refresh token.'
+        authCodeUrl:
+          allOf:
+            - $ref: '#/components/schemas/AuthCodeUrl'
+            - description: ' The authorization code url required to redirect to SAP Login Page to fetch authorization code for OAuth type authentication. '
+        oAuthScopes:
+          allOf:
+            - $ref: '#/components/schemas/OAuthScopeList'
+            - description: ' The OAuth scopes required for OAuth type authentication. '
+      description: ' The OAuth properties required for OAuth type authentication. '
     OAuthScope:
       type: string
-      pattern: '[\w]*'
+      pattern: '[/\w]*'
       maxLength: 128
     OperatorPropertiesKeys:
       type: string
@@ -4239,11 +4450,10 @@ components:
         - CONCAT_FORMAT
         - SUBFIELD_CATEGORY_MAP
         - EXCLUDE_SOURCE_FIELDS_LIST
-    Password:
-      type: string
-      pattern: .*
-      maxLength: 512
-      format: password
+    PortNumber:
+      type: integer
+      minimum: 1
+      maximum: 65535
     PrefixType:
       type: string
       enum:
@@ -4270,9 +4480,27 @@ components:
             - $ref: '#/components/schemas/PrefixFormat'
             - description: ' Determines the level of granularity that''s included in the prefix. '
       description: ' Determines the prefix that Amazon AppFlow applies to the destination folder name. You can name your destination folders according to the flow frequency and date. '
+    PrivateConnectionProvisioningFailureCause:
+      type: string
+      enum:
+        - CONNECTOR_AUTHENTICATION
+        - CONNECTOR_SERVER
+        - INTERNAL_SERVER
+        - ACCESS_DENIED
+        - VALIDATION
+    PrivateConnectionProvisioningFailureMessage:
+      type: string
+      pattern: '[\s\w/!@#+=.-]*'
+      maxLength: 2048
+    PrivateConnectionProvisioningStatus:
+      type: string
+      enum:
+        - FAILED
+        - PENDING
+        - CREATED
     PrivateLinkServiceName:
       type: string
-      pattern: \S+
+      pattern: '^$|com.amazonaws.vpce.[\w/!:@#.\-]+'
       maxLength: 512
     Property:
       type: string
@@ -4318,6 +4546,14 @@ components:
             - $ref: '#/components/schemas/BucketPrefix'
             - description: ' The object key for the Amazon S3 bucket in which the source files are stored. '
       description: ' The properties that are applied when Amazon S3 is being used as the flow source. '
+    SAPODataSourceProperties:
+      type: object
+      properties:
+        objectPath:
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object path specified in the SAPOData flow source. '
+      description: ' The properties that are applied when using SAPOData as a flow source. '
     WriteOperationType:
       type: string
       enum:
@@ -4455,6 +4691,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/Object'
             - description: ' The object specified in the Veeva flow source. '
+        documentType:
+          allOf:
+            - $ref: '#/components/schemas/DocumentType'
+            - description: The document type specified in the Veeva document extract flow.
+        includeSourceFiles:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Boolean value to include source files in Veeva document extract flow.
+        includeRenditions:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Boolean value to include file renditions in Veeva document extract flow.
+        includeAllVersions:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Boolean value to include All Versions of files in Veeva document extract flow.
       description: ' The properties that are applied when using Veeva as a flow source. '
     ZendeskSourceProperties:
       type: object
@@ -4544,7 +4796,7 @@ components:
         connectorProfileName:
           allOf:
             - $ref: '#/components/schemas/ConnectorProfileName'
-            - description: ' The name of the connector profile and is unique for each <code>ConnectorProfile</code> in the AWS Account. '
+            - description: ' The name of the connector profile and is unique for each <code>ConnectorProfile</code> in the Amazon Web Services account. '
         connectionMode:
           allOf:
             - $ref: '#/components/schemas/ConnectionMode'
@@ -4558,6 +4810,7 @@ components:
       required:
         - flowName
         - triggerConfig
+        - sourceFlowConfig
         - destinationFlowConfigList
         - tasks
       title: UpdateFlowRequest
