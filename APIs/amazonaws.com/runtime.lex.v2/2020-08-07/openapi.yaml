@@ -390,25 +390,20 @@ paths:
                   type: object
                   properties:
                     dialogAction:
-                      allOf:
-                        - $ref: '#/components/schemas/DialogAction'
-                        - description: The next step that Amazon Lex V2 should take in the conversation with a user.
+                      $ref: '#/components/schemas/DialogAction'
+                      description: The next step that Amazon Lex V2 should take in the conversation with a user.
                     intent:
-                      allOf:
-                        - $ref: '#/components/schemas/Intent'
-                        - description: The active intent that Amazon Lex V2 is processing.
+                      $ref: '#/components/schemas/Intent'
+                      description: The active intent that Amazon Lex V2 is processing.
                     activeContexts:
-                      allOf:
-                        - $ref: '#/components/schemas/ActiveContextsList'
-                        - description: 'One or more contexts that indicate to Amazon Lex V2 the context of a request. When a context is active, Amazon Lex V2 considers intents with the matching context as a trigger as the next intent in a session.'
+                      $ref: '#/components/schemas/ActiveContextsList'
+                      description: 'One or more contexts that indicate to Amazon Lex V2 the context of a request. When a context is active, Amazon Lex V2 considers intents with the matching context as a trigger as the next intent in a session.'
                     sessionAttributes:
-                      allOf:
-                        - $ref: '#/components/schemas/StringMap'
-                        - description: Map of key/value pairs representing session-specific context information. It contains application information passed between Amazon Lex V2 and a client application.
+                      $ref: '#/components/schemas/StringMap'
+                      description: Map of key/value pairs representing session-specific context information. It contains application information passed between Amazon Lex V2 and a client application.
                     originatingRequestId:
-                      allOf:
-                        - $ref: '#/components/schemas/NonEmptyString'
-                        - description: <p/>
+                      $ref: '#/components/schemas/NonEmptyString'
+                      description: <p/>
                 requestAttributes:
                   description: '<p>Request-specific information passed between Amazon Lex V2 and the client application.</p> <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don''t create any request attributes with the prefix <code>x-amz-lex:</code>.</p>'
                   type: object
@@ -525,25 +520,20 @@ paths:
                   type: object
                   properties:
                     dialogAction:
-                      allOf:
-                        - $ref: '#/components/schemas/DialogAction'
-                        - description: The next step that Amazon Lex V2 should take in the conversation with a user.
+                      $ref: '#/components/schemas/DialogAction'
+                      description: The next step that Amazon Lex V2 should take in the conversation with a user.
                     intent:
-                      allOf:
-                        - $ref: '#/components/schemas/Intent'
-                        - description: The active intent that Amazon Lex V2 is processing.
+                      $ref: '#/components/schemas/Intent'
+                      description: The active intent that Amazon Lex V2 is processing.
                     activeContexts:
-                      allOf:
-                        - $ref: '#/components/schemas/ActiveContextsList'
-                        - description: 'One or more contexts that indicate to Amazon Lex V2 the context of a request. When a context is active, Amazon Lex V2 considers intents with the matching context as a trigger as the next intent in a session.'
+                      $ref: '#/components/schemas/ActiveContextsList'
+                      description: 'One or more contexts that indicate to Amazon Lex V2 the context of a request. When a context is active, Amazon Lex V2 considers intents with the matching context as a trigger as the next intent in a session.'
                     sessionAttributes:
-                      allOf:
-                        - $ref: '#/components/schemas/StringMap'
-                        - description: Map of key/value pairs representing session-specific context information. It contains application information passed between Amazon Lex V2 and a client application.
+                      $ref: '#/components/schemas/StringMap'
+                      description: Map of key/value pairs representing session-specific context information. It contains application information passed between Amazon Lex V2 and a client application.
                     originatingRequestId:
-                      allOf:
-                        - $ref: '#/components/schemas/NonEmptyString'
-                        - description: <p/>
+                      $ref: '#/components/schemas/NonEmptyString'
+                      description: <p/>
                 requestAttributes:
                   description: '<p>Request-specific information passed between the client application and Amazon Lex V2 </p> <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don''t create any request attributes with the prefix <code>x-amz-lex:</code>.</p>'
                   type: object
@@ -750,21 +740,17 @@ components:
       type: object
       properties:
         botId:
-          allOf:
-            - $ref: '#/components/schemas/BotIdentifier'
-            - description: The identifier of the bot that contained the session data.
+          $ref: '#/components/schemas/BotIdentifier'
+          description: The identifier of the bot that contained the session data.
         botAliasId:
-          allOf:
-            - $ref: '#/components/schemas/BotAliasIdentifier'
-            - description: The alias identifier in use for the bot that contained the session data.
+          $ref: '#/components/schemas/BotAliasIdentifier'
+          description: The alias identifier in use for the bot that contained the session data.
         localeId:
-          allOf:
-            - $ref: '#/components/schemas/LocaleId'
-            - description: The locale where the session was used.
+          $ref: '#/components/schemas/LocaleId'
+          description: The locale where the session was used.
         sessionId:
-          allOf:
-            - $ref: '#/components/schemas/SessionId'
-            - description: The identifier of the deleted session.
+          $ref: '#/components/schemas/SessionId'
+          description: The identifier of the deleted session.
     AccessDeniedException: {}
     ResourceNotFoundException: {}
     ValidationException: {}
@@ -775,41 +761,34 @@ components:
       type: object
       properties:
         sessionId:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The identifier of the returned session.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the returned session.
         messages:
-          allOf:
-            - $ref: '#/components/schemas/Messages'
-            - description: 'A list of messages that were last sent to the user. The messages are ordered based on the order that your returned the messages from your Lambda function or the order that messages are defined in the bot. '
+          $ref: '#/components/schemas/Messages'
+          description: 'A list of messages that were last sent to the user. The messages are ordered based on the order that your returned the messages from your Lambda function or the order that messages are defined in the bot. '
         interpretations:
-          allOf:
-            - $ref: '#/components/schemas/Interpretations'
-            - description: '<p>A list of intents that Amazon Lex V2 determined might satisfy the user''s utterance. </p> <p>Each interpretation includes the intent, a score that indicates how confident Amazon Lex V2 is that the interpretation is the correct one, and an optional sentiment response that indicates the sentiment expressed in the utterance.</p>'
+          $ref: '#/components/schemas/Interpretations'
+          description: '<p>A list of intents that Amazon Lex V2 determined might satisfy the user''s utterance. </p> <p>Each interpretation includes the intent, a score that indicates how confident Amazon Lex V2 is that the interpretation is the correct one, and an optional sentiment response that indicates the sentiment expressed in the utterance.</p>'
         sessionState:
-          allOf:
-            - $ref: '#/components/schemas/SessionState'
-            - description: <p>Represents the current state of the dialog between the user and the bot.</p> <p>You can use this to determine the progress of the conversation and what the next action might be.</p>
+          $ref: '#/components/schemas/SessionState'
+          description: <p>Represents the current state of the dialog between the user and the bot.</p> <p>You can use this to determine the progress of the conversation and what the next action might be.</p>
     PutSessionResponse:
       type: object
       properties:
         audioStream:
-          allOf:
-            - $ref: '#/components/schemas/BlobStream'
-            - description: 'If the requested content type was audio, the audio version of the message to convey to the user.'
+          $ref: '#/components/schemas/BlobStream'
+          description: 'If the requested content type was audio, the audio version of the message to convey to the user.'
     Message:
       type: object
       required:
         - contentType
       properties:
         content:
-          allOf:
-            - $ref: '#/components/schemas/Text'
-            - description: The text of the message.
+          $ref: '#/components/schemas/Text'
+          description: The text of the message.
         contentType:
-          allOf:
-            - $ref: '#/components/schemas/MessageContentType'
-            - description: Indicates the type of response.
+          $ref: '#/components/schemas/MessageContentType'
+          description: Indicates the type of response.
         imageResponseCard:
           $ref: '#/components/schemas/ImageResponseCard'
       description: Container for text that is returned to the customer..
@@ -819,13 +798,11 @@ components:
         - type
       properties:
         type:
-          allOf:
-            - $ref: '#/components/schemas/DialogActionType'
-            - description: '<p>The next action that the bot should take in its interaction with the user. The possible values are:</p> <ul> <li> <p> <code>Close</code> - Indicates that there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.</p> </li> <li> <p> <code>ConfirmIntent</code> - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"</p> </li> <li> <p> <code>Delegate</code> - The next action is determined by Amazon Lex V2.</p> </li> <li> <p> <code>ElicitSlot</code> - The next action is to elicit a slot value from the user.</p> </li> </ul>'
+          $ref: '#/components/schemas/DialogActionType'
+          description: '<p>The next action that the bot should take in its interaction with the user. The possible values are:</p> <ul> <li> <p> <code>Close</code> - Indicates that there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.</p> </li> <li> <p> <code>ConfirmIntent</code> - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"</p> </li> <li> <p> <code>Delegate</code> - The next action is determined by Amazon Lex V2.</p> </li> <li> <p> <code>ElicitSlot</code> - The next action is to elicit a slot value from the user.</p> </li> </ul>'
         slotToElicit:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The name of the slot that should be elicited from the user.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the slot that should be elicited from the user.
       description: The next action that Amazon Lex V2 should take.
     Intent:
       type: object
@@ -833,21 +810,17 @@ components:
         - name
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The name of the intent.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the intent.
         slots:
-          allOf:
-            - $ref: '#/components/schemas/Slots'
-            - description: 'A map of all of the slots for the intent. The name of the slot maps to the value of the slot. If a slot has not been filled, the value is null.'
+          $ref: '#/components/schemas/Slots'
+          description: 'A map of all of the slots for the intent. The name of the slot maps to the value of the slot. If a slot has not been filled, the value is null.'
         state:
-          allOf:
-            - $ref: '#/components/schemas/IntentState'
-            - description: 'Contains fulfillment information for the intent. '
+          $ref: '#/components/schemas/IntentState'
+          description: 'Contains fulfillment information for the intent. '
         confirmationState:
-          allOf:
-            - $ref: '#/components/schemas/ConfirmationState'
-            - description: Contains information about whether fulfillment of the intent has been confirmed.
+          $ref: '#/components/schemas/ConfirmationState'
+          description: Contains information about whether fulfillment of the intent has been confirmed.
       description: The current intent that Amazon Lex V2 is attempting to fulfill.
     ActiveContextsList:
       type: array
@@ -870,32 +843,26 @@ components:
       type: object
       properties:
         messages:
-          allOf:
-            - $ref: '#/components/schemas/Messages'
-            - description: A list of messages last sent to the user. The messages are ordered based on the order that you returned the messages from your Lambda function or the order that the messages are defined in the bot.
+          $ref: '#/components/schemas/Messages'
+          description: A list of messages last sent to the user. The messages are ordered based on the order that you returned the messages from your Lambda function or the order that the messages are defined in the bot.
         sessionState:
-          allOf:
-            - $ref: '#/components/schemas/SessionState'
-            - description: <p>Represents the current state of the dialog between the user and the bot. </p> <p>Use this to determine the progress of the conversation and what the next action may be.</p>
+          $ref: '#/components/schemas/SessionState'
+          description: <p>Represents the current state of the dialog between the user and the bot. </p> <p>Use this to determine the progress of the conversation and what the next action may be.</p>
         interpretations:
-          allOf:
-            - $ref: '#/components/schemas/Interpretations'
-            - description: '<p>A list of intents that Amazon Lex V2 determined might satisfy the user''s utterance. </p> <p>Each interpretation includes the intent, a score that indicates now confident Amazon Lex V2 is that the interpretation is the correct one, and an optional sentiment response that indicates the sentiment expressed in the utterance.</p>'
+          $ref: '#/components/schemas/Interpretations'
+          description: '<p>A list of intents that Amazon Lex V2 determined might satisfy the user''s utterance. </p> <p>Each interpretation includes the intent, a score that indicates now confident Amazon Lex V2 is that the interpretation is the correct one, and an optional sentiment response that indicates the sentiment expressed in the utterance.</p>'
         requestAttributes:
-          allOf:
-            - $ref: '#/components/schemas/StringMap'
-            - description: The attributes sent in the request.
+          $ref: '#/components/schemas/StringMap'
+          description: The attributes sent in the request.
         sessionId:
-          allOf:
-            - $ref: '#/components/schemas/SessionId'
-            - description: The identifier of the session in use.
+          $ref: '#/components/schemas/SessionId'
+          description: The identifier of the session in use.
     RecognizeUtteranceResponse:
       type: object
       properties:
         audioStream:
-          allOf:
-            - $ref: '#/components/schemas/BlobStream'
-            - description: 'The prompt or statement to send to the user. This is based on the bot configuration and context. For example, if Amazon Lex V2 did not understand the user intent, it sends the <code>clarificationPrompt</code> configured for the bot. If the intent requires confirmation before taking the fulfillment action, it sends the <code>confirmationPrompt</code>. Another example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message to convey to the user. Then Amazon Lex V2 sends that message in the response.'
+          $ref: '#/components/schemas/BlobStream'
+          description: 'The prompt or statement to send to the user. This is based on the bot configuration and context. For example, if Amazon Lex V2 did not understand the user intent, it sends the <code>clarificationPrompt</code> configured for the bot. If the intent requires confirmation before taking the fulfillment action, it sends the <code>confirmationPrompt</code>. Another example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message to convey to the user. Then Amazon Lex V2 sends that message in the response.'
     ActiveContextName:
       type: string
       pattern: '^([A-Za-z]_?)+$'
@@ -908,13 +875,11 @@ components:
         - turnsToLive
       properties:
         timeToLiveInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/ActiveContextTimeToLiveInSeconds'
-            - description: The number of seconds that the context is active. You can specify between 5 and 86400 seconds (24 hours).
+          $ref: '#/components/schemas/ActiveContextTimeToLiveInSeconds'
+          description: The number of seconds that the context is active. You can specify between 5 and 86400 seconds (24 hours).
         turnsToLive:
-          allOf:
-            - $ref: '#/components/schemas/ActiveContextTurnsToLive'
-            - description: The number of turns that the context is active. You can specify up to 20 turns. Each request and response from the bot is a turn.
+          $ref: '#/components/schemas/ActiveContextTurnsToLive'
+          description: The number of turns that the context is active. You can specify up to 20 turns. Each request and response from the bot is a turn.
       description: The time that a context is active. You can specify the time to live in seconds or in conversation turns.
     ActiveContextParametersMap:
       type: object
@@ -930,17 +895,14 @@ components:
         - contextAttributes
       properties:
         name:
-          allOf:
-            - $ref: '#/components/schemas/ActiveContextName'
-            - description: The name of the context.
+          $ref: '#/components/schemas/ActiveContextName'
+          description: The name of the context.
         timeToLive:
-          allOf:
-            - $ref: '#/components/schemas/ActiveContextTimeToLive'
-            - description: 'Indicates the number of turns or seconds that the context is active. Once the time to live expires, the context is no longer returned in a response.'
+          $ref: '#/components/schemas/ActiveContextTimeToLive'
+          description: 'Indicates the number of turns or seconds that the context is active. Once the time to live expires, the context is no longer returned in a response.'
         contextAttributes:
-          allOf:
-            - $ref: '#/components/schemas/ActiveContextParametersMap'
-            - description: '<p>A lis tof contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request.</p> <p>If you don''t specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared. </p>'
+          $ref: '#/components/schemas/ActiveContextParametersMap'
+          description: '<p>A lis tof contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request.</p> <p>If you don''t specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared. </p>'
       description: '<p>Contains information about the contexts that a user is using in a session. You can configure Amazon Lex V2 to set a context when an intent is fulfilled, or you can set a context using the , , or operations.</p> <p>Use a context to indicate to Amazon Lex V2 intents that should be used as follow-up intents. For example, if the active context is <code>order-fulfilled</code>, only intents that have <code>order-fulfilled</code> configured as a trigger are considered for follow up.</p>'
     Text:
       type: string
@@ -987,13 +949,11 @@ components:
         - value
       properties:
         text:
-          allOf:
-            - $ref: '#/components/schemas/ButtonText'
-            - description: The text that is displayed on the button.
+          $ref: '#/components/schemas/ButtonText'
+          description: The text that is displayed on the button.
         value:
-          allOf:
-            - $ref: '#/components/schemas/ButtonValue'
-            - description: The value returned to Amazon Lex V2 when a user chooses the button.
+          $ref: '#/components/schemas/ButtonValue'
+          description: The value returned to Amazon Lex V2 when a user chooses the button.
       description: A button that appears on a response card show to the user.
     ButtonsList:
       type: array
@@ -1008,9 +968,8 @@ components:
       type: object
       properties:
         score:
-          allOf:
-            - $ref: '#/components/schemas/Double'
-            - description: A score that indicates how confident Amazon Lex V2 is that an intent satisfies the user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher confidence.
+          $ref: '#/components/schemas/Double'
+          description: A score that indicates how confident Amazon Lex V2 is that an intent satisfies the user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher confidence.
       description: Provides a score that indicates the confidence that Amazon Lex V2 has that an intent is the one that satisfies the user's intent.
     ConfirmationState:
       type: string
@@ -1056,25 +1015,20 @@ components:
       type: object
       properties:
         dialogAction:
-          allOf:
-            - $ref: '#/components/schemas/DialogAction'
-            - description: The next step that Amazon Lex V2 should take in the conversation with a user.
+          $ref: '#/components/schemas/DialogAction'
+          description: The next step that Amazon Lex V2 should take in the conversation with a user.
         intent:
-          allOf:
-            - $ref: '#/components/schemas/Intent'
-            - description: The active intent that Amazon Lex V2 is processing.
+          $ref: '#/components/schemas/Intent'
+          description: The active intent that Amazon Lex V2 is processing.
         activeContexts:
-          allOf:
-            - $ref: '#/components/schemas/ActiveContextsList'
-            - description: 'One or more contexts that indicate to Amazon Lex V2 the context of a request. When a context is active, Amazon Lex V2 considers intents with the matching context as a trigger as the next intent in a session.'
+          $ref: '#/components/schemas/ActiveContextsList'
+          description: 'One or more contexts that indicate to Amazon Lex V2 the context of a request. When a context is active, Amazon Lex V2 considers intents with the matching context as a trigger as the next intent in a session.'
         sessionAttributes:
-          allOf:
-            - $ref: '#/components/schemas/StringMap'
-            - description: Map of key/value pairs representing session-specific context information. It contains application information passed between Amazon Lex V2 and a client application.
+          $ref: '#/components/schemas/StringMap'
+          description: Map of key/value pairs representing session-specific context information. It contains application information passed between Amazon Lex V2 and a client application.
         originatingRequestId:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
       description: The state of the user's session with Amazon Lex V2.
     ImageResponseCard:
       type: object
@@ -1082,21 +1036,17 @@ components:
         - title
       properties:
         title:
-          allOf:
-            - $ref: '#/components/schemas/AttachmentTitle'
-            - description: The title to display on the response card. The format of the title is determined by the platform displaying the response card.
+          $ref: '#/components/schemas/AttachmentTitle'
+          description: The title to display on the response card. The format of the title is determined by the platform displaying the response card.
         subtitle:
-          allOf:
-            - $ref: '#/components/schemas/AttachmentTitle'
-            - description: The subtitle to display on the response card. The format of the subtitle is determined by the platform displaying the response card.
+          $ref: '#/components/schemas/AttachmentTitle'
+          description: The subtitle to display on the response card. The format of the subtitle is determined by the platform displaying the response card.
         imageUrl:
-          allOf:
-            - $ref: '#/components/schemas/AttachmentUrl'
-            - description: The URL of an image to display on the response card. The image URL must be publicly available so that the platform displaying the response card has access to the image.
+          $ref: '#/components/schemas/AttachmentUrl'
+          description: The URL of an image to display on the response card. The image URL must be publicly available so that the platform displaying the response card has access to the image.
         buttons:
-          allOf:
-            - $ref: '#/components/schemas/ButtonsList'
-            - description: A list of buttons that should be displayed on the response card. The arrangement of the buttons is determined by the platform that displays the button.
+          $ref: '#/components/schemas/ButtonsList'
+          description: A list of buttons that should be displayed on the response card. The arrangement of the buttons is determined by the platform that displays the button.
       description: '<p>A card that is shown to the user by a messaging platform. You define the contents of the card, the card is displayed by the platform. </p> <p>When you use a response card, the response from the user is constrained to the text associated with a button on the card.</p>'
     Slots:
       type: object
@@ -1114,9 +1064,8 @@ components:
       type: object
       properties:
         sentiment:
-          allOf:
-            - $ref: '#/components/schemas/SentimentType'
-            - description: The overall sentiment expressed in the user's response. This is the sentiment most likely expressed by the user based on the analysis by Amazon Comprehend.
+          $ref: '#/components/schemas/SentimentType'
+          description: The overall sentiment expressed in the user's response. This is the sentiment most likely expressed by the user based on the analysis by Amazon Comprehend.
         sentimentScore:
           $ref: '#/components/schemas/SentimentScore'
       description: '<p>Provides information about the sentiment expressed in a user''s response in a conversation. Sentiments are determined using Amazon Comprehend. Sentiments are only returned if they are enabled for the bot.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/how-sentiment.html"> Determine Sentiment </a> in the <i>Amazon Comprehend developer guide</i>.</p>'
@@ -1124,17 +1073,14 @@ components:
       type: object
       properties:
         nluConfidence:
-          allOf:
-            - $ref: '#/components/schemas/ConfidenceScore'
-            - description: 'Determines the threshold where Amazon Lex V2 will insert the <code>AMAZON.FallbackIntent</code>, <code>AMAZON.KendraSearchIntent</code>, or both when returning alternative intents in a response. <code>AMAZON.FallbackIntent</code> and <code>AMAZON.KendraSearchIntent</code> are only inserted if they are configured for the bot.'
+          $ref: '#/components/schemas/ConfidenceScore'
+          description: 'Determines the threshold where Amazon Lex V2 will insert the <code>AMAZON.FallbackIntent</code>, <code>AMAZON.KendraSearchIntent</code>, or both when returning alternative intents in a response. <code>AMAZON.FallbackIntent</code> and <code>AMAZON.KendraSearchIntent</code> are only inserted if they are configured for the bot.'
         sentimentResponse:
-          allOf:
-            - $ref: '#/components/schemas/SentimentResponse'
-            - description: '<p>The sentiment expressed in an utterance. </p> <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains the result of the analysis.</p>'
+          $ref: '#/components/schemas/SentimentResponse'
+          description: '<p>The sentiment expressed in an utterance. </p> <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains the result of the analysis.</p>'
         intent:
-          allOf:
-            - $ref: '#/components/schemas/Intent'
-            - description: A list of intents that might satisfy the user's utterance. The intents are ordered by the confidence score.
+          $ref: '#/components/schemas/Intent'
+          description: A list of intents that might satisfy the user's utterance. The intents are ordered by the confidence score.
       description: 'An intent that Amazon Lex V2 determined might satisfy the user''s utterance. The intents are ordered by the confidence score. '
     MessageContentType:
       type: string
@@ -1154,17 +1100,14 @@ components:
       title: PutSessionRequest
       properties:
         messages:
-          allOf:
-            - $ref: '#/components/schemas/Messages'
-            - description: A list of messages to send to the user. Messages are sent in the order that they are defined in the list.
+          $ref: '#/components/schemas/Messages'
+          description: A list of messages to send to the user. Messages are sent in the order that they are defined in the list.
         sessionState:
-          allOf:
-            - $ref: '#/components/schemas/SessionState'
-            - description: 'Sets the state of the session with the user. You can use this to set the current intent, attributes, context, and dialog action. Use the dialog action to determine the next step that Amazon Lex V2 should use in the conversation with the user.'
+          $ref: '#/components/schemas/SessionState'
+          description: 'Sets the state of the session with the user. You can use this to set the current intent, attributes, context, and dialog action. Use the dialog action to determine the next step that Amazon Lex V2 should use in the conversation with the user.'
         requestAttributes:
-          allOf:
-            - $ref: '#/components/schemas/StringMap'
-            - description: '<p>Request-specific information passed between Amazon Lex V2 and the client application.</p> <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don''t create any request attributes with the prefix <code>x-amz-lex:</code>.</p>'
+          $ref: '#/components/schemas/StringMap'
+          description: '<p>Request-specific information passed between Amazon Lex V2 and the client application.</p> <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don''t create any request attributes with the prefix <code>x-amz-lex:</code>.</p>'
     RecognizeTextRequest:
       type: object
       required:
@@ -1172,17 +1115,14 @@ components:
       title: RecognizeTextRequest
       properties:
         text:
-          allOf:
-            - $ref: '#/components/schemas/Text'
-            - description: The text that the user entered. Amazon Lex V2 interprets this text.
+          $ref: '#/components/schemas/Text'
+          description: The text that the user entered. Amazon Lex V2 interprets this text.
         sessionState:
-          allOf:
-            - $ref: '#/components/schemas/SessionState'
-            - description: The current state of the dialog between the user and the bot.
+          $ref: '#/components/schemas/SessionState'
+          description: The current state of the dialog between the user and the bot.
         requestAttributes:
-          allOf:
-            - $ref: '#/components/schemas/StringMap'
-            - description: '<p>Request-specific information passed between the client application and Amazon Lex V2 </p> <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don''t create any request attributes with the prefix <code>x-amz-lex:</code>.</p>'
+          $ref: '#/components/schemas/StringMap'
+          description: '<p>Request-specific information passed between the client application and Amazon Lex V2 </p> <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don''t create any request attributes with the prefix <code>x-amz-lex:</code>.</p>'
     SensitiveNonEmptyString:
       type: string
       format: password
@@ -1191,9 +1131,8 @@ components:
       title: RecognizeUtteranceRequest
       properties:
         inputStream:
-          allOf:
-            - $ref: '#/components/schemas/BlobStream'
-            - description: User input in PCM or Opus audio format or text format as described in the <code>requestContentType</code> parameter.
+          $ref: '#/components/schemas/BlobStream'
+          description: User input in PCM or Opus audio format or text format as described in the <code>requestContentType</code> parameter.
     SentimentType:
       type: string
       enum:
@@ -1205,21 +1144,17 @@ components:
       type: object
       properties:
         positive:
-          allOf:
-            - $ref: '#/components/schemas/Double'
-            - description: The level of confidence that Amazon Comprehend has in the accuracy of its detection of the <code>POSITIVE</code> sentiment.
+          $ref: '#/components/schemas/Double'
+          description: The level of confidence that Amazon Comprehend has in the accuracy of its detection of the <code>POSITIVE</code> sentiment.
         negative:
-          allOf:
-            - $ref: '#/components/schemas/Double'
-            - description: The level of confidence that Amazon Comprehend has in the accuracy of its detection of the <code>NEGATIVE</code> sentiment.
+          $ref: '#/components/schemas/Double'
+          description: The level of confidence that Amazon Comprehend has in the accuracy of its detection of the <code>NEGATIVE</code> sentiment.
         neutral:
-          allOf:
-            - $ref: '#/components/schemas/Double'
-            - description: The level of confidence that Amazon Comprehend has in the accuracy of its detection of the <code>NEUTRAL</code> sentiment.
+          $ref: '#/components/schemas/Double'
+          description: The level of confidence that Amazon Comprehend has in the accuracy of its detection of the <code>NEUTRAL</code> sentiment.
         mixed:
-          allOf:
-            - $ref: '#/components/schemas/Double'
-            - description: The level of confidence that Amazon Comprehend has in the accuracy of its detection of the <code>MIXED</code> sentiment.
+          $ref: '#/components/schemas/Double'
+          description: The level of confidence that Amazon Comprehend has in the accuracy of its detection of the <code>MIXED</code> sentiment.
       description: The individual sentiment responses for the utterance.
     Shape:
       type: string
@@ -1232,17 +1167,14 @@ components:
         - interpretedValue
       properties:
         originalValue:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The text of the utterance from the user that was entered for the slot.
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The text of the utterance from the user that was entered for the slot.
         interpretedValue:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The value that Amazon Lex V2 determines for the slot. The actual value depends on the setting of the value selection strategy for the bot. You can choose to use the value entered by the user, or you can have Amazon Lex V2 choose the first value in the <code>resolvedValues</code> list.'
+          $ref: '#/components/schemas/NonEmptyString'
+          description: 'The value that Amazon Lex V2 determines for the slot. The actual value depends on the setting of the value selection strategy for the bot. You can choose to use the value entered by the user, or you can have Amazon Lex V2 choose the first value in the <code>resolvedValues</code> list.'
         resolvedValues:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: A list of additional values that have been recognized for the slot.
+          $ref: '#/components/schemas/StringList'
+          description: A list of additional values that have been recognized for the slot.
       description: The value of a slot.
     Values:
       type: array
@@ -1252,13 +1184,11 @@ components:
       type: object
       properties:
         value:
-          allOf:
-            - $ref: '#/components/schemas/Value'
-            - description: The current value of the slot.
+          $ref: '#/components/schemas/Value'
+          description: The current value of the slot.
         values:
-          allOf:
-            - $ref: '#/components/schemas/Values'
-            - description: 'A list of one or more values that the user provided for the slot. For example, if a for a slot that elicits pizza toppings, the values might be "pepperoni" and "pineapple." '
+          $ref: '#/components/schemas/Values'
+          description: 'A list of one or more values that the user provided for the slot. For example, if a for a slot that elicits pizza toppings, the values might be "pepperoni" and "pineapple." '
       description: 'A value that Amazon Lex V2 uses to fulfill an intent. '
     StringList:
       type: array
