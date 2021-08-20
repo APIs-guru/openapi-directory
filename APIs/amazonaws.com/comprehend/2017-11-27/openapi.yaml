@@ -2773,6 +2773,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/KmsKeyValidationException'
         '485':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '486':
           description: InternalServerException
           content:
             application/json:
@@ -2830,6 +2836,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/KmsKeyValidationException'
         '483':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '484':
           description: InternalServerException
           content:
             application/json:
@@ -2899,6 +2911,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/KmsKeyValidationException'
         '485':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '486':
           description: InternalServerException
           content:
             application/json:
@@ -2956,6 +2974,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/KmsKeyValidationException'
         '483':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '484':
           description: InternalServerException
           content:
             application/json:
@@ -3013,6 +3037,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/KmsKeyValidationException'
         '483':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '484':
           description: InternalServerException
           content:
             application/json:
@@ -3070,6 +3100,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/KmsKeyValidationException'
         '483':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '484':
           description: InternalServerException
           content:
             application/json:
@@ -3127,6 +3163,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/KmsKeyValidationException'
         '483':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '484':
           description: InternalServerException
           content:
             application/json:
@@ -3184,6 +3226,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/KmsKeyValidationException'
         '483':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '484':
           description: InternalServerException
           content:
             application/json:
@@ -4920,6 +4968,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: 'The identifier generated for the job. To get the status of the job, use this identifier with the operation.'
+        JobArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the document classification job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:</p> <p> <code>arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:document-classification-job/&lt;job-id&gt;</code> </p> <p>The following is an example job ARN:</p> <p> <code>arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab</code> </p>'
         JobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
@@ -4965,6 +5017,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcConfig'
             - description: 'Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your document classification job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'Tags to be associated with the document classification job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
     StartDominantLanguageDetectionJobResponse:
       type: object
       properties:
@@ -4972,6 +5028,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: 'The identifier generated for the job. To get the status of a job, use this identifier with the operation.'
+        JobArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the dominant language detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:</p> <p> <code>arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:dominant-language-detection-job/&lt;job-id&gt;</code> </p> <p>The following is an example job ARN:</p> <p> <code>arn:aws:comprehend:us-west-2:111122223333:dominant-language-detection-job/1234abcd12ab34cd56ef1234567890ab</code> </p>'
         JobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
@@ -5012,6 +5072,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcConfig'
             - description: 'Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your dominant language detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'Tags to be associated with the dominant language detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
     StartEntitiesDetectionJobResponse:
       type: object
       properties:
@@ -5019,6 +5083,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: 'The identifier generated for the job. To get the status of job, use this identifier with the operation.'
+        JobArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the entities detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:</p> <p> <code>arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:entities-detection-job/&lt;job-id&gt;</code> </p> <p>The following is an example job ARN:</p> <p> <code>arn:aws:comprehend:us-west-2:111122223333:entities-detection-job/1234abcd12ab34cd56ef1234567890ab</code> </p>'
         JobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
@@ -5068,6 +5136,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcConfig'
             - description: 'Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your entity detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'Tags to be associated with the entities detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
     StartEventsDetectionJobResponse:
       type: object
       properties:
@@ -5075,6 +5147,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: 'An unique identifier for the request. If you don''t set the client request token, Amazon Comprehend generates one.'
+        JobArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the events detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:</p> <p> <code>arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:events-detection-job/&lt;job-id&gt;</code> </p> <p>The following is an example job ARN:</p> <p> <code>arn:aws:comprehend:us-west-2:111122223333:events-detection-job/1234abcd12ab34cd56ef1234567890ab</code> </p>'
         JobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
@@ -5117,6 +5193,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TargetEventTypes'
             - description: The types of events to detect in the input documents.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'Tags to be associated with the events detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
     StartKeyPhrasesDetectionJobResponse:
       type: object
       properties:
@@ -5124,6 +5204,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: 'The identifier generated for the job. To get the status of a job, use this identifier with the operation.'
+        JobArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the key phrase detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:</p> <p> <code>arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:key-phrases-detection-job/&lt;job-id&gt;</code> </p> <p>The following is an example job ARN:</p> <p> <code>arn:aws:comprehend:us-west-2:111122223333:key-phrases-detection-job/1234abcd12ab34cd56ef1234567890ab</code> </p>'
         JobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
@@ -5169,6 +5253,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcConfig'
             - description: ' Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your key phrases detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'Tags to be associated with the key phrases detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
     StartPiiEntitiesDetectionJobResponse:
       type: object
       properties:
@@ -5176,6 +5264,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: The identifier generated for the job.
+        JobArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the PII entity detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:</p> <p> <code>arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:pii-entities-detection-job/&lt;job-id&gt;</code> </p> <p>The following is an example job ARN:</p> <p> <code>arn:aws:comprehend:us-west-2:111122223333:pii-entities-detection-job/1234abcd12ab34cd56ef1234567890ab</code> </p>'
         JobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
@@ -5222,6 +5314,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestTokenString'
             - description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend generates one.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'Tags to be associated with the PII entities detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
     StartSentimentDetectionJobResponse:
       type: object
       properties:
@@ -5229,6 +5325,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: 'The identifier generated for the job. To get the status of a job, use this identifier with the operation.'
+        JobArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the sentiment detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:</p> <p> <code>arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:sentiment-detection-job/&lt;job-id&gt;</code> </p> <p>The following is an example job ARN:</p> <p> <code>arn:aws:comprehend:us-west-2:111122223333:sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab</code> </p>'
         JobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
@@ -5274,6 +5374,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcConfig'
             - description: 'Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your sentiment detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'Tags to be associated with the sentiment detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
     StartTopicsDetectionJobResponse:
       type: object
       properties:
@@ -5281,6 +5385,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: 'The identifier generated for the job. To get the status of the job, use this identifier with the <code>DescribeTopicDetectionJob</code> operation.'
+        JobArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the topics detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:</p> <p> <code>arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:topics-detection-job/&lt;job-id&gt;</code> </p> <p>The following is an example job ARN:</p> <p> <code>arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab</code> </p>'
         JobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
@@ -5325,6 +5433,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcConfig'
             - description: 'Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your topic detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'Tags to be associated with the topics detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
     StopDominantLanguageDetectionJobResponse:
       type: object
       properties:
@@ -5964,6 +6076,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: The identifier assigned to the document classification job.
+        JobArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the document classification job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:</p> <p> <code>arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:document-classification-job/&lt;job-id&gt;</code> </p> <p>The following is an example job ARN:</p> <p> <code>arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab</code> </p>'
         JobName:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -6084,6 +6200,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: The identifier assigned to the dominant language detection job.
+        JobArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the dominant language detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:</p> <p> <code>arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:dominant-language-detection-job/&lt;job-id&gt;</code> </p> <p>The following is an example job ARN:</p> <p> <code>arn:aws:comprehend:us-west-2:111122223333:dominant-language-detection-job/1234abcd12ab34cd56ef1234567890ab</code> </p>'
         JobName:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -6172,6 +6292,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: The identifier assigned to the entities detection job.
+        JobArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the entities detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:</p> <p> <code>arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:entities-detection-job/&lt;job-id&gt;</code> </p> <p>The following is an example job ARN:</p> <p> <code>arn:aws:comprehend:us-west-2:111122223333:entities-detection-job/1234abcd12ab34cd56ef1234567890ab</code> </p>'
         JobName:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -6288,6 +6412,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: The identifier assigned to the events detection job.
+        JobArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the events detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:</p> <p> <code>arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:events-detection-job/&lt;job-id&gt;</code> </p> <p>The following is an example job ARN:</p> <p> <code>arn:aws:comprehend:us-west-2:111122223333:events-detection-job/1234abcd12ab34cd56ef1234567890ab</code> </p>'
         JobName:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -6336,6 +6464,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: The identifier assigned to the key phrases detection job.
+        JobArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the key phrases detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:</p> <p> <code>arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:key-phrases-detection-job/&lt;job-id&gt;</code> </p> <p>The following is an example job ARN:</p> <p> <code>arn:aws:comprehend:us-west-2:111122223333:key-phrases-detection-job/1234abcd12ab34cd56ef1234567890ab</code> </p>'
         JobName:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -6388,6 +6520,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: The identifier assigned to the PII entities detection job.
+        JobArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the PII entities detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:</p> <p> <code>arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:pii-entities-detection-job/&lt;job-id&gt;</code> </p> <p>The following is an example job ARN:</p> <p> <code>arn:aws:comprehend:us-west-2:111122223333:pii-entities-detection-job/1234abcd12ab34cd56ef1234567890ab</code> </p>'
         JobName:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -6440,6 +6576,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: The identifier assigned to the sentiment detection job.
+        JobArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the sentiment detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:</p> <p> <code>arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:sentiment-detection-job/&lt;job-id&gt;</code> </p> <p>The following is an example job ARN:</p> <p> <code>arn:aws:comprehend:us-west-2:111122223333:sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab</code> </p>'
         JobName:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -6492,6 +6632,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: The identifier assigned to the topic detection job.
+        JobArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the topics detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:</p> <p> <code>arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:topics-detection-job/&lt;job-id&gt;</code> </p> <p>The following is an example job ARN:</p> <p> <code>arn:aws:comprehend:us-west-2:111122223333:topics-detection-job/1234abcd12ab34cd56ef1234567890ab</code> </p>'
         JobName:
           allOf:
             - $ref: '#/components/schemas/JobName'

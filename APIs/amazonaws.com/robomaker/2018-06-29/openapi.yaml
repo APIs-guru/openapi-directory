@@ -1257,7 +1257,7 @@ paths:
                   minLength: 1
                   maxLength: 255
                 failureBehavior:
-                  description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
+                  description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Leaves the instance running for its maximum timeout duration after a <code>4XX</code> error code.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
                   type: string
                   enum:
                     - Fail
@@ -5772,7 +5772,7 @@ components:
         failureBehavior:
           allOf:
             - $ref: '#/components/schemas/FailureBehavior'
-            - description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
+            - description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Leaves the host running for its maximum timeout duration after a <code>4XX</code> error code.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
         useDefaultApplications:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
@@ -6453,7 +6453,7 @@ components:
         failureBehavior:
           allOf:
             - $ref: '#/components/schemas/FailureBehavior'
-            - description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
+            - description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Leaves the instance running for its maximum timeout duration after a <code>4XX</code> error code.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
         robotApplications:
           allOf:
             - $ref: '#/components/schemas/RobotApplicationConfigs'
@@ -7768,7 +7768,7 @@ components:
         failureBehavior:
           allOf:
             - $ref: '#/components/schemas/FailureBehavior'
-            - description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
+            - description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Leaves the host running for its maximum timeout duration after a <code>4XX</code> error code.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
         failureCode:
           allOf:
             - $ref: '#/components/schemas/SimulationJobErrorCode'

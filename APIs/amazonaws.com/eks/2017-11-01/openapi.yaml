@@ -1132,6 +1132,12 @@ paths:
           description: 'The name of the add-on. The name must match one of the names returned by <a href="https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html"> <code>ListAddons</code> </a>.'
           schema:
             type: string
+        - name: preserve
+          in: query
+          required: false
+          description: 'Specifying this option preserves the add-on software on your cluster but Amazon EKS stops managing any settings for the add-on. If an IAM account is associated with the add-on, it is not removed.'
+          schema:
+            type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3116,6 +3122,7 @@ components:
         - ConfigurationConflict
         - AdmissionRequestDenied
         - UnsupportedAddonModification
+        - K8sResourceNotFound
     AddonIssue:
       type: object
       properties:
@@ -3974,6 +3981,7 @@ components:
         - ConfigurationConflict
         - AdmissionRequestDenied
         - UnsupportedAddonModification
+        - K8sResourceNotFound
     ErrorDetail:
       type: object
       properties:
