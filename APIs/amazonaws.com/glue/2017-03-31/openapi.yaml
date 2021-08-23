@@ -405,6 +405,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.BatchGetBlueprints:
+    post:
+      operationId: BatchGetBlueprints
+      description: Retrieves information about a list of blueprints.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetBlueprintsResponse'
+        '480':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '481':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '482':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetBlueprintsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.BatchGetBlueprints
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSGlue.BatchGetCrawlers:
     post:
       operationId: BatchGetCrawlers
@@ -937,6 +988,69 @@ paths:
             type: string
             enum:
               - AWSGlue.CheckSchemaVersionValidity
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.CreateBlueprint:
+    post:
+      operationId: CreateBlueprint
+      description: Registers a blueprint with Glue.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBlueprintResponse'
+        '480':
+          description: AlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '484':
+          description: ResourceNumberLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNumberLimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBlueprintRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.CreateBlueprint
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2116,6 +2230,57 @@ paths:
             type: string
             enum:
               - AWSGlue.CreateWorkflow
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.DeleteBlueprint:
+    post:
+      operationId: DeleteBlueprint
+      description: Deletes an existing blueprint.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteBlueprintResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteBlueprintRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.DeleteBlueprint
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3325,6 +3490,183 @@ paths:
             type: string
             enum:
               - AWSGlue.DeleteWorkflow
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.GetBlueprint:
+    post:
+      operationId: GetBlueprint
+      description: Retrieves the details of a blueprint.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBlueprintResponse'
+        '480':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBlueprintRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.GetBlueprint
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.GetBlueprintRun:
+    post:
+      operationId: GetBlueprintRun
+      description: Retrieves the details of a blueprint run.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBlueprintRunResponse'
+        '480':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBlueprintRunRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.GetBlueprintRun
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.GetBlueprintRuns:
+    post:
+      operationId: GetBlueprintRuns
+      description: Retrieves the details of blueprint runs for a specified blueprint.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBlueprintRunsResponse'
+        '480':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '483':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBlueprintRunsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.GetBlueprintRuns
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -6534,6 +6876,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.ListBlueprints:
+    post:
+      operationId: ListBlueprints
+      description: Lists all the blueprint names in an account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBlueprintsResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListBlueprintsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.ListBlueprints
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSGlue.ListCrawlers:
     post:
       operationId: ListCrawlers
@@ -7737,6 +8142,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.StartBlueprintRun:
+    post:
+      operationId: StartBlueprintRun
+      description: Starts a new run of the specified blueprint.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartBlueprintRunResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: ResourceNumberLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNumberLimitExceededException'
+        '484':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '485':
+          description: IllegalBlueprintStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IllegalBlueprintStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartBlueprintRunRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.StartBlueprintRun
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSGlue.StartCrawler:
     post:
       operationId: StartCrawler
@@ -8656,6 +9130,75 @@ paths:
             type: string
             enum:
               - AWSGlue.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.UpdateBlueprint:
+    post:
+      operationId: UpdateBlueprint
+      description: Updates a registered blueprint.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateBlueprintResponse'
+        '480':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '482':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '483':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '485':
+          description: IllegalBlueprintStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IllegalBlueprintStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBlueprintRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.UpdateBlueprint
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -9950,6 +10493,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/BatchDeleteTableVersionList'
             - description: A list of the IDs of versions to be deleted. A <code>VersionId</code> is a string representation of an integer. Each version is incremented by 1.
+    BatchGetBlueprintsResponse:
+      type: object
+      properties:
+        Blueprints:
+          allOf:
+            - $ref: '#/components/schemas/Blueprints'
+            - description: Returns a list of blueprint as a <code>Blueprints</code> object.
+        MissingBlueprints:
+          allOf:
+            - $ref: '#/components/schemas/BlueprintNames'
+            - description: Returns a list of <code>BlueprintNames</code> that were not found.
+    BatchGetBlueprintsRequest:
+      type: object
+      required:
+        - Names
+      title: BatchGetBlueprintsRequest
+      properties:
+        Names:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetBlueprintNames'
+            - description: A list of blueprint names.
+        IncludeBlueprint:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Specifies whether or not to include the blueprint in the response.
+        IncludeParameterSpec:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: 'Specifies whether or not to include the parameters, as a JSON string, for the blueprint in the response.'
     BatchGetCrawlersResponse:
       type: object
       properties:
@@ -10208,6 +10780,36 @@ components:
           allOf:
             - $ref: '#/components/schemas/SchemaDefinitionString'
             - description: The definition of the schema that has to be validated.
+    CreateBlueprintResponse:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: Returns the name of the blueprint that was registered.
+    CreateBlueprintRequest:
+      type: object
+      required:
+        - Name
+        - BlueprintLocation
+      title: CreateBlueprintRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/OrchestrationNameString'
+            - description: The name of the blueprint.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Generic512CharString'
+            - description: A description of the blueprint.
+        BlueprintLocation:
+          allOf:
+            - $ref: '#/components/schemas/OrchestrationS3Location'
+            - description: Specifies a path in Amazon S3 where the blueprint is published.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: The tags to be applied to this blueprint.
     CreateClassifierResponse:
       type: object
       properties: {}
@@ -10957,7 +11559,9 @@ components:
             - $ref: '#/components/schemas/TagsMap'
             - description: 'The tags to use with this trigger. You may use tags to limit access to the trigger. For more information about tags in Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">Amazon Web Services Tags in Glue</a> in the developer guide. '
         EventBatchingCondition:
-          $ref: '#/components/schemas/EventBatchingCondition'
+          allOf:
+            - $ref: '#/components/schemas/EventBatchingCondition'
+            - description: Batch condition that must be met (specified number of events received or batch time window expired) before EventBridge event trigger fires.
     CreateUserDefinedFunctionResponse:
       type: object
       properties: {}
@@ -11013,6 +11617,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/NullableInteger'
             - description: 'You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.'
+    DeleteBlueprintResponse:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: Returns the name of the blueprint that was deleted.
+    DeleteBlueprintRequest:
+      type: object
+      required:
+        - Name
+      title: DeleteBlueprintRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the blueprint to delete.
     DeleteClassifierResponse:
       type: object
       properties: {}
@@ -11442,6 +12063,82 @@ components:
           allOf:
             - $ref: '#/components/schemas/NameString'
             - description: Name of the workflow to be deleted.
+    GetBlueprintResponse:
+      type: object
+      properties:
+        Blueprint:
+          allOf:
+            - $ref: '#/components/schemas/Blueprint'
+            - description: Returns a <code>Blueprint</code> object.
+    GetBlueprintRequest:
+      type: object
+      required:
+        - Name
+      title: GetBlueprintRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the blueprint.
+        IncludeBlueprint:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Specifies whether or not to include the blueprint in the response.
+        IncludeParameterSpec:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Specifies whether or not to include the parameter specification.
+    GetBlueprintRunResponse:
+      type: object
+      properties:
+        BlueprintRun:
+          allOf:
+            - $ref: '#/components/schemas/BlueprintRun'
+            - description: Returns a <code>BlueprintRun</code> object.
+    GetBlueprintRunRequest:
+      type: object
+      required:
+        - BlueprintName
+        - RunId
+      title: GetBlueprintRunRequest
+      properties:
+        BlueprintName:
+          allOf:
+            - $ref: '#/components/schemas/OrchestrationNameString'
+            - description: The name of the blueprint.
+        RunId:
+          allOf:
+            - $ref: '#/components/schemas/IdString'
+            - description: The run ID for the blueprint run you want to retrieve.
+    GetBlueprintRunsResponse:
+      type: object
+      properties:
+        BlueprintRuns:
+          allOf:
+            - $ref: '#/components/schemas/BlueprintRuns'
+            - description: Returns a list of <code>BlueprintRun</code> objects.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'A continuation token, if not all blueprint runs have been returned.'
+    GetBlueprintRunsRequest:
+      type: object
+      required:
+        - BlueprintName
+      title: GetBlueprintRunsRequest
+      properties:
+        BlueprintName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the blueprint.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'A continuation token, if this is a continuation request.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/PageSize'
+            - description: The maximum size of a list to return.
     GetCatalogImportStatusResponse:
       type: object
       properties:
@@ -13019,6 +13716,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
             - description: 'The ID of the catalog to import. Currently, this should be the Amazon Web Services account ID.'
+    ListBlueprintsResponse:
+      type: object
+      properties:
+        Blueprints:
+          allOf:
+            - $ref: '#/components/schemas/BlueprintNames'
+            - description: List of names of blueprints in the account.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'A continuation token, if not all blueprint names have been returned.'
+    ListBlueprintsRequest:
+      type: object
+      title: ListBlueprintsRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'A continuation token, if this is a continuation request.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/PageSize'
+            - description: The maximum size of a list to return.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: Filters the list by an Amazon Web Services resource tag.
     ListCrawlersResponse:
       type: object
       properties:
@@ -13627,6 +14351,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceShareType'
             - description: '<p>Allows you to specify that you want to search the tables shared with your account. The allowable values are <code>FOREIGN</code> or <code>ALL</code>. </p> <ul> <li> <p>If set to <code>FOREIGN</code>, will search the tables shared with your account. </p> </li> <li> <p>If set to <code>ALL</code>, will search the tables shared with your account, as well as the tables in yor local account. </p> </li> </ul>'
+    StartBlueprintRunResponse:
+      type: object
+      properties:
+        RunId:
+          allOf:
+            - $ref: '#/components/schemas/IdString'
+            - description: The run ID for this blueprint run.
+    StartBlueprintRunRequest:
+      type: object
+      required:
+        - BlueprintName
+        - RoleArn
+      title: StartBlueprintRunRequest
+      properties:
+        BlueprintName:
+          allOf:
+            - $ref: '#/components/schemas/OrchestrationNameString'
+            - description: The name of the blueprint.
+        Parameters:
+          allOf:
+            - $ref: '#/components/schemas/BlueprintParameters'
+            - description: Specifies the parameters as a <code>BlueprintParameters</code> object.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/OrchestrationIAMRoleArn'
+            - description: Specifies the IAM role used to create the workflow.
+    IllegalBlueprintStateException: {}
     StartCrawlerResponse:
       type: object
       properties: {}
@@ -13931,6 +14682,32 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeysList'
             - description: Tags to remove from this resource.
+    UpdateBlueprintResponse:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: Returns the name of the blueprint that was updated.
+    UpdateBlueprintRequest:
+      type: object
+      required:
+        - Name
+        - BlueprintLocation
+      title: UpdateBlueprintRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/OrchestrationNameString'
+            - description: The name of the blueprint.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Generic512CharString'
+            - description: A description of the blueprint.
+        BlueprintLocation:
+          allOf:
+            - $ref: '#/components/schemas/OrchestrationS3Location'
+            - description: Specifies a path in Amazon S3 where the blueprint is published.
     UpdateClassifierResponse:
       type: object
       properties: {}
@@ -14621,6 +15398,27 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/TableVersionError'
+    OrchestrationNameString:
+      type: string
+      pattern: '[\.\-_A-Za-z0-9]+'
+      minLength: 1
+      maxLength: 128
+    BatchGetBlueprintNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/OrchestrationNameString'
+      minItems: 1
+      maxItems: 25
+    NullableBoolean:
+      type: boolean
+    Blueprints:
+      type: array
+      items:
+        $ref: '#/components/schemas/Blueprint'
+    BlueprintNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/OrchestrationNameString'
     CrawlerNameList:
       type: array
       items:
@@ -14673,8 +15471,6 @@ components:
         $ref: '#/components/schemas/NameString'
       minItems: 1
       maxItems: 25
-    NullableBoolean:
-      type: boolean
     Workflows:
       type: array
       items:
@@ -14844,6 +15640,172 @@ components:
       description: Defines column statistics supported for bit sequence data values.
     Blob:
       type: string
+    Generic512CharString:
+      type: string
+      minLength: 1
+      maxLength: 512
+    TimestampValue:
+      type: string
+      format: date-time
+    BlueprintParameterSpec:
+      type: string
+      minLength: 1
+      maxLength: 131072
+    BlueprintStatus:
+      type: string
+      enum:
+        - CREATING
+        - ACTIVE
+        - UPDATING
+        - FAILED
+    ErrorString:
+      type: string
+    LastActiveDefinition:
+      type: object
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Generic512CharString'
+            - description: The description of the blueprint.
+        LastModifiedOn:
+          allOf:
+            - $ref: '#/components/schemas/TimestampValue'
+            - description: The date and time the blueprint was last modified.
+        ParameterSpec:
+          allOf:
+            - $ref: '#/components/schemas/BlueprintParameterSpec'
+            - description: A JSON string specifying the parameters for the blueprint.
+        BlueprintLocation:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: Specifies a path in Amazon S3 where the blueprint is published by the Glue developer.
+        BlueprintServiceLocation:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: Specifies a path in Amazon S3 where the blueprint is copied when you create or update the blueprint.
+      description: 'When there are multiple versions of a blueprint and the latest version has some errors, this attribute indicates the last successful blueprint definition that is available with the service.'
+    Blueprint:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/OrchestrationNameString'
+            - description: The name of the blueprint.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Generic512CharString'
+            - description: The description of the blueprint.
+        CreatedOn:
+          allOf:
+            - $ref: '#/components/schemas/TimestampValue'
+            - description: The date and time the blueprint was registered.
+        LastModifiedOn:
+          allOf:
+            - $ref: '#/components/schemas/TimestampValue'
+            - description: The date and time the blueprint was last modified.
+        ParameterSpec:
+          allOf:
+            - $ref: '#/components/schemas/BlueprintParameterSpec'
+            - description: A JSON string that indicates the list of parameter specifications for the blueprint.
+        BlueprintLocation:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: Specifies the path in Amazon S3 where the blueprint is published.
+        BlueprintServiceLocation:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: Specifies a path in Amazon S3 where the blueprint is copied when you call <code>CreateBlueprint/UpdateBlueprint</code> to register the blueprint in Glue.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/BlueprintStatus'
+            - description: <p>The status of the blueprint registration.</p> <ul> <li> <p>Creating — The blueprint registration is in progress.</p> </li> <li> <p>Active — The blueprint has been successfully registered.</p> </li> <li> <p>Updating — An update to the blueprint registration is in progress.</p> </li> <li> <p>Failed — The blueprint registration failed.</p> </li> </ul>
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/ErrorString'
+            - description: An error message.
+        LastActiveDefinition:
+          allOf:
+            - $ref: '#/components/schemas/LastActiveDefinition'
+            - description: 'When there are multiple versions of a blueprint and the latest version has some errors, this attribute indicates the last successful blueprint definition that is available with the service.'
+      description: The details of a blueprint.
+    BlueprintDetails:
+      type: object
+      properties:
+        BlueprintName:
+          allOf:
+            - $ref: '#/components/schemas/OrchestrationNameString'
+            - description: The name of the blueprint.
+        RunId:
+          allOf:
+            - $ref: '#/components/schemas/IdString'
+            - description: The run ID for this blueprint.
+      description: The details of a blueprint.
+    BlueprintParameters:
+      type: string
+      minLength: 1
+      maxLength: 131072
+    BlueprintRunState:
+      type: string
+      enum:
+        - RUNNING
+        - SUCCEEDED
+        - FAILED
+        - ROLLING_BACK
+    MessageString:
+      type: string
+    OrchestrationIAMRoleArn:
+      type: string
+      pattern: 'arn:aws[^:]*:iam::[0-9]*:role/.+'
+      minLength: 1
+      maxLength: 1024
+    BlueprintRun:
+      type: object
+      properties:
+        BlueprintName:
+          allOf:
+            - $ref: '#/components/schemas/OrchestrationNameString'
+            - description: The name of the blueprint.
+        RunId:
+          allOf:
+            - $ref: '#/components/schemas/IdString'
+            - description: The run ID for this blueprint run.
+        WorkflowName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: 'The name of a workflow that is created as a result of a successful blueprint run. If a blueprint run has an error, there will not be a workflow created.'
+        State:
+          allOf:
+            - $ref: '#/components/schemas/BlueprintRunState'
+            - description: '<p>The state of the blueprint run. Possible values are:</p> <ul> <li> <p>Running — The blueprint run is in progress.</p> </li> <li> <p>Succeeded — The blueprint run completed successfully.</p> </li> <li> <p>Failed — The blueprint run failed and rollback is complete.</p> </li> <li> <p>Rolling Back — The blueprint run failed and rollback is in progress.</p> </li> </ul>'
+        StartedOn:
+          allOf:
+            - $ref: '#/components/schemas/TimestampValue'
+            - description: The date and time that the blueprint run started.
+        CompletedOn:
+          allOf:
+            - $ref: '#/components/schemas/TimestampValue'
+            - description: The date and time that the blueprint run completed.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/MessageString'
+            - description: Indicates any errors that are seen while running the blueprint.
+        RollbackErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/MessageString'
+            - description: 'If there are any errors while creating the entities of a workflow, we try to roll back the created entities until that point and delete them. This attribute indicates the errors seen while trying to delete the entities that are created.'
+        Parameters:
+          allOf:
+            - $ref: '#/components/schemas/BlueprintParameters'
+            - description: The blueprint parameters as a string. You will have to provide a value for each key that is required from the parameter spec that is defined in the <code>Blueprint$ParameterSpec</code>.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/OrchestrationIAMRoleArn'
+            - description: The role ARN. This role will be assumed by the Glue service and will be used to create the workflow and other entities of a workflow.
+      description: The details of a blueprint run.
+    BlueprintRuns:
+      type: array
+      items:
+        $ref: '#/components/schemas/BlueprintRun'
     Boolean:
       type: boolean
     BooleanColumnStatisticsData:
@@ -15822,9 +16784,6 @@ components:
             - $ref: '#/components/schemas/OrchestrationStringList'
             - description: A list of connections used by the job.
       description: Specifies the connections used by a job.
-    TimestampValue:
-      type: string
-      format: date-time
     LogGroup:
       type: string
       pattern: '[\.\-_/#A-Za-z0-9]+'
@@ -16135,6 +17094,17 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DynamoDBTarget'
+    OrchestrationS3Location:
+      type: string
+      pattern: '^s3://([^/]+)/([^/]+/)*([^/]+)$'
+      minLength: 1
+      maxLength: 8192
+    TagsMap:
+      type: object
+      minProperties: 0
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
     CreateGrokClassifierRequest:
       type: object
       required:
@@ -16229,12 +17199,6 @@ components:
       description: Specifies a custom CSV classifier for <code>CreateClassifier</code> to create.
     CronExpression:
       type: string
-    TagsMap:
-      type: object
-      minProperties: 0
-      maxProperties: 50
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
     CsvColumnDelimiter:
       type: string
       pattern: '[^\r\n]'
@@ -16974,8 +17938,6 @@ components:
             - $ref: '#/components/schemas/ErrorMessageString'
             - description: The error message for an error.
       description: An object containing error details.
-    ErrorString:
-      type: string
     TransformType:
       type: string
       enum:
@@ -17847,6 +18809,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NullableInteger'
             - description: 'You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.'
+        BlueprintDetails:
+          allOf:
+            - $ref: '#/components/schemas/BlueprintDetails'
+            - description: This structure indicates the details of the blueprint that this particular workflow is created from.
       description: A workflow is a collection of multiple dependent Glue jobs and crawlers that are run to complete a complex ETL task. A workflow manages the execution and monitoring of all its jobs and crawlers.
     WorkflowRun:
       type: object

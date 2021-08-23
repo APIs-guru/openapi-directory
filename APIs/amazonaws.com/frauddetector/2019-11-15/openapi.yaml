@@ -258,6 +258,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: AccessDeniedException
           content:
             application/json:
@@ -309,12 +315,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
-        '483':
+        '484':
           description: ResourceNotFoundException
           content:
             application/json:
@@ -429,6 +441,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
           description: AccessDeniedException
           content:
             application/json:
@@ -486,6 +504,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: InternalServerException
           content:
             application/json:
@@ -657,6 +681,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: AccessDeniedException
           content:
             application/json:
@@ -846,6 +876,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: AccessDeniedException
           content:
             application/json:
@@ -960,6 +996,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: AccessDeniedException
           content:
             application/json:
@@ -1074,6 +1116,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ConflictException'
         '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
           description: InternalServerException
           content:
             application/json:
@@ -1131,6 +1179,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: AccessDeniedException
           content:
             application/json:
@@ -1188,6 +1242,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: ConflictException
           content:
             application/json:
@@ -1497,6 +1557,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: AccessDeniedException
           content:
             application/json:
@@ -1566,6 +1632,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: AccessDeniedException
           content:
             application/json:
@@ -1773,6 +1845,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: AccessDeniedException
           content:
             application/json:
@@ -1859,6 +1937,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
       requestBody:
         required: true
         content:
@@ -1911,6 +1995,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: AccessDeniedException
           content:
             application/json:
@@ -2049,6 +2139,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
           description: AccessDeniedException
           content:
             application/json:
@@ -2100,6 +2196,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: AccessDeniedException
           content:
             application/json:
@@ -2169,6 +2271,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: AccessDeniedException
           content:
             application/json:
@@ -2199,7 +2307,7 @@ paths:
   /#X-Amz-Target=AWSHawksNestServiceFacade.GetModels:
     post:
       operationId: GetModels
-      description: '<p>Gets one or more models. Gets all models for the AWS account if no model type and no model id provided. Gets all models for the AWS account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified. </p> <p>This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.</p>'
+      description: '<p>Gets one or more models. Gets all models for the Amazon Web Services account if no model type and no model id provided. Gets all models for the Amazon Web Services account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified. </p> <p>This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.</p>'
       responses:
         '200':
           description: Success
@@ -2226,6 +2334,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: AccessDeniedException
           content:
             application/json:
@@ -2514,6 +2628,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
           description: AccessDeniedException
           content:
             application/json:
@@ -2588,6 +2708,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -2634,11 +2760,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -2685,11 +2823,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -2747,6 +2897,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -2799,11 +2955,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -2850,11 +3018,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -2912,6 +3092,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -2958,6 +3144,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
           description: AccessDeniedException
           content:
             application/json:
@@ -3009,6 +3201,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
           description: AccessDeniedException
           content:
             application/json:
@@ -3077,6 +3275,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -3134,6 +3338,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -3197,6 +3407,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -3249,11 +3465,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -3306,11 +3534,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: InternalServerException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -3363,11 +3603,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -3431,6 +3683,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -3494,6 +3752,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -3557,6 +3821,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -4373,7 +4643,7 @@ components:
         ruleResults:
           allOf:
             - $ref: '#/components/schemas/ListOfRuleResults'
-            - description: The results.
+            - description: The results from the rules.
     GetEventPredictionRequest:
       type: object
       required:
@@ -4407,7 +4677,7 @@ components:
             - description: 'The entity type (associated with the detector''s event type) and specific entity ID representing who performed the event. If an entity id is not available, use "UNKNOWN."'
         eventTimestamp:
           allOf:
-            - $ref: '#/components/schemas/string'
+            - $ref: '#/components/schemas/utcTimestampISO8601'
             - description: Timestamp that defines when the event under evaluation occurred.
         eventVariables:
           allOf:
@@ -4417,6 +4687,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExternalModelEndpointDataBlobMap'
             - description: The Amazon SageMaker model endpoint input data blobs.
+    ResourceUnavailableException: {}
     GetEventTypesResult:
       type: object
       properties:
@@ -5848,6 +6119,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Entity'
+    utcTimestampISO8601:
+      type: string
+      minLength: 10
+      maxLength: 30
     ListOfModelScores:
       type: array
       items:
@@ -5940,7 +6215,7 @@ components:
     labelMapper:
       type: object
       additionalProperties:
-        $ref: '#/components/schemas/ListOfStrings'
+        $ref: '#/components/schemas/NonEmptyListOfStrings'
     LabelSchema:
       type: object
       required:
@@ -5951,7 +6226,7 @@ components:
             - $ref: '#/components/schemas/labelMapper'
             - description: 'The label mapper maps the Amazon Fraud Detector supported model classification labels (<code>FRAUD</code>, <code>LEGIT</code>) to the appropriate event type labels. For example, if "<code>FRAUD</code>" and "<code>LEGIT</code>" are Amazon Fraud Detector supported labels, this mapper could be: <code>{"FRAUD" =&gt; ["0"]</code>, <code>"LEGIT" =&gt; ["1"]}</code> or <code>{"FRAUD" =&gt; ["false"]</code>, <code>"LEGIT" =&gt; ["true"]}</code> or <code>{"FRAUD" =&gt; ["fraud", "abuse"]</code>, <code>"LEGIT" =&gt; ["legit", "safe"]}</code>. The value part of the mapper is a list, because you may have multiple label variants from your event type for a single Amazon Fraud Detector label. '
       description: The label schema.
-    LogitMetric:
+    LogOddsMetric:
       type: object
       required:
         - variableName
@@ -5969,12 +6244,12 @@ components:
         variableImportance:
           allOf:
             - $ref: '#/components/schemas/float'
-            - description: The relative importance of the variable.
-      description: The logit metric details.
-    ListOfLogitMetrics:
+            - description: 'The relative importance of the variable. For more information, see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/model-variable-importance.html">Model variable importance</a>.'
+      description: The log odds metric details.
+    ListOfLogOddsMetrics:
       type: array
       items:
-        $ref: '#/components/schemas/LogitMetric'
+        $ref: '#/components/schemas/LogOddsMetric'
     ModelScores:
       type: object
       properties:
@@ -6285,9 +6560,9 @@ components:
     VariableImportanceMetrics:
       type: object
       properties:
-        LogitMetrics:
+        logOddsMetrics:
           allOf:
-            - $ref: '#/components/schemas/ListOfLogitMetrics'
+            - $ref: '#/components/schemas/ListOfLogOddsMetrics'
             - description: List of variable metrics.
       description: The variable importance metrics details.
     tagKeyList:

@@ -3,7 +3,7 @@ info:
   version: '2018-01-12'
   x-release: v4
   title: Amazon Data Lifecycle Manager
-  description: '<fullname>Amazon Data Lifecycle Manager</fullname> <p>With Amazon Data Lifecycle Manager, you can manage the lifecycle of your AWS resources. You create lifecycle policies, which are used to automate operations on the specified resources.</p> <p>Amazon DLM supports Amazon EBS volumes and snapshots. For information about using Amazon DLM with Amazon EBS, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html">Automating the Amazon EBS Snapshot Lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p>'
+  description: '<fullname>Amazon Data Lifecycle Manager</fullname> <p>With Amazon Data Lifecycle Manager, you can manage the lifecycle of your Amazon Web Services resources. You create lifecycle policies, which are used to automate operations on the specified resources.</p> <p>Amazon DLM supports Amazon EBS volumes and snapshots. For information about using Amazon DLM with Amazon EBS, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html">Automating the Amazon EBS Snapshot Lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -118,7 +118,7 @@ paths:
   /policies:
     post:
       operationId: CreateLifecyclePolicy
-      description: Creates a policy to manage the lifecycle of the specified AWS resources. You can create up to 100 lifecycle policies.
+      description: Creates a policy to manage the lifecycle of the specified Amazon Web Services resources. You can create up to 100 lifecycle policies.
       responses:
         '200':
           description: Success
@@ -182,7 +182,7 @@ paths:
                     PolicyType:
                       allOf:
                         - $ref: '#/components/schemas/PolicyTypeValues'
-                        - description: <p>The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> to create an event-based policy that performs specific actions when a defined event occurs in your AWS account.</p> <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>
+                        - description: <p>The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> to create an event-based policy that performs specific actions when a defined event occurs in your Amazon Web Services account.</p> <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>
                     ResourceTypes:
                       allOf:
                         - $ref: '#/components/schemas/ResourceTypeValuesList'
@@ -190,7 +190,7 @@ paths:
                     ResourceLocations:
                       allOf:
                         - $ref: '#/components/schemas/ResourceLocationList'
-                        - description: '<p>The location of the resources to backup. If the source resources are located in an AWS Region, specify <code>CLOUD</code>. If the source resources are located on an AWS Outpost in your account, specify <code>OUTPOST</code>. </p> <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account.</p>'
+                        - description: '<p>The location of the resources to backup. If the source resources are located in an Amazon Web Services Region, specify <code>CLOUD</code>. If the source resources are located on an Outpost in your account, specify <code>OUTPOST</code>. </p> <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account.</p>'
                     TargetTags:
                       allOf:
                         - $ref: '#/components/schemas/TargetTagList'
@@ -302,7 +302,7 @@ paths:
         - name: tagsToAdd
           in: query
           required: false
-          description: <p>The tags to add to objects created by the policy.</p> <p>Tags are strings in the format <code>key=value</code>.</p> <p>These user-defined tags are added in addition to the AWS-added lifecycle tags.</p>
+          description: <p>The tags to add to objects created by the policy.</p> <p>Tags are strings in the format <code>key=value</code>.</p> <p>These user-defined tags are added in addition to the Amazon Web Services-added lifecycle tags.</p>
           schema:
             type: array
             items:
@@ -629,7 +629,7 @@ paths:
                     PolicyType:
                       allOf:
                         - $ref: '#/components/schemas/PolicyTypeValues'
-                        - description: <p>The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> to create an event-based policy that performs specific actions when a defined event occurs in your AWS account.</p> <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>
+                        - description: <p>The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> to create an event-based policy that performs specific actions when a defined event occurs in your Amazon Web Services account.</p> <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>
                     ResourceTypes:
                       allOf:
                         - $ref: '#/components/schemas/ResourceTypeValuesList'
@@ -637,7 +637,7 @@ paths:
                     ResourceLocations:
                       allOf:
                         - $ref: '#/components/schemas/ResourceLocationList'
-                        - description: '<p>The location of the resources to backup. If the source resources are located in an AWS Region, specify <code>CLOUD</code>. If the source resources are located on an AWS Outpost in your account, specify <code>OUTPOST</code>. </p> <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account.</p>'
+                        - description: '<p>The location of the resources to backup. If the source resources are located in an Amazon Web Services Region, specify <code>CLOUD</code>. If the source resources are located on an Outpost in your account, specify <code>OUTPOST</code>. </p> <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account.</p>'
                     TargetTags:
                       allOf:
                         - $ref: '#/components/schemas/TargetTagList'
@@ -775,7 +775,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/EventSourceValues'
-            - description: The source of the event. Currently only managed AWS CloudWatch Events rules are supported.
+            - description: The source of the event. Currently only managed CloudWatch Events rules are supported.
         Parameters:
           allOf:
             - $ref: '#/components/schemas/EventParameters'
@@ -924,7 +924,7 @@ components:
         PolicyType:
           allOf:
             - $ref: '#/components/schemas/PolicyTypeValues'
-            - description: <p>The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> to create an event-based policy that performs specific actions when a defined event occurs in your AWS account.</p> <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>
+            - description: <p>The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> to create an event-based policy that performs specific actions when a defined event occurs in your Amazon Web Services account.</p> <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>
         ResourceTypes:
           allOf:
             - $ref: '#/components/schemas/ResourceTypeValuesList'
@@ -932,7 +932,7 @@ components:
         ResourceLocations:
           allOf:
             - $ref: '#/components/schemas/ResourceLocationList'
-            - description: '<p>The location of the resources to backup. If the source resources are located in an AWS Region, specify <code>CLOUD</code>. If the source resources are located on an AWS Outpost in your account, specify <code>OUTPOST</code>. </p> <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account.</p>'
+            - description: '<p>The location of the resources to backup. If the source resources are located in an Amazon Web Services Region, specify <code>CLOUD</code>. If the source resources are located on an Outpost in your account, specify <code>OUTPOST</code>. </p> <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account.</p>'
         TargetTags:
           allOf:
             - $ref: '#/components/schemas/TargetTagList'
@@ -1017,7 +1017,7 @@ components:
         Location:
           allOf:
             - $ref: '#/components/schemas/LocationValues'
-            - description: '<p>Specifies the destination for snapshots created by the policy. To create snapshots in the same Region as the source resource, specify <code>CLOUD</code>. To create snapshots on the same Outpost as the source resource, specify <code>OUTPOST_LOCAL</code>. If you omit this parameter, <code>CLOUD</code> is used by default.</p> <p>If the policy targets resources in an AWS Region, then you must create snapshots in the same Region as the source resource. </p> <p>If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost as the source resource, or in the Region of that Outpost.</p>'
+            - description: '<p>Specifies the destination for snapshots created by the policy. To create snapshots in the same Region as the source resource, specify <code>CLOUD</code>. To create snapshots on the same Outpost as the source resource, specify <code>OUTPOST_LOCAL</code>. If you omit this parameter, <code>CLOUD</code> is used by default.</p> <p>If the policy targets resources in an Amazon Web Services Region, then you must create snapshots in the same Region as the source resource.</p> <p>If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost as the source resource, or in the Region of that Outpost.</p>'
         Interval:
           allOf:
             - $ref: '#/components/schemas/Interval'
@@ -1052,7 +1052,7 @@ components:
         CmkArn:
           allOf:
             - $ref: '#/components/schemas/CmkArn'
-            - description: 'The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use for EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used.'
+            - description: 'The Amazon Resource Name (ARN) of the KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.'
       description: Specifies the encryption settings for shared snapshots that are copied across Regions.
     CrossRegionCopyRetainRule:
       type: object
@@ -1090,6 +1090,18 @@ components:
         - WEEKS
         - MONTHS
         - YEARS
+    CrossRegionCopyDeprecateRule:
+      type: object
+      properties:
+        Interval:
+          allOf:
+            - $ref: '#/components/schemas/Interval'
+            - description: 'The period after which to deprecate the cross-Region AMI copies. The period must be less than or equal to the cross-Region AMI copy retention period, and it can''t be greater than 10 years. This is equivalent to 120 months, 520 weeks, or 3650 days.'
+        IntervalUnit:
+          allOf:
+            - $ref: '#/components/schemas/RetentionIntervalUnitValues'
+            - description: The unit of time in which to measure the <b>Interval</b>.
+      description: Specifies an AMI deprecation rule for cross-Region AMI copies created by a cross-Region copy rule.
     TargetRegion:
       type: string
       pattern: '([a-z]+-){2,3}\d'
@@ -1105,11 +1117,11 @@ components:
         TargetRegion:
           allOf:
             - $ref: '#/components/schemas/TargetRegion'
-            - description: '<p>The target Region for the snapshot copies.</p> <p>If you specify a target Region, you must omit <b>Target</b>. You cannot specify a target Region and a target Outpost in the same rule.</p>'
+            - description: '<p>Avoid using this parameter when creating new policies. Instead, use <b>Target</b> to specify a target Region or a target Outpost for snapshot copies.</p> <p>For policies created before the <b>Target</b> parameter was introduced, this parameter indicates the target Region for snapshot copies.</p>'
         Target:
           allOf:
             - $ref: '#/components/schemas/Target'
-            - description: '<p>The Amazon Resource Name (ARN) of the target AWS Outpost for the snapshot copies.</p> <p>If you specify an ARN, you must omit <b>TargetRegion</b>. You cannot specify a target Region and a target Outpost in the same rule.</p>'
+            - description: <p>The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.</p> <p>Use this parameter instead of <b>TargetRegion</b>. Do not specify both.</p>
         Encrypted:
           allOf:
             - $ref: '#/components/schemas/Encrypted'
@@ -1117,15 +1129,19 @@ components:
         CmkArn:
           allOf:
             - $ref: '#/components/schemas/CmkArn'
-            - description: 'The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use for EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used.'
+            - description: 'The Amazon Resource Name (ARN) of the KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.'
         CopyTags:
           allOf:
             - $ref: '#/components/schemas/CopyTagsNullable'
-            - description: Copy all user-defined tags from the source snapshot to the copied snapshot.
+            - description: Indicates whether to copy all user-defined tags from the source snapshot to the cross-Region snapshot copy.
         RetainRule:
           allOf:
             - $ref: '#/components/schemas/CrossRegionCopyRetainRule'
-            - description: The retention rule.
+            - description: The retention rule that indicates how long snapshot copies are to be retained in the destination Region.
+        DeprecateRule:
+          allOf:
+            - $ref: '#/components/schemas/CrossRegionCopyDeprecateRule'
+            - description: The AMI deprecation rule for cross-Region AMI copies created by the rule.
       description: Specifies a rule for cross-Region snapshot copies.
     CrossRegionCopyRules:
       type: array
@@ -1137,6 +1153,22 @@ components:
       type: object
       title: DeleteLifecyclePolicyRequest
       properties: {}
+    DeprecateRule:
+      type: object
+      properties:
+        Count:
+          allOf:
+            - $ref: '#/components/schemas/Count'
+            - description: 'If the schedule has a count-based retention rule, this parameter specifies the number of oldest AMIs to deprecate. The count must be less than or equal to the schedule''s retention count, and it can''t be greater than 1000.'
+        Interval:
+          allOf:
+            - $ref: '#/components/schemas/Interval'
+            - description: 'If the schedule has an age-based retention rule, this parameter specifies the period after which to deprecate AMIs created by the schedule. The period must be less than or equal to the schedule''s retention period, and it can''t be greater than 10 years. This is equivalent to 120 months, 520 weeks, or 3650 days.'
+        IntervalUnit:
+          allOf:
+            - $ref: '#/components/schemas/RetentionIntervalUnitValues'
+            - description: The unit of time in which to measure the <b>Interval</b>.
+      description: Specifies an AMI deprecation rule for a schedule.
     DescriptionRegex:
       type: string
       pattern: '[\p{all}]*'
@@ -1166,7 +1198,7 @@ components:
         SnapshotOwner:
           allOf:
             - $ref: '#/components/schemas/SnapshotOwnerList'
-            - description: The IDs of the AWS accounts that can trigger policy by sharing snapshots with your account. The policy only runs if one of the specified AWS accounts shares a snapshot with your account.
+            - description: The IDs of the Amazon Web Services accounts that can trigger policy by sharing snapshots with your account. The policy only runs if one of the specified Amazon Web Services accounts shares a snapshot with your account.
         DescriptionRegex:
           allOf:
             - $ref: '#/components/schemas/DescriptionRegex'
@@ -1379,7 +1411,7 @@ components:
         TagsToAdd:
           allOf:
             - $ref: '#/components/schemas/TagsToAddList'
-            - description: The tags to apply to policy-created resources. These user-defined tags are in addition to the AWS-added lifecycle tags.
+            - description: The tags to apply to policy-created resources. These user-defined tags are in addition to the Amazon Web Services-added lifecycle tags.
         VariableTags:
           allOf:
             - $ref: '#/components/schemas/VariableTagsList'
@@ -1403,7 +1435,11 @@ components:
         ShareRules:
           allOf:
             - $ref: '#/components/schemas/ShareRules'
-            - description: The rule for sharing snapshots with other AWS accounts.
+            - description: The rule for sharing snapshots with other Amazon Web Services accounts.
+        DeprecateRule:
+          allOf:
+            - $ref: '#/components/schemas/DeprecateRule'
+            - description: The AMI deprecation rule for the schedule.
       description: Specifies a backup schedule for a snapshot or AMI lifecycle policy.
     ShareTargetAccountList:
       type: array
@@ -1418,16 +1454,16 @@ components:
         TargetAccounts:
           allOf:
             - $ref: '#/components/schemas/ShareTargetAccountList'
-            - description: The IDs of the AWS accounts with which to share the snapshots.
+            - description: The IDs of the Amazon Web Services accounts with which to share the snapshots.
         UnshareInterval:
           allOf:
             - $ref: '#/components/schemas/Interval'
-            - description: The period after which snapshots that are shared with other AWS accounts are automatically unshared.
+            - description: The period after which snapshots that are shared with other Amazon Web Services accounts are automatically unshared.
         UnshareIntervalUnit:
           allOf:
             - $ref: '#/components/schemas/RetentionIntervalUnitValues'
             - description: The unit of time for the automatic unsharing interval.
-      description: Specifies a rule for sharing snapshots across AWS accounts.
+      description: Specifies a rule for sharing snapshots across Amazon Web Services accounts.
     String:
       type: string
       pattern: '[\p{all}]*'

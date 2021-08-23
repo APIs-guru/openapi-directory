@@ -3,7 +3,7 @@ info:
   version: '2018-11-15'
   x-release: v4
   title: AWS Backup
-  description: '<fullname>AWS Backup</fullname> <p>AWS Backup is a unified backup service designed to protect AWS services and their associated data. AWS Backup simplifies the creation, migration, restoration, and deletion of backups, while also providing reporting and auditing.</p>'
+  description: '<fullname>Backup</fullname> <p>Backup is a unified backup service designed to protect Amazon Web Services services and their associated data. Backup simplifies the creation, migration, restoration, and deletion of backups, while also providing reporting and auditing.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -112,11 +112,12 @@ servers:
           - cn-northwest-1
         default: cn-north-1
     description: The AWS Backup endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 paths:
   /backup/plans/:
     put:
       operationId: CreateBackupPlan
-      description: '<p>Creates a backup plan using a backup plan name and backup rules. A backup plan is a document that contains information that AWS Backup uses to schedule tasks that create recovery points for resources.</p> <p>If you call <code>CreateBackupPlan</code> with a plan that already exists, an <code>AlreadyExistsException</code> is returned.</p>'
+      description: '<p>Creates a backup plan using a backup plan name and backup rules. A backup plan is a document that contains information that Backup uses to schedule tasks that create recovery points for resources.</p> <p>If you call <code>CreateBackupPlan</code> with a plan that already exists, you receive an <code>AlreadyExistsException</code> exception.</p>'
       responses:
         '200':
           description: Success
@@ -165,7 +166,7 @@ paths:
                 - BackupPlan
               properties:
                 BackupPlan:
-                  description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources. '
+                  description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of Amazon Web Services resources. '
                   type: object
                   properties:
                     BackupPlanName:
@@ -179,7 +180,7 @@ paths:
                     AdvancedBackupSettings:
                       allOf:
                         - $ref: '#/components/schemas/AdvancedBackupSettings'
-                        - description: Specifies a list of <code>BackupOptions</code> for each resource type. These settings are only available for Windows VSS backup jobs.
+                        - description: Specifies a list of <code>BackupOptions</code> for each resource type. These settings are only available for Windows Volume Shadow Copy Service (VSS) backup jobs.
                 BackupPlanTags:
                   description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair. The specified tags are assigned to all backups created with this plan.'
                   type: object
@@ -198,7 +199,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListBackupPlans
-      description: 'Returns a list of existing backup plans for an authenticated account. The list is populated only if the advanced option is set for the backup plan. The list contains information such as Amazon Resource Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan names, and creator request IDs.'
+      description: 'Returns a list of all active backup plans for an authenticated account. The list contains information such as Amazon Resource Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan names, and creator request IDs.'
       responses:
         '200':
           description: Success
@@ -331,7 +332,7 @@ paths:
                     IamRoleArn:
                       allOf:
                         - $ref: '#/components/schemas/IAMRoleArn'
-                        - description: 'The ARN of the IAM role that AWS Backup uses to authenticate when backing up the target resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+                        - description: 'The ARN of the IAM role that Backup uses to authenticate when backing up the target resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
                     Resources:
                       allOf:
                         - $ref: '#/components/schemas/ResourceArns'
@@ -421,7 +422,7 @@ paths:
   '/backup-vaults/{backupVaultName}':
     put:
       operationId: CreateBackupVault
-      description: '<p>Creates a logical container where backups are stored. A <code>CreateBackupVault</code> request includes a name, optionally one or more resource tags, an encryption key, and a request ID.</p> <note> <p>Sensitive data, such as passport numbers, should not be included the name of a backup vault.</p> </note>'
+      description: '<p>Creates a logical container where backups are stored. A <code>CreateBackupVault</code> request includes a name, optionally one or more resource tags, an encryption key, and a request ID.</p> <note> <p>Do not include sensitive data, such as passport numbers, in the name of a backup vault.</p> </note>'
       responses:
         '200':
           description: Success
@@ -463,7 +464,7 @@ paths:
         - name: backupVaultName
           in: path
           required: true
-          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of letters, numbers, and hyphens.'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of letters, numbers, and hyphens.'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
@@ -533,7 +534,7 @@ paths:
         - name: backupVaultName
           in: path
           required: true
-          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
     get:
@@ -574,7 +575,271 @@ paths:
         - name: backupVaultName
           in: path
           required: true
-          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          schema:
+            type: string
+  /audit/frameworks:
+    post:
+      operationId: CreateFramework
+      description: 'Creates a framework with one or more controls. A framework is a collection of controls that you can use to evaluate your backup practices. By using pre-built customizable controls to define your policies, you can evaluate whether your backup practices comply with your policies. To get insights into the compliance status of your frameworks, you can set up automatic daily reports.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFrameworkOutput'
+        '480':
+          description: AlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: MissingParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingParameterValueException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - FrameworkName
+                - FrameworkControls
+              properties:
+                FrameworkName:
+                  description: 'The unique name of the framework. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).'
+                  type: string
+                  pattern: '[a-zA-Z][_a-zA-Z0-9]*'
+                  minLength: 1
+                  maxLength: 256
+                FrameworkDescription:
+                  description: 'An optional description of the framework with a maximum of 1,024 characters.'
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 0
+                  maxLength: 1024
+                FrameworkControls:
+                  description: 'A list of the controls that make up the framework. Each control in the list has a name, input parameters, and scope.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FrameworkControl'
+                IdempotencyToken:
+                  description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>CreateFrameworkInput</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
+                  type: string
+                FrameworkTags:
+                  description: Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListFrameworks
+      description: Returns a list of all frameworks for an Amazon Web Services account and Amazon Web Services Region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFrameworksOutput'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The number of desired results from 1 to 1000. Optional. If unspecified, the query will return 1 MB of data.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: NextToken
+          in: query
+          required: false
+          description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
+          schema:
+            type: string
+  /audit/report-plans:
+    post:
+      operationId: CreateReportPlan
+      description: '<p>Creates a report plan. A report plan is a document that contains information about the contents of the report and where Backup will deliver it.</p> <p>If you call <code>CreateReportPlan</code> with a plan that already exists, you receive an <code>AlreadyExistsException</code> exception.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateReportPlanOutput'
+        '480':
+          description: AlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: MissingParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingParameterValueException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ReportPlanName
+                - ReportDeliveryChannel
+                - ReportSetting
+              properties:
+                ReportPlanName:
+                  description: 'The unique name of the report plan. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).'
+                  type: string
+                  pattern: '[a-zA-Z][_a-zA-Z0-9]*'
+                  minLength: 1
+                  maxLength: 256
+                ReportPlanDescription:
+                  description: 'An optional description of the report plan with a maximum of 1,024 characters.'
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 0
+                  maxLength: 1024
+                ReportDeliveryChannel:
+                  description: 'Contains information from your report plan about where to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.'
+                  type: object
+                  properties:
+                    S3BucketName:
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: The unique name of the S3 bucket that receives your reports.
+                    S3KeyPrefix:
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: 'The prefix for where Backup Audit Manager delivers your reports to Amazon S3. The prefix is this part of the following path: s3://your-bucket-name/<code>prefix</code>/Backup/us-west-2/year/month/day/report-name. If not specified, there is no prefix.'
+                    Formats:
+                      allOf:
+                        - $ref: '#/components/schemas/FormatList'
+                        - description: 'A list of the format of your reports: <code>CSV</code>, <code>JSON</code>, or both. If not specified, the default format is <code>CSV</code>.'
+                ReportSetting:
+                  description: Contains detailed information about a report setting.
+                  type: object
+                  properties:
+                    ReportTemplate:
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: '<p>Identifies the report template for the report. Reports are built using a report template. The report templates are:</p> <p> <code>BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT</code> </p>'
+                ReportPlanTags:
+                  description: Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/string'
+                IdempotencyToken:
+                  description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>CreateReportPlanInput</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListReportPlans
+      description: 'Returns a list of your report plans. For detailed information about a single report plan, use <code>DescribeReportPlan</code>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReportPlansOutput'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The number of desired results from 1 to 1000. Optional. If unspecified, the query will return 1 MB of data.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: NextToken
+          in: query
+          required: false
+          description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
           schema:
             type: string
   '/backup/plans/{backupPlanId}':
@@ -684,7 +949,7 @@ paths:
                 - BackupPlan
               properties:
                 BackupPlan:
-                  description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources. '
+                  description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of Amazon Web Services resources. '
                   type: object
                   properties:
                     BackupPlanName:
@@ -698,7 +963,7 @@ paths:
                     AdvancedBackupSettings:
                       allOf:
                         - $ref: '#/components/schemas/AdvancedBackupSettings'
-                        - description: Specifies a list of <code>BackupOptions</code> for each resource type. These settings are only available for Windows VSS backup jobs.
+                        - description: Specifies a list of <code>BackupOptions</code> for each resource type. These settings are only available for Windows Volume Shadow Copy Service (VSS) backup jobs.
   '/backup/plans/{backupPlanId}/selections/{selectionId}':
     delete:
       operationId: DeleteBackupSelection
@@ -833,7 +1098,7 @@ paths:
         - name: backupVaultName
           in: path
           required: true
-          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
@@ -883,7 +1148,7 @@ paths:
         - name: backupVaultName
           in: path
           required: true
-          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
@@ -921,7 +1186,7 @@ paths:
         - name: backupVaultName
           in: path
           required: true
-          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
@@ -1020,7 +1285,7 @@ paths:
         - name: backupVaultName
           in: path
           required: true
-          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
@@ -1058,7 +1323,7 @@ paths:
         - name: backupVaultName
           in: path
           required: true
-          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
@@ -1076,10 +1341,186 @@ paths:
                   description: 'The Amazon Resource Name (ARN) that specifies the topic for a backup vault’s events; for example, <code>arn:aws:sns:us-west-2:111122223333:MyVaultTopic</code>.'
                   type: string
                 BackupVaultEvents:
-                  description: An array of events that indicate the status of jobs to back up resources to the backup vault.
+                  description: '<p>An array of events that indicate the status of jobs to back up resources to the backup vault.</p> <note> <p>The following events are supported:</p> <p> <code>BACKUP_JOB_STARTED</code>, <code>BACKUP_JOB_COMPLETED</code>,</p> <p> <code>COPY_JOB_STARTED</code>, <code>COPY_JOB_SUCCESSFUL</code>, <code>COPY_JOB_FAILED</code>,</p> <p> <code>RESTORE_JOB_STARTED</code>, <code>RESTORE_JOB_COMPLETED</code>, and <code>RECOVERY_POINT_MODIFIED</code>.</p> <p>To find failed backup jobs, use <code>BACKUP_JOB_COMPLETED</code> and filter using event metadata.</p> <p>Other events in the following list are deprecated.</p> </note>'
                   type: array
                   items:
                     $ref: '#/components/schemas/BackupVaultEvent'
+  '/audit/frameworks/{frameworkName}':
+    delete:
+      operationId: DeleteFramework
+      description: Deletes the framework specified by a framework name.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: MissingParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingParameterValueException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: frameworkName
+          in: path
+          required: true
+          description: The unique name of a framework.
+          schema:
+            type: string
+            pattern: '[a-zA-Z][_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeFramework
+      description: Returns the framework details for the specified <code>FrameworkName</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeFrameworkOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: MissingParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingParameterValueException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: frameworkName
+          in: path
+          required: true
+          description: The unique name of a framework.
+          schema:
+            type: string
+            pattern: '[a-zA-Z][_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 256
+    put:
+      operationId: UpdateFramework
+      description: Updates an existing framework identified by its <code>FrameworkName</code> with the input document in JSON format.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFrameworkOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: MissingParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingParameterValueException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: frameworkName
+          in: path
+          required: true
+          description: 'The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).'
+          schema:
+            type: string
+            pattern: '[a-zA-Z][_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                FrameworkDescription:
+                  description: 'An optional description of the framework with a maximum 1,024 characters.'
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 0
+                  maxLength: 1024
+                FrameworkControls:
+                  description: 'A list of the controls that make up the framework. Each control in the list has a name, input parameters, and scope.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FrameworkControl'
+                IdempotencyToken:
+                  description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>UpdateFrameworkInput</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
+                  type: string
   '/backup-vaults/{backupVaultName}/recovery-points/{recoveryPointArn}':
     delete:
       operationId: DeleteRecoveryPoint
@@ -1127,7 +1568,7 @@ paths:
         - name: backupVaultName
           in: path
           required: true
-          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
@@ -1183,7 +1624,7 @@ paths:
         - name: backupVaultName
           in: path
           required: true
-          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
@@ -1195,7 +1636,7 @@ paths:
             type: string
     post:
       operationId: UpdateRecoveryPointLifecycle
-      description: '<p>Sets the transition lifecycle of a recovery point.</p> <p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p> <p>Does not support continuous backups.</p>'
+      description: '<p>Sets the transition lifecycle of a recovery point.</p> <p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p> <p>Does not support continuous backups.</p>'
       responses:
         '200':
           description: Success
@@ -1231,7 +1672,7 @@ paths:
         - name: backupVaultName
           in: path
           required: true
-          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
@@ -1260,6 +1701,195 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Long'
                         - description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.
+  '/audit/report-plans/{reportPlanName}':
+    delete:
+      operationId: DeleteReportPlan
+      description: Deletes the report plan specified by a report plan name.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: MissingParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingParameterValueException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: reportPlanName
+          in: path
+          required: true
+          description: The unique name of a report plan.
+          schema:
+            type: string
+            pattern: '[a-zA-Z][_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeReportPlan
+      description: Returns a list of all report plans for an Amazon Web Services account and Amazon Web Services Region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeReportPlanOutput'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: MissingParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: reportPlanName
+          in: path
+          required: true
+          description: The unique name of a report plan.
+          schema:
+            type: string
+            pattern: '[a-zA-Z][_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 256
+    put:
+      operationId: UpdateReportPlan
+      description: Updates an existing report plan identified by its <code>ReportPlanName</code> with the input document in JSON format.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateReportPlanOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: MissingParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingParameterValueException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: reportPlanName
+          in: path
+          required: true
+          description: 'The unique name of the report plan. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).'
+          schema:
+            type: string
+            pattern: '[a-zA-Z][_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ReportPlanDescription:
+                  description: 'An optional description of the report plan with a maximum 1,024 characters.'
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 0
+                  maxLength: 1024
+                ReportDeliveryChannel:
+                  description: 'Contains information from your report plan about where to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.'
+                  type: object
+                  properties:
+                    S3BucketName:
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: The unique name of the S3 bucket that receives your reports.
+                    S3KeyPrefix:
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: 'The prefix for where Backup Audit Manager delivers your reports to Amazon S3. The prefix is this part of the following path: s3://your-bucket-name/<code>prefix</code>/Backup/us-west-2/year/month/day/report-name. If not specified, there is no prefix.'
+                    Formats:
+                      allOf:
+                        - $ref: '#/components/schemas/FormatList'
+                        - description: 'A list of the format of your reports: <code>CSV</code>, <code>JSON</code>, or both. If not specified, the default format is <code>CSV</code>.'
+                ReportSetting:
+                  description: Contains detailed information about a report setting.
+                  type: object
+                  properties:
+                    ReportTemplate:
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: '<p>Identifies the report template for the report. Reports are built using a report template. The report templates are:</p> <p> <code>BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT</code> </p>'
+                IdempotencyToken:
+                  description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>UpdateReportPlanInput</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
+                  type: string
   '/backup-jobs/{backupJobId}':
     get:
       operationId: DescribeBackupJob
@@ -1305,7 +1935,7 @@ paths:
         - name: backupJobId
           in: path
           required: true
-          description: Uniquely identifies a request to AWS Backup to back up a resource.
+          description: Uniquely identifies a request to Backup to back up a resource.
           schema:
             type: string
     parameters:
@@ -1356,7 +1986,7 @@ paths:
         - name: backupJobId
           in: path
           required: true
-          description: Uniquely identifies a request to AWS Backup to back up a resource.
+          description: Uniquely identifies a request to Backup to back up a resource.
           schema:
             type: string
   '/copy-jobs/{copyJobId}':
@@ -1412,7 +2042,7 @@ paths:
   /global-settings:
     get:
       operationId: DescribeGlobalSettings
-      description: 'Describes the global settings of the AWS account, including whether it is opted in to cross-account backup.'
+      description: 'Describes whether the Amazon Web Services account is opted in to cross-account backup. Returns an error if the account is not a member of an Organizations organization. Example: <code>describe-global-settings --region us-west-2</code> '
       responses:
         '200':
           description: Success
@@ -1443,7 +2073,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateGlobalSettings
-      description: Updates the current global settings for the AWS account. Use the <code>DescribeGlobalSettings</code> API to determine the current settings.
+      description: Updates whether the Amazon Web Services account is opted in to cross-account backup. Returns an error if the account is not an Organizations management account. Use the <code>DescribeGlobalSettings</code> API to determine the current settings.
       responses:
         '200':
           description: Success
@@ -1480,14 +2110,14 @@ paths:
               type: object
               properties:
                 GlobalSettings:
-                  description: A list of resources along with the opt-in preferences for the account.
+                  description: 'A value for <code>isCrossAccountBackupEnabled</code> and a Region. Example: <code>update-global-settings --global-settings isCrossAccountBackupEnabled=false --region us-west-2</code>.'
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/GlobalSettingsValue'
   '/resources/{resourceArn}':
     get:
       operationId: DescribeProtectedResource
-      description: 'Returns information about a saved resource, including the last time it was backed up, its Amazon Resource Name (ARN), and the AWS service type of the saved resource.'
+      description: 'Returns information about a saved resource, including the last time it was backed up, its Amazon Resource Name (ARN), and the Amazon Web Services service type of the saved resource.'
       responses:
         '200':
           description: Success
@@ -1537,7 +2167,7 @@ paths:
   /account-settings:
     get:
       operationId: DescribeRegionSettings
-      description: 'Returns the current service opt-in settings for the Region. If service-opt-in is enabled for a service, AWS Backup tries to protect that service''s resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, AWS Backup does not try to protect that service''s resources in this Region, AWS Backup does not try to protect that service''s resources in this Region.'
+      description: 'Returns the current service opt-in settings for the Region. If service opt-in is enabled for a service, Backup tries to protect that service''s resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, Backup does not try to protect that service''s resources in this Region.'
       responses:
         '200':
           description: Success
@@ -1562,7 +2192,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateRegionSettings
-      description: 'Updates the current service opt-in settings for the Region. If service-opt-in is enabled for a service, AWS Backup tries to protect that service''s resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, AWS Backup does not try to protect that service''s resources in this Region. Use the <code>DescribeRegionSettings</code> API to determine the resource types that are supported.'
+      description: 'Updates the current service opt-in settings for the Region. If service-opt-in is enabled for a service, Backup tries to protect that service''s resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, Backup does not try to protect that service''s resources in this Region. Use the <code>DescribeRegionSettings</code> API to determine the resource types that are supported.'
       responses:
         '200':
           description: Success
@@ -1597,6 +2227,50 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/IsEnabled'
+  '/audit/report-jobs/{reportJobId}':
+    get:
+      operationId: DescribeReportJob
+      description: Returns the details associated with creating a report as specified by its <code>ReportJobId</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeReportJobOutput'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: MissingParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: reportJobId
+          in: path
+          required: true
+          description: 'The identifier of the report job. A unique, randomly generated, Unicode, UTF-8 encoded string that is at most 1,024 bytes long. The report job ID cannot be edited.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/restore-jobs/{restoreJobId}':
     get:
       operationId: DescribeRestoreJob
@@ -1656,7 +2330,7 @@ paths:
   '/backup-vaults/{backupVaultName}/recovery-points/{recoveryPointArn}/disassociate':
     post:
       operationId: DisassociateRecoveryPoint
-      description: '<p>Deletes the specified continuous backup recovery point from AWS Backup and releases control of that continuous backup to the source service, such as Amazon RDS. The source service will continue to create and retain continuous backups using the lifecycle that you specified in your original backup plan.</p> <p>Does not support snapshot backup recovery points.</p>'
+      description: '<p>Deletes the specified continuous backup recovery point from Backup and releases control of that continuous backup to the source service, such as Amazon RDS. The source service will continue to create and retain continuous backups using the lifecycle that you specified in your original backup plan.</p> <p>Does not support snapshot backup recovery points.</p>'
       responses:
         '200':
           description: Success
@@ -1700,14 +2374,14 @@ paths:
         - name: backupVaultName
           in: path
           required: true
-          description: The unique name of an AWS Backup vault. Required.
+          description: The unique name of an Backup vault.
           schema:
             type: string
             pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
         - name: recoveryPointArn
           in: path
           required: true
-          description: An Amazon Resource Name (ARN) that uniquely identifies an AWS Backup recovery point. Required.
+          description: An Amazon Resource Name (ARN) that uniquely identifies an Backup recovery point.
           schema:
             type: string
     parameters:
@@ -1975,7 +2649,7 @@ paths:
         - name: backupVaultName
           in: path
           required: true
-          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
@@ -1996,7 +2670,7 @@ paths:
   /supported-resource-types:
     get:
       operationId: GetSupportedResourceTypes
-      description: Returns the AWS resource types supported by AWS Backup.
+      description: Returns the Amazon Web Services resource types supported by Backup.
       responses:
         '200':
           description: Success
@@ -2080,7 +2754,7 @@ paths:
         - name: backupVaultName
           in: query
           required: false
-          description: 'Returns only backup jobs that will be stored in the specified backup vault. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          description: 'Returns only backup jobs that will be stored in the specified backup vault. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
@@ -2101,14 +2775,14 @@ paths:
         - name: resourceType
           in: query
           required: false
-          description: '<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>'
+          description: '<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for Storage Gateway</p> </li> </ul>'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
         - name: accountId
           in: query
           required: false
-          description: '<p>The account ID to list the jobs from. Returns only backup jobs associated with the specified account ID.</p> <p>If used from an AWS Organizations management account, passing <code>*</code> returns all jobs across the organization.</p>'
+          description: '<p>The account ID to list the jobs from. Returns only backup jobs associated with the specified account ID.</p> <p>If used from an Organizations management account, passing <code>*</code> returns all jobs across the organization.</p>'
           schema:
             type: string
             pattern: '^[0-9]{12}$'
@@ -2420,7 +3094,7 @@ paths:
         - name: resourceType
           in: query
           required: false
-          description: '<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>'
+          description: '<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for Storage Gateway</p> </li> </ul>'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
@@ -2460,7 +3134,7 @@ paths:
   /resources/:
     get:
       operationId: ListProtectedResources
-      description: 'Returns an array of resources successfully backed up by AWS Backup, including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.'
+      description: 'Returns an array of resources successfully backed up by Backup, including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.'
       responses:
         '200':
           description: Success
@@ -2554,7 +3228,7 @@ paths:
         - name: backupVaultName
           in: path
           required: true
-          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          description: '<p>The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.</p> <note> <p>Backup vault name might not be available when a supported service creates the backup.</p> </note>'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
@@ -2628,7 +3302,7 @@ paths:
   '/resources/{resourceArn}/recovery-points/':
     get:
       operationId: ListRecoveryPointsByResource
-      description: Returns detailed information about recovery points of the type specified by a resource Amazon Resource Name (ARN).
+      description: '<p>Returns detailed information about all the recovery points of the type specified by a resource Amazon Resource Name (ARN).</p> <note> <p>For Amazon EFS and Amazon EC2, this action only lists recovery points created by Backup.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2676,7 +3350,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: The maximum number of items to be returned.
+          description: <p>The maximum number of items to be returned.</p> <note> <p>Amazon RDS requires a value of at least 20.</p> </note>
           schema:
             type: integer
             minimum: 1
@@ -2701,10 +3375,85 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /audit/report-jobs:
+    get:
+      operationId: ListReportJobs
+      description: Returns details about your report jobs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReportJobsOutput'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: ReportPlanName
+          in: query
+          required: false
+          description: Returns only report jobs with the specified report plan name.
+          schema:
+            type: string
+            pattern: '[a-zA-Z][_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 256
+        - name: CreationBefore
+          in: query
+          required: false
+          description: 'Returns only report jobs that were created before the date and time specified in Unix format and Coordinated Universal Time (UTC). For example, the value 1516925490 represents Friday, January 26, 2018 12:11:30 AM.'
+          schema:
+            type: string
+            format: date-time
+        - name: CreationAfter
+          in: query
+          required: false
+          description: 'Returns only report jobs that were created after the date and time specified in Unix format and Coordinated Universal Time (UTC). For example, the value 1516925490 represents Friday, January 26, 2018 12:11:30 AM.'
+          schema:
+            type: string
+            format: date-time
+        - name: Status
+          in: query
+          required: false
+          description: '<p>Returns only report jobs that are in the specified status. The statuses are:</p> <p> <code>CREATED | RUNNING | COMPLETED | FAILED</code> </p>'
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The number of desired results from 1 to 1000. Optional. If unspecified, the query will return 1 MB of data.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: NextToken
+          in: query
+          required: false
+          description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /restore-jobs/:
     get:
       operationId: ListRestoreJobs
-      description: 'Returns a list of jobs that AWS Backup initiated to restore a saved resource, including metadata about the recovery process.'
+      description: 'Returns a list of jobs that Backup initiated to restore a saved resource, including details about the recovery process.'
       responses:
         '200':
           description: Success
@@ -2940,7 +3689,7 @@ paths:
                 - IamRoleArn
               properties:
                 BackupVaultName:
-                  description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+                  description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
                   type: string
                   pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
                 ResourceArn:
@@ -2950,7 +3699,7 @@ paths:
                   description: 'Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
                   type: string
                 IdempotencyToken:
-                  description: A customer chosen string that can be used to distinguish between calls to <code>StartBackupJob</code>.
+                  description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>StartBackupJob</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
                   type: string
                 StartWindowMinutes:
                   description: 'A value in minutes after a backup is scheduled before a job will be canceled if it doesn''t start successfully. This value is optional, and the default is 8 hours.'
@@ -2976,7 +3725,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 BackupOptions:
-                  description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid values: Set to <code>"WindowsVSS”:“enabled"</code> to enable WindowsVSS backup option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS option is not enabled by default.</p>'
+                  description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows Volume Shadow Copy Service (VSS) backup jobs.</p> <p>Valid values: Set to <code>"WindowsVSS":"enabled"</code> to enable the <code>WindowsVSS</code> backup option and create a Windows VSS backup. Set to <code>"WindowsVSS""disabled"</code> to create a regular backup. The <code>WindowsVSS</code> option is not enabled by default.</p>'
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/BackupOptionValue'
@@ -3052,7 +3801,7 @@ paths:
                   description: 'An ARN that uniquely identifies a recovery point to use for the copy job; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. '
                   type: string
                 SourceBackupVaultName:
-                  description: 'The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+                  description: 'The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
                   type: string
                   pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
                 DestinationBackupVaultArn:
@@ -3062,7 +3811,7 @@ paths:
                   description: 'Specifies the IAM role ARN used to copy the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
                   type: string
                 IdempotencyToken:
-                  description: A customer chosen string that can be used to distinguish between calls to <code>StartCopyJob</code>.
+                  description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>StartCopyJob</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
                   type: string
                 Lifecycle:
                   description: '<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
@@ -3076,6 +3825,69 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Long'
                         - description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/audit/report-jobs/{reportPlanName}':
+    post:
+      operationId: StartReportJob
+      description: Starts an on-demand report job for the specified report plan.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartReportJobOutput'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '482':
+          description: MissingParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingParameterValueException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: reportPlanName
+          in: path
+          required: true
+          description: The unique name of a report plan.
+          schema:
+            type: string
+            pattern: '[a-zA-Z][_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                IdempotencyToken:
+                  description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>StartReportJobInput</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
+                  type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3135,18 +3947,18 @@ paths:
                   description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
                   type: string
                 Metadata:
-                  description: '<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: The ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system. You can specify a key from another AWS account provided that key it is properly shared with your account via AWS KMS.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> <li> <p> <code>ItemsToRestore </code>: An array of one to five strings where each string is a file path. Use <code>ItemsToRestore</code> to restore specific files or directories rather than the entire file system. This parameter is optional. For example, <code>"itemsToRestore":"[\"/my.test\"]"</code>.</p> </li> </ul>'
+                  description: '<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: The ID of the Amazon EFS file system that is backed up by Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the Amazon Web Services KMS key that is used to encrypt the restored file system. You can specify a key from another Amazon Web Services account provided that key it is properly shared with your account via Amazon Web Services KMS.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> <li> <p> <code>ItemsToRestore</code>: An array of one to five strings where each string is a file path. Use <code>ItemsToRestore</code> to restore specific files or directories rather than the entire file system. This parameter is optional. For example, <code>"itemsToRestore":"[\"/my.test\"]"</code>.</p> </li> </ul>'
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/MetadataValue'
                 IamRoleArn:
-                  description: 'The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+                  description: 'The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
                   type: string
                 IdempotencyToken:
-                  description: A customer chosen string that can be used to distinguish between calls to <code>StartRestoreJob</code>.
+                  description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>StartRestoreJob</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
                   type: string
                 ResourceType:
-                  description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>'
+                  description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for Storage Gateway</p> </li> </ul>'
                   type: string
                   pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
     parameters:
@@ -3357,7 +4169,7 @@ components:
         AdvancedBackupSettings:
           allOf:
             - $ref: '#/components/schemas/AdvancedBackupSettings'
-            - description: A list of <code>BackupOptions</code> settings for a resource type. This option is only available for Windows VSS backup jobs.
+            - description: A list of <code>BackupOptions</code> settings for a resource type. This option is only available for Windows Volume Shadow Copy Service (VSS) backup jobs.
     BackupPlanName:
       type: string
     BackupRulesInput:
@@ -3418,6 +4230,52 @@ components:
           allOf:
             - $ref: '#/components/schemas/timestamp'
             - description: 'The date and time a backup vault is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+    CreateFrameworkOutput:
+      type: object
+      properties:
+        FrameworkName:
+          allOf:
+            - $ref: '#/components/schemas/FrameworkName'
+            - description: 'The unique name of the framework. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).'
+        FrameworkArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+    FrameworkControl:
+      type: object
+      required:
+        - ControlName
+      properties:
+        ControlName:
+          allOf:
+            - $ref: '#/components/schemas/ControlName'
+            - description: The name of a control. This name is between 1 and 256 characters.
+        ControlInputParameters:
+          allOf:
+            - $ref: '#/components/schemas/ControlInputParameters'
+            - description: A list of <code>ParameterName</code> and <code>ParameterValue</code> pairs.
+        ControlScope:
+          allOf:
+            - $ref: '#/components/schemas/ControlScope'
+            - description: 'The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans. For more information, see <code>ControlScope</code>.'
+      description: Contains detailed information about all of the controls of a framework. Each framework must contain at least one control.
+    string:
+      type: string
+    CreateReportPlanOutput:
+      type: object
+      properties:
+        ReportPlanName:
+          allOf:
+            - $ref: '#/components/schemas/ReportPlanName'
+            - description: The unique name of the report plan.
+        ReportPlanArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+    FormatList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
     DeleteBackupPlanOutput:
       type: object
       properties:
@@ -3439,6 +4297,7 @@ components:
             - description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version IDs cannot be edited.'
     ResourceNotFoundException: {}
     InvalidRequestException: {}
+    ConflictException: {}
     InvalidResourceStateException: {}
     DescribeBackupJobOutput:
       type: object
@@ -3450,11 +4309,11 @@ components:
         BackupJobId:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a request to AWS Backup to back up a resource.
+            - description: Uniquely identifies a request to Backup to back up a resource.
         BackupVaultName:
           allOf:
             - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         BackupVaultArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -3502,7 +4361,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
+            - description: 'The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
         BytesTransferred:
           allOf:
             - $ref: '#/components/schemas/Long'
@@ -3522,7 +4381,7 @@ components:
         BackupType:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: 'Represents the actual backup type selected for a backup job. For example, if a successful WindowsVSS backup was taken, <code>BackupType</code> returns "WindowsVSS". If <code>BackupType</code> is empty, then the backup type that was is a regular backup.'
+            - description: 'Represents the actual backup type selected for a backup job. For example, if a successful Windows Volume Shadow Copy Service (VSS) backup was taken, <code>BackupType</code> returns <code>"WindowsVSS"</code>. If <code>BackupType</code> is empty, then the backup type was a regular backup.'
     DependencyFailureException: {}
     DescribeBackupVaultOutput:
       type: object
@@ -3558,17 +4417,52 @@ components:
           allOf:
             - $ref: '#/components/schemas/CopyJob'
             - description: Contains detailed information about a copy job.
+    DescribeFrameworkOutput:
+      type: object
+      properties:
+        FrameworkName:
+          allOf:
+            - $ref: '#/components/schemas/FrameworkName'
+            - description: The unique name of a framework.
+        FrameworkArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+        FrameworkDescription:
+          allOf:
+            - $ref: '#/components/schemas/FrameworkDescription'
+            - description: An optional description of the framework.
+        FrameworkControls:
+          allOf:
+            - $ref: '#/components/schemas/FrameworkControls'
+            - description: 'A list of the controls that make up the framework. Each control in the list has a name, input parameters, and scope.'
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: 'The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+        DeploymentStatus:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>The deployment status of a framework. The statuses are:</p> <p> <code>CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED</code> </p>'
+        FrameworkStatus:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>A framework consists of one or more controls. Each control governs a resource, such as backup plans, backup selections, backup vaults, or recovery points. You can also turn Config recording on or off for each resource. The statuses are:</p> <ul> <li> <p> <code>ACTIVE</code> when recording is turned on for all resources governed by the framework.</p> </li> <li> <p> <code>PARTIALLY_ACTIVE</code> when recording is turned off for at least one resource governed by the framework.</p> </li> <li> <p> <code>INACTIVE</code> when recording is turned off for all resources governed by the framework.</p> </li> <li> <p> <code>UNAVAILABLE</code> when Backup is unable to validate recording status at this time.</p> </li> </ul>'
+        IdempotencyToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>DescribeFrameworkOutput</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
     DescribeGlobalSettingsOutput:
       type: object
       properties:
         GlobalSettings:
           allOf:
             - $ref: '#/components/schemas/GlobalSettings'
-            - description: A list of resources along with the opt-in preferences for the account.
+            - description: The status of the flag <code>isCrossAccountBackupEnabled</code>.
         LastUpdateTime:
           allOf:
             - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time that the global settings were last updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of <code>LastUpdateTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+            - description: 'The date and time that the flag <code>isCrossAccountBackupEnabled</code> was last updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of <code>LastUpdateTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
     DescribeProtectedResourceOutput:
       type: object
       properties:
@@ -3579,7 +4473,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource saved as a recovery point; for example, an EBS volume or an Amazon RDS database.'
+            - description: 'The type of Amazon Web Services resource saved as a recovery point; for example, an Amazon EBS volume or an Amazon RDS database.'
         LastBackupTime:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -3602,7 +4496,7 @@ components:
         SourceBackupVaultArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
-            - description: 'An Amazon Resource Name (ARN) that uniquely identifies the source vault where the resource was originally backed up in; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:BackupVault</code>. If the recovery is restored to the same AWS account or Region, this value will be <code>null</code>.'
+            - description: 'An Amazon Resource Name (ARN) that uniquely identifies the source vault where the resource was originally backed up in; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:BackupVault</code>. If the recovery is restored to the same Amazon Web Services account or Region, this value will be <code>null</code>.'
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -3610,7 +4504,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource to save as a recovery point; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
+            - description: 'The type of Amazon Web Services resource to save as a recovery point; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
         CreatedBy:
           allOf:
             - $ref: '#/components/schemas/RecoveryPointCreator'
@@ -3622,7 +4516,11 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/RecoveryPointStatus'
-            - description: <p>A status code specifying the state of the recovery point.</p> <note> <p>A partial status indicates that the recovery point was not successfully re-created and must be retried.</p> </note>
+            - description: '<p>A status code specifying the state of the recovery point.</p> <p> <code>PARTIAL</code> status indicates Backup could not create the recovery point before the backup window closed. To increase your backup plan window using the API, see <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateBackupPlan.html">UpdateBackupPlan</a>. You can also increase your backup plan window using the Console by choosing and editing your backup plan.</p> <p> <code>EXPIRED</code> status indicates that the recovery point has exceeded its retention period, but Backup lacks permission or is otherwise unable to delete it. To manually delete these recovery points, see <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/gs-cleanup-resources.html#cleanup-backups"> Step 3: Delete the recovery points</a> in the <i>Clean up resources</i> section of <i>Getting started</i>.</p>'
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A status message explaining the reason for the recovery point deletion failure.
         CreationDate:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -3642,7 +4540,7 @@ components:
         Lifecycle:
           allOf:
             - $ref: '#/components/schemas/Lifecycle'
-            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups that are transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
+            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups that are transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
         EncryptionKeyArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -3666,6 +4564,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceTypeOptInPreference'
             - description: Returns a list of all services along with the opt-in preferences in the Region.
+    DescribeReportJobOutput:
+      type: object
+      properties:
+        ReportJob:
+          allOf:
+            - $ref: '#/components/schemas/ReportJob'
+            - description: 'A list of information about a report job, including its completion and creation times, report destination, unique report job ID, Amazon Resource Name (ARN), report template, status, and status message.'
+    DescribeReportPlanOutput:
+      type: object
+      properties:
+        ReportPlan:
+          allOf:
+            - $ref: '#/components/schemas/ReportPlan'
+            - description: 'Returns details about the report plan that is specified by its name. These details include the report plan''s Amazon Resource Name (ARN), description, settings, delivery channel, deployment status, creation time, and last attempted and successful run times.'
     DescribeRestoreJobOutput:
       type: object
       properties:
@@ -3692,7 +4604,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/RestoreJobStatus'
-            - description: Status code specifying the state of the job that is initiated by AWS Backup to restore a recovery point.
+            - description: Status code specifying the state of the job that is initiated by Backup to restore a recovery point.
         StatusMessage:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -3859,7 +4771,7 @@ components:
         ResourceTypes:
           allOf:
             - $ref: '#/components/schemas/ResourceTypes'
-            - description: '<p>Contains a string with the supported AWS resource types:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>'
+            - description: '<p>Contains a string with the supported Amazon Web Services resource types:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for Storage Gateway</p> </li> </ul>'
     ListBackupJobsOutput:
       type: object
       properties:
@@ -3937,13 +4849,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/string'
             - description: 'The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token. '
+    ListFrameworksOutput:
+      type: object
+      properties:
+        Frameworks:
+          allOf:
+            - $ref: '#/components/schemas/FrameworkList'
+            - description: 'A list of frameworks with details for each framework, including the framework name, Amazon Resource Name (ARN), description, number of controls, creation time, and deployment status.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
     ListProtectedResourcesOutput:
       type: object
       properties:
         Results:
           allOf:
             - $ref: '#/components/schemas/ProtectedResourcesList'
-            - description: 'An array of resources successfully backed up by AWS Backup including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.'
+            - description: 'An array of resources successfully backed up by Backup including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -3969,7 +4892,29 @@ components:
         RecoveryPoints:
           allOf:
             - $ref: '#/components/schemas/RecoveryPointByResourceList'
-            - description: An array of objects that contain detailed information about recovery points of the specified resource type.
+            - description: <p>An array of objects that contain detailed information about recovery points of the specified resource type.</p> <note> <p>Only Amazon EFS and Amazon EC2 recovery points return BackupVaultName.</p> </note>
+    ListReportJobsOutput:
+      type: object
+      properties:
+        ReportJobs:
+          allOf:
+            - $ref: '#/components/schemas/ReportJobList'
+            - description: Details about your report jobs in JSON format.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
+    ListReportPlansOutput:
+      type: object
+      properties:
+        ReportPlans:
+          allOf:
+            - $ref: '#/components/schemas/ReportPlanList'
+            - description: 'A list of your report plans with detailed information for each plan. This information includes the Amazon Resource Name (ARN), report plan name, description, settings, delivery channel, deployment status, creation time, and last times the report plan attempted to and successfully ran.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
     ListRestoreJobsOutput:
       type: object
       properties:
@@ -4016,7 +4961,7 @@ components:
         BackupJobId:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a request to AWS Backup to back up a resource.
+            - description: Uniquely identifies a request to Backup to back up a resource.
         RecoveryPointArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -4041,6 +4986,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/timestamp'
             - description: 'The date and time that a copy job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+    StartReportJobOutput:
+      type: object
+      properties:
+        ReportJobId:
+          allOf:
+            - $ref: '#/components/schemas/ReportJobId'
+            - description: 'The identifier of the report job. A unique, randomly generated, Unicode, UTF-8 encoded string that is at most 1,024 bytes long. The report job ID cannot be edited.'
     StartRestoreJobOutput:
       type: object
       properties:
@@ -4049,8 +5001,6 @@ components:
             - $ref: '#/components/schemas/RestoreJobId'
             - description: Uniquely identifies the job that restores a recovery point.
     MetadataValue:
-      type: string
-    string:
       type: string
     UpdateBackupPlanOutput:
       type: object
@@ -4066,7 +5016,7 @@ components:
         CreationDate:
           allOf:
             - $ref: '#/components/schemas/timestamp'
-            - description: 'The date and time a backup plan is updated, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+            - description: 'The date and time a backup plan is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         VersionId:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -4075,6 +5025,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/AdvancedBackupSettings'
             - description: Contains a list of <code>BackupOptions</code> for each resource type.
+    UpdateFrameworkOutput:
+      type: object
+      properties:
+        FrameworkName:
+          allOf:
+            - $ref: '#/components/schemas/FrameworkName'
+            - description: 'The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).'
+        FrameworkArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: 'The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
     GlobalSettingsValue:
       type: string
     UpdateRecoveryPointLifecycleOutput:
@@ -4091,13 +5056,28 @@ components:
         Lifecycle:
           allOf:
             - $ref: '#/components/schemas/Lifecycle'
-            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
+            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
         CalculatedLifecycle:
           allOf:
             - $ref: '#/components/schemas/CalculatedLifecycle'
             - description: A <code>CalculatedLifecycle</code> object containing <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps.
     IsEnabled:
       type: boolean
+    UpdateReportPlanOutput:
+      type: object
+      properties:
+        ReportPlanName:
+          allOf:
+            - $ref: '#/components/schemas/ReportPlanName'
+            - description: The unique name of the report plan.
+        ReportPlanArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: 'The date and time that a report plan is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
     ARN:
       type: string
     AccountId:
@@ -4116,11 +5096,11 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: '<p>Specifies an object containing resource type and backup options. The only supported resource type is Amazon EC2 instances with Windows VSS. For an CloudFormation example, see the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/integrate-cloudformation-with-aws-backup.html">sample CloudFormation template to enable Windows VSS</a> in the <i>AWS Backup User Guide</i>.</p> <p>Valid values: <code>EC2</code>.</p>'
+            - description: '<p>Specifies an object containing resource type and backup options. The only supported resource type is Amazon EC2 instances with Windows Volume Shadow Copy Service (VSS). For a CloudFormation example, see the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/integrate-cloudformation-with-aws-backup.html">sample CloudFormation template to enable Windows VSS</a> in the <i>Backup User Guide</i>.</p> <p>Valid values: <code>EC2</code>.</p>'
         BackupOptions:
           allOf:
             - $ref: '#/components/schemas/BackupOptions'
-            - description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid values: </p> <p>Set to <code>"WindowsVSS":"enabled"</code> to enable the WindowsVSS backup option and create a VSS Windows backup. </p> <p>Set to <code>"WindowsVSS":"disabled"</code> to create a regular backup. The WindowsVSS option is not enabled by default.</p> <p>If you specify an invalid option, you get an <code>InvalidParameterValueException</code> exception.</p> <p>For more information about Windows VSS backups, see <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html">Creating a VSS-Enabled Windows Backup</a>.</p>'
+            - description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid values: </p> <p>Set to <code>"WindowsVSS":"enabled"</code> to enable the <code>WindowsVSS</code> backup option and create a Windows VSS backup. </p> <p>Set to <code>"WindowsVSS":"disabled"</code> to create a regular backup. The <code>WindowsVSS</code> option is not enabled by default.</p> <p>If you specify an invalid option, you get an <code>InvalidParameterValueException</code> exception.</p> <p>For more information about Windows VSS backups, see <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html">Creating a VSS-Enabled Windows Backup</a>.</p>'
       description: A list of backup options for each resource type.
     BackupVaultName:
       type: string
@@ -4158,7 +5138,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/string'
             - description: Uniquely identifies a rule used to schedule the backup of a selection of resources.
-      description: Contains information about the backup plan and rule that AWS Backup used to initiate the recovery point backup.
+      description: Contains information about the backup plan and rule that Backup used to initiate the recovery point backup.
     BackupJob:
       type: object
       properties:
@@ -4169,11 +5149,11 @@ components:
         BackupJobId:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: Uniquely identifies a request to AWS Backup to back up a resource.
+            - description: Uniquely identifies a request to Backup to back up a resource.
         BackupVaultName:
           allOf:
             - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         BackupVaultArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -4229,7 +5209,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.'
+            - description: 'The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the only supported resource type is Amazon EC2.'
         BytesTransferred:
           allOf:
             - $ref: '#/components/schemas/Long'
@@ -4237,7 +5217,7 @@ components:
         BackupOptions:
           allOf:
             - $ref: '#/components/schemas/BackupOptions'
-            - description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid values: Set to <code>"WindowsVSS”:“enabled"</code> to enable WindowsVSS backup option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. If you specify an invalid option, you get an <code>InvalidParameterValueException</code> exception.</p>'
+            - description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows Volume Shadow Copy Service (VSS) backup jobs.</p> <p>Valid values: Set to <code>"WindowsVSS":"enabled"</code> to enable the <code>WindowsVSS</code> backup option and create a Windows VSS backup. Set to <code>"WindowsVSS":"disabled"</code> to create a regular backup. If you specify an invalid option, you get an <code>InvalidParameterValueException</code> exception.</p>'
         BackupType:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -4272,7 +5252,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/AdvancedBackupSettings'
             - description: Contains a list of <code>BackupOptions</code> for each resource type.
-      description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources.'
+      description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of Amazon Web Services resources.'
     BackupPlanInput:
       type: object
       required:
@@ -4290,8 +5270,8 @@ components:
         AdvancedBackupSettings:
           allOf:
             - $ref: '#/components/schemas/AdvancedBackupSettings'
-            - description: Specifies a list of <code>BackupOptions</code> for each resource type. These settings are only available for Windows VSS backup jobs.
-      description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources. '
+            - description: Specifies a list of <code>BackupOptions</code> for each resource type. These settings are only available for Windows Volume Shadow Copy Service (VSS) backup jobs.
+      description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of Amazon Web Services resources. '
     BackupPlanTemplatesListMember:
       type: object
       properties:
@@ -4398,11 +5378,11 @@ components:
         TargetBackupVaultName:
           allOf:
             - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         ScheduleExpression:
           allOf:
             - $ref: '#/components/schemas/CronExpression'
-            - description: 'A CRON expression specifying when AWS Backup initiates a backup job. For more information about cron expressions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html">Schedule Expressions for Rules</a> in the <i>Amazon CloudWatch Events User Guide.</i>. Prior to specifying a value for this parameter, we recommend testing your cron expression using one of the many available cron generator and testing tools.'
+            - description: 'A cron expression in UTC specifying when Backup initiates a backup job. For more information about cron expressions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html">Schedule Expressions for Rules</a> in the <i>Amazon CloudWatch Events User Guide.</i>. Prior to specifying a value for this parameter, we recommend testing your cron expression using one of the many available cron generator and testing tools.'
         StartWindowMinutes:
           allOf:
             - $ref: '#/components/schemas/WindowMinutes'
@@ -4410,11 +5390,11 @@ components:
         CompletionWindowMinutes:
           allOf:
             - $ref: '#/components/schemas/WindowMinutes'
-            - description: A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by AWS Backup. This value is optional.
+            - description: A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by Backup. This value is optional.
         Lifecycle:
           allOf:
             - $ref: '#/components/schemas/Lifecycle'
-            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
+            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
         RecoveryPointTags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -4430,7 +5410,7 @@ components:
         EnableContinuousBackup:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Specifies whether AWS Backup creates continuous backups. True causes AWS Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes AWS Backup to create snapshot backups.
+            - description: Specifies whether Backup creates continuous backups. True causes Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes Backup to create snapshot backups.
       description: Specifies a scheduled task used to back up a selection of resources.
     BackupRuleInput:
       type: object
@@ -4445,11 +5425,11 @@ components:
         TargetBackupVaultName:
           allOf:
             - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         ScheduleExpression:
           allOf:
             - $ref: '#/components/schemas/CronExpression'
-            - description: A CRON expression specifying when AWS Backup initiates a backup job.
+            - description: A CRON expression in UTC specifying when Backup initiates a backup job.
         StartWindowMinutes:
           allOf:
             - $ref: '#/components/schemas/WindowMinutes'
@@ -4457,11 +5437,11 @@ components:
         CompletionWindowMinutes:
           allOf:
             - $ref: '#/components/schemas/WindowMinutes'
-            - description: A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by AWS Backup. This value is optional.
+            - description: A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by Backup. This value is optional.
         Lifecycle:
           allOf:
             - $ref: '#/components/schemas/Lifecycle'
-            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
+            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
         RecoveryPointTags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -4473,7 +5453,7 @@ components:
         EnableContinuousBackup:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Specifies whether AWS Backup creates continuous backups. True causes AWS Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes AWS Backup to create snapshot backups.
+            - description: Specifies whether Backup creates continuous backups. True causes Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes Backup to create snapshot backups.
       description: Specifies a scheduled task used to back up a selection of resources.
     BackupSelection:
       type: object
@@ -4488,7 +5468,7 @@ components:
         IamRoleArn:
           allOf:
             - $ref: '#/components/schemas/IAMRoleArn'
-            - description: 'The ARN of the IAM role that AWS Backup uses to authenticate when backing up the target resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+            - description: 'The ARN of the IAM role that Backup uses to authenticate when backing up the target resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
         Resources:
           allOf:
             - $ref: '#/components/schemas/ResourceArns'
@@ -4540,7 +5520,7 @@ components:
         BackupVaultName:
           allOf:
             - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         BackupVaultArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -4579,7 +5559,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/timestamp'
             - description: A timestamp that specifies when to delete a recovery point.
-      description: '<p>Contains <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps, which are used to specify a lifecycle for a recovery point.</p> <p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
+      description: '<p>Contains <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps, which are used to specify a lifecycle for a recovery point.</p> <p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
+    ComplianceResourceIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
+      minItems: 1
+      maxItems: 100
     ConditionType:
       type: string
       enum:
@@ -4608,6 +5594,52 @@ components:
             - $ref: '#/components/schemas/ConditionValue'
             - description: 'The value in a key-value pair. For example, in <code>"ec2:ResourceTag/Department": "accounting"</code>, <code>"accounting"</code> is the value.'
       description: 'Contains an array of triplets made up of a condition type (such as <code>StringEquals</code>), a key, and a value. Conditions are used to filter resources in a selection that is assigned to a backup plan.'
+    ParameterName:
+      type: string
+    ParameterValue:
+      type: string
+    ControlInputParameter:
+      type: object
+      properties:
+        ParameterName:
+          allOf:
+            - $ref: '#/components/schemas/ParameterName'
+            - description: 'The name of a parameter, for example, <code>BackupPlanFrequency</code>.'
+        ParameterValue:
+          allOf:
+            - $ref: '#/components/schemas/ParameterValue'
+            - description: 'The value of parameter, for example, <code>hourly</code>.'
+      description: 'A list of parameters for a control. A control can have zero, one, or more than one parameter. An example of a control with two parameters is: "backup plan frequency is at least <code>daily</code> and the retention period is at least <code>1 year</code>". The first parameter is <code>daily</code>. The second parameter is <code>1 year</code>.'
+    ControlInputParameters:
+      type: array
+      items:
+        $ref: '#/components/schemas/ControlInputParameter'
+    ControlName:
+      type: string
+    ResourceTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ARN'
+    stringMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/string'
+    ControlScope:
+      type: object
+      properties:
+        ComplianceResourceIds:
+          allOf:
+            - $ref: '#/components/schemas/ComplianceResourceIdList'
+            - description: Describes whether the control scope includes a specific resource identified by its unique Amazon Resource Name (ARN).
+        ComplianceResourceTypes:
+          allOf:
+            - $ref: '#/components/schemas/ResourceTypeList'
+            - description: 'Describes whether the control scope includes one or more types of resources, such as <code>EFS</code> or <code>RDS</code>.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/stringMap'
+            - description: Describes whether the control scope includes resources with one or more tags. Each tag is a key-value pair.
+      description: '<p>A framework consists of one or more controls. Each control has its own control scope. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans.</p> <note> <p>To set a control scope that includes all of a particular resource, leave the <code>ControlScope</code> empty or do not pass it when calling <code>CreateFramework</code>.</p> </note>'
     CopyAction:
       type: object
       required:
@@ -4657,7 +5689,7 @@ components:
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
-            - description: 'The AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
+            - description: 'The Amazon Web Services resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
         CreationDate:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -4687,7 +5719,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
+            - description: 'The type of Amazon Web Services resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
       description: Contains detailed information about a copy job.
     CopyJobsList:
       type: array
@@ -4741,6 +5773,117 @@ components:
           allOf:
             - $ref: '#/components/schemas/string'
             - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+    FrameworkName:
+      type: string
+      pattern: '[a-zA-Z][_a-zA-Z0-9]*'
+      minLength: 1
+      maxLength: 256
+    FrameworkDescription:
+      type: string
+      pattern: .*\S.*
+      minLength: 0
+      maxLength: 1024
+    FrameworkControls:
+      type: array
+      items:
+        $ref: '#/components/schemas/FrameworkControl'
+    CreateFrameworkInput:
+      type: object
+      required:
+        - FrameworkName
+        - FrameworkControls
+      title: CreateFrameworkInput
+      properties:
+        FrameworkName:
+          allOf:
+            - $ref: '#/components/schemas/FrameworkName'
+            - description: 'The unique name of the framework. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).'
+        FrameworkDescription:
+          allOf:
+            - $ref: '#/components/schemas/FrameworkDescription'
+            - description: 'An optional description of the framework with a maximum of 1,024 characters.'
+        FrameworkControls:
+          allOf:
+            - $ref: '#/components/schemas/FrameworkControls'
+            - description: 'A list of the controls that make up the framework. Each control in the list has a name, input parameters, and scope.'
+        IdempotencyToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>CreateFrameworkInput</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
+        FrameworkTags:
+          allOf:
+            - $ref: '#/components/schemas/stringMap'
+            - description: Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.
+    ReportPlanName:
+      type: string
+      pattern: '[a-zA-Z][_a-zA-Z0-9]*'
+      minLength: 1
+      maxLength: 256
+    ReportPlanDescription:
+      type: string
+      pattern: .*\S.*
+      minLength: 0
+      maxLength: 1024
+    ReportDeliveryChannel:
+      type: object
+      required:
+        - S3BucketName
+      properties:
+        S3BucketName:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The unique name of the S3 bucket that receives your reports.
+        S3KeyPrefix:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The prefix for where Backup Audit Manager delivers your reports to Amazon S3. The prefix is this part of the following path: s3://your-bucket-name/<code>prefix</code>/Backup/us-west-2/year/month/day/report-name. If not specified, there is no prefix.'
+        Formats:
+          allOf:
+            - $ref: '#/components/schemas/FormatList'
+            - description: 'A list of the format of your reports: <code>CSV</code>, <code>JSON</code>, or both. If not specified, the default format is <code>CSV</code>.'
+      description: 'Contains information from your report plan about where to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.'
+    ReportSetting:
+      type: object
+      required:
+        - ReportTemplate
+      properties:
+        ReportTemplate:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>Identifies the report template for the report. Reports are built using a report template. The report templates are:</p> <p> <code>BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT</code> </p>'
+      description: Contains detailed information about a report setting.
+    CreateReportPlanInput:
+      type: object
+      required:
+        - ReportPlanName
+        - ReportDeliveryChannel
+        - ReportSetting
+      title: CreateReportPlanInput
+      properties:
+        ReportPlanName:
+          allOf:
+            - $ref: '#/components/schemas/ReportPlanName'
+            - description: 'The unique name of the report plan. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).'
+        ReportPlanDescription:
+          allOf:
+            - $ref: '#/components/schemas/ReportPlanDescription'
+            - description: 'An optional description of the report plan with a maximum of 1,024 characters.'
+        ReportDeliveryChannel:
+          allOf:
+            - $ref: '#/components/schemas/ReportDeliveryChannel'
+            - description: 'A structure that contains information about where and how to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.'
+        ReportSetting:
+          allOf:
+            - $ref: '#/components/schemas/ReportSetting'
+            - description: '<p>Identifies the report template for the report. Reports are built using a report template. The report templates are:</p> <p> <code>BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT</code> </p>'
+        ReportPlanTags:
+          allOf:
+            - $ref: '#/components/schemas/stringMap'
+            - description: Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.
+        IdempotencyToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>CreateReportPlanInput</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
     DeleteBackupPlanInput:
       type: object
       title: DeleteBackupPlanInput
@@ -4761,9 +5904,17 @@ components:
       type: object
       title: DeleteBackupVaultNotificationsInput
       properties: {}
+    DeleteFrameworkInput:
+      type: object
+      title: DeleteFrameworkInput
+      properties: {}
     DeleteRecoveryPointInput:
       type: object
       title: DeleteRecoveryPointInput
+      properties: {}
+    DeleteReportPlanInput:
+      type: object
+      title: DeleteReportPlanInput
       properties: {}
     DescribeBackupJobInput:
       type: object
@@ -4776,6 +5927,10 @@ components:
     DescribeCopyJobInput:
       type: object
       title: DescribeCopyJobInput
+      properties: {}
+    DescribeFrameworkInput:
+      type: object
+      title: DescribeFrameworkInput
       properties: {}
     DescribeGlobalSettingsInput:
       type: object
@@ -4816,6 +5971,92 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/IsEnabled'
+    ReportJobId:
+      type: string
+    DescribeReportJobInput:
+      type: object
+      title: DescribeReportJobInput
+      properties: {}
+    ReportJob:
+      type: object
+      properties:
+        ReportJobId:
+          allOf:
+            - $ref: '#/components/schemas/ReportJobId'
+            - description: 'The identifier for a report job. A unique, randomly generated, Unicode, UTF-8 encoded string that is at most 1,024 bytes long. Report job IDs cannot be edited.'
+        ReportPlanArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+        ReportTemplate:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>Identifies the report template for the report. Reports are built using a report template. The report templates are: </p> <p> <code>BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT</code> </p>'
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: 'The date and time that a report job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+        CompletionTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: 'The date and time that a report job is completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>The status of a report job. The statuses are:</p> <p> <code>CREATED | RUNNING | COMPLETED | FAILED</code> </p> <p> <code>COMPLETED</code> means that the report is available for your review at your designated destination. If the status is <code>FAILED</code>, review the <code>StatusMessage</code> for the reason.</p>'
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A message explaining the status of the report job.
+        ReportDestination:
+          allOf:
+            - $ref: '#/components/schemas/ReportDestination'
+            - description: The S3 bucket name and S3 keys for the destination where the report job publishes the report.
+      description: Contains detailed information about a report job. A report job compiles a report based on a report plan and publishes it to Amazon S3.
+    DescribeReportPlanInput:
+      type: object
+      title: DescribeReportPlanInput
+      properties: {}
+    ReportPlan:
+      type: object
+      properties:
+        ReportPlanArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+        ReportPlanName:
+          allOf:
+            - $ref: '#/components/schemas/ReportPlanName'
+            - description: 'The unique name of the report plan. This name is between 1 and 256 characters starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).'
+        ReportPlanDescription:
+          allOf:
+            - $ref: '#/components/schemas/ReportPlanDescription'
+            - description: 'An optional description of the report plan with a maximum 1,024 characters.'
+        ReportSetting:
+          allOf:
+            - $ref: '#/components/schemas/ReportSetting'
+            - description: '<p>Identifies the report template for the report. Reports are built using a report template. The report templates are:</p> <p> <code>BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT</code> </p>'
+        ReportDeliveryChannel:
+          allOf:
+            - $ref: '#/components/schemas/ReportDeliveryChannel'
+            - description: 'Contains information about where and how to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.'
+        DeploymentStatus:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>The deployment status of a report plan. The statuses are:</p> <p> <code>CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED</code> </p>'
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: 'The date and time that a report plan is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+        LastAttemptedExecutionTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: 'The date and time that a report job associated with this report plan last attempted to run, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastAttemptedExecutionTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+        LastSuccessfulExecutionTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: 'The date and time that a report job associated with this report plan last successfully ran, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastSuccessfulExecutionTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+      description: Contains detailed information about a report plan.
     RestoreJobId:
       type: string
     DescribeRestoreJobInput:
@@ -4838,6 +6079,40 @@ components:
       type: object
       title: ExportBackupPlanTemplateInput
       properties: {}
+    integer:
+      type: integer
+    Framework:
+      type: object
+      properties:
+        FrameworkName:
+          allOf:
+            - $ref: '#/components/schemas/FrameworkName'
+            - description: 'The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).'
+        FrameworkArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+        FrameworkDescription:
+          allOf:
+            - $ref: '#/components/schemas/FrameworkDescription'
+            - description: 'An optional description of the framework with a maximum 1,024 characters.'
+        NumberOfControls:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+            - description: The number of controls contained by the framework.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: 'The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+        DeploymentStatus:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>The deployment status of a framework. The statuses are:</p> <p> <code>CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED</code> </p>'
+      description: 'Contains detailed information about a framework. Frameworks contain controls, which evaluate and report on your backup events and resources. Frameworks generate daily compliance results.'
+    FrameworkList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Framework'
     GetBackupPlanFromJSONInput:
       type: object
       required:
@@ -4916,6 +6191,14 @@ components:
       type: object
       title: ListCopyJobsInput
       properties: {}
+    MaxFrameworkInputs:
+      type: integer
+      minimum: 1
+      maximum: 1000
+    ListFrameworksInput:
+      type: object
+      title: ListFrameworksInput
+      properties: {}
     ListProtectedResourcesInput:
       type: object
       title: ListProtectedResourcesInput
@@ -4940,6 +6223,22 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/RecoveryPointByResource'
+    ListReportJobsInput:
+      type: object
+      title: ListReportJobsInput
+      properties: {}
+    ReportJobList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReportJob'
+    ListReportPlansInput:
+      type: object
+      title: ListReportPlansInput
+      properties: {}
+    ReportPlanList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReportPlan'
     ListRestoreJobsInput:
       type: object
       title: ListRestoreJobsInput
@@ -4964,7 +6263,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.'
+            - description: 'The type of Amazon Web Services resource; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the only supported resource type is Amazon EC2.'
         LastBackupTime:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -4992,7 +6291,7 @@ components:
         BackupVaultEvents:
           allOf:
             - $ref: '#/components/schemas/BackupVaultEvents'
-            - description: An array of events that indicate the status of jobs to back up resources to the backup vault.
+            - description: '<p>An array of events that indicate the status of jobs to back up resources to the backup vault.</p> <note> <p>The following events are supported:</p> <p> <code>BACKUP_JOB_STARTED</code>, <code>BACKUP_JOB_COMPLETED</code>,</p> <p> <code>COPY_JOB_STARTED</code>, <code>COPY_JOB_SUCCESSFUL</code>, <code>COPY_JOB_FAILED</code>,</p> <p> <code>RESTORE_JOB_STARTED</code>, <code>RESTORE_JOB_COMPLETED</code>, and <code>RECOVERY_POINT_MODIFIED</code>.</p> <p>To find failed backup jobs, use <code>BACKUP_JOB_COMPLETED</code> and filter using event metadata.</p> <p>Other events in the following list are deprecated.</p> </note>'
     RecoveryPointByBackupVault:
       type: object
       properties:
@@ -5003,7 +6302,7 @@ components:
         BackupVaultName:
           allOf:
             - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         BackupVaultArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -5019,7 +6318,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource saved as a recovery point; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.'
+            - description: 'The type of Amazon Web Services resource saved as a recovery point; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the only supported resource type is Amazon EC2.'
         CreatedBy:
           allOf:
             - $ref: '#/components/schemas/RecoveryPointCreator'
@@ -5032,6 +6331,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecoveryPointStatus'
             - description: A status code specifying the state of the recovery point.
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A message explaining the reason of the recovery point deletion failure.
         CreationDate:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -5051,7 +6354,7 @@ components:
         Lifecycle:
           allOf:
             - $ref: '#/components/schemas/Lifecycle'
-            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
+            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
         EncryptionKeyArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -5080,6 +6383,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecoveryPointStatus'
             - description: A status code specifying the state of the recovery point.
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A message explaining the reason of the recovery point deletion failure.
         EncryptionKeyArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -5091,8 +6398,24 @@ components:
         BackupVaultName:
           allOf:
             - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
       description: Contains detailed information about a saved recovery point.
+    stringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
+    ReportDestination:
+      type: object
+      properties:
+        S3BucketName:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The unique name of the Amazon S3 bucket that receives your reports.
+        S3Keys:
+          allOf:
+            - $ref: '#/components/schemas/stringList'
+            - description: The object key that uniquely identifies your reports in your S3 bucket.
+      description: Contains information from your report job about your report destination.
     RestoreJobsListMember:
       type: object
       properties:
@@ -5119,7 +6442,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/RestoreJobStatus'
-            - description: A status code specifying the state of the job initiated by AWS Backup to restore a recovery point.
+            - description: A status code specifying the state of the job initiated by Backup to restore a recovery point.
         StatusMessage:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -5147,7 +6470,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The resource type of the listed restore jobs; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.'
+            - description: 'The resource type of the listed restore jobs; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the only supported resource type is Amazon EC2.'
       description: Contains metadata about a restore job.
     StartBackupJobInput:
       type: object
@@ -5160,7 +6483,7 @@ components:
         BackupVaultName:
           allOf:
             - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+            - description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -5172,7 +6495,7 @@ components:
         IdempotencyToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A customer chosen string that can be used to distinguish between calls to <code>StartBackupJob</code>.
+            - description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>StartBackupJob</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
         StartWindowMinutes:
           allOf:
             - $ref: '#/components/schemas/WindowMinutes'
@@ -5184,7 +6507,7 @@ components:
         Lifecycle:
           allOf:
             - $ref: '#/components/schemas/Lifecycle'
-            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
+            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
         RecoveryPointTags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -5192,7 +6515,7 @@ components:
         BackupOptions:
           allOf:
             - $ref: '#/components/schemas/BackupOptions'
-            - description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid values: Set to <code>"WindowsVSS”:“enabled"</code> to enable WindowsVSS backup option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS option is not enabled by default.</p>'
+            - description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows Volume Shadow Copy Service (VSS) backup jobs.</p> <p>Valid values: Set to <code>"WindowsVSS":"enabled"</code> to enable the <code>WindowsVSS</code> backup option and create a Windows VSS backup. Set to <code>"WindowsVSS""disabled"</code> to create a regular backup. The <code>WindowsVSS</code> option is not enabled by default.</p>'
     StartCopyJobInput:
       type: object
       required:
@@ -5209,7 +6532,7 @@ components:
         SourceBackupVaultName:
           allOf:
             - $ref: '#/components/schemas/BackupVaultName'
-            - description: 'The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+            - description: 'The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         DestinationBackupVaultArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -5221,9 +6544,17 @@ components:
         IdempotencyToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A customer chosen string that can be used to distinguish between calls to <code>StartCopyJob</code>.
+            - description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>StartCopyJob</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
         Lifecycle:
           $ref: '#/components/schemas/Lifecycle'
+    StartReportJobInput:
+      type: object
+      title: StartReportJobInput
+      properties:
+        IdempotencyToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>StartReportJobInput</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
     StartRestoreJobInput:
       type: object
       required:
@@ -5239,19 +6570,19 @@ components:
         Metadata:
           allOf:
             - $ref: '#/components/schemas/Metadata'
-            - description: '<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: The ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system. You can specify a key from another AWS account provided that key it is properly shared with your account via AWS KMS.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> <li> <p> <code>ItemsToRestore </code>: An array of one to five strings where each string is a file path. Use <code>ItemsToRestore</code> to restore specific files or directories rather than the entire file system. This parameter is optional. For example, <code>"itemsToRestore":"[\"/my.test\"]"</code>.</p> </li> </ul>'
+            - description: '<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: The ID of the Amazon EFS file system that is backed up by Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the Amazon Web Services KMS key that is used to encrypt the restored file system. You can specify a key from another Amazon Web Services account provided that key it is properly shared with your account via Amazon Web Services KMS.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> <li> <p> <code>ItemsToRestore</code>: An array of one to five strings where each string is a file path. Use <code>ItemsToRestore</code> to restore specific files or directories rather than the entire file system. This parameter is optional. For example, <code>"itemsToRestore":"[\"/my.test\"]"</code>.</p> </li> </ul>'
         IamRoleArn:
           allOf:
             - $ref: '#/components/schemas/IAMRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+            - description: 'The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
         IdempotencyToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A customer chosen string that can be used to distinguish between calls to <code>StartRestoreJob</code>.
+            - description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>StartRestoreJob</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>'
+            - description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for Storage Gateway</p> </li> </ul>'
     StopBackupJobInput:
       type: object
       title: StopBackupJobInput
@@ -5292,6 +6623,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/BackupPlanInput'
             - description: Specifies the body of a backup plan. Includes a <code>BackupPlanName</code> and one or more sets of <code>Rules</code>.
+    UpdateFrameworkInput:
+      type: object
+      title: UpdateFrameworkInput
+      properties:
+        FrameworkDescription:
+          allOf:
+            - $ref: '#/components/schemas/FrameworkDescription'
+            - description: 'An optional description of the framework with a maximum 1,024 characters.'
+        FrameworkControls:
+          allOf:
+            - $ref: '#/components/schemas/FrameworkControls'
+            - description: 'A list of the controls that make up the framework. Each control in the list has a name, input parameters, and scope.'
+        IdempotencyToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>UpdateFrameworkInput</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
     UpdateGlobalSettingsInput:
       type: object
       title: UpdateGlobalSettingsInput
@@ -5299,7 +6646,7 @@ components:
         GlobalSettings:
           allOf:
             - $ref: '#/components/schemas/GlobalSettings'
-            - description: A list of resources along with the opt-in preferences for the account.
+            - description: 'A value for <code>isCrossAccountBackupEnabled</code> and a Region. Example: <code>update-global-settings --global-settings isCrossAccountBackupEnabled=false --region us-west-2</code>.'
     UpdateRecoveryPointLifecycleInput:
       type: object
       title: UpdateRecoveryPointLifecycleInput
@@ -5307,7 +6654,7 @@ components:
         Lifecycle:
           allOf:
             - $ref: '#/components/schemas/Lifecycle'
-            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
+            - description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
     UpdateRegionSettingsInput:
       type: object
       title: UpdateRegionSettingsInput
@@ -5316,5 +6663,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceTypeOptInPreference'
             - description: Updates the list of services along with the opt-in preferences for the Region.
+    UpdateReportPlanInput:
+      type: object
+      title: UpdateReportPlanInput
+      properties:
+        ReportPlanDescription:
+          allOf:
+            - $ref: '#/components/schemas/ReportPlanDescription'
+            - description: 'An optional description of the report plan with a maximum 1,024 characters.'
+        ReportDeliveryChannel:
+          allOf:
+            - $ref: '#/components/schemas/ReportDeliveryChannel'
+            - description: 'A structure that contains information about where to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.'
+        ReportSetting:
+          allOf:
+            - $ref: '#/components/schemas/ReportSetting'
+            - description: '<p>Identifies the report template for the report. Reports are built using a report template. The report templates are:</p> <p> <code>BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT</code> </p>'
+        IdempotencyToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>UpdateReportPlanInput</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
 security:
   - hmac: []

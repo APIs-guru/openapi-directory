@@ -126,41 +126,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiKey'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
-          description: LimitExceededException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LimitExceededException'
-        '484':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '485':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters: []
       requestBody:
         required: true
@@ -222,12 +222,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
           description: UnauthorizedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnauthorizedException'
-        '482':
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -282,24 +288,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
+          description: ConflictException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/ConflictException'
         '482':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '483':
           description: LimitExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -380,17 +392,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '482':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
         '483':
           description: TooManyRequestsException
           content:
@@ -428,11 +440,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/BasePathMapping'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: ConflictException
           content:
@@ -440,11 +452,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ConflictException'
         '482':
-          description: BadRequestException
+          description: LimitExceededException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequestException'
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
           description: NotFoundException
           content:
@@ -452,6 +464,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -501,11 +519,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/BasePathMappings'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -513,6 +531,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -549,35 +573,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/Deployment'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '482':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '483':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
-        '484':
+        '482':
           description: LimitExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
         '485':
           description: TooManyRequestsException
           content:
@@ -743,11 +767,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ConflictException'
         '482':
-          description: UnauthorizedException
+          description: LimitExceededException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
           description: NotFoundException
           content:
@@ -755,11 +779,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '484':
-          description: LimitExceededException
+          description: UnauthorizedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LimitExceededException'
+                $ref: '#/components/schemas/UnauthorizedException'
         '485':
           description: TooManyRequestsException
           content:
@@ -835,17 +859,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '482':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
         '483':
           description: TooManyRequestsException
           content:
@@ -922,30 +946,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocumentationPartIds'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '483':
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
           description: LimitExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -1009,11 +1039,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ConflictException'
         '482':
-          description: UnauthorizedException
+          description: LimitExceededException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
           description: NotFoundException
           content:
@@ -1021,11 +1051,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '484':
-          description: LimitExceededException
+          description: UnauthorizedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LimitExceededException'
+                $ref: '#/components/schemas/UnauthorizedException'
         '485':
           description: TooManyRequestsException
           content:
@@ -1130,24 +1160,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/DomainName'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '482':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
           description: TooManyRequestsException
           content:
             application/json:
@@ -1250,12 +1286,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
           description: UnauthorizedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnauthorizedException'
-        '482':
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -1292,29 +1334,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '482':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '483':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
-        '484':
+        '482':
           description: LimitExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
         '485':
           description: TooManyRequestsException
           content:
@@ -1429,24 +1471,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
+          description: ConflictException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/ConflictException'
         '482':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '483':
           description: LimitExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -1500,17 +1548,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '482':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
         '483':
           description: TooManyRequestsException
           content:
@@ -1628,24 +1676,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/RestApi'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: LimitExceededException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LimitExceededException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
           description: TooManyRequestsException
           content:
             application/json:
@@ -1735,12 +1789,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
           description: UnauthorizedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnauthorizedException'
-        '482':
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -1902,18 +1962,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/Stages'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
-        '482':
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -1950,35 +2028,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '482':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
-          description: LimitExceededException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LimitExceededException'
-        '484':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
-        '485':
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters: []
       requestBody:
         required: true
@@ -2058,29 +2136,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '482':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '484':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: position
           in: query
@@ -2124,11 +2196,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ConflictException'
         '482':
-          description: UnauthorizedException
+          description: LimitExceededException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
           description: NotFoundException
           content:
@@ -2136,6 +2208,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -2189,17 +2267,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '482':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
         '483':
           description: TooManyRequestsException
           content:
@@ -2243,18 +2321,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/VpcLink'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
         '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
           description: TooManyRequestsException
           content:
             application/json:
@@ -2312,12 +2402,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
           description: UnauthorizedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnauthorizedException'
-        '482':
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -2344,18 +2440,30 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
-        '482':
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
           description: TooManyRequestsException
           content:
             application/json:
@@ -2387,11 +2495,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiKey'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -2399,6 +2507,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -2428,35 +2542,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiKey'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '483':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '484':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: api_Key
           in: path
@@ -2484,35 +2604,35 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '484':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: restapi_id
           in: path
@@ -2545,11 +2665,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Authorizer'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -2557,6 +2677,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -2666,24 +2792,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/Authorizer'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -2722,29 +2860,29 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '483':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
         '484':
           description: TooManyRequestsException
           content:
@@ -2783,11 +2921,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/BasePathMapping'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -2795,6 +2933,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -2824,30 +2968,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/BasePathMapping'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '483':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -2886,29 +3036,35 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '483':
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: clientcertificate_id
           in: path
@@ -2935,11 +3091,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ClientCertificate'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -2947,6 +3103,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -2970,29 +3132,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/ClientCertificate'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: clientcertificate_id
           in: path
@@ -3020,24 +3194,36 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -3075,11 +3261,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Deployment'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -3087,12 +3273,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
+        '484':
           description: ServiceUnavailableException
           content:
             application/json:
@@ -3130,30 +3322,42 @@ paths:
               schema:
                 $ref: '#/components/schemas/Deployment'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TooManyRequestsException'
-        '484':
+        '486':
           description: ServiceUnavailableException
           content:
             application/json:
@@ -3192,35 +3396,35 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '484':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: restapi_id
           in: path
@@ -3253,11 +3457,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocumentationPart'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -3265,6 +3469,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -3300,29 +3510,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '482':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '483':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
-        '484':
+        '482':
           description: LimitExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
         '485':
           description: TooManyRequestsException
           content:
@@ -3362,29 +3572,29 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '483':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
         '484':
           description: TooManyRequestsException
           content:
@@ -3464,30 +3674,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocumentationVersion'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '483':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -3526,29 +3742,35 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: domain_name
           in: path
@@ -3575,11 +3797,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/DomainName'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -3587,11 +3809,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
-          description: ServiceUnavailableException
+          description: UnauthorizedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceUnavailableException'
+                $ref: '#/components/schemas/UnauthorizedException'
         '483':
           description: TooManyRequestsException
           content:
@@ -3616,30 +3838,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/DomainName'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '483':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -3672,35 +3900,35 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '484':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: restapi_id
           in: path
@@ -3711,7 +3939,7 @@ paths:
         - name: response_type
           in: path
           required: true
-          description: '<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p></p>'
+          description: '<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>.</p></p>'
           schema:
             type: string
             enum:
@@ -3735,6 +3963,7 @@ paths:
               - REQUEST_TOO_LARGE
               - THROTTLED
               - QUOTA_EXCEEDED
+              - WAF_FILTERED
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3754,11 +3983,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/GatewayResponse'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -3766,6 +3995,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -3781,7 +4016,7 @@ paths:
         - name: response_type
           in: path
           required: true
-          description: '<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p></p>'
+          description: '<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>.</p></p>'
           schema:
             type: string
             enum:
@@ -3805,6 +4040,7 @@ paths:
               - REQUEST_TOO_LARGE
               - THROTTLED
               - QUOTA_EXCEEDED
+              - WAF_FILTERED
     put:
       operationId: PutGatewayResponse
       description: Creates a customization of a <a>GatewayResponse</a> of a specified response type and status code on the given <a>RestApi</a>.
@@ -3822,24 +4058,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
+          description: ConflictException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/ConflictException'
         '482':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '483':
           description: LimitExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -3855,7 +4097,7 @@ paths:
         - name: response_type
           in: path
           required: true
-          description: '<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p></p>'
+          description: '<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>.</p></p>'
           schema:
             type: string
             enum:
@@ -3879,6 +4121,7 @@ paths:
               - REQUEST_TOO_LARGE
               - THROTTLED
               - QUOTA_EXCEEDED
+              - WAF_FILTERED
       requestBody:
         required: true
         content:
@@ -3911,24 +4154,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/GatewayResponse'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -3944,7 +4199,7 @@ paths:
         - name: response_type
           in: path
           required: true
-          description: '<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p></p>'
+          description: '<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>.</p></p>'
           schema:
             type: string
             enum:
@@ -3968,6 +4223,7 @@ paths:
               - REQUEST_TOO_LARGE
               - THROTTLED
               - QUOTA_EXCEEDED
+              - WAF_FILTERED
       requestBody:
         required: true
         content:
@@ -3988,29 +4244,35 @@ paths:
         '204':
           description: Success
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: restapi_id
           in: path
@@ -4049,11 +4311,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Integration'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -4061,6 +4323,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -4096,23 +4364,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/Integration'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '482':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
           description: NotFoundException
           content:
@@ -4120,6 +4388,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -4229,35 +4503,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/Integration'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '483':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '484':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: restapi_id
           in: path
@@ -4297,35 +4577,35 @@ paths:
         '204':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '484':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: restapi_id
           in: path
@@ -4372,11 +4652,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/IntegrationResponse'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -4384,6 +4664,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -4427,17 +4713,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/IntegrationResponse'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: NotFoundException
+          description: ConflictException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFoundException'
+                $ref: '#/components/schemas/ConflictException'
         '482':
           description: LimitExceededException
           content:
@@ -4445,23 +4731,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
         '483':
-          description: BadRequestException
+          description: NotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequestException'
+                $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TooManyRequestsException'
-        '485':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
       parameters:
         - name: restapi_id
           in: path
@@ -4526,30 +4812,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/IntegrationResponse'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '483':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -5268,35 +5560,35 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '484':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: restapi_id
           in: path
@@ -5329,11 +5621,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Model'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -5341,6 +5633,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -5376,30 +5674,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/Model'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '483':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -5438,35 +5742,35 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '484':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: restapi_id
           in: path
@@ -5499,11 +5803,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/RequestValidator'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -5511,6 +5815,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -5540,24 +5850,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/RequestValidator'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -5768,29 +6090,35 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: restapi_id
           in: path
@@ -5817,11 +6145,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/RestApi'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -5829,6 +6157,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -5852,41 +6186,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/RestApi'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: LimitExceededException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LimitExceededException'
-        '482':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '483':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '484':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '485':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: restapi_id
           in: path
@@ -5940,30 +6274,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/RestApi'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '483':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -5996,29 +6336,41 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: restapi_id
           in: path
@@ -6051,18 +6403,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/Stage'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
-        '482':
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -6092,30 +6462,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/Stage'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '483':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -6154,29 +6530,35 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '483':
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: usageplanId
           in: path
@@ -6209,17 +6591,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '482':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
         '483':
           description: TooManyRequestsException
           content:
@@ -6244,23 +6626,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/UsagePlan'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
           description: NotFoundException
           content:
@@ -6268,11 +6650,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '484':
-          description: ConflictException
+          description: UnauthorizedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConflictException'
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: usageplanId
           in: path
@@ -6312,17 +6700,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ConflictException'
         '482':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '483':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
         '484':
           description: TooManyRequestsException
           content:
@@ -6367,17 +6755,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '482':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
         '483':
           description: TooManyRequestsException
           content:
@@ -6405,29 +6793,35 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: vpclink_id
           in: path
@@ -6454,11 +6848,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/VpcLink'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -6466,6 +6860,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -6489,30 +6889,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/VpcLink'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '483':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -6545,24 +6951,36 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -6597,24 +7015,36 @@ paths:
         '202':
           description: Success
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -6653,23 +7083,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/ClientCertificate'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: TooManyRequestsException
+          description: ConflictException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
+                $ref: '#/components/schemas/ConflictException'
         '482':
           description: LimitExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters: []
       requestBody:
         required: true
@@ -6711,12 +7153,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
           description: UnauthorizedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnauthorizedException'
-        '482':
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -6747,11 +7195,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Account'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -6759,6 +7207,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -6784,24 +7238,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/Account'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
         '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
-        '483':
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -6832,30 +7298,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExportResponse'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '483':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -6920,17 +7392,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '482':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
         '483':
           description: TooManyRequestsException
           content:
@@ -7102,30 +7574,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/SdkResponse'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '483':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
           description: TooManyRequestsException
           content:
             application/json:
@@ -7178,11 +7656,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/SdkType'
         '480':
-          description: UnauthorizedException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
           description: NotFoundException
           content:
@@ -7190,6 +7668,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -7222,12 +7706,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/SdkTypes'
         '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
           description: UnauthorizedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnauthorizedException'
-        '481':
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
@@ -7272,29 +7768,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '482':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
-        '484':
-          description: LimitExceededException
+        '482':
+          description: UnauthorizedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LimitExceededException'
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: resource_arn
           in: path
@@ -7335,17 +7825,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
+          description: ConflictException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/ConflictException'
         '482':
-          description: TooManyRequestsException
+          description: LimitExceededException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
           description: NotFoundException
           content:
@@ -7353,17 +7843,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '484':
-          description: LimitExceededException
+          description: UnauthorizedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LimitExceededException'
+                $ref: '#/components/schemas/UnauthorizedException'
         '485':
-          description: ConflictException
+          description: TooManyRequestsException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConflictException'
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: resource_arn
           in: path
@@ -7477,41 +7967,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiKeyIds'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: NotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundException'
-        '482':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
-          description: LimitExceededException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LimitExceededException'
-        '484':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '485':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: format
           in: query
@@ -7566,35 +8056,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/RestApi'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: LimitExceededException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LimitExceededException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '483':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '484':
+        '481':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: failonwarnings
           in: query
@@ -7651,17 +8147,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: UnauthorizedException
+          description: ConflictException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnauthorizedException'
+                $ref: '#/components/schemas/ConflictException'
         '482':
-          description: TooManyRequestsException
+          description: LimitExceededException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
           description: NotFoundException
           content:
@@ -7669,11 +8165,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '484':
-          description: ConflictException
+          description: UnauthorizedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConflictException'
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: resource_arn
           in: path
@@ -7709,29 +8211,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/Usage'
         '480':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '481':
-          description: TooManyRequestsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '482':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
         '483':
           description: NotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: usageplanId
           in: path
@@ -7875,12 +8389,12 @@ components:
       description: 'A reference to a unique stage identified in the format <code>{restApiId}/{stage}</code>.'
     String:
       type: string
-    UnauthorizedException: {}
-    NotFoundException: {}
-    TooManyRequestsException: {}
-    LimitExceededException: {}
     BadRequestException: {}
     ConflictException: {}
+    LimitExceededException: {}
+    NotFoundException: {}
+    UnauthorizedException: {}
+    TooManyRequestsException: {}
     Authorizer:
       type: object
       properties:
@@ -8047,7 +8561,7 @@ components:
         regionalHostedZoneId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For more information, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html">Set up a Regional Custom Domain Name</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region">AWS Regions and Endpoints for API Gateway</a>. '
+            - description: 'The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For more information, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html">Set up a Regional Custom Domain Name</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region">AWS Regions and Endpoints for API Gateway</a>.'
         regionalCertificateName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -8063,7 +8577,7 @@ components:
         distributionHostedZoneId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized endpoint. The valid value is <code>Z2FDTNDATAQYW2</code> for all the regions. For more information, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html">Set up a Regional Custom Domain Name</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region">AWS Regions and Endpoints for API Gateway</a>. '
+            - description: 'The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized endpoint. The valid value is <code>Z2FDTNDATAQYW2</code> for all the regions. For more information, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html">Set up a Regional Custom Domain Name</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region">AWS Regions and Endpoints for API Gateway</a>.'
         endpointConfiguration:
           allOf:
             - $ref: '#/components/schemas/EndpointConfiguration'
@@ -8443,7 +8957,7 @@ components:
         cloudwatchRoleArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The ARN of an Amazon CloudWatch role for the current <a>Account</a>. '
+            - description: The ARN of an Amazon CloudWatch role for the current <a>Account</a>.
         throttleSettings:
           allOf:
             - $ref: '#/components/schemas/ThrottleSettings'
@@ -8571,7 +9085,7 @@ components:
         responseType:
           allOf:
             - $ref: '#/components/schemas/GatewayResponseType'
-            - description: 'The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> '
+            - description: The response type of the associated <a>GatewayResponse</a>.
         statusCode:
           allOf:
             - $ref: '#/components/schemas/StatusCode'
@@ -9758,6 +10272,7 @@ components:
         - REQUEST_TOO_LARGE
         - THROTTLED
         - QUOTA_EXCEEDED
+        - WAF_FILTERED
     DeleteGatewayResponseRequest:
       type: object
       title: DeleteGatewayResponseRequest
