@@ -4207,7 +4207,7 @@ paths:
           name: advertiserId
           schema:
             type: string
-        - description: 'Allows filtering by custom bidding algorithm fields. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by `AND`. A sequence of restrictions * implicitly uses `AND`. * A restriction has the form of `{field} {operator} {value}`. * The operator must be `CONTAINS (:)` or `EQUALS (=)`. * The operator must be `CONTAINS (:)` for the following field: - `displayName` * The operator must be `EQUALS (=)` for the following field: - `customBiddingAlgorithmType` * For `displayName`, the value is a string. We return all custom bidding algorithms whose display_name contains such string. * For `customBiddingAlgorithmType`, the value is a string. We return all algorithms whose custom_bidding_algorithm_type is equal to the given type. Examples: * All custom bidding algorithms for which the display name contains "politics": `displayName:politics`. * All custom bidding algorithms for which the type is "SCRIPT_BASED": `customBiddingAlgorithmType=SCRIPT_BASED` The length of this field should be no more than 500 characters.'
+        - description: 'Allows filtering by custom bidding algorithm fields. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by `AND`. A sequence of restrictions * implicitly uses `AND`. * A restriction has the form of `{field} {operator} {value}`. * The operator must be `CONTAINS (:)` or `EQUALS (=)`. * The operator must be `CONTAINS (:)` for the following field: - `displayName` * The operator must be `EQUALS (=)` for the following field: - `customBiddingAlgorithmType` - `customBiddingAlgorithmState` * For `displayName`, the value is a string. We return all custom bidding algorithms whose display_name contains such string. * For `customBiddingAlgorithmType`, the value is a string. We return all algorithms whose custom_bidding_algorithm_type is equal to the given type. * For `customBiddingAlgorithmState`, the value is a string. We return all algorithms whose custom_bidding_algorithm_state is equal to the given type. Examples: * All custom bidding algorithms for which the display name contains "politics": `displayName:politics`. * All custom bidding algorithms for which the type is "SCRIPT_BASED": `customBiddingAlgorithmType=SCRIPT_BASED` * All custom bidding algorithms for which the state is "ENABLED": `customBiddingAlgorithmState=ENABLED` The length of this field should be no more than 500 characters.'
           in: query
           name: filter
           schema:
@@ -8387,6 +8387,7 @@ components:
             - CUSTOM_BIDDING_ALGORITHM_TYPE_UNSPECIFIED
             - SCRIPT_BASED
             - ADS_DATA_HUB_BASED
+            - GOAL_BUILDER_BASED
           type: string
         displayName:
           description: Required. The display name of the custom bidding algorithm. Must be UTF-8 encoded with a maximum size of 240 bytes.
@@ -8961,7 +8962,9 @@ components:
             - EXCHANGE_WAZE
             - EXCHANGE_SOUNDCAST
             - EXCHANGE_SHARETHROUGH
+            - EXCHANGE_RED_FOR_PUBLISHERS
             - EXCHANGE_MEDIANET
+            - EXCHANGE_TAPJOY
           type: string
         googleAdManagerAgencyId:
           description: Output only. Agency ID of Google Ad Manager. The field is only relevant when Google Ad Manager is the enabled exchange.
@@ -9045,7 +9048,9 @@ components:
             - EXCHANGE_WAZE
             - EXCHANGE_SOUNDCAST
             - EXCHANGE_SHARETHROUGH
+            - EXCHANGE_RED_FOR_PUBLISHERS
             - EXCHANGE_MEDIANET
+            - EXCHANGE_TAPJOY
           type: string
         status:
           description: Status of the exchange review.
@@ -9125,7 +9130,9 @@ components:
             - EXCHANGE_WAZE
             - EXCHANGE_SOUNDCAST
             - EXCHANGE_SHARETHROUGH
+            - EXCHANGE_RED_FOR_PUBLISHERS
             - EXCHANGE_MEDIANET
+            - EXCHANGE_TAPJOY
           readOnly: true
           type: string
       type: object
@@ -9966,7 +9973,9 @@ components:
             - EXCHANGE_WAZE
             - EXCHANGE_SOUNDCAST
             - EXCHANGE_SHARETHROUGH
+            - EXCHANGE_RED_FOR_PUBLISHERS
             - EXCHANGE_MEDIANET
+            - EXCHANGE_TAPJOY
           type: string
         inventorySourceId:
           description: Output only. The unique ID of the inventory source. Assigned by the system.

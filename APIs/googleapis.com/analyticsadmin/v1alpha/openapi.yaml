@@ -1946,6 +1946,9 @@ components:
         customMetric:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaCustomMetric"
           description: A snapshot of a CustomMetric resource in change history.
+        dataRetentionSettings:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaDataRetentionSettings"
+          description: A snapshot of a data retention settings resource in change history.
         displayVideo360AdvertiserLink:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLink"
           description: A snapshot of a DisplayVideo360AdvertiserLink resource in change history.
@@ -2105,6 +2108,27 @@ components:
             - METRIC_SCOPE_UNSPECIFIED
             - EVENT
           type: string
+      type: object
+    GoogleAnalyticsAdminV1alphaDataRetentionSettings:
+      description: Settings values for data retention. This is a singleton resource.
+      properties:
+        eventDataRetention:
+          description: The length of time that event-level data is retained.
+          enum:
+            - RETENTION_DURATION_UNSPECIFIED
+            - TWO_MONTHS
+            - FOURTEEN_MONTHS
+            - TWENTY_SIX_MONTHS
+            - THIRTY_EIGHT_MONTHS
+            - FIFTY_MONTHS
+          type: string
+        name:
+          description: "Output only. Resource name for this DataRetentionSetting resource. Format: properties/{property}/dataRetentionSettings"
+          readOnly: true
+          type: string
+        resetUserDataOnNewActivity:
+          description: If true, reset the retention period for the user identifier with every event from that user.
+          type: boolean
       type: object
     GoogleAnalyticsAdminV1alphaDataSharingSettings:
       description: A resource message representing data sharing settings of a Google Analytics account.
@@ -2726,6 +2750,7 @@ components:
               - MEASUREMENT_PROTOCOL_SECRET
               - CUSTOM_DIMENSION
               - CUSTOM_METRIC
+              - DATA_RETENTION_SETTINGS
             type: string
           type: array
       type: object
