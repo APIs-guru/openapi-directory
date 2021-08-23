@@ -298,6 +298,8 @@ tags:
     name: Teams
   - description: This object determines if a user is a member of a team.
     name: Team Memberships
+  - description: A `time_period` is an object that represents a domain-scoped date range that can be set on `Goals`.
+    name: Time Periods
   - description: The typeahead search API provides search for objects from a single workspace.
     name: Typeahead
   - description: |-
@@ -916,6 +918,14 @@ paths:
           name: workspace
           schema:
             type: string
+        - description: Globally unique identifiers for the time periods.
+          example: 221693,506165
+          in: query
+          name: time_periods
+          schema:
+            items:
+              type: string
+            type: array
       responses:
         "200":
           content:
@@ -948,6 +958,47 @@ paths:
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/limit"
       - $ref: "#/components/parameters/offset"
+    post:
+      description: |-
+        Creates a new goal in a workspace or team.
+
+        Returns the full record of the newly created goal.
+      operationId: createGoal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  $ref: "#/components/schemas/GoalRequest"
+              type: object
+        description: The goal to create.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: "#/components/schemas/GoalResponse"
+                type: object
+          description: Successfully created a new goal.
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      summary: Create a goal
+      tags:
+        - Goals
   "/goals/{goal_gid}":
     delete:
       description: |-
@@ -1456,7 +1507,7 @@ paths:
         otherwise responds with a 400 status code.
 
         Returns the complete updated goal metric record.
-      operationId: Update GoalMetric
+      operationId: updateGoalMetric
       parameters:
         - description: Automatically added
           in: path
@@ -5323,6 +5374,93 @@ paths:
       - $ref: "#/components/parameters/pretty"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/offset"
+  /time_periods:
+    get:
+      description: Returns compact time period records.
+      operationId: getTimePeriods
+      parameters:
+        - description: ISO 8601 date string
+          example: 2019-09-15
+          in: query
+          name: start_on
+          schema:
+            format: date
+            type: string
+        - description: ISO 8601 date string
+          example: 2019-09-15
+          in: query
+          name: end_on
+          schema:
+            format: date
+            type: string
+        - description: Globally unique identifier for the workspace.
+          example: "31326"
+          in: query
+          name: workspace
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: "#/components/schemas/TimePeriodCompact"
+                    type: array
+                type: object
+          description: Successfully retrieved the requested time periods.
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      summary: Get time periods
+      tags:
+        - Time Periods
+    parameters:
+      - $ref: "#/components/parameters/pretty"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/limit"
+      - $ref: "#/components/parameters/offset"
+  "/time_periods/{time_period_gid}":
+    get:
+      description: Returns the full record for a single time period.
+      operationId: getTimePeriod
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: "#/components/schemas/TimePeriodResponse"
+                type: object
+          description: Successfully retrieved the record for a single time period.
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      summary: Get a time period
+      tags:
+        - Time Periods
+    parameters:
+      - $ref: "#/components/parameters/time_period_path_gid"
+      - $ref: "#/components/parameters/pretty"
+      - $ref: "#/components/parameters/fields"
   "/user_task_lists/{user_task_list_gid}":
     get:
       description: Returns the full record for a user task list.
@@ -7117,6 +7255,15 @@ components:
       schema:
         type: string
       x-env-variable: team
+    time_period_path_gid:
+      description: Globally unique identifier for the time period.
+      example: "917392"
+      in: path
+      name: time_period_gid
+      required: true
+      schema:
+        type: string
+      x-env-variable: time_period
     user_path_gid:
       description: A string identifying a user. This can either be the string "me", an email, or the gid of a user.
       example: me
@@ -7905,7 +8052,7 @@ components:
               example: <body>Start building brand awareness.</body>
               type: string
             is_workspace_level:
-              description: Whether the goal belongs to the workspace (and is listed as part of the workspace’s goals) or not. If it isn’t a workspace-level goal, it is a team-level goal, and is associated with the goal’s team.
+              description: "*Conditional*. This property is only present when the `workspace` provided is an organization. Whether the goal belongs to the `workspace` (and is listed as part of the workspace’s goals) or not. If it isn’t a workspace-level goal, it is a team-level goal, and is associated with the goal’s team."
               example: true
               type: boolean
             liked:
@@ -7933,6 +8080,12 @@ components:
             team:
               allOf:
                 - $ref: "#/components/schemas/TeamCompact"
+                - nullable: true
+                  type: object
+              description: "*Conditional*. This property is only present when the `workspace` provided is an organization."
+            time_period:
+              allOf:
+                - $ref: "#/components/schemas/TimePeriodCompact"
                 - nullable: true
                   type: object
             workspace:
@@ -7964,7 +8117,6 @@ components:
               description: ISO 4217 currency code to format this custom field. This will be null if the `format` is not `currency`.
               example: EUR
               nullable: true
-              readOnly: true
               type: string
             current_display_value:
               description: "*Conditional*. This string is the current value of a goal metric of type string."
@@ -7977,14 +8129,12 @@ components:
             initial_number_value:
               description: "*Conditional*. This number is the start value of a goal metric of type number."
               example: 5.2
-              readOnly: true
               type: number
             precision:
               description: |-
                 Only relevant for goal metrics of type ‘Number’. This field dictates the number of places after the decimal to round to, i.e. 0 is integer values, 1 rounds to the nearest tenth, and so on. Must be between 0 and 6, inclusive.
                 For percentage format, this may be unintuitive, as a value of 0.25 has a precision of 0, while a value of 0.251 has a precision of 1. This is due to 0.25 being displayed as 25%.
               example: 2
-              readOnly: true
               type: integer
             resource_subtype:
               description: The subtype of this resource. Different subtypes retain many of the same fields and behavior, but may render differently in Asana or represent resources with different semantic meaning.
@@ -7996,7 +8146,6 @@ components:
             target_number_value:
               description: "*Conditional*. This number is the end value of a goal metric of type number."
               example: 10.2
-              readOnly: true
               type: number
             unit:
               description: A supported unit of measure for the goal metric, or none.
@@ -8004,7 +8153,6 @@ components:
                 - none
                 - currency
                 - percentage
-              readOnly: true
               type: string
           type: object
     GoalMetricCurrentValueRequest:
@@ -9608,8 +9756,8 @@ components:
               allOf:
                 - $ref: "#/components/schemas/SectionCompact"
                 - description: |-
-                    The *assignee section* is a subdivision of a project that groups  tasks together in the assignee's "My Tasks" list. It can either be a  header above a list of tasks in a list view or a column in a board  view of "My Tasks."
-                    The `assignee_section` property will be returned in the response only  if the request was sent by the user who is the assignee of the task.  Note that you can only write to `assignee_section` with the gid of an  existing section visible in the user's "My Tasks" list.
+                    The *assignee section* is a subdivision of a project that groups tasks together in the assignee's "My Tasks" list. It can either be a header above a list of tasks in a list view or a column in a board view of "My Tasks."
+                    The `assignee_section` property will be returned in the response only if the request was sent by the user who is the assignee of the task. Note that you can only write to `assignee_section` with the gid of an existing section visible in the user's "My Tasks" list.
               nullable: true
             custom_fields:
               description: Array of custom field values applied to the task. These represent the custom field values recorded on this project for a particular custom field. For example, these custom field values will contain an `enum_value` property for custom fields of type `enum`, a `text_value` property for custom fields of type `text`, and so on. Please note that the `gid` returned on each custom field value *is identical* to the `gid` of the custom field, which allows referencing the custom field metadata through the `/custom_fields/custom_field-gid` endpoint.
@@ -9770,6 +9918,44 @@ components:
               readOnly: true
               type: string
           type: object
+    TimePeriodBase:
+      allOf:
+        - $ref: "#/components/schemas/TimePeriodCompact"
+        - properties:
+            parent:
+              $ref: "#/components/schemas/TimePeriodCompact"
+          type: object
+    TimePeriodCompact:
+      allOf:
+        - $ref: "#/components/schemas/AsanaResource"
+        - properties:
+            end_on:
+              description: The localized end date of the time period in `YYYY-MM-DD` format.
+              example: 2019-09-14
+              type: string
+            period:
+              description: "The cadence and index of the time period. The value is one of: `FY`, `H1`, `H2`, `Q1`, `Q2`, `Q3`, or `Q4`."
+              enum:
+                - FY
+                - H1
+                - H2
+                - Q1
+                - Q2
+                - Q3
+                - Q4
+              example: Q1
+              type: string
+            start_on:
+              description: The localized start date of the time period in `YYYY-MM-DD` format.
+              example: 2019-09-13
+              type: string
+          type: object
+          x-docs-overrides:
+            properties.resource_type.example: time_period
+    TimePeriodResponse:
+      allOf:
+        - $ref: "#/components/schemas/TimePeriodBase"
+        - type: object
     UserBase:
       $ref: "#/components/schemas/UserCompact"
     UserCompact:

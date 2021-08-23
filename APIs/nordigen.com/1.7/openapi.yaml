@@ -288,12 +288,14 @@ paths:
                         - ...
                         - AT
                       id: N26_NTSBDEB1
+                      logo: https://cdn.nordigen.com/ais/N26_SANDBOX_NTSBDEB1.png
                       name: N26 Bank
                       transaction_total_days: "90"
                     - bic: FTSBDEFAXXX
                       countries:
                         - DE
                       id: ABNAMRO_FTSBDEFAXXX
+                      logo: https://cdn.nordigen.com/ais/ABNAMRO_FTSBDEFAXXX.png
                       name: ABN AMRO Bank Commercial
                       transaction_total_days: "558"
               schema:
@@ -331,6 +333,7 @@ paths:
                     countries:
                       - DE
                     id: ABNAMRO_FTSBDEFAXXX
+                    logo: https://cdn.nordigen.com/ais/ABNAMRO_FTSBDEFAXXX.png
                     name: ABN AMRO Bank Commercial
                     transaction_total_days: "558"
                 N26Bank:
@@ -344,6 +347,7 @@ paths:
                       - ...
                       - AT
                     id: N26_NTSBDEB1
+                    logo: https://cdn.nordigen.com/ais/N26_SANDBOX_NTSBDEB1.png
                     name: N26 Bank
                     transaction_total_days: "90"
               schema:
@@ -537,6 +541,8 @@ components:
           type: array
         id:
           type: string
+        logo:
+          type: string
         name:
           type: string
         transaction_total_days:
@@ -545,6 +551,7 @@ components:
       required:
         - countries
         - id
+        - logo
         - name
       type: object
     EndUserAgreement:

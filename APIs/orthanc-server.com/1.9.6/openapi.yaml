@@ -307,6 +307,9 @@ paths:
                 KeepPrivateTags:
                   description: Keep the private tags from the DICOM instances (defaults to `false`)
                   type: boolean
+                KeepSource:
+                  description: If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.
+                  type: boolean
                 PrivateCreator:
                   description: The private creator to be used for private tags in `Replace`
                   type: string
@@ -1685,6 +1688,9 @@ paths:
                   items:
                     type: string
                   type: array
+                KeepSource:
+                  description: If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.
+                  type: boolean
                 PrivateCreator:
                   description: The private creator to be used for private tags in `Replace`
                   type: string
@@ -2297,9 +2303,9 @@ paths:
               schema:
                 description: JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)
                 example:
-                  - 3b2b5734-2181-468c-9fda-e800ff2647da
-                  - 3f656515-d105-4ef5-a6b5-3ac2384181e3
-                  - 43ccf2db-74fe-457e-8537-dca845087574
+                  - 0190e616-f520-4128-98f1-ab681bd4633a
+                  - 0a43a06e-f53a-45e5-8a2e-ce9702f81247
+                  - 4ee11497-4381-4979-b999-d96b9566bef1
                   - ...
           description: ""
       summary: List jobs
@@ -3194,6 +3200,9 @@ paths:
                   type: array
                 KeepPrivateTags:
                   description: Keep the private tags from the DICOM instances (defaults to `false`)
+                  type: boolean
+                KeepSource:
+                  description: If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.
                   type: boolean
                 Permissive:
                   description: If `true`, ignore errors during the individual steps of the job.
@@ -4277,6 +4286,9 @@ paths:
                   items:
                     type: string
                   type: array
+                KeepSource:
+                  description: If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.
+                  type: boolean
                 Permissive:
                   description: If `true`, ignore errors during the individual steps of the job.
                   type: boolean
@@ -5634,6 +5646,9 @@ paths:
                 KeepPrivateTags:
                   description: Keep the private tags from the DICOM instances (defaults to `false`)
                   type: boolean
+                KeepSource:
+                  description: If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.
+                  type: boolean
                 Permissive:
                   description: If `true`, ignore errors during the individual steps of the job.
                   type: boolean
@@ -6587,6 +6602,9 @@ paths:
                   items:
                     type: string
                   type: array
+                KeepSource:
+                  description: If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.
+                  type: boolean
                 Permissive:
                   description: If `true`, ignore errors during the individual steps of the job.
                   type: boolean
@@ -7358,6 +7376,9 @@ paths:
                   type: array
                 KeepPrivateTags:
                   description: Keep the private tags from the DICOM instances (defaults to `false`)
+                  type: boolean
+                KeepSource:
+                  description: If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.
                   type: boolean
                 Permissive:
                   description: If `true`, ignore errors during the individual steps of the job.
@@ -8506,6 +8527,9 @@ paths:
                   items:
                     type: string
                   type: array
+                KeepSource:
+                  description: If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.
+                  type: boolean
                 Permissive:
                   description: If `true`, ignore errors during the individual steps of the job.
                   type: boolean
@@ -9076,7 +9100,7 @@ paths:
                   Name: Orthanc Demo
                   PluginsEnabled: true
                   StorageAreaPlugin: null
-                  Version: 1.9.5
+                  Version: 1.9.6
                 properties:
                   ApiVersion:
                     description: Version of the REST API
@@ -9234,6 +9258,9 @@ paths:
                 KeepPrivateTags:
                   description: Keep the private tags from the DICOM instances (defaults to `false`)
                   type: boolean
+                KeepSource:
+                  description: If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.
+                  type: boolean
                 Permissive:
                   description: If `true`, ignore errors during the individual steps of the job.
                   type: boolean
@@ -9355,6 +9382,9 @@ paths:
                   items:
                     type: string
                   type: array
+                KeepSource:
+                  description: If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.
+                  type: boolean
                 Permissive:
                   description: If `true`, ignore errors during the individual steps of the job.
                   type: boolean
@@ -10102,22 +10132,22 @@ paths:
           content:
             text/plain:
               example: |
-                orthanc_count_instances 2552 1626863153049
-                orthanc_count_patients 8 1626863153049
-                orthanc_count_series 26 1626863153049
-                orthanc_count_studies 8 1626863153049
-                orthanc_dicom_cache_count 83 1626857936800
-                orthanc_dicom_cache_size 61.942482 1626857936800
-                orthanc_disk_size_mb 1018.65021 1626863153049
-                orthanc_jobs_completed 10 1626863153049
-                orthanc_jobs_failed 1 1626863153049
-                orthanc_jobs_pending 0 1626863153049
-                orthanc_jobs_running 0 1626863153049
-                orthanc_jobs_success 9 1626863153049
-                orthanc_rest_api_active_requests 1 1626863153049
-                orthanc_rest_api_duration_ms 385 1626863148654
-                orthanc_storage_read_duration_ms 21 1626863148365
-                orthanc_uncompressed_size_mb 1018.65021 1626863153049
+                orthanc_count_instances 2552 1629103886979
+                orthanc_count_patients 8 1629103886979
+                orthanc_count_series 26 1629103886979
+                orthanc_count_studies 8 1629103886979
+                orthanc_dicom_cache_count 231 1629098711537
+                orthanc_dicom_cache_size 114.333038 1629098711537
+                orthanc_disk_size_mb 1018.65021 1629103886979
+                orthanc_jobs_completed 10 1629103886979
+                orthanc_jobs_failed 4 1629103886979
+                orthanc_jobs_pending 0 1629103886979
+                orthanc_jobs_running 0 1629103886979
+                orthanc_jobs_success 6 1629103886979
+                orthanc_rest_api_active_requests 1 1629103886977
+                orthanc_rest_api_duration_ms 1790 1629103882403
+                orthanc_storage_read_duration_ms 52 1629103881241
+                orthanc_uncompressed_size_mb 1018.65021 1629103886979
           description: ""
       summary: Get usage metrics
       tags:
@@ -10131,7 +10161,7 @@ paths:
         "200":
           content:
             text/plain:
-              example: 20210721T102553
+              example: 20210816T085127
               schema:
                 description: The UTC time
           description: ""
@@ -10147,7 +10177,7 @@ paths:
         "200":
           content:
             text/plain:
-              example: 20210721T102553
+              example: 20210816T085127
               schema:
                 description: The local time
           description: ""

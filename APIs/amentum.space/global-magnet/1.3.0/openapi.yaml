@@ -135,6 +135,27 @@ paths:
             else:
               json_payload = response.json()
               print(json.dumps(json_payload, indent=4, sort_keys=True))
+        - lang: Javascript
+          source: |
+            let url = 'https://geomag.amentum.io/wmm/magnetic_field?'
+
+            var params = new URLSearchParams({
+              year: 2020.5, // decimal year, half-way through 2020
+              latitude: 80, // [deg]
+              longitude: 100,
+              altitude: 10 // [km]
+            })
+
+            var requestOptions = {
+              method: 'GET',
+              redirect: 'follow',
+              headers: {'API-Key': '<add_your_key>'} 
+            };
+
+            fetch(url + params, requestOptions)
+              .then(response => response.text())
+              .then(result => console.log(result))
+              .catch(error => console.log('error', error));
 components:
   parameters:
     Altitude:

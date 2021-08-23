@@ -312,6 +312,57 @@ paths:
       summary: Get SDK Key
       tags:
         - SDK Keys
+  "/v1/configs/{configId}/environments/{environmentId}/values":
+    get:
+      description: |-
+        This endpoint returns the value of a specified Config's Feature Flags or Settings identified by the `configId` parameter
+        in a specified Environment identified by the `environmentId` parameter.
+
+        The most important attributes in the response are the `value`, `rolloutRules` and `percentageRules`.
+        The `value` represents what the clients will get when the evaluation requests of our SDKs 
+        are not matching to any of the defined Targeting or Percentage Rules, or when there are no additional rules to evaluate.
+
+        The `rolloutRules` and `percentageRules` attributes are representing the current 
+        Targeting and Percentage Rules configuration of the actual Feature Flag or Setting 
+        in an **ordered** collection, which means the order of the returned rules is matching to the
+        evaluation order. You can read more about these rules [here](https://configcat.com/docs/advanced/targeting/).
+      operationId: get-setting-values
+      parameters:
+        - description: The identifier of the Config.
+          in: path
+          name: configId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The identifier of the Environment.
+          in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/ConfigSettingValuesModel"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfigSettingValuesModel"
+          description: When everything is ok, the setting values returned.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Get values
+      tags:
+        - Feature Flag & Setting values
   "/v1/configs/{configId}/settings":
     get:
       description: |-
@@ -3046,6 +3097,7 @@ components:
         - organizationAdminChanged
         - organizationAdminRemoved
         - organizationAdminLeft
+        - organizationAdminDisabled2FA
         - tagAdded
         - tagChanged
         - tagRemoved
@@ -3053,6 +3105,16 @@ components:
         - settingTagRemoved
         - publicApiAccessTokenAdded
         - publicApiAccessTokenRemoved
+        - domainAdded
+        - domainVerified
+        - domainRemoved
+        - domainSamlConfigured
+        - domainSamlDeleted
+        - autoProvisioningConfigurationChanged
+        - organizationMemberJoined
+        - organizationMemberProductAccessRequested
+        - organizationMemberAccessRequestDeclined
+        - organizationMemberAccessRequestAccepted
       type: string
     ConfigModel:
       additionalProperties: false
@@ -3127,6 +3189,64 @@ components:
         name:
           nullable: true
           type: string
+      type: object
+    ConfigSettingValueModel:
+      additionalProperties: false
+      properties:
+        integrationLinks:
+          items:
+            $ref: "#/components/schemas/IntegrationLinkModel"
+          nullable: true
+          type: array
+        lastUpdaterUserEmail:
+          nullable: true
+          type: string
+        lastUpdaterUserFullName:
+          nullable: true
+          type: string
+        rolloutPercentageItems:
+          description: The percentage rule collection.
+          items:
+            $ref: "#/components/schemas/RolloutPercentageItemModel"
+          nullable: true
+          type: array
+        rolloutRules:
+          description: The targeting rule collection.
+          items:
+            $ref: "#/components/schemas/RolloutRuleModel"
+          nullable: true
+          type: array
+        setting:
+          $ref: "#/components/schemas/SettingDataModel"
+        settingTags:
+          items:
+            $ref: "#/components/schemas/SettingTagModel"
+          nullable: true
+          type: array
+        updatedAt:
+          format: date-time
+          nullable: true
+          type: string
+        value:
+          additionalProperties: false
+          description: The value to serve. It must respect the setting type.
+          nullable: true
+          type: object
+      type: object
+    ConfigSettingValuesModel:
+      additionalProperties: false
+      properties:
+        config:
+          $ref: "#/components/schemas/ConfigModel"
+        environment:
+          $ref: "#/components/schemas/EnvironmentModel"
+        readOnly:
+          type: boolean
+        settingValues:
+          items:
+            $ref: "#/components/schemas/ConfigSettingValueModel"
+          nullable: true
+          type: array
       type: object
     CreateConfigRequest:
       additionalProperties: false

@@ -391,7 +391,6 @@ paths:
                               items:
                                 properties:
                                   availToSellQty:
-                                    description: Quantity of an item that is available to be allocated to orders
                                     properties:
                                       amount:
                                         description: The number available in the inventory
@@ -406,7 +405,6 @@ paths:
                                       - unit
                                     type: object
                                   inputQty:
-                                    description: Quantity of an item that is input by the seller
                                     properties:
                                       amount:
                                         description: The number available in the inventory
@@ -518,7 +516,6 @@ paths:
                     items:
                       properties:
                         availToSellQty:
-                          description: Quantity of an item that is available to be allocated to orders
                           properties:
                             amount:
                               description: The number available in the inventory
@@ -585,7 +582,6 @@ paths:
                               name: Error
                           type: array
                         inputQty:
-                          description: Quantity of an item that is input by the seller
                           properties:
                             amount:
                               description: The number available in the inventory
@@ -678,7 +674,6 @@ paths:
                       items:
                         properties:
                           inputQty:
-                            description: Quantity of an item that is input by the seller
                             properties:
                               amount:
                                 description: The number available in the inventory
@@ -856,7 +851,6 @@ paths:
               schema:
                 properties:
                   quantity:
-                    description: Information about the quantity in inventory
                     properties:
                       amount:
                         description: The number available in the inventory
@@ -892,7 +886,6 @@ paths:
               schema:
                 properties:
                   quantity:
-                    description: Information about the quantity in inventory
                     properties:
                       amount:
                         description: The number available in the inventory
@@ -980,7 +973,6 @@ paths:
             schema:
               properties:
                 quantity:
-                  description: Information about the quantity in inventory
                   properties:
                     amount:
                       description: The number available in the inventory
@@ -1016,7 +1008,6 @@ paths:
             schema:
               properties:
                 quantity:
-                  description: Information about the quantity in inventory
                   properties:
                     amount:
                       description: The number available in the inventory
@@ -1053,7 +1044,6 @@ paths:
               schema:
                 properties:
                   quantity:
-                    description: Information about the quantity in inventory
                     properties:
                       amount:
                         description: The number available in the inventory
@@ -1089,7 +1079,6 @@ paths:
               schema:
                 properties:
                   quantity:
-                    description: Information about the quantity in inventory
                     properties:
                       amount:
                         description: The number available in the inventory
@@ -1174,21 +1163,6 @@ components:
       schema:
         type: string
   schemas:
-    AvailToSellQty:
-      description: Quantity of an item that is available to be allocated to orders
-      properties:
-        amount:
-          description: The number available in the inventory
-          type: number
-        unit:
-          description: "The unit of measurement. Example: 'EACH'"
-          enum:
-            - EACH
-          type: string
-      required:
-        - amount
-        - unit
-      type: object
     Cause:
       properties:
         code:
@@ -1211,7 +1185,6 @@ components:
                 items:
                   properties:
                     availToSellQty:
-                      description: Quantity of an item that is available to be allocated to orders
                       properties:
                         amount:
                           description: The number available in the inventory
@@ -1226,7 +1199,6 @@ components:
                         - unit
                       type: object
                     inputQty:
-                      description: Quantity of an item that is input by the seller
                       properties:
                         amount:
                           description: The number available in the inventory
@@ -1317,7 +1289,6 @@ components:
           items:
             properties:
               availToSellQty:
-                description: Quantity of an item that is available to be allocated to orders
                 properties:
                   amount:
                     description: The number available in the inventory
@@ -1332,7 +1303,6 @@ components:
                   - unit
                 type: object
               inputQty:
-                description: Quantity of an item that is input by the seller
                 properties:
                   amount:
                     description: The number available in the inventory
@@ -1358,7 +1328,6 @@ components:
     GetAllInventoriesNodeDTO:
       properties:
         availToSellQty:
-          description: Quantity of an item that is available to be allocated to orders
           properties:
             amount:
               description: The number available in the inventory
@@ -1373,7 +1342,6 @@ components:
             - unit
           type: object
         inputQty:
-          description: Quantity of an item that is input by the seller
           properties:
             amount:
               description: The number available in the inventory
@@ -1406,28 +1374,12 @@ components:
           format: int32
           type: integer
       type: object
-    InputQty:
-      description: Quantity of an item that is input by the seller
-      properties:
-        amount:
-          description: The number available in the inventory
-          type: number
-        unit:
-          description: "The unit of measurement. Example: 'EACH'"
-          enum:
-            - EACH
-          type: string
-      required:
-        - amount
-        - unit
-      type: object
     InventoriesDTO:
       properties:
         nodes:
           items:
             properties:
               availToSellQty:
-                description: Quantity of an item that is available to be allocated to orders
                 properties:
                   amount:
                     description: The number available in the inventory
@@ -1494,7 +1446,6 @@ components:
                     name: Error
                 type: array
               inputQty:
-                description: Quantity of an item that is input by the seller
                 properties:
                   amount:
                     description: The number available in the inventory
@@ -1520,7 +1471,6 @@ components:
     Inventory:
       properties:
         quantity:
-          description: Information about the quantity in inventory
           properties:
             amount:
               description: The number available in the inventory
@@ -1590,7 +1540,6 @@ components:
                     items:
                       properties:
                         availToSellQty:
-                          description: Quantity of an item that is available to be allocated to orders
                           properties:
                             amount:
                               description: The number available in the inventory
@@ -1605,7 +1554,6 @@ components:
                             - unit
                           type: object
                         inputQty:
-                          description: Quantity of an item that is input by the seller
                           properties:
                             amount:
                               description: The number available in the inventory
@@ -1650,7 +1598,6 @@ components:
               items:
                 properties:
                   inputQty:
-                    description: Quantity of an item that is input by the seller
                     properties:
                       amount:
                         description: The number available in the inventory
@@ -1751,7 +1698,6 @@ components:
     NodeDTO:
       properties:
         availToSellQty:
-          description: Quantity of an item that is available to be allocated to orders
           properties:
             amount:
               description: The number available in the inventory
@@ -1818,7 +1764,6 @@ components:
               name: Error
           type: array
         inputQty:
-          description: Quantity of an item that is input by the seller
           properties:
             amount:
               description: The number available in the inventory
@@ -1884,7 +1829,6 @@ components:
           type: string
       type: object
     SupplyQuantity:
-      description: Information about the quantity in inventory
       properties:
         amount:
           description: The number available in the inventory
@@ -1904,7 +1848,6 @@ components:
           items:
             properties:
               inputQty:
-                description: Quantity of an item that is input by the seller
                 properties:
                   amount:
                     description: The number available in the inventory
@@ -1932,7 +1875,6 @@ components:
     UpdateInventoriesRequestNodeDTO:
       properties:
         inputQty:
-          description: Quantity of an item that is input by the seller
           properties:
             amount:
               description: The number available in the inventory

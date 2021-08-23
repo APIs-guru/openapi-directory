@@ -63,6 +63,8 @@ tags:
     name: IPs
   - description: Inbound channels operations
     name: Inbound Channels
+  - description: Inventory Level
+    name: Inventory Level
   - description: Search messaging detail records
     name: MDR Search (Beta)
   - description: Managed Accounts operations
@@ -83,14 +85,14 @@ tags:
     name: Notifications
   - description: Background jobs performed over a batch of phone numbers
     name: Number Background Jobs
+  - description: Background jobs performed over a phone-numbers block's phone numbers
+    name: Number Blocks Background Jobs
   - description: Configure your phone numbers
     name: Number Configurations
   - description: Look up phone number data
     name: Number Lookup
   - description: Number order documents
     name: Number Order Documents
-  - description: Number order regulatory requirements
-    name: Number Order Regulatory Requirements
   - description: Number orders
     name: Number Orders
   - description: Number portout operations
@@ -526,6 +528,113 @@ paths:
       tags:
         - Authentication Providers
       x-latency-category: responsive
+  /available_phone_number_blocks:
+    get:
+      operationId: listAvailablePhoneNumberBlocks
+      parameters:
+        - description: Filter number blocks that start with a pattern (meant to be used after `national_destination_code` filter has been set).
+          in: query
+          name: filter[phone_number][starts_with]
+          schema:
+            example: "201"
+            type: string
+        - description: Filter numbers ending with a pattern.
+          in: query
+          name: filter[phone_number][ends_with]
+          schema:
+            example: "8000"
+            type: string
+        - description: Filter numbers containing a pattern.
+          in: query
+          name: filter[phone_number][contains]
+          schema:
+            example: "456"
+            type: string
+        - description: Filter phone numbers by city.
+          examples:
+            AU:
+              value: Canberra
+            CA:
+              value: Toronto
+            US:
+              value: Chicago
+          in: query
+          name: filter[locality]
+          schema:
+            type: string
+        - description: Filter phone numbers by US state/CA province.
+          in: query
+          name: filter[administrative_area]
+          schema:
+            example: IL
+            type: string
+        - description: Filter phone numbers by ISO alpha-2 country code.
+          in: query
+          name: filter[country_code]
+          schema:
+            example: US
+            type: string
+        - description: Filter by the national destination code of the number. This filter is only applicable to North American numbers.
+          examples:
+            AU:
+              value: "0251"
+            CA:
+              value: "437"
+            US:
+              value: "312"
+          in: query
+          name: filter[national_destination_code]
+          schema:
+            type: string
+        - description: Filter phone numbers by NANP rate center. This filter is only applicable to North American numbers.
+          in: query
+          name: filter[rate_center]
+          schema:
+            example: CHICAGO HEIGHTS
+            type: string
+        - description: Filter phone numbers by number type.
+          in: query
+          name: filter[number_type]
+          schema:
+            enum:
+              - toll-free
+            example: toll-free
+            type: string
+        - description: Filter if the phone number should be used for voice, fax, mms, sms, emergency.
+          in: query
+          name: filter[features]
+          schema:
+            example: voice,sms
+            items:
+              enum:
+                - sms
+                - mms
+                - voice
+                - fax
+                - emergency
+              type: string
+            type: array
+        - description: Filter number blocks by minimum blocks size
+          in: query
+          name: filter[minimum_block_size]
+          schema:
+            example: 100
+            type: integer
+        - description: Limits the number of results.
+          in: query
+          name: filter[limit]
+          schema:
+            example: 100
+            type: integer
+      responses:
+        "200":
+          $ref: "#/components/responses/ListAvailablePhoneNumbersBlockResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: List available phone number blocks
+      tags:
+        - Number Search
+      x-latency-category: responsive
   /available_phone_numbers:
     get:
       operationId: listAvailablePhoneNumbers
@@ -605,7 +714,10 @@ paths:
           schema:
             enum:
               - toll-free
-            example: toll-free
+              - national
+              - mobile
+              - local
+            example: local
             type: string
         - description: Filter if the phone number should be used for voice, fax, mms, sms, emergency.
           in: query
@@ -2130,6 +2242,88 @@ paths:
       tags:
         - Call Commands
       x-latency-category: interactive
+  /comments:
+    get:
+      operationId: listComments
+      parameters:
+        - description: Record type that the comment relates to i.e number_order, sub_number_order or number_order_phone_number
+          in: query
+          name: filter[comment_record_type]
+          required: true
+          schema:
+            example: sub_number_order
+            type: string
+        - description: ID of the record the comments relate to
+          in: query
+          name: filter[comment_record_id]
+          required: true
+          schema:
+            example: 8ffb3622-7c6b-4ccc-b65f-7a3dc0099576
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/listCommentsResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Retrieve all comments
+      tags:
+        - Number Orders
+      x-latency-category: responsive
+    post:
+      operationId: createComment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Comment"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/CommentResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Create a comment
+      tags:
+        - Number Orders
+      x-latency-category: responsive
+  "/comments/{id}":
+    get:
+      operationId: retrieveComment
+      responses:
+        "200":
+          $ref: "#/components/responses/CommentResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Retrieve a comment
+      tags:
+        - Number Orders
+      x-latency-category: responsive
+    parameters:
+      - description: The comment ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+  "/comments/{id}/read":
+    parameters:
+      - description: The comment ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    patch:
+      operationId: markCommentRead
+      responses:
+        "200":
+          $ref: "#/components/responses/ReadCommentResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Mark a comment as read
+      tags:
+        - Number Orders
+      x-latency-category: responsive
   /conferences:
     get:
       description: Lists conferences. Conferences are created on demand, and will expire after all participants have left the conference or after 4 hours regardless of the number of active participants. Conferences are listed in descending order by `expires_at`.
@@ -2479,6 +2673,51 @@ paths:
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
       summary: Join a conference
+      tags:
+        - Conference Commands
+      x-latency-category: interactive
+  "/conferences/{id}/actions/leave":
+    post:
+      callbacks:
+        conferenceParticipantLeft:
+          "{$request.body#/webhook_url}":
+            post:
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ConferenceParticipantLeftEvent"
+                required: true
+              responses:
+                "200":
+                  description: The server must return an HTTP 200, otherwise we will reattempt delivery at the failover webhook URL.
+      description: |
+        Removes a call leg from a conference and moves it back to parked state. **Expected Webhooks:**
+
+        - `conference.participant.left`
+      operationId: conferenceLeave
+      parameters:
+        - description: Uniquely identifies the conference by id or name
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LeaveConferenceRequest"
+        description: Leave Conference request object
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/ConferenceCommandResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+      summary: Leave a conference
       tags:
         - Conference Commands
       x-latency-category: interactive
@@ -3834,6 +4073,89 @@ paths:
       summary: Update an FQDN
       tags:
         - FQDNs
+      x-latency-category: responsive
+  /inventory_coverage:
+    get:
+      description: Creates an inventory coverage request. If locality, npa or national_destination_code is used in groupBy, and no region or locality filters are used, the whole paginated set is returned.
+      operationId: createInventoryCoverageRequest
+      parameters:
+        - example: 318
+          in: query
+          name: filter[npa]
+          schema:
+            description: Filter by npa
+            type: integer
+        - example: 202
+          in: query
+          name: filter[nxx]
+          schema:
+            description: Filter by nxx
+            type: integer
+        - example: LA
+          in: query
+          name: filter[administrative_area]
+          schema:
+            description: Filter by administrative area
+            type: string
+        - example: did
+          in: query
+          name: filter[number_type]
+          schema:
+            description: Filter by number type
+            enum:
+              - did
+              - toll-free
+            type: string
+        - example: local
+          in: query
+          name: filter[phone_number_type]
+          schema:
+            description: Filter by phone number type
+            enum:
+              - local
+              - toll_free
+              - national
+              - mobile
+              - landline
+              - shared_cost
+            type: string
+        - example: US
+          in: query
+          name: filter[country_code]
+          schema:
+            description: Filter by country. Defaults to US
+            enum:
+              - US
+              - CA
+              - GB
+            type: string
+        - example: "true"
+          in: query
+          name: filter[count]
+          schema:
+            description: Include count in the result
+            type: boolean
+        - example: nxx
+          in: query
+          name: filter[groupBy]
+          required: true
+          schema:
+            description: Filter to group results
+            enum:
+              - rate_center
+              - locality
+              - npa
+              - national_destination_code
+              - nxx
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/InventoryCoverageResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Create an inventory coverage request
+      tags:
+        - Inventory Level
       x-latency-category: responsive
   /ip_connections:
     get:
@@ -5417,6 +5739,97 @@ paths:
       tags:
         - Notifications
       x-latency-category: responsive
+  /number_block_orders:
+    get:
+      description: Get a paginated list of number block orders.
+      operationId: listNumberBlockOrders
+      parameters:
+        - description: Filter number block orders by status.
+          in: query
+          name: filter[status]
+          schema:
+            example: pending
+            type: string
+        - description: Filter number block orders later than this value.
+          in: query
+          name: filter[created_at][gt]
+          schema:
+            example: 2018-01-01T00:00:00.000000Z
+            type: string
+        - description: Filter number block orders earlier than this value.
+          in: query
+          name: filter[created_at][lt]
+          schema:
+            example: 2018-01-01T00:00:00.000000Z
+            type: string
+        - description: Filter number block  orders having these phone numbers.
+          in: query
+          name: filter[phone_numbers.starting_number]
+          schema:
+            example: "+19705555000"
+            type: string
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          $ref: "#/components/responses/ListNumberBlockOrdersResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: List number block orders
+      tags:
+        - Number Block Orders
+      x-latency-category: responsive
+    post:
+      callbacks:
+        numberOrderStatusUpdate:
+          "{$request.body#/webhook_url}":
+            post:
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/NumberOrderBlockEvent"
+                required: true
+              responses:
+                "200":
+                  description: The server must return a HTTP 200, otherwise we will reattempt to deliver the webhook to the failover URL.
+      description: Creates a phone number block order.
+      operationId: createNumberBlockOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateNumberBlockOrderRequest"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/NumberBlockOrderResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Create a number block order
+      tags:
+        - Number Block Orders
+      x-latency-category: responsive
+  "/number_block_orders/{number_block_order_id}":
+    get:
+      description: Get an existing phone number block order.
+      operationId: retrieveNumberBlockOrder
+      parameters:
+        - description: The number block order ID.
+          in: path
+          name: number_block_order_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/NumberBlockOrderResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Retrieve a number block order
+      tags:
+        - Number Block Orders
+      x-latency-category: responsive
   "/number_lookup/{phone_number}":
     get:
       description: Returns information about the provided phone number.
@@ -5530,6 +5943,64 @@ paths:
       tags:
         - Number Order Documents
       x-latency-category: responsive
+  /number_order_phone_numbers:
+    get:
+      description: Get a list of phone numbers associated to orders.
+      operationId: retrieveNumberOrderPhoneNumbers
+      responses:
+        "200":
+          $ref: "#/components/responses/ListNumberOrderPhoneNumbersResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Retrieve a list of phone numbers associated to orders
+      tags:
+        - Number Orders
+      x-latency-category: responsive
+  "/number_order_phone_numbers/{number_order_phone_number_id}":
+    get:
+      description: Get an existing number order phone number.
+      operationId: retrieveNumberOrderPhoneNumber
+      parameters:
+        - description: The number order phone number ID.
+          in: path
+          name: number_order_phone_number_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/NumberOrderPhoneNumberResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Retrieve a number order phone number.
+      tags:
+        - Number Orders
+      x-latency-category: responsive
+    patch:
+      description: Updates a number order phone number.
+      operationId: updateNumberOrderPhoneNumber
+      parameters:
+        - description: The number order phone number ID.
+          in: path
+          name: number_order_phone_number_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateNumberOrderPhoneNumberRequest"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/NumberOrderPhoneNumberResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Update a number order phone number.
+      tags:
+        - Number Orders
+      x-latency-category: responsive
   /number_orders:
     get:
       description: Get a paginated list of number orders.
@@ -5550,9 +6021,9 @@ paths:
           name: filter[created_at][lt]
           schema:
             type: string
-        - description: Filter number orders having these phone numbers.
+        - description: Filter number order with this amount of numbers
           in: query
-          name: filter[phone_numbers.phone_number]
+          name: filter[phone_numbers_count]
           schema:
             type: string
         - description: Filter number orders via the customer reference set.
@@ -5908,6 +6379,108 @@ paths:
       tags:
         - Outbound Voice Profiles
       x-latency-category: responsive
+  /phone_number_blocks/jobs:
+    get:
+      operationId: listPhoneNumberBlocksJobs
+      parameters:
+        - description: Filter the phone number blocks jobs by type.
+          in: query
+          name: filter[type]
+          schema:
+            description: Identifies the type of the background job.
+            enum:
+              - delete_phone_number_block
+            example: delete_phone_number_block
+            type: string
+        - description: Filter the phone number blocks jobs by status.
+          in: query
+          name: filter[status]
+          schema:
+            description: Identifies the status of the background job.
+            enum:
+              - pending
+              - in_progress
+              - completed
+              - failed
+            example: in_progress
+            type: string
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+        - description: Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+          in: query
+          name: sort
+          required: false
+          schema:
+            enum:
+              - created_at
+            example: created_at
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/ListPhoneNumberBlocksJobsResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Lists the phone number blocks jobs
+      tags:
+        - Number Blocks Background Jobs
+      x-group-parameters: "true"
+      x-latency-category: responsive
+  /phone_number_blocks/jobs/delete_phone_number_block:
+    post:
+      description: Creates a new background job to delete all the phone numbers associated with the given block. We will only consider the phone number block as deleted after all phone numbers associated with it are removed, so multiple executions of this job may be necessary in case some of the phone numbers present errors during the deletion process.
+      operationId: createPhoneNumberBlocksJobDeletePhoneNumberBlock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PhoneNumberBlocksJobDeletePhoneNumberBlockRequest"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: "#/components/schemas/PhoneNumberBlocksJob"
+                title: Phone Number Blocks Job Delete Phone Number Block
+                type: object
+          description: Phone number blocks job delete phone numbers requested.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Deletes all numbers associated with a phone number block
+      tags:
+        - Number Blocks Background Jobs
+      x-group-parameters: "true"
+      x-latency-category: background
+  "/phone_number_blocks/jobs/{id}":
+    get:
+      operationId: retrievePhoneNumberBlocksJob
+      parameters:
+        - description: Identifies the Phone Number Blocks Job.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: "#/components/schemas/PhoneNumberBlocksJob"
+                title: Phone Number Blocks Job
+                type: object
+          description: Phone number blocks job details.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Retrieves a phone number blocks job
+      tags:
+        - Number Blocks Background Jobs
+      x-group-parameters: "true"
+      x-latency-category: responsive
   /phone_numbers:
     get:
       operationId: listPhoneNumbers
@@ -6002,7 +6575,6 @@ paths:
           in: query
           name: filter[customer_reference]
           schema:
-            example: MY REF 001
             type: string
         - description: Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
           in: query
@@ -6277,7 +6849,7 @@ paths:
       x-latency-category: background
   /phone_numbers/jobs/update_phone_numbers:
     post:
-      description: Creates a new background job to update a batch of numbers. At most one thousand numbers can be updated per API call. At least one of the updateable fields must be submitted
+      description: Creates a new background job to update a batch of numbers. At most one thousand numbers can be updated per API call. At least one of the updateable fields must be submitted.
       operationId: createPhoneNumbersJobUpdatePhoneNumber
       requestBody:
         content:
@@ -6575,30 +7147,6 @@ paths:
         - Number Configurations
       x-endpoint-cost: medium
       x-latency-category: responsive
-  /phone_numbers_regulatory_requirements:
-    get:
-      description: Gets a paginated list of phone number regulatory requirements.
-      operationId: listPhoneNumberRegulatoryRequirements
-      parameters:
-        - description: The list of phone numbers to retrieve regulatory requirements for.
-          in: query
-          name: filter[phone_number]
-          schema:
-            items:
-              type: string
-            type: array
-        - $ref: "#/components/parameters/PageNumber"
-        - $ref: "#/components/parameters/PageSize"
-      responses:
-        "200":
-          $ref: "#/components/responses/ListPhoneNumberRegulatoryRequirementsResponse"
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: List regulatory requirements per number
-      tags:
-        - Number Order Regulatory Requirements
-      x-group-parameters: "true"
-      x-latency-category: responsive
   /portability_checks:
     post:
       description: Runs a portability check, returning the results immediately.
@@ -6643,6 +7191,12 @@ paths:
           example: 123abc
           in: query
           name: filter[customer_reference]
+          schema:
+            type: string
+        - description: Filter results by country ISO 3166-1 alpha-2 code
+          example: US
+          in: query
+          name: filter[phone_numbers][country_code]
           schema:
             type: string
         - description: Filter results by old service provider
@@ -6729,6 +7283,22 @@ paths:
       tags:
         - Porting Order
       x-latency-category: responsive
+  /porting_orders/exception_types:
+    get:
+      description: Returns a list of all possible exception types for a porting order.
+      operationId: listPortingOrdersExceptionTypes
+      parameters: []
+      responses:
+        "200":
+          $ref: "#/components/responses/ListPortingOrdersExceptionTypes"
+        "401":
+          description: Unauthorized
+        "422":
+          description: Unprocessable entity. Check message field in response for details.
+      summary: List all exception types
+      tags:
+        - Porting Order
+      x-latency-category: responsive
   "/porting_orders/{id}":
     delete:
       description: Request the cancellation of a porting order.
@@ -6786,6 +7356,23 @@ paths:
       tags:
         - Porting Order
       x-latency-category: responsive
+  "/porting_orders/{id}/actions/activate":
+    post:
+      description: Activate every numbers of a porting order asynchronously.
+      operationId: activatePortingOrder
+      parameters:
+        - $ref: "#/components/parameters/PathPortingOrderID"
+      responses:
+        "202":
+          $ref: "#/components/responses/ShowPortingOrdersActivationJob"
+        "401":
+          description: Unauthorized
+        "422":
+          description: Unprocessable entity. Check message field in response for details.
+      summary: Activates every number on a porting order.
+      tags:
+        - Porting Order
+      x-latency-category: responsive
   "/porting_orders/{id}/actions/cancel":
     post:
       description: Cancel this porting order
@@ -6817,6 +7404,84 @@ paths:
         "422":
           description: Unprocessable entity. Check message field in response for details.
       summary: Confirms the porting order is ready to be actioned.
+      tags:
+        - Porting Order
+      x-latency-category: responsive
+  "/porting_orders/{id}/activation_jobs":
+    get:
+      description: Returns a list of your porting activation jobs.
+      operationId: listPortingOrdersActivationJobs
+      parameters:
+        - $ref: "#/components/parameters/PathPortingOrderID"
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          $ref: "#/components/responses/ListPortingOrdersActivationJobs"
+        "401":
+          description: Unauthorized
+        "422":
+          description: Unprocessable entity. Check message field in response for details.
+      summary: List all porting activation jobs
+      tags:
+        - Porting Order
+      x-latency-category: responsive
+  "/porting_orders/{id}/activation_jobs/{activationJobId}":
+    get:
+      description: Returns a porting activation job.
+      operationId: getPortingOrdersActivationJob
+      parameters:
+        - $ref: "#/components/parameters/PathPortingOrderID"
+        - $ref: "#/components/parameters/PathPortingOrdersActivationJobID"
+      responses:
+        "200":
+          $ref: "#/components/responses/ShowPortingOrdersActivationJob"
+        "401":
+          description: Unauthorized
+        "422":
+          description: Unprocessable entity. Check message field in response for details.
+      summary: Retrieve a porting activation job
+      tags:
+        - Porting Order
+      x-latency-category: responsive
+  "/porting_orders/{id}/comments":
+    get:
+      description: Returns a list of all comments of a porting order.
+      operationId: listPortingOrdersComments
+      parameters:
+        - $ref: "#/components/parameters/PathPortingOrderID"
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          $ref: "#/components/responses/ListPortingOrdersComments"
+        "401":
+          description: Unauthorized
+        "422":
+          description: Unprocessable entity. Check message field in response for details.
+      summary: List all comments of a porting order
+      tags:
+        - Porting Order
+      x-latency-category: responsive
+    post:
+      description: Creates a new comment for a porting order.
+      operationId: createPortingOrderComment
+      parameters:
+        - $ref: "#/components/parameters/PathPortingOrderID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePortingOrderComment"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/ShowPortingOrdersComment"
+        "401":
+          description: Unauthorized
+        "422":
+          description: Unprocessable entity. Check message field in response for details.
+      summary: Create a comment for a porting order
       tags:
         - Porting Order
       x-latency-category: responsive
@@ -7261,58 +7926,6 @@ paths:
       tags:
         - Recordings Commands
       x-latency-category: interactive
-  /regulatory_requirements:
-    get:
-      description: Gets a paginated list of number order regulatory requirements.
-      operationId: listNumberOrderRegulatoryRequirements
-      parameters:
-        - description: Filter number order regulatory requirements by `requirement_id`.
-          in: query
-          name: filter[requirement_id]
-          schema:
-            type: string
-        - description: Filter number order regulatory requirements by `field_type`.
-          in: query
-          name: filter[field_type]
-          schema:
-            type: string
-        - description: Filter number order regulatory requirements by `requirement_type`.
-          in: query
-          name: filter[requirement_type]
-          schema:
-            type: string
-        - $ref: "#/components/parameters/PageNumber"
-        - $ref: "#/components/parameters/PageSize"
-      responses:
-        "200":
-          $ref: "#/components/responses/ListNumberOrderRegulatoryRequirementsResponse"
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: List number order regulatory requirements
-      tags:
-        - Number Order Regulatory Requirements
-      x-group-parameters: "true"
-      x-latency-category: responsive
-  "/regulatory_requirements/{requirement_id}":
-    get:
-      description: Gets a single number order regulatory requirement.
-      operationId: retrieveNumberOrderRegulatoryRequirement
-      parameters:
-        - description: The number order regulatory requirement ID.
-          in: path
-          name: requirement_id
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          $ref: "#/components/responses/NumberOrderRegulatoryRequirementResponse"
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: Retrieve a number order regulatory requirement
-      tags:
-        - Number Order Regulatory Requirements
-      x-latency-category: responsive
   /reports/batch_mdr_reports:
     get:
       description: "Fetch all previous requests for messaging detail reports. Messaging detail reports are reports for pulling all messaging records. "
@@ -9136,6 +9749,105 @@ paths:
       summary: List wireless connectivity logs
       tags:
         - SIM Cards
+      x-latency-category: responsive
+  /sub_number_orders:
+    get:
+      description: Get a paginated list of sub number orders.
+      operationId: listSubNumberOrders
+      parameters:
+        - description: User ID of the user who owns the sub number order
+          in: query
+          name: filter[user_id]
+          schema:
+            example: d70873cd-7c98-401a-81b6-b1ae08246995
+            format: uuid
+            type: string
+        - description: ID of the number order the sub number order belongs to
+          in: query
+          name: filter[order_request_id]
+          schema:
+            example: 12ade33a-21c0-473b-b055-b3c836e1c293
+            format: uuid
+            type: string
+        - description: ISO alpha-2 country code.
+          in: query
+          name: filter[country_code]
+          schema:
+            example: US
+            type: string
+        - description: Phone Number Type
+          in: query
+          name: filter[phone_number_type]
+          schema:
+            example: local
+            type: string
+        - description: Amount of numbers in the sub number order
+          in: query
+          name: filter[phone_numbers_count]
+          schema:
+            example: 1
+            type: integer
+      responses:
+        "200":
+          $ref: "#/components/responses/ListSubNumberOrdersResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: List sub number orders
+      tags:
+        - Number Orders
+      x-group-parameters: "true"
+      x-latency-category: responsive
+  "/sub_number_orders/{sub_number_order_id}":
+    get:
+      description: Get an existing sub number order.
+      operationId: retrieveSubNumberOrder
+      parameters:
+        - description: The sub number order ID.
+          in: path
+          name: sub_number_order_id
+          required: true
+          schema:
+            type: string
+        - description: Include the first 50 phone number objects in the results
+          in: query
+          name: filter[include_phone_numbers]
+          required: false
+          schema:
+            default: false
+            type: boolean
+      responses:
+        "200":
+          $ref: "#/components/responses/SubNumberOrderResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Retrieve a sub number order
+      tags:
+        - Number Orders
+      x-latency-category: responsive
+    patch:
+      description: Updates a sub number order.
+      operationId: updateSubNumberOrder
+      parameters:
+        - description: The sub number order ID.
+          in: path
+          name: sub_number_order_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSubNumberOrderRequest"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/SubNumberOrderResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Update a sub number order
+      tags:
+        - Number Orders
       x-latency-category: responsive
   /telephony_credentials:
     get:
@@ -11030,6 +11742,14 @@ components:
       schema:
         format: uuid
         type: string
+    PathPortingOrdersActivationJobID:
+      description: Activation Job Identifier
+      in: path
+      name: activationJobId
+      required: true
+      schema:
+        format: uuid
+        type: string
     PhoneNumber:
       description: The phone number to be looked up
       in: path
@@ -11338,6 +12058,17 @@ components:
             title: Check Contact Response
             type: object
       description: Successful response with details about WhatsApp contact(s).
+    CommentResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                allOf:
+                  - $ref: "#/components/schemas/Comment"
+                  - type: object
+            type: object
+      description: A Comment Response
     ConferenceCommandResponse:
       content:
         application/json:
@@ -11855,6 +12586,19 @@ components:
                 type: array
             type: object
       description: Successful response
+    InventoryCoverageResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/InventoryCoverage"
+                type: array
+              meta:
+                $ref: "#/components/schemas/InventoryCoverageMetadata"
+            type: object
+      description: Successful response with a list of inventory coverage levels
     IpConnectionResponse:
       content:
         application/json:
@@ -11875,6 +12619,20 @@ components:
             title: Ip Response
             type: object
       description: Successful response with details about an IP.
+    ListAvailablePhoneNumbersBlockResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/AvailablePhoneNumberBlock"
+                type: array
+              meta:
+                $ref: "#/components/schemas/AvailablePhoneNumbersMetadata"
+            title: List Available Phone Numbers Blocks Response
+            type: object
+      description: Successful response with a list of available phone numbers blocks.
     ListAvailablePhoneNumbersResponse:
       content:
         application/json:
@@ -11930,19 +12688,6 @@ components:
             title: List Call Events Response
             type: object
       description: Successful response with a list of call events.
-    ListComments:
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                items:
-                  $ref: "#/components/schemas/Comment"
-                type: array
-              meta:
-                $ref: "#/components/schemas/PaginationMeta"
-            type: object
-      description: Successful response
     ListConferencesResponse:
       content:
         application/json:
@@ -12209,6 +12954,20 @@ components:
             title: List Messaging Profile Url Domains Response
             type: object
       description: Successful response with details about a messaging URL domain.
+    ListNumberBlockOrdersResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/NumberBlockOrder"
+                type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
+            title: List Number Block Orders Response
+            type: object
+      description: Successful response with a list of number block orders.
     ListNumberOrderDocumentsResponse:
       content:
         application/json:
@@ -12223,20 +12982,20 @@ components:
             title: List Number Order Documents Response
             type: object
       description: Successful response with a list of number order documents.
-    ListNumberOrderRegulatoryRequirementsResponse:
+    ListNumberOrderPhoneNumbersResponse:
       content:
         application/json:
           schema:
             properties:
               data:
                 items:
-                  $ref: "#/components/schemas/RegulatoryRequirement"
+                  $ref: "#/components/schemas/NumberOrderPhoneNumber"
                 type: array
               meta:
                 $ref: "#/components/schemas/PaginationMeta"
-            title: List Number Order Regulatory Requirements Response
+            title: List Number Order Phone Numbers Response
             type: object
-      description: Successful response with a list of number order regulatory requirements.
+      description: Successful response with a list of number order phone numbers.
     ListNumberOrdersResponse:
       content:
         application/json:
@@ -12293,20 +13052,20 @@ components:
             title: List Participants Response
             type: object
       description: Successful response with a list of conference participants.
-    ListPhoneNumberRegulatoryRequirementsResponse:
+    ListPhoneNumberBlocksJobsResponse:
       content:
         application/json:
           schema:
             properties:
               data:
                 items:
-                  $ref: "#/components/schemas/PhoneNumberRegulatoryGroup"
+                  $ref: "#/components/schemas/PhoneNumberBlocksJob"
                 type: array
               meta:
                 $ref: "#/components/schemas/PaginationMeta"
-            title: List Phone Number Regulatory Requirements Response
+            title: List Phone Number Blocks Background Jobs Response
             type: object
-      description: Successful response with a list of phone number regulatory requirements.
+      description: Successful response with a list of phone number blocks background jobs.
     ListPhoneNumbers:
       content:
         application/json:
@@ -12397,6 +13156,43 @@ components:
               data:
                 items:
                   $ref: "#/components/schemas/PortingOrder"
+                type: array
+            type: object
+      description: Successful response
+    ListPortingOrdersActivationJobs:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/PortingOrdersActivationJob"
+                type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
+            type: object
+      description: Successful response
+    ListPortingOrdersComments:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/PortingOrdersComment"
+                type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
+            type: object
+      description: Successful response
+    ListPortingOrdersExceptionTypes:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/PortingOrdersExceptionType"
                 type: array
             type: object
       description: Successful response
@@ -12518,6 +13314,20 @@ components:
             title: List Short Codes Response
             type: object
       description: Successful response with a list of short codes.
+    ListSubNumberOrdersResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/SubNumberOrder"
+                type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
+            title: List Sub Number Orders Response
+            type: object
+      description: Successful response with a list of sub number orders.
     ListTagsResponse:
       content:
         application/json:
@@ -12620,6 +13430,16 @@ components:
       description: Successful response with details about a messaging profile.
     NotFoundResponse:
       description: Conference does not exist
+    NumberBlockOrderResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/NumberBlockOrder"
+            title: Number Block Order Response
+            type: object
+      description: Successful response with details about a number block order.
     NumberLookupResponse:
       content:
         application/json:
@@ -12640,23 +13460,23 @@ components:
             title: Number Order Document Response
             type: object
       description: Successful response with details about a number order document.
-    NumberOrderRegulatoryRequirementResponse:
+    NumberOrderPhoneNumberResponse:
       content:
         application/json:
           schema:
             properties:
               data:
-                $ref: "#/components/schemas/RegulatoryRequirement"
-            title: Number Order Regulatory Requirement Response
+                $ref: "#/components/schemas/NumberOrderPhoneNumber"
+            title: Number Order Phone Number Response
             type: object
-      description: Successful response with details about a number order regulatory requirement.
+      description: Successful response with details about a number order phone number.
     NumberOrderResponse:
       content:
         application/json:
           schema:
             properties:
               data:
-                $ref: "#/components/schemas/NumberOrder"
+                $ref: "#/components/schemas/NumberOrderWithPhoneNumbers"
             title: Number Order Response
             type: object
       description: Successful response with details about a number order.
@@ -12784,6 +13604,17 @@ components:
             title: Queue Response
             type: object
       description: Successful response with details about a queue.
+    ReadCommentResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                allOf:
+                  - $ref: "#/components/schemas/ReadComment"
+                  - type: object
+            type: object
+      description: A Comment Response
     ReceivedSIMCardPublicIPResponse:
       content:
         application/json:
@@ -13012,22 +13843,6 @@ components:
             title: Short Code Response
             type: object
       description: Successful response with details about a short code.
-    ShowComment:
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                $ref: "#/components/schemas/Comment"
-              meta:
-                properties:
-                  port_request_url:
-                    description: Link to show port request
-                    example: /porting_orders/?filter[id]=6dedc3d4-4db8-4b12-91bd-c0d28a9d955b
-                    type: string
-                type: object
-            type: object
-      description: Successful response
     ShowPhoneNumber:
       content:
         application/json:
@@ -13061,6 +13876,24 @@ components:
                 type: object
             type: object
       description: Successful response
+    ShowPortingOrdersActivationJob:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/PortingOrdersActivationJob"
+            type: object
+      description: Successful response
+    ShowPortingOrdersComment:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/PortingOrdersComment"
+            type: object
+      description: Successful response
     SimCardGroupActionCollectionResponse:
       content:
         application/json:
@@ -13083,6 +13916,16 @@ components:
                 $ref: "#/components/schemas/SimpleSIMCard"
             type: object
       description: Successful response
+    SubNumberOrderResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/SubNumberOrder"
+            title: Sub Number Order Response
+            type: object
+      description: Successful response with details about a sub number order.
     TelephonyCredentialResponse:
       content:
         application/json:
@@ -13232,6 +14075,19 @@ components:
                 $ref: "#/components/schemas/PaginationMeta"
             type: object
       description: Successful response
+    listCommentsResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/Comment"
+                type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
+            type: object
+      description: An array of Comment Responses
   schemas:
     ActivationStatus:
       description: Activation status
@@ -13504,17 +14360,15 @@ components:
           currency: USD
           monthly_cost: "6.54"
           upfront_cost: "3.21"
+        features:
+          - name: sms
+          - name: voice
         phone_number: "+19705555098"
         quickship: true
         record_type: available_phone_number
         region_information:
           - region_name: US
             region_type: country_code
-        regulatory_requirements:
-          - description: Requirement for providing Proof of Address.
-            field_type: address
-            label: Proof of Address
-            requirement_type: end user proof of address
         reservable: true
         vanity_format: ""
       properties:
@@ -13524,6 +14378,10 @@ components:
           type: boolean
         cost_information:
           $ref: "#/components/schemas/CostInformation"
+        features:
+          items:
+            $ref: "#/components/schemas/Feature"
+          type: array
         phone_number:
           example: "+19705555098"
           type: string
@@ -13540,15 +14398,49 @@ components:
           items:
             $ref: "#/components/schemas/RegionInformation"
           type: array
-        regulatory_requirements:
-          items:
-            $ref: "#/components/schemas/RegulatoryRequirement"
-          type: array
         reservable:
           description: Specifies whether the phone number can be reserved before purchase or not.
           example: true
           type: boolean
         vanity_format:
+          type: string
+      type: object
+    AvailablePhoneNumberBlock:
+      example:
+        cost_information:
+          currency: USD
+          monthly_cost: "6.54"
+          upfront_cost: "3.21"
+        features:
+          - name: sms
+          - name: voice
+        phone_number: "+19705555000"
+        range: 10
+        record_type: available_phone_number_block
+        region_information:
+          - region_name: US
+            region_type: country_code
+      properties:
+        cost_information:
+          $ref: "#/components/schemas/CostInformation"
+        features:
+          items:
+            $ref: "#/components/schemas/Feature"
+          type: array
+        range:
+          example: 10
+          type: integer
+        record_type:
+          enum:
+            - available_phone_number_block
+          example: available_phone_number_block
+          type: string
+        region_information:
+          items:
+            $ref: "#/components/schemas/RegionInformation"
+          type: array
+        starting_number:
+          example: "+19705555000"
           type: string
       type: object
     AvailablePhoneNumbersMetadata:
@@ -16001,27 +16893,53 @@ components:
     Comment:
       properties:
         body:
-          description: Body of comment
-          example: Great experience so far
+          example: Hi there, ....
+          type: string
+        comment_record_id:
+          example: 8ffb3622-7c6b-4ccc-b65f-7a3dc0099576
+          format: uuid
+          type: string
+        comment_record_type:
+          enum:
+            - number_order
+            - sub_number_order
+            - number_order_phone_number
+          example: sub_number_order
+          type: string
+        commenter:
+          example: user@company.com
+          readOnly: true
+          type: string
+        commenter_type:
+          enum:
+            - admin
+            - user
+          example: user
+          readOnly: true
           type: string
         created_at:
-          description: ISO 8601 formatted date indicating when the resource was created.
-          example: 2021-03-19T10:07:15.527Z
-          format: date-time
+          description: An ISO 8901 datetime string denoting when the comment was created.
+          example: 2018-01-01T00:00:00.000000Z
+          format: datetime
+          readOnly: true
           type: string
         id:
-          example: f1486bae-f067-460c-ad43-73a92848f902
+          example: 12ade33a-21c0-473b-b055-b3c836e1c292
           format: uuid
+          readOnly: true
           type: string
-        porting_order_id:
-          example: f1486bae-f067-460c-ad43-73a92848f902
-          format: uuid
+        read_at:
+          description: An ISO 8901 datetime string for when the comment was read.
+          example: null
+          format: datetime
+          readOnly: true
           type: string
-        user_id:
-          description: identifies the user who created the comment. Will be null if created by a Telnyx Admin
-          example: f1486bae-f067-460c-ad43-73a92848f902
+        updated_at:
+          description: An ISO 8901 datetime string for when the comment was updated.
+          example: 2018-01-01T00:00:00.000000Z
+          format: datetime
+          readOnly: true
           type: string
-      type: object
     CompleteOTAUpdate:
       description: This object represents an Over the Air (OTA) update request. It allows tracking the current status of a operation that apply settings in a particular SIM card. <br/><br/>
       example:
@@ -18795,6 +19713,81 @@ components:
           format: binary
           type: string
       type: object
+    CreateNumberBlockOrderRequest:
+      example:
+        range: 10
+        starting_number: "+19705555000"
+      properties:
+        connection_id:
+          description: Identifies the connection associated with this phone number.
+          example: "346789098765567"
+          type: string
+        created_at:
+          description: An ISO 8901 datetime string denoting when the number order was created.
+          example: 2018-01-01T00:00:00.000000Z
+          format: datetime
+          readOnly: true
+          type: string
+        customer_reference:
+          description: A customer reference string for customer look ups.
+          example: MY REF 001
+          type: string
+        errors:
+          description: Errors the reservation could happen upon
+          example: Number is already on hold
+          readOnly: true
+          type: string
+        id:
+          example: 12ade33a-21c0-473b-b055-b3c836e1c292
+          format: uuid
+          readOnly: true
+          type: string
+        messaging_profile_id:
+          description: Identifies the messaging profile associated with the phone number.
+          example: abc85f64-5717-4562-b3fc-2c9600
+          type: string
+        phone_numbers_count:
+          description: The count of phone numbers in the number order.
+          example: 10
+          readOnly: true
+          type: integer
+        range:
+          description: The phone number range included in the block.
+          example: 10
+          type: integer
+          writeOnly: true
+        record_type:
+          example: number_block_order
+          readOnly: true
+          type: string
+        requirements_met:
+          description: True if all requirements are met for every phone number, false otherwise.
+          example: true
+          readOnly: true
+          type: boolean
+        starting_number:
+          description: Starting phone number block
+          example: "+19705555000"
+          format: e164_phone_number
+          type: string
+          writeOnly: true
+        status:
+          description: The status of the order.
+          enum:
+            - pending
+            - success
+            - failure
+          readOnly: true
+          type: string
+        updated_at:
+          description: An ISO 8901 datetime string for when the number order was updated.
+          example: 2018-01-01T00:00:00.000000Z
+          format: datetime
+          readOnly: true
+          type: string
+      required:
+        - starting_number
+        - range
     CreateNumberOrderDocumentRequest:
       example:
         created_at: 2018-01-01T00:00:00.000000Z
@@ -18853,7 +19846,7 @@ components:
             record_type: number_order_phone_number
             regulatory_group_id: dc8e4d67-33a0-4cbb-af74-7b58f05bd494
             regulatory_requirements:
-              - field_type: address_id
+              - field_type: address
                 field_value: 45f45a04-b4be-4592-95b1-9306b9db2b21
                 record_type: phone_number_regulatory_requirement
                 requirement_id: 8ffb3622-7c6b-4ccc-b65f-7a3dc0099576
@@ -18917,6 +19910,7 @@ components:
             - pending
             - success
             - failure
+          example: success
           readOnly: true
           type: string
         updated_at:
@@ -19140,6 +20134,12 @@ components:
       required:
         - phone_numbers
       title: CreatePortingOrder
+      type: object
+    CreatePortingOrderComment:
+      properties:
+        body:
+          example: Please, let me know when the port completes
+          type: string
       type: object
     CreateRoomClientTokenRequest:
       properties:
@@ -21217,6 +22217,13 @@ components:
           example: event
           type: string
       type: object
+    Feature:
+      example:
+        name: sms
+      properties:
+        name:
+          example: sms
+          type: string
     Filter:
       properties:
         billing_group:
@@ -22309,6 +23316,63 @@ components:
       format: int64
       title: Int ID
       type: string
+    InventoryCoverage:
+      example:
+        count: 3
+        coverage_type: number
+        group: "318"
+        group_type: npa
+        number_range: 1
+        number_type: did
+        phone_number_type: local
+        record_type: inventory_coverage_group
+      properties:
+        count:
+          example: 3
+          type: integer
+        coverage_type:
+          enum:
+            - number
+            - block
+          example: number
+          type: string
+        group:
+          example: "318"
+          type: string
+        group_type:
+          example: npa
+          type: string
+        number_range:
+          example: 1
+          type: integer
+        number_type:
+          enum:
+            - did
+            - toll-free
+          example: did
+          type: string
+        phone_number_type:
+          enum:
+            - local
+            - toll_free
+            - national
+            - landline
+            - shared_cost
+            - mobile
+          example: local
+          type: string
+        record_type:
+          example: inventory_coverage_group
+          type: string
+      type: object
+    InventoryCoverageMetadata:
+      example:
+        total_results: 25
+      properties:
+        total_results:
+          example: 25
+          type: integer
+      type: object
     Ip:
       example:
         connection_id: "3456789987654"
@@ -22601,6 +23665,32 @@ components:
         - policy
         - code
       title: Language
+      type: object
+    LeaveConferenceRequest:
+      example:
+        beep_enabled: never
+        call_control_id: c46e06d7-b78f-4b13-96b6-c576af9640ff
+      properties:
+        beep_enabled:
+          description: Whether a beep sound should be played when the participant leaves the conference. Can be used to override the conference-level setting.
+          enum:
+            - always
+            - never
+            - on_enter
+            - on_exit
+          example: on_exit
+          type: string
+        call_control_id:
+          description: Unique identifier and token for controlling the call
+          example: f91269aa-61d1-417f-97b3-10e020e8bc47
+          type: string
+        command_id:
+          description: Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
+          example: 891510ac-f3e4-11e8-af5b-de00688a4901
+          type: string
+      required:
+        - call_control_id
+      title: Leave Conference Request
       type: object
     LeaveQueueRequest:
       example:
@@ -24201,6 +25291,82 @@ components:
           format: date-time
           readOnly: true
           type: string
+    NumberBlockOrder:
+      example:
+        connection_id: "346789098765567"
+        created_at: 2018-01-01T00:00:00.000000Z
+        customer_reference: MY REF 001
+        id: 12ade33a-21c0-473b-b055-b3c836e1c292
+        messaging_profile_id: abc85f64-5717-4562-b3fc-2c9600
+        phone_numbers_count: 10
+        range: 10
+        record_type: number_block_order
+        requirements_met: true
+        starting_number: "+19705555000"
+        status: pending
+        updated_at: 2018-01-01T00:00:00.000000Z
+      properties:
+        connection_id:
+          description: Identifies the connection associated to all numbers in the phone number block.
+          example: "346789098765567"
+          type: string
+        created_at:
+          description: An ISO 8901 datetime string denoting when the number order was created.
+          example: 2018-01-01T00:00:00.000000Z
+          format: datetime
+          readOnly: true
+          type: string
+        customer_reference:
+          description: A customer reference string for customer look ups.
+          example: MY REF 001
+          type: string
+        id:
+          example: 12ade33a-21c0-473b-b055-b3c836e1c292
+          format: uuid
+          readOnly: true
+          type: string
+        messaging_profile_id:
+          description: Identifies the messaging profile associated to all numbers in the phone number block.
+          example: abc85f64-5717-4562-b3fc-2c9600
+          type: string
+        phone_numbers_count:
+          description: The count of phone numbers in the number order.
+          example: 1
+          readOnly: true
+          type: integer
+        range:
+          description: The phone number range included in the block.
+          example: 10
+          type: integer
+        record_type:
+          example: number_block_order
+          readOnly: true
+          type: string
+        requirements_met:
+          description: True if all requirements are met for every phone number, false otherwise.
+          example: true
+          readOnly: true
+          type: boolean
+        starting_number:
+          description: Starting phone number block
+          example: "+19705555000"
+          format: e164_phone_number
+          type: string
+        status:
+          description: The status of the order.
+          enum:
+            - pending
+            - success
+            - failure
+          example: success
+          readOnly: true
+          type: string
+        updated_at:
+          description: An ISO 8901 datetime string for when the number order was updated.
+          example: 2018-01-01T00:00:00.000000Z
+          format: datetime
+          readOnly: true
+          type: string
     NumberHealthMetrics:
       description: |
         High level health metrics about the number and it's messaging sending patterns.
@@ -24263,30 +25429,6 @@ components:
       title: NumberLookup
       type: object
     NumberOrder:
-      example:
-        billing_group_id: abc85f64-5717-4562-b3fc-2c9600
-        connection_id: "346789098765567"
-        created_at: 2018-01-01T00:00:00.000000Z
-        customer_reference: MY REF 001
-        id: 12ade33a-21c0-473b-b055-b3c836e1c292
-        messaging_profile_id: abc85f64-5717-4562-b3fc-2c9600
-        phone_numbers:
-          - id: dc8e4d67-33a0-4cbb-af74-7b58f05bd494
-            phone_number: "+19705555098"
-            record_type: number_order_phone_number
-            regulatory_group_id: dc8e4d67-33a0-4cbb-af74-7b58f05bd494
-            regulatory_requirements:
-              - field_type: address_id
-                field_value: 45f45a04-b4be-4592-95b1-9306b9db2b21
-                record_type: phone_number_regulatory_requirement
-                requirement_id: 8ffb3622-7c6b-4ccc-b65f-7a3dc0099576
-            requirements_met: true
-            status: success
-        phone_numbers_count: 1
-        record_type: number_order
-        requirements_met: true
-        status: pending
-        updated_at: 2018-01-01T00:00:00.000000Z
       properties:
         billing_group_id:
           description: Identifies the messaging profile associated with the phone number.
@@ -24315,11 +25457,6 @@ components:
           description: Identifies the messaging profile associated with the phone number.
           example: abc85f64-5717-4562-b3fc-2c9600
           type: string
-        phone_numbers:
-          items:
-            $ref: "#/components/schemas/PhoneNumber"
-          type: array
-          writeOnly: true
         phone_numbers_count:
           description: The count of phone numbers in the number order.
           example: 1
@@ -24348,6 +25485,12 @@ components:
           format: datetime
           readOnly: true
           type: string
+    NumberOrderBlockEvent:
+      properties:
+        data:
+          $ref: "#/components/schemas/NumberBlockOrder"
+      title: Number Order Event
+      type: object
     NumberOrderDocument:
       example:
         created_at: 2018-01-01T00:00:00.000000Z
@@ -24392,6 +25535,67 @@ components:
           description: Unique id for a requirement.
           example: 36aaf27d-986b-493c-bd1b-de16af2e4292
           type: string
+    NumberOrderPhoneNumber:
+      properties:
+        country_code:
+          example: US
+          type: string
+        id:
+          example: dc8e4d67-33a0-4cbb-af74-7b58f05bd494
+          format: uuid
+          readOnly: true
+          type: string
+        order_request_id:
+          example: dc8e4d67-33a0-4cbb-af74-7b58f05bd495
+          format: uuid
+          type: string
+        phone_number:
+          example: "+19705555098"
+          format: e164_phone_number
+          type: string
+        phone_number_type:
+          enum:
+            - local
+            - toll-free
+            - mobile
+            - national
+            - shared-cost
+          example: local
+          type: string
+        record_type:
+          example: number_order_phone_number
+          readOnly: true
+          type: string
+        regulatory_requirements:
+          items:
+            $ref: "#/components/schemas/PhoneNumberRegulatoryRequirement"
+          type: array
+        requirements_met:
+          description: True if all requirements are met for a phone number, false otherwise.
+          example: true
+          readOnly: true
+          type: boolean
+        status:
+          description: The status of the phone number in the order.
+          enum:
+            - pending
+            - success
+            - failure
+          readOnly: true
+          type: string
+        sub_number_order_id:
+          example: dc8e4d67-33a0-4cbb-af74-7b58f05bd496
+          format: uuid
+          type: string
+    NumberOrderWithPhoneNumbers:
+      allOf:
+        - $ref: "#/components/schemas/NumberOrder"
+        - properties:
+            phone_numbers:
+              items:
+                $ref: "#/components/schemas/PhoneNumber"
+              type: array
+          type: object
     NumberOrdered:
       properties:
         event_type:
@@ -25262,7 +26466,7 @@ components:
         record_type: number_order_phone_number
         regulatory_group_id: dc8e4d67-33a0-4cbb-af74-7b58f05bd494
         regulatory_requirements:
-          - field_type: address_id
+          - field_type: address
             field_value: 45f45a04-b4be-4592-95b1-9306b9db2b21
             record_type: phone_number_regulatory_requirement
             requirement_id: 8ffb3622-7c6b-4ccc-b65f-7a3dc0099576
@@ -25303,6 +26507,105 @@ components:
             - failure
           readOnly: true
           type: string
+    PhoneNumberBlocksJob:
+      example:
+        created_at: 2020-10-23T18:10:00.000Z
+        etc: 2020-10-30T18:10:00.000Z
+        failed_operations: []
+        id: 42587e44-3a3e-46de-9255-0c9a7a1d1ec7
+        record_type: phone_numbers_job
+        status: pending
+        successful_operations: []
+        type: delete_phone_number_block
+        updated_at: 2020-10-23T18:10:01.000Z
+      properties:
+        created_at:
+          description: ISO 8601 formatted date indicating when the resource was created.
+          readOnly: true
+          type: string
+        etc:
+          description: ISO 8601 formatted date indicating when the estimated time of completion of the background job.
+          format: date-time
+          readOnly: true
+          type: string
+        failed_operations:
+          items:
+            $ref: "#/components/schemas/PhoneNumberBlocksJobFailedOperation"
+          readOnly: true
+          type: array
+        id:
+          description: Identifies the resource.
+          example: 42587e44-3a3e-46de-9255-0c9a7a1d1ec7
+          format: uuid
+          readOnly: true
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          example: phone_number_block_job
+          readOnly: true
+          type: string
+        status:
+          default: pending
+          description: Indicates the completion status of the background operation.
+          enum:
+            - pending
+            - in_progress
+            - completed
+            - failed
+          example: pending
+          readOnly: true
+          type: string
+        successful_operations:
+          items:
+            $ref: "#/components/schemas/PhoneNumberBlocksJobSuccessfulOperation"
+            description: The phone numbers successfully updated.
+          readOnly: true
+          type: array
+        type:
+          description: Identifies the type of the background job.
+          enum:
+            - delete_phone_number_block
+          example: delete_phone_number_block
+          readOnly: true
+          type: string
+        updated_at:
+          description: ISO 8601 formatted date indicating when the resource was updated.
+          readOnly: true
+          type: string
+      type: object
+    PhoneNumberBlocksJobDeletePhoneNumberBlockRequest:
+      example:
+        phone_number_block_id: f3946371-7199-4261-9c3d-81a0d7935146
+      properties:
+        phone_number_block_id:
+          type: string
+      required:
+        - phone_number_block_id
+      type: object
+    PhoneNumberBlocksJobFailedOperation:
+      properties:
+        errors:
+          items:
+            $ref: "#/components/schemas/Error"
+          type: array
+        id:
+          description: The phone number's ID
+          format: int64
+          type: string
+        phone_number:
+          description: The phone number in e164 format.
+          format: e164
+          type: string
+    PhoneNumberBlocksJobSuccessfulOperation:
+      properties:
+        id:
+          description: The phone number's ID
+          format: int64
+          type: string
+        phone_number:
+          description: The phone number in e164 format.
+          format: e164
+          type: string
     PhoneNumberDeletedDetailed:
       example:
         billing_group_id: 86f58db9-0fe3-4adc-9d1f-46e66e6e9323
@@ -25320,6 +26623,7 @@ components:
         id: "1293384261075731499"
         messaging_profile_id: abc85f64-5717-4562-b3fc-2c9600000000
         messaging_profile_name: regional-customers
+        number_level_routing: disabled
         phone_number: "+19705555098"
         phone_number_type: longcode
         purchased_at: 2019-10-23T18:10:00.000Z
@@ -25387,6 +26691,13 @@ components:
           description: The name of the messaging profile associated with the phone number.
           example: regional-customers
           type: string
+        number_level_routing:
+          default: enabled
+          description: Specifies whether the number can have overrides to the routing settings on itself (enabled) or if it uses the associated connection for all routing settings (disabled). Defaults to enabled but will be changed to disabled in the future. There are performance advantages to using disabled and setting all routing information at the connection level.
+          enum:
+            - enabled
+            - disabled
+          type: string
         phone_number:
           description: The +E.164-formatted phone number associated with this record.
           readOnly: true
@@ -25452,6 +26763,7 @@ components:
         id: "1293384261075731499"
         messaging_profile_id: abc85f64-5717-4562-b3fc-2c9600000000
         messaging_profile_name: regional-customers
+        number_level_routing: disabled
         phone_number: "+19705555098"
         phone_number_type: longcode
         purchased_at: 2019-10-23T18:10:00.000Z
@@ -25507,15 +26819,6 @@ components:
           description: Indicates whether emergency services are enabled for this number.
           readOnly: true
           type: boolean
-        emergency_status:
-          default: disabled
-          description: Represents the state of the number regarding emergency activation.
-          enum:
-            - disabled
-            - active
-            - provisioning
-            - deprovisioning
-          type: string
         external_pin:
           description: If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, Telnyx will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
           type: string
@@ -25527,6 +26830,13 @@ components:
         messaging_profile_name:
           description: The name of the messaging profile associated with the phone number.
           example: regional-customers
+          type: string
+        number_level_routing:
+          default: enabled
+          description: Specifies whether the number can have overrides to the routing settings on itself (enabled) or if it uses the associated connection for all routing settings (disabled). Defaults to enabled but will be changed to disabled in the future. There are performance advantages to using disabled and setting all routing information at the connection level.
+          enum:
+            - enabled
+            - disabled
           type: string
         phone_number:
           description: The +E.164-formatted phone number associated with this record.
@@ -25588,63 +26898,15 @@ components:
         - emergency_enabled
         - emergency_address_id
       type: object
-    PhoneNumberRegulatoryGroup:
-      example:
-        phone_number: "+19705555098"
-        record_type: phone_number_regulatory_requirement
-        regulatory_group_id: d70873cd-7c98-401a-81b6-b1ae08246995
-        regulatory_requirements:
-          - description: Requirement for providing Proof of Address.
-            field_type: address
-            label: Proof of Address
-            record_type: regulatory_requirement
-            requirement_type: end user proof of address
-      properties:
-        phone_number:
-          example: "+19705555098"
-          format: e164_phone_number
-          type: string
-        record_type:
-          example: phone_number_regulatory_requirement
-          readOnly: true
-          type: string
-        regulatory_group_id:
-          example: d70873cd-7c98-401a-81b6-b1ae08246995
-          format: uuid
-          type: string
-        regulatory_requirements:
-          items:
-            $ref: "#/components/schemas/RegulatoryRequirement"
-          type: array
     PhoneNumberRegulatoryRequirement:
-      example:
-        field_type: address_id
-        field_value: 45f45a04-b4be-4592-95b1-9306b9db2b21
-        record_type: phone_number_regulatory_requirement
-        requirement_id: 8ffb3622-7c6b-4ccc-b65f-7a3dc0099576
-      properties:
-        field_type:
-          enum:
-            - string
-            - datetime
-            - address_id
-            - number_order_document_id
-          example: address_id
-          readOnly: true
-          type: string
-        field_value:
-          description: The value of the requirement, this could be an id to a resource or a string value.
-          example: 45f45a04-b4be-4592-95b1-9306b9db2b21
-          type: string
-        record_type:
-          example: phone_number_regulatory_requirement
-          readOnly: true
-          type: string
-        requirement_id:
-          description: Unique id for a requirement.
-          example: 8ffb3622-7c6b-4ccc-b65f-7a3dc0099576
-          format: uuid
-          type: string
+      allOf:
+        - $ref: "#/components/schemas/SubNumberOrderRegulatoryRequirement"
+        - properties:
+            field_value:
+              description: The value of the requirement, this could be an id to a resource or a string value.
+              example: 45f45a04-b4be-4592-95b1-9306b9db2b21
+              type: string
+          type: object
     PhoneNumberWithMessagingSettings:
       example:
         country_code: US
@@ -25759,7 +27021,7 @@ components:
           cnam_listing_details: example
           cnam_listing_enabled: true
         connection_id: 1d0e6cb8-8668-462e-94c6-49ae0f0ed48b
-        customer_reference: customer_reference
+        customer_reference: customer-reference
         emergency:
           emergency_address_id: "1315261609962112019"
           emergency_enabled: true
@@ -25826,10 +27088,19 @@ components:
           example: pay-per-minute
           type: string
       type: object
+    PhoneNumbersBulkUpdateError:
+      properties:
+        errors:
+          items:
+            $ref: "#/components/schemas/Error"
+          type: array
+        phone_number:
+          description: The phone number in e164 format.
+          format: e164
+          type: string
     PhoneNumbersJob:
       example:
         created_at: 2020-10-23T18:10:00.000Z
-        created_by: 015e81fc-11b7-4170-974d-5592ce987da7
         etc: 2020-10-30T18:10:00.000Z
         failed_operations:
           - errors:
@@ -25841,26 +27112,20 @@ components:
             phone_number: "+19705551234"
         id: 42587e44-3a3e-46de-9255-0c9a7a1d1ec7
         pending_operations:
-          - id: "2637816387126861835"
-            phone_number: "+19705555095"
+          - id: "2637816387126861837"
+            phone_number: "+19705555099"
         record_type: phone_numbers_job
         status: pending
         successful_operations:
           - id: "2637816387126861836"
             phone_number: "+19705555098"
-          - id: "33081887126861837"
-            phone_number: "+19715555099"
+          - id: "33081887126861836"
+            phone_number: "+19715555098"
         type: update_emergency_settings
         updated_at: 2020-10-23T18:10:01.000Z
       properties:
         created_at:
           description: ISO 8601 formatted date indicating when the resource was created.
-          readOnly: true
-          type: string
-        created_by:
-          description: Identifies the user which created the resource.
-          example: 42587e44-3a3e-46de-9255-0c9a7a1d1ec7
-          format: uuid
           readOnly: true
           type: string
         etc:
@@ -26215,8 +27480,6 @@ components:
           format: date-time
           readOnly: true
           type: string
-        documents:
-          $ref: "#/components/schemas/PortingOrderDocuments"
         end_user:
           $ref: "#/components/schemas/PortingEndUser"
         id:
@@ -26244,6 +27507,11 @@ components:
           example: porting_order
           readOnly: true
           type: string
+        requirements:
+          description: List of documentation requirements for porting numbers.
+          items:
+            $ref: "#/components/schemas/PortingOrderRequirement"
+          type: array
         status:
           $ref: "#/components/schemas/PortingOrderStatus"
         support_key:
@@ -26286,17 +27554,6 @@ components:
           description: ISO 8601 formatted Date/Time requested for the FOC date
           example: 2021-03-19T10:07:15.527Z
           format: date-time
-          type: string
-      type: object
-    PortingOrderDocuments:
-      properties:
-        invoice:
-          description: identifies the invoice document
-          example: 35146afd-df93-4963-b1e9-1a085e2ae874
-          type: string
-        loa:
-          description: identifies the loa document
-          example: f1486bae-f067-460c-ad43-73a92848f902
           type: string
       type: object
     PortingOrderEndUserAdmin:
@@ -26390,16 +27647,34 @@ components:
             type: string
           type: array
       type: object
+    PortingOrderRequirement:
+      properties:
+        field_type:
+          description: Type of value expected on field_value field
+          enum:
+            - document
+          example: document
+          type: string
+        field_value:
+          description: identifies the document that satisfies this requirement
+          example: 9787fb5f-cbe5-4de4-b765-3303774ee9fe
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          example: porting_requirement
+          type: string
+        requirement_type_id:
+          description: Identifies the requirement type that meets this requirement
+          example: 59b0762a-b274-4f76-ac32-4d5cf0272e66
+          type: string
+      type: object
     PortingOrderStatus:
       description: Porting order status
       properties:
         details:
           description: A list of 0 or more details about this porting order's status
-          example:
-            - exception
-            - exception resolved
           items:
-            type: string
+            $ref: "#/components/schemas/PortingOrdersExceptionType"
           type: array
         value:
           description: The current status of the porting order
@@ -26432,6 +27707,106 @@ components:
           description: Once an order is ported, cancellation is requested or the request is canceled, the user may rate their experience
           example: 5
           type: integer
+      type: object
+    PortingOrdersActivationJob:
+      properties:
+        created_at:
+          description: ISO 8601 formatted date indicating when the resource was created.
+          example: 2021-03-19T10:07:15.527Z
+          format: date-time
+          readOnly: true
+          type: string
+        id:
+          description: Uniquely identifies this activation job
+          example: f1486bae-f067-460c-ad43-73a92848f902
+          format: uuid
+          readOnly: true
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          example: porting_activation_job
+          readOnly: true
+          type: string
+        status:
+          description: Specifies the status of this activation job
+          enum:
+            - created
+            - in-process
+            - completed
+            - failed
+          type: string
+        updated_at:
+          description: ISO 8601 formatted date indicating when the resource was created.
+          example: 2021-03-19T10:07:15.527Z
+          format: date-time
+          readOnly: true
+          type: string
+      type: object
+    PortingOrdersComment:
+      properties:
+        body:
+          description: Body of comment
+          example: Great experience so far
+          type: string
+        created_at:
+          description: ISO 8601 formatted date indicating when the resource was created.
+          example: 2021-03-19T10:07:15.527Z
+          format: date-time
+          type: string
+        id:
+          example: f1486bae-f067-460c-ad43-73a92848f902
+          format: uuid
+          type: string
+        porting_order_id:
+          example: f1486bae-f067-460c-ad43-73a92848f902
+          format: uuid
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          example: porting_comment
+          type: string
+        user_type:
+          description: Indicates whether this comment was created by a Telnyx Admin, user, or system
+          enum:
+            - admin
+            - user
+            - system
+          example: user
+          type: string
+      type: object
+    PortingOrdersExceptionType:
+      properties:
+        code:
+          description: Identifier of an exception type
+          enum:
+            - ACCOUNT_NUMBER_MISMATCH
+            - AUTH_PERSON_MISMATCH
+            - BTN_ATN_MISMATCH
+            - ENTITY_NAME_MISMATCH
+            - FOC_EXPIRED
+            - FOC_REJECTED
+            - LOCATION_MISMATCH
+            - LSR_PENDING
+            - MAIN_BTN_PORTING
+            - OSP_IRRESPONSIVE
+            - OTHER
+            - PASSCODE_PIN_INVALID
+            - PHONE_NUMBER_HAS_SPECIAL_FEATURE
+            - PHONE_NUMBER_MISMATCH
+            - PHONE_NUMBER_NOT_PORTABLE
+            - PORT_TYPE_INCORRECT
+            - PORTING_ORDER_SPLIT_REQUIRED
+            - PORTING_ORDER_SPLIT_REQUIRED
+            - POSTAL_CODE_MISMATCH
+            - RATE_CENTER_NOT_PORTABLE
+            - SV_CONFLICT
+            - SV_UNKNOWN_FAILURE
+          example: ENTITY_NAME_MISMATCH
+          type: string
+        description:
+          description: Description of an exception type
+          example: Entity name does not match that on the CSR
+          type: string
       type: object
     PortoutComment:
       example:
@@ -26772,6 +28147,17 @@ components:
         - queue_id
       title: QueueCall
       type: object
+    ReadComment:
+      allOf:
+        - $ref: "#/components/schemas/Comment"
+        - properties:
+            read_at:
+              description: An ISO 8901 datetime string for when the comment was read.
+              example: 2018-01-01T00:00:00.000000Z
+              format: datetime
+              readOnly: true
+              type: string
+          type: object
     Recording:
       example:
         call_leg_id: 11111111-5717-4562-b3fc-2c963f66afa6
@@ -26944,58 +28330,6 @@ components:
             - location
           example: country_code
           type: string
-    RegulatoryRequirement:
-      example:
-        description: Requirement for providing Proof of Address.
-        field_type: address
-        label: Proof of Address
-        record_type: regulatory_requirement
-        requirement_type: end user proof of address
-      properties:
-        description:
-          example: Requirement for providing Proof of Address.
-          type: string
-        field_type:
-          enum:
-            - file upload
-            - text field
-            - address
-            - datetime
-          type: string
-        label:
-          example: Proof of Address
-          type: string
-        record_type:
-          description: Identifies the type of the resource.
-          example: regulatory_requirement
-          readOnly: true
-          type: string
-        requirement_type:
-          enum:
-            - end user proof of address
-            - entity identification
-            - end user address
-          type: string
-    RegulatoryRequirementCriteria:
-      example:
-        criteria_type: country
-        criteria_value: AU
-        record_type: phone_number_regulatory_requirement_criteria
-      properties:
-        criteria_type:
-          enum:
-            - country
-            - phone_number_type
-          readOnly: true
-          type: string
-        criteria_value:
-          example: AU
-          readOnly: true
-          type: string
-        record_type:
-          example: phone_number_regulatory_requirement_criteria
-          readOnly: true
-          type: string
     RejectRequest:
       example:
         cause: USER_BUSY
@@ -27078,11 +28412,6 @@ components:
           format: datetime
           readOnly: true
           type: string
-        errors:
-          description: Errors the reservation could happen upon
-          example: Number is already on hold
-          readOnly: true
-          type: string
         expired_at:
           description: An ISO 8901 datetime string for when the individual number reservation is going to expire
           example: 2018-01-01T00:00:00.000000Z
@@ -27108,6 +28437,7 @@ components:
             - pending
             - success
             - failure
+          example: success
           readOnly: true
           type: string
         updated_at:
@@ -28357,6 +29687,85 @@ components:
           type: string
       title: Stop Recording Request
       type: object
+    SubNumberOrder:
+      properties:
+        country_code:
+          example: US
+          readOnly: true
+          type: string
+        created_at:
+          description: An ISO 8901 datetime string denoting when the number order was created.
+          example: 2018-01-01T00:00:00.000000Z
+          format: datetime
+          readOnly: true
+          type: string
+        id:
+          example: 12ade33a-21c0-473b-b055-b3c836e1c292
+          format: uuid
+          readOnly: true
+          type: string
+        order_request_id:
+          example: 12ade33a-21c0-473b-b055-b3c836e1c293
+          format: uuid
+          readOnly: true
+          type: string
+        phone_number_type:
+          enum:
+            - local
+            - toll-free
+            - mobile
+            - national
+            - shared-cost
+          example: local
+          type: string
+        phone_numbers_count:
+          description: The count of phone numbers in the number order.
+          example: 1
+          readOnly: true
+          type: integer
+        record_type:
+          example: sub_number_order
+          readOnly: true
+          type: string
+        regulatory_requirements:
+          items:
+            $ref: "#/components/schemas/SubNumberOrderRegulatoryRequirement"
+          type: array
+        requirements_met:
+          description: True if all requirements are met for every phone number, false otherwise.
+          example: true
+          readOnly: true
+          type: boolean
+        updated_at:
+          description: An ISO 8901 datetime string for when the number order was updated.
+          example: 2018-01-01T00:00:00.000000Z
+          format: datetime
+          readOnly: true
+          type: string
+        user_id:
+          example: d70873cd-7c98-401a-81b6-b1ae08246995
+          format: uuid
+          type: string
+    SubNumberOrderRegulatoryRequirement:
+      properties:
+        field_type:
+          enum:
+            - textual
+            - datetime
+            - address
+            - document
+          example: address
+          readOnly: true
+          type: string
+        record_type:
+          example: phone_number_regulatory_requirement
+          readOnly: true
+          type: string
+        requirement_id:
+          description: Unique id for a requirement.
+          example: 8ffb3622-7c6b-4ccc-b65f-7a3dc0099576
+          format: uuid
+          type: string
     TelephonyCredential:
       example:
         created_at: 2020-06-18T21:32:38
@@ -29756,6 +31165,12 @@ components:
           description: Unique id for a requirement.
           example: 36aaf27d-986b-493c-bd1b-de16af2e4292
           type: string
+    UpdateNumberOrderPhoneNumberRequest:
+      properties:
+        regulatory_requirements:
+          items:
+            $ref: "#/components/schemas/UpdateRegulatoryRequirement"
+          type: array
     UpdateNumberOrderRequest:
       example:
         created_at: 2018-01-01T00:00:00.000000Z
@@ -29767,7 +31182,7 @@ components:
             record_type: number_order_phone_number
             regulatory_group_id: dc8e4d67-33a0-4cbb-af74-7b58f05bd494
             regulatory_requirements:
-              - field_type: address_id
+              - field_type: address
                 field_value: 45f45a04-b4be-4592-95b1-9306b9db2b21
                 record_type: phone_number_regulatory_requirement
                 requirement_id: 8ffb3622-7c6b-4ccc-b65f-7a3dc0099576
@@ -29931,6 +31346,7 @@ components:
         customer_reference: customer-reference
         external_pin: "1234"
         id: dc8e4d67-33a0-4cbb-af74-7b58f05bd494
+        number_level_routing: disabled
         tags:
           - tag
       properties:
@@ -29950,6 +31366,13 @@ components:
         id:
           description: Identifies the type of resource.
           readOnly: true
+          type: string
+        number_level_routing:
+          default: enabled
+          description: Specifies whether the number can have overrides to the routing settings on itself (enabled) or if it uses the associated connection for all routing settings (disabled). Defaults to enabled but will be changed to disabled in the future. There are performance advantages to using disabled and setting all routing information at the connection level.
+          enum:
+            - enabled
+            - disabled
           type: string
         tags:
           description: A list of user-assigned tags to help organize phone numbers.
@@ -30014,14 +31437,17 @@ components:
           type: object
         customer_reference:
           type: string
-        documents:
-          $ref: "#/components/schemas/PortingOrderDocuments"
         end_user:
           $ref: "#/components/schemas/PortingEndUser"
         misc:
           $ref: "#/components/schemas/PortingOrderMisc"
         phone_number_configuration:
           $ref: "#/components/schemas/PortingOrderPhoneNumberConfiguration"
+        requirements:
+          description: List of requirements for porting numbers.
+          items:
+            $ref: "#/components/schemas/UpdatePortingOrderRequirement"
+          type: array
         user_feedback:
           $ref: "#/components/schemas/PortingOrderUserFeedback"
         webhook_url:
@@ -30029,6 +31455,31 @@ components:
           type: string
       title: UpdatePortingOrder
       type: object
+    UpdatePortingOrderRequirement:
+      properties:
+        field_value:
+          description: identifies the document that satisfies this requirement
+          example: 9787fb5f-cbe5-4de4-b765-3303774ee9fe
+          type: string
+        requirement_type_id:
+          description: Identifies the requirement type that meets this requirement
+          example: 59b0762a-b274-4f76-ac32-4d5cf0272e66
+          type: string
+      required:
+        - field_value
+        - requirement_type_id
+      type: object
+    UpdateRegulatoryRequirement:
+      properties:
+        field_value:
+          description: The value of the requirement, this could be an id to a resource or a string value.
+          example: 45f45a04-b4be-4592-95b1-9306b9db2b21
+          type: string
+        requirement_id:
+          description: Unique id for a requirement.
+          example: 8ffb3622-7c6b-4ccc-b65f-7a3dc0099576
+          format: uuid
+          type: string
     UpdateShortCodeRequest:
       example:
         messaging_profile_id: abc85f64-5717-4562-b3fc-2c9600000000
@@ -30039,6 +31490,12 @@ components:
       required:
         - messaging_profile_id
       type: object
+    UpdateSubNumberOrderRequest:
+      properties:
+        regulatory_requirements:
+          items:
+            $ref: "#/components/schemas/UpdateRegulatoryRequirement"
+          type: array
     UpdateTexmlApplicationRequest:
       example:
         active: false

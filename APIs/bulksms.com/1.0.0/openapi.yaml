@@ -813,6 +813,157 @@ paths:
       summary: Get profile
       tags:
         - Profile
+  /rmm/pre-sign-attachment:
+    post:
+      description: |
+        You can send any URL as part of your SMS text.  When the recipient taps on the URL, the file to which the URL points will be downloaded and opened on the mobile device.  This handy feature is supported by most modern mobile devices.
+
+        The best way to send an attachment is to store the file on a web server you own and use that URL in the SMS text.  Your customer will then see a URL that she will recognise as belonging to you.  This is the most flexible and the simplest solution.
+
+        However, if it is not possible to use your web server, you can use BulkSMS storage to keep the files that you want to attach to your SMS message.  Please note that these files will be deleted after 30 days.   
+
+        The process to use the BulkSMS storage requires you to take three steps:
+
+        **Step 1**: Use your BulkSMS credentials (or your API Token) to request a pre-signed URL.  This is what this `pre-sign-attachment` method is for.  It returns a PreSignInfo object that you will use in the other two steps.
+
+        **Step 2**: Upload the file using a standard HTTP `PUT` request. For your `PUT` request, use the value of `putURL` from the PreSignInfo object as the request address.  You also have to add the entries from the `fields` property (of the PreSignInfo object) to the headers of your 'PUT' request. You send the file content as the body of the `PUT` request.
+
+        **Step 3**: Now you can use the value of `fetchURL` from the PreSignInfo object in the body of your SMS messages and send those using the usual messaging API (described elsewhere in this document).  If you send the same file to many recipients, it is safe to use the same URL for all of them.
+
+        If you need to, take a closer look at the example program (on the right-hand side) to get a better idea of how to implement this process.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PreSignRequest"
+        description: Describes the file to upload
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreSignInfo"
+          description: A PreSignInfo object
+      security:
+        - basicAuth: []
+      summary: Upload an attachment via a signed URL
+      tags:
+        - Attachments
+      x-code-samples:
+        - lang: C#
+          source: |
+            using System;
+            using System.IO;
+            using System.Net;
+            using System.Text;
+            using System.Text.Json;
+
+            namespace AttachmentUpload
+            {
+                class MainClass
+                {
+                    // IMPORTANT: change these constants to match your environment
+                    const string myUsername = "username";
+                    const string myPassword = "password";
+                    const string myPhoneNumber = "1111111";
+                    const string myFilePath = "path/to/file.pdf";
+                    const string myMediaType = "application/pdf";
+                    const string myFileExtension = "pdf";
+
+                    public static void Main(string[] args)
+                    {
+                        try
+                        {
+                            // get authorisation (pre-signed URL)
+                            var signDetails = getSignedDetails(myFileExtension, myMediaType);
+                            // upload and send the file to the signed URL
+                            sendFile(signDetails, myFilePath);
+                            // send your messages using the provided URL
+                            sendMessage(myPhoneNumber, "Attachment test`: " + signDetails.fetchUrl);
+                            Console.WriteLine($"Message sent that contains URL to file: {signDetails.fetchUrl}");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("An error occurred:\n" + ex.Message);
+                        }
+                    }
+
+                    public static void sendFile(PreSignInfo signDetails, string filePath)
+                    {
+                        using (WebClient client = new WebClient())
+                        {
+                            foreach (var f in signDetails.fields)
+                            {
+                                client.Headers.Add(f.name, f.value);
+                            }
+                            using (Stream fileStream = File.OpenRead(filePath))
+                            using (Stream requestStream = client.OpenWrite(new Uri(signDetails.putUrl), "PUT"))
+                            {
+                                fileStream.CopyTo(requestStream);
+                            }
+                        }
+                    }
+
+                    public static PreSignInfo getSignedDetails(string extension, string mediaType)
+                    {
+                        string postMessageUrl = "https://api.bulksms.com/v1/rmm/pre-sign-attachment";
+                        string requestBody = $"{{fileExtension: '{extension}', mediaType: '{mediaType}'}}";
+                        var result = postJson(postMessageUrl, requestBody);
+                        return JsonSerializer.Deserialize<PreSignInfo>(result);
+                    }
+
+                    public static string sendMessage(string phoneNumber, string messageText)
+                    {
+                        string postMessageUrl = "https://api.bulksms.com/v1/messages?auto-unicode=true";
+                        string requestBody = $"{{to: '{myPhoneNumber}', body: '{messageText}'}}";
+                        return postJson(postMessageUrl, requestBody);
+                    }
+
+
+                    public static string postJson(string url, string jsonBody)
+                    {
+                        var request = WebRequest.Create(url);
+                        var encoding = ASCIIEncoding.UTF8;
+                        var auth = $"{myUsername}:{myPassword}";
+                        var authBase64 = Convert.ToBase64String(encoding.GetBytes(auth));
+                        request.Headers.Add("Authorization", "Basic " + authBase64);
+                        request.Method = "POST";
+                        request.ContentType = "application/json";
+                        var encodedData = encoding.GetBytes(jsonBody);
+                        var stream = request.GetRequestStream();
+                        stream.Write(encodedData, 0, encodedData.Length);
+                        stream.Close();
+                        try
+                        {
+                            var response = request.GetResponse();
+                            var reader = new StreamReader(response.GetResponseStream());
+                            return reader.ReadToEnd();
+                        }
+                        catch (WebException ex)
+                        {
+                            var reader = new StreamReader(ex.Response.GetResponseStream());
+                            throw new Exception(reader.ReadToEnd());
+                        }
+
+                    }
+
+                }
+
+                class NameValue
+                {
+                    public string name { get; set; }
+                    public string value { get; set; }
+                }
+
+                class PreSignInfo
+                {
+                    public string putUrl { get; set; }
+                    public string fetchUrl { get; set; }
+                    public NameValue[] fields {get;set;}
+
+                }
+            }
   /webhooks:
     get:
       description: Contains a list of your webhooks
@@ -1166,6 +1317,42 @@ components:
       description: A phone number in E.164 format
       example: "44123456789"
       type: string
+    PreSignInfo:
+      properties:
+        fetchUrl:
+          description: The URL you use in your SMS text.  It is the file location.
+          example: https://smsattach.it/bedhkd.pdf
+          type: string
+        fields:
+          description: Name value objects to add to the headers of the PUT request.
+          items:
+            properties:
+              name:
+                description: The header name
+                example: x-amz-acl
+                type: string
+              value:
+                description: The header value
+                example: public-read
+                type: string
+            type: object
+          type: array
+        putUrl:
+          description: The address of the PUT request to upload the file.
+          example: https://some.place/aethzd.pdf?Token=IQoJb3JpZ2luX2EP3
+          type: string
+      type: object
+    PreSignRequest:
+      properties:
+        fileExtension:
+          description: The extension of the file.  Usually related to the media type.
+          example: pdf
+          type: string
+        mediaType:
+          description: The media type of the file you would like to upload.  If you are not sure what value to use here, check out the standard [list of media types](https://www.iana.org/assignments/media-types/media-types.xhtml).
+          example: application/pdf
+          type: string
+      type: object
     Profile:
       properties:
         commerce:

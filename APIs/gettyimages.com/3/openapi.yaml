@@ -3022,6 +3022,13 @@ paths:
             description: Search images using a search phrase.
             nullable: true
             type: string
+        - description: Setting safe_search to "true" excludes images containing nudity, death, profanity, drugs and alcohol, suggestive content, and graphic content from the result set. The default is false. Because this is a keyword-based filter, it's possible that a small number of unsafe images may not be caught by the filter. Please direct feedback to your Getty Images Account or API support representative.
+          in: query
+          name: safe_search
+          schema:
+            default: false
+            description: Setting safe_search to "true" excludes images containing nudity, death, profanity, drugs and alcohol, suggestive content, and graphic content from the result set. The default is false. Because this is a keyword-based filter, it's possible that a small number of unsafe images may not be caught by the filter. Please direct feedback to your Getty Images Account or API support representative.
+            type: boolean
         - in: query
           name: sort_order
           schema:
@@ -4002,6 +4009,13 @@ paths:
             description: Free-text search query.
             nullable: true
             type: string
+        - description: Setting safe_search to "true" excludes images containing nudity, death, profanity, drugs and alcohol, suggestive content, and graphic content from the result set. The default is false. Because this is a keyword-based filter, it's possible that a small number of unsafe images may not be caught by the filter. Please direct feedback to your Getty Images Account or API support representative.
+          in: query
+          name: safe_search
+          schema:
+            default: false
+            description: Setting safe_search to "true" excludes images containing nudity, death, profanity, drugs and alcohol, suggestive content, and graphic content from the result set. The default is false. Because this is a keyword-based filter, it's possible that a small number of unsafe images may not be caught by the filter. Please direct feedback to your Getty Images Account or API support representative.
+            type: boolean
         - in: query
           name: sort_order
           schema:

@@ -59,83 +59,68 @@ paths:
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
         - description: Filter appointments by email address.
           in: query
           name: email
           schema:
-            default: ""
             type: string
         - description: Filter appointments by lastname or part of.
           in: query
           name: lastname
           schema:
-            default: ""
             type: string
         - description: Filter appointments by phone number or par of it.
           in: query
           name: phone
           schema:
-            default: ""
             type: string
         - description: Filter appointments by service.
           in: query
           name: serviceId
           schema:
-            default: ""
             type: string
         - description: Filter appointments by calendar.
           in: query
           name: calendarId
           schema:
-            default: ""
             type: string
         - description: Filter appointments by resource.
           in: query
           name: resourceId
           schema:
-            default: ""
             type: string
         - description: Filter appointments by customer.
           in: query
           name: customerId
           schema:
-            default: ""
             type: string
         - description: Filter appointments by service allocation.
           in: query
           name: serviceAllocationId
           schema:
-            default: ""
             type: string
         - description: Format YYYY-MM-DD. Filter appointments by on/after startDate.
           in: query
           name: startDate
           schema:
-            default: ""
             format: date-time
-            nullable: true
             type: string
         - description: Format YYYY-MM-DD. Filter appointments on/before endDate.
           in: query
           name: endDate
           schema:
-            default: ""
             format: date-time
-            nullable: true
             type: string
         - description: "Filter appointments by status: IN, BK, CN, RE, RS."
           in: query
           name: status
           schema:
-            default: ""
             type: string
         - description: Filter appointments by user email who booked.
           in: query
           name: bookedBy
           schema:
-            default: ""
             type: string
         - description: Starting row of page, default 0
           in: query
@@ -254,7 +239,6 @@ paths:
           in: query
           name: completeBooking
           schema:
-            default: ""
             type: string
       requestBody:
         content:
@@ -270,6 +254,7 @@ paths:
           text/json:
             schema:
               $ref: "#/components/schemas/AppointmentInitialModel"
+        description: ""
       responses:
         "200":
           content:
@@ -310,7 +295,6 @@ paths:
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
       responses:
         "200":
@@ -346,7 +330,6 @@ paths:
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
       responses:
         "200":
@@ -375,7 +358,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
       responses:
         "200":
@@ -399,7 +381,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
       responses:
         "200":
@@ -436,7 +417,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
       requestBody:
         content:
@@ -452,6 +432,7 @@ paths:
           text/json:
             schema:
               $ref: "#/components/schemas/AppointmentBookModel"
+        description: ""
       responses:
         "200":
           content:
@@ -479,7 +460,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
       responses:
         "200":
@@ -537,6 +517,7 @@ paths:
           text/json:
             schema:
               $ref: "#/components/schemas/AppointmentNoShowModel"
+        description: ""
       responses:
         "200":
           description: Success
@@ -582,7 +563,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
       requestBody:
         content:
@@ -598,6 +578,7 @@ paths:
           text/json:
             schema:
               $ref: "#/components/schemas/AppointmentRescheduleModel"
+        description: ""
       responses:
         "200":
           content:
@@ -647,7 +628,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
         - description: ""
           in: query
@@ -668,6 +648,7 @@ paths:
           text/json:
             schema:
               $ref: "#/components/schemas/AppointmentReserveModel"
+        description: ""
       responses:
         "200":
           description: Success
@@ -735,14 +716,12 @@ paths:
           name: serviceId
           required: true
           schema:
-            default: ""
             type: string
         - description: Format YYYY-MM-DD. Start Date for availability search. Use format YYYY-MM-DD
           in: path
           name: startDate
           required: true
           schema:
-            default: ""
             format: date-time
             type: string
         - description: Format YYYY-MM-DD. End Date for availability search. Use format YYYY-MM-DD
@@ -750,7 +729,6 @@ paths:
           name: endDate
           required: true
           schema:
-            default: ""
             format: date-time
             type: string
         - description: Format Military Time.Start Time for availability search. Defaults to Business Hours Start.
@@ -758,44 +736,37 @@ paths:
           name: startTime
           schema:
             format: int32
-            nullable: true
             type: integer
         - description: Format Military Time.End Time for availability search. Defaults to Business Hours End.
           in: query
           name: endTime
           schema:
             format: int32
-            nullable: true
             type: integer
         - description: The id of the business location. Defaults to first business location.
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
         - description: Resource Id for availability search.
           in: query
           name: resourceId
           schema:
-            default: ""
             type: string
         - description: Resource Group Id for availability search.
           in: query
           name: resourceGroupId
           schema:
-            default: ""
             type: string
         - description: Comma separated Resource Id's for availability search.
           in: query
           name: resourceIds
           schema:
-            default: ""
             type: string
         - description: Round robin choice 0=none, 1=random, 2=balanced.
           in: query
           name: roundRobin
           schema:
-            default: ""
             type: string
         - description: Duration of the service if different than the default.
           in: query
@@ -814,19 +785,16 @@ paths:
           name: tzOffset
           schema:
             format: int32
-            nullable: true
             type: integer
         - description: For calculating travel based availability. Requires distance scope.
           in: query
           name: destination
           schema:
-            default: ""
             type: string
         - description: Format YYYY-DD-YY. Start date for day availability. Defaults to startDate.
           in: query
           name: dayAvailabilityStartDate
           schema:
-            default: ""
             format: date-time
             type: string
         - description: Number of days of day availability to return.
@@ -868,14 +836,12 @@ paths:
           name: serviceId
           required: true
           schema:
-            default: ""
             type: string
         - description: Format Format YYYY-MM-DD. Start Date for availability search.
           in: path
           name: startDate
           required: true
           schema:
-            default: ""
             format: date-time
             type: string
         - description: Format Format YYYY-MM-DD. End Date for availability search.
@@ -883,20 +849,17 @@ paths:
           name: endDate
           required: true
           schema:
-            default: ""
             format: date-time
             type: string
         - description: The id of the business location. Defaults to first business location.
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
         - description: Resource Id to filter on.
           in: query
           name: resourceId
           schema:
-            default: ""
             type: string
         - description: Request timezone offset to view availability.
           in: query
@@ -925,14 +888,12 @@ paths:
           name: serviceId
           required: true
           schema:
-            default: ""
             type: string
         - description: Format YYYY-MM-DD. Start Date for availability search.
           in: path
           name: startDate
           required: true
           schema:
-            default: ""
             format: date-time
             type: string
         - description: Format YYYY-MM-DD. End Date for availability search.
@@ -940,7 +901,6 @@ paths:
           name: endDate
           required: true
           schema:
-            default: ""
             format: date-time
             type: string
         - description: Format Military Time. Start Time for availability search. Defaults to Business Hours Start.
@@ -948,50 +908,42 @@ paths:
           name: startTime
           schema:
             format: int32
-            nullable: true
             type: integer
         - description: Format Military Time. End Time for availability search. Defaults to Business Hours End.
           in: query
           name: endTime
           schema:
             format: int32
-            nullable: true
             type: integer
         - description: The id of the business location. Defaults to first business location.
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
         - description: Destination address to calculate travel times.
           in: query
           name: destination
           schema:
-            default: ""
             type: string
         - description: Resource Id to filter on.
           in: query
           name: resourceId
           schema:
-            default: ""
             type: string
         - description: Comma separated list of Resource Id's to filter on.
           in: query
           name: resourceIds
           schema:
-            default: ""
             type: string
         - description: Resource Group Id to filter on.
           in: query
           name: resourceGroupId
           schema:
-            default: ""
             type: string
         - description: Round robin choice 0=none, 1=random, 2=balanced, 3=score, 4=distance.
           in: query
           name: roundRobin
           schema:
-            default: ""
             type: string
         - description: Duration of the service if different than the default.
           in: query
@@ -1015,7 +967,6 @@ paths:
           in: query
           name: dayAvailabilityStartDate
           schema:
-            default: ""
             format: date-time
             type: string
         - description: Number of days of day availability to return.
@@ -1048,14 +999,12 @@ paths:
           name: serviceId
           required: true
           schema:
-            default: ""
             type: string
         - description: Format YYYY-MM-DD. Start Date for unavailable time search.
           in: path
           name: startDate
           required: true
           schema:
-            default: ""
             format: date-time
             type: string
         - description: Format YYYY-MM-DD. End Date for unavailable time search.
@@ -1063,20 +1012,17 @@ paths:
           name: endDate
           required: true
           schema:
-            default: ""
             format: date-time
             type: string
         - description: The id of the business location. Defaults to first business location.
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
         - description: Resource Id to filter on.
           in: query
           name: resourceId
           schema:
-            default: ""
             type: string
         - description: Duration of the service if different than the default.
           in: query
@@ -1116,14 +1062,12 @@ paths:
           name: serviceId
           required: true
           schema:
-            default: ""
             type: string
         - description: Format YYYY-MM-DD. Start Date for availability search.
           in: path
           name: startDate
           required: true
           schema:
-            default: ""
             format: date-time
             type: string
         - description: Format YYYY-MM-DD. End Date for availability search.
@@ -1131,44 +1075,37 @@ paths:
           name: endDate
           required: true
           schema:
-            default: ""
             format: date-time
             type: string
         - description: The id of the business location. Defaults to first business location.
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
         - description: Destination address to calculate travel times.
           in: query
           name: destination
           schema:
-            default: ""
             type: string
         - description: Resource Id to filter on.
           in: query
           name: resourceId
           schema:
-            default: ""
             type: string
         - description: Comma separated list of Resource Id's to filter on.
           in: query
           name: resourceIds
           schema:
-            default: ""
             type: string
         - description: Resource Group Id to filter on.
           in: query
           name: resourceGroupId
           schema:
-            default: ""
             type: string
         - description: Round robin choice 0=none, 1=random, 2=balanced.
           in: query
           name: roundRobin
           schema:
-            default: ""
             type: string
         - description: Duration of the service if different than the default.
           in: query
@@ -1208,25 +1145,21 @@ paths:
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
         - description: Filter customers by group.
           in: query
           name: groupId
           schema:
-            default: ""
             type: string
         - description: Filter customers by email address.
           in: query
           name: email
           schema:
-            default: ""
             type: string
         - description: Search customers by lastname.
           in: query
           name: lastname
           schema:
-            default: ""
             type: string
         - description: Filter customers by deleted status.
           in: query
@@ -1315,7 +1248,6 @@ paths:
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
       responses:
         "200":
@@ -1364,7 +1296,6 @@ paths:
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
         - description: A true/false indicator to filter on custom fields used for lead questions.
           in: query
@@ -1391,13 +1322,11 @@ paths:
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
         - description: Filter customers by group.
           in: query
           name: groupId
           schema:
-            default: ""
             type: string
         - description: Starting row of page, default 0
           in: query
@@ -1432,7 +1361,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
       responses:
         "200":
@@ -1455,7 +1383,6 @@ paths:
         - in: query
           name: country
           schema:
-            default: ""
             type: string
       responses:
         "200":
@@ -1479,7 +1406,6 @@ paths:
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
         - description: Starting row of page, default 0
           in: query
@@ -1510,7 +1436,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
       responses:
         "200":
@@ -1525,7 +1450,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
       responses:
         "200":
@@ -1545,7 +1469,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
       requestBody:
         content:
@@ -1561,6 +1484,7 @@ paths:
           text/json:
             schema:
               $ref: "#/components/schemas/CustomerSubscriptionUpdateModel"
+        description: Customer subscription update model.
       responses:
         "200":
           description: Success
@@ -1574,7 +1498,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
       responses:
         "200":
@@ -1591,7 +1514,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
       responses:
         "200":
@@ -1612,7 +1534,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
       requestBody:
         content:
@@ -1657,28 +1578,24 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
         - description: The id of the service object.
           in: path
           name: serviceId
           required: true
           schema:
-            default: ""
             type: string
         - description: The id of the resource object.
           in: path
           name: resourceId
           required: true
           schema:
-            default: ""
             type: string
         - description: The DateTimeTz to check
           in: path
           name: dateTimeTz
           required: true
           schema:
-            default: ""
             format: date-time
             type: string
       responses:
@@ -1700,7 +1617,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
       responses:
         "200":
@@ -1720,7 +1636,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
       requestBody:
         content:
@@ -1736,6 +1651,7 @@ paths:
           text/json:
             schema:
               $ref: "#/components/schemas/CustomerSubscriptionInputModel"
+        description: The subscription input model.
       responses:
         "200":
           content:
@@ -1766,13 +1682,11 @@ paths:
           in: query
           name: name
           schema:
-            default: ""
             type: string
         - description: Search by distance nearest Geocoords, City, Postal/Zip Code
           in: query
           name: nearestTo
           schema:
-            default: ""
             type: string
         - description: Maximum distance to display
           in: query
@@ -1784,19 +1698,16 @@ paths:
           in: query
           name: units
           schema:
-            default: ""
             type: string
         - description: Locations that offer this service
           in: query
           name: serviceId
           schema:
-            default: ""
             type: string
         - description: Locations within a specific region
           in: query
           name: regionId
           schema:
-            default: ""
             type: string
         - description: Don't include the Primary Location
           in: query
@@ -1834,7 +1745,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
       responses:
         "200":
@@ -1856,7 +1766,6 @@ paths:
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
         - description: Filter resources by group.
           in: query
@@ -1868,19 +1777,16 @@ paths:
           in: query
           name: email
           schema:
-            default: ""
             type: string
         - description: Search resources by name.
           in: query
           name: name
           schema:
-            default: ""
             type: string
         - description: Specify sort order of response.
           in: query
           name: sortOrder
           schema:
-            default: ""
             type: string
         - description: Starting row of page, default 0
           in: query
@@ -1986,7 +1892,6 @@ paths:
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
         - description: Starting row of page, default 0
           in: query
@@ -2045,7 +1950,6 @@ paths:
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
         - description: Filter services by group.
           in: query
@@ -2057,36 +1961,26 @@ paths:
           in: query
           name: defaultService
           schema:
-            nullable: true
             type: boolean
         - description: Search on all Locations, default is <b>false</b>
           in: query
           name: allLocations
           schema:
-            nullable: true
             type: boolean
         - description: Filter Services by Scope, company, location or all, default is <b>all</b>.
           in: query
           name: scope
           schema:
-            default: ""
-            enum:
-              - company
-              - location
-              - all
-            nullable: true
-            type: string
+            $ref: "#/components/schemas/ServicesScope"
         - description: Filter Services using Service Names. Supports Partial name search
           in: query
           name: name
           schema:
-            default: ""
             type: string
         - description: Filter based on ServiceId. Using this parameter would ignore all other parameters
           in: query
           name: serviceId
           schema:
-            default: ""
             type: string
         - description: Starting row of page, default <b>0</b>
           in: query
@@ -2104,17 +1998,11 @@ paths:
           in: query
           name: sortOrder
           schema:
-            default: ""
-            enum:
-              - natural
-              - name
-            nullable: true
-            type: string
+            $ref: "#/components/schemas/ServiceSortOrder"
         - description: Sort Result in Descending Order. default <b>true</b>
           in: query
           name: sortDescending
           schema:
-            nullable: true
             type: boolean
       responses:
         "200":
@@ -2135,7 +2023,6 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
       responses:
         "200":
@@ -2193,32 +2080,27 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
         - description: The id of the location. Defaults to the primary location.
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
         - description: The id of the resource to filter on.
           in: query
           name: resourceId
           schema:
-            default: ""
             type: string
         - description: Format YYYY-MM-DD. Filter appointments by on/after startDate
           in: query
           name: startDate
           schema:
-            default: ""
             format: date-time
             type: string
         - description: Format YYYY-MM-DD. Filter appointments on/before endDate.
           in: query
           name: endDate
           schema:
-            default: ""
             format: date-time
             type: string
         - description: Starting row of page, default 0
@@ -2260,13 +2142,11 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
             type: string
         - description: The id of the business location. Defaults to primary business location.
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
         - description: Starting row of page, default 0
           in: query
@@ -2300,7 +2180,6 @@ paths:
           in: query
           name: locationId
           schema:
-            default: ""
             type: string
       responses:
         "200":
@@ -2312,152 +2191,160 @@ paths:
       summary: Returns a list of customers.
       tags:
         - Settings
+  "/{planId}":
+    get:
+      parameters:
+        - in: path
+          name: planId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: locationId
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - StripePlans
 components:
   schemas:
     AddressInputModel:
       additionalProperties: false
       properties:
         addressLine1:
+          nullable: true
           type: string
         addressLine2:
+          nullable: true
           type: string
         city:
+          nullable: true
           type: string
         country:
+          nullable: true
           type: string
         postalCode:
+          nullable: true
           type: string
         state:
+          nullable: true
           type: string
       type: object
     AddressUpdateModel:
       additionalProperties: false
       properties:
         addressLine1:
+          nullable: true
           type: string
         addressLine2:
+          nullable: true
           type: string
         city:
+          nullable: true
           type: string
         country:
+          nullable: true
           type: string
         postalCode:
+          nullable: true
           type: string
         state:
-          type: string
-      type: object
-    AddressViewModel:
-      additionalProperties: false
-      properties:
-        addressLine1:
-          type: string
-        addressLine2:
-          type: string
-        city:
-          type: string
-        country:
-          type: string
-        postalCode:
-          type: string
-        state:
-          type: string
-      type: object
-    AppoinmentBookingFormsViewModel:
-      additionalProperties: false
-      properties:
-        bookingConfirmationPage:
-          type: string
-        bookingForm:
+          nullable: true
           type: string
       type: object
     AppointmentAuditViewModel:
       additionalProperties: false
       properties:
         appointmentId:
+          nullable: true
           type: string
         id:
+          nullable: true
           type: string
         modificationType:
+          nullable: true
           type: string
         modifiedBy:
+          nullable: true
           type: string
         modifiedOn:
           format: date-time
           nullable: true
           type: string
         notesAfter:
+          nullable: true
           type: string
         notesBefore:
+          nullable: true
           type: string
         statusAfter:
+          nullable: true
           type: string
         statusBefore:
+          nullable: true
           type: string
       type: object
     AppointmentBookModel:
       additionalProperties: false
       properties:
-        appointmentBookingFields:
-          items:
-            $ref: "#/components/schemas/BookingFieldItem"
-          type: array
-        customFields:
-          $ref: "#/components/schemas/CustomFieldInputModel"
-        customerBookingFields:
-          items:
-            $ref: "#/components/schemas/BookingFieldItem"
-          type: array
         customerMessage:
+          nullable: true
           type: string
         email:
+          nullable: true
           type: string
         groupSize:
           format: int32
           nullable: true
           type: integer
         name:
+          nullable: true
           type: string
         notes:
+          nullable: true
           type: string
         phone:
+          nullable: true
           type: string
         phoneExt:
+          nullable: true
           type: string
         phoneType:
+          nullable: true
           type: string
       type: object
     AppointmentCustomerViewModel:
       additionalProperties: false
       properties:
         appointmentId:
+          nullable: true
           type: string
         customerId:
+          nullable: true
           type: string
       type: object
     AppointmentInitialModel:
       additionalProperties: false
       properties:
-        appointmentBookingFields:
-          items:
-            $ref: "#/components/schemas/BookingFieldItem"
-          type: array
         bookedBy:
+          nullable: true
           type: string
         bookingWindowId:
+          nullable: true
           type: string
         calendarId:
+          nullable: true
           type: string
-        customFields:
-          $ref: "#/components/schemas/CustomFieldInputModel"
-        customerBookingFields:
-          items:
-            $ref: "#/components/schemas/BookingFieldItem"
-          type: array
         customerId:
+          nullable: true
           type: string
         customerMessage:
+          nullable: true
           type: string
         email:
+          nullable: true
           type: string
         endDateTime:
           format: date-time
@@ -2467,33 +2354,46 @@ components:
           nullable: true
           type: integer
         location:
+          nullable: true
           type: string
         locationId:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
         notes:
+          nullable: true
           type: string
         phone:
+          nullable: true
           type: string
         phoneType:
+          nullable: true
           type: string
         resourceGroupId:
+          nullable: true
           type: string
         resourceId:
+          nullable: true
           type: string
         resourceIds:
+          nullable: true
           type: string
         serviceAllocationId:
+          nullable: true
           type: string
         serviceId:
+          nullable: true
           type: string
         startDateTime:
           format: date-time
           type: string
         timezoneName:
+          nullable: true
           type: string
         travelAppointmentId:
+          nullable: true
           type: string
         travelTimeMins:
           format: int32
@@ -2502,90 +2402,110 @@ components:
     AppointmentInitialViewModel:
       additionalProperties: false
       properties:
-        appointmentBookingFields:
-          items:
-            $ref: "#/components/schemas/BookingFieldViewModel"
-          type: array
         auditTrail:
           items:
             $ref: "#/components/schemas/AppointmentAuditViewModel"
+          nullable: true
           type: array
         bookedBy:
+          nullable: true
           type: string
-        bookingForms:
-          $ref: "#/components/schemas/AppoinmentBookingFormsViewModel"
         businessName:
+          nullable: true
           type: string
         calendarId:
+          nullable: true
           type: string
         confirmationNumber:
+          nullable: true
           type: string
         confirmed:
           type: boolean
         createDate:
+          nullable: true
           type: string
         customFields:
           additionalProperties:
             $ref: "#/components/schemas/CustomFieldViewModel"
+          nullable: true
           type: object
-        customerBookingFields:
-          items:
-            $ref: "#/components/schemas/BookingFieldViewModel"
-          type: array
         customerId:
+          nullable: true
           type: string
         customerMessage:
+          nullable: true
           type: string
         customers:
           items:
             $ref: "#/components/schemas/AppointmentCustomerViewModel"
+          nullable: true
           type: array
         date:
+          nullable: true
           type: string
         dateInternational:
+          nullable: true
           type: string
         downloadIcsUrl:
+          nullable: true
           type: string
         duration:
           format: int32
           type: integer
         email:
+          nullable: true
           type: string
         emailConfirmationSent:
+          nullable: true
           type: string
         emailReminderSent:
+          nullable: true
           type: string
         endDateTime:
+          nullable: true
           type: string
         firstname:
+          nullable: true
           type: string
         groupSize:
           format: int32
           nullable: true
           type: integer
         id:
+          nullable: true
           type: string
         ipAddress:
+          nullable: true
           type: string
         lastModifiedBy:
+          nullable: true
           type: string
         lastModifiedOn:
+          nullable: true
           type: string
         lastname:
+          nullable: true
           type: string
         latitude:
+          nullable: true
           type: string
         location:
+          nullable: true
           type: string
         locationId:
+          nullable: true
           type: string
         longitude:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
         notes:
+          nullable: true
           type: string
-        object:
+        objectName:
+          nullable: true
           type: string
         onlineBooking:
           nullable: true
@@ -2594,46 +2514,66 @@ components:
           format: int32
           type: integer
         phone:
+          nullable: true
           type: string
         phoneExt:
+          nullable: true
           type: string
         phoneType:
+          nullable: true
           type: string
         rescheduledId:
+          nullable: true
           type: string
         resourceGroupId:
+          nullable: true
           type: string
         resourceGroupName:
+          nullable: true
           type: string
         resourceId:
+          nullable: true
           type: string
         resourceImageUrl:
+          nullable: true
           type: string
         resourceName:
+          nullable: true
           type: string
         resources:
           items:
             $ref: "#/components/schemas/AppointmentResourceViewModel"
+          nullable: true
           type: array
         serviceAllocationId:
+          nullable: true
           type: string
         serviceId:
+          nullable: true
           type: string
         serviceImageUrl:
+          nullable: true
           type: string
         serviceName:
+          nullable: true
           type: string
         smsConfirmationSent:
+          nullable: true
           type: string
         smsReminderSent:
+          nullable: true
           type: string
         startDateTime:
+          nullable: true
           type: string
         status:
+          nullable: true
           type: string
         stripeChargeId:
+          nullable: true
           type: string
         stripeRefundId:
+          nullable: true
           type: string
         time:
           format: int32
@@ -2643,29 +2583,14 @@ components:
           nullable: true
           type: integer
         timezoneIana:
+          nullable: true
           type: string
         timezoneId:
+          nullable: true
           type: string
       type: object
     AppointmentListViewModel:
       additionalProperties: false
-      properties:
-        count:
-          format: int32
-          type: integer
-        data:
-          items:
-            $ref: "#/components/schemas/AppointmentViewModel"
-          type: array
-        hasMore:
-          type: boolean
-        object:
-          type: string
-        total:
-          format: int32
-          type: integer
-        url:
-          type: string
       type: object
     AppointmentNoShowModel:
       additionalProperties: false
@@ -2677,13 +2602,16 @@ components:
           format: date-time
           type: string
         resourceId:
+          nullable: true
           type: string
         serviceId:
+          nullable: true
           type: string
         startDateTime:
           format: date-time
           type: string
         travelAppointmentId:
+          nullable: true
           type: string
         travelTimeMins:
           format: int32
@@ -2692,37 +2620,36 @@ components:
     AppointmentReserveModel:
       additionalProperties: false
       properties:
-        appointmentBookingFields:
-          items:
-            $ref: "#/components/schemas/BookingFieldItem"
-          type: array
-        customFields:
-          $ref: "#/components/schemas/CustomFieldInputModel"
-        customerBookingFields:
-          items:
-            $ref: "#/components/schemas/BookingFieldItem"
-          type: array
         customerMessage:
+          nullable: true
           type: string
         email:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
         notes:
+          nullable: true
           type: string
         phone:
+          nullable: true
           type: string
         phoneExt:
+          nullable: true
           type: string
         phoneType:
+          nullable: true
           type: string
       type: object
     AppointmentResourceViewModel:
       additionalProperties: false
       properties:
         appointmentId:
+          nullable: true
           type: string
         resourceId:
+          nullable: true
           type: string
       type: object
     AppointmentViewModel:
@@ -2731,77 +2658,107 @@ components:
         auditTrail:
           items:
             $ref: "#/components/schemas/AppointmentAuditViewModel"
+          nullable: true
           type: array
         bookedBy:
+          nullable: true
           type: string
         businessName:
+          nullable: true
           type: string
         calendarId:
+          nullable: true
           type: string
         confirmationNumber:
+          nullable: true
           type: string
         confirmed:
           type: boolean
         createDate:
+          nullable: true
           type: string
         customFields:
           additionalProperties:
             $ref: "#/components/schemas/CustomFieldViewModel"
+          nullable: true
           type: object
         customerId:
+          nullable: true
           type: string
         customerMessage:
+          nullable: true
           type: string
         customers:
           items:
             $ref: "#/components/schemas/AppointmentCustomerViewModel"
+          nullable: true
           type: array
         date:
+          nullable: true
           type: string
         dateInternational:
+          nullable: true
           type: string
         downloadIcsUrl:
+          nullable: true
           type: string
         duration:
           format: int32
           type: integer
         email:
+          nullable: true
           type: string
         emailConfirmationSent:
+          nullable: true
           type: string
         emailReminderSent:
+          nullable: true
           type: string
         endDateTime:
+          nullable: true
           type: string
         firstname:
+          nullable: true
           type: string
         groupSize:
           format: int32
           nullable: true
           type: integer
         id:
+          nullable: true
           type: string
         ipAddress:
+          nullable: true
           type: string
         lastModifiedBy:
+          nullable: true
           type: string
         lastModifiedOn:
+          nullable: true
           type: string
         lastname:
+          nullable: true
           type: string
         latitude:
+          nullable: true
           type: string
         location:
+          nullable: true
           type: string
         locationId:
+          nullable: true
           type: string
         longitude:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
         notes:
+          nullable: true
           type: string
-        object:
+        objectName:
+          nullable: true
           type: string
         onlineBooking:
           nullable: true
@@ -2810,46 +2767,66 @@ components:
           format: int32
           type: integer
         phone:
+          nullable: true
           type: string
         phoneExt:
+          nullable: true
           type: string
         phoneType:
+          nullable: true
           type: string
         rescheduledId:
+          nullable: true
           type: string
         resourceGroupId:
+          nullable: true
           type: string
         resourceGroupName:
+          nullable: true
           type: string
         resourceId:
+          nullable: true
           type: string
         resourceImageUrl:
+          nullable: true
           type: string
         resourceName:
+          nullable: true
           type: string
         resources:
           items:
             $ref: "#/components/schemas/AppointmentResourceViewModel"
+          nullable: true
           type: array
         serviceAllocationId:
+          nullable: true
           type: string
         serviceId:
+          nullable: true
           type: string
         serviceImageUrl:
+          nullable: true
           type: string
         serviceName:
+          nullable: true
           type: string
         smsConfirmationSent:
+          nullable: true
           type: string
         smsReminderSent:
+          nullable: true
           type: string
         startDateTime:
+          nullable: true
           type: string
         status:
+          nullable: true
           type: string
         stripeChargeId:
+          nullable: true
           type: string
         stripeRefundId:
+          nullable: true
           type: string
         time:
           format: int32
@@ -2859,450 +2836,196 @@ components:
           nullable: true
           type: integer
         timezoneIana:
+          nullable: true
           type: string
         timezoneId:
+          nullable: true
           type: string
       type: object
     Availability3ViewModel:
       additionalProperties: false
       properties:
-        availableDays:
-          items:
-            $ref: "#/components/schemas/AvailableDayViewModel"
-          type: array
-        availableTimes:
-          items:
-            $ref: "#/components/schemas/AvailableTime3ViewModel"
-          type: array
         businessName:
+          nullable: true
           type: string
         firstAvailableDate:
+          nullable: true
           type: string
-        object:
+        objectName:
+          nullable: true
           type: string
         resourceDescription:
+          nullable: true
           type: string
         resourceId:
+          nullable: true
           type: string
         resourceIds:
+          nullable: true
           type: string
         resourceName:
+          nullable: true
           type: string
         serviceDescription:
+          nullable: true
           type: string
         serviceDuration:
           format: int32
           type: integer
         serviceId:
+          nullable: true
           type: string
         serviceName:
+          nullable: true
           type: string
         tzRequested:
           format: int32
           nullable: true
           type: integer
-        url:
-          type: string
       type: object
     AvailabilityDayViewModel:
       additionalProperties: false
       properties:
-        availableDays:
-          items:
-            $ref: "#/components/schemas/AvailableDayViewModel"
-          type: array
-        object:
+        objectName:
+          nullable: true
           type: string
         resourceDescription:
+          nullable: true
           type: string
         resourceId:
+          nullable: true
           type: string
         resourceName:
+          nullable: true
           type: string
         serviceDescription:
+          nullable: true
           type: string
         serviceId:
+          nullable: true
           type: string
         serviceName:
+          nullable: true
           type: string
         tzRequested:
           format: int32
           nullable: true
           type: integer
-        url:
-          type: string
       type: object
     AvailabilityViewModel:
       additionalProperties: false
       properties:
-        availableDays:
-          items:
-            $ref: "#/components/schemas/AvailableDayViewModel"
-          type: array
-        availableTimes:
-          items:
-            $ref: "#/components/schemas/AvailableTimeViewModel"
-          type: array
         businessName:
+          nullable: true
           type: string
         calendarId:
+          nullable: true
           type: string
         calendarResourceGroupId:
+          nullable: true
           type: string
         endDate:
+          nullable: true
           type: string
         firstAvailableDate:
+          nullable: true
           type: string
         locationId:
+          nullable: true
           type: string
-        object:
+        objectName:
+          nullable: true
           type: string
         resourceDescription:
+          nullable: true
           type: string
         resourceId:
+          nullable: true
           type: string
         resourceIds:
+          nullable: true
           type: string
         resourceName:
+          nullable: true
           type: string
         serviceDescription:
+          nullable: true
           type: string
         serviceDuration:
           format: int32
           type: integer
         serviceId:
+          nullable: true
           type: string
         serviceName:
+          nullable: true
           type: string
         startDate:
+          nullable: true
           type: string
         tzRequested:
           format: int32
           nullable: true
           type: integer
-        url:
-          type: string
-      type: object
-    AvailableDayViewModel:
-      additionalProperties: false
-      properties:
-        available:
-          type: boolean
-        bookingCount:
-          format: int32
-          type: integer
-        bookingLimit:
-          format: int32
-          type: integer
-        closed:
-          type: boolean
-        date:
-          type: string
-        object:
-          type: string
-        reason:
-          type: string
-        reasonCode:
-          format: int32
-          type: integer
-      type: object
-    AvailableTime3ViewModel:
-      additionalProperties: false
-      properties:
-        allowableBookings:
-          format: int32
-          type: integer
-        availableBookings:
-          format: int32
-          type: integer
-        date:
-          type: string
-        displayTime:
-          type: string
-        duration:
-          format: int32
-          type: integer
-        endDateTime:
-          type: string
-        resourceId:
-          type: string
-        resourceIds:
-          type: string
-        startDateTime:
-          type: string
-        time:
-          format: int32
-          type: integer
-        travelAppointmentId:
-          type: string
-        travelTimeMins:
-          format: int32
-          type: integer
-      type: object
-    AvailableTimeViewModel:
-      additionalProperties: false
-      properties:
-        allowableBookings:
-          format: int32
-          type: integer
-        allowableCapacity:
-          format: int32
-          type: integer
-        availableBookings:
-          format: int32
-          type: integer
-        availableCapacity:
-          format: int32
-          type: integer
-        date:
-          type: string
-        displayTime:
-          type: string
-        duration:
-          format: int32
-          type: integer
-        endDateTime:
-          type: string
-        resourceId:
-          type: string
-        startDateTime:
-          type: string
-        time:
-          format: int32
-          type: integer
-        travelAppointmentId:
-          type: string
-        travelTimeMins:
-          format: int32
-          type: integer
-      type: object
-    AvailableWindowViewModel:
-      additionalProperties: false
-      properties:
-        availableTime:
-          $ref: "#/components/schemas/AvailableTimeViewModel"
-        availableTimes:
-          items:
-            $ref: "#/components/schemas/AvailableTimeViewModel"
-          type: array
-        bookingWindowId:
-          format: int32
-          type: integer
-        displayTime:
-          type: string
-        endDateTime:
-          type: string
-        startDateTime:
-          type: string
-      type: object
-    BookingFieldItem:
-      additionalProperties: false
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-      type: object
-    BookingFieldListItemViewModel:
-      additionalProperties: false
-      properties:
-        id:
-          type: string
-        leadAnswerScore:
-          format: int32
-          type: integer
-        leadRoutingEntityId:
-          format: int32
-          type: integer
-        leadRoutingEntityType:
-          type: string
-        name:
-          type: string
-        object:
-          type: string
-        value:
-          type: string
       type: object
     BookingFieldListViewModel:
       additionalProperties: false
       properties:
-        bookingFields:
-          items:
-            $ref: "#/components/schemas/BookingFieldViewModel"
-          type: array
-        object:
+        objectName:
+          nullable: true
           type: string
         total:
           format: int32
           type: integer
       type: object
-    BookingFieldViewModel:
-      additionalProperties: false
-      properties:
-        businessId:
-          type: string
-        companyId:
-          type: string
-        fieldLabel:
-          type: string
-        fieldLength:
-          format: int32
-          type: integer
-        fieldListItems:
-          items:
-            $ref: "#/components/schemas/BookingFieldListItemViewModel"
-          type: array
-        fieldName:
-          type: string
-        fieldRequired:
-          type: boolean
-        fieldType:
-          type: string
-        id:
-          type: string
-        leadQuestion:
-          type: boolean
-        leadQuestionWeight:
-          format: double
-          type: number
-        object:
-          type: string
-        sortKey:
-          format: int32
-          type: integer
-      type: object
-    BusinessDefaultsViewModel:
-      additionalProperties: false
-      properties:
-        autoUpdateCustomer:
-          nullable: true
-          type: boolean
-        businessNotification:
-          nullable: true
-          type: boolean
-        customerCity:
-          nullable: true
-          type: boolean
-        customerState:
-          nullable: true
-          type: boolean
-        emailInfo:
-          nullable: true
-          type: boolean
-        enableUtcTimezone:
-          nullable: true
-          type: boolean
-        object:
-          type: string
-      type: object
-    BusinessHolidayViewModel:
-      additionalProperties: false
-      properties:
-        businessClosed:
-          type: boolean
-        holidayName:
-          type: string
-        id:
-          type: string
-      type: object
-    BusinessHourViewModel:
-      additionalProperties: false
-      properties:
-        endTime:
-          format: int32
-          type: integer
-        is24Hours:
-          type: boolean
-        isOpen:
-          type: boolean
-        startTime:
-          format: int32
-          type: integer
-      type: object
-    BusinessHoursViewModel:
-      additionalProperties: false
-      properties:
-        fri:
-          $ref: "#/components/schemas/BusinessHourViewModel"
-        mon:
-          $ref: "#/components/schemas/BusinessHourViewModel"
-        sat:
-          $ref: "#/components/schemas/BusinessHourViewModel"
-        sun:
-          $ref: "#/components/schemas/BusinessHourViewModel"
-        thu:
-          $ref: "#/components/schemas/BusinessHourViewModel"
-        tue:
-          $ref: "#/components/schemas/BusinessHourViewModel"
-        wed:
-          $ref: "#/components/schemas/BusinessHourViewModel"
-      type: object
-    BusinessServiceViewModel:
-      additionalProperties: false
-      properties:
-        id:
-          format: int32
-          type: integer
-        object:
-          type: string
-        serviceId:
-          format: int32
-          type: integer
-        serviceName:
-          type: string
-      type: object
     ContactInputModel:
       additionalProperties: false
       properties:
         businessPhone:
+          nullable: true
           type: string
         businessPhoneExt:
+          nullable: true
           type: string
         conferenceInfo:
+          nullable: true
           type: string
         homePhone:
+          nullable: true
           type: string
         mobilePhone:
+          nullable: true
           type: string
         preferredPhoneType:
+          nullable: true
           type: string
         skypeUsername:
+          nullable: true
           type: string
       type: object
     ContactUpdateModel:
       additionalProperties: false
       properties:
         businessPhone:
+          nullable: true
           type: string
         businessPhoneExt:
+          nullable: true
           type: string
         conferenceInfo:
+          nullable: true
           type: string
         homePhone:
+          nullable: true
           type: string
         mobilePhone:
+          nullable: true
           type: string
         preferredPhoneType:
+          nullable: true
           type: string
         skypeUsername:
-          type: string
-      type: object
-    ContactViewModel:
-      additionalProperties: false
-      properties:
-        businessPhone:
-          type: string
-        businessPhoneExt:
-          type: string
-        conferenceInfo:
-          type: string
-        homePhone:
-          type: string
-        mobilePhone:
-          type: string
-        phoneType:
-          type: string
-        skypeUsername:
+          nullable: true
           type: string
       type: object
     CountryViewModel:
@@ -3310,57 +3033,22 @@ components:
       description: View model for country objects
       properties:
         code:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
-        object:
+        objectName:
+          nullable: true
           type: string
       type: object
     CustomFieldDefinitionListViewModel:
       additionalProperties: false
       properties:
-        customFields:
-          items:
-            $ref: "#/components/schemas/CustomFieldDefinitionViewModel"
-          type: array
-        object:
+        objectName:
+          nullable: true
           type: string
         total:
-          format: int32
-          type: integer
-      type: object
-    CustomFieldDefinitionViewModel:
-      additionalProperties: false
-      properties:
-        fieldKey:
-          type: string
-        fieldLabel:
-          type: string
-        fieldLength:
-          format: int32
-          type: integer
-        fieldListItems:
-          items:
-            $ref: "#/components/schemas/CustomFieldListDefinitionViewModel"
-          type: array
-        fieldName:
-          type: string
-        fieldPublic:
-          type: boolean
-        fieldRequired:
-          type: boolean
-        fieldType:
-          type: string
-        id:
-          type: string
-        leadQuestion:
-          type: boolean
-        leadQuestionWeight:
-          format: double
-          type: number
-        object:
-          type: string
-        sortKey:
           format: int32
           type: integer
       type: object
@@ -3368,76 +3056,78 @@ components:
       additionalProperties: false
       properties:
         field1:
+          nullable: true
           type: string
         field10:
+          nullable: true
           type: string
         field2:
+          nullable: true
           type: string
         field3:
+          nullable: true
           type: string
         field4:
+          nullable: true
           type: string
         field5:
+          nullable: true
           type: string
         field6:
+          nullable: true
           type: string
         field7:
+          nullable: true
           type: string
         field8:
+          nullable: true
           type: string
         field9:
-          type: string
-      type: object
-    CustomFieldListDefinitionViewModel:
-      additionalProperties: false
-      properties:
-        id:
-          type: string
-        leadAnswerScore:
-          format: int32
-          type: integer
-        leadRoutingEntityId:
-          format: int32
-          type: integer
-        leadRoutingEntityType:
-          type: string
-        name:
-          type: string
-        object:
-          type: string
-        value:
+          nullable: true
           type: string
       type: object
     CustomFieldUpdateModel:
       additionalProperties: false
       properties:
         field1:
+          nullable: true
           type: string
         field10:
+          nullable: true
           type: string
         field2:
+          nullable: true
           type: string
         field3:
+          nullable: true
           type: string
         field4:
+          nullable: true
           type: string
         field5:
+          nullable: true
           type: string
         field6:
+          nullable: true
           type: string
         field7:
+          nullable: true
           type: string
         field8:
+          nullable: true
           type: string
         field9:
+          nullable: true
           type: string
       type: object
     CustomFieldViewModel:
       additionalProperties: false
       properties:
         name:
+          nullable: true
           type: string
         value:
+          nullable: true
           type: string
       type: object
     CustomerInputModel:
@@ -3450,22 +3140,29 @@ components:
         customFields:
           $ref: "#/components/schemas/CustomFieldInputModel"
         email:
+          nullable: true
           type: string
         firstname:
+          nullable: true
           type: string
         lastname:
+          nullable: true
           type: string
         locationId:
           description: ""
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
         notificationType:
           description: 0 = default(Email), 1 = Email, 2 = SMS, 3 = Email and SMS
+          nullable: true
           type: string
         sendLeadNotification:
           type: boolean
         stripeCustomerId:
+          nullable: true
           type: string
         type:
           format: int32
@@ -3474,43 +3171,9 @@ components:
       type: object
     CustomerListViewModel:
       additionalProperties: false
-      properties:
-        count:
-          format: int32
-          type: integer
-        data:
-          items:
-            $ref: "#/components/schemas/CustomerViewModel"
-          type: array
-        hasMore:
-          type: boolean
-        object:
-          type: string
-        total:
-          format: int32
-          type: integer
-        url:
-          type: string
       type: object
     CustomerPlanListViewModel:
       additionalProperties: false
-      properties:
-        count:
-          format: int32
-          type: integer
-        data:
-          items:
-            $ref: "#/components/schemas/CustomerPlanViewModel"
-          type: array
-        hasMore:
-          type: boolean
-        object:
-          type: string
-        total:
-          format: int32
-          type: integer
-        url:
-          type: string
       type: object
     CustomerPlanViewModel:
       additionalProperties: false
@@ -3519,26 +3182,35 @@ components:
           format: date-time
           type: string
         description:
+          nullable: true
           type: string
         id:
+          nullable: true
           type: string
         locationId:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
-        object:
+        objectName:
+          nullable: true
           type: string
         serviceGroupId:
+          nullable: true
           type: string
         stripePlanId:
+          nullable: true
           type: string
         uid:
+          nullable: true
           type: string
       type: object
     CustomerSubscriptionInputModel:
       additionalProperties: false
       properties:
         customerPlanId:
+          nullable: true
           type: string
         planStart:
           format: date-time
@@ -3550,28 +3222,12 @@ components:
       type: object
     CustomerSubscriptionListViewModel:
       additionalProperties: false
-      properties:
-        count:
-          format: int32
-          type: integer
-        data:
-          items:
-            $ref: "#/components/schemas/CustomerSubscriptionViewModel"
-          type: array
-        hasMore:
-          type: boolean
-        object:
-          type: string
-        total:
-          format: int32
-          type: integer
-        url:
-          type: string
       type: object
     CustomerSubscriptionUpdateModel:
       additionalProperties: false
       properties:
         customerPlanId:
+          nullable: true
           type: string
         planStart:
           format: date-time
@@ -3586,14 +3242,19 @@ components:
       additionalProperties: false
       properties:
         customerId:
+          nullable: true
           type: string
         customerPlanId:
+          nullable: true
           type: string
         customerPlanName:
+          nullable: true
           type: string
         id:
+          nullable: true
           type: string
-        object:
+        objectName:
+          nullable: true
           type: string
         planStart:
           format: date-time
@@ -3617,19 +3278,26 @@ components:
         customFields:
           $ref: "#/components/schemas/CustomFieldUpdateModel"
         email:
+          nullable: true
           type: string
         firstname:
+          nullable: true
           type: string
         lastname:
+          nullable: true
           type: string
         locationId:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
         notificationType:
           description: 0 = default(Email), 1 = Email, 2 = SMS, 3 = Email and SMS
+          nullable: true
           type: string
         stripeCustomerId:
+          nullable: true
           type: string
         type:
           format: int32
@@ -3639,32 +3307,31 @@ components:
     CustomerViewModel:
       additionalProperties: false
       properties:
-        address:
-          $ref: "#/components/schemas/AddressViewModel"
         birthdate:
+          nullable: true
           type: string
         businessName:
+          nullable: true
           type: string
         companyName:
+          nullable: true
           type: string
-        contact:
-          $ref: "#/components/schemas/ContactViewModel"
         createdBy:
+          nullable: true
           type: string
         createdOn:
+          nullable: true
           type: string
-        customFields:
-          additionalProperties:
-            $ref: "#/components/schemas/CustomFieldViewModel"
-          type: object
         deletedStatus:
           type: boolean
         deletedTime:
+          nullable: true
           type: string
         disabled:
           nullable: true
           type: boolean
         email:
+          nullable: true
           type: string
         emailInfo:
           nullable: true
@@ -3673,107 +3340,113 @@ components:
           nullable: true
           type: boolean
         firstname:
+          nullable: true
           type: string
         gender:
+          nullable: true
           type: string
         groupId:
+          nullable: true
           type: string
         id:
+          nullable: true
           type: string
         inviteEmailSent:
+          nullable: true
           type: string
         lastVisitDate:
+          nullable: true
           type: string
         lastname:
+          nullable: true
           type: string
         latitude:
+          nullable: true
           type: string
         locationId:
+          nullable: true
           type: string
         longitude:
+          nullable: true
           type: string
         modifiedBy:
+          nullable: true
           type: string
         modifiedOn:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
         notificationType:
+          nullable: true
           type: string
-        object:
+        objectName:
+          nullable: true
           type: string
         registeredBy:
+          nullable: true
           type: string
         registrationDate:
+          nullable: true
           type: string
         resourceId:
+          nullable: true
           type: string
         stripeCustomerId:
+          nullable: true
           type: string
         subscriptionId:
+          nullable: true
           type: string
         verificationDate:
+          nullable: true
           type: string
         verifiedBy:
+          nullable: true
           type: string
         welcomeEmailSent:
+          nullable: true
           type: string
       type: object
     LocationListViewModel:
       additionalProperties: false
-      properties:
-        count:
-          format: int32
-          type: integer
-        data:
-          items:
-            $ref: "#/components/schemas/LocationViewModel"
-          type: array
-        hasMore:
-          type: boolean
-        object:
-          type: string
-        total:
-          format: int32
-          type: integer
-        url:
-          type: string
       type: object
     LocationViewModel:
       additionalProperties: false
       properties:
-        address:
-          $ref: "#/components/schemas/AddressViewModel"
         adminEmail:
+          nullable: true
           type: string
         adminName:
+          nullable: true
           type: string
-        businessHolidays:
-          items:
-            $ref: "#/components/schemas/BusinessHolidayViewModel"
-          type: array
-        businessHours:
-          $ref: "#/components/schemas/BusinessHoursViewModel"
         companyId:
+          nullable: true
           type: string
         companyName:
+          nullable: true
           type: string
-        defaults:
-          $ref: "#/components/schemas/BusinessDefaultsViewModel"
         email:
+          nullable: true
           type: string
         fax:
+          nullable: true
           type: string
         friendlyId:
+          nullable: true
           type: string
         id:
+          nullable: true
           type: string
         imageUrl:
+          nullable: true
           type: string
         latitude:
           format: double
           type: number
         logo:
+          nullable: true
           type: string
         longitude:
           format: double
@@ -3785,34 +3458,34 @@ components:
           format: int32
           type: integer
         name:
+          nullable: true
           type: string
-        object:
+        objectName:
+          nullable: true
           type: string
         phone:
+          nullable: true
           type: string
         primaryBusiness:
           type: boolean
         primaryCalendarId:
+          nullable: true
           type: string
         regionId:
+          nullable: true
           type: string
-        services:
-          items:
-            $ref: "#/components/schemas/BusinessServiceViewModel"
-          type: array
-        settings:
-          $ref: "#/components/schemas/OnlineSettingsViewModel"
         timezoneIana:
+          nullable: true
           type: string
         timezoneId:
+          nullable: true
           type: string
         timezoneOffset:
           format: int32
           nullable: true
           type: integer
-        travel:
-          $ref: "#/components/schemas/TravelViewModel"
         website:
+          nullable: true
           type: string
       type: object
     OnlineSettingsViewModel:
@@ -3833,17 +3506,22 @@ components:
         bookWithAccount:
           type: boolean
         bookingConfirmationMessage:
+          nullable: true
           type: string
         bookingMessage:
+          nullable: true
           type: string
         bookingPolicy:
+          nullable: true
           type: string
         bookingTimerMins:
           format: int32
           type: integer
         businessId:
+          nullable: true
           type: string
         companyId:
+          nullable: true
           type: string
         customerBookingsPerDay:
           format: int32
@@ -3906,11 +3584,14 @@ components:
         liveMode:
           nullable: true
           type: boolean
-        object:
+        objectName:
+          nullable: true
           type: string
         resourceAnyLabel:
+          nullable: true
           type: string
         resourceLabel:
+          nullable: true
           type: string
         resourceSelection:
           type: boolean
@@ -3919,6 +3600,7 @@ components:
         returnToService:
           type: boolean
         serviceLabel:
+          nullable: true
           type: string
         showBusinessLogo:
           type: boolean
@@ -3927,194 +3609,39 @@ components:
         showServiceGroups:
           type: boolean
       type: object
-    PhoneViewModel:
-      additionalProperties: false
-      properties:
-        businessPhone:
-          type: string
-        businessPhoneExt:
-          type: string
-        homePhone:
-          type: string
-        mobilePhone:
-          type: string
-        phoneType:
-          type: string
-      type: object
     PlanLimitListViewModel:
       additionalProperties: false
-      properties:
-        count:
-          format: int32
-          type: integer
-        data:
-          items:
-            $ref: "#/components/schemas/PlanLimitViewModel"
-          type: array
-        hasMore:
-          type: boolean
-        object:
-          type: string
-        total:
-          format: int32
-          type: integer
-        url:
-          type: string
-      type: object
-    PlanLimitViewModel:
-      additionalProperties: false
-      properties:
-        adjPeriodEnd:
-          type: string
-        adjPeriodStart:
-          type: string
-        bookingCount:
-          format: int32
-          type: integer
-        bookingMinutes:
-          format: int32
-          type: integer
-        interval:
-          format: int32
-          type: integer
-        limitCount:
-          format: int32
-          type: integer
-        limitMinutes:
-          format: int32
-          type: integer
-        periodEnd:
-          type: string
-        periodStart:
-          type: string
-        planName:
-          type: string
-        planStart:
-          type: string
-        remainingBookings:
-          format: int32
-          type: integer
-        remainingMinutes:
-          format: int32
-          type: integer
-        resourceLimits:
-          type: boolean
-        trialEnd:
-          format: date-time
-          nullable: true
-          type: string
-        trialPeriodLimits:
-          type: boolean
-        type:
-          type: string
       type: object
     RepeatViewModel:
       additionalProperties: false
       properties:
         frequency:
+          nullable: true
           type: string
         interval:
           format: int32
           type: integer
         monthDay:
+          nullable: true
           type: string
         monthType:
+          nullable: true
           type: string
         weekdays:
+          nullable: true
           type: string
-      type: object
-    ResourceHourViewModel:
-      additionalProperties: false
-      properties:
-        endTime:
-          format: int32
-          type: integer
-        startTime:
-          format: int32
-          type: integer
-      type: object
-    ResourceHoursViewModel:
-      additionalProperties: false
-      properties:
-        fri:
-          $ref: "#/components/schemas/ResourceHourViewModel"
-        mon:
-          $ref: "#/components/schemas/ResourceHourViewModel"
-        sat:
-          $ref: "#/components/schemas/ResourceHourViewModel"
-        sun:
-          $ref: "#/components/schemas/ResourceHourViewModel"
-        thu:
-          $ref: "#/components/schemas/ResourceHourViewModel"
-        tue:
-          $ref: "#/components/schemas/ResourceHourViewModel"
-        wed:
-          $ref: "#/components/schemas/ResourceHourViewModel"
       type: object
     ResourceListViewModel:
       additionalProperties: false
-      properties:
-        count:
-          format: int32
-          type: integer
-        data:
-          items:
-            $ref: "#/components/schemas/ResourceViewModel"
-          type: array
-        hasMore:
-          type: boolean
-        object:
-          type: string
-        total:
-          format: int32
-          type: integer
-        url:
-          type: string
       type: object
     ResourceServiceListViewModel:
       additionalProperties: false
-      properties:
-        count:
-          format: int32
-          type: integer
-        data:
-          items:
-            $ref: "#/components/schemas/ResourceServiceViewModel"
-          type: array
-        hasMore:
-          type: boolean
-        object:
-          type: string
-        total:
-          format: int32
-          type: integer
-        url:
-          type: string
-      type: object
-    ResourceServiceViewModel:
-      additionalProperties: false
-      properties:
-        object:
-          type: string
-        resourceId:
-          format: int32
-          type: integer
-        resourceName:
-          type: string
-        serviceId:
-          format: int32
-          type: integer
-        serviceName:
-          type: string
       type: object
     ResourceViewModel:
       additionalProperties: false
       properties:
-        address:
-          $ref: "#/components/schemas/AddressViewModel"
-        availability:
-          $ref: "#/components/schemas/ResourceHoursViewModel"
         bioLink:
+          nullable: true
           type: string
         bookingNotification:
           format: int32
@@ -4122,10 +3649,6 @@ components:
         calendarAvailability:
           format: int32
           type: integer
-        contact:
-          $ref: "#/components/schemas/ContactViewModel"
-        customFields:
-          $ref: "#/components/schemas/CustomFieldInputModel"
         deletedStatus:
           type: boolean
         deletedTime:
@@ -4133,52 +3656,62 @@ components:
           nullable: true
           type: string
         description:
+          nullable: true
           type: string
         effectiveDate:
           format: date-time
           nullable: true
           type: string
         email:
+          nullable: true
           type: string
         gender:
+          nullable: true
           type: string
         googleCalendarId:
+          nullable: true
           type: string
         groupId:
+          nullable: true
           type: string
         hourly:
           format: double
           nullable: true
           type: number
         id:
+          nullable: true
           type: string
         ignoreBusinessHours:
           type: boolean
         imageUrl:
+          nullable: true
           type: string
         locationId:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
         notificationType:
           format: int32
           type: integer
-        object:
+        objectName:
+          nullable: true
           type: string
         outlookCalendarId:
+          nullable: true
           type: string
-        services:
-          items:
-            $ref: "#/components/schemas/ResourceServiceViewModel"
-          type: array
         skypeName:
+          nullable: true
           type: string
         sortKey:
           format: int32
           type: integer
         timezoneIana:
+          nullable: true
           type: string
         timezoneId:
+          nullable: true
           type: string
         timezoneOffset:
           format: int32
@@ -4187,23 +3720,6 @@ components:
       type: object
     ServiceAllocationListViewModel:
       additionalProperties: false
-      properties:
-        count:
-          format: int32
-          type: integer
-        data:
-          items:
-            $ref: "#/components/schemas/ServiceAllocationViewModel"
-          type: array
-        hasMore:
-          type: boolean
-        object:
-          type: string
-        total:
-          format: int32
-          type: integer
-        url:
-          type: string
       type: object
     ServiceAllocationViewModel:
       additionalProperties: false
@@ -4215,51 +3731,62 @@ components:
           format: int32
           type: integer
         endDate:
+          nullable: true
           type: string
         endTime:
           format: int32
           type: integer
         id:
+          nullable: true
           type: string
         locationId:
+          nullable: true
           type: string
-        object:
+        objectName:
+          nullable: true
           type: string
         reason:
+          nullable: true
           type: string
         repeat:
           $ref: "#/components/schemas/RepeatViewModel"
         repeats:
           type: boolean
-        resourceAddress:
-          $ref: "#/components/schemas/AddressViewModel"
         resourceDescription:
+          nullable: true
           type: string
         resourceId:
+          nullable: true
           type: string
         resourceImageUrl:
+          nullable: true
           type: string
         resourceName:
+          nullable: true
           type: string
-        resourcePhone:
-          $ref: "#/components/schemas/PhoneViewModel"
         serviceDescription:
+          nullable: true
           type: string
         serviceDuration:
           format: int32
           type: integer
         serviceId:
+          nullable: true
           type: string
         serviceImageUrl:
+          nullable: true
           type: string
         serviceName:
+          nullable: true
           type: string
         startDate:
+          nullable: true
           type: string
         startTime:
           format: int32
           type: integer
         timezoneName:
+          nullable: true
           type: string
         timezoneOffset:
           format: int32
@@ -4268,97 +3795,47 @@ components:
       type: object
     ServiceGroupListViewModel:
       additionalProperties: false
-      properties:
-        count:
-          format: int32
-          type: integer
-        data:
-          items:
-            $ref: "#/components/schemas/ServiceGroupViewModel"
-          type: array
-        hasMore:
-          type: boolean
-        object:
-          type: string
-        total:
-          format: int32
-          type: integer
-        url:
-          type: string
       type: object
     ServiceGroupViewModel:
       additionalProperties: false
       properties:
         companyId:
+          nullable: true
           type: string
         description:
+          nullable: true
           type: string
         id:
+          nullable: true
           type: string
         imageUrl:
+          nullable: true
           type: string
         label:
+          nullable: true
           type: string
         locationId:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
-        object:
+        objectName:
+          nullable: true
           type: string
-      type: object
-    ServiceHourViewModel:
-      additionalProperties: false
-      properties:
-        endTime:
-          format: int32
-          type: integer
-        startTime:
-          format: int32
-          type: integer
-      type: object
-    ServiceHoursViewModel:
-      additionalProperties: false
-      properties:
-        fri:
-          $ref: "#/components/schemas/ServiceHourViewModel"
-        mon:
-          $ref: "#/components/schemas/ServiceHourViewModel"
-        sat:
-          $ref: "#/components/schemas/ServiceHourViewModel"
-        sun:
-          $ref: "#/components/schemas/ServiceHourViewModel"
-        thu:
-          $ref: "#/components/schemas/ServiceHourViewModel"
-        tue:
-          $ref: "#/components/schemas/ServiceHourViewModel"
-        wed:
-          $ref: "#/components/schemas/ServiceHourViewModel"
       type: object
     ServiceListViewModel:
       additionalProperties: false
-      properties:
-        count:
-          format: int32
-          type: integer
-        data:
-          items:
-            $ref: "#/components/schemas/ServiceViewModel"
-          type: array
-        hasMore:
-          type: boolean
-        object:
-          type: string
-        total:
-          format: int32
-          type: integer
-        url:
-          type: string
       type: object
+    ServiceSortOrder:
+      enum:
+        - 0
+        - 1
+      format: int32
+      type: integer
     ServiceViewModel:
       additionalProperties: false
       properties:
-        availability:
-          $ref: "#/components/schemas/ServiceHoursViewModel"
         bookAheadUnit:
           format: int32
           type: integer
@@ -4375,8 +3852,10 @@ components:
           format: int32
           type: integer
         calendarId:
+          nullable: true
           type: string
         calendarResourceGroupId:
+          nullable: true
           type: string
         cancellationFeeAmount:
           format: double
@@ -4384,6 +3863,7 @@ components:
         cancellationFeeTaxable:
           type: boolean
         companyId:
+          nullable: true
           type: string
         consumerPadding:
           type: boolean
@@ -4396,6 +3876,7 @@ components:
         defaultService:
           type: boolean
         description:
+          nullable: true
           type: string
         duration:
           format: int32
@@ -4417,10 +3898,13 @@ components:
         feeTaxable:
           type: boolean
         id:
+          nullable: true
           type: string
         imageUrl:
+          nullable: true
           type: string
         locationId:
+          nullable: true
           type: string
         maxBookingLimit:
           format: int32
@@ -4435,12 +3919,15 @@ components:
           format: int32
           type: integer
         mediaPageUrl:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
         nonRefundable:
           type: boolean
-        object:
+        objectName:
+          nullable: true
           type: string
         padding:
           format: int32
@@ -4453,129 +3940,78 @@ components:
           nullable: true
           type: integer
         serviceGroupName:
+          nullable: true
           type: string
         showOnline:
           type: boolean
         type:
+          nullable: true
           type: string
       type: object
+    ServicesScope:
+      enum:
+        - 0
+        - 1
+        - 2
+      format: int32
+      type: integer
     StateViewModel:
       additionalProperties: false
       description: View model for state object
       properties:
         code:
+          nullable: true
           type: string
         country:
+          nullable: true
           type: string
         countryName:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
-        object:
-          type: string
-      type: object
-    TravelViewModel:
-      additionalProperties: false
-      properties:
-        distance:
-          type: string
-        proximity:
-          type: string
-        startAddress:
-          type: string
-        startLat:
-          type: string
-        startLon:
-          type: string
-        units:
+        objectName:
+          nullable: true
           type: string
       type: object
     UnavailableTimeListViewModel:
       additionalProperties: false
-      properties:
-        object:
-          type: string
-        unavailableTimes:
-          items:
-            $ref: "#/components/schemas/UnavailableTimeViewModel"
-          type: array
-        url:
-          type: string
-      type: object
-    UnavailableTimeViewModel:
-      additionalProperties: false
-      properties:
-        calendarId:
-          type: string
-        date:
-          type: string
-        endDateTime:
-          type: string
-        entityId:
-          format: int32
-          type: integer
-        entityType:
-          type: string
-        fromTime:
-          format: int32
-          type: integer
-        locationId:
-          type: string
-        objectName:
-          type: string
-        reason:
-          type: string
-        reasonCode:
-          type: string
-        resourceId:
-          type: string
-        resourceName:
-          type: string
-        serviceId:
-          type: string
-        serviceName:
-          type: string
-        startDateTime:
-          type: string
-        toTime:
-          format: int32
-          type: integer
-        tzOffset:
-          format: int32
-          type: integer
       type: object
     WindowAvailabilityViewModel:
       additionalProperties: false
       properties:
-        bookingWindows:
-          items:
-            $ref: "#/components/schemas/AvailableWindowViewModel"
-          type: array
         businessName:
+          nullable: true
           type: string
-        object:
+        objectName:
+          nullable: true
           type: string
         resourceDescription:
+          nullable: true
           type: string
         resourceId:
+          nullable: true
           type: string
         resourceName:
+          nullable: true
           type: string
         serviceDescription:
+          nullable: true
           type: string
         serviceDuration:
           format: int32
           type: integer
         serviceId:
+          nullable: true
           type: string
         serviceName:
+          nullable: true
           type: string
         tzRequested:
           format: int32
           nullable: true
           type: integer
-        url:
-          type: string
       type: object
   securitySchemes:
     oauth2:
@@ -4583,6 +4019,5 @@ components:
         clientCredentials:
           scopes:
             OnSchedApi: Consumer and Setup Interface
-            distance: Travel and Distance calculations
           tokenUrl: https://sandbox-identity.onsched.com/connect/token
       type: oauth2

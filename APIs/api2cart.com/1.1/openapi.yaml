@@ -5972,6 +5972,12 @@ paths:
           required: false
           schema:
             type: string
+        - description: Create order with fulfillment status
+          in: query
+          name: fulfillment_status
+          required: false
+          schema:
+            type: string
         - description: Defines order payment method.<br/>Setting order_payment_method on Shopify will also change financial_status field value to 'paid'
           in: query
           name: order_payment_method

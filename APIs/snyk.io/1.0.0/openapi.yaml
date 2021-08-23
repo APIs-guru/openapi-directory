@@ -4748,7 +4748,7 @@ paths:
                               description: Whether all issue's path are upgradable
                               type: boolean
                             nearestFixedInVersion:
-                              description: Nearest version which includes a fix for the issue
+                              description: Nearest version which includes a fix for the issue. This is populated for container projects only.
                               type: string
                           type: object
                         id:
@@ -4813,7 +4813,7 @@ paths:
                               description: The language of the issue
                               type: string
                             nearestFixedInVersion:
-                              description: Nearest version which includes a fix for the issue
+                              description: Nearest version which includes a fix for the issue. This is populated for container projects only.
                               type: string
                             originalSeverity:
                               description: The original severity status of the issue, as retrieved from Snyk Vulnerability database, before policies are applied
@@ -5303,7 +5303,7 @@ paths:
                               description: Whether all issue's path are upgradable
                               type: boolean
                             nearestFixedInVersion:
-                              description: Nearest version which includes a fix for the issue
+                              description: Nearest version which includes a fix for the issue. This is populated for container projects only.
                               type: string
                           type: object
                         id:
@@ -5368,7 +5368,7 @@ paths:
                               description: The language of the issue
                               type: string
                             nearestFixedInVersion:
-                              description: Nearest version which includes a fix for the issue
+                              description: Nearest version which includes a fix for the issue. This is populated for container projects only.
                               type: string
                             originalSeverity:
                               description: The original severity status of the issue, as retrieved from Snyk Vulnerability database, before policies are applied
@@ -8553,6 +8553,45 @@ paths:
                   results:
                     description: A list of issues
                     items:
+                      oneOf:
+                        - properties:
+                            project:
+                              description: When no `groupBy` is used, a single project is returned per issue
+                              properties:
+                                id:
+                                  description: The identifier of the project
+                                  type: string
+                                name:
+                                  description: The name of the project
+                                  type: string
+                                packageManager:
+                                  description: The package manager for the project (e.g. npm, rubygems etc)
+                                  type: string
+                                source:
+                                  description: The source of the project (e.g. github, heroku etc)
+                                  type: string
+                                targetFile:
+                                  description: The file path to the dependency manifest or lock file (e.g. package.json, Gemfile.lock etc)
+                                  type: string
+                                url:
+                                  description: URL to a page containing information about the project
+                                  type: string
+                              required:
+                                - url
+                                - id
+                                - name
+                                - source
+                                - packageManager
+                              type: object
+                          required:
+                            - project
+                        - properties:
+                            projects:
+                              description: When `groupBy` is used, multiple projects may be returned per issue
+                              items: {}
+                              type: array
+                          required:
+                            - projects
                       properties:
                         fixedDate:
                           description: The date that the issue was fixed
@@ -8601,17 +8640,17 @@ paths:
                                   type: array
                               type: object
                             ignored:
-                              description: The list of ignore rules that were applied to the issue (only present if issue was ignored)
+                              description: The list of ignore rules that were applied to the issue (only present if issue was ignored and no `groupBy` in the API request)
                               items: {}
                               type: array
                             isIgnored:
-                              description: Whether the issue has been ignored
+                              description: Whether the issue has been ignored (only present if there is no `groupBy` in the API request)
                               type: boolean
                             isPatchable:
                               description: Whether the issue can be patched
                               type: boolean
                             isPatched:
-                              description: Whether the issue has been patched (not applicable to licenses)
+                              description: Whether the issue has been patched (not applicable to licenses and only present if there is no `groupBy` in the API request)
                               type: boolean
                             isPinnable:
                               description: Whether the issue can be pinned
@@ -8683,42 +8722,12 @@ paths:
                             - severity
                             - originalSeverity
                             - exploitMaturity
-                            - isIgnored
-                            - isPatched
                           type: object
                         patchedDate:
                           description: The date that the issue was patched
                           type: string
-                        project:
-                          properties:
-                            id:
-                              description: The identifier of the project
-                              type: string
-                            name:
-                              description: The name of the project
-                              type: string
-                            packageManager:
-                              description: The package manager for the project (e.g. npm, rubygems etc)
-                              type: string
-                            source:
-                              description: The source of the project (e.g. github, heroku etc)
-                              type: string
-                            targetFile:
-                              description: The file path to the dependency manifest or lock file (e.g. package.json, Gemfile.lock etc)
-                              type: string
-                            url:
-                              description: URL to a page containing information about the project
-                              type: string
-                          required:
-                            - url
-                            - id
-                            - name
-                            - source
-                            - packageManager
-                          type: object
                       required:
                         - issue
-                        - project
                         - isFixed
                         - introducedDate
                       type: object
@@ -8895,6 +8904,45 @@ paths:
                   results:
                     description: A list of issues
                     items:
+                      oneOf:
+                        - properties:
+                            project:
+                              description: When no `groupBy` is used, a single project is returned per issue
+                              properties:
+                                id:
+                                  description: The identifier of the project
+                                  type: string
+                                name:
+                                  description: The name of the project
+                                  type: string
+                                packageManager:
+                                  description: The package manager for the project (e.g. npm, rubygems etc)
+                                  type: string
+                                source:
+                                  description: The source of the project (e.g. github, heroku etc)
+                                  type: string
+                                targetFile:
+                                  description: The file path to the dependency manifest or lock file (e.g. package.json, Gemfile.lock etc)
+                                  type: string
+                                url:
+                                  description: URL to a page containing information about the project
+                                  type: string
+                              required:
+                                - url
+                                - id
+                                - name
+                                - source
+                                - packageManager
+                              type: object
+                          required:
+                            - project
+                        - properties:
+                            projects:
+                              description: When `groupBy` is used, multiple projects may be returned per issue
+                              items: {}
+                              type: array
+                          required:
+                            - projects
                       properties:
                         fixedDate:
                           description: The date that the issue was fixed
@@ -8943,17 +8991,17 @@ paths:
                                   type: array
                               type: object
                             ignored:
-                              description: The list of ignore rules that were applied to the issue (only present if issue was ignored)
+                              description: The list of ignore rules that were applied to the issue (only present if issue was ignored and no `groupBy` in the API request)
                               items: {}
                               type: array
                             isIgnored:
-                              description: Whether the issue has been ignored
+                              description: Whether the issue has been ignored (only present if there is no `groupBy` in the API request)
                               type: boolean
                             isPatchable:
                               description: Whether the issue can be patched
                               type: boolean
                             isPatched:
-                              description: Whether the issue has been patched (not applicable to licenses)
+                              description: Whether the issue has been patched (not applicable to licenses and only present if there is no `groupBy` in the API request)
                               type: boolean
                             isPinnable:
                               description: Whether the issue can be pinned
@@ -9025,42 +9073,12 @@ paths:
                             - severity
                             - originalSeverity
                             - exploitMaturity
-                            - isIgnored
-                            - isPatched
                           type: object
                         patchedDate:
                           description: The date that the issue was patched
                           type: string
-                        project:
-                          properties:
-                            id:
-                              description: The identifier of the project
-                              type: string
-                            name:
-                              description: The name of the project
-                              type: string
-                            packageManager:
-                              description: The package manager for the project (e.g. npm, rubygems etc)
-                              type: string
-                            source:
-                              description: The source of the project (e.g. github, heroku etc)
-                              type: string
-                            targetFile:
-                              description: The file path to the dependency manifest or lock file (e.g. package.json, Gemfile.lock etc)
-                              type: string
-                            url:
-                              description: URL to a page containing information about the project
-                              type: string
-                          required:
-                            - url
-                            - id
-                            - name
-                            - source
-                            - packageManager
-                          type: object
                       required:
                         - issue
-                        - project
                         - isFixed
                         - introducedDate
                       type: object
@@ -18925,7 +18943,7 @@ components:
                     description: Whether all issue's path are upgradable
                     type: boolean
                   nearestFixedInVersion:
-                    description: Nearest version which includes a fix for the issue
+                    description: Nearest version which includes a fix for the issue. This is populated for container projects only.
                     type: string
                 type: object
               id:
@@ -18989,7 +19007,7 @@ components:
                     description: The language of the issue
                     type: string
                   nearestFixedInVersion:
-                    description: Nearest version which includes a fix for the issue
+                    description: Nearest version which includes a fix for the issue. This is populated for container projects only.
                     type: string
                   originalSeverity:
                     description: The original severity status of the issue, as retrieved from Snyk Vulnerability database, before policies are applied
@@ -19895,17 +19913,17 @@ components:
                         type: array
                     type: object
                   ignored:
-                    description: The list of ignore rules that were applied to the issue (only present if issue was ignored)
+                    description: The list of ignore rules that were applied to the issue (only present if issue was ignored and no `groupBy` in the API request)
                     items: {}
                     type: array
                   isIgnored:
-                    description: Whether the issue has been ignored
+                    description: Whether the issue has been ignored (only present if there is no `groupBy` in the API request)
                     type: boolean
                   isPatchable:
                     description: Whether the issue can be patched
                     type: boolean
                   isPatched:
-                    description: Whether the issue has been patched (not applicable to licenses)
+                    description: Whether the issue has been patched (not applicable to licenses and only present if there is no `groupBy` in the API request)
                     type: boolean
                   isPinnable:
                     description: Whether the issue can be pinned
@@ -19977,42 +19995,12 @@ components:
                   - severity
                   - originalSeverity
                   - exploitMaturity
-                  - isIgnored
-                  - isPatched
                 type: object
               patchedDate:
                 description: The date that the issue was patched
                 type: string
-              project:
-                properties:
-                  id:
-                    description: The identifier of the project
-                    type: string
-                  name:
-                    description: The name of the project
-                    type: string
-                  packageManager:
-                    description: The package manager for the project (e.g. npm, rubygems etc)
-                    type: string
-                  source:
-                    description: The source of the project (e.g. github, heroku etc)
-                    type: string
-                  targetFile:
-                    description: The file path to the dependency manifest or lock file (e.g. package.json, Gemfile.lock etc)
-                    type: string
-                  url:
-                    description: URL to a page containing information about the project
-                    type: string
-                required:
-                  - url
-                  - id
-                  - name
-                  - source
-                  - packageManager
-                type: object
             required:
               - issue
-              - project
               - isFixed
               - introducedDate
             type: object

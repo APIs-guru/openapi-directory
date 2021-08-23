@@ -201,6 +201,31 @@ paths:
                 units = dose_rate['dose rate']['units']
 
                 print(f"Dose rate is {dose_rate_val} {units}")
+        - lang: Javascript
+          source: |
+            let url = 'https://avrad.amentum.io/cari7/ambient_dose?'
+
+            var params = new URLSearchParams({
+                altitude : 11, // km 
+                latitude : 30, // degrees (N)
+                longitude : 30, // degrees (E)
+                year : 2019,  
+                month : 12,
+                day : 1,
+                particle : "total",
+                utc : 3
+            })
+
+            var requestOptions = {
+              method: 'GET',
+              redirect: 'follow',
+              headers: {'API-Key': '<add_your_key>'} 
+            };
+
+            fetch(url + params, requestOptions)
+              .then(response => response.text())
+              .then(result => console.log(result))
+              .catch(error => console.log('error', error));
   /cari7/effective_dose:
     get:
       description: |
@@ -364,6 +389,31 @@ paths:
                 units = dose_rate['dose rate']['units']
 
                 print(f"Dose rate is {dose_rate_val} {units}")
+        - lang: Javascript
+          source: |
+            let url = 'https://avrad.amentum.io/cari7/effective_dose?'
+
+            var params = new URLSearchParams({
+                altitude : 11, // km 
+                latitude : 30, // degrees (N)
+                longitude : 30, // degrees (E)
+                year : 2019,  
+                month : 12,
+                day : 1,
+                particle : "total",
+                utc : 3
+            })
+
+            var requestOptions = {
+              method: 'GET',
+              redirect: 'follow',
+              headers: {'API-Key': '<add_your_key>'} 
+            };
+
+            fetch(url + params, requestOptions)
+              .then(response => response.text())
+              .then(result => console.log(result))
+              .catch(error => console.log('error', error));
   /parma/ambient_dose:
     get:
       description: |
@@ -495,6 +545,30 @@ paths:
                 units = dose_rate['dose rate']['units']
 
                 print(f"Dose rate is {dose_rate_val} {units}")
+        - lang: Javascript
+          source: |-
+            let url = 'https://avrad.amentum.io/parma/ambient_dose?'
+
+            var params = new URLSearchParams({
+                altitude : 11, // km 
+                latitude : 30, // degrees (N)
+                longitude : 30, // degrees (E)
+                year : 2019,  
+                month : 12,
+                day : 1,
+                particle : "proton"
+            })
+
+            var requestOptions = {
+              method: 'GET',
+              redirect: 'follow',
+              headers: {'API-Key': '<add_your_key>'} 
+            };
+
+            fetch(url + params, requestOptions)
+              .then(response => response.text())
+              .then(result => console.log(result))
+              .catch(error => console.log('error', error));
   /parma/differential_intensity:
     get:
       description: |
@@ -811,6 +885,31 @@ paths:
 
                 print(f"Kinetic energies: {kes} MeV")
                 print(f"Intensities: {flux} /cm2/s/sr/MeV")
+        - lang: Javascript
+          source: |
+            let url = 'https://avrad.amentum.io/parma/differential_intensity?'
+
+            var params = new URLSearchParams({
+                altitude : 11, // km 
+                latitude : 30, // degrees (N)
+                longitude : 30, // degrees (E)
+                year : 2019,  
+                month : 12,
+                day : 1,
+                particle : 'proton',
+                angle : 1.0
+            })
+
+            var requestOptions = {
+              method: 'GET',
+              redirect: 'follow',
+              headers: {'API-Key': '<add_your_key>'} 
+            };
+
+            fetch(url + params, requestOptions)
+              .then(response => response.text())
+              .then(result => console.log(result))
+              .catch(error => console.log('error', error));
   /parma/effective_dose:
     get:
       description: |
@@ -941,6 +1040,30 @@ paths:
                 units = dose_rate['dose rate']['units']
 
                 print(f"Dose rate is {dose_rate_val} {units}")
+        - lang: Javascript
+          source: |
+            let url = 'https://avrad.amentum.io/parma/effective_dose?'
+
+            var params = new URLSearchParams({
+                altitude : 11, // km 
+                latitude : 30, // degrees (N)
+                longitude : 30, // degrees (E)
+                year : 2019,  
+                month : 12,
+                day : 1,
+                particle : "total"
+            })
+
+            var requestOptions = {
+              method: 'GET',
+              redirect: 'follow',
+              headers: {'API-Key': '<add_your_key>'} 
+            };
+
+            fetch(url + params, requestOptions)
+              .then(response => response.text())
+              .then(result => console.log(result))
+              .catch(error => console.log('error', error));
   /route/ambient_dose:
     get:
       description: |
@@ -1056,6 +1179,30 @@ paths:
             else:
               dose = response_json['dose']['value']
               print(f"Total Ambient Dose was {dose:.2f} uSv")
+        - lang: Javascript
+          source: |
+            let url = 'https://avrad.amentum.io/route/ambient_dose?'
+
+            var params = new URLSearchParams({
+              origin : "YSSY", // can be ICAO or iATA codes
+              destination : "33.94250107,-118.4079971",
+              altitude : 10.1, // km,
+              duration : 5, // hours
+              year : 2019,
+              month : 5,
+              day : 21
+            })
+
+            var requestOptions = {
+              method: 'GET',
+              redirect: 'follow',
+              headers: {'API-Key': '<add_your_key>'} 
+            };
+
+            fetch(url + params, requestOptions)
+              .then(response => response.text())
+              .then(result => console.log(result))
+              .catch(error => console.log('error', error));
   /route/effective_dose:
     get:
       description: |
@@ -1175,6 +1322,30 @@ paths:
               # Extract the dose
               dose = response_json['dose']['value']
               print(f"Total Effective Dose was {dose:.2f} uSv")
+        - lang: Javascript
+          source: |
+            let url = 'https://avrad.amentum.io/route/effective_dose?'
+
+            var params = new URLSearchParams({
+              origin : "YSSY", // can be ICAO or iATA codes
+              destination : "33.94250107,-118.4079971",
+              altitude : 10.1, // km,
+              duration : 5, // hours
+              year : 2019,
+              month : 5,
+              day : 21
+            })
+
+            var requestOptions = {
+              method: 'GET',
+              redirect: 'follow',
+              headers: {'API-Key': '<add_your_key>'} 
+            };
+
+            fetch(url + params, requestOptions)
+              .then(response => response.text())
+              .then(result => console.log(result))
+              .catch(error => console.log('error', error));
 x-tagGroups:
   - name: Calculate radiation dose along a great circle flight route
     tags:

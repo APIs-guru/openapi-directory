@@ -627,6 +627,7 @@ paths:
   /listings:
     get:
       description: |-
+        See /listings2 endpoint for more flexible listing search.
         Returns a dealer's listings over the last 45 days by dealer ID. The ID can be found by calling the /getDealers endpoint. 
         Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
         Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
@@ -675,9 +676,144 @@ paths:
       tags:
         - Vehicle Data
         - Ultra Plan Or Greater
+  /listings2:
+    get:
+      description: |-
+        Generic getter for listings supporting a wide array of selection criteria. This is the new primary listing endpoint and we will phase out the older listing endpoints over time.
+        The other listing endpoints return the same data, but are more restrictive in the available geographic and vehicle selection criteria.
+
+        Dealer selection uses the most restictive criteria supplied. 
+
+
+        Listing selection logically ANDs all options given. 
+
+        Time interval selection will prefer explicit start and end dates. If only one of startDate/endDate is supplied, this endpoint will use it 
+        as an anchor and look forward or backwards by the daysBack value. If neither is supplied endpoint will set endDate to today
+        and look back by the supplied daysBack value.
+
+        Maximum time interval is 45 days.
+
+        ExtendedSearch modifies the slice of listings returned. If false (default) it only returns vehicles satisfying lastSeen >= startDate and lastSeen < endDate.
+        If true it will return vehicles that were in dealer's inventory at any point between startDate and endDate including vehicles that were sold after endDate.
+        Setting extendedSearch to true will result in a slower response time. 
+
+        For example: If both a region name and dealer ID are supplied the dealer ID will be used because it is the most restrictive.
+
+        If a brandName of Ford and modelYear of 2019, modelName of F-150, and newCars of False is supplied this endpoint will return 
+        used 2019 model year Ford F-150s. If a contradictory listing selection is supplied (for example Ford + Camry) no listings will be returned
+        because the request matched no listings.
+
+        Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
+      operationId: getListings2_listings2_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: dealerID
+          required: false
+          schema:
+            default: 0
+            title: Dealerid
+            type: integer
+        - in: query
+          name: zipCode
+          required: false
+          schema:
+            default: 0
+            title: Zipcode
+            type: integer
+        - in: query
+          name: regionName
+          required: false
+          schema:
+            title: Regionname
+            type: string
+        - in: query
+          name: brandName
+          required: false
+          schema:
+            title: Brandname
+            type: string
+        - in: query
+          name: modelName
+          required: false
+          schema:
+            title: Modelname
+            type: string
+        - in: query
+          name: modelYear
+          required: false
+          schema:
+            default: 0
+            title: Modelyear
+            type: integer
+        - in: query
+          name: startDate
+          required: false
+          schema:
+            format: date
+            title: Startdate
+            type: string
+        - in: query
+          name: endDate
+          required: false
+          schema:
+            format: date
+            title: Enddate
+            type: string
+        - in: query
+          name: daysBack
+          required: false
+          schema:
+            default: 45
+            title: Daysback
+            type: integer
+        - in: query
+          name: page
+          required: false
+          schema:
+            default: 1
+            title: Page
+            type: integer
+        - in: query
+          name: newCars
+          required: false
+          schema:
+            default: true
+            title: Newcars
+            type: boolean
+        - in: query
+          name: extendedSearch
+          required: false
+          schema:
+            default: false
+            title: Extendedsearch
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListingResp"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      summary: Flexible Listing Search
+      tags:
+        - Vehicle Data
+        - Ultra Plan Or Greater
   /listingsByDate:
     get:
       description: |-
+        See /listings2 endpoint for more flexible listing search.
         Returns a dealer's listings over the given timespan by dealer ID. The ID can be found by calling the /getDealers endpoint. 
         Maximum time interval between startDate and endDate is 45 days.
         Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
@@ -744,6 +880,7 @@ paths:
   /listingsByRegion:
     get:
       description: |-
+        See /listings2 endpoint for more flexible listing search.
         Returns a dealer's listings over up to the last 45 days by region. 
         Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
         Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
@@ -808,6 +945,7 @@ paths:
   /listingsByRegionAndDate:
     get:
       description: |-
+        See /listings2 endpoint for more flexible listing search.
         Returns listings active in a region in the given date range [startdate, endDate), or in other words dates that satisfy startDate <= X < endDate. Maximum range is 45 days 
         Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
         Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
@@ -879,6 +1017,7 @@ paths:
   /listingsByZipCode:
     get:
       description: |-
+        See /listings2 endpoint for more flexible listing search.
         Returns a dealer's listings over up to the last 45 days in the provided dealerhip's zip code. For example 92701.
         Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
         Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
@@ -936,6 +1075,7 @@ paths:
   /listingsByZipCodeAndDate:
     get:
       description: |-
+        See /listings2 endpoint for more flexible listing search.
         Returns a dealer's listings over up to the last 45 days in the provided dealership's zip code. For example 92701.
         Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
         Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).

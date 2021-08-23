@@ -28,6 +28,23 @@ paths:
           description: Success
       tags:
         - Health
+  "/{planId}":
+    get:
+      parameters:
+        - in: path
+          name: planId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: locationId
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - StripePlans
 components:
   securitySchemes:
     oauth2:
@@ -35,6 +52,5 @@ components:
         clientCredentials:
           scopes:
             OnSchedApi: Consumer and Setup Interface
-            distance: Travel and Distance calculations
           tokenUrl: https://sandbox-identity.onsched.com/connect/token
       type: oauth2

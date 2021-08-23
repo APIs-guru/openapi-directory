@@ -234,7 +234,7 @@ paths:
   /assets/correlation/matrix/nearest:
     post:
       description: |
-        Compute the _closest_ correlation matrix to an approximate correlation matrix, optionally keeping a selected number of correlations fixed, _closest_ being defined in terms of [the Frobenius norm](https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm).
+        Compute the _closest_ correlation matrix to an approximate assets correlation matrix, optionally keeping a selected number of correlations fixed, _closest_ being defined in terms of [the Frobenius norm](https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm).
 
         References
         * [Nicholas J. Higham, Computing the Nearest Correlation Matrix—A Problem from Finance, IMA J. Numer. Anal. 22, 329–343, 2002.](http://www.maths.manchester.ac.uk/~higham/narep/narep369.pdf)
@@ -348,6 +348,163 @@ paths:
                 type: object
           description: OK
       summary: Nearest Correlation Matrix
+      tags:
+        - Assets Correlation Matrix
+      x-codegen-request-body-name: body
+  /assets/correlation/matrix/shrinkage:
+    post:
+      description: |
+        Compute a correlation matrix as a weighted average of an assets correlation matrix and a target correlation matrix, the target correlation matrix being either:  
+        * An equicorrelation matrix made of 1
+        * An equicorrelation matrix made of 0
+        * An equicorrelation matrix made of -1/(n-1), with n the number of assets
+        * A provided correlation matrix
+
+        References
+        * [Steiner, Andreas, Manipulating Valid Correlation Matrices](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1878165)
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Shrinkage toward a provided correlation matrix:
+                description: Shrinkage toward a provided correlation matrix, here the identity matrix
+                value:
+                  assets: 3
+                  assetsCorrelationMatrix:
+                    - - 1
+                      - 0.5
+                      - 0.9
+                    - - 0.5
+                      - 1
+                      - 0.7
+                    - - 0.9
+                      - 0.7
+                      - 1
+                  shrinkageFactor: 0.5
+                  shrinkageTargetCorrelationMatrix:
+                    - - 1
+                      - 0
+                      - 0
+                    - - 0
+                      - 1
+                      - 0
+                    - - 0
+                      - 0
+                      - 1
+              Shrinkage toward an equicorrelation matrix:
+                description: Shrinkage toward the equicorrelation matrix made of 1
+                value:
+                  assets: 3
+                  assetsCorrelationMatrix:
+                    - - 1
+                      - 0.5
+                      - 0.9
+                    - - 0.5
+                      - 1
+                      - 0.7
+                    - - 0.9
+                      - 0.7
+                      - 1
+                  shrinkageFactor: 0.5
+                  shrinkageTarget: maximumEquicorrelationMatrix
+            schema:
+              oneOf:
+                - properties:
+                    assets:
+                      minimum: 2
+                      type: integer
+                    assetsCorrelationMatrix:
+                      description: assetsCorrelationMatrix[i][j] is the correlation between the asset i and the asset j
+                      items:
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                      minItems: 2
+                      type: array
+                    shrinkageFactor:
+                      maximum: 1
+                      minimum: 0
+                      type: number
+                    shrinkageTarget:
+                      enum:
+                        - minimumEquicorrelationMatrix
+                        - zeroEquicorrelationMatrix
+                        - maximumEquicorrelationMatrix
+                      type: string
+                  required:
+                    - assets
+                    - assetsCorrelationMatrix
+                    - shrinkageTarget
+                    - shrinkageFactor
+                  type: object
+                - properties:
+                    assets:
+                      minimum: 2
+                      type: integer
+                    assetsCorrelationMatrix:
+                      description: assetsCorrelationMatrix[i][j] is the correlation between the asset i and the asset j
+                      items:
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                      minItems: 2
+                      type: array
+                    shrinkageFactor:
+                      maximum: 1
+                      minimum: 0
+                      type: number
+                    shrinkageTargetCorrelationMatrix:
+                      description: shrinkageTargetCorrelationMatrix[i][j] is the target correlation between the asset i and the asset j
+                      items:
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                      minItems: 2
+                      type: array
+                  required:
+                    - assets
+                    - assetsCorrelationMatrix
+                    - shrinkageTargetCorrelationMatrix
+                    - shrinkageFactor
+                  type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Shrinkage:
+                  description: Shrunk correlation matrix
+                  value:
+                    assetsCorrelationMatrix:
+                      - - 1
+                        - 0.75
+                        - 0.95
+                      - - 0.75
+                        - 1
+                        - 0.85
+                      - - 0.95
+                        - 0.85
+                        - 1
+              schema:
+                properties:
+                  assetsCorrelationMatrix:
+                    description: assetsCorrelationMatrix[i][j] is the correlation between the asset i and the asset j
+                    items:
+                      items:
+                        type: number
+                      minItems: 2
+                      type: array
+                    minItems: 2
+                    type: array
+                required:
+                  - assetsCorrelationMatrix
+                type: object
+          description: OK
+      summary: Correlation Matrix Shrinkage
       tags:
         - Assets Correlation Matrix
       x-codegen-request-body-name: body
@@ -1406,6 +1563,250 @@ paths:
       summary: Residualization
       tags:
         - Factors
+      x-codegen-request-body-name: body
+  /portfolio/analysis/alpha:
+    post:
+      description: |
+        Compute the Jensen’s alpha of one or several portfolio(s) in the Capital Asset Pricing Model (CAPM).
+
+        References
+        * Carl R. Bacon, Practical Portfolio Performance Measurement and Attribution  
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                description: Compute the Jensen’s alpha of one portfolio
+                value:
+                  benchmarkReturns:
+                    - 0.002
+                    - 0.025
+                    - 0.018
+                    - -0.011
+                    - 0.014
+                  portfolios:
+                    - portfolioReturns:
+                        - 0.003
+                        - 0.026
+                        - 0.011
+                        - -0.01
+                        - 0.015
+                  riskFreeRate: 0.01
+            schema:
+              oneOf:
+                - properties:
+                    benchmarkReturns:
+                      description: benchmarkReturns[t] is the return of the benchmark at the time t; the benchmarkReturns array must have the same length as all the portfolioReturns arrays
+                      items:
+                        type: number
+                      minItems: 2
+                      type: array
+                    portfolios:
+                      items:
+                        properties:
+                          portfolioReturns:
+                            description: portfolioReturns[t] is the return of the portfolio at the time t, all the portfolioReturns arrays must have the same length, equal to the length of the benchmarkReturns array
+                            items:
+                              type: number
+                            minItems: 2
+                            type: array
+                        required:
+                          - portfolioReturns
+                        type: object
+                      minItems: 1
+                      type: array
+                    riskFreeRate:
+                      description: The risk free rate, assumed to be constant for any time t
+                      type: number
+                  required:
+                    - benchmarkReturns
+                    - portfolios
+                  type: object
+                - properties:
+                    benchmarkReturns:
+                      description: benchmarkReturns[t] is the return of the benchmark at the time t; the benchmarkReturns array must have the same length as all the portfolioReturns arrays
+                      items:
+                        type: number
+                      minItems: 2
+                      type: array
+                    portfolios:
+                      items:
+                        properties:
+                          portfolioReturns:
+                            description: portfolioReturns[t] is the return of the portfolio at the time t, all the portfolioReturns arrays must have the same length, equal to the length of the benchmarkReturns array
+                            items:
+                              type: number
+                            minItems: 2
+                            type: array
+                        required:
+                          - portfolioReturns
+                        type: object
+                      minItems: 1
+                      type: array
+                    riskFreeReturns:
+                      description: riskFreeReturns[t] is the risk free return at the time t; the riskFreeReturns array must have the same length as all the portfolioReturns arrays
+                      items:
+                        type: number
+                      minItems: 2
+                      type: array
+                  required:
+                    - benchmarkReturns
+                    - portfolios
+                  type: object
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Computed Jensen's alpha of one portfolio
+                  value:
+                    portfolios:
+                      - portfolioAlpha: -0.0006332179930795853
+              schema:
+                properties:
+                  portfolios:
+                    items:
+                      properties:
+                        portfolioAlpha:
+                          description: The portfolio Jensen's alpha, which correponds to the portfolio excess return adjusted for the systematic risk in the Capital Asset Pricing Model (CAPM)
+                          type: number
+                      required:
+                        - portfolioAlpha
+                      type: object
+                    minItems: 1
+                    type: array
+                required:
+                  - portfolios
+                type: object
+          description: OK
+      summary: Alpha
+      tags:
+        - Portfolio Analysis
+      x-codegen-request-body-name: body
+  /portfolio/analysis/beta:
+    post:
+      description: |
+        Compute the beta of one or several portfolio(s) in the Capital Asset Pricing Model (CAPM)..
+
+        References
+        * Carl R. Bacon, Practical Portfolio Performance Measurement and Attribution  
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                description: Compute the beta of one portfolio
+                value:
+                  benchmarkReturns:
+                    - 0.002
+                    - 0.025
+                    - 0.018
+                    - -0.011
+                    - 0.014
+                  portfolios:
+                    - portfolioReturns:
+                        - 0.003
+                        - 0.026
+                        - 0.011
+                        - -0.01
+                        - 0.015
+                  riskFreeRate: 0.01
+            schema:
+              oneOf:
+                - properties:
+                    benchmarkReturns:
+                      description: benchmarkReturns[t] is the return of the benchmark at the time t; the benchmarkReturns array must have the same length as all the portfolioReturns arrays
+                      items:
+                        type: number
+                      minItems: 2
+                      type: array
+                    portfolios:
+                      items:
+                        properties:
+                          portfolioReturns:
+                            description: portfolioReturns[t] is the return of the portfolio at the time t, all the portfolioReturns arrays must have the same length, equal to the length of the benchmarkReturns array
+                            items:
+                              type: number
+                            minItems: 2
+                            type: array
+                        required:
+                          - portfolioReturns
+                        type: object
+                      minItems: 1
+                      type: array
+                    riskFreeRate:
+                      description: The risk free rate, assumed to be constant for any time t
+                      type: number
+                  required:
+                    - benchmarkReturns
+                    - portfolios
+                  type: object
+                - properties:
+                    benchmarkReturns:
+                      description: benchmarkReturns[t] is the return of the benchmark at the time t; the benchmarkReturns array must have the same length as all the portfolioReturns arrays
+                      items:
+                        type: number
+                      minItems: 2
+                      type: array
+                    portfolios:
+                      items:
+                        properties:
+                          portfolioReturns:
+                            description: portfolioReturns[t] is the return of the portfolio at the time t, all the portfolioReturns arrays must have the same length, equal to the length of the benchmarkReturns array
+                            items:
+                              type: number
+                            minItems: 2
+                            type: array
+                        required:
+                          - portfolioReturns
+                        type: object
+                      minItems: 1
+                      type: array
+                    riskFreeReturns:
+                      description: riskFreeReturns[t] is the risk free return at the time t; the riskFreeReturns array must have the same length as all the portfolioReturns arrays
+                      items:
+                        type: number
+                      minItems: 2
+                      type: array
+                  required:
+                    - benchmarkReturns
+                    - portfolios
+                  type: object
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Computed beta of one portfolio
+                  value:
+                    portfolios:
+                      - portfolioBeta: 0.9169550173010382
+              schema:
+                properties:
+                  portfolios:
+                    items:
+                      properties:
+                        portfolioBeta:
+                          description: The portfolio beta, which correponds to the portfolio systematic risk in the Capital Asset Pricing Model (CAPM)
+                          type: number
+                      required:
+                        - portfolioBeta
+                      type: object
+                    minItems: 1
+                    type: array
+                required:
+                  - portfolios
+                type: object
+          description: OK
+      summary: Beta
+      tags:
+        - Portfolio Analysis
       x-codegen-request-body-name: body
   /portfolio/analysis/contributions/return:
     post:
@@ -3134,7 +3535,6 @@ paths:
         * Minimum and maximum portfolio exposure constraints
 
         References 
-        * [Sharpe, W. (1992), “Asset Allocation: Management Style and Performance Measurement.” Journal of Portfolio Management, Winter, 7-19](https://web.stanford.edu/~wfsharpe/art/sa/sa.htm)
         * Konstantinos Benidis, Yiyong Feng, Daniel P. Palomar, Optimization Methods for Financial Index Tracking: From Theory to Practice, now publishers Inc (7 juin 2018)
       requestBody:
         content:

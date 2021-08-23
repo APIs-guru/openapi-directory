@@ -17563,6 +17563,10 @@ components:
           description: InboxRegistration cookie code, if there is an associated InboxRegistration
           example: abc123
           type: string
+        ip:
+          description: Registrant IP Address
+          example: 10.1.1.1
+          type: string
         name:
           description: Registrant name
           example: account
@@ -17687,6 +17691,7 @@ components:
             - ldap_login
             - saml_login
             - client_log
+            - pending_work
           example: ""
           type: string
         folder_behavior_id:
@@ -17896,6 +17901,7 @@ components:
             - waiting_for_enqueued_operations
             - processing_deferred_folders
             - processing_recursively
+            - removing_deferred_folders
           example: complete
           type: string
       type: object

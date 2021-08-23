@@ -832,7 +832,7 @@ paths:
                   example: 4ADFB67A-0F5B-4A9A-9D74-34437250045C
                   type: string
                 clientSecret:
-                  description: The SHA256 hash of the nonce above and the app’s Client Key. The Client Key will only be shown to you when you create the app, so don’t forget to save it somewhere safe.
+                  description: The SHA256 hash of the nonce above and the app’s Client Key. The Client Key will only be shown to you when you create the app, so don’t forget to save it somewhere safe. SECRET=( `/bin/echo -n $NONCE$CLIENT_KEY | sha256sum` ).
                   example: 4ADFB67A-0F5B-4A9A-9D74-34437250045C
                   type: string
                 grantType:
@@ -2525,109 +2525,6 @@ paths:
                 type: object
           description: The Payment Request details object
       summary: Get Payment Details
-      tags:
-        - Open Banking
-  "/payments/{paymentUuid}/bankpayrefund":
-    post:
-      description: Process a request to refund a payment. The original payment must be in the `PAID` state.
-      operationId: bankPayRefundRequest
-      parameters:
-        - in: path
-          name: paymentUuid
-          required: true
-          schema:
-            description: The unique id for the transaction.
-            example: 4ADFB67A-0F5B-4A9A-9D74-34437250045C
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                amount:
-                  description: The amount to refund. Must be within a certain percentage of the original payment.
-                  example: 1000
-                  format: int64
-                  type: integer
-                currency:
-                  description: Must correspond to the currency of the original payment
-                  enum:
-                    - EUR
-                    - GBP
-                  type: string
-                description:
-                  description: A public facing description of the refund request.
-                  example: Gym Fees Refunded Oct 2020
-                  type: string
-                myRef:
-                  description: An internal description of the refund request.
-                  example: Fees Refunded
-                  type: string
-                orderDetails:
-                  properties:
-                    merchantNumber:
-                      description: Your Merchant Number (if applicable).
-                      example: "1234567"
-                      type: string
-                  title: BankPayMerchantNumber
-                  type: object
-                reason:
-                  description: A reason for the refund.
-                  example: Gym Closed for repairs.
-                  type: string
-              title: BankPayRefund
-              type: object
-        description: Details of the refund request
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                properties:
-                  paymentUuid:
-                    description: The unique id for the original payment.
-                    example: 4ADFB67A-0F5B-4A9A-9D74-34437250045C
-                    type: string
-                  refundRequestUuid:
-                    description: The unique id for the refund request
-                    example: 4ADFB67A-0F5B-4A9A-9D74-34437250045C
-                    type: string
-                  status:
-                    description: Status of the refund request.
-                    enum:
-                      - REQUEST_ACCEPTED
-                      - REQUEST_REJECTED
-                      - REJECTED
-                      - RECEIVED
-                    type: string
-                title: BankPayRefundResponse
-                type: object
-          description: Refund Request successful
-        "405":
-          content:
-            application/json:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      properties:
-                        code:
-                          description: Error Code
-                          example: 50051
-                          format: int64
-                          type: integer
-                        message:
-                          description: The error message
-                          example: Sorry, we are unable to proceed with your request.
-                          type: string
-                      title: ApiError
-                      type: object
-                    type: array
-                title: ApiErrors
-                type: object
-          description: Error Method not Allowed
-      summary: Request a Refund for a Payment Request Payment
       tags:
         - Open Banking
   "/user/{userId}":

@@ -79,6 +79,35 @@ paths:
         required: true
         schema:
           type: string
+  "/session/create/{name}":
+    get:
+      description: Create a session key to keep search context. The session is attached to a name. After the session is created, the header `hashlookup_session` can be set to the session name.
+      operationId: get_sessioncreate
+      responses:
+        "200":
+          description: Success
+      tags:
+        - default
+    parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+  "/session/get/{name}":
+    get:
+      description: Return set of matching and non-matching hashes from a session.
+      responses:
+        "200":
+          description: Success
+      tags:
+        - default
+    parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
 components:
   responses:
     MaskError:

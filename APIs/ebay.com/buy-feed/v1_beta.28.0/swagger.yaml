@@ -253,7 +253,7 @@ paths:
           schema:
             $ref: "#/definitions/ItemGroupResponse"
         "400":
-          description: Bad Request
+          description: Bad request
           x-response-codes:
             errors:
               "13000":
@@ -343,7 +343,7 @@ paths:
         "416":
           description: Range not satisfiable
         "500":
-          description: Internal Server Error
+          description: Internal server error
           x-response-codes:
             errors:
               "13006":
@@ -375,7 +375,7 @@ paths:
           name: category_id
           required: true
           type: string
-        - description: "The date of the feed you want returned. This can be up to 14 days in the past but cannot be set to a date in the future. Format: yyyyMMdd"
+        - description: "The date of the feed you want returned. This can be up to 14 days in the past but cannot be set to a date in the future. Format: yyyyMMdd Note: The daily Item feed files are available each day after 9AM MST (US Mountain Standard Time), which is -7 hours UTC time. There is a 48 hour latency when generating the Item feed files. This means you can download the file for July 10th on July 12 after 9AM MST. Note: For categories with a large number of items, the latency can be up to 72 hours."
           in: query
           name: date
           required: true
@@ -643,7 +643,7 @@ paths:
         "416":
           description: Range not satisfiable
         "500":
-          description: Internal server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "13006":

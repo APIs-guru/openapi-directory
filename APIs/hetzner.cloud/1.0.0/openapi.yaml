@@ -7672,6 +7672,11 @@ paths:
                             ipv4:
                               description: IP address (v4)
                               properties:
+                                dns_ptr:
+                                  description: Reverse DNS PTR entry for the IPv4 address of this Load Balancer
+                                  example: lb1.example.com
+                                  nullable: true
+                                  type: string
                                 ip:
                                   description: IP address (v4) of this Load Balancer
                                   example: 1.2.3.4
@@ -7681,6 +7686,11 @@ paths:
                             ipv6:
                               description: IP address (v6)
                               properties:
+                                dns_ptr:
+                                  description: Reverse DNS PTR entry for the IPv6 address of this Load Balancer
+                                  example: lb1.example.com
+                                  nullable: true
+                                  type: string
                                 ip:
                                   description: IP address (v6) of this Load Balancer
                                   example: 2001:db8::1
@@ -8672,6 +8682,11 @@ paths:
                           ipv4:
                             description: IP address (v4)
                             properties:
+                              dns_ptr:
+                                description: Reverse DNS PTR entry for the IPv4 address of this Load Balancer
+                                example: lb1.example.com
+                                nullable: true
+                                type: string
                               ip:
                                 description: IP address (v4) of this Load Balancer
                                 example: 1.2.3.4
@@ -8681,6 +8696,11 @@ paths:
                           ipv6:
                             description: IP address (v6)
                             properties:
+                              dns_ptr:
+                                description: Reverse DNS PTR entry for the IPv6 address of this Load Balancer
+                                example: lb1.example.com
+                                nullable: true
+                                type: string
                               ip:
                                 description: IP address (v6) of this Load Balancer
                                 example: 2001:db8::1
@@ -9181,6 +9201,11 @@ paths:
                           ipv4:
                             description: IP address (v4)
                             properties:
+                              dns_ptr:
+                                description: Reverse DNS PTR entry for the IPv4 address of this Load Balancer
+                                example: lb1.example.com
+                                nullable: true
+                                type: string
                               ip:
                                 description: IP address (v4) of this Load Balancer
                                 example: 1.2.3.4
@@ -9190,6 +9215,11 @@ paths:
                           ipv6:
                             description: IP address (v6)
                             properties:
+                              dns_ptr:
+                                description: Reverse DNS PTR entry for the IPv6 address of this Load Balancer
+                                example: lb1.example.com
+                                nullable: true
+                                type: string
                               ip:
                                 description: IP address (v6) of this Load Balancer
                                 example: 2001:db8::1
@@ -9788,6 +9818,11 @@ paths:
                           ipv4:
                             description: IP address (v4)
                             properties:
+                              dns_ptr:
+                                description: Reverse DNS PTR entry for the IPv4 address of this Load Balancer
+                                example: lb1.example.com
+                                nullable: true
+                                type: string
                               ip:
                                 description: IP address (v4) of this Load Balancer
                                 example: 1.2.3.4
@@ -9797,6 +9832,11 @@ paths:
                           ipv6:
                             description: IP address (v6)
                             properties:
+                              dns_ptr:
+                                description: Reverse DNS PTR entry for the IPv6 address of this Load Balancer
+                                example: lb1.example.com
+                                nullable: true
+                                type: string
                               ip:
                                 description: IP address (v6) of this Load Balancer
                                 example: 2001:db8::1
@@ -10937,6 +10977,141 @@ paths:
                 type: object
           description: The `action` key contains the `change_algorithm` Action
       summary: Change Algorithm
+      tags:
+        - Load Balancer Actions
+  "/load_balancers/{id}/actions/change_dns_ptr":
+    post:
+      description: |
+        Changes the hostname that will appear when getting the hostname belonging to the public IPs (IPv4 and IPv6) of this Load Balancer.
+
+        Floating IPs assigned to the Server are not affected by this.
+      parameters:
+        - description: ID of the Load Balancer
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                dns_ptr:
+                  description: Hostname to set as a reverse DNS PTR entry
+                  example: lb1.example.com
+                  nullable: true
+                  type: string
+                ip:
+                  description: Public IP address for which the reverse DNS entry should be set
+                  example: 1.2.3.4
+                  type: string
+              required:
+                - ip
+                - dns_ptr
+              title: ChangeLoadbalancerDnsPtrRequest
+              type: object
+        description: Select the IP address for which to change the DNS entry by passing `ip`. It can be either IPv4 or IPv6. The target hostname is set by passing `dns_ptr`.
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                action:
+                  command: change_dns_ptr
+                  error:
+                    code: action_failed
+                    message: Action failed
+                  finished: null
+                  id: 13
+                  progress: 0
+                  resources:
+                    - id: 42
+                      type: load_balancer
+                  started: 2016-01-30T23:50:00+00:00
+                  status: running
+              schema:
+                properties:
+                  action:
+                    properties:
+                      command:
+                        description: Command executed in the Action
+                        example: start_server
+                        type: string
+                      error:
+                        description: Error message for the Action if error occurred, otherwise null
+                        nullable: true
+                        properties:
+                          code:
+                            description: Fixed machine readable code
+                            example: action_failed
+                            type: string
+                          message:
+                            description: Humanized error message
+                            example: Action failed
+                            type: string
+                        required:
+                          - code
+                          - message
+                        type: object
+                      finished:
+                        description: Point in time when the Action was finished (in ISO-8601 format). Only set if the Action is finished otherwise null.
+                        example: 2016-01-30T23:55:00+00:00
+                        nullable: true
+                        type: string
+                      id:
+                        description: ID of the Resource
+                        example: 42
+                        type: integer
+                      progress:
+                        description: Progress of Action in percent
+                        example: 100
+                        type: number
+                      resources:
+                        description: Resources the Action relates to
+                        items:
+                          properties:
+                            id:
+                              description: ID of the Resource
+                              example: 42
+                              type: integer
+                            type:
+                              description: Type of resource referenced
+                              example: server
+                              type: string
+                          required:
+                            - id
+                            - type
+                          type: object
+                        type: array
+                      started:
+                        description: Point in time when the Action was started (in ISO-8601 format)
+                        example: 2016-01-30T23:55:00+00:00
+                        type: string
+                      status:
+                        description: Status of the Action
+                        enum:
+                          - success
+                          - running
+                          - error
+                        type: string
+                    required:
+                      - id
+                      - command
+                      - status
+                      - progress
+                      - started
+                      - finished
+                      - resources
+                      - error
+                    title: Action
+                    type: object
+                required:
+                  - action
+                title: ActionResponse
+                type: object
+          description: The `action` key in the reply contains an Action object with this structure
+      summary: Change reverse DNS entry for this Load Balancer
       tags:
         - Load Balancer Actions
   "/load_balancers/{id}/actions/change_protection":
@@ -18669,6 +18844,140 @@ paths:
       summary: Get all Actions for a Server
       tags:
         - Server Actions
+  "/servers/{id}/actions/add_to_placement_group":
+    post:
+      description: |
+        Adds a Server to a Placement Group.
+
+        Server must be powered off for this command to succeed.
+
+        #### Call specific error codes
+
+        | Code                          | Description                                                          |
+        |-------------------------------|----------------------------------------------------------------------|
+        | `server_not_stopped`          | The action requires a stopped server                                 |
+      parameters:
+        - description: ID of the Server
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                placement_group:
+                  description: ID of Placement Group the Server should be added to
+                  example: 1
+                  type: integer
+              required:
+                - placement_group
+              title: AddToPlacementGroupRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                action:
+                  command: add_to_placement_group
+                  error:
+                    code: action_failed
+                    message: Action failed
+                  finished: null
+                  id: 13
+                  progress: 0
+                  resources:
+                    - id: 42
+                      type: server
+                  started: 2016-01-30T23:50:00+00:00
+                  status: running
+              schema:
+                properties:
+                  action:
+                    properties:
+                      command:
+                        description: Command executed in the Action
+                        example: start_server
+                        type: string
+                      error:
+                        description: Error message for the Action if error occurred, otherwise null
+                        nullable: true
+                        properties:
+                          code:
+                            description: Fixed machine readable code
+                            example: action_failed
+                            type: string
+                          message:
+                            description: Humanized error message
+                            example: Action failed
+                            type: string
+                        required:
+                          - code
+                          - message
+                        type: object
+                      finished:
+                        description: Point in time when the Action was finished (in ISO-8601 format). Only set if the Action is finished otherwise null.
+                        example: 2016-01-30T23:55:00+00:00
+                        nullable: true
+                        type: string
+                      id:
+                        description: ID of the Resource
+                        example: 42
+                        type: integer
+                      progress:
+                        description: Progress of Action in percent
+                        example: 100
+                        type: number
+                      resources:
+                        description: Resources the Action relates to
+                        items:
+                          properties:
+                            id:
+                              description: ID of the Resource
+                              example: 42
+                              type: integer
+                            type:
+                              description: Type of resource referenced
+                              example: server
+                              type: string
+                          required:
+                            - id
+                            - type
+                          type: object
+                        type: array
+                      started:
+                        description: Point in time when the Action was started (in ISO-8601 format)
+                        example: 2016-01-30T23:55:00+00:00
+                        type: string
+                      status:
+                        description: Status of the Action
+                        enum:
+                          - success
+                          - running
+                          - error
+                        type: string
+                    required:
+                      - id
+                      - command
+                      - status
+                      - progress
+                      - started
+                      - finished
+                      - resources
+                      - error
+                    title: Action
+                    type: object
+                required:
+                  - action
+                title: ActionResponse
+                type: object
+          description: The `action` key in the reply contains an Action object with this structure
+      summary: Add a Server to a Placement Group
+      tags:
+        - Server Actions
   "/servers/{id}/actions/attach_iso":
     post:
       description: |
@@ -20982,6 +21291,119 @@ paths:
                 type: object
           description: The `action` key in the reply contains an Action object with this structure
       summary: Rebuild a Server from an Image
+      tags:
+        - Server Actions
+  "/servers/{id}/actions/remove_from_placement_group":
+    post:
+      description: |
+        Removes a Server from a Placement Group.
+      parameters:
+        - description: ID of the Server
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                action:
+                  command: remove_from_placement_group
+                  error:
+                    code: action_failed
+                    message: Action failed
+                  finished: 2016-01-30T23:56:00+00:00
+                  id: 13
+                  progress: 100
+                  resources:
+                    - id: 42
+                      type: server
+                  started: 2016-01-30T23:55:00+00:00
+                  status: success
+              schema:
+                properties:
+                  action:
+                    properties:
+                      command:
+                        description: Command executed in the Action
+                        example: start_server
+                        type: string
+                      error:
+                        description: Error message for the Action if error occurred, otherwise null
+                        nullable: true
+                        properties:
+                          code:
+                            description: Fixed machine readable code
+                            example: action_failed
+                            type: string
+                          message:
+                            description: Humanized error message
+                            example: Action failed
+                            type: string
+                        required:
+                          - code
+                          - message
+                        type: object
+                      finished:
+                        description: Point in time when the Action was finished (in ISO-8601 format). Only set if the Action is finished otherwise null.
+                        example: 2016-01-30T23:55:00+00:00
+                        nullable: true
+                        type: string
+                      id:
+                        description: ID of the Resource
+                        example: 42
+                        type: integer
+                      progress:
+                        description: Progress of Action in percent
+                        example: 100
+                        type: number
+                      resources:
+                        description: Resources the Action relates to
+                        items:
+                          properties:
+                            id:
+                              description: ID of the Resource
+                              example: 42
+                              type: integer
+                            type:
+                              description: Type of resource referenced
+                              example: server
+                              type: string
+                          required:
+                            - id
+                            - type
+                          type: object
+                        type: array
+                      started:
+                        description: Point in time when the Action was started (in ISO-8601 format)
+                        example: 2016-01-30T23:55:00+00:00
+                        type: string
+                      status:
+                        description: Status of the Action
+                        enum:
+                          - success
+                          - running
+                          - error
+                        type: string
+                    required:
+                      - id
+                      - command
+                      - status
+                      - progress
+                      - started
+                      - finished
+                      - resources
+                      - error
+                    title: Action
+                    type: object
+                required:
+                  - action
+                title: ActionResponse
+                type: object
+          description: The `action` key in the reply contains an Action object with this structure
+      summary: Remove from Placement Group
       tags:
         - Server Actions
   "/servers/{id}/actions/request_console":

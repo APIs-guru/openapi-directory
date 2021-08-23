@@ -149,6 +149,50 @@ info:
 
     We have validated the generated libraries, but let us know if you find any anomalies in the client code.
     *  *  *  *  *
+
+    # Error codes
+
+    | Code   | Description                    |
+    |--------|--------------------------------|
+    | 401    | Unauthorized                   |
+    | 403    | Forbidden                      |
+    | 404    | Not Found                      |
+    | 422    | Unprocessable Entity           |
+    | 500    | Internal Server Error          |
+
+    ## 401 - Unauthorized
+    | Description                                                             |
+    |-------------------------------------------------------------------------|
+    | Authentication failed: request expired                                  |
+    | Authentication failed: workspace missing                                |
+    | Authentication failed: key missing                                      |
+    | Authentication failed: property 'iss' (issuer) missing in JWT           |
+    | Authentication failed: property 'sub' (subject) missing in JWT          |
+    | Authentication failed: property 'exp' (expiration time) missing in JWT  |
+    | Authentication failed: incorrect signature                              |
+
+    ## 403 - Forbidden
+    | Description                                                             |
+    |-------------------------------------------------------------------------|
+    | Your account has exceeded the monthly document generation limit.        |
+    | Access not granted: You cannot delete master workspace via API          |
+    | Access not granted: Template is not accessible by this organization     |
+    | Your session has expired, please close and reopen the editor.           |
+
+    ## 404 Entity not found
+    | Description                                                             |
+    |-------------------------------------------------------------------------|
+    | Entity not found                                                        |
+    | Resource not found                                                      |
+    | None of the templates is available for the workspace.                   |
+
+    ## 422 Unprocessable Entity
+    | Description                                                             |
+    |-------------------------------------------------------------------------|
+    | Unable to parse JSON, please check formatting                           |
+    | Required parameter missing                                              |
+    | Required parameter missing: template definition not defined             |
+    | Required parameter missing: template not defined                        |
   title: PDF Generator API
   version: 3.1.1
   x-apisguru-categories:
@@ -1246,7 +1290,7 @@ paths:
   /templates/templateId/editor:
     post:
       description: |
-        Returns an unique URL which you can use to redirect your user to the editor form your application or use the generated URL as iframe source to show the editor within your application.
+        Returns an unique URL which you can use to redirect your user to the editor from your application or use the generated URL as iframe source to show the editor within your application.
       operationId: getEditorUrl
       parameters:
         - description: Template unique identifier
@@ -1941,8 +1985,16 @@ components:
               error:
                 description: Error description
                 enum:
+                  - "Authentication failed: request expired"
+                  - "Authentication failed: signature or secret missing"
+                  - "Authentication failed: workspace missing"
+                  - "Authentication failed: key missing"
+                  - "Authentication failed: property 'iss' (issuer) missing in JWT"
+                  - "Authentication failed: property 'sub' (subject) missing in JWT"
+                  - "Authentication failed: property 'exp' (expiration time) missing in JWT"
+                  - "Authentication failed: invalid 'iss' (issuer)"
+                  - "Authentication failed: incorrect signature"
                   - Authentication failed
-                  - Required parameter missing
                 example: Authentication failed
                 type: string
               status:
@@ -1958,6 +2010,8 @@ components:
             properties:
               error:
                 description: Error description
+                enum:
+                  - Your account has exceeded the monthly document generation limit.
                 example: Access not granted
                 type: string
               status:
@@ -1976,6 +2030,7 @@ components:
                 enum:
                   - Entity not found
                   - Resource not found
+                  - None of the templates is available for the workspace.
                 example: Entity not found
                 type: string
               status:
@@ -1991,6 +2046,11 @@ components:
             properties:
               error:
                 description: Error description
+                enum:
+                  - Unable to parse JSON, please check formatting
+                  - Required parameter missing
+                  - "Required parameter missing: template definition not defined"
+                  - "Required parameter missing: template not defined"
                 example: Incorrect parameter value
                 type: string
               status:

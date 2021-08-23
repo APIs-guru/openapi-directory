@@ -1371,6 +1371,68 @@ paths:
       summary: Update a Customer Additional Field.
       tags:
         - Customer Additional Fields
+  /fulfillments.json:
+    get:
+      parameters:
+        - $ref: "#/components/parameters/LoginParam"
+        - $ref: "#/components/parameters/AuthtokenParam"
+        - $ref: "#/components/parameters/LimitParam"
+        - $ref: "#/components/parameters/PageParam"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Fulfillment"
+                type: array
+          description: An array of Fulfillments
+      summary: Retrieve all Fulfillments.
+      tags:
+        - Fulfillments
+  /fulfillments/count.json:
+    get:
+      parameters:
+        - $ref: "#/components/parameters/LoginParam"
+        - $ref: "#/components/parameters/AuthtokenParam"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+          description: OK
+      summary: Count all Fulfillments.
+      tags:
+        - Fulfillments
+  "/fulfillments/{id}.json":
+    get:
+      parameters:
+        - $ref: "#/components/parameters/LoginParam"
+        - $ref: "#/components/parameters/AuthtokenParam"
+        - description: Id of the Fulfillment
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fulfillment"
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+          description: Fulfillment Not Found.
+      summary: Retrieve a single Fulfillment.
+      tags:
+        - Fulfillments
   /hooks.json:
     get:
       parameters:
@@ -1579,6 +1641,36 @@ paths:
       summary: Retrieve a JSApp.
       tags:
         - Apps
+  "/order/{id}/fulfillments.json":
+    get:
+      parameters:
+        - $ref: "#/components/parameters/LoginParam"
+        - $ref: "#/components/parameters/AuthtokenParam"
+        - description: Id of the Order
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Fulfillment"
+                type: array
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+          description: Fulfillment Not Found.
+      summary: Retrieve the Fulfillments associated with the Order.
+      tags:
+        - Fulfillments
   /orders.json:
     get:
       parameters:
@@ -4649,6 +4741,137 @@ components:
           type: integer
         url:
           description: Private URL of the digital product
+          type: string
+      type: object
+    Fulfillment:
+      properties:
+        category:
+          $ref: "#/components/schemas/FulfillmentFields"
+      type: object
+    FulfillmentCreate:
+      properties:
+        order:
+          $ref: "#/components/schemas/FulfillmentCreateFields"
+      type: object
+    FulfillmentCreateFields:
+      properties:
+        expected_arrival_from:
+          description: First date expected for the fulfillment to arrive at customer place
+          type: string
+        expected_arrival_to:
+          description: Last date expected for the fulfillment to arrive at customer place
+          type: string
+        external_id:
+          description: Unique identifier of the Fulfillment used by the tracking company
+          type: string
+        order_id:
+          description: Order associated with the fulfillment
+          type: string
+        service_type:
+          description: Type of Service requested to the tracking company
+          type: string
+        shipment_status:
+          description: Status of the Fulfillment
+          enum:
+            - requested
+            - in_transit
+            - delivered
+            - failed
+          type: string
+        tracking_company:
+          description: Tracking company responsible for the fulfillment
+          type: string
+        tracking_number:
+          description: Tracking Number associated with the fulfillment
+          type: string
+        type:
+          description: Type of fulfillment Service used
+          enum:
+            - manual
+            - shipit
+            - chilexpress
+            - ctt
+            - correos_chile
+            - dhl
+            - servientrega
+            - starken
+            - bluexpress
+          type: string
+    FulfillmentEdit:
+      properties:
+        order:
+          $ref: "#/components/schemas/FulfillmentEditFields"
+      type: object
+    FulfillmentEditFields:
+      properties:
+        expected_arrival_from:
+          description: First date expected for the fulfillment to arrive at customer place
+          type: string
+        expected_arrival_to:
+          description: Last date expected for the fulfillment to arrive at customer place
+          type: string
+        external_id:
+          description: Unique identifier of the Fulfillment used by the tracking company
+          type: string
+        order_id:
+          description: Order associated with the fulfillment
+          type: string
+        service_type:
+          description: Type of Service requested to the tracking company
+          type: string
+        shipment_status:
+          description: Status of the Fulfillment
+          enum:
+            - requested
+            - in_transit
+            - delivered
+            - failed
+          type: string
+        tracking_company:
+          description: Tracking company responsible for the fulfillment
+          type: string
+        tracking_number:
+          description: Tracking Number associated with the fulfillment
+          type: string
+        type:
+          description: Type of fulfillment Service used
+          enum:
+            - manual
+            - shipit
+            - chilexpress
+            - ctt
+            - correos_chile
+            - dhl
+            - servientrega
+            - starken
+            - bluexpress
+          type: string
+    FulfillmentFields:
+      properties:
+        external_id:
+          description: Unique identifier of the Fulfillment used by the tracking company
+          type: string
+        id:
+          description: Unique identifier of the Fulfillment
+          format: int32
+          type: integer
+        order_id:
+          description: Order associated with the fulfillment
+          type: string
+        service_type:
+          description: Type of Service requested to the tracking company
+          type: string
+        shipment_status:
+          description: Status of the fulfillment
+          type: string
+        tracking_company:
+          description: Tracking company responsible for the fulfillment
+          type: string
+        tracking_number:
+          description: Tracking Number associated with the fulfillment
+          type: string
+        type:
+          description: Type of fulfillment Service used
           type: string
       type: object
     Hook:

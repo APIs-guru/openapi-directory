@@ -1166,6 +1166,11 @@ definitions:
         description: INTERNAL USE ONLY.
         format: int64
         type: integer
+      vendor_id:
+        description: "<strong>Format: </strong>Variable length, up to 12 N<br><strong>Description: </strong>Identifies the vendor to which this expire token request applies."
+        example: 212100026512
+        format: int64
+        type: integer
     required:
       - card_id
       - merchant_id
@@ -1532,6 +1537,11 @@ definitions:
         type: string
       user_id:
         description: INTERNAL USE ONLY.
+        format: int64
+        type: integer
+      vendor_id:
+        description: "<strong>Format: </strong>Variable length, up to 12 N<br><strong>Description: </strong>Identifies the vendor to which this tokenize request applies."
+        example: 212100026512
         format: int64
         type: integer
     required:
@@ -1967,6 +1977,10 @@ definitions:
         example: <Provide merchant id that links to API Key>
         format: int64
         type: integer
+      moto_ecomm_ind:
+        description: "<strong>Format: </strong>Fixed length, 1 N<br><strong>Default: </strong>7<br><strong>Description: </strong>Indicates type of MOTO transaction: <ul><li>0 = Card Present (not MOTO/e-Commerce)</li><li> 1 = One Time MOTO transaction</li><li>2 = Recurring </li><li>3 = Installment </li><li>5 = Full 3D-Secure transaction</li><li>6 = Merchant 3D-Secure transaction</li><li>7 = e-Commerce Channel Encrypted (SSL)</li></ul>"
+        example: "1"
+        type: string
       payload_apple_pay:
         description: "<strong>Format: </strong>Variable length<br><strong>Description: </strong>Apple Pay payload"
         example: xxxxxxx

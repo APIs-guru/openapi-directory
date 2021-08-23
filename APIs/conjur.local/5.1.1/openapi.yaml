@@ -633,8 +633,6 @@ paths:
           $ref: "#/components/responses/BadRequest"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
-        "502":
-          description: Error connecting conjur to the OIDC provider
       security: []
       summary: |
         Gets a short-lived access token for applications using OpenID

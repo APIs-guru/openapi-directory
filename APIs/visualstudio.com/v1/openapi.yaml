@@ -3467,6 +3467,50 @@ paths:
           description: Success
       tags:
         - UserSubscriptions
+  /api/v1/pools/default:
+    get:
+      parameters:
+        - in: query
+          name: skuName
+          required: true
+          schema:
+            items:
+              type: string
+            minItems: 1
+            type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PoolStatusResponseBody"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PoolStatusResponseBody"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PoolStatusResponseBody"
+                type: array
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+      tags:
+        - Pools
   "/api/v1/tenant/{tenantId}/Pool/{poolName}":
     delete:
       parameters:
@@ -5389,6 +5433,35 @@ components:
       required:
         - poolGroupName
         - vmSpecs
+      type: object
+    PoolStatusResponseBody:
+      additionalProperties: false
+      properties:
+        allWithLatestVersion:
+          type: boolean
+        isEnvironmentPool:
+          type: boolean
+        location:
+          nullable: true
+          type: string
+        poolCode:
+          nullable: true
+          type: string
+        readyUnassignedCount:
+          format: int32
+          type: integer
+        readyUnassignedLatestVersionCount:
+          format: int32
+          type: integer
+        readyUnassignedNotLatestVersionCount:
+          format: int32
+          type: integer
+        resourceType:
+          nullable: true
+          type: string
+        sku:
+          nullable: true
+          type: string
       type: object
     PrebuildEnvironmentOptions:
       additionalProperties: false
