@@ -631,7 +631,7 @@ components:
           type: string
       type: object
     Policy:
-      description: A policy for container image binary authorization.
+      description: A policy for Binary Authorization.
       properties:
         admissionWhitelistPatterns:
           description: Optional. Admission policy allowlisting. A matching admission request will always be permitted. This feature is typically used to exclude Google or third-party infrastructure images from Binary Authorization policies.

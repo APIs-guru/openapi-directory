@@ -1667,7 +1667,7 @@ paths:
         - edits
   "/androidpublisher/v3/applications/{packageName}/inappproducts":
     get:
-      description: Lists all in-app products - both managed products and subscriptions.
+      description: Lists all in-app products - both managed products and subscriptions. If an app has a large number of in-app products, the response may be paginated. In this case the response field `tokenPagination.nextPageToken` will be set and the caller should provide its value as a `token` request parameter to retrieve the next page.
       operationId: androidpublisher.inappproducts.list
       parameters:
         - description: Package name of the app.
@@ -1676,12 +1676,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: How many results the list operation should return.
+        - description: Deprecated and ignored. The page size is determined by the server.
           in: query
           name: maxResults
           schema:
             type: integer
-        - description: The index of the first element to return.
+        - description: Deprecated and ignored. Set the `token` parameter to rertieve the next page.
           in: query
           name: startIndex
           schema:
@@ -3213,7 +3213,7 @@ components:
           type: string
         pageInfo:
           $ref: "#/components/schemas/PageInfo"
-          description: Information about the current page.
+          description: Deprecated and unset.
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"
           description: Pagination token, to handle a number of products that is over one page.

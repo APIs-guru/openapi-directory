@@ -2973,7 +2973,7 @@ components:
           type: string
       type: object
     BigTableIODetails:
-      description: Metadata for a Cloud BigTable connector used by the job.
+      description: Metadata for a Cloud Bigtable connector used by the job.
       properties:
         instanceId:
           description: InstanceId accessed in the connection.
@@ -3579,10 +3579,20 @@ components:
             type: string
           description: 'Additional user labels to be specified for the job. Keys and values must follow the restrictions specified in the [labeling restrictions](https://cloud.google.com/compute/docs/labeling-resources#restrictions) page. An object containing a list of "key": value pairs. Example: { "name": "wrench", "mass": "1kg", "count": "3" }.'
           type: object
+        autoscalingAlgorithm:
+          description: The algorithm to use for autoscaling
+          enum:
+            - AUTOSCALING_ALGORITHM_UNKNOWN
+            - AUTOSCALING_ALGORITHM_NONE
+            - AUTOSCALING_ALGORITHM_BASIC
+          type: string
         diskSizeGb:
           description: Worker disk size, in gigabytes.
           format: int32
           type: integer
+        dumpHeapOnOom:
+          description: If true, save a heap dump before killing a thread or process which is GC thrashing or out of memory. The location of the heap file will either be echoed back to the user, or the user will be given the opportunity to download the heap file.
+          type: boolean
         enableStreamingEngine:
           description: Whether to enable Streaming Engine for the job.
           type: boolean
@@ -3606,10 +3616,6 @@ components:
         machineType:
           description: The machine type to use for the job. Defaults to the value from the template if not specified.
           type: string
-        maxNumWorkers:
-          description: The maximum number of workers to cap scaling at.
-          format: int32
-          type: integer
         maxWorkers:
           description: The maximum number of Google Compute Engine instances to be made available to your pipeline during execution, from 1 to 1000.
           format: int32
@@ -3621,6 +3627,9 @@ components:
           description: The initial number of Google Compute Engine instances for the job.
           format: int32
           type: integer
+        saveHeapDumpsToGcsPath:
+          description: Cloud Storage bucket (directory) to upload heap dumps to the given location. Enabling this implies that heap dumps should be generated on OOM (dump_heap_on_oom is set to true).
+          type: string
         sdkContainerImage:
           description: Docker registry location of container image to use for the 'worker harness. Default is the container for the version of the SDK. Note this field is only valid for portable pipelines.
           type: string
@@ -3983,7 +3992,7 @@ components:
       description: Metadata available primarily for filtering jobs. Will be included in the ListJob response and Job SUMMARY view.
       properties:
         bigTableDetails:
-          description: Identification of a Cloud BigTable source used in the Dataflow job.
+          description: Identification of a Cloud Bigtable source used in the Dataflow job.
           items:
             $ref: "#/components/schemas/BigTableIODetails"
           type: array
@@ -4003,7 +4012,7 @@ components:
             $ref: "#/components/schemas/FileIODetails"
           type: array
         pubsubDetails:
-          description: Identification of a PubSub source used in the Dataflow job.
+          description: Identification of a Pub/Sub source used in the Dataflow job.
           items:
             $ref: "#/components/schemas/PubSubIODetails"
           type: array
@@ -4721,7 +4730,7 @@ components:
       description: The environment values to set at runtime.
       properties:
         additionalExperiments:
-          description: Additional experiment flags for the job.
+          description: Additional experiment flags for the job, specified with the `--experiments` option.
           items:
             type: string
           type: array
@@ -4979,7 +4988,7 @@ components:
           description: The project this snapshot belongs to.
           type: string
         pubsubMetadata:
-          description: PubSub snapshot metadata.
+          description: Pub/Sub snapshot metadata.
           items:
             $ref: "#/components/schemas/PubsubSnapshotMetadata"
           type: array
@@ -6105,7 +6114,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
             https://www.googleapis.com/auth/compute: View and manage your Google Compute Engine resources
             https://www.googleapis.com/auth/compute.readonly: View your Google Compute Engine resources
             https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
@@ -6116,7 +6125,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
             https://www.googleapis.com/auth/compute: View and manage your Google Compute Engine resources
             https://www.googleapis.com/auth/compute.readonly: View your Google Compute Engine resources
             https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address

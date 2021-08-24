@@ -1284,8 +1284,7 @@ paths:
                     discount_percentage: 15,
                     item_id: 12344,
                     tax_rate: {
-                      name: '15% GST on Expenses',
-                      code: 'ABN'
+                      code: 'N-T'
                     },
                     general_ledger_account: {
                       name: 'Bank account'
@@ -1509,8 +1508,7 @@ paths:
                     discount_percentage: 15,
                     item_id: 12344,
                     tax_rate: {
-                      name: '15% GST on Expenses',
-                      code: 'ABN'
+                      code: 'N-T'
                     },
                     general_ledger_account: {
                       name: 'Bank account'
@@ -1660,14 +1658,17 @@ paths:
                 sub_type: 'CHECKING_ACCOUNT',
                 name: 'Bank account',
                 fully_qualified_name: 'Asset.Bank.Checking_Account',
-                description: 'The main checking account',
+                description: 'Main checking account',
                 opening_balance: 75000,
                 current_balance: 20000,
                 currency: 'USD',
                 tax_type: 'USD',
-                tax_code: 'N-T',
-                level: '2',
+                tax_rate: {
+                  code: 'N-T'
+                },
+                level: 2,
                 active: true,
+                header: true,
                 bank_account: {
                   iban: 'CH2989144532982975332',
                   bic: 'AUDSCHGGXXX',
@@ -1844,14 +1845,17 @@ paths:
                 sub_type: 'CHECKING_ACCOUNT',
                 name: 'Bank account',
                 fully_qualified_name: 'Asset.Bank.Checking_Account',
-                description: 'The main checking account',
+                description: 'Main checking account',
                 opening_balance: 75000,
                 current_balance: 20000,
                 currency: 'USD',
                 tax_type: 'USD',
-                tax_code: 'N-T',
-                level: '2',
+                tax_rate: {
+                  code: 'N-T'
+                },
+                level: 2,
                 active: true,
+                header: true,
                 bank_account: {
                   iban: 'CH2989144532982975332',
                   bic: 'AUDSCHGGXXX',
@@ -4303,7 +4307,7 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: TaxRate
+      x-graphql-type-name: TaxRateOne
     GetTaxRatesResponse:
       properties:
         data:
@@ -4448,20 +4452,7 @@ components:
                 title: Tax amount
                 type: integer
               tax_rate:
-                properties:
-                  code:
-                    example: ABN
-                    minLength: 1
-                    nullable: true
-                    title: Tax code
-                    type: string
-                  id:
-                    $ref: "#/components/schemas/Id"
-                  name:
-                    example: 15% GST on Expenses
-                    minLength: 1
-                    nullable: true
-                    type: string
+                $ref: "#/components/schemas/LinkedTaxRate"
               total_amount:
                 example: 27500
                 nullable: true
@@ -4644,11 +4635,12 @@ components:
         - first_name
         - last_name
     LedgerAccount:
-      additionalProperties: false
+      additionalProperties: true
       properties:
         active:
           example: true
           nullable: true
+          title: Is active
           type: boolean
         bank_account:
           $ref: "#/components/schemas/BankAccount"
@@ -4673,13 +4665,12 @@ components:
         currency:
           $ref: "#/components/schemas/Currency"
         current_balance:
-          description: The current balance. A positive integer representing the smallest currency unit (e.g., 20000 cents equals $200.00 or 20000 equals ¥20000, a zero-decimal currency)
           example: 20000
           nullable: true
+          title: Current balance
           type: number
         description:
-          example: The main checking account
-          minLength: 1
+          example: Main checking account
           nullable: true
           type: string
         display_id:
@@ -4690,6 +4681,11 @@ components:
           example: Asset.Bank.Checking_Account
           nullable: true
           type: string
+        header:
+          example: true
+          nullable: true
+          title: Is header
+          type: boolean
         id:
           $ref: "#/components/schemas/Id"
         last_reconciliation_date:
@@ -4700,9 +4696,9 @@ components:
           title: Last Reconciliation Date
           type: string
         level:
-          example: "2"
+          example: 2
           nullable: true
-          type: string
+          type: number
         name:
           example: Bank account
           nullable: true
@@ -4712,9 +4708,9 @@ components:
           nullable: true
           type: string
         opening_balance:
-          description: The opening balance. A positive integer representing the smallest currency unit (e.g., 100 cents equals $1.00 or 100 equals ¥100, a zero-decimal currency)
           example: 75000
           nullable: true
+          title: Opening balance
           type: number
         parent_account:
           properties:
@@ -4731,6 +4727,10 @@ components:
               type: string
           readOnly: true
           type: object
+        row_version:
+          example: 1-12345
+          readOnly: true
+          type: string
         sub_account:
           example: true
           nullable: true
@@ -4753,10 +4753,8 @@ components:
           example: CHECKING_ACCOUNT
           nullable: true
           type: string
-        tax_code:
-          example: N-T
-          nullable: true
-          type: string
+        tax_rate:
+          $ref: "#/components/schemas/LinkedTaxRate"
         tax_type:
           example: USD
           nullable: true
@@ -4780,11 +4778,22 @@ components:
           example: bank
           nullable: true
           type: string
+          x-graphql-type-name: ledgerAccountType
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+    LinkedTaxRate:
+      properties:
+        code:
+          example: N-T
+          nullable: true
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+      type: object
+      x-graphql-type-name: LinkedTaxRate
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:

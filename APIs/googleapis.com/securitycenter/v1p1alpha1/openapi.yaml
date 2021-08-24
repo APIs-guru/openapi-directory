@@ -224,6 +224,91 @@ components:
       schema:
         type: string
   schemas:
+    Cve:
+      description: "CVE stands for Common Vulnerabilities and Exposures. More information: https://cve.mitre.org"
+      properties:
+        cvssv3:
+          $ref: "#/components/schemas/Cvssv3"
+          description: Describe Common Vulnerability Scoring System specified at https://www.first.org/cvss/v3.1/specification-document
+        id:
+          description: The unique identifier for the vulnerability. e.g. CVE-2021-34527
+          type: string
+        references:
+          description: Additional information about the CVE. e.g. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-34527
+          items:
+            $ref: "#/components/schemas/Reference"
+          type: array
+      type: object
+    Cvssv3:
+      description: Common Vulnerability Scoring System version 3.
+      properties:
+        attackComplexity:
+          description: This metric describes the conditions beyond the attacker's control that must exist in order to exploit the vulnerability.
+          enum:
+            - ATTACK_COMPLEXITY_UNSPECIFIED
+            - ATTACK_COMPLEXITY_LOW
+            - ATTACK_COMPLEXITY_HIGH
+          type: string
+        attackVector:
+          description: Base Metrics Represents the intrinsic characteristics of a vulnerability that are constant over time and across user environments. This metric reflects the context by which vulnerability exploitation is possible.
+          enum:
+            - ATTACK_VECTOR_UNSPECIFIED
+            - ATTACK_VECTOR_NETWORK
+            - ATTACK_VECTOR_ADJACENT
+            - ATTACK_VECTOR_LOCAL
+            - ATTACK_VECTOR_PHYSICAL
+          type: string
+        availabilityImpact:
+          description: This metric measures the impact to the availability of the impacted component resulting from a successfully exploited vulnerability.
+          enum:
+            - IMPACT_UNSPECIFIED
+            - IMPACT_HIGH
+            - IMPACT_LOW
+            - IMPACT_NONE
+          type: string
+        baseScore:
+          description: The base score is a function of the base metric scores.
+          format: double
+          type: number
+        confidentialityImpact:
+          description: This metric measures the impact to the confidentiality of the information resources managed by a software component due to a successfully exploited vulnerability.
+          enum:
+            - IMPACT_UNSPECIFIED
+            - IMPACT_HIGH
+            - IMPACT_LOW
+            - IMPACT_NONE
+          type: string
+        integrityImpact:
+          description: This metric measures the impact to integrity of a successfully exploited vulnerability.
+          enum:
+            - IMPACT_UNSPECIFIED
+            - IMPACT_HIGH
+            - IMPACT_LOW
+            - IMPACT_NONE
+          type: string
+        privilegesRequired:
+          description: This metric describes the level of privileges an attacker must possess before successfully exploiting the vulnerability.
+          enum:
+            - PRIVILEGES_REQUIRED_UNSPECIFIED
+            - PRIVILEGES_REQUIRED_NONE
+            - PRIVILEGES_REQUIRED_LOW
+            - PRIVILEGES_REQUIRED_HIGH
+          type: string
+        scope:
+          description: The Scope metric captures whether a vulnerability in one vulnerable component impacts resources in components beyond its security scope.
+          enum:
+            - SCOPE_UNSPECIFIED
+            - SCOPE_UNCHANGED
+            - SCOPE_CHANGED
+          type: string
+        userInteraction:
+          description: This metric captures the requirement for a human user, other than the attacker, to participate in the successful compromise of the vulnerable component.
+          enum:
+            - USER_INTERACTION_UNSPECIFIED
+            - USER_INTERACTION_NONE
+            - USER_INTERACTION_REQUIRED
+          type: string
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
@@ -293,6 +378,9 @@ components:
             - ACTIVE
             - INACTIVE
           type: string
+        vulnerability:
+          $ref: "#/components/schemas/Vulnerability"
+          description: Represents vulnerability specific fields like cve, cvss scores etc. CVE stands for Common Vulnerabilities and Exposures (https://cve.mitre.org/about/)
       type: object
     Folder:
       description: Message that contains the resource name and display name of a folder resource.
@@ -559,6 +647,16 @@ components:
           description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
+    Reference:
+      description: Additional Links
+      properties:
+        source:
+          description: Source of the reference e.g. NVD
+          type: string
+        uri:
+          description: Uri for the mentioned source e.g. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-34527.
+          type: string
+      type: object
     SecurityMarks:
       description: User specified security marks that are attached to the parent Security Command Center resource. Security marks are scoped within a Security Command Center organization -- they can be modified and viewed by all users who have proper permissions on the organization.
       properties:
@@ -591,6 +689,13 @@ components:
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
+      type: object
+    Vulnerability:
+      description: Refers to common vulnerability fields e.g. cve, cvss, cwe etc.
+      properties:
+        cve:
+          $ref: "#/components/schemas/Cve"
+          description: CVE stands for Common Vulnerabilities and Exposures (https://cve.mitre.org/about/)
       type: object
   securitySchemes:
     Oauth2:
