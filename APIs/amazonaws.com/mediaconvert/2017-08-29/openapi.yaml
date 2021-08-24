@@ -5891,6 +5891,12 @@ components:
         - SINGLE_FILE
         - SEGMENTED_FILES
       description: 'When set to SINGLE_FILE, a single output file is generated, which is internally segmented using the Fragment Length and Segment Length. When set to SEGMENTED_FILES, separate segment files will be created.'
+    CmafSegmentLengthControl:
+      type: string
+      enum:
+        - EXACT
+        - GOP_MULTIPLE
+      description: Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.
     CmafStreamInfResolution:
       type: string
       enum:
@@ -5971,7 +5977,7 @@ components:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
             - xml:
                 name: fragmentLength
-              description: 'Length of fragments to generate (in seconds). Fragment length must be compatible with GOP size and Framerate. Note that fragments will end on the next keyframe after this number of seconds, so actual fragment length may be longer. When Emit Single File is checked, the fragmentation is internal to a single output file and it does not cause the creation of many output files as in other output types.'
+              description: 'Specify the length, in whole seconds, of the mp4 fragments. When you don''t specify a value, MediaConvert defaults to 2. Related setting: Use Fragment length control (FragmentLengthControl) to specify whether the encoder enforces this value strictly.'
         ImageBasedTrickPlay:
           allOf:
             - $ref: '#/components/schemas/CmafImageBasedTrickPlay'
@@ -6025,7 +6031,13 @@ components:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
             - xml:
                 name: segmentLength
-              description: 'Use this setting to specify the length, in seconds, of each individual CMAF segment. This value applies to the whole package; that is, to every output in the output group. Note that segments end on the first keyframe after this number of seconds, so the actual segment length might be slightly longer. If you set Segment control (CmafSegmentControl) to single file, the service puts the content of each output in a single file that has metadata that marks these segments. If you set it to segmented files, the service creates multiple files for each output, each with the content of one segment.'
+              description: 'Specify the length, in whole seconds, of each segment. When you don''t specify a value, MediaConvert defaults to 10. Related settings: Use Segment length control (SegmentLengthControl) to specify whether the encoder enforces this value strictly. Use Segment control (CmafSegmentControl) to specify whether MediaConvert creates separate segment files or one content file that has metadata to mark the segment boundaries.'
+        SegmentLengthControl:
+          allOf:
+            - $ref: '#/components/schemas/CmafSegmentLengthControl'
+            - xml:
+                name: segmentLengthControl
+              description: Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.
         StreamInfResolution:
           allOf:
             - $ref: '#/components/schemas/CmafStreamInfResolution'
@@ -6376,6 +6388,12 @@ components:
             - xml:
                 name: bufferModel
               description: 'Controls what buffer model to use for accurate interleaving. If set to MULTIPLEX, use multiplex  buffer model. If set to NONE, this can lead to lower latency, but low-memory devices may not be able to play back the stream without interruptions.'
+        DataPTSControl:
+          allOf:
+            - $ref: '#/components/schemas/M2tsDataPtsControl'
+            - xml:
+                name: dataPTSControl
+              description: 'If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with Presentation Timestamp (PTS) values greater than or equal to the first video packet PTS (MediaConvert drops captions and data packets with lesser PTS values). Keep the default value (AUTO) to allow all PTS values.'
         DvbNitSettings:
           allOf:
             - $ref: '#/components/schemas/DvbNitSettings'
@@ -6584,6 +6602,12 @@ components:
             - xml:
                 name: audioPids
               description: 'Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation.'
+        DataPTSControl:
+          allOf:
+            - $ref: '#/components/schemas/M3u8DataPtsControl'
+            - xml:
+                name: dataPTSControl
+              description: 'If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with Presentation Timestamp (PTS) values greater than or equal to the first video packet PTS (MediaConvert drops captions and data packets with lesser PTS values). Keep the default value (AUTO) to allow all PTS values.'
         MaxPcrInterval:
           allOf:
             - $ref: '#/components/schemas/__integerMin0Max500'
@@ -7775,6 +7799,12 @@ components:
         - SINGLE_FILE
         - SEGMENTED_FILES
       description: 'When set to SINGLE_FILE, a single output file is generated, which is internally segmented using the Fragment Length and Segment Length. When set to SEGMENTED_FILES, separate segment files will be created.'
+    DashIsoSegmentLengthControl:
+      type: string
+      enum:
+        - EXACT
+        - GOP_MULTIPLE
+      description: Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.
     DashIsoWriteSegmentTimelineInRepresentation:
       type: string
       enum:
@@ -7873,7 +7903,13 @@ components:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
             - xml:
                 name: segmentLength
-              description: 'Length of mpd segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer. When Emit Single File is checked, the segmentation is internal to a single output file and it does not cause the creation of many output files as in other output types.'
+              description: 'Specify the length, in whole seconds, of each segment. When you don''t specify a value, MediaConvert defaults to 30. Related settings: Use Segment length control (SegmentLengthControl) to specify whether the encoder enforces this value strictly. Use Segment control (DashIsoSegmentControl) to specify whether MediaConvert creates separate segment files or one content file that has metadata to mark the segment boundaries.'
+        SegmentLengthControl:
+          allOf:
+            - $ref: '#/components/schemas/DashIsoSegmentLengthControl'
+            - xml:
+                name: segmentLengthControl
+              description: Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.
         WriteSegmentTimelineInRepresentation:
           allOf:
             - $ref: '#/components/schemas/DashIsoWriteSegmentTimelineInRepresentation'
@@ -8600,7 +8636,8 @@ components:
       enum:
         - PAFF
         - FORCE_FIELD
-      description: 'Keep the default value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding and create separate interlaced fields.'
+        - MBAFF
+      description: 'The video encoding method for your MPEG-4 AVC output. Keep the default value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding and create separate interlaced fields. Choose MBAFF to disable PAFF and have MediaConvert use MBAFF encoding for interlaced outputs.'
     H264FlickerAdaptiveQuantization:
       type: string
       enum:
@@ -8799,7 +8836,7 @@ components:
             - $ref: '#/components/schemas/H264FieldEncoding'
             - xml:
                 name: fieldEncoding
-              description: 'Keep the default value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding and create separate interlaced fields.'
+              description: 'The video encoding method for your MPEG-4 AVC output. Keep the default value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding and create separate interlaced fields. Choose MBAFF to disable PAFF and have MediaConvert use MBAFF encoding for interlaced outputs.'
         FlickerAdaptiveQuantization:
           allOf:
             - $ref: '#/components/schemas/H264FlickerAdaptiveQuantization'
@@ -8889,7 +8926,7 @@ components:
             - $ref: '#/components/schemas/__integerMin0Max7'
             - xml:
                 name: numberBFramesBetweenReferenceFrames
-              description: Number of B-frames between reference frames.
+              description: 'Specify the number of B-frames that MediaConvert puts between reference frames in this output. Valid values are whole numbers from 0 through 7. When you don''t specify a value, MediaConvert defaults to 2.'
         NumberReferenceFrames:
           allOf:
             - $ref: '#/components/schemas/__integerMin1Max6'
@@ -9338,7 +9375,7 @@ components:
             - $ref: '#/components/schemas/__integerMin0Max7'
             - xml:
                 name: numberBFramesBetweenReferenceFrames
-              description: Number of B-frames between reference frames.
+              description: 'Specify the number of B-frames that MediaConvert puts between reference frames in this output. Valid values are whole numbers from 0 through 7. When you don''t specify a value, MediaConvert defaults to 2.'
         NumberReferenceFrames:
           allOf:
             - $ref: '#/components/schemas/__integerMin1Max6'
@@ -9701,6 +9738,12 @@ components:
         - SINGLE_FILE
         - SEGMENTED_FILES
       description: 'When set to SINGLE_FILE, emits program as a single media resource (.ts) file, uses #EXT-X-BYTERANGE tags to index segment for playback.'
+    HlsSegmentLengthControl:
+      type: string
+      enum:
+        - EXACT
+        - GOP_MULTIPLE
+      description: Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.
     HlsStreamInfResolution:
       type: string
       enum:
@@ -9854,7 +9897,13 @@ components:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
             - xml:
                 name: segmentLength
-              description: 'Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer.'
+              description: 'Specify the length, in whole seconds, of each segment. When you don''t specify a value, MediaConvert defaults to 10. Related settings: Use Segment length control (SegmentLengthControl) to specify whether the encoder enforces this value strictly. Use Segment control (HlsSegmentControl) to specify whether MediaConvert creates separate segment files or one content file that has metadata to mark the segment boundaries.'
+        SegmentLengthControl:
+          allOf:
+            - $ref: '#/components/schemas/HlsSegmentLengthControl'
+            - xml:
+                name: segmentLengthControl
+              description: Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.
         SegmentsPerSubdirectory:
           allOf:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
@@ -10717,6 +10766,12 @@ components:
         - MULTIPLEX
         - NONE
       description: 'Controls what buffer model to use for accurate interleaving. If set to MULTIPLEX, use multiplex  buffer model. If set to NONE, this can lead to lower latency, but low-memory devices may not be able to play back the stream without interruptions.'
+    M2tsDataPtsControl:
+      type: string
+      enum:
+        - AUTO
+        - ALIGN_TO_VIDEO
+      description: 'If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with Presentation Timestamp (PTS) values greater than or equal to the first video packet PTS (MediaConvert drops captions and data packets with lesser PTS values). Keep the default value (AUTO) to allow all PTS values.'
     M2tsEbpAudioInterval:
       type: string
       enum:
@@ -10817,6 +10872,12 @@ components:
         - DEFAULT_CODEC_DURATION
         - MATCH_VIDEO_DURATION
       description: 'Specify this setting only when your output will be consumed by a downstream repackaging workflow that is sensitive to very small duration differences between video and audio. For this situation, choose Match video duration (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration, MediaConvert pads the output audio streams with silence or trims them to ensure that the total duration of each audio stream is at least as long as the total duration of the video stream. After padding or trimming, the audio stream duration is no more than one frame longer than the video stream. MediaConvert applies audio padding or trimming only to the end of the last segment of the output. For unsegmented outputs, MediaConvert adds padding only to the end of the file. When you keep the default value, any minor discrepancies between audio and video duration will depend on your output audio codec.'
+    M3u8DataPtsControl:
+      type: string
+      enum:
+        - AUTO
+        - ALIGN_TO_VIDEO
+      description: 'If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with Presentation Timestamp (PTS) values greater than or equal to the first video packet PTS (MediaConvert drops captions and data packets with lesser PTS values). Keep the default value (AUTO) to allow all PTS values.'
     M3u8NielsenId3:
       type: string
       enum:
@@ -11056,7 +11117,7 @@ components:
       enum:
         - FRAMES
         - SECONDS
-      description: Indicates if the GOP Size in MPEG2 is specified in frames or seconds. If seconds the system will convert the GOP Size into a frame count at run time.
+      description: 'Specify the units for GOP size (GopSize). If you don''t specify a value here, by default the encoder measures GOP size in frames.'
     Mpeg2InterlaceMode:
       type: string
       enum:
@@ -11216,13 +11277,13 @@ components:
             - $ref: '#/components/schemas/__doubleMin0'
             - xml:
                 name: gopSize
-              description: GOP Length (keyframe interval) in frames or seconds. Must be greater than zero.
+              description: 'Specify the interval between keyframes, in seconds or frames, for this output. Default: 12 Related settings: When you specify the GOP size in seconds, set GOP mode control (GopSizeUnits) to Specified, seconds (SECONDS). The default value for GOP mode control (GopSizeUnits) is Frames (FRAMES).'
         GopSizeUnits:
           allOf:
             - $ref: '#/components/schemas/Mpeg2GopSizeUnits'
             - xml:
                 name: gopSizeUnits
-              description: Indicates if the GOP Size in MPEG2 is specified in frames or seconds. If seconds the system will convert the GOP Size into a frame count at run time.
+              description: 'Specify the units for GOP size (GopSize). If you don''t specify a value here, by default the encoder measures GOP size in frames.'
         HrdBufferInitialFillPercentage:
           allOf:
             - $ref: '#/components/schemas/__integerMin0Max100'
@@ -11264,7 +11325,7 @@ components:
             - $ref: '#/components/schemas/__integerMin0Max7'
             - xml:
                 name: numberBFramesBetweenReferenceFrames
-              description: Number of B-frames between reference frames.
+              description: 'Specify the number of B-frames that MediaConvert puts between reference frames in this output. Valid values are whole numbers from 0 through 7. When you don''t specify a value, MediaConvert defaults to 2.'
         ParControl:
           allOf:
             - $ref: '#/components/schemas/Mpeg2ParControl'
@@ -11376,6 +11437,12 @@ components:
                 name: spekeKeyProvider
               description: 'If your output group type is HLS, DASH, or Microsoft Smooth, use these settings when doing DRM encryption with a SPEKE-compliant key provider.  If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.'
       description: 'If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to specify the value SpekeKeyProvider.'
+    MsSmoothFragmentLengthControl:
+      type: string
+      enum:
+        - EXACT
+        - GOP_MULTIPLE
+      description: Specify how you want MediaConvert to determine the fragment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Fragment length (FragmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.
     __listOfMsSmoothAdditionalManifest:
       type: array
       items:
@@ -11424,7 +11491,13 @@ components:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
             - xml:
                 name: fragmentLength
-              description: Use Fragment length (FragmentLength) to specify the mp4 fragment sizes in seconds. Fragment length must be compatible with GOP size and frame rate.
+              description: Specify how you want MediaConvert to determine the fragment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Fragment length (FragmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.
+        FragmentLengthControl:
+          allOf:
+            - $ref: '#/components/schemas/MsSmoothFragmentLengthControl'
+            - xml:
+                name: fragmentLengthControl
+              description: Specify how you want MediaConvert to determine the fragment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Fragment length (FragmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.
         ManifestEncoding:
           allOf:
             - $ref: '#/components/schemas/MsSmoothManifestEncoding'
@@ -12167,6 +12240,12 @@ components:
             - xml:
                 name: encryptionType
               description: 'Specify how you want your data keys managed. AWS uses data keys to encrypt your content. AWS also encrypts the data keys themselves, using a customer master key (CMK), and then stores the encrypted data keys alongside your encrypted content. Use this setting to specify which AWS service manages the CMK. For simplest set up, choose Amazon S3 (SERVER_SIDE_ENCRYPTION_S3). If you want your master key to be managed by AWS Key Management Service (KMS), choose AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). By default, when you choose AWS KMS, KMS uses the AWS managed customer master key (CMK) associated with Amazon S3 to encrypt your data keys. You can optionally choose to specify a different, customer managed CMK. Do so by specifying the Amazon Resource Name (ARN) of the key for the setting  KMS ARN (kmsKeyArn).'
+        KmsEncryptionContext:
+          allOf:
+            - $ref: '#/components/schemas/__stringPatternAZaZ0902'
+            - xml:
+                name: kmsEncryptionContext
+              description: 'Optionally, specify the encryption context that you want to use alongside your KMS key. AWS KMS uses this encryption context as additional authenticated data (AAD) to support authenticated encryption. This value must be a base64-encoded UTF-8 string holding JSON which represents a string-string map. To use this setting, you must also set Server-side encryption (S3ServerSideEncryptionType) to AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). For more information about encryption context, see: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context.'
         KmsKeyArn:
           allOf:
             - $ref: '#/components/schemas/__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912'
