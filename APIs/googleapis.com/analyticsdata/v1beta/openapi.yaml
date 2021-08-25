@@ -163,6 +163,52 @@ paths:
             - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - properties
+  "/v1beta/{property}:checkCompatibility":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: This compatibility method lists dimensions and metrics that can be added to a report request and maintain compatibility. This method fails if the request's dimensions and metrics are incompatible. In Google Analytics, reports fail if they request incompatible dimensions and/or metrics; in that case, you will need to remove dimensions and/or metrics from the incompatible report until the report is compatible. The Realtime and Core reports have different compatibility rules. This method checks compatibility for Core reports.
+      operationId: analyticsdata.properties.checkCompatibility
+      parameters:
+        - description: "A Google Analytics GA4 property identifier whose events are tracked. To learn more, see [where to find your Property ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id). `property` should be the same value as in your `runReport` request. Example: properties/1234 Set the Property ID to 0 for compatibility checking on dimensions and metrics common to all properties. In this special mode, this method will not return custom dimensions and metrics."
+          in: path
+          name: property
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckCompatibilityRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckCompatibilityResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.readonly
+      tags:
+        - properties
   "/v1beta/{property}:runPivotReport":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -436,6 +482,47 @@ components:
           description: Name of a dimension. The name must refer back to a name in dimensions field of the request.
           type: string
       type: object
+    CheckCompatibilityRequest:
+      description: The request for compatibility information for a report's dimensions and metrics. Check compatibility provides a preview of the compatibility of a report; fields shared with the `runReport` request should be the same values as in your `runReport` request.
+      properties:
+        compatibilityFilter:
+          description: "Filters the dimensions and metrics in the response to just this compatibility. Commonly used as `”compatibilityFilter”: “COMPATIBLE”` to only return compatible dimensions & metrics."
+          enum:
+            - COMPATIBILITY_UNSPECIFIED
+            - COMPATIBLE
+            - INCOMPATIBLE
+          type: string
+        dimensionFilter:
+          $ref: "#/components/schemas/FilterExpression"
+          description: The filter clause of dimensions. `dimensionFilter` should be the same value as in your `runReport` request.
+        dimensions:
+          description: The dimensions in this report. `dimensions` should be the same value as in your `runReport` request.
+          items:
+            $ref: "#/components/schemas/Dimension"
+          type: array
+        metricFilter:
+          $ref: "#/components/schemas/FilterExpression"
+          description: The filter clause of metrics. `metricFilter` should be the same value as in your `runReport` request
+        metrics:
+          description: The metrics in this report. `metrics` should be the same value as in your `runReport` request.
+          items:
+            $ref: "#/components/schemas/Metric"
+          type: array
+      type: object
+    CheckCompatibilityResponse:
+      description: The compatibility response with the compatibility of each dimension & metric.
+      properties:
+        dimensionCompatibilities:
+          description: The compatibility of each dimension.
+          items:
+            $ref: "#/components/schemas/DimensionCompatibility"
+          type: array
+        metricCompatibilities:
+          description: The compatibility of each metric.
+          items:
+            $ref: "#/components/schemas/MetricCompatibility"
+          type: array
+      type: object
     Cohort:
       description: Defines a cohort selection criteria. A cohort is a group of users who share a common characteristic. For example, users with the same `firstSessionDate` belong to the same cohort.
       properties:
@@ -526,6 +613,20 @@ components:
           description: The name of the dimension. See the [API Dimensions](https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema#dimensions) for the list of dimension names. If `dimensionExpression` is specified, `name` can be any string that you would like within the allowed character set. For example if a `dimensionExpression` concatenates `country` and `city`, you could call that dimension `countryAndCity`. Dimension names that you choose must match the regular expression "^[a-zA-Z0-9_]$". Dimensions are referenced by `name` in `dimensionFilter`, `orderBys`, `dimensionExpression`, and `pivots`.
           type: string
       type: object
+    DimensionCompatibility:
+      description: The compatibility for a single dimension.
+      properties:
+        compatibility:
+          description: The compatibility of this dimension. If the compatibility is COMPATIBLE, this dimension can be successfully added to the report.
+          enum:
+            - COMPATIBILITY_UNSPECIFIED
+            - COMPATIBLE
+            - INCOMPATIBLE
+          type: string
+        dimensionMetadata:
+          $ref: "#/components/schemas/DimensionMetadata"
+          description: The dimension metadata contains the API name for this compatibility information. The dimension metadata also contains other helpful information like the UI name and description.
+      type: object
     DimensionExpression:
       description: "Used to express a dimension which is the result of a formula of multiple dimensions. Example usages: 1) lower_case(dimension) 2) concatenate(dimension1, symbol, dimension2)."
       properties:
@@ -551,6 +652,9 @@ components:
       properties:
         apiName:
           description: This dimension's name. Useable in [Dimension](#Dimension)'s `name`. For example, `eventName`.
+          type: string
+        category:
+          description: The display name of the category that this dimension belongs to. Similar dimensions and metrics are categorized together.
           type: string
         customDefinition:
           description: True if the dimension is a custom dimension for this property.
@@ -675,6 +779,20 @@ components:
           description: The name of the metric. See the [API Metrics](https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema#metrics) for the list of metric names. If `expression` is specified, `name` can be any string that you would like within the allowed character set. For example if `expression` is `screenPageViews/sessions`, you could call that metric's name = `viewsPerSession`. Metric names that you choose must match the regular expression "^[a-zA-Z0-9_]$". Metrics are referenced by `name` in `metricFilter`, `orderBys`, and metric `expression`.
           type: string
       type: object
+    MetricCompatibility:
+      description: The compatibility for a single metric.
+      properties:
+        compatibility:
+          description: The compatibility of this metric. If the compatibility is COMPATIBLE, this metric can be successfully added to the report.
+          enum:
+            - COMPATIBILITY_UNSPECIFIED
+            - COMPATIBLE
+            - INCOMPATIBLE
+          type: string
+        metricMetadata:
+          $ref: "#/components/schemas/MetricMetadata"
+          description: The metric metadata contains the API name for this compatibility information. The metric metadata also contains other helpful information like the UI name and description.
+      type: object
     MetricHeader:
       description: Describes a metric column in the report. Visible metrics requested in a report produce column entries within rows and MetricHeaders. However, metrics used exclusively within filters or expressions do not produce columns in a report; correspondingly, those metrics do not produce headers.
       properties:
@@ -704,6 +822,9 @@ components:
       properties:
         apiName:
           description: A metric name. Useable in [Metric](#Metric)'s `name`. For example, `eventCount`.
+          type: string
+        category:
+          description: The display name of the category that this metrics belongs to. Similar dimensions and metrics are categorized together.
           type: string
         customDefinition:
           description: True if the metric is a custom metric for this property.

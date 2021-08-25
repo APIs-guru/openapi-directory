@@ -734,6 +734,11 @@ components:
             - VERIFY_APPS_ENFORCED
             - VERIFY_APPS_USER_CHOICE
           type: string
+        personalAppsThatCanReadWorkNotifications:
+          description: Personal apps that can read work profile notifications using a NotificationListenerService (https://developer.android.com/reference/android/service/notification/NotificationListenerService). By default, no personal apps (aside from system apps) can read work notifications. Each value in the list must be a package name.
+          items:
+            type: string
+          type: array
         untrustedAppsPolicy:
           description: The policy for untrusted apps (apps from unknown sources) enforced on the device. Replaces install_unknown_sources_allowed (deprecated).
           enum:
@@ -1116,6 +1121,32 @@ components:
           type: array
         uri:
           description: This feature is not generally available.
+          type: string
+      type: object
+    CrossProfilePolicies:
+      description: Cross-profile policies applied on the device.
+      properties:
+        crossProfileCopyPaste:
+          description: Whether text copied from one profile (personal or work) can be pasted in the other profile.
+          enum:
+            - CROSS_PROFILE_COPY_PASTE_UNSPECIFIED
+            - COPY_FROM_WORK_TO_PERSONAL_DISALLOWED
+            - CROSS_PROFILE_COPY_PASTE_ALLOWED
+          type: string
+        crossProfileDataSharing:
+          description: Whether data from one profile (personal or work) can be shared with apps in the other profile. Specifically controls simple data sharing via intents. Management of other cross-profile communication channels, such as contact search, copy/paste, or connected work & personal apps, are configured separately.
+          enum:
+            - CROSS_PROFILE_DATA_SHARING_UNSPECIFIED
+            - CROSS_PROFILE_DATA_SHARING_DISALLOWED
+            - DATA_SHARING_FROM_WORK_TO_PERSONAL_DISALLOWED
+            - CROSS_PROFILE_DATA_SHARING_ALLOWED
+          type: string
+        showWorkContactsInPersonalProfile:
+          description: Whether contacts stored in the work profile can be shown in personal profile contact searches and incoming calls.
+          enum:
+            - SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_UNSPECIFIED
+            - SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED
+            - SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_ALLOWED
           type: string
       type: object
     Date:
@@ -2188,6 +2219,9 @@ components:
         credentialsConfigDisabled:
           description: Whether configuring user credentials is disabled.
           type: boolean
+        crossProfilePolicies:
+          $ref: "#/components/schemas/CrossProfilePolicies"
+          description: Cross-profile policies applied on the device.
         dataRoamingDisabled:
           description: Whether roaming data services are disabled.
           type: boolean

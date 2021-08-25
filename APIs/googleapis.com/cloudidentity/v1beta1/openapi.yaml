@@ -1810,12 +1810,20 @@ components:
           description: Whether device supports Android work profiles. If false, this service will not block access to corp data even if an administrator turns on the "Enforce Work Profile" policy.
           type: boolean
       type: object
+    GoogleAppsCloudidentityDevicesV1ApproveDeviceUserMetadata:
+      description: Metadata for ApproveDeviceUser LRO.
+      properties: {}
+      type: object
     GoogleAppsCloudidentityDevicesV1ApproveDeviceUserResponse:
       description: Response message for approving the device to access user data.
       properties:
         deviceUser:
           $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1DeviceUser"
           description: Resultant DeviceUser object for the action.
+      type: object
+    GoogleAppsCloudidentityDevicesV1BlockDeviceUserMetadata:
+      description: Metadata for BlockDeviceUser LRO.
+      properties: {}
       type: object
     GoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse:
       description: Response message for blocking the device from accessing user data.
@@ -1824,12 +1832,20 @@ components:
           $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1DeviceUser"
           description: Resultant DeviceUser object for the action.
       type: object
+    GoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata:
+      description: Metadata for CancelWipeDevice LRO.
+      properties: {}
+      type: object
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceResponse:
       description: Response message for cancelling an unfinished device wipe.
       properties:
         device:
           $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1Device"
           description: Resultant Device object for the action. Note that asset tags will not be returned in the device object.
+      type: object
+    GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserMetadata:
+      description: Metadata for CancelWipeDeviceUser LRO.
+      properties: {}
       type: object
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse:
       description: Response message for cancelling an unfinished user account wipe.
@@ -1892,7 +1908,7 @@ components:
             - UNMANAGED
           type: string
         name:
-          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the ClientState in format: `devices/{device_id}/deviceUsers/{device_user_id}/clientState/{partner_id}`, where partner_id corresponds to the partner storing the data. For partners belonging to the \"BeyondCorp Alliance\", this is the partner ID specified to you by Google. For all other callers, this is a string of the form: `{customer_id}-suffix`, where `customer_id` is your customer ID. The *suffix* is any string the caller specifies. This string will be displayed verbatim in the administration console. This suffix is used in setting up Custom Access Levels in Context-Aware Access. Your organization's customer ID can be obtained from the URL: `GET https://www.googleapis.com/admin/directory/v1/customers/my_customer` The `id` field in the response contains the customer ID starting with the letter 'C'. The customer ID to be used in this API is the string after the letter 'C' (not including 'C')"
+          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the ClientState in format: `devices/{device}/deviceUsers/{device_user}/clientState/{partner}`, where partner corresponds to the partner storing the data. For partners belonging to the \"BeyondCorp Alliance\", this is the partner ID specified to you by Google. For all other callers, this is a string of the form: `{customer}-suffix`, where `customer` is your customer ID. The *suffix* is any string the caller specifies. This string will be displayed verbatim in the administration console. This suffix is used in setting up Custom Access Levels in Context-Aware Access. Your organization's customer ID can be obtained from the URL: `GET https://www.googleapis.com/admin/directory/v1/customers/my_customer` The `id` field in the response contains the customer ID starting with the letter 'C'. The customer ID to be used in this API is the string after the letter 'C' (not including 'C')"
           readOnly: true
           type: string
         ownerType:
@@ -1907,6 +1923,10 @@ components:
           description: A descriptive cause of the health score.
           type: string
       type: object
+    GoogleAppsCloudidentityDevicesV1CreateDeviceMetadata:
+      description: Metadata for CreateDevice LRO.
+      properties: {}
+      type: object
     GoogleAppsCloudidentityDevicesV1CustomAttributeValue:
       description: Additional custom attribute values may be one of these types
       properties:
@@ -1920,6 +1940,14 @@ components:
         stringValue:
           description: Represents a string value.
           type: string
+      type: object
+    GoogleAppsCloudidentityDevicesV1DeleteDeviceMetadata:
+      description: Metadata for DeleteDevice LRO.
+      properties: {}
+      type: object
+    GoogleAppsCloudidentityDevicesV1DeleteDeviceUserMetadata:
+      description: Metadata for DeleteDeviceUser LRO.
+      properties: {}
       type: object
     GoogleAppsCloudidentityDevicesV1Device:
       description: " A Device within the Cloud Identity Devices API. Represents a Device known to Google Cloud, independent of the device ownership, type, and whether it is assigned or in use by a user."
@@ -2027,7 +2055,7 @@ components:
           readOnly: true
           type: string
         name:
-          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device_id}`, where device_id is the unique id assigned to the Device."
+          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device}`, where device is the unique id assigned to the Device."
           readOnly: true
           type: string
         networkOperator:
@@ -2111,7 +2139,7 @@ components:
           readOnly: true
           type: string
         name:
-          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the DeviceUser in format: `devices/{device_id}/deviceUsers/{device_user_id}`, where `device_user_id` uniquely identifies a user's use of a device."
+          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the DeviceUser in format: `devices/{device}/deviceUsers/{device_user}`, where `device_user` uniquely identifies a user's use of a device."
           readOnly: true
           type: string
         passwordState:
@@ -2129,12 +2157,36 @@ components:
           description: Email address of the user registered on the device.
           type: string
       type: object
+    GoogleAppsCloudidentityDevicesV1ListEndpointAppsMetadata:
+      description: Metadata for ListEndpointApps LRO.
+      properties: {}
+      type: object
+    GoogleAppsCloudidentityDevicesV1SignoutDeviceUserMetadata:
+      description: Metadata for SignoutDeviceUser LRO.
+      properties: {}
+      type: object
+    GoogleAppsCloudidentityDevicesV1UpdateClientStateMetadata:
+      description: Metadata for UpdateClientState LRO.
+      properties: {}
+      type: object
+    GoogleAppsCloudidentityDevicesV1UpdateDeviceMetadata:
+      description: Metadata for UpdateDevice LRO.
+      properties: {}
+      type: object
+    GoogleAppsCloudidentityDevicesV1WipeDeviceMetadata:
+      description: Metadata for WipeDevice LRO.
+      properties: {}
+      type: object
     GoogleAppsCloudidentityDevicesV1WipeDeviceResponse:
       description: Response message for wiping all data on the device.
       properties:
         device:
           $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1Device"
           description: Resultant Device object for the action. Note that asset tags will not be returned in the device object.
+      type: object
+    GoogleAppsCloudidentityDevicesV1WipeDeviceUserMetadata:
+      description: Metadata for WipeDeviceUser LRO.
+      properties: {}
       type: object
     GoogleAppsCloudidentityDevicesV1WipeDeviceUserResponse:
       description: Response message for wiping the user's account from the device.
@@ -2616,7 +2668,7 @@ components:
             https://www.googleapis.com/auth/cloud-identity.devices.lookup: See your device details
             https://www.googleapis.com/auth/cloud-identity.groups: See, change, create, and delete any of the Cloud Identity Groups that you can access, including the members of each group
             https://www.googleapis.com/auth/cloud-identity.groups.readonly: See any Cloud Identity Groups that you can access, including group members and their emails
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -2627,6 +2679,6 @@ components:
             https://www.googleapis.com/auth/cloud-identity.devices.lookup: See your device details
             https://www.googleapis.com/auth/cloud-identity.groups: See, change, create, and delete any of the Cloud Identity Groups that you can access, including the members of each group
             https://www.googleapis.com/auth/cloud-identity.groups.readonly: See any Cloud Identity Groups that you can access, including group members and their emails
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

@@ -41,7 +41,7 @@ paths:
       description: Lists/Searches devices.
       operationId: cloudidentity.devices.list
       parameters:
-        - description: "Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer in the format: `customers/{customer_id}`, where customer_id is the customer to whom the device belongs. If you're using this API for your own organization, use `customers/my_customer`. If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs."
+        - description: "Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer in the format: `customers/{customer}`, where customer is the customer to whom the device belongs. If you're using this API for your own organization, use `customers/my_customer`. If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs."
           in: query
           name: customer
           schema:
@@ -100,7 +100,7 @@ paths:
       description: "Creates a device. Only company-owned device may be created. **Note**: This method is available only to customers who have one of the following SKUs: Enterprise Standard, Enterprise Plus, Enterprise for Education, and Cloud Identity Premium"
       operationId: cloudidentity.devices.create
       parameters:
-        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
+        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
           in: query
           name: customer
           schema:
@@ -134,7 +134,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Required. The parent resource under which to list all `Group` resources. Must be of the form `identitysources/{identity_source_id}` for external- identity-mapped groups or `customers/{customer_id}` for Google Groups. The `customer_id` must begin with "C" (for example, 'C046psxkn').
+        - description: Required. The parent resource under which to list all `Group` resources. Must be of the form `identitysources/{identity_source}` for external- identity-mapped groups or `customers/{customer}` for Google Groups. The `customer` must begin with "C" (for example, 'C046psxkn').
           in: query
           name: parent
           schema:
@@ -228,7 +228,7 @@ paths:
           name: groupKey.id
           schema:
             type: string
-        - description: The namespace in which the entity exists. If not specified, the `EntityKey` represents a Google-managed entity such as a Google user or a Google Group. If specified, the `EntityKey` represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source_id}`.
+        - description: The namespace in which the entity exists. If not specified, the `EntityKey` represents a Google-managed entity such as a Google user or a Google Group. If specified, the `EntityKey` represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source}`.
           in: query
           name: groupKey.namespace
           schema:
@@ -282,7 +282,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Required. The search query. Must be specified in [Common Expression Language](https://opensource.google/projects/cel). May only contain equality operators on the parent and inclusion operators on labels (e.g., `parent == 'customers/{customer_id}' && 'cloudidentity.googleapis.com/groups.discussion_forum' in labels`). The `customer_id` must begin with "C" (for example, 'C046psxkn').
+        - description: Required. The search query. Must be specified in [Common Expression Language](https://opensource.google/projects/cel). May only contain equality operators on the parent and inclusion operators on labels (e.g., `parent == 'customers/{customer}' && 'cloudidentity.googleapis.com/groups.discussion_forum' in labels`). The `customer` must begin with "C" (for example, 'C046psxkn').
           in: query
           name: query
           schema:
@@ -335,13 +335,13 @@ paths:
       description: Deletes a `Membership`.
       operationId: cloudidentity.groups.memberships.delete
       parameters:
-        - description: Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership` to delete. Must be of the form `groups/{group_id}/memberships/{membership_id}`
+        - description: Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership` to delete. Must be of the form `groups/{group}/memberships/{membership}`
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
+        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
           in: query
           name: customer
           schema:
@@ -368,13 +368,13 @@ paths:
       description: Retrieves a `Membership`.
       operationId: cloudidentity.groups.memberships.get
       parameters:
-        - description: Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership` to retrieve. Must be of the form `groups/{group_id}/memberships/{membership_id}`.
+        - description: Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership` to retrieve. Must be of the form `groups/{group}/memberships/{membership}`.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
+        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
           in: query
           name: customer
           schema:
@@ -417,7 +417,7 @@ paths:
       description: Updates a `Group`.
       operationId: cloudidentity.groups.patch
       parameters:
-        - description: Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Group`. Shall be of the form `groups/{group_id}`.
+        - description: Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Group`. Shall be of the form `groups/{group}`.
           in: path
           name: name
           required: true
@@ -468,7 +468,7 @@ paths:
       description: Approves device to access user data.
       operationId: cloudidentity.devices.deviceUsers.approve
       parameters:
-        - description: "Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device_id}/deviceUsers/{device_user_id}`, where device_id is the unique ID assigned to the Device, and device_user_id is the unique ID assigned to the User."
+        - description: "Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device}/deviceUsers/{device_user}`, where device is the unique ID assigned to the Device, and device_user is the unique ID assigned to the User."
           in: path
           name: name
           required: true
@@ -505,7 +505,7 @@ paths:
       description: Blocks device from accessing user data
       operationId: cloudidentity.devices.deviceUsers.block
       parameters:
-        - description: "Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device_id}/deviceUsers/{device_user_id}`, where device_id is the unique ID assigned to the Device, and device_user_id is the unique ID assigned to the User."
+        - description: "Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device}/deviceUsers/{device_user}`, where device is the unique ID assigned to the Device, and device_user is the unique ID assigned to the User."
           in: path
           name: name
           required: true
@@ -542,7 +542,7 @@ paths:
       description: Cancels an unfinished user account wipe. This operation can be used to cancel device wipe in the gap between the wipe operation returning success and the device being wiped.
       operationId: cloudidentity.devices.deviceUsers.cancelWipe
       parameters:
-        - description: "Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device_id}/deviceUsers/{device_user_id}`, where device_id is the unique ID assigned to the Device, and device_user_id is the unique ID assigned to the User."
+        - description: "Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device}/deviceUsers/{device_user}`, where device is the unique ID assigned to the Device, and device_user is the unique ID assigned to the User."
           in: path
           name: name
           required: true
@@ -579,7 +579,7 @@ paths:
       description: Modifies the `MembershipRole`s of a `Membership`.
       operationId: cloudidentity.groups.memberships.modifyMembershipRoles
       parameters:
-        - description: Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership` whose roles are to be modified. Must be of the form `groups/{group_id}/memberships/{membership_id}`.
+        - description: Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership` whose roles are to be modified. Must be of the form `groups/{group}/memberships/{membership}`.
           in: path
           name: name
           required: true
@@ -625,7 +625,7 @@ paths:
       description: Wipes the user's account on a device. Other data on the device that is not associated with the user's work account is not affected. For example, if a Gmail app is installed on a device that is used for personal and work purposes, and the user is logged in to the Gmail app with their personal account as well as their work account, wiping the "deviceUser" by their work administrator will not affect their personal account within Gmail or other apps such as Photos.
       operationId: cloudidentity.devices.deviceUsers.wipe
       parameters:
-        - description: "Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device_id}/deviceUsers/{device_user_id}`, where device_id is the unique ID assigned to the Device, and device_user_id is the unique ID assigned to the User."
+        - description: "Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device}/deviceUsers/{device_user}`, where device is the unique ID assigned to the Device, and device_user is the unique ID assigned to the User."
           in: path
           name: name
           required: true
@@ -656,7 +656,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
+        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
           in: query
           name: customer
           schema:
@@ -708,7 +708,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
+        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
           in: query
           name: customer
           schema:
@@ -759,7 +759,7 @@ paths:
       description: Lists the `Membership`s within a `Group`.
       operationId: cloudidentity.groups.memberships.list
       parameters:
-        - description: Required. The parent `Group` resource under which to lookup the `Membership` name. Must be of the form `groups/{group_id}`.
+        - description: Required. The parent `Group` resource under which to lookup the `Membership` name. Must be of the form `groups/{group}`.
           in: path
           name: parent
           required: true
@@ -822,7 +822,7 @@ paths:
       description: Creates a `Membership`.
       operationId: cloudidentity.groups.memberships.create
       parameters:
-        - description: Required. The parent `Group` resource under which to create the `Membership`. Must be of the form `groups/{group_id}`.
+        - description: Required. The parent `Group` resource under which to create the `Membership`. Must be of the form `groups/{group}`.
           in: path
           name: parent
           required: true
@@ -856,7 +856,7 @@ paths:
       description: Check a potential member for membership in a group. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. If the account of the member is not one of these, a 403 (PERMISSION_DENIED) HTTP status code will be returned. A member has membership to a group as long as there is a single viewable transitive membership between the group and the member. The actor must have view permissions to at least one transitive membership between the member and group.
       operationId: cloudidentity.groups.memberships.checkTransitiveMembership
       parameters:
-        - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to check the transitive membership in. Format: `groups/{group_id}`, where `group_id` is the unique id assigned to the Group to which the Membership belongs to."
+        - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to check the transitive membership in. Format: `groups/{group}`, where `group` is the unique id assigned to the Group to which the Membership belongs to."
           in: path
           name: parent
           required: true
@@ -906,7 +906,7 @@ paths:
       description: Get a membership graph of just a member or both a member and a group. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. If the account of the member is not one of these, a 403 (PERMISSION_DENIED) HTTP status code will be returned. Given a member, the response will contain all membership paths from the member. Given both a group and a member, the response will contain all membership paths between the group and the member.
       operationId: cloudidentity.groups.memberships.getMembershipGraph
       parameters:
-        - description: 'Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group_id}`, where `group_id` is the unique ID assigned to the Group to which the Membership belongs to. group_id can be a wildcard collection id "-". When a group_id is specified, the membership graph will be constrained to paths between the member (defined in the query) and the parent. If a wildcard collection is provided, all membership paths connected to the member will be returned.'
+        - description: 'Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group}`, where `group` is the unique ID assigned to the Group to which the Membership belongs to. group can be a wildcard collection id "-". When a group is specified, the membership graph will be constrained to paths between the member (defined in the query) and the parent. If a wildcard collection is provided, all membership paths connected to the member will be returned.'
           in: path
           name: parent
           required: true
@@ -956,7 +956,7 @@ paths:
       description: Looks up the [resource name](https://cloud.google.com/apis/design/resource_names) of a `Membership` by its `EntityKey`.
       operationId: cloudidentity.groups.memberships.lookup
       parameters:
-        - description: Required. The parent `Group` resource under which to lookup the `Membership` name. Must be of the form `groups/{group_id}`.
+        - description: Required. The parent `Group` resource under which to lookup the `Membership` name. Must be of the form `groups/{group}`.
           in: path
           name: parent
           required: true
@@ -967,7 +967,7 @@ paths:
           name: memberKey.id
           schema:
             type: string
-        - description: The namespace in which the entity exists. If not specified, the `EntityKey` represents a Google-managed entity such as a Google user or a Google Group. If specified, the `EntityKey` represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source_id}`.
+        - description: The namespace in which the entity exists. If not specified, the `EntityKey` represents a Google-managed entity such as a Google user or a Google Group. If specified, the `EntityKey` represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source}`.
           in: query
           name: memberKey.namespace
           schema:
@@ -1011,7 +1011,7 @@ paths:
       description: Search transitive groups of a member. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. If the account of the member is not one of these, a 403 (PERMISSION_DENIED) HTTP status code will be returned. A transitive group is any group that has a direct or indirect membership to the member. Actor must have view permissions all transitive groups.
       operationId: cloudidentity.groups.memberships.searchTransitiveGroups
       parameters:
-        - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group_id}`, where `group_id` is always '-' as this API will search across all groups for a given member."
+        - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group}`, where `group` is always '-' as this API will search across all groups for a given member."
           in: path
           name: parent
           required: true
@@ -1071,7 +1071,7 @@ paths:
       description: Search transitive memberships of a group. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. If the account of the group is not one of these, a 403 (PERMISSION_DENIED) HTTP status code will be returned. A transitive membership is any direct or indirect membership of a group. Actor must have view permissions to all transitive memberships.
       operationId: cloudidentity.groups.memberships.searchTransitiveMemberships
       parameters:
-        - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group_id}`, where `group_id` is the unique ID assigned to the Group."
+        - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group}`, where `group` is the unique ID assigned to the Group."
           in: path
           name: parent
           required: true
@@ -1266,6 +1266,22 @@ components:
           description: Response does not include the possible roles of a member since the behavior of this rpc is not all-or-nothing unlike the other rpcs. So, it may not be possible to list all the roles definitively, due to possible lack of authorization in some of the paths.
           type: boolean
       type: object
+    CreateGroupMetadata:
+      description: Metadata for CreateGroup LRO.
+      properties: {}
+      type: object
+    CreateMembershipMetadata:
+      description: Metadata for CreateMembership LRO.
+      properties: {}
+      type: object
+    DeleteGroupMetadata:
+      description: Metadata for DeleteGroup LRO.
+      properties: {}
+      type: object
+    DeleteMembershipMetadata:
+      description: Metadata for DeleteMembership LRO.
+      properties: {}
+      type: object
     DynamicGroupMetadata:
       description: Dynamic group metadata like queries and status.
       properties:
@@ -1314,7 +1330,7 @@ components:
           description: The ID of the entity. For Google-managed entities, the `id` should be the email address of an existing group or user. For external-identity-mapped entities, the `id` must be a string conforming to the Identity Source's requirements. Must be unique within a `namespace`.
           type: string
         namespace:
-          description: The namespace in which the entity exists. If not specified, the `EntityKey` represents a Google-managed entity such as a Google user or a Google Group. If specified, the `EntityKey` represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source_id}`.
+          description: The namespace in which the entity exists. If not specified, the `EntityKey` represents a Google-managed entity such as a Google user or a Google Group. If specified, the `EntityKey` represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source}`.
           type: string
       type: object
     ExpiryDetail:
@@ -1324,6 +1340,10 @@ components:
           description: The time at which the `MembershipRole` will expire.
           format: google-datetime
           type: string
+      type: object
+    GetMembershipGraphMetadata:
+      description: Metadata of GetMembershipGraphResponse LRO. This is currently empty to permit future extensibility.
+      properties: {}
       type: object
     GetMembershipGraphResponse:
       description: The response message for MembershipsService.GetMembershipGraph.
@@ -1360,11 +1380,15 @@ components:
           description: Whether device supports Android work profiles. If false, this service will not block access to corp data even if an administrator turns on the "Enforce Work Profile" policy.
           type: boolean
       type: object
+    GoogleAppsCloudidentityDevicesV1ApproveDeviceUserMetadata:
+      description: Metadata for ApproveDeviceUser LRO.
+      properties: {}
+      type: object
     GoogleAppsCloudidentityDevicesV1ApproveDeviceUserRequest:
       description: Request message for approving the device to access user data.
       properties:
         customer:
-          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
+          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
           type: string
       type: object
     GoogleAppsCloudidentityDevicesV1ApproveDeviceUserResponse:
@@ -1374,11 +1398,15 @@ components:
           $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1DeviceUser"
           description: Resultant DeviceUser object for the action.
       type: object
+    GoogleAppsCloudidentityDevicesV1BlockDeviceUserMetadata:
+      description: Metadata for BlockDeviceUser LRO.
+      properties: {}
+      type: object
     GoogleAppsCloudidentityDevicesV1BlockDeviceUserRequest:
       description: Request message for blocking account on device.
       properties:
         customer:
-          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
+          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
           type: string
       type: object
     GoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse:
@@ -1388,11 +1416,15 @@ components:
           $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1DeviceUser"
           description: Resultant DeviceUser object for the action.
       type: object
+    GoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata:
+      description: Metadata for CancelWipeDevice LRO.
+      properties: {}
+      type: object
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest:
       description: Request message for cancelling an unfinished device wipe.
       properties:
         customer:
-          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
+          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
           type: string
       type: object
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceResponse:
@@ -1402,11 +1434,15 @@ components:
           $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1Device"
           description: Resultant Device object for the action. Note that asset tags will not be returned in the device object.
       type: object
+    GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserMetadata:
+      description: Metadata for CancelWipeDeviceUser LRO.
+      properties: {}
+      type: object
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest:
       description: Request message for cancelling an unfinished user account wipe.
       properties:
         customer:
-          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
+          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
           type: string
       type: object
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse:
@@ -1470,7 +1506,7 @@ components:
             - UNMANAGED
           type: string
         name:
-          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the ClientState in format: `devices/{device_id}/deviceUsers/{device_user_id}/clientState/{partner_id}`, where partner_id corresponds to the partner storing the data. For partners belonging to the \"BeyondCorp Alliance\", this is the partner ID specified to you by Google. For all other callers, this is a string of the form: `{customer_id}-suffix`, where `customer_id` is your customer ID. The *suffix* is any string the caller specifies. This string will be displayed verbatim in the administration console. This suffix is used in setting up Custom Access Levels in Context-Aware Access. Your organization's customer ID can be obtained from the URL: `GET https://www.googleapis.com/admin/directory/v1/customers/my_customer` The `id` field in the response contains the customer ID starting with the letter 'C'. The customer ID to be used in this API is the string after the letter 'C' (not including 'C')"
+          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the ClientState in format: `devices/{device}/deviceUsers/{device_user}/clientState/{partner}`, where partner corresponds to the partner storing the data. For partners belonging to the \"BeyondCorp Alliance\", this is the partner ID specified to you by Google. For all other callers, this is a string of the form: `{customer}-suffix`, where `customer` is your customer ID. The *suffix* is any string the caller specifies. This string will be displayed verbatim in the administration console. This suffix is used in setting up Custom Access Levels in Context-Aware Access. Your organization's customer ID can be obtained from the URL: `GET https://www.googleapis.com/admin/directory/v1/customers/my_customer` The `id` field in the response contains the customer ID starting with the letter 'C'. The customer ID to be used in this API is the string after the letter 'C' (not including 'C')"
           readOnly: true
           type: string
         ownerType:
@@ -1485,6 +1521,10 @@ components:
           description: A descriptive cause of the health score.
           type: string
       type: object
+    GoogleAppsCloudidentityDevicesV1CreateDeviceMetadata:
+      description: Metadata for CreateDevice LRO.
+      properties: {}
+      type: object
     GoogleAppsCloudidentityDevicesV1CustomAttributeValue:
       description: Additional custom attribute values may be one of these types
       properties:
@@ -1498,6 +1538,14 @@ components:
         stringValue:
           description: Represents a string value.
           type: string
+      type: object
+    GoogleAppsCloudidentityDevicesV1DeleteDeviceMetadata:
+      description: Metadata for DeleteDevice LRO.
+      properties: {}
+      type: object
+    GoogleAppsCloudidentityDevicesV1DeleteDeviceUserMetadata:
+      description: Metadata for DeleteDeviceUser LRO.
+      properties: {}
       type: object
     GoogleAppsCloudidentityDevicesV1Device:
       description: " A Device within the Cloud Identity Devices API. Represents a Device known to Google Cloud, independent of the device ownership, type, and whether it is assigned or in use by a user."
@@ -1605,7 +1653,7 @@ components:
           readOnly: true
           type: string
         name:
-          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device_id}`, where device_id is the unique id assigned to the Device."
+          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device}`, where device is the unique id assigned to the Device."
           readOnly: true
           type: string
         networkOperator:
@@ -1689,7 +1737,7 @@ components:
           readOnly: true
           type: string
         name:
-          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the DeviceUser in format: `devices/{device_id}/deviceUsers/{device_user_id}`, where `device_user_id` uniquely identifies a user's use of a device."
+          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the DeviceUser in format: `devices/{device}/deviceUsers/{device_user}`, where `device_user` uniquely identifies a user's use of a device."
           readOnly: true
           type: string
         passwordState:
@@ -1743,6 +1791,10 @@ components:
           description: Token to retrieve the next page of results. Empty if there are no more results.
           type: string
       type: object
+    GoogleAppsCloudidentityDevicesV1ListEndpointAppsMetadata:
+      description: Metadata for ListEndpointApps LRO.
+      properties: {}
+      type: object
     GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse:
       description: Response containing resource names of the DeviceUsers associated with the caller's credentials.
       properties:
@@ -1750,7 +1802,7 @@ components:
           description: The obfuscated customer Id that may be passed back to other Devices API methods such as List, Get, etc.
           type: string
         names:
-          description: "[Resource names](https://cloud.google.com/apis/design/resource_names) of the DeviceUsers in the format: `devices/{device_id}/deviceUsers/{user_resource_id}`, where device_id is the unique ID assigned to a Device and user_resource_id is the unique user ID"
+          description: "[Resource names](https://cloud.google.com/apis/design/resource_names) of the DeviceUsers in the format: `devices/{device}/deviceUsers/{user_resource}`, where device is the unique ID assigned to a Device and user_resource is the unique user ID"
           items:
             type: string
           type: array
@@ -1758,11 +1810,27 @@ components:
           description: Token to retrieve the next page of results. Empty if there are no more results.
           type: string
       type: object
+    GoogleAppsCloudidentityDevicesV1SignoutDeviceUserMetadata:
+      description: Metadata for SignoutDeviceUser LRO.
+      properties: {}
+      type: object
+    GoogleAppsCloudidentityDevicesV1UpdateClientStateMetadata:
+      description: Metadata for UpdateClientState LRO.
+      properties: {}
+      type: object
+    GoogleAppsCloudidentityDevicesV1UpdateDeviceMetadata:
+      description: Metadata for UpdateDevice LRO.
+      properties: {}
+      type: object
+    GoogleAppsCloudidentityDevicesV1WipeDeviceMetadata:
+      description: Metadata for WipeDevice LRO.
+      properties: {}
+      type: object
     GoogleAppsCloudidentityDevicesV1WipeDeviceRequest:
       description: Request message for wiping all data on the device.
       properties:
         customer:
-          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
+          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
           type: string
       type: object
     GoogleAppsCloudidentityDevicesV1WipeDeviceResponse:
@@ -1772,11 +1840,15 @@ components:
           $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1Device"
           description: Resultant Device object for the action. Note that asset tags will not be returned in the device object.
       type: object
+    GoogleAppsCloudidentityDevicesV1WipeDeviceUserMetadata:
+      description: Metadata for WipeDeviceUser LRO.
+      properties: {}
+      type: object
     GoogleAppsCloudidentityDevicesV1WipeDeviceUserRequest:
       description: Request message for starting an account wipe on device.
       properties:
         customer:
-          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
+          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
           type: string
       type: object
     GoogleAppsCloudidentityDevicesV1WipeDeviceUserResponse:
@@ -1812,11 +1884,11 @@ components:
           description: Required. One or more label entries that apply to the Group. Currently supported labels contain a key with an empty value. Google Groups are the default type of group and have a label with a key of `cloudidentity.googleapis.com/groups.discussion_forum` and an empty value. Existing Google Groups can have an additional label with a key of `cloudidentity.googleapis.com/groups.security` and an empty value added to them. **This is an immutable change and the security label cannot be removed once added.** Dynamic groups have a label with a key of `cloudidentity.googleapis.com/groups.dynamic`. Identity-mapped groups for Cloud Search have a label with a key of `system/groups/external` and an empty value.
           type: object
         name:
-          description: Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Group`. Shall be of the form `groups/{group_id}`.
+          description: Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Group`. Shall be of the form `groups/{group}`.
           readOnly: true
           type: string
         parent:
-          description: Required. Immutable. The resource name of the entity under which this `Group` resides in the Cloud Identity resource hierarchy. Must be of the form `identitysources/{identity_source_id}` for external- identity-mapped groups or `customers/{customer_id}` for Google Groups. The `customer_id` must begin with "C" (for example, 'C046psxkn').
+          description: Required. Immutable. The resource name of the entity under which this `Group` resides in the Cloud Identity resource hierarchy. Must be of the form `identitysources/{identity_source}` for external- identity-mapped groups or `customers/{customer}` for Google Groups. The `customer` must begin with "C" (for example, 'C046psxkn').
           type: string
         updateTime:
           description: Output only. The time when the `Group` was last updated.
@@ -1890,7 +1962,7 @@ components:
       description: The response message for MembershipsService.LookupMembershipName.
       properties:
         name:
-          description: The [resource name](https://cloud.google.com/apis/design/resource_names) of the looked-up `Membership`. Must be of the form `groups/{group_id}/memberships/{membership_id}`.
+          description: The [resource name](https://cloud.google.com/apis/design/resource_names) of the looked-up `Membership`. Must be of the form `groups/{group}/memberships/{membership}`.
           type: string
       type: object
     MemberRelation:
@@ -1927,7 +1999,7 @@ components:
           readOnly: true
           type: string
         name:
-          description: Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership`. Shall be of the form `groups/{group_id}/memberships/{membership_id}`.
+          description: Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership`. Shall be of the form `groups/{group}/memberships/{membership}`.
           readOnly: true
           type: string
         preferredMemberKey:
@@ -2087,6 +2159,14 @@ components:
           description: 'TransitiveMembershipRole in string format. Currently supported TransitiveMembershipRoles: `"MEMBER"`, `"OWNER"`, and `"MANAGER"`.'
           type: string
       type: object
+    UpdateGroupMetadata:
+      description: Metadata for UpdateGroup LRO.
+      properties: {}
+      type: object
+    UpdateMembershipMetadata:
+      description: Metadata for UpdateMembership LRO.
+      properties: {}
+      type: object
     UpdateMembershipRolesParams:
       description: The details of an update to a `MembershipRole`.
       properties:
@@ -2132,7 +2212,7 @@ components:
             https://www.googleapis.com/auth/cloud-identity.devices.lookup: See your device details
             https://www.googleapis.com/auth/cloud-identity.groups: See, change, create, and delete any of the Cloud Identity Groups that you can access, including the members of each group
             https://www.googleapis.com/auth/cloud-identity.groups.readonly: See any Cloud Identity Groups that you can access, including group members and their emails
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -2143,6 +2223,6 @@ components:
             https://www.googleapis.com/auth/cloud-identity.devices.lookup: See your device details
             https://www.googleapis.com/auth/cloud-identity.groups: See, change, create, and delete any of the Cloud Identity Groups that you can access, including the members of each group
             https://www.googleapis.com/auth/cloud-identity.groups.readonly: See any Cloud Identity Groups that you can access, including group members and their emails
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

@@ -695,7 +695,7 @@ components:
         cachePriorityCapabilities:
           $ref: "#/components/schemas/BuildBazelRemoteExecutionV2PriorityCapabilities"
           description: Supported cache priority range for both CAS and ActionCache.
-        digestFunction:
+        digestFunctions:
           description: All the digest functions supported by the remote cache. Remote cache may support multiple digest functions simultaneously.
           items:
             enum:
@@ -713,12 +713,13 @@ components:
           description: Maximum total size of blobs to be uploaded/downloaded using batch methods. A value of 0 means no limit is set, although in practice there will always be a message size limitation of the protocol in use, e.g. GRPC.
           format: int64
           type: string
-        supportedCompressor:
+        supportedCompressors:
           description: Compressors supported by the "compressed-blobs" bytestream resources. Servers MUST support identity/no-compression, even if it is not listed here. Note that this does not imply which if any compressors are supported by the server at the gRPC level.
           items:
             enum:
               - IDENTITY
               - ZSTD
+              - DEFLATE
             type: string
           type: array
         symlinkAbsolutePathStrategy:

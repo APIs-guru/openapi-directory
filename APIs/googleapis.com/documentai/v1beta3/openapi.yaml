@@ -594,6 +594,26 @@ components:
       schema:
         type: string
   schemas:
+    GoogleCloudDocumentaiUiv1beta3BatchDeleteDocumentsMetadata:
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3BatchDeleteDocumentsResponse:
+      description: Response of the delete documents operation.
+      properties: {}
+      type: object
+    GoogleCloudDocumentaiUiv1beta3BatchMoveDocumentsMetadata:
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3BatchMoveDocumentsResponse:
+      description: Response of the batch move documents operation.
+      properties: {}
+      type: object
     GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata:
       description: The common metadata for long running operations.
       properties:
@@ -708,6 +728,17 @@ components:
           description: The Cloud Storage URI containing the output artifacts.
           type: string
       type: object
+    GoogleCloudDocumentaiUiv1beta3ImportDocumentsMetadata:
+      description: Metadata of the import document operation.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3ImportDocumentsResponse:
+      description: Response of the import document operation.
+      properties: {}
+      type: object
     GoogleCloudDocumentaiUiv1beta3SetDefaultProcessorVersionMetadata:
       description: The long running operation metadata for set default processor version method.
       properties:
@@ -771,6 +802,12 @@ components:
     GoogleCloudDocumentaiUiv1beta3UndeployProcessorVersionResponse:
       description: Response message for the undeploy processor version method.
       properties: {}
+      type: object
+    GoogleCloudDocumentaiUiv1beta3UpdateDatasetOperationMetadata:
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
       type: object
     GoogleCloudDocumentaiUiv1beta3UpdateHumanReviewConfigMetadata:
       description: The long running operation metadata for updating the human review configuration.
@@ -972,7 +1009,7 @@ components:
           type: string
       type: object
     GoogleCloudDocumentaiV1beta1DocumentEntity:
-      description: A phrase in the text that is a known entity type, such as a person, an organization, or location.
+      description: An entity that could be a phrase in the text or a property belongs to the document. It is a known entity type, such as a person, an organization, or location.
       properties:
         confidence:
           description: Optional. Confidence of detected Schema entity. Range [0, 1].
@@ -985,7 +1022,7 @@ components:
           description: Optional. Deprecated. Use `id` field instead.
           type: string
         mentionText:
-          description: Optional. Text value in the document e.g. `1600 Amphitheatre Pkwy`.
+          description: Optional. Text value in the document e.g. `1600 Amphitheatre Pkwy`. If the entity is not present in the document, this field will be empty.
           type: string
         normalizedValue:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentEntityNormalizedValue"
@@ -1026,11 +1063,19 @@ components:
         datetimeValue:
           $ref: "#/components/schemas/GoogleTypeDateTime"
           description: "DateTime value. Includes date, time, and timezone. See also: https://github.com/googleapis/googleapis/blob/master/google/type/datetime.proto"
+        floatValue:
+          description: Float value.
+          format: float
+          type: number
+        integerValue:
+          description: Integer value.
+          format: int32
+          type: integer
         moneyValue:
           $ref: "#/components/schemas/GoogleTypeMoney"
           description: "Money value. See also: https://github.com/googleapis/googleapis/blob/master/google/type/money.proto"
         text:
-          description: Required. Normalized entity value stored as a string. This field is populated for supported document type (e.g. Invoice). For some entity types, one of respective 'structured_value' fields may also be populated. - Money/Currency type (`money_value`) is in the ISO 4217 text format. - Date type (`date_value`) is in the ISO 8601 text format. - Datetime type (`datetime_value`) is in the ISO 8601 text format.
+          description: Optional. An optional field to store a normalized string. For some entity types, one of respective 'structured_value' fields may also be populated. Also not all the types of 'structured_value' will be normalized. For example, some processors may not generate float or int normalized text by default. Below are sample formats mapped to structured values. - Money/Currency type (`money_value`) is in the ISO 4217 text format. - Date type (`date_value`) is in the ISO 8601 text format. - Datetime type (`datetime_value`) is in the ISO 8601 text format.
           type: string
       type: object
     GoogleCloudDocumentaiV1beta1DocumentEntityRelation:
@@ -1751,7 +1796,7 @@ components:
           type: string
       type: object
     GoogleCloudDocumentaiV1beta2DocumentEntity:
-      description: A phrase in the text that is a known entity type, such as a person, an organization, or location.
+      description: An entity that could be a phrase in the text or a property belongs to the document. It is a known entity type, such as a person, an organization, or location.
       properties:
         confidence:
           description: Optional. Confidence of detected Schema entity. Range [0, 1].
@@ -1764,7 +1809,7 @@ components:
           description: Optional. Deprecated. Use `id` field instead.
           type: string
         mentionText:
-          description: Optional. Text value in the document e.g. `1600 Amphitheatre Pkwy`.
+          description: Optional. Text value in the document e.g. `1600 Amphitheatre Pkwy`. If the entity is not present in the document, this field will be empty.
           type: string
         normalizedValue:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentEntityNormalizedValue"
@@ -1805,11 +1850,19 @@ components:
         datetimeValue:
           $ref: "#/components/schemas/GoogleTypeDateTime"
           description: "DateTime value. Includes date, time, and timezone. See also: https://github.com/googleapis/googleapis/blob/master/google/type/datetime.proto"
+        floatValue:
+          description: Float value.
+          format: float
+          type: number
+        integerValue:
+          description: Integer value.
+          format: int32
+          type: integer
         moneyValue:
           $ref: "#/components/schemas/GoogleTypeMoney"
           description: "Money value. See also: https://github.com/googleapis/googleapis/blob/master/google/type/money.proto"
         text:
-          description: Required. Normalized entity value stored as a string. This field is populated for supported document type (e.g. Invoice). For some entity types, one of respective 'structured_value' fields may also be populated. - Money/Currency type (`money_value`) is in the ISO 4217 text format. - Date type (`date_value`) is in the ISO 8601 text format. - Datetime type (`datetime_value`) is in the ISO 8601 text format.
+          description: Optional. An optional field to store a normalized string. For some entity types, one of respective 'structured_value' fields may also be populated. Also not all the types of 'structured_value' will be normalized. For example, some processors may not generate float or int normalized text by default. Below are sample formats mapped to structured values. - Money/Currency type (`money_value`) is in the ISO 4217 text format. - Date type (`date_value`) is in the ISO 8601 text format. - Datetime type (`datetime_value`) is in the ISO 8601 text format.
           type: string
       type: object
     GoogleCloudDocumentaiV1beta2DocumentEntityRelation:
@@ -2683,7 +2736,7 @@ components:
           type: string
       type: object
     GoogleCloudDocumentaiV1beta3DocumentEntity:
-      description: A phrase in the text that is a known entity type, such as a person, an organization, or location.
+      description: An entity that could be a phrase in the text or a property belongs to the document. It is a known entity type, such as a person, an organization, or location.
       properties:
         confidence:
           description: Optional. Confidence of detected Schema entity. Range [0, 1].
@@ -2696,7 +2749,7 @@ components:
           description: Optional. Deprecated. Use `id` field instead.
           type: string
         mentionText:
-          description: Optional. Text value in the document e.g. `1600 Amphitheatre Pkwy`.
+          description: Optional. Text value in the document e.g. `1600 Amphitheatre Pkwy`. If the entity is not present in the document, this field will be empty.
           type: string
         normalizedValue:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentEntityNormalizedValue"
@@ -2737,11 +2790,19 @@ components:
         datetimeValue:
           $ref: "#/components/schemas/GoogleTypeDateTime"
           description: "DateTime value. Includes date, time, and timezone. See also: https://github.com/googleapis/googleapis/blob/master/google/type/datetime.proto"
+        floatValue:
+          description: Float value.
+          format: float
+          type: number
+        integerValue:
+          description: Integer value.
+          format: int32
+          type: integer
         moneyValue:
           $ref: "#/components/schemas/GoogleTypeMoney"
           description: "Money value. See also: https://github.com/googleapis/googleapis/blob/master/google/type/money.proto"
         text:
-          description: Required. Normalized entity value stored as a string. This field is populated for supported document type (e.g. Invoice). For some entity types, one of respective 'structured_value' fields may also be populated. - Money/Currency type (`money_value`) is in the ISO 4217 text format. - Date type (`date_value`) is in the ISO 8601 text format. - Datetime type (`datetime_value`) is in the ISO 8601 text format.
+          description: Optional. An optional field to store a normalized string. For some entity types, one of respective 'structured_value' fields may also be populated. Also not all the types of 'structured_value' will be normalized. For example, some processors may not generate float or int normalized text by default. Below are sample formats mapped to structured values. - Money/Currency type (`money_value`) is in the ISO 4217 text format. - Date type (`date_value`) is in the ISO 8601 text format. - Datetime type (`datetime_value`) is in the ISO 8601 text format.
           type: string
       type: object
     GoogleCloudDocumentaiV1beta3DocumentEntityRelation:
