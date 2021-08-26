@@ -4158,7 +4158,7 @@ components:
         schema:
           $ref: "#/components/schemas/TableSchema"
           description: The schema of the results. Present only when the query completes successfully.
-        sessionInfo:
+        sessionInfoTemplate:
           $ref: "#/components/schemas/SessionInfo"
           description: "[Output-only] [Preview] Information of the session if this job is part of one."
         totalBytesProcessed:

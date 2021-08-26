@@ -1025,6 +1025,9 @@ components:
           items:
             $ref: "#/components/schemas/FileShareConfig"
           type: array
+        kmsKeyName:
+          description: KMS key name used for data encryption.
+          type: string
         labels:
           additionalProperties:
             type: string
@@ -1053,12 +1056,22 @@ components:
             - DELETING
             - ERROR
             - RESTORING
+            - SUSPENDED
           readOnly: true
           type: string
         statusMessage:
           description: Output only. Additional information about the instance state, if available.
           readOnly: true
           type: string
+        suspensionReasons:
+          description: Output only. field indicates all the reasons the instance is in "SUSPENDED" state.
+          items:
+            enum:
+              - SUSPENSION_REASON_UNSPECIFIED
+              - KMS_KEY_ISSUE
+            type: string
+          readOnly: true
+          type: array
         tier:
           description: The service tier of the instance.
           enum:
