@@ -3122,7 +3122,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: 'If the result of the previous request to <code>ListTranscriptionJobs</code> was truncated, include the <code>NextToken</code> to fetch the next set of jobs.'
+            - description: 'If the result of the previous request to <code>ListTranscriptionJobs</code> is truncated, include the <code>NextToken</code> to fetch the next set of jobs.'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -3633,6 +3633,10 @@ components:
         - te-IN
         - tr-TR
         - zh-CN
+        - zh-TW
+        - th-TH
+        - en-ZA
+        - en-NZ
     MediaSampleRateHertz:
       type: integer
       minimum: 8000
@@ -4122,7 +4126,7 @@ components:
         CompletionTime:
           allOf:
             - $ref: '#/components/schemas/DateTime'
-            - description: A timestamp that shows when the job was completed.
+            - description: A timestamp that shows when the job completed.
         FailureReason:
           allOf:
             - $ref: '#/components/schemas/FailureReason'

@@ -1185,7 +1185,7 @@ paths:
   /#X-Amz-Target=RekognitionService.DetectCustomLabels:
     post:
       operationId: DetectCustomLabels
-      description: '<p>Detects custom labels in a supplied image by using an Amazon Rekognition Custom Labels model. </p> <p>You specify which version of a model version to use by using the <code>ProjectVersionArn</code> input parameter. </p> <p>You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p> For each object that the model version detects on an image, the API returns a (<code>CustomLabel</code>) object in an array (<code>CustomLabels</code>). Each <code>CustomLabel</code> object provides the label name (<code>Name</code>), the level of confidence that the image contains the object (<code>Confidence</code>), and object location information, if it exists, for the label on the image (<code>Geometry</code>). </p> <p>During training model calculates a threshold value that determines if a prediction for a label is true. By default, <code>DetectCustomLabels</code> doesn''t return labels whose confidence value is below the model''s calculated threshold value. To filter labels that are returned, specify a value for <code>MinConfidence</code> that is higher than the model''s calculated threshold. You can get the model''s calculated threshold from the model''s training results shown in the Amazon Rekognition Custom Labels console. To get all labels, regardless of confidence, specify a <code>MinConfidence</code> value of 0. </p> <p>You can also add the <code>MaxResults</code> parameter to limit the number of labels returned. </p> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectCustomLabels</code> action. </p>'
+      description: '<p>Detects custom labels in a supplied image by using an Amazon Rekognition Custom Labels model. </p> <p>You specify which version of a model version to use by using the <code>ProjectVersionArn</code> input parameter. </p> <p>You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p> For each object that the model version detects on an image, the API returns a (<code>CustomLabel</code>) object in an array (<code>CustomLabels</code>). Each <code>CustomLabel</code> object provides the label name (<code>Name</code>), the level of confidence that the image contains the object (<code>Confidence</code>), and object location information, if it exists, for the label on the image (<code>Geometry</code>). </p> <p>To filter labels that are returned, specify a value for <code>MinConfidence</code>. <code>DetectCustomLabelsLabels</code> only returns labels with a confidence that''s higher than the specified value. The value of <code>MinConfidence</code> maps to the assumed threshold values created during training. For more information, see <i>Assumed threshold</i> in the Amazon Rekognition Custom Labels Developer Guide. Amazon Rekognition Custom Labels metrics expresses an assumed threshold as a floating point value between 0-1. The range of <code>MinConfidence</code> normalizes the threshold value to a percentage value (0-100). Confidence responses from <code>DetectCustomLabels</code> are also returned as a percentage. You can use <code>MinConfidence</code> to change the precision and recall or your model. For more information, see <i>Analyzing an image</i> in the Amazon Rekognition Custom Labels Developer Guide. </p> <p>If you don''t specify a value for <code>MinConfidence</code>, <code>DetectCustomLabels</code> returns labels based on the assumed threshold of each label.</p> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectCustomLabels</code> action. </p> <p>For more information, see <i>Analyzing an image</i> in the Amazon Rekognition Custom Labels Developer Guide. </p>'
       responses:
         '200':
           description: Success
@@ -1695,7 +1695,7 @@ paths:
   /#X-Amz-Target=RekognitionService.GetCelebrityInfo:
     post:
       operationId: GetCelebrityInfo
-      description: '<p>Gets the name and additional information about a celebrity based on his or her Amazon Rekognition ID. The additional information is returned as an array of URLs. If there is no additional information about the celebrity, this list is empty.</p> <p>For more information, see Recognizing Celebrities in an Image in the Amazon Rekognition Developer Guide.</p> <p>This operation requires permissions to perform the <code>rekognition:GetCelebrityInfo</code> action. </p>'
+      description: '<p>Gets the name and additional information about a celebrity based on their Amazon Rekognition ID. The additional information is returned as an array of URLs. If there is no additional information about the celebrity, this list is empty.</p> <p>For more information, see Recognizing Celebrities in an Image in the Amazon Rekognition Developer Guide.</p> <p>This operation requires permissions to perform the <code>rekognition:GetCelebrityInfo</code> action. </p>'
       responses:
         '200':
           description: Success
@@ -4789,7 +4789,7 @@ components:
         MinConfidence:
           allOf:
             - $ref: '#/components/schemas/Percent'
-            - description: 'Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn''t return any labels with a confidence lower than this specified value. If you specify a value of 0, all labels are return, regardless of the default thresholds that the model version applies.'
+            - description: 'Specifies the minimum confidence level for the labels to return. <code>DetectCustomLabels</code> doesn''t return any labels with a confidence value that''s lower than this specified value. If you specify a value of 0, <code>DetectCustomLabels</code> returns all labels, regardless of the assumed threshold applied to each label. If you don''t specify a value for <code>MinConfidence</code>, <code>DetectCustomLabels</code> returns labels based on the assumed threshold of each label.'
     ResourceNotReadyException: {}
     DetectFacesResponse:
       type: object
@@ -4986,6 +4986,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the celebrity.
+        KnownGender:
+          allOf:
+            - $ref: '#/components/schemas/KnownGender'
+            - description: Retrieves the known gender for the celebrity.
     GetCelebrityInfoRequest:
       type: object
       required:
@@ -5692,7 +5696,7 @@ components:
         CelebrityFaces:
           allOf:
             - $ref: '#/components/schemas/CelebrityList'
-            - description: Details about each celebrity found in the image. Amazon Rekognition can detect a maximum of 64 celebrities in an image.
+            - description: 'Details about each celebrity found in the image. Amazon Rekognition can detect a maximum of 64 celebrities in an image. Each celebrity object includes the following attributes: <code>Face</code>, <code>Confidence</code>, <code>Emotions</code>, <code>Landmarks</code>, <code>Pose</code>, <code>Quality</code>, <code>Smile</code>, <code>Id</code>, <code>KnownGender</code>, <code>MatchConfidence</code>, <code>Name</code>, <code>Urls</code>.'
         UnrecognizedFaces:
           allOf:
             - $ref: '#/components/schemas/ComparedFaceList'
@@ -5700,7 +5704,7 @@ components:
         OrientationCorrection:
           allOf:
             - $ref: '#/components/schemas/OrientationCorrection'
-            - description: '<p>The orientation of the input image (counterclockwise direction). If your application displays the image, you can use this value to correct the orientation. The bounding box coordinates returned in <code>CelebrityFaces</code> and <code>UnrecognizedFaces</code> represent face locations before the image orientation is corrected. </p> <note> <p>If the input image is in .jpeg format, it might contain exchangeable image (Exif) metadata that includes the image''s orientation. If so, and the Exif metadata for the input image populates the orientation field, the value of <code>OrientationCorrection</code> is null. The <code>CelebrityFaces</code> and <code>UnrecognizedFaces</code> bounding box coordinates represent face locations after Exif metadata is used to correct the image orientation. Images in .png format don''t contain Exif metadata. </p> </note>'
+            - description: '<note> <p>Support for estimating image orientation using the the OrientationCorrection field has ceased as of August 2021. Any returned values for this field included in an API response will always be NULL.</p> </note> <p>The orientation of the input image (counterclockwise direction). If your application displays the image, you can use this value to correct the orientation. The bounding box coordinates returned in <code>CelebrityFaces</code> and <code>UnrecognizedFaces</code> represent face locations before the image orientation is corrected. </p> <note> <p>If the input image is in .jpeg format, it might contain exchangeable image (Exif) metadata that includes the image''s orientation. If so, and the Exif metadata for the input image populates the orientation field, the value of <code>OrientationCorrection</code> is null. The <code>CelebrityFaces</code> and <code>UnrecognizedFaces</code> bounding box coordinates represent face locations after Exif metadata is used to correct the image orientation. Images in .png format don''t contain Exif metadata. </p> </note>'
     RecognizeCelebritiesRequest:
       type: object
       required:
@@ -6383,6 +6387,8 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Url'
+      minItems: 0
+      maxItems: 255
     RekognitionUniqueId:
       type: string
       pattern: '[0-9A-Za-z]*'
@@ -6409,7 +6415,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/ImageQuality'
             - description: 'Identifies face image brightness and sharpness. '
+        Emotions:
+          allOf:
+            - $ref: '#/components/schemas/Emotions'
+            - description: ' The emotions that appear to be expressed on the face, and the confidence level in the determination. Valid values include "Happy", "Sad", "Angry", "Confused", "Disgusted", "Surprised", "Calm", "Unknown", and "Fear". '
+        Smile:
+          allOf:
+            - $ref: '#/components/schemas/Smile'
+            - description: ' Indicates whether or not the face is smiling, and the confidence level in the determination. '
       description: Provides face metadata for target image faces that are analyzed by <code>CompareFaces</code> and <code>RecognizeCelebrities</code>.
+    KnownGender:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/KnownGenderType'
+            - description: A string value of the KnownGender info about the Celebrity.
+      description: The known gender identity for the celebrity that matches the provided ID.
     Celebrity:
       type: object
       properties:
@@ -6433,6 +6455,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/Percent'
             - description: 'The confidence, in percentage, that Amazon Rekognition has that the recognized face is the celebrity.'
+        KnownGender:
+          $ref: '#/components/schemas/KnownGender'
       description: Provides information about a celebrity recognized by the <a>RecognizeCelebrities</a> operation.
     FaceDetail:
       type: object
@@ -6658,6 +6682,22 @@ components:
             - $ref: '#/components/schemas/Float'
             - description: Value representing sharpness of the face. The service returns a value between 0 and 100 (inclusive). A higher value indicates a sharper face image.
       description: 'Identifies face image brightness and sharpness. '
+    Emotions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Emotion'
+    Smile:
+      type: object
+      properties:
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Boolean value that indicates whether the face is smiling or not.
+        Confidence:
+          allOf:
+            - $ref: '#/components/schemas/Percent'
+            - description: Level of confidence in the determination.
+      description: 'Indicates whether or not the face is smiling, and the confidence level in the determination.'
     ComparedFaceList:
       type: array
       items:
@@ -7058,10 +7098,6 @@ components:
             - $ref: '#/components/schemas/Percent'
             - description: Level of confidence in the determination.
       description: 'The emotions that appear to be expressed on the face, and the confidence level in the determination. The API is only making a determination of the physical appearance of a person''s face. It is not a determination of the person’s internal emotional state and should not be used in such a way. For example, a person pretending to have a sad face might not be sad emotionally.'
-    Emotions:
-      type: array
-      items:
-        $ref: '#/components/schemas/Emotion'
     ProtectiveEquipmentType:
       type: string
       enum:
@@ -7174,18 +7210,6 @@ components:
       enum:
         - DEFAULT
         - ALL
-    Smile:
-      type: object
-      properties:
-        Value:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Boolean value that indicates whether the face is smiling or not.
-        Confidence:
-          allOf:
-            - $ref: '#/components/schemas/Percent'
-            - description: Level of confidence in the determination.
-      description: 'Indicates whether or not the face is smiling, and the confidence level in the determination.'
     Sunglasses:
       type: object
       properties:
@@ -7507,6 +7531,12 @@ components:
             - $ref: '#/components/schemas/KinesisVideoArn'
             - description: ARN of the Kinesis video stream stream that streams the source video.
       description: 'Kinesis video stream stream that provides the source streaming video for a Amazon Rekognition Video stream processor. For more information, see CreateStreamProcessor in the Amazon Rekognition Developer Guide.'
+    KnownGenderType:
+      type: string
+      enum:
+        - Male
+        - Female
+      description: A list of enum string of possible gender values that Celebrity returns.
     Parents:
       type: array
       items:
