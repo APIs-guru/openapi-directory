@@ -1073,7 +1073,7 @@ components:
       properties:
         gkeCluster:
           $ref: "#/components/schemas/GkeCluster"
-          description: Optional. GKE-specific information. Only present if this Membership is a GKE cluster.
+          description: Optional. Specific information for a GKE-on-GCP cluster.
         kubernetesMetadata:
           $ref: "#/components/schemas/KubernetesMetadata"
           description: Output only. Useful Kubernetes-specific metadata.
@@ -1081,6 +1081,12 @@ components:
         kubernetesResource:
           $ref: "#/components/schemas/KubernetesResource"
           description: "Optional. The in-cluster Kubernetes Resources that should be applied for a correctly registered cluster, in the steady state. These resources: * Ensure that the cluster is exclusively registered to one and only one Hub Membership. * Propagate Workload Pool Information available in the Membership Authority field. * Ensure proper initial configuration of default Hub Features."
+        multiCloudCluster:
+          $ref: "#/components/schemas/MultiCloudCluster"
+          description: Optional. Specific information for a GKE Multi-Cloud cluster.
+        onPremCluster:
+          $ref: "#/components/schemas/OnPremCluster"
+          description: Optional. Specific information for a GKE On-Prem cluster.
       type: object
     MembershipState:
       description: State of the Membership resource.
@@ -1102,6 +1108,31 @@ components:
         updateTime:
           description: This field is never set by the Hub Service.
           format: google-datetime
+          type: string
+      type: object
+    MultiCloudCluster:
+      description: MultiCloudCluster contains information specific to GKE Multi-Cloud clusters.
+      properties:
+        clusterMissing:
+          description: Output only. If cluster_missing is set then it denotes that API(gkemulticloud.googleapis.com) resource for this GKE Multi-Cloud cluster no longer exists.
+          readOnly: true
+          type: boolean
+        resourceLink:
+          description: "Immutable. Self-link of the GCP resource for the GKE Multi-Cloud cluster. For example: //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/awsClusters/my-cluster //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/azureClusters/my-cluster"
+          type: string
+      type: object
+    OnPremCluster:
+      description: OnPremCluster contains information specific to GKE On-Prem clusters.
+      properties:
+        adminCluster:
+          description: Immutable. Whether the cluster is an admin cluster.
+          type: boolean
+        clusterMissing:
+          description: Output only. If cluster_missing is set then it denotes that API(gkeonprem.googleapis.com) resource for this GKE On-Prem cluster no longer exists.
+          readOnly: true
+          type: boolean
+        resourceLink:
+          description: "Immutable. Self-link of the GCP resource for the GKE On-Prem cluster. For example: //gkeonprem.googleapis.com/projects/my-project/locations/us-west1-a/vmwareClusters/my-cluster //gkeonprem.googleapis.com/projects/my-project/locations/us-west1-a/bareMetalClusters/my-cluster"
           type: string
       type: object
     Operation:

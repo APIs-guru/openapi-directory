@@ -1006,7 +1006,7 @@ components:
       properties:
         gkeCluster:
           $ref: "#/components/schemas/GkeCluster"
-          description: Optional. GKE-specific information. Only present if this Membership is a GKE cluster.
+          description: Optional. Specific information for a GKE-on-GCP cluster.
         kubernetesMetadata:
           $ref: "#/components/schemas/KubernetesMetadata"
           description: Output only. Useful Kubernetes-specific metadata.

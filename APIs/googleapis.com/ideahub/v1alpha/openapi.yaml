@@ -359,7 +359,7 @@ components:
       description: An idea activity entry.
       properties:
         ideas:
-          description: The Idea IDs for this entry.
+          description: The Idea IDs for this entry. If empty, topics should be set.
           items:
             type: string
           type: array
@@ -367,7 +367,7 @@ components:
           description: "Unique identifier for the idea activity. Format: platforms/{platform}/properties/{property}/ideaActivities/{idea_activity}"
           type: string
         topics:
-          description: The Topic IDs for this entry.
+          description: The Topic IDs for this entry. If empty, ideas should be set.
           items:
             type: string
           type: array
@@ -378,6 +378,7 @@ components:
             - POST_DRAFTED
             - POST_PUBLISHED
             - POST_DELETED
+            - POST_UNPUBLISHED
           type: string
         uri:
           description: The uri the activity relates to.

@@ -149,6 +149,15 @@ components:
           type: string
         token_type:
           type: string
+        trial_scope_to_scope_group_pks:
+          items:
+            format: int32
+            type: integer
+          type: array
+        trial_scopes:
+          items:
+            type: string
+          type: array
         user:
           type: string
         user_id:
@@ -162,6 +171,8 @@ components:
         - scopes
         - token
         - token_type
+        - trial_scope_to_scope_group_pks
+        - trial_scopes
         - user_id
       type: object
     Error:
