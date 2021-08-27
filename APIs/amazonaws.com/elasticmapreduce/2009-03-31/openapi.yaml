@@ -901,10 +901,43 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ElasticMapReduce.GetAutoTerminationPolicy:
+    post:
+      operationId: GetAutoTerminationPolicy
+      description: Returns the auto-termination policy for an Amazon EMR cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAutoTerminationPolicyOutput'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAutoTerminationPolicyInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.GetAutoTerminationPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=ElasticMapReduce.GetBlockPublicAccessConfiguration:
     post:
       operationId: GetBlockPublicAccessConfiguration
-      description: 'Returns the Amazon EMR block public access configuration for your account in the current Region. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.'
+      description: 'Returns the Amazon EMR block public access configuration for your Amazon Web Services account in the current Region. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.'
       responses:
         '200':
           description: Success
@@ -1078,7 +1111,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.ListClusters:
     post:
       operationId: ListClusters
-      description: 'Provides the status of all clusters visible to this account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status. This call returns a maximum of 50 clusters in unsorted order per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls.'
+      description: 'Provides the status of all clusters visible to this Amazon Web Services account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status. This call returns a maximum of 50 clusters in unsorted order per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls.'
       responses:
         '200':
           description: Success
@@ -1543,7 +1576,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.ListStudios:
     post:
       operationId: ListStudios
-      description: 'Returns a list of all Amazon EMR Studios associated with the account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.'
+      description: 'Returns a list of all Amazon EMR Studios associated with the Amazon Web Services account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.'
       responses:
         '200':
           description: Success
@@ -1745,10 +1778,43 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ElasticMapReduce.PutAutoTerminationPolicy:
+    post:
+      operationId: PutAutoTerminationPolicy
+      description: 'Creates or updates an auto-termination policy for an Amazon EMR cluster. An auto-termination policy defines the amount of idle time in seconds after which a cluster automatically terminates. For alternative cluster termination options, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html">Control cluster termination</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutAutoTerminationPolicyOutput'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutAutoTerminationPolicyInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.PutAutoTerminationPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=ElasticMapReduce.PutBlockPublicAccessConfiguration:
     post:
       operationId: PutBlockPublicAccessConfiguration
-      description: 'Creates or updates an Amazon EMR block public access configuration for your account in the current Region. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.'
+      description: 'Creates or updates an Amazon EMR block public access configuration for your Amazon Web Services account in the current Region. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.'
       responses:
         '200':
           description: Success
@@ -1848,6 +1914,39 @@ paths:
             type: string
             enum:
               - ElasticMapReduce.RemoveAutoScalingPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ElasticMapReduce.RemoveAutoTerminationPolicy:
+    post:
+      operationId: RemoveAutoTerminationPolicy
+      description: Removes an auto-termination policy from an Amazon EMR cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveAutoTerminationPolicyOutput'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveAutoTerminationPolicyInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.RemoveAutoTerminationPolicy
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2011,7 +2110,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.SetVisibleToAllUsers:
     post:
       operationId: SetVisibleToAllUsers
-      description: '<p>Sets the <a>Cluster$VisibleToAllUsers</a> value for an EMR cluster. When <code>true</code>, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals.</p> <p>This action works on running clusters. When you create a cluster, use the <a>RunJobFlowInput$VisibleToAllUsers</a> parameter.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMRManagement Guide</i>.</p>'
+      description: '<p>Sets the <a>Cluster$VisibleToAllUsers</a> value for an EMR cluster. When <code>true</code>, IAM principals in the Amazon Web Services account can perform EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals.</p> <p>This action works on running clusters. When you create a cluster, use the <a>RunJobFlowInput$VisibleToAllUsers</a> parameter.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMRManagement Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -2769,6 +2868,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
             - description: The Amazon EMR Studio ID.
+    GetAutoTerminationPolicyOutput:
+      type: object
+      properties:
+        AutoTerminationPolicy:
+          allOf:
+            - $ref: '#/components/schemas/AutoTerminationPolicy'
+            - description: 'Specifies the auto-termination policy that is attached to an Amazon EMR cluster. '
+    GetAutoTerminationPolicyInput:
+      type: object
+      required:
+        - ClusterId
+      title: GetAutoTerminationPolicyInput
+      properties:
+        ClusterId:
+          allOf:
+            - $ref: '#/components/schemas/ClusterId'
+            - description: Specifies the ID of the Amazon EMR cluster for which the auto-termination policy will be fetched.
     GetBlockPublicAccessConfigurationOutput:
       type: object
       required:
@@ -3050,7 +3166,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'Specifies the next page of results. If <code>NextToken</code> is not specified, which is usually the case for the first request of ListReleaseLabels, the first page of results are determined by other filtering parameters or by the latest version. The <code>ListReleaseLabels</code> request fails if the identity (account ID) and all filtering parameters are different from the original request, or if the <code>NextToken</code> is expired or tampered with.'
+            - description: 'Specifies the next page of results. If <code>NextToken</code> is not specified, which is usually the case for the first request of ListReleaseLabels, the first page of results are determined by other filtering parameters or by the latest version. The <code>ListReleaseLabels</code> request fails if the identity (Amazon Web Services account ID) and all filtering parameters are different from the original request, or if the <code>NextToken</code> is expired or tampered with.'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResultsNumber'
@@ -3243,6 +3359,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutoScalingPolicy'
             - description: Specifies the definition of the automatic scaling policy.
+    PutAutoTerminationPolicyOutput:
+      type: object
+      properties: {}
+    PutAutoTerminationPolicyInput:
+      type: object
+      required:
+        - ClusterId
+      title: PutAutoTerminationPolicyInput
+      properties:
+        ClusterId:
+          allOf:
+            - $ref: '#/components/schemas/ClusterId'
+            - description: Specifies the ID of the Amazon EMR cluster to which the auto-termination policy will be attached.
+        AutoTerminationPolicy:
+          allOf:
+            - $ref: '#/components/schemas/AutoTerminationPolicy'
+            - description: Specifies the auto-termination policy to attach to the cluster.
     PutBlockPublicAccessConfigurationOutput:
       type: object
       properties: {}
@@ -3292,6 +3425,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/InstanceGroupId'
             - description: Specifies the ID of the instance group to which the scaling policy is applied.
+    RemoveAutoTerminationPolicyOutput:
+      type: object
+      properties: {}
+    RemoveAutoTerminationPolicyInput:
+      type: object
+      required:
+        - ClusterId
+      title: RemoveAutoTerminationPolicyInput
+      properties:
+        ClusterId:
+          allOf:
+            - $ref: '#/components/schemas/ClusterId'
+            - description: Specifies the ID of the Amazon EMR cluster from which the auto-termination policy will be removed.
     RemoveManagedScalingPolicyOutput:
       type: object
       properties: {}
@@ -3399,7 +3545,7 @@ components:
         VisibleToAllUsers:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Set this value to <code>true</code> so that IAM principals in the account associated with the cluster can perform EMR actions on the cluster that their IAM policies allow. This value defaults to <code>true</code> for clusters created using the EMR API or the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command.</p> <p>When set to <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions for the cluster, regardless of the IAM permissions policies attached to other IAM principals. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMRManagement Guide</i>.</p>'
+            - description: '<p>Set this value to <code>true</code> so that IAM principals in the Amazon Web Services account associated with the cluster can perform EMR actions on the cluster that their IAM policies allow. This value defaults to <code>true</code> for clusters created using the EMR API or the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command.</p> <p>When set to <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions for the cluster, regardless of the IAM permissions policies attached to other IAM principals. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMRManagement Guide</i>.</p>'
         JobFlowRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
@@ -3452,6 +3598,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/PlacementGroupConfigList'
             - description: The specified placement group configuration for an Amazon EMR cluster.
+        AutoTerminationPolicy:
+          $ref: '#/components/schemas/AutoTerminationPolicy'
       description: ' Input to the <a>RunJobFlow</a> operation. '
     SetTerminationProtectionInput:
       type: object
@@ -3483,7 +3631,7 @@ components:
         VisibleToAllUsers:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: A value of <code>true</code> indicates that an IAM principal in the account can perform EMR actions on the cluster that the IAM policies attached to the principal allow. A value of <code>false</code> indicates that only the IAM principal that created the cluster and the Amazon Web Services root user can perform EMR actions on the cluster.
+            - description: A value of <code>true</code> indicates that an IAM principal in the Amazon Web Services account can perform EMR actions on the cluster that the IAM policies attached to the principal allow. A value of <code>false</code> indicates that only the IAM principal that created the cluster and the Amazon Web Services root user can perform EMR actions on the cluster.
       description: The input to the SetVisibleToAllUsers action.
     StartNotebookExecutionOutput:
       type: object
@@ -3812,6 +3960,16 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'A friendly, more verbose message that accompanies an automatic scaling policy state change.'
       description: The reason for an <a>AutoScalingPolicyStatus</a> change.
+    Long:
+      type: integer
+    AutoTerminationPolicy:
+      type: object
+      properties:
+        IdleTimeout:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: Specifies the amount of idle time in seconds after which the cluster automatically terminates. You can specify a minimum of 60 seconds and a maximum of 604800 seconds (seven days).
+      description: 'An auto-termination policy for an Amazon EMR cluster. An auto-termination policy defines the amount of idle time in seconds after which a cluster automatically terminates. For alternative cluster termination options, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html">Control cluster termination</a>.'
     Boolean:
       type: boolean
     PortRanges:
@@ -4208,7 +4366,7 @@ components:
         VisibleToAllUsers:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Indicates whether the cluster is visible to IAM principals in the account associated with the cluster. When <code>true</code>, IAM principals in the account can perform EMR cluster actions on the cluster that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p> <p>The default value is <code>true</code> if a value is not provided when creating a cluster using the EMR API <a>RunJobFlow</a> command, the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command, or the Management Console. IAM principals that are allowed to perform actions on the cluster can use the <a>SetVisibleToAllUsers</a> action to change the value on a running cluster. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMRManagement Guide</i>.</p>'
+            - description: '<p>Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When <code>true</code>, IAM principals in the Amazon Web Services account can perform EMR cluster actions on the cluster that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p> <p>The default value is <code>true</code> if a value is not provided when creating a cluster using the EMR API <a>RunJobFlow</a> command, the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command, or the Amazon Web Services Management Console. IAM principals that are allowed to perform actions on the cluster can use the <a>SetVisibleToAllUsers</a> action to change the value on a running cluster. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMRManagement Guide</i>.</p>'
         Applications:
           allOf:
             - $ref: '#/components/schemas/ApplicationList'
@@ -5124,8 +5282,6 @@ components:
             - $ref: '#/components/schemas/InstanceGroupTimeline'
             - description: The timeline of the instance group status over time.
       description: The details of the instance group status.
-    Long:
-      type: integer
     ShrinkPolicy:
       type: object
       properties:
@@ -5719,7 +5875,7 @@ components:
         VisibleToAllUsers:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Indicates whether the cluster is visible to IAM principals in the account associated with the cluster. When <code>true</code>, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p> <p>The default value is <code>true</code> if a value is not provided when creating a cluster using the EMR API <a>RunJobFlow</a> command, the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command, or the Management Console. IAM principals that are authorized to perform actions on the cluster can use the <a>SetVisibleToAllUsers</a> action to change the value on a running cluster. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMRManagement Guide</i>.</p>'
+            - description: '<p>Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When <code>true</code>, IAM principals in the Amazon Web Services account can perform EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p> <p>The default value is <code>true</code> if a value is not provided when creating a cluster using the EMR API <a>RunJobFlow</a> command, the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command, or the Amazon Web Services Management Console. IAM principals that are authorized to perform actions on the cluster can use the <a>SetVisibleToAllUsers</a> action to change the value on a running cluster. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMRManagement Guide</i>.</p>'
         JobFlowRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
