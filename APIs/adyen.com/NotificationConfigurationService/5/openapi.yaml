@@ -63,7 +63,7 @@ paths:
             application/json:
               examples:
                 basic:
-                  $ref: "#/components/examples/post-createNotificationConfiguration-basic"
+                  $ref: "#/components/examples/post-createNotificationConfiguration-basic-200"
               schema:
                 $ref: "#/components/schemas/GetNotificationConfigurationResponse"
           description: OK - the request has succeeded.
@@ -339,7 +339,7 @@ paths:
             application/json:
               examples:
                 basic:
-                  $ref: "#/components/examples/post-updateNotificationConfiguration-basic"
+                  $ref: "#/components/examples/post-updateNotificationConfiguration-basic-200"
               schema:
                 $ref: "#/components/schemas/GetNotificationConfigurationResponse"
           description: OK - the request has succeeded.
@@ -396,6 +396,19 @@ components:
           notifyURL: https://www.adyen.com/notification-handler
           notifyUsername: testUserName
           sslProtocol: SSL
+    post-createNotificationConfiguration-basic-200:
+      summary: Example response for request 'basic'
+      value:
+        configurationDetails:
+          active: true
+          description: Unique description 123
+          eventConfigs:
+            - eventType: ACCOUNT_HOLDER_VERIFICATION
+              includeMode: INCLUDE
+          notificationId: 28468
+          notifyURL: https://www.adyen.com/notification-handler
+          sslProtocol: SSLInsecureCiphers
+        pspReference: "8516178952380553"
     post-updateNotificationConfiguration-basic:
       summary: Update notification configurations
       value:
@@ -412,6 +425,21 @@ components:
           notifyURL: https://www.adyen.com/notification-handler
           notifyUsername: testUserName2
           sslProtocol: TLSv10
+    post-updateNotificationConfiguration-basic-200:
+      summary: Example response for request 'basic'
+      value:
+        configurationDetails:
+          active: false
+          description: Test notif config 756
+          eventConfigs:
+            - eventType: ACCOUNT_CREATED
+              includeMode: INCLUDE
+            - eventType: ACCOUNT_HOLDER_CREATED
+              includeMode: EXCLUDE
+          notificationId: 21259
+          notifyURL: https://www.adyen.com/notification-handler
+          sslProtocol: TLSv10
+        pspReference: "8516178952580574"
   schemas:
     CreateNotificationConfigurationRequest:
       properties:

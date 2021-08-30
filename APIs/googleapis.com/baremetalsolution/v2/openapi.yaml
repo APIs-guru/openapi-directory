@@ -56,10 +56,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets details of a single Volume.
-      operationId: baremetalsolution.projects.locations.volumes.get
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: baremetalsolution.projects.locations.operations.get
       parameters:
-        - description: Required. Name of the resource.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -70,7 +70,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Volume"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -239,7 +239,7 @@ paths:
         - projects
   "/v2/{parent}/instances":
     get:
-      description: Lists Instances in a given project and location.
+      description: List servers in a given project and location.
       operationId: baremetalsolution.projects.locations.instances.list
       parameters:
         - description: Required. Parent value for ListInstancesRequest.
@@ -258,12 +258,12 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, the server will pick an appropriate default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A token identifying a page of results the server should return.
+        - description: A token identifying a page of results from the server.
           in: query
           name: pageToken
           schema:
@@ -274,63 +274,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListInstancesResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/volumes":
-    get:
-      description: Lists Volumes in a given project and location.
-      operationId: baremetalsolution.projects.locations.volumes.list
-      parameters:
-        - description: Required. Parent value for ListVolumesRequest.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Filtering results.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: Hint for how to order the results.
-          in: query
-          name: orderBy
-          schema:
-            type: string
-        - description: Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: A token identifying a page of results the server should return.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListVolumesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -593,15 +536,18 @@ components:
           type: string
       type: object
     Instance:
-      description: An instance resource.
+      description: A server.
       properties:
         createTime:
-          description: Output only. Create time stamp.
+          description: Output only. Create a time stamp.
           format: google-datetime
           readOnly: true
           type: string
         hyperthreadingEnabled:
-          description: True if hyperthreading enabled for the instance, false otherwise. The default value is false.
+          description: True if you enable hyperthreading for the server, otherwise false. The default value is false.
+          type: boolean
+        interactiveSerialConsoleEnabled:
+          description: True if the interactive serial console feature is enabled for the instance, false otherwise. The default value is false.
           type: boolean
         labels:
           additionalProperties:
@@ -609,24 +555,24 @@ components:
           description: Labels as key value pairs.
           type: object
         luns:
-          description: List of luns associated with this instance.
+          description: List of LUNs associated with this server.
           items:
             $ref: "#/components/schemas/Lun"
           type: array
         machineType:
-          description: The type of this Instance. [Available Instance types](https://cloud.google.com/bare-metal/docs/bms-planning#server_configurations)
+          description: The server type. [Available server types](https://cloud.google.com/bare-metal/docs/bms-planning#server_configurations)
           type: string
         name:
           description: "Output only. The resource name of this `Instance`. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. Format: `projects/{project}/locations/{location}/instances/{instance}`"
           readOnly: true
           type: string
         networks:
-          description: List of networks associated with this instance.
+          description: List of networks associated with this server.
           items:
             $ref: "#/components/schemas/Network"
           type: array
         state:
-          description: The state of this Instance.
+          description: The state of the server.
           enum:
             - STATE_UNSPECIFIED
             - PROVISIONING
@@ -634,21 +580,21 @@ components:
             - DELETED
           type: string
         updateTime:
-          description: Output only. Update time stamp.
+          description: Output only. Update a time stamp.
           format: google-datetime
           readOnly: true
           type: string
       type: object
     ListInstancesResponse:
-      description: Message for response to listing Instances.
+      description: Response message for the list of servers.
       properties:
         instances:
-          description: The list of Instance.
+          description: The list of servers.
           items:
             $ref: "#/components/schemas/Instance"
           type: array
         nextPageToken:
-          description: A token identifying a page of results the server should return.
+          description: A token identifying a page of results from the server.
           type: string
         unreachable:
           description: Locations that could not be reached.
@@ -680,23 +626,6 @@ components:
             $ref: "#/components/schemas/Operation"
           type: array
       type: object
-    ListVolumesResponse:
-      description: Message for response to listing Volumes.
-      properties:
-        nextPageToken:
-          description: A token identifying a page of results the server should return.
-          type: string
-        unreachable:
-          description: Locations that could not be reached.
-          items:
-            type: string
-          type: array
-        volumes:
-          description: The list of Volume.
-          items:
-            $ref: "#/components/schemas/Volume"
-          type: array
-      type: object
     Location:
       description: A resource that represents Google Cloud Platform location.
       properties:
@@ -721,13 +650,13 @@ components:
           type: string
       type: object
     Lun:
-      description: A storage Lun.
+      description: A storage volume logical unit number (LUN).
       properties:
         bootLun:
-          description: Whether this Lun is a boot Lun.
+          description: Display if this LUN is a boot LUN.
           type: boolean
         multiprotocolType:
-          description: The Lun Multiprotocol type to ensure the characteristics of the LUN are optimized for the Operating System.
+          description: The LUN multiprotocol type ensures the characteristics of the LUN are optimized for each operating system.
           enum:
             - MULTIPROTOCOL_TYPE_UNSPECIFIED
             - LINUX
@@ -735,18 +664,18 @@ components:
             - VMWARE
           type: string
         name:
-          description: Output only. The name of this Lun.
+          description: Output only. The name of the LUN.
           readOnly: true
           type: string
-        shared:
-          description: Whether this Lun is allowed to be shared between multiple physical servers.
+        shareable:
+          description: Display if this LUN can be shared between multiple physical servers.
           type: boolean
         sizeGb:
-          description: The size of this Lun, in gigabytes.
+          description: The size of this LUN, in gigabytes.
           format: int64
           type: string
         state:
-          description: The state of this Volume.
+          description: The state of this storage volume.
           enum:
             - STATE_UNSPECIFIED
             - CREATING
@@ -755,14 +684,14 @@ components:
             - DELETING
           type: string
         storageType:
-          description: The storage type of this Lun.
+          description: The storage type for this LUN.
           enum:
             - STORAGE_TYPE_UNSPECIFIED
             - SSD
             - HDD
           type: string
         storageVolume:
-          description: The storage volume that this Lun is attached to.
+          description: Display the storage volume for this LUN.
           type: string
       type: object
     Network:
@@ -772,7 +701,7 @@ components:
           description: IP address configured.
           type: string
         macAddress:
-          description: List of physical nics.
+          description: List of physical interfaces.
           items:
             type: string
           type: array
@@ -811,10 +740,10 @@ components:
           type: object
       type: object
     OperationMetadata:
-      description: Represents the metadata of the long-running operation.
+      description: Represents the metadata from a long-running operation.
       properties:
         apiVersion:
-          description: Output only. API version used to start the operation.
+          description: Output only. API version used with the operation.
           readOnly: true
           type: string
         createTime:
@@ -828,7 +757,7 @@ components:
           readOnly: true
           type: string
         requestedCancellation:
-          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          description: Output only. Identifies whether the user requested the cancellation of the operation. Operations that have been successfully cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
           readOnly: true
           type: boolean
         statusMessage:
@@ -840,12 +769,12 @@ components:
           readOnly: true
           type: string
         verb:
-          description: Output only. Name of the verb executed by the operation.
+          description: Output only. Name of the action executed by the operation.
           readOnly: true
           type: string
       type: object
     Policy:
-      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') - etag: BwWWja0YfJA= - version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
+      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
       properties:
         bindings:
           description: Associates a list of `members` to a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one member.
@@ -867,22 +796,6 @@ components:
         policy:
           $ref: "#/components/schemas/Policy"
           description: "REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them."
-      type: object
-    SnapshotReservationDetail:
-      description: Details about snapshot space reservation and usage on the Volume.
-      properties:
-        reservedSpaceGib:
-          description: The space on this Volume reserved for snapshotsk, provided in GiB.
-          format: int64
-          type: string
-        reservedSpaceRemainingGib:
-          description: The amount, in GiB, of space available in this Volume's reserved snapshot space.
-          format: int64
-          type: string
-        reservedSpaceUsedPercent:
-          description: The percent of reserved snapshot space on this Volume that is actually used by snapshot copies. This may be higher than 100% if snapshot copies are occupying more space than has been reserved on the Volume.
-          format: int32
-          type: integer
       type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
@@ -919,48 +832,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    Volume:
-      description: A storage Volume.
-      properties:
-        autoGrownSizeGib:
-          description: The size, in GiB, that this Volume has expanded as a result of an auto grow policy. In the absence of auto-grow, the value is 0.
-          format: int64
-          type: string
-        currentSizeGib:
-          description: The current size of this Volume, in GiB, including space reserved for snapshots. This size may be different than the requested size if the Volume has been configured with auto grow or auto shrink.
-          format: int64
-          type: string
-        name:
-          description: "Output only. The resource name of this `Volume`. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. Format: `projects/{project}/locations/{location}/volumes/{volume}`"
-          readOnly: true
-          type: string
-        remainingSpaceGib:
-          description: The space remaining in the Volume for new LUNs, in GiB, excluding space reserved for snapshots.
-          format: int64
-          type: string
-        requestedSizeGib:
-          description: The requested size of this Volume, in GiB.
-          format: int64
-          type: string
-        snapshotReservationDetail:
-          $ref: "#/components/schemas/SnapshotReservationDetail"
-          description: Details about snapshot space reservation and usage on the Volume.
-        state:
-          description: The state of this Volume.
-          enum:
-            - STATE_UNSPECIFIED
-            - CREATING
-            - READY
-            - DELETING
-          type: string
-        storageType:
-          description: The storage type of this Volume.
-          enum:
-            - STORAGE_TYPE_UNSPECIFIED
-            - SSD
-            - HDD
-          type: string
       type: object
   securitySchemes:
     Oauth2:

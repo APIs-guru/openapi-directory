@@ -7251,6 +7251,19 @@ components:
           description: The comment added by the user to this fan funding event.
           type: string
       type: object
+    LiveChatMemberMilestoneChatDetails:
+      properties:
+        memberLevelName:
+          description: The name of the Level at which the viever is a member. The Level names are defined by the YouTube channel offering the Membership. In some situations this field isn't filled.
+          type: string
+        memberMonth:
+          description: The total amount of months (rounded up) the viewer has been a member that granted them this Member Milestone Chat. This is the same number of months as is being displayed to YouTube users.
+          format: uint32
+          type: integer
+        userComment:
+          description: The comment added by the member to this Member Milestone Chat. This field is empty for messages without a comment from the member.
+          type: string
+      type: object
     LiveChatMessage:
       description: A *liveChatMessage* resource represents a chat message in a YouTube Live Chat.
       properties:
@@ -7344,10 +7357,10 @@ components:
           type: string
       type: object
     LiveChatMessageSnippet:
-      description: "Next ID: 29"
+      description: "Next ID: 31"
       properties:
         authorChannelId:
-          description: The ID of the user that authored this message, this field is not always filled. textMessageEvent - the user that wrote the message fanFundingEvent - the user that funded the broadcast newSponsorEvent - the user that just became a sponsor messageDeletedEvent - the moderator that took the action messageRetractedEvent - the author that retracted their message userBannedEvent - the moderator that took the action superChatEvent - the user that made the purchase superStickerEvent - the user that made the purchase
+          description: The ID of the user that authored this message, this field is not always filled. textMessageEvent - the user that wrote the message fanFundingEvent - the user that funded the broadcast newSponsorEvent - the user that just became a sponsor memberMilestoneChatEvent - the member that sent the message messageDeletedEvent - the moderator that took the action messageRetractedEvent - the author that retracted their message userBannedEvent - the moderator that took the action superChatEvent - the user that made the purchase superStickerEvent - the user that made the purchase
           type: string
         displayMessage:
           description: Contains a string that can be displayed to the user. If this field is not present the message is silent, at the moment only messages of type TOMBSTONE and CHAT_ENDED_EVENT are silent.
@@ -7360,10 +7373,16 @@ components:
           type: boolean
         liveChatId:
           type: string
+        memberMilestoneChatDetails:
+          $ref: "#/components/schemas/LiveChatMemberMilestoneChatDetails"
+          description: Details about the Member Milestone Chat event, this is only set if the type is 'memberMilestoneChatEvent'.
         messageDeletedDetails:
           $ref: "#/components/schemas/LiveChatMessageDeletedDetails"
         messageRetractedDetails:
           $ref: "#/components/schemas/LiveChatMessageRetractedDetails"
+        newSponsorDetails:
+          $ref: "#/components/schemas/LiveChatNewSponsorDetails"
+          description: Details about the New Member Announcement event, this is only set if the type is 'newSponsorEvent'. Please note that "member" is the new term for "sponsor".
         publishedAt:
           description: The date and time when the message was orignally published.
           format: date-time
@@ -7388,6 +7407,7 @@ components:
             - sponsorOnlyModeStartedEvent
             - sponsorOnlyModeEndedEvent
             - newSponsorEvent
+            - memberMilestoneChatEvent
             - messageDeletedEvent
             - messageRetractedEvent
             - userBannedEvent
@@ -7454,6 +7474,15 @@ components:
         moderatorDetails:
           $ref: "#/components/schemas/ChannelProfileDetails"
           description: Details about the moderator.
+      type: object
+    LiveChatNewSponsorDetails:
+      properties:
+        isUpgrade:
+          description: If the viewer just had upgraded from a lower level. For viewers that were not members at the time of purchase, this field is false.
+          type: boolean
+        memberLevelName:
+          description: The name of the Level that the viewer just had joined. The Level names are defined by the YouTube channel offering the Membership. In some situations this field isn't filled.
+          type: string
       type: object
     LiveChatSuperChatDetails:
       properties:

@@ -267,7 +267,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Lead API
-  version: 5.4.0
+  version: 5.5.1
   x-apideck-api: lead
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -301,26 +301,28 @@ paths:
       operationId: leadsAll
       parameters:
         - $ref: "#/components/parameters/raw"
-        - $ref: "#/components/parameters/x-apideck-consumer-id"
-        - $ref: "#/components/parameters/x-apideck-app-id"
-        - $ref: "#/components/parameters/x-apideck-service-id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/leadsFilter"
+        - $ref: "#/components/parameters/leadsSort"
       responses:
         "200":
-          $ref: "#/components/responses/GetLeads"
+          $ref: "#/components/responses/GetLeadsResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: List leads
@@ -351,9 +353,9 @@ paths:
       operationId: leadsAdd
       parameters:
         - $ref: "#/components/parameters/raw"
-        - $ref: "#/components/parameters/x-apideck-consumer-id"
-        - $ref: "#/components/parameters/x-apideck-app-id"
-        - $ref: "#/components/parameters/x-apideck-service-id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
       requestBody:
         content:
           application/json:
@@ -362,19 +364,19 @@ paths:
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateLead"
+          $ref: "#/components/responses/CreateLeadResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create lead
@@ -477,25 +479,25 @@ paths:
       operationId: leadsDelete
       parameters:
         - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/x-apideck-consumer-id"
-        - $ref: "#/components/parameters/x-apideck-app-id"
-        - $ref: "#/components/parameters/x-apideck-service-id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteLead"
+          $ref: "#/components/responses/DeleteLeadResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Delete lead
@@ -527,25 +529,25 @@ paths:
       operationId: leadsOne
       parameters:
         - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/x-apideck-consumer-id"
-        - $ref: "#/components/parameters/x-apideck-app-id"
-        - $ref: "#/components/parameters/x-apideck-service-id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetLead"
+          $ref: "#/components/responses/GetLeadResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get lead
@@ -577,9 +579,9 @@ paths:
       operationId: leadsUpdate
       parameters:
         - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/x-apideck-consumer-id"
-        - $ref: "#/components/parameters/x-apideck-app-id"
-        - $ref: "#/components/parameters/x-apideck-service-id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
       requestBody:
         content:
@@ -589,19 +591,19 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateLead"
+          $ref: "#/components/responses/UpdateLeadResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update lead
@@ -701,6 +703,20 @@ paths:
             }
 components:
   parameters:
+    applicationId:
+      description: The ID of your Unify application
+      in: header
+      name: x-apideck-app-id
+      required: true
+      schema:
+        type: string
+    consumerId:
+      description: ID of the consumer which you want to get or push data from
+      in: header
+      name: x-apideck-consumer-id
+      required: true
+      schema:
+        type: string
     cursor:
       description: Cursor to start from. You can find cursors for next/previous pages in the meta.cursors property of the response.
       in: query
@@ -715,6 +731,22 @@ components:
       required: true
       schema:
         type: string
+    leadsFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/LeadsFilter"
+      style: deepObject
+    leadsSort:
+      description: Apply sorting (beta)
+      explode: true
+      in: query
+      name: sort
+      schema:
+        $ref: "#/components/schemas/LeadsSort"
+      style: deepObject
     limit:
       description: Number of records to return
       in: query
@@ -731,255 +763,84 @@ components:
       schema:
         default: true
         type: boolean
-    x-apideck-app-id:
-      description: The ID of your Unify application
-      in: header
-      name: x-apideck-app-id
-      required: true
-      schema:
-        type: string
-    x-apideck-consumer-id:
-      description: ID of the consumer which you want to get or push data from
-      in: header
-      name: x-apideck-consumer-id
-      required: true
-      schema:
-        type: string
-    x-apideck-service-id:
+    serviceId:
       description: Provide the service id you want to call (e.g., pipedrive). [See the full list in the connector section.](#section/Connectors) Only needed when a consumer has activated multiple integrations for a Unified API.
       in: header
       name: x-apideck-service-id
       schema:
         type: string
   responses:
-    BadRequest:
+    BadRequestResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/BadRequest"
+            $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    CreateLead:
+    CreateLeadResponse:
       content:
         application/json:
           schema:
-            properties:
-              data:
-                $ref: "#/components/schemas/UnifiedId"
-              operation:
-                description: Operation performed
-                example: one
-                type: string
-              resource:
-                description: Unified API resource name
-                example: companies
-                type: string
-              service:
-                description: Apideck ID of service provider
-                example: zoho-crm
-                type: string
-              status:
-                description: HTTP Response Status
-                example: OK
-                type: string
-              status_code:
-                description: HTTP Response Status Code
-                example: 200
-                type: integer
-            required:
-              - status_code
-              - status
-              - service
-              - resource
-              - operation
-              - data
-            type: object
+            $ref: "#/components/schemas/CreateLeadResponse"
       description: Lead created
-    DeleteLead:
+    DeleteLeadResponse:
       content:
         application/json:
           schema:
-            properties:
-              data:
-                $ref: "#/components/schemas/UnifiedId"
-              operation:
-                description: Operation performed
-                example: one
-                type: string
-              resource:
-                description: Unified API resource name
-                example: companies
-                type: string
-              service:
-                description: Apideck ID of service provider
-                example: zoho-crm
-                type: string
-              status:
-                description: HTTP Response Status
-                example: OK
-                type: string
-              status_code:
-                description: HTTP Response Status Code
-                example: 200
-                type: integer
-            required:
-              - status_code
-              - status
-              - service
-              - resource
-              - operation
-              - data
-            type: object
+            $ref: "#/components/schemas/DeleteLeadResponse"
       description: Lead deleted
-    GetLead:
+    GetLeadResponse:
       content:
         application/json:
           schema:
-            properties:
-              data:
-                $ref: "#/components/schemas/Lead"
-              operation:
-                description: Operation performed
-                example: one
-                type: string
-              resource:
-                description: Unified API resource name
-                example: companies
-                type: string
-              service:
-                description: Apideck ID of service provider
-                example: zoho-crm
-                type: string
-              status:
-                description: HTTP Response Status
-                example: OK
-                type: string
-              status_code:
-                description: HTTP Response Status Code
-                example: 200
-                type: integer
-            required:
-              - status_code
-              - status
-              - service
-              - resource
-              - operation
-              - data
-            type: object
+            $ref: "#/components/schemas/GetLeadResponse"
       description: Lead
-    GetLeads:
+    GetLeadsResponse:
       content:
         application/json:
           schema:
-            properties:
-              data:
-                items:
-                  $ref: "#/components/schemas/Lead"
-                type: array
-              links:
-                $ref: "#/components/schemas/Links"
-              meta:
-                $ref: "#/components/schemas/Meta"
-              operation:
-                description: Operation performed
-                example: one
-                type: string
-              resource:
-                description: Unified API resource name
-                example: companies
-                type: string
-              service:
-                description: Apideck ID of service provider
-                example: zoho-crm
-                type: string
-              status:
-                description: HTTP Response Status
-                example: OK
-                type: string
-              status_code:
-                description: HTTP Response Status Code
-                example: 200
-                type: integer
-            required:
-              - status_code
-              - status
-              - service
-              - resource
-              - operation
-              - data
-            type: object
-            x-graphql-type-name: LeadList
+            $ref: "#/components/schemas/GetLeadsResponse"
       description: Leads
-    NotFound:
+    NotFoundResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/NotFoundResponse"
       description: The specified resource was not found
-    NotImplemented:
+    NotImplementedResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/NotImplemented"
+            $ref: "#/components/schemas/NotImplementedResponse"
       description: Not Implemented
-    PaymentRequired:
+    PaymentRequiredResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/PaymentRequired"
+            $ref: "#/components/schemas/PaymentRequiredResponse"
       description: Payment Required
-    Unauthorized:
+    UnauthorizedResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Unauthorized"
+            $ref: "#/components/schemas/UnauthorizedResponse"
       description: Unauthorized
-    UnexpectedError:
+    UnexpectedErrorResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UnexpectedError"
+            $ref: "#/components/schemas/UnexpectedErrorResponse"
       description: Unexpected error
-    Unprocessable:
+    UnprocessableResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Unprocessable"
+            $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
-    UpdateLead:
+    UpdateLeadResponse:
       content:
         application/json:
           schema:
-            properties:
-              data:
-                $ref: "#/components/schemas/UnifiedId"
-              operation:
-                description: Operation performed
-                example: one
-                type: string
-              resource:
-                description: Unified API resource name
-                example: companies
-                type: string
-              service:
-                description: Apideck ID of service provider
-                example: zoho-crm
-                type: string
-              status:
-                description: HTTP Response Status
-                example: OK
-                type: string
-              status_code:
-                description: HTTP Response Status Code
-                example: 200
-                type: integer
-            required:
-              - status_code
-              - status
-              - service
-              - resource
-              - operation
-              - data
-            type: object
+            $ref: "#/components/schemas/UpdateLeadResponse"
       description: Lead updated
   schemas:
     Address:
@@ -1048,7 +909,7 @@ components:
           type: string
           x-graphql-type-name: AddressType
       type: object
-    BadRequest:
+    BadRequestResponse:
       properties:
         detail:
           anyOf:
@@ -1114,6 +975,38 @@ components:
           nullable: true
           type: string
       type: object
+    CreateLeadResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     CustomField:
       additionalProperties: false
       properties:
@@ -1136,6 +1029,38 @@ components:
               type: array
       required:
         - id
+      type: object
+    DeleteLeadResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
       type: object
     Email:
       properties:
@@ -1161,6 +1086,77 @@ components:
       required:
         - email
       type: object
+    GetLeadResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Lead"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    GetLeadsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Lead"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: LeadList
     Lead:
       additionalProperties: false
       properties:
@@ -1274,6 +1270,55 @@ components:
         - email
         - first_name
         - last_name
+    LeadsFilter:
+      additionalProperties: false
+      example:
+        email: elon@tesla.com
+        first_name: Elon
+        last_name: Musk
+      properties:
+        email:
+          description: E-mail of the lead to filter on
+          example: elon@tesla.com
+          type: string
+        first_name:
+          description: First name of the lead to filter on
+          example: Elon
+          type: string
+        last_name:
+          description: Last name of the lead to filter on
+          example: Musk
+          type: string
+        name:
+          description: Name of the lead to filter on
+          example: Elon Musk
+          type: string
+      type: object
+      x-graphql-type-name: LeadsFilter
+    LeadsSort:
+      additionalProperties: false
+      example:
+        by: created_at
+        direction: desc
+      properties:
+        by:
+          description: The field on which to sort the Leads
+          enum:
+            - created_at
+            - updated_at
+            - name
+            - first_name
+            - last_name
+            - email
+          example: created_at
+          type: string
+          x-graphql-type-name: LeadsSortBy
+        direction:
+          $ref: "#/components/schemas/SortDirection"
+      required:
+        - by
+      type: object
+      x-graphql-type-name: LeadsSort
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -1351,7 +1396,7 @@ components:
           description: The type of error returned
           example: EntityNotFoundError
           type: string
-    NotImplemented:
+    NotImplementedResponse:
       properties:
         detail:
           anyOf:
@@ -1379,7 +1424,7 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
-    PaymentRequired:
+    PaymentRequiredResponse:
       properties:
         detail:
           description: Contains parameter or domain specific information related to the error and why it occured.
@@ -1448,13 +1493,21 @@ components:
       required:
         - url
       type: object
+    SortDirection:
+      default: asc
+      description: The direction in which to sort the results
+      enum:
+        - asc
+        - desc
+      type: string
+      x-graphql-type-name: SortDirection
     Tags:
       example:
         - New
       items:
         type: string
       type: array
-    Unauthorized:
+    UnauthorizedResponse:
       properties:
         detail:
           description: Contains parameter or domain specific information related to the error and why it occured.
@@ -1480,7 +1533,7 @@ components:
           description: The type of error returned
           example: UnauthorizedError
           type: string
-    UnexpectedError:
+    UnexpectedErrorResponse:
       properties:
         detail:
           anyOf:
@@ -1520,7 +1573,7 @@ components:
       required:
         - id
       title: UnifiedId
-    Unprocessable:
+    UnprocessableResponse:
       properties:
         detail:
           description: Contains parameter or domain specific information related to the error and why it occured.
@@ -1546,6 +1599,38 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
+    UpdateLeadResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     Website:
       properties:
         id:

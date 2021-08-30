@@ -335,7 +335,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Stops a node.
+      description: Stops a node, this operation is only available with single TPU nodes.
       operationId: tpu.projects.locations.nodes.stop
       parameters:
         - description: The resource name.
@@ -892,7 +892,7 @@ components:
           readOnly: true
           type: string
         cancelRequested:
-          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
           readOnly: true
           type: boolean
         createTime:

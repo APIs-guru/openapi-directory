@@ -45,7 +45,7 @@ paths:
             application/json:
               examples:
                 get3dsAvailability:
-                  $ref: "#/components/examples/post-get3dsAvailability-get3dsAvailability"
+                  $ref: "#/components/examples/post-get3dsAvailability-get3dsAvailability-200"
               schema:
                 $ref: "#/components/schemas/ThreeDSAvailabilityResponse"
           description: OK - the request has succeeded.
@@ -54,7 +54,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -122,13 +122,13 @@ paths:
             application/json:
               examples:
                 getCostEstimate:
-                  $ref: "#/components/examples/post-getCostEstimate-getCostEstimate"
+                  $ref: "#/components/examples/post-getCostEstimate-getCostEstimate-200"
                 getCostEstimateEncryptedCard:
-                  $ref: "#/components/examples/post-getCostEstimate-getCostEstimateEncryptedCard"
+                  $ref: "#/components/examples/post-getCostEstimate-getCostEstimateEncryptedCard-200"
                 getCostEstimateMinimal:
-                  $ref: "#/components/examples/post-getCostEstimate-getCostEstimateMinimal"
+                  $ref: "#/components/examples/post-getCostEstimate-getCostEstimateMinimal-200"
                 getCostEstimateMinimal3DS:
-                  $ref: "#/components/examples/post-getCostEstimate-getCostEstimateMinimal3DS"
+                  $ref: "#/components/examples/post-getCostEstimate-getCostEstimateMinimal3DS-200"
               schema:
                 $ref: "#/components/schemas/CostEstimateResponse"
           description: OK - the request has succeeded.
@@ -137,7 +137,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -175,7 +175,7 @@ paths:
       x-sortIndex: 0
 components:
   examples:
-    generic:
+    generic-400:
       summary: Response code 400. Bad Request.
       value:
         errorCode: "702"
@@ -188,6 +188,12 @@ components:
       value:
         cardNumber: "4111111111111111"
         merchantAccount: YOUR_MERCHANT_ACCOUNT
+    post-get3dsAvailability-get3dsAvailability-200:
+      summary: Example response for request 'get3dsAvailability'
+      value:
+        threeDS1Supported: "true"
+        threeDS2CardRangeDetails: []
+        threeDS2supported: "false"
     post-getCostEstimate-getCostEstimate:
       description: Example request to get the estimated cost of a transaction
       summary: Estimate the transaction cost
@@ -205,6 +211,14 @@ components:
           enrolledIn3DSecure: true
           mcc: "7411"
         shopperInteraction: Ecommerce
+    post-getCostEstimate-getCostEstimate-200:
+      summary: Example response for request 'getCostEstimate'
+      value:
+        costEstimateAmount:
+          currency: EUR
+          value: 12
+        resultCode: Success
+        surchargeType: PASSTHROUGH
     post-getCostEstimate-getCostEstimateEncryptedCard:
       description: Example request to get the estimated cost of a transaction
       summary: Estimate the transaction cost using an encrypted card number
@@ -222,7 +236,24 @@ components:
           enrolledIn3DSecure: true
           mcc: "7411"
         shopperInteraction: Ecommerce
+    post-getCostEstimate-getCostEstimateEncryptedCard-200:
+      summary: Example response for request 'getCostEstimateEncryptedCard'
+      value:
+        costEstimateAmount:
+          currency: EUR
+          value: 12
+        resultCode: Success
+        surchargeType: PASSTHROUGH
     post-getCostEstimate-getCostEstimateMinimal:
+      description: Example request to get the estimated cost of a transaction with minimum details
+      summary: Estimate the transaction cost (minimal)
+      value:
+        amount:
+          currency: EUR
+          value: 1234
+        cardNumber: "5101180000000007"
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+    post-getCostEstimate-getCostEstimateMinimal-200:
       summary: Example response for request 'getCostEstimateMinimal'
       value:
         costEstimateAmount:
@@ -242,6 +273,14 @@ components:
           assumeLevel3Data: true
         cardNumber: "5101180000000007"
         merchantAccount: YOUR_MERCHANT_ACCOUNT
+    post-getCostEstimate-getCostEstimateMinimal3DS-200:
+      summary: Example response for request 'getCostEstimateMinimal3DS'
+      value:
+        costEstimateAmount:
+          currency: EUR
+          value: 12
+        resultCode: Success
+        surchargeType: PASSTHROUGH
     post-getCostEstimate-getCostEstimateRecurringContract:
       description: Example request to get the estimated cost of a recurring transaction
       summary: Estimate the transaction cost (recurring contract)

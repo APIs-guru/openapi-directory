@@ -61,7 +61,7 @@ paths:
             application/json:
               examples:
                 confirmThirdParty:
-                  $ref: "#/components/examples/post-confirmThirdParty-confirmThirdParty"
+                  $ref: "#/components/examples/post-confirmThirdParty-confirmThirdParty-200"
               schema:
                 $ref: "#/components/schemas/ModifyResponse"
           description: OK - the request has succeeded.
@@ -70,7 +70,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -128,7 +128,7 @@ paths:
             application/json:
               examples:
                 declineThirdParty:
-                  $ref: "#/components/examples/post-declineThirdParty-declineThirdParty"
+                  $ref: "#/components/examples/post-declineThirdParty-declineThirdParty-200"
               schema:
                 $ref: "#/components/schemas/ModifyResponse"
           description: OK - the request has succeeded.
@@ -137,7 +137,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -200,7 +200,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -255,7 +255,7 @@ paths:
             application/json:
               examples:
                 storeDetail:
-                  $ref: "#/components/examples/post-storeDetail-storeDetail"
+                  $ref: "#/components/examples/post-storeDetail-storeDetail-200"
               schema:
                 $ref: "#/components/schemas/StoreDetailResponse"
           description: OK - the request has succeeded.
@@ -264,7 +264,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -335,7 +335,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -399,7 +399,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -438,7 +438,7 @@ paths:
       x-sortIndex: 3
 components:
   examples:
-    generic:
+    generic-400:
       summary: Response code 400. Bad Request.
       value:
         errorCode: "702"
@@ -451,12 +451,22 @@ components:
       value:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         originalReference: "9913140798220028"
+    post-confirmThirdParty-confirmThirdParty-200:
+      summary: Example response for request 'confirmThirdParty'
+      value:
+        pspReference: 991617894325358C
+        response: "[payout-confirm-received]"
     post-declineThirdParty-declineThirdParty:
       description: Cancel a previously submitted payout
       summary: Cancel a payout
       value:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         originalReference: "9913140798220028"
+    post-declineThirdParty-declineThirdParty-200:
+      summary: Example response for request 'declineThirdParty'
+      value:
+        pspReference: 991617894325360J
+        response: "[payout-decline-received]"
     post-payout-payout-b2c:
       description: Pay out to your sellers, customers, freelancers, etc
       summary: Instant card payout (B2C)
@@ -519,6 +529,37 @@ components:
           lastName: Smith
         shopperStatement: Payer Name
     post-storeDetail-storeDetail:
+      description: Store payment details under the PAYOUT recurring contract
+      summary: Store payout details
+      value:
+        bank:
+          bankCity: Amsterdam
+          bankName: AbnAmro
+          bic: ABNANL2A
+          countryCode: NL
+          iban: NL32ABNA0515071439
+          ownerName: Adyen
+          taxId: bankTaxId
+        billingAddress:
+          city: Amsterdam
+          country: US
+          houseNumberOrName: "17"
+          postalCode: "12345"
+          stateOrProvince: NY
+          street: Teststreet 1
+        dateOfBirth: 1990-01-01
+        entityType: Company
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        nationality: NL
+        recurring:
+          contract: PAYOUT
+        shopperEmail: shopper@email.com
+        shopperName:
+          firstName: Adyen
+          gender: MALE
+          lastName: Test
+        shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
+    post-storeDetail-storeDetail-200:
       summary: Example response for request 'storeDetail'
       value:
         pspReference: 991617894326362D
@@ -815,7 +856,7 @@ components:
 
             Possible values:
             * **true** – Perform 3D Secure authentication.
-            * **false** – Don't perform 3D Secure authentication.
+            * **false** – Don't perform 3D Secure authentication. Note that this setting results in refusals if the issuer mandates 3D Secure because of the PSD2 directive  or other, national regulations. 
           type: string
         mpiImplementationType:
           description: In case of Secure+, this field must be set to **CUPSecurePlus**.
@@ -2537,7 +2578,9 @@ components:
           $ref: "#/components/schemas/Address"
           description: |-
             The address where to send the invoice.
-            > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object.
+            > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object. 
+
+            > For cross-border payouts to and from Canada, this field is required.
           x-addedInVersion: "4"
         browserInfo:
           $ref: "#/components/schemas/BrowserInfo"
@@ -2781,7 +2824,6 @@ components:
             - $ref: "#/components/schemas/ResponseAdditionalDataInstallments"
             - $ref: "#/components/schemas/ResponseAdditionalDataNetworkTokens"
             - $ref: "#/components/schemas/ResponseAdditionalDataOpi"
-            - $ref: "#/components/schemas/ResponseAdditionalDataPayPal"
             - $ref: "#/components/schemas/ResponseAdditionalDataSepa"
         authCode:
           description: |-
@@ -3297,6 +3339,12 @@ components:
 
             Example: AUTHORISED
           type: string
+        requestAmount:
+          description: The amount of the payment request.
+          type: string
+        requestCurrencyCode:
+          description: The currency of the payment request.
+          type: string
         shopperInteraction:
           description: |-
             The shopper interaction type of the payment request.
@@ -3445,38 +3493,6 @@ components:
         opi.transToken:
           description: "Returned in the response if you included `opi.includeTransToken: true` in an ecommerce payment request. This contains an Oracle Payment Interface token that you can store in your Oracle Opera database to identify tokenized ecommerce transactions. For more information and required settings, see [Oracle Opera](https://docs.adyen.com/plugins/oracle-opera#opi-token-ecommerce)."
           type: string
-    ResponseAdditionalDataPayPal:
-      properties:
-        paypalEmail:
-          description: |-
-            The buyer's PayPal account email address.
-
-            Example: paypaltest@adyen.com
-          type: string
-        paypalPayerId:
-          description: |-
-            The buyer's PayPal ID.
-
-            Example: LF5HCWWBRV2KL
-          type: string
-        paypalPayerResidenceCountry:
-          description: |-
-            The buyer's country of residence.
-
-            Example: NL
-          type: string
-        paypalPayerStatus:
-          description: |-
-            The status of the buyer's PayPal account.
-
-            Example: unverified
-          type: string
-        paypalProtectionEligibility:
-          description: |-
-            The eligibility for PayPal Seller Protection for this payment.
-
-            Example: Ineligible
-          type: string
     ResponseAdditionalDataSepa:
       properties:
         sepadirectdebit.dateOfSignature:
@@ -3610,7 +3626,10 @@ components:
             > This field is mandatory if `card` is not provided.
         billingAddress:
           $ref: "#/components/schemas/Address"
-          description: The billing address.
+          description: |-
+            The billing address.
+
+            > For cross-border payouts to and from Canada, this field is required.
           x-addedInVersion: "18"
         card:
           $ref: "#/components/schemas/Card"
@@ -3732,7 +3751,10 @@ components:
             > This field is mandatory if `card` is not provided.
         billingAddress:
           $ref: "#/components/schemas/Address"
-          description: The billing address.
+          description: |-
+            The billing address.
+
+            > For cross-border payouts to and from Canada, this field is required.
           x-addedInVersion: "18"
         card:
           $ref: "#/components/schemas/Card"

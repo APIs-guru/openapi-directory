@@ -267,7 +267,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 5.4.0
+  version: 5.5.1
   x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -338,17 +338,17 @@ paths:
         "200":
           $ref: "#/components/responses/GetActivitiesResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: List activities
@@ -392,17 +392,17 @@ paths:
         "201":
           $ref: "#/components/responses/CreateActivityResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create activity
@@ -487,17 +487,17 @@ paths:
         "200":
           $ref: "#/components/responses/DeleteActivityResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Delete activity
@@ -537,17 +537,17 @@ paths:
         "200":
           $ref: "#/components/responses/GetActivityResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get activity
@@ -593,17 +593,17 @@ paths:
         "200":
           $ref: "#/components/responses/UpdateActivityResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update activity
@@ -690,19 +690,19 @@ paths:
         - $ref: "#/components/parameters/companiesSort"
       responses:
         "200":
-          $ref: "#/components/responses/GetCompanies"
+          $ref: "#/components/responses/GetCompaniesResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: List companies
@@ -744,19 +744,19 @@ paths:
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateCompany"
+          $ref: "#/components/responses/CreateCompanyResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create company
@@ -878,19 +878,19 @@ paths:
         - $ref: "#/components/parameters/serviceId"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteCompany"
+          $ref: "#/components/responses/DeleteCompanyResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Delete company
@@ -928,19 +928,19 @@ paths:
         - $ref: "#/components/parameters/serviceId"
       responses:
         "200":
-          $ref: "#/components/responses/GetCompany"
+          $ref: "#/components/responses/GetCompanyResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get company
@@ -984,19 +984,19 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateCompany"
+          $ref: "#/components/responses/UpdateCompanyResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update company
@@ -1122,19 +1122,19 @@ paths:
         - $ref: "#/components/parameters/contactsSort"
       responses:
         "200":
-          $ref: "#/components/responses/GetContacts"
+          $ref: "#/components/responses/GetContactsResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: List contacts
@@ -1176,19 +1176,19 @@ paths:
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateContact"
+          $ref: "#/components/responses/CreateContactResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create contact
@@ -1304,19 +1304,19 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteContact"
+          $ref: "#/components/responses/DeleteContactResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Delete contact
@@ -1354,19 +1354,19 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetContact"
+          $ref: "#/components/responses/GetContactResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get contact
@@ -1410,19 +1410,19 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateContact"
+          $ref: "#/components/responses/UpdateContactResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update contact
@@ -1542,19 +1542,19 @@ paths:
         - $ref: "#/components/parameters/leadsSort"
       responses:
         "200":
-          $ref: "#/components/responses/GetLeads"
+          $ref: "#/components/responses/GetLeadsResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: List leads
@@ -1596,19 +1596,19 @@ paths:
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateLead"
+          $ref: "#/components/responses/CreateLeadResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create lead
@@ -1717,19 +1717,19 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteLead"
+          $ref: "#/components/responses/DeleteLeadResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Delete lead
@@ -1767,19 +1767,19 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetLead"
+          $ref: "#/components/responses/GetLeadResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get lead
@@ -1823,19 +1823,19 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateLead"
+          $ref: "#/components/responses/UpdateLeadResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update lead
@@ -1948,17 +1948,17 @@ paths:
         "200":
           $ref: "#/components/responses/GetNotesResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: List notes
@@ -2002,17 +2002,17 @@ paths:
         "201":
           $ref: "#/components/responses/CreateNoteResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create note
@@ -2064,17 +2064,17 @@ paths:
         "200":
           $ref: "#/components/responses/DeleteNoteResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Delete note
@@ -2114,17 +2114,17 @@ paths:
         "200":
           $ref: "#/components/responses/GetNoteResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get note
@@ -2170,17 +2170,17 @@ paths:
         "200":
           $ref: "#/components/responses/UpdateNoteResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update note
@@ -2234,19 +2234,19 @@ paths:
         - $ref: "#/components/parameters/opportunitiesSort"
       responses:
         "200":
-          $ref: "#/components/responses/GetOpportunities"
+          $ref: "#/components/responses/GetOpportunitiesResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: List opportunities
@@ -2288,19 +2288,19 @@ paths:
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateOpportunity"
+          $ref: "#/components/responses/CreateOpportunityResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create opportunity
@@ -2375,19 +2375,19 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteOpportunity"
+          $ref: "#/components/responses/DeleteOpportunityResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Delete opportunity
@@ -2425,19 +2425,19 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetOpportunity"
+          $ref: "#/components/responses/GetOpportunityResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get opportunity
@@ -2481,19 +2481,19 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateOpportunity"
+          $ref: "#/components/responses/UpdateOpportunityResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update opportunity
@@ -2568,19 +2568,19 @@ paths:
         - $ref: "#/components/parameters/serviceId"
       responses:
         "200":
-          $ref: "#/components/responses/GetPipelines"
+          $ref: "#/components/responses/GetPipelinesResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: List pipelines
@@ -2622,19 +2622,19 @@ paths:
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreatePipeline"
+          $ref: "#/components/responses/CreatePipelineResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create pipeline
@@ -2689,19 +2689,19 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeletePipeline"
+          $ref: "#/components/responses/DeletePipelineResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Delete pipeline
@@ -2740,19 +2740,19 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetPipeline"
+          $ref: "#/components/responses/GetPipelineResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get pipeline
@@ -2797,19 +2797,19 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdatePipeline"
+          $ref: "#/components/responses/UpdatePipelineResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update pipeline
@@ -2866,19 +2866,19 @@ paths:
         - $ref: "#/components/parameters/limit"
       responses:
         "200":
-          $ref: "#/components/responses/GetUsers"
+          $ref: "#/components/responses/GetUsersResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: List users
@@ -2920,19 +2920,19 @@ paths:
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateUser"
+          $ref: "#/components/responses/CreateUserResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create user
@@ -2983,19 +2983,19 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteUser"
+          $ref: "#/components/responses/DeleteUserResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Delete user
@@ -3033,19 +3033,19 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetUser"
+          $ref: "#/components/responses/GetUserResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get user
@@ -3089,19 +3089,19 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateUser"
+          $ref: "#/components/responses/UpdateUserResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update user
@@ -3258,31 +3258,31 @@ components:
       schema:
         type: string
   responses:
-    BadRequest:
+    BadRequestResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/BadRequest"
+            $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
     CreateActivityResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/CreateActivityResponse"
-      description: Activity
-    CreateCompany:
+      description: Activity created
+    CreateCompanyResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/CreateCompanyResponse"
       description: Company created
-    CreateContact:
+    CreateContactResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/CreateContactResponse"
       description: Contact created
-    CreateLead:
+    CreateLeadResponse:
       content:
         application/json:
           schema:
@@ -3293,20 +3293,20 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/CreateNoteResponse"
-      description: Note
-    CreateOpportunity:
+      description: Note created
+    CreateOpportunityResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/CreateOpportunityResponse"
-      description: Opportunity
-    CreatePipeline:
+      description: Opportunity created
+    CreatePipelineResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/CreatePipelineResponse"
       description: Pipeline created
-    CreateUser:
+    CreateUserResponse:
       content:
         application/json:
           schema:
@@ -3317,20 +3317,20 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/DeleteActivityResponse"
-      description: Activity
-    DeleteCompany:
+      description: Activity deleted
+    DeleteCompanyResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/DeleteCompanyResponse"
       description: Company deleted
-    DeleteContact:
+    DeleteContactResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/DeleteContactResponse"
       description: Contact deleted
-    DeleteLead:
+    DeleteLeadResponse:
       content:
         application/json:
           schema:
@@ -3341,20 +3341,20 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/DeleteNoteResponse"
-      description: Note
-    DeleteOpportunity:
+      description: Note deleted
+    DeleteOpportunityResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/DeleteOpportunityResponse"
       description: Opportunity deleted
-    DeletePipeline:
+    DeletePipelineResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/DeletePipelineResponse"
       description: Pipeline deleted
-    DeleteUser:
+    DeleteUserResponse:
       content:
         application/json:
           schema:
@@ -3372,37 +3372,37 @@ components:
           schema:
             $ref: "#/components/schemas/GetActivityResponse"
       description: Activity
-    GetCompanies:
+    GetCompaniesResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetCompaniesResponse"
       description: Companies
-    GetCompany:
+    GetCompanyResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetCompanyResponse"
       description: Company
-    GetContact:
+    GetContactResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetContactResponse"
       description: Contact
-    GetContacts:
+    GetContactsResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetContactsResponse"
       description: Contacts
-    GetLead:
+    GetLeadResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetLeadResponse"
       description: Lead
-    GetLeads:
+    GetLeadsResponse:
       content:
         application/json:
           schema:
@@ -3420,97 +3420,97 @@ components:
           schema:
             $ref: "#/components/schemas/GetNotesResponse"
       description: Notes
-    GetOpportunities:
+    GetOpportunitiesResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetOpportunitiesResponse"
       description: Opportunities
-    GetOpportunity:
+    GetOpportunityResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetOpportunityResponse"
       description: Opportunity
-    GetPipeline:
+    GetPipelineResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetPipelineResponse"
       description: Pipeline
-    GetPipelines:
+    GetPipelinesResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetPipelinesResponse"
       description: Pipelines
-    GetUser:
+    GetUserResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetUserResponse"
       description: User
-    GetUsers:
+    GetUsersResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetUsersResponse"
       description: Users
-    NotFound:
+    NotFoundResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/NotFoundResponse"
       description: The specified resource was not found
-    NotImplemented:
+    NotImplementedResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/NotImplemented"
+            $ref: "#/components/schemas/NotImplementedResponse"
       description: Not Implemented
-    PaymentRequired:
+    PaymentRequiredResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/PaymentRequired"
+            $ref: "#/components/schemas/PaymentRequiredResponse"
       description: Payment Required
-    Unauthorized:
+    UnauthorizedResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Unauthorized"
+            $ref: "#/components/schemas/UnauthorizedResponse"
       description: Unauthorized
-    UnexpectedError:
+    UnexpectedErrorResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UnexpectedError"
+            $ref: "#/components/schemas/UnexpectedErrorResponse"
       description: Unexpected error
-    Unprocessable:
+    UnprocessableResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Unprocessable"
+            $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
     UpdateActivityResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/UpdateActivityResponse"
-      description: Activity
-    UpdateCompany:
+      description: Activity updated
+    UpdateCompanyResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/UpdateCompanyResponse"
       description: Company updated
-    UpdateContact:
+    UpdateContactResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/UpdateContactResponse"
       description: Contact updated
-    UpdateLead:
+    UpdateLeadResponse:
       content:
         application/json:
           schema:
@@ -3521,20 +3521,20 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/UpdateNoteResponse"
-      description: Note
-    UpdateOpportunity:
+      description: Note updated
+    UpdateOpportunityResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/UpdateOpportunityResponse"
       description: Opportunity updated
-    UpdatePipeline:
+    UpdatePipelineResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/UpdatePipelineResponse"
       description: Pipeline updated
-    UpdateUser:
+    UpdateUserResponse:
       content:
         application/json:
           schema:
@@ -3790,7 +3790,7 @@ components:
           type: string
           x-graphql-type-name: AddressType
       type: object
-    BadRequest:
+    BadRequestResponse:
       properties:
         detail:
           anyOf:
@@ -5646,7 +5646,7 @@ components:
           description: The type of error returned
           example: EntityNotFoundError
           type: string
-    NotImplemented:
+    NotImplementedResponse:
       properties:
         detail:
           anyOf:
@@ -5959,7 +5959,7 @@ components:
         - title
         - primary_contact_id
       type: object
-    PaymentRequired:
+    PaymentRequiredResponse:
       properties:
         detail:
           description: Contains parameter or domain specific information related to the error and why it occured.
@@ -6083,13 +6083,14 @@ components:
         - asc
         - desc
       type: string
+      x-graphql-type-name: SortDirection
     Tags:
       example:
         - New
       items:
         type: string
       type: array
-    Unauthorized:
+    UnauthorizedResponse:
       properties:
         detail:
           description: Contains parameter or domain specific information related to the error and why it occured.
@@ -6115,7 +6116,7 @@ components:
           description: The type of error returned
           example: UnauthorizedError
           type: string
-    UnexpectedError:
+    UnexpectedErrorResponse:
       properties:
         detail:
           anyOf:
@@ -6155,7 +6156,7 @@ components:
       required:
         - id
       title: UnifiedId
-    Unprocessable:
+    UnprocessableResponse:
       properties:
         detail:
           description: Contains parameter or domain specific information related to the error and why it occured.

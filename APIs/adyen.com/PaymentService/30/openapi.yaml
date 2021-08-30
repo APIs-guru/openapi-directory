@@ -73,7 +73,7 @@ paths:
             application/json:
               examples:
                 adjustAuthorisation:
-                  $ref: "#/components/examples/post-adjustAuthorisation-adjustAuthorisation"
+                  $ref: "#/components/examples/post-adjustAuthorisation-adjustAuthorisation-200"
               schema:
                 $ref: "#/components/schemas/ModificationResult"
           description: OK - the request has succeeded.
@@ -82,7 +82,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -91,7 +91,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-401"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -112,7 +112,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-500"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -161,7 +161,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -170,7 +170,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-401"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -191,7 +191,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-500"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -230,7 +230,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -239,7 +239,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-401"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -260,7 +260,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-500"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -301,7 +301,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -310,7 +310,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-401"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -331,7 +331,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-500"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -372,7 +372,7 @@ paths:
             application/json:
               examples:
                 cancelOrRefund:
-                  $ref: "#/components/examples/post-cancelOrRefund-cancelOrRefund"
+                  $ref: "#/components/examples/post-cancelOrRefund-cancelOrRefund-200"
               schema:
                 $ref: "#/components/schemas/ModificationResult"
           description: OK - the request has succeeded.
@@ -381,7 +381,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -390,7 +390,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-401"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -411,7 +411,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-500"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -449,7 +449,7 @@ paths:
             application/json:
               examples:
                 capture:
-                  $ref: "#/components/examples/post-capture-capture"
+                  $ref: "#/components/examples/post-capture-capture-200"
               schema:
                 $ref: "#/components/schemas/ModificationResult"
           description: OK - the request has succeeded.
@@ -458,7 +458,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -467,7 +467,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-401"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -488,7 +488,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-500"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -526,7 +526,7 @@ paths:
             application/json:
               examples:
                 refund:
-                  $ref: "#/components/examples/post-refund-refund"
+                  $ref: "#/components/examples/post-refund-refund-200"
               schema:
                 $ref: "#/components/schemas/ModificationResult"
           description: OK - the request has succeeded.
@@ -535,7 +535,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -544,7 +544,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-401"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -565,7 +565,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-500"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -602,7 +602,7 @@ paths:
             application/json:
               examples:
                 technicalCancel:
-                  $ref: "#/components/examples/post-technicalCancel-technicalCancel"
+                  $ref: "#/components/examples/post-technicalCancel-technicalCancel-200"
               schema:
                 $ref: "#/components/schemas/ModificationResult"
           description: OK - the request has succeeded.
@@ -611,7 +611,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -620,7 +620,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-401"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -641,7 +641,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-500"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -679,9 +679,9 @@ paths:
             application/json:
               examples:
                 voidpendingrefund-pspreference:
-                  $ref: "#/components/examples/post-voidPendingRefund-voidpendingrefund-pspreference"
+                  $ref: "#/components/examples/post-voidPendingRefund-voidpendingrefund-pspreference-200"
                 voidpendingrefund-tenderreference:
-                  $ref: "#/components/examples/post-voidPendingRefund-voidpendingrefund-tenderreference"
+                  $ref: "#/components/examples/post-voidPendingRefund-voidpendingrefund-tenderreference-200"
               schema:
                 $ref: "#/components/schemas/ModificationResult"
           description: OK - the request has succeeded.
@@ -690,7 +690,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -699,7 +699,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-401"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -720,7 +720,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-500"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -735,13 +735,28 @@ paths:
       x-sortIndex: 7
 components:
   examples:
-    generic:
+    generic-400:
+      summary: Response code 400. Bad request.
+      value:
+        errorCode: "702"
+        errorType: validation
+        message: 'Unexpected input: ", expected: }'
+        status: 400
+    generic-401:
       summary: Response code 401. Unauthorized.
       value:
         errorCode: "000"
         errorType: security
         message: HTTP Status Response - Unauthorized
         status: 401
+    generic-500:
+      summary: Response code 500. Internal server error.
+      value:
+        errorCode: "905"
+        errorType: configuration
+        message: Payment details are not supported
+        pspReference: "8516091485743033"
+        status: 500
     post-adjustAuthorisation-adjustAuthorisation:
       summary: Increases or decreases the authorised amount
       value:
@@ -751,6 +766,11 @@ components:
           value: 1700
         originalReference: COPY_PSP_REFERENCE_FROM_AUTHORISE_RESPONSE
         reference: YourModificationReference
+    post-adjustAuthorisation-adjustAuthorisation-200:
+      summary: Example response for request 'adjustAuthorisation'
+      value:
+        pspReference: 851617892360718D
+        response: "[adjustAuthorisation-received]"
     post-authorise-authorise-3dsecure:
       summary: Initiate a 3D Secure payment
       value:
@@ -879,6 +899,11 @@ components:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         originalReference: COPY_PSP_REFERENCE_FROM_AUTHORISE_RESPONSE
         reference: YourModificationReference
+    post-cancelOrRefund-cancelOrRefund-200:
+      summary: Example response for request 'cancelOrRefund'
+      value:
+        pspReference: 851617892359708H
+        response: "[cancelOrRefund-received]"
     post-capture-capture:
       summary: Capture an authorised payment
       value:
@@ -888,6 +913,11 @@ components:
           value: 500
         originalReference: COPY_PSP_REFERENCE_FROM_AUTHORISE_RESPONSE
         reference: YOUR_REFERENCE
+    post-capture-capture-200:
+      summary: Example response for request 'capture'
+      value:
+        pspReference: 861617892359057J
+        response: "[capture-received]"
     post-refund-refund:
       summary: Refund a captured payment
       value:
@@ -897,7 +927,18 @@ components:
           value: 500
         originalReference: COPY_PSP_REFERENCE_FROM_AUTHORISE_RESPONSE
         reference: YOUR_REFERENCE
+    post-refund-refund-200:
+      summary: Example response for request 'refund'
+      value:
+        pspReference: 861617892360059B
+        response: "[refund-received]"
     post-technicalCancel-technicalCancel:
+      summary: Cancel a payment without a PSP reference
+      value:
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        originalMerchantReference: YOUR_MERCHANT_REFERENCE
+        reference: YOUR_MODIFICATION_REFERENCE
+    post-technicalCancel-technicalCancel-200:
       summary: Example response for request 'technicalCancel'
       value:
         pspReference: 881617892361436J
@@ -907,7 +948,18 @@ components:
       value:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         originalReference: "9914748988390044"
+    post-voidPendingRefund-voidpendingrefund-pspreference-200:
+      summary: Example response for request 'voidpendingrefund-pspreference'
+      value:
+        pspReference: 861617892360062F
+        response: "[voidPendingRefund-received]"
     post-voidPendingRefund-voidpendingrefund-tenderreference:
+      summary: Cancels a POS refund request with tender reference before it has been completed
+      value:
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        tenderReference: 5Iw8001176969533005
+        uniqueTerminalId: VX820-123456789
+    post-voidPendingRefund-voidpendingrefund-tenderreference-200:
       summary: Example response for request 'voidpendingrefund-tenderreference'
       value:
         pspReference: 881617892360409G
@@ -933,7 +985,7 @@ components:
 
             Possible values:
             * **true** – Perform 3D Secure authentication.
-            * **false** – Don't perform 3D Secure authentication.
+            * **false** – Don't perform 3D Secure authentication. Note that this setting results in refusals if the issuer mandates 3D Secure because of the PSD2 directive  or other, national regulations. 
           type: string
         mpiImplementationType:
           description: In case of Secure+, this field must be set to **CUPSecurePlus**.
@@ -3122,7 +3174,6 @@ components:
             - $ref: "#/components/schemas/ResponseAdditionalDataInstallments"
             - $ref: "#/components/schemas/ResponseAdditionalDataNetworkTokens"
             - $ref: "#/components/schemas/ResponseAdditionalDataOpi"
-            - $ref: "#/components/schemas/ResponseAdditionalDataPayPal"
             - $ref: "#/components/schemas/ResponseAdditionalDataSepa"
         authCode:
           description: |-
@@ -3675,6 +3726,12 @@ components:
 
             Example: AUTHORISED
           type: string
+        requestAmount:
+          description: The amount of the payment request.
+          type: string
+        requestCurrencyCode:
+          description: The currency of the payment request.
+          type: string
         shopperInteraction:
           description: |-
             The shopper interaction type of the payment request.
@@ -3822,38 +3879,6 @@ components:
       properties:
         opi.transToken:
           description: "Returned in the response if you included `opi.includeTransToken: true` in an ecommerce payment request. This contains an Oracle Payment Interface token that you can store in your Oracle Opera database to identify tokenized ecommerce transactions. For more information and required settings, see [Oracle Opera](https://docs.adyen.com/plugins/oracle-opera#opi-token-ecommerce)."
-          type: string
-    ResponseAdditionalDataPayPal:
-      properties:
-        paypalEmail:
-          description: |-
-            The buyer's PayPal account email address.
-
-            Example: paypaltest@adyen.com
-          type: string
-        paypalPayerId:
-          description: |-
-            The buyer's PayPal ID.
-
-            Example: LF5HCWWBRV2KL
-          type: string
-        paypalPayerResidenceCountry:
-          description: |-
-            The buyer's country of residence.
-
-            Example: NL
-          type: string
-        paypalPayerStatus:
-          description: |-
-            The status of the buyer's PayPal account.
-
-            Example: unverified
-          type: string
-        paypalProtectionEligibility:
-          description: |-
-            The eligibility for PayPal Seller Protection for this payment.
-
-            Example: Ineligible
           type: string
     ResponseAdditionalDataSepa:
       properties:

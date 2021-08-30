@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 5.4.0
+  version: 5.5.1
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -307,6 +307,10 @@ tags:
     name: Ledger Accounts
     x-apideck-model:
       $ref: "#/components/schemas/LedgerAccount"
+  - description: Invoice items are stored from invoice lines to be used later on when creating new invoices.
+    name: Invoice Items
+    x-apideck-model:
+      $ref: "#/components/schemas/InvoiceItem"
 paths:
   /accounting/companies:
     get:
@@ -323,17 +327,17 @@ paths:
         "200":
           $ref: "#/components/responses/GetCompaniesResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: List Companies
@@ -377,17 +381,17 @@ paths:
         "201":
           $ref: "#/components/responses/CreateCompanyResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create Company
@@ -511,17 +515,17 @@ paths:
         "200":
           $ref: "#/components/responses/DeleteCompanyResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Delete Company
@@ -561,17 +565,17 @@ paths:
         "200":
           $ref: "#/components/responses/GetCompanyResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get Company
@@ -617,17 +621,17 @@ paths:
         "200":
           $ref: "#/components/responses/UpdateCompanyResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update Company
@@ -753,17 +757,17 @@ paths:
         "200":
           $ref: "#/components/responses/GetContactsResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: List Contacts
@@ -807,17 +811,17 @@ paths:
         "201":
           $ref: "#/components/responses/CreateContactResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create Contact
@@ -935,17 +939,17 @@ paths:
         "200":
           $ref: "#/components/responses/DeleteContactResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Delete Contact
@@ -985,17 +989,17 @@ paths:
         "200":
           $ref: "#/components/responses/GetContactResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get Contact
@@ -1041,17 +1045,17 @@ paths:
         "200":
           $ref: "#/components/responses/UpdateContactResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update Contact
@@ -1156,6 +1160,324 @@ paths:
             } catch (error) {
               console.error(error)
             }
+  /accounting/invoice-items:
+    get:
+      description: List Invoice Items
+      operationId: invoiceItemsAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetInvoiceItemsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Invoice Items
+      tags:
+        - Invoice Items
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.invoiceItemsAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: invoiceItems
+    post:
+      description: Create Invoice Item
+      operationId: invoiceItemsAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceItem"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateInvoiceItemResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Invoice Item
+      tags:
+        - Invoice Items
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              invoiceItem: {
+                id: '12345',
+                code: '120-C',
+                sold: true,
+                name: 'Model Y',
+                description:
+                  'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
+                type: 'inventory',
+                sales_details: {
+                  unit_price: 27500.5,
+                  unit_of_measure: 'hour',
+                  tax_inclusive: true,
+                  tax_rate: {
+                    id: '12345',
+                    code: 'N-T'
+                  }
+                },
+                quantity: 2,
+                unit_price: 27500.5,
+                ledger_account: {
+                  id: '12345',
+                  name: 'Bank account'
+                },
+                active: true,
+                row_version: '1-12345'
+              }
+            }
+
+            try {
+              const { data } = await apideck.accounting.invoiceItemsAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/accounting/invoice-items/{id}":
+    delete:
+      description: Delete Invoice Item
+      operationId: invoiceItemsDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteInvoiceItemResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Invoice Item
+      tags:
+        - Invoice Items
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.invoiceItemsDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Invoice Item
+      operationId: invoiceItemsOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetInvoiceItemResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Invoice Item
+      tags:
+        - Invoice Items
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.invoiceItemsOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update Invoice Item
+      operationId: invoiceItemsUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceItem"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateInvoiceItemResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update Invoice Item
+      tags:
+        - Invoice Items
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              invoiceItem: {
+                id: '12345',
+                code: '120-C',
+                sold: true,
+                name: 'Model Y',
+                description:
+                  'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
+                type: 'inventory',
+                sales_details: {
+                  unit_price: 27500.5,
+                  unit_of_measure: 'hour',
+                  tax_inclusive: true,
+                  tax_rate: {
+                    id: '12345',
+                    code: 'N-T'
+                  }
+                },
+                quantity: 2,
+                unit_price: 27500.5,
+                ledger_account: {
+                  id: '12345',
+                  name: 'Bank account'
+                },
+                active: true,
+                row_version: '1-12345'
+              }
+            }
+
+            try {
+              const { data } = await apideck.accounting.invoiceItemsUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
   /accounting/invoices:
     get:
       description: List Invoices
@@ -1171,17 +1493,17 @@ paths:
         "200":
           $ref: "#/components/responses/GetInvoicesResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: List Invoices
@@ -1225,17 +1547,17 @@ paths:
         "201":
           $ref: "#/components/responses/CreateInvoiceResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create Invoice
@@ -1256,16 +1578,19 @@ paths:
 
             const params = {
               invoice: {
+                id: '12345',
                 type: 'Service',
                 number: 'OIT00546',
                 customer: {
+                  id: '12345',
                   company_name: 'The boring company'
                 },
-                date: '2020-09-30',
+                invoice_date: '2020-09-30',
                 due_date: '2020-10-30',
                 po_number: '90000117',
                 status: 'paid',
                 currency: 'USD',
+                tax_inclusive: true,
                 sub_total: 27500,
                 total_tax: 1000,
                 total: 28500,
@@ -1274,21 +1599,32 @@ paths:
                 customer_memo: 'Thank you for your business and have a great day!',
                 line_items: [
                   {
+                    id: '12345',
+                    row_id: '12345',
+                    code: '120-C',
                     line_number: 1,
-                    description: 'Rock Fountain',
-                    type: 'Transaction',
+                    description:
+                      'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
+                    type: 'Inventory',
                     tax_amount: 27500,
                     total_amount: 27500,
                     quantity: 2,
-                    unit_price: 27500,
+                    unit_price: 27500.5,
                     discount_percentage: 15,
-                    item_id: 12344,
+                    item: {
+                      id: '12344',
+                      code: '120-C',
+                      name: 'Model Y'
+                    },
                     tax_rate: {
+                      id: '12345',
                       code: 'N-T'
                     },
-                    general_ledger_account: {
+                    ledger_account: {
+                      id: '12345',
                       name: 'Bank account'
-                    }
+                    },
+                    row_version: '1-12345'
                   }
                 ],
                 billing_address: {
@@ -1318,7 +1654,8 @@ paths:
                   country: 'US',
                   latitude: '40.759211',
                   longitude: '-73.984638'
-                }
+                },
+                row_version: '1-12345'
               }
             }
 
@@ -1342,17 +1679,17 @@ paths:
         "200":
           $ref: "#/components/responses/DeleteInvoiceResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Delete Invoice
@@ -1392,17 +1729,17 @@ paths:
         "200":
           $ref: "#/components/responses/GetInvoiceResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get Invoice
@@ -1448,17 +1785,17 @@ paths:
         "200":
           $ref: "#/components/responses/UpdateInvoiceResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update Invoice
@@ -1480,16 +1817,19 @@ paths:
             const params = {
               id: 'id_example',
               invoice: {
+                id: '12345',
                 type: 'Service',
                 number: 'OIT00546',
                 customer: {
+                  id: '12345',
                   company_name: 'The boring company'
                 },
-                date: '2020-09-30',
+                invoice_date: '2020-09-30',
                 due_date: '2020-10-30',
                 po_number: '90000117',
                 status: 'paid',
                 currency: 'USD',
+                tax_inclusive: true,
                 sub_total: 27500,
                 total_tax: 1000,
                 total: 28500,
@@ -1498,21 +1838,32 @@ paths:
                 customer_memo: 'Thank you for your business and have a great day!',
                 line_items: [
                   {
+                    id: '12345',
+                    row_id: '12345',
+                    code: '120-C',
                     line_number: 1,
-                    description: 'Rock Fountain',
-                    type: 'Transaction',
+                    description:
+                      'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
+                    type: 'Inventory',
                     tax_amount: 27500,
                     total_amount: 27500,
                     quantity: 2,
-                    unit_price: 27500,
+                    unit_price: 27500.5,
                     discount_percentage: 15,
-                    item_id: 12344,
+                    item: {
+                      id: '12344',
+                      code: '120-C',
+                      name: 'Model Y'
+                    },
                     tax_rate: {
+                      id: '12345',
                       code: 'N-T'
                     },
-                    general_ledger_account: {
+                    ledger_account: {
+                      id: '12345',
                       name: 'Bank account'
-                    }
+                    },
+                    row_version: '1-12345'
                   }
                 ],
                 billing_address: {
@@ -1542,7 +1893,8 @@ paths:
                   country: 'US',
                   latitude: '40.759211',
                   longitude: '-73.984638'
-                }
+                },
+                row_version: '1-12345'
               }
             }
 
@@ -1567,17 +1919,17 @@ paths:
         "200":
           $ref: "#/components/responses/GetLedgerAccountsResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: List Ledger Accounts
@@ -1621,17 +1973,17 @@ paths:
         "201":
           $ref: "#/components/responses/CreateLedgerAccountResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create Ledger Account
@@ -1652,6 +2004,7 @@ paths:
 
             const params = {
               ledgerAccount: {
+                id: '12345',
                 nominal_code: '091',
                 classification: 'asset',
                 type: 'bank',
@@ -1664,6 +2017,7 @@ paths:
                 currency: 'USD',
                 tax_type: 'USD',
                 tax_rate: {
+                  id: '12345',
                   code: 'N-T'
                 },
                 level: 2,
@@ -1701,17 +2055,17 @@ paths:
         "200":
           $ref: "#/components/responses/DeleteLedgerAccountResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Delete Ledger Account
@@ -1751,17 +2105,17 @@ paths:
         "200":
           $ref: "#/components/responses/GetLedgerAccountResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get Ledger Account
@@ -1807,17 +2161,17 @@ paths:
         "200":
           $ref: "#/components/responses/UpdateLedgerAccountResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update Ledger Account
@@ -1839,6 +2193,7 @@ paths:
             const params = {
               id: 'id_example',
               ledgerAccount: {
+                id: '12345',
                 nominal_code: '091',
                 classification: 'asset',
                 type: 'bank',
@@ -1851,6 +2206,7 @@ paths:
                 currency: 'USD',
                 tax_type: 'USD',
                 tax_rate: {
+                  id: '12345',
                   code: 'N-T'
                 },
                 level: 2,
@@ -1889,17 +2245,17 @@ paths:
         "200":
           $ref: "#/components/responses/GetTaxRatesResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: List Tax Rates
@@ -1943,17 +2299,17 @@ paths:
         "201":
           $ref: "#/components/responses/CreateTaxRateResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create Tax Rate
@@ -1974,6 +2330,7 @@ paths:
 
             const params = {
               taxRate: {
+                id: '12345',
                 name: '15% GST on Expenses',
                 code: 'ABN',
                 description: 'No ABN Withholding',
@@ -2012,17 +2369,17 @@ paths:
         "200":
           $ref: "#/components/responses/DeleteTaxRateResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Delete Tax Rate
@@ -2062,17 +2419,17 @@ paths:
         "200":
           $ref: "#/components/responses/GetTaxRateResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get Tax Rate
@@ -2118,17 +2475,17 @@ paths:
         "200":
           $ref: "#/components/responses/UpdateTaxRateResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update Tax Rate
@@ -2150,6 +2507,7 @@ paths:
             const params = {
               id: 'id_example',
               taxRate: {
+                id: '12345',
                 name: '15% GST on Expenses',
                 code: 'ABN',
                 description: 'No ABN Withholding',
@@ -2227,131 +2585,126 @@ components:
       schema:
         type: string
   responses:
-    BadRequest:
+    BadRequestResponse:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                anyOf:
-                  - example: Missing property foobar
-                    type: string
-                  - example:
-                      missing:
-                        - foobar: required
-                    type: object
-                description: Contains parameter or domain specific information related to the error and why it occured.
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Bad Request
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Invalid Params
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#requestbodyvalidationerror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 400
-                type: number
-              type_name:
-                description: The type of error returned
-                example: RequestHeadersValidationError
-                type: string
+            $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
     CreateCompanyResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/CreateCompanyResponse"
-      description: Companies
+      description: Company created
     CreateContactResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/CreateContactResponse"
-      description: Contacts
+      description: Contact created
+    CreateInvoiceItemResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateInvoiceItemResponse"
+      description: InvoiceItems
     CreateInvoiceResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/CreateInvoiceResponse"
-      description: Invoices
+      description: Invoice created
     CreateLedgerAccountResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/CreateLedgerAccountResponse"
-      description: LedgerAccounts
+      description: LedgerAccount created
     CreateTaxRateResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/CreateTaxRateResponse"
-      description: TaxRates
+      description: TaxRate created
     DeleteCompanyResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/DeleteCompanyResponse"
-      description: Companies
+      description: Company deleted
     DeleteContactResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/DeleteContactResponse"
-      description: Contacts
+      description: Contact deleted
+    DeleteInvoiceItemResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteTaxRateResponse"
+      description: InvoiceItems
     DeleteInvoiceResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/DeleteInvoiceResponse"
-      description: Invoices
+      description: Invoice deleted
     DeleteLedgerAccountResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/DeleteLedgerAccountResponse"
-      description: LedgerAccounts
+      description: LedgerAccount deleted
     DeleteTaxRateResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/DeleteTaxRateResponse"
-      description: TaxRates
+      description: TaxRates deleted
     GetCompaniesResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetCompaniesResponse"
-      description: Company
+      description: Companies
     GetCompanyResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetCompanyResponse"
-      description: Companies
+      description: Company
     GetContactResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetContactResponse"
-      description: Contacts
+      description: Contact
     GetContactsResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetContactsResponse"
       description: Contacts
+    GetInvoiceItemResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetInvoiceItemResponse"
+      description: InvoiceItems
+    GetInvoiceItemsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetInvoiceItemsResponse"
+      description: InvoiceItems
     GetInvoiceResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetInvoiceResponse"
-      description: Invoices
+      description: Invoice
     GetInvoicesResponse:
       content:
         application/json:
@@ -2363,7 +2716,7 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/GetLedgerAccountResponse"
-      description: LedgerAccounts
+      description: LedgerAccount
     GetLedgerAccountsResponse:
       content:
         application/json:
@@ -2375,248 +2728,85 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/GetTaxRateResponse"
-      description: TaxRates
+      description: TaxRate
     GetTaxRatesResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetTaxRatesResponse"
       description: TaxRates
-    Invoice:
+    NotFoundResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Invoice"
-      description: Invoices
-    NotFound:
-      content:
-        application/json:
-          schema:
-            properties:
-              detail:
-                anyOf:
-                  - example: "Could not find widget with id: '123'"
-                    type: string
-                  - example:
-                      not_found:
-                        entity: widget
-                        id: "123"
-                    type: object
-                description: Contains parameter or domain specific information related to the error and why it occured.
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Not Found
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Unknown Widget
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#entitynotfounderror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 404
-                type: number
-              type_name:
-                description: The type of error returned
-                example: EntityNotFoundError
-                type: string
+            $ref: "#/components/schemas/NotFoundResponse"
       description: The specified resource was not found
-    NotImplemented:
+    NotImplementedResponse:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                anyOf:
-                  - example: Failed to retrieve Widget tokenUrl from 'components.securitySchemes.oauth2.flows'
-                    type: string
-                  - type: object
-                description: Contains parameter or domain specific information related to the error and why it occured.
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Not Implemented
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Unmapped Attribute
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#mappingerror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 501
-                type: number
-              type_name:
-                description: The type of error returned
-                example: MappingError
-                type: string
+            $ref: "#/components/schemas/NotImplementedResponse"
       description: Not Implemented
-    PaymentRequired:
+    PaymentRequiredResponse:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                description: Contains parameter or domain specific information related to the error and why it occured.
-                example: You have reached your limit of 2000
-                type: string
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Payment Required
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Request Limit Reached
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#requestlimiterror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 402
-                type: number
-              type_name:
-                description: The type of error returned
-                example: RequestLimitError
-                type: string
+            $ref: "#/components/schemas/PaymentRequiredResponse"
       description: Payment Required
-    TaxRate:
+    UnauthorizedResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/TaxRate"
-      description: TaxRates
-    Unauthorized:
-      content:
-        application/json:
-          schema:
-            properties:
-              detail:
-                description: Contains parameter or domain specific information related to the error and why it occured.
-                example: Failed to generate valid JWT Session. Verify applicationId is correct
-                type: string
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Unauthorized
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Unauthorized Request
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#unauthorizederror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 401
-                type: number
-              type_name:
-                description: The type of error returned
-                example: UnauthorizedError
-                type: string
+            $ref: "#/components/schemas/UnauthorizedResponse"
       description: Unauthorized
-    UnexpectedError:
+    UnexpectedErrorResponse:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                anyOf:
-                  - example: "Missing Header: x-apideck-consumer-id"
-                    type: string
-                  - example:
-                      missing:
-                        - x-apideck-consumer-id: required
-                    type: object
-                description: Contains parameter or domain specific information related to the error and why it occured.
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Bad Request
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Invalid Params
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#unauthorizederror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 400
-                type: number
-              type_name:
-                description: The type of error returned
-                example: RequestHeadersValidationError
-                type: string
+            $ref: "#/components/schemas/UnexpectedErrorResponse"
       description: Unexpected error
-    Unprocessable:
+    UnprocessableResponse:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                description: Contains parameter or domain specific information related to the error and why it occured.
-                example: State did not include unified_api
-                type: string
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Unprocessable Entity
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Invalid State
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#invalidstateerror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 422
-                type: number
-              type_name:
-                description: The type of error returned
-                example: InvalidStateError
-                type: string
+            $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
     UpdateCompanyResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/UpdateCompanyResponse"
-      description: Companies
+      description: Company updated
     UpdateContactResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/UpdateContactResponse"
-      description: Contacts
+      description: Contact updated
+    UpdateInvoiceItemResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateInvoiceItemsResponse"
+      description: InvoiceItems
     UpdateInvoiceResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/UpdateInvoiceResponse"
-      description: Invoices
+      description: Invoice updated
     UpdateLedgerAccountResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/UpdateLedgerAccountResponse"
-      description: LedgerAccounts
+      description: LedgerAccount updated
     UpdateTaxRateResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/UpdateTaxRateResponse"
-      description: TaxRates
+      description: TaxRate updated
   schemas:
     Address:
       properties:
@@ -2684,6 +2874,37 @@ components:
           type: string
           x-graphql-type-name: AddressType
       type: object
+    BadRequestResponse:
+      properties:
+        detail:
+          anyOf:
+            - example: Missing property foobar
+              type: string
+            - example:
+                missing:
+                  - foobar: required
+              type: object
+          description: Contains parameter or domain specific information related to the error and why it occured.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Bad Request
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Invalid Params
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#requestbodyvalidationerror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 400
+          type: number
+        type_name:
+          description: The type of error returned
+          example: RequestHeadersValidationError
+          type: string
     BankAccount:
       properties:
         account_name:
@@ -3069,7 +3290,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Companies
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -3101,7 +3322,39 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Contacts
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    CreateInvoiceItemResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: InvoiceItems
           type: string
         service:
           description: Apideck ID of service provider
@@ -3813,7 +4066,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Companies
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -3845,7 +4098,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Contacts
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -3867,6 +4120,8 @@ components:
         - operation
         - data
       type: object
+    DeleteInvoiceItemResponse:
+      $ref: "#/components/schemas/DeleteTaxRateResponse"
     DeleteInvoiceResponse:
       properties:
         data:
@@ -4003,7 +4258,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Companies
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -4036,7 +4291,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Companies
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -4058,7 +4313,7 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: Company
+      x-graphql-type-name: company
     GetContactResponse:
       properties:
         data:
@@ -4069,7 +4324,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Contacts
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -4091,7 +4346,6 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: Contact
     GetContactsResponse:
       properties:
         data:
@@ -4108,7 +4362,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Contacts
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -4131,6 +4385,78 @@ components:
         - data
       type: object
       x-graphql-type-name: ContactList
+    GetInvoiceItemResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/InvoiceItem"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: InvoiceItems
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: InvoiceItem
+    GetInvoiceItemsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/InvoiceItem"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: InvoiceItems
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: InvoiceItemList
     GetInvoiceResponse:
       properties:
         data:
@@ -4349,7 +4675,6 @@ components:
       x-graphql-type-name: TaxRateList
     Id:
       example: "12345"
-      readOnly: true
       type: string
     Invoice:
       additionalProperties: false
@@ -4378,18 +4703,14 @@ components:
               type: string
             id:
               $ref: "#/components/schemas/Id"
+          required:
+            - id
           title: Customer
           type: object
         customer_memo:
           example: Thank you for your business and have a great day!
           nullable: true
           title: Customer memo
-          type: string
-        date:
-          description: Date invoice was issued - YYYY-MM-DD
-          example: 2020-09-30
-          format: date
-          title: Invoice date
           type: string
         deposit:
           example: 2000
@@ -4404,12 +4725,24 @@ components:
           type: string
         id:
           $ref: "#/components/schemas/Id"
+        invoice_date:
+          description: Date invoice was issued - YYYY-MM-DD
+          example: 2020-09-30
+          format: date
+          title: Invoice date
+          type: string
         line_items:
           items:
             additionalProperties: false
             properties:
+              code:
+                description: User defined item code
+                example: 120-C
+                nullable: true
+                title: Item code
+                type: string
               description:
-                example: Rock Fountain
+                example: Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.
                 nullable: true
                 title: Description
                 type: string
@@ -4418,56 +4751,66 @@ components:
                 nullable: true
                 title: Amount
                 type: integer
-              general_ledger_account:
-                properties:
-                  id:
-                    $ref: "#/components/schemas/Id"
-                  name:
-                    example: Bank account
-                    minLength: 1
-                    nullable: true
-                    title: Account Name
-                    type: string
               id:
                 $ref: "#/components/schemas/Id"
-              item_id:
-                description: ID of the linked item
-                example: 12344
-                nullable: true
-                title: Item ID
-                type: integer
+              item:
+                properties:
+                  code:
+                    description: User defined item code
+                    example: 120-C
+                    nullable: true
+                    title: Item code
+                    type: string
+                  id:
+                    description: ID of the linked item
+                    example: "12344"
+                    nullable: true
+                    title: Item ID
+                    type: string
+                  name:
+                    example: Model Y
+                    nullable: true
+                    title: Item name
+                    type: string
+                type: object
+              ledger_account:
+                $ref: "#/components/schemas/LinkedLedgerAccount"
               line_number:
                 example: 1
                 nullable: true
                 title: Line number
                 type: integer
               quantity:
-                example: 2
-                nullable: true
-                title: Quantity
-                type: integer
+                $ref: "#/components/schemas/Quantity"
+              row_id:
+                example: "12345"
+                title: Row ID
+                type: string
+              row_version:
+                $ref: "#/components/schemas/RowVersion"
               tax_amount:
                 example: 27500
                 nullable: true
                 title: Tax amount
-                type: integer
+                type: number
               tax_rate:
                 $ref: "#/components/schemas/LinkedTaxRate"
               total_amount:
                 example: 27500
                 nullable: true
                 title: Total amount
-                type: integer
+                type: number
               type:
-                example: Transaction
+                enum:
+                  - inventory
+                  - service
+                example: Inventory
                 nullable: true
                 title: Type
                 type: string
+                x-graphql-type-name: InvoiceLineItemType
               unit_price:
-                example: 27500
-                nullable: true
-                title: Unit price
-                type: integer
+                $ref: "#/components/schemas/UnitPrice"
             type: object
           type: array
         number:
@@ -4481,6 +4824,8 @@ components:
           nullable: true
           title: Purchase Order number
           type: string
+        row_version:
+          $ref: "#/components/schemas/RowVersion"
         shipping_address:
           $ref: "#/components/schemas/Address"
         status:
@@ -4491,6 +4836,7 @@ components:
             - partially_paid
             - paid
             - void
+            - credit
           example: paid
           nullable: true
           title: Status
@@ -4500,6 +4846,12 @@ components:
           nullable: true
           title: Sub-total amount
           type: number
+        tax_inclusive:
+          description: Amounts include tax
+          example: true
+          nullable: true
+          title: Tax inclusive
+          type: boolean
         total:
           example: 28500
           nullable: true
@@ -4516,6 +4868,82 @@ components:
           nullable: true
           title: Invoice type
           type: string
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
+      type: object
+    InvoiceItem:
+      additionalProperties: false
+      properties:
+        active:
+          example: true
+          nullable: true
+          title: Is active
+          type: boolean
+        code:
+          description: User defined item code
+          example: 120-C
+          nullable: true
+          title: Item code
+          type: string
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        description:
+          example: Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.
+          nullable: true
+          title: Description
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        ledger_account:
+          $ref: "#/components/schemas/LinkedLedgerAccount"
+        name:
+          example: Model Y
+          nullable: true
+          title: Item name
+          type: string
+        quantity:
+          $ref: "#/components/schemas/Quantity"
+        row_version:
+          $ref: "#/components/schemas/RowVersion"
+        sales_details:
+          properties:
+            tax_inclusive:
+              description: Indicates the unit price includes tax.
+              example: true
+              nullable: true
+              title: Tax inclusive
+              type: boolean
+            tax_rate:
+              $ref: "#/components/schemas/LinkedTaxRate"
+            unit_of_measure:
+              example: hour
+              nullable: true
+              title: "Description of the unit type the item is sold as, ie: kg, hour."
+              type: string
+            unit_price:
+              $ref: "#/components/schemas/UnitPrice"
+          type: object
+        sold:
+          description: Item can be sold
+          example: true
+          nullable: true
+          title: Item sold
+          type: boolean
+        type:
+          enum:
+            - inventory
+            - service
+          example: inventory
+          nullable: true
+          title: Type
+          type: string
+          x-graphql-type-name: InvoiceItemType
+        unit_price:
+          $ref: "#/components/schemas/UnitPrice"
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
@@ -4778,12 +5206,23 @@ components:
           example: bank
           nullable: true
           type: string
-          x-graphql-type-name: ledgerAccountType
+          x-graphql-type-name: LedgerAccountType
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+    LinkedLedgerAccount:
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          example: Bank account
+          minLength: 1
+          nullable: true
+          title: Account Name
+          type: string
+      x-graphql-type-name: LinkedLedgerAccount
     LinkedTaxRate:
       properties:
         code:
@@ -4839,6 +5278,66 @@ components:
           example: 50
           type: integer
       type: object
+    NotFoundResponse:
+      properties:
+        detail:
+          anyOf:
+            - example: "Could not find widget with id: '123'"
+              type: string
+            - example:
+                not_found:
+                  entity: widget
+                  id: "123"
+              type: object
+          description: Contains parameter or domain specific information related to the error and why it occured.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Not Found
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Unknown Widget
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#entitynotfounderror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 404
+          type: number
+        type_name:
+          description: The type of error returned
+          example: EntityNotFoundError
+          type: string
+    NotImplementedResponse:
+      properties:
+        detail:
+          anyOf:
+            - example: Failed to retrieve Widget tokenUrl from 'components.securitySchemes.oauth2.flows'
+              type: string
+            - type: object
+          description: Contains parameter or domain specific information related to the error and why it occured.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Not Implemented
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Unmapped Attribute
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#mappingerror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 501
+          type: number
+        type_name:
+          description: The type of error returned
+          example: MappingError
+          type: string
     Opportunity:
       additionalProperties: false
       properties:
@@ -5021,6 +5520,32 @@ components:
         - title
         - primary_contact_id
       type: object
+    PaymentRequiredResponse:
+      properties:
+        detail:
+          description: Contains parameter or domain specific information related to the error and why it occured.
+          example: You have reached your limit of 2000
+          type: string
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Payment Required
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Request Limit Reached
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#requestlimiterror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 402
+          type: number
+        type_name:
+          description: The type of error returned
+          example: RequestLimitError
+          type: string
     PhoneNumber:
       properties:
         id:
@@ -5095,6 +5620,15 @@ components:
       required:
         - name
       x-pii: []
+    Quantity:
+      example: 2
+      nullable: true
+      title: Quantity
+      type: integer
+    RowVersion:
+      example: 1-12345
+      title: Row version
+      type: string
     SocialLink:
       properties:
         id:
@@ -5195,6 +5729,63 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+    UnauthorizedResponse:
+      properties:
+        detail:
+          description: Contains parameter or domain specific information related to the error and why it occured.
+          example: Failed to generate valid JWT Session. Verify applicationId is correct
+          type: string
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Unauthorized
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Unauthorized Request
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#unauthorizederror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 401
+          type: number
+        type_name:
+          description: The type of error returned
+          example: UnauthorizedError
+          type: string
+    UnexpectedErrorResponse:
+      properties:
+        detail:
+          anyOf:
+            - example: "Missing Header: x-apideck-consumer-id"
+              type: string
+            - example:
+                missing:
+                  - x-apideck-consumer-id: required
+              type: object
+          description: Contains parameter or domain specific information related to the error and why it occured.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Bad Request
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Invalid Params
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#unauthorizederror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 400
+          type: number
+        type_name:
+          description: The type of error returned
+          example: RequestHeadersValidationError
+          type: string
     UnifiedId:
       properties:
         id:
@@ -5204,6 +5795,37 @@ components:
       required:
         - id
       title: UnifiedId
+    UnitPrice:
+      example: 27500.5
+      nullable: true
+      title: Unit price
+      type: number
+    UnprocessableResponse:
+      properties:
+        detail:
+          description: Contains parameter or domain specific information related to the error and why it occured.
+          example: State did not include unified_api
+          type: string
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Unprocessable Entity
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Invalid State
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#invalidstateerror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 422
+          type: number
+        type_name:
+          description: The type of error returned
+          example: InvalidStateError
+          type: string
     UpdateCompanyResponse:
       properties:
         data:
@@ -5214,7 +5836,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Companies
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -5246,7 +5868,39 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Contacts
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    UpdateInvoiceItemsResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Invoices
           type: string
         service:
           description: Apideck ID of service provider

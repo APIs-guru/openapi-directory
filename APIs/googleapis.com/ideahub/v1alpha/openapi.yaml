@@ -364,7 +364,7 @@ components:
             type: string
           type: array
         name:
-          description: "Unique identifier for the idea activity. Format: platforms/{platform}/properties/{property}/ideaActivities/{idea_activity}"
+          description: "Unique identifier for the idea activity. The name is ignored when creating an idea activity. Format: platforms/{platform}/properties/{property}/ideaActivities/{idea_activity}"
           type: string
         topics:
           description: The Topic IDs for this entry. If empty, ideas should be set.

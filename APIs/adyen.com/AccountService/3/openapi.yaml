@@ -78,7 +78,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -93,7 +93,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-403"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -147,7 +147,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -162,7 +162,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-403"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -216,7 +216,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -231,7 +231,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-403"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -275,9 +275,9 @@ paths:
             application/json:
               examples:
                 business:
-                  $ref: "#/components/examples/post-createAccountHolder-business"
+                  $ref: "#/components/examples/post-createAccountHolder-business-200"
                 individual:
-                  $ref: "#/components/examples/post-createAccountHolder-individual"
+                  $ref: "#/components/examples/post-createAccountHolder-individual-200"
               schema:
                 $ref: "#/components/schemas/CreateAccountHolderResponse"
           description: OK - the request has succeeded.
@@ -286,7 +286,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -295,7 +295,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/post-createAccountHolder-generic"
+                  $ref: "#/components/examples/post-createAccountHolder-generic-401"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -304,7 +304,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-403"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -313,9 +313,9 @@ paths:
             application/json:
               examples:
                 business:
-                  $ref: "#/components/examples/post-createAccountHolder-business"
+                  $ref: "#/components/examples/post-createAccountHolder-business-422"
                 individual:
-                  $ref: "#/components/examples/post-createAccountHolder-individual"
+                  $ref: "#/components/examples/post-createAccountHolder-individual-422"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -324,7 +324,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/post-createAccountHolder-generic"
+                  $ref: "#/components/examples/post-createAccountHolder-generic-500"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -366,7 +366,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -381,7 +381,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-403"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -435,7 +435,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -450,7 +450,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-403"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -501,7 +501,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -516,7 +516,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-403"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -572,7 +572,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -587,7 +587,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-403"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -635,7 +635,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -650,7 +650,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-403"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -699,7 +699,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -714,7 +714,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-403"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -768,7 +768,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -783,7 +783,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-403"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -840,7 +840,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -855,7 +855,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-403"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -909,7 +909,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -924,7 +924,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-403"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1004,7 +1004,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1019,7 +1019,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-403"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1073,7 +1073,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1088,7 +1088,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-403"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1142,7 +1142,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-400"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1157,7 +1157,7 @@ paths:
             application/json:
               examples:
                 generic:
-                  $ref: "#/components/examples/generic"
+                  $ref: "#/components/examples/generic-403"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1183,7 +1183,14 @@ paths:
       x-sortIndex: 1
 components:
   examples:
-    generic:
+    generic-400:
+      summary: Response code 400. Bad Request.
+      value:
+        errorCode: "702"
+        errorType: validation
+        message: "Unexpected input: I"
+        status: 400
+    generic-403:
       summary: Response code 401. Forbidden.
       value:
         errorCode: 10_003
@@ -1203,6 +1210,76 @@ components:
       value:
         accountHolderCode: CODE_OF_ACCOUNT_HOLDER
     post-createAccountHolder-business:
+      summary: Create a business account holder
+      value:
+        accountHolderCode: GENERATE_CODE
+        accountHolderDetails:
+          businessDetails:
+            doingBusinessAs: Real Good Restaurant
+            legalBusinessName: Real Good Restaurant Inc.
+            shareholders:
+              - ShareholderContact:
+                  name:
+                    firstName: John
+                    gender: MALE
+                    lastName: Carpenter
+          email: test@adyen.com
+          webAddress: https://www.your-website.com
+        legalEntity: Business
+    post-createAccountHolder-business-200:
+      summary: Response code 200. Success.
+      value:
+        accountCode: "8816080397613522"
+        accountHolderCode: GENERATE_CODE
+        accountHolderDetails:
+          address:
+            country: US
+          bankAccountDetails: []
+          email: tim@green.com
+          individualDetails:
+            name:
+              firstName: Tim
+              gender: MALE
+              lastName: Green
+          merchantCategoryCode: "7999"
+          payoutMethods: []
+          webAddress: null
+        accountHolderStatus:
+          events: []
+          payoutState:
+            allowPayout: false
+            disabled: false
+          processingState:
+            disabled: false
+            processedFrom:
+              currency: USD
+              value: 0
+            processedTo:
+              currency: USD
+              value: 9999
+            tierNumber: 0
+          status: Active
+        invalidFields: []
+        legalEntity: Individual
+        pspReference: "8816080397613514"
+        verification:
+          accountHolder:
+            checks:
+              - requiredFields:
+                  - AccountHolderDetails.IndividualDetails.PersonalData.personalData
+                  - AccountHolderDetails.Address.city
+                  - AccountHolderDetails.Address.houseNumberOrName
+                  - AccountHolderDetails.Address.postalCode
+                  - AccountHolderDetails.Address.street
+                  - AccountHolderDetails.IndividualDetails.PersonalData.idNumber
+                  - AccountHolderDetails.PhoneNumber.phoneNumber
+                status: AWAITING_DATA
+                type: IDENTITY_VERIFICATION
+              - requiredFields:
+                  - AccountHolderDetails.BankAccountDetails.bankAccount
+                status: AWAITING_DATA
+                type: PAYOUT_METHOD_VERIFICATION
+    post-createAccountHolder-business-422:
       summary: Response code 422. Unprocessable Entity.
       value:
         invalidFields:
@@ -1212,14 +1289,87 @@ components:
               field: accountHolderCode
               fieldName: accountHolderCode
         pspReference: "8816080407386622"
-    post-createAccountHolder-generic:
+    post-createAccountHolder-generic-401:
       summary: Response code 401. Unauthorized.
       value:
         errorCode: "000"
         errorType: security
         message: HTTP Status Response - Unauthorized
         status: 401
+    post-createAccountHolder-generic-500:
+      summary: Response code 500. Internal Server Error.
+      value:
+        errorCode: "701"
+        errorType: internal
+        message: Internal Error in createAccountHolder 991608040809302G
+        status: 500
     post-createAccountHolder-individual:
+      summary: Create an individual account holder
+      value:
+        accountHolderCode: GENERATE_CODE
+        accountHolderDetails:
+          email: tim@green.com
+          individualDetails:
+            name:
+              firstName: Tim
+              gender: MALE
+              lastName: Green
+          webAddress: https://www.your-website.com
+        legalEntity: Individual
+    post-createAccountHolder-individual-200:
+      summary: Response code 200. Success.
+      value:
+        accountCode: "8516080413108724"
+        accountHolderCode: GENERATE_CODE
+        accountHolderDetails:
+          address:
+            country: US
+          bankAccountDetails: []
+          email: tim@green.com
+          individualDetails:
+            name:
+              firstName: Tim
+              gender: MALE
+              lastName: Green
+          merchantCategoryCode: "7999"
+          payoutMethods: []
+          webAddress: null
+        accountHolderStatus:
+          events: []
+          payoutState:
+            allowPayout: false
+            disabled: false
+          processingState:
+            disabled: false
+            processedFrom:
+              currency: USD
+              value: 0
+            processedTo:
+              currency: USD
+              value: 9999
+            tierNumber: 0
+          status: Active
+        invalidFields: []
+        legalEntity: Individual
+        pspReference: "8516080413108716"
+        verification:
+          accountHolder:
+            checks:
+              - requiredFields:
+                  - AccountHolderDetails.Address.city
+                  - AccountHolderDetails.Address.houseNumberOrName
+                  - AccountHolderDetails.Address.postalCode
+                  - AccountHolderDetails.Address.street
+                  - AccountHolderDetails.IndividualDetails.PersonalData.idNumber
+                  - AccountHolderDetails.PhoneNumber.phoneNumber
+                  - AccountHolderDetails.IndividualDetails.PersonalData.personalData
+                status: AWAITING_DATA
+                type: IDENTITY_VERIFICATION
+              - requiredFields:
+                  - AccountHolderDetails.BankAccountDetails.bankAccount
+                status: AWAITING_DATA
+                type: PAYOUT_METHOD_VERIFICATION
+    post-createAccountHolder-individual-422:
       summary: Response code 422. Unprocessable Entity.
       value:
         invalidFields:
@@ -1889,6 +2039,9 @@ components:
           enum:
             - BIWEEKLY_ON_1ST_AND_15TH_AT_MIDNIGHT
             - BIWEEKLY_ON_1ST_AND_15TH_AT_NOON
+            - BI_DAILY_AU
+            - BI_DAILY_EU
+            - BI_DAILY_US
             - DAILY
             - DAILY_6PM
             - DAILY_AU
@@ -2531,6 +2684,9 @@ components:
           enum:
             - BIWEEKLY_ON_1ST_AND_15TH_AT_MIDNIGHT
             - BIWEEKLY_ON_1ST_AND_15TH_AT_NOON
+            - BI_DAILY_AU
+            - BI_DAILY_EU
+            - BI_DAILY_US
             - DAILY
             - DAILY_6PM
             - DAILY_AU
@@ -2686,7 +2842,7 @@ components:
           description: The phone number of the person.
         signatoryCode:
           description: |
-            The unique identifier (UUID) of the Signatory.
+            The unique identifier (UUID) of the signatory.
             >**If, during an Account Holder create or update request, this field is left blank (but other fields provided), a new Signatory will be created with a procedurally-generated UUID.**
 
             >**If, during an Account Holder create request, a UUID is provided, the creation of the Signatory will fail while the creation of the Account Holder will continue.**
@@ -2696,7 +2852,7 @@ components:
             >**If, during an Account Holder update request, a UUID that is correlated with an existing Signatory is provided, the existing Signatory will be updated.**
           type: string
         signatoryReference:
-          description: Your reference for the Signatory.
+          description: Your reference for the signatory.
           type: string
         webAddress:
           description: The URL of the person's website.
@@ -2934,6 +3090,9 @@ components:
           enum:
             - BIWEEKLY_ON_1ST_AND_15TH_AT_MIDNIGHT
             - BIWEEKLY_ON_1ST_AND_15TH_AT_NOON
+            - BI_DAILY_AU
+            - BI_DAILY_EU
+            - BI_DAILY_US
             - DAILY
             - DAILY_6PM
             - DAILY_AU

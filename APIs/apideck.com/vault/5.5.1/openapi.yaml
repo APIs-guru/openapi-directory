@@ -163,7 +163,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 5.4.0
+  version: 5.5.1
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -223,17 +223,17 @@ paths:
         "301":
           description: redirect
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security: []
       summary: Authorize
       tags:
@@ -251,7 +251,10 @@ paths:
 
             const params = {
               serviceId: 'pipedrive',
-              applicationId: 'application_id_example'
+              applicationId: 'application_id_example',
+              state:
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb25zdW1lcl9pZCI6InRlc3RfdXNlcl9pZCIsInVuaWZpZWRfYXBpIjoiZGVmYXVsdCIsInNlcnZpY2VfaWQiOiJ0ZWFtbGVhZGVyIiwiYXBwbGljYXRpb25faWQiOiIxMTExIiwiaWF0IjoxNjIyMTI2Nzg3fQ.97_pn1UAXc7mctXBdr15czUNO1jjdQ9sJUOIE_Myzbk',
+              redirectUri: 'http://example.com/integrations'
             }
 
             try {
@@ -276,17 +279,17 @@ paths:
         "301":
           description: callback
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security: []
       summary: Callback
       tags:
@@ -302,8 +305,14 @@ paths:
               apiKey: 'REPLACE_WITH_API_KEY'
             })
 
+            const params = {
+              state:
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb25zdW1lcl9pZCI6InRlc3RfdXNlcl9pZCIsInVuaWZpZWRfYXBpIjoiZGVmYXVsdCIsInNlcnZpY2VfaWQiOiJ0ZWFtbGVhZGVyIiwiYXBwbGljYXRpb25faWQiOiIxMTExIiwiaWF0IjoxNjIyMTI2Nzg3fQ.97_pn1UAXc7mctXBdr15czUNO1jjdQ9sJUOIE_Myzbk',
+              code: 'g0ZGZmNjVmOWI'
+            }
+
             try {
-              const { data } = await apideck.vault.connectionsCallback({})
+              const { data } = await apideck.vault.connectionsCallback(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -324,19 +333,19 @@ paths:
         - $ref: "#/components/parameters/configured"
       responses:
         "200":
-          $ref: "#/components/responses/GetConnections"
+          $ref: "#/components/responses/GetConnectionsResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get all connections
@@ -375,17 +384,17 @@ paths:
         "204":
           description: Resource deleted
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Deletes a connection
@@ -423,22 +432,27 @@ paths:
         - $ref: "#/components/parameters/service_id"
         - $ref: "#/components/parameters/unified_api"
       requestBody:
-        $ref: "#/components/requestBodies/UpdateConnectionRequestBody"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Connection"
+        description: Fields that need to be updated on the resource
+        required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateConnection"
+          $ref: "#/components/responses/UpdateConnectionResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update connection
@@ -457,11 +471,52 @@ paths:
               consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
+            const params = {
+              serviceId: 'pipedrive',
+              unifiedApi: 'crm',
+              connection: {
+                settings: {
+                  instance_url: 'https://eu28.salesforce.com'
+                },
+                metadata: {
+                  account: {
+                    name: 'My Company',
+                    id: 'c01458a5-7276-41ce-bc19-639906b0450a'
+                  },
+                  plan: 'enterprise'
+                },
+                auth_type: 'oauth2',
+                form_fields: [
+                  {
+                    id: 'instance_url',
+                    label: 'Instance url',
+                    value: 'https://eu28.salesforce.com',
+                    placeholder: '',
+                    mask: false,
+                    type: 'text',
+                    required: true,
+                    disabled: false,
+                    custom_field: false
+                  }
+                ],
+                configuration: [
+                  {
+                    resource: 'leads',
+                    defaults: [
+                      {
+                        id: 'ProductInterest',
+                        options: [Array],
+                        value: 'GC5000 series'
+                      }
+                    ]
+                  }
+                ],
+                enabled: true
+              }
+            }
+
             try {
-              const { data } = await apideck.vault.connectionsUpdate({
-                serviceId: 'pipedrive',
-                unifiedApi: 'crm'
-              })
+              const { data } = await apideck.vault.connectionsUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -476,22 +531,27 @@ paths:
         - $ref: "#/components/parameters/service_id"
         - $ref: "#/components/parameters/unified_api"
       requestBody:
-        $ref: "#/components/requestBodies/CreateConnectionRequestBody"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Connection"
+        description: Fields that need to be persisted on the resource
+        required: true
       responses:
         "200":
-          $ref: "#/components/responses/CreateConnection"
+          $ref: "#/components/responses/CreateConnectionResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create connection
@@ -510,11 +570,52 @@ paths:
               consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
+            const params = {
+              serviceId: 'pipedrive',
+              unifiedApi: 'crm',
+              connection: {
+                settings: {
+                  instance_url: 'https://eu28.salesforce.com'
+                },
+                metadata: {
+                  account: {
+                    name: 'My Company',
+                    id: 'c01458a5-7276-41ce-bc19-639906b0450a'
+                  },
+                  plan: 'enterprise'
+                },
+                auth_type: 'oauth2',
+                form_fields: [
+                  {
+                    id: 'instance_url',
+                    label: 'Instance url',
+                    value: 'https://eu28.salesforce.com',
+                    placeholder: '',
+                    mask: false,
+                    type: 'text',
+                    required: true,
+                    disabled: false,
+                    custom_field: false
+                  }
+                ],
+                configuration: [
+                  {
+                    resource: 'leads',
+                    defaults: [
+                      {
+                        id: 'ProductInterest',
+                        options: [Array],
+                        value: 'GC5000 series'
+                      }
+                    ]
+                  }
+                ],
+                enabled: true
+              }
+            }
+
             try {
-              const { data } = await apideck.vault.connectionsAdd({
-                serviceId: 'pipedrive',
-                unifiedApi: 'crm'
-              })
+              const { data } = await apideck.vault.connectionsAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -534,19 +635,19 @@ paths:
         - $ref: "#/components/parameters/resource"
       responses:
         "200":
-          $ref: "#/components/responses/GetConnection"
+          $ref: "#/components/responses/GetConnectionResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get settings
@@ -596,19 +697,19 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateConnection"
+          $ref: "#/components/responses/UpdateConnectionResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update settings
@@ -631,16 +732,7 @@ paths:
               serviceId: 'pipedrive',
               unifiedApi: 'crm',
               resource: 'leads',
-              connectionsSetting: {
-                service_id: 'salesforce',
-                name: 'Salesforce',
-                tag_line:
-                  'CRM software solutions and enterprise cloud computing from Salesforce, the leader in customer relationship management (CRM) and PaaS. Free 30 day trial.',
-                unified_api: 'crm',
-                website: 'https://www.salesforce.com',
-                icon:
-                  'https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png',
-                logo: 'https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg',
+              connection: {
                 settings: {
                   instance_url: 'https://eu28.salesforce.com'
                 },
@@ -652,7 +744,6 @@ paths:
                   plan: 'enterprise'
                 },
                 auth_type: 'oauth2',
-                status: 'live',
                 form_fields: [
                   {
                     id: 'instance_url',
@@ -678,17 +769,7 @@ paths:
                     ]
                   }
                 ],
-                configurable_resources: ['opportunities', 'companies', 'contacts', 'leads'],
-                resource_schema_support: ['leads'],
-                resource_settings_support: ['leads'],
-                settings_required_for_authorization: ['instance_url'],
-                authorize_url:
-                  'https://unify.apideck.com/vault/authorize/salesforce/<application-id>?state=<state>',
-                revoke_url: 'https://unify.apideck.com/vault/revoke/salesforce/<application-id>?state=<state>',
-                enabled: true,
-                created_at: 1615563533390,
-                updated_at: 1616662325753,
-                state: 'authorized'
+                enabled: true
               }
             }
 
@@ -710,19 +791,19 @@ paths:
         - $ref: "#/components/parameters/limit"
       responses:
         "200":
-          $ref: "#/components/responses/GetConsumers"
+          $ref: "#/components/responses/GetConsumersResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get all consumers
@@ -757,19 +838,19 @@ paths:
         - $ref: "#/components/parameters/consumer_id"
       responses:
         "200":
-          $ref: "#/components/responses/GetConsumer"
+          $ref: "#/components/responses/GetConsumerResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get consumer
@@ -808,19 +889,19 @@ paths:
         - $ref: "#/components/parameters/end_datetime"
       responses:
         "200":
-          $ref: "#/components/responses/ConsumerRequestCountsInDateRange"
+          $ref: "#/components/responses/ConsumerRequestCountsInDateRangeResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Consumer request counts
@@ -838,10 +919,14 @@ paths:
               appId: 'REPLACE_WITH_APP_ID'
             })
 
+            const params = {
+              consumerId: 'test_user_id',
+              startDatetime: '2021-05-01T12:00:00.000Z',
+              endDatetime: '2021-05-30T12:00:00.000Z'
+            }
+
             try {
-              const { data } = await apideck.vault.consumersRequestCounts({
-                consumerId: 'test_user_id'
-              })
+              const { data } = await apideck.vault.consumersRequestCounts(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -860,19 +945,19 @@ paths:
         - $ref: "#/components/parameters/limit"
       responses:
         "200":
-          $ref: "#/components/responses/GetLogs"
+          $ref: "#/components/responses/GetLogsResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get all consumer request logs
@@ -1257,17 +1342,17 @@ paths:
         "301":
           description: redirect
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security: []
       summary: Revoke
       tags:
@@ -1285,7 +1370,10 @@ paths:
 
             const params = {
               serviceId: 'pipedrive',
-              applicationId: 'application_id_example'
+              applicationId: 'application_id_example',
+              state:
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb25zdW1lcl9pZCI6InRlc3RfdXNlcl9pZCIsInVuaWZpZWRfYXBpIjoiZGVmYXVsdCIsInNlcnZpY2VfaWQiOiJ0ZWFtbGVhZGVyIiwiYXBwbGljYXRpb25faWQiOiIxMTExIiwiaWF0IjoxNjIyMTI2Nzg3fQ.97_pn1UAXc7mctXBdr15czUNO1jjdQ9sJUOIE_Myzbk',
+              redirectUri: 'http://example.com/integrations'
             }
 
             try {
@@ -1311,24 +1399,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SessionRequest"
+              $ref: "#/components/schemas/Session"
         description: Additional redirect uri and/or consumer metadata
         required: false
       responses:
         "200":
-          $ref: "#/components/responses/CreateSession"
+          $ref: "#/components/responses/CreateSessionResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create Session
@@ -1349,7 +1437,6 @@ paths:
 
             const params = {
               session: {
-                redirect_uri: 'https://mysaas.com/dashboard',
                 consumer_metadata: {
                   account_name: 'SpaceX',
                   user_name: 'Elon Musk',
@@ -1369,20 +1456,21 @@ paths:
                     }
                   ]
                 },
+                redirect_uri: 'https://mysaas.com/dashboard',
+                settings: {
+                  hide_resource_settings: false,
+                  sandbox_mode: false,
+                  session_length: '30m',
+                  show_logs: true
+                },
                 theme: {
-                  vault_name: 'Intercom',
+                  favicon: 'https://res.cloudinary.com/apideck/icons/intercom',
                   primary_color: '#286efa',
+                  privacy_url: 'https://compliance.apideck.com/privacy-policy',
                   sidepanel_background_color: '#286efa',
                   sidepanel_text_color: '#FFFFFF',
-                  favicon: 'https://res.cloudinary.com/apideck/icons/intercom',
                   terms_url: 'https://www.termsfeed.com/terms-conditions/957c85c1b089ae9e3219c83eff65377e',
-                  privacy_url: 'https://compliance.apideck.com/privacy-policy'
-                },
-                settings: {
-                  session_length: '30m',
-                  hide_resource_settings: false,
-                  show_logs: true,
-                  sandbox_mode: false
+                  vault_name: 'Intercom'
                 }
               }
             }
@@ -1453,20 +1541,7 @@ components:
       in: query
       name: filter
       schema:
-        properties:
-          connector_id:
-            example: crm+salesforce
-            nullable: true
-            type: string
-          exclude_unified_apis:
-            example: vault,proxy
-            nullable: true
-            type: string
-          status_code:
-            example: 201
-            nullable: true
-            type: number
-        type: object
+        $ref: "#/components/schemas/LogsFilter"
       style: deepObject
     id:
       description: ID of the record you are acting upon.
@@ -1598,41 +1673,26 @@ components:
       required: true
       schema:
         type: string
-  requestBodies:
-    CreateConnectionRequestBody:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/CreateConnectionRequestBody"
-      description: Fields to be persisted as Connection
-      required: true
-    UpdateConnectionRequestBody:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/CreateConnectionRequestBody"
-      description: Fields to be updated on the resource
-      required: true
   responses:
-    BadRequest:
+    BadRequestResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/BadRequest"
+            $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    ConsumerRequestCountsInDateRange:
+    ConsumerRequestCountsInDateRangeResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/ConsumerRequestCountsInDateRangeResponse"
       description: Consumers Request Counts within Date Range
-    CreateConnection:
+    CreateConnectionResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/CreateConnectionResponse"
       description: Connection created
-    CreateSession:
+    CreateSessionResponse:
       content:
         application/json:
           schema:
@@ -1650,53 +1710,53 @@ components:
           example: {}
           schema: {}
       description: Resource succesfully deleted
-    GetConnection:
+    GetConnectionResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetConnectionResponse"
       description: Connection
-    GetConnections:
+    GetConnectionsResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetConnectionsResponse"
-      description: All Connections
-    GetConsumer:
+      description: Connections
+    GetConsumerResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetConsumerResponse"
       description: Consumer
-    GetConsumers:
+    GetConsumersResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetConsumersResponse"
-      description: All Consumers
-    GetLogs:
+      description: Consumers
+    GetLogsResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetLogsResponse"
-      description: All Consumer Logs
+      description: Logs
     NoContent:
       content:
         application/json:
           example: {}
           schema: {}
       description: No content
-    NotFound:
+    NotFoundResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/NotFoundResponse"
       description: The specified resource was not found
-    NotImplemented:
+    NotImplementedResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/NotImplemented"
+            $ref: "#/components/schemas/NotImplementedResponse"
       description: Not Implemented
     Ok:
       content:
@@ -1704,11 +1764,11 @@ components:
           example: {}
           schema: {}
       description: Ok
-    PaymentRequired:
+    PaymentRequiredResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/PaymentRequired"
+            $ref: "#/components/schemas/PaymentRequiredResponse"
       description: Payment Required
     ProxyError:
       content:
@@ -1720,25 +1780,25 @@ components:
           schema:
             description: Indicates if the error returned in the body is from the downstream
             type: boolean
-    Unauthorized:
+    UnauthorizedResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Unauthorized"
+            $ref: "#/components/schemas/UnauthorizedResponse"
       description: Unauthorized
-    UnexpectedError:
+    UnexpectedErrorResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UnexpectedError"
+            $ref: "#/components/schemas/UnexpectedErrorResponse"
       description: Unexpected error
-    Unprocessable:
+    UnprocessableResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Unprocessable"
+            $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
-    UpdateConnection:
+    UpdateConnectionResponse:
       content:
         application/json:
           schema:
@@ -1758,7 +1818,7 @@ components:
         - basic
         - none
       type: string
-    BadRequest:
+    BadRequestResponse:
       properties:
         detail:
           anyOf:
@@ -1793,9 +1853,11 @@ components:
       properties:
         auth_type:
           $ref: "#/components/schemas/AuthType"
+          readOnly: true
         authorize_url:
           example: https://unify.apideck.com/vault/authorize/salesforce/<application-id>?state=<state>
           nullable: true
+          readOnly: true
           type: string
         configurable_resources:
           example:
@@ -1805,6 +1867,7 @@ components:
             - leads
           items:
             type: string
+          readOnly: true
           type: array
         configuration:
           items:
@@ -1854,6 +1917,7 @@ components:
           type: array
         created_at:
           example: 1615563533390
+          readOnly: true
           type: number
         enabled:
           example: true
@@ -1874,6 +1938,7 @@ components:
           type: array
         icon:
           example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
+          readOnly: true
           type: string
         id:
           example: lead+close
@@ -1881,6 +1946,7 @@ components:
           type: string
         logo:
           example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
+          readOnly: true
           type: string
         metadata:
           additionalProperties: true
@@ -1895,25 +1961,30 @@ components:
           type: object
         name:
           example: Salesforce
+          readOnly: true
           type: string
         resource_schema_support:
           example:
             - leads
           items:
             type: string
+          readOnly: true
           type: array
         resource_settings_support:
           example:
             - leads
           items:
             type: string
+          readOnly: true
           type: array
         revoke_url:
           example: https://unify.apideck.com/vault/revoke/salesforce/<application-id>?state=<state>
           nullable: true
+          readOnly: true
           type: string
         service_id:
           example: salesforce
+          readOnly: true
           type: string
         settings:
           description: Connection settings. Values will persist to `form_fields` with corresponding id
@@ -1926,27 +1997,34 @@ components:
             - instance_url
           items:
             type: string
+          readOnly: true
           type: array
         state:
           $ref: "#/components/schemas/ConnectionState"
+          readOnly: true
         status:
           enum:
             - live
             - upcoming
             - requested
+          readOnly: true
           type: string
         tag_line:
           example: CRM software solutions and enterprise cloud computing from Salesforce, the leader in customer relationship management (CRM) and PaaS. Free 30 day trial.
+          readOnly: true
           type: string
         unified_api:
           example: crm
+          readOnly: true
           type: string
         updated_at:
           example: 1616662325753
           nullable: true
+          readOnly: true
           type: number
         website:
           example: https://www.salesforce.com
+          readOnly: true
           type: string
       type: object
     ConnectionMetadata:
@@ -1964,6 +2042,7 @@ components:
         - added
         - authorized
       example: authorized
+      readOnly: true
       type: string
     Consumer:
       properties:
@@ -2093,34 +2172,6 @@ components:
         - status
         - data
       type: object
-    CreateConnectionRequestBody:
-      additionalProperties: false
-      properties:
-        enabled:
-          example: true
-          type: boolean
-        metadata:
-          example:
-            account:
-              id: c01458a5-7276-41ce-bc19-639906b0450a
-              name: My Company
-            ecosystem:
-              id: a6469332-7948-46a6-abc2-87ba3f005025
-              name: My Ecosystem
-          nullable: true
-          properties:
-            account:
-              $ref: "#/components/schemas/ConnectionMetadata"
-            ecosystem:
-              $ref: "#/components/schemas/ConnectionMetadata"
-          type: object
-        settings:
-          description: Connection settings. Values will persist to `form_fields` with corresponding id
-          example:
-            instance_url: https://eu28.salesforce.com
-          nullable: true
-          type: object
-      type: object
     CreateConnectionResponse:
       properties:
         data:
@@ -2139,9 +2190,18 @@ components:
         - data
       type: object
     CreateSessionResponse:
+      additionalProperties: false
       properties:
         data:
-          $ref: "#/components/schemas/Session"
+          additionalProperties: false
+          properties:
+            session_uri:
+              example: http://vault.apideck.com/session/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb25zdW1lcl9pZCI6InRlc3RfdXNlcl9pZCIsImFwcGxpY2F0aW9uX2lkIj
+              readOnly: true
+              type: string
+          required:
+            - session_uri
+          type: object
         status:
           description: HTTP Response Status
           example: OK
@@ -2512,6 +2572,22 @@ components:
         - timestamp
         - unified_api
       type: object
+    LogsFilter:
+      properties:
+        connector_id:
+          example: crm+salesforce
+          nullable: true
+          type: string
+        exclude_unified_apis:
+          example: vault,proxy
+          nullable: true
+          type: string
+        status_code:
+          example: 201
+          nullable: true
+          type: number
+      type: object
+      x-graphql-type-name: LogsFilter
     Meta:
       description: Reponse metadata
       properties:
@@ -2571,7 +2647,7 @@ components:
           description: The type of error returned
           example: EntityNotFoundError
           type: string
-    NotImplemented:
+    NotImplementedResponse:
       properties:
         detail:
           anyOf:
@@ -2599,7 +2675,7 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
-    PaymentRequired:
+    PaymentRequiredResponse:
       properties:
         detail:
           description: Contains parameter or domain specific information related to the error and why it occured.
@@ -2663,19 +2739,13 @@ components:
           type: number
       type: object
     Session:
-      properties:
-        session_uri:
-          example: http://vault.apideck.com/session/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb25zdW1lcl9pZCI6InRlc3RfdXNlcl9pZCIsImFwcGxpY2F0aW9uX2lkIj
-          type: string
-      type: object
-    SessionRequest:
       additionalProperties: false
       properties:
         consumer_metadata:
           $ref: "#/components/schemas/ConsumerMetadata"
         custom_consumer_settings:
           additionalProperties: true
-          description: Custom consumer settings that are passed part of the session.
+          description: Custom consumer settings that are passed as part of the session.
           example:
             feature_flag_1: true
             tax_rates:
@@ -2683,7 +2753,6 @@ components:
                 label: 6%
               - id: "21"
                 label: 21%
-          properties: {}
           title: Custom consumer settings
           type: object
         redirect_uri:
@@ -2758,7 +2827,7 @@ components:
                   - type: number
               type: array
       type: object
-    Unauthorized:
+    UnauthorizedResponse:
       properties:
         detail:
           description: Contains parameter or domain specific information related to the error and why it occured.
@@ -2784,7 +2853,7 @@ components:
           description: The type of error returned
           example: UnauthorizedError
           type: string
-    UnexpectedError:
+    UnexpectedErrorResponse:
       properties:
         detail:
           anyOf:
@@ -2815,7 +2884,7 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
-    Unprocessable:
+    UnprocessableResponse:
       properties:
         detail:
           description: Contains parameter or domain specific information related to the error and why it occured.
@@ -2841,8 +2910,6 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
-    UpdateConnectionRequestBody:
-      $ref: "#/components/schemas/CreateConnectionRequestBody"
     UpdateConnectionResponse:
       properties:
         data:
