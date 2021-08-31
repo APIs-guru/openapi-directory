@@ -3169,8 +3169,8 @@ components:
     Attachment:
       properties:
         content:
+          contentEncoding: base64
           description: The document, in Base64-encoded string format.
-          format: byte
           type: string
         contentType:
           deprecated: true

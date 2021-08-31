@@ -1851,7 +1851,7 @@ components:
       description: A person's gender.
       properties:
         addressMeAs:
-          description: "The type of pronouns that should be used to address the person. The value can be custom or one of these predefined values: * `male` * `female` * `other`"
+          description: "Free form text field for pronouns that should be used to address the person. Common values are: * `he`/`him` * `she`/`her` * `they`/`them`"
           type: string
         formattedValue:
           description: Output only. The value of the gender translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale. Unspecified or custom value are not localized.
