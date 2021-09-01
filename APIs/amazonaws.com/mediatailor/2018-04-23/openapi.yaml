@@ -143,15 +143,28 @@ paths:
                 - Outputs
                 - PlaybackMode
               properties:
+                FillerSlate:
+                  description: Slate VOD source configuration.
+                  type: object
+                  properties:
+                    SourceLocationName:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The name of the source location where the slate VOD source is stored.
+                    VodSourceName:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The slate VOD source name. The VOD source must already exist in a source location before it can be used for slate.
                 Outputs:
                   description: An object that represents an object in the CreateChannel request.
                   type: array
                   items:
                     $ref: '#/components/schemas/RequestOutputItem'
                 PlaybackMode:
-                  description: The type of playback mode for this channel. The only supported value is LOOP.
+                  description: '<p>The type of playback mode to use for this channel.</p> <p>LINEAR - The programs in the schedule play once back-to-back in the schedule.</p> <p>LOOP - The programs in the schedule play back-to-back in an endless loop. When the last program in the schedule stops playing, playback loops back to the first program in the schedule.</p>'
                   enum:
                     - LOOP
+                    - LINEAR
                   type: string
                 tags:
                   description: The tags to assign to the channel.
@@ -1380,6 +1393,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__timestampUnix'
             - description: The timestamp of when the channel was created.
+        FillerSlate:
+          allOf:
+            - $ref: '#/components/schemas/SlateSource'
+            - description: Contains information about the slate used to fill gaps between programs in the schedule.
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/__timestampUnix'
@@ -1391,13 +1408,15 @@ components:
         PlaybackMode:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: The type of playback for this channel. The only supported value is LOOP.
+            - description: The channel's playback mode.
         Tags:
           allOf:
             - $ref: '#/components/schemas/__mapOf__string'
             - xml:
                 name: tags
               description: The tags assigned to the channel.
+    __string:
+      type: string
     RequestOutputItem:
       required:
         - ManifestName
@@ -1420,9 +1439,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: A string used to match which HttpPackageConfiguration is used for each VodSource.
-      description: The ouput configuration for this channel.
-    __string:
-      type: string
+      description: The output configuration for this channel.
     CreateProgramResponse:
       type: object
       properties:
@@ -1446,6 +1463,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: The name of the program.
+        ScheduledStartTime:
+          allOf:
+            - $ref: '#/components/schemas/__timestampUnix'
+            - description: 'The date and time that the program is scheduled to start in ISO 8601 format and Coordinated Universal Time (UTC). For example, the value 2021-03-27T17:48:16.751Z represents March 27, 2021 at 17:48:16.751 UTC.'
         SourceLocationName:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -1483,15 +1504,19 @@ components:
         RelativePosition:
           allOf:
             - $ref: '#/components/schemas/RelativePosition'
-            - description: 'The position where this program will be inserted relative to the RelativeProgram. Possible values are: AFTER_PROGRAM, and BEFORE_PROGRAM.'
+            - description: The position where this program will be inserted relative to the RelativePosition.
         RelativeProgram:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: 'The name of the program that this program will be inserted next to, as defined by RelativePosition.'
+        ScheduledStartTimeMillis:
+          allOf:
+            - $ref: '#/components/schemas/__long'
+            - description: 'The date and time that the program is scheduled to start, in epoch milliseconds.'
         Type:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: When the program should be played. RELATIVE means that programs will be played back-to-back.
+            - description: '<p>Defines when the program plays in the schedule. You can set the value to ABSOLUTE or RELATIVE.</p> <p>ABSOLUTE - The program plays at a specific wall clock time. This setting can only be used for channels using the LINEAR PlaybackMode.</p> <p>Note the following considerations when using ABSOLUTE transitions:</p> <p>If the preceding program in the schedule has a duration that extends past the wall clock time, MediaTailor truncates the preceding program on a common segment boundary.</p> <p>If there are gaps in playback, MediaTailor plays the FillerSlate you configured for your linear channel.</p> <p>RELATIVE - The program is inserted into the schedule either before or after a program that you specify via RelativePosition.</p>'
       description: Program transition configuration.
     CreateSourceLocationResponse:
       type: object
@@ -1641,6 +1666,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__timestampUnix'
             - description: The timestamp of when the channel was created.
+        FillerSlate:
+          allOf:
+            - $ref: '#/components/schemas/SlateSource'
+            - description: Contains information about the slate used to fill gaps between programs in the schedule.
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/__timestampUnix'
@@ -1652,7 +1681,7 @@ components:
         PlaybackMode:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: The type of playback for this channel. The only supported value is LOOP.
+            - description: The channel's playback mode.
         Tags:
           allOf:
             - $ref: '#/components/schemas/__mapOf__string'
@@ -1682,6 +1711,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: The name of the program.
+        ScheduledStartTime:
+          allOf:
+            - $ref: '#/components/schemas/__timestampUnix'
+            - description: 'The date and time that the program is scheduled to start in ISO 8601 format and Coordinated Universal Time (UTC). For example, the value 2021-03-27T17:48:16.751Z represents March 27, 2021 at 17:48:16.751 UTC.'
         SourceLocationName:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2049,6 +2082,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__timestampUnix'
             - description: The timestamp of when the channel was created.
+        FillerSlate:
+          allOf:
+            - $ref: '#/components/schemas/SlateSource'
+            - description: Contains information about the slate used to fill gaps between programs in the schedule.
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/__timestampUnix'
@@ -2060,7 +2097,7 @@ components:
         PlaybackMode:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: The type of playback for this channel. The only supported value is LOOP.
+            - description: The channel's playback mode.
         Tags:
           allOf:
             - $ref: '#/components/schemas/__mapOf__string'
@@ -2291,6 +2328,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__timestampUnix'
             - description: The timestamp of when the channel was created.
+        FillerSlate:
+          allOf:
+            - $ref: '#/components/schemas/SlateSource'
+            - description: Contains information about the slate used to fill gaps between programs in the schedule. You must configure FillerSlate if your channel uses an LINEAR PlaybackMode.
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/__timestampUnix'
@@ -2302,7 +2343,7 @@ components:
         PlaybackMode:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: 'The type of playback mode for this channel. Possible values: ONCE or LOOP.'
+            - description: '<p>The type of playback mode for this channel.</p> <p>LINEAR - Programs play back-to-back only once.</p> <p>LOOP - Programs play back-to-back in an endless loop. When the last program in the schedule plays, playback loops back to the first program in the schedule.</p>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/__mapOf__string'
@@ -2333,6 +2374,7 @@ components:
     PlaybackMode:
       enum:
         - LOOP
+        - LINEAR
       type: string
     CreateChannelRequest:
       required:
@@ -2341,6 +2383,10 @@ components:
       type: object
       title: CreateChannelRequest
       properties:
+        FillerSlate:
+          allOf:
+            - $ref: '#/components/schemas/SlateSource'
+            - description: The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses an LINEAR PlaybackMode.
         Outputs:
           allOf:
             - $ref: '#/components/schemas/RequestOutputs'
@@ -2348,7 +2394,7 @@ components:
         PlaybackMode:
           allOf:
             - $ref: '#/components/schemas/PlaybackMode'
-            - description: The type of playback mode for this channel. The only supported value is LOOP.
+            - description: '<p>The type of playback mode to use for this channel.</p> <p>LINEAR - The programs in the schedule play once back-to-back in the schedule.</p> <p>LOOP - The programs in the schedule play back-to-back in an endless loop. When the last program in the schedule stops playing, playback loops back to the first program in the schedule.</p>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/__mapOf__string'
@@ -2859,6 +2905,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ScheduleAdBreak'
+    ScheduleEntryType:
+      enum:
+        - PROGRAM
+        - FILLER_SLATE
+      type: string
     ScheduleEntry:
       required:
         - VodSourceName
@@ -2892,6 +2943,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__listOfScheduleAdBreak'
             - description: The schedule's ad break properties.
+        ScheduleEntryType:
+          allOf:
+            - $ref: '#/components/schemas/ScheduleEntryType'
+            - description: '<p>The type of schedule entry.</p> <p>Valid values: PROGRAM or FILLER_SLATE.</p>'
         SourceLocationName:
           allOf:
             - $ref: '#/components/schemas/__string'

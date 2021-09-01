@@ -3,7 +3,7 @@ info:
   version: '2020-06-24'
   x-release: v4
   title: AWS Service Catalog App Registry
-  description: ' AWS Service Catalog AppRegistry enables organizations to understand the application context of their AWS resources. AppRegistry provides a repository of your applications, their resources, and the application metadata that you use within your enterprise.'
+  description: ' Amazon Web Services Service Catalog AppRegistry enables organizations to understand the application context of their Amazon Web Services resources. AppRegistry provides a repository of your applications, their resources, and the application metadata that you use within your enterprise.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -157,7 +157,7 @@ paths:
           description: The name or ID of the application.
           schema:
             type: string
-            pattern: \w+
+            pattern: '[-.\w]+'
             minLength: 1
             maxLength: 256
         - name: attributeGroup
@@ -166,7 +166,7 @@ paths:
           description: The name or ID of the attribute group that holds the attributes to describe the application.
           schema:
             type: string
-            pattern: \w+
+            pattern: '[-.\w]+'
             minLength: 1
             maxLength: 256
     parameters:
@@ -212,7 +212,7 @@ paths:
           description: The name or ID of the application.
           schema:
             type: string
-            pattern: \w+
+            pattern: '[-.\w]+'
             minLength: 1
             maxLength: 256
         - name: attributeGroup
@@ -221,7 +221,7 @@ paths:
           description: The name or ID of the attribute group that holds the attributes to describe the application.
           schema:
             type: string
-            pattern: \w+
+            pattern: '[-.\w]+'
             minLength: 1
             maxLength: 256
   '/applications/{application}/resources/{resourceType}/{resource}':
@@ -266,7 +266,7 @@ paths:
           description: The name or ID of the application.
           schema:
             type: string
-            pattern: \w+
+            pattern: '[-.\w]+'
             minLength: 1
             maxLength: 256
         - name: resourceType
@@ -323,7 +323,7 @@ paths:
           description: The name or ID of the application.
           schema:
             type: string
-            pattern: \w+
+            pattern: '[-.\w]+'
             minLength: 1
             maxLength: 256
         - name: resourceType
@@ -338,6 +338,61 @@ paths:
           in: path
           required: true
           description: The name or ID of the resource.
+          schema:
+            type: string
+            pattern: \S+
+            minLength: 1
+            maxLength: 256
+    get:
+      operationId: GetAssociatedResource
+      description: Gets the resource associated with the application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAssociatedResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: application
+          in: path
+          required: true
+          description: The name or ID of the application.
+          schema:
+            type: string
+            pattern: '[-.\w]+'
+            minLength: 1
+            maxLength: 256
+        - name: resourceType
+          in: path
+          required: true
+          description: The type of resource associated with the application.
+          schema:
+            type: string
+            enum:
+              - CFN_STACK
+        - name: resource
+          in: path
+          required: true
+          description: The name or ID of the resource associated with the application.
           schema:
             type: string
             pattern: \S+
@@ -386,7 +441,7 @@ paths:
                 name:
                   description: The name of the application. The name must be unique in the region in which you are creating the application.
                   type: string
-                  pattern: \w+
+                  pattern: '[-.\w]+'
                   minLength: 1
                   maxLength: 256
                 description:
@@ -504,7 +559,7 @@ paths:
                 name:
                   description: The name of the attribute group.
                   type: string
-                  pattern: \w+
+                  pattern: '[-.\w]+'
                   minLength: 1
                   maxLength: 256
                 description:
@@ -614,7 +669,7 @@ paths:
           description: The name or ID of the application.
           schema:
             type: string
-            pattern: \w+
+            pattern: '[-.\w]+'
             minLength: 1
             maxLength: 256
     parameters:
@@ -660,7 +715,7 @@ paths:
           description: The name or ID of the application.
           schema:
             type: string
-            pattern: \w+
+            pattern: '[-.\w]+'
             minLength: 1
             maxLength: 256
     patch:
@@ -698,7 +753,7 @@ paths:
           description: The name or ID of the application that will be updated.
           schema:
             type: string
-            pattern: \w+
+            pattern: '[-.\w]+'
             minLength: 1
             maxLength: 256
       requestBody:
@@ -711,7 +766,7 @@ paths:
                 name:
                   description: The new name of the application. The name must be unique in the region in which you are updating the application.
                   type: string
-                  pattern: \w+
+                  pattern: '[-.\w]+'
                   minLength: 1
                   maxLength: 256
                 description:
@@ -754,7 +809,7 @@ paths:
           description: The name or ID of the attribute group that holds the attributes to describe the application.
           schema:
             type: string
-            pattern: \w+
+            pattern: '[-.\w]+'
             minLength: 1
             maxLength: 256
     parameters:
@@ -800,7 +855,7 @@ paths:
           description: The name or ID of the attribute group that holds the attributes to describe the application.
           schema:
             type: string
-            pattern: \w+
+            pattern: '[-.\w]+'
             minLength: 1
             maxLength: 256
     patch:
@@ -844,7 +899,7 @@ paths:
           description: The name or ID of the attribute group that holds the attributes to describe the application.
           schema:
             type: string
-            pattern: \w+
+            pattern: '[-.\w]+'
             minLength: 1
             maxLength: 256
       requestBody:
@@ -857,7 +912,7 @@ paths:
                 name:
                   description: The new name of the attribute group. The name must be unique in the region in which you are updating the attribute group.
                   type: string
-                  pattern: \w+
+                  pattern: '[-.\w]+'
                   minLength: 1
                   maxLength: 256
                 description:
@@ -906,7 +961,7 @@ paths:
           description: The name or ID of the application.
           schema:
             type: string
-            pattern: \w+
+            pattern: '[-.\w]+'
             minLength: 1
             maxLength: 256
         - name: nextToken
@@ -970,7 +1025,7 @@ paths:
           description: The name or ID of the application.
           schema:
             type: string
-            pattern: \w+
+            pattern: '[-.\w]+'
             minLength: 1
             maxLength: 256
         - name: nextToken
@@ -1102,7 +1157,7 @@ paths:
   '/sync/{resourceType}/{resource}':
     post:
       operationId: SyncResource
-      description: 'Syncs the resource with what is currently recorded in App registry. Specifically, the resource’s App registry system tags are synced with its associated application. The resource is removed if it is not associated with the application. The caller must have permissions to read and update the resource.'
+      description: '<p>Syncs the resource with current AppRegistry records.</p> <p>Specifically, the resource’s AppRegistry system tags sync with its associated application. We remove the resource''s AppRegistry system tags if it does not associate with the application. The caller must have permissions to read and update the resource.</p>'
       responses:
         '200':
           description: Success
@@ -1140,7 +1195,7 @@ paths:
         - name: resource
           in: path
           required: true
-          description: 'An entity you can work with and specify with a name or ID. Examples include an Amazon EC2 instance, an AWS CloudFormation stack, or an Amazon S3 bucket.'
+          description: 'An entity you can work with and specify with a name or ID. Examples include an Amazon EC2 instance, an Amazon Web Services CloudFormation stack, or an Amazon S3 bucket.'
           schema:
             type: string
             pattern: \S+
@@ -1379,6 +1434,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: Key-value pairs associated with the application.
+        integrations:
+          allOf:
+            - $ref: '#/components/schemas/Integrations'
+            - description: 'The information about the integration of the application with other services, such as Resource Groups.'
+    GetAssociatedResourceResponse:
+      type: object
+      properties:
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/Resource'
+            - description: The resource associated with the application.
     GetAttributeGroupResponse:
       type: object
       properties:
@@ -1507,13 +1573,15 @@ components:
             - description: The updated information of the attribute group.
     ApplicationId:
       type: string
-      pattern: '[a-z0-9]{12}'
+      pattern: '[a-z0-9]+'
+      minLength: 26
+      maxLength: 26
     ApplicationArn:
       type: string
       pattern: 'arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/applications/[a-z0-9]+'
     Name:
       type: string
-      pattern: \w+
+      pattern: '[-.\w]+'
       minLength: 1
       maxLength: 256
     Description:
@@ -1559,10 +1627,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: Key-value pairs you can use to associate with the application.
-      description: Represents a Service Catalog AppRegistry application that is the top-level node in a hierarchy of related cloud resource abstractions.
+      description: Represents a Amazon Web Services Service Catalog AppRegistry application that is the top-level node in a hierarchy of related cloud resource abstractions.
     ApplicationSpecifier:
       type: string
-      pattern: \w+
+      pattern: '[-.\w]+'
       minLength: 1
       maxLength: 256
     ApplicationSummary:
@@ -1592,7 +1660,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: ' The ISO-8601 formatted timestamp of the moment when the application was last updated.'
-      description: Summary of a Service Catalog AppRegistry application.
+      description: Summary of a Amazon Web Services Service Catalog AppRegistry application.
     ApplicationSummaries:
       type: array
       items:
@@ -1604,7 +1672,7 @@ components:
       maxLength: 1600
     AttributeGroupSpecifier:
       type: string
-      pattern: \w+
+      pattern: '[-.\w]+'
       minLength: 1
       maxLength: 256
     AssociateAttributeGroupRequest:
@@ -1632,9 +1700,9 @@ components:
       minimum: 0
     AttributeGroupId:
       type: string
-      pattern: '[a-z0-9]{12}'
-      minLength: 1
-      maxLength: 100
+      pattern: '[a-z0-9]+'
+      minLength: 26
+      maxLength: 26
     AttributeGroup:
       type: object
       properties:
@@ -1666,7 +1734,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: Key-value pairs you can use to associate with the attribute group.
-      description: Represents a Service Catalog AppRegistry attribute group that is rich metadata which describes an application and its components.
+      description: Represents a Amazon Web Services Service Catalog AppRegistry attribute group that is rich metadata which describes an application and its components.
     AttributeGroupIds:
       type: array
       items:
@@ -1698,7 +1766,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The ISO-8601 formatted timestamp of the moment the attribute group was last updated. This time is the same as the creationTime for a newly created attribute group.
-      description: Summary of a Service Catalog AppRegistry attribute group.
+      description: Summary of a Amazon Web Services Service Catalog AppRegistry attribute group.
     AttributeGroupSummaries:
       type: array
       items:
@@ -1784,10 +1852,58 @@ components:
       type: object
       title: GetApplicationRequest
       properties: {}
+    Integrations:
+      type: object
+      properties:
+        resourceGroup:
+          allOf:
+            - $ref: '#/components/schemas/ResourceGroup'
+            - description: ' The information about the resource group integration.'
+      description: ' The information about the service integration.'
+    GetAssociatedResourceRequest:
+      type: object
+      title: GetAssociatedResourceRequest
+      properties: {}
+    Resource:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceSpecifier'
+            - description: The name of the resource.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/StackArn'
+            - description: The Amazon resource name (ARN) of the resource.
+        associationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the resource was associated with the application.
+        integrations:
+          allOf:
+            - $ref: '#/components/schemas/ResourceIntegrations'
+            - description: 'The service integration information about the resource. '
+      description: ' The information about the resource.'
     GetAttributeGroupRequest:
       type: object
       title: GetAttributeGroupRequest
       properties: {}
+    ResourceGroup:
+      type: object
+      properties:
+        state:
+          allOf:
+            - $ref: '#/components/schemas/ResourceGroupState'
+            - description: '<p>The state of the propagation process for the resource group. The states includes:</p> <p> <code>CREATING </code>if the resource group is in the process of being created.</p> <p> <code>CREATE_COMPLETE</code> if the resource group was created successfully.</p> <p> <code>CREATE_FAILED</code> if the resource group failed to be created.</p> <p> <code>UPDATING</code> if the resource group is in the process of being updated.</p> <p> <code>UPDATE_COMPLETE</code> if the resource group updated successfully.</p> <p> <code>UPDATE_FAILED</code> if the resource group could not update successfully.</p>'
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon resource name (ARN) of the resource group.
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error message that generates when the propagation process for the resource group fails.
+      description: The information about the resource group integration.
     NextToken:
       type: string
       pattern: '[A-Za-z0-9+/=]+'
@@ -1824,6 +1940,25 @@ components:
     StackArn:
       type: string
       pattern: 'arn:aws[-a-z]*:cloudformation:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:stack/[a-zA-Z][-A-Za-z0-9]{0,127}/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}'
+    ResourceIntegrations:
+      type: object
+      properties:
+        resourceGroup:
+          allOf:
+            - $ref: '#/components/schemas/ResourceGroup'
+            - description: The information about the integration of Resource Groups.
+      description: The service integration information about the resource.
+    ResourceGroupState:
+      type: string
+      enum:
+        - CREATING
+        - CREATE_COMPLETE
+        - CREATE_FAILED
+        - UPDATING
+        - UPDATE_COMPLETE
+        - UPDATE_FAILED
+    String:
+      type: string
     ResourceInfo:
       type: object
       properties:
@@ -1835,7 +1970,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/StackArn'
             - description: The Amazon resource name (ARN) that specifies the resource across services.
-      description: Information about the resource.
+      description: The information about the resource.
     SyncAction:
       type: string
       enum:
