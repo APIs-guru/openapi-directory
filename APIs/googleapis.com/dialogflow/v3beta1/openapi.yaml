@@ -95,7 +95,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Kicks off a continuous test under the specified Environment.
+      description: "Kicks off a continuous test under the specified Environment. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: RunContinuousTestMetadata - `response`: RunContinuousTestResponse"
       operationId: dialogflow.projects.locations.agents.environments.runContinuousTest
       parameters:
         - description: "Required. Format: `projects//locations//agents//environments/`."
@@ -411,7 +411,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Exports the specified flow to a binary file. Note that resources (e.g. intents, entities, webhooks) that the flow references will also be exported.
+      description: "Exports the specified flow to a binary file. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: ExportFlowResponse Note that resources (e.g. intents, entities, webhooks) that the flow references will also be exported."
       operationId: dialogflow.projects.locations.agents.flows.export
       parameters:
         - description: "Required. The name of the flow to export. Format: `projects//locations//agents//flows/`."
@@ -457,7 +457,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Loads resources in the specified version to the draft flow.
+      description: "Loads resources in the specified version to the draft flow. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: An [Empty message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)"
       operationId: dialogflow.projects.locations.agents.flows.versions.load
       parameters:
         - description: "Required. The Version to be loaded to draft flow. Format: `projects//locations//agents//flows//versions/`."
@@ -554,7 +554,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Restores the specified agent from a binary file. Replaces the current agent with a new one. Note that all existing resources in agent (e.g. intents, entity types, flows) will be removed. Note: You should always train a flow prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training)."
+      description: "Restores the specified agent from a binary file. Replaces the current agent with a new one. Note that all existing resources in agent (e.g. intents, entity types, flows) will be removed. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: An [Empty message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty) Note: You should always train a flow prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training)."
       operationId: dialogflow.projects.locations.agents.restore
       parameters:
         - description: "Required. The name of the agent to restore into. Format: `projects//locations//agents/`."
@@ -600,7 +600,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Kicks off a test case run.
+      description: "Kicks off a test case run. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: RunTestCaseMetadata - `response`: RunTestCaseResponse"
       operationId: dialogflow.projects.locations.agents.testCases.run
       parameters:
         - description: "Required. Format of test case name to run: `projects//locations/ /agents//testCases/`."
@@ -738,7 +738,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Trains the specified flow. Note that only the flow in 'draft' environment is trained. Note: You should always train a flow prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training)."
+      description: "Trains the specified flow. Note that only the flow in 'draft' environment is trained. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: An [Empty message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty) Note: You should always train a flow prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training)."
       operationId: dialogflow.projects.locations.agents.flows.train
       parameters:
         - description: "Required. The flow to train. Format: `projects//locations//agents//flows/`."
@@ -1092,7 +1092,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates an Environment in the specified Agent.
+      description: "Creates an Environment in the specified Agent. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: Environment"
       operationId: dialogflow.projects.locations.agents.environments.create
       parameters:
         - description: "Required. The Agent to create an Environment for. Format: `projects//locations//agents/`."
@@ -1316,7 +1316,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Imports the specified flow to the specified agent from a binary file. Note: You should always train a flow prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training)."
+      description: "Imports the specified flow to the specified agent from a binary file. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: ImportFlowResponse Note: You should always train a flow prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training)."
       operationId: dialogflow.projects.locations.agents.flows.import
       parameters:
         - description: "Required. The agent to import the flow into. Format: `projects//locations//agents/`."
@@ -1838,7 +1838,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Kicks off a batch run of test cases.
+      description: "Kicks off a batch run of test cases. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: BatchRunTestCasesMetadata - `response`: BatchRunTestCasesResponse"
       operationId: dialogflow.projects.locations.agents.testCases.batchRun
       parameters:
         - description: "Required. Agent name. Format: `projects//locations//agents/ `."
@@ -1884,7 +1884,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Exports the test cases under the agent to a Cloud Storage bucket or a local file. Filter can be applied to export a subset of test cases.
+      description: "Exports the test cases under the agent to a Cloud Storage bucket or a local file. Filter can be applied to export a subset of test cases. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: ExportTestCasesMetadata - `response`: ExportTestCasesResponse"
       operationId: dialogflow.projects.locations.agents.testCases.export
       parameters:
         - description: "Required. The agent where to export test cases from. Format: `projects//locations//agents/`."
@@ -1930,7 +1930,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Imports the test cases from a Cloud Storage bucket or a local file. It always creates new test cases and won't overwite any existing ones. The provided ID in the imported test case is neglected.
+      description: "Imports the test cases from a Cloud Storage bucket or a local file. It always creates new test cases and won't overwite any existing ones. The provided ID in the imported test case is neglected. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: ImportTestCasesMetadata - `response`: ImportTestCasesResponse"
       operationId: dialogflow.projects.locations.agents.testCases.import
       parameters:
         - description: "Required. The agent to import test cases to. Format: `projects//locations//agents/`."
@@ -2108,7 +2108,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a Version in the specified Flow.
+      description: "Creates a Version in the specified Flow. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: CreateVersionOperationMetadata - `response`: Version"
       operationId: dialogflow.projects.locations.agents.flows.versions.create
       parameters:
         - description: "Required. The Flow to create an Version for. Format: `projects//locations//agents//flows/`."
@@ -2527,7 +2527,7 @@ components:
         diagnosticInfo:
           additionalProperties:
             description: Properties of the object.
-          description: Required. Input only. The diagnostic info output for the turn.
+          description: Required. Input only. The diagnostic info output for the turn. Required to calculate the testing coverage.
           type: object
         differences:
           description: Output only. If this is part of a result conversation turn, the list of differences between the original run and the replay for this output, if any.
@@ -2633,7 +2633,7 @@ components:
           type: string
       type: object
     GoogleCloudDialogflowCxV3ExportTestCasesMetadata:
-      description: Metadata returned for the TestCases.ExportTestCases long running operation.
+      description: Metadata returned for the TestCases.ExportTestCases long running operation. This message currently has no fields.
       properties: {}
       type: object
     GoogleCloudDialogflowCxV3ExportTestCasesResponse:
@@ -3175,7 +3175,7 @@ components:
           description: The result for a continuous test run.
       type: object
     GoogleCloudDialogflowCxV3RunTestCaseMetadata:
-      description: Metadata returned for the TestCases.RunTestCase long running operation.
+      description: Metadata returned for the TestCases.RunTestCase long running operation. This message currently has no fields.
       properties: {}
       type: object
     GoogleCloudDialogflowCxV3RunTestCaseResponse:
@@ -3679,7 +3679,7 @@ components:
         diagnosticInfo:
           additionalProperties:
             description: Properties of the object.
-          description: Required. Input only. The diagnostic info output for the turn.
+          description: Required. Input only. The diagnostic info output for the turn. Required to calculate the testing coverage.
           type: object
         differences:
           description: Output only. If this is part of a result conversation turn, the list of differences between the original run and the replay for this output, if any.
@@ -4088,7 +4088,7 @@ components:
           type: string
       type: object
     GoogleCloudDialogflowCxV3beta1ExportTestCasesMetadata:
-      description: Metadata returned for the TestCases.ExportTestCases long running operation.
+      description: Metadata returned for the TestCases.ExportTestCases long running operation. This message currently has no fields.
       properties: {}
       type: object
     GoogleCloudDialogflowCxV3beta1ExportTestCasesRequest:
@@ -5268,7 +5268,7 @@ components:
           description: The result for a continuous test run.
       type: object
     GoogleCloudDialogflowCxV3beta1RunTestCaseMetadata:
-      description: Metadata returned for the TestCases.RunTestCase long running operation.
+      description: Metadata returned for the TestCases.RunTestCase long running operation. This message currently has no fields.
       properties: {}
       type: object
     GoogleCloudDialogflowCxV3beta1RunTestCaseRequest:

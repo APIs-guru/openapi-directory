@@ -44,7 +44,7 @@ paths:
       description: Lists the folders that are direct descendants of supplied parent resource. `list()` provides a strongly consistent view of the folders underneath the specified parent resource. `list()` returns folders sorted based upon the (ascending) lexical ordering of their display_name. The caller must have `resourcemanager.folders.list` permission on the identified parent.
       operationId: cloudresourcemanager.folders.list
       parameters:
-        - description: Optional. The maximum number of folders to return in the response. If unspecified, server picks an appropriate default.
+        - description: Optional. The maximum number of folders to return in the response. The server can return fewer folders than requested. If unspecified, server picks an appropriate default.
           in: query
           name: pageSize
           schema:
@@ -121,7 +121,7 @@ paths:
       description: Search for folders that match specific filter criteria. `search()` provides an eventually consistent view of the folders a user has access to which meet the specified filter criteria. This will only return folders on which the caller has the permission `resourcemanager.folders.get`.
       operationId: cloudresourcemanager.folders.search
       parameters:
-        - description: Optional. The maximum number of folders to return in the response. If unspecified, server picks an appropriate default.
+        - description: Optional. The maximum number of folders to return in the response. The server can return fewer folders than requested. If unspecified, server picks an appropriate default.
           in: query
           name: pageSize
           schema:
@@ -171,7 +171,7 @@ paths:
       description: List all Liens applied to the `parent` resource. Callers of this method will require permission on the `parent` resource. For example, a Lien with a `parent` of `projects/1234` requires permission `resourcemanager.projects.get`.
       operationId: cloudresourcemanager.liens.list
       parameters:
-        - description: The maximum number of items to return. This is a suggestion for the server.
+        - description: The maximum number of items to return. This is a suggestion for the server. The server can return fewer liens than requested. If unspecified, server picks an appropriate default.
           in: query
           name: pageSize
           schema:
@@ -247,7 +247,7 @@ paths:
       description: Searches organization resources that are visible to the user and satisfy the specified filter. This method returns organizations in an unspecified order. New organizations do not necessarily appear at the end of the results, and may take a small amount of time to appear. Search will only return organizations on which the user has the permission `resourcemanager.organizations.get`
       operationId: cloudresourcemanager.organizations.search
       parameters:
-        - description: Optional. The maximum number of organizations to return in the response. If unspecified, server picks an appropriate default.
+        - description: Optional. The maximum number of organizations to return in the response. The server can return fewer organizations than requested. If unspecified, server picks an appropriate default.
           in: query
           name: pageSize
           schema:

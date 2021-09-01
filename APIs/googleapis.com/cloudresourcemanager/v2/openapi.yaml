@@ -82,7 +82,7 @@ paths:
       description: Lists the Folders that are direct descendants of supplied parent resource. List provides a strongly consistent view of the Folders underneath the specified parent resource. List returns Folders sorted based upon the (ascending) lexical ordering of their display_name. The caller must have `resourcemanager.folders.list` permission on the identified parent.
       operationId: cloudresourcemanager.folders.list
       parameters:
-        - description: Optional. The maximum number of Folders to return in the response.
+        - description: Optional. The maximum number of Folders to return in the response. The server can return fewer folders than requested. If unspecified, server picks an appropriate default.
           in: query
           name: pageSize
           schema:
@@ -927,7 +927,7 @@ components:
       description: The request message for searching folders.
       properties:
         pageSize:
-          description: Optional. The maximum number of folders to return in the response.
+          description: Optional. The maximum number of folders to return in the response. The server can return fewer folders than requested. If unspecified, server picks an appropriate default.
           format: int32
           type: integer
         pageToken:

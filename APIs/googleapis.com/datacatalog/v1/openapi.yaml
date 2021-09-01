@@ -120,7 +120,7 @@ paths:
       description: "Deletes a policy tag together with the following: * All of its descendant policy tags, if any * Policies associated with the policy tag and its descendants * References from BigQuery table schema of the policy tag and its descendants"
       operationId: datacatalog.projects.locations.taxonomies.policyTags.delete
       parameters:
-        - description: "Required. Resource name of the policy tag to delete. Note: All of its descendant policy tags are also deleted. "
+        - description: "Required. Resource name of the policy tag to delete. Note: All of its descendant policy tags are also deleted."
           in: path
           name: name
           required: true
@@ -149,7 +149,7 @@ paths:
       description: Gets a policy tag.
       operationId: datacatalog.projects.locations.taxonomies.policyTags.get
       parameters:
-        - description: "Required. Resource name of the policy tag. "
+        - description: Required. Resource name of the policy tag.
           in: path
           name: name
           required: true
@@ -190,7 +190,7 @@ paths:
       description: Updates a policy tag, including its display name, description, and parent policy tag.
       operationId: datacatalog.projects.locations.taxonomies.policyTags.patch
       parameters:
-        - description: "Output only. Resource name of this policy tag in the URL format. The policy tag manager generates unique taxonomy IDs and policy tag IDs. "
+        - description: Output only. Resource name of this policy tag in the URL format. The policy tag manager generates unique taxonomy IDs and policy tag IDs.
           in: path
           name: name
           required: true
@@ -237,7 +237,7 @@ paths:
       description: Renames an enum value in a tag template. Within a single enum field, enum values must be unique.
       operationId: datacatalog.projects.locations.tagTemplates.fields.enumValues.rename
       parameters:
-        - description: "Required. The name of the enum field value. "
+        - description: Required. The name of the enum field value.
           in: path
           name: name
           required: true
@@ -360,7 +360,7 @@ paths:
       description: Creates an entry. You can create entries only with 'FILESET', 'CLUSTER', 'DATA_STREAM', or custom types. Data Catalog automatically creates entries with other types during metadata ingestion from integrated systems. You must enable the Data Catalog API in the project identified by the `parent` parameter. For more information, see [Data Catalog resource project](https://cloud.google.com/data-catalog/docs/concepts/resource-project). An entry group can have a maximum of 100,000 entries.
       operationId: datacatalog.projects.locations.entryGroups.entries.create
       parameters:
-        - description: "Required. The name of the entry group this entry belongs to. Note: The entry itself and its child resources might not be stored in the location specified in its name. "
+        - description: "Required. The name of the entry group this entry belongs to. Note: The entry itself and its child resources might not be stored in the location specified in its name."
           in: path
           name: parent
           required: true
@@ -441,7 +441,7 @@ paths:
       description: "Creates an entry group. An entry group contains logically related entries together with [Cloud Identity and Access Management](/data-catalog/docs/concepts/iam) policies. These policies specify users who can create, edit, and view entries within entry groups. Data Catalog automatically creates entry groups with names that start with the `@` symbol for the following resources: * BigQuery entries (`@bigquery`) * Pub/Sub topics (`@pubsub`) * Dataproc Metastore services (`@dataproc_metastore_{SERVICE_NAME_HASH}`) You can create your own entry groups for Cloud Storage fileset entries and custom entries together with the corresponding IAM policies. User-created entry groups can't contain the `@` symbol, it is reserved for automatically created groups. Entry groups, like entries, can be searched. A maximum of 10,000 entry groups may be created per organization across all locations. You must enable the Data Catalog API in the project identified by the `parent` parameter. For more information, see [Data Catalog resource project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)."
       operationId: datacatalog.projects.locations.entryGroups.create
       parameters:
-        - description: "Required. The names of the project and location that the new entry group belongs to. Note: The entry group itself and its child resources might not be stored in the location specified in its name. "
+        - description: "Required. The names of the project and location that the new entry group belongs to. Note: The entry group itself and its child resources might not be stored in the location specified in its name."
           in: path
           name: parent
           required: true
@@ -488,7 +488,7 @@ paths:
       description: Creates a field in a tag template. You must enable the Data Catalog API in the project identified by the `parent` parameter. For more information, see [Data Catalog resource project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
       operationId: datacatalog.projects.locations.tagTemplates.fields.create
       parameters:
-        - description: "Required. The name of the project and the template location [region](https://cloud.google.com/data-catalog/docs/concepts/regions). "
+        - description: Required. The name of the project and the template location [region](https://cloud.google.com/data-catalog/docs/concepts/regions).
           in: path
           name: parent
           required: true
@@ -523,7 +523,7 @@ paths:
       description: Lists all policy tags in a taxonomy.
       operationId: datacatalog.projects.locations.taxonomies.policyTags.list
       parameters:
-        - description: "Required. Resource name of the taxonomy to list the policy tags of. "
+        - description: Required. Resource name of the taxonomy to list the policy tags of.
           in: path
           name: parent
           required: true
@@ -569,7 +569,7 @@ paths:
       description: Creates a policy tag in a taxonomy.
       operationId: datacatalog.projects.locations.taxonomies.policyTags.create
       parameters:
-        - description: "Required. Resource name of the taxonomy that the policy tag will belong to. "
+        - description: Required. Resource name of the taxonomy that the policy tag will belong to.
           in: path
           name: parent
           required: true
@@ -611,7 +611,7 @@ paths:
       description: Creates a tag template. You must enable the Data Catalog API in the project identified by the `parent` parameter. For more information, see [Data Catalog resource project] (https://cloud.google.com/data-catalog/docs/concepts/resource-project).
       operationId: datacatalog.projects.locations.tagTemplates.create
       parameters:
-        - description: "Required. The name of the project and the template location [region](https://cloud.google.com/data-catalog/docs/concepts/regions). "
+        - description: Required. The name of the project and the template location [region](https://cloud.google.com/data-catalog/docs/concepts/regions).
           in: path
           name: parent
           required: true
@@ -646,7 +646,7 @@ paths:
       description: Lists tags assigned to an Entry.
       operationId: datacatalog.projects.locations.entryGroups.tags.list
       parameters:
-        - description: "Required. The name of the Data Catalog resource to list the tags of. The resource can be an Entry or an EntryGroup (without `/entries/{entries}` at the end). "
+        - description: Required. The name of the Data Catalog resource to list the tags of. The resource can be an Entry or an EntryGroup (without `/entries/{entries}` at the end).
           in: path
           name: parent
           required: true
@@ -692,7 +692,7 @@ paths:
       description: "Creates a tag and assigns it to: * An Entry if the method name is ``projects.locations.entryGroups.entries.tags.create``. * Or EntryGroupif the method name is ``projects.locations.entryGroups.tags.create``. Note: The project identified by the `parent` parameter for the [tag] (https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.entryGroups.entries.tags/create#path-parameters) and the [tag template] (https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.tagTemplates/create#path-parameters) used to create the tag must be in the same organization."
       operationId: datacatalog.projects.locations.entryGroups.tags.create
       parameters:
-        - description: "Required. The name of the resource to attach this tag to. Tags can be attached to entries or entry groups. An entry can have up to 1000 attached tags. Note: The tag and its child resources might not be stored in the location specified in its name. "
+        - description: "Required. The name of the resource to attach this tag to. Tags can be attached to entries or entry groups. An entry can have up to 1000 attached tags. Note: The tag and its child resources might not be stored in the location specified in its name."
           in: path
           name: parent
           required: true
@@ -722,7 +722,7 @@ paths:
       description: Lists all taxonomies in a project in a particular location that you have a permission to view.
       operationId: datacatalog.projects.locations.taxonomies.list
       parameters:
-        - description: "Required. Resource name of the project to list the taxonomies of. "
+        - description: Required. Resource name of the project to list the taxonomies of.
           in: path
           name: parent
           required: true
@@ -768,7 +768,7 @@ paths:
       description: Creates a taxonomy in a specified project. The taxonomy is initially empty, that is, it doesn't contain policy tags.
       operationId: datacatalog.projects.locations.taxonomies.create
       parameters:
-        - description: "Required. Resource name of the project that the taxonomy will belong to. "
+        - description: Required. Resource name of the project that the taxonomy will belong to.
           in: path
           name: parent
           required: true
@@ -798,7 +798,7 @@ paths:
       description: Exports taxonomies in the requested type and returns them, including their policy tags. The requested taxonomies must belong to the same project. This method generates `SerializedTaxonomy` protocol buffers with nested policy tags that can be used as input for `ImportTaxonomies` calls.
       operationId: datacatalog.projects.locations.taxonomies.export
       parameters:
-        - description: "Required. Resource name of the project that the exported taxonomies belong to. "
+        - description: Required. Resource name of the project that the exported taxonomies belong to.
           in: path
           name: parent
           required: true
@@ -861,7 +861,7 @@ paths:
       description: Creates new taxonomies (including their policy tags) in a given project by importing from inlined or cross-regional sources. For a cross-regional source, new taxonomies are created by copying from a source in another region. For an inlined source, taxonomies and policy tags are created in bulk using nested protocol buffer structures.
       operationId: datacatalog.projects.locations.taxonomies.import
       parameters:
-        - description: "Required. Resource name of project that the imported taxonomies will belong to. "
+        - description: Required. Resource name of project that the imported taxonomies will belong to.
           in: path
           name: parent
           required: true
@@ -1325,7 +1325,7 @@ components:
           description: "The resource this metadata entry refers to. For Google Cloud Platform resources, `linked_resource` is the [Full Resource Name] (https://cloud.google.com/apis/design/resource_names#full_resource_name). For example, the `linked_resource` for a table resource from BigQuery is: `//bigquery.googleapis.com/projects/{PROJECT_ID}/datasets/{DATASET_ID}/tables/{TABLE_ID}` Output only when the entry is one of the types in the `EntryType` enum. For entries with a `user_specified_type`, this field is optional and defaults to an empty string. The resource string must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), periods (.), colons (:), slashes (/), dashes (-), and hashes (#). The maximum size is 200 bytes when encoded in UTF-8."
           type: string
         name:
-          description: "Output only. The resource name of an entry in URL format. Note: The entry itself and its child resources might not be stored in the location specified in its name. "
+          description: "Output only. The resource name of an entry in URL format. Note: The entry itself and its child resources might not be stored in the location specified in its name."
           readOnly: true
           type: string
         routineSpec:
@@ -1376,7 +1376,7 @@ components:
           description: A short name to identify the entry group, for example, "analytics data - jan 2011". Default value is an empty string.
           type: string
         name:
-          description: "The resource name of the entry group in URL format. Note: The entry group itself and its child resources might not be stored in the location specified in its name. "
+          description: "The resource name of the entry group in URL format. Note: The entry group itself and its child resources might not be stored in the location specified in its name."
           type: string
       type: object
     GoogleCloudDatacatalogV1ExportTaxonomiesResponse:
@@ -1553,7 +1553,7 @@ components:
           description: Required. User-defined name of this policy tag. The name can't start or end with spaces and must be unique within the parent taxonomy, contain only Unicode letters, numbers, underscores, dashes and spaces, and be at most 200 bytes long when encoded in UTF-8.
           type: string
         name:
-          description: "Output only. Resource name of this policy tag in the URL format. The policy tag manager generates unique taxonomy IDs and policy tag IDs. "
+          description: Output only. Resource name of this policy tag in the URL format. The policy tag manager generates unique taxonomy IDs and policy tag IDs.
           readOnly: true
           type: string
         parentPolicyTag:
@@ -1816,7 +1816,7 @@ components:
           description: Required. Maps the ID of a tag field to its value and additional information about that field. Tag template defines valid field IDs. A tag must have at least 1 field and at most 500 fields.
           type: object
         name:
-          description: "The resource name of the tag in URL format where tag ID is a system-generated identifier. Note: The tag itself might not be stored in the location specified in its name. "
+          description: "The resource name of the tag in URL format where tag ID is a system-generated identifier. Note: The tag itself might not be stored in the location specified in its name."
           type: string
         template:
           description: "Required. The resource name of the tag template this tag uses. Example: `projects/{PROJECT_ID}/locations/{LOCATION}/tagTemplates/{TAG_TEMPLATE_ID}` This field cannot be modified after creation."
@@ -1881,7 +1881,7 @@ components:
           description: "Indicates whether this is a public tag template. Every user has view access to a *public* tag template by default. This means that: * Every user can use this tag template to tag an entry. * If an entry is tagged using the tag template, the tag is always shown in the response to ``ListTags`` called on the entry. * To get the template using the GetTagTemplate method, you need view access either on the project or the organization the tag template resides in but no other permission is needed. * Operations on the tag template other than viewing (for example, editing IAM policies) follow standard IAM structures. Tags created with a public tag template are referred to as public tags. You can search for a public tag by value with a simple search query instead of using a ``tag:`` predicate. Public tag templates may not appear in search results depending on scope, see: include_public_tag_templates Note: If an [IAM domain restriction](https://cloud.google.com/resource-manager/docs/organization-policy/restricting-domains) is configured in the tag template's location, the public access will not be enabled but the simple search for tag values will still work."
           type: boolean
         name:
-          description: "The resource name of the tag template in URL format. Note: The tag template itself and its child resources might not be stored in the location specified in its name. "
+          description: "The resource name of the tag template in URL format. Note: The tag template itself and its child resources might not be stored in the location specified in its name."
           type: string
       type: object
     GoogleCloudDatacatalogV1TagTemplateField:
@@ -1926,7 +1926,7 @@ components:
           description: Required. User-defined name of this taxonomy. The name can't start or end with spaces, must contain only Unicode letters, numbers, underscores, dashes, and spaces, and be at most 200 bytes long when encoded in UTF-8.
           type: string
         name:
-          description: "Output only. Resource name of this taxonomy in URL format. Note: Policy tag manager generates unique taxonomy IDs. "
+          description: "Output only. Resource name of this taxonomy in URL format. Note: Policy tag manager generates unique taxonomy IDs."
           readOnly: true
           type: string
         policyTagCount:

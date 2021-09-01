@@ -44,7 +44,7 @@ paths:
       description: List all Liens applied to the `parent` resource. Callers of this method will require permission on the `parent` resource. For example, a Lien with a `parent` of `projects/1234` requires permission `resourcemanager.projects.get`.
       operationId: cloudresourcemanager.liens.list
       parameters:
-        - description: The maximum number of items to return. This is a suggestion for the server.
+        - description: The maximum number of items to return. This is a suggestion for the server. The server can return fewer liens than requested. If unspecified, server picks an appropriate default.
           in: query
           name: pageSize
           schema:
@@ -1714,7 +1714,7 @@ components:
           description: "An optional query string used to filter the Organizations to return in the response. Filter rules are case-insensitive. Organizations may be filtered by `owner.directoryCustomerId` or by `domain`, where the domain is a G Suite domain, for example: * Filter `owner.directorycustomerid:123456789` returns Organization resources with `owner.directory_customer_id` equal to `123456789`. * Filter `domain:google.com` returns Organization resources corresponding to the domain `google.com`. This field is optional."
           type: string
         pageSize:
-          description: The maximum number of Organizations to return in the response. This field is optional.
+          description: The maximum number of Organizations to return in the response. The server can return fewer organizations than requested. If unspecified, server picks an appropriate default.
           format: int32
           type: integer
         pageToken:
