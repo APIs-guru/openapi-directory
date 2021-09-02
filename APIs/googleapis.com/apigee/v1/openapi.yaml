@@ -5727,6 +5727,10 @@ components:
           description: Output only. Port number of the exposed Apigee endpoint.
           readOnly: true
           type: string
+        runtimeVersion:
+          description: Output only. Version of the runtime system running in the instance. The runtime system is the set of components that serve the API Proxy traffic in your Environments.
+          readOnly: true
+          type: string
         state:
           description: Output only. State of the instance. Values other than `ACTIVE` means the resource is not ready to use.
           enum:
@@ -7213,6 +7217,9 @@ components:
       type: object
     GoogleCloudApigeeV1TargetServerConfig:
       properties:
+        enabled:
+          description: Whether the target server is enabled. An empty/omitted value for this field should be interpreted as true.
+          type: boolean
         host:
           description: Host name of the target server.
           type: string

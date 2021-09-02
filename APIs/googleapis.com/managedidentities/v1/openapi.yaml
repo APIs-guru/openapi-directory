@@ -37,10 +37,10 @@ tags:
 paths:
   "/v1/{name}":
     delete:
-      description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: managedidentities.projects.locations.global.operations.delete
+      description: Deletes identified Peering.
+      operationId: managedidentities.projects.locations.global.peerings.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: "Required. Peering resource name using the form: `projects/{project_id}/locations/global/peerings/{peering_id}`"
           in: path
           name: name
           required: true
@@ -51,7 +51,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Empty"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -61,10 +61,10 @@ paths:
       tags:
         - projects
     get:
-      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
-      operationId: managedidentities.projects.locations.global.operations.list
+      description: Gets details of a single Peering.
+      operationId: managedidentities.projects.locations.global.peerings.get
       parameters:
-        - description: The name of the operation's parent resource.
+        - description: "Required. Peering resource name using the form: `projects/{project_id}/locations/global/peerings/{peering_id}`"
           in: path
           name: name
           required: true
@@ -90,7 +90,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListOperationsResponse"
+                $ref: "#/components/schemas/Peering"
           description: Successful response
       security:
         - Oauth2:
@@ -112,16 +112,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the metadata and configuration of a domain.
-      operationId: managedidentities.projects.locations.global.domains.patch
+      description: Updates the labels for specified Peering.
+      operationId: managedidentities.projects.locations.global.peerings.patch
       parameters:
-        - description: "Required. The unique name of the domain using the form: `projects/{project_id}/locations/global/domains/{domain_name}`."
+        - description: "Output only. Unique name of the peering in this scope including projects and location using the form: `projects/{project_id}/locations/global/peerings/{peering_id}`."
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: "Required. Mask of fields to update. At least one path must be supplied in this field. The elements of the repeated paths field may only include fields from Domain: * `labels` * `locations` * `authorized_networks` * `audit_logs_enabled`"
+        - description: "Required. Mask of fields to update. At least one path must be supplied in this field. The elements of the repeated paths field may only include these fields from Peering: * `labels`"
           in: query
           name: updateMask
           schema:
@@ -130,7 +130,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Domain"
+              $ref: "#/components/schemas/Peering"
       responses:
         "200":
           content:
@@ -597,6 +597,97 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Domain"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/peerings":
+    get:
+      description: Lists Peerings in a given project.
+      operationId: managedidentities.projects.locations.global.peerings.list
+      parameters:
+        - description: "Required. The resource name of the peering location using the form: `projects/{project_id}/locations/global`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filter specifying constraints of a list operation. For example, `peering.authorized_network="projects/myprojectid/global/networks/mynetwork"`.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Specifies the ordering of results following syntax at https://cloud.google.com/apis/design/design_patterns#sorting_order.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return. If not specified, a default value of 1000 will be used by the service. Regardless of the page_size value, the response may include a partial list and a caller should only rely on response's next_page_token to determine if there are more instances left to be queried.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPeeringsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a Peering for Managed AD instance.
+      operationId: managedidentities.projects.locations.global.peerings.create
+      parameters:
+        - description: "Required. Resource project name and location using the form: `projects/{project_id}/locations/global`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Peering Id, unique name to identify peering.
+          in: query
+          name: peeringId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Peering"
       responses:
         "200":
           content:
@@ -1387,6 +1478,23 @@ components:
             $ref: "#/components/schemas/Operation"
           type: array
       type: object
+    ListPeeringsResponse:
+      description: ListPeeringsResponse is the response message for ListPeerings method.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        peerings:
+          description: A list of Managed Identities Service Peerings in the project.
+          items:
+            $ref: "#/components/schemas/Peering"
+          type: array
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
     ListSqlIntegrationsResponse:
       description: ListSqlIntegrationsResponse is the response message for ListSqlIntegrations method.
       properties:
@@ -1524,6 +1632,49 @@ components:
           type: string
         verb:
           description: Output only. Name of the verb executed by the operation.
+          readOnly: true
+          type: string
+      type: object
+    Peering:
+      description: Represents a Managed Service for Microsoft Active Directory Peering.
+      properties:
+        authorizedNetwork:
+          description: Required. The full names of the Google Compute Engine [networks](/compute/docs/networks-and-firewalls#networks) to which the instance is connected. Caller needs to make sure that CIDR subnets do not overlap between networks, else peering creation will fail.
+          type: string
+        createTime:
+          description: Output only. The time the instance was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        domainResource:
+          description: "Required. Full domain resource path for the Managed AD Domain involved in peering. The resource path should be in the form: `projects/{project_id}/locations/global/domains/{domain_name}`"
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Resource labels to represent user-provided metadata.
+          type: object
+        name:
+          description: "Output only. Unique name of the peering in this scope including projects and location using the form: `projects/{project_id}/locations/global/peerings/{peering_id}`."
+          readOnly: true
+          type: string
+        state:
+          description: Output only. The current state of this Peering.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - CONNECTED
+            - DISCONNECTED
+            - DELETING
+          readOnly: true
+          type: string
+        statusMessage:
+          description: Output only. Additional information about the current status of this peering, if available.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Last update time.
+          format: google-datetime
           readOnly: true
           type: string
       type: object

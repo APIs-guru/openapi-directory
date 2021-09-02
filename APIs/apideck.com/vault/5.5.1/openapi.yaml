@@ -2954,3 +2954,44 @@ components:
       in: header
       name: x-apideck-app-id
       type: apiKey
+x-webhooks:
+  ConnectionCreated:
+    post:
+      description: Connection Created
+      operationId: connectionCreated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                connection:
+                  $ref: "#/components/schemas/Connection"
+              type: object
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Connection Created
+      tags:
+        - Connection
+      x-apideck-event-type: vault.connection.created
+  ConnectionUpdated:
+    post:
+      description: Connection Updated
+      operationId: connectionUpdated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                connection:
+                  $ref: "#/components/schemas/Connection"
+              type: object
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Connection Updated
+      tags:
+        - Connection
+      x-apideck-event-type: vault.connection.updated
