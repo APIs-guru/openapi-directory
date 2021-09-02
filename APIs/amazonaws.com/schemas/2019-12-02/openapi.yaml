@@ -182,6 +182,9 @@ paths:
                   type: string
                   minLength: 20
                   maxLength: 1600
+                CrossAccount:
+                  description: 'Support discovery of schemas in events sent to the bus from another account. (default: true).'
+                  type: boolean
                 tags:
                   description: Key-value pairs associated with a resource.
                   type: object
@@ -982,6 +985,9 @@ paths:
                   type: string
                   minLength: 0
                   maxLength: 256
+                CrossAccount:
+                  description: 'Support discovery of schemas in events sent to the bus from another account. (default: true)'
+                  type: boolean
   /v1/policy:
     delete:
       operationId: DeleteResourcePolicy
@@ -2337,6 +2343,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DiscovererState'
             - description: The state of the discoverer.
+        CrossAccount:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: The Status if the discoverer will discover schemas from events sent from another account.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2452,6 +2462,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DiscovererState'
             - description: The state of the discoverer.
+        CrossAccount:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: The Status if the discoverer will discover schemas from events sent from another account.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2700,6 +2714,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DiscovererState'
             - description: The state of the discoverer.
+        CrossAccount:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: The Status if the discoverer will discover schemas from events sent from another account.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2777,6 +2795,8 @@ components:
       type: string
       minLength: 20
       maxLength: 1600
+    __boolean:
+      type: boolean
     Tags:
       type: object
       description: Key-value pairs associated with a resource.
@@ -2796,6 +2816,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__stringMin20Max1600'
             - description: The ARN of the event bus.
+        CrossAccount:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: 'Support discovery of schemas in events sent to the bus from another account. (default: true).'
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2914,6 +2938,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DiscovererState'
             - description: The state of the discoverer.
+        CrossAccount:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: The Status if the discoverer will discover schemas from events sent from another account.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -3159,6 +3187,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__stringMin0Max256'
             - description: The description of the discoverer to update.
+        CrossAccount:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: 'Support discovery of schemas in events sent to the bus from another account. (default: true)'
     UpdateRegistryRequest:
       type: object
       title: UpdateRegistryRequest

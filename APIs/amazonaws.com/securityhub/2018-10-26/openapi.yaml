@@ -628,7 +628,7 @@ paths:
                     Status:
                       allOf:
                         - $ref: '#/components/schemas/WorkflowStatus'
-                        - description: '<p>The status of the investigation into the finding. The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets <code>WorkFlowStatus</code> from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p>The record state changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p>The compliance status changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> </ul>'
+                        - description: '<p>The status of the investigation into the finding. The workflow status is specific to an individual finding. It does not affect the generation of new findings. For example, setting the workflow status to <code>SUPPRESSED</code> or <code>RESOLVED</code> does not prevent a new finding for the same issue.</p> <p>The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets <code>WorkFlowStatus</code> from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p>The record state changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p>The compliance status changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.</p> </li> <li> <p> <code>SUPPRESSED</code> - Indicates that you reviewed the finding and do not believe that any action is needed. The finding is no longer updated.</p> </li> </ul>'
                 RelatedFindings:
                   description: A list of findings that are related to the updated findings.
                   type: array
@@ -4861,7 +4861,7 @@ components:
         ProductName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The name of the product that generated the finding.</p> <p>Security Hub populates this attribute automatically for each finding. You cannot update it using <code>BatchImportFindings</code> or <code>BatchUpdateFindings</code>. The exception to this is when you use a custom integration.</p> <p>When you use the Security Hub console to filter findings by product name, you use this attribute.</p> <p>When you use the Security Hub API to filter findings by product name, you use the <code>aws/securityhub/ProductyName</code> attribute under <code>ProductFields</code>.</p> <p>Security Hub does not synchronize those two attributes.</p>'
+            - description: '<p>The name of the product that generated the finding.</p> <p>Security Hub populates this attribute automatically for each finding. You cannot update it using <code>BatchImportFindings</code> or <code>BatchUpdateFindings</code>. The exception to this is when you use a custom integration.</p> <p>When you use the Security Hub console to filter findings by product name, you use this attribute.</p> <p>When you use the Security Hub API to filter findings by product name, you use the <code>aws/securityhub/ProductName</code> attribute under <code>ProductFields</code>.</p> <p>Security Hub does not synchronize those two attributes.</p>'
         CompanyName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -5746,6 +5746,22 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ActionTarget'
+    Adjustment:
+      type: object
+      properties:
+        Metric:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The metric to adjust.
+        Reason:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The reason for the adjustment.
+      description: An adjustment to the CVSS metric.
+    AdjustmentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Adjustment'
     AdminStatus:
       type: string
       enum:
@@ -6193,6 +6209,142 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: '<p>Indicates when the auto scaling group was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: Provides details about an auto scaling group.
+    AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails:
+      type: object
+      properties:
+        DeleteOnTermination:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to delete the volume when the instance is terminated.
+        Encrypted:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to encrypt the volume.
+        Iops:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>The number of input/output (I/O) operations per second (IOPS) to provision for the volume.</p> <p>Only supported for <code>gp3</code> or <code>io1</code> volumes. Required for <code>io1</code> volumes. Not used with <code>standard</code>, <code>gp2</code>, <code>st1</code>, or <code>sc1</code> volumes.</p>'
+        SnapshotId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: <p>The snapshot ID of the volume to use.</p> <p>You must specify either <code>VolumeSize</code> or <code>SnapshotId</code>.</p>
+        VolumeSize:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>The volume size, in GiBs. The following are the supported volumes sizes for each volume type:</p> <ul> <li> <p>gp2 and gp3: 1-16,384</p> </li> <li> <p>io1: 4-16,384</p> </li> <li> <p>st1 and sc1: 125-16,384</p> </li> <li> <p>standard: 1-1,024</p> </li> </ul> <p>You must specify either <code>SnapshotId</code> or <code>VolumeSize</code>. If you specify both <code>SnapshotId</code> and <code>VolumeSize</code>, the volume size must be equal or greater than the size of the snapshot.</p>'
+        VolumeType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The volume type.
+      description: Parameters that are used to automatically set up EBS volumes when an instance is launched.
+    AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails:
+      type: object
+      properties:
+        DeviceName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The device name that is exposed to the EC2 instance. For example, <code>/dev/sdh</code> or <code>xvdh</code>.'
+        Ebs:
+          allOf:
+            - $ref: '#/components/schemas/AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails'
+            - description: Parameters that are used to automatically set up Amazon EBS volumes when an instance is launched.
+        NoDevice:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Whether to suppress the device that is included in the block device mapping of the Amazon Machine Image (AMI).</p> <p>If <code>NoDevice</code> is <code>true</code>, then you cannot specify <code>Ebs</code>.&gt;</p>'
+        VirtualName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The name of the virtual device (for example, <code>ephemeral0</code>).</p> <p>You can provide either <code>VirtualName</code> or <code>Ebs</code>, but not both.</p>'
+      description: A block device for the instance.
+    AwsAutoScalingLaunchConfigurationBlockDeviceMappingsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails'
+    AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>If set to <code>true</code>, then instances in the group launch with detailed monitoring.</p> <p>If set to <code>false</code>, then instances in the group launch with basic monitoring.</p>'
+      description: Information about the type of monitoring for instances in the group.
+    AwsAutoScalingLaunchConfigurationDetails:
+      type: object
+      properties:
+        AssociatePublicIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'For Auto Scaling groups that run in a VPC, specifies whether to assign a public IP address to the group''s instances.'
+        BlockDeviceMappings:
+          allOf:
+            - $ref: '#/components/schemas/AwsAutoScalingLaunchConfigurationBlockDeviceMappingsList'
+            - description: Specifies the block devices for the instance.
+        ClassicLinkVpcId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of a ClassicLink-enabled VPC that EC2-Classic instances are linked to.
+        ClassicLinkVpcSecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The identifiers of one or more security groups for the VPC that is specified in <code>ClassicLinkVPCId</code>.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The creation date and time for the launch configuration.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        EbsOptimized:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the launch configuration is optimized for Amazon EBS I/O.
+        IamInstanceProfile:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name or the ARN of the instance profile associated with the IAM role for the instance. The instance profile contains the IAM role.
+        ImageId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the Amazon Machine Image (AMI) that is used to launch EC2 instances.
+        InstanceMonitoring:
+          allOf:
+            - $ref: '#/components/schemas/AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails'
+            - description: Indicates the type of monitoring for instances in the group.
+        InstanceType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The instance type for the instances.
+        KernelId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the kernel associated with the AMI.
+        KeyName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the key pair.
+        LaunchConfigurationName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the launch configuration.
+        PlacementTenancy:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The tenancy of the instance. An instance with <code>dedicated</code> tenancy runs on isolated, single-tenant hardware and can only be launched into a VPC.'
+        RamdiskId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the RAM disk associated with the AMI.
+        SecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The security groups to assign to the instances in the Auto Scaling group.
+        SpotPrice:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The maximum hourly price to be paid for any Spot Instance that is launched to fulfill the request.
+        UserData:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The user data to make available to the launched EC2 instances. Must be base64-encoded text.
+      description: Details about a launch configuration.
     AwsCertificateManagerCertificateDomainValidationOptions:
       type: array
       items:
@@ -6699,7 +6851,7 @@ components:
         EncryptionKey:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The KMS customer master key (CMK) used to encrypt the build output artifacts.</p> <p>You can specify either the ARN of the CMK or, if available, the CMK alias (using the format alias/alias-name). </p>'
+            - description: '<p>The KMS key used to encrypt the build output artifacts.</p> <p>You can specify either the ARN of the KMS key or, if available, the KMS key alias (using the format alias/alias-name). </p>'
         Environment:
           allOf:
             - $ref: '#/components/schemas/AwsCodeBuildProjectEnvironment'
@@ -6839,7 +6991,7 @@ components:
         KmsMasterKeyArn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ARN of the KMS customer master key (CMK) that is used for the KMS encryption.
+            - description: The ARN of the KMS key that is used for the KMS encryption.
       description: Information about the server-side encryption for the table.
     AwsDynamoDbTableStreamSpecification:
       type: object
@@ -7041,7 +7193,7 @@ components:
         KmsMasterKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The identifier of the KMS customer master key (CMK) that will be used for KMS encryption for the replica.
+            - description: The identifier of the KMS key that will be used for KMS encryption for the replica.
         ProvisionedThroughputOverride:
           allOf:
             - $ref: '#/components/schemas/AwsDynamoDbTableProvisionedThroughputOverride'
@@ -7637,7 +7789,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ARN of the KMS customer master key (CMK) that was used to protect the volume encryption key for the volume.
+            - description: The ARN of the KMS key that was used to protect the volume encryption key for the volume.
         Attachments:
           allOf:
             - $ref: '#/components/schemas/AwsEc2VolumeAttachmentList'
@@ -7667,6 +7819,218 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The current state of the VPC.
       description: Details about an EC2 VPC.
+    AwsEc2VpnConnectionVgwTelemetryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEc2VpnConnectionVgwTelemetryDetails'
+    AwsEc2VpnConnectionOptionsDetails:
+      type: object
+      properties:
+        StaticRoutesOnly:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the VPN connection uses static routes only.
+        TunnelOptions:
+          allOf:
+            - $ref: '#/components/schemas/AwsEc2VpnConnectionOptionsTunnelOptionsList'
+            - description: The VPN tunnel options.
+      description: VPN connection options.
+    AwsEc2VpnConnectionRoutesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEc2VpnConnectionRoutesDetails'
+    AwsEc2VpnConnectionDetails:
+      type: object
+      properties:
+        VpnConnectionId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the VPN connection.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The current state of the VPN connection.
+        CustomerGatewayId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the customer gateway that is at your end of the VPN connection.
+        CustomerGatewayConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The configuration information for the VPN connection''s customer gateway, in the native XML format.'
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The type of VPN connection.
+        VpnGatewayId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the virtual private gateway that is at the Amazon Web Services side of the VPN connection.
+        Category:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The category of the VPN connection. <code>VPN</code> indicates an Amazon Web Services VPN connection. <code>VPN-Classic</code> indicates an Amazon Web Services Classic VPN connection.
+        VgwTelemetry:
+          allOf:
+            - $ref: '#/components/schemas/AwsEc2VpnConnectionVgwTelemetryList'
+            - description: Information about the VPN tunnel.
+        Options:
+          allOf:
+            - $ref: '#/components/schemas/AwsEc2VpnConnectionOptionsDetails'
+            - description: The VPN connection options.
+        Routes:
+          allOf:
+            - $ref: '#/components/schemas/AwsEc2VpnConnectionRoutesList'
+            - description: The static routes that are associated with the VPN connection.
+        TransitGatewayId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the transit gateway that is associated with the VPN connection.
+      description: Details about an Amazon EC2 VPN connection.
+    AwsEc2VpnConnectionOptionsTunnelOptionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEc2VpnConnectionOptionsTunnelOptionsDetails'
+    IntegerList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Integer'
+    AwsEc2VpnConnectionOptionsTunnelOptionsDetails:
+      type: object
+      properties:
+        DpdTimeoutSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of seconds after which a Dead Peer Detection (DPD) timeout occurs.
+        IkeVersions:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The Internet Key Exchange (IKE) versions that are permitted for the VPN tunnel.
+        OutsideIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The external IP address of the VPN tunnel.
+        Phase1DhGroupNumbers:
+          allOf:
+            - $ref: '#/components/schemas/IntegerList'
+            - description: The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 1 IKE negotiations.
+        Phase1EncryptionAlgorithms:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The permitted encryption algorithms for the VPN tunnel for phase 1 IKE negotiations.
+        Phase1IntegrityAlgorithms:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The permitted integrity algorithms for the VPN tunnel for phase 1 IKE negotiations.
+        Phase1LifetimeSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The lifetime for phase 1 of the IKE negotiation, in seconds.'
+        Phase2DhGroupNumbers:
+          allOf:
+            - $ref: '#/components/schemas/IntegerList'
+            - description: The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 2 IKE negotiations.
+        Phase2EncryptionAlgorithms:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The permitted encryption algorithms for the VPN tunnel for phase 2 IKE negotiations.
+        Phase2IntegrityAlgorithms:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The permitted integrity algorithms for the VPN tunnel for phase 2 IKE negotiations.
+        Phase2LifetimeSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The lifetime for phase 2 of the IKE negotiation, in seconds.'
+        PreSharedKey:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The preshared key to establish initial authentication between the virtual private gateway and the customer gateway.
+        RekeyFuzzPercentage:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The percentage of the rekey window, which is determined by <code>RekeyMarginTimeSeconds</code> during which the rekey time is randomly selected.'
+        RekeyMarginTimeSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The margin time, in seconds, before the phase 2 lifetime expires, during which the Amazon Web Services side of the VPN connection performs an IKE rekey.'
+        ReplayWindowSize:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of packets in an IKE replay window.
+        TunnelInsideCidr:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The range of inside IPv4 addresses for the tunnel.
+      description: The VPN tunnel options.
+    AwsEc2VpnConnectionRoutesDetails:
+      type: object
+      properties:
+        DestinationCidrBlock:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The CIDR block associated with the local subnet of the customer data center.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The current state of the static route.
+      description: A static routes associated with the VPN connection.
+    AwsEc2VpnConnectionVgwTelemetryDetails:
+      type: object
+      properties:
+        AcceptedRouteCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of accepted routes.
+        CertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the VPN tunnel endpoint certificate.
+        LastStatusChange:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The date and time of the last change in status.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        OutsideIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Internet-routable IP address of the virtual private gateway's outside interface.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The status of the VPN tunnel.
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'If an error occurs, a description of the error.'
+      description: Information about the VPN tunnel.
+    AwsEcrContainerImageDetails:
+      type: object
+      properties:
+        RegistryId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Web Services account identifier that is associated with the registry that the image belongs to.
+        RepositoryName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the repository that the image belongs to.
+        Architecture:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The architecture of the image.
+        ImageDigest:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The sha256 digest of the image manifest.
+        ImageTags:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The list of tags that are associated with the image.
+        ImagePublishedAt:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The date and time when the image was pushed to the repository.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+      description: Information about an Amazon ECR image.
     AwsEcsClusterClusterSettingsDetails:
       type: object
       properties:
@@ -9842,32 +10206,36 @@ components:
         AWSAccountId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The twelve-digit account ID of the Amazon Web Services account that owns the CMK.
+            - description: The twelve-digit account ID of the Amazon Web Services account that owns the KMS key.
         CreationDate:
           allOf:
             - $ref: '#/components/schemas/Double'
-            - description: '<p>Indicates when the CMK was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the KMS key was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         KeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The globally unique identifier for the CMK.
+            - description: The globally unique identifier for the KMS key.
         KeyManager:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The manager of the CMK. CMKs in your Amazon Web Services account are either customer managed or Amazon Web Services managed.
+            - description: The manager of the KMS key. KMS keys in your Amazon Web Services account are either customer managed or Amazon Web Services managed.
         KeyState:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The state of the CMK.
+            - description: The state of the KMS key.
         Origin:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The source of the CMK''s key material.</p> <p>When this value is <code>AWS_KMS</code>, KMS created the key material.</p> <p>When this value is <code>EXTERNAL</code>, the key material was imported from your existing key management infrastructure or the CMK lacks key material.</p> <p>When this value is <code>AWS_CLOUDHSM</code>, the key material was created in the CloudHSM cluster associated with a custom key store.</p>'
+            - description: '<p>The source of the KMS key material.</p> <p>When this value is <code>AWS_KMS</code>, KMS created the key material.</p> <p>When this value is <code>EXTERNAL</code>, the key material was imported from your existing key management infrastructure or the KMS key lacks key material.</p> <p>When this value is <code>AWS_CLOUDHSM</code>, the key material was created in the CloudHSM cluster associated with a custom key store.</p>'
         Description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: A description of the key.
-      description: Contains metadata about a customer master key (CMK).
+        KeyRotationStatus:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the key has key rotation enabled.
+      description: Contains metadata about an KMS key.
     AwsLambdaFunctionCode:
       type: object
       properties:
@@ -9966,7 +10334,7 @@ components:
         KmsKeyArn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The KMS key that is used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed CMK.
+            - description: The KMS key that is used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed customer managed key.
         LastModified:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -11660,6 +12028,46 @@ components:
             - $ref: '#/components/schemas/AwsS3BucketServerSideEncryptionRules'
             - description: The encryption rules that are applied to the S3 bucket.
       description: The encryption configuration for the S3 bucket.
+    AwsS3BucketLoggingConfiguration:
+      type: object
+      properties:
+        DestinationBucketName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the S3 bucket where log files for the S3 bucket are stored.
+        LogFilePrefix:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The prefix added to log files for the S3 bucket.
+      description: Information about logging for the S3 bucket
+    AwsS3BucketWebsiteConfiguration:
+      type: object
+      properties:
+        ErrorDocument:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the error document for the website.
+        IndexDocumentSuffix:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the index document for the website.
+        RedirectAllRequestsTo:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketWebsiteConfigurationRedirectTo'
+            - description: The redirect behavior for requests to the website.
+        RoutingRules:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketWebsiteConfigurationRoutingRules'
+            - description: The rules for applying redirects for requests to the website.
+      description: Website parameters for the S3 bucket.
+    AwsS3BucketNotificationConfiguration:
+      type: object
+      properties:
+        Configurations:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketNotificationConfigurationDetails'
+            - description: Configurations for S3 bucket notifications.
+      description: The notification configuration for the S3 bucket.
     AwsS3BucketDetails:
       type: object
       properties:
@@ -11687,7 +12095,88 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsS3AccountPublicAccessBlockDetails'
             - description: Provides information about the Amazon S3 Public Access Block configuration for the S3 bucket.
+        AccessControlList:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The access control list for the S3 bucket.
+        BucketLoggingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketLoggingConfiguration'
+            - description: The logging configuration for the S3 bucket.
+        BucketWebsiteConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketWebsiteConfiguration'
+            - description: The website configuration parameters for the S3 bucket.
+        BucketNotificationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketNotificationConfiguration'
+            - description: The notification configuration for the S3 bucket.
       description: The details of an Amazon S3 bucket.
+    AwsS3BucketNotificationConfigurationDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsS3BucketNotificationConfigurationDetail'
+    AwsS3BucketNotificationConfigurationEvents:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+    AwsS3BucketNotificationConfigurationFilter:
+      type: object
+      properties:
+        S3KeyFilter:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketNotificationConfigurationS3KeyFilter'
+            - description: Details for an Amazon S3 filter.
+      description: Filtering information for the notifications. The filtering is based on Amazon S3 key names.
+    AwsS3BucketNotificationConfigurationDetail:
+      type: object
+      properties:
+        Events:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketNotificationConfigurationEvents'
+            - description: The list of events that trigger a notification.
+        Filter:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketNotificationConfigurationFilter'
+            - description: The filters that determine which S3 buckets generate notifications.
+        Destination:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The ARN of the Lambda function, Amazon SQS queue, or Amazon SNS topic that generates the notification.'
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'Indicates the type of notification. Notifications can be generated using Lambda functions, Amazon SQS queues or Amazon SNS topics.'
+      description: Details for an S3 bucket notification configuration.
+    AwsS3BucketNotificationConfigurationS3KeyFilter:
+      type: object
+      properties:
+        FilterRules:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketNotificationConfigurationS3KeyFilterRules'
+            - description: The filter rules for the filter.
+      description: Details for an Amazon S3 filter.
+    AwsS3BucketNotificationConfigurationS3KeyFilterRules:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsS3BucketNotificationConfigurationS3KeyFilterRule'
+    AwsS3BucketNotificationConfigurationS3KeyFilterRuleName:
+      type: string
+      enum:
+        - Prefix
+        - Suffix
+    AwsS3BucketNotificationConfigurationS3KeyFilterRule:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketNotificationConfigurationS3KeyFilterRuleName'
+            - description: Indicates whether the filter is based on the prefix or suffix of the Amazon S3 key.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The filter value.
+      description: Details for a filter rule.
     AwsS3BucketServerSideEncryptionByDefault:
       type: object
       properties:
@@ -11698,7 +12187,7 @@ components:
         KMSMasterKeyID:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: KMS customer master key (CMK) ID to use for the default encryption.
+            - description: KMS key ID to use for the default encryption.
       description: Specifies the default server-side encryption to apply to new objects in the bucket.
     AwsS3BucketServerSideEncryptionRules:
       type: array
@@ -11712,6 +12201,70 @@ components:
             - $ref: '#/components/schemas/AwsS3BucketServerSideEncryptionByDefault'
             - description: 'Specifies the default server-side encryption to apply to new objects in the bucket. If a <code>PUT</code> object request doesn''t specify any server-side encryption, this default encryption is applied.'
       description: An encryption rule to apply to the S3 bucket.
+    AwsS3BucketWebsiteConfigurationRedirectTo:
+      type: object
+      properties:
+        Hostname:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the host to redirect requests to.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The protocol to use when redirecting requests. By default, uses the same protocol as the original request.'
+      description: The redirect behavior for requests to the website.
+    AwsS3BucketWebsiteConfigurationRoutingRules:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsS3BucketWebsiteConfigurationRoutingRule'
+    AwsS3BucketWebsiteConfigurationRoutingRuleCondition:
+      type: object
+      properties:
+        HttpErrorCodeReturnedEquals:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: Indicates to redirect the request if the HTTP error code matches this value.
+        KeyPrefixEquals:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: Indicates to redirect the request if the key prefix matches this value.
+      description: The condition that must be met in order to apply the routing rule.
+    AwsS3BucketWebsiteConfigurationRoutingRuleRedirect:
+      type: object
+      properties:
+        Hostname:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The host name to use in the redirect request.
+        HttpRedirectCode:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The HTTP redirect code to use in the response.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The protocol to use to redirect the request. By default, uses the protocol from the original request.'
+        ReplaceKeyPrefixWith:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: <p>The object key prefix to use in the redirect request.</p> <p>Cannot be provided if <code>ReplaceKeyWith</code> is present.</p>
+        ReplaceKeyWith:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: <p>The specific object key to use in the redirect request.</p> <p>Cannot be provided if <code>ReplaceKeyPrefixWith</code> is present.</p>
+      description: The rules to redirect the request if the condition in <code>Condition</code> is met.
+    AwsS3BucketWebsiteConfigurationRoutingRule:
+      type: object
+      properties:
+        Condition:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketWebsiteConfigurationRoutingRuleCondition'
+            - description: Provides the condition that must be met in order to apply the routing rule.
+        Redirect:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketWebsiteConfigurationRoutingRuleRedirect'
+            - description: Provides the rules to redirect the request if the condition in <code>Condition</code> is met.
+      description: A rule for redirecting requests to the website.
     AwsS3ObjectDetails:
       type: object
       properties:
@@ -11738,7 +12291,7 @@ components:
         SSEKMSKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The identifier of the KMS symmetric customer managed customer master key (CMK) that was used for the object.
+            - description: The identifier of the KMS symmetric customer managed key that was used for the object.
       description: Details about an Amazon S3 object.
     AwsSecretsManagerSecretRotationRules:
       type: object
@@ -11762,7 +12315,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The ARN, Key ID, or alias of the KMS customer master key (CMK) used to encrypt the <code>SecretString</code> or <code>SecretBinary</code> values for versions of this secret.'
+            - description: 'The ARN, Key ID, or alias of the KMS key used to encrypt the <code>SecretString</code> or <code>SecretBinary</code> values for versions of this secret.'
         RotationEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -11951,7 +12504,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/WorkflowStatus'
-            - description: '<p>The status of the investigation into the finding. The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets the workflow status from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p> <code>RecordState</code> changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p> <code>ComplianceStatus</code> changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
+            - description: '<p>The status of the investigation into the finding. The workflow status is specific to an individual finding. It does not affect the generation of new findings. For example, setting the workflow status to <code>SUPPRESSED</code> or <code>RESOLVED</code> does not prevent a new finding for the same issue.</p> <p>The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets the workflow status from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p> <code>RecordState</code> changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p> <code>ComplianceStatus</code> changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - Indicates that you reviewed the finding and do not believe that any action is needed. The finding is no longer updated.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
       description: Provides information about the status of the investigation into a finding.
     RecordState:
       type: string
@@ -12462,7 +13015,7 @@ components:
         KmsMasterKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ID of an Amazon Web Services managed customer master key (CMK) for Amazon SNS or a custom CMK.
+            - description: The ID of an Amazon Web Services managed key for Amazon SNS or a customer managed key.
         Subscription:
           allOf:
             - $ref: '#/components/schemas/AwsSnsTopicSubscriptionList'
@@ -12498,7 +13051,7 @@ components:
         KmsMasterKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ID of an Amazon Web Services managed customer master key (CMK) for Amazon SQS or a custom CMK.
+            - description: The ID of an Amazon Web Services managed key for Amazon SQS or a custom KMS key.
         QueueName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -12765,7 +13318,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/WorkflowStatus'
-            - description: '<p>The status of the investigation into the finding. The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets <code>WorkFlowStatus</code> from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p>The record state changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p>The compliance status changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> </ul>'
+            - description: '<p>The status of the investigation into the finding. The workflow status is specific to an individual finding. It does not affect the generation of new findings. For example, setting the workflow status to <code>SUPPRESSED</code> or <code>RESOLVED</code> does not prevent a new finding for the same issue.</p> <p>The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets <code>WorkFlowStatus</code> from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p>The record state changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p>The compliance status changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.</p> </li> <li> <p> <code>SUPPRESSED</code> - Indicates that you reviewed the finding and do not believe that any action is needed. The finding is no longer updated.</p> </li> </ul>'
       description: Used to update information about the investigation into the finding.
     BatchUpdateFindingsRequest:
       type: object
@@ -13096,6 +13649,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The base scoring vector for the CVSS score.
+        Source:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The origin of the original CVSS score and vector.
+        Adjustments:
+          allOf:
+            - $ref: '#/components/schemas/AdjustmentList'
+            - description: Adjustments to the CVSS metrics.
       description: CVSS scores from the advisory related to the vulnerability.
     CvssList:
       type: array
@@ -13890,7 +14451,7 @@ components:
         MarketplaceUrl:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>For integrations with Amazon Web Services services, the Amazon Web Services Console URL from which to activate the service.</p> <p>For integrations with third-party products, the Marketplace URL from which to subscribe to or purchase the product.</p>'
+            - description: '<p>For integrations with Amazon Web Services services, the Amazon Web Services Console URL from which to activate the service.</p> <p>For integrations with third-party products, the Amazon Web Services Marketplace URL from which to subscribe to or purchase the product.</p>'
         ActivationUrl:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -14050,7 +14611,7 @@ components:
         AwsElbLoadBalancer:
           allOf:
             - $ref: '#/components/schemas/AwsElbLoadBalancerDetails'
-            - description: contains details about a Classic Load Balancer.
+            - description: Contains details about a Classic Load Balancer.
         AwsIamGroup:
           allOf:
             - $ref: '#/components/schemas/AwsIamGroupDetails'
@@ -14123,6 +14684,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsEcsServiceDetails'
             - description: Details about a service within an ECS cluster.
+        AwsAutoScalingLaunchConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsAutoScalingLaunchConfigurationDetails'
+            - description: Provides details about a launch configuration.
+        AwsEc2VpnConnection:
+          allOf:
+            - $ref: '#/components/schemas/AwsEc2VpnConnectionDetails'
+            - description: Details about an EC2 VPN connection.
+        AwsEcrContainerImage:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcrContainerImageDetails'
+            - description: information about an Amazon ECR image.
       description: '<p>Additional details about a resource related to a finding.</p> <p>To provide the details, use the object that corresponds to the resource type. For example, if the resource type is <code>AwsEc2Instance</code>, then you use the <code>AwsEc2Instance</code> object to provide the details.</p> <p>If the type-specific object does not contain all of the fields you want to populate, then you use the <code>Other</code> object to populate those additional fields.</p> <p>You also use the <code>Other</code> object to populate the details when the selected type does not have a corresponding object.</p>'
     Resource:
       type: object
@@ -14241,6 +14814,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The architecture used for the software package.
+        PackageManager:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The source of the package.
+        FilePath:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The file system path to the package manager inventory file.
       description: Information about a software package.
     SoftwarePackageList:
       type: array

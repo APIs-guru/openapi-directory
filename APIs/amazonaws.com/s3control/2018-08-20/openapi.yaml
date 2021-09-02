@@ -130,7 +130,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID for the owner of the bucket for which you want to create an access point.
+          description: The Amazon Web Services account ID for the owner of the bucket for which you want to create an access point.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -258,7 +258,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID for owner of the specified Object Lambda Access Point.
+          description: The Amazon Web Services account ID for owner of the specified Object Lambda Access Point.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -510,7 +510,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID that creates the job.
+          description: The Amazon Web Services account ID that creates the job.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -636,7 +636,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListJobs
-      description: '<p>Lists current S3 Batch Operations jobs and jobs that have ended within the last 30 days for the account making the request. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html">S3 Batch Operations</a> in the <i>Amazon S3 User Guide</i>.</p> <p>Related actions include:</p> <p/> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html">CreateJob</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html">DescribeJob</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html">UpdateJobPriority</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html">UpdateJobStatus</a> </p> </li> </ul>'
+      description: '<p>Lists current S3 Batch Operations jobs and jobs that have ended within the last 30 days for the Amazon Web Services account making the request. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html">S3 Batch Operations</a> in the <i>Amazon S3 User Guide</i>.</p> <p>Related actions include:</p> <p/> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html">CreateJob</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html">DescribeJob</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html">UpdateJobPriority</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html">UpdateJobStatus</a> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -666,7 +666,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID associated with the S3 Batch Operations job.
+          description: The Amazon Web Services account ID associated with the S3 Batch Operations job.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -708,6 +708,63 @@ paths:
             type: string
           description: Pagination token
           required: false
+  /v20180820/async-requests/mrap/create#x-amz-account-id:
+    post:
+      operationId: CreateMultiRegionAccessPoint
+      description: '<p>Creates a Multi-Region Access Point and associates it with the specified buckets. For more information about creating Multi-Region Access Points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html">Creating Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>This request is asynchronous, meaning that you might receive a response before the command has completed. When this request provides a response, it provides a token that you can use to monitor the status of the request with <code>DescribeMultiRegionAccessPointOperation</code>.</p> <p>The following actions are related to <code>CreateMultiRegionAccessPoint</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html">DeleteMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html">DescribeMultiRegionAccessPointOperation</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html">GetMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html">ListMultiRegionAccessPoints</a> </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateMultiRegionAccessPointResult'
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The Amazon Web Services account ID for the owner of the Multi-Region Access Point. The owner of the Multi-Region Access Point also must own the underlying buckets.
+          schema:
+            type: string
+            pattern: '^\d{12}$'
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              type: object
+              required:
+                - ClientToken
+                - Details
+              properties:
+                ClientToken:
+                  description: An idempotency token used to identify the request and guarantee that requests are unique.
+                  type: string
+                  pattern: \S+
+                  maxLength: 64
+                Details:
+                  description: 'A container for the information associated with a <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html">CreateMultiRegionAccessPoint</a> request. '
+                  type: object
+                  properties:
+                    Name:
+                      allOf:
+                        - $ref: '#/components/schemas/MultiRegionAccessPointName'
+                        - description: The name of the Multi-Region Access Point associated with this request.
+                    PublicAccessBlock:
+                      $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+                    Regions:
+                      allOf:
+                        - $ref: '#/components/schemas/RegionCreationList'
+                        - description: The buckets in different Regions that are associated with the Multi-Region Access Point.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v20180820/accesspoint/{name}/policy#x-amz-account-id':
     delete:
       operationId: DeleteAccessPointPolicy
@@ -777,7 +834,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID for owner of the bucket associated with the specified access point.
+          description: The Amazon Web Services account ID for owner of the bucket associated with the specified access point.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -933,7 +990,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetBucket
-      description: '<p>Gets an Amazon S3 on Outposts bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html"> Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p> <p>If you are using an identity other than the root user of the account that owns the Outposts bucket, the calling identity must have the <code>s3-outposts:GetBucket</code> permissions on the specified Outposts bucket and belong to the Outposts bucket owner''s account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. </p> <p> If you don''t have <code>s3-outposts:GetBucket</code> permissions or you''re not using an identity that belongs to the bucket owner''s account, Amazon S3 returns a <code>403 Access Denied</code> error.</p> <p>The following actions are related to <code>GetBucket</code> for Amazon S3 on Outposts:</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html#API_control_GetBucket_Examples">Examples</a> section.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html">PutObject</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html">CreateBucket</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html">DeleteBucket</a> </p> </li> </ul>'
+      description: '<p>Gets an Amazon S3 on Outposts bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html"> Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p> <p>If you are using an identity other than the root user of the Amazon Web Services account that owns the Outposts bucket, the calling identity must have the <code>s3-outposts:GetBucket</code> permissions on the specified Outposts bucket and belong to the Outposts bucket owner''s account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. </p> <p> If you don''t have <code>s3-outposts:GetBucket</code> permissions or you''re not using an identity that belongs to the bucket owner''s account, Amazon S3 returns a <code>403 Access Denied</code> error.</p> <p>The following actions are related to <code>GetBucket</code> for Amazon S3 on Outposts:</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html#API_control_GetBucket_Examples">Examples</a> section.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html">PutObject</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html">CreateBucket</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html">DeleteBucket</a> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -945,7 +1002,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID of the Outposts bucket.
+          description: The Amazon Web Services account ID of the Outposts bucket.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -1004,7 +1061,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID of the Outposts bucket.
+          description: The Amazon Web Services account ID of the Outposts bucket.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -1027,7 +1084,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID of the Outposts bucket.
+          description: The Amazon Web Services account ID of the Outposts bucket.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -1058,7 +1115,7 @@ paths:
   '/v20180820/bucket/{name}/policy#x-amz-account-id':
     delete:
       operationId: DeleteBucketPolicy
-      description: '<note> <p>This action deletes an Amazon S3 on Outposts bucket policy. To delete an S3 bucket policy, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html">DeleteBucketPolicy</a> in the <i>Amazon S3 API Reference</i>. </p> </note> <p>This implementation of the DELETE action uses the policy subresource to delete the policy of a specified Amazon S3 on Outposts bucket. If you are using an identity other than the root user of the account that owns the bucket, the calling identity must have the <code>s3-outposts:DeleteBucketPolicy</code> permissions on the specified Outposts bucket and belong to the bucket owner''s account to use this action. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">Using Amazon S3 on Outposts</a> in <i>Amazon S3 User Guide</i>.</p> <p>If you don''t have <code>DeleteBucketPolicy</code> permissions, Amazon S3 returns a <code>403 Access Denied</code> error. If you have the correct permissions, but you''re not using an identity that belongs to the bucket owner''s account, Amazon S3 returns a <code>405 Method Not Allowed</code> error. </p> <important> <p>As a security precaution, the root user of the account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.</p> </important> <p>For more information about bucket policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html">Using Bucket Policies and User Policies</a>. </p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples">Examples</a> section.</p> <p>The following actions are related to <code>DeleteBucketPolicy</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html">GetBucketPolicy</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html">PutBucketPolicy</a> </p> </li> </ul>'
+      description: '<note> <p>This action deletes an Amazon S3 on Outposts bucket policy. To delete an S3 bucket policy, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html">DeleteBucketPolicy</a> in the <i>Amazon S3 API Reference</i>. </p> </note> <p>This implementation of the DELETE action uses the policy subresource to delete the policy of a specified Amazon S3 on Outposts bucket. If you are using an identity other than the root user of the Amazon Web Services account that owns the bucket, the calling identity must have the <code>s3-outposts:DeleteBucketPolicy</code> permissions on the specified Outposts bucket and belong to the bucket owner''s account to use this action. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">Using Amazon S3 on Outposts</a> in <i>Amazon S3 User Guide</i>.</p> <p>If you don''t have <code>DeleteBucketPolicy</code> permissions, Amazon S3 returns a <code>403 Access Denied</code> error. If you have the correct permissions, but you''re not using an identity that belongs to the bucket owner''s account, Amazon S3 returns a <code>405 Method Not Allowed</code> error. </p> <important> <p>As a security precaution, the root user of the Amazon Web Services account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.</p> </important> <p>For more information about bucket policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html">Using Bucket Policies and User Policies</a>. </p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples">Examples</a> section.</p> <p>The following actions are related to <code>DeleteBucketPolicy</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html">GetBucketPolicy</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html">PutBucketPolicy</a> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1089,7 +1146,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetBucketPolicy
-      description: '<note> <p>This action gets a bucket policy for an Amazon S3 on Outposts bucket. To get a policy for an S3 bucket, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html">GetBucketPolicy</a> in the <i>Amazon S3 API Reference</i>. </p> </note> <p>Returns the policy of a specified Outposts bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p> <p>If you are using an identity other than the root user of the account that owns the bucket, the calling identity must have the <code>GetBucketPolicy</code> permissions on the specified bucket and belong to the bucket owner''s account in order to use this action.</p> <p>Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. If you don''t have <code>s3-outposts:GetBucketPolicy</code> permissions or you''re not using an identity that belongs to the bucket owner''s account, Amazon S3 returns a <code>403 Access Denied</code> error.</p> <important> <p>As a security precaution, the root user of the account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.</p> </important> <p>For more information about bucket policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html">Using Bucket Policies and User Policies</a>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html#API_control_GetBucketPolicy_Examples">Examples</a> section.</p> <p>The following actions are related to <code>GetBucketPolicy</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html">GetObject</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html">PutBucketPolicy</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html">DeleteBucketPolicy</a> </p> </li> </ul>'
+      description: '<note> <p>This action gets a bucket policy for an Amazon S3 on Outposts bucket. To get a policy for an S3 bucket, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html">GetBucketPolicy</a> in the <i>Amazon S3 API Reference</i>. </p> </note> <p>Returns the policy of a specified Outposts bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p> <p>If you are using an identity other than the root user of the Amazon Web Services account that owns the bucket, the calling identity must have the <code>GetBucketPolicy</code> permissions on the specified bucket and belong to the bucket owner''s account in order to use this action.</p> <p>Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. If you don''t have <code>s3-outposts:GetBucketPolicy</code> permissions or you''re not using an identity that belongs to the bucket owner''s account, Amazon S3 returns a <code>403 Access Denied</code> error.</p> <important> <p>As a security precaution, the root user of the Amazon Web Services account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.</p> </important> <p>For more information about bucket policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html">Using Bucket Policies and User Policies</a>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html#API_control_GetBucketPolicy_Examples">Examples</a> section.</p> <p>The following actions are related to <code>GetBucketPolicy</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html">GetObject</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html">PutBucketPolicy</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html">DeleteBucketPolicy</a> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1101,7 +1158,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID of the Outposts bucket.
+          description: The Amazon Web Services account ID of the Outposts bucket.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -1116,7 +1173,7 @@ paths:
             maxLength: 255
     put:
       operationId: PutBucketPolicy
-      description: '<note> <p>This action puts a bucket policy to an Amazon S3 on Outposts bucket. To put a policy on an S3 bucket, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketPolicy.html">PutBucketPolicy</a> in the <i>Amazon S3 API Reference</i>. </p> </note> <p>Applies an Amazon S3 bucket policy to an Outposts bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p> <p>If you are using an identity other than the root user of the account that owns the Outposts bucket, the calling identity must have the <code>PutBucketPolicy</code> permissions on the specified Outposts bucket and belong to the bucket owner''s account in order to use this action.</p> <p>If you don''t have <code>PutBucketPolicy</code> permissions, Amazon S3 returns a <code>403 Access Denied</code> error. If you have the correct permissions, but you''re not using an identity that belongs to the bucket owner''s account, Amazon S3 returns a <code>405 Method Not Allowed</code> error.</p> <important> <p> As a security precaution, the root user of the account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action. </p> </important> <p>For more information about bucket policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html">Using Bucket Policies and User Policies</a>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html#API_control_PutBucketPolicy_Examples">Examples</a> section.</p> <p>The following actions are related to <code>PutBucketPolicy</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html">GetBucketPolicy</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html">DeleteBucketPolicy</a> </p> </li> </ul>'
+      description: '<note> <p>This action puts a bucket policy to an Amazon S3 on Outposts bucket. To put a policy on an S3 bucket, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketPolicy.html">PutBucketPolicy</a> in the <i>Amazon S3 API Reference</i>. </p> </note> <p>Applies an Amazon S3 bucket policy to an Outposts bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p> <p>If you are using an identity other than the root user of the Amazon Web Services account that owns the Outposts bucket, the calling identity must have the <code>PutBucketPolicy</code> permissions on the specified Outposts bucket and belong to the bucket owner''s account in order to use this action.</p> <p>If you don''t have <code>PutBucketPolicy</code> permissions, Amazon S3 returns a <code>403 Access Denied</code> error. If you have the correct permissions, but you''re not using an identity that belongs to the bucket owner''s account, Amazon S3 returns a <code>405 Method Not Allowed</code> error.</p> <important> <p> As a security precaution, the root user of the Amazon Web Services account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action. </p> </important> <p>For more information about bucket policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html">Using Bucket Policies and User Policies</a>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html#API_control_PutBucketPolicy_Examples">Examples</a> section.</p> <p>The following actions are related to <code>PutBucketPolicy</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html">GetBucketPolicy</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html">DeleteBucketPolicy</a> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1124,7 +1181,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID of the Outposts bucket.
+          description: The Amazon Web Services account ID of the Outposts bucket.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -1166,7 +1223,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID of the Outposts bucket tag set to be removed.
+          description: The Amazon Web Services account ID of the Outposts bucket tag set to be removed.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -1201,7 +1258,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID of the Outposts bucket.
+          description: The Amazon Web Services account ID of the Outposts bucket.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -1216,7 +1273,7 @@ paths:
             maxLength: 255
     put:
       operationId: PutBucketTagging
-      description: '<note> <p>This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html">PutBucketTagging</a> in the <i>Amazon S3 API Reference</i>. </p> </note> <p>Sets the tags for an S3 on Outposts bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p> <p>Use tags to organize your Amazon Web Services bill to reflect your own cost structure. To do this, sign up to get your account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Cost allocation and tagging</a>.</p> <note> <p>Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/CostAllocTagging.html"> Using cost allocation in Amazon S3 bucket tags</a>.</p> </note> <p>To use this action, you must have permissions to perform the <code>s3-outposts:PutBucketTagging</code> action. The Outposts bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources"> Permissions Related to Bucket Subresource Operations</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html">Managing access permissions to your Amazon S3 resources</a>.</p> <p> <code>PutBucketTagging</code> has the following special errors:</p> <ul> <li> <p>Error code: <code>InvalidTagError</code> </p> <ul> <li> <p>Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html"> User-Defined Tag Restrictions</a> and <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html"> Amazon Web Services-Generated Cost Allocation Tag Restrictions</a>.</p> </li> </ul> </li> <li> <p>Error code: <code>MalformedXMLError</code> </p> <ul> <li> <p>Description: The XML provided does not match the schema.</p> </li> </ul> </li> <li> <p>Error code: <code>OperationAbortedError </code> </p> <ul> <li> <p>Description: A conflicting conditional action is currently in progress against this resource. Try again.</p> </li> </ul> </li> <li> <p>Error code: <code>InternalError</code> </p> <ul> <li> <p>Description: The service was unable to apply the provided tag to the bucket.</p> </li> </ul> </li> </ul> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html#API_control_PutBucketTagging_Examples">Examples</a> section.</p> <p>The following actions are related to <code>PutBucketTagging</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html">GetBucketTagging</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html">DeleteBucketTagging</a> </p> </li> </ul>'
+      description: '<note> <p>This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html">PutBucketTagging</a> in the <i>Amazon S3 API Reference</i>. </p> </note> <p>Sets the tags for an S3 on Outposts bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p> <p>Use tags to organize your Amazon Web Services bill to reflect your own cost structure. To do this, sign up to get your Amazon Web Services account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Cost allocation and tagging</a>.</p> <note> <p>Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/CostAllocTagging.html"> Using cost allocation in Amazon S3 bucket tags</a>.</p> </note> <p>To use this action, you must have permissions to perform the <code>s3-outposts:PutBucketTagging</code> action. The Outposts bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources"> Permissions Related to Bucket Subresource Operations</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html">Managing access permissions to your Amazon S3 resources</a>.</p> <p> <code>PutBucketTagging</code> has the following special errors:</p> <ul> <li> <p>Error code: <code>InvalidTagError</code> </p> <ul> <li> <p>Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html"> User-Defined Tag Restrictions</a> and <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html"> Amazon Web Services-Generated Cost Allocation Tag Restrictions</a>.</p> </li> </ul> </li> <li> <p>Error code: <code>MalformedXMLError</code> </p> <ul> <li> <p>Description: The XML provided does not match the schema.</p> </li> </ul> </li> <li> <p>Error code: <code>OperationAbortedError </code> </p> <ul> <li> <p>Description: A conflicting conditional action is currently in progress against this resource. Try again.</p> </li> </ul> </li> <li> <p>Error code: <code>InternalError</code> </p> <ul> <li> <p>Description: The service was unable to apply the provided tag to the bucket.</p> </li> </ul> </li> </ul> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html#API_control_PutBucketTagging_Examples">Examples</a> section.</p> <p>The following actions are related to <code>PutBucketTagging</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html">GetBucketTagging</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html">DeleteBucketTagging</a> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1224,7 +1281,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID of the Outposts bucket.
+          description: The Amazon Web Services account ID of the Outposts bucket.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -1287,7 +1344,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID associated with the S3 Batch Operations job.
+          description: The Amazon Web Services account ID associated with the S3 Batch Operations job.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -1341,7 +1398,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID associated with the S3 Batch Operations job.
+          description: The Amazon Web Services account ID associated with the S3 Batch Operations job.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -1393,7 +1450,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID associated with the S3 Batch Operations job.
+          description: The Amazon Web Services account ID associated with the S3 Batch Operations job.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -1421,10 +1478,61 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/S3Tag'
+  /v20180820/async-requests/mrap/delete#x-amz-account-id:
+    post:
+      operationId: DeleteMultiRegionAccessPoint
+      description: '<p>Deletes a Multi-Region Access Point. This action does not delete the buckets associated with the Multi-Region Access Point, only the Multi-Region Access Point itself.</p> <p>This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>This request is asynchronous, meaning that you might receive a response before the command has completed. When this request provides a response, it provides a token that you can use to monitor the status of the request with <code>DescribeMultiRegionAccessPointOperation</code>.</p> <p>The following actions are related to <code>DeleteMultiRegionAccessPoint</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html">CreateMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html">DescribeMultiRegionAccessPointOperation</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html">GetMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html">ListMultiRegionAccessPoints</a> </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteMultiRegionAccessPointResult'
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+          schema:
+            type: string
+            pattern: '^\d{12}$'
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              type: object
+              required:
+                - ClientToken
+                - Details
+              properties:
+                ClientToken:
+                  description: An idempotency token used to identify the request and guarantee that requests are unique.
+                  type: string
+                  pattern: \S+
+                  maxLength: 64
+                Details:
+                  description: 'A container for the information associated with a <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html">DeleteMultiRegionAccessPoint</a> request.'
+                  type: object
+                  properties:
+                    Name:
+                      allOf:
+                        - $ref: '#/components/schemas/MultiRegionAccessPointName'
+                        - description: The name of the Multi-Region Access Point associated with this request.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /v20180820/configuration/publicAccessBlock#x-amz-account-id:
     delete:
       operationId: DeletePublicAccessBlock
-      description: '<p>Removes the <code>PublicAccessBlock</code> configuration for an account. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html"> Using Amazon S3 block public access</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html">GetPublicAccessBlock</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html">PutPublicAccessBlock</a> </p> </li> </ul>'
+      description: '<p>Removes the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html"> Using Amazon S3 block public access</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html">GetPublicAccessBlock</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html">PutPublicAccessBlock</a> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1432,7 +1540,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID for the account whose <code>PublicAccessBlock</code> configuration you want to remove.
+          description: The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want to remove.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -1447,7 +1555,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetPublicAccessBlock
-      description: '<p>Retrieves the <code>PublicAccessBlock</code> configuration for an account. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html"> Using Amazon S3 block public access</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html">DeletePublicAccessBlock</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html">PutPublicAccessBlock</a> </p> </li> </ul>'
+      description: '<p>Retrieves the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html"> Using Amazon S3 block public access</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html">DeletePublicAccessBlock</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html">PutPublicAccessBlock</a> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1465,14 +1573,14 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID for the account whose <code>PublicAccessBlock</code> configuration you want to retrieve.
+          description: The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want to retrieve.
           schema:
             type: string
             pattern: '^\d{12}$'
             maxLength: 64
     put:
       operationId: PutPublicAccessBlock
-      description: '<p>Creates or modifies the <code>PublicAccessBlock</code> configuration for an account. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html"> Using Amazon S3 block public access</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html">GetPublicAccessBlock</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html">DeletePublicAccessBlock</a> </p> </li> </ul>'
+      description: '<p>Creates or modifies the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html"> Using Amazon S3 block public access</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html">GetPublicAccessBlock</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html">DeletePublicAccessBlock</a> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1480,7 +1588,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID for the account whose <code>PublicAccessBlock</code> configuration you want to set.
+          description: The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want to set.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -1801,7 +1909,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID associated with the S3 Batch Operations job.
+          description: The Amazon Web Services account ID associated with the S3 Batch Operations job.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -1815,6 +1923,43 @@ paths:
             pattern: '[a-zA-Z0-9\-\_]+'
             minLength: 5
             maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v20180820/async-requests/mrap/{request_token}#x-amz-account-id':
+    get:
+      operationId: DescribeMultiRegionAccessPointOperation
+      description: '<p>Retrieves the status of an asynchronous request to manage a Multi-Region Access Point. For more information about managing Multi-Region Access Points and how asynchronous requests work, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>The following actions are related to <code>GetMultiRegionAccessPoint</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html">CreateMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html">DeleteMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html">GetMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html">ListMultiRegionAccessPoints</a> </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeMultiRegionAccessPointOperationResult'
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+          schema:
+            type: string
+            pattern: '^\d{12}$'
+            maxLength: 64
+        - name: request_token
+          in: path
+          required: true
+          description: The request token associated with the request you want to know about. This request token is returned as part of the response when you make an asynchronous request. You provide this token to query about the status of the asynchronous action.
+          schema:
+            type: string
+            pattern: 'arn:.+'
+            minLength: 1
+            maxLength: 1024
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1986,6 +2131,114 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v20180820/mrap/instances/{name}#x-amz-account-id':
+    get:
+      operationId: GetMultiRegionAccessPoint
+      description: '<p>Returns configuration information about the specified Multi-Region Access Point.</p> <p>This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>The following actions are related to <code>GetMultiRegionAccessPoint</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html">CreateMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html">DeleteMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html">DescribeMultiRegionAccessPointOperation</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html">ListMultiRegionAccessPoints</a> </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetMultiRegionAccessPointResult'
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+          schema:
+            type: string
+            pattern: '^\d{12}$'
+            maxLength: 64
+        - name: name
+          in: path
+          required: true
+          description: 'The name of the Multi-Region Access Point whose configuration information you want to receive. The name of the Multi-Region Access Point is different from the alias. For more information about the distinction between the name and the alias of an Multi-Region Access Point, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.'
+          schema:
+            type: string
+            pattern: '^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$'
+            maxLength: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v20180820/mrap/instances/{name}/policy#x-amz-account-id':
+    get:
+      operationId: GetMultiRegionAccessPointPolicy
+      description: '<p>Returns the access control policy of the specified Multi-Region Access Point.</p> <p>This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>The following actions are related to <code>GetMultiRegionAccessPointPolicy</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html">GetMultiRegionAccessPointPolicyStatus</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html">PutMultiRegionAccessPointPolicy</a> </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetMultiRegionAccessPointPolicyResult'
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+          schema:
+            type: string
+            pattern: '^\d{12}$'
+            maxLength: 64
+        - name: name
+          in: path
+          required: true
+          description: 'Specifies the Multi-Region Access Point. The name of the Multi-Region Access Point is different from the alias. For more information about the distinction between the name and the alias of an Multi-Region Access Point, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.'
+          schema:
+            type: string
+            pattern: '^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$'
+            maxLength: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v20180820/mrap/instances/{name}/policystatus#x-amz-account-id':
+    get:
+      operationId: GetMultiRegionAccessPointPolicyStatus
+      description: '<p>Indicates whether the specified Multi-Region Access Point has an access control policy that allows public access.</p> <p>This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>The following actions are related to <code>GetMultiRegionAccessPointPolicyStatus</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html">GetMultiRegionAccessPointPolicy</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html">PutMultiRegionAccessPointPolicy</a> </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetMultiRegionAccessPointPolicyStatusResult'
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+          schema:
+            type: string
+            pattern: '^\d{12}$'
+            maxLength: 64
+        - name: name
+          in: path
+          required: true
+          description: 'Specifies the Multi-Region Access Point. The name of the Multi-Region Access Point is different from the alias. For more information about the distinction between the name and the alias of an Multi-Region Access Point, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.'
+          schema:
+            type: string
+            pattern: '^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$'
+            maxLength: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /v20180820/accesspoint#x-amz-account-id:
     get:
       operationId: ListAccessPoints
@@ -2001,7 +2254,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID for owner of the bucket whose access points you want to list.
+          description: The Amazon Web Services account ID for owner of the bucket whose access points you want to list.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -2106,6 +2359,62 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v20180820/mrap/instances#x-amz-account-id:
+    get:
+      operationId: ListMultiRegionAccessPoints
+      description: '<p>Returns a list of the Multi-Region Access Points currently associated with the specified Amazon Web Services account. Each call can return up to 100 Multi-Region Access Points, the maximum number of Multi-Region Access Points that can be associated with a single account.</p> <p>This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>The following actions are related to <code>ListMultiRegionAccessPoint</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html">CreateMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html">DeleteMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html">DescribeMultiRegionAccessPointOperation</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html">GetMultiRegionAccessPoint</a> </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListMultiRegionAccessPointsResult'
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+          schema:
+            type: string
+            pattern: '^\d{12}$'
+            maxLength: 64
+        - name: nextToken
+          in: query
+          required: false
+          description: Not currently used. Do not use this parameter.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1024
+        - name: maxResults
+          in: query
+          required: false
+          description: Not currently used. Do not use this parameter.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1000
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /v20180820/bucket#x-amz-account-id:
     get:
       operationId: ListRegionalBuckets
@@ -2121,7 +2430,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID of the Outposts bucket.
+          description: The Amazon Web Services account ID of the Outposts bucket.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -2210,6 +2519,61 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v20180820/async-requests/mrap/put-policy#x-amz-account-id:
+    post:
+      operationId: PutMultiRegionAccessPointPolicy
+      description: '<p>Associates an access control policy with the specified Multi-Region Access Point. Each Multi-Region Access Point can have only one policy, so a request made to this action replaces any existing policy that is associated with the specified Multi-Region Access Point.</p> <p>This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>The following actions are related to <code>PutMultiRegionAccessPointPolicy</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html">GetMultiRegionAccessPointPolicy</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html">GetMultiRegionAccessPointPolicyStatus</a> </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PutMultiRegionAccessPointPolicyResult'
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+          schema:
+            type: string
+            pattern: '^\d{12}$'
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              type: object
+              required:
+                - ClientToken
+                - Details
+              properties:
+                ClientToken:
+                  description: An idempotency token used to identify the request and guarantee that requests are unique.
+                  type: string
+                  pattern: \S+
+                  maxLength: 64
+                Details:
+                  description: 'A container for the information associated with a <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html">PutMultiRegionAccessPoint</a> request.'
+                  type: object
+                  properties:
+                    Name:
+                      allOf:
+                        - $ref: '#/components/schemas/MultiRegionAccessPointName'
+                        - description: The name of the Multi-Region Access Point associated with the request.
+                    Policy:
+                      allOf:
+                        - $ref: '#/components/schemas/Policy'
+                        - description: The policy details for the <code>PutMultiRegionAccessPoint</code> request.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v20180820/jobs/{id}/priority#x-amz-account-id&priority':
     post:
       operationId: UpdateJobPriority
@@ -2249,7 +2613,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID associated with the S3 Batch Operations job.
+          description: The Amazon Web Services account ID associated with the S3 Batch Operations job.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -2324,7 +2688,7 @@ paths:
         - name: x-amz-account-id
           in: header
           required: true
-          description: The account ID associated with the S3 Batch Operations job.
+          description: The Amazon Web Services account ID associated with the S3 Batch Operations job.
           schema:
             type: string
             pattern: '^\d{12}$'
@@ -2696,10 +3060,55 @@ components:
     BadRequestException: {}
     IdempotencyException: {}
     InternalServiceException: {}
+    CreateMultiRegionAccessPointResult:
+      type: object
+      properties:
+        RequestTokenARN:
+          allOf:
+            - $ref: '#/components/schemas/AsyncRequestTokenARN'
+            - description: 'The request token associated with the request. You can use this token with <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html">DescribeMultiRegionAccessPointOperation</a> to determine the status of asynchronous requests.'
+    MultiRegionAccessPointName:
+      type: string
+      pattern: '^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$'
+      maxLength: 50
+    PublicAccessBlockConfiguration:
+      type: object
+      properties:
+        BlockPublicAcls:
+          allOf:
+            - $ref: '#/components/schemas/Setting'
+            - description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
+        IgnorePublicAcls:
+          allOf:
+            - $ref: '#/components/schemas/Setting'
+            - description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p> <p>This is not supported for Amazon S3 on Outposts.</p>
+        BlockPublicPolicy:
+          allOf:
+            - $ref: '#/components/schemas/Setting'
+            - description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p> <p>This is not supported for Amazon S3 on Outposts.</p>
+        RestrictPublicBuckets:
+          allOf:
+            - $ref: '#/components/schemas/Setting'
+            - description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only Amazon Web Service principals and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
+      description: '<p>The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3 account. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the <i>Amazon S3 User Guide</i>.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
+    RegionCreationList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/Region'
+          - xml:
+              name: Region
     DeleteJobTaggingResult:
       type: object
       properties: {}
     NotFoundException: {}
+    DeleteMultiRegionAccessPointResult:
+      type: object
+      properties:
+        RequestTokenARN:
+          allOf:
+            - $ref: '#/components/schemas/AsyncRequestTokenARN'
+            - description: 'The request token associated with the request. You can use this token with <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html">DescribeMultiRegionAccessPointOperation</a> to determine the status of asynchronous requests.'
     DeleteStorageLensConfigurationTaggingResult:
       type: object
       properties: {}
@@ -2710,6 +3119,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobDescriptor'
             - description: Contains the configuration parameters and status for the job specified in the <code>Describe Job</code> request.
+    DescribeMultiRegionAccessPointOperationResult:
+      type: object
+      properties:
+        AsyncOperation:
+          allOf:
+            - $ref: '#/components/schemas/AsyncOperation'
+            - description: A container element containing the details of the asynchronous operation.
     GetAccessPointResult:
       type: object
       properties:
@@ -2840,13 +3256,32 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3TagSet'
             - description: The set of tags associated with the S3 Batch Operations job.
+    GetMultiRegionAccessPointResult:
+      type: object
+      properties:
+        AccessPoint:
+          allOf:
+            - $ref: '#/components/schemas/MultiRegionAccessPointReport'
+            - description: A container element containing the details of the requested Multi-Region Access Point.
+    GetMultiRegionAccessPointPolicyResult:
+      type: object
+      properties:
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/MultiRegionAccessPointPolicyDocument'
+            - description: The policy associated with the specified Multi-Region Access Point.
+    GetMultiRegionAccessPointPolicyStatusResult:
+      type: object
+      properties:
+        Established:
+          $ref: '#/components/schemas/PolicyStatus'
     GetPublicAccessBlockOutput:
       type: object
       properties:
         PublicAccessBlockConfiguration:
           allOf:
             - $ref: '#/components/schemas/PublicAccessBlockConfiguration'
-            - description: The <code>PublicAccessBlock</code> configuration currently in effect for this account.
+            - description: The <code>PublicAccessBlock</code> configuration currently in effect for this Amazon Web Services account.
     NoSuchPublicAccessBlockConfiguration: {}
     GetStorageLensConfigurationResult:
       type: object
@@ -2913,6 +3348,17 @@ components:
         - Suspended
     InvalidRequestException: {}
     InvalidNextTokenException: {}
+    ListMultiRegionAccessPointsResult:
+      type: object
+      properties:
+        AccessPoints:
+          allOf:
+            - $ref: '#/components/schemas/MultiRegionAccessPointReportList'
+            - description: The list of Multi-Region Access Points associated with the user.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+            - description: 'If the specified bucket has more Multi-Region Access Points than can be returned in one call to this action, this field contains a continuation token. You can use this token tin subsequent calls to this action to retrieve additional Multi-Region Access Points.'
     ListRegionalBucketsResult:
       type: object
       properties:
@@ -2950,6 +3396,15 @@ components:
       type: object
       properties: {}
     TooManyTagsException: {}
+    PutMultiRegionAccessPointPolicyResult:
+      type: object
+      properties:
+        RequestTokenARN:
+          allOf:
+            - $ref: '#/components/schemas/AsyncRequestTokenARN'
+            - description: 'The request token associated with the request. You can use this token with <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html">DescribeMultiRegionAccessPointOperation</a> to determine the status of asynchronous requests.'
+    Policy:
+      type: string
     ConfigId:
       type: string
       pattern: '[a-zA-Z0-9\-\_\.]+'
@@ -3172,6 +3627,151 @@ components:
             - $ref: '#/components/schemas/PrefixLevel'
             - description: A container for the bucket-level prefix-level metrics for S3 Storage Lens
       description: A container for the bucket-level configuration.
+    AsyncCreationTimestamp:
+      type: string
+      format: date-time
+    MaxLength1024String:
+      type: string
+      maxLength: 1024
+    AsyncErrorDetails:
+      type: object
+      properties:
+        Code:
+          allOf:
+            - $ref: '#/components/schemas/MaxLength1024String'
+            - description: A string that uniquely identifies the error condition.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/MaxLength1024String'
+            - description: A generic descritpion of the error condition in English.
+        Resource:
+          allOf:
+            - $ref: '#/components/schemas/MaxLength1024String'
+            - description: The identifier of the resource associated with the error.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/MaxLength1024String'
+            - description: The ID of the request associated with the error.
+      description: Error details for the failed asynchronous operation.
+    AsyncOperationName:
+      type: string
+      enum:
+        - CreateMultiRegionAccessPoint
+        - DeleteMultiRegionAccessPoint
+        - PutMultiRegionAccessPointPolicy
+    AsyncRequestTokenARN:
+      type: string
+      pattern: 'arn:.+'
+      minLength: 1
+      maxLength: 1024
+    AsyncRequestParameters:
+      type: object
+      properties:
+        CreateMultiRegionAccessPointRequest:
+          allOf:
+            - $ref: '#/components/schemas/CreateMultiRegionAccessPointInput'
+            - description: 'A container of the parameters for a <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html">CreateMultiRegionAccessPoint</a> request.'
+        DeleteMultiRegionAccessPointRequest:
+          allOf:
+            - $ref: '#/components/schemas/DeleteMultiRegionAccessPointInput'
+            - description: 'A container of the parameters for a <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html">DeleteMultiRegionAccessPoint</a> request.'
+        PutMultiRegionAccessPointPolicyRequest:
+          allOf:
+            - $ref: '#/components/schemas/PutMultiRegionAccessPointPolicyInput'
+            - description: 'A container of the parameters for a <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html">PutMultiRegionAccessPoint</a> request.'
+      description: A container for the request parameters associated with an asynchronous request.
+    AsyncRequestStatus:
+      type: string
+    AsyncResponseDetails:
+      type: object
+      properties:
+        MultiRegionAccessPointDetails:
+          allOf:
+            - $ref: '#/components/schemas/MultiRegionAccessPointsAsyncResponse'
+            - description: The details for the Multi-Region Access Point.
+        ErrorDetails:
+          allOf:
+            - $ref: '#/components/schemas/AsyncErrorDetails'
+            - description: Error details for an asynchronous request.
+      description: A container for the response details that are returned when querying about an asynchronous request.
+    AsyncOperation:
+      type: object
+      properties:
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/AsyncCreationTimestamp'
+            - description: The time that the request was sent to the service.
+        Operation:
+          allOf:
+            - $ref: '#/components/schemas/AsyncOperationName'
+            - description: The specific operation for the asynchronous request.
+        RequestTokenARN:
+          allOf:
+            - $ref: '#/components/schemas/AsyncRequestTokenARN'
+            - description: The request token associated with the request.
+        RequestParameters:
+          allOf:
+            - $ref: '#/components/schemas/AsyncRequestParameters'
+            - description: The parameters associated with the request.
+        RequestStatus:
+          allOf:
+            - $ref: '#/components/schemas/AsyncRequestStatus'
+            - description: The current status of the request.
+        ResponseDetails:
+          allOf:
+            - $ref: '#/components/schemas/AsyncResponseDetails'
+            - description: The details of the response.
+      description: A container for the information about an asynchronous operation.
+    CreateMultiRegionAccessPointInput:
+      type: object
+      required:
+        - Name
+        - Regions
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/MultiRegionAccessPointName'
+            - description: The name of the Multi-Region Access Point associated with this request.
+        PublicAccessBlock:
+          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+        Regions:
+          allOf:
+            - $ref: '#/components/schemas/RegionCreationList'
+            - description: The buckets in different Regions that are associated with the Multi-Region Access Point.
+      description: 'A container for the information associated with a <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html">CreateMultiRegionAccessPoint</a> request. '
+    DeleteMultiRegionAccessPointInput:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/MultiRegionAccessPointName'
+            - description: The name of the Multi-Region Access Point associated with this request.
+      description: 'A container for the information associated with a <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html">DeleteMultiRegionAccessPoint</a> request.'
+    PutMultiRegionAccessPointPolicyInput:
+      type: object
+      required:
+        - Name
+        - Policy
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/MultiRegionAccessPointName'
+            - description: The name of the Multi-Region Access Point associated with the request.
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/Policy'
+            - description: The policy details for the <code>PutMultiRegionAccessPoint</code> request.
+      description: 'A container for the information associated with a <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html">PutMultiRegionAccessPoint</a> request.'
+    MultiRegionAccessPointsAsyncResponse:
+      type: object
+      properties:
+        Regions:
+          allOf:
+            - $ref: '#/components/schemas/MultiRegionAccessPointRegionalResponseList'
+            - description: A collection of status information for the different Regions that a Multi-Region Access Point supports.
+      description: The Multi-Region Access Point details that are returned when querying about an asynchronous request.
     FunctionArnString:
       type: string
       pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
@@ -3271,26 +3871,6 @@ components:
       pattern: 'arn:[^:]+:s3-object-lambda:[^:]*:\d{12}:accesspoint/.*'
       minLength: 1
       maxLength: 2048
-    PublicAccessBlockConfiguration:
-      type: object
-      properties:
-        BlockPublicAcls:
-          allOf:
-            - $ref: '#/components/schemas/Setting'
-            - description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
-        IgnorePublicAcls:
-          allOf:
-            - $ref: '#/components/schemas/Setting'
-            - description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p> <p>This is not supported for Amazon S3 on Outposts.</p>
-        BlockPublicPolicy:
-          allOf:
-            - $ref: '#/components/schemas/Setting'
-            - description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p> <p>This is not supported for Amazon S3 on Outposts.</p>
-        RestrictPublicBuckets:
-          allOf:
-            - $ref: '#/components/schemas/Setting'
-            - description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only Amazon Web Service principals and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
-      description: '<p>The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3 account. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the <i>Amazon S3 User Guide</i>.</p> <p>This is not supported for Amazon S3 on Outposts.</p>'
     CreateAccessPointRequest:
       type: object
       required:
@@ -3487,7 +4067,29 @@ components:
       pattern: '[a-zA-Z0-9\-\_]+'
       minLength: 5
       maxLength: 36
+    MultiRegionAccessPointClientToken:
+      type: string
+      pattern: \S+
+      maxLength: 64
+    CreateMultiRegionAccessPointRequest:
+      type: object
+      required:
+        - ClientToken
+        - Details
+      title: CreateMultiRegionAccessPointRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/MultiRegionAccessPointClientToken'
+            - description: An idempotency token used to identify the request and guarantee that requests are unique.
+        Details:
+          allOf:
+            - $ref: '#/components/schemas/CreateMultiRegionAccessPointInput'
+            - description: A container element containing details about the Multi-Region Access Point.
     CreationDate:
+      type: string
+      format: date-time
+    CreationTimestamp:
       type: string
       format: date-time
     Date:
@@ -3531,6 +4133,21 @@ components:
       type: object
       title: DeleteJobTaggingRequest
       properties: {}
+    DeleteMultiRegionAccessPointRequest:
+      type: object
+      required:
+        - ClientToken
+        - Details
+      title: DeleteMultiRegionAccessPointRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/MultiRegionAccessPointClientToken'
+            - description: An idempotency token used to identify the request and guarantee that requests are unique.
+        Details:
+          allOf:
+            - $ref: '#/components/schemas/DeleteMultiRegionAccessPointInput'
+            - description: A container element containing details about the Multi-Region Access Point.
     DeletePublicAccessBlockRequest:
       type: object
       title: DeletePublicAccessBlockRequest
@@ -3619,6 +4236,10 @@ components:
             - $ref: '#/components/schemas/SuspendedCause'
             - description: 'The reason why the specified job was suspended. A job is only suspended if you create it through the Amazon S3 console. When you create the job, it enters the <code>Suspended</code> state to await confirmation before running. After you confirm the job, it automatically exits the <code>Suspended</code> state.'
       description: A container element for the job configuration and status information returned by a <code>Describe Job</code> request.
+    DescribeMultiRegionAccessPointOperationRequest:
+      type: object
+      title: DescribeMultiRegionAccessPointOperationRequest
+      properties: {}
     NonEmptyMaxLength1024String:
       type: string
       minLength: 1
@@ -3627,6 +4248,14 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+    EstablishedMultiRegionAccessPointPolicy:
+      type: object
+      properties:
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/Policy'
+            - description: The details of the last established policy.
+      description: '<p>The last established access control policy for a Multi-Region Access Point.</p> <p>When you update the policy, the update is first listed as the proposed policy. After the update is finished and all Regions have been updated, the proposed policy is listed as the established policy. If both policies have the same version number, the proposed policy is the established policy.</p>'
     Regions:
       type: array
       items:
@@ -3664,8 +4293,6 @@ components:
       type: object
       title: GetAccessPointPolicyRequest
       properties: {}
-    Policy:
-      type: string
     GetAccessPointPolicyStatusForObjectLambdaRequest:
       type: object
       title: GetAccessPointPolicyStatusForObjectLambdaRequest
@@ -3708,6 +4335,56 @@ components:
       type: object
       title: GetJobTaggingRequest
       properties: {}
+    GetMultiRegionAccessPointPolicyRequest:
+      type: object
+      title: GetMultiRegionAccessPointPolicyRequest
+      properties: {}
+    MultiRegionAccessPointPolicyDocument:
+      type: object
+      properties:
+        Established:
+          allOf:
+            - $ref: '#/components/schemas/EstablishedMultiRegionAccessPointPolicy'
+            - description: The last established policy for the Multi-Region Access Point.
+        Proposed:
+          allOf:
+            - $ref: '#/components/schemas/ProposedMultiRegionAccessPointPolicy'
+            - description: The proposed policy for the Multi-Region Access Point.
+      description: '<p>The Multi-Region Access Point access control policy.</p> <p>When you update the policy, the update is first listed as the proposed policy. After the update is finished and all Regions have been updated, the proposed policy is listed as the established policy. If both policies have the same version number, the proposed policy is the established policy.</p>'
+    GetMultiRegionAccessPointPolicyStatusRequest:
+      type: object
+      title: GetMultiRegionAccessPointPolicyStatusRequest
+      properties: {}
+    GetMultiRegionAccessPointRequest:
+      type: object
+      title: GetMultiRegionAccessPointRequest
+      properties: {}
+    MultiRegionAccessPointReport:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/MultiRegionAccessPointName'
+            - description: The name of the Multi-Region Access Point.
+        Alias:
+          allOf:
+            - $ref: '#/components/schemas/MultiRegionAccessPointAlias'
+            - description: 'The alias for the Multi-Region Access Point. For more information about the distinction between the name and the alias of an Multi-Region Access Point, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming">Managing Multi-Region Access Points</a>.'
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/CreationTimestamp'
+            - description: When the Multi-Region Access Point create request was received.
+        PublicAccessBlock:
+          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/MultiRegionAccessPointStatus'
+            - description: '<p>The current status of the Multi-Region Access Point.</p> <p> <code>CREATING</code> and <code>DELETING</code> are temporary states that exist while the request is propogating and being completed. If a Multi-Region Access Point has a status of <code>PARTIALLY_CREATED</code>, you can retry creation or send a request to delete the Multi-Region Access Point. If a Multi-Region Access Point has a status of <code>PARTIALLY_DELETED</code>, you can retry a delete request to finish the deletion of the Multi-Region Access Point.</p>'
+        Regions:
+          allOf:
+            - $ref: '#/components/schemas/RegionReportList'
+            - description: A collection of the Regions and buckets associated with the Multi-Region Access Point.
+      description: A collection of statuses for a Multi-Region Access Point in the various Regions it supports.
     GetPublicAccessBlockRequest:
       type: object
       title: GetPublicAccessBlockRequest
@@ -4066,6 +4743,17 @@ components:
       type: object
       title: ListJobsRequest
       properties: {}
+    ListMultiRegionAccessPointsRequest:
+      type: object
+      title: ListMultiRegionAccessPointsRequest
+      properties: {}
+    MultiRegionAccessPointReportList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/MultiRegionAccessPointReport'
+          - xml:
+              name: AccessPoint
     ListRegionalBucketsRequest:
       type: object
       title: ListRegionalBucketsRequest
@@ -4119,14 +4807,62 @@ components:
               name: StorageLensConfiguration
       xml:
         wrapped: false
-    MaxLength1024String:
-      type: string
-      maxLength: 1024
     MinStorageBytesPercentage:
       type: number
       format: double
       minimum: 0.1
       maximum: 100
+    MultiRegionAccessPointAlias:
+      type: string
+      pattern: '^[a-z][a-z0-9]*[.]mrap$'
+      maxLength: 63
+    ProposedMultiRegionAccessPointPolicy:
+      type: object
+      properties:
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/Policy'
+            - description: The details of the proposed policy.
+      description: '<p>The proposed access control policy for the Multi-Region Access Point.</p> <p>When you update the policy, the update is first listed as the proposed policy. After the update is finished and all Regions have been updated, the proposed policy is listed as the established policy. If both policies have the same version number, the proposed policy is the established policy.</p>'
+    RegionName:
+      type: string
+      minLength: 1
+      maxLength: 64
+    MultiRegionAccessPointRegionalResponse:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RegionName'
+            - description: The name of the Region in the Multi-Region Access Point.
+        RequestStatus:
+          allOf:
+            - $ref: '#/components/schemas/AsyncRequestStatus'
+            - description: The current status of the Multi-Region Access Point in this Region.
+      description: Status information for a single Multi-Region Access Point Region.
+    MultiRegionAccessPointRegionalResponseList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/MultiRegionAccessPointRegionalResponse'
+          - xml:
+              name: Region
+    MultiRegionAccessPointStatus:
+      type: string
+      enum:
+        - READY
+        - INCONSISTENT_ACROSS_REGIONS
+        - CREATING
+        - PARTIALLY_CREATED
+        - PARTIALLY_DELETED
+        - DELETING
+    RegionReportList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/RegionReport'
+          - xml:
+              name: Region
     NonEmptyMaxLength2048String:
       type: string
       minLength: 1
@@ -4316,6 +5052,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3TagSet'
             - description: The set of tags to associate with the S3 Batch Operations job.
+    PutMultiRegionAccessPointPolicyRequest:
+      type: object
+      required:
+        - ClientToken
+        - Details
+      title: PutMultiRegionAccessPointPolicyRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/MultiRegionAccessPointClientToken'
+            - description: An idempotency token used to identify the request and guarantee that requests are unique.
+        Details:
+          allOf:
+            - $ref: '#/components/schemas/PutMultiRegionAccessPointPolicyInput'
+            - description: A container element containing the details of the policy for the Multi-Region Access Point.
     PutPublicAccessBlockRequest:
       type: object
       required:
@@ -4325,7 +5076,7 @@ components:
         PublicAccessBlockConfiguration:
           allOf:
             - $ref: '#/components/schemas/PublicAccessBlockConfiguration'
-            - description: The <code>PublicAccessBlock</code> configuration that you want to apply to the specified account.
+            - description: The <code>PublicAccessBlock</code> configuration that you want to apply to the specified Amazon Web Services account.
       xml:
         namespace: 'http://awss3control.amazonaws.com/doc/2018-08-20/'
     PutStorageLensConfigurationRequest:
@@ -4352,6 +5103,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/StorageLensTags'
             - description: <p>The tag set of the S3 Storage Lens configuration.</p> <note> <p>You can set up to a maximum of 50 tags.</p> </note>
+    Region:
+      type: object
+      required:
+        - Bucket
+      properties:
+        Bucket:
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: The name of the associated bucket for the Region.
+      description: A Region that supports a Multi-Region Access Point as well as the associated bucket for the Region.
+    RegionReport:
+      type: object
+      properties:
+        Bucket:
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: The name of the bucket.
+        Region:
+          allOf:
+            - $ref: '#/components/schemas/RegionName'
+            - description: The name of the Region.
+      description: A combination of a bucket and Region that's part of a Multi-Region Access Point.
     RegionalBucket:
       type: object
       required:

@@ -690,7 +690,7 @@ paths:
                 - VolumeSize
               properties:
                 VolumeSize:
-                  description: 'The size of the volume, in GiB. The maximum size is <code>16384</code> GiB (16 TiB).'
+                  description: 'The size of the volume, in GiB. The maximum size is <code>65536</code> GiB (64 TiB).'
                   type: integer
                   minimum: 1
                 ParentSnapshotId:
@@ -1078,7 +1078,7 @@ components:
         VolumeSize:
           allOf:
             - $ref: '#/components/schemas/VolumeSize'
-            - description: 'The size of the volume, in GiB. The maximum size is <code>16384</code> GiB (16 TiB).'
+            - description: 'The size of the volume, in GiB. The maximum size is <code>65536</code> GiB (64 TiB).'
         ParentSnapshotId:
           allOf:
             - $ref: '#/components/schemas/SnapshotId'
