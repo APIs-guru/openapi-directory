@@ -311,9 +311,6 @@ components:
         config:
           $ref: "#/components/schemas/RecognitionConfig"
           description: Required. Provides information to the recognizer that specifies how to process the request.
-        outputConfig:
-          $ref: "#/components/schemas/TranscriptOutputConfig"
-          description: Optional. Specifies an optional destination for the recognition results.
       type: object
     LongRunningRecognizeResponse:
       description: The only message returned to the client by the `LongRunningRecognize` method. It contains the result as zero or more sequential `SpeechRecognitionResult` messages. It is included in the `result.response` field of the `Operation` returned by the `GetOperation` call of the `google::longrunning::Operations` service.
@@ -575,13 +572,6 @@ components:
           type: array
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
-          type: string
-      type: object
-    TranscriptOutputConfig:
-      description: Specifies an optional destination for the recognition results.
-      properties:
-        gcsUri:
-          description: "Specifies a Cloud Storage URI for the recognition results. Must be specified in the format: `gs://bucket_name/object_name`, and the bucket must already exist."
           type: string
       type: object
     WordInfo:

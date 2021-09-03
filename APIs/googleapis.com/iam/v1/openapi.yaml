@@ -586,10 +586,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Disables a ServiceAccount immediately. If an application uses the service account to authenticate, that application can no longer call Google APIs or access Google Cloud resources. Existing access tokens for the service account are rejected, and requests for new access tokens will fail. To re-enable the service account, use EnableServiceAccount. After you re-enable the service account, its existing access tokens will be accepted, and you can request new access tokens. To help avoid unplanned outages, we recommend that you disable the service account before you delete it. Use this method to disable the service account, then wait at least 24 hours and watch for unintended consequences. If there are no unintended consequences, you can delete the service account with DeleteServiceAccount.
-      operationId: iam.projects.serviceAccounts.disable
+      description: Disable a ServiceAccountKey. A disabled service account key can be enabled through EnableServiceAccountKey. The API is currently in preview phase.
+      operationId: iam.projects.serviceAccounts.keys.disable
       parameters:
-        - description: "The resource name of the service account in the following format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`. Using `-` as a wildcard for the `PROJECT_ID` will infer the project from the account. The `ACCOUNT` value can be the `email` address or the `unique_id` of the service account."
+        - description: "Required. The resource name of the service account key in the following format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}/keys/{key}`. Using `-` as a wildcard for the `PROJECT_ID` will infer the project from the account. The `ACCOUNT` value can be the `email` address or the `unique_id` of the service account."
           in: path
           name: name
           required: true
@@ -599,7 +599,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DisableServiceAccountRequest"
+              $ref: "#/components/schemas/DisableServiceAccountKeyRequest"
       responses:
         "200":
           content:
@@ -628,10 +628,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Enables a ServiceAccount that was disabled by DisableServiceAccount. If the service account is already enabled, then this method has no effect. If the service account was disabled by other means—for example, if Google disabled the service account because it was compromised—you cannot use this method to enable the service account.
-      operationId: iam.projects.serviceAccounts.enable
+      description: Enable a ServiceAccountKey. The API is currently in preview phase.
+      operationId: iam.projects.serviceAccounts.keys.enable
       parameters:
-        - description: "The resource name of the service account in the following format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`. Using `-` as a wildcard for the `PROJECT_ID` will infer the project from the account. The `ACCOUNT` value can be the `email` address or the `unique_id` of the service account."
+        - description: "Required. The resource name of the service account key in the following format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}/keys/{key}`. Using `-` as a wildcard for the `PROJECT_ID` will infer the project from the account. The `ACCOUNT` value can be the `email` address or the `unique_id` of the service account."
           in: path
           name: name
           required: true
@@ -641,7 +641,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/EnableServiceAccountRequest"
+              $ref: "#/components/schemas/EnableServiceAccountKeyRequest"
       responses:
         "200":
           content:
@@ -1375,12 +1375,20 @@ components:
           $ref: "#/components/schemas/ServiceAccount"
           description: "The ServiceAccount resource to create. Currently, only the following values are user assignable: `display_name` and `description`."
       type: object
+    DisableServiceAccountKeyRequest:
+      description: The service account key disable request.
+      properties: {}
+      type: object
     DisableServiceAccountRequest:
       description: The service account disable request.
       properties: {}
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      properties: {}
+      type: object
+    EnableServiceAccountKeyRequest:
+      description: The service account key enable request.
       properties: {}
       type: object
     EnableServiceAccountRequest:
@@ -1785,6 +1793,9 @@ components:
     ServiceAccountKey:
       description: "Represents a service account key. A service account has two sets of key-pairs: user-managed, and system-managed. User-managed key-pairs can be created and deleted by users. Users are responsible for rotating these keys periodically to ensure security of their service accounts. Users retain the private key of these key-pairs, and Google retains ONLY the public key. System-managed keys are automatically rotated by Google, and are used for signing for a maximum of two weeks. The rotation process is probabilistic, and usage of the new key will gradually ramp up and down over the key's lifetime. If you cache the public key set for a service account, we recommend that you update the cache every 15 minutes. User-managed keys can be added and removed at any time, so it is important to update the cache frequently. For Google-managed keys, Google will publish a key at least 6 hours before it is first used for signing and will keep publishing it for at least 6 hours after it was last used for signing. Public keys for all service accounts are also published at the OAuth2 Service Account API."
       properties:
+        disabled:
+          description: The key status.
+          type: boolean
         keyAlgorithm:
           description: Specifies the algorithm (and possibly key size) for the key.
           enum:

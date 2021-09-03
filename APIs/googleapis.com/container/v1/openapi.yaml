@@ -2919,6 +2919,9 @@ components:
         gcePersistentDiskCsiDriverConfig:
           $ref: "#/components/schemas/GcePersistentDiskCsiDriverConfig"
           description: Configuration for the Compute Engine Persistent Disk CSI driver.
+        gcpFilestoreCsiDriverConfig:
+          $ref: "#/components/schemas/GcpFilestoreCsiDriverConfig"
+          description: Configuration for the GCP Filestore CSI driver.
         horizontalPodAutoscaling:
           $ref: "#/components/schemas/HorizontalPodAutoscaling"
           description: Configuration for the horizontal pod autoscaling feature, which increases or decreases the number of replica pods a replication controller has based on the resource usage of the existing pods.
@@ -3502,6 +3505,13 @@ components:
       properties:
         enabled:
           description: Whether the Compute Engine PD CSI driver is enabled for this cluster.
+          type: boolean
+      type: object
+    GcpFilestoreCsiDriverConfig:
+      description: Configuration for the GCP Filestore CSI driver.
+      properties:
+        enabled:
+          description: Whether the GCP Filestore CSI driver is enabled for this cluster.
           type: boolean
       type: object
     GetJSONWebKeysResponse:

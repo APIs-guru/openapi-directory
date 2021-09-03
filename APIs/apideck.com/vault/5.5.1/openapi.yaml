@@ -2965,8 +2965,7 @@ x-webhooks:
             schema:
               additionalProperties: false
               properties:
-                connection:
-                  $ref: "#/components/schemas/Connection"
+                $ref: "#/components/schemas/Connection"
               type: object
       responses:
         "200":
@@ -2985,8 +2984,7 @@ x-webhooks:
             schema:
               additionalProperties: false
               properties:
-                connection:
-                  $ref: "#/components/schemas/Connection"
+                $ref: "#/components/schemas/Connection"
               type: object
       responses:
         "200":

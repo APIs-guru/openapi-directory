@@ -50,17 +50,17 @@ paths:
         "200":
           $ref: "#/components/responses/GetWebhooksResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: List webhooks
@@ -102,17 +102,17 @@ paths:
         "201":
           $ref: "#/components/responses/CreateWebhookResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Create webhook
@@ -158,17 +158,17 @@ paths:
         "200":
           $ref: "#/components/responses/DeleteWebhookResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Delete webhook
@@ -206,17 +206,17 @@ paths:
         "200":
           $ref: "#/components/responses/GetWebhookResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Get webhook
@@ -260,17 +260,17 @@ paths:
         "200":
           $ref: "#/components/responses/UpdateWebhookResponse"
         "400":
-          $ref: "#/components/responses/BadRequest"
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
-          $ref: "#/components/responses/Unauthorized"
+          $ref: "#/components/responses/UnauthorizedResponse"
         "402":
-          $ref: "#/components/responses/PaymentRequired"
+          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
-          $ref: "#/components/responses/NotFound"
+          $ref: "#/components/responses/NotFoundResponse"
         "422":
-          $ref: "#/components/responses/Unprocessable"
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
       summary: Update webhook
@@ -357,11 +357,11 @@ components:
       schema:
         type: string
   responses:
-    BadRequest:
+    BadRequestResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/BadRequest"
+            $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
     CreateWebhookResponse:
       content:
@@ -387,41 +387,41 @@ components:
           schema:
             $ref: "#/components/schemas/GetWebhooksResponse"
       description: Webhooks
-    NotFound:
+    NotFoundResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/NotFound"
+            $ref: "#/components/schemas/NotFoundResponse"
       description: The specified resource was not found
-    NotImplemented:
+    NotImplementedResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/NotImplemented"
+            $ref: "#/components/schemas/NotImplementedResponse"
       description: Not Implemented
-    PaymentRequired:
+    PaymentRequiredResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/PaymentRequired"
+            $ref: "#/components/schemas/PaymentRequiredResponse"
       description: Payment Required
-    Unauthorized:
+    UnauthorizedResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Unauthorized"
+            $ref: "#/components/schemas/UnauthorizedResponse"
       description: Unauthorized
-    UnexpectedError:
+    UnexpectedErrorResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UnexpectedError"
+            $ref: "#/components/schemas/UnexpectedErrorResponse"
       description: Unexpected error
-    Unprocessable:
+    UnprocessableResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Unprocessable"
+            $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
     UpdateWebhookResponse:
       content:
@@ -430,7 +430,7 @@ components:
             $ref: "#/components/schemas/UpdateWebhookResponse"
       description: Webhooks
   schemas:
-    BadRequest:
+    BadRequestResponse:
       properties:
         detail:
           anyOf:
@@ -582,7 +582,7 @@ components:
           example: 50
           type: integer
       type: object
-    NotFound:
+    NotFoundResponse:
       properties:
         detail:
           anyOf:
@@ -614,7 +614,7 @@ components:
           description: The type of error returned
           example: EntityNotFoundError
           type: string
-    NotImplemented:
+    NotImplementedResponse:
       properties:
         detail:
           anyOf:
@@ -642,7 +642,7 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
-    PaymentRequired:
+    PaymentRequiredResponse:
       properties:
         detail:
           description: Contains parameter or domain specific information related to the error and why it occured.
@@ -668,7 +668,7 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
-    Unauthorized:
+    UnauthorizedResponse:
       properties:
         detail:
           description: Contains parameter or domain specific information related to the error and why it occured.
@@ -694,7 +694,7 @@ components:
           description: The type of error returned
           example: UnauthorizedError
           type: string
-    UnexpectedError:
+    UnexpectedErrorResponse:
       properties:
         detail:
           anyOf:
@@ -734,7 +734,7 @@ components:
       required:
         - id
       title: UnifiedId
-    Unprocessable:
+    UnprocessableResponse:
       properties:
         detail:
           description: Contains parameter or domain specific information related to the error and why it occured.
@@ -824,6 +824,10 @@ components:
           format: uri
           pattern: ^(https?)://
           type: string
+      required:
+        - url
+        - status
+        - events
       type: object
   securitySchemes:
     apiKey:
@@ -858,280 +862,279 @@ x-webhooks:
             schema:
               additionalProperties: false
               properties:
-                connection:
-                  properties:
-                    auth_type:
-                      enum:
-                        - oauth2
-                        - apiKey
-                        - basic
-                        - none
-                      readOnly: true
+                properties:
+                  auth_type:
+                    enum:
+                      - oauth2
+                      - apiKey
+                      - basic
+                      - none
+                    readOnly: true
+                    type: string
+                  authorize_url:
+                    example: https://unify.apideck.com/vault/authorize/salesforce/<application-id>?state=<state>
+                    nullable: true
+                    readOnly: true
+                    type: string
+                  configurable_resources:
+                    example:
+                      - opportunities
+                      - companies
+                      - contacts
+                      - leads
+                    items:
                       type: string
-                    authorize_url:
-                      example: https://unify.apideck.com/vault/authorize/salesforce/<application-id>?state=<state>
-                      nullable: true
-                      readOnly: true
-                      type: string
-                    configurable_resources:
-                      example:
-                        - opportunities
-                        - companies
-                        - contacts
-                        - leads
-                      items:
-                        type: string
-                      readOnly: true
-                      type: array
-                    configuration:
-                      items:
-                        properties:
-                          defaults:
-                            items:
-                              properties:
-                                id:
-                                  example: ProductInterest
-                                  type: string
-                                options:
-                                  items:
-                                    anyOf:
-                                      - properties:
-                                          label:
-                                            example: General Channel
-                                            type: string
-                                          value:
-                                            anyOf:
-                                              - example: general
-                                                type: string
-                                              - example: 123
-                                                type: integer
-                                              - example: 12.5
-                                                type: number
-                                              - example: true
-                                                type: boolean
-                                              - example:
-                                                  - team
-                                                  - general
-                                                items:
-                                                  anyOf:
-                                                    - type: string
-                                                    - type: integer
-                                                    - type: number
-                                                type: array
-                                        type: object
-                                      - properties:
-                                          id:
-                                            example: "1234"
-                                            type: string
-                                          label:
-                                            example: General Channel
-                                            type: string
-                                          options:
-                                            items:
-                                              $ref: "#/x-webhooks/ConnectionCreated/post/requestBody/content/application~1json/schema/properties/connection/properties/configuration/items/properties/defaults/items/properties/options/items/anyOf/0"
-                                            type: array
-                                        type: object
-                                  type: array
-                                target:
-                                  enum:
-                                    - custom_fields
-                                    - resource
-                                  example: custom_fields
-                                  readOnly: true
-                                  type: string
-                                value:
+                    readOnly: true
+                    type: array
+                  configuration:
+                    items:
+                      properties:
+                        defaults:
+                          items:
+                            properties:
+                              id:
+                                example: ProductInterest
+                                type: string
+                              options:
+                                items:
                                   anyOf:
-                                    - example: GC5000 series
-                                      type: string
-                                    - example: 10
-                                      type: integer
-                                    - example: 10.5
-                                      type: number
-                                    - example: true
-                                      type: boolean
-                                    - items:
-                                        anyOf:
-                                          - example: GC6000 series
-                                            type: string
-                                          - example: 10
-                                            type: integer
-                                          - example: 10.5
-                                            type: number
-                                      type: array
-                              type: object
-                            type: array
-                          resource:
-                            example: leads
-                            type: string
-                        type: object
-                      type: array
-                    created_at:
-                      example: 1615563533390
-                      readOnly: true
-                      type: number
-                    enabled:
-                      example: true
-                      type: boolean
-                    form_fields:
-                      example:
-                        - custom_field: false
-                          disabled: false
-                          id: instance_url
-                          label: Instance url
-                          mask: false
-                          placeholder: ""
-                          required: true
-                          type: text
-                          value: https://eu28.salesforce.com
-                      items:
-                        properties:
-                          custom_field:
-                            example: false
-                            type: boolean
-                          description:
-                            example: Slack channel to push notification to
-                            nullable: true
-                            type: string
-                          disabled:
-                            example: false
-                            nullable: true
-                            type: boolean
-                          id:
-                            example: channel
-                            type: string
-                          label:
-                            example: Channel
-                            type: string
-                          options:
-                            example:
-                              - label: General Channel
-                                value: general
-                            items:
-                              $ref: "#/x-webhooks/ConnectionCreated/post/requestBody/content/application~1json/schema/properties/connection/properties/configuration/items/properties/defaults/items/properties/options/items"
-                            type: array
-                          placeholder:
-                            example: Select a channel
-                            nullable: true
-                            type: string
-                          required:
-                            example: true
-                            type: boolean
-                          type:
-                            enum:
-                              - text
-                              - checkbox
-                              - tel
-                              - email
-                              - url
-                              - textarea
-                              - select
-                              - filtered-select
-                              - multi-select
-                              - datetime
-                              - date
-                              - time
-                              - number
-                            example: select
-                        type: object
-                      type: array
-                    icon:
-                      example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
-                      readOnly: true
-                      type: string
-                    id:
-                      example: lead+close
-                      readOnly: true
-                      type: string
-                    logo:
-                      example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
-                      readOnly: true
-                      type: string
-                    metadata:
-                      additionalProperties: true
-                      description: Attach your own consumer specific metadata
-                      example:
-                        account:
-                          id: c01458a5-7276-41ce-bc19-639906b0450a
-                          name: My Company
-                        plan: enterprise
-                      nullable: true
-                      properties: {}
+                                    - properties:
+                                        label:
+                                          example: General Channel
+                                          type: string
+                                        value:
+                                          anyOf:
+                                            - example: general
+                                              type: string
+                                            - example: 123
+                                              type: integer
+                                            - example: 12.5
+                                              type: number
+                                            - example: true
+                                              type: boolean
+                                            - example:
+                                                - team
+                                                - general
+                                              items:
+                                                anyOf:
+                                                  - type: string
+                                                  - type: integer
+                                                  - type: number
+                                              type: array
+                                      type: object
+                                    - properties:
+                                        id:
+                                          example: "1234"
+                                          type: string
+                                        label:
+                                          example: General Channel
+                                          type: string
+                                        options:
+                                          items:
+                                            $ref: "#/x-webhooks/ConnectionCreated/post/requestBody/content/application~1json/schema/properties/properties/configuration/items/properties/defaults/items/properties/options/items/anyOf/0"
+                                          type: array
+                                      type: object
+                                type: array
+                              target:
+                                enum:
+                                  - custom_fields
+                                  - resource
+                                example: custom_fields
+                                readOnly: true
+                                type: string
+                              value:
+                                anyOf:
+                                  - example: GC5000 series
+                                    type: string
+                                  - example: 10
+                                    type: integer
+                                  - example: 10.5
+                                    type: number
+                                  - example: true
+                                    type: boolean
+                                  - items:
+                                      anyOf:
+                                        - example: GC6000 series
+                                          type: string
+                                        - example: 10
+                                          type: integer
+                                        - example: 10.5
+                                          type: number
+                                    type: array
+                            type: object
+                          type: array
+                        resource:
+                          example: leads
+                          type: string
                       type: object
-                    name:
-                      example: Salesforce
-                      readOnly: true
-                      type: string
-                    resource_schema_support:
-                      example:
-                        - leads
-                      items:
-                        type: string
-                      readOnly: true
-                      type: array
-                    resource_settings_support:
-                      example:
-                        - leads
-                      items:
-                        type: string
-                      readOnly: true
-                      type: array
-                    revoke_url:
-                      example: https://unify.apideck.com/vault/revoke/salesforce/<application-id>?state=<state>
-                      nullable: true
-                      readOnly: true
-                      type: string
-                    service_id:
-                      example: salesforce
-                      readOnly: true
-                      type: string
-                    settings:
-                      description: Connection settings. Values will persist to `form_fields` with corresponding id
-                      example:
-                        instance_url: https://eu28.salesforce.com
-                      nullable: true
+                    type: array
+                  created_at:
+                    example: 1615563533390
+                    readOnly: true
+                    type: number
+                  enabled:
+                    example: true
+                    type: boolean
+                  form_fields:
+                    example:
+                      - custom_field: false
+                        disabled: false
+                        id: instance_url
+                        label: Instance url
+                        mask: false
+                        placeholder: ""
+                        required: true
+                        type: text
+                        value: https://eu28.salesforce.com
+                    items:
+                      properties:
+                        custom_field:
+                          example: false
+                          type: boolean
+                        description:
+                          example: Slack channel to push notification to
+                          nullable: true
+                          type: string
+                        disabled:
+                          example: false
+                          nullable: true
+                          type: boolean
+                        id:
+                          example: channel
+                          type: string
+                        label:
+                          example: Channel
+                          type: string
+                        options:
+                          example:
+                            - label: General Channel
+                              value: general
+                          items:
+                            $ref: "#/x-webhooks/ConnectionCreated/post/requestBody/content/application~1json/schema/properties/properties/configuration/items/properties/defaults/items/properties/options/items"
+                          type: array
+                        placeholder:
+                          example: Select a channel
+                          nullable: true
+                          type: string
+                        required:
+                          example: true
+                          type: boolean
+                        type:
+                          enum:
+                            - text
+                            - checkbox
+                            - tel
+                            - email
+                            - url
+                            - textarea
+                            - select
+                            - filtered-select
+                            - multi-select
+                            - datetime
+                            - date
+                            - time
+                            - number
+                          example: select
                       type: object
-                    settings_required_for_authorization:
-                      example:
-                        - instance_url
-                      items:
-                        type: string
-                      readOnly: true
-                      type: array
-                    state:
-                      description: "[Connection state flow](#section/Connection-state)"
-                      enum:
-                        - available
-                        - callable
-                        - added
-                        - authorized
-                      example: authorized
-                      readOnly: true
+                    type: array
+                  icon:
+                    example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
+                    readOnly: true
+                    type: string
+                  id:
+                    example: lead+close
+                    readOnly: true
+                    type: string
+                  logo:
+                    example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
+                    readOnly: true
+                    type: string
+                  metadata:
+                    additionalProperties: true
+                    description: Attach your own consumer specific metadata
+                    example:
+                      account:
+                        id: c01458a5-7276-41ce-bc19-639906b0450a
+                        name: My Company
+                      plan: enterprise
+                    nullable: true
+                    properties: {}
+                    type: object
+                  name:
+                    example: Salesforce
+                    readOnly: true
+                    type: string
+                  resource_schema_support:
+                    example:
+                      - leads
+                    items:
                       type: string
-                    status:
-                      enum:
-                        - live
-                        - upcoming
-                        - requested
-                      readOnly: true
+                    readOnly: true
+                    type: array
+                  resource_settings_support:
+                    example:
+                      - leads
+                    items:
                       type: string
-                    tag_line:
-                      example: CRM software solutions and enterprise cloud computing from Salesforce, the leader in customer relationship management (CRM) and PaaS. Free 30 day trial.
-                      readOnly: true
+                    readOnly: true
+                    type: array
+                  revoke_url:
+                    example: https://unify.apideck.com/vault/revoke/salesforce/<application-id>?state=<state>
+                    nullable: true
+                    readOnly: true
+                    type: string
+                  service_id:
+                    example: salesforce
+                    readOnly: true
+                    type: string
+                  settings:
+                    description: Connection settings. Values will persist to `form_fields` with corresponding id
+                    example:
+                      instance_url: https://eu28.salesforce.com
+                    nullable: true
+                    type: object
+                  settings_required_for_authorization:
+                    example:
+                      - instance_url
+                    items:
                       type: string
-                    unified_api:
-                      example: crm
-                      readOnly: true
-                      type: string
-                    updated_at:
-                      example: 1616662325753
-                      nullable: true
-                      readOnly: true
-                      type: number
-                    website:
-                      example: https://www.salesforce.com
-                      readOnly: true
-                      type: string
-                  type: object
+                    readOnly: true
+                    type: array
+                  state:
+                    description: "[Connection state flow](#section/Connection-state)"
+                    enum:
+                      - available
+                      - callable
+                      - added
+                      - authorized
+                    example: authorized
+                    readOnly: true
+                    type: string
+                  status:
+                    enum:
+                      - live
+                      - upcoming
+                      - requested
+                    readOnly: true
+                    type: string
+                  tag_line:
+                    example: CRM software solutions and enterprise cloud computing from Salesforce, the leader in customer relationship management (CRM) and PaaS. Free 30 day trial.
+                    readOnly: true
+                    type: string
+                  unified_api:
+                    example: crm
+                    readOnly: true
+                    type: string
+                  updated_at:
+                    example: 1616662325753
+                    nullable: true
+                    readOnly: true
+                    type: number
+                  website:
+                    example: https://www.salesforce.com
+                    readOnly: true
+                    type: string
+                type: object
               type: object
       responses:
         "200":
@@ -1150,8 +1153,7 @@ x-webhooks:
             schema:
               additionalProperties: false
               properties:
-                connection:
-                  $ref: "#/x-webhooks/ConnectionCreated/post/requestBody/content/application~1json/schema/properties/connection"
+                $ref: "#/x-webhooks/ConnectionCreated/post/requestBody/content/application~1json/schema/properties"
               type: object
       responses:
         "200":

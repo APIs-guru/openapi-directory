@@ -335,6 +335,11 @@ components:
     Instance:
       description: A collection of Bigtable Tables and the resources that serve them. All tables in an instance are served from all Clusters in the instance.
       properties:
+        createTime:
+          description: Output only. A server-assigned timestamp representing when this Instance was created.
+          format: google-datetime
+          readOnly: true
+          type: string
         displayName:
           description: Required. The descriptive name for this instance as it appears in UIs. Can be changed at any time, but should be kept globally unique to avoid confusion.
           type: string
