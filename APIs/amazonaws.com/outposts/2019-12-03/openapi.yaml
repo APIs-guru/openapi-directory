@@ -115,6 +115,98 @@ servers:
     description: The Outposts endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /orders:
+    post:
+      operationId: CreateOrder
+      description: Creates an order for an Outpost.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOrderOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - OutpostIdentifier
+                - LineItems
+                - PaymentOption
+              properties:
+                OutpostIdentifier:
+                  description: ' The ID or the Amazon Resource Name (ARN) of the Outpost. '
+                  type: string
+                  pattern: '^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$'
+                  minLength: 1
+                  maxLength: 180
+                LineItems:
+                  description: The line items that make up the order.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/LineItemRequest'
+                  minItems: 1
+                  maxItems: 20
+                PaymentOption:
+                  description: The payment option for the order.
+                  type: string
+                  enum:
+                    - ALL_UPFRONT
+                    - NO_UPFRONT
+                    - PARTIAL_UPFRONT
+                PaymentTerm:
+                  description: The payment terms for the order.
+                  type: string
+                  enum:
+                    - THREE_YEARS
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /outposts:
     post:
       operationId: CreateOutpost
@@ -341,11 +433,10 @@ paths:
         - name: OutpostId
           in: path
           required: true
-          description: ''
+          description: ' The ID of the Outpost. '
           schema:
             type: string
             pattern: '^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$'
-            description: The ID of the Outpost.
             minLength: 1
             maxLength: 180
     parameters:
@@ -394,11 +485,10 @@ paths:
         - name: OutpostId
           in: path
           required: true
-          description: ''
+          description: ' The ID of the Outpost. '
           schema:
             type: string
             pattern: '^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$'
-            description: The ID of the Outpost.
             minLength: 1
             maxLength: 180
   '/sites/{SiteId}':
@@ -500,11 +590,10 @@ paths:
         - name: OutpostId
           in: path
           required: true
-          description: ''
+          description: ' The ID of the Outpost. '
           schema:
             type: string
             pattern: '^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$'
-            description: The ID of the Outpost.
             minLength: 1
             maxLength: 180
         - name: NextToken
@@ -798,6 +887,31 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    CreateOrderOutput:
+      type: object
+      properties:
+        Order:
+          allOf:
+            - $ref: '#/components/schemas/Order'
+            - description: Information about this order.
+    LineItemRequest:
+      type: object
+      properties:
+        CatalogItemId:
+          allOf:
+            - $ref: '#/components/schemas/SkuCode'
+            - description: The ID of the catalog item.
+        Quantity:
+          allOf:
+            - $ref: '#/components/schemas/LineItemQuantity'
+            - description: The quantity of a line item request.
+      description: Information about a line item request.
+    ValidationException: {}
+    ConflictException: {}
+    AccessDeniedException: {}
+    NotFoundException: {}
+    InternalServerException: {}
+    ServiceQuotaExceededException: {}
     CreateOutpostOutput:
       type: object
       properties:
@@ -807,12 +921,6 @@ components:
       type: string
       pattern: '^[\S \n]+$'
       maxLength: 256
-    ValidationException: {}
-    ConflictException: {}
-    NotFoundException: {}
-    AccessDeniedException: {}
-    InternalServerException: {}
-    ServiceQuotaExceededException: {}
     DeleteOutpostOutput:
       type: object
       properties: {}
@@ -832,7 +940,9 @@ components:
         NextToken:
           $ref: '#/components/schemas/Token'
         OutpostId:
-          $ref: '#/components/schemas/OutpostId'
+          allOf:
+            - $ref: '#/components/schemas/OutpostId'
+            - description: ' The ID of the Outpost. '
         OutpostArn:
           $ref: '#/components/schemas/OutpostArn'
     ListOutpostsOutput:
@@ -907,6 +1017,83 @@ components:
         $ref: '#/components/schemas/AvailabilityZone'
       minItems: 1
       maxItems: 5
+    OutpostIdentifier:
+      type: string
+      pattern: '^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$'
+      minLength: 1
+      maxLength: 180
+    LineItemRequestListDefinition:
+      type: array
+      items:
+        $ref: '#/components/schemas/LineItemRequest'
+      minItems: 1
+      maxItems: 20
+    PaymentOption:
+      type: string
+      enum:
+        - ALL_UPFRONT
+        - NO_UPFRONT
+        - PARTIAL_UPFRONT
+    PaymentTerm:
+      type: string
+      enum:
+        - THREE_YEARS
+    CreateOrderInput:
+      type: object
+      required:
+        - OutpostIdentifier
+        - LineItems
+        - PaymentOption
+      title: CreateOrderInput
+      properties:
+        OutpostIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/OutpostIdentifier'
+            - description: ' The ID or the Amazon Resource Name (ARN) of the Outpost. '
+        LineItems:
+          allOf:
+            - $ref: '#/components/schemas/LineItemRequestListDefinition'
+            - description: The line items that make up the order.
+        PaymentOption:
+          allOf:
+            - $ref: '#/components/schemas/PaymentOption'
+            - description: The payment option for the order.
+        PaymentTerm:
+          allOf:
+            - $ref: '#/components/schemas/PaymentTerm'
+            - description: The payment terms for the order.
+    Order:
+      type: object
+      properties:
+        OutpostId:
+          allOf:
+            - $ref: '#/components/schemas/OutpostIdOnly'
+            - description: ' The ID of the Outpost. '
+        OrderId:
+          allOf:
+            - $ref: '#/components/schemas/OrderId'
+            - description: The ID of the order.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/OrderStatus'
+            - description: The status of the order
+        LineItems:
+          allOf:
+            - $ref: '#/components/schemas/LineItemListDefinition'
+            - description: The line items for the order
+        PaymentOption:
+          allOf:
+            - $ref: '#/components/schemas/PaymentOption'
+            - description: The payment option for the order.
+        OrderSubmissionDate:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601Timestamp'
+            - description: The submission date for the order.
+        OrderFulfilledDate:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601Timestamp'
+            - description: The fulfillment date of the order.
+      description: Information about an order.
     OutpostName:
       type: string
       pattern: '^[\S ]+$'
@@ -956,7 +1143,9 @@ components:
       type: object
       properties:
         OutpostId:
-          $ref: '#/components/schemas/OutpostId'
+          allOf:
+            - $ref: '#/components/schemas/OutpostId'
+            - description: ' The ID of the Outpost. '
         OwnerId:
           $ref: '#/components/schemas/OwnerId'
         OutpostArn:
@@ -983,7 +1172,6 @@ components:
     OutpostId:
       type: string
       pattern: '^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:outpost/)?op-[a-f0-9]{17}$'
-      description: The ID of the Outpost.
       minLength: 1
       maxLength: 180
     DeleteOutpostInput:
@@ -1024,6 +1212,9 @@ components:
       description: The Amazon Resource Name (ARN) of the Outpost.
       minLength: 1
       maxLength: 255
+    ISO8601Timestamp:
+      type: string
+      format: date-time
     InstanceType:
       type: string
       description: The instance type.
@@ -1039,6 +1230,47 @@ components:
         $ref: '#/components/schemas/LifeCycleStatus'
       minItems: 1
       maxItems: 5
+    SkuCode:
+      type: string
+      pattern: 'OR-[A-Z0-9]{7}'
+      minLength: 1
+      maxLength: 10
+    LineItemId:
+      type: string
+      pattern: 'ooi-[a-f0-9]{17}'
+    LineItemQuantity:
+      type: integer
+      minimum: 1
+      maximum: 20
+    Status:
+      type: string
+      pattern: '^[\S ]+$'
+      minLength: 1
+      maxLength: 1000
+    LineItem:
+      type: object
+      properties:
+        CatalogItemId:
+          allOf:
+            - $ref: '#/components/schemas/SkuCode'
+            - description: ' The ID of the catalog item. '
+        LineItemId:
+          allOf:
+            - $ref: '#/components/schemas/LineItemId'
+            - description: The ID of the line item.
+        Quantity:
+          allOf:
+            - $ref: '#/components/schemas/LineItemQuantity'
+            - description: The quantity of the line item.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: The status of the line item.
+      description: Information about a line item.
+    LineItemListDefinition:
+      type: array
+      items:
+        $ref: '#/components/schemas/LineItem'
     ListOutpostsInput:
       type: object
       title: ListOutpostsInput
@@ -1061,6 +1293,25 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    OutpostIdOnly:
+      type: string
+      pattern: '^op-[a-f0-9]{17}$'
+      minLength: 1
+      maxLength: 20
+    OrderId:
+      type: string
+      pattern: 'oo-[a-f0-9]{17}$'
+      minLength: 1
+      maxLength: 20
+    OrderStatus:
+      type: string
+      enum:
+        - RECEIVED
+        - PENDING
+        - PROCESSING
+        - INSTALLING
+        - FULFILLED
+        - CANCELLED
     OwnerId:
       type: string
       pattern: '\d{12}'

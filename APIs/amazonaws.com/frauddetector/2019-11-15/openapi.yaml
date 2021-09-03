@@ -4644,6 +4644,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ListOfRuleResults'
             - description: The results from the rules.
+        externalModelOutputs:
+          allOf:
+            - $ref: '#/components/schemas/ListOfExternalModelOutputs'
+            - description: The model scores for Amazon SageMaker models.
     GetEventPredictionRequest:
       type: object
       required:
@@ -6059,6 +6063,34 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ExternalModel'
+    ExternalModelSummary:
+      type: object
+      properties:
+        modelEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The endpoint of the Amazon SageMaker model.
+        modelSource:
+          allOf:
+            - $ref: '#/components/schemas/ModelSource'
+            - description: The source of the model.
+      description: The Amazon SageMaker model.
+    ExternalModelPredictionMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/string'
+    ExternalModelOutputs:
+      type: object
+      properties:
+        externalModel:
+          allOf:
+            - $ref: '#/components/schemas/ExternalModelSummary'
+            - description: The Amazon SageMaker model.
+        outputs:
+          allOf:
+            - $ref: '#/components/schemas/ExternalModelPredictionMap'
+            - description: The fraud prediction scores from Amazon SageMaker model.
+      description: The fraud prediction scores from Amazon SageMaker model.
     ExternalModelsMaxResults:
       type: integer
       minimum: 5
@@ -6131,6 +6163,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/RuleResult'
+    ListOfExternalModelOutputs:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExternalModelOutputs'
     eventTypesMaxResults:
       type: integer
       minimum: 5
