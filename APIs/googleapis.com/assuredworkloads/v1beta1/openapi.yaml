@@ -32,7 +32,7 @@ tags:
 paths:
   "/v1beta1/{name}":
     delete:
-      description: Deletes the workload. Make sure that workload's direct children are already in a deleted state, otherwise the request will fail with a FAILED_PRECONDITION error.
+      description: Deletes the workload. Make sure that workload's direct children are already in a deleted state, otherwise the request will fail with a FAILED_PRECONDITION error. In addition to assuredworkloads.workload.delete permission, the user should also have orgpolicy.policy.set permission on the deleted folder to remove Assured Workloads OrgPolicies.
       operationId: assuredworkloads.organizations.locations.workloads.delete
       parameters:
         - description: "Required. The `name` field is used to identify the workload. Format: organizations/{org_id}/locations/{location_id}/workloads/{workload_id}"
@@ -196,7 +196,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Restrict the list of services allowed in the Workload environment. The current list of allowed services can be found at https://cloud.google.com/assured-workloads/docs/supported-products
+      description: Restrict the list of services allowed in the Workload environment. The current list of allowed services can be found at https://cloud.google.com/assured-workloads/docs/supported-products In addition to assuredworkloads.workload.create permission, the user should also have orgpolicy.policy.set permission on the folder resource to use this functionality.
       operationId: assuredworkloads.organizations.locations.workloads.restrictAllowedServices
       parameters:
         - description: Required. The resource name of the Workload. This is the workloads's relative path in the API, formatted as "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}". For example, "organizations/123/locations/us-east1/workloads/assured-workload-1".
@@ -401,6 +401,7 @@ components:
             - HIPAA
             - HITRUST
             - EU_REGIONS_AND_SUPPORT
+            - CA_REGIONS_AND_SUPPORT
           type: string
         createTime:
           description: Optional. Time when the operation was created.
@@ -431,6 +432,7 @@ components:
             - HIPAA
             - HITRUST
             - EU_REGIONS_AND_SUPPORT
+            - CA_REGIONS_AND_SUPPORT
           type: string
         createTime:
           description: Output only. Immutable. The Workload creation timestamp.

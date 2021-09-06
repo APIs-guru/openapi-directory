@@ -163,7 +163,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 5.5.1
+  version: 5.6.0
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -2054,48 +2054,7 @@ components:
           type: string
         connections:
           items:
-            properties:
-              auth_type:
-                $ref: "#/components/schemas/AuthType"
-              created_at:
-                example: 2020-09-19T12:18:37.071Z
-                type: string
-              enabled:
-                example: true
-                type: boolean
-              icon:
-                example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
-                type: string
-              id:
-                example: 1111+test_user_id
-                readOnly: true
-                type: string
-              logo:
-                example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
-                type: string
-              name:
-                example: Salesforce
-                type: string
-              service_id:
-                example: teamleader
-                type: string
-              state:
-                enum:
-                  - available
-                  - callable
-                  - added
-                  - configured
-                  - authorized
-                example: authorized
-                type: string
-              unified_api:
-                example: crm
-                type: string
-              updated_at:
-                example: 2020-09-19T12:18:37.071Z
-                nullable: true
-                type: string
-            type: object
+            $ref: "#/components/schemas/ConsumerConnection"
           type: array
         consumer_id:
           example: test_consumer_id
@@ -2121,6 +2080,74 @@ components:
             example: salesforce
             type: string
           type: array
+      type: object
+    ConsumerConnection:
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/AuthType"
+        created_at:
+          example: 2020-09-19T12:18:37.071Z
+          type: string
+        enabled:
+          example: true
+          type: boolean
+        icon:
+          example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
+          type: string
+        id:
+          example: 1111+test_user_id
+          readOnly: true
+          type: string
+        logo:
+          example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
+          type: string
+        metadata:
+          additionalProperties: true
+          description: Attach your own consumer specific metadata
+          example:
+            account:
+              id: c01458a5-7276-41ce-bc19-639906b0450a
+              name: My Company
+            plan: enterprise
+          nullable: true
+          properties: {}
+          type: object
+        name:
+          example: Salesforce
+          type: string
+        service_id:
+          example: teamleader
+          type: string
+        settings:
+          description: Connection settings. Values will persist to `form_fields` with corresponding id
+          example:
+            instance_url: https://eu28.salesforce.com
+          nullable: true
+          type: object
+        state:
+          enum:
+            - available
+            - callable
+            - added
+            - configured
+            - authorized
+          example: authorized
+          type: string
+        tag_line:
+          example: CRM software solutions and enterprise cloud computing from Salesforce, the leader in customer relationship management (CRM) and PaaS. Free 30 day trial.
+          readOnly: true
+          type: string
+        unified_api:
+          example: crm
+          type: string
+        updated_at:
+          example: 2020-09-19T12:18:37.071Z
+          nullable: true
+          type: string
+        website:
+          example: https://www.salesforce.com
+          readOnly: true
+          type: string
       type: object
     ConsumerMetadata:
       properties:
@@ -2965,7 +2992,7 @@ x-webhooks:
             schema:
               additionalProperties: false
               properties:
-                $ref: "#/components/schemas/Connection"
+                $ref: "#/components/schemas/ConsumerConnection"
               type: object
       responses:
         "200":
@@ -2984,7 +3011,7 @@ x-webhooks:
             schema:
               additionalProperties: false
               properties:
-                $ref: "#/components/schemas/Connection"
+                $ref: "#/components/schemas/ConsumerConnection"
               type: object
       responses:
         "200":

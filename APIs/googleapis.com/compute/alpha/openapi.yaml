@@ -60,6 +60,7 @@ tags:
   - name: instanceGroups
   - name: instances
   - name: instanceTemplates
+  - name: instantSnapshots
   - name: interconnectAttachments
   - name: interconnectLocations
   - name: interconnects
@@ -123,7 +124,6 @@ tags:
   - name: vpnGateways
   - name: vpnTunnels
   - name: zoneInPlaceSnapshots
-  - name: zoneInstantSnapshots
   - name: zoneOperations
   - name: zones
 paths:
@@ -44041,7 +44041,7 @@ paths:
   "/projects/{project}/zones/{zone}/instantSnapshots":
     get:
       description: Retrieves the list of InstantSnapshot resources contained within the specified zone.
-      operationId: compute.zoneInstantSnapshots.list
+      operationId: compute.instantSnapshots.list
       parameters:
         - description: Project ID for this request.
           in: path
@@ -44102,7 +44102,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
-        - zoneInstantSnapshots
+        - instantSnapshots
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -44118,7 +44118,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
     post:
       description: Creates an instant snapshot in the specified zone.
-      operationId: compute.zoneInstantSnapshots.insert
+      operationId: compute.instantSnapshots.insert
       parameters:
         - description: Project ID for this request.
           in: path
@@ -44159,11 +44159,11 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/compute
       tags:
-        - zoneInstantSnapshots
+        - instantSnapshots
   "/projects/{project}/zones/{zone}/instantSnapshots/{instantSnapshot}":
     delete:
       description: Deletes the specified InstantSnapshot resource. Keep in mind that deleting a single instantSnapshot might not necessarily delete all the data on that instantSnapshot. If any data on the instantSnapshot that is marked for deletion is needed for subsequent instantSnapshots, the data will be moved to the next corresponding instantSnapshot. For more information, see Deleting instantSnapshots.
-      operationId: compute.zoneInstantSnapshots.delete
+      operationId: compute.instantSnapshots.delete
       parameters:
         - description: Project ID for this request.
           in: path
@@ -44205,10 +44205,10 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/compute
       tags:
-        - zoneInstantSnapshots
+        - instantSnapshots
     get:
       description: Returns the specified InstantSnapshot resource in the specified zone.
-      operationId: compute.zoneInstantSnapshots.get
+      operationId: compute.instantSnapshots.get
       parameters:
         - description: Project ID for this request.
           in: path
@@ -44249,7 +44249,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
-        - zoneInstantSnapshots
+        - instantSnapshots
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -44279,7 +44279,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
     post:
       description: Export the changed blocks between two instant snapshots to a customer's bucket in the user specified format.
-      operationId: compute.zoneInstantSnapshots.export
+      operationId: compute.instantSnapshots.export
       parameters:
         - description: Project ID for this request.
           in: path
@@ -44308,7 +44308,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ZoneInstantSnapshotsExportRequest"
+              $ref: "#/components/schemas/InstantSnapshotsExportRequest"
       responses:
         "200":
           content:
@@ -44326,11 +44326,11 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/compute
       tags:
-        - zoneInstantSnapshots
+        - instantSnapshots
   "/projects/{project}/zones/{zone}/instantSnapshots/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-      operationId: compute.zoneInstantSnapshots.getIamPolicy
+      operationId: compute.instantSnapshots.getIamPolicy
       parameters:
         - description: Project ID for this request.
           in: path
@@ -44376,7 +44376,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
-        - zoneInstantSnapshots
+        - instantSnapshots
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -44406,7 +44406,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
-      operationId: compute.zoneInstantSnapshots.setIamPolicy
+      operationId: compute.instantSnapshots.setIamPolicy
       parameters:
         - description: Project ID for this request.
           in: path
@@ -44448,7 +44448,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/compute
       tags:
-        - zoneInstantSnapshots
+        - instantSnapshots
   "/projects/{project}/zones/{zone}/instantSnapshots/{resource}/setLabels":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -44465,7 +44465,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
     post:
       description: Sets the labels on a instantSnapshot in the given zone. To learn more about labels, read the Labeling Resources documentation.
-      operationId: compute.zoneInstantSnapshots.setLabels
+      operationId: compute.instantSnapshots.setLabels
       parameters:
         - description: Project ID for this request.
           in: path
@@ -44512,7 +44512,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/compute
       tags:
-        - zoneInstantSnapshots
+        - instantSnapshots
   "/projects/{project}/zones/{zone}/instantSnapshots/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -44529,7 +44529,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
     post:
       description: Returns permissions that a caller has on the specified resource.
-      operationId: compute.zoneInstantSnapshots.testIamPermissions
+      operationId: compute.instantSnapshots.testIamPermissions
       parameters:
         - description: Project ID for this request.
           in: path
@@ -44575,7 +44575,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
-        - zoneInstantSnapshots
+        - instantSnapshots
   "/projects/{project}/zones/{zone}/machineTypes":
     get:
       description: Retrieves a list of machine types available to the specified project.
@@ -50245,7 +50245,7 @@ components:
           type: string
         diskEncryptionKey:
           $ref: "#/components/schemas/CustomerEncryptionKey"
-          description: Encrypts the disk using a customer-supplied encryption key. After you encrypt a disk with a customer-supplied key, you must provide the same key if you use the disk later (e.g. to create a disk snapshot, to create a disk image, to create a machine image, or to attach the disk to a virtual machine). Customer-supplied encryption keys do not protect access to metadata of the disk. If you do not provide an encryption key when creating the disk, then the disk will be encrypted using an automatically generated key and you do not need to provide a key to use the disk later.
+          description: "Encrypts the disk using a customer-supplied encryption key or a customer-managed encryption key. Encryption keys do not protect access to metadata of the disk. After you encrypt a disk with a customer-supplied key, you must provide the same key if you use the disk later. For example, to create a disk snapshot, to create a disk image, to create a machine image, or to attach the disk to a virtual machine. After you encrypt a disk with a customer-managed key, the diskEncryptionKey.kmsKeyName is set to a key *version* name once the disk is created. The disk is encrypted with this version of the key. In the response, diskEncryptionKey.kmsKeyName appears in the following format: \"diskEncryptionKey.kmsKeyName\": \"projects/kms_project_id/locations/region/keyRings/ key_region/cryptoKeys/key /cryptoKeysVersions/version If you do not provide an encryption key when creating the disk, then the disk is encrypted using an automatically generated key and you don't need to provide a key to use the disk later."
         eraseWindowsVssSignature:
           description: Specifies whether the disk restored from a source snapshot should erase Windows specific VSS signature.
           type: boolean
@@ -56314,6 +56314,12 @@ components:
               type: string
           type: object
       type: object
+    InstantSnapshotsExportRequest:
+      properties:
+        exportParams:
+          $ref: "#/components/schemas/InstantSnapshotExportParams"
+          description: Parameters to export the changed blocks.
+      type: object
     Int64RangeMatch:
       description: HttpRouteRuleMatch criteria for field values that must stay within the specified integer range.
       properties:
@@ -62284,10 +62290,12 @@ components:
             - BACKEND_SERVICES
             - C2D_CPUS
             - C2_CPUS
+            - C3_CPUS
             - COMMITMENTS
             - COMMITTED_A2_CPUS
             - COMMITTED_C2D_CPUS
             - COMMITTED_C2_CPUS
+            - COMMITTED_C3_CPUS
             - COMMITTED_CPUS
             - COMMITTED_E2_CPUS
             - COMMITTED_LICENSES
@@ -70983,12 +70991,6 @@ components:
         supportsPzs:
           description: "[Output Only] Reserved for future use."
           type: boolean
-      type: object
-    ZoneInstantSnapshotsExportRequest:
-      properties:
-        exportParams:
-          $ref: "#/components/schemas/InstantSnapshotExportParams"
-          description: Parameters to export the changed blocks.
       type: object
     ZoneList:
       description: Contains a list of zone resources.

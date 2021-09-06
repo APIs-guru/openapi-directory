@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Webhook API
-  version: 0.0.1
+  version: 5.6.0
   x-apideck-api: webhook
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -96,7 +96,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Webhook"
+              $ref: "#/components/schemas/CreateWebhookRequest"
         required: true
       responses:
         "201":
@@ -254,7 +254,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Webhook"
+              $ref: "#/components/schemas/UpdateWebhookRequest"
         required: true
       responses:
         "200":
@@ -461,6 +461,37 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
+    CreateWebhookRequest:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        description:
+          $ref: "#/components/schemas/Description"
+        events:
+          description: The list of subscribed events for this webhook. [’*’] indicates that all events are enabled.
+          example:
+            - vault.connection.created
+            - vault.connection.updated
+          items:
+            $ref: "#/components/schemas/Event"
+          title: Subscribed events
+          type: array
+        id:
+          example: "1234"
+          readOnly: true
+          type: string
+        status:
+          $ref: "#/components/schemas/Status"
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        url:
+          $ref: "#/components/schemas/Url"
+      required:
+        - url
+        - status
+        - events
+      type: object
     CreateWebhookResponse:
       properties:
         data:
@@ -478,6 +509,11 @@ components:
         - status
         - data
       type: object
+    CreatedAt:
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      readOnly: true
+      type: string
     DeleteWebhookResponse:
       properties:
         data:
@@ -495,6 +531,18 @@ components:
         - status
         - data
       type: object
+    Description:
+      description: An optional description of what the webhook is used for.
+      example: This is a webhook. It listens to connection events
+      type: string
+    Event:
+      enum:
+        - "*"
+        - vault.connection.created
+        - vault.connection.updated
+        - vault.connection.deleted
+        - vault.connection.callable
+      type: string
     GetWebhookResponse:
       properties:
         data:
@@ -668,6 +716,13 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+    Status:
+      description: The status of the webhook.
+      enum:
+        - enabled
+        - disabled
+      example: enabled
+      type: string
     UnauthorizedResponse:
       properties:
         detail:
@@ -760,6 +815,33 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
+    UpdateWebhookRequest:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        description:
+          $ref: "#/components/schemas/Description"
+        events:
+          description: The list of subscribed events for this webhook. [’*’] indicates that all events are enabled.
+          example:
+            - vault.connection.created
+            - vault.connection.updated
+          items:
+            $ref: "#/components/schemas/Event"
+          title: Subscribed events
+          type: array
+        id:
+          example: "1234"
+          readOnly: true
+          type: string
+        status:
+          $ref: "#/components/schemas/Status"
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        url:
+          $ref: "#/components/schemas/Url"
+      type: object
     UpdateWebhookResponse:
       properties:
         data:
@@ -777,14 +859,22 @@ components:
         - status
         - data
       type: object
+    UpdatedAt:
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      readOnly: true
+      type: string
+    Url:
+      description: The URL of the webhook endpoint.
+      example: https://example.com/my/webhook/endpoint
+      format: uri
+      pattern: ^(https?)://
+      type: string
     Webhook:
       additionalProperties: false
       properties:
         created_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
+          $ref: "#/components/schemas/CreatedAt"
         description:
           description: An optional description of what the webhook is used for.
           example: This is a webhook. It listens to connection events
@@ -795,11 +885,7 @@ components:
             - vault.connection.created
             - vault.connection.updated
           items:
-            enum:
-              - "*"
-              - vault.connection.created
-              - vault.connection.updated
-            type: string
+            $ref: "#/components/schemas/Event"
           title: Subscribed events
           type: array
         id:
@@ -814,10 +900,7 @@ components:
           example: enabled
           type: string
         updated_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
+          $ref: "#/components/schemas/UpdatedAt"
         url:
           description: The URL of the webhook endpoint.
           example: https://example.com/my/webhook/endpoint
@@ -852,10 +935,67 @@ components:
       name: Authorization
       type: apiKey
 x-webhooks:
+  ConnectionCallable:
+    post:
+      description: Connection Callable
+      operationId: connectionCallable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                $ref: "#/x-webhooks/ConnectionUpdated/post/requestBody/content/application~1json/schema/properties"
+              type: object
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Connection Callable
+      tags:
+        - Connection
+      x-apideck-event-type: vault.connection.callable
   ConnectionCreated:
     post:
       description: Connection Created
       operationId: connectionCreated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                $ref: "#/x-webhooks/ConnectionUpdated/post/requestBody/content/application~1json/schema/properties"
+              type: object
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Connection Created
+      tags:
+        - Connection
+      x-apideck-event-type: vault.connection.created
+  ConnectionDeleted:
+    post:
+      description: Connection Deleted
+      operationId: connectionDeleted
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                $ref: "#/x-webhooks/ConnectionUpdated/post/requestBody/content/application~1json/schema/properties"
+              type: object
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Connection Deleted
+      tags:
+        - Connection
+      x-apideck-event-type: vault.connection.deleted
+  ConnectionUpdated:
+    post:
+      description: Connection Updated
+      operationId: connectionUpdated
       requestBody:
         content:
           application/json:
@@ -869,185 +1009,22 @@ x-webhooks:
                       - apiKey
                       - basic
                       - none
-                    readOnly: true
                     type: string
-                  authorize_url:
-                    example: https://unify.apideck.com/vault/authorize/salesforce/<application-id>?state=<state>
-                    nullable: true
-                    readOnly: true
-                    type: string
-                  configurable_resources:
-                    example:
-                      - opportunities
-                      - companies
-                      - contacts
-                      - leads
-                    items:
-                      type: string
-                    readOnly: true
-                    type: array
-                  configuration:
-                    items:
-                      properties:
-                        defaults:
-                          items:
-                            properties:
-                              id:
-                                example: ProductInterest
-                                type: string
-                              options:
-                                items:
-                                  anyOf:
-                                    - properties:
-                                        label:
-                                          example: General Channel
-                                          type: string
-                                        value:
-                                          anyOf:
-                                            - example: general
-                                              type: string
-                                            - example: 123
-                                              type: integer
-                                            - example: 12.5
-                                              type: number
-                                            - example: true
-                                              type: boolean
-                                            - example:
-                                                - team
-                                                - general
-                                              items:
-                                                anyOf:
-                                                  - type: string
-                                                  - type: integer
-                                                  - type: number
-                                              type: array
-                                      type: object
-                                    - properties:
-                                        id:
-                                          example: "1234"
-                                          type: string
-                                        label:
-                                          example: General Channel
-                                          type: string
-                                        options:
-                                          items:
-                                            $ref: "#/x-webhooks/ConnectionCreated/post/requestBody/content/application~1json/schema/properties/properties/configuration/items/properties/defaults/items/properties/options/items/anyOf/0"
-                                          type: array
-                                      type: object
-                                type: array
-                              target:
-                                enum:
-                                  - custom_fields
-                                  - resource
-                                example: custom_fields
-                                readOnly: true
-                                type: string
-                              value:
-                                anyOf:
-                                  - example: GC5000 series
-                                    type: string
-                                  - example: 10
-                                    type: integer
-                                  - example: 10.5
-                                    type: number
-                                  - example: true
-                                    type: boolean
-                                  - items:
-                                      anyOf:
-                                        - example: GC6000 series
-                                          type: string
-                                        - example: 10
-                                          type: integer
-                                        - example: 10.5
-                                          type: number
-                                    type: array
-                            type: object
-                          type: array
-                        resource:
-                          example: leads
-                          type: string
-                      type: object
-                    type: array
                   created_at:
-                    example: 1615563533390
-                    readOnly: true
-                    type: number
+                    example: 2020-09-19T12:18:37.071Z
+                    type: string
                   enabled:
                     example: true
                     type: boolean
-                  form_fields:
-                    example:
-                      - custom_field: false
-                        disabled: false
-                        id: instance_url
-                        label: Instance url
-                        mask: false
-                        placeholder: ""
-                        required: true
-                        type: text
-                        value: https://eu28.salesforce.com
-                    items:
-                      properties:
-                        custom_field:
-                          example: false
-                          type: boolean
-                        description:
-                          example: Slack channel to push notification to
-                          nullable: true
-                          type: string
-                        disabled:
-                          example: false
-                          nullable: true
-                          type: boolean
-                        id:
-                          example: channel
-                          type: string
-                        label:
-                          example: Channel
-                          type: string
-                        options:
-                          example:
-                            - label: General Channel
-                              value: general
-                          items:
-                            $ref: "#/x-webhooks/ConnectionCreated/post/requestBody/content/application~1json/schema/properties/properties/configuration/items/properties/defaults/items/properties/options/items"
-                          type: array
-                        placeholder:
-                          example: Select a channel
-                          nullable: true
-                          type: string
-                        required:
-                          example: true
-                          type: boolean
-                        type:
-                          enum:
-                            - text
-                            - checkbox
-                            - tel
-                            - email
-                            - url
-                            - textarea
-                            - select
-                            - filtered-select
-                            - multi-select
-                            - datetime
-                            - date
-                            - time
-                            - number
-                          example: select
-                      type: object
-                    type: array
                   icon:
                     example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
-                    readOnly: true
                     type: string
                   id:
-                    example: lead+close
+                    example: 1111+test_user_id
                     readOnly: true
                     type: string
                   logo:
                     example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
-                    readOnly: true
                     type: string
                   metadata:
                     additionalProperties: true
@@ -1062,30 +1039,9 @@ x-webhooks:
                     type: object
                   name:
                     example: Salesforce
-                    readOnly: true
-                    type: string
-                  resource_schema_support:
-                    example:
-                      - leads
-                    items:
-                      type: string
-                    readOnly: true
-                    type: array
-                  resource_settings_support:
-                    example:
-                      - leads
-                    items:
-                      type: string
-                    readOnly: true
-                    type: array
-                  revoke_url:
-                    example: https://unify.apideck.com/vault/revoke/salesforce/<application-id>?state=<state>
-                    nullable: true
-                    readOnly: true
                     type: string
                   service_id:
-                    example: salesforce
-                    readOnly: true
+                    example: teamleader
                     type: string
                   settings:
                     description: Connection settings. Values will persist to `form_fields` with corresponding id
@@ -1093,29 +1049,14 @@ x-webhooks:
                       instance_url: https://eu28.salesforce.com
                     nullable: true
                     type: object
-                  settings_required_for_authorization:
-                    example:
-                      - instance_url
-                    items:
-                      type: string
-                    readOnly: true
-                    type: array
                   state:
-                    description: "[Connection state flow](#section/Connection-state)"
                     enum:
                       - available
                       - callable
                       - added
+                      - configured
                       - authorized
                     example: authorized
-                    readOnly: true
-                    type: string
-                  status:
-                    enum:
-                      - live
-                      - upcoming
-                      - requested
-                    readOnly: true
                     type: string
                   tag_line:
                     example: CRM software solutions and enterprise cloud computing from Salesforce, the leader in customer relationship management (CRM) and PaaS. Free 30 day trial.
@@ -1123,37 +1064,16 @@ x-webhooks:
                     type: string
                   unified_api:
                     example: crm
-                    readOnly: true
                     type: string
                   updated_at:
-                    example: 1616662325753
+                    example: 2020-09-19T12:18:37.071Z
                     nullable: true
-                    readOnly: true
-                    type: number
+                    type: string
                   website:
                     example: https://www.salesforce.com
                     readOnly: true
                     type: string
                 type: object
-              type: object
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Connection Created
-      tags:
-        - Connection
-      x-apideck-event-type: vault.connection.created
-  ConnectionUpdated:
-    post:
-      description: Connection Updated
-      operationId: connectionUpdated
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: false
-              properties:
-                $ref: "#/x-webhooks/ConnectionCreated/post/requestBody/content/application~1json/schema/properties"
               type: object
       responses:
         "200":

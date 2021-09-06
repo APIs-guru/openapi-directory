@@ -46,6 +46,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: If set to true, any snapshots of the instance will also be deleted. (Otherwise, the request will only work if the instance has no snapshots.)
+          in: query
+          name: force
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -924,11 +929,6 @@ components:
     GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata:
       description: Node information for custom per-node SLO implementations. SSA does not support per-node SLO, but producers can populate per-node information in SloMetadata for custom precomputations. SSA Eligibility Exporter will emit per-node metric based on this information.
       properties:
-        exclusions:
-          description: By default node is eligible if instance is eligible. But individual node might be excluded from SLO by adding entry here. For semantic see SloMetadata.exclusions. If both instance and node level exclusions are present for time period, the node level's reason will be reported by Eligibility Exporter.
-          items:
-            $ref: "#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion"
-          type: array
         location:
           description: The location of the node, if different from instance location.
           type: string
@@ -968,32 +968,9 @@ components:
           description: User-defined reason for the current value of instance eligibility. Usually, this can be directly mapped to the internal state. An empty reason is allowed.
           type: string
       type: object
-    GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion:
-      description: SloExclusion represents an exclusion in SLI calculation applies to all SLOs.
-      properties:
-        duration:
-          description: Exclusion duration. No restrictions on the possible values. When an ongoing operation is taking longer than initially expected, an existing entry in the exclusion list can be updated by extending the duration. This is supported by the subsystem exporting eligibility data as long as such extension is committed at least 10 minutes before the original exclusion expiration - otherwise it is possible that there will be "gaps" in the exclusion application in the exported timeseries.
-          format: google-duration
-          type: string
-        reason:
-          description: Human-readable reason for the exclusion. This should be a static string (e.g. "Disruptive update in progress") and should not contain dynamically generated data (e.g. instance name). Can be left empty.
-          type: string
-        sliName:
-          description: Name of an SLI that this exclusion applies to. Can be left empty, signaling that the instance should be excluded from all SLIs.
-          type: string
-        startTime:
-          description: Start time of the exclusion. No alignment (e.g. to a full minute) needed.
-          format: google-datetime
-          type: string
-      type: object
     GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata:
       description: SloMetadata contains resources required for proper SLO classification of the instance.
       properties:
-        exclusions:
-          description: List of SLO exclusion windows. When multiple entries in the list match (matching the exclusion time-window against current time point) the exclusion reason used in the first matching entry will be published. It is not needed to include expired exclusion in this list, as only the currently applicable exclusions are taken into account by the eligibility exporting subsystem (the historical state of exclusions will be reflected in the historically produced timeseries regardless of the current state). This field can be used to mark the instance as temporary ineligible for the purpose of SLO calculation. For permanent instance SLO exclusion, use of custom instance eligibility is recommended. See 'eligibility' field below.
-          items:
-            $ref: "#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion"
-          type: array
         nodes:
           description: Optional. List of nodes. Some producers need to use per-node metadata to calculate SLO. This field allows such producers to publish per-node SLO meta data, which will be consumed by SSA Eligibility Exporter and published in the form of per node metric to Monarch.
           items:
