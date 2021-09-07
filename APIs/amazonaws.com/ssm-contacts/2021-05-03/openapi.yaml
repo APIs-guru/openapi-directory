@@ -3,7 +3,7 @@ info:
   version: '2021-05-03'
   x-release: v4
   title: AWS Systems Manager Incident Manager Contacts
-  description: '<p>AWS Systems Manager Incident Manager is an incident management console designed to help users mitigate and recover from incidents affecting their AWS-hosted applications. An incident is any unplanned interruption or reduction in quality of services. </p> <p>Incident Manager increases incident resolution by notifying responders of impact, highlighting relevant troubleshooting data, and providing collaboration tools to get services back up and running. To achieve the primary goal of reducing the time-to-resolution of critical incidents, Incident Manager automates response plans and enables responder team escalation. </p>'
+  description: '<p>Systems Manager Incident Manager is an incident management console designed to help users mitigate and recover from incidents affecting their Amazon Web Services-hosted applications. An incident is any unplanned interruption or reduction in quality of services. </p> <p>Incident Manager increases incident resolution by notifying responders of impact, highlighting relevant troubleshooting data, and providing collaboration tools to get services back up and running. To achieve the primary goal of reducing the time-to-resolution of critical incidents, Incident Manager automates response plans and enables responder team escalation. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -1492,7 +1492,7 @@ paths:
   /#X-Amz-Target=SSMContacts.SendActivationCode:
     post:
       operationId: SendActivationCode
-      description: Sends an activation code to a contact channel. The contact can use this code to activate the contact channel in the console or with the <code>ActivateChannel</code> action. Incident Manager can't engage a contact channel until it has been activated.
+      description: Sends an activation code to a contact channel. The contact can use this code to activate the contact channel in the console or with the <code>ActivateChannel</code> operation. Incident Manager can't engage a contact channel until it has been activated.
       responses:
         '200':
           description: Success
@@ -2032,6 +2032,7 @@ components:
   schemas:
     AcceptPageResult:
       type: object
+      example: {}
       properties: {}
     AcceptPageRequest:
       type: object
@@ -2072,6 +2073,7 @@ components:
     ValidationException: {}
     ActivateContactChannelResult:
       type: object
+      example: {}
       properties: {}
     ActivateContactChannelRequest:
       type: object
@@ -2092,6 +2094,8 @@ components:
       type: object
       required:
         - ContactArn
+      example:
+        ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
       properties:
         ContactArn:
           allOf:
@@ -2128,7 +2132,7 @@ components:
         IdempotencyToken:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+            - description: A token ensuring that the operation is called only once with the specified details.
     ConflictException: {}
     ServiceQuotaExceededException: {}
     DataEncryptionException: {}
@@ -2136,11 +2140,13 @@ components:
       type: object
       required:
         - ContactChannelArn
+      example:
+        ContactChannelArn: 'arn:aws:ssm-contacts:us-east-1:111122223333:contact-channel/akuam/02f506b9-ea5d-4764-af89-2daa793ff024'
       properties:
         ContactChannelArn:
           allOf:
             - $ref: '#/components/schemas/SsmContactsArn'
-            - description: The ARN of the contact channel.
+            - description: The Amazon Resource Name (ARN) of the contact channel.
     CreateContactChannelRequest:
       type: object
       required:
@@ -2173,9 +2179,10 @@ components:
         IdempotencyToken:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+            - description: A token ensuring that the operation is called only once with the specified details.
     DeactivateContactChannelResult:
       type: object
+      example: {}
       properties: {}
     DeactivateContactChannelRequest:
       type: object
@@ -2189,6 +2196,7 @@ components:
             - description: The Amazon Resource Name (ARN) of the contact channel you're deactivating.
     DeleteContactResult:
       type: object
+      example: {}
       properties: {}
     DeleteContactRequest:
       type: object
@@ -2202,6 +2210,7 @@ components:
             - description: The Amazon Resource Name (ARN) of the contact that you're deleting.
     DeleteContactChannelResult:
       type: object
+      example: {}
       properties: {}
     DeleteContactChannelRequest:
       type: object
@@ -2221,6 +2230,15 @@ components:
         - Sender
         - Subject
         - Content
+      example:
+        ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/example_escalation'
+        Content: Testing engagements
+        EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/example_escalation/69e40ce1-8dbb-4d57-8962-5fbe7fc53356'
+        PublicContent: Testing engagements
+        PublicSubject: test
+        Sender: tester
+        StartTime: '$2021-05-18T18:25:41.151000+00:00'
+        Subject: test
       properties:
         ContactArn:
           allOf:
@@ -2281,6 +2299,18 @@ components:
         - Sender
         - Subject
         - Content
+      example:
+        ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
+        Content: Testing engagements
+        DeliveryTime: '2021-05-18T18:43:55.265000+00:00'
+        EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/78a29753-3674-4ac5-9f83-0468563567f0'
+        PageArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:page/akuam/ad0052bd-e606-498a-861b-25726292eb93'
+        PublicContent: Testing engagements
+        PublicSubject: test
+        ReadTime: '2021-05-18T18:43:55.708000+00:00'
+        Sender: tester
+        SentTime: '2021-05-18T18:43:29.301000+00:00'
+        Subject: test
       properties:
         PageArn:
           allOf:
@@ -2347,6 +2377,28 @@ components:
         - Alias
         - Type
         - Plan
+      example:
+        Alias: example_escalation
+        ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/example_escalation'
+        DisplayName: Example Escalation Plan
+        Plan:
+          Stages:
+            - DurationInMinutes: 5
+              Targets:
+                - ContactTargetInfo:
+                    ContactId: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
+                    IsEssential: true
+            - DurationInMinutes: 5
+              Targets:
+                - ContactTargetInfo:
+                    ContactId: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/alejr'
+                    IsEssential: false
+            - DurationInMinutes: 0
+              Targets:
+                - ContactTargetInfo:
+                    ContactId: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/anasi'
+                    IsEssential: false
+        Type: ESCALATION
       properties:
         ContactArn:
           allOf:
@@ -2386,6 +2438,14 @@ components:
         - Name
         - Type
         - DeliveryAddress
+      example:
+        ActivationStatus: ACTIVATED
+        ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
+        ContactChannelArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d'
+        DeliveryAddress:
+          SimpleAddress: '+15005550199'
+        Name: akuas sms
+        Type: SMS
       properties:
         ContactArn:
           allOf:
@@ -2423,6 +2483,9 @@ components:
             - description: The Amazon Resource Name (ARN) of the contact channel you want information about.
     GetContactPolicyResult:
       type: object
+      example:
+        ContactArn: 'arn:aws:ssm-contacts:us-east-1:111122223333:contact/akuam'
+        Policy: '{"Version":"2012-10-17","Statement":[{"Sid":"SharePolicyForDocumentationDralia","Effect":"Allow","Principal":{"AWS":"222233334444"},"Action":["ssm-contacts:GetContact","ssm-contacts:StartEngagement","ssm-contacts:DescribeEngagement","ssm-contacts:ListPagesByEngagement","ssm-contacts:StopEngagement"],"Resource":["arn:aws:ssm-contacts:*:111122223333:contact/akuam","arn:aws:ssm-contacts:*:111122223333:engagement/akuam/*"]}]}'
       properties:
         ContactArn:
           allOf:
@@ -2446,6 +2509,15 @@ components:
       type: object
       required:
         - ContactChannels
+      example:
+        ContactChannels:
+          - ActivationStatus: ACTIVATED
+            ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
+            ContactChannelArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d'
+            DeliveryAddress:
+              SimpleAddress: '+15005550100'
+            Name: akuas sms
+            Type: SMS
       properties:
         NextToken:
           allOf:
@@ -2475,6 +2547,24 @@ components:
             - description: The maximum number of contact channels per page.
     ListContactsResult:
       type: object
+      example:
+        Contacts:
+          - Alias: akuam
+            ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
+            DisplayName: Akua Mansa
+            Type: PERSONAL
+          - Alias: alejr
+            ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/alejr'
+            DisplayName: Alejandro Rosalez
+            Type: PERSONAL
+          - Alias: anasi
+            ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/anasi'
+            DisplayName: Ana Carolina Silva
+            Type: PERSONAL
+          - Alias: example_escalation
+            ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/example_escalation'
+            DisplayName: Example Escalation
+            Type: ESCALATION
       properties:
         NextToken:
           allOf:
@@ -2508,6 +2598,24 @@ components:
       type: object
       required:
         - Engagements
+      example:
+        Engagements:
+          - ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
+            EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/91792571-0b53-4821-9f73-d25d13d9e529'
+            Sender: cli
+            StartTime: '2021-05-18T20:37:50.300000+00:00'
+          - ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
+            EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/78a29753-3674-4ac5-9f83-0468563567f0'
+            Sender: cli
+            StartTime: '2021-05-18T18:40:26.666000+00:00'
+          - ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/example_escalation'
+            EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/example_escalation/69e40ce1-8dbb-4d57-8962-5fbe7fc53356'
+            Sender: cli
+            StartTime: '2021-05-18T18:25:41.151000+00:00'
+          - ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
+            EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/607ced0e-e8fa-4ea7-8958-a237b8803f8f'
+            Sender: cli
+            StartTime: '2021-05-18T18:20:58.093000+00:00'
       properties:
         NextToken:
           allOf:
@@ -2539,6 +2647,20 @@ components:
             - description: The time range to lists engagements for an incident.
     ListPageReceiptsResult:
       type: object
+      example:
+        Receipts:
+          - ContactChannelArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d'
+            ReceiptInfo: '425440'
+            ReceiptTime: '2021-05-18T20:42:57.485000+00:00'
+            ReceiptType: DELIVERED
+          - ContactChannelArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d'
+            ReceiptInfo: '425440'
+            ReceiptTime: '2021-05-18T20:42:57.907000+00:00'
+            ReceiptType: READ
+          - ContactChannelArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d'
+            ReceiptInfo: SM6656c19132f1465f9c9c1123a5dde7c9
+            ReceiptTime: '2021-05-18T20:40:52.962000+00:00'
+            ReceiptType: SENT
       properties:
         NextToken:
           allOf:
@@ -2570,6 +2692,15 @@ components:
       type: object
       required:
         - Pages
+      example:
+        Pages:
+          - ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
+            DeliveryTime: '2021-05-18T18:43:55.265000+00:00'
+            EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/78a29753-3674-4ac5-9f83-0468563567f0'
+            PageArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:page/akuam/ad0052bd-e606-498a-861b-25726292eb93'
+            ReadTime: '2021-05-18T18:43:55.708000+00:00'
+            Sender: cli
+            SentTime: '2021-05-18T18:43:29.301000+00:00'
       properties:
         NextToken:
           allOf:
@@ -2601,6 +2732,13 @@ components:
       type: object
       required:
         - Pages
+      example:
+        Pages:
+          - ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
+            EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/78a29753-3674-4ac5-9f83-0468563567f0'
+            PageArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:page/akuam/ad0052bd-e606-498a-861b-25726292eb93'
+            Sender: cli
+            SentTime: '2021-05-18T18:40:27.245000+00:00'
       properties:
         NextToken:
           allOf:
@@ -2630,6 +2768,10 @@ components:
             - description: The maximum number of engagements to contact channels to list per page of results.
     ListTagsForResourceResult:
       type: object
+      example:
+        Tags:
+          - Key: group1
+            Value: '1'
       properties:
         Tags:
           allOf:
@@ -2647,6 +2789,7 @@ components:
             - description: The Amazon Resource Name (ARN) of the contact or escalation plan.
     PutContactPolicyResult:
       type: object
+      example: {}
       properties: {}
     PutContactPolicyRequest:
       type: object
@@ -2665,6 +2808,7 @@ components:
             - description: Details of the resource policy.
     SendActivationCodeResult:
       type: object
+      example: {}
       properties: {}
     SendActivationCodeRequest:
       type: object
@@ -2680,6 +2824,8 @@ components:
       type: object
       required:
         - EngagementArn
+      example:
+        EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/example_escalation/69e40ce1-8dbb-4d57-8962-5fbe7fc53356'
       properties:
         EngagementArn:
           allOf:
@@ -2725,9 +2871,10 @@ components:
         IdempotencyToken:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+            - description: A token ensuring that the operation is called only once with the specified details.
     StopEngagementResult:
       type: object
+      example: {}
       properties: {}
     StopEngagementRequest:
       type: object
@@ -2745,6 +2892,7 @@ components:
             - description: 'The reason that you''re stopping the engagement. '
     TagResourceResult:
       type: object
+      example: {}
       properties: {}
     TagResourceRequest:
       type: object
@@ -2763,6 +2911,7 @@ components:
             - description: A list of tags that you are adding to the contact or escalation plan.
     UntagResourceResult:
       type: object
+      example: {}
       properties: {}
     UntagResourceRequest:
       type: object
@@ -2781,6 +2930,7 @@ components:
             - description: The key of the tag that you want to remove.
     UpdateContactResult:
       type: object
+      example: {}
       properties: {}
     UpdateContactRequest:
       type: object
@@ -2802,6 +2952,7 @@ components:
             - description: 'A list of stages. A contact has an engagement plan with stages for specified contact channels. An escalation plan uses these stages to contact specified contacts. '
     UpdateContactChannelResult:
       type: object
+      example: {}
       properties: {}
     UpdateContactChannelRequest:
       type: object
@@ -2816,7 +2967,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/ChannelName'
-            - description: The name of the contact channel
+            - description: The name of the contact channel.
         DeliveryAddress:
           allOf:
             - $ref: '#/components/schemas/ContactChannelAddress'
@@ -3262,6 +3413,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/ContactTargetInfo'
             - description: Information about the contact that Incident Manager is engaging.
-      description: The contact or contact channel that is being engaged.
+      description: The contact or contact channel that's being engaged.
 security:
   - hmac: []

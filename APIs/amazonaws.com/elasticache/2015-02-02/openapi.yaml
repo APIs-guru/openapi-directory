@@ -9097,7 +9097,7 @@ paths:
         - name: UserGroupIdsToAdd
           in: query
           required: false
-          description: The user group you are associating with the replication group.
+          description: The ID of the user group you are associating with the replication group.
           schema:
             type: array
             items:
@@ -9105,7 +9105,7 @@ paths:
         - name: UserGroupIdsToRemove
           in: query
           required: false
-          description: 'The user group to remove, meaning the users in the group no longer can access the replication group.'
+          description: 'The ID of the user group to disassociate from the replication group, meaning the users in the group no longer can access the replication group.'
           schema:
             type: array
             items:
@@ -9113,7 +9113,7 @@ paths:
         - name: RemoveUserGroups
           in: query
           required: false
-          description: Removes the user groups that can access this replication group.
+          description: Removes the user group associated with this replication group.
           schema:
             type: boolean
         - name: LogDeliveryConfigurations
@@ -11361,7 +11361,7 @@ components:
         PendingChanges:
           allOf:
             - $ref: '#/components/schemas/UserGroupPendingChanges'
-            - description: A list of updates being applied to the user groups.
+            - description: A list of updates being applied to the user group.
         ReplicationGroups:
           allOf:
             - $ref: '#/components/schemas/UGReplicationGroupIdList'
@@ -12671,7 +12671,7 @@ components:
         UserGroupIds:
           allOf:
             - $ref: '#/components/schemas/UserGroupIdList'
-            - description: The list of user group IDs that have access to the replication group.
+            - description: The ID of the user group associated to the replication group.
         LogDeliveryConfigurations:
           allOf:
             - $ref: '#/components/schemas/LogDeliveryConfigurationList'
@@ -14650,15 +14650,15 @@ components:
         UserGroupIdsToAdd:
           allOf:
             - $ref: '#/components/schemas/UserGroupIdList'
-            - description: The user group you are associating with the replication group.
+            - description: The ID of the user group you are associating with the replication group.
         UserGroupIdsToRemove:
           allOf:
             - $ref: '#/components/schemas/UserGroupIdList'
-            - description: 'The user group to remove, meaning the users in the group no longer can access the replication group.'
+            - description: 'The ID of the user group to disassociate from the replication group, meaning the users in the group no longer can access the replication group.'
         RemoveUserGroups:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: Removes the user groups that can access this replication group.
+            - description: Removes the user group associated with this replication group.
         LogDeliveryConfigurations:
           allOf:
             - $ref: '#/components/schemas/LogDeliveryConfigurationRequestList'
@@ -15212,7 +15212,7 @@ components:
         UserGroups:
           allOf:
             - $ref: '#/components/schemas/UserGroupsUpdateStatus'
-            - description: The user groups being modified.
+            - description: The user group being modified.
         LogDeliveryConfigurations:
           allOf:
             - $ref: '#/components/schemas/PendingLogDeliveryConfigurationList'
@@ -15246,11 +15246,11 @@ components:
         UserGroupIdsToAdd:
           allOf:
             - $ref: '#/components/schemas/UserGroupIdList'
-            - description: The list of user group IDs to add.
+            - description: The ID of the user group to add.
         UserGroupIdsToRemove:
           allOf:
             - $ref: '#/components/schemas/UserGroupIdList'
-            - description: The list of user group IDs to remove.
+            - description: The ID of the user group to remove.
       description: The status of the user group update.
     ReservedCacheNodeList:
       type: array

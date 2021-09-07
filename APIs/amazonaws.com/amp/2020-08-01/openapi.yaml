@@ -113,6 +113,7 @@ servers:
           - cn-northwest-1
         default: cn-north-1
     description: The Amazon Prometheus Service endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 paths:
   /workspaces:
     post:
@@ -180,6 +181,13 @@ paths:
                   pattern: '[!-~]+'
                   minLength: 1
                   maxLength: 64
+                tags:
+                  description: The list of tags assigned to the resource.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -364,6 +372,189 @@ paths:
             description: A workspace ID.
             minLength: 1
             maxLength: 64
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags you have assigned to the resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Creates tags for the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: The list of tags assigned to the resource.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Deletes tags from the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource.
+          schema:
+            type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: One or more tag keys
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/workspaces/{workspaceId}/alias':
     post:
       operationId: UpdateWorkspaceAlias
@@ -517,11 +708,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkspaceStatus'
             - description: The status of the workspace that was just created (usually CREATING).
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags of this workspace.
         workspaceId:
           allOf:
             - $ref: '#/components/schemas/WorkspaceId'
             - description: The generated ID of the workspace that was just created.
       description: Represents the output of a CreateWorkspace operation.
+    TagValue:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 0
+      maxLength: 256
     ThrottlingException: {}
     ConflictException: {}
     ValidationException: {}
@@ -539,6 +739,11 @@ components:
             - $ref: '#/components/schemas/WorkspaceDescription'
             - description: The properties of the selected workspace.
       description: Represents the output of a DescribeWorkspace operation.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          $ref: '#/components/schemas/TagMap'
     ListWorkspacesResponse:
       type: object
       required:
@@ -553,6 +758,17 @@ components:
             - $ref: '#/components/schemas/WorkspaceSummaryList'
             - description: 'The list of existing workspaces, including those undergoing creation or deletion.'
       description: Represents the output of a ListWorkspaces operation.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 128
     WorkspaceAlias:
       type: string
       description: A user-assigned workspace alias.
@@ -564,6 +780,13 @@ components:
       description: An identifier used to ensure the idempotency of a write request.
       minLength: 1
       maxLength: 64
+    TagMap:
+      type: object
+      description: The list of tags assigned to the resource.
+      minProperties: 0
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
     CreateWorkspaceRequest:
       type: object
       title: CreateWorkspaceRequest
@@ -576,6 +799,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
             - description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'Optional, user-provided tags for this workspace.'
       description: Represents the input of a CreateWorkspace operation.
     WorkspaceArn:
       type: string
@@ -634,11 +861,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkspaceStatus'
             - description: The status of this workspace.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags of this workspace.
         workspaceId:
           allOf:
             - $ref: '#/components/schemas/WorkspaceId'
             - description: Unique string identifying this workspace.
       description: Represents the properties of a workspace.
+    String:
+      type: string
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
     ListWorkspacesRequestMaxResultsInteger:
       type: integer
       minimum: 1
@@ -656,9 +893,25 @@ components:
       description: A list of workspace summaries.
       items:
         $ref: '#/components/schemas/WorkspaceSummary'
+    TagKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          $ref: '#/components/schemas/TagMap'
     Timestamp:
       type: string
       format: date-time
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
     UpdateWorkspaceAliasRequest:
       type: object
       title: UpdateWorkspaceAliasRequest
@@ -709,6 +962,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkspaceStatus'
             - description: The status of this workspace.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags of this workspace.
         workspaceId:
           allOf:
             - $ref: '#/components/schemas/WorkspaceId'

@@ -667,6 +667,14 @@ paths:
           description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListClusters</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p> <note> <p>This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
           schema:
             type: string
+        - name: include
+          in: query
+          required: false
+          description: Indicates whether connected clusters are included in the returned list. Default value is 'ALL'.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
   '/clusters/{name}/fargate-profiles':
     post:
       operationId: CreateFargateProfile
@@ -1523,6 +1531,62 @@ paths:
           description: The name of the node group to describe.
           schema:
             type: string
+  '/cluster-registrations/{name}':
+    delete:
+      operationId: DeregisterCluster
+      description: Deregisters a connected cluster to remove it from the Amazon EKS control plane.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeregisterClusterResponse'
+        '480':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '483':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the connected cluster to deregister.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /addons/supported-versions:
     get:
       operationId: DescribeAddonVersions
@@ -2115,6 +2179,87 @@ paths:
                 clientRequestToken:
                   description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                   type: string
+  /cluster-registrations:
+    post:
+      operationId: RegisterCluster
+      description: '<p>Connects a Kubernetes cluster to the Amazon EKS control plane. </p> <p>Any Kubernetes cluster can be connected to the Amazon EKS control plane to view current information about the cluster and its nodes. </p> <p>Cluster connection requires two steps. First, send a <code> <a>RegisterClusterRequest</a> </code> to add it to the Amazon EKS control plane.</p> <p>Second, a <a href="https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml">Manifest</a> containing the <code>activationID</code> and <code>activationCode</code> must be applied to the Kubernetes cluster through it''s native provider to provide visibility.</p> <p>After the Manifest is updated and applied, then the connected cluster is visible to the Amazon EKS control plane. If the Manifest is not applied within a set amount of time, then the connected cluster will no longer be visible and must be deregistered. See <a>DeregisterCluster</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterClusterResponse'
+        '480':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '483':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - connectorConfig
+              properties:
+                name:
+                  description: Define a unique name for this cluster within your AWS account.
+                  type: string
+                  pattern: '^[0-9A-Za-z][A-Za-z0-9\-_]*'
+                  minLength: 1
+                  maxLength: 100
+                connectorConfig:
+                  description: The configuration sent to a cluster for configuration.
+                  type: object
+                  properties:
+                    roleArn:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The Amazon Resource Name (ARN) of the role that is authorized to request the connector configuration.
+                    provider:
+                      allOf:
+                        - $ref: '#/components/schemas/ConnectorConfigProvider'
+                        - description: The cloud provider for the target cluster to connect.
+                clientRequestToken:
+                  description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
@@ -2800,6 +2945,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Nodegroup'
             - description: The full description of your deleted node group.
+    DeregisterClusterResponse:
+      type: object
+      properties:
+        cluster:
+          $ref: '#/components/schemas/Cluster'
     DescribeAddonResponse:
       type: object
       properties:
@@ -2956,6 +3106,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The <code>nextToken</code> value to include in a future <code>ListUpdates</code> request. When the results of a <code>ListUpdates</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+    RegisterClusterResponse:
+      type: object
+      properties:
+        cluster:
+          $ref: '#/components/schemas/Cluster'
+    ConnectorConfigProvider:
+      type: string
+      enum:
+        - EKS_ANYWHERE
+        - ANTHOS
+        - GKE
+        - AKS
+        - OPENSHIFT
+        - TANZU
+        - RANCHER
+        - EC2
+        - OTHER
     TagResourceResponse:
       type: object
       properties: {}
@@ -3361,6 +3528,31 @@ components:
         - DELETING
         - FAILED
         - UPDATING
+        - PENDING
+    ConnectorConfigResponse:
+      type: object
+      properties:
+        activationId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A unique ID associated with the cluster for registration purposes.
+        activationCode:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A unique code associated with the cluster for registration purposes.
+        activationExpiry:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The expiration time of the connected cluster. The cluster's YAML file must be applied through the native provider.
+        provider:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The cluster's cloud service provider.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the role that is used by the EKS connector to communicate with AWS services from the connected Kubernetes cluster.
+      description: The full description of your connected cluster.
     Cluster:
       type: object
       properties:
@@ -3423,11 +3615,15 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: 'The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Cluster tags do not propagate to any other resources associated with the cluster. '
+            - description: 'The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Cluster tags do not propagate to any other resources associated with the cluster.'
         encryptionConfig:
           allOf:
             - $ref: '#/components/schemas/EncryptionConfigList'
             - description: The encryption configuration for the cluster.
+        connectorConfig:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorConfigResponse'
+            - description: The configuration used to connect to a cluster for registration.
       description: An object representing an Amazon EKS cluster.
     Compatibility:
       type: object
@@ -3445,6 +3641,21 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: The supported default version.
       description: Compatibility information.
+    ConnectorConfigRequest:
+      type: object
+      required:
+        - roleArn
+        - provider
+      properties:
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the role that is authorized to request the connector configuration.
+        provider:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorConfigProvider'
+            - description: The cloud provider for the target cluster to connect.
+      description: The configuration sent to a cluster for configuration.
     RoleArn:
       type: string
       minLength: 1
@@ -3879,6 +4090,10 @@ components:
       type: object
       title: DeleteNodegroupRequest
       properties: {}
+    DeregisterClusterRequest:
+      type: object
+      title: DeregisterClusterRequest
+      properties: {}
     DescribeAddonRequest:
       type: object
       title: DescribeAddonRequest
@@ -3931,7 +4146,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/OidcIdentityProviderConfig'
             - description: An object that represents an OpenID Connect (OIDC) identity provider configuration.
-      description: An object that represents an identity configuration.
+      description: The full description of your identity configuration.
     DescribeNodegroupRequest:
       type: object
       title: DescribeNodegroupRequest
@@ -4082,6 +4297,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/IdentityProviderConfig'
+    IncludeClustersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
     NodegroupIssueCode:
       type: string
       enum:
@@ -4231,6 +4450,25 @@ components:
         - CREATING
         - DELETING
         - ACTIVE
+    RegisterClusterRequest:
+      type: object
+      required:
+        - name
+        - connectorConfig
+      title: RegisterClusterRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ClusterName'
+            - description: Define a unique name for this cluster within your AWS account.
+        connectorConfig:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorConfigRequest'
+            - description: The configuration settings required to connect the Kubernetes cluster to the Amazon EKS control plane.
+        clientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     TagKeyList:
       type: array
       items:
