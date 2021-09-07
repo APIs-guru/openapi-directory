@@ -405,9 +405,6 @@ components:
     GoogleCloudRecaptchaenterpriseV1AndroidKeySettings:
       description: Settings specific to keys that can be used by Android apps.
       properties:
-        allowAllPackageNames:
-          description: If set to true, it means allowed_package_names will not be enforced.
-          type: boolean
         allowedPackageNames:
           description: "Android package names of apps allowed to use the key. Example: 'com.companyname.appname'"
           items:
@@ -505,9 +502,6 @@ components:
     GoogleCloudRecaptchaenterpriseV1IOSKeySettings:
       description: Settings specific to keys that can be used by iOS apps.
       properties:
-        allowAllBundleIds:
-          description: If set to true, it means allowed_bundle_ids will not be enforced.
-          type: boolean
         allowedBundleIds:
           description: "iOS bundle ids of apps allowed to use the key. Example: 'com.companyname.productname.appname'"
           items:

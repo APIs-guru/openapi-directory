@@ -1333,7 +1333,7 @@ components:
       description: Fulfillment information, such as the store IDs for in-store pickup or region IDs for different shipping methods.
       properties:
         placeIds:
-          description: The IDs for this type, such as the store IDs for FulfillmentInfo.type.pickup-in-store or the region IDs for FulfillmentInfo.type.same-day-delivery. A maximum of 2000 values are allowed. Each value must be a string with a length limit of 10 characters, matching the pattern [a-zA-Z0-9_-]+, such as "store1" or "REGION-2". Otherwise, an INVALID_ARGUMENT error is returned.
+          description: The IDs for this type, such as the store IDs for FulfillmentInfo.type.pickup-in-store or the region IDs for FulfillmentInfo.type.same-day-delivery. A maximum of 3000 values are allowed. Each value must be a string with a length limit of 30 characters, matching the pattern [a-zA-Z0-9_-]+, such as "store1" or "REGION-2". Otherwise, an INVALID_ARGUMENT error is returned.
           items:
             type: string
           type: array
@@ -1957,7 +1957,7 @@ components:
       properties:
         boostSpec:
           $ref: "#/components/schemas/GoogleCloudRetailV2SearchRequestBoostSpec"
-          description: Boost specification to boost certain products. See more details at this [user guide](/retail/private/docs/boosting).
+          description: Boost specification to boost certain products. See more details at this [user guide](https://cloud.google.com/retail/docs/boosting).
         branch:
           description: The branch resource name, such as `projects/*/locations/global/catalogs/default_catalog/branches/0`. Use "default_branch" as the branch ID or leave this field empty, to search products under the default branch.
           type: string
@@ -1973,14 +1973,14 @@ components:
             $ref: "#/components/schemas/GoogleCloudRetailV2SearchRequestFacetSpec"
           type: array
         filter:
-          description: The filter syntax consists of an expression language for constructing a predicate from one or more fields of the products being filtered. Filter expression is case-sensitive. See more details at this [user guide](/retail/private/docs/filter-and-order#filter). If this field is unrecognizable, an INVALID_ARGUMENT is returned.
+          description: The filter syntax consists of an expression language for constructing a predicate from one or more fields of the products being filtered. Filter expression is case-sensitive. See more details at this [user guide](https://cloud.google.com/retail/docs/filter-and-order#filter). If this field is unrecognizable, an INVALID_ARGUMENT is returned.
           type: string
         offset:
           description: A 0-indexed integer that specifies the current offset (that is, starting result location, amongst the Products deemed by the API as relevant) in search results. This field is only considered if page_token is unset. If this field is negative, an INVALID_ARGUMENT is returned.
           format: int32
           type: integer
         orderBy:
-          description: The order in which products are returned. Products can be ordered by a field in an Product object. Leave it unset if ordered by relevance. OrderBy expression is case-sensitive. See more details at this [user guide](/retail/private/docs/filter-and-order#order). If this field is unrecognizable, an INVALID_ARGUMENT is returned.
+          description: The order in which products are returned. Products can be ordered by a field in an Product object. Leave it unset if ordered by relevance. OrderBy expression is case-sensitive. See more details at this [user guide](https://cloud.google.com/retail/docs/filter-and-order#order). If this field is unrecognizable, an INVALID_ARGUMENT is returned.
           type: string
         pageCategories:
           description: "The categories associated with a category page. Required for category navigation queries to achieve good search quality. The format should be the same as UserEvent.page_categories; To represent full path of category, use '>' sign to separate different hierarchies. If '>' is part of the category name, please replace it with other character(s). Category pages include special pages such as sales or promotions. For instance, a special sale page may have the category hierarchy: \"pageCategories\" : [\"Sales > 2017 Black Friday Deals\"]."
@@ -1999,7 +1999,7 @@ components:
           type: string
         queryExpansionSpec:
           $ref: "#/components/schemas/GoogleCloudRetailV2SearchRequestQueryExpansionSpec"
-          description: The query expansion specification that specifies the conditions under which query expansion will occur. See more details at this [user guide](/retail/private/docs/result-size#query_expansion).
+          description: The query expansion specification that specifies the conditions under which query expansion will occur. See more details at this [user guide](https://cloud.google.com/retail/docs/result-size#query_expansion).
         userInfo:
           $ref: "#/components/schemas/GoogleCloudRetailV2UserInfo"
           description: User information.
@@ -2178,7 +2178,7 @@ components:
           description: Bool describing whether query expansion has occurred.
           type: boolean
         pinnedResultCount:
-          description: Number of pinned results. This field will only be set when expansion happens and SearchRequest.query_expansion_spec.pin_unexpanded_results is set to true.
+          description: Number of pinned results. This field will only be set when expansion happens and SearchRequest.QueryExpansionSpec.pin_unexpanded_results is set to true.
           format: int64
           type: string
       type: object
@@ -2254,7 +2254,7 @@ components:
           description: Highly recommended for user events that are the result of PredictionService.Predict. This field enables accurate attribution of recommendation model performance. The value must be a valid PredictResponse.attribution_token for user events that are the result of PredictionService.Predict. The value must be a valid SearchResponse.attribution_token for user events that are the result of SearchService.Search. This token enables us to accurately attribute page view or purchase back to the event and the particular predict response containing this clicked/purchased product. If user clicks on product K in the recommendation results, pass PredictResponse.attribution_token as a URL parameter to product K's page. When recording events on product K's page, log the PredictResponse.attribution_token to this field.
           type: string
         cartId:
-          description: The id or name of the associated shopping cart. This id is used to associate multiple items added or present in the cart before purchase. This can only be set for `add-to-cart`, `purchase-complete`, or `shopping-cart-page-view` events.
+          description: The ID or name of the associated shopping cart. This ID is used to associate multiple items added or present in the cart before purchase. This can only be set for `add-to-cart`, `purchase-complete`, or `shopping-cart-page-view` events.
           type: string
         completionDetail:
           $ref: "#/components/schemas/GoogleCloudRetailV2CompletionDetail"
@@ -2287,10 +2287,10 @@ components:
             type: string
           type: array
         pageViewId:
-          description: A unique id of a web page view. This should be kept the same for all user events triggered from the same pageview. For example, an item detail page view could trigger multiple events as the user is browsing the page. The `pageViewId` property should be kept the same for all these events so that they can be grouped together properly. When using the client side event reporting with JavaScript pixel and Google Tag Manager, this value is filled in automatically.
+          description: A unique ID of a web page view. This should be kept the same for all user events triggered from the same pageview. For example, an item detail page view could trigger multiple events as the user is browsing the page. The `pageViewId` property should be kept the same for all these events so that they can be grouped together properly. When using the client side event reporting with JavaScript pixel and Google Tag Manager, this value is filled in automatically.
           type: string
         productDetails:
-          description: "The main product details related to the event. This field is required for the following event types: * `add-to-cart` * `detail-page-view` * `purchase-complete` In a `search` event, this field represents the products returned to the end user on the current page (the end user may have not finished broswing the whole page yet). When a new page is returned to the end user, after pagination/filtering/ordering even for the same query, a new `search` event with different product_details is desired. The end user may have not finished broswing the whole page yet."
+          description: "The main product details related to the event. This field is required for the following event types: * `add-to-cart` * `detail-page-view` * `purchase-complete` In a `search` event, this field represents the products returned to the end user on the current page (the end user may have not finished browsing the whole page yet). When a new page is returned to the end user, after pagination/filtering/ordering even for the same query, a new `search` event with different product_details is desired. The end user may have not finished browsing the whole page yet."
           items:
             $ref: "#/components/schemas/GoogleCloudRetailV2ProductDetail"
           type: array
