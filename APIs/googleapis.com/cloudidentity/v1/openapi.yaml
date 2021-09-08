@@ -423,7 +423,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Required. The names of fields to update. May only contain the following fields: `display_name`, `description`, `labels`."
+        - description: "Required. The names of fields to update. May only contain the following field names: `display_name`, `description`, `labels`."
           in: query
           name: updateMask
           schema:

@@ -3453,6 +3453,10 @@ paths:
               type: string
             type: array
           style: form
+        - in: query
+          name: externalChannelId
+          schema:
+            type: string
       requestBody:
         content:
           application/json:

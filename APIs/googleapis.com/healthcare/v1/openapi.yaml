@@ -983,6 +983,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{nlpService}:analyzeEntities":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Analyze heathcare entity in a document. Its response includes the recognized entity mentions and the relationships between them. AnalyzeEntities uses context aware models to detect entities.
+      operationId: healthcare.projects.locations.services.nlp.analyzeEntities
+      parameters:
+        - description: 'The resource name of the service of the form: "projects/{project_id}/locations/{location_id}/services/nlp".'
+          in: path
+          name: nlpService
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyzeEntitiesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyzeEntitiesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/attributeDefinitions":
     get:
       description: Lists the Attribute definitions in the specified consent store.
@@ -2466,6 +2508,41 @@ components:
           format: google-duration
           type: string
       type: object
+    AnalyzeEntitiesRequest:
+      description: The request to analyze healthcare entities in a document.
+      properties:
+        documentContent:
+          description: document_content is a document to be annotated.
+          type: string
+        licensedVocabularies:
+          description: A list of licensed vocabularies to use in the request, in addition to the default unlicensed vocabularies.
+          items:
+            enum:
+              - LICENSED_VOCABULARY_UNSPECIFIED
+              - ICD10CM
+              - SNOMEDCT_US
+            type: string
+          type: array
+      type: object
+    AnalyzeEntitiesResponse:
+      description: Includes recognized entity mentions and relationships between them.
+      properties:
+        entities:
+          description: The union of all the candidate entities that the entity_mentions in this response could link to. These are UMLS concepts or normalized mention content.
+          items:
+            $ref: "#/components/schemas/Entity"
+          type: array
+        entityMentions:
+          description: entity_mentions contains all the annotated medical entities that were mentioned in the provided document.
+          items:
+            $ref: "#/components/schemas/EntityMention"
+          type: array
+        relationships:
+          description: relationships contains all the binary relationships that were identified between entity mentions within the provided document.
+          items:
+            $ref: "#/components/schemas/EntityMentionRelationship"
+          type: array
+      type: object
     ArchiveUserDataMappingRequest:
       description: Archives the specified User data mapping.
       properties: {}
@@ -2865,6 +2942,66 @@ components:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
       type: object
+    Entity:
+      description: The candidate entities that an entity mention could link to.
+      properties:
+        entityId:
+          description: entity_id is a first class field entity_id uniquely identifies this concept and its meta-vocabulary. For example, "UMLS/C0000970".
+          type: string
+        preferredTerm:
+          description: preferred_term is the preferred term for this concept. For example, "Acetaminophen". For ad hoc entities formed by normalization, this is the most popular unnormalized string.
+          type: string
+        vocabularyCodes:
+          description: Vocabulary codes are first-class fields and differentiated from the concept unique identifier (entity_id). vocabulary_codes contains the representation of this concept in particular vocabularies, such as ICD-10, SNOMED-CT and RxNORM. These are prefixed by the name of the vocabulary, followed by the unique code within that vocabulary. For example, "RXNORM/A10334543".
+          items:
+            type: string
+          type: array
+      type: object
+    EntityMention:
+      description: An entity mention in the document.
+      properties:
+        certaintyAssessment:
+          $ref: "#/components/schemas/Feature"
+          description: "The certainty assessment of the entity mention. Its value is one of: LIKELY, SOMEWHAT_LIKELY, UNCERTAIN, SOMEWHAT_UNLIKELY, UNLIKELY, CONDITIONAL"
+        confidence:
+          description: The model's confidence in this entity mention annotation. A number between 0 and 1.
+          format: double
+          type: number
+        linkedEntities:
+          description: linked_entities are candidate ontological concepts that this entity mention may refer to. They are sorted by decreasing confidence.it
+          items:
+            $ref: "#/components/schemas/LinkedEntity"
+          type: array
+        mentionId:
+          description: mention_id uniquely identifies each entity mention in a single response.
+          type: string
+        subject:
+          $ref: "#/components/schemas/Feature"
+          description: "The subject this entity mention relates to. Its value is one of: PATIENT, FAMILY_MEMBER, OTHER"
+        temporalAssessment:
+          $ref: "#/components/schemas/Feature"
+          description: "How this entity mention relates to the subject temporally. Its value is one of: CURRENT, CLINICAL_HISTORY, FAMILY_HISTORY, UPCOMING, ALLERGY"
+        text:
+          $ref: "#/components/schemas/TextSpan"
+          description: text is the location of the entity mention in the document.
+        type:
+          description: "The semantic type of the entity: UNKNOWN_ENTITY_TYPE, ALONE, ANATOMICAL_STRUCTURE, ASSISTED_LIVING, BF_RESULT, BM_RESULT, BM_UNIT, BM_VALUE, BODY_FUNCTION, BODY_MEASUREMENT, COMPLIANT, DOESNOT_FOLLOWUP, FAMILY, FOLLOWSUP, LABORATORY_DATA, LAB_RESULT, LAB_UNIT, LAB_VALUE, MEDICAL_DEVICE, MEDICINE, MED_DOSE, MED_DURATION, MED_FORM, MED_FREQUENCY, MED_ROUTE, MED_STATUS, MED_STRENGTH, MED_TOTALDOSE, MED_UNIT, NON_COMPLIANT, OTHER_LIVINGSTATUS, PROBLEM, PROCEDURE, PROCEDURE_RESULT, PROC_METHOD, REASON_FOR_NONCOMPLIANCE, SEVERITY, SUBSTANCE_ABUSE, UNCLEAR_FOLLOWUP."
+          type: string
+      type: object
+    EntityMentionRelationship:
+      description: Defines directed relationship from one entity mention to another.
+      properties:
+        confidence:
+          description: The model's confidence in this annotation. A number between 0 and 1.
+          format: double
+          type: number
+        objectId:
+          description: object_id is the id of the object entity mention.
+          type: string
+        subjectId:
+          description: subject_id is the id of the subject entity mention.
+          type: string
+      type: object
     EvaluateUserConsentsRequest:
       description: "Evaluate a user's Consents for all matching User data mappings. Note: User data mappings are indexed asynchronously, causing slight delays between the time mappings are created or updated and when they are included in EvaluateUserConsents results."
       properties:
@@ -2952,6 +3089,17 @@ components:
           type: string
         title:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
+          type: string
+      type: object
+    Feature:
+      description: A feature of an entity mention.
+      properties:
+        confidence:
+          description: The model's confidence in this feature annotation. A number between 0 and 1.
+          format: double
+          type: number
+        value:
+          description: The value of this feature annotation. Its range depends on the type of the feature.
           type: string
       type: object
     FhirConfig:
@@ -3320,6 +3468,13 @@ components:
           $ref: "#/components/schemas/Message"
           description: Created message resource.
       type: object
+    LinkedEntity:
+      description: EntityMentions can be linked to multiple entities using a LinkedEntity message lets us add other fields, e.g. confidence.
+      properties:
+        entityId:
+          description: entity_id is a concept unique identifier. These are prefixed by a string that identifies the entity coding system, followed by the unique identifier within that system. For example, "UMLS/C0000970". This also supports ad hoc entities, which are formed by normalizing entity mention content.
+          type: string
+      type: object
     ListAttributeDefinitionsResponse:
       properties:
         attributeDefinitions:
@@ -3622,7 +3777,7 @@ components:
           type: string
       type: object
     Policy:
-      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') - etag: BwWWja0YfJA= - version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
+      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
       properties:
         auditConfigs:
           description: Specifies cloud audit logging configuration for this policy.
@@ -3934,6 +4089,17 @@ components:
             $ref: "#/components/schemas/InfoTypeTransformation"
           type: array
       type: object
+    TextSpan:
+      description: A span of text in the provided document.
+      properties:
+        beginOffset:
+          description: The unicode codepoint index of the beginning of this span.
+          format: int32
+          type: integer
+        content:
+          description: The original text contained in this span.
+          type: string
+      type: object
     Type:
       description: A type definition for some HL7v2 type (incl. Segments and Datatypes).
       properties:
@@ -3998,7 +4164,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -4006,6 +4172,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
