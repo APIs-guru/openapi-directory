@@ -536,6 +536,15 @@ paths:
 
                                         <p>Details for ClientAuthentication using TLS.</p>
                                      
+                    Unauthenticated:
+                      allOf:
+                        - $ref: '#/components/schemas/Unauthenticated'
+                        - xml:
+                            name: unauthenticated
+                          description: |2-
+
+                                        <p>Contains information about unauthenticated traffic to the cluster.</p>
+                                     
                 clusterName:
                   description: |2-
 
@@ -2745,6 +2754,154 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/clusters/{clusterArn}/security':
+    patch:
+      operationId: UpdateSecurity
+      description: |2-
+
+                    <p>Updates the security settings for the cluster. You can use this operation to specify encryption and authentication on existing clusters.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSecurityResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+                     
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - currentVersion
+              properties:
+                clientAuthentication:
+                  description: |2-
+
+                                <p>Includes all client authentication information.</p>
+                             
+                  type: object
+                  properties:
+                    Sasl:
+                      allOf:
+                        - $ref: '#/components/schemas/Sasl'
+                        - xml:
+                            name: sasl
+                          description: |2-
+
+                                        <p>Details for ClientAuthentication using SASL.</p>
+                                     
+                    Tls:
+                      allOf:
+                        - $ref: '#/components/schemas/Tls'
+                        - xml:
+                            name: tls
+                          description: |2-
+
+                                        <p>Details for ClientAuthentication using TLS.</p>
+                                     
+                    Unauthenticated:
+                      allOf:
+                        - $ref: '#/components/schemas/Unauthenticated'
+                        - xml:
+                            name: unauthenticated
+                          description: |2-
+
+                                        <p>Contains information about unauthenticated traffic to the cluster.</p>
+                                     
+                currentVersion:
+                  description: |2-
+
+                                <p>The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.</p>
+                             
+                  type: string
+                encryptionInfo:
+                  description: |2-
+
+                                <p>Includes encryption-related information, such as the AWS KMS key used for encrypting data at rest and whether you want MSK to encrypt your data in transit.</p>
+                             
+                  type: object
+                  properties:
+                    EncryptionAtRest:
+                      allOf:
+                        - $ref: '#/components/schemas/EncryptionAtRest'
+                        - xml:
+                            name: encryptionAtRest
+                          description: |2-
+
+                                        <p>The data-volume encryption details.</p>
+                                     
+                    EncryptionInTransit:
+                      allOf:
+                        - $ref: '#/components/schemas/EncryptionInTransit'
+                        - xml:
+                            name: encryptionInTransit
+                          description: |2-
+
+                                        <p>The details for encryption in transit.</p>
+                                     
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -2927,10 +3084,31 @@ components:
 
                             <p>List of ACM Certificate Authority ARNs.</p>
                          
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: enabled
+              description: |2-
+
+                            <p>Specifies whether you want to enable or disable TLS authentication.</p>
+                         
       description: |2-
 
                     <p>Details for client authentication using TLS.</p>
                  
+    Unauthenticated:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: enabled
+              description: |2-
+
+                            <p>Specifies whether you want to enable or disable unauthenticated traffic to your cluster.</p>
+                         
     __long:
       type: integer
     EncryptionAtRest:
@@ -3679,6 +3857,27 @@ components:
 
                             <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
                          
+    UpdateSecurityResponse:
+      type: object
+      properties:
+        ClusterArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: clusterArn
+              description: |2-
+
+                            <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                         
+        ClusterOperationArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: clusterOperationArn
+              description: |2-
+
+                            <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
+                         
     BatchAssociateScramSecretRequest:
       type: object
       required:
@@ -3929,6 +4128,15 @@ components:
               description: |2-
 
                             <p>Details for ClientAuthentication using TLS.</p>
+                         
+        Unauthenticated:
+          allOf:
+            - $ref: '#/components/schemas/Unauthenticated'
+            - xml:
+                name: unauthenticated
+              description: |2-
+
+                            <p>Contains information about unauthenticated traffic to the cluster.</p>
                          
       description: |2-
 
@@ -4297,6 +4505,10 @@ components:
             - $ref: '#/components/schemas/LoggingInfo'
             - xml:
                 name: loggingInfo
+              description: |2-
+
+                            <p>You can configure your MSK cluster to send broker logs to different destination types. This is a container for the configuration details related to broker logs.</p>
+                            
         InstanceType:
           allOf:
             - $ref: '#/components/schemas/__stringMin5Max32'
@@ -4306,6 +4518,24 @@ components:
 
                             <p>Information about the Amazon MSK broker type.</p>
                             
+        ClientAuthentication:
+          allOf:
+            - $ref: '#/components/schemas/ClientAuthentication'
+            - xml:
+                name: clientAuthentication
+              description: |2-
+
+                            <p>Includes all client authentication information.</p>
+                         
+        EncryptionInfo:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionInfo'
+            - xml:
+                name: encryptionInfo
+              description: |2-
+
+                            <p>Includes all encryption-related information.</p>
+                         
       description: |2-
 
                     <p>Information about cluster attributes that can be updated via update APIs.</p>
@@ -5464,6 +5694,39 @@ components:
             - xml:
                 name: loggingInfo
       description: Request body for UpdateMonitoring.
+    UpdateSecurityRequest:
+      type: object
+      required:
+        - CurrentVersion
+      title: UpdateSecurityRequest
+      properties:
+        ClientAuthentication:
+          allOf:
+            - $ref: '#/components/schemas/ClientAuthentication'
+            - xml:
+                name: clientAuthentication
+              description: |2-
+
+                            <p>Includes all client authentication related information.</p>
+                         
+        CurrentVersion:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: currentVersion
+              description: |2-
+
+                            <p>The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.</p>
+                         
+        EncryptionInfo:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionInfo'
+            - xml:
+                name: encryptionInfo
+              description: |2-
+
+                            <p>Includes all encryption-related information.</p>
+                         
     UpdateConfigurationRequest:
       type: object
       required:

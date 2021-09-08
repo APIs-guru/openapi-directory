@@ -3,7 +3,7 @@ info:
   version: '2018-01-04'
   x-release: v4
   title: AWS Resource Access Manager
-  description: '<p>Use AWS Resource Access Manager to share AWS resources between AWS accounts. To share a resource, you create a resource share, associate the resource with the resource share, and specify the principals that can access the resources associated with the resource share. The following principals are supported: AWS accounts, organizational units (OU) from AWS Organizations, and organizations from AWS Organizations.</p> <p>For more information, see the <a href="https://docs.aws.amazon.com/ram/latest/userguide/">AWS Resource Access Manager User Guide</a>.</p>'
+  description: '<p>This is the <i>Resource Access Manager API Reference</i>. This documentation provides descriptions and syntax for each of the actions and data types in RAM. RAM is a service that helps you securely share your Amazon Web Services resources across Amazon Web Services accounts and within your organization or organizational units (OUs) in Organizations. For supported resource types, you can also share resources with IAM roles and IAM users. If you have multiple Amazon Web Services accounts, you can use RAM to share those resources with other accounts.</p> <p>To learn more about RAM, see the following resources:</p> <ul> <li> <p> <a href="http://aws.amazon.com/ram">Resource Access Manager product page</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/ram/latest/userguide/">Resource Access Manager User Guide</a> </p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -116,7 +116,7 @@ paths:
   /acceptresourceshareinvitation:
     post:
       operationId: AcceptResourceShareInvitation
-      description: Accepts an invitation to a resource share from another AWS account.
+      description: Accepts an invitation to a resource share from another Amazon Web Services account.
       responses:
         '200':
           description: Success
@@ -305,12 +305,12 @@ paths:
                   description: The Amazon Resource Name (ARN) of the resource share.
                   type: string
                 resourceArns:
-                  description: The Amazon Resource Names (ARN) of the resources.
+                  description: The Amazon Resource Names (ARNs) of the resources.
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 principals:
-                  description: 'The principals to associate with the resource share. The possible values are IDs of AWS accounts, and the ARNs of organizational units (OU) or organizations from AWS Organizations.'
+                  description: '<p>The principals to associate with the resource share. The possible values are:</p> <ul> <li> <p>An Amazon Web Services account ID</p> </li> <li> <p>An Amazon Resource Name (ARN) of an organization in Organizations</p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations</p> </li> <li> <p>An ARN of an IAM role</p> </li> <li> <p>An ARN of an IAM user</p> </li> </ul> <note> <p>Not all resource types can be shared with IAM roles and IAM users. For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and IAM users</a> in the <i>Resource Access Manager User Guide</i>.</p> </note>'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
@@ -393,7 +393,7 @@ paths:
                   description: The Amazon Resource Name (ARN) of the resource share.
                   type: string
                 permissionArn:
-                  description: The Amazon Resource Name (ARN) of the AWS RAM permissions to associate with the resource share.
+                  description: The Amazon Resource Name (ARN) of the RAM permission to associate with the resource share.
                   type: string
                 replace:
                   description: Indicates whether the permission should replace the permissions that are currently associated with the resource share. Use <code>true</code> to replace the current permissions. Use <code>false</code> to add the permission to the current permission.
@@ -402,7 +402,7 @@ paths:
                   description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                   type: string
                 permissionVersion:
-                  description: The version of the AWS RAM permissions to associate with the resource share.
+                  description: The version of the RAM permissions to associate with the resource share.
                   type: integer
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -415,7 +415,7 @@ paths:
   /createresourceshare:
     post:
       operationId: CreateResourceShare
-      description: Creates a resource share.
+      description: '<p>Creates a resource share. You must provide a list of the Amazon Resource Names (ARNs) for the resources you want to share. You must also specify who you want to share the resources with, and the permissions that you grant them.</p> <note> <p>Sharing a resource makes it available for use by principals outside of the Amazon Web Services account that created the resource. Sharing doesn''t change any permissions or quotas that apply to the resource in the account that created it.</p> </note>'
       responses:
         '200':
           description: Success
@@ -503,12 +503,12 @@ paths:
                   description: The name of the resource share.
                   type: string
                 resourceArns:
-                  description: The Amazon Resource Names (ARN) of the resources to associate with the resource share.
+                  description: The ARNs of the resources to associate with the resource share.
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 principals:
-                  description: 'The principals to associate with the resource share. The possible values are IDs of AWS accounts, the ARN of an OU or organization from AWS Organizations.'
+                  description: '<p>The principals to associate with the resource share. The possible values are:</p> <ul> <li> <p>An Amazon Web Services account ID</p> </li> <li> <p>An Amazon Resource Name (ARN) of an organization in Organizations</p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations</p> </li> <li> <p>An ARN of an IAM role</p> </li> <li> <p>An ARN of an IAM user</p> </li> </ul> <note> <p>Not all resource types can be shared with IAM roles and IAM users. For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and IAM users</a> in the <i>Resource Access Manager User Guide</i>.</p> </note>'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
@@ -518,13 +518,13 @@ paths:
                   items:
                     $ref: '#/components/schemas/Tag'
                 allowExternalPrincipals:
-                  description: Indicates whether principals outside your AWS organization can be associated with a resource share.
+                  description: Indicates whether principals outside your organization in Organizations can be associated with a resource share.
                   type: boolean
                 clientToken:
                   description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                   type: string
                 permissionArns:
-                  description: 'The ARNs of the permissions to associate with the resource share. If you do not specify an ARN for the permission, AWS RAM automatically attaches the default version of the permission for each resource type.'
+                  description: 'The Amazon Resource Names (ARNs) of the permissions to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. Only one permission can be associated with each resource type in a resource share.'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
@@ -730,7 +730,7 @@ paths:
   /disassociateresourcesharepermission:
     post:
       operationId: DisassociateResourceSharePermission
-      description: Disassociates an AWS RAM permission from a resource share.
+      description: Disassociates an RAM permission from a resource share.
       responses:
         '200':
           description: Success
@@ -801,7 +801,7 @@ paths:
                   description: The Amazon Resource Name (ARN) of the resource share.
                   type: string
                 permissionArn:
-                  description: The ARN of the permission to disassociate from the resource share.
+                  description: The Amazon Resource Name (ARN) of the permission to disassociate from the resource share.
                   type: string
                 clientToken:
                   description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
@@ -817,7 +817,7 @@ paths:
   /enablesharingwithawsorganization:
     post:
       operationId: EnableSharingWithAwsOrganization
-      description: <p>Enables resource sharing within your AWS Organization.</p> <p>The caller must be the master account for the AWS Organization.</p>
+      description: <p>Enables resource sharing within your organization in Organizations.</p> <p>The caller must be the master account for the organization.</p>
       responses:
         '200':
           description: Success
@@ -855,7 +855,7 @@ paths:
   /getpermission:
     post:
       operationId: GetPermission
-      description: Gets the contents of an AWS RAM permission in JSON format.
+      description: Gets the contents of an RAM permission in JSON format.
       responses:
         '200':
           description: Success
@@ -910,7 +910,7 @@ paths:
                 - permissionArn
               properties:
                 permissionArn:
-                  description: The ARN of the permission.
+                  description: The Amazon Resource Name (ARN) of the permission.
                   type: string
                 permissionVersion:
                   description: The identifier for the version of the permission.
@@ -993,7 +993,7 @@ paths:
                 - resourceArns
               properties:
                 resourceArns:
-                  description: The Amazon Resource Names (ARN) of the resources.
+                  description: The Amazon Resource Names (ARNs) of the resources.
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
@@ -1308,7 +1308,7 @@ paths:
                 - resourceOwner
               properties:
                 resourceShareArns:
-                  description: The ARNs of the resource shares.
+                  description: The Amazon Resource Names (ARNs) of the resource shares.
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
@@ -1344,7 +1344,7 @@ paths:
                   minimum: 1
                   maximum: 500
                 permissionArn:
-                  description: The Amazon Resource Name (ARN) of the AWS RAM permission that is associated with the resource share.
+                  description: The Amazon Resource Name (ARN) of the RAM permission that is associated with the resource share.
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1463,7 +1463,7 @@ paths:
   /listpermissions:
     post:
       operationId: ListPermissions
-      description: Lists the AWS RAM permissions.
+      description: Lists the RAM permissions.
       responses:
         '200':
           description: Success
@@ -1624,7 +1624,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/String'
                 resourceType:
-                  description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> </p>'
+                  description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:FirewallRuleGroup</code> |<code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> | <code>s3-outposts:Outpost</code> | <code>ssm-contacts:Contact</code> | <code>ssm-incidents:ResponsePlan</code> </p>'
                   type: string
                 resourceShareArns:
                   description: The Amazon Resource Names (ARN) of the resource shares.
@@ -1650,7 +1650,7 @@ paths:
   /listresourcesharepermissions:
     post:
       operationId: ListResourceSharePermissions
-      description: Lists the AWS RAM permissions that are associated with a resource share.
+      description: Lists the RAM permissions that are associated with a resource share.
       responses:
         '200':
           description: Success
@@ -1744,7 +1744,7 @@ paths:
   /listresourcetypes:
     post:
       operationId: ListResourceTypes
-      description: Lists the shareable resource types supported by AWS RAM.
+      description: Lists the shareable resource types supported by RAM.
       responses:
         '200':
           description: Success
@@ -1897,10 +1897,10 @@ paths:
                   description: The principal.
                   type: string
                 resourceType:
-                  description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> </p>'
+                  description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:FirewallRuleGroup</code> |<code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> | <code>s3-outposts:Outpost</code> | <code>ssm-contacts:Contact</code> | <code>ssm-incidents:ResponsePlan</code> </p>'
                   type: string
                 resourceArns:
-                  description: The Amazon Resource Names (ARN) of the resources.
+                  description: The Amazon Resource Names (ARNs) of the resources.
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
@@ -1928,7 +1928,7 @@ paths:
   /promoteresourcesharecreatedfrompolicy#resourceShareArn:
     post:
       operationId: PromoteResourceShareCreatedFromPolicy
-      description: '<p>Resource shares that were created by attaching a policy to a resource are visible only to the resource share owner, and the resource share cannot be modified in AWS RAM.</p> <p>Use this API action to promote the resource share. When you promote the resource share, it becomes:</p> <ul> <li> <p>Visible to all principals that it is shared with.</p> </li> <li> <p>Modifiable in AWS RAM.</p> </li> </ul>'
+      description: '<p>Resource shares that were created by attaching a policy to a resource are visible only to the resource share owner, and the resource share cannot be modified in RAM.</p> <p>Use this API action to promote the resource share. When you promote the resource share, it becomes:</p> <ul> <li> <p>Visible to all principals that it is shared with.</p> </li> <li> <p>Modifiable in RAM.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1988,7 +1988,7 @@ paths:
         - name: resourceShareArn
           in: query
           required: true
-          description: The ARN of the resource share to promote.
+          description: The Amazon Resource Name (ARN) of the resource share to promote.
           schema:
             type: string
     parameters:
@@ -2002,7 +2002,7 @@ paths:
   /rejectresourceshareinvitation:
     post:
       operationId: RejectResourceShareInvitation
-      description: Rejects an invitation to a resource share from another AWS account.
+      description: Rejects an invitation to a resource share from another Amazon Web Services account.
       responses:
         '200':
           description: Success
@@ -2318,7 +2318,7 @@ paths:
                   description: The name of the resource share.
                   type: string
                 allowExternalPrincipals:
-                  description: Indicates whether principals outside your AWS organization can be associated with a resource share.
+                  description: Indicates whether principals outside your organization in Organizations can be associated with a resource share.
                   type: boolean
                 clientToken:
                   description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
@@ -2613,7 +2613,7 @@ components:
         resourceTypes:
           allOf:
             - $ref: '#/components/schemas/ServiceNameAndResourceTypeList'
-            - description: The shareable resource types supported by AWS RAM.
+            - description: The shareable resource types supported by RAM.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2700,11 +2700,11 @@ components:
         senderAccountId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ID of the AWS account that sent the invitation.
+            - description: The ID of the Amazon Web Services account that sent the invitation.
         receiverAccountId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ID of the AWS account that received the invitation.
+            - description: The ID of the Amazon Web Services account that received the invitation.
         invitationTimestamp:
           allOf:
             - $ref: '#/components/schemas/DateTime'
@@ -2741,7 +2741,7 @@ components:
         permissionArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the AWS RAM permissions to associate with the resource share.
+            - description: The Amazon Resource Name (ARN) of the RAM permission to associate with the resource share.
         replace:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -2753,7 +2753,7 @@ components:
         permissionVersion:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The version of the AWS RAM permissions to associate with the resource share.
+            - description: The version of the RAM permissions to associate with the resource share.
     ResourceArnList:
       type: array
       items:
@@ -2775,11 +2775,11 @@ components:
         resourceArns:
           allOf:
             - $ref: '#/components/schemas/ResourceArnList'
-            - description: The Amazon Resource Names (ARN) of the resources.
+            - description: The Amazon Resource Names (ARNs) of the resources.
         principals:
           allOf:
             - $ref: '#/components/schemas/PrincipalArnOrIdList'
-            - description: 'The principals to associate with the resource share. The possible values are IDs of AWS accounts, and the ARNs of organizational units (OU) or organizations from AWS Organizations.'
+            - description: '<p>The principals to associate with the resource share. The possible values are:</p> <ul> <li> <p>An Amazon Web Services account ID</p> </li> <li> <p>An Amazon Resource Name (ARN) of an organization in Organizations</p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations</p> </li> <li> <p>An ARN of an IAM role</p> </li> <li> <p>An ARN of an IAM user</p> </li> </ul> <note> <p>Not all resource types can be shared with IAM roles and IAM users. For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and IAM users</a> in the <i>Resource Access Manager User Guide</i>.</p> </note>'
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2809,11 +2809,11 @@ components:
         resourceArns:
           allOf:
             - $ref: '#/components/schemas/ResourceArnList'
-            - description: The Amazon Resource Names (ARN) of the resources to associate with the resource share.
+            - description: The ARNs of the resources to associate with the resource share.
         principals:
           allOf:
             - $ref: '#/components/schemas/PrincipalArnOrIdList'
-            - description: 'The principals to associate with the resource share. The possible values are IDs of AWS accounts, the ARN of an OU or organization from AWS Organizations.'
+            - description: '<p>The principals to associate with the resource share. The possible values are:</p> <ul> <li> <p>An Amazon Web Services account ID</p> </li> <li> <p>An Amazon Resource Name (ARN) of an organization in Organizations</p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations</p> </li> <li> <p>An ARN of an IAM role</p> </li> <li> <p>An ARN of an IAM user</p> </li> </ul> <note> <p>Not all resource types can be shared with IAM roles and IAM users. For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and IAM users</a> in the <i>Resource Access Manager User Guide</i>.</p> </note>'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -2821,7 +2821,7 @@ components:
         allowExternalPrincipals:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether principals outside your AWS organization can be associated with a resource share.
+            - description: Indicates whether principals outside your organization in Organizations can be associated with a resource share.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2829,7 +2829,7 @@ components:
         permissionArns:
           allOf:
             - $ref: '#/components/schemas/PermissionArnList'
-            - description: 'The ARNs of the permissions to associate with the resource share. If you do not specify an ARN for the permission, AWS RAM automatically attaches the default version of the permission for each resource type.'
+            - description: 'The Amazon Resource Names (ARNs) of the permissions to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. Only one permission can be associated with each resource type in a resource share.'
     ResourceShare:
       type: object
       properties:
@@ -2844,11 +2844,11 @@ components:
         owningAccountId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ID of the AWS account that owns the resource share.
+            - description: The ID of the Amazon Web Services account that owns the resource share.
         allowExternalPrincipals:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether principals outside your AWS organization can be associated with a resource share.
+            - description: Indicates whether principals outside your organization in Organizations can be associated with a resource share.
         status:
           allOf:
             - $ref: '#/components/schemas/ResourceShareStatus'
@@ -2872,7 +2872,7 @@ components:
         featureSet:
           allOf:
             - $ref: '#/components/schemas/ResourceShareFeatureSet'
-            - description: '<p>Indicates how the resource share was created. Possible values include:</p> <ul> <li> <p> <code>CREATED_FROM_POLICY</code> - Indicates that the resource share was created from an AWS Identity and Access Management (AWS IAM) policy attached to a resource. These resource shares are visible only to the AWS account that created it. They cannot be modified in AWS RAM.</p> </li> <li> <p> <code>PROMOTING_TO_STANDARD</code> - The resource share is in the process of being promoted. For more information, see <a>PromoteResourceShareCreatedFromPolicy</a>.</p> </li> <li> <p> <code>STANDARD</code> - Indicates that the resource share was created in AWS RAM using the console or APIs. These resource shares are visible to all principals. They can be modified in AWS RAM.</p> </li> </ul>'
+            - description: '<p>Indicates how the resource share was created. Possible values include:</p> <ul> <li> <p> <code>CREATED_FROM_POLICY</code> - Indicates that the resource share was created from an Amazon Web Services Identity and Access Management (Amazon Web Services IAM) policy attached to a resource. These resource shares are visible only to the Amazon Web Services account that created it. They cannot be modified in RAM.</p> </li> <li> <p> <code>PROMOTING_TO_STANDARD</code> - The resource share is in the process of being promoted. For more information, see <a>PromoteResourceShareCreatedFromPolicy</a>.</p> </li> <li> <p> <code>STANDARD</code> - Indicates that the resource share was created in RAM using the console or APIs. These resource shares are visible to all principals. They can be modified in RAM.</p> </li> </ul>'
       description: Describes a resource share.
     DateTime:
       type: string
@@ -2895,7 +2895,7 @@ components:
         permissionArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ARN of the permission to disassociate from the resource share.
+            - description: The Amazon Resource Name (ARN) of the permission to disassociate from the resource share.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2935,7 +2935,7 @@ components:
         permissionArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ARN of the permission.
+            - description: The Amazon Resource Name (ARN) of the permission.
         permissionVersion:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -2946,7 +2946,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ARN of the permission.
+            - description: The Amazon Resource Name (ARN) of the permission.
         version:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2979,7 +2979,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Specifies whether the version of the permission is set to the default version for this resource type.
-      description: Information about an AWS RAM permission.
+      description: Information about an RAM permission.
     MaxResults:
       type: integer
       minimum: 1
@@ -2993,7 +2993,7 @@ components:
         resourceArns:
           allOf:
             - $ref: '#/components/schemas/ResourceArnList'
-            - description: The Amazon Resource Names (ARN) of the resources.
+            - description: The Amazon Resource Names (ARNs) of the resources.
         principal:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3115,7 +3115,7 @@ components:
         resourceShareArns:
           allOf:
             - $ref: '#/components/schemas/ResourceShareArnList'
-            - description: The ARNs of the resource shares.
+            - description: The Amazon Resource Names (ARNs) of the resource shares.
         resourceShareStatus:
           allOf:
             - $ref: '#/components/schemas/ResourceShareStatus'
@@ -3143,7 +3143,7 @@ components:
         permissionArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the AWS RAM permission that is associated with the resource share.
+            - description: The Amazon Resource Name (ARN) of the RAM permission that is associated with the resource share.
     ResourceShareList:
       type: array
       items:
@@ -3211,7 +3211,7 @@ components:
         resourceType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> </p>'
+            - description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:FirewallRuleGroup</code> |<code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> | <code>s3-outposts:Outpost</code> | <code>ssm-contacts:Contact</code> | <code>ssm-incidents:ResponsePlan</code> </p>'
         resourceShareArns:
           allOf:
             - $ref: '#/components/schemas/ResourceShareArnList'
@@ -3279,11 +3279,11 @@ components:
         resourceType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> </p>'
+            - description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:FirewallRuleGroup</code> |<code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> | <code>s3-outposts:Outpost</code> | <code>ssm-contacts:Contact</code> | <code>ssm-incidents:ResponsePlan</code> </p>'
         resourceArns:
           allOf:
             - $ref: '#/components/schemas/ResourceArnList'
-            - description: The Amazon Resource Names (ARN) of the resources.
+            - description: The Amazon Resource Names (ARNs) of the resources.
         resourceShareArns:
           allOf:
             - $ref: '#/components/schemas/ResourceShareArnList'
@@ -3320,8 +3320,8 @@ components:
         external:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
-      description: Describes a principal for use with AWS Resource Access Manager.
+            - description: Indicates whether the principal belongs to the same organization in Organizations as the Amazon Web Services account that owns the resource share.
+      description: Describes a principal for use with Resource Access Manager.
     PromoteResourceShareCreatedFromPolicyRequest:
       type: object
       title: PromoteResourceShareCreatedFromPolicyRequest
@@ -3366,7 +3366,7 @@ components:
         resourceGroupArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ARN of the resource group. This value is returned only if the resource is a resource group.
+            - description: The Amazon Resource Name (ARN) of the resource group. This value is returned only if the resource is a resource group.
         status:
           allOf:
             - $ref: '#/components/schemas/ResourceStatus'
@@ -3404,7 +3404,7 @@ components:
         associatedEntity:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.'
+            - description: '<p>The associated entity. For resource associations, this is the Amazon Resource Name (ARN) of the resource. For principal associations, this is one of the following:</p> <ul> <li> <p>An Amazon Web Services account ID</p> </li> <li> <p>An ARN of an organization in Organizations</p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations</p> </li> <li> <p>An ARN of an IAM role</p> </li> <li> <p>An ARN of an IAM user</p> </li> </ul>'
         associationType:
           allOf:
             - $ref: '#/components/schemas/ResourceShareAssociationType'
@@ -3428,7 +3428,7 @@ components:
         external:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
+            - description: Indicates whether the principal belongs to the same organization in Organizations as the Amazon Web Services account that owns the resource share.
       description: Describes an association with a resource share.
     ResourceShareInvitationStatus:
       type: string
@@ -3443,7 +3443,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ARN of the permission.
+            - description: The Amazon Resource Name (ARN) of the permission.
         version:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3487,8 +3487,8 @@ components:
         serviceName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the AWS services to which the resources belong.
-      description: Information about the shareable resource types and the AWS services to which they belong.
+            - description: The name of the Amazon Web Services services to which the resources belong.
+      description: Information about the shareable resource types and the Amazon Web Services services to which they belong.
     TagValue:
       type: string
     TagValueList:
@@ -3546,7 +3546,7 @@ components:
         allowExternalPrincipals:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether principals outside your AWS organization can be associated with a resource share.
+            - description: Indicates whether principals outside your organization in Organizations can be associated with a resource share.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
