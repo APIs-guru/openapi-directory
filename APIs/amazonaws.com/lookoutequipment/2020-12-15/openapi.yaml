@@ -582,7 +582,7 @@ paths:
   /#X-Amz-Target=AWSLookoutEquipmentFrontendService.DescribeDataset:
     post:
       operationId: DescribeDataset
-      description: 'Provides information on a specified dataset such as the schema location, status, and so on.'
+      description: 'Provides a JSON description of the data that is in each time series dataset, including names, column names, and data types.'
       responses:
         '200':
           description: Success
@@ -708,7 +708,7 @@ paths:
   /#X-Amz-Target=AWSLookoutEquipmentFrontendService.DescribeModel:
     post:
       operationId: DescribeModel
-      description: 'Provides overall information about a specific ML model, including model name and ARN, dataset, training and evaluation information, status, and so on. '
+      description: 'Provides a JSON containing the overall information about a specific ML model, including model name and ARN, dataset, training and evaluation information, status, and so on. '
       responses:
         '200':
           description: Success
@@ -1678,7 +1678,7 @@ components:
         ServerSideKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NameOrArn'
-            - description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt dataset data by Amazon Lookout for Equipment. '
+            - description: 'Provides the identifier of the KMS key used to encrypt dataset data by Amazon Lookout for Equipment. '
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/IdempotenceToken'
@@ -1731,7 +1731,7 @@ components:
         DataDelayOffsetInMinutes:
           allOf:
             - $ref: '#/components/schemas/DataDelayOffsetInMinutes'
-            - description: ' A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if you select an offset delay time of five minutes, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don''t need to stop and restart the scheduler when uploading new data. '
+            - description: 'A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if you select an offset delay time of five minutes, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don''t need to stop and restart the scheduler when uploading new data. '
         DataUploadFrequency:
           allOf:
             - $ref: '#/components/schemas/DataUploadFrequency'
@@ -1751,7 +1751,7 @@ components:
         ServerSideKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NameOrArn'
-            - description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment. '
+            - description: 'Provides the identifier of the KMS key used to encrypt inference scheduler data by Amazon Lookout for Equipment. '
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/IdempotenceToken'
@@ -1827,11 +1827,15 @@ components:
         ServerSideKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NameOrArn'
-            - description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt model data by Amazon Lookout for Equipment. '
+            - description: 'Provides the identifier of the KMS key used to encrypt model data by Amazon Lookout for Equipment. '
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: ' Any tags associated with the ML model being created. '
+        OffCondition:
+          allOf:
+            - $ref: '#/components/schemas/OffCondition'
+            - description: 'Indicates that the asset associated with this sensor has been shut off. As long as this condition is met, Lookout for Equipment will not use data from this asset for training, evaluation, or inference.'
     DeleteDatasetRequest:
       type: object
       required:
@@ -1933,7 +1937,7 @@ components:
         ServerSideKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyArn'
-            - description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt dataset data by Amazon Lookout for Equipment. '
+            - description: 'Provides the identifier of the KMS key used to encrypt dataset data by Amazon Lookout for Equipment. '
         IngestionInputConfiguration:
           allOf:
             - $ref: '#/components/schemas/IngestionInputConfiguration'
@@ -2002,7 +2006,7 @@ components:
         ServerSideKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyArn'
-            - description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment. '
+            - description: 'Provides the identifier of the KMS key used to encrypt inference scheduler data by Amazon Lookout for Equipment. '
     DescribeInferenceSchedulerRequest:
       type: object
       required:
@@ -2095,7 +2099,11 @@ components:
         ServerSideKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyArn'
-            - description: 'Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt model data by Amazon Lookout for Equipment. '
+            - description: 'Provides the identifier of the KMS key used to encrypt model data by Amazon Lookout for Equipment. '
+        OffCondition:
+          allOf:
+            - $ref: '#/components/schemas/OffCondition'
+            - description: 'Indicates that the asset associated with this sensor has been shut off. As long as this condition is met, Lookout for Equipment will not use data from this asset for training, evaluation, or inference.'
     DescribeModelRequest:
       type: object
       required:
@@ -2439,7 +2447,7 @@ components:
         DataDelayOffsetInMinutes:
           allOf:
             - $ref: '#/components/schemas/DataDelayOffsetInMinutes'
-            - description: '&gt; A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if you select an offset delay time of five minutes, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don''t need to stop and restart the scheduler when uploading new data.'
+            - description: ' A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if you select an offset delay time of five minutes, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don''t need to stop and restart the scheduler when uploading new data.'
         DataUploadFrequency:
           allOf:
             - $ref: '#/components/schemas/DataUploadFrequency'
@@ -2546,8 +2554,8 @@ components:
         InferenceInputNameConfiguration:
           allOf:
             - $ref: '#/components/schemas/InferenceInputNameConfiguration'
-            - description: '&gt; Specifies configuration information for the input data for the inference, including timestamp format and delimiter. '
-      description: '&gt; Specifies configuration information for the input data for the inference, including S3 location of input data.. '
+            - description: 'Specifies configuration information for the input data for the inference, including timestamp format and delimiter. '
+      description: 'Specifies configuration information for the input data for the inference, including S3 location of input data.. '
     InferenceOutputConfiguration:
       type: object
       required:
@@ -2605,6 +2613,10 @@ components:
             - $ref: '#/components/schemas/TargetSamplingRate'
             - description: '<p>The sampling rate of the data after post processing by Amazon Lookout for Equipment. For example, if you provide data that has been collected at a 1 second level and you want the system to resample the data at a 1 minute rate before training, the <code>TargetSamplingRate</code> is 1 minute.</p> <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the prefix "PT" to the rate you want. The value for a 1 second rate is therefore <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>, and the value for a 1 hour rate is <i>PT1H</i> </p>'
       description: '<p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of the data after post processing by Amazon Lookout for Equipment. For example, if you provide data that has been collected at a 1 second level and you want the system to resample the data at a 1 minute rate before training, the <code>TargetSamplingRate</code> is 1 minute.</p> <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the prefix "PT" to the rate you want. The value for a 1 second rate is therefore <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>, and the value for a 1 hour rate is <i>PT1H</i> </p>'
+    OffCondition:
+      type: string
+      minLength: 1
+      maxLength: 2048
     ModelArn:
       type: string
       pattern: 'arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\-]*:[0-9]{12}:model\/.+'
@@ -2828,7 +2840,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ComponentTimestampDelimiter'
             - description: 'Indicates the delimiter character used between items in the data. '
-      description: '&gt;&gt; Specifies configuration information for the input data for the inference, including timestamp format and delimiter. '
+      description: 'Specifies configuration information for the input data for the inference, including timestamp format and delimiter. '
     InferenceS3OutputConfiguration:
       type: object
       required:
@@ -2879,7 +2891,7 @@ components:
         DataDelayOffsetInMinutes:
           allOf:
             - $ref: '#/components/schemas/DataDelayOffsetInMinutes'
-            - description: '&gt; A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if an offset delay time of five minutes was selected, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don''t need to stop and restart the scheduler when uploading new data. '
+            - description: 'A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if an offset delay time of five minutes was selected, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don''t need to stop and restart the scheduler when uploading new data. '
         DataUploadFrequency:
           allOf:
             - $ref: '#/components/schemas/DataUploadFrequency'

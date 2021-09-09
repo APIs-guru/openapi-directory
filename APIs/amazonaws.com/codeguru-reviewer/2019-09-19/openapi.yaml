@@ -3,7 +3,7 @@ info:
   version: '2019-09-19'
   x-release: v4
   title: Amazon CodeGuru Reviewer
-  description: '<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations. CodeGuru Reviewer is a service that uses program analysis and machine learning to detect potential defects that are difficult for developers to find and recommends fixes in your Java and Python code.</p> <p>By proactively detecting and providing recommendations for addressing code defects and implementing best practices, CodeGuru Reviewer improves the overall quality and maintainability of your code base during the code review stage. For more information about CodeGuru Reviewer, see the <i> <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html">Amazon CodeGuru Reviewer User Guide</a>.</i> </p> <p> To improve the security of your CodeGuru Reviewer API calls, you can establish a private connection between your VPC and CodeGuru Reviewer by creating an <i>interface VPC endpoint</i>. For more information, see <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/vpc-interface-endpoints.html">CodeGuru Reviewer and interface VPC endpoints (AWS PrivateLink)</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>. </p>'
+  description: '<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations. CodeGuru Reviewer is a service that uses program analysis and machine learning to detect potential defects that are difficult for developers to find and recommends fixes in your Java and Python code.</p> <p>By proactively detecting and providing recommendations for addressing code defects and implementing best practices, CodeGuru Reviewer improves the overall quality and maintainability of your code base during the code review stage. For more information about CodeGuru Reviewer, see the <i> <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html">Amazon CodeGuru Reviewer User Guide</a>.</i> </p> <p> To improve the security of your CodeGuru Reviewer API calls, you can establish a private connection between your VPC and CodeGuru Reviewer by creating an <i>interface VPC endpoint</i>. For more information, see <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/vpc-interface-endpoints.html">CodeGuru Reviewer and interface VPC endpoints (Amazon Web Services PrivateLink)</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -118,7 +118,7 @@ paths:
   /associations:
     post:
       operationId: AssociateRepository
-      description: '<p> Use to associate an AWS CodeCommit repository or a repostory managed by AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code changes in the repository''s pull requests and provides automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html">Recommendations in Amazon CodeGuru Reviewer</a> in the <i>Amazon CodeGuru Reviewer User Guide.</i> </p> <p>If you associate a CodeCommit or S3 repository, it must be in the same AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured.</p> <p>Bitbucket and GitHub Enterprise Server repositories are managed by AWS CodeStar Connections to connect to CodeGuru Reviewer. For more information, see <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-associate-repository.html">Associate a repository</a> in the <i>Amazon CodeGuru Reviewer User Guide.</i> </p> <note> <p> You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub repository, use the console. For more information, see <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html">Getting started with CodeGuru Reviewer</a> in the <i>CodeGuru Reviewer User Guide.</i> </p> </note>'
+      description: '<p> Use to associate an Amazon Web Services CodeCommit repository or a repostory managed by Amazon Web Services CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code changes in the repository''s pull requests and provides automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html">Recommendations in Amazon CodeGuru Reviewer</a> in the <i>Amazon CodeGuru Reviewer User Guide.</i> </p> <p>If you associate a CodeCommit or S3 repository, it must be in the same Amazon Web Services Region and Amazon Web Services account where its CodeGuru Reviewer code reviews are configured.</p> <p>Bitbucket and GitHub Enterprise Server repositories are managed by Amazon Web Services CodeStar Connections to connect to CodeGuru Reviewer. For more information, see <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-associate-repository.html">Associate a repository</a> in the <i>Amazon CodeGuru Reviewer User Guide.</i> </p> <note> <p> You cannot use the CodeGuru Reviewer SDK or the Amazon Web Services CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub repository, use the console. For more information, see <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html">Getting started with CodeGuru Reviewer</a> in the <i>CodeGuru Reviewer User Guide.</i> </p> </note>'
       responses:
         '200':
           description: Success
@@ -167,13 +167,13 @@ paths:
                 - Repository
               properties:
                 Repository:
-                  description: ' Information about an associated AWS CodeCommit repository or an associated repository that is managed by AWS CodeStar Connections (for example, Bitbucket). This <code>Repository</code> object is not used if your source code is in an associated GitHub repository. '
+                  description: ' Information about an associated Amazon Web Services CodeCommit repository or an associated repository that is managed by Amazon Web Services CodeStar Connections (for example, Bitbucket). This <code>Repository</code> object is not used if your source code is in an associated GitHub repository. '
                   type: object
                   properties:
                     CodeCommit:
                       allOf:
                         - $ref: '#/components/schemas/CodeCommitRepository'
-                        - description: Information about an AWS CodeCommit repository.
+                        - description: Information about an Amazon Web Services CodeCommit repository.
                     Bitbucket:
                       allOf:
                         - $ref: '#/components/schemas/ThirdPartySourceRepository'
@@ -198,17 +198,17 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 KMSKeyDetails:
-                  description: '<p>An object that contains:</p> <ul> <li> <p>The encryption option for a repository association. It is either owned by AWS Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p> </li> <li> <p>The ID of the AWS KMS key that is associated with a respository association.</p> </li> </ul>'
+                  description: '<p>An object that contains:</p> <ul> <li> <p>The encryption option for a repository association. It is either owned by Amazon Web Services Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p> </li> <li> <p>The ID of the Amazon Web Services KMS key that is associated with a respository association.</p> </li> </ul>'
                   type: object
                   properties:
                     KMSKeyId:
                       allOf:
                         - $ref: '#/components/schemas/KMSKeyId'
-                        - description: The ID of the AWS KMS key that is associated with a respository association.
+                        - description: The ID of the Amazon Web Services KMS key that is associated with a respository association.
                     EncryptionOption:
                       allOf:
                         - $ref: '#/components/schemas/EncryptionOption'
-                        - description: The encryption option for a repository association. It is either owned by AWS Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).
+                        - description: The encryption option for a repository association. It is either owned by Amazon Web Services Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -279,7 +279,7 @@ paths:
         - name: Owner
           in: query
           required: false
-          description: 'List of owners to use as a filter. For AWS CodeCommit, it is the name of the CodeCommit account that was used to associate the repository. For other repository source providers, such as Bitbucket and GitHub Enterprise Server, this is name of the account that was used to associate the repository. '
+          description: 'List of owners to use as a filter. For Amazon Web Services CodeCommit, it is the name of the CodeCommit account that was used to associate the repository. For other repository source providers, such as Bitbucket and GitHub Enterprise Server, this is name of the account that was used to associate the repository. '
           schema:
             type: array
             items:
@@ -362,7 +362,7 @@ paths:
                 - Type
               properties:
                 Name:
-                  description: ' The name of the code review. The name of each code review in your AWS account must be unique. '
+                  description: ' The name of the code review. The name of each code review in your Amazon Web Services account must be unique. '
                   type: string
                   pattern: '[a-zA-Z0-9-_]*'
                   minLength: 1
@@ -520,7 +520,7 @@ paths:
         - name: UserId
           in: query
           required: false
-          description: '<p> Optional parameter to describe the feedback for a given user. If this is not supplied, it defaults to the user making the request. </p> <p> The <code>UserId</code> is an IAM principal that can be specified as an AWS account ID or an Amazon Resource Name (ARN). For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying"> Specifying a Principal</a> in the <i>AWS Identity and Access Management User Guide</i>. </p>'
+          description: '<p> Optional parameter to describe the feedback for a given user. If this is not supplied, it defaults to the user making the request. </p> <p> The <code>UserId</code> is an IAM principal that can be specified as an Amazon Web Services account ID or an Amazon Resource Name (ARN). For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying"> Specifying a Principal</a> in the <i>Amazon Web Services Identity and Access Management User Guide</i>. </p>'
           schema:
             type: string
             minLength: 1
@@ -817,7 +817,7 @@ paths:
         - name: UserIds
           in: query
           required: false
-          description: '<p> An AWS user''s account ID or Amazon Resource Name (ARN). Use this ID to query the recommendation feedback for a code review from that user. </p> <p> The <code>UserId</code> is an IAM principal that can be specified as an AWS account ID or an Amazon Resource Name (ARN). For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying"> Specifying a Principal</a> in the <i>AWS Identity and Access Management User Guide</i>. </p>'
+          description: '<p> An Amazon Web Services user''s account ID or Amazon Resource Name (ARN). Use this ID to query the recommendation feedback for a code review from that user. </p> <p> The <code>UserId</code> is an IAM principal that can be specified as an Amazon Web Services account ID or an Amazon Resource Name (ARN). For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying"> Specifying a Principal</a> in the <i>Amazon Web Services Identity and Access Management User Guide</i>. </p>'
           schema:
             type: array
             items:
@@ -1225,8 +1225,8 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: 'The name of the AWS CodeCommit repository. For more information, see <a href="https://docs.aws.amazon.com/codecommit/latest/APIReference/API_GetRepository.html#CodeCommit-GetRepository-request-repositoryName">repositoryName</a> in the <i>AWS CodeCommit API Reference</i>.'
-      description: Information about an AWS CodeCommit repository. The CodeCommit repository must be in the same AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured.
+            - description: 'The name of the Amazon Web Services CodeCommit repository. For more information, see <a href="https://docs.aws.amazon.com/codecommit/latest/APIReference/API_GetRepository.html#CodeCommit-GetRepository-request-repositoryName">repositoryName</a> in the <i>Amazon Web Services CodeCommit API Reference</i>.'
+      description: Information about an Amazon Web Services CodeCommit repository. The CodeCommit repository must be in the same Amazon Web Services Region and Amazon Web Services account where its CodeGuru Reviewer code reviews are configured.
     ThirdPartySourceRepository:
       type: object
       required:
@@ -1241,11 +1241,11 @@ components:
         ConnectionArn:
           allOf:
             - $ref: '#/components/schemas/ConnectionArn'
-            - description: ' The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see <a href="https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html"> <code>Connection</code> </a> in the <i>AWS CodeStar Connections API Reference</i>. '
+            - description: ' The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar Connections connection. Its format is <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see <a href="https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html"> <code>Connection</code> </a> in the <i>Amazon Web Services CodeStar Connections API Reference</i>. '
         Owner:
           allOf:
             - $ref: '#/components/schemas/Owner'
-            - description: ' The owner of the repository. For a GitHub, GitHub Enterprise, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, this can be the username or AWS account ID. '
+            - description: ' The owner of the repository. For a GitHub, GitHub Enterprise, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, this can be the username or Amazon Web Services account ID. '
       description: ' Information about a third-party source repository connected to CodeGuru Reviewer. '
     S3Repository:
       type: object
@@ -1463,7 +1463,7 @@ components:
         CodeCommit:
           allOf:
             - $ref: '#/components/schemas/CodeCommitRepository'
-            - description: Information about an AWS CodeCommit repository.
+            - description: Information about an Amazon Web Services CodeCommit repository.
         Bitbucket:
           allOf:
             - $ref: '#/components/schemas/ThirdPartySourceRepository'
@@ -1474,7 +1474,7 @@ components:
             - description: ' Information about a GitHub Enterprise Server repository. '
         S3Bucket:
           $ref: '#/components/schemas/S3Repository'
-      description: ' Information about an associated AWS CodeCommit repository or an associated repository that is managed by AWS CodeStar Connections (for example, Bitbucket). This <code>Repository</code> object is not used if your source code is in an associated GitHub repository. '
+      description: ' Information about an associated Amazon Web Services CodeCommit repository or an associated repository that is managed by Amazon Web Services CodeStar Connections (for example, Bitbucket). This <code>Repository</code> object is not used if your source code is in an associated GitHub repository. '
     ClientRequestToken:
       type: string
       pattern: '^[\w-]+$'
@@ -1492,12 +1492,12 @@ components:
         KMSKeyId:
           allOf:
             - $ref: '#/components/schemas/KMSKeyId'
-            - description: The ID of the AWS KMS key that is associated with a respository association.
+            - description: The ID of the Amazon Web Services KMS key that is associated with a respository association.
         EncryptionOption:
           allOf:
             - $ref: '#/components/schemas/EncryptionOption'
-            - description: The encryption option for a repository association. It is either owned by AWS Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).
-      description: '<p>An object that contains:</p> <ul> <li> <p>The encryption option for a repository association. It is either owned by AWS Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p> </li> <li> <p>The ID of the AWS KMS key that is associated with a respository association.</p> </li> </ul>'
+            - description: The encryption option for a repository association. It is either owned by Amazon Web Services Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).
+      description: '<p>An object that contains:</p> <ul> <li> <p>The encryption option for a repository association. It is either owned by Amazon Web Services Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p> </li> <li> <p>The ID of the Amazon Web Services KMS key that is associated with a respository association.</p> </li> </ul>'
     AssociateRepositoryRequest:
       type: object
       required:
@@ -1519,7 +1519,7 @@ components:
         KMSKeyDetails:
           allOf:
             - $ref: '#/components/schemas/KMSKeyDetails'
-            - description: '<p>A <code>KMSKeyDetails</code> object that contains:</p> <ul> <li> <p>The encryption option for this repository association. It is either owned by AWS Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p> </li> <li> <p>The ID of the AWS KMS key that is associated with this respository association.</p> </li> </ul>'
+            - description: '<p>A <code>KMSKeyDetails</code> object that contains:</p> <ul> <li> <p>The encryption option for this repository association. It is either owned by Amazon Web Services Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p> </li> <li> <p>The ID of the Amazon Web Services KMS key that is associated with this respository association.</p> </li> </ul>'
     RepositoryAssociation:
       type: object
       properties:
@@ -1534,7 +1534,7 @@ components:
         ConnectionArn:
           allOf:
             - $ref: '#/components/schemas/ConnectionArn'
-            - description: ' The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see <a href="https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html"> <code>Connection</code> </a> in the <i>AWS CodeStar Connections API Reference</i>. '
+            - description: ' The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar Connections connection. Its format is <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see <a href="https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html"> <code>Connection</code> </a> in the <i>Amazon Web Services CodeStar Connections API Reference</i>. '
         Name:
           allOf:
             - $ref: '#/components/schemas/Name'
@@ -1542,7 +1542,7 @@ components:
         Owner:
           allOf:
             - $ref: '#/components/schemas/Owner'
-            - description: 'The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, it can be the username or AWS account ID.'
+            - description: 'The owner of the repository. For an Amazon Web Services CodeCommit repository, this is the Amazon Web Services account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, it can be the username or Amazon Web Services account ID.'
         ProviderType:
           allOf:
             - $ref: '#/components/schemas/ProviderType'
@@ -1566,7 +1566,7 @@ components:
         KMSKeyDetails:
           allOf:
             - $ref: '#/components/schemas/KMSKeyDetails'
-            - description: '<p>A <code>KMSKeyDetails</code> object that contains:</p> <ul> <li> <p>The encryption option for this repository association. It is either owned by AWS Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p> </li> <li> <p>The ID of the AWS KMS key that is associated with this respository association.</p> </li> </ul>'
+            - description: '<p>A <code>KMSKeyDetails</code> object that contains:</p> <ul> <li> <p>The encryption option for this repository association. It is either owned by Amazon Web Services Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p> </li> <li> <p>The ID of the Amazon Web Services KMS key that is associated with this respository association.</p> </li> </ul>'
         S3RepositoryDetails:
           $ref: '#/components/schemas/S3RepositoryDetails'
       description: 'Information about a repository association. The <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_DescribeRepositoryAssociation.html"> <code>DescribeRepositoryAssociation</code> </a> operation returns a <code>RepositoryAssociation</code> object.'
@@ -1666,7 +1666,7 @@ components:
         MeteredLinesOfCodeCount:
           allOf:
             - $ref: '#/components/schemas/MeteredLinesOfCodeCount'
-            - description: ' Lines of code metered in the code review. For the initial code review pull request and all subsequent revisions, this includes all lines of code in the files added to the pull request. In subsequent revisions, for files that already existed in the pull request, this includes only the changed lines of code. In both cases, this does not include non-code lines such as comments and import statements. For example, if you submit a pull request containing 5 files, each with 500 lines of code, and in a subsequent revision you added a new file with 200 lines of code, and also modified a total of 25 lines across the initial 5 files, <code>MeteredLinesOfCodeCount</code> includes the first 5 files (5 * 500 = 2,500 lines), the new file (200 lines) and the 25 changed lines of code for a total of 2,725 lines of code. '
+            - description: ' <code>MeteredLinesOfCode</code> is the number of lines of code in the repository where the code review happened. This does not include non-code lines such as comments and blank lines. '
         FindingsCount:
           allOf:
             - $ref: '#/components/schemas/FindingsCount'
@@ -1690,7 +1690,7 @@ components:
         Owner:
           allOf:
             - $ref: '#/components/schemas/Owner'
-            - description: 'The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, it can be the username or AWS account ID.'
+            - description: 'The owner of the repository. For an Amazon Web Services CodeCommit repository, this is the Amazon Web Services account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, it can be the username or Amazon Web Services account ID.'
         ProviderType:
           allOf:
             - $ref: '#/components/schemas/ProviderType'
@@ -1759,7 +1759,7 @@ components:
         Owner:
           allOf:
             - $ref: '#/components/schemas/Owner'
-            - description: 'The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, it can be the username or AWS account ID.'
+            - description: 'The owner of the repository. For an Amazon Web Services CodeCommit repository, this is the Amazon Web Services account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, it can be the username or Amazon Web Services account ID.'
         ProviderType:
           allOf:
             - $ref: '#/components/schemas/ProviderType'
@@ -1857,7 +1857,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/CodeReviewName'
-            - description: ' The name of the code review. The name of each code review in your AWS account must be unique. '
+            - description: ' The name of the code review. The name of each code review in your Amazon Web Services account must be unique. '
         RepositoryAssociationArn:
           allOf:
             - $ref: '#/components/schemas/AssociationArn'
@@ -1896,7 +1896,7 @@ components:
         UserId:
           allOf:
             - $ref: '#/components/schemas/UserId'
-            - description: '<p> The ID of the user that made the API call. </p> <p> The <code>UserId</code> is an IAM principal that can be specified as an AWS account ID or an Amazon Resource Name (ARN). For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying"> Specifying a Principal</a> in the <i>AWS Identity and Access Management User Guide</i>. </p>'
+            - description: '<p> The ID of the user that made the API call. </p> <p> The <code>UserId</code> is an IAM principal that can be specified as an Amazon Web Services account ID or an Amazon Resource Name (ARN). For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying"> Specifying a Principal</a> in the <i>Amazon Web Services Identity and Access Management User Guide</i>. </p>'
         CreatedTimeStamp:
           allOf:
             - $ref: '#/components/schemas/TimeStamp'
@@ -2036,6 +2036,11 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    LongDescription:
+      type: string
+      pattern: ^\S(.*\S)?$
+      minLength: 1
+      maxLength: 1000
     MeteredLinesOfCodeCount:
       type: integer
     Reactions:
@@ -2092,7 +2097,7 @@ components:
         UserId:
           allOf:
             - $ref: '#/components/schemas/UserId'
-            - description: '<p> The ID of the user that gave the feedback. </p> <p> The <code>UserId</code> is an IAM principal that can be specified as an AWS account ID or an Amazon Resource Name (ARN). For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying"> Specifying a Principal</a> in the <i>AWS Identity and Access Management User Guide</i>. </p>'
+            - description: '<p> The ID of the user that gave the feedback. </p> <p> The <code>UserId</code> is an IAM principal that can be specified as an Amazon Web Services account ID or an Amazon Resource Name (ARN). For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying"> Specifying a Principal</a> in the <i>Amazon Web Services Identity and Access Management User Guide</i>. </p>'
       description: ' Information about recommendation feedback summaries. '
     RecommendationSummary:
       type: object
@@ -2121,11 +2126,51 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecommendationCategory'
             - description: The type of a recommendation.
+        RuleMetadata:
+          allOf:
+            - $ref: '#/components/schemas/RuleMetadata'
+            - description: 'Metadata about a rule. Rule metadata includes an ID, a name, a list of tags, and a short and long description. CodeGuru Reviewer uses rules to analyze code. A rule''s recommendation is included in analysis results if code is detected that violates the rule.'
+        Severity:
+          allOf:
+            - $ref: '#/components/schemas/Severity'
+            - description: The severity of the issue in the code that generated this recommendation.
       description: ' Information about recommendations. '
     Text:
       type: string
       minLength: 1
       maxLength: 2048
+    RuleMetadata:
+      type: object
+      properties:
+        RuleId:
+          allOf:
+            - $ref: '#/components/schemas/RuleId'
+            - description: The ID of the rule.
+        RuleName:
+          allOf:
+            - $ref: '#/components/schemas/RuleName'
+            - description: The name of the rule.
+        ShortDescription:
+          allOf:
+            - $ref: '#/components/schemas/ShortDescription'
+            - description: A short description of the rule.
+        LongDescription:
+          allOf:
+            - $ref: '#/components/schemas/LongDescription'
+            - description: A long description of the rule.
+        RuleTags:
+          allOf:
+            - $ref: '#/components/schemas/RuleTags'
+            - description: Tags that are associated with the rule.
+      description: 'Metadata about a rule. Rule metadata includes an ID, a name, a list of tags, and a short and long description. CodeGuru Reviewer uses rules to analyze code. A rule''s recommendation is included in analysis results if code is detected that violates the rule.'
+    Severity:
+      type: string
+      enum:
+        - Info
+        - Low
+        - Medium
+        - High
+        - Critical
     RepositoryHeadSourceCodeType:
       type: object
       required:
@@ -2158,7 +2203,7 @@ components:
         ConnectionArn:
           allOf:
             - $ref: '#/components/schemas/ConnectionArn'
-            - description: ' The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see <a href="https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html"> <code>Connection</code> </a> in the <i>AWS CodeStar Connections API Reference</i>. '
+            - description: ' The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar Connections connection. Its format is <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see <a href="https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html"> <code>Connection</code> </a> in the <i>Amazon Web Services CodeStar Connections API Reference</i>. '
         LastUpdatedTimeStamp:
           allOf:
             - $ref: '#/components/schemas/TimeStamp'
@@ -2174,7 +2219,7 @@ components:
         Owner:
           allOf:
             - $ref: '#/components/schemas/Owner'
-            - description: 'The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, it can be the username or AWS account ID.'
+            - description: 'The owner of the repository. For an Amazon Web Services CodeCommit repository, this is the Amazon Web Services account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, it can be the username or Amazon Web Services account ID.'
         ProviderType:
           allOf:
             - $ref: '#/components/schemas/ProviderType'
@@ -2219,6 +2264,32 @@ components:
             - $ref: '#/components/schemas/VendorName'
             - description: 'The name of the repository vendor used to upload code to an S3 bucket for a CI/CD code review. For example, if code and artifacts are uploaded to an S3 bucket for a CI/CD code review by GitHub scripts from a GitHub repository, then the repository association''s <code>ProviderType</code> is <code>S3Bucket</code> and the CI/CD repository vendor name is GitHub. For more information, see the definition for <code>ProviderType</code> in <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html">RepositoryAssociation</a>. '
       description: Metadata that is associated with a code review. This applies to both pull request and repository analysis code reviews.
+    RuleId:
+      type: string
+      pattern: '^\S+\/[a-zA-Z0-9-]+@v\d+\.\d+$'
+      minLength: 1
+      maxLength: 64
+    RuleName:
+      type: string
+      pattern: ^\S(.*\S)?$
+      minLength: 1
+      maxLength: 100
+    ShortDescription:
+      type: string
+      pattern: ^\S(.*\S)?$
+      minLength: 1
+      maxLength: 200
+    RuleTags:
+      type: array
+      items:
+        $ref: '#/components/schemas/RuleTag'
+      minItems: 1
+      maxItems: 20
+    RuleTag:
+      type: string
+      pattern: ^\S(.*\S)?$
+      minLength: 1
+      maxLength: 50
     S3BucketName:
       type: string
       pattern: ^\S(.*\S)?$

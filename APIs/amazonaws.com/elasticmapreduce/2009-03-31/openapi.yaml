@@ -246,7 +246,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.AddTags:
     post:
       operationId: AddTags
-      description: 'Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html">Tag Clusters</a>. '
+      description: 'Adds tags to an Amazon EMR resource, such as a cluster or an Amazon EMR Studio. Tags make it easier to associate resources in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html">Tag Clusters</a>. '
       responses:
         '200':
           description: Success
@@ -426,7 +426,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.CreateStudioSessionMapping:
     post:
       operationId: CreateStudioSessionMapping
-      description: 'Maps a user or group to the Amazon EMR Studio specified by <code>StudioId</code>, and applies a session policy to refine Studio permissions for that user or group.'
+      description: 'Maps a user or group to the Amazon EMR Studio specified by <code>StudioId</code>, and applies a session policy to refine Studio permissions for that user or group. Use <code>CreateStudioSessionMapping</code> to assign users to a Studio when you use Amazon Web Services SSO authentication. For instructions on how to assign users to a Studio when you use IAM authentication, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-manage-users.html#emr-studio-assign-users-groups">Assign a user or group to your EMR Studio</a>.'
       responses:
         '200':
           description: Success
@@ -1991,7 +1991,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.RemoveTags:
     post:
       operationId: RemoveTags
-      description: '<p>Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html">Tag Clusters</a>. </p> <p>The following example removes the stack tag with value Prod from a cluster:</p>'
+      description: '<p>Removes tags from an Amazon EMR resource, such as a cluster or Amazon EMR Studio. Tags make it easier to associate resources in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html">Tag Clusters</a>. </p> <p>The following example removes the stack tag with value Prod from a cluster:</p>'
       responses:
         '200':
           description: Success
@@ -2500,12 +2500,12 @@ components:
         ResourceId:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
-            - description: The Amazon EMR resource identifier to which tags will be added. This value must be a cluster identifier.
+            - description: 'The Amazon EMR resource identifier to which tags will be added. For example, a cluster identifier or an Amazon EMR Studio ID.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'A list of tags to associate with a cluster and propagate to EC2 instances. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.'
-      description: This input identifies a cluster and a list of tags to attach.
+            - description: 'A list of tags to associate with a resource. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.'
+      description: This input identifies an Amazon EMR resource and a list of tags to attach.
     CancelStepsOutput:
       type: object
       properties:
@@ -2582,7 +2582,6 @@ components:
         - VpcId
         - SubnetIds
         - ServiceRole
-        - UserRole
         - WorkspaceSecurityGroupId
         - EngineSecurityGroupId
         - DefaultS3Location
@@ -2599,7 +2598,7 @@ components:
         AuthMode:
           allOf:
             - $ref: '#/components/schemas/AuthMode'
-            - description: Specifies whether the Studio authenticates users using single sign-on (SSO) or IAM. Amazon EMR Studio currently only supports SSO authentication.
+            - description: Specifies whether the Studio authenticates users using IAM or Amazon Web Services SSO.
         VpcId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -2611,11 +2610,11 @@ components:
         ServiceRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a way for Amazon EMR Studio to interoperate with other Amazon Web Services services.
+            - description: The IAM role that the Amazon EMR Studio assumes. The service role provides a way for Amazon EMR Studio to interoperate with other Amazon Web Services services.
         UserRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: The IAM user role that will be assumed by users and groups logged in to an Amazon EMR Studio. The permissions attached to this IAM role can be scoped down for each user or group using session policies.
+            - description: The IAM user role that users and groups assume when logged in to an Amazon EMR Studio. Only specify a <code>UserRole</code> when you use Amazon Web Services SSO authentication. The permissions attached to the <code>UserRole</code> can be scoped down for each user or group using session policies.
         WorkspaceSecurityGroupId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -2628,6 +2627,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/XmlString'
             - description: The Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook files.
+        IdpAuthUrl:
+          allOf:
+            - $ref: '#/components/schemas/XmlString'
+            - description: The authentication endpoint of your identity provider (IdP). Specify this value when you use IAM authentication and want to let federated users log in to a Studio with the Studio URL and credentials from your IdP. Amazon EMR Studio redirects users to this endpoint to enter credentials.
+        IdpRelayStateParameterName:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: 'The name that your identity provider (IdP) uses for its <code>RelayState</code> parameter. For example, <code>RelayState</code> or <code>TargetSource</code>. Specify this value when you use IAM authentication and want to let federated users log in to a Studio using the Studio URL. The <code>RelayState</code> parameter differs by IdP.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -3454,7 +3461,7 @@ components:
     RemoveTagsOutput:
       type: object
       properties: {}
-      description: This output indicates the result of removing tags from a resource.
+      description: This output indicates the result of removing tags from the resource.
     RemoveTagsInput:
       type: object
       required:
@@ -3465,12 +3472,12 @@ components:
         ResourceId:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
-            - description: The Amazon EMR resource identifier from which tags will be removed. This value must be a cluster identifier.
+            - description: 'The Amazon EMR resource identifier from which tags will be removed. For example, a cluster identifier or an Amazon EMR Studio ID.'
         TagKeys:
           allOf:
             - $ref: '#/components/schemas/StringList'
-            - description: A list of tag keys to remove from a resource.
-      description: This input identifies a cluster and a list of tags to remove.
+            - description: A list of tag keys to remove from the resource.
+      description: This input identifies an Amazon EMR resource and a list of tags to remove.
     RunJobFlowOutput:
       type: object
       properties:
@@ -3553,7 +3560,7 @@ components:
         ServiceRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: The IAM role that will be assumed by the Amazon EMR service to access Amazon Web Services resources on your behalf.
+            - description: The IAM role that Amazon EMR assumes in order to access Amazon Web Services resources on your behalf.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -4378,7 +4385,7 @@ components:
         ServiceRole:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The IAM role that will be assumed by the Amazon EMR service to access Amazon Web Services resources on your behalf.
+            - description: The IAM role that Amazon EMR assumes in order to access Amazon Web Services resources on your behalf.
         NormalizedInstanceHours:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -4722,7 +4729,7 @@ components:
         AuthMode:
           allOf:
             - $ref: '#/components/schemas/AuthMode'
-            - description: Specifies whether the Amazon EMR Studio authenticates users using single sign-on (SSO) or IAM.
+            - description: Specifies whether the Amazon EMR Studio authenticates users using IAM or Amazon Web Services SSO.
         VpcId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -4738,7 +4745,7 @@ components:
         UserRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: The name of the IAM role assumed by users logged in to the Amazon EMR Studio.
+            - description: The name of the IAM role assumed by users logged in to the Amazon EMR Studio. A Studio only requires a <code>UserRole</code> when you use IAM authentication.
         WorkspaceSecurityGroupId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -4759,6 +4766,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/XmlString'
             - description: The Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook files.
+        IdpAuthUrl:
+          allOf:
+            - $ref: '#/components/schemas/XmlString'
+            - description: Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.
+        IdpRelayStateParameterName:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The name of your identity provider's <code>RelayState</code> parameter.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -6487,6 +6502,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
             - description: The unique access URL of the Amazon EMR Studio.
+        AuthMode:
+          allOf:
+            - $ref: '#/components/schemas/AuthMode'
+            - description: Specifies whether the Studio authenticates users using IAM or Amazon Web Services SSO.
         CreationTime:
           allOf:
             - $ref: '#/components/schemas/Date'
