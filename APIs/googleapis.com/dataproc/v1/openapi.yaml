@@ -2845,45 +2845,6 @@ components:
           $ref: "#/components/schemas/KerberosConfig"
           description: Optional. Kerberos related configuration.
       type: object
-    SessionOperationMetadata:
-      description: Metadata describing the Session operation.
-      properties:
-        createTime:
-          description: The time when the operation was created.
-          format: google-datetime
-          type: string
-        description:
-          description: Short description of the operation.
-          type: string
-        doneTime:
-          description: The time when the operation was finished.
-          format: google-datetime
-          type: string
-        labels:
-          additionalProperties:
-            type: string
-          description: Labels associated with the operation.
-          type: object
-        operationType:
-          description: The operation type.
-          enum:
-            - SESSION_OPERATION_TYPE_UNSPECIFIED
-            - CREATE
-            - TERMINATE
-            - DELETE
-          type: string
-        session:
-          description: Name of the session for the operation.
-          type: string
-        sessionUuid:
-          description: Session UUID for the operation.
-          type: string
-        warnings:
-          description: Warnings encountered during operation execution.
-          items:
-            type: string
-          type: array
-      type: object
     SetIamPolicyRequest:
       description: Request message for SetIamPolicy method.
       properties:

@@ -532,6 +532,53 @@ components:
           format: google-datetime
           type: string
       type: object
+    GoogleCloudDocumentaiV1DeleteProcessorMetadata:
+      description: The long running operation metadata for delete processor method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1DeleteProcessorVersionMetadata:
+      description: The long running operation metadata for delete processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1DeployProcessorVersionMetadata:
+      description: The long running operation metadata for deploy processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1DeployProcessorVersionResponse:
+      description: Response message for the deploy processor version method.
+      properties: {}
+      type: object
+    GoogleCloudDocumentaiV1DisableProcessorMetadata:
+      description: The long running operation metadata for disable processor method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1DisableProcessorResponse:
+      description: Response message for the disable processor method. Intentionally empty proto for adding fields in future.
+      properties: {}
+      type: object
+    GoogleCloudDocumentaiV1EnableProcessorMetadata:
+      description: The long running operation metadata for enable processor method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1EnableProcessorResponse:
+      description: Response message for the enable processor method. Intentionally empty proto for adding fields in future.
+      properties: {}
+      type: object
     GoogleCloudDocumentaiV1HumanReviewStatus:
       description: The status of human review on a processed document.
       properties:
@@ -564,6 +611,28 @@ components:
         gcsDestination:
           description: The Cloud Storage uri for the human reviewed document.
           type: string
+      type: object
+    GoogleCloudDocumentaiV1SetDefaultProcessorVersionMetadata:
+      description: The long running operation metadata for set default processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1SetDefaultProcessorVersionResponse:
+      description: Response message for set default processor version method.
+      properties: {}
+      type: object
+    GoogleCloudDocumentaiV1UndeployProcessorVersionMetadata:
+      description: The long running operation metadata for the undeploy processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1UndeployProcessorVersionResponse:
+      description: Response message for the undeploy processor version method.
+      properties: {}
       type: object
     GoogleCloudDocumentaiV1beta1BatchProcessDocumentsResponse:
       description: Response to an batch document processing request. This is returned in the LRO Operation after the operation is complete.
@@ -2374,6 +2443,24 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
           description: The basic metadata of the long running operation.
       type: object
+    GoogleCloudDocumentaiV1beta3DeleteProcessorVersionMetadata:
+      description: The long running operation metadata for delete processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1beta3DeployProcessorVersionMetadata:
+      description: The long running operation metadata for deploy processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1beta3DeployProcessorVersionResponse:
+      description: Response message for the deploy processor version method.
+      properties: {}
+      type: object
     GoogleCloudDocumentaiV1beta3DisableProcessorMetadata:
       description: The long running operation metadata for disable processor method.
       properties:
@@ -2449,6 +2536,28 @@ components:
         gcsDestination:
           description: The Cloud Storage uri for the human reviewed document.
           type: string
+      type: object
+    GoogleCloudDocumentaiV1beta3SetDefaultProcessorVersionMetadata:
+      description: The long running operation metadata for set default processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1beta3SetDefaultProcessorVersionResponse:
+      description: Response message for set default processor version method.
+      properties: {}
+      type: object
+    GoogleCloudDocumentaiV1beta3UndeployProcessorVersionMetadata:
+      description: The long running operation metadata for the undeploy processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1beta3UndeployProcessorVersionResponse:
+      description: Response message for the undeploy processor version method.
+      properties: {}
       type: object
     GoogleLongrunningOperation:
       description: This resource represents a long-running operation that is the result of a network API call.

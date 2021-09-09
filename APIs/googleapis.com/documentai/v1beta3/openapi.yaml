@@ -74,10 +74,10 @@ paths:
         - projects
   "/v1beta3/{name}":
     delete:
-      description: Deletes the processor, unloads all deployed model artifacts if it was enabled and then deletes all artifacts associated with this processor.
-      operationId: documentai.projects.locations.processors.delete
+      description: Deletes the processor version, all artifacts under the processor version will be deleted.
+      operationId: documentai.projects.locations.processors.processorVersions.delete
       parameters:
-        - description: Required. The processor resource name to be deleted.
+        - description: Required. The processor version resource name to be deleted.
           in: path
           name: name
           required: true
@@ -98,10 +98,10 @@ paths:
       tags:
         - projects
     get:
-      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
-      operationId: documentai.projects.locations.operations.list
+      description: Gets a processor version detail.
+      operationId: documentai.projects.locations.processors.processorVersions.get
       parameters:
-        - description: The name of the operation's parent resource.
+        - description: Required. The processor resource name.
           in: path
           name: name
           required: true
@@ -127,7 +127,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleLongrunningListOperationsResponse"
+                $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3ProcessorVersion"
           description: Successful response
       security:
         - Oauth2:
@@ -279,6 +279,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1beta3/{name}:deploy":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Deploys the processor version.
+      operationId: documentai.projects.locations.processors.processorVersions.deploy
+      parameters:
+        - description: Required. The processor version resource name to be deployed.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DeployProcessorVersionRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta3/{name}:disable":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -405,6 +447,95 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1beta3/{name}:undeploy":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Undeploys the processor version.
+      operationId: documentai.projects.locations.processors.processorVersions.undeploy
+      parameters:
+        - description: Required. The processor version resource name to be undeployed.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3UndeployProcessorVersionRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta3/{parent}/processorVersions":
+    get:
+      description: Lists all versions of a processor.
+      operationId: documentai.projects.locations.processors.processorVersions.list
+      parameters:
+        - description: "Required. The parent (project, location and processor) to list all versions. Format: projects/{project}/locations/{location}/processors/{processor}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of processor versions to return. If unspecified, at most 10 processor versions will be returned. The maximum value is 20; values above 20 will be coerced to 20.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: We will return the processor versions sorted by creation time. The page token will point to the next processor version.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3ListProcessorVersionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta3/{parent}/processors":
     get:
       description: Lists all processors which belong to this project.
@@ -518,6 +649,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1beta3/{processor}:setDefaultProcessorVersion":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Set the default (active) version of a Processor that will be used in ProcessDocument and BatchProcessDocuments.
+      operationId: documentai.projects.locations.processors.setDefaultProcessorVersion
+      parameters:
+        - description: Required. The resource name of the Processor to change default version.
+          in: path
+          name: processor
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3SetDefaultProcessorVersionRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
 components:
   parameters:
     _.xgafv:
@@ -899,6 +1072,53 @@ components:
           format: google-datetime
           type: string
       type: object
+    GoogleCloudDocumentaiV1DeleteProcessorMetadata:
+      description: The long running operation metadata for delete processor method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1DeleteProcessorVersionMetadata:
+      description: The long running operation metadata for delete processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1DeployProcessorVersionMetadata:
+      description: The long running operation metadata for deploy processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1DeployProcessorVersionResponse:
+      description: Response message for the deploy processor version method.
+      properties: {}
+      type: object
+    GoogleCloudDocumentaiV1DisableProcessorMetadata:
+      description: The long running operation metadata for disable processor method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1DisableProcessorResponse:
+      description: Response message for the disable processor method. Intentionally empty proto for adding fields in future.
+      properties: {}
+      type: object
+    GoogleCloudDocumentaiV1EnableProcessorMetadata:
+      description: The long running operation metadata for enable processor method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1EnableProcessorResponse:
+      description: Response message for the enable processor method. Intentionally empty proto for adding fields in future.
+      properties: {}
+      type: object
     GoogleCloudDocumentaiV1HumanReviewStatus:
       description: The status of human review on a processed document.
       properties:
@@ -931,6 +1151,28 @@ components:
         gcsDestination:
           description: The Cloud Storage uri for the human reviewed document.
           type: string
+      type: object
+    GoogleCloudDocumentaiV1SetDefaultProcessorVersionMetadata:
+      description: The long running operation metadata for set default processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1SetDefaultProcessorVersionResponse:
+      description: Response message for set default processor version method.
+      properties: {}
+      type: object
+    GoogleCloudDocumentaiV1UndeployProcessorVersionMetadata:
+      description: The long running operation metadata for the undeploy processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1UndeployProcessorVersionResponse:
+      description: Response message for the undeploy processor version method.
+      properties: {}
       type: object
     GoogleCloudDocumentaiV1beta1BatchProcessDocumentsResponse:
       description: Response to an batch document processing request. This is returned in the LRO Operation after the operation is complete.
@@ -2679,6 +2921,28 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
           description: The basic metadata of the long running operation.
       type: object
+    GoogleCloudDocumentaiV1beta3DeleteProcessorVersionMetadata:
+      description: The long running operation metadata for delete processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1beta3DeployProcessorVersionMetadata:
+      description: The long running operation metadata for deploy processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1beta3DeployProcessorVersionRequest:
+      description: Request message for the deploy processor version method.
+      properties: {}
+      type: object
+    GoogleCloudDocumentaiV1beta3DeployProcessorVersionResponse:
+      description: Response message for the deploy processor version method.
+      properties: {}
+      type: object
     GoogleCloudDocumentaiV1beta3DisableProcessorMetadata:
       description: The long running operation metadata for disable processor method.
       properties:
@@ -3395,6 +3659,59 @@ components:
       description: Response message for the enable processor method. Intentionally empty proto for adding fields in future.
       properties: {}
       type: object
+    GoogleCloudDocumentaiV1beta3EvaluationMetrics:
+      description: Evaluation metrics, either in aggregate or about a specific entity.
+      properties:
+        f1Score:
+          description: The calculated f1 score.
+          format: float
+          type: number
+        falseNegativesCount:
+          description: The amount of false negatives.
+          format: int32
+          type: integer
+        falsePositivesCount:
+          description: The amount of false positives.
+          format: int32
+          type: integer
+        groundTruthOccurrencesCount:
+          description: The amount of occurrences in ground truth documents.
+          format: int32
+          type: integer
+        precision:
+          description: The calculated precision.
+          format: float
+          type: number
+        predictedOccurrencesCount:
+          description: The amount of occurrences in predicted documents.
+          format: int32
+          type: integer
+        recall:
+          description: The calculated recall.
+          format: float
+          type: number
+        totalDocumentsCount:
+          description: The amount of documents that had an occurrence of this label.
+          format: int32
+          type: integer
+        truePositivesCount:
+          description: The amount of true positives.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudDocumentaiV1beta3EvaluationReference:
+      description: Gives a short summary of an evaluation, and links to the evaluation itself.
+      properties:
+        aggregateMetrics:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3EvaluationMetrics"
+          description: An aggregate of the statistics for the evaluation.
+        evaluation:
+          description: The resource name of the evaluation.
+          type: string
+        operation:
+          description: The resource name of the Long Running Operation for the evaluation.
+          type: string
+      type: object
     GoogleCloudDocumentaiV1beta3FetchProcessorTypesResponse:
       description: Response message for fetch processor types.
       properties:
@@ -3448,6 +3765,18 @@ components:
         stateMessage:
           description: A message providing more details about the human review state.
           type: string
+      type: object
+    GoogleCloudDocumentaiV1beta3ListProcessorVersionsResponse:
+      description: Response message for list processors.
+      properties:
+        nextPageToken:
+          description: Points to the next processor, otherwise empty.
+          type: string
+        processorVersions:
+          description: The list of processors.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3ProcessorVersion"
+          type: array
       type: object
     GoogleCloudDocumentaiV1beta3ListProcessorsResponse:
       description: Response message for list processors.
@@ -3547,7 +3876,7 @@ components:
       description: "A processor type is responsible for performing a certain document understanding task on a certain type of document. All processor types are created by the documentai service internally. User will only list all available processor types via UI. For different users (projects), the available processor types may be different since we'll expose the access of some types via EAP whitelisting. We make the ProcessorType a resource under location so we have a unified API and keep the possibility that UI will load different available processor types from different regions. But for alpha the behavior is that the user will always get the union of all available processor types among all regions no matter which regionalized endpoint is called, and then we use the 'available_locations' field to show under which regions a processor type is available. For example, users can call either the 'US' or 'EU' endpoint to feach processor types. In the return, we will have an 'invoice parsing' processor with 'available_locations' field only containing 'US'. So the user can try to create an 'invoice parsing' processor under the location 'US'. Such attempt of creating under the location 'EU' will fail. Next ID: 8."
       properties:
         allowCreation:
-          description: Whether the processor type allows creation. If yes, user can create a processor of this processor type. Otherwise, user needs to require for whitelisting.
+          description: Whether the processor type allows creation. If yes, user can create a processor of this processor type. Otherwise, user needs to request access.
           type: boolean
         availableLocations:
           description: The locations in which this processor is available.
@@ -3569,6 +3898,38 @@ components:
       properties:
         locationId:
           description: The location id, currently must be one of [us, eu].
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta3ProcessorVersion:
+      description: A processor version is an implementation of a processor. Each processor can have multiple versions, pre-trained by Google internally or up-trained by the customer. At a time, a processor can only have one default version version. So the processor's behavior (when processing documents) is defined by a default version.
+      properties:
+        createTime:
+          description: The time the processor version was created.
+          format: google-datetime
+          type: string
+        displayName:
+          description: The display name of the processor version.
+          type: string
+        latestEvaluation:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3EvaluationReference"
+          description: The most recently invoked evaluation for the processor version.
+        name:
+          description: "The resource name of the processor version. Format: projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processor_version}"
+          type: string
+        schema:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3Schema"
+          description: The schema of the processor version. Describes the output.
+        state:
+          description: The state of the processor version.
+          enum:
+            - STATE_UNSPECIFIED
+            - DEPLOYED
+            - DEPLOYING
+            - UNDEPLOYED
+            - UNDEPLOYING
+            - CREATING
+            - DELETING
+            - FAILED
           type: string
       type: object
     GoogleCloudDocumentaiV1beta3RawDocument:
@@ -3635,6 +3996,93 @@ components:
         gcsDestination:
           description: The Cloud Storage uri for the human reviewed document.
           type: string
+      type: object
+    GoogleCloudDocumentaiV1beta3Schema:
+      description: The schema defines the output of the processed document by a processor.
+      properties:
+        description:
+          description: Description of the schema.
+          type: string
+        displayName:
+          description: Display name to show to users.
+          type: string
+        entityTypes:
+          description: Entity types of the schema.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3SchemaEntityType"
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta3SchemaEntityType:
+      description: EntityType is the wrapper of a label of the corresponding model with detailed attributes and limitations for entity-based processors. Multiple types can also compose a dependency tree to represent nested types.
+      properties:
+        baseType:
+          description: "Type of the entity. It must be one of the following: `document` - the entity represents a classification of a logical document. `object` - if the entity has properties it is likely an object (or or a document.) `datetime` - the entity is a date or time value. `money` - the entity represents a money value amount. `number` - the entity is a number - integer or floating point. `string` - the entity is a string value. `boolean` - the entity is a boolean value. `address` - the entity is a location address."
+          type: string
+        description:
+          description: Description of the entity type.
+          type: string
+        enumValues:
+          description: If specified, lists all the possible values for this entity.
+          items:
+            type: string
+          type: array
+        occurrenceType:
+          description: Occurrence type limits the number of times an entity type appears in the document.
+          enum:
+            - OCCURRENCE_TYPE_UNSPECIFIED
+            - OPTIONAL_ONCE
+            - OPTIONAL_MULTIPLE
+            - REQUIRED_ONCE
+            - REQUIRED_MULTIPLE
+          type: string
+        properties:
+          description: Describing the nested structure of an entity. An EntityType may consist of several other EntityTypes. For example, in a document there can be an EntityType 'ID', which consists of EntityType 'name' and 'address', with corresponding attributes, such as TEXT for both types and ONCE for occurrence types.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3SchemaEntityType"
+          type: array
+        source:
+          description: Source of this entity type.
+          enum:
+            - SOURCE_UNSPECIFIED
+            - PREDEFINED
+            - USER_INPUT
+          type: string
+        type:
+          description: Name of the type. It must be unique within the set of same level types.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta3SetDefaultProcessorVersionMetadata:
+      description: The long running operation metadata for set default processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1beta3SetDefaultProcessorVersionRequest:
+      description: Request message for the set default processor version method.
+      properties:
+        defaultProcessorVersion:
+          description: Required. The resource name of child ProcessorVersion to use as default.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta3SetDefaultProcessorVersionResponse:
+      description: Response message for set default processor version method.
+      properties: {}
+      type: object
+    GoogleCloudDocumentaiV1beta3UndeployProcessorVersionMetadata:
+      description: The long running operation metadata for the undeploy processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1beta3UndeployProcessorVersionRequest:
+      description: Request message for the undeploy processor version method.
+      properties: {}
+      type: object
+    GoogleCloudDocumentaiV1beta3UndeployProcessorVersionResponse:
+      description: Response message for the undeploy processor version method.
+      properties: {}
       type: object
     GoogleCloudDocumentaiV1beta3Vertex:
       description: "A vertex represents a 2D point in the image. NOTE: the vertex coordinates are in the same scale as the original image."

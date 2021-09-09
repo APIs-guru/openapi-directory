@@ -481,10 +481,20 @@ paths:
                     postal_code: '94104',
                     country: 'US',
                     latitude: '40.759211',
-                    longitude: '-73.984638'
+                    longitude: '-73.984638',
+                    contact_name: '111-111-1111',
+                    salutation: '111-111-1111',
+                    phone_number: '111-111-1111',
+                    fax: '111-111-1111',
+                    email: '111-111-1111',
+                    website: '111-111-1111'
                   }
                 ],
                 notes: 'Some notes about this customer',
+                tax_rate: {
+                  id: '12345',
+                  code: 'N-T'
+                },
                 currency: 'USD'
               }
             }
@@ -665,10 +675,20 @@ paths:
                     postal_code: '94104',
                     country: 'US',
                     latitude: '40.759211',
-                    longitude: '-73.984638'
+                    longitude: '-73.984638',
+                    contact_name: '111-111-1111',
+                    salutation: '111-111-1111',
+                    phone_number: '111-111-1111',
+                    fax: '111-111-1111',
+                    email: '111-111-1111',
+                    website: '111-111-1111'
                   }
                 ],
                 notes: 'Some notes about this customer',
+                tax_rate: {
+                  id: '12345',
+                  code: 'N-T'
+                },
                 currency: 'USD'
               }
             }
@@ -1158,7 +1178,13 @@ paths:
                   postal_code: '94104',
                   country: 'US',
                   latitude: '40.759211',
-                  longitude: '-73.984638'
+                  longitude: '-73.984638',
+                  contact_name: '111-111-1111',
+                  salutation: '111-111-1111',
+                  phone_number: '111-111-1111',
+                  fax: '111-111-1111',
+                  email: '111-111-1111',
+                  website: '111-111-1111'
                 },
                 shipping_address: {
                   id: '123',
@@ -1172,7 +1198,13 @@ paths:
                   postal_code: '94104',
                   country: 'US',
                   latitude: '40.759211',
-                  longitude: '-73.984638'
+                  longitude: '-73.984638',
+                  contact_name: '111-111-1111',
+                  salutation: '111-111-1111',
+                  phone_number: '111-111-1111',
+                  fax: '111-111-1111',
+                  email: '111-111-1111',
+                  website: '111-111-1111'
                 },
                 row_version: '1-12345'
               }
@@ -1397,7 +1429,13 @@ paths:
                   postal_code: '94104',
                   country: 'US',
                   latitude: '40.759211',
-                  longitude: '-73.984638'
+                  longitude: '-73.984638',
+                  contact_name: '111-111-1111',
+                  salutation: '111-111-1111',
+                  phone_number: '111-111-1111',
+                  fax: '111-111-1111',
+                  email: '111-111-1111',
+                  website: '111-111-1111'
                 },
                 shipping_address: {
                   id: '123',
@@ -1411,7 +1449,13 @@ paths:
                   postal_code: '94104',
                   country: 'US',
                   latitude: '40.759211',
-                  longitude: '-73.984638'
+                  longitude: '-73.984638',
+                  contact_name: '111-111-1111',
+                  salutation: '111-111-1111',
+                  phone_number: '111-111-1111',
+                  fax: '111-111-1111',
+                  email: '111-111-1111',
+                  website: '111-111-1111'
                 },
                 row_version: '1-12345'
               }
@@ -2316,9 +2360,21 @@ components:
           example: San Francisco
           nullable: true
           type: string
+        contact_name:
+          example: 111-111-1111
+          nullable: true
+          type: string
         country:
           description: country code according to ISO 3166-1 alpha-2.
           example: US
+          nullable: true
+          type: string
+        email:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        fax:
+          example: 111-111-1111
           nullable: true
           type: string
         id:
@@ -2347,9 +2403,17 @@ components:
           example: HQ US
           nullable: true
           type: string
+        phone_number:
+          example: 111-111-1111
+          nullable: true
+          type: string
         postal_code:
           description: Zip code or equivalent.
           example: "94104"
+          nullable: true
+          type: string
+        salutation:
+          example: 111-111-1111
           nullable: true
           type: string
         state:
@@ -2374,6 +2438,10 @@ components:
           example: primary
           type: string
           x-graphql-type-name: AddressType
+        website:
+          example: 111-111-1111
+          nullable: true
+          type: string
       type: object
     BadRequestResponse:
       properties:
@@ -3593,6 +3661,8 @@ components:
           nullable: true
           title: Notes
           type: string
+        tax_rate:
+          $ref: "#/components/schemas/LinkedTaxRate"
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:

@@ -779,48 +779,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{name}:credit":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Credits the account balance for the developer.
-      operationId: apigee.organizations.developers.balance.credit
-      parameters:
-        - description: "Required. Account balance for the developer. Use the following structure in your request: `organizations/{org}/developers/{developer}/balance`"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudApigeeV1CreditDeveloperBalanceRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudApigeeV1DeveloperBalance"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - organizations
   "/v1/{name}:expire":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -4698,16 +4656,6 @@ components:
           description: Status of the credential.
           type: string
       type: object
-    GoogleCloudApigeeV1CreditDeveloperBalanceRequest:
-      description: Request for CreditDeveloperBalance.
-      properties:
-        transactionAmount:
-          $ref: "#/components/schemas/GoogleTypeMoney"
-          description: The amount of money to be credited. The wallet corresponding to the currency specified within `transaction_amount` will be updated. For example, if you specified `currency_code` within `transaction_amount` as "USD", then the amount would be added to the wallet which has the "USD" currency or if no such wallet exists, a new wallet will be created with the "USD" currency.
-        transactionId:
-          description: Each transaction_id uniquely identifies a credit balance request. If multiple requests are received with the same transaction_id, only one of them will be considered.
-          type: string
-      type: object
     GoogleCloudApigeeV1CustomReport:
       properties:
         chartType:
@@ -5291,39 +5239,6 @@ components:
           type: array
         status:
           description: Status of the credential. Valid values include `approved` or `revoked`.
-          type: string
-      type: object
-    GoogleCloudApigeeV1DeveloperBalance:
-      description: Account balance for the developer.
-      properties:
-        wallets:
-          description: Output only. List of all wallets. Each individual wallet stores the account balance for a particular currency.
-          items:
-            $ref: "#/components/schemas/GoogleCloudApigeeV1DeveloperBalanceWallet"
-          readOnly: true
-          type: array
-      type: object
-    GoogleCloudApigeeV1DeveloperBalanceWallet:
-      description: Wallet used to manage an account balance for a particular currency.
-      properties:
-        balance:
-          $ref: "#/components/schemas/GoogleTypeMoney"
-          description: Current remaining balance of the developer for a particular currency.
-        lastCreditTime:
-          description: Output only. Time at which the developer last added credit to the account in milliseconds since epoch.
-          format: int64
-          readOnly: true
-          type: string
-      type: object
-    GoogleCloudApigeeV1DeveloperMonetizationConfig:
-      description: Monetization configuration for the developer.
-      properties:
-        billingType:
-          description: Billing type.
-          enum:
-            - BILLING_TYPE_UNSPECIFIED
-            - PREPAID
-            - POSTPAID
           type: string
       type: object
     GoogleCloudApigeeV1DeveloperSubscription:

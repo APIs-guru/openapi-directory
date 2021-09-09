@@ -1057,7 +1057,7 @@ paths:
         - projects
   "/v1/{parent}/githubEnterpriseConfigs":
     get:
-      description: List all GitHubEnterpriseConfigs for a given project. This API is experimental.
+      description: List all GitHubEnterpriseConfigs for a given project.
       operationId: cloudbuild.projects.locations.githubEnterpriseConfigs.list
       parameters:
         - description: "Name of the parent project. For example: projects/{$project_number} or projects/{$project_id}"
@@ -1098,7 +1098,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Create an association between a GCP project and a GitHub Enterprise server. This API is experimental.
+      description: Create an association between a GCP project and a GitHub Enterprise server.
       operationId: cloudbuild.projects.locations.githubEnterpriseConfigs.create
       parameters:
         - description: "Name of the parent project. For example: projects/{$project_number} or projects/{$project_id}"

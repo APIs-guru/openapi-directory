@@ -8,7 +8,7 @@ info:
     url: https://developer.nexmo.com/
   description: With the SMS API you can send SMS from your account and lookup messages both messages that you've sent as well as messages sent to your virtual numbers. Numbers are specified in E.164 format. More SMS API documentation is at <https://developer.nexmo.com/messaging/sms/overview>
   title: SMS API
-  version: 1.0.10
+  version: 1.0.11
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/sms.yml
@@ -270,17 +270,17 @@ components:
           xml:
             name: messageId
         message-price:
-          description: The cost of the message
+          description: The estimated cost of the message
           example: "0.03330000"
           type: string
           xml:
             name: messagePrice
         network:
-          description: The ID of the network of the recipient
+          description: The estimated ID of the network of the recipient
           example: "12345"
           type: string
         remaining-balance:
-          description: Your remaining balance
+          description: Your estimated remaining balance
           example: "3.14159265"
           type: string
           xml:

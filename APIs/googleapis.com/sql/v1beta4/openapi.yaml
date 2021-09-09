@@ -2674,6 +2674,9 @@ components:
         kind:
           description: This is always `sql#connectSettings`.
           type: string
+        region:
+          description: The cloud region for the instance. e.g. **us-central1**, **europe-west1**. The region cannot be changed after instance creation.
+          type: string
         serverCaCert:
           $ref: "#/components/schemas/SslCert"
           description: SSL configuration.
@@ -2985,6 +2988,18 @@ components:
         csvExportOptions:
           description: Options for exporting data as CSV. *MySQL* and *PostgreSQL* instances only.
           properties:
+            escapeCharacter:
+              description: Specifies the character that should appear before a data character that needs to be escaped.
+              type: string
+            fieldsTerminatedBy:
+              description: Specifies the character that separates columns within each row (line) of the file.
+              type: string
+            linesTerminatedBy:
+              description: This is used to separate lines. If a line does not contain all fields, the rest of the columns are set to their default values.
+              type: string
+            quoteCharacter:
+              description: Specifies the quoting character to be used when a data value is quoted.
+              type: string
             selectQuery:
               description: The select query used to extract the data.
               type: string
@@ -3175,6 +3190,18 @@ components:
               items:
                 type: string
               type: array
+            escapeCharacter:
+              description: Specifies the character that should appear before a data character that needs to be escaped.
+              type: string
+            fieldsTerminatedBy:
+              description: Specifies the character that separates columns within each row (line) of the file.
+              type: string
+            linesTerminatedBy:
+              description: This is used to separate lines. If a line does not contain all fields, the rest of the columns are set to their default values.
+              type: string
+            quoteCharacter:
+              description: Specifies the quoting character to be used when a data value is quoted.
+              type: string
             table:
               description: The table to which CSV data is imported.
               type: string
@@ -3765,6 +3792,9 @@ components:
           description: The version of instance settings. This is a required field for update method to make sure concurrent updates are handled properly. During update, use the most recent settingsVersion value for this instance and do not try to update this value.
           format: int64
           type: string
+        sqlServerAuditConfig:
+          $ref: "#/components/schemas/SqlServerAuditConfig"
+          description: SQL Server specific audit configuration.
         storageAutoResize:
           description: Configuration to increase storage size automatically. The default value is true.
           type: boolean
@@ -3867,6 +3897,9 @@ components:
         verifyConnectionOnly:
           description: Flag to enable verifying connection only
           type: boolean
+        verifyReplicationOnly:
+          description: Optional. Flag to verify settings required by replication setup only
+          type: boolean
       type: object
     SqlInstancesVerifyExternalSyncSettingsResponse:
       description: Instance verify external sync settings response.
@@ -3915,6 +3948,16 @@ components:
         startTime:
           description: The start time of any upcoming scheduled maintenance for this instance.
           format: google-datetime
+          type: string
+      type: object
+    SqlServerAuditConfig:
+      description: SQL Server specific audit configuration.
+      properties:
+        bucket:
+          description: The name of the destination bucket (e.g., gs://mybucket).
+          type: string
+        kind:
+          description: This is always sql#sqlServerAuditConfig
           type: string
       type: object
     SqlServerDatabaseDetails:
