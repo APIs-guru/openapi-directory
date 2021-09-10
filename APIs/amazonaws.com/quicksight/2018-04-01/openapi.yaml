@@ -1907,6 +1907,7 @@ paths:
                     - TERADATA
                     - TWITTER
                     - TIMESTREAM
+                    - AMAZON_OPENSEARCH
                 DataSourceParameters:
                   description: 'The parameters that Amazon QuickSight uses to connect to your underlying data source. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
                   type: object
@@ -1991,6 +1992,8 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/TwitterParameters'
                         - description: The parameters for Twitter.
+                    AmazonOpenSearchParameters:
+                      $ref: '#/components/schemas/AmazonOpenSearchParameters'
                 Credentials:
                   description: 'Data source credentials. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
                   type: object
@@ -5365,6 +5368,8 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/TwitterParameters'
                         - description: The parameters for Twitter.
+                    AmazonOpenSearchParameters:
+                      $ref: '#/components/schemas/AmazonOpenSearchParameters'
                 Credentials:
                   description: 'Data source credentials. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
                   type: object
@@ -11486,6 +11491,13 @@ components:
             - $ref: '#/components/schemas/PositiveInteger'
             - description: Maximum number of rows to query Twitter.
       description: The parameters for Twitter.
+    AmazonOpenSearchParameters:
+      type: object
+      required:
+        - Domain
+      properties:
+        Domain:
+          $ref: '#/components/schemas/Domain'
     CredentialPair:
       type: object
       required:
@@ -14633,6 +14645,7 @@ components:
         - TERADATA
         - TWITTER
         - TIMESTREAM
+        - AMAZON_OPENSEARCH
     DataSourceParameters:
       type: object
       properties:
@@ -14716,6 +14729,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/TwitterParameters'
             - description: The parameters for Twitter.
+        AmazonOpenSearchParameters:
+          $ref: '#/components/schemas/AmazonOpenSearchParameters'
       description: 'The parameters that Amazon QuickSight uses to connect to your underlying data source. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
     DataSourceCredentials:
       type: object

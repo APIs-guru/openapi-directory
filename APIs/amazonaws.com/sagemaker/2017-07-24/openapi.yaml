@@ -241,7 +241,7 @@ paths:
   /#X-Amz-Target=SageMaker.CreateAction:
     post:
       operationId: CreateAction
-      description: '<p>Creates an <i>action</i>. An action is a lineage tracking entity that represents an action or activity. For example, a model deployment or an HPO job. Generally, an action involves at least one input or output artifact. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html">Amazon SageMaker ML Lineage Tracking</a>.</p> <note> <p> <code>CreateAction</code> can only be invoked from within an SageMaker managed environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker notebooks. A call to <code>CreateAction</code> from outside one of these environments results in an error.</p> </note>'
+      description: 'Creates an <i>action</i>. An action is a lineage tracking entity that represents an action or activity. For example, a model deployment or an HPO job. Generally, an action involves at least one input or output artifact. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html">Amazon SageMaker ML Lineage Tracking</a>.'
       responses:
         '200':
           description: Success
@@ -397,7 +397,7 @@ paths:
   /#X-Amz-Target=SageMaker.CreateArtifact:
     post:
       operationId: CreateArtifact
-      description: '<p>Creates an <i>artifact</i>. An artifact is a lineage tracking entity that represents a URI addressable object or data. Some examples are the S3 URI of a dataset and the ECR registry path of an image. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html">Amazon SageMaker ML Lineage Tracking</a>.</p> <note> <p> <code>CreateArtifact</code> can only be invoked from within an SageMaker managed environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker notebooks. A call to <code>CreateArtifact</code> from outside one of these environments results in an error.</p> </note>'
+      description: 'Creates an <i>artifact</i>. An artifact is a lineage tracking entity that represents a URI addressable object or data. Some examples are the S3 URI of a dataset and the ECR registry path of an image. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html">Amazon SageMaker ML Lineage Tracking</a>.'
       responses:
         '200':
           description: Success
@@ -559,7 +559,7 @@ paths:
   /#X-Amz-Target=SageMaker.CreateContext:
     post:
       operationId: CreateContext
-      description: '<p>Creates a <i>context</i>. A context is a lineage tracking entity that represents a logical grouping of other tracking or experiment entities. Some examples are an endpoint and a model package. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html">Amazon SageMaker ML Lineage Tracking</a>.</p> <note> <p> <code>CreateContext</code> can only be invoked from within an SageMaker managed environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker notebooks. A call to <code>CreateContext</code> from outside one of these environments results in an error.</p> </note>'
+      description: 'Creates a <i>context</i>. A context is a lineage tracking entity that represents a logical grouping of other tracking or experiment entities. Some examples are an endpoint and a model package. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html">Amazon SageMaker ML Lineage Tracking</a>.'
       responses:
         '200':
           description: Success
@@ -803,7 +803,7 @@ paths:
   /#X-Amz-Target=SageMaker.CreateEndpointConfig:
     post:
       operationId: CreateEndpointConfig
-      description: '<p>Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the <code>CreateModel</code> API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the <a>CreateEndpoint</a> API.</p> <note> <p> Use this API if you want to use Amazon SageMaker hosting services to deploy models into production. </p> </note> <p>In the request, you define a <code>ProductionVariant</code>, for each model that you want to deploy. Each <code>ProductionVariant</code> parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy. </p> <p>If you are hosting multiple models, you also assign a <code>VariantWeight</code> to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B. </p> <p>For an example that calls this method when deploying a model to Amazon SageMaker hosting services, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto">Deploy the Model to Amazon SageMaker Hosting Services (Amazon Web Services SDK for Python (Boto 3)).</a> </p> <note> <p>When you call <a>CreateEndpoint</a>, a load call is made to DynamoDB to verify that your endpoint configuration exists. When you read data from a DynamoDB table supporting <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html"> <code>Eventually Consistent Reads</code> </a>, the response might not reflect the results of a recently completed write operation. The response might include some stale data. If the dependent entities are not yet in DynamoDB, this causes a validation error. If you repeat your read request after a short time, the response should return the latest data. So retry logic is recommended to handle these possible issues. We also recommend that customers call <a>DescribeEndpointConfig</a> before calling <a>CreateEndpoint</a> to minimize the potential impact of a DynamoDB eventually consistent read.</p> </note>'
+      description: '<p>Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the <code>CreateModel</code> API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the <a>CreateEndpoint</a> API.</p> <note> <p> Use this API if you want to use Amazon SageMaker hosting services to deploy models into production. </p> </note> <p>In the request, you define a <code>ProductionVariant</code>, for each model that you want to deploy. Each <code>ProductionVariant</code> parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy. </p> <p>If you are hosting multiple models, you also assign a <code>VariantWeight</code> to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B. </p> <note> <p>When you call <a>CreateEndpoint</a>, a load call is made to DynamoDB to verify that your endpoint configuration exists. When you read data from a DynamoDB table supporting <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html"> <code>Eventually Consistent Reads</code> </a>, the response might not reflect the results of a recently completed write operation. The response might include some stale data. If the dependent entities are not yet in DynamoDB, this causes a validation error. If you repeat your read request after a short time, the response should return the latest data. So retry logic is recommended to handle these possible issues. We also recommend that customers call <a>DescribeEndpointConfig</a> before calling <a>CreateEndpoint</a> to minimize the potential impact of a DynamoDB eventually consistent read.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1779,6 +1779,45 @@ paths:
             type: string
             enum:
               - SageMaker.CreateProject
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.CreateStudioLifecycleConfig:
+    post:
+      operationId: CreateStudioLifecycleConfig
+      description: Creates a new Studio Lifecycle Configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateStudioLifecycleConfigResponse'
+        '480':
+          description: ResourceInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStudioLifecycleConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.CreateStudioLifecycleConfig
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3195,6 +3234,47 @@ paths:
             type: string
             enum:
               - SageMaker.DeleteProject
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DeleteStudioLifecycleConfig:
+    post:
+      operationId: DeleteStudioLifecycleConfig
+      description: 'Deletes the Studio Lifecycle Configuration. In order to delete the Lifecycle Configuration, there must be no running apps using the Lifecycle Configuration. You must also remove the Lifecycle Configuration from UserSettings in all Domains and UserProfiles.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+        '481':
+          description: ResourceInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteStudioLifecycleConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DeleteStudioLifecycleConfig
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4870,6 +4950,45 @@ paths:
             type: string
             enum:
               - SageMaker.DescribeProject
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DescribeStudioLifecycleConfig:
+    post:
+      operationId: DescribeStudioLifecycleConfig
+      description: Describes the Studio Lifecycle Configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeStudioLifecycleConfigResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeStudioLifecycleConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DescribeStudioLifecycleConfig
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -7396,6 +7515,57 @@ paths:
             type: string
             enum:
               - SageMaker.ListProjects
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.ListStudioLifecycleConfigs:
+    post:
+      operationId: ListStudioLifecycleConfigs
+      description: Lists the Studio Lifecycle Configurations in your Amazon Web Services Account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStudioLifecycleConfigsResponse'
+        '480':
+          description: ResourceInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListStudioLifecycleConfigsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.ListStudioLifecycleConfigs
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -11262,6 +11432,37 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: 'An array of key-value pairs that you want to use to organize and track your Amazon Web Services resource costs. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General Reference Guide</i>.'
+    CreateStudioLifecycleConfigResponse:
+      type: object
+      properties:
+        StudioLifecycleConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigArn'
+            - description: The ARN of your created Lifecycle Configuration.
+    CreateStudioLifecycleConfigRequest:
+      type: object
+      required:
+        - StudioLifecycleConfigName
+        - StudioLifecycleConfigContent
+        - StudioLifecycleConfigAppType
+      title: CreateStudioLifecycleConfigRequest
+      properties:
+        StudioLifecycleConfigName:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigName'
+            - description: The name of the Studio Lifecycle Configuration to create.
+        StudioLifecycleConfigContent:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigContent'
+            - description: The content of your Studio Lifecycle Configuration script. This content must be base64 encoded.
+        StudioLifecycleConfigAppType:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigAppType'
+            - description: The App type that the Lifecycle Configuration is attached to.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'Tags to be associated with the Lifecycle Configuration. Each tag consists of a key and an optional value. Tag keys must be unique per resource. Tags are searchable using the Search API. '
     CreateTrainingJobResponse:
       type: object
       required:
@@ -12028,6 +12229,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProjectEntityName'
             - description: The name of the project to delete.
+    DeleteStudioLifecycleConfigRequest:
+      type: object
+      required:
+        - StudioLifecycleConfigName
+      title: DeleteStudioLifecycleConfigRequest
+      properties:
+        StudioLifecycleConfigName:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigName'
+            - description: The name of the Studio Lifecycle Configuration to delete.
     DeleteTagsOutput:
       type: object
       properties: {}
@@ -14490,6 +14701,43 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProjectEntityName'
             - description: The name of the project to describe.
+    DescribeStudioLifecycleConfigResponse:
+      type: object
+      properties:
+        StudioLifecycleConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigArn'
+            - description: The ARN of the Lifecycle Configuration to describe.
+        StudioLifecycleConfigName:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigName'
+            - description: The name of the Studio Lifecycle Configuration that is described.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time of the Studio Lifecycle Configuration.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: This value is equivalent to CreationTime because Studio Lifecycle Configurations are immutable.
+        StudioLifecycleConfigContent:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigContent'
+            - description: The content of your Studio Lifecycle Configuration script.
+        StudioLifecycleConfigAppType:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigAppType'
+            - description: The App type that the Lifecycle Configuration is attached to.
+    DescribeStudioLifecycleConfigRequest:
+      type: object
+      required:
+        - StudioLifecycleConfigName
+      title: DescribeStudioLifecycleConfigRequest
+      properties:
+        StudioLifecycleConfigName:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigName'
+            - description: The name of the Studio Lifecycle Configuration to describe.
     DescribeSubscribedWorkteamResponse:
       type: object
       required:
@@ -17260,6 +17508,61 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProjectSortOrder'
             - description: The sort order for results. The default is <code>Ascending</code>.
+    ListStudioLifecycleConfigsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token for getting the next set of actions, if there are any.'
+        StudioLifecycleConfigs:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigsList'
+            - description: A list of Lifecycle Configurations and their properties.
+    ListStudioLifecycleConfigsRequest:
+      type: object
+      title: ListStudioLifecycleConfigsRequest
+      properties:
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of Studio Lifecycle Configurations to return in the response. The default value is 10.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the previous call to ListStudioLifecycleConfigs didn''t return the full set of Lifecycle Configurations, the call returns a token for getting the next set of Lifecycle Configurations.'
+        NameContains:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigName'
+            - description: A string in the Lifecycle Configuration name. This filter returns only Lifecycle Configurations whose name contains the specified string.
+        AppTypeEquals:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigAppType'
+            - description: A parameter to search for the App Type to which the Lifecycle Configuration is attached.
+        CreationTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only Lifecycle Configurations created on or before the specified time.
+        CreationTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only Lifecycle Configurations created on or after the specified time.
+        ModifiedTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only Lifecycle Configurations modified before the specified time.
+        ModifiedTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only Lifecycle Configurations modified after the specified time.
+        SortBy:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigSortKey'
+            - description: The property used to sort results. The default value is CreationTime.
+        SortOrder:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: The sort order. The default value is Descending.
     ListSubscribedWorkteamsResponse:
       type: object
       required:
@@ -20918,6 +21221,7 @@ components:
         - x86_win64
         - coreml
         - jacinto_tda4vm
+        - imx8mplus
     TargetPlatformOs:
       type: string
       enum:
@@ -21281,6 +21585,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AppInstanceType'
             - description: The instance type that the image version runs on.
+        LifecycleConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigArn'
+            - description: ' The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the Resource.'
       description: 'Specifies the ARN''s of a SageMaker image and SageMaker image version, and the instance type that the version runs on.'
     ProblemType:
       type: string
@@ -22593,6 +22901,24 @@ components:
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
       minLength: 1
       maxLength: 20
+    StudioLifecycleConfigName:
+      type: string
+      pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}'
+      maxLength: 63
+    StudioLifecycleConfigContent:
+      type: string
+      pattern: '[\S\s]+'
+      minLength: 1
+      maxLength: 16384
+    StudioLifecycleConfigAppType:
+      type: string
+      enum:
+        - JupyterServer
+        - KernelGateway
+    StudioLifecycleConfigArn:
+      type: string
+      pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:studio-lifecycle-config/.*'
+      maxLength: 256
     TrainingJobName:
       type: string
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}'
@@ -25829,6 +26155,10 @@ components:
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*\/[a-zA-Z0-9](-*[a-zA-Z0-9.])*'
       minLength: 1
       maxLength: 256
+    LifecycleConfigArns:
+      type: array
+      items:
+        $ref: '#/components/schemas/StudioLifecycleConfigArn'
     JupyterServerAppSettings:
       type: object
       properties:
@@ -25836,6 +26166,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceSpec'
             - description: The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterServer app.
+        LifecycleConfigArns:
+          allOf:
+            - $ref: '#/components/schemas/LifecycleConfigArns'
+            - description: ' The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the JupyterServerApp.'
       description: The JupyterServer app settings.
     KernelDisplayName:
       type: string
@@ -25851,6 +26185,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CustomImages'
             - description: A list of custom SageMaker images that are configured to run as a KernelGateway app.
+        LifecycleConfigArns:
+          allOf:
+            - $ref: '#/components/schemas/LifecycleConfigArns'
+            - description: ' The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the KernelGatewayApp.'
       description: The KernelGateway app settings.
     KernelSpecs:
       type: array
@@ -26322,6 +26660,16 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ProjectSummary'
+    StudioLifecycleConfigSortKey:
+      type: string
+      enum:
+        - CreationTime
+        - LastModifiedTime
+        - Name
+    StudioLifecycleConfigsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StudioLifecycleConfigDetails'
     SubscribedWorkteams:
       type: array
       items:
@@ -28858,6 +29206,30 @@ components:
         - Line
         - RecordIO
         - TFRecord
+    StudioLifecycleConfigDetails:
+      type: object
+      properties:
+        StudioLifecycleConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigArn'
+            - description: ' The Amazon Resource Name (ARN) of the Lifecycle Configuration.'
+        StudioLifecycleConfigName:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigName'
+            - description: The name of the Studio Lifecycle Configuration.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time of the Studio Lifecycle Configuration.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: This value is equivalent to CreationTime because Studio Lifecycle Configurations are immutable.
+        StudioLifecycleConfigAppType:
+          allOf:
+            - $ref: '#/components/schemas/StudioLifecycleConfigAppType'
+            - description: The App type to which the Lifecycle Configuration is attached.
+      description: Details of the Studio Lifecycle Configuration.
     TagKey:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
