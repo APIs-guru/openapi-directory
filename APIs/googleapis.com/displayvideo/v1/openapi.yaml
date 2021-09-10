@@ -4282,28 +4282,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates a new custom bidding algorithm. Returns the newly created custom bidding algorithm if successful.
-      operationId: displayvideo.customBiddingAlgorithms.create
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CustomBiddingAlgorithm"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CustomBiddingAlgorithm"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/display-video
-          Oauth2c:
-            - https://www.googleapis.com/auth/display-video
-      tags:
-        - customBiddingAlgorithms
   "/v1/customBiddingAlgorithms/{customBiddingAlgorithmId}":
     get:
       description: Gets a custom bidding algorithm.
@@ -4351,40 +4329,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    patch:
-      description: Updates an existing custom bidding algorithm. Returns the updated custom bidding algorithm if successful.
-      operationId: displayvideo.customBiddingAlgorithms.patch
-      parameters:
-        - description: Output only. The unique ID of the custom bidding algorithm. Assigned by the system.
-          in: path
-          name: customBiddingAlgorithmId
-          required: true
-          schema:
-            type: string
-        - description: Required. The mask to control which fields to update.
-          in: query
-          name: updateMask
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CustomBiddingAlgorithm"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CustomBiddingAlgorithm"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/display-video
-          Oauth2c:
-            - https://www.googleapis.com/auth/display-video
-      tags:
-        - customBiddingAlgorithms
   /v1/customLists:
     get:
       description: Lists custom lists. The order is defined by the order_by parameter.
@@ -7730,10 +7674,10 @@ components:
     BusinessChainSearchTerms:
       description: Search terms for Business Chain targeting options. At least one of the field should be populated.
       properties:
-        businessChain:
+        businessChainQuery:
           description: The search query for the desired business chain. The query must be the full name of the business, e.g. "KFC", "mercedes-benz".
           type: string
-        region:
+        regionQuery:
           description: The search query for the desired geo region, e.g. "Seattle", "United State".
           type: string
       type: object

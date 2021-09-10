@@ -270,9 +270,9 @@ components:
       properties:
         deployment:
           $ref: "#/components/schemas/Deployment"
-          description: Deployment details.
+          description: Required. Deployment details.
         profileType:
-          description: One or more profile types that the agent is capable of providing.
+          description: Required. One or more profile types that the agent is capable of providing.
           items:
             enum:
               - PROFILE_TYPE_UNSPECIFIED
@@ -298,7 +298,7 @@ components:
           description: "Project ID is the ID of a cloud project. Validation regex: `^a-z{4,61}[a-z0-9]$`."
           type: string
         target:
-          description: "Target is the service name used to group related deployments: * Service name for GAE Flex / Standard. * Cluster and container name for GKE. * User-specified string for direct GCE profiling (e.g. Java). * Job name for Dataflow. Validation regex: `^[a-z]([-a-z0-9_.]{0,253}[a-z0-9])?$`."
+          description: "Target is the service name used to group related deployments: * Service name for App Engine Flex / Standard. * Cluster and container name for GKE. * User-specified string for direct Compute Engine profiling (e.g. Java). * Job name for Dataflow. Validation regex: `^[a-z]([-a-z0-9_.]{0,253}[a-z0-9])?$`."
           type: string
       type: object
     Profile:
@@ -318,6 +318,7 @@ components:
           type: object
         name:
           description: Output only. Opaque, server-assigned, unique ID for this profile.
+          readOnly: true
           type: string
         profileBytes:
           description: Input only. Profile bytes, as a gzip compressed serialized proto, the format is https://github.com/google/pprof/blob/master/proto/profile.proto.

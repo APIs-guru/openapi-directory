@@ -8,7 +8,7 @@ info:
     url: https://developer.nexmo.com/
   description: The Messages API enables you to send messages to customers via their preferred channels (currently Facebook Messenger, WhatsApp, Viber, and SMS/MMS) using a single API. The Messages API is currently in Beta.
   title: Messages API
-  version: 0.4.0
+  version: 0.5.0
   x-label: Beta
   x-origin:
     - format: openapi
@@ -774,6 +774,42 @@ components:
       required:
         - message
       type: object
+    imageMessageMms:
+      properties:
+        message:
+          properties:
+            content:
+              properties:
+                image:
+                  properties:
+                    caption:
+                      description: Additional text to accompany the image.
+                      example: My Tabby cat, Oliver.
+                      type: string
+                    url:
+                      description: The URL of the image attachment. The image file is available for 48 hours after it is created. Supported file types are .jpg, .jpeg, .png, and .gif
+                      example: https://example.com/image.jpg
+                      format: url
+                      type: string
+                  required:
+                    - url
+                  type: object
+                type:
+                  description: The type of message to be sent
+                  enum:
+                    - image
+                  example: image
+                  type: string
+              required:
+                - image
+                - type
+              type: object
+          required:
+            - content
+          type: object
+      required:
+        - message
+      type: object
     imageMessageViber:
       properties:
         message:
@@ -1116,8 +1152,17 @@ components:
               x-tab-id: file
           title: Facebook Messenger
           x-tab-id: Messenger
-        - allOf:
-            - $ref: "#/components/schemas/mmsMessage"
+        - oneOf:
+            - allOf:
+                - $ref: "#/components/schemas/mmsMessage"
+                - $ref: "#/components/schemas/imageMessageMms"
+              title: Image
+              x-tab-id: image
+            - allOf:
+                - $ref: "#/components/schemas/mmsMessage"
+                - $ref: "#/components/schemas/vcardMessageMms"
+              title: VCard
+              x-tab-id: vcard
           title: MMS
           x-tab-id: MMS
     messenger:
@@ -1159,33 +1204,6 @@ components:
           required:
             - type
             - number
-          type: object
-        message:
-          properties:
-            content:
-              properties:
-                image:
-                  properties:
-                    url:
-                      description: The URL of the image attachment. The image file is available for 48 hours after it is created. Supported file types are .jpg, .jpeg, .png, and .gif
-                      example: https://example.com/image.jpg
-                      format: url
-                      type: string
-                  required:
-                    - url
-                  type: object
-                type:
-                  description: The type of message to be sent
-                  enum:
-                    - image
-                  example: image
-                  type: string
-              required:
-                - image
-                - type
-              type: object
-          required:
-            - content
           type: object
         to:
           properties:
@@ -1464,6 +1482,38 @@ components:
                   example: unsupported
                   type: string
               required:
+                - type
+              type: object
+          required:
+            - content
+          type: object
+      required:
+        - message
+      type: object
+    vcardMessageMms:
+      properties:
+        message:
+          properties:
+            content:
+              properties:
+                type:
+                  description: The type of message to be sent
+                  enum:
+                    - vcard
+                  example: vcard
+                  type: string
+                vcard:
+                  properties:
+                    url:
+                      description: The URL of the vcard attachment. The vcard file is available for 48 hours after it is created.
+                      example: https://example.com/my-vcard.vcf
+                      format: url
+                      type: string
+                  required:
+                    - url
+                  type: object
+              required:
+                - vcard
                 - type
               type: object
           required:
