@@ -17978,7 +17978,7 @@ components:
         elasticsearch:
           allOf:
             - $ref: '#/components/schemas/ElasticsearchAction'
-            - description: Write data to an Amazon Elasticsearch Service domain.
+            - description: '<p>Write data to an Amazon Elasticsearch Service domain.</p> <note> <p>This action is deprecated. Use the <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html">OpenSearch action</a> instead.</p> </note>'
         salesforce:
           allOf:
             - $ref: '#/components/schemas/SalesforceAction'
@@ -18011,6 +18011,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/KafkaAction'
             - description: Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or self-managed Apache Kafka cluster.
+        openSearch:
+          allOf:
+            - $ref: '#/components/schemas/OpenSearchAction'
+            - description: Write data to an Amazon OpenSearch Service domain.
       description: Describes the actions associated with a rule.
     SqlParseException: {}
     CreateTopicRuleDestinationResponse:
@@ -20607,7 +20611,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ElasticsearchId'
             - description: The unique identifier for the document you are storing.
-      description: Describes an action that writes data to an Amazon Elasticsearch Service domain.
+      description: '<p>Describes an action that writes data to an Amazon Elasticsearch Service domain.</p> <note> <p>This action is deprecated. Use the <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html">OpenSearch action</a> instead.</p> </note>'
     SalesforceAction:
       type: object
       required:
@@ -20779,6 +20783,36 @@ components:
             - $ref: '#/components/schemas/ClientProperties'
             - description: Properties of the Apache Kafka producer client.
       description: Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or self-managed Apache Kafka cluster.
+    OpenSearchAction:
+      type: object
+      required:
+        - roleArn
+        - endpoint
+        - index
+        - type
+        - id
+      properties:
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/AwsArn'
+            - description: The IAM role ARN that has access to OpenSearch.
+        endpoint:
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchEndpoint'
+            - description: The endpoint of your OpenSearch domain.
+        index:
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchIndex'
+            - description: The OpenSearch index where you want to store your data.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchType'
+            - description: The type of document you are storing.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchId'
+            - description: The unique identifier for the document you are storing.
+      description: Describes an action that writes data to an Amazon OpenSearch Service domain.
     ActionType:
       type: string
       enum:
@@ -26924,7 +26958,7 @@ components:
         disconnectReason:
           allOf:
             - $ref: '#/components/schemas/DisconnectReason'
-            - description: The reason why the client is disconnected.
+            - description: 'The reason why the client is disconnected. If the thing has been disconnected for approximately an hour, the <code>disconnectReason</code> value might be missing.'
       description: The connectivity status of the thing.
     ThingGroupNameList:
       type: array
