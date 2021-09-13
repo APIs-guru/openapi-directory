@@ -72,6 +72,43 @@ paths:
           description: Successful response
       tags:
         - platforms
+  "/v1beta/{parent}/ideaActivities":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates an idea activity entry.
+      operationId: ideahub.platforms.properties.ideaActivities.create
+      parameters:
+        - description: "Required. The parent resource where this idea activity will be created. Format: platforms/{platform}/property/{property}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleSearchIdeahubV1betaIdeaActivity"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleSearchIdeahubV1betaIdeaActivity"
+          description: Successful response
+      tags:
+        - platforms
   "/v1beta/{parent}/ideas":
     get:
       description: List ideas for a given Creator and filter and sort options.
@@ -266,6 +303,35 @@ components:
           items:
             $ref: "#/components/schemas/GoogleSearchIdeahubV1betaTopic"
           type: array
+      type: object
+    GoogleSearchIdeahubV1betaIdeaActivity:
+      description: An idea activity entry.
+      properties:
+        ideas:
+          description: The Idea IDs for this entry. If empty, topics should be set.
+          items:
+            type: string
+          type: array
+        name:
+          description: "Unique identifier for the idea activity. The name is ignored when creating an idea activity. Format: platforms/{platform}/properties/{property}/ideaActivities/{idea_activity}"
+          type: string
+        topics:
+          description: The Topic IDs for this entry. If empty, ideas should be set.
+          items:
+            type: string
+          type: array
+        type:
+          description: The type of activity performed.
+          enum:
+            - TYPE_UNSPECIFIED
+            - POST_DRAFTED
+            - POST_PUBLISHED
+            - POST_DELETED
+            - POST_UNPUBLISHED
+          type: string
+        uri:
+          description: The uri the activity relates to.
+          type: string
       type: object
     GoogleSearchIdeahubV1betaIdeaState:
       description: Represents idea state specific to a web property.

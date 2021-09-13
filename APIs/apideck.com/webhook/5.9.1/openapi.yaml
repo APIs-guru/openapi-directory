@@ -36,12 +36,57 @@ tags:
     x-apideck-model:
       $ref: "#/components/schemas/Webhook"
 paths:
+  /webhook/logs:
+    get:
+      description: List event logs
+      operationId: eventLogsAll
+      parameters:
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/filter"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetWebhookEventLogsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List event logs
+      tags:
+        - Webhooks
+      x-apideck-api: webhook
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY'
+            })
+
+            try {
+              const { data } = await apideck.webhook.eventLogsAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: eventLogs
   /webhook/webhooks:
     get:
       description: List webhooks
       operationId: webhooksAll
       parameters:
-        - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
@@ -89,7 +134,6 @@ paths:
       description: Create webhook
       operationId: webhooksAdd
       parameters:
-        - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
       requestBody:
@@ -153,7 +197,6 @@ paths:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
       responses:
         "200":
           $ref: "#/components/responses/DeleteWebhookResponse"
@@ -201,7 +244,6 @@ paths:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
       responses:
         "200":
           $ref: "#/components/responses/GetWebhookResponse"
@@ -249,7 +291,6 @@ paths:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
       requestBody:
         content:
           application/json:
@@ -327,6 +368,14 @@ components:
       schema:
         nullable: true
         type: string
+    filter:
+      description: Filter results
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/WebhookEventLogsFilter"
+      style: deepObject
     id:
       description: ID of the record you are acting upon.
       in: path
@@ -343,13 +392,6 @@ components:
         maximum: 200
         minimum: 1
         type: integer
-    raw:
-      description: Include raw response. Mostly used for debugging purposes
-      in: query
-      name: raw
-      schema:
-        default: true
-        type: boolean
     serviceId:
       description: Provide the service id you want to call (e.g., pipedrive). [See the full list in the connector section.](#section/Connectors) Only needed when a consumer has activated multiple integrations for a Unified API.
       in: header
@@ -375,6 +417,12 @@ components:
           schema:
             $ref: "#/components/schemas/DeleteWebhookResponse"
       description: Webhooks
+    GetWebhookEventLogsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetWebhookEventLogsResponse"
+      description: EventLogs
     GetWebhookResponse:
       content:
         application/json:
@@ -430,6 +478,10 @@ components:
             $ref: "#/components/schemas/UpdateWebhookResponse"
       description: Webhooks
   schemas:
+    ApplicationId:
+      description: ID of your Apideck Application
+      example: "1111"
+      type: string
     BadRequestResponse:
       properties:
         detail:
@@ -461,6 +513,10 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
+    ConsumerId:
+      description: Consumer identifier
+      example: test_consumer_id
+      type: string
     CreateWebhookRequest:
       additionalProperties: false
       properties:
@@ -543,6 +599,30 @@ components:
         - vault.connection.deleted
         - vault.connection.callable
       type: string
+    GetWebhookEventLogsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/WebhookEventLog"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+      x-graphql-type-name: EventLogList
     GetWebhookResponse:
       properties:
         data:
@@ -716,6 +796,10 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+    ServiceId:
+      description: Service provider identifier
+      example: close
+      type: string
     Status:
       description: The status of the webhook.
       enum:
@@ -780,6 +864,16 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
+    UnifiedApi:
+      description: Name of Apideck Unified Api
+      enum:
+        - crm
+        - lead
+        - proxy
+        - vault
+        - accounting
+      example: crm
+      type: string
     UnifiedId:
       properties:
         id:
@@ -912,6 +1006,108 @@ components:
         - status
         - events
       type: object
+    WebhookEventLog:
+      additionalProperties: false
+      properties:
+        application_id:
+          $ref: "#/components/schemas/ApplicationId"
+        consumer_id:
+          $ref: "#/components/schemas/ConsumerId"
+        endpoint:
+          description: The URL of the webhook endpoint.
+          example: https://example.com/my/webhook/endpoint
+          format: uri
+          pattern: ^(https?)://
+          type: string
+        entity_type:
+          description: Name of the Entity described by the attributes delivered within payload
+          example: Connection
+          type: string
+        error_message:
+          description: If error occured, response captured here
+          example: Forbidden
+          nullable: true
+          type: string
+        event_type:
+          description: Name of source event that webhook is subscribed to.
+          example: vault.connection.updated
+          type: string
+        execution_attempt:
+          description: Number of attempts webhook endpoint was called before a success was returned or eventually failed
+          example: 3
+          type: number
+        http_method:
+          description: HTTP Method of request to endpoint.
+          example: GET
+          type: string
+        id:
+          example: 1d174c4d-fe9e-4377-a76c-6da22fe9cd87
+          type: string
+        request_body:
+          description: The JSON stringified payload that was delivered to the webhook endpoint.
+          example: '{"entity":{"id":"2222+test_user_id","application_id":"2222","consumer_id":"test_user_id","name":"ActiveCampaign","icon":"https://res.cloudinary.com/apideck/image/upload/v1529455970/catalog/activecampaign/icon128x128.png","logo":"https://www.activecampaign.com/site/assets/social-2x.png","unified_api":"crm","service_id":"activecampaign","auth_type":"apiKey","enabled":true,"tag_line":"Integrated email marketing, marketing automation, and small business CRM. Save time while growing your business with sales automation.","website":"https://www.activecampaign.com/","settings":{"instance_url":"https://eu28.salesforce.com","base_url":"https://updated.api-us1.com"},"metadata":{"plan":"enterprise","account":{"name":"My Company"}},"state":"callable","created_at":"2021-09-10T10:39:49.628Z","updated_at":"2021-09-10T10:39:52.715Z"},"entityType":"Connection"}'
+          type: string
+        response_body:
+          description: The JSON stringified response that was returned from the webhook endpoint.
+          example: '{"status":"OK"}'
+          type: string
+        service:
+          additionalProperties: false
+          description: Apideck service provider associated with event.
+          properties:
+            id:
+              description: Apideck service provider id.
+              example: 101-data-solution
+              type: string
+            name:
+              description: Apideck service provider name.
+              example: 101 Data Solution
+              type: string
+          required:
+            - id
+            - name
+          type: object
+        status_code:
+          description: HTTP Status code that was returned.
+          example: 200
+          type: integer
+        success:
+          description: Whether or not the request was successful.
+          example: true
+          type: boolean
+        timestamp:
+          description: ISO Date and time when the request was made.
+          example: 2021-07-12T14:26:17.420Z
+          type: string
+        unified_api:
+          $ref: "#/components/schemas/UnifiedApi"
+      type: object
+    WebhookEventLogsFilter:
+      properties:
+        entity_type:
+          example: Connection
+          nullable: true
+          type: string
+        event_type:
+          example: vault.connection.callable
+          nullable: true
+          type: string
+        exclude_unified_apis:
+          example: vault,proxy
+          nullable: true
+          type: string
+        service:
+          nullable: true
+          properties:
+            id:
+              type: string
+          type: object
+        status_code:
+          example: 201
+          nullable: true
+          type: number
+      type: object
+      x-graphql-type-name: WebhookEventLogsFilter
   securitySchemes:
     apiKey:
       description: |
@@ -945,7 +1141,11 @@ x-webhooks:
             schema:
               additionalProperties: false
               properties:
-                $ref: "#/x-webhooks/ConnectionUpdated/post/requestBody/content/application~1json/schema/properties"
+                entity:
+                  $ref: "#/x-webhooks/ConnectionUpdated/post/requestBody/content/application~1json/schema/properties/entity"
+                entity_type:
+                  example: Connection
+                  type: string
               type: object
       responses:
         "200":
@@ -964,7 +1164,11 @@ x-webhooks:
             schema:
               additionalProperties: false
               properties:
-                $ref: "#/x-webhooks/ConnectionUpdated/post/requestBody/content/application~1json/schema/properties"
+                entity:
+                  $ref: "#/x-webhooks/ConnectionUpdated/post/requestBody/content/application~1json/schema/properties/entity"
+                entity_type:
+                  example: Connection
+                  type: string
               type: object
       responses:
         "200":
@@ -983,7 +1187,11 @@ x-webhooks:
             schema:
               additionalProperties: false
               properties:
-                $ref: "#/x-webhooks/ConnectionUpdated/post/requestBody/content/application~1json/schema/properties"
+                entity:
+                  $ref: "#/x-webhooks/ConnectionUpdated/post/requestBody/content/application~1json/schema/properties/entity"
+                entity_type:
+                  example: Connection
+                  type: string
               type: object
       responses:
         "200":
@@ -1002,78 +1210,85 @@ x-webhooks:
             schema:
               additionalProperties: false
               properties:
-                properties:
-                  auth_type:
-                    enum:
-                      - oauth2
-                      - apiKey
-                      - basic
-                      - none
-                    type: string
-                  created_at:
-                    example: 2020-09-19T12:18:37.071Z
-                    type: string
-                  enabled:
-                    example: true
-                    type: boolean
-                  icon:
-                    example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
-                    type: string
-                  id:
-                    example: 1111+test_user_id
-                    readOnly: true
-                    type: string
-                  logo:
-                    example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
-                    type: string
-                  metadata:
-                    additionalProperties: true
-                    description: Attach your own consumer specific metadata
-                    example:
-                      account:
-                        id: c01458a5-7276-41ce-bc19-639906b0450a
-                        name: My Company
-                      plan: enterprise
-                    nullable: true
-                    properties: {}
-                    type: object
-                  name:
-                    example: Salesforce
-                    type: string
-                  service_id:
-                    example: teamleader
-                    type: string
-                  settings:
-                    description: Connection settings. Values will persist to `form_fields` with corresponding id
-                    example:
-                      instance_url: https://eu28.salesforce.com
-                    nullable: true
-                    type: object
-                  state:
-                    enum:
-                      - available
-                      - callable
-                      - added
-                      - configured
-                      - authorized
-                    example: authorized
-                    type: string
-                  tag_line:
-                    example: CRM software solutions and enterprise cloud computing from Salesforce, the leader in customer relationship management (CRM) and PaaS. Free 30 day trial.
-                    readOnly: true
-                    type: string
-                  unified_api:
-                    example: crm
-                    type: string
-                  updated_at:
-                    example: 2020-09-19T12:18:37.071Z
-                    nullable: true
-                    type: string
-                  website:
-                    example: https://www.salesforce.com
-                    readOnly: true
-                    type: string
-                type: object
+                entity:
+                  properties:
+                    auth_type:
+                      enum:
+                        - oauth2
+                        - apiKey
+                        - basic
+                        - none
+                      type: string
+                    consumer_id:
+                      example: test_user_id
+                      type: string
+                    created_at:
+                      example: 2020-09-19T12:18:37.071Z
+                      type: string
+                    enabled:
+                      example: true
+                      type: boolean
+                    icon:
+                      example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
+                      type: string
+                    id:
+                      example: 1111+test_user_id
+                      readOnly: true
+                      type: string
+                    logo:
+                      example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
+                      type: string
+                    metadata:
+                      additionalProperties: true
+                      description: Attach your own consumer specific metadata
+                      example:
+                        account:
+                          id: c01458a5-7276-41ce-bc19-639906b0450a
+                          name: My Company
+                        plan: enterprise
+                      nullable: true
+                      properties: {}
+                      type: object
+                    name:
+                      example: Salesforce
+                      type: string
+                    service_id:
+                      example: teamleader
+                      type: string
+                    settings:
+                      description: Connection settings. Values will persist to `form_fields` with corresponding id
+                      example:
+                        instance_url: https://eu28.salesforce.com
+                      nullable: true
+                      type: object
+                    state:
+                      enum:
+                        - available
+                        - callable
+                        - added
+                        - configured
+                        - authorized
+                      example: authorized
+                      type: string
+                    tag_line:
+                      example: CRM software solutions and enterprise cloud computing from Salesforce, the leader in customer relationship management (CRM) and PaaS. Free 30 day trial.
+                      readOnly: true
+                      type: string
+                    unified_api:
+                      example: crm
+                      type: string
+                    updated_at:
+                      example: 2020-09-19T12:18:37.071Z
+                      nullable: true
+                      type: string
+                    website:
+                      example: https://www.salesforce.com
+                      readOnly: true
+                      type: string
+                  type: object
+                entity_type:
+                  example: Connection
+                  type: string
               type: object
       responses:
         "200":

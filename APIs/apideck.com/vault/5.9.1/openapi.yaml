@@ -2085,6 +2085,9 @@ components:
       properties:
         auth_type:
           $ref: "#/components/schemas/AuthType"
+        consumer_id:
+          example: test_user_id
+          type: string
         created_at:
           example: 2020-09-19T12:18:37.071Z
           type: string
@@ -2576,6 +2579,7 @@ components:
             - lead
             - proxy
             - vault
+            - accounting
           example: vault
           type: string
       required:
@@ -2992,7 +2996,11 @@ x-webhooks:
             schema:
               additionalProperties: false
               properties:
-                $ref: "#/components/schemas/ConsumerConnection"
+                entity:
+                  $ref: "#/components/schemas/ConsumerConnection"
+                entity_type:
+                  example: Connection
+                  type: string
               type: object
       responses:
         "200":
@@ -3011,7 +3019,11 @@ x-webhooks:
             schema:
               additionalProperties: false
               properties:
-                $ref: "#/components/schemas/ConsumerConnection"
+                entity:
+                  $ref: "#/components/schemas/ConsumerConnection"
+                entity_type:
+                  example: Connection
+                  type: string
               type: object
       responses:
         "200":

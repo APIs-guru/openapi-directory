@@ -653,6 +653,10 @@ components:
         uploadReference:
           $ref: "#/components/schemas/UploadRef"
           description: Required when creating a photo. Input only. The resource URL where the photo bytes are uploaded to.
+        uploadTime:
+          description: Time when the image was uploaded.
+          format: google-datetime
+          type: string
         viewCount:
           description: Output only. View count of the photo.
           format: int64
