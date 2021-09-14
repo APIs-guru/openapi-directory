@@ -263,6 +263,53 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/admin/{name}/topics":
+    get:
+      description: Lists the topics attached to the specified reservation.
+      operationId: pubsublite.admin.projects.locations.reservations.topics.list
+      parameters:
+        - description: "Required. The name of the reservation whose topics to list. Structured like: projects/{project_number}/locations/{location}/reservations/{reservation_id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of topics to return. The service may return fewer than this value. If unset or zero, all topics for the given reservation will be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListReservationTopics` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListReservationTopics` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListReservationTopicsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - admin
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/admin/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -339,6 +386,87 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - admin
+  "/v1/admin/{parent}/reservations":
+    get:
+      description: Returns the list of reservations for the given project.
+      operationId: pubsublite.admin.projects.locations.reservations.list
+      parameters:
+        - description: Required. The parent whose reservations are to be listed. Structured like `projects/{project_number}/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of reservations to return. The service may return fewer than this value. If unset or zero, all reservations for the parent will be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListReservations` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListReservations` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListReservationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - admin
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new reservation.
+      operationId: pubsublite.admin.projects.locations.reservations.create
+      parameters:
+        - description: Required. The parent location in which to create the reservation. Structured like `projects/{project_number}/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. The ID to use for the reservation, which will become the final component of the reservation's name. This value is structured like: `my-reservation-name`."
+          in: query
+          name: reservationId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Reservation"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reservation"
           description: Successful response
       security:
         - Oauth2:
@@ -950,6 +1078,30 @@ components:
             $ref: "#/components/schemas/PartitionCursor"
           type: array
       type: object
+    ListReservationTopicsResponse:
+      description: Response for ListReservationTopics.
+      properties:
+        nextPageToken:
+          description: A token that can be sent as `page_token` to retrieve the next page of results. If this field is omitted, there are no more results.
+          type: string
+        topics:
+          description: The names of topics attached to the reservation. The order of the topics is unspecified.
+          items:
+            type: string
+          type: array
+      type: object
+    ListReservationsResponse:
+      description: Response for ListReservations.
+      properties:
+        nextPageToken:
+          description: A token that can be sent as `page_token` to retrieve the next page of results. If this field is omitted, there are no more results.
+          type: string
+        reservations:
+          description: The list of reservation in the requested parent. The order of the reservations is unspecified.
+          items:
+            $ref: "#/components/schemas/Reservation"
+          type: array
+      type: object
     ListSubscriptionsResponse:
       description: Response for ListSubscriptions.
       properties:
@@ -1053,6 +1205,24 @@ components:
           format: int64
           type: string
       type: object
+    Reservation:
+      description: Metadata about a reservation resource.
+      properties:
+        name:
+          description: "The name of the reservation. Structured like: projects/{project_number}/locations/{location}/reservations/{reservation_id}"
+          type: string
+        throughputCapacity:
+          description: The reserved throughput capacity. Every unit of throughput capacity is equivalent to 1 MiB/s of published messages or 2 MiB/s of subscribed messages. Any topics which are declared as using capacity from a Reservation will consume resources from this reservation instead of being charged individually.
+          format: int64
+          type: string
+      type: object
+    ReservationConfig:
+      description: The settings for this topic's Reservation usage.
+      properties:
+        throughputReservation:
+          description: "The Reservation to use for this topic's throughput capacity. Structured like: projects/{project_number}/locations/{location}/reservations/{reservation_id}"
+          type: string
+      type: object
     RetentionConfig:
       description: The settings for a topic's message retention.
       properties:
@@ -1135,6 +1305,9 @@ components:
         partitionConfig:
           $ref: "#/components/schemas/PartitionConfig"
           description: The settings for this topic's partitions.
+        reservationConfig:
+          $ref: "#/components/schemas/ReservationConfig"
+          description: The settings for this topic's Reservation usage.
         retentionConfig:
           $ref: "#/components/schemas/RetentionConfig"
           description: The settings for this topic's message retention.

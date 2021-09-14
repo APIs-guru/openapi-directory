@@ -249,7 +249,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. Opaque thread identifier string that can be specified to group messages into a single thread. If this is the first message with a given thread identifier, a new thread is created. Subsequent messages with the same thread identifier will be posted into the same thread. This relieves bots and webhooks from having to store the Hangouts Chat thread ID of a thread (created earlier by them) to post further updates to it. Has no effect if thread field, corresponding to an existing thread, is set in message.
+        - description: Optional. Opaque thread identifier string that can be specified to group messages into a single thread. If this is the first message with a given thread identifier, a new thread is created. Subsequent messages with the same thread identifier will be posted into the same thread. This relieves bots and webhooks from having to store the Google Chat thread ID of a thread (created earlier by them) to post further updates to it. Has no effect if thread field, corresponding to an existing thread, is set in message.
           in: query
           name: threadKey
           schema:
@@ -291,7 +291,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. Opaque thread identifier string that can be specified to group messages into a single thread. If this is the first message with a given thread identifier, a new thread is created. Subsequent messages with the same thread identifier will be posted into the same thread. This relieves bots and webhooks from having to store the Hangouts Chat thread ID of a thread (created earlier by them) to post further updates to it. Has no effect if thread field, corresponding to an existing thread, is set in message.
+        - description: Optional. Opaque thread identifier string that can be specified to group messages into a single thread. If this is the first message with a given thread identifier, a new thread is created. Subsequent messages with the same thread identifier will be posted into the same thread. This relieves bots and webhooks from having to store the Google Chat thread ID of a thread (created earlier by them) to post further updates to it. Has no effect if thread field, corresponding to an existing thread, is set in message.
           in: query
           name: threadKey
           schema:
@@ -468,7 +468,7 @@ components:
           description: The metadata of user mention.
       type: object
     Attachment:
-      description: An attachment in Hangouts Chat.
+      description: An attachment in Google Chat.
       properties:
         attachmentDataRef:
           $ref: "#/components/schemas/AttachmentDataRef"
@@ -680,7 +680,7 @@ components:
           description: The message that triggered the event, if applicable.
         space:
           $ref: "#/components/schemas/Space"
-          description: The room or DM in which the event occurred.
+          description: The space in which the event occurred.
         threadKey:
           description: The bot-defined key for the thread related to the event. See the thread_key field of the `spaces.message.create` request for more information.
           type: string
@@ -1438,7 +1438,7 @@ components:
           type: string
       type: object
     Membership:
-      description: Represents a membership relation in Hangouts Chat.
+      description: Represents a membership relation in Google Chat.
       properties:
         createTime:
           description: The creation time of the membership a.k.a the time at which the member joined the space, if applicable.
@@ -1446,7 +1446,7 @@ components:
           type: string
         member:
           $ref: "#/components/schemas/User"
-          description: A User in Hangout Chat
+          description: A user in Google Chat.
         name:
           type: string
         state:
@@ -1459,7 +1459,7 @@ components:
           type: string
       type: object
     Message:
-      description: A message in Hangouts Chat.
+      description: A message in Google Chat.
       properties:
         actionResponse:
           $ref: "#/components/schemas/ActionResponse"
@@ -1483,7 +1483,7 @@ components:
             $ref: "#/components/schemas/Card"
           type: array
         createTime:
-          description: Output only. The time at which the message was created in Hangouts Chat server.
+          description: Output only. The time at which the message was created in Google Chat server.
           format: google-datetime
           readOnly: true
           type: string
@@ -1491,7 +1491,7 @@ components:
           description: A plain-text description of the message's cards, used when the actual cards cannot be displayed (e.g. mobile notifications).
           type: string
         lastUpdateTime:
-          description: Output only. The time at which the message was last updated in Hangouts Chat server. If the message was never updated, this field will be same as create_time.
+          description: Output only. The time at which the message was last updated in Google Chat server. If the message was never updated, this field will be same as create_time.
           format: google-datetime
           readOnly: true
           type: string
@@ -1578,10 +1578,10 @@ components:
           type: string
       type: object
     Space:
-      description: A room or DM in Hangouts Chat.
+      description: A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat bot.
       properties:
         displayName:
-          description: Output only. The display name (only if the space is a room). Please note that this field might not be populated in direct messages between humans.
+          description: Output only. The display name (only if the space is of type `ROOM`). Please note that this field might not be populated in direct messages between humans.
           type: string
         name:
           description: 'Resource name of the space, in the form "spaces/*". Example: spaces/AAAAMpdlehYs'
@@ -1625,7 +1625,7 @@ components:
           type: string
       type: object
     Thread:
-      description: A thread in Hangouts Chat.
+      description: A thread in Google Chat.
       properties:
         name:
           description: 'Resource name, in the form "spaces/*/threads/*". Example: spaces/AAAAMpdlehY/threads/UMxbHmzDlr4'
