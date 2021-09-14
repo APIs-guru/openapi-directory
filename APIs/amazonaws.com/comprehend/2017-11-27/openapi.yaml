@@ -5656,6 +5656,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AttributeNamesListItem'
+    AugmentedManifestsDocumentTypeFormat:
+      type: string
+      enum:
+        - PLAIN_TEXT_DOCUMENT
+        - SEMI_STRUCTURED_DOCUMENT
     S3Uri:
       type: string
       pattern: 's3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?'
@@ -5674,6 +5679,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/AttributeNamesList'
             - description: '<p>The JSON attribute that contains the annotations for your training documents. The number of attribute names that you specify depends on whether your augmented manifest file is the output of a single labeling job or a chained labeling job.</p> <p>If your file is the output of a single labeling job, specify the LabelAttributeName key that was used when the job was created in Ground Truth.</p> <p>If your file is the output of a chained labeling job, specify the LabelAttributeName key for one or more jobs in the chain. Each LabelAttributeName key provides the annotations from an individual job.</p>'
+        AnnotationDataS3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The S3 prefix to the annotation files that are referred in the augmented manifest file.
+        SourceDocumentsS3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The S3 prefix to the source files (PDFs) that are referred to in the augmented manifest file.
+        DocumentType:
+          allOf:
+            - $ref: '#/components/schemas/AugmentedManifestsDocumentTypeFormat'
+            - description: '<p>The type of augmented manifest. PlainTextDocument or SemiStructuredDocument. If you don''t specify, the default is PlainTextDocument. </p> <ul> <li> <p> <code>PLAIN_TEXT_DOCUMENT</code> A document type that represents any unicode text that is encoded in UTF-8.</p> </li> <li> <p> <code>SEMI_STRUCTURED_DOCUMENT</code> A document type with positional and structural context, like a PDF. For training with Amazon Comprehend, only PDFs are supported. For inference, Amazon Comprehend support PDFs, DOCX and TXT.</p> </li> </ul>'
       description: An augmented manifest file that provides training data for your custom model. An augmented manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth.
     Integer:
       type: integer
@@ -6002,6 +6019,7 @@ components:
       description: 'Provides output results configuration parameters for custom classifier jobs. '
     KmsKeyId:
       type: string
+      pattern: .*
       maxLength: 2048
     VpcConfig:
       type: object
@@ -6025,7 +6043,7 @@ components:
         - MULTI_LABEL
     DocumentClassifierArn:
       type: string
-      pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+      pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier/[a-zA-Z0-9](-*[a-zA-Z0-9])*(/version/[a-zA-Z0-9](-*[a-zA-Z0-9])*)?'
       maxLength: 256
     InferenceUnitsInteger:
       type: integer
@@ -6062,7 +6080,7 @@ components:
       description: Specifies the format and location of the input data.
     EntityRecognizerArn:
       type: string
-      pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:entity-recognizer/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+      pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:entity-recognizer/[a-zA-Z0-9](-*[a-zA-Z0-9])*(/version/[a-zA-Z0-9](-*[a-zA-Z0-9])*)?'
       maxLength: 256
     JobId:
       type: string
@@ -6754,7 +6772,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/InputFormat'
             - description: '<p>Specifies how the text in an input file should be processed:</p> <ul> <li> <p> <code>ONE_DOC_PER_FILE</code> - Each file is considered a separate document. Use this option when you are processing large documents, such as newspaper articles or scientific papers.</p> </li> <li> <p> <code>ONE_DOC_PER_LINE</code> - Each line in a file is considered a separate document. Use this option when you are processing many short documents, such as text messages.</p> </li> </ul>'
-      description: The input properties for a topic detection job.
+        DocumentReaderConfig:
+          allOf:
+            - $ref: '#/components/schemas/DocumentReaderConfig'
+            - description: <p>The document reader config field applies only for InputDataConfig of StartEntitiesDetectionJob. </p> <p>Use DocumentReaderConfig to provide specifications about how you want your inference documents read. Currently it applies for PDF documents in StartEntitiesDetectionJob custom inference.</p>
+      description: The input properties for an inference job.
     OutputDataConfig:
       type: object
       required:
@@ -6829,6 +6851,46 @@ components:
             - $ref: '#/components/schemas/Float'
             - description: The confidence score that Amazon Comprehend has this label correctly attributed.
       description: Specifies one of the label or labels that categorize the document being analyzed.
+    DocumentReadAction:
+      type: string
+      enum:
+        - TEXTRACT_DETECT_DOCUMENT_TEXT
+        - TEXTRACT_ANALYZE_DOCUMENT
+    DocumentReadFeatureTypes:
+      type: string
+      enum:
+        - TABLES
+        - FORMS
+      description: <p>A list of the types of analyses to perform. This field specifies what feature types need to be extracted from the document where entity recognition is expected.</p> <ul> <li> <p> <code>TABLES</code> - Add TABLES to the list to return information about the tables that are detected in the input document. </p> </li> <li> <p> <code>FORMS</code> - Add FORMS to return detected form data. </p> </li> </ul>
+    DocumentReadMode:
+      type: string
+      enum:
+        - SERVICE_DEFAULT
+        - FORCE_DOCUMENT_READ_ACTION
+    ListOfDocumentReadFeatureTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/DocumentReadFeatureTypes'
+      minItems: 1
+      maxItems: 2
+    DocumentReaderConfig:
+      type: object
+      required:
+        - DocumentReadAction
+      properties:
+        DocumentReadAction:
+          allOf:
+            - $ref: '#/components/schemas/DocumentReadAction'
+            - description: '<p>This enum field will start with two values which will apply to PDFs:</p> <ul> <li> <p> <code>TEXTRACT_DETECT_DOCUMENT_TEXT</code> - The service calls DetectDocumentText for PDF documents per page.</p> </li> <li> <p> <code>TEXTRACT_ANALYZE_DOCUMENT</code> - The service calls AnalyzeDocument for PDF documents per page.</p> </li> </ul>'
+        DocumentReadMode:
+          allOf:
+            - $ref: '#/components/schemas/DocumentReadMode'
+            - description: '<p>This enum field provides two values:</p> <ul> <li> <p> <code>SERVICE_DEFAULT</code> - use service defaults for Document reading. For Digital PDF it would mean using an internal parser instead of Textract APIs</p> </li> <li> <p> <code>FORCE_DOCUMENT_READ_ACTION</code> - Always use specified action for DocumentReadAction, including Digital PDF. </p> </li> </ul>'
+        FeatureTypes:
+          allOf:
+            - $ref: '#/components/schemas/ListOfDocumentReadFeatureTypes'
+            - description: 'Specifies how the text in an input file should be processed:'
+      description: The input properties for a topic detection job.
     DominantLanguage:
       type: object
       properties:

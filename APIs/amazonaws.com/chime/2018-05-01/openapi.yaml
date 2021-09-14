@@ -4613,12 +4613,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/UnauthorizedClientException'
         '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
           description: ServiceUnavailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
-        '486':
+        '487':
           description: ServiceFailureException
           content:
             application/json:
@@ -4652,6 +4658,13 @@ paths:
                   type: string
                   pattern: '^\+?[1-9]\d{1,14}$'
                   format: password
+                SipHeaders:
+                  description: The SIP headers added to an outbound call leg.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 20
+                  additionalProperties:
+                    $ref: '#/components/schemas/SensitiveString'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -9917,17 +9930,17 @@ paths:
                 - Origination
               properties:
                 Origination:
-                  description: Origination settings enable your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector.
+                  description: '<p>Origination settings enable your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector.</p> <note> <p>The parameters listed below are not required, but you must use at least one. </p> </note>'
                   type: object
                   properties:
                     Routes:
                       allOf:
                         - $ref: '#/components/schemas/OriginationRouteList'
-                        - description: 'The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1. Maximum value of 20.'
+                        - description: 'The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1. Maximum value of 20. This parameter is not required, but you must specify this parameter or <code>Disabled</code>.'
                     Disabled:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
-                        - description: 'When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector.'
+                        - description: 'When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector. This parameter is not required, but you must specify this parameter or <code>Routes</code>.'
   '/voice-connectors/{voiceConnectorId}/programmable-numbers/proxy':
     delete:
       operationId: DeleteVoiceConnectorProxy
@@ -14946,7 +14959,7 @@ paths:
   '/meetings/{meetingId}/transcription#operation=start':
     post:
       operationId: StartMeetingTranscription
-      description: 'Start transcription for the specified <code>meetingId</code>. '
+      description: 'Starts transcription for the specified <code>meetingId</code>. '
       responses:
         '200':
           description: Success
@@ -15043,7 +15056,7 @@ paths:
                     EngineTranscribeMedicalSettings:
                       allOf:
                         - $ref: '#/components/schemas/EngineTranscribeMedicalSettings'
-                        - description: The transcription configuration settings passed to Amazon Transcribe.
+                        - description: The transcription configuration settings passed to Amazon Transcribe Medical.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -16292,6 +16305,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/SipMediaApplicationCall'
             - description: The actual call.
+    SensitiveString:
+      type: string
+      format: password
     CreateSipRuleResponse:
       type: object
       properties:
@@ -16353,9 +16369,6 @@ components:
       type: object
       properties: {}
     UnprocessableEntityException: {}
-    SensitiveString:
-      type: string
-      format: password
     DescribeAppInstanceResponse:
       type: object
       properties:
@@ -19134,6 +19147,12 @@ components:
             - $ref: '#/components/schemas/Iso8601Timestamp'
             - description: 'The room update timestamp, in ISO 8601 format.'
       description: The Amazon Chime chat room details.
+    SipHeadersMap:
+      type: object
+      minProperties: 0
+      maxProperties: 20
+      additionalProperties:
+        $ref: '#/components/schemas/SensitiveString'
     CreateSipMediaApplicationCallRequest:
       type: object
       required:
@@ -19149,6 +19168,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/E164PhoneNumber'
             - description: The phone number that the service should call.
+        SipHeaders:
+          allOf:
+            - $ref: '#/components/schemas/SipHeadersMap'
+            - description: The SIP headers added to an outbound call leg.
     SipMediaApplicationCall:
       type: object
       properties:
@@ -20010,12 +20033,12 @@ components:
         Routes:
           allOf:
             - $ref: '#/components/schemas/OriginationRouteList'
-            - description: 'The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1. Maximum value of 20.'
+            - description: 'The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1. Maximum value of 20. This parameter is not required, but you must specify this parameter or <code>Disabled</code>.'
         Disabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector.'
-      description: Origination settings enable your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector.
+            - description: 'When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector. This parameter is not required, but you must specify this parameter or <code>Routes</code>.'
+      description: '<p>Origination settings enable your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector.</p> <note> <p>The parameters listed below are not required, but you must use at least one. </p> </note>'
     GetVoiceConnectorProxyRequest:
       type: object
       title: GetVoiceConnectorProxyRequest
@@ -20569,7 +20592,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/OriginationRouteWeight'
             - description: 'The weight associated with the host. If hosts are equal in priority, calls are redistributed among them based on their relative weight.'
-      description: 'Origination routes define call distribution properties for your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector. Limit: Ten origination routes for each Amazon Chime Voice Connector.'
+      description: '<p>Origination routes define call distribution properties for your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector. Limit: Ten origination routes for each Amazon Chime Voice Connector.</p> <note> <p>The parameters listed below are not required, but you must use at least one. </p> </note>'
     Participant:
       type: object
       properties:
@@ -20903,7 +20926,7 @@ components:
         EngineTranscribeMedicalSettings:
           allOf:
             - $ref: '#/components/schemas/EngineTranscribeMedicalSettings'
-            - description: The transcription configuration settings passed to Amazon Transcribe.
+            - description: The transcription configuration settings passed to Amazon Transcribe Medical.
       description: The configuration for the current transcription operation. Must contain <code>EngineTranscribeSettings</code> or <code>EngineTranscribeMedicalSettings</code>.
     StartMeetingTranscriptionRequest:
       type: object
