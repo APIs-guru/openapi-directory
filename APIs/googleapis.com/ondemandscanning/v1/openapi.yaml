@@ -427,6 +427,9 @@ components:
     AnalyzePackagesRequestV1:
       description: AnalyzePackagesRequest is the request to analyze a list of packages and create Vulnerability Occurrences for it.
       properties:
+        includeOsvData:
+          description: Whether to include OSV data in the scan.
+          type: boolean
         packages:
           description: The packages to analyze.
           items:

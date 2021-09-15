@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: File storage API
-  version: 5.10.0
+  version: 5.11.0
   x-apideck-api: file-storage
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -344,6 +344,63 @@ paths:
               console.error(error)
             }
       x-graphql-field-name: files
+  /file-storage/files/search:
+    post:
+      description: Search Files
+      operationId: filesSearch
+      parameters:
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilesSearch"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/GetFilesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Search Files
+      tags:
+        - Files
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.filesSearch({
+                filesSearch: {
+                  query: 'logo jpg'
+                }
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
   "/file-storage/files/{id}":
     delete:
       description: Delete File
@@ -841,6 +898,18 @@ components:
           type: boolean
       type: object
       x-graphql-type-name: FilesFilter
+    FilesSearch:
+      additionalProperties: false
+      example:
+        query: logo jpg
+      properties:
+        query:
+          description: The query to search for. May match across multiple fields.
+          example: logo jpg
+          type: string
+      required:
+        - query
+      type: object
     GetFileResponse:
       properties:
         data:

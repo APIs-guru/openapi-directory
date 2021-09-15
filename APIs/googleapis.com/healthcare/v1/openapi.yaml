@@ -3765,6 +3765,13 @@ components:
           description: Byte(s) to use as the segment terminator. If this is unset, '\r' is used as segment terminator, matching the HL7 version 2 specification.
           format: byte
           type: string
+        version:
+          description: Immutable. Determines the version of the unschematized parser to be used when `schema` is not given. This field is immutable after store creation.
+          enum:
+            - PARSER_VERSION_UNSPECIFIED
+            - V1
+            - V2
+          type: string
       type: object
     PatientId:
       description: A patient identifier and associated type.
@@ -3946,6 +3953,14 @@ components:
           items:
             $ref: "#/components/schemas/Hl7TypesConfig"
           type: array
+        unexpectedSegmentHandling:
+          description: Determines how unexpected segments (segments not matched to the schema) are handled.
+          enum:
+            - UNEXPECTED_SEGMENT_HANDLING_MODE_UNSPECIFIED
+            - FAIL
+            - SKIP
+            - PARSE
+          type: string
       type: object
     SchemaSegment:
       description: An HL7v2 Segment.
