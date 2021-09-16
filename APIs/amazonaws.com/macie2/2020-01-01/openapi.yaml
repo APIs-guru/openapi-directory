@@ -257,7 +257,7 @@ paths:
               type: object
               properties:
                 ids:
-                  description: An array of strings that lists the unique identifiers for the custom data identifiers to retrieve information about.
+                  description: 'An array of custom data identifier IDs, one for each custom data identifier to retrieve information about.'
                   type: array
                   items:
                     $ref: '#/components/schemas/__string'
@@ -339,7 +339,7 @@ paths:
                   description: 'A unique, case-sensitive token that you provide to ensure the idempotency of the request.'
                   type: string
                 customDataIdentifierIds:
-                  description: The custom data identifiers to use for data analysis and classification.
+                  description: 'An array of unique identifiers, one for each custom data identifier for the job to use when it analyzes data. To use only managed data identifiers, don''t specify a value for this property and specify a value other than NONE for the managedDataIdentifierSelector property.'
                   type: array
                   items:
                     $ref: '#/components/schemas/__string'
@@ -347,7 +347,7 @@ paths:
                   description: A custom description of the job. The description can contain as many as 200 characters.
                   type: string
                 initialRun:
-                  description: 'Specifies whether to analyze all existing, eligible objects immediately after the job is created.'
+                  description: '<p>For a recurring job, specifies whether to analyze all existing, eligible objects immediately after the job is created (true). To analyze only those objects that are created or changed after you create the job and before the job''s first scheduled run, set this value to false.</p><p>If you configure the job to run only once, don''t specify a value for this property.</p>'
                   type: boolean
                 jobType:
                   description: 'The schedule for running a classification job. Valid values are:'
@@ -355,6 +355,19 @@ paths:
                   enum:
                     - ONE_TIME
                     - SCHEDULED
+                managedDataIdentifierIds:
+                  description: '<p>An array of unique identifiers, one for each managed data identifier for the job to include (use) or exclude (not use) when it analyzes data. Inclusion or exclusion depends on the managed data identifier selection type that you specify for the job (managedDataIdentifierSelector).</p><p>To retrieve a list of valid values for this property, use the ListManagedDataIdentifiers operation.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                managedDataIdentifierSelector:
+                  description: 'The selection type that determines which managed data identifiers a classification job uses to analyze data. Valid values are:'
+                  type: string
+                  enum:
+                    - ALL
+                    - EXCLUDE
+                    - INCLUDE
+                    - NONE
                 name:
                   description: A custom name for the job. The name can contain as many as 500 characters.
                   type: string
@@ -375,7 +388,7 @@ paths:
                         - $ref: '#/components/schemas/S3BucketCriteriaForJob'
                         - description: 'The property- and tag-based conditions that determine which S3 buckets to include or exclude from the analysis. Each time the job runs, the job uses these criteria to determine which buckets contain objects to analyze. A job''s definition can contain a bucketCriteria object or a bucketDefinitions array, not both.'
                 samplingPercentage:
-                  description: 'The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.'
+                  description: 'The sampling depth, as a percentage, for the job to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.'
                   type: integer
                 scheduleFrequency:
                   description: Specifies the recurrence pattern for running a classification job.
@@ -474,17 +487,17 @@ paths:
                   description: '<p>A custom description of the custom data identifier. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see the identifier''s description, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
                   type: string
                 ignoreWords:
-                  description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 characters. Ignore words are case sensitive.'
+                  description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore words are case sensitive.'
                   type: array
                   items:
                     $ref: '#/components/schemas/__string'
                 keywords:
-                  description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 characters. Keywords aren''t case sensitive.'
+                  description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren''t case sensitive.'
                   type: array
                   items:
                     $ref: '#/components/schemas/__string'
                 maximumMatchDistance:
-                  description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.
+                  description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.
                   type: integer
                 name:
                   description: '<p>A custom name for the custom data identifier. The name can contain as many as 128 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see the identifier''s name, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
@@ -760,7 +773,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListInvitations
-      description: Retrieves information about all the Amazon Macie membership invitations that were received by an account.
+      description: Retrieves information about the Amazon Macie membership invitations that were received by an account.
       responses:
         '200':
           description: Success
@@ -3930,6 +3943,36 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /managed-data-identifiers/list:
+    post:
+      operationId: ListManagedDataIdentifiers
+      description: Retrieves information about all the managed data identifiers that Amazon Macie currently provides.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListManagedDataIdentifiersResponse'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nextToken:
+                  description: The nextToken string that specifies which page of results to return in a paginated response.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
@@ -4163,17 +4206,17 @@ paths:
                 - sampleText
               properties:
                 ignoreWords:
-                  description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 characters. Ignore words are case sensitive.'
+                  description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore words are case sensitive.'
                   type: array
                   items:
                     $ref: '#/components/schemas/__string'
                 keywords:
-                  description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 characters. Keywords aren''t case sensitive.'
+                  description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren''t case sensitive.'
                   type: array
                   items:
                     $ref: '#/components/schemas/__string'
                 maximumMatchDistance:
-                  description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.
+                  description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.
                   type: integer
                 regex:
                   description: The regular expression (<i>regex</i>) that defines the pattern to match. The expression can contain as many as 512 characters.
@@ -4378,7 +4421,7 @@ components:
         notFoundIdentifierIds:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: 'An array of identifiers, one for each identifier that was specified in the request, but doesn''t correlate to an existing custom data identifier.'
+            - description: 'An array of custom data identifier IDs, one for each custom data identifier that was specified in the request but doesn''t correlate to an existing custom data identifier.'
     __string:
       type: string
     CreateClassificationJobResponse:
@@ -4579,7 +4622,7 @@ components:
         customDataIdentifierIds:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: The custom data identifiers that the job uses to analyze data.
+            - description: 'An array of unique identifiers, one for each custom data identifier that the job uses to analyze data. This value is null if the job uses only managed data identifiers to analyze data.'
         description:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -4587,7 +4630,7 @@ components:
         initialRun:
           allOf:
             - $ref: '#/components/schemas/__boolean'
-            - description: 'Specifies whether the job is configured to analyze all existing, eligible objects immediately after it''s created.'
+            - description: 'For a recurring job, specifies whether you configured the job to analyze all existing, eligible objects immediately after the job was created (true). If you configured the job to analyze only those objects that were created or changed after the job was created and before the job''s first scheduled run, this value is false. This value is also false for a one-time job.'
         jobArn:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -4599,7 +4642,7 @@ components:
         jobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
-            - description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job or, if it''s a one-time job, you paused the job and didn''t resume it within 30 days.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn''t apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to one-time jobs.</p></li> <li><p>PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don''t resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job''s type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>'
+            - description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job or, if it''s a one-time job, you paused the job and didn''t resume it within 30 days.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn''t apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to one-time jobs.</p></li> <li><p>PAUSED - Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don''t resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job''s type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>'
         jobType:
           allOf:
             - $ref: '#/components/schemas/JobType'
@@ -4612,6 +4655,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
             - description: 'The date and time, in UTC and extended ISO 8601 format, when the job started. If the job is a recurring job, this value indicates when the most recent run started.'
+        managedDataIdentifierIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - description: 'An array of unique identifiers, one for each managed data identifier that the job is explicitly configured to include (use) or exclude (not use) when it analyzes data. Inclusion or exclusion depends on the managed data identifier selection type specified for the job (managedDataIdentifierSelector). This value is null if the job''s managed data identifier selection type is ALL or the job uses only custom data identifiers (customDataIdentifierIds) to analyze data.'
+        managedDataIdentifierSelector:
+          allOf:
+            - $ref: '#/components/schemas/ManagedDataIdentifierSelector'
+            - description: '<p>The selection type that determines which managed data identifiers the job uses to analyze data. Possible values are:</p> <ul><li><p>ALL - Use all the managed data identifiers that Amazon Macie provides.</p></li> <li><p>EXCLUDE - Use all the managed data identifiers that Macie provides except the managed data identifiers specified by the managedDataIdentifierIds property.</p></li> <li><p>INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property.</p></li> <li><p>NONE - Don''t use any managed data identifiers.</p></li></ul> <p>If this value is null, the job uses all managed data identifiers. If this value is null, ALL, or EXCLUDE for a recurring job, the job also uses new managed data identifiers as they are released.</p>'
         name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -4627,7 +4678,7 @@ components:
         scheduleFrequency:
           allOf:
             - $ref: '#/components/schemas/JobScheduleFrequency'
-            - description: 'The recurrence pattern for running the job. If the job is configured to run only once, this value is null.'
+            - description: The recurrence pattern for running the job. This value is null if the job is configured to run only once.
         statistics:
           allOf:
             - $ref: '#/components/schemas/Statistics'
@@ -4775,7 +4826,7 @@ components:
         maximumMatchDistance:
           allOf:
             - $ref: '#/components/schemas/__integer'
-            - description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern.
+            - description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern.
         name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -5039,6 +5090,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/__listOfInvitation'
             - description: 'An array of objects, one for each invitation that was received by the account.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+    ListManagedDataIdentifiersResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/__listOfManagedDataIdentifierSummary'
+            - description: 'An array of objects, one for each managed data identifier.'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -5381,7 +5443,7 @@ components:
         ids:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: An array of strings that lists the unique identifiers for the custom data identifiers to retrieve information about.
+            - description: 'An array of custom data identifier IDs, one for each custom data identifier to retrieve information about.'
     __listOfBatchGetCustomDataIdentifierSummary:
       type: array
       items:
@@ -5852,6 +5914,14 @@ components:
         - ONE_TIME
         - SCHEDULED
       description: 'The schedule for running a classification job. Valid values are:'
+    ManagedDataIdentifierSelector:
+      type: string
+      enum:
+        - ALL
+        - EXCLUDE
+        - INCLUDE
+        - NONE
+      description: 'The selection type that determines which managed data identifiers a classification job uses to analyze data. Valid values are:'
     S3JobDefinition:
       type: object
       properties:
@@ -5907,7 +5977,7 @@ components:
         customDataIdentifierIds:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: The custom data identifiers to use for data analysis and classification.
+            - description: 'An array of unique identifiers, one for each custom data identifier for the job to use when it analyzes data. To use only managed data identifiers, don''t specify a value for this property and specify a value other than NONE for the managedDataIdentifierSelector property.'
         description:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -5915,11 +5985,19 @@ components:
         initialRun:
           allOf:
             - $ref: '#/components/schemas/__boolean'
-            - description: 'Specifies whether to analyze all existing, eligible objects immediately after the job is created.'
+            - description: '<p>For a recurring job, specifies whether to analyze all existing, eligible objects immediately after the job is created (true). To analyze only those objects that are created or changed after you create the job and before the job''s first scheduled run, set this value to false.</p><p>If you configure the job to run only once, don''t specify a value for this property.</p>'
         jobType:
           allOf:
             - $ref: '#/components/schemas/JobType'
             - description: '<p>The schedule for running the job. Valid values are:</p> <ul><li><p>ONE_TIME - Run the job only once. If you specify this value, don''t specify a value for the scheduleFrequency property.</p></li> <li><p>SCHEDULED - Run the job on a daily, weekly, or monthly basis. If you specify this value, use the scheduleFrequency property to define the recurrence pattern for the job.</p></li></ul>'
+        managedDataIdentifierIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - description: '<p>An array of unique identifiers, one for each managed data identifier for the job to include (use) or exclude (not use) when it analyzes data. Inclusion or exclusion depends on the managed data identifier selection type that you specify for the job (managedDataIdentifierSelector).</p><p>To retrieve a list of valid values for this property, use the ListManagedDataIdentifiers operation.</p>'
+        managedDataIdentifierSelector:
+          allOf:
+            - $ref: '#/components/schemas/ManagedDataIdentifierSelector'
+            - description: '<p>The selection type to apply when determining which managed data identifiers the job uses to analyze data. Valid values are:</p> <ul><li><p>ALL - Use all the managed data identifiers that Amazon Macie provides. If you specify this value, don''t specify any values for the managedDataIdentifierIds property.</p></li> <li><p>EXCLUDE - Use all the managed data identifiers that Macie provides except the managed data identifiers specified by the managedDataIdentifierIds property.</p></li> <li><p>INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property.</p></li> <li><p>NONE - Don''t use any managed data identifiers. If you specify this value, specify at least one custom data identifier for the job (customDataIdentifierIds) and don''t specify any values for the managedDataIdentifierIds property.</p></li></ul> <p>If you don''t specify a value for this property, the job uses all managed data identifiers. If you don''t specify a value for this property or you specify ALL or EXCLUDE for a recurring job, the job also uses new managed data identifiers as they are released.</p>'
         name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -5931,7 +6009,7 @@ components:
         samplingPercentage:
           allOf:
             - $ref: '#/components/schemas/__integer'
-            - description: 'The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.'
+            - description: 'The sampling depth, as a percentage, for the job to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.'
         scheduleFrequency:
           allOf:
             - $ref: '#/components/schemas/JobScheduleFrequency'
@@ -5955,15 +6033,15 @@ components:
         ignoreWords:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 characters. Ignore words are case sensitive.'
+            - description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore words are case sensitive.'
         keywords:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 characters. Keywords aren''t case sensitive.'
+            - description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren''t case sensitive.'
         maximumMatchDistance:
           allOf:
             - $ref: '#/components/schemas/__integer'
-            - description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.
+            - description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.
         name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -6215,7 +6293,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Records'
             - description: '<p>An array of objects, one for each occurrence of sensitive data in an Apache Avro object container, Apache Parquet file, JSON file, or JSON Lines file. This value is null for all other types of files.</p> <p>For an Avro object container or Parquet file, each Record object specifies a record index and the path to a field in a record that contains the sensitive data. For a JSON or JSON Lines file, each Record object specifies the path to a field or array that contains the sensitive data. For a JSON Lines file, it also specifies the index of the line that contains the data.</p>'
-      description: Specifies the location of 1-15 occurrences of sensitive data that was detected by managed data identifiers or a custom data identifier and produced a sensitive data finding.
+      description: Specifies the location of 1-15 occurrences of sensitive data that was detected by a managed data identifier or a custom data identifier and produced a sensitive data finding.
     CustomDetection:
       type: object
       properties:
@@ -6271,7 +6349,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: 'The type of sensitive data that was detected. For example, AWS_CREDENTIALS, PHONE_NUMBER, or ADDRESS.'
-      description: Provides information about a type of sensitive data that was detected by managed data identifiers and produced a sensitive data finding.
+      description: Provides information about a type of sensitive data that was detected by a managed data identifier and produced a sensitive data finding.
     DefaultDetections:
       type: array
       description: 'Provides information about sensitive data that was detected by managed data identifiers and produced a sensitive data finding, and the number of occurrences of each type of sensitive data that was detected.'
@@ -7132,7 +7210,7 @@ components:
         jobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
-            - description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job or, if it''s a one-time job, you paused the job and didn''t resume it within 30 days.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn''t apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to one-time jobs.</p></li> <li><p>PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don''t resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job''s type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>'
+            - description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job or, if it''s a one-time job, you paused the job and didn''t resume it within 30 days.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn''t apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to one-time jobs.</p></li> <li><p>PAUSED - Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don''t resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job''s type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>'
         jobType:
           allOf:
             - $ref: '#/components/schemas/JobType'
@@ -7305,6 +7383,18 @@ components:
             - $ref: '#/components/schemas/__listOf__string'
             - description: An array that lists one or more values to use to filter the results.
       description: 'Specifies a condition that filters the results of a request for information about classification jobs. Each condition consists of a property, an operator, and one or more values.'
+    ListManagedDataIdentifiersRequest:
+      type: object
+      title: ListManagedDataIdentifiersRequest
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The nextToken string that specifies which page of results to return in a paginated response.
+    __listOfManagedDataIdentifierSummary:
+      type: array
+      items:
+        $ref: '#/components/schemas/ManagedDataIdentifierSummary'
     ListMembersRequest:
       type: object
       title: ListMembersRequest
@@ -7325,6 +7415,26 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    SensitiveDataItemCategory:
+      type: string
+      enum:
+        - FINANCIAL_INFORMATION
+        - PERSONAL_INFORMATION
+        - CREDENTIALS
+        - CUSTOM_IDENTIFIER
+      description: 'For a finding, the category of sensitive data that was detected and produced the finding. For a managed data identifier, the category of sensitive data that the managed data identifier detects. Possible values are:'
+    ManagedDataIdentifierSummary:
+      type: object
+      properties:
+        category:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveDataItemCategory'
+            - description: 'The category of sensitive data that the managed data identifier detects: CREDENTIALS, for credentials data such as private keys or Amazon Web Services secret keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as passport numbers.'
+        id:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The unique identifier for the managed data identifier. This is a string that describes the type of sensitive data that the managed data identifier detects. For example: OPENSSH_PRIVATE_KEY for OpenSSH private keys, CREDIT_CARD_NUMBER for credit card numbers, or USA_PASSPORT_NUMBER for US passport numbers.'
+      description: 'Provides information about a managed data identifier. For additional information, see <a href="https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html">Using managed data identifiers</a> in the <i>Amazon Macie User Guide</i>.'
     MatchingBucket:
       type: object
       properties:
@@ -7526,7 +7636,7 @@ components:
         owner:
           allOf:
             - $ref: '#/components/schemas/S3BucketOwner'
-            - description: The display name and Amazon Web Services account ID for the user who owns the bucket.
+            - description: The display name and canonical user ID for the Amazon Web Services account that owns the bucket.
         publicAccess:
           allOf:
             - $ref: '#/components/schemas/BucketPublicAccess'
@@ -7606,12 +7716,12 @@ components:
         displayName:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: The display name of the user who owns the bucket.
+            - description: The display name of the account that owns the bucket.
         id:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: The Amazon Web Services account ID for the user who owns the bucket.
-      description: Provides information about the user who owns an S3 bucket.
+            - description: The canonical user ID for the account that owns the bucket.
+      description: Provides information about the Amazon Web Services account that owns an S3 bucket.
     S3BucketDefinitionForJob:
       type: object
       required:
@@ -7774,7 +7884,7 @@ components:
         category:
           allOf:
             - $ref: '#/components/schemas/SensitiveDataItemCategory'
-            - description: 'The category of sensitive data that was detected. For example: CREDENTIALS, for credentials data such as private keys or Amazon Web Services secret keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as driver''s license identification numbers.'
+            - description: 'The category of sensitive data that was detected. For example: CREDENTIALS, for credentials data such as private keys or Amazon Web Services secret keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as passport numbers.'
         detections:
           allOf:
             - $ref: '#/components/schemas/DefaultDetections'
@@ -7784,14 +7894,6 @@ components:
             - $ref: '#/components/schemas/__long'
             - description: The total number of occurrences of the sensitive data that was detected.
       description: 'Provides information about the category, types, and occurrences of sensitive data that produced a sensitive data finding.'
-    SensitiveDataItemCategory:
-      type: string
-      enum:
-        - FINANCIAL_INFORMATION
-        - PERSONAL_INFORMATION
-        - CREDENTIALS
-        - CUSTOM_IDENTIFIER
-      description: 'The category of sensitive data that was detected and produced the finding. Possible values are:'
     Unit:
       type: string
       enum:
@@ -7920,15 +8022,15 @@ components:
         ignoreWords:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 characters. Ignore words are case sensitive.'
+            - description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore words are case sensitive.'
         keywords:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 characters. Keywords aren''t case sensitive.'
+            - description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren''t case sensitive.'
         maximumMatchDistance:
           allOf:
             - $ref: '#/components/schemas/__integer'
-            - description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.
+            - description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.
         regex:
           allOf:
             - $ref: '#/components/schemas/__string'

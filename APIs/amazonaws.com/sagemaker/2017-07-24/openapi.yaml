@@ -8149,6 +8149,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.RetryPipelineExecution:
+    post:
+      operationId: RetryPipelineExecution
+      description: Retry the execution of the pipeline.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetryPipelineExecutionResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+        '481':
+          description: ResourceLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceeded'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetryPipelineExecutionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.RetryPipelineExecution
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.Search:
     post:
       operationId: Search
@@ -15116,7 +15167,7 @@ components:
         CreatedBy:
           allOf:
             - $ref: '#/components/schemas/UserContext'
-            - description: Who created the component.
+            - description: Who created the trial component.
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -18069,6 +18120,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/HumanTaskUiArn'
             - description: <p>The <code>HumanTaskUiArn</code> of the worker UI that you want to render. Do not provide a <code>HumanTaskUiArn</code> if you use the <code>UiTemplate</code> parameter.</p> <p>See a list of available Human Ui Amazon Resource Names (ARNs) in <a>UiConfig</a>.</p>
+    RetryPipelineExecutionResponse:
+      type: object
+      properties:
+        PipelineExecutionArn:
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionArn'
+            - description: The Amazon Resource Name (ARN) of the pipeline execution.
+    RetryPipelineExecutionRequest:
+      type: object
+      required:
+        - PipelineExecutionArn
+        - ClientRequestToken
+      title: RetryPipelineExecutionRequest
+      properties:
+        PipelineExecutionArn:
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionArn'
+            - description: The Amazon Resource Name (ARN) of the pipeline execution.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than once.'
     SearchResponse:
       type: object
       properties:
@@ -18213,7 +18286,7 @@ components:
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than once.'
     StopAutoMLJobRequest:
       type: object
       required:
@@ -18305,7 +18378,7 @@ components:
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than once.'
     StopProcessingJobRequest:
       type: object
       required:
@@ -19851,7 +19924,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The domain associated with the user.
-      description: 'Information about the user who created or modified an experiment, trial, or trial component.'
+      description: 'Information about the user who created or modified an experiment, trial, trial component, or project.'
     MaxConcurrentInvocationsPerInstance:
       type: integer
       minimum: 1
@@ -22890,7 +22963,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProvisioningParameters'
             - description: A list of key value pairs that you specify when you provision a product.
-      description: 'Details that you specify to provision a service catalog product. For information about service catalog, see .<a href="https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html">What is Amazon Web Services Service Catalog</a>.'
+      description: 'Details that you specify to provision a service catalog product. For information about service catalog, see <a href="https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html">What is Amazon Web Services Service Catalog</a>.'
     ProjectArn:
       type: string
       pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:project:.*'
@@ -25125,7 +25198,9 @@ components:
             - $ref: '#/components/schemas/Timestamp'
             - description: When the experiment was created.
         CreatedBy:
-          $ref: '#/components/schemas/UserContext'
+          allOf:
+            - $ref: '#/components/schemas/UserContext'
+            - description: Who created the experiment.
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -28578,7 +28653,9 @@ components:
             - $ref: '#/components/schemas/ProjectStatus'
             - description: The status of the project.
         CreatedBy:
-          $ref: '#/components/schemas/UserContext'
+          allOf:
+            - $ref: '#/components/schemas/UserContext'
+            - description: Who created the project.
         CreationTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -29035,7 +29112,9 @@ components:
             - $ref: '#/components/schemas/Timestamp'
             - description: When the trial was created.
         CreatedBy:
-          $ref: '#/components/schemas/UserContext'
+          allOf:
+            - $ref: '#/components/schemas/UserContext'
+            - description: Who created the trial.
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -29087,7 +29166,9 @@ components:
             - $ref: '#/components/schemas/Timestamp'
             - description: When the component was created.
         CreatedBy:
-          $ref: '#/components/schemas/UserContext'
+          allOf:
+            - $ref: '#/components/schemas/UserContext'
+            - description: Who created the trial component.
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -29742,7 +29823,7 @@ components:
         CreatedBy:
           allOf:
             - $ref: '#/components/schemas/UserContext'
-            - description: Who created the component.
+            - description: Who created the trial component.
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'

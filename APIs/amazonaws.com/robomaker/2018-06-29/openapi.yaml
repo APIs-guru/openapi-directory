@@ -852,7 +852,6 @@ paths:
               type: object
               required:
                 - name
-                - sources
                 - robotSoftwareSuite
               properties:
                 name:
@@ -885,6 +884,14 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                environment:
+                  description: The object that contains the Docker image URI for either your robot or simulation applications.
+                  type: object
+                  properties:
+                    uri:
+                      allOf:
+                        - $ref: '#/components/schemas/RepositoryUrl'
+                        - description: The Docker image URI for either your robot or simulation applications.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -956,6 +963,17 @@ paths:
                   pattern: '[a-zA-Z0-9_.\-]*'
                   minLength: 1
                   maxLength: 40
+                s3Etags:
+                  description: The Amazon S3 identifier for the zip file bundle that you use for your robot application.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/S3Etag'
+                imageDigest:
+                  description: A SHA256 identifier for the Docker image that you use for your robot application.
+                  type: string
+                  pattern: '[Ss][Hh][Aa]256:[0-9a-fA-F]{64}'
+                  minLength: 0
+                  maxLength: 72
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1020,7 +1038,6 @@ paths:
               type: object
               required:
                 - name
-                - sources
                 - simulationSoftwareSuite
                 - robotSoftwareSuite
               properties:
@@ -1078,6 +1095,14 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                environment:
+                  description: The object that contains the Docker image URI for either your robot or simulation applications.
+                  type: object
+                  properties:
+                    uri:
+                      allOf:
+                        - $ref: '#/components/schemas/RepositoryUrl'
+                        - description: The Docker image URI for either your robot or simulation applications.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1149,6 +1174,17 @@ paths:
                   pattern: '[a-zA-Z0-9_.\-]*'
                   minLength: 1
                   maxLength: 40
+                s3Etags:
+                  description: The Amazon S3 eTag identifier for the zip file bundle that you use to create the simulation application.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/S3Etag'
+                imageDigest:
+                  description: The SHA256 digest used to identify the Docker image URI used to created the simulation application.
+                  type: string
+                  pattern: '[Ss][Hh][Aa]256:[0-9a-fA-F]{64}'
+                  minLength: 0
+                  maxLength: 72
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4060,7 +4096,6 @@ paths:
               type: object
               required:
                 - application
-                - sources
                 - robotSoftwareSuite
               properties:
                 application:
@@ -4092,6 +4127,14 @@ paths:
                   pattern: '[a-zA-Z0-9_.\-]*'
                   minLength: 1
                   maxLength: 40
+                environment:
+                  description: The object that contains the Docker image URI for either your robot or simulation applications.
+                  type: object
+                  properties:
+                    uri:
+                      allOf:
+                        - $ref: '#/components/schemas/RepositoryUrl'
+                        - description: The Docker image URI for either your robot or simulation applications.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4150,7 +4193,6 @@ paths:
               type: object
               required:
                 - application
-                - sources
                 - simulationSoftwareSuite
                 - robotSoftwareSuite
               properties:
@@ -4207,6 +4249,14 @@ paths:
                   pattern: '[a-zA-Z0-9_.\-]*'
                   minLength: 1
                   maxLength: 40
+                environment:
+                  description: The object that contains the Docker image URI for either your robot or simulation applications.
+                  type: object
+                  properties:
+                    uri:
+                      allOf:
+                        - $ref: '#/components/schemas/RepositoryUrl'
+                        - description: The Docker image URI for either your robot or simulation applications.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4566,6 +4616,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The list of all tags added to the robot application.
+        environment:
+          allOf:
+            - $ref: '#/components/schemas/Environment'
+            - description: An object that contains the Docker image URI used to a create your robot application.
     SourceConfig:
       type: object
       properties:
@@ -4594,6 +4648,11 @@ components:
         - Melodic
         - Dashing
         - Foxy
+    RepositoryUrl:
+      type: string
+      pattern: .+
+      minLength: 1
+      maxLength: 1024
     CreateRobotApplicationVersionResponse:
       type: object
       properties:
@@ -4625,6 +4684,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/RevisionId'
             - description: The revision id of the robot application.
+        environment:
+          allOf:
+            - $ref: '#/components/schemas/Environment'
+            - description: The object that contains the Docker image URI used to create your robot application.
+    S3Etag:
+      type: string
     CreateSimulationApplicationResponse:
       type: object
       properties:
@@ -4668,6 +4733,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The list of all tags added to the simulation application.
+        environment:
+          allOf:
+            - $ref: '#/components/schemas/Environment'
+            - description: The object that contains the Docker image URI that you used to create your simulation application.
     SimulationSoftwareSuiteType:
       type: string
       enum:
@@ -4726,6 +4795,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RevisionId'
             - description: The revision ID of the simulation application.
+        environment:
+          allOf:
+            - $ref: '#/components/schemas/Environment'
+            - description: The object that contains the Docker image URI used to create the simulation application.
     CreateSimulationJobResponse:
       type: object
       properties:
@@ -5207,6 +5280,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The list of all tags added to the specified robot application.
+        environment:
+          allOf:
+            - $ref: '#/components/schemas/Environment'
+            - description: The object that contains the Docker image URI used to create the robot application.
+        imageDigest:
+          allOf:
+            - $ref: '#/components/schemas/ImageDigest'
+            - description: A SHA256 identifier for the Docker image that you use for your robot application.
     DescribeSimulationApplicationResponse:
       type: object
       properties:
@@ -5250,6 +5331,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The list of all tags added to the specified simulation application.
+        environment:
+          allOf:
+            - $ref: '#/components/schemas/Environment'
+            - description: The object that contains the Docker image URI used to create the simulation application.
+        imageDigest:
+          allOf:
+            - $ref: '#/components/schemas/ImageDigest'
+            - description: A SHA256 identifier for the Docker image that you use for your simulation application.
     DescribeSimulationJobResponse:
       type: object
       properties:
@@ -5877,6 +5966,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RevisionId'
             - description: The revision id of the robot application.
+        environment:
+          allOf:
+            - $ref: '#/components/schemas/Environment'
+            - description: The object that contains the Docker image URI for your robot application.
     UpdateSimulationApplicationResponse:
       type: object
       properties:
@@ -5916,6 +6009,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RevisionId'
             - description: The revision id of the simulation application.
+        environment:
+          allOf:
+            - $ref: '#/components/schemas/Environment'
+            - description: The object that contains the Docker image URI used for your simulation application.
     UpdateWorldTemplateResponse:
       type: object
       properties:
@@ -6198,11 +6295,18 @@ components:
             - $ref: '#/components/schemas/RobotSoftwareSuiteVersionType'
             - description: The version of the robot software suite (ROS distribution).
       description: Information about a robot software suite (ROS distribution).
+    Environment:
+      type: object
+      properties:
+        uri:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryUrl'
+            - description: The Docker image URI for either your robot or simulation applications.
+      description: The object that contains the Docker image URI for either your robot or simulation applications.
     CreateRobotApplicationRequest:
       type: object
       required:
         - name
-        - sources
         - robotSoftwareSuite
       title: CreateRobotApplicationRequest
       properties:
@@ -6222,6 +6326,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: A map that contains tag keys and tag values that are attached to the robot application.
+        environment:
+          allOf:
+            - $ref: '#/components/schemas/Environment'
+            - description: The object that contains that URI of the Docker image that you use for your robot application.
     Version:
       type: string
       pattern: '(\$LATEST)|[0-9]*'
@@ -6239,6 +6347,15 @@ components:
       pattern: '[a-zA-Z0-9_.\-]*'
       minLength: 1
       maxLength: 40
+    S3Etags:
+      type: array
+      items:
+        $ref: '#/components/schemas/S3Etag'
+    ImageDigest:
+      type: string
+      pattern: '[Ss][Hh][Aa]256:[0-9a-fA-F]{64}'
+      minLength: 0
+      maxLength: 72
     CreateRobotApplicationVersionRequest:
       type: object
       required:
@@ -6253,6 +6370,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/RevisionId'
             - description: 'The current revision id for the robot application. If you provide a value and it matches the latest revision ID, a new version will be created.'
+        s3Etags:
+          allOf:
+            - $ref: '#/components/schemas/S3Etags'
+            - description: The Amazon S3 identifier for the zip file bundle that you use for your robot application.
+        imageDigest:
+          allOf:
+            - $ref: '#/components/schemas/ImageDigest'
+            - description: A SHA256 identifier for the Docker image that you use for your robot application.
     Id:
       type: string
       pattern: .*
@@ -6310,7 +6435,6 @@ components:
       type: object
       required:
         - name
-        - sources
         - simulationSoftwareSuite
         - robotSoftwareSuite
       title: CreateSimulationApplicationRequest
@@ -6339,6 +6463,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: A map that contains tag keys and tag values that are attached to the simulation application.
+        environment:
+          allOf:
+            - $ref: '#/components/schemas/Environment'
+            - description: The object that contains the Docker image URI used to create your simulation application.
     CreateSimulationApplicationVersionRequest:
       type: object
       required:
@@ -6353,6 +6481,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/RevisionId'
             - description: 'The current revision id for the simulation application. If you provide a value and it matches the latest revision ID, a new version will be created.'
+        s3Etags:
+          allOf:
+            - $ref: '#/components/schemas/S3Etags'
+            - description: The Amazon S3 eTag identifier for the zip file bundle that you use to create the simulation application.
+        imageDigest:
+          allOf:
+            - $ref: '#/components/schemas/ImageDigest'
+            - description: The SHA256 digest used to identify the Docker image URI used to created the simulation application.
     OutputLocation:
       type: object
       properties:
@@ -7690,8 +7826,6 @@ components:
             - $ref: '#/components/schemas/DeploymentJobErrorCode'
             - description: The robot deployment failure code.
       description: Information about a robot deployment.
-    S3Etag:
-      type: string
     S3KeyOutput:
       type: object
       properties:
@@ -8029,7 +8163,6 @@ components:
       type: object
       required:
         - application
-        - sources
         - robotSoftwareSuite
       title: UpdateRobotApplicationRequest
       properties:
@@ -8049,11 +8182,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/RevisionId'
             - description: The revision id for the robot application.
+        environment:
+          allOf:
+            - $ref: '#/components/schemas/Environment'
+            - description: The object that contains the Docker image URI for your robot application.
     UpdateSimulationApplicationRequest:
       type: object
       required:
         - application
-        - sources
         - simulationSoftwareSuite
         - robotSoftwareSuite
       title: UpdateSimulationApplicationRequest
@@ -8082,6 +8218,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RevisionId'
             - description: The revision id for the robot application.
+        environment:
+          allOf:
+            - $ref: '#/components/schemas/Environment'
+            - description: The object that contains the Docker image URI for your simulation application.
     UpdateWorldTemplateRequest:
       type: object
       required:

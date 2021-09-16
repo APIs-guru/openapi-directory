@@ -3376,6 +3376,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LanguageOptions'
             - description: '<p>An object containing a list of languages that might be present in your collection of audio files. Automatic language identification chooses a language that best matches the source audio from that list.</p> <p>To transcribe speech in Modern Standard Arabic (ar-SA), your audio or video file must be encoded at a sample rate of 16,000 Hz or higher.</p>'
+        Subtitles:
+          allOf:
+            - $ref: '#/components/schemas/Subtitles'
+            - description: Add subtitles to your batch transcription job.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -4171,6 +4175,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: 'A key:value pair assigned to a given transcription job.'
+        Subtitles:
+          allOf:
+            - $ref: '#/components/schemas/SubtitlesOutput'
+            - description: Generate subtitles for your batch transcription job.
       description: 'Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation. '
     RelativeTimeRange:
       type: object
@@ -4565,11 +4573,44 @@ components:
             - $ref: '#/components/schemas/VocabularyFilterMethod'
             - description: 'Set to <code>mask</code> to remove filtered text from the transcript and replace it with three asterisks ("***") as placeholder text. Set to <code>remove</code> to remove filtered text from the transcript without using placeholder text. Set to <code>tag</code> to mark the word in the transcription output that matches the vocabulary filter. When you set the filter method to <code>tag</code>, the words matching your vocabulary filter are not masked or removed.'
       description: Provides optional settings for the <code>StartTranscriptionJob</code> operation.
+    Subtitles:
+      type: object
+      properties:
+        Formats:
+          allOf:
+            - $ref: '#/components/schemas/SubtitleFormats'
+            - description: Specify the output format for your subtitle file.
+      description: Generate subtitles for your batch transcription job.
     StringTargetList:
       type: array
       items:
         $ref: '#/components/schemas/NonEmptyString'
       minItems: 1
+    SubtitleFileUris:
+      type: array
+      items:
+        $ref: '#/components/schemas/Uri'
+    SubtitleFormat:
+      type: string
+      enum:
+        - vtt
+        - srt
+    SubtitleFormats:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubtitleFormat'
+    SubtitlesOutput:
+      type: object
+      properties:
+        Formats:
+          allOf:
+            - $ref: '#/components/schemas/SubtitleFormats'
+            - description: 'Specify the output format for your subtitle file; if you select both SRT and VTT formats, two output files are genereated.'
+        SubtitleFileUris:
+          allOf:
+            - $ref: '#/components/schemas/SubtitleFileUris'
+            - description: Choose the output location for your subtitle file. This location must be an S3 bucket.
+      description: Specify the output format for your subtitle file.
     TagKey:
       type: string
       minLength: 1

@@ -400,6 +400,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/__string'
                         - description: 'A custom name of the default treatment for the campaign, if the campaign has multiple treatments. A <i>treatment</i> is a variation of a campaign that''s used for A/B testing.'
+                    Priority:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - description: 'Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1170,6 +1174,329 @@ paths:
           description: The NextToken string that specifies which page of results to return in a paginated response.
           schema:
             type: string
+  '/v1/templates/{template-name}/inapp':
+    post:
+      operationId: CreateInAppTemplate
+      description: Creates a new message template for messages using the in-app message channel.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateInAppTemplateResponse'
+        '480':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - InAppTemplateRequest
+              properties:
+                InAppTemplateRequest:
+                  description: InApp Template Request.
+                  type: object
+                  properties:
+                    Content:
+                      allOf:
+                        - $ref: '#/components/schemas/ListOfInAppMessageContent'
+                        - description: 'The content of the message, can include up to 5 modals. Each modal must contain a message, a header, and background color. ImageUrl and buttons are optional.'
+                    CustomConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/MapOf__string'
+                        - description: Custom config to be sent to client.
+                    Layout:
+                      allOf:
+                        - $ref: '#/components/schemas/Layout'
+                        - description: The layout of the message.
+                    tags:
+                      allOf:
+                        - $ref: '#/components/schemas/MapOf__string'
+                        - description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+                    TemplateDescription:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The description of the template.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteInAppTemplate
+      description: Deletes a message template for messages sent using the in-app message channel.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteInAppTemplateResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: PayloadTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadTooLargeException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          schema:
+            type: string
+        - name: version
+          in: query
+          required: false
+          description: '<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don''t occur.</p> <p>If you don''t specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn''t used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>'
+          schema:
+            type: string
+    get:
+      operationId: GetInAppTemplate
+      description: Retrieves the content and settings of a message template for messages sent through the in-app channel.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInAppTemplateResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: PayloadTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadTooLargeException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          schema:
+            type: string
+        - name: version
+          in: query
+          required: false
+          description: '<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don''t occur.</p> <p>If you don''t specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn''t used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>'
+          schema:
+            type: string
+    put:
+      operationId: UpdateInAppTemplate
+      description: Updates an existing message template for messages sent through the in-app message channel.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateInAppTemplateResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: PayloadTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadTooLargeException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: create-new-version
+          in: query
+          required: false
+          description: '<p>Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to (overwrite) the latest existing version of the template.</p> <p>If you don''t specify a value for this parameter, Amazon Pinpoint saves the updates to (overwrites) the latest existing version of the template. If you specify a value of true for this parameter, don''t specify a value for the version parameter. Otherwise, an error will occur.</p>'
+          schema:
+            type: boolean
+        - name: template-name
+          in: path
+          required: true
+          description: 'The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.'
+          schema:
+            type: string
+        - name: version
+          in: query
+          required: false
+          description: '<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend="templates-template-name-template-type-versions">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don''t occur.</p> <p>If you don''t specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn''t used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>'
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - InAppTemplateRequest
+              properties:
+                InAppTemplateRequest:
+                  description: InApp Template Request.
+                  type: object
+                  properties:
+                    Content:
+                      allOf:
+                        - $ref: '#/components/schemas/ListOfInAppMessageContent'
+                        - description: 'The content of the message, can include up to 5 modals. Each modal must contain a message, a header, and background color. ImageUrl and buttons are optional.'
+                    CustomConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/MapOf__string'
+                        - description: Custom config to be sent to client.
+                    Layout:
+                      allOf:
+                        - $ref: '#/components/schemas/Layout'
+                        - description: The layout of the message.
+                    tags:
+                      allOf:
+                        - $ref: '#/components/schemas/MapOf__string'
+                        - description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+                    TemplateDescription:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The description of the template.
   '/v1/apps/{application-id}/journeys':
     post:
       operationId: CreateJourney
@@ -4485,6 +4812,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/__string'
                         - description: 'A custom name of the default treatment for the campaign, if the campaign has multiple treatments. A <i>treatment</i> is a variation of a campaign that''s used for A/B testing.'
+                    Priority:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - description: 'Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.'
   '/v1/apps/{application-id}/channels/email':
     delete:
       operationId: DeleteEmailChannel
@@ -7514,6 +7845,80 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/endpoints/{endpoint-id}/inappmessages':
+    get:
+      operationId: GetInAppMessages
+      description: Retrieves the in-app messages targeted for the provided endpoint ID.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInAppMessagesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: PayloadTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadTooLargeException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.
+          schema:
+            type: string
+        - name: endpoint-id
+          in: path
+          required: true
+          description: The unique identifier for the endpoint.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/apps/{application-id}/journeys/{journey-id}/kpis/daterange/{kpi-name}':
     get:
       operationId: GetJourneyDateRangeKpi
@@ -9250,6 +9655,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__integer'
             - description: 'The maximum number of messages that a campaign can send to a single endpoint during the course of the campaign. If a campaign recurs, this setting applies to all runs of the campaign. The maximum value is 100.'
+        Session:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: The maximum total number of messages that the campaign can send per user session.
       description: 'For a campaign, specifies limits on the messages that the campaign can send. For an application, specifies the default limits for messages that campaigns in the application can send.'
     MessageConfiguration:
       type: object
@@ -9286,6 +9695,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CampaignSmsMessage'
             - description: 'The message that the campaign sends through the SMS channel. If specified, this message overrides the default message.'
+        InAppMessage:
+          allOf:
+            - $ref: '#/components/schemas/CampaignInAppMessage'
+            - description: The in-app message configuration.
       description: Specifies the message configuration settings for a campaign.
     Schedule:
       type: object
@@ -9371,6 +9784,26 @@ components:
       enum:
         - CSV
         - JSON
+    CreateInAppTemplateResponse:
+      type: object
+      required:
+        - TemplateCreateMessageBody
+      properties:
+        TemplateCreateMessageBody:
+          $ref: '#/components/schemas/TemplateCreateMessageBody'
+    ListOfInAppMessageContent:
+      type: array
+      items:
+        $ref: '#/components/schemas/InAppMessageContent'
+    Layout:
+      type: string
+      enum:
+        - BOTTOM_BANNER
+        - TOP_BANNER
+        - OVERLAYS
+        - MOBILE_FEED
+        - MIDDLE_BANNER
+        - CAROUSEL
     CreateJourneyResponse:
       type: object
       required:
@@ -9721,6 +10154,13 @@ components:
       properties:
         GCMChannelResponse:
           $ref: '#/components/schemas/GCMChannelResponse'
+    DeleteInAppTemplateResponse:
+      type: object
+      required:
+        - MessageBody
+      properties:
+        MessageBody:
+          $ref: '#/components/schemas/MessageBody'
     DeleteJourneyResponse:
       type: object
       required:
@@ -9966,6 +10406,20 @@ components:
       properties:
         ImportJobsResponse:
           $ref: '#/components/schemas/ImportJobsResponse'
+    GetInAppMessagesResponse:
+      type: object
+      required:
+        - InAppMessagesResponse
+      properties:
+        InAppMessagesResponse:
+          $ref: '#/components/schemas/InAppMessagesResponse'
+    GetInAppTemplateResponse:
+      type: object
+      required:
+        - InAppTemplateResponse
+      properties:
+        InAppTemplateResponse:
+          $ref: '#/components/schemas/InAppTemplateResponse'
     GetJourneyResponse:
       type: object
       required:
@@ -10314,6 +10768,7 @@ components:
         - EMAIL
         - BAIDU
         - CUSTOM
+        - IN_APP
     EndpointDemographic:
       type: object
       properties:
@@ -10412,6 +10867,13 @@ components:
       properties:
         GCMChannelResponse:
           $ref: '#/components/schemas/GCMChannelResponse'
+    UpdateInAppTemplateResponse:
+      type: object
+      required:
+        - MessageBody
+      properties:
+        MessageBody:
+          $ref: '#/components/schemas/MessageBody'
     UpdateJourneyResponse:
       type: object
       required:
@@ -11366,6 +11828,12 @@ components:
             - $ref: '#/components/schemas/__string'
             - description: The message title to use instead of the default message title. This value overrides the default message title.
       description: Specifies address-based configuration settings for a message that's sent directly to an endpoint.
+    Alignment:
+      type: string
+      enum:
+        - LEFT
+        - CENTER
+        - RIGHT
     __timestampIso8601:
       type: string
       format: date-time
@@ -11656,6 +12124,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ResultRow'
+    ButtonAction:
+      type: string
+      enum:
+        - LINK
+        - DEEP_LINK
+        - CLOSE
     CampaignCustomMessage:
       type: object
       properties:
@@ -11764,6 +12238,26 @@ components:
       enum:
         - DELIVERY
         - FILTER
+    CampaignInAppMessage:
+      type: object
+      properties:
+        Body:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The message body of the notification, the email body or the text message.'
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/ListOfInAppMessageContent'
+            - description: In-app message content.
+        CustomConfig:
+          allOf:
+            - $ref: '#/components/schemas/MapOf__string'
+            - description: Custom config to be sent to client.
+        Layout:
+          allOf:
+            - $ref: '#/components/schemas/Layout'
+            - description: In-app message layout.
+      description: In-app message configuration.
     ListOfTreatmentResource:
       type: array
       items:
@@ -11883,6 +12377,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__integer'
             - description: The version number of the campaign.
+        Priority:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: 'Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.'
       description: 'Provides information about the status, configuration, and other settings for a campaign.'
     MessageType:
       type: string
@@ -12121,6 +12619,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: 'A custom name of the default treatment for the campaign, if the campaign has multiple treatments. A <i>treatment</i> is a variation of a campaign that''s used for A/B testing.'
+        Priority:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: 'Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.'
       description: Specifies the configuration and other settings for a campaign.
     CreateCampaignRequest:
       type: object
@@ -12391,6 +12893,54 @@ components:
             - $ref: '#/components/schemas/__string'
             - description: The job type. This value is IMPORT for import jobs.
       description: Provides information about the status and settings of a job that imports endpoint definitions from one or more files. The files can be stored in an Amazon Simple Storage Service (Amazon S3) bucket or uploaded directly from a computer by using the Amazon Pinpoint console.
+    InAppTemplateRequest:
+      type: object
+      properties:
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/ListOfInAppMessageContent'
+            - description: 'The content of the message, can include up to 5 modals. Each modal must contain a message, a header, and background color. ImageUrl and buttons are optional.'
+        CustomConfig:
+          allOf:
+            - $ref: '#/components/schemas/MapOf__string'
+            - description: Custom config to be sent to client.
+        Layout:
+          allOf:
+            - $ref: '#/components/schemas/Layout'
+            - description: The layout of the message.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/MapOf__string'
+            - description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+        TemplateDescription:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The description of the template.
+      description: InApp Template Request.
+    CreateInAppTemplateRequest:
+      type: object
+      required:
+        - InAppTemplateRequest
+      title: CreateInAppTemplateRequest
+      properties:
+        InAppTemplateRequest:
+          $ref: '#/components/schemas/InAppTemplateRequest'
+    TemplateCreateMessageBody:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The Amazon Resource Name (ARN) of the message template that was created.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The message that's returned from the API for the request to create the message template.
+        RequestID:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The unique identifier for the request to create the message template.
+      description: Provides information about a request to create a message template.
     WriteJourneyRequest:
       type: object
       required:
@@ -12860,6 +13410,37 @@ components:
             - $ref: '#/components/schemas/__string'
             - description: The message content that's passed to an AWS Lambda function or to a web hook.
       description: Specifies the message content for a custom channel message that's sent to participants in a journey.
+    DefaultButtonConfiguration:
+      type: object
+      required:
+        - ButtonAction
+        - Text
+      properties:
+        BackgroundColor:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The background color of the button.
+        BorderRadius:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: The border radius of the button.
+        ButtonAction:
+          allOf:
+            - $ref: '#/components/schemas/ButtonAction'
+            - description: Action triggered by the button.
+        Link:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Button destination.
+        Text:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Button text.
+        TextColor:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The text color of the button.
+      description: Default button configuration.
     DefaultMessage:
       type: object
       properties:
@@ -13184,6 +13765,10 @@ components:
             - $ref: '#/components/schemas/__integer'
             - description: The current version of the GCM channel.
       description: 'Provides information about the status and settings of the GCM channel for an application. The GCM channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.'
+    DeleteInAppTemplateRequest:
+      type: object
+      title: DeleteInAppTemplateRequest
+      properties: {}
     DeleteJourneyRequest:
       type: object
       title: DeleteJourneyRequest
@@ -13594,6 +14179,7 @@ components:
         - SMS
         - VOICE
         - PUSH
+        - INAPP
     EmailTemplateResponse:
       type: object
       required:
@@ -14129,6 +14715,7 @@ components:
         - WEEKLY
         - MONTHLY
         - EVENT
+        - IN_APP_EVENT
     GCMChannelRequest:
       type: object
       required:
@@ -14290,6 +14877,75 @@ components:
             - $ref: '#/components/schemas/__string'
             - description: The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
       description: Provides information about the status and settings of all the import jobs that are associated with an application or segment. An import job is a job that imports endpoint definitions from one or more files.
+    GetInAppMessagesRequest:
+      type: object
+      title: GetInAppMessagesRequest
+      properties: {}
+    InAppMessagesResponse:
+      type: object
+      properties:
+        InAppMessageCampaigns:
+          allOf:
+            - $ref: '#/components/schemas/ListOfInAppMessageCampaign'
+            - description: List of targeted in-app message campaigns.
+      description: Get in-app messages response object.
+    GetInAppTemplateRequest:
+      type: object
+      title: GetInAppTemplateRequest
+      properties: {}
+    InAppTemplateResponse:
+      type: object
+      required:
+        - LastModifiedDate
+        - CreationDate
+        - TemplateName
+        - TemplateType
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The resource arn of the template.
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/ListOfInAppMessageContent'
+            - description: 'The content of the message, can include up to 5 modals. Each modal must contain a message, a header, and background color. ImageUrl and buttons are optional.'
+        CreationDate:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The creation date of the template.
+        CustomConfig:
+          allOf:
+            - $ref: '#/components/schemas/MapOf__string'
+            - description: Custom config to be sent to client.
+        LastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The last modified date of the template.
+        Layout:
+          allOf:
+            - $ref: '#/components/schemas/Layout'
+            - description: The layout of the message.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/MapOf__string'
+            - description: A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+        TemplateDescription:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The description of the template.
+        TemplateName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the template.
+        TemplateType:
+          allOf:
+            - $ref: '#/components/schemas/TemplateType'
+            - description: The type of the template.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The version id of the template.
+      description: In-App Template Response.
     GetJourneyDateRangeKpiRequest:
       type: object
       title: GetJourneyDateRangeKpiRequest
@@ -14712,6 +15368,180 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ImportJobResponse'
+    InAppCampaignSchedule:
+      type: object
+      properties:
+        EndDate:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The scheduled time after which the in-app message should not be shown. Timestamp is in ISO 8601 format.
+        EventFilter:
+          allOf:
+            - $ref: '#/components/schemas/CampaignEventFilter'
+            - description: The event filter the SDK has to use to show the in-app message in the application.
+        QuietTime:
+          allOf:
+            - $ref: '#/components/schemas/QuietTime'
+            - description: Time during which the in-app message should not be shown to the user.
+      description: Schedule of the campaign.
+    InAppMessage:
+      type: object
+      properties:
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/ListOfInAppMessageContent'
+            - description: In-app message content.
+        CustomConfig:
+          allOf:
+            - $ref: '#/components/schemas/MapOf__string'
+            - description: Custom config to be sent to SDK.
+        Layout:
+          allOf:
+            - $ref: '#/components/schemas/Layout'
+            - description: The layout of the message.
+      description: Provides all fields required for building an in-app message.
+    InAppMessageBodyConfig:
+      type: object
+      required:
+        - Alignment
+        - TextColor
+        - Body
+      properties:
+        Alignment:
+          allOf:
+            - $ref: '#/components/schemas/Alignment'
+            - description: 'The alignment of the text. Valid values: LEFT, CENTER, RIGHT.'
+        Body:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Message Body.
+        TextColor:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The text color.
+      description: Text config for Message Body.
+    OverrideButtonConfiguration:
+      type: object
+      required:
+        - ButtonAction
+      properties:
+        ButtonAction:
+          allOf:
+            - $ref: '#/components/schemas/ButtonAction'
+            - description: Action triggered by the button.
+        Link:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Button destination.
+      description: Override button configuration.
+    InAppMessageButton:
+      type: object
+      properties:
+        Android:
+          allOf:
+            - $ref: '#/components/schemas/OverrideButtonConfiguration'
+            - description: Default button content.
+        DefaultConfig:
+          allOf:
+            - $ref: '#/components/schemas/DefaultButtonConfiguration'
+            - description: Default button content.
+        IOS:
+          allOf:
+            - $ref: '#/components/schemas/OverrideButtonConfiguration'
+            - description: Default button content.
+        Web:
+          allOf:
+            - $ref: '#/components/schemas/OverrideButtonConfiguration'
+            - description: Default button content.
+      description: Button Config for an in-app message.
+    InAppMessageCampaign:
+      type: object
+      properties:
+        CampaignId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Campaign id of the corresponding campaign.
+        DailyCap:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: Daily cap which controls the number of times any in-app messages can be shown to the endpoint during a day.
+        InAppMessage:
+          allOf:
+            - $ref: '#/components/schemas/InAppMessage'
+            - description: In-app message content with all fields required for rendering an in-app message.
+        Priority:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: Priority of the in-app message.
+        Schedule:
+          allOf:
+            - $ref: '#/components/schemas/InAppCampaignSchedule'
+            - description: Schedule of the campaign.
+        SessionCap:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: Session cap which controls the number of times an in-app message can be shown to the endpoint during an application session.
+        TotalCap:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: Total cap which controls the number of times an in-app message can be shown to the endpoint.
+        TreatmentId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Treatment id of the campaign.
+      description: Targeted in-app message campaign.
+    InAppMessageHeaderConfig:
+      type: object
+      required:
+        - Alignment
+        - Header
+        - TextColor
+      properties:
+        Alignment:
+          allOf:
+            - $ref: '#/components/schemas/Alignment'
+            - description: 'The alignment of the text. Valid values: LEFT, CENTER, RIGHT.'
+        Header:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Message Header.
+        TextColor:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The text color.
+      description: Text config for Message Header.
+    InAppMessageContent:
+      type: object
+      properties:
+        BackgroundColor:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The background color for the message.
+        BodyConfig:
+          allOf:
+            - $ref: '#/components/schemas/InAppMessageBodyConfig'
+            - description: The configuration for the message body.
+        HeaderConfig:
+          allOf:
+            - $ref: '#/components/schemas/InAppMessageHeaderConfig'
+            - description: The configuration for the message header.
+        ImageUrl:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The image url for the background of message.
+        PrimaryBtn:
+          allOf:
+            - $ref: '#/components/schemas/InAppMessageButton'
+            - description: The first button inside the message.
+        SecondaryBtn:
+          allOf:
+            - $ref: '#/components/schemas/InAppMessageButton'
+            - description: The second button inside message.
+      description: The configuration for the message content.
+    ListOfInAppMessageCampaign:
+      type: array
+      items:
+        $ref: '#/components/schemas/InAppMessageCampaign'
     Include:
       type: string
       enum:
@@ -15802,6 +16632,14 @@ components:
       properties:
         GCMChannelRequest:
           $ref: '#/components/schemas/GCMChannelRequest'
+    UpdateInAppTemplateRequest:
+      type: object
+      required:
+        - InAppTemplateRequest
+      title: UpdateInAppTemplateRequest
+      properties:
+        InAppTemplateRequest:
+          $ref: '#/components/schemas/InAppTemplateRequest'
     UpdateJourneyRequest:
       type: object
       required:
@@ -15982,5 +16820,6 @@ components:
         - EMAIL
         - BAIDU
         - CUSTOM
+        - IN_APP
 security:
   - hmac: []
