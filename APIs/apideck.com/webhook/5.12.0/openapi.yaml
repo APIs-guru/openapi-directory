@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Webhook API
-  version: 5.11.0
+  version: 5.12.0
   x-apideck-api: webhook
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -41,6 +41,7 @@ paths:
       description: List event logs
       operationId: eventLogsAll
       parameters:
+        - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/filter"
@@ -72,7 +73,8 @@ paths:
             import { Apideck } from '@apideck/node'
 
             const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY'
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID'
             })
 
             try {

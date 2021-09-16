@@ -3496,6 +3496,11 @@ paths:
               - linkUnspecified
               - channelToStoreLink
             type: string
+        - description: Channel ID to which changes should be applied, for delegation.
+          in: query
+          name: externalChannelId
+          schema:
+            type: string
         - description: Do not use. Required for compatibility.
           explode: true
           in: query
@@ -3524,6 +3529,11 @@ paths:
               type: string
             type: array
           style: form
+        - description: Channel ID to which changes should be applied, for delegation.
+          in: query
+          name: externalChannelId
+          schema:
+            type: string
         - description: Get a third party link with the given linking token.
           in: query
           name: linkingToken
@@ -3572,6 +3582,11 @@ paths:
               type: string
             type: array
           style: form
+        - description: Channel ID to which changes should be applied, for delegation.
+          in: query
+          name: externalChannelId
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -3600,6 +3615,11 @@ paths:
               type: string
             type: array
           style: form
+        - description: Channel ID to which changes should be applied, for delegation.
+          in: query
+          name: externalChannelId
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
