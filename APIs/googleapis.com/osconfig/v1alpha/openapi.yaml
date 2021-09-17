@@ -419,6 +419,58 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1alpha/{parent}/reports":
+    get:
+      description: List OS policy asssignment reports for all Compute Engine VM instances in the specified zone.
+      operationId: osconfig.projects.locations.instances.osPolicyAssignments.reports.list
+      parameters:
+        - description: "Required. The parent resource name. Format: `projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/{assignment}/reports` For `{project}`, either `project-number` or `project-id` can be provided. For `{instance}`, either `instance-name`, `instance-id`, or `-` can be provided. If '-' is provided, the response will include OSPolicyAssignmentReports for all instances in the project/location. For `{assignment}`, either `assignment-id` or `-` can be provided. If '-' is provided, the response will include OSPolicyAssignmentReports for all OSPolicyAssignments in the project/location. Either {instance} or {assignment} must be `-`. For example: `projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/-/reports` returns all reports for the instance `projects/{project}/locations/{location}/instances/-/osPolicyAssignments/{assignment-id}/reports` returns all the reports for the given assignment across all instances. `projects/{project}/locations/{location}/instances/-/osPolicyAssignments/-/reports` returns all the reports for all assignments across all instances."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: If provided, this field specifies the criteria that must be met by the `OSPolicyAssignmentReport` API resource that is included in the response.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of results to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A pagination token returned from a previous call to the `ListOSPolicyAssignmentReports` method that indicates where this listing should continue from.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOSPolicyAssignmentReportsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1alpha/{parent}/vulnerabilityReports":
     get:
       description: List vulnerability reports for all VM instances in the specified zone.
@@ -984,6 +1036,18 @@ components:
           description: The pagination token to retrieve the next page of inventory objects.
           type: string
       type: object
+    ListOSPolicyAssignmentReportsResponse:
+      description: A response message for listing OS Policy assignment reports including the page of results and page token.
+      properties:
+        nextPageToken:
+          description: The pagination token to retrieve the next page of OS policy assignment report objects.
+          type: string
+        osPolicyAssignmentReports:
+          description: List of OS policy assignment reports.
+          items:
+            $ref: "#/components/schemas/OSPolicyAssignmentReport"
+          type: array
+      type: object
     ListOSPolicyAssignmentRevisionsResponse:
       description: A response message for listing all revisions for a OS policy assignment.
       properties:
@@ -1180,6 +1244,102 @@ components:
         rolloutUpdateTime:
           description: Rollout update time
           format: google-datetime
+          type: string
+      type: object
+    OSPolicyAssignmentReport:
+      description: A report of the OS policy assignment status for a given instance.
+      properties:
+        instance:
+          description: The Compute Engine VM instance name.
+          type: string
+        lastRunId:
+          description: "Unique identifier of the last attempted run to apply the OS policies associated with this assignment on the VM. This ID is logged by the OS Config agent while applying the OS policies associated with this assignment on the VM. NOTE: If the service is unable to successfully connect to the agent for this run, then this id will not be available in the agent logs."
+          type: string
+        name:
+          description: "The `OSPolicyAssignmentReport` API resource name. Format: `projects/{project_number}/locations/{location}/instances/{instance_id}/osPolicyAssignments/{os_policy_assignment_id}/report`"
+          type: string
+        osPolicyAssignment:
+          description: "Reference to the `OSPolicyAssignment` API resource that the `OSPolicy` belongs to. Format: `projects/{project_number}/locations/{location}/osPolicyAssignments/{os_policy_assignment_id@revision_id}`"
+          type: string
+        osPolicyCompliances:
+          description: Compliance data for each `OSPolicy` that is applied to the VM.
+          items:
+            $ref: "#/components/schemas/OSPolicyAssignmentReportOSPolicyCompliance"
+          type: array
+        updateTime:
+          description: Timestamp for when the report was last generated.
+          format: google-datetime
+          type: string
+      type: object
+    OSPolicyAssignmentReportOSPolicyCompliance:
+      description: Compliance data for an OS policy
+      properties:
+        complianceState:
+          description: The compliance state of the OS policy.
+          enum:
+            - UNKNOWN
+            - COMPLIANT
+            - NON_COMPLIANT
+          type: string
+        complianceStateReason:
+          description: "The reason for the OS policy to be in an unknown compliance state. This field is always populated when `compliance_state` is `UNKNOWN`. If populated, the field can contain one of the following values: * `vm-not-running`: The VM was not running. * `os-policies-not-supported-by-agent`: The version of the OS Config agent running on the VM does not support running OS policies. * `no-agent-detected`: The OS Config agent is not detected for the VM. * `resource-execution-errors`: The OS Config agent encountered errors while executing one or more resources in the policy. See `os_policy_resource_compliances` for details. * `task-timeout`: The task sent to the agent to apply the policy timed out. * `unexpected-agent-state`: The OS Config agent did not report the final status of the task that attempted to apply the policy. Instead, the agent unexpectedly started working on a different task. This mostly happens when the agent or VM unexpectedly restarts while applying OS policies. * `internal-service-errors`: Internal service errors were encountered while attempting to apply the policy."
+          type: string
+        osPolicyId:
+          description: The OS policy id
+          type: string
+        osPolicyResourceCompliances:
+          description: Compliance data for each resource within the policy that is applied to the VM.
+          items:
+            $ref: "#/components/schemas/OSPolicyAssignmentReportOSPolicyComplianceOSPolicyResourceCompliance"
+          type: array
+      type: object
+    OSPolicyAssignmentReportOSPolicyComplianceOSPolicyResourceCompliance:
+      description: Compliance data for an OS policy resource.
+      properties:
+        complianceState:
+          description: The compliance state of the resource.
+          enum:
+            - UNKNOWN
+            - COMPLIANT
+            - NON_COMPLIANT
+          type: string
+        complianceStateReason:
+          description: "A reason for the resource to be in the given compliance state. This field is always populated when `compliance_state` is `UNKNOWN`. The following values are supported when `compliance_state == UNKNOWN` * `execution-errors`: Errors were encountered by the agent while executing the resource and the compliance state couldn't be determined. * `execution-skipped-by-agent`: Resource execution was skipped by the agent because errors were encountered while executing prior resources in the OS policy. * `os-policy-execution-attempt-failed`: The execution of the OS policy containing this resource failed and the compliance state couldn't be determined."
+          type: string
+        configSteps:
+          description: Ordered list of configuration completed by the agent for the OS policy resource.
+          items:
+            $ref: "#/components/schemas/OSPolicyAssignmentReportOSPolicyComplianceOSPolicyResourceComplianceOSPolicyResourceConfigStep"
+          type: array
+        execResourceOutput:
+          $ref: "#/components/schemas/OSPolicyAssignmentReportOSPolicyComplianceOSPolicyResourceComplianceExecResourceOutput"
+          description: ExecResource specific output.
+        osPolicyResourceId:
+          description: The ID of the OS policy resource.
+          type: string
+      type: object
+    OSPolicyAssignmentReportOSPolicyComplianceOSPolicyResourceComplianceExecResourceOutput:
+      description: ExecResource specific output.
+      properties:
+        enforcementOutput:
+          description: Output from enforcement phase output file (if run). Output size is limited to 100K bytes.
+          format: byte
+          type: string
+      type: object
+    OSPolicyAssignmentReportOSPolicyComplianceOSPolicyResourceComplianceOSPolicyResourceConfigStep:
+      description: Step performed by the OS Config agent for configuring an `OSPolicy` resource to its desired state.
+      properties:
+        errorMessage:
+          description: An error message recorded during the execution of this step. Only populated if errors were encountered during this step execution.
+          type: string
+        type:
+          description: Configuration step type.
+          enum:
+            - TYPE_UNSPECIFIED
+            - VALIDATION
+            - DESIRED_STATE_CHECK
+            - DESIRED_STATE_ENFORCEMENT
+            - DESIRED_STATE_CHECK_POST_ENFORCEMENT
           type: string
       type: object
     OSPolicyAssignmentRollout:

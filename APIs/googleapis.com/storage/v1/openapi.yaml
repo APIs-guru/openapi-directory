@@ -3735,6 +3735,9 @@ components:
               format: int64
               type: string
           type: object
+        rpo:
+          description: The Recovery Point Objective (RPO) of this bucket. Set to ASYNC_TURBO to turn on Turbo Replication on a bucket.
+          type: string
         satisfiesPZS:
           description: Reserved for future use.
           type: boolean

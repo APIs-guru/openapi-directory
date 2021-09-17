@@ -695,7 +695,7 @@ components:
         type: string
   schemas:
     Assignment:
-      description: A Assignment allows a project to submit jobs of a certain type using slots from the specified reservation.
+      description: An assignment allows a project to submit jobs of a certain type using slots from the specified reservation.
       properties:
         assignee:
           description: The resource which will use the reservation. E.g. `projects/myproject`, `folders/123`, or `organizations/456`.
@@ -855,7 +855,7 @@ components:
           readOnly: true
           type: string
         ignoreIdleSlots:
-          description: If false, any query using this reservation will use idle slots from other reservations within the same admin project. If true, a query using this reservation will execute with the slot capacity specified above at most.
+          description: If false, any query or pipeline job using this reservation will use idle slots from other reservations within the same admin project. If true, a query or pipeline job using this reservation will execute with the slot capacity specified in the slot_capacity field at most.
           type: boolean
         name:
           description: The resource name of the reservation, e.g., `projects/*/locations/*/reservations/team1-prod`.
