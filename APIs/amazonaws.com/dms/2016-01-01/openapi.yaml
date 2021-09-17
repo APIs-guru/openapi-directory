@@ -507,7 +507,7 @@ paths:
   /#X-Amz-Target=AmazonDMSv20160101.CreateReplicationSubnetGroup:
     post:
       operationId: CreateReplicationSubnetGroup
-      description: Creates a replication subnet group given a list of the subnet IDs in a VPC.
+      description: '<p>Creates a replication subnet group given a list of the subnet IDs in a VPC.</p> <p>The VPC needs to have at least one subnet in at least two availability zones in the Amazon Web Services Region, otherwise the service will throw a <code>ReplicationSubnetGroupDoesNotCoverEnoughAZs</code> exception.</p>'
       responses:
         '200':
           description: Success
@@ -2709,7 +2709,7 @@ paths:
   /#X-Amz-Target=AmazonDMSv20160101.ReloadTables:
     post:
       operationId: ReloadTables
-      description: 'Reloads the target database table with the source data. '
+      description: '<p>Reloads the target database table with the source data. </p> <p>You can only use this operation with a task in the <code>RUNNING</code> state, otherwise the service will throw an <code>InvalidResourceStateFault</code> exception.</p>'
       responses:
         '200':
           description: Success
@@ -3196,7 +3196,7 @@ components:
         ApplyAction:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The pending maintenance action to apply to this resource.
+            - description: '<p>The pending maintenance action to apply to this resource.</p> <p>Valid values: <code>os-upgrade</code>, <code>system-update</code>, <code>db-upgrade</code> </p>'
         OptInType:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3321,7 +3321,7 @@ components:
         DmsTransferSettings:
           allOf:
             - $ref: '#/components/schemas/DmsTransferSettings'
-            - description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Possible settings include the following:</p> <ul> <li> <p> <code>ServiceAccessRoleArn</code> - The IAM role that has permission to access the Amazon S3 bucket. The role must allow the <code>iam:PassRole</code> action.</p> </li> <li> <p> <code>BucketName</code> - The name of the S3 bucket to use.</p> </li> </ul> <p>Shorthand syntax for these settings is as follows: <code>ServiceAccessRoleArn=string,BucketName=string</code> </p> <p>JSON syntax for these settings is as follows: <code>{ "ServiceAccessRoleArn": "string", "BucketName": "string", } </code> </p>'
+            - description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Possible settings include the following:</p> <ul> <li> <p> <code>ServiceAccessRoleArn</code> - The Amazon Resource Name (ARN) used by the service access IAM role. The role must allow the <code>iam:PassRole</code> action.</p> </li> <li> <p> <code>BucketName</code> - The name of the S3 bucket to use.</p> </li> </ul> <p>Shorthand syntax for these settings is as follows: <code>ServiceAccessRoleArn=string,BucketName=string</code> </p> <p>JSON syntax for these settings is as follows: <code>{ "ServiceAccessRoleArn": "string", "BucketName": "string", } </code> </p>'
         MongoDbSettings:
           allOf:
             - $ref: '#/components/schemas/MongoDbSettings'
@@ -4743,7 +4743,7 @@ components:
         DmsTransferSettings:
           allOf:
             - $ref: '#/components/schemas/DmsTransferSettings'
-            - description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Attributes include the following:</p> <ul> <li> <p>serviceAccessRoleArn - The Identity and Access Management (IAM) role that has permission to access the Amazon S3 bucket. The role must allow the <code>iam:PassRole</code> action.</p> </li> <li> <p>BucketName - The name of the S3 bucket to use.</p> </li> </ul> <p>Shorthand syntax for these settings is as follows: <code>ServiceAccessRoleArn=string ,BucketName=string</code> </p> <p>JSON syntax for these settings is as follows: <code>{ "ServiceAccessRoleArn": "string", "BucketName": "string"} </code> </p>'
+            - description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Attributes include the following:</p> <ul> <li> <p>serviceAccessRoleArn - The Amazon Resource Name (ARN) used by the service access IAM role. The role must allow the <code>iam:PassRole</code> action.</p> </li> <li> <p>BucketName - The name of the S3 bucket to use.</p> </li> </ul> <p>Shorthand syntax for these settings is as follows: <code>ServiceAccessRoleArn=string ,BucketName=string</code> </p> <p>JSON syntax for these settings is as follows: <code>{ "ServiceAccessRoleArn": "string", "BucketName": "string"} </code> </p>'
         MongoDbSettings:
           allOf:
             - $ref: '#/components/schemas/MongoDbSettings'
@@ -5059,7 +5059,11 @@ components:
         ForceFailover:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: 'If this parameter is <code>true</code>, the reboot is conducted through a Multi-AZ failover. (If the instance isn''t configured for Multi-AZ, then you can''t specify <code>true</code>.)'
+            - description: 'If this parameter is <code>true</code>, the reboot is conducted through a Multi-AZ failover. If the instance isn''t configured for Multi-AZ, then you can''t specify <code>true</code>. ( <code>--force-planned-failover</code> and <code>--force-failover</code> can''t both be set to <code>true</code>.)'
+        ForcePlannedFailover:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'If this parameter is <code>true</code>, the reboot is conducted through a planned Multi-AZ failover where resources are released and cleaned up prior to conducting the failover. If the instance isn''''t configured for Multi-AZ, then you can''t specify <code>true</code>. ( <code>--force-planned-failover</code> and <code>--force-failover</code> can''t both be set to <code>true</code>.)'
     RefreshSchemasResponse:
       type: object
       example:
@@ -5724,7 +5728,7 @@ components:
         ServiceAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' The IAM role that has permission to access the Amazon S3 bucket. When specified as part of request syntax, such as for the <code>CreateEndpoint</code> and <code>ModifyEndpoint</code> actions, the role must allow the <code>iam:PassRole</code> action.'
+            - description: 'The Amazon Resource Name (ARN) used by the service access IAM role. The role must allow the <code>iam:PassRole</code> action.'
         BucketName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -6693,7 +6697,7 @@ components:
         DmsTransferSettings:
           allOf:
             - $ref: '#/components/schemas/DmsTransferSettings'
-            - description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Possible settings include the following:</p> <ul> <li> <p> <code>ServiceAccessRoleArn</code> - The IAM role that has permission to access the Amazon S3 bucket. The role must allow the <code>iam:PassRole</code> action.</p> </li> <li> <p> <code>BucketName</code> - The name of the S3 bucket to use.</p> </li> </ul> <p>Shorthand syntax for these settings is as follows: <code>ServiceAccessRoleArn=string,BucketName=string,</code> </p> <p>JSON syntax for these settings is as follows: <code>{ "ServiceAccessRoleArn": "string", "BucketName": "string"} </code> </p>'
+            - description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Possible settings include the following:</p> <ul> <li> <p> <code>ServiceAccessRoleArn</code> - - The Amazon Resource Name (ARN) used by the service access IAM role. The role must allow the <code>iam:PassRole</code> action.</p> </li> <li> <p> <code>BucketName</code> - The name of the S3 bucket to use.</p> </li> </ul> <p>Shorthand syntax for these settings is as follows: <code>ServiceAccessRoleArn=string,BucketName=string,</code> </p> <p>JSON syntax for these settings is as follows: <code>{ "ServiceAccessRoleArn": "string", "BucketName": "string"} </code> </p>'
         MongoDbSettings:
           allOf:
             - $ref: '#/components/schemas/MongoDbSettings'

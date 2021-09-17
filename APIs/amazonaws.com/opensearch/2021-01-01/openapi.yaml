@@ -472,7 +472,9 @@ paths:
                         - $ref: '#/components/schemas/IntegerClass'
                         - description: The number of UltraWarm nodes in the cluster.
                     ColdStorageOptions:
-                      $ref: '#/components/schemas/ColdStorageOptions'
+                      allOf:
+                        - $ref: '#/components/schemas/ColdStorageOptions'
+                        - description: Specifies the <code>ColdStorageOptions</code> config for a Domain
                 EBSOptions:
                   description: 'Options to enable, disable, and specify the properties of EBS storage volumes.'
                   type: object
@@ -1297,7 +1299,9 @@ paths:
                         - $ref: '#/components/schemas/IntegerClass'
                         - description: The number of UltraWarm nodes in the cluster.
                     ColdStorageOptions:
-                      $ref: '#/components/schemas/ColdStorageOptions'
+                      allOf:
+                        - $ref: '#/components/schemas/ColdStorageOptions'
+                        - description: Specifies the <code>ColdStorageOptions</code> config for a Domain
                 EBSOptions:
                   description: 'Options to enable, disable, and specify the properties of EBS storage volumes.'
                   type: object
@@ -2435,6 +2439,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: engineType
+          in: query
+          required: false
+          description: ' Optional parameter to filter the output by domain engine type. Acceptable values are ''Elasticsearch'' and ''OpenSearch''. '
+          schema:
+            type: string
+            enum:
+              - OpenSearch
+              - Elasticsearch
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3469,7 +3483,10 @@ components:
         - Enabled
       properties:
         Enabled:
-          $ref: '#/components/schemas/Boolean'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Enable cold storage option. Accepted values true or false
+      description: Specifies the configuration for cold storage options such as enabled
     VolumeType:
       type: string
       enum:
@@ -3872,8 +3889,8 @@ components:
         DomainNames:
           allOf:
             - $ref: '#/components/schemas/DomainInfoList'
-            - description: List of domain names.
-      description: 'The result of a <code>ListDomainNames</code> operation. Contains the names of all domains owned by this account. '
+            - description: List of domain names and respective engine types.
+      description: The result of a <code>ListDomainNames</code> operation. Contains the names of all domains owned by this account and their respective engine types.
     ListDomainsForPackageResponse:
       type: object
       properties:
@@ -4547,7 +4564,9 @@ components:
             - $ref: '#/components/schemas/IntegerClass'
             - description: The number of UltraWarm nodes in the cluster.
         ColdStorageOptions:
-          $ref: '#/components/schemas/ColdStorageOptions'
+          allOf:
+            - $ref: '#/components/schemas/ColdStorageOptions'
+            - description: Specifies the <code>ColdStorageOptions</code> config for a Domain
       description: 'The configuration for the domain cluster, such as the type and number of instances.'
     ClusterConfigStatus:
       type: object
@@ -5431,6 +5450,11 @@ components:
       description: Unique identifier for the domain.
       minLength: 1
       maxLength: 64
+    EngineType:
+      type: string
+      enum:
+        - OpenSearch
+        - Elasticsearch
     DomainInfo:
       type: object
       properties:
@@ -5438,6 +5462,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DomainName'
             - description: 'The <code>DomainName</code>. '
+        EngineType:
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - description: ' Specifies the <code>EngineType</code> of the domain.'
     DomainInfoList:
       type: array
       description: Contains the list of domain information.
@@ -5668,6 +5696,11 @@ components:
             - $ref: '#/components/schemas/AdditionalLimitList'
             - description: ' List of additional limits that are specific to a given InstanceType and for each of its <code> <a>InstanceRole</a> </code> . '
       description: ' Limits for a given InstanceType and for each of its roles. <br/> Limits contains the following: <code> <a>StorageTypes</a> </code>, <code> <a>InstanceLimits</a> </code>, and <code> <a>AdditionalLimits</a> </code> '
+    ListDomainNamesRequest:
+      type: object
+      title: ListDomainNamesRequest
+      properties: {}
+      description: ' Container for the parameters to the <code><a>ListDomainNames</a></code> operation.'
     ListDomainsForPackageRequest:
       type: object
       title: ListDomainsForPackageRequest

@@ -418,6 +418,7 @@ paths:
                 ElasticsearchVersion:
                   description: 'String of format X.Y to specify version for the Elasticsearch domain eg. "1.5" or "2.3". For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains" target="_blank">Creating Elasticsearch Domains</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>.'
                   type: string
+                  pattern: '^[0-9]{1}\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\.[0-9]{1,2}$'
                 ElasticsearchClusterConfig:
                   description: 'Specifies the configuration for the domain cluster, such as the type and number of instances.'
                   type: object
@@ -465,7 +466,7 @@ paths:
                     ColdStorageOptions:
                       allOf:
                         - $ref: '#/components/schemas/ColdStorageOptions'
-                        - description: Specifies the <code>ColdStorageOptions</code> configuration for an Elasticsearch domain.
+                        - description: Specifies the <code>ColdStorageOptions</code> config for Elasticsearch Domain
                 EBSOptions:
                   description: 'Options to enable, disable, and specify the properties of EBS storage volumes. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank"> Configuring EBS-based Storage</a>.'
                   type: object
@@ -1322,7 +1323,7 @@ paths:
                     ColdStorageOptions:
                       allOf:
                         - $ref: '#/components/schemas/ColdStorageOptions'
-                        - description: Specifies the <code>ColdStorageOptions</code> configuration for an Elasticsearch domain.
+                        - description: Specifies the <code>ColdStorageOptions</code> config for Elasticsearch Domain
                 EBSOptions:
                   description: 'Options to enable, disable, and specify the properties of EBS storage volumes. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank"> Configuring EBS-based Storage</a>.'
                   type: object
@@ -1657,6 +1658,7 @@ paths:
           description: ' Version of Elasticsearch for which <code> <a>Limits</a> </code> are needed. '
           schema:
             type: string
+            pattern: '^[0-9]{1}\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\.[0-9]{1,2}$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2413,6 +2415,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: engineType
+          in: query
+          required: false
+          description: ' Optional parameter to filter the output by domain engine type. Acceptable values are ''Elasticsearch'' and ''OpenSearch''. '
+          schema:
+            type: string
+            enum:
+              - OpenSearch
+              - Elasticsearch
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2546,6 +2558,7 @@ paths:
           description: 'Version of Elasticsearch for which list of supported elasticsearch instance types are needed. '
           schema:
             type: string
+            pattern: '^[0-9]{1}\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\.[0-9]{1,2}$'
         - name: domainName
           in: query
           required: false
@@ -3184,6 +3197,7 @@ paths:
                 TargetVersion:
                   description: The version of Elasticsearch that you intend to upgrade the domain to.
                   type: string
+                  pattern: '^[0-9]{1}\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\.[0-9]{1,2}$'
                 PerformCheckOnly:
                   description: ' This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. '
                   type: boolean
@@ -3388,8 +3402,8 @@ components:
         Enabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: True to enable cold storage for an Elasticsearch domain.
-      description: Specifies settings for cold storage.
+            - description: Enable cold storage option. Accepted values true or false
+      description: Specifies the configuration for cold storage options such as enabled
     VolumeType:
       type: string
       enum:
@@ -3780,8 +3794,8 @@ components:
         DomainNames:
           allOf:
             - $ref: '#/components/schemas/DomainInfoList'
-            - description: List of Elasticsearch domain names.
-      description: The result of a <code>ListDomainNames</code> operation. Contains the names of all Elasticsearch domains owned by this account.
+            - description: List of domain names and respective engine types.
+      description: The result of a <code>ListDomainNames</code> operation. Contains the names of all domains owned by this account and their respective engine types.
     ListDomainsForPackageResponse:
       type: object
       properties:
@@ -4447,6 +4461,7 @@ components:
         $ref: '#/components/schemas/CompatibleVersionsMap'
     ElasticsearchVersionString:
       type: string
+      pattern: '^[0-9]{1}\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\.[0-9]{1,2}$'
     ElasticsearchVersionList:
       type: array
       description: 'List of supported elastic search versions. '
@@ -4501,7 +4516,7 @@ components:
         ColdStorageOptions:
           allOf:
             - $ref: '#/components/schemas/ColdStorageOptions'
-            - description: Specifies the <code>ColdStorageOptions</code> configuration for an Elasticsearch domain.
+            - description: Specifies the <code>ColdStorageOptions</code> config for Elasticsearch Domain
       description: 'Specifies the configuration for the domain cluster, such as the type and number of instances.'
     EBSOptions:
       type: object
@@ -5205,6 +5220,11 @@ components:
       description: Unique identifier for an Elasticsearch domain.
       minLength: 1
       maxLength: 64
+    EngineType:
+      type: string
+      enum:
+        - OpenSearch
+        - Elasticsearch
     DomainInfo:
       type: object
       properties:
@@ -5212,6 +5232,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DomainName'
             - description: ' Specifies the <code>DomainName</code>.'
+        EngineType:
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - description: ' Specifies the <code>EngineType</code> of the domain.'
     DomainInfoList:
       type: array
       description: ' Contains the list of Elasticsearch domain information.'
@@ -5535,6 +5559,11 @@ components:
             - $ref: '#/components/schemas/AdditionalLimitList'
             - description: ' List of additional limits that are specific to a given InstanceType and for each of it''s <code> <a>InstanceRole</a> </code> . '
       description: ' Limits for given InstanceType and for each of it''s role. <br/> Limits contains following <code> <a>StorageTypes,</a> </code> <code> <a>InstanceLimits</a> </code> and <code> <a>AdditionalLimits</a> </code> '
+    ListDomainNamesRequest:
+      type: object
+      title: ListDomainNamesRequest
+      properties: {}
+      description: ' Container for the parameters to the <code><a>ListDomainNames</a></code> operation.'
     ListDomainsForPackageRequest:
       type: object
       title: ListDomainsForPackageRequest
