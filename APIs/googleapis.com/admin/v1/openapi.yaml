@@ -1,0 +1,462 @@
+openapi: 3.0.0
+servers:
+  - url: https://admin.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: Admin SDK lets administrators of enterprise domains to view and manage resources like user, groups etc. It also provides audit and usage reports of domain.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Admin SDK API
+  version: v1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+  x-origin:
+    - format: openapi
+      url: https://admin.googleapis.com/$discovery/rest?version=reports_v1
+      version: "3.0"
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: admin
+externalDocs:
+  url: https://developers.google.com/admin-sdk/
+tags: []
+paths: {}
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    Alias:
+      description: JSON template for Alias object in Directory API.
+      properties:
+        alias:
+          type: string
+        etag:
+          type: string
+        id:
+          type: string
+        kind:
+          default: admin#directory#alias
+          type: string
+        primaryEmail:
+          type: string
+      type: object
+    Aliases:
+      description: JSON response template to list aliases in Directory API.
+      properties:
+        aliases:
+          items: {}
+          type: array
+        etag:
+          type: string
+        kind:
+          default: admin#directory#aliases
+          type: string
+      type: object
+    Feature:
+      description: JSON template for Feature object in Directory API.
+      properties:
+        etags:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: admin#directory#resources#features#Feature
+          description: Kind of resource this is.
+          type: string
+        name:
+          description: The name of the feature.
+          type: string
+      type: object
+    FeatureInstance:
+      description: JSON template for a feature instance.
+      properties:
+        feature:
+          $ref: "#/components/schemas/Feature"
+          description: The feature that this is an instance of. A calendar resource may have multiple instances of a feature.
+      type: object
+    UserAbout:
+      description: JSON template for About (notes) of a user in Directory API.
+      properties:
+        contentType:
+          description: About entry can have a type which indicates the content type. It can either be plain or html. By default, notes contents are assumed to contain plain text.
+          type: string
+        value:
+          description: Actual value of notes.
+          type: string
+      type: object
+    UserAddress:
+      description: JSON template for address.
+      properties:
+        country:
+          description: Country.
+          type: string
+        countryCode:
+          description: Country code.
+          type: string
+        customType:
+          description: Custom type.
+          type: string
+        extendedAddress:
+          description: Extended Address.
+          type: string
+        formatted:
+          description: Formatted address.
+          type: string
+        locality:
+          description: Locality.
+          type: string
+        poBox:
+          description: Other parts of address.
+          type: string
+        postalCode:
+          description: Postal code.
+          type: string
+        primary:
+          description: If this is user's primary address. Only one entry could be marked as primary.
+          type: boolean
+        region:
+          description: Region.
+          type: string
+        sourceIsStructured:
+          description: User supplied address was structured. Structured addresses are NOT supported at this time. You might be able to write structured addresses but any values will eventually be clobbered.
+          type: boolean
+        streetAddress:
+          description: Street.
+          type: string
+        type:
+          description: Each entry can have a type which indicates standard values of that entry. For example address could be of home work etc. In addition to the standard type an entry can have a custom type and can take any value. Such type should have the CUSTOM value as type and also have a customType value.
+          type: string
+      type: object
+    UserCustomProperties:
+      additionalProperties: {}
+      description: JSON template for a set of custom properties (i.e. all fields in a particular schema)
+      type: object
+    UserEmail:
+      description: JSON template for an email.
+      properties:
+        address:
+          description: Email id of the user.
+          type: string
+        customType:
+          description: Custom Type.
+          type: string
+        primary:
+          description: If this is user's primary email. Only one entry could be marked as primary.
+          type: boolean
+        type:
+          description: Each entry can have a type which indicates standard types of that entry. For example email could be of home, work etc. In addition to the standard type, an entry can have a custom type and can take any value Such types should have the CUSTOM value as type and also have a customType value.
+          type: string
+      type: object
+    UserExternalId:
+      description: JSON template for an externalId entry.
+      properties:
+        customType:
+          description: Custom type.
+          type: string
+        type:
+          description: The type of the Id.
+          type: string
+        value:
+          description: The value of the id.
+          type: string
+      type: object
+    UserGender:
+      properties:
+        addressMeAs:
+          description: AddressMeAs. A human-readable string containing the proper way to refer to the profile owner by humans for example he/him/his or they/them/their.
+          type: string
+        customGender:
+          description: Custom gender.
+          type: string
+        type:
+          description: Gender.
+          type: string
+      type: object
+    UserIm:
+      description: JSON template for instant messenger of an user.
+      properties:
+        customProtocol:
+          description: Custom protocol.
+          type: string
+        customType:
+          description: Custom type.
+          type: string
+        im:
+          description: Instant messenger id.
+          type: string
+        primary:
+          description: If this is user's primary im. Only one entry could be marked as primary.
+          type: boolean
+        protocol:
+          description: Protocol used in the instant messenger. It should be one of the values from ImProtocolTypes map. Similar to type it can take a CUSTOM value and specify the custom name in customProtocol field.
+          type: string
+        type:
+          description: Each entry can have a type which indicates standard types of that entry. For example instant messengers could be of home work etc. In addition to the standard type an entry can have a custom type and can take any value. Such types should have the CUSTOM value as type and also have a customType value.
+          type: string
+      type: object
+    UserKeyword:
+      description: JSON template for a keyword entry.
+      properties:
+        customType:
+          description: Custom Type.
+          type: string
+        type:
+          description: Each entry can have a type which indicates standard type of that entry. For example keyword could be of type occupation or outlook. In addition to the standard type an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a customType value.
+          type: string
+        value:
+          description: Keyword.
+          type: string
+      type: object
+    UserLanguage:
+      description: JSON template for a language entry.
+      properties:
+        customLanguage:
+          description: Other language. User can provide own language name if there is no corresponding Google III language code. If this is set LanguageCode can't be set
+          type: string
+        languageCode:
+          description: Language Code. Should be used for storing Google III LanguageCode string representation for language. Illegal values cause SchemaException.
+          type: string
+      type: object
+    UserLocation:
+      description: JSON template for a location entry.
+      properties:
+        area:
+          description: Textual location. This is most useful for display purposes to concisely describe the location. For example 'Mountain View, CA', 'Near Seattle', 'US-NYC-9TH 9A209A.''
+          type: string
+        buildingId:
+          description: Building Identifier.
+          type: string
+        customType:
+          description: Custom Type.
+          type: string
+        deskCode:
+          description: Most specific textual code of individual desk location.
+          type: string
+        floorName:
+          description: Floor name/number.
+          type: string
+        floorSection:
+          description: Floor section. More specific location within the floor. For example if a floor is divided into sections 'A', 'B' and 'C' this field would identify one of those values.
+          type: string
+        type:
+          description: Each entry can have a type which indicates standard types of that entry. For example location could be of types default and desk. In addition to standard type an entry can have a custom type and can give it any name. Such types should have 'custom' as type and also have a customType value.
+          type: string
+      type: object
+    UserOrganization:
+      description: JSON template for an organization entry.
+      properties:
+        costCenter:
+          description: The cost center of the users department.
+          type: string
+        customType:
+          description: Custom type.
+          type: string
+        department:
+          description: Department within the organization.
+          type: string
+        description:
+          description: Description of the organization.
+          type: string
+        domain:
+          description: The domain to which the organization belongs to.
+          type: string
+        fullTimeEquivalent:
+          description: The full-time equivalent millipercent within the organization (100000 = 100%).
+          format: int32
+          type: integer
+        location:
+          description: Location of the organization. This need not be fully qualified address.
+          type: string
+        name:
+          description: Name of the organization
+          type: string
+        primary:
+          description: If it user's primary organization.
+          type: boolean
+        symbol:
+          description: Symbol of the organization.
+          type: string
+        title:
+          description: Title (designation) of the user in the organization.
+          type: string
+        type:
+          description: Each entry can have a type which indicates standard types of that entry. For example organization could be of school work etc. In addition to the standard type an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a CustomType value.
+          type: string
+      type: object
+    UserPhone:
+      description: JSON template for a phone entry.
+      properties:
+        customType:
+          description: Custom Type.
+          type: string
+        primary:
+          description: If this is user's primary phone or not.
+          type: boolean
+        type:
+          description: Each entry can have a type which indicates standard types of that entry. For example phone could be of home_fax work mobile etc. In addition to the standard type an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a customType value.
+          type: string
+        value:
+          description: Phone number.
+          type: string
+      type: object
+    UserPosixAccount:
+      description: JSON template for a POSIX account entry.
+      properties:
+        accountId:
+          description: A POSIX account field identifier.
+          type: string
+        gecos:
+          description: The GECOS (user information) for this account.
+          type: string
+        gid:
+          description: The default group ID.
+          format: uint64
+          type: string
+        homeDirectory:
+          description: The path to the home directory for this account.
+          type: string
+        operatingSystemType:
+          description: The operating system type for this account.
+          type: string
+        primary:
+          description: If this is user's primary account within the SystemId.
+          type: boolean
+        shell:
+          description: The path to the login shell for this account.
+          type: string
+        systemId:
+          description: System identifier for which account Username or Uid apply to.
+          type: string
+        uid:
+          description: The POSIX compliant user ID.
+          format: uint64
+          type: string
+        username:
+          description: The username of the account.
+          type: string
+      type: object
+    UserRelation:
+      description: JSON template for a relation entry.
+      properties:
+        customType:
+          description: Custom Type.
+          type: string
+        type:
+          description: The relation of the user. Some of the possible values are mother father sister brother manager assistant partner.
+          type: string
+        value:
+          description: The name of the relation.
+          type: string
+      type: object
+    UserSshPublicKey:
+      description: JSON template for a POSIX account entry.
+      properties:
+        expirationTimeUsec:
+          description: An expiration time in microseconds since epoch.
+          format: int64
+          type: string
+        fingerprint:
+          description: A SHA-256 fingerprint of the SSH public key. (Read-only)
+          readOnly: true
+          type: string
+        key:
+          description: An SSH public key.
+          type: string
+      type: object
+    UserWebsite:
+      description: JSON template for a website entry.
+      properties:
+        customType:
+          description: Custom Type.
+          type: string
+        primary:
+          description: If this is user's primary website or not.
+          type: boolean
+        type:
+          description: Each entry can have a type which indicates standard types of that entry. For example website could be of home work blog etc. In addition to the standard type an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a customType value.
+          type: string
+        value:
+          description: Website.
+          type: string
+      type: object

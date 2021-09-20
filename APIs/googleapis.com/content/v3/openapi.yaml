@@ -1,0 +1,458 @@
+openapi: 3.0.0
+servers:
+  - url: https://shoppingcontent.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: Manage your product listings and accounts for Google Shopping
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Content API for Shopping
+  version: v3
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+  x-origin:
+    - format: openapi
+      url: https://shoppingcontent.googleapis.com/$discovery/rest?version=v2.1
+      version: "3.0"
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: content
+externalDocs:
+  url: https://developers.google.com/shopping-content/v2/
+tags:
+  - name: accounts
+paths:
+  "/content/v3/{name}":
+    delete:
+      description: Deletes a repricing rule in your Merchant Center account.
+      operationId: content.accounts.repricingrules.delete
+      parameters:
+        - description: "Required. The name of the repricing rule to delete. Format: accounts/{account}/repricingrules/{repricing_rule}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - accounts
+    get:
+      description: Retrieves a repricing rule from your Merchant Center account.
+      operationId: content.accounts.repricingrules.get
+      parameters:
+        - description: "Required. The name of the repricing rule to retrieve. Format: accounts/{account}/repricingrules/{repricing_rule}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RepricingRule"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates a repricing rule in your Merchant Center account. All mutable fields will be overwritten in each update request. In each update, you must provide all required mutable fields, or an error will be thrown.
+      operationId: content.accounts.repricingrules.patch
+      parameters:
+        - description: "The resource name of the repricing rule. Format: {repricingrule.name=accounts/{account}/repricingrules/{repricing_rule}}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The comma-separated field mask indicating the fields to update.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RepricingRule"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RepricingRule"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - accounts
+  "/content/v3/{parent}/repricingrules":
+    get:
+      description: Lists the repricing rules in your Merchant Center account.
+      operationId: content.accounts.repricingrules.list
+      parameters:
+        - description: "Required. The parent account. Format: accounts/{account}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of repricing rules to return. The service may return fewer than this value. If unspecified, at most 50 rules will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListRepricingRules` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListRepricingRules` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListRepricingRulesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a repricing rule for your Merchant Center account.
+      operationId: content.accounts.repricingrules.create
+      parameters:
+        - description: "Required. The parent account. Format: accounts/{account}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the rule, which will become the final component of the rule's resource name.
+          in: query
+          name: repricingRuleId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RepricingRule"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RepricingRule"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - accounts
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    ListRepricingRulesResponse:
+      description: Response message for the `ListRepricingRules` method.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        repricingRules:
+          description: The rules from the specified merchant.
+          items:
+            $ref: "#/components/schemas/RepricingRule"
+          type: array
+      type: object
+    RepricingRule:
+      description: "Represents a repricing rule. A repricing rule is used by shopping serving to adjust transactable offer prices if conditions are met. Next ID: 24"
+      properties:
+        cogsBasedRule:
+          $ref: "#/components/schemas/RepricingRuleCostOfGoodsSaleRule"
+          description: The rule definition for TYPE_COGS_BASED. Required when the rule type is TYPE_COGS_BASED.
+        effectiveTimePeriod:
+          $ref: "#/components/schemas/RepricingRuleEffectiveTime"
+          description: Required. Time period when the rule should take effect.
+        eligibleOfferMatcher:
+          $ref: "#/components/schemas/RepricingRuleEligibleOfferMatcher"
+          description: Required. Match criteria for the eligible offers.
+        languageCode:
+          description: Required. Immutable. The two-letter ISO 639-1 language code associated with the repricing rule.
+          type: string
+        merchantId:
+          description: Output only. Merchant that owns the repricing rule.
+          format: int64
+          readOnly: true
+          type: string
+        name:
+          description: "The resource name of the repricing rule. Format: {repricingrule.name=accounts/{account}/repricingrules/{repricing_rule}}"
+          type: string
+        paused:
+          description: Represents whether a rule is paused. A paused rule will behave like a non-paused rule within CRUD operations, with the major difference that a paused rule will not be evaluated and will have no effect on offers.
+          type: boolean
+        regionCode:
+          description: Required. Immutable. [CLDR region code](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml) (e.g. "US").
+          type: string
+        restriction:
+          $ref: "#/components/schemas/RepricingRuleRestriction"
+          description: Required. Restriction of the rule appliance.
+        ruleId:
+          description: Output only. The ID to uniquely identify each repricing rule.
+          readOnly: true
+          type: string
+        statsBasedRule:
+          $ref: "#/components/schemas/RepricingRuleStatsBasedRule"
+          description: The rule definition for TYPE_STATS_BASED. Required when the rule type is TYPE_STATS_BASED.
+        title:
+          description: The title for the rule.
+          type: string
+        type:
+          description: Required. Immutable. The type of the rule.
+          enum:
+            - REPRICING_RULE_TYPE_UNSPECIFIED
+            - TYPE_STATS_BASED
+            - TYPE_COGS_BASED
+          type: string
+      type: object
+    RepricingRuleCostOfGoodsSaleRule:
+      description: A repricing rule that changes the sale price based on cost of goods sale.
+      properties:
+        percentageDelta:
+          description: "The percent change against the COGS. Ex: 20 would mean to set the adjusted price 1.2X of the COGS data."
+          format: int32
+          type: integer
+        priceDelta:
+          description: The price delta against the COGS. E.g. 2 means $2 more of the COGS.
+          type: string
+      type: object
+    RepricingRuleEffectiveTime:
+      properties:
+        timePeriods:
+          description: A list of time periods combined with OR. The maximum number of entries is limited to 5.
+          items:
+            $ref: "#/components/schemas/TimePeriod"
+          type: array
+      type: object
+    RepricingRuleEligibleOfferMatcher:
+      description: "Matcher that specifies eligible offers. When the USE_FEED_ATTRIBUTE option is selected, only the repricing_rule_id attribute on the product feed is used to specify offer-rule mapping. When the CUSTOM_FILTER option is selected, only the *_matcher fields are used to filter the offers for offer-rule mapping. If the CUSTOM_FILTER option is selected, an offer needs to satisfy each custom filter matcher to be eligible for a rule. Size limit: the sum of the number of entries in all the matchers should not exceed 20. For example, there can be 15 product ids and 5 brands, but not 10 product ids and 11 brands."
+      properties:
+        brandMatcher:
+          $ref: "#/components/schemas/RepricingRuleEligibleOfferMatcherStringMatcher"
+          description: Filter by the brand.
+        itemGroupIdMatcher:
+          $ref: "#/components/schemas/RepricingRuleEligibleOfferMatcherStringMatcher"
+          description: Filter by the item group id.
+        matcherOption:
+          description: Determines whether to use the custom matchers or the product feed attribute "repricing_rule_id" to specify offer-rule mapping.
+          enum:
+            - MATCHER_OPTION_UNSPECIFIED
+            - MATCHER_OPTION_CUSTOM_FILTER
+            - MATCHER_OPTION_USE_FEED_ATTRIBUTE
+            - MATCHER_OPTION_ALL_PRODUCTS
+          type: string
+        offerIdMatcher:
+          $ref: "#/components/schemas/RepricingRuleEligibleOfferMatcherStringMatcher"
+          description: Filter by the offer id.
+        skipWhenOnPromotion:
+          description: When true, the rule won't be applied to offers with active promotions.
+          type: boolean
+      type: object
+    RepricingRuleEligibleOfferMatcherStringMatcher:
+      description: Matcher by string attributes.
+      properties:
+        strAttributes:
+          description: String attributes, as long as such attribute of an offer is one of the string attribute values, the offer is considered as passing the matcher. The string matcher checks an offer for inclusivity in the string attributes, not equality. Only literal string matching is supported, no regex.
+          items:
+            type: string
+          type: array
+      type: object
+    RepricingRuleRestriction:
+      description: 'Definition of a rule restriction. At least one of the following needs to be true: (1) use_auto_pricing_min_price is true (2) floor.price_delta exists (3) floor.percentage_delta exists If floor.price_delta and floor.percentage_delta are both set on a rule, the highest value will be chosen by the Repricer. In other words, for a product with a price of $50, if the `floor.percentage_delta` is "-10" and the floor.price_delta is "-12", the offer price will only be lowered $5 (10% lower than the original offer price).'
+      properties:
+        floor:
+          $ref: "#/components/schemas/RepricingRuleRestrictionBoundary"
+          description: The inclusive floor lower bound. The repricing rule only applies when new price >= floor.
+        useAutoPricingMinPrice:
+          description: If true, use the AUTO_PRICING_MIN_PRICE offer attribute as the lower bound of the rule. If use_auto_pricing_min_price is true, then only offers with `AUTO_PRICING_MIN_PRICE` existing on the offer will get Repricer treatment, even if a floor value is set on the rule. Also, if use_auto_pricing_min_price is true, the floor restriction will be ignored.
+          type: boolean
+      type: object
+    RepricingRuleRestrictionBoundary:
+      description: Definition of a boundary.
+      properties:
+        percentageDelta:
+          description: The percentage delta relative to the offer selling price. This field is signed. It must be negative in floor. When it is used in floor, it should be > -100. For example, if an offer is selling at $10 and this field is -30 in floor, the repricing rule only applies if the calculated new price is >= $7.
+          format: int32
+          type: integer
+        priceDelta:
+          description: The price micros relative to the offer selling price. This field is signed. It must be negative in floor. For example, if an offer is selling at $10 and this field is -$2 in floor, the repricing rule only applies if the calculated new price is >= $8.
+          type: string
+      type: object
+    RepricingRuleStatsBasedRule:
+      description: Definition of stats based rule.
+      properties:
+        percentageDelta:
+          description: The percent change against the price target. Valid from 0 to 100 inclusively.
+          format: int32
+          type: integer
+        priceDelta:
+          description: The price delta against the above price target. A positive value means the price should be adjusted to be above statistical measure, and a negative value means below. Currency code must not be included.
+          type: string
+      type: object
+    TimePeriod:
+      description: A message that represents a time period.
+      properties:
+        endTime:
+          description: The ending time.
+          format: google-datetime
+          type: string
+        startTime:
+          description: The starting point in time.
+          format: google-datetime
+          type: string
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/content: Manage your product listings and accounts for Google Shopping
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/content: Manage your product listings and accounts for Google Shopping
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

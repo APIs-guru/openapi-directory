@@ -24,10 +24,10 @@ info:
     - converter:
         url: https://github.com/mermade/oas-kit
         version: 7.0.4
-      format: google
-      url: https://run.googleapis.com/$discovery/rest?version=v1alpha1
-      version: v1
-  x-preferred: true
+      format: openapi
+      url: https://run.googleapis.com/$discovery/rest?version=v1beta1
+      version: "3.0"
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: run
 externalDocs:
