@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Artifact Registry API
-  version: v1beta2
+  version: v1beta1
   x-apisguru-categories:
     - analytics
     - media
@@ -20,7 +20,7 @@ info:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: https://artifactregistry.googleapis.com/$discovery/rest?version=v1beta2
+      url: https://artifactregistry.googleapis.com/$discovery/rest?version=v1beta1
       version: v1
   x-providerName: googleapis.com
   x-serviceName: artifactregistry
@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta2/{name}":
+  "/v1beta1/{name}":
     delete:
       description: Deletes a version and all of its content. The returned operation will complete once the version has been deleted.
       operationId: artifactregistry.projects.locations.repositories.packages.versions.delete
@@ -142,7 +142,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta2/{name}/locations":
+  "/v1beta1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
       operationId: artifactregistry.projects.locations.list
@@ -198,91 +198,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta2/{parent}/aptArtifacts:create":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Directly uploads an Apt artifact. The returned Operation will complete once the resources are uploaded. Package, Version, and File resources are created based on the imported artifact. Imported artifacts that conflict with existing resources are ignored.
-      operationId: artifactregistry.projects.locations.repositories.aptartifacts.upload
-      parameters:
-        - description: The name of the parent resource where the artifacts will be uploaded.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/octet-stream:
-            schema:
-              $ref: "#/components/schemas/UploadAptArtifactRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UploadAptArtifactMediaResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1beta2/{parent}/aptArtifacts:import":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Imports Apt artifacts. The returned Operation will complete once the resources are imported. Package, Version, and File resources are created based on the imported artifacts. Imported artifacts that conflict with existing resources are ignored.
-      operationId: artifactregistry.projects.locations.repositories.aptArtifacts.import
-      parameters:
-        - description: The name of the parent resource where the artifacts will be imported.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ImportAptArtifactsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1beta2/{parent}/files":
+  "/v1beta1/{parent}/files":
     get:
       description: Lists files.
       operationId: artifactregistry.projects.locations.repositories.files.list
@@ -338,7 +254,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta2/{parent}/packages":
+  "/v1beta1/{parent}/packages":
     get:
       description: Lists packages.
       operationId: artifactregistry.projects.locations.repositories.packages.list
@@ -349,7 +265,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of packages to return. Maximum page size is 1,000.
+        - description: The maximum number of packages to return.
           in: query
           name: pageSize
           schema:
@@ -389,7 +305,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta2/{parent}/repositories":
+  "/v1beta1/{parent}/repositories":
     get:
       description: Lists repositories.
       operationId: artifactregistry.projects.locations.repositories.list
@@ -400,7 +316,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of repositories to return. Maximum page size is 1,000.
+        - description: The maximum number of repositories to return.
           in: query
           name: pageSize
           schema:
@@ -474,7 +390,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta2/{parent}/tags":
+  "/v1beta1/{parent}/tags":
     get:
       description: Lists tags.
       operationId: artifactregistry.projects.locations.repositories.packages.tags.list
@@ -490,7 +406,7 @@ paths:
           name: filter
           schema:
             type: string
-        - description: The maximum number of tags to return. Maximum page size is 10,000.
+        - description: The maximum number of tags to return.
           in: query
           name: pageSize
           schema:
@@ -564,7 +480,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta2/{parent}/versions":
+  "/v1beta1/{parent}/versions":
     get:
       description: Lists versions.
       operationId: artifactregistry.projects.locations.repositories.packages.versions.list
@@ -580,7 +496,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: The maximum number of versions to return. Maximum page size is 1,000.
+        - description: The maximum number of versions to return.
           in: query
           name: pageSize
           schema:
@@ -629,91 +545,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta2/{parent}/yumArtifacts:create":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Directly uploads a Yum artifact. The returned Operation will complete once the resources are uploaded. Package, Version, and File resources are created based on the imported artifact. Imported artifacts that conflict with existing resources are ignored.
-      operationId: artifactregistry.projects.locations.repositories.yumartifacts.upload
-      parameters:
-        - description: The name of the parent resource where the artifacts will be uploaded.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/octet-stream:
-            schema:
-              $ref: "#/components/schemas/UploadYumArtifactRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UploadYumArtifactMediaResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1beta2/{parent}/yumArtifacts:import":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Imports Yum (RPM) artifacts. The returned Operation will complete once the resources are imported. Package, Version, and File resources are created based on the imported artifacts. Imported artifacts that conflict with existing resources are ignored.
-      operationId: artifactregistry.projects.locations.repositories.yumArtifacts.import
-      parameters:
-        - description: The name of the parent resource where the artifacts will be imported.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ImportYumArtifactsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1beta2/{resource}:getIamPolicy":
+  "/v1beta1/{resource}:getIamPolicy":
     get:
       description: Gets the IAM policy for a given resource.
       operationId: artifactregistry.projects.locations.repositories.getIamPolicy
@@ -759,7 +591,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta2/{resource}:setIamPolicy":
+  "/v1beta1/{resource}:setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -801,7 +633,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta2/{resource}:testIamPermissions":
+  "/v1beta1/{resource}:testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -991,7 +823,7 @@ components:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
-    GoogleDevtoolsArtifactregistryV1beta2File:
+    File:
       description: Files store content that is potentially associated with Packages or Versions.
       properties:
         createTime:
@@ -1054,13 +886,6 @@ components:
           description: Supports URI wildcards for matching multiple objects from a single URI.
           type: boolean
       type: object
-    ImportAptArtifactsRequest:
-      description: The request to import new apt artifacts.
-      properties:
-        gcsSource:
-          $ref: "#/components/schemas/ImportAptArtifactsGcsSource"
-          description: Google Cloud Storage location where input content is located.
-      type: object
     ImportAptArtifactsResponse:
       description: The response message from importing artifacts.
       properties:
@@ -1097,13 +922,6 @@ components:
           description: Supports URI wildcards for matching multiple objects from a single URI.
           type: boolean
       type: object
-    ImportYumArtifactsRequest:
-      description: The request to import new yum artifacts.
-      properties:
-        gcsSource:
-          $ref: "#/components/schemas/ImportYumArtifactsGcsSource"
-          description: Google Cloud Storage location where input content is located.
-      type: object
     ImportYumArtifactsResponse:
       description: The response message from importing artifacts.
       properties:
@@ -1124,7 +942,7 @@ components:
         files:
           description: The files returned.
           items:
-            $ref: "#/components/schemas/GoogleDevtoolsArtifactregistryV1beta2File"
+            $ref: "#/components/schemas/File"
           type: array
         nextPageToken:
           description: The token to retrieve the next page of files, or empty if there are no more files to return.
@@ -1341,7 +1159,7 @@ components:
           description: 'The name of the tag, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/tags/tag1". If the package part contains slashes, the slashes are escaped. The tag part can only have characters in [a-zA-Z0-9\-._~:@], anything else must be URL encoded.'
           type: string
         version:
-          description: 'The name of the version the tag refers to, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/sha256:5243811" If the package or version ID parts contain slashes, the slashes are escaped.'
+          description: 'The name of the version the tag refers to, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/sha256:5243811"'
           type: string
       type: object
     TestIamPermissionsRequest:
@@ -1369,10 +1187,6 @@ components:
           $ref: "#/components/schemas/Operation"
           description: Operation to be returned to the user.
       type: object
-    UploadAptArtifactRequest:
-      description: The request to upload an artifact.
-      properties: {}
-      type: object
     UploadAptArtifactResponse:
       description: The response of the completed artifact upload operation. This response is contained in the Operation and available to users.
       properties:
@@ -1388,10 +1202,6 @@ components:
         operation:
           $ref: "#/components/schemas/Operation"
           description: Operation to be returned to the user.
-      type: object
-    UploadYumArtifactRequest:
-      description: The request to upload an artifact.
-      properties: {}
       type: object
     UploadYumArtifactResponse:
       description: The response of the completed artifact upload operation. This response is contained in the Operation and available to users.
@@ -1412,12 +1222,6 @@ components:
         description:
           description: Optional. Description of the version, as specified in its metadata.
           type: string
-        metadata:
-          additionalProperties:
-            description: Properties of the object.
-          description: Output only. Repository-specific Metadata stored against this version. The fields returned are defined by the underlying repository-specific resource. Currently, the only resource in use is DockerImage
-          readOnly: true
-          type: object
         name:
           description: 'The name of the version, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/art1". If the package or version ID parts contain slashes, the slashes are escaped.'
           type: string

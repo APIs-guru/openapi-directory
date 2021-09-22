@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Network Management API
-  version: v1beta1
+  version: v1
   x-apisguru-categories:
     - analytics
     - media
@@ -20,7 +20,7 @@ info:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: https://networkmanagement.googleapis.com/$discovery/rest?version=v1beta1
+      url: https://networkmanagement.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-providerName: googleapis.com
   x-serviceName: networkmanagement
@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta1/{name}":
+  "/v1/{name}":
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
       operationId: networkmanagement.projects.locations.global.operations.delete
@@ -94,7 +94,7 @@ paths:
       description: Updates the configuration of an existing `ConnectivityTest`. After you update a test, the reachability analysis is performed as part of the long running operation, which completes when the analysis completes. The Reachability state in the test resource is updated with the new result. If the endpoint specifications in `ConnectivityTest` are invalid (for example, they contain non-existent resources in the network, or the user does not have read permissions to the network configurations of listed projects), then the reachability result returns a value of UNKNOWN. If the endpoint specifications in `ConnectivityTest` are incomplete, the reachability result returns a value of `AMBIGUOUS`. See the documentation in `ConnectivityTest` for for more details.
       operationId: networkmanagement.projects.locations.global.connectivityTests.patch
       parameters:
-        - description: "Required. Unique name of the resource using the form: `projects/{project_id}/locations/global/connectivityTests/{test}`"
+        - description: "Required. Unique name of the resource using the form: `projects/{project_id}/locations/global/connectivityTests/{test_id}`"
           in: path
           name: name
           required: true
@@ -124,7 +124,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}/locations":
+  "/v1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
       operationId: networkmanagement.projects.locations.list
@@ -176,7 +176,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}/operations":
+  "/v1/{name}/operations":
     get:
       description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
       operationId: networkmanagement.projects.locations.global.operations.list
@@ -228,7 +228,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:cancel":
+  "/v1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -270,7 +270,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:rerun":
+  "/v1/{name}:rerun":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -312,7 +312,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/connectivityTests":
+  "/v1/{parent}/connectivityTests":
     get:
       description: Lists all Connectivity Tests owned by a project.
       operationId: networkmanagement.projects.locations.global.connectivityTests.list
@@ -403,7 +403,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:getIamPolicy":
+  "/v1/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: networkmanagement.projects.locations.global.connectivityTests.getIamPolicy
@@ -445,7 +445,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{resource}:setIamPolicy":
+  "/v1/{resource}:setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -487,7 +487,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:testIamPermissions":
+  "/v1/{resource}:testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -725,12 +725,8 @@ components:
           description: Resource labels to represent user-provided metadata.
           type: object
         name:
-          description: "Required. Unique name of the resource using the form: `projects/{project_id}/locations/global/connectivityTests/{test}`"
+          description: "Required. Unique name of the resource using the form: `projects/{project_id}/locations/global/connectivityTests/{test_id}`"
           type: string
-        probingDetails:
-          $ref: "#/components/schemas/ProbingDetails"
-          description: Output only. The probing details of this test from the latest run, present for applicable tests only. The details are updated when creating a new test, updating an existing test, or triggering a one-time rerun of an existing test.
-          readOnly: true
         protocol:
           description: IP Protocol of the test. When not provided, "TCP" is assumed.
           type: string
@@ -819,7 +815,7 @@ components:
           description: A Compute Engine instance URI.
           type: string
         ipAddress:
-          description: The IP address of the endpoint, which can be an external or internal IP. An IPv6 address is only allowed when the test's destination is a [global load balancer VIP](https://cloud.google.com/load-balancing/docs/load-balancing-overview).
+          description: The IP address of the endpoint, which can be an external or internal IP. An IPv6 address is only allowed when the test's destination is a [global load balancer VIP](/load-balancing/docs/load-balancing-overview).
           type: string
         network:
           description: A Compute Engine network URI.
@@ -1014,27 +1010,6 @@ components:
         uri:
           description: URI of a Compute Engine instance.
           type: string
-      type: object
-    LatencyDistribution:
-      description: Describes measured latency distribution.
-      properties:
-        latencyPercentiles:
-          description: Representative latency percentiles.
-          items:
-            $ref: "#/components/schemas/LatencyPercentile"
-          type: array
-      type: object
-    LatencyPercentile:
-      description: Latency percentile rank and value.
-      properties:
-        latencyMicros:
-          description: percent-th percentile of latency observed, in microseconds. Fraction of percent/100 of samples have latency lower or equal to the value of this field.
-          format: int64
-          type: string
-        percent:
-          description: Percentage of samples this data point applies to.
-          format: int32
-          type: integer
       type: object
     ListConnectivityTestsResponse:
       description: Response for the `ListConnectivityTests` method.
@@ -1243,47 +1218,6 @@ components:
           description: "Specifies the format of the policy. Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected. Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations: * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy that includes conditions **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost. If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies)."
           format: int32
           type: integer
-      type: object
-    ProbingDetails:
-      description: Results of active probing from the last run of the test.
-      properties:
-        abortCause:
-          description: The reason probing was aborted.
-          enum:
-            - PROBING_ABORT_CAUSE_UNSPECIFIED
-            - PERMISSION_DENIED
-            - NO_SOURCE_LOCATION
-          type: string
-        endpointInfo:
-          $ref: "#/components/schemas/EndpointInfo"
-          description: The source and destination endpoints derived from the test input and used for active probing.
-        error:
-          $ref: "#/components/schemas/Status"
-          description: Details about an internal failure or the cancellation of active probing.
-        probingLatency:
-          $ref: "#/components/schemas/LatencyDistribution"
-          description: "Latency as measured by active probing in one direction: from the source to the destination endpoint."
-        result:
-          description: The overall result of active probing.
-          enum:
-            - PROBING_RESULT_UNSPECIFIED
-            - REACHABLE
-            - UNREACHABLE
-            - REACHABILITY_INCONSISTENT
-            - UNDETERMINED
-          type: string
-        sentProbeCount:
-          description: Number of probes sent.
-          format: int32
-          type: integer
-        successfulProbeCount:
-          description: Number of probes that reached the destination.
-          format: int32
-          type: integer
-        verifyTime:
-          description: The time that reachability was assessed through active probing.
-          format: google-datetime
-          type: string
       type: object
     ReachabilityDetails:
       description: Results of the configuration analysis from the last run of the test.

@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Cloud OS Login API
-  version: v1beta
+  version: v1alpha
   x-apisguru-categories:
     - analytics
     - media
@@ -20,7 +20,7 @@ info:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: https://oslogin.googleapis.com/$discovery/rest?version=v1beta
+      url: https://oslogin.googleapis.com/$discovery/rest?version=v1alpha
       version: v1
   x-providerName: googleapis.com
   x-serviceName: oslogin
@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: users
 paths:
-  "/v1beta/{name}":
+  "/v1alpha/{name}":
     delete:
       description: Deletes an SSH public key.
       operationId: oslogin.users.sshPublicKeys.delete
@@ -39,6 +39,15 @@ paths:
           name: name
           required: true
           schema:
+            type: string
+        - description: The type of operating system associated with the account.
+          in: query
+          name: operatingSystemType
+          schema:
+            enum:
+              - OPERATING_SYSTEM_TYPE_UNSPECIFIED
+              - LINUX
+              - WINDOWS
             type: string
       responses:
         "200":
@@ -136,7 +145,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - users
-  "/v1beta/{name}/loginProfile":
+  "/v1alpha/{name}/loginProfile":
     get:
       description: Retrieves the profile information used for logging in to a virtual machine on Google Compute Engine.
       operationId: oslogin.users.getLoginProfile
@@ -146,6 +155,15 @@ paths:
           name: name
           required: true
           schema:
+            type: string
+        - description: The type of operating system associated with the account.
+          in: query
+          name: operatingSystemType
+          schema:
+            enum:
+              - OPERATING_SYSTEM_TYPE_UNSPECIFIED
+              - LINUX
+              - WINDOWS
             type: string
         - description: The project ID of the Google Cloud Platform project.
           in: query
@@ -204,7 +222,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}:importSshPublicKey":
+  "/v1alpha/{parent}:importSshPublicKey":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

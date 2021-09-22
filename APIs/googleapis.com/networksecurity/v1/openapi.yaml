@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Network Security API
-  version: v1beta1
+  version: v1
   x-apisguru-categories:
     - analytics
     - media
@@ -20,7 +20,7 @@ info:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: https://networksecurity.googleapis.com/$discovery/rest?version=v1beta1
+      url: https://networksecurity.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-providerName: googleapis.com
   x-serviceName: networksecurity
@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta1/{name}":
+  "/v1/{name}":
     delete:
       description: Deletes a single ServerTlsPolicy.
       operationId: networksecurity.projects.locations.serverTlsPolicies.delete
@@ -124,7 +124,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}/locations":
+  "/v1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
       operationId: networksecurity.projects.locations.list
@@ -176,7 +176,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}/operations":
+  "/v1/{name}/operations":
     get:
       description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
       operationId: networksecurity.projects.locations.operations.list
@@ -228,7 +228,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:cancel":
+  "/v1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -270,7 +270,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/authorizationPolicies":
+  "/v1/{parent}/authorizationPolicies":
     get:
       description: Lists AuthorizationPolicies in a given project and location.
       operationId: networksecurity.projects.locations.authorizationPolicies.list
@@ -351,7 +351,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/clientTlsPolicies":
+  "/v1/{parent}/clientTlsPolicies":
     get:
       description: Lists ClientTlsPolicies in a given project and location.
       operationId: networksecurity.projects.locations.clientTlsPolicies.list
@@ -432,7 +432,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/serverTlsPolicies":
+  "/v1/{parent}/serverTlsPolicies":
     get:
       description: Lists ServerTlsPolicies in a given project and location.
       operationId: networksecurity.projects.locations.serverTlsPolicies.list
@@ -513,7 +513,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:getIamPolicy":
+  "/v1/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: networksecurity.projects.locations.serverTlsPolicies.getIamPolicy
@@ -555,7 +555,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{resource}:setIamPolicy":
+  "/v1/{resource}:setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -597,7 +597,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:testIamPermissions":
+  "/v1/{resource}:testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -767,7 +767,7 @@ components:
       description: ClientTlsPolicy is a resource that specifies how a client should authenticate connections to backends of a service. This resource itself does not affect configuration unless it is attached to a backend service resource.
       properties:
         clientCertificate:
-          $ref: "#/components/schemas/GoogleCloudNetworksecurityV1beta1CertificateProvider"
+          $ref: "#/components/schemas/GoogleCloudNetworksecurityV1CertificateProvider"
           description: Optional. Defines a mechanism to provision client identity (public and private keys) for peer to peer authentication. The presence of this dictates mTLS.
         createTime:
           description: Output only. The timestamp when the resource was created.
@@ -842,17 +842,17 @@ components:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
-    GoogleCloudNetworksecurityV1beta1CertificateProvider:
+    GoogleCloudNetworksecurityV1CertificateProvider:
       description: Specification of certificate provider. Defines the mechanism to obtain the certificate and private key for peer to peer authentication.
       properties:
         certificateProviderInstance:
           $ref: "#/components/schemas/CertificateProviderInstance"
           description: The certificate provider instance specification that will be passed to the data plane, which will be used to load necessary credential information.
         grpcEndpoint:
-          $ref: "#/components/schemas/GoogleCloudNetworksecurityV1beta1GrpcEndpoint"
+          $ref: "#/components/schemas/GoogleCloudNetworksecurityV1GrpcEndpoint"
           description: gRPC specific configuration to access the gRPC server to obtain the cert and private key.
       type: object
-    GoogleCloudNetworksecurityV1beta1GrpcEndpoint:
+    GoogleCloudNetworksecurityV1GrpcEndpoint:
       description: Specification of the GRPC Endpoint.
       properties:
         targetUri:
@@ -1153,7 +1153,7 @@ components:
           description: Required. Name of the ServerTlsPolicy resource. It matches the pattern `projects/*/locations/{location}/serverTlsPolicies/{server_tls_policy}`
           type: string
         serverCertificate:
-          $ref: "#/components/schemas/GoogleCloudNetworksecurityV1beta1CertificateProvider"
+          $ref: "#/components/schemas/GoogleCloudNetworksecurityV1CertificateProvider"
           description: " Defines a mechanism to provision server identity (public and private keys). Cannot be combined with `allow_open` as a permissive mode that allows both plain text and TLS is not supported."
         updateTime:
           description: Output only. The timestamp when the resource was updated.
@@ -1200,7 +1200,7 @@ components:
           $ref: "#/components/schemas/CertificateProviderInstance"
           description: The certificate provider instance specification that will be passed to the data plane, which will be used to load necessary credential information.
         grpcEndpoint:
-          $ref: "#/components/schemas/GoogleCloudNetworksecurityV1beta1GrpcEndpoint"
+          $ref: "#/components/schemas/GoogleCloudNetworksecurityV1GrpcEndpoint"
           description: gRPC specific configuration to access the gRPC server to obtain the CA certificate.
       type: object
   securitySchemes:

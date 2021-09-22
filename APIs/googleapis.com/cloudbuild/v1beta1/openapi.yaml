@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Cloud Build API
-  version: v2
+  version: v1beta1
   x-apiClientRegistration:
     url: https://console.developers.google.com
   x-apisguru-categories:
@@ -26,17 +26,18 @@ info:
       version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: cloudbuild
+  x-preferred: false
 externalDocs:
   url: https://cloud.google.com/cloud-build/docs/
 tags:
   - name: projects
 paths:
-  "/v2/{name}":
-    get:
-      description: Gets details of a single TaskRun.
-      operationId: cloudbuild.projects.locations.taskRuns.get
+  "/v1beta1/{name}":
+    delete:
+      description: "Deletes a `WorkerPool`. NOTE: As of now, this method returns an `Operation` that is always complete."
+      operationId: cloudbuild.projects.locations.workerPools.delete
       parameters:
-        - description: "Required. The name of the TaskRun to retrieve. Format: projects/{project}/locations/{location}/taskRuns/{taskRun}"
+        - description: "Required. The name of the `WorkerPool` to delete. Format: `projects/{project}/locations/{workerPool}/workerPools/{workerPool}`."
           in: path
           name: name
           required: true
@@ -47,7 +48,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TaskRun"
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    get:
+      description: Returns details of a `WorkerPool`.
+      operationId: cloudbuild.projects.locations.workerPools.get
+      parameters:
+        - description: "Required. The name of the `WorkerPool` to retrieve. Format: `projects/{project}/locations/{location}/workerPools/{workerPool}`."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkerPool"
           description: Successful response
       security:
         - Oauth2:
@@ -69,35 +94,25 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the parameters of a single TaskRun.
-      operationId: cloudbuild.projects.locations.taskRuns.patch
+      description: "Updates a `WorkerPool`. NOTE: As of now, this method returns an `Operation` that is always complete."
+      operationId: cloudbuild.projects.locations.workerPools.patch
       parameters:
-        - description: "Output only. The 'TaskRun' name with format: `projects/{project}/locations/{location}/taskRuns/{task_run}`"
+        - description: Output only. The resource name of the `WorkerPool`, with format `projects/{project}/locations/{location}/workerPools/{worker_pool}`. The value of `{worker_pool}` is provided by `worker_pool_id` in `CreateWorkerPool` request and the value of `{location}` is determined by the endpoint accessed.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Optional. If set to true, and the TaskRun is not found, a new TaskRun will be created. In this situation, `update_mask` is ignored.
-          in: query
-          name: allowMissing
-          schema:
-            type: boolean
-        - description: Required. The list of fields to be updated.
+        - description: A mask specifying which fields in `WorkerPool` to update.
           in: query
           name: updateMask
           schema:
             type: string
-        - description: Optional. When true, the query is validated only, but not executed.
-          in: query
-          name: validateOnly
-          schema:
-            type: boolean
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/TaskRun"
+              $ref: "#/components/schemas/WorkerPool"
       responses:
         "200":
           content:
@@ -112,7 +127,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:cancel":
+  "/v1beta1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -154,30 +169,15 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/records":
+  "/v1beta1/{parent}/workerPools":
     get:
-      description: Lists Records of a given project and location.
-      operationId: cloudbuild.projects.locations.results.records.list
+      description: Lists `WorkerPool`s in the given project.
+      operationId: cloudbuild.projects.locations.workerPools.list
       parameters:
-        - description: "Required. The parent, which owns this collection of Records. Format: projects/{project}/locations/{location}/results/{result}/"
+        - description: "Required. The parent of the collection of `WorkerPools`. Format: `projects/{project}/locations/location`."
           in: path
           name: parent
           required: true
-          schema:
-            type: string
-        - description: Filter for the Records.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: Size of the page to return.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Page start.
-          in: query
-          name: pageToken
           schema:
             type: string
       responses:
@@ -185,111 +185,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListRecordsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/results":
-    get:
-      description: Lists Results of a given project and location.
-      operationId: cloudbuild.projects.locations.results.list
-      parameters:
-        - description: "Required. The parent, which owns this collection of Results. Format: projects/{project}/locations/{location}/"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Filter for the Records.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: Size of the page to return.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Page start.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListResultsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/taskRuns":
-    get:
-      description: Lists TaskRuns in a given project and location.
-      operationId: cloudbuild.projects.locations.taskRuns.list
-      parameters:
-        - description: "Required. The parent, which owns this collection of TaskRuns. Format: projects/{project}/locations/{location}"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Filter for the results.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: Number of results to return in the list.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Page start.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListTaskRunsResponse"
+                $ref: "#/components/schemas/ListWorkerPoolsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -311,30 +207,25 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new TaskRun in a given project and location.
-      operationId: cloudbuild.projects.locations.taskRuns.create
+      description: "Creates a `WorkerPool` to run the builds, and returns the new worker pool. NOTE: As of now, this method returns an `Operation` that is always complete."
+      operationId: cloudbuild.projects.locations.workerPools.create
       parameters:
-        - description: Required. Value for parent.
+        - description: "Required. The parent resource where this worker pool will be created. Format: `projects/{project}/locations/{location}`."
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Required. The ID to use for the TaskRun, which will become the final component of the TaskRun's resource name. Names must be unique per-project per-location. This value should be 4-63 characters, and valid characters are /a-z-/.
+        - description: Required. Immutable. The ID to use for the `WorkerPool`, which will become the final component of the resource name. This value should be 1-63 characters, and valid characters are /a-z-/.
           in: query
-          name: taskRunId
+          name: workerPoolId
           schema:
             type: string
-        - description: Optional. When true, the query is validated only, but not executed.
-          in: query
-          name: validateOnly
-          schema:
-            type: boolean
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/TaskRun"
+              $ref: "#/components/schemas/WorkerPool"
       responses:
         "200":
           content:
@@ -832,77 +723,6 @@ components:
       description: The request message for Operations.CancelOperation.
       properties: {}
       type: object
-    Condition:
-      description: Conditions defines a readiness condition for a Knative resource.
-      properties:
-        lastTransitionTime:
-          description: LastTransitionTime is the last time the condition transitioned from one status to another.
-          format: google-datetime
-          type: string
-        message:
-          description: A human readable message indicating details about the transition.
-          type: string
-        reason:
-          description: The reason for the condition's last transition.
-          type: string
-        severity:
-          description: Severity with which to treat failures of this type of condition.
-          enum:
-            - SEVERITY_UNSPECIFIED
-            - WARNING
-            - INFO
-          type: string
-        status:
-          description: Status of the condition.
-          enum:
-            - UNKNOWN
-            - "TRUE"
-            - "FALSE"
-          type: string
-        type:
-          description: Type of condition.
-          type: string
-      type: object
-    ContainerStateRunning:
-      description: ContainerStateWaiting is a running state of a container.
-      properties:
-        startedAt:
-          description: Time at which the container was last (re-)started.
-          format: google-datetime
-          type: string
-      type: object
-    ContainerStateTerminated:
-      description: ContainerStateWaiting is a terminated state of a container.
-      properties:
-        exitCode:
-          description: Exit status from the last termination of the container.
-          format: int32
-          type: integer
-        finishedAt:
-          description: Time at which the container last terminated
-          format: google-datetime
-          type: string
-        message:
-          description: Message regarding the last termination of the container
-          type: string
-        reason:
-          description: Reason from the last termination of the container
-          type: string
-        startedAt:
-          description: Time at which previous execution of the container started
-          format: google-datetime
-          type: string
-      type: object
-    ContainerStateWaiting:
-      description: ContainerStateWaiting is a waiting state of a container.
-      properties:
-        message:
-          description: Message regarding why the container is not yet running.
-          type: string
-        reason:
-          description: Reason the container is not yet running.
-          type: string
-      type: object
     CreateGitHubEnterpriseConfigOperationMetadata:
       description: Metadata for `CreateGithubEnterpriseConfig` operation.
       properties:
@@ -966,20 +786,6 @@ components:
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
-      type: object
-    EmptyDir:
-      description: Represents an empty directory
-      properties: {}
-      type: object
-    EnvVar:
-      description: Environment variable.
-      properties:
-        name:
-          description: Name of the environment variable.
-          type: string
-        value:
-          description: Value of the environment variable.
-          type: string
       type: object
     FailureInfo:
       description: A fatal problem encountered during the execution of the build.
@@ -1077,52 +883,21 @@ components:
           description: "Resource name of Cloud KMS crypto key to decrypt the encrypted value. In format: projects/*/locations/*/keyRings/*/cryptoKeys/*"
           type: string
       type: object
-    JsonAny:
-      description: JSON serialized data.
+    ListWorkerPoolsResponse:
+      description: Response containing existing `WorkerPools`.
       properties:
-        type:
-          description: Identifier of underlying data. e.g. `cloudbuild.googleapis.com/PipelineRun`
-          type: string
-        value:
-          description: JSON-serialized data of above type.
-          format: byte
-          type: string
-      type: object
-    ListRecordsResponse:
-      description: Message for response to listing Records.
-      properties:
-        nextPageToken:
-          description: A token identifying a page of results the server should return.
-          type: string
-        records:
-          description: The list of Records.
+        workerPools:
+          description: "`WorkerPools` for the specified project."
           items:
-            $ref: "#/components/schemas/Record"
+            $ref: "#/components/schemas/WorkerPool"
           type: array
       type: object
-    ListResultsResponse:
-      description: Message for response to listing Results.
+    NetworkConfig:
+      description: Network describes the network configuration for a `WorkerPool`.
       properties:
-        nextPageToken:
-          description: A token identifying a page of results the server should return.
+        peeredNetwork:
+          description: Required. Immutable. The network definition that the workers are peered to. If this section is left empty, the workers will be peered to `WorkerPool.project_id` on the service producer network. Must be in the format `projects/{project}/global/networks/{network}`, where `{project}` is a project number, such as `12345`, and `{network}` is the name of a VPC network in the project. See [Understanding network configuration options](https://cloud.google.com/cloud-build/docs/custom-workers/set-up-custom-worker-pool-environment#understanding_the_network_configuration_options)
           type: string
-        results:
-          description: The list of Results.
-          items:
-            $ref: "#/components/schemas/Result"
-          type: array
-      type: object
-    ListTaskRunsResponse:
-      description: Message for response to listing TaskRuns
-      properties:
-        nextPageToken:
-          description: A token identifying a page of results the server should return.
-          type: string
-        taskRuns:
-          description: The list of TaskRun
-          items:
-            $ref: "#/components/schemas/TaskRun"
-          type: array
       type: object
     Notification:
       description: Notification is the container which holds the data that is relevant to this particular notification.
@@ -1257,76 +1032,6 @@ components:
           readOnly: true
           type: string
       type: object
-    Param:
-      description: Param defined with name and value. PipelineRef can be used to refer to a specific instance of a Pipeline.
-      properties:
-        name:
-          description: Name of the parameter.
-          type: string
-        value:
-          $ref: "#/components/schemas/ParamValue"
-          description: Value of the parameter.
-      type: object
-    ParamSpec:
-      description: ParamSpec defines parameters needed beyond typed inputs (such as resources). Parameter values are provided by users as inputs on a TaskRun or PipelineRun.
-      properties:
-        description:
-          description: Description of the ParamSpec
-          type: string
-        name:
-          description: Name of the ParamSpec
-          type: string
-        type:
-          description: Type of ParamSpec
-          enum:
-            - TYPE_UNSPECIFIED
-            - STRING
-            - ARRAY
-          type: string
-      type: object
-    ParamValue:
-      description: Parameter value.
-      properties:
-        arrayVal:
-          description: Value of the parameter if type is array.
-          items:
-            type: string
-          type: array
-        stringVal:
-          description: Value of the parameter if type is string.
-          type: string
-        type:
-          description: Type of parameter.
-          enum:
-            - TYPE_UNSPECIFIED
-            - STRING
-            - ARRAY
-          type: string
-      type: object
-    PersistentVolumeClaim:
-      description: PersistentVolumeClaim is a user's request for and claim to a persistent volume
-      properties:
-        spec:
-          $ref: "#/components/schemas/PersistentVolumeClaimSpec"
-          description: Spec defines the desired characteristics of a volume requested by a pod author.
-      type: object
-    PersistentVolumeClaimSpec:
-      description: PersistentVolumeClaimSpec describes the common attributes of storage devices and allows a Source for provider-specific attributes.
-      properties:
-        accessModes:
-          description: Desired access modes the volume should have.
-          items:
-            enum:
-              - PERSISTENT_VOLUME_ACCESS_MODE_UNSPECIFIED
-              - READ_WRITE_ONCE
-              - READ_ONLY_MANY
-              - READ_WRITE_MANY
-            type: string
-          type: array
-        resources:
-          $ref: "#/components/schemas/ResourceRequirements"
-          description: The minimum resources the volume should have.
-      type: object
     PoolOption:
       description: Details about how a build should be executed on a `WorkerPool`. See [running builds in a private pool](https://cloud.google.com/build/docs/private-pools/run-builds-in-private-pool) for more information.
       properties:
@@ -1347,60 +1052,6 @@ components:
           type: string
         githubEnterpriseConfig:
           description: "The resource name of the GitHubEnterprise to be created. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
-          type: string
-      type: object
-    Record:
-      description: Record belonging to a Result.
-      properties:
-        createTime:
-          description: Output only. Server assigned timestamp for when the record was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        data:
-          $ref: "#/components/schemas/JsonAny"
-          description: Output only. JSON serialized Record data.
-          readOnly: true
-        name:
-          description: Output only. The name of Record.
-          readOnly: true
-          type: string
-        uid:
-          description: Output only. Server assigned uid.
-          readOnly: true
-          type: string
-        updateTime:
-          description: Output only. Server assigned timestamp for when the record was updated.
-          format: google-datetime
-          readOnly: true
-          type: string
-      type: object
-    RecordSummary:
-      description: Summary of the underlying Record.
-      properties:
-        createTime:
-          description: Output only. The time the Record was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        record:
-          description: Output only. Summarized record.
-          readOnly: true
-          type: string
-        recordData:
-          additionalProperties:
-            type: string
-          description: Output only. Key-value pairs representing underlying record data, e.g. "status", "SUCCESS"
-          readOnly: true
-          type: object
-        type:
-          description: Output only. Identifier of underlying data. e.g. `cloudbuild.googleapis.com/PipelineRun`
-          readOnly: true
-          type: string
-        updateTime:
-          description: Output only. The time the Record was updated.
-          format: google-datetime
-          readOnly: true
           type: string
       type: object
     RepoSource:
@@ -1431,48 +1082,6 @@ components:
           type: object
         tagName:
           description: Regex matching tags to build. The syntax of the regular expressions accepted is the syntax accepted by RE2 and described at https://github.com/google/re2/wiki/Syntax
-          type: string
-      type: object
-    ResourceRequirements:
-      description: Compute resource requirements.
-      properties:
-        limits:
-          additionalProperties:
-            type: string
-          description: The maximum amount of compute resources allowed.
-          type: object
-        requests:
-          additionalProperties:
-            type: string
-          description: The minimum amount of compute resources needed.
-          type: object
-      type: object
-    Result:
-      description: Result of a single event/execution.
-      properties:
-        createTime:
-          description: Output only. Server assigned timestamp for when the result was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        name:
-          description: Output only. The name of Result.
-          readOnly: true
-          type: string
-        recordSummaries:
-          description: Output only. Summary of the underlying Record. GCB only returns a summary for the primary Record, e.g. a PipelineRun but not its TaskRuns.
-          items:
-            $ref: "#/components/schemas/RecordSummary"
-          readOnly: true
-          type: array
-        uid:
-          description: Output only. Server assigned uid.
-          readOnly: true
-          type: string
-        updateTime:
-          description: Output only. Server assigned timestamp for when the result was updated.
-          format: google-datetime
-          readOnly: true
           type: string
       type: object
     Results:
@@ -1623,58 +1232,6 @@ components:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
-    Step:
-      description: Step embeds the Container type, which allows it to include fields not provided by Container.
-      properties:
-        args:
-          description: Arguments to the entrypoint.
-          items:
-            type: string
-          type: array
-        command:
-          description: Entrypoint array.
-          items:
-            type: string
-          type: array
-        env:
-          description: List of environment variables to set in the container.
-          items:
-            $ref: "#/components/schemas/EnvVar"
-          type: array
-        image:
-          description: Docker image name.
-          type: string
-        name:
-          description: Name of the container specified as a DNS_LABEL.
-          type: string
-        script:
-          description: The contents of an executable file to execute.
-          type: string
-        workingDir:
-          description: Container's working directory.
-          items:
-            type: string
-          type: array
-      type: object
-    StepState:
-      description: StepState reports the results of running a step in a Task.
-      properties:
-        imageId:
-          description: Image ID of the StepState.
-          type: string
-        name:
-          description: Name of the StepState.
-          type: string
-        running:
-          $ref: "#/components/schemas/ContainerStateRunning"
-          description: Details about a running container
-        terminated:
-          $ref: "#/components/schemas/ContainerStateTerminated"
-          description: Details about a terminated container
-        waiting:
-          $ref: "#/components/schemas/ContainerStateWaiting"
-          description: Details about a waiting container
-      type: object
     StorageSource:
       description: Location of the source in an archive file in Google Cloud Storage.
       properties:
@@ -1702,159 +1259,6 @@ components:
         object:
           description: Google Cloud Storage object containing the source manifest. This object must be a JSON file.
           type: string
-      type: object
-    TaskRef:
-      description: TaskRef can be used to refer to a specific instance of a task. PipelineRef can be used to refer to a specific instance of a Pipeline.
-      properties:
-        bundle:
-          description: Bundle url reference to a Tekton Bundle.
-          type: string
-        name:
-          description: Name of the task.
-          type: string
-      type: object
-    TaskResult:
-      description: TaskResult used to describe the results of a task.
-      properties:
-        description:
-          description: Description of the result.
-          type: string
-        name:
-          description: Name of the result.
-          type: string
-      type: object
-    TaskRun:
-      description: Message describing TaskRun object
-      properties:
-        annotations:
-          additionalProperties:
-            type: string
-          description: User annotations. See https://google.aip.dev/128#annotations
-          type: object
-        completionTime:
-          description: Output only. Time the task completed.
-          format: google-datetime
-          readOnly: true
-          type: string
-        conditions:
-          description: Output only. Kubernetes Conditions convention for PipelineRun status and error.
-          items:
-            $ref: "#/components/schemas/Condition"
-          readOnly: true
-          type: array
-        createTime:
-          description: Output only. Time at which the request to create the `TaskRun` was received.
-          format: google-datetime
-          readOnly: true
-          type: string
-        etag:
-          description: Needed for declarative-friendly resources.
-          type: string
-        labels:
-          additionalProperties:
-            type: string
-          description: Map of key-value pairs of user-defined labels.
-          type: object
-        name:
-          description: "Output only. The 'TaskRun' name with format: `projects/{project}/locations/{location}/taskRuns/{task_run}`"
-          readOnly: true
-          type: string
-        params:
-          description: Params is a list of parameter names and values.
-          items:
-            $ref: "#/components/schemas/Param"
-          type: array
-        serviceAccount:
-          description: Required. Service account used in the task.
-          type: string
-        startTime:
-          description: Output only. Time the task is actually started.
-          format: google-datetime
-          readOnly: true
-          type: string
-        status:
-          description: Status of the TaskRun.
-          enum:
-            - TASK_RUN_STATUS_UNSPECIFIED
-            - TASK_RUN_CANCELLED
-          type: string
-        steps:
-          description: Output only. Steps describes the state of each build step container.
-          items:
-            $ref: "#/components/schemas/StepState"
-          readOnly: true
-          type: array
-        taskRef:
-          $ref: "#/components/schemas/TaskRef"
-          description: TaskRef refer to a specific instance of a task.
-        taskRunResults:
-          description: Output only. List of results written out by the task's containers
-          items:
-            $ref: "#/components/schemas/TaskRunResult"
-          readOnly: true
-          type: array
-        taskSpec:
-          $ref: "#/components/schemas/TaskSpec"
-          description: TaskSpec contains the Spec to instantiate a TaskRun.
-        timeout:
-          description: Time after which the task times out.
-          format: google-duration
-          type: string
-        uid:
-          description: Output only. A unique identifier for the `TaskRun`.
-          readOnly: true
-          type: string
-        updateTime:
-          description: Output only. Time at which the request to update the `TaskRun` was received.
-          format: google-datetime
-          readOnly: true
-          type: string
-        workerpool:
-          description: Output only. The WorkerPool used to run this TaskRun.
-          readOnly: true
-          type: string
-        workspaces:
-          description: Workspaces is a list of WorkspaceBindings from volumes to workspaces.
-          items:
-            $ref: "#/components/schemas/WorkspaceBinding"
-          type: array
-      type: object
-    TaskRunResult:
-      description: TaskRunResult used to describe the results of a task
-      properties:
-        name:
-          description: Name of the TaskRun
-          type: string
-        value:
-          description: Value of the result
-          type: string
-      type: object
-    TaskSpec:
-      description: TaskSpec contains the Spec to instantiate a TaskRun.
-      properties:
-        description:
-          description: Description of the task.
-          type: string
-        params:
-          description: List of parameters.
-          items:
-            $ref: "#/components/schemas/ParamSpec"
-          type: array
-        results:
-          description: Values that this Task can output.
-          items:
-            $ref: "#/components/schemas/TaskResult"
-          type: array
-        steps:
-          description: Steps of the task.
-          items:
-            $ref: "#/components/schemas/Step"
-          type: array
-        workspaces:
-          description: The volumes that this Task requires.
-          items:
-            $ref: "#/components/schemas/WorkspaceDeclaration"
-          type: array
       type: object
     TimeSpan:
       description: Start and end times for a build execution phase.
@@ -1923,34 +1327,58 @@ components:
           description: Explanation of the warning generated.
           type: string
       type: object
-    WorkspaceBinding:
-      description: WorkspaceBinding maps a workspace to a Volume. PipelineRef can be used to refer to a specific instance of a Pipeline.
+    WorkerConfig:
+      description: Defines the configuration to be used for creating workers in the pool.
       properties:
-        emptyDir:
-          $ref: "#/components/schemas/EmptyDir"
-          description: EmptyDir represents a temporary directory that shares a Task's lifetime.
-        name:
-          description: Name of the workspace.
+        diskSizeGb:
+          description: Size of the disk attached to the worker, in GB. See [Worker pool config file](https://cloud.google.com/cloud-build/docs/custom-workers/worker-pool-config-file). Specify a value of up to 1000. If `0` is specified, Cloud Build will use a standard disk size.
+          format: int64
           type: string
-        volumeClaimTemplate:
-          $ref: "#/components/schemas/PersistentVolumeClaim"
-          description: Template for a claim that will be created in the same namespace.
-      type: object
-    WorkspaceDeclaration:
-      description: WorkspaceDeclaration is a declaration of a volume that a Task requires.
-      properties:
-        description:
-          description: Description is a human readable description of this volume.
+        machineType:
+          description: Machine type of a worker, such as `n1-standard-1`. See [Worker pool config file](https://cloud.google.com/cloud-build/docs/custom-workers/worker-pool-config-file). If left blank, Cloud Build will use `n1-standard-1`.
           type: string
-        mountPath:
-          description: MountPath overrides the directory that the volume will be made available at.
-          type: string
-        name:
-          description: Name is the name by which you can bind the volume at runtime.
-          type: string
-        readOnly:
-          description: ReadOnly dictates whether a mounted volume is writable.
+        noExternalIp:
+          description: If true, workers are created without any public address, which prevents network egress to public IPs.
           type: boolean
+      type: object
+    WorkerPool:
+      description: Configuration for a `WorkerPool` to run the builds. Workers provide a build environment where Cloud Build runs your builds. Cloud Build owns and maintains a pool of workers for general use. By default, when you submit a build, Cloud Build uses one of the workers from this pool. Builds that run in the default worker pool have access to the public internet. If your build needs access to resources on a private network, create and use a `WorkerPool` to run your builds. Custom `WorkerPool`s give your builds access to any single VPC network that you administer, including any on-prem resources connected to that VPC network. For an overview of custom worker pools, see [Custom workers overview](https://cloud.google.com/cloud-build/docs/custom-workers/custom-workers-overview).
+      properties:
+        createTime:
+          description: Output only. Time at which the request to create the `WorkerPool` was received.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. Time at which the request to delete the `WorkerPool` was received.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The resource name of the `WorkerPool`, with format `projects/{project}/locations/{location}/workerPools/{worker_pool}`. The value of `{worker_pool}` is provided by `worker_pool_id` in `CreateWorkerPool` request and the value of `{location}` is determined by the endpoint accessed.
+          readOnly: true
+          type: string
+        networkConfig:
+          $ref: "#/components/schemas/NetworkConfig"
+          description: Network configuration for the `WorkerPool`.
+        state:
+          description: Output only. `WorkerPool` state.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - RUNNING
+            - DELETING
+            - DELETED
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Time at which the request to update the `WorkerPool` was received.
+          format: google-datetime
+          readOnly: true
+          type: string
+        workerConfig:
+          $ref: "#/components/schemas/WorkerConfig"
+          description: Worker configuration for the `WorkerPool`.
       type: object
   securitySchemes:
     Oauth2:
@@ -1970,3 +1398,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

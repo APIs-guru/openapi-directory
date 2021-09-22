@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Secret Manager API
-  version: v1beta1
+  version: v1
   x-apisguru-categories:
     - analytics
     - media
@@ -20,7 +20,7 @@ info:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: https://secretmanager.googleapis.com/$discovery/rest?version=v1beta1
+      url: https://secretmanager.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-providerName: googleapis.com
   x-serviceName: secretmanager
@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta1/{name}":
+  "/v1/{name}":
     delete:
       description: Deletes a Secret.
       operationId: secretmanager.projects.secrets.delete
@@ -38,6 +38,11 @@ paths:
           in: path
           name: name
           required: true
+          schema:
+            type: string
+        - description: Optional. Etag of the Secret. The request succeeds if it matches the etag of the currently stored secret object. If the etag is omitted, the request succeeds.
+          in: query
+          name: etag
           schema:
             type: string
       responses:
@@ -55,10 +60,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets metadata for a SecretVersion. `projects/*/secrets/*/versions/latest` is an alias to the `latest` SecretVersion.
+      description: Gets metadata for a SecretVersion. `projects/*/secrets/*/versions/latest` is an alias to the most recently created SecretVersion.
       operationId: secretmanager.projects.secrets.versions.get
       parameters:
-        - description: Required. The resource name of the SecretVersion in the format `projects/*/secrets/*/versions/*`. `projects/*/secrets/*/versions/latest` is an alias to the `latest` SecretVersion.
+        - description: Required. The resource name of the SecretVersion in the format `projects/*/secrets/*/versions/*`. `projects/*/secrets/*/versions/latest` is an alias to the most recently created SecretVersion.
           in: path
           name: name
           required: true
@@ -124,7 +129,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}/locations":
+  "/v1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
       operationId: secretmanager.projects.locations.list
@@ -176,12 +181,12 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:access":
+  "/v1/{name}:access":
     get:
-      description: Accesses a SecretVersion. This call returns the secret data. `projects/*/secrets/*/versions/latest` is an alias to the `latest` SecretVersion.
+      description: Accesses a SecretVersion. This call returns the secret data. `projects/*/secrets/*/versions/latest` is an alias to the most recently created SecretVersion.
       operationId: secretmanager.projects.secrets.versions.access
       parameters:
-        - description: Required. The resource name of the SecretVersion in the format `projects/*/secrets/*/versions/*`.
+        - description: Required. The resource name of the SecretVersion in the format `projects/*/secrets/*/versions/*`. `projects/*/secrets/*/versions/latest` is an alias to the most recently created SecretVersion.
           in: path
           name: name
           required: true
@@ -213,7 +218,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:destroy":
+  "/v1/{name}:destroy":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -255,7 +260,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:disable":
+  "/v1/{name}:disable":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -297,7 +302,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:enable":
+  "/v1/{name}:enable":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -339,7 +344,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/secrets":
+  "/v1/{parent}/secrets":
     get:
       description: Lists Secrets.
       operationId: secretmanager.projects.secrets.list
@@ -348,6 +353,11 @@ paths:
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: Optional. Filter string, adhering to the rules in [List-operation filtering](https://cloud.google.com/secret-manager/docs/filtering). List only secrets matching the filter. If filter is empty, all secrets are listed.
+          in: query
+          name: filter
           schema:
             type: string
         - description: Optional. The maximum number of results to be returned in a single page. If set to 0, the server decides the number of results to return. If the number is greater than 25000, it is capped at 25000.
@@ -420,7 +430,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/versions":
+  "/v1/{parent}/versions":
     get:
       description: Lists SecretVersions. This call does not return secret data.
       operationId: secretmanager.projects.secrets.versions.list
@@ -429,6 +439,11 @@ paths:
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: Optional. Filter string, adhering to the rules in [List-operation filtering](https://cloud.google.com/secret-manager/docs/filtering). List only secret versions matching the filter. If filter is empty, all secret versions are listed.
+          in: query
+          name: filter
           schema:
             type: string
         - description: Optional. The maximum number of results to be returned in a single page. If set to 0, the server decides the number of results to return. If the number is greater than 25000, it is capped at 25000.
@@ -467,7 +482,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}:addVersion":
+  "/v1/{parent}:addVersion":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -509,7 +524,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:getIamPolicy":
+  "/v1/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a secret. Returns empty policy if the secret exists and does not have a policy set.
       operationId: secretmanager.projects.secrets.getIamPolicy
@@ -551,7 +566,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{resource}:setIamPolicy":
+  "/v1/{resource}:setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -593,7 +608,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:testIamPermissions":
+  "/v1/{resource}:testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -759,7 +774,18 @@ components:
       type: object
     Automatic:
       description: A replication policy that replicates the Secret payload without any restrictions.
-      properties: {}
+      properties:
+        customerManagedEncryption:
+          $ref: "#/components/schemas/CustomerManagedEncryption"
+          description: Optional. The customer-managed encryption configuration of the Secret. If no configuration is provided, Google-managed default encryption is used. Updates to the Secret encryption configuration only apply to SecretVersions added afterwards. They do not apply retroactively to existing SecretVersions.
+      type: object
+    AutomaticStatus:
+      description: The replication status of a SecretVersion using automatic replication. Only populated if the parent Secret has an automatic replication policy.
+      properties:
+        customerManagedEncryption:
+          $ref: "#/components/schemas/CustomerManagedEncryptionStatus"
+          description: Output only. The customer-managed encryption status of the SecretVersion. Only populated if customer-managed encryption is used.
+          readOnly: true
       type: object
     Binding:
       description: Associates `members` with a `role`.
@@ -776,13 +802,33 @@ components:
           description: Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
+    CustomerManagedEncryption:
+      description: Configuration for encrypting secret payloads using customer-managed encryption keys (CMEK).
+      properties:
+        kmsKeyName:
+          description: Required. The resource name of the Cloud KMS CryptoKey used to encrypt secret payloads. For secrets using the UserManaged replication policy type, Cloud KMS CryptoKeys must reside in the same location as the replica location. For secrets using the Automatic replication policy type, Cloud KMS CryptoKeys must reside in `global`. The expected format is `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+          type: string
+      type: object
+    CustomerManagedEncryptionStatus:
+      description: Describes the status of customer-managed encryption.
+      properties:
+        kmsKeyVersionName:
+          description: "Required. The resource name of the Cloud KMS CryptoKeyVersion used to encrypt the secret payload, in the following format: `projects/*/locations/*/keyRings/*/cryptoKeys/*/versions/*`."
+          type: string
+      type: object
     DestroySecretVersionRequest:
       description: Request message for SecretManagerService.DestroySecretVersion.
-      properties: {}
+      properties:
+        etag:
+          description: Optional. Etag of the SecretVersion. The request succeeds if it matches the etag of the currently stored secret version object. If the etag is omitted, the request succeeds.
+          type: string
       type: object
     DisableSecretVersionRequest:
       description: Request message for SecretManagerService.DisableSecretVersion.
-      properties: {}
+      properties:
+        etag:
+          description: Optional. Etag of the SecretVersion. The request succeeds if it matches the etag of the currently stored secret version object. If the etag is omitted, the request succeeds.
+          type: string
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
@@ -790,7 +836,10 @@ components:
       type: object
     EnableSecretVersionRequest:
       description: Request message for SecretManagerService.EnableSecretVersion.
-      properties: {}
+      properties:
+        etag:
+          description: Optional. Etag of the SecretVersion. The request succeeds if it matches the etag of the currently stored secret version object. If the etag is omitted, the request succeeds.
+          type: string
       type: object
     Expr:
       description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."
@@ -900,12 +949,27 @@ components:
     Replica:
       description: Represents a Replica for this Secret.
       properties:
+        customerManagedEncryption:
+          $ref: "#/components/schemas/CustomerManagedEncryption"
+          description: Optional. The customer-managed encryption configuration of the User-Managed Replica. If no configuration is provided, Google-managed default encryption is used. Updates to the Secret encryption configuration only apply to SecretVersions added afterwards. They do not apply retroactively to existing SecretVersions.
         location:
           description: 'The canonical IDs of the location to replicate data. For example: `"us-east1"`.'
           type: string
       type: object
+    ReplicaStatus:
+      description: Describes the status of a user-managed replica for the SecretVersion.
+      properties:
+        customerManagedEncryption:
+          $ref: "#/components/schemas/CustomerManagedEncryptionStatus"
+          description: Output only. The customer-managed encryption status of the SecretVersion. Only populated if customer-managed encryption is used.
+          readOnly: true
+        location:
+          description: 'Output only. The canonical ID of the replica location. For example: `"us-east1"`.'
+          readOnly: true
+          type: string
+      type: object
     Replication:
-      description: A policy that defines the replication configuration of data.
+      description: A policy that defines the replication and encryption configuration of data.
       properties:
         automatic:
           $ref: "#/components/schemas/Automatic"
@@ -914,6 +978,28 @@ components:
           $ref: "#/components/schemas/UserManaged"
           description: The Secret will only be replicated into the locations specified.
       type: object
+    ReplicationStatus:
+      description: The replication status of a SecretVersion.
+      properties:
+        automatic:
+          $ref: "#/components/schemas/AutomaticStatus"
+          description: Describes the replication status of a SecretVersion with automatic replication. Only populated if the parent Secret has an automatic replication policy.
+        userManaged:
+          $ref: "#/components/schemas/UserManagedStatus"
+          description: Describes the replication status of a SecretVersion with user-managed replication. Only populated if the parent Secret has a user-managed replication policy.
+      type: object
+    Rotation:
+      description: The rotation time and period for a Secret. At next_rotation_time, Secret Manager will send a Pub/Sub notification to the topics configured on the Secret. Secret.topics must be set to configure rotation.
+      properties:
+        nextRotationTime:
+          description: Optional. Timestamp in UTC at which the Secret is scheduled to rotate. Cannot be set to less than 300s (5 min) in the future and at most 3153600000s (100 years). next_rotation_time MUST be set if rotation_period is set.
+          format: google-datetime
+          type: string
+        rotationPeriod:
+          description: Input only. The Duration between rotation notifications. Must be in seconds and at least 3600s (1h) and at most 3153600000s (100 years). If rotation_period is set, next_rotation_time must be set. next_rotation_time will be advanced by this period when the service automatically sends rotation notifications.
+          format: google-duration
+          type: string
+      type: object
     Secret:
       description: A Secret is a logical secret whose value and versions can be accessed. A Secret is made up of zero or more SecretVersions that represent the secret data.
       properties:
@@ -921,6 +1007,13 @@ components:
           description: Output only. The time at which the Secret was created.
           format: google-datetime
           readOnly: true
+          type: string
+        etag:
+          description: Optional. Etag of the currently stored Secret.
+          type: string
+        expireTime:
+          description: Optional. Timestamp in UTC when the Secret is scheduled to expire. This is always provided on output, regardless of what was sent on input.
+          format: google-datetime
           type: string
         labels:
           additionalProperties:
@@ -934,9 +1027,21 @@ components:
         replication:
           $ref: "#/components/schemas/Replication"
           description: Required. Immutable. The replication policy of the secret data attached to the Secret. The replication policy cannot be changed after the Secret has been created.
+        rotation:
+          $ref: "#/components/schemas/Rotation"
+          description: Optional. Rotation policy attached to the Secret. May be excluded if there is no rotation policy.
+        topics:
+          description: Optional. A list of up to 10 Pub/Sub topics to which messages are published when control plane operations are called on the secret or its versions.
+          items:
+            $ref: "#/components/schemas/Topic"
+          type: array
+        ttl:
+          description: Input only. The TTL for the Secret.
+          format: google-duration
+          type: string
       type: object
     SecretPayload:
-      description: A secret payload resource in the Secret Manager API. This contains the sensitive secret data that is associated with a SecretVersion.
+      description: A secret payload resource in the Secret Manager API. This contains the sensitive secret payload that is associated with a SecretVersion.
       properties:
         data:
           description: The secret data. Must be no larger than 64KiB.
@@ -956,10 +1061,17 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        etag:
+          description: Output only. Etag of the currently stored SecretVersion.
+          readOnly: true
+          type: string
         name:
           description: Output only. The resource name of the SecretVersion in the format `projects/*/secrets/*/versions/*`. SecretVersion IDs in a Secret start at 1 and are incremented for each subsequent version of the secret.
           readOnly: true
           type: string
+        replicationStatus:
+          $ref: "#/components/schemas/ReplicationStatus"
+          description: The replication status of the SecretVersion.
         state:
           description: Output only. The current state of the SecretVersion.
           enum:
@@ -999,6 +1111,13 @@ components:
             type: string
           type: array
       type: object
+    Topic:
+      description: A Pub/Sub topic which Secret Manager will publish to when control plane events occur on this secret.
+      properties:
+        name:
+          description: "Required. The resource name of the Pub/Sub topic that will be published to, in the following format: `projects/*/topics/*`. For publication to succeed, the Secret Manager P4SA must have `pubsub.publisher` permissions on the topic."
+          type: string
+      type: object
     UserManaged:
       description: A replication policy that replicates the Secret payload into the locations specified in Secret.replication.user_managed.replicas
       properties:
@@ -1006,6 +1125,16 @@ components:
           description: Required. The list of Replicas for this Secret. Cannot be empty.
           items:
             $ref: "#/components/schemas/Replica"
+          type: array
+      type: object
+    UserManagedStatus:
+      description: The replication status of a SecretVersion using user-managed replication. Only populated if the parent Secret has a user-managed replication policy.
+      properties:
+        replicas:
+          description: Output only. The list of replica statuses for the SecretVersion.
+          items:
+            $ref: "#/components/schemas/ReplicaStatus"
+          readOnly: true
           type: array
       type: object
   securitySchemes:

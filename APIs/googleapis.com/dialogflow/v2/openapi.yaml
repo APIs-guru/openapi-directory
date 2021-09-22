@@ -22,9 +22,9 @@ info:
     - format: google
       url: https://dialogflow.googleapis.com/$discovery/rest?version=v2
       version: v1
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: dialogflow
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/dialogflow/
 tags:
@@ -2590,6 +2590,25 @@ components:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata"
           description: The generic information of the operation.
       type: object
+    GoogleCloudDialogflowCxV3DeployFlowMetadata:
+      description: Metadata returned for the Environments.DeployFlow long running operation.
+      properties:
+        testErrors:
+          description: Errors of running deployment tests.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TestError"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3DeployFlowResponse:
+      description: The response message for Environments.DeployFlow.
+      properties:
+        deployment:
+          description: "The name of the flow version Deployment. Format: `projects//locations//agents// environments//deployments/`."
+          type: string
+        environment:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Environment"
+          description: The updated environment where the flow is deployed.
+      type: object
     GoogleCloudDialogflowCxV3DtmfInput:
       description: Represents the input for dtmf event.
       properties:
@@ -2598,6 +2617,54 @@ components:
           type: string
         finishDigit:
           description: The finish digit (if any).
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3Environment:
+      description: Represents an environment for an agent. You can create multiple versions of your agent and publish them to separate environments. When you edit an agent, you are editing the draft agent. At any point, you can save the draft agent as an agent version, which is an immutable snapshot of your agent. When you save the draft agent, it is published to the default environment. When you create agent versions, you can publish them to custom environments. You can create a variety of custom environments for testing, development, production, etc.
+      properties:
+        description:
+          description: The human-readable description of the environment. The maximum length is 500 characters. If exceeded, the request is rejected.
+          type: string
+        displayName:
+          description: Required. The human-readable name of the environment (unique in an agent). Limit of 64 characters.
+          type: string
+        name:
+          description: "The name of the environment. Format: `projects//locations//agents//environments/`."
+          type: string
+        testCasesConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3EnvironmentTestCasesConfig"
+          description: The test cases config for continuous tests of this environment.
+        updateTime:
+          description: Output only. Update time of this environment.
+          format: google-datetime
+          readOnly: true
+          type: string
+        versionConfigs:
+          description: Required. A list of configurations for flow versions. You should include version configs for all flows that are reachable from `Start Flow` in the agent. Otherwise, an error will be returned.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3EnvironmentVersionConfig"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3EnvironmentTestCasesConfig:
+      description: The configuration for continuous tests.
+      properties:
+        enableContinuousRun:
+          description: Whether to run test cases in TestCasesConfig.test_cases periodically. Default false. If set to ture, run once a day.
+          type: boolean
+        enablePredeploymentRun:
+          description: Whether to run test cases in TestCasesConfig.test_cases before deploying a flow version to the environment. Default false.
+          type: boolean
+        testCases:
+          description: "A list of test case names to run. They should be under the same agent. Format of each test case name: `projects//locations/ /agents//testCases/`"
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3EnvironmentVersionConfig:
+      description: Configuration for the version.
+      properties:
+        version:
+          description: "Required. Format: projects//locations//agents//flows//versions/."
           type: string
       type: object
     GoogleCloudDialogflowCxV3EventHandler:
@@ -3631,6 +3698,25 @@ components:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1GenericKnowledgeOperationMetadata"
           description: The generic information of the operation.
       type: object
+    GoogleCloudDialogflowCxV3beta1DeployFlowMetadata:
+      description: Metadata returned for the Environments.DeployFlow long running operation.
+      properties:
+        testErrors:
+          description: Errors of running deployment tests.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TestError"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1DeployFlowResponse:
+      description: The response message for Environments.DeployFlow.
+      properties:
+        deployment:
+          description: "The name of the flow version deployment. Format: `projects//locations//agents// environments//deployments/`."
+          type: string
+        environment:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Environment"
+          description: The updated environment where the flow is deployed.
+      type: object
     GoogleCloudDialogflowCxV3beta1DtmfInput:
       description: Represents the input for dtmf event.
       properties:
@@ -3639,6 +3725,54 @@ components:
           type: string
         finishDigit:
           description: The finish digit (if any).
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1Environment:
+      description: Represents an environment for an agent. You can create multiple versions of your agent and publish them to separate environments. When you edit an agent, you are editing the draft agent. At any point, you can save the draft agent as an agent version, which is an immutable snapshot of your agent. When you save the draft agent, it is published to the default environment. When you create agent versions, you can publish them to custom environments. You can create a variety of custom environments for testing, development, production, etc.
+      properties:
+        description:
+          description: The human-readable description of the environment. The maximum length is 500 characters. If exceeded, the request is rejected.
+          type: string
+        displayName:
+          description: Required. The human-readable name of the environment (unique in an agent). Limit of 64 characters.
+          type: string
+        name:
+          description: "The name of the environment. Format: `projects//locations//agents//environments/`."
+          type: string
+        testCasesConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1EnvironmentTestCasesConfig"
+          description: The test cases config for continuous tests of this environment.
+        updateTime:
+          description: Output only. Update time of this environment.
+          format: google-datetime
+          readOnly: true
+          type: string
+        versionConfigs:
+          description: Required. A list of configurations for flow versions. You should include version configs for all flows that are reachable from `Start Flow` in the agent. Otherwise, an error will be returned.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1EnvironmentVersionConfig"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1EnvironmentTestCasesConfig:
+      description: The configuration for continuous tests.
+      properties:
+        enableContinuousRun:
+          description: Whether to run test cases in TestCasesConfig.test_cases periodically. Default false. If set to ture, run once a day.
+          type: boolean
+        enablePredeploymentRun:
+          description: Whether to run test cases in TestCasesConfig.test_cases before deploying a flow version to the environment. Default false.
+          type: boolean
+        testCases:
+          description: "A list of test case names to run. They should be under the same agent. Format of each test case name: `projects//locations/ /agents//testCases/`"
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1EnvironmentVersionConfig:
+      description: Configuration for the version.
+      properties:
+        version:
+          description: "Required. Format: projects//locations//agents//flows//versions/."
           type: string
       type: object
     GoogleCloudDialogflowCxV3beta1EventHandler:

@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Cloud Identity API
-  version: v1beta1
+  version: v1
   x-apisguru-categories:
     - analytics
     - media
@@ -20,28 +20,32 @@ info:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: https://cloudidentity.googleapis.com/$discovery/rest?version=v1beta1
+      url: https://cloudidentity.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-providerName: googleapis.com
   x-serviceName: cloudidentity
 externalDocs:
   url: https://cloud.google.com/identity/
 tags:
-  - name: customers
   - name: devices
   - name: groups
 paths:
-  /v1beta1/devices:
+  /v1/devices:
     get:
       description: Lists/Searches devices.
       operationId: cloudidentity.devices.list
       parameters:
+        - description: "Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer in the format: `customers/{customer}`, where customer is the customer to whom the device belongs. If you're using this API for your own organization, use `customers/my_customer`. If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs."
+          in: query
+          name: customer
+          schema:
+            type: string
         - description: Optional. Additional restrictions when fetching list of devices. For a list of search fields, refer to [Mobile device search fields](https://developers.google.com/admin-sdk/directory/v1/search-operators). Multiple search fields are separated by the space character.
           in: query
           name: filter
           schema:
             type: string
-        - description: "Optional. Order specification for devices in the response. Only one of the following field names may be used to specify the order: `create_time`, `last_sync_time`, `model`, `os_version`, `device_type` and `serial_number`. `desc` may be specified optionally to specify results to be sorted in descending order. Default order is ascending."
+        - description: "Optional. Order specification for devices in the response. Only one of the following field names may be used to specify the order: `create_time`, `last_sync_time`, `model`, `os_version`, `device_type` and `serial_number`. `desc` may be specified optionally at the end to specify results to be sorted in descending order. Default order is ascending."
           in: query
           name: orderBy
           schema:
@@ -70,7 +74,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListDevicesResponse"
+                $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1ListDevicesResponse"
           description: Successful response
       tags:
         - devices
@@ -89,11 +93,17 @@ paths:
     post:
       description: "Creates a device. Only company-owned device may be created. **Note**: This method is available only to customers who have one of the following SKUs: Enterprise Standard, Enterprise Plus, Enterprise for Education, and Cloud Identity Premium"
       operationId: cloudidentity.devices.create
+      parameters:
+        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
+          in: query
+          name: customer
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateDeviceRequest"
+              $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1Device"
       responses:
         "200":
           content:
@@ -103,7 +113,7 @@ paths:
           description: Successful response
       tags:
         - devices
-  /v1beta1/groups:
+  /v1/groups:
     get:
       description: Lists the `Group` resources under a customer or namespace.
       operationId: cloudidentity.groups.list
@@ -118,7 +128,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Required. The parent resource under which to list all `Group` resources. Must be of the form `identitysources/{identity_source_id}` for external- identity-mapped groups or `customers/{customer_id}` for Google Groups. The `customer_id` must begin with "C" (for example, 'C046psxkn').
+        - description: Required. The parent resource under which to list all `Group` resources. Must be of the form `identitysources/{identity_source}` for external- identity-mapped groups or `customers/{customer}` for Google Groups. The `customer` must begin with "C" (for example, 'C046psxkn').
           in: query
           name: parent
           schema:
@@ -167,10 +177,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a `Group`.
+      description: Creates a Group.
       operationId: cloudidentity.groups.create
       parameters:
-        - description: Required. The initial configuration option for the `Group`.
+        - description: Optional. The initial configuration option for the `Group`.
           in: query
           name: initialGroupConfig
           schema:
@@ -202,17 +212,17 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
-  /v1beta1/groups:lookup:
+  /v1/groups:lookup:
     get:
       description: Looks up the [resource name](https://cloud.google.com/apis/design/resource_names) of a `Group` by its `EntityKey`.
       operationId: cloudidentity.groups.lookup
       parameters:
-        - description: The ID of the entity. For Google-managed entities, the `id` must be the email address of an existing group or user. For external-identity-mapped entities, the `id` must be a string conforming to the Identity Source's requirements. Must be unique within a `namespace`.
+        - description: The ID of the entity. For Google-managed entities, the `id` should be the email address of an existing group or user. For external-identity-mapped entities, the `id` must be a string conforming to the Identity Source's requirements. Must be unique within a `namespace`.
           in: query
           name: groupKey.id
           schema:
             type: string
-        - description: The namespace in which the entity exists. If not specified, the `EntityKey` represents a Google-managed entity such as a Google user or a Google Group. If specified, the `EntityKey` represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source_id}`.
+        - description: The namespace in which the entity exists. If not specified, the `EntityKey` represents a Google-managed entity such as a Google user or a Google Group. If specified, the `EntityKey` represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source}`.
           in: query
           name: groupKey.namespace
           schema:
@@ -251,12 +261,12 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  /v1beta1/groups:search:
+  /v1/groups:search:
     get:
       description: Searches for `Group` resources matching a specified query.
       operationId: cloudidentity.groups.search
       parameters:
-        - description: The maximum number of results to return. Note that the number of results returned may be less than this value even if there are more available results. To fetch all results, clients must continue calling this method repeatedly until the response no longer contains a `next_page_token`. If unspecified, defaults to 200 for `GroupView.BASIC` and to 50 for `GroupView.FULL`. Must not be greater than 1000 for `GroupView.BASIC` or 500 for `GroupView.FULL`.
+        - description: The maximum number of results to return. Note that the number of results returned may be less than this value even if there are more available results. To fetch all results, clients must continue calling this method repeatedly until the response no longer contains a `next_page_token`. If unspecified, defaults to 200 for `GroupView.BASIC` and 50 for `GroupView.FULL`. Must not be greater than 1000 for `GroupView.BASIC` or 500 for `GroupView.FULL`.
           in: query
           name: pageSize
           schema:
@@ -266,7 +276,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Required. The search query. Must be specified in [Common Expression Language](https://opensource.google/projects/cel). May only contain equality operators on the parent and inclusion operators on labels (e.g., `parent == 'customers/{customer_id}' && 'cloudidentity.googleapis.com/groups.discussion_forum' in labels`). The `customer_id` must begin with "C" (for example, 'C046psxkn').
+        - description: Required. The search query. Must be specified in [Common Expression Language](https://opensource.google/projects/cel). May only contain equality operators on the parent and inclusion operators on labels (e.g., `parent == 'customers/{customer}' && 'cloudidentity.googleapis.com/groups.discussion_forum' in labels`). The `customer` must begin with "C" (for example, 'C046psxkn').
           in: query
           name: query
           schema:
@@ -276,6 +286,7 @@ paths:
           name: view
           schema:
             enum:
+              - VIEW_UNSPECIFIED
               - BASIC
               - FULL
             type: string
@@ -313,15 +324,20 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}":
+  "/v1/{name}":
     delete:
       description: Deletes a `Membership`.
       operationId: cloudidentity.groups.memberships.delete
       parameters:
-        - description: Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership` to delete. Must be of the form `groups/{group_id}/memberships/{membership_id}`.
+        - description: Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership` to delete. Must be of the form `groups/{group}/memberships/{membership}`
           in: path
           name: name
           required: true
+          schema:
+            type: string
+        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
+          in: query
+          name: customer
           schema:
             type: string
       responses:
@@ -346,13 +362,13 @@ paths:
       description: Retrieves a `Membership`.
       operationId: cloudidentity.groups.memberships.get
       parameters:
-        - description: Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership` to retrieve. Must be of the form `groups/{group_id}/memberships/{membership_id}`.
+        - description: Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership` to retrieve. Must be of the form `groups/{group}/memberships/{membership}`.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
+        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
           in: query
           name: customer
           schema:
@@ -395,13 +411,13 @@ paths:
       description: Updates a `Group`.
       operationId: cloudidentity.groups.patch
       parameters:
-        - description: Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Group`. Shall be of the form `groups/{group_id}`.
+        - description: Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Group`. Shall be of the form `groups/{group}`.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: "Required. The names of fields to update. May only contain the following field names: `display_name`, `description`, `labels`, `dynamic_group_metadata`, `posix_groups`."
+        - description: "Required. The names of fields to update. May only contain the following field names: `display_name`, `description`, `labels`."
           in: query
           name: updateMask
           schema:
@@ -429,7 +445,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
-  "/v1beta1/{name}:approve":
+  "/v1/{name}:approve":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -446,7 +462,7 @@ paths:
       description: Approves device to access user data.
       operationId: cloudidentity.devices.deviceUsers.approve
       parameters:
-        - description: "Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device_id}/deviceUsers/{device_user_id}`, where device_id is the unique ID assigned to the Device, and device_user_id is the unique ID assigned to the User."
+        - description: "Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device}/deviceUsers/{device_user}`, where device is the unique ID assigned to the Device, and device_user is the unique ID assigned to the User."
           in: path
           name: name
           required: true
@@ -456,7 +472,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ApproveDeviceUserRequest"
+              $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1ApproveDeviceUserRequest"
       responses:
         "200":
           content:
@@ -466,7 +482,7 @@ paths:
           description: Successful response
       tags:
         - devices
-  "/v1beta1/{name}:block":
+  "/v1/{name}:block":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -483,7 +499,7 @@ paths:
       description: Blocks device from accessing user data
       operationId: cloudidentity.devices.deviceUsers.block
       parameters:
-        - description: "Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device_id}/deviceUsers/{device_user_id}`, where device_id is the unique ID assigned to the Device, and device_user_id is the unique ID assigned to the User."
+        - description: "Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device}/deviceUsers/{device_user}`, where device is the unique ID assigned to the Device, and device_user is the unique ID assigned to the User."
           in: path
           name: name
           required: true
@@ -493,7 +509,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BlockDeviceUserRequest"
+              $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1BlockDeviceUserRequest"
       responses:
         "200":
           content:
@@ -503,44 +519,7 @@ paths:
           description: Successful response
       tags:
         - devices
-  "/v1beta1/{name}:cancel":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Cancels a UserInvitation that was already sent.
-      operationId: cloudidentity.customers.userinvitations.cancel
-      parameters:
-        - description: Required. `UserInvitation` name in the format `customers/{customer}/userinvitations/{user_email_address}`
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CancelUserInvitationRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      tags:
-        - customers
-  "/v1beta1/{name}:cancelWipe":
+  "/v1/{name}:cancelWipe":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -557,7 +536,7 @@ paths:
       description: Cancels an unfinished user account wipe. This operation can be used to cancel device wipe in the gap between the wipe operation returning success and the device being wiped.
       operationId: cloudidentity.devices.deviceUsers.cancelWipe
       parameters:
-        - description: "Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device_id}/deviceUsers/{device_user_id}`, where device_id is the unique ID assigned to the Device, and device_user_id is the unique ID assigned to the User."
+        - description: "Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device}/deviceUsers/{device_user}`, where device is the unique ID assigned to the Device, and device_user is the unique ID assigned to the User."
           in: path
           name: name
           required: true
@@ -567,7 +546,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CancelWipeDeviceUserRequest"
+              $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest"
       responses:
         "200":
           content:
@@ -577,39 +556,7 @@ paths:
           description: Successful response
       tags:
         - devices
-  "/v1beta1/{name}:isInvitableUser":
-    get:
-      description: "Verifies whether a user account is eligible to receive a UserInvitation (is an unmanaged account). Eligibility is based on the following criteria: * the email address is a consumer account and it's the primary email address of the account, and * the domain of the email address matches an existing verified Google Workspace or Cloud Identity domain If both conditions are met, the user is eligible. **Note:** This method is not supported for Workspace Essentials customers."
-      operationId: cloudidentity.customers.userinvitations.isInvitableUser
-      parameters:
-        - description: Required. `UserInvitation` name in the format `customers/{customer}/userinvitations/{user_email_address}`
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/IsInvitableUserResponse"
-          description: Successful response
-      tags:
-        - customers
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:modifyMembershipRoles":
+  "/v1/{name}:modifyMembershipRoles":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -626,7 +573,7 @@ paths:
       description: Modifies the `MembershipRole`s of a `Membership`.
       operationId: cloudidentity.groups.memberships.modifyMembershipRoles
       parameters:
-        - description: Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership` whose roles are to be modified. Must be of the form `groups/{group_id}/memberships/{membership_id}`.
+        - description: Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership` whose roles are to be modified. Must be of the form `groups/{group}/memberships/{membership}`.
           in: path
           name: name
           required: true
@@ -655,7 +602,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
-  "/v1beta1/{name}:send":
+  "/v1/{name}:wipe":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -669,47 +616,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Sends a UserInvitation to email. If the `UserInvitation` does not exist for this request and it is a valid request, the request creates a `UserInvitation`. **Note:** The `get` and `list` methods have a 48-hour delay where newly-created consumer accounts will not appear in the results. You can still send a `UserInvitation` to those accounts if you know the unmanaged email address and IsInvitableUser==True.
-      operationId: cloudidentity.customers.userinvitations.send
-      parameters:
-        - description: Required. `UserInvitation` name in the format `customers/{customer}/userinvitations/{user_email_address}`
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SendUserInvitationRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      tags:
-        - customers
-  "/v1beta1/{name}:wipe":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Wipes the user's account on a device.
+      description: Wipes the user's account on a device. Other data on the device that is not associated with the user's work account is not affected. For example, if a Gmail app is installed on a device that is used for personal and work purposes, and the user is logged in to the Gmail app with their personal account as well as their work account, wiping the "deviceUser" by their work administrator will not affect their personal account within Gmail or other apps such as Photos.
       operationId: cloudidentity.devices.deviceUsers.wipe
       parameters:
-        - description: "Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device_id}/deviceUsers/{device_user_id}`, where device_id is the unique ID assigned to the Device, and device_user_id is the unique ID assigned to the User."
+        - description: "Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device}/deviceUsers/{device_user}`, where device is the unique ID assigned to the Device, and device_user is the unique ID assigned to the User."
           in: path
           name: name
           required: true
@@ -719,7 +629,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WipeDeviceUserRequest"
+              $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1WipeDeviceUserRequest"
       responses:
         "200":
           content:
@@ -729,7 +639,59 @@ paths:
           description: Successful response
       tags:
         - devices
-  "/v1beta1/{parent}/deviceUsers":
+  "/v1/{parent}/clientStates":
+    get:
+      description: Lists the client states for the given search query.
+      operationId: cloudidentity.devices.deviceUsers.clientStates.list
+      parameters:
+        - description: 'Required. To list all ClientStates, set this to "devices/-/deviceUsers/-". To list all ClientStates owned by a DeviceUser, set this to the resource name of the DeviceUser. Format: devices/{device}/deviceUsers/{deviceUser}'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
+          in: query
+          name: customer
+          schema:
+            type: string
+        - description: Optional. Additional restrictions when fetching list of client states.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Order specification for client states in the response.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. A page token, received from a previous `ListClientStates` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListClientStates` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1ListClientStatesResponse"
+          description: Successful response
+      tags:
+        - devices
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/deviceUsers":
     get:
       description: Lists/Searches DeviceUsers.
       operationId: cloudidentity.devices.deviceUsers.list
@@ -738,6 +700,11 @@ paths:
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
+          in: query
+          name: customer
           schema:
             type: string
         - description: Optional. Additional restrictions when fetching list of devices. For a list of search fields, refer to [Mobile device search fields](https://developers.google.com/admin-sdk/directory/v1/search-operators). Multiple search fields are separated by the space character.
@@ -765,7 +732,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListDeviceUsersResponse"
+                $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse"
           description: Successful response
       tags:
         - devices
@@ -781,12 +748,12 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/memberships":
+  "/v1/{parent}/memberships":
     get:
       description: Lists the `Membership`s within a `Group`.
       operationId: cloudidentity.groups.memberships.list
       parameters:
-        - description: Required. The parent `Group` resource under which to lookup the `Membership` name. Must be of the form `groups/{group_id}`.
+        - description: Required. The parent `Group` resource under which to lookup the `Membership` name. Must be of the form `groups/{group}`.
           in: path
           name: parent
           required: true
@@ -802,11 +769,12 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: The level of detail to be returned. If unspecified, defaults to `MembershipView.BASIC`.
+        - description: The level of detail to be returned. If unspecified, defaults to `View.BASIC`.
           in: query
           name: view
           schema:
             enum:
+              - VIEW_UNSPECIFIED
               - BASIC
               - FULL
             type: string
@@ -848,7 +816,7 @@ paths:
       description: Creates a `Membership`.
       operationId: cloudidentity.groups.memberships.create
       parameters:
-        - description: Required. The parent `Group` resource under which to create the `Membership`. Must be of the form `groups/{group_id}`.
+        - description: Required. The parent `Group` resource under which to create the `Membership`. Must be of the form `groups/{group}`.
           in: path
           name: parent
           required: true
@@ -877,12 +845,12 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
-  "/v1beta1/{parent}/memberships:checkTransitiveMembership":
+  "/v1/{parent}/memberships:checkTransitiveMembership":
     get:
-      description: Check a potential member for membership in a group. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. A member has membership to a group as long as there is a single viewable transitive membership between the group and the member. The actor must have view permissions to at least one transitive membership between the member and group.
+      description: Check a potential member for membership in a group. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. If the account of the member is not one of these, a 403 (PERMISSION_DENIED) HTTP status code will be returned. A member has membership to a group as long as there is a single viewable transitive membership between the group and the member. The actor must have view permissions to at least one transitive membership between the member and group.
       operationId: cloudidentity.groups.memberships.checkTransitiveMembership
       parameters:
-        - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to check the transitive membership in. Format: `groups/{group_id}`, where `group_id` is the unique id assigned to the Group to which the Membership belongs to."
+        - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to check the transitive membership in. Format: `groups/{group}`, where `group` is the unique id assigned to the Group to which the Membership belongs to."
           in: path
           name: parent
           required: true
@@ -927,12 +895,12 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/memberships:getMembershipGraph":
+  "/v1/{parent}/memberships:getMembershipGraph":
     get:
-      description: Get a membership graph of just a member or both a member and a group. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. Given a member, the response will contain all membership paths from the member. Given both a group and a member, the response will contain all membership paths between the group and the member.
+      description: Get a membership graph of just a member or both a member and a group. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. If the account of the member is not one of these, a 403 (PERMISSION_DENIED) HTTP status code will be returned. Given a member, the response will contain all membership paths from the member. Given both a group and a member, the response will contain all membership paths between the group and the member.
       operationId: cloudidentity.groups.memberships.getMembershipGraph
       parameters:
-        - description: 'Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group_id}`, where `group_id` is the unique ID assigned to the Group to which the Membership belongs to. group_id can be a wildcard collection id "-". When a group_id is specified, the membership graph will be constrained to paths between the member (defined in the query) and the parent. If a wildcard collection is provided, all membership paths connected to the member will be returned.'
+        - description: 'Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group}`, where `group` is the unique ID assigned to the Group to which the Membership belongs to. group can be a wildcard collection id "-". When a group is specified, the membership graph will be constrained to paths between the member (defined in the query) and the parent. If a wildcard collection is provided, all membership paths connected to the member will be returned.'
           in: path
           name: parent
           required: true
@@ -977,23 +945,23 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/memberships:lookup":
+  "/v1/{parent}/memberships:lookup":
     get:
       description: Looks up the [resource name](https://cloud.google.com/apis/design/resource_names) of a `Membership` by its `EntityKey`.
       operationId: cloudidentity.groups.memberships.lookup
       parameters:
-        - description: Required. The parent `Group` resource under which to lookup the `Membership` name. Must be of the form `groups/{group_id}`.
+        - description: Required. The parent `Group` resource under which to lookup the `Membership` name. Must be of the form `groups/{group}`.
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The ID of the entity. For Google-managed entities, the `id` must be the email address of an existing group or user. For external-identity-mapped entities, the `id` must be a string conforming to the Identity Source's requirements. Must be unique within a `namespace`.
+        - description: The ID of the entity. For Google-managed entities, the `id` should be the email address of an existing group or user. For external-identity-mapped entities, the `id` must be a string conforming to the Identity Source's requirements. Must be unique within a `namespace`.
           in: query
           name: memberKey.id
           schema:
             type: string
-        - description: The namespace in which the entity exists. If not specified, the `EntityKey` represents a Google-managed entity such as a Google user or a Google Group. If specified, the `EntityKey` represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source_id}`.
+        - description: The namespace in which the entity exists. If not specified, the `EntityKey` represents a Google-managed entity such as a Google user or a Google Group. If specified, the `EntityKey` represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source}`.
           in: query
           name: memberKey.namespace
           schema:
@@ -1032,12 +1000,12 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/memberships:searchTransitiveGroups":
+  "/v1/{parent}/memberships:searchTransitiveGroups":
     get:
-      description: Search transitive groups of a member. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. A transitive group is any group that has a direct or indirect membership to the member. Actor must have view permissions all transitive groups.
+      description: Search transitive groups of a member. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. If the account of the member is not one of these, a 403 (PERMISSION_DENIED) HTTP status code will be returned. A transitive group is any group that has a direct or indirect membership to the member. Actor must have view permissions all transitive groups.
       operationId: cloudidentity.groups.memberships.searchTransitiveGroups
       parameters:
-        - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group_id}`, where `group_id` is always '-' as this API will search across all groups for a given member."
+        - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group}`, where `group` is always '-' as this API will search across all groups for a given member."
           in: path
           name: parent
           required: true
@@ -1092,12 +1060,12 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/memberships:searchTransitiveMemberships":
+  "/v1/{parent}/memberships:searchTransitiveMemberships":
     get:
-      description: Search transitive memberships of a group. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. A transitive membership is any direct or indirect membership of a group. Actor must have view permissions to all transitive memberships.
+      description: Search transitive memberships of a group. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. If the account of the group is not one of these, a 403 (PERMISSION_DENIED) HTTP status code will be returned. A transitive membership is any direct or indirect membership of a group. Actor must have view permissions to all transitive memberships.
       operationId: cloudidentity.groups.memberships.searchTransitiveMemberships
       parameters:
-        - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group_id}`, where `group_id` is the unique ID assigned to the Group."
+        - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group}`, where `group` is the unique ID assigned to the Group."
           in: path
           name: parent
           required: true
@@ -1147,59 +1115,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/userinvitations":
-    get:
-      description: Retrieves a list of UserInvitation resources. **Note:** New consumer accounts with the customer's verified domain created within the previous 48 hours will not appear in the result. This delay also applies to newly-verified domains.
-      operationId: cloudidentity.customers.userinvitations.list
-      parameters:
-        - description: Required. The customer ID of the Google Workspace or Cloud Identity account the UserInvitation resources are associated with.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: "Optional. A query string for filtering `UserInvitation` results by their current state, in the format: `\"state=='invited'\"`."
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: Optional. The sort order of the list results. You can sort the results in descending order based on either email or last update timestamp but not both, using `order_by="email desc"`. Currently, sorting is supported for `update_time asc`, `update_time desc`, `email asc`, and `email desc`. If not specified, results will be returned based on `email asc` order.
-          in: query
-          name: orderBy
-          schema:
-            type: string
-        - description: Optional. The maximum number of UserInvitation resources to return. If unspecified, at most 100 resources will be returned. The maximum value is 200; values above 200 will be set to 200.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Optional. A page token, received from a previous `ListUserInvitations` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListBooks` must match the call that provided the page token.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListUserInvitationsResponse"
-          description: Successful response
-      tags:
-        - customers
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}:lookup":
+  "/v1/{parent}:lookup":
     get:
       description: "Looks up resource names of the DeviceUsers associated with the caller's credentials, as well as the properties provided in the request. This method must be called with end-user credentials with the scope: https://www.googleapis.com/auth/cloud-identity.devices.lookup If multiple properties are provided, only DeviceUsers having all of these properties are considered as matches - i.e. the query behaves like an AND. Different platforms require different amounts of information from the caller to ensure that the DeviceUser is uniquely identified. - iOS: No properties need to be passed, the caller's credentials are sufficient to identify the corresponding DeviceUser. - Android: Specifying the 'android_id' field is required. - Desktop: Specifying the 'raw_resource_id' field is required."
       operationId: cloudidentity.devices.deviceUsers.lookup
@@ -1240,7 +1156,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/LookupSelfDeviceUsersResponse"
+                $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1337,75 +1253,6 @@ components:
       schema:
         type: string
   schemas:
-    AndroidAttributes:
-      description: Resource representing the Android specific attributes of a Device.
-      properties:
-        enabledUnknownSources:
-          description: Whether applications from unknown sources can be installed on device.
-          type: boolean
-        ownerProfileAccount:
-          description: Whether this account is on an owner/primary profile. For phones, only true for owner profiles. Android 4+ devices can have secondary or restricted user profiles.
-          type: boolean
-        ownershipPrivilege:
-          description: Ownership privileges on device.
-          enum:
-            - OWNERSHIP_PRIVILEGE_UNSPECIFIED
-            - DEVICE_ADMINISTRATOR
-            - PROFILE_OWNER
-            - DEVICE_OWNER
-          type: string
-        supportsWorkProfile:
-          description: Whether device supports Android work profiles. If false, this service will not block access to corp data even if an administrator turns on the "Enforce Work Profile" policy.
-          type: boolean
-      type: object
-    ApproveDeviceUserRequest:
-      description: Request message for approving the device to access user data.
-      properties: {}
-      type: object
-    ApproveDeviceUserResponse:
-      description: Response message for approving the device to access user data.
-      properties:
-        deviceUser:
-          $ref: "#/components/schemas/DeviceUser"
-          description: Resultant DeviceUser object for the action.
-      type: object
-    BlockDeviceUserRequest:
-      description: Request message for blocking account on device.
-      properties: {}
-      type: object
-    BlockDeviceUserResponse:
-      description: Response message for blocking the device from accessing user data.
-      properties:
-        deviceUser:
-          $ref: "#/components/schemas/DeviceUser"
-          description: Resultant DeviceUser object for the action.
-      type: object
-    CancelUserInvitationRequest:
-      description: Request to cancel sent invitation for target email in UserInvitation.
-      properties: {}
-      type: object
-    CancelWipeDeviceRequest:
-      description: Request message for cancelling an unfinished device wipe.
-      properties: {}
-      type: object
-    CancelWipeDeviceResponse:
-      description: Response message for cancelling an unfinished device wipe.
-      properties:
-        device:
-          $ref: "#/components/schemas/Device"
-          description: Resultant Device object for the action. Note that asset tags will not be returned in the device object.
-      type: object
-    CancelWipeDeviceUserRequest:
-      description: Request message for cancelling an unfinished user account wipe.
-      properties: {}
-      type: object
-    CancelWipeDeviceUserResponse:
-      description: Response message for cancelling an unfinished user account wipe.
-      properties:
-        deviceUser:
-          $ref: "#/components/schemas/DeviceUser"
-          description: Resultant DeviceUser object for the action.
-      type: object
     CheckTransitiveMembershipResponse:
       description: The response message for MembershipsService.CheckTransitiveMembership.
       properties:
@@ -1413,303 +1260,21 @@ components:
           description: Response does not include the possible roles of a member since the behavior of this rpc is not all-or-nothing unlike the other rpcs. So, it may not be possible to list all the roles definitively, due to possible lack of authorization in some of the paths.
           type: boolean
       type: object
-    ClientState:
-      description: Represents the state associated with an API client calling the Devices API. Resource representing ClientState and supports updates from API users
-      properties:
-        assetTags:
-          description: The caller can specify asset tags for this resource
-          items:
-            type: string
-          type: array
-        complianceState:
-          description: The compliance state of the resource as specified by the API client.
-          enum:
-            - COMPLIANCE_STATE_UNSPECIFIED
-            - COMPLIANT
-            - NON_COMPLIANT
-          type: string
-        createTime:
-          description: Output only. The time the client state data was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        customId:
-          description: This field may be used to store a unique identifier for the API resource within which these CustomAttributes are a field.
-          type: string
-        etag:
-          description: The token that needs to be passed back for concurrency control in updates. Token needs to be passed back in UpdateRequest
-          type: string
-        healthScore:
-          description: The Health score of the resource
-          enum:
-            - HEALTH_SCORE_UNSPECIFIED
-            - VERY_POOR
-            - POOR
-            - NEUTRAL
-            - GOOD
-            - VERY_GOOD
-          type: string
-        keyValuePairs:
-          additionalProperties:
-            $ref: "#/components/schemas/CustomAttributeValue"
-          description: The map of key-value attributes stored by callers specific to a device. The total serialized length of this map may not exceed 10KB. No limit is placed on the number of attributes in a map.
-          type: object
-        lastUpdateTime:
-          description: Output only. The time the client state data was last updated.
-          format: google-datetime
-          readOnly: true
-          type: string
-        managed:
-          description: The management state of the resource as specified by the API client.
-          enum:
-            - MANAGED_STATE_UNSPECIFIED
-            - MANAGED
-            - UNMANAGED
-          type: string
-        name:
-          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the ClientState in format: `devices/{device_id}/deviceUsers/{device_user_id}/clientState/{partner_id}`, where partner_id corresponds to the partner storing the data."
-          readOnly: true
-          type: string
-        ownerType:
-          description: Output only. The owner of the ClientState
-          enum:
-            - OWNER_TYPE_UNSPECIFIED
-            - OWNER_TYPE_CUSTOMER
-            - OWNER_TYPE_PARTNER
-          readOnly: true
-          type: string
-        scoreReason:
-          description: A descriptive cause of the health score.
-          type: string
+    CreateGroupMetadata:
+      description: Metadata for CreateGroup LRO.
+      properties: {}
       type: object
-    CreateDeviceRequest:
-      description: Request message for creating a Company Owned device.
-      properties:
-        device:
-          $ref: "#/components/schemas/Device"
-          description: Required. The device to be created. The name field within this device is ignored in the create method. A new name is created by the method, and returned within the response. Only the fields `device_type`, `serial_number` and `asset_tag` (if present) are used to create the device. All other fields are ignored. The `device_type` and `serial_number` fields are required.
+    CreateMembershipMetadata:
+      description: Metadata for CreateMembership LRO.
+      properties: {}
       type: object
-    CustomAttributeValue:
-      description: Additional custom attribute values may be one of these types
-      properties:
-        boolValue:
-          description: Represents a boolean value.
-          type: boolean
-        numberValue:
-          description: Represents a double value.
-          format: double
-          type: number
-        stringValue:
-          description: Represents a string value.
-          type: string
+    DeleteGroupMetadata:
+      description: Metadata for DeleteGroup LRO.
+      properties: {}
       type: object
-    Device:
-      description: A Device within the Cloud Identity Devices API. Represents a Device known to Google Cloud, independent of the device ownership, type, and whether it is assigned or in use by a user.
-      properties:
-        androidSpecificAttributes:
-          $ref: "#/components/schemas/AndroidAttributes"
-          description: Output only. Attributes specific to Android devices.
-          readOnly: true
-        assetTag:
-          description: Asset tag of the device.
-          type: string
-        basebandVersion:
-          description: Output only. Baseband version of the device.
-          readOnly: true
-          type: string
-        bootloaderVersion:
-          description: "Output only. Device bootloader version. Example: 0.6.7."
-          readOnly: true
-          type: string
-        brand:
-          description: "Output only. Device brand. Example: Samsung."
-          readOnly: true
-          type: string
-        buildNumber:
-          description: Output only. Build number of the device.
-          readOnly: true
-          type: string
-        compromisedState:
-          description: Output only. Represents whether the Device is compromised.
-          enum:
-            - COMPROMISED_STATE_UNSPECIFIED
-            - COMPROMISED
-            - UNCOMPROMISED
-          readOnly: true
-          type: string
-        createTime:
-          description: Output only. When the Company-Owned device was imported. This field is empty for BYOD devices.
-          format: google-datetime
-          readOnly: true
-          type: string
-        deviceType:
-          description: Output only. Type of device.
-          enum:
-            - DEVICE_TYPE_UNSPECIFIED
-            - ANDROID
-            - IOS
-            - GOOGLE_SYNC
-            - WINDOWS
-            - MAC_OS
-            - LINUX
-            - CHROME_OS
-          readOnly: true
-          type: string
-        enabledDeveloperOptions:
-          description: Output only. Whether developer options is enabled on device.
-          readOnly: true
-          type: boolean
-        enabledUsbDebugging:
-          description: Output only. Whether USB debugging is enabled on device.
-          readOnly: true
-          type: boolean
-        encryptionState:
-          description: Output only. Device encryption state.
-          enum:
-            - ENCRYPTION_STATE_UNSPECIFIED
-            - UNSUPPORTED_BY_DEVICE
-            - ENCRYPTED
-            - NOT_ENCRYPTED
-          readOnly: true
-          type: string
-        imei:
-          description: Output only. IMEI number of device if GSM device; empty otherwise.
-          readOnly: true
-          type: string
-        kernelVersion:
-          description: Output only. Kernel version of the device.
-          readOnly: true
-          type: string
-        lastSyncTime:
-          description: Most recent time when device synced with this service.
-          format: google-datetime
-          type: string
-        managementState:
-          description: Output only. Management state of the device
-          enum:
-            - MANAGEMENT_STATE_UNSPECIFIED
-            - APPROVED
-            - BLOCKED
-            - PENDING
-            - UNPROVISIONED
-            - WIPING
-            - WIPED
-          readOnly: true
-          type: string
-        manufacturer:
-          description: "Output only. Device manufacturer. Example: Motorola."
-          readOnly: true
-          type: string
-        meid:
-          description: Output only. MEID number of device if CDMA device; empty otherwise.
-          readOnly: true
-          type: string
-        model:
-          description: "Output only. Model name of device. Example: Pixel 3."
-          readOnly: true
-          type: string
-        name:
-          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Device in format: `devices/{device_id}`, where device_id is the unique id assigned to the Device."
-          readOnly: true
-          type: string
-        networkOperator:
-          description: Output only. Mobile or network operator of device, if available.
-          readOnly: true
-          type: string
-        osVersion:
-          description: "Output only. OS version of the device. Example: Android 8.1.0."
-          readOnly: true
-          type: string
-        otherAccounts:
-          description: "Output only. Domain name for Google accounts on device. Type for other accounts on device. On Android, will only be populated if |ownership_privilege| is |PROFILE_OWNER| or |DEVICE_OWNER|. Does not include the account signed in to the device policy app if that account's domain has only one account. Examples: \"com.example\", \"xyz.com\"."
-          items:
-            type: string
-          readOnly: true
-          type: array
-        ownerType:
-          description: Output only. Whether the device is owned by the company or an individual
-          enum:
-            - DEVICE_OWNERSHIP_UNSPECIFIED
-            - COMPANY
-            - BYOD
-          readOnly: true
-          type: string
-        releaseVersion:
-          description: "Output only. OS release version. Example: 6.0."
-          readOnly: true
-          type: string
-        securityPatchTime:
-          description: Output only. OS security patch update time on device.
-          format: google-datetime
-          readOnly: true
-          type: string
-        serialNumber:
-          description: "Serial Number of device. Example: HT82V1A01076."
-          type: string
-        wifiMacAddresses:
-          description: WiFi MAC addresses of device.
-          items:
-            type: string
-          type: array
-      type: object
-    DeviceUser:
-      description: Represents a user's use of a Device in the Cloud Identity Devices API. A DeviceUser is a resource representing a user's use of a Device
-      properties:
-        compromisedState:
-          description: Compromised State of the DeviceUser object
-          enum:
-            - COMPROMISED_STATE_UNSPECIFIED
-            - COMPROMISED
-            - NOT_COMPROMISED
-          type: string
-        createTime:
-          description: When the user first signed in to the device
-          format: google-datetime
-          type: string
-        firstSyncTime:
-          description: Output only. Most recent time when user registered with this service.
-          format: google-datetime
-          readOnly: true
-          type: string
-        languageCode:
-          description: Output only. Default locale used on device, in IETF BCP-47 format.
-          readOnly: true
-          type: string
-        lastSyncTime:
-          description: Output only. Last time when user synced with policies.
-          format: google-datetime
-          readOnly: true
-          type: string
-        managementState:
-          description: Output only. Management state of the user on the device.
-          enum:
-            - MANAGEMENT_STATE_UNSPECIFIED
-            - WIPING
-            - WIPED
-            - APPROVED
-            - BLOCKED
-            - PENDING_APPROVAL
-            - UNENROLLED
-          readOnly: true
-          type: string
-        name:
-          description: "Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the DeviceUser in format: `devices/{device_id}/deviceUsers/{device_user_id}`, where `device_user_id` uniquely identifies a user's use of a device."
-          readOnly: true
-          type: string
-        passwordState:
-          description: Password state of the DeviceUser object
-          enum:
-            - PASSWORD_STATE_UNSPECIFIED
-            - PASSWORD_SET
-            - PASSWORD_NOT_SET
-          type: string
-        userAgent:
-          description: Output only. User agent on the device for this specific user
-          readOnly: true
-          type: string
-        userEmail:
-          description: Email address of the user registered on the device.
-          type: string
+    DeleteMembershipMetadata:
+      description: Metadata for DeleteMembership LRO.
+      properties: {}
       type: object
     DynamicGroupMetadata:
       description: Dynamic group metadata like queries and status.
@@ -1728,9 +1293,10 @@ components:
       description: Defines a query on a resource.
       properties:
         query:
-          description: "Query that determines the memberships of the dynamic group. Examples: All users with at least one `organizations.department` of engineering. `user.organizations.exists(org, org.department=='engineering')` All users with at least one location that has `area` of `foo` and `building_id` of `bar`. `user.locations.exists(loc, loc.area=='foo' && loc.building_id=='bar')`"
+          description: "Query that determines the memberships of the dynamic group. Examples: All users with at least one `organizations.department` of engineering. `user.organizations.exists(org, org.department=='engineering')` All users with at least one location that has `area` of `foo` and `building_id` of `bar`. `user.locations.exists(loc, loc.area=='foo' && loc.building_id=='bar')` All users with any variation of the name John Doe (case-insensitive queries add `equalsIgnoreCase()` to the value being queried). `user.name.value.equalsIgnoreCase('jOhn DoE')`"
           type: string
         resourceType:
+          description: Resource type for the Dynamic Group Query
           enum:
             - RESOURCE_TYPE_UNSPECIFIED
             - USER
@@ -1745,7 +1311,6 @@ components:
             - STATUS_UNSPECIFIED
             - UP_TO_DATE
             - UPDATING_MEMBERSHIPS
-            - INVALID_QUERY
           type: string
         statusTime:
           description: The latest time at which the dynamic group is guaranteed to be in the given status. If status is `UP_TO_DATE`, the latest time at which the dynamic group was confirmed to be up-to-date. If status is `UPDATING_MEMBERSHIPS`, the time at which dynamic group was created.
@@ -1756,10 +1321,10 @@ components:
       description: A unique identifier for an entity in the Cloud Identity Groups API. An entity can represent either a group with an optional `namespace` or a user without a `namespace`. The combination of `id` and `namespace` must be unique; however, the same `id` can be used with different `namespace`s.
       properties:
         id:
-          description: The ID of the entity. For Google-managed entities, the `id` must be the email address of an existing group or user. For external-identity-mapped entities, the `id` must be a string conforming to the Identity Source's requirements. Must be unique within a `namespace`.
+          description: The ID of the entity. For Google-managed entities, the `id` should be the email address of an existing group or user. For external-identity-mapped entities, the `id` must be a string conforming to the Identity Source's requirements. Must be unique within a `namespace`.
           type: string
         namespace:
-          description: The namespace in which the entity exists. If not specified, the `EntityKey` represents a Google-managed entity such as a Google user or a Google Group. If specified, the `EntityKey` represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source_id}`.
+          description: The namespace in which the entity exists. If not specified, the `EntityKey` represents a Google-managed entity such as a Google user or a Google Group. If specified, the `EntityKey` represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source}`.
           type: string
       type: object
     ExpiryDetail:
@@ -1769,6 +1334,10 @@ components:
           description: The time at which the `MembershipRole` will expire.
           format: google-datetime
           type: string
+      type: object
+    GetMembershipGraphMetadata:
+      description: Metadata of GetMembershipGraphResponse LRO. This is currently empty to permit future extensibility.
+      properties: {}
       type: object
     GetMembershipGraphResponse:
       description: The response message for MembershipsService.GetMembershipGraph.
@@ -1809,6 +1378,13 @@ components:
       description: Metadata for ApproveDeviceUser LRO.
       properties: {}
       type: object
+    GoogleAppsCloudidentityDevicesV1ApproveDeviceUserRequest:
+      description: Request message for approving the device to access user data.
+      properties:
+        customer:
+          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
+          type: string
+      type: object
     GoogleAppsCloudidentityDevicesV1ApproveDeviceUserResponse:
       description: Response message for approving the device to access user data.
       properties:
@@ -1819,6 +1395,13 @@ components:
     GoogleAppsCloudidentityDevicesV1BlockDeviceUserMetadata:
       description: Metadata for BlockDeviceUser LRO.
       properties: {}
+      type: object
+    GoogleAppsCloudidentityDevicesV1BlockDeviceUserRequest:
+      description: Request message for blocking account on device.
+      properties:
+        customer:
+          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
+          type: string
       type: object
     GoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse:
       description: Response message for blocking the device from accessing user data.
@@ -1831,6 +1414,13 @@ components:
       description: Metadata for CancelWipeDevice LRO.
       properties: {}
       type: object
+    GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest:
+      description: Request message for cancelling an unfinished device wipe.
+      properties:
+        customer:
+          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
+          type: string
+      type: object
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceResponse:
       description: Response message for cancelling an unfinished device wipe.
       properties:
@@ -1841,6 +1431,13 @@ components:
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserMetadata:
       description: Metadata for CancelWipeDeviceUser LRO.
       properties: {}
+      type: object
+    GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest:
+      description: Request message for cancelling an unfinished user account wipe.
+      properties:
+        customer:
+          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
+          type: string
       type: object
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse:
       description: Response message for cancelling an unfinished user account wipe.
@@ -2152,9 +1749,60 @@ components:
           description: Email address of the user registered on the device.
           type: string
       type: object
+    GoogleAppsCloudidentityDevicesV1ListClientStatesResponse:
+      description: Response message that is returned in ListClientStates.
+      properties:
+        clientStates:
+          description: Client states meeting the list restrictions.
+          items:
+            $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1ClientState"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results. Empty if there are no more results.
+          type: string
+      type: object
+    GoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse:
+      description: Response message that is returned from the ListDeviceUsers method.
+      properties:
+        deviceUsers:
+          description: Devices meeting the list restrictions.
+          items:
+            $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1DeviceUser"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results. Empty if there are no more results.
+          type: string
+      type: object
+    GoogleAppsCloudidentityDevicesV1ListDevicesResponse:
+      description: Response message that is returned from the ListDevices method.
+      properties:
+        devices:
+          description: Devices meeting the list restrictions.
+          items:
+            $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1Device"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results. Empty if there are no more results.
+          type: string
+      type: object
     GoogleAppsCloudidentityDevicesV1ListEndpointAppsMetadata:
       description: Metadata for ListEndpointApps LRO.
       properties: {}
+      type: object
+    GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse:
+      description: Response containing resource names of the DeviceUsers associated with the caller's credentials.
+      properties:
+        customer:
+          description: The obfuscated customer Id that may be passed back to other Devices API methods such as List, Get, etc.
+          type: string
+        names:
+          description: "[Resource names](https://cloud.google.com/apis/design/resource_names) of the DeviceUsers in the format: `devices/{device}/deviceUsers/{user_resource}`, where device is the unique ID assigned to a Device and user_resource is the unique user ID"
+          items:
+            type: string
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results. Empty if there are no more results.
+          type: string
       type: object
     GoogleAppsCloudidentityDevicesV1SignoutDeviceUserMetadata:
       description: Metadata for SignoutDeviceUser LRO.
@@ -2172,6 +1820,13 @@ components:
       description: Metadata for WipeDevice LRO.
       properties: {}
       type: object
+    GoogleAppsCloudidentityDevicesV1WipeDeviceRequest:
+      description: Request message for wiping all data on the device.
+      properties:
+        customer:
+          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
+          type: string
+      type: object
     GoogleAppsCloudidentityDevicesV1WipeDeviceResponse:
       description: Response message for wiping all data on the device.
       properties:
@@ -2183,6 +1838,13 @@ components:
       description: Metadata for WipeDeviceUser LRO.
       properties: {}
       type: object
+    GoogleAppsCloudidentityDevicesV1WipeDeviceUserRequest:
+      description: Request message for starting an account wipe on device.
+      properties:
+        customer:
+          description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
+          type: string
+      type: object
     GoogleAppsCloudidentityDevicesV1WipeDeviceUserResponse:
       description: Response message for wiping the user's account from the device.
       properties:
@@ -2193,11 +1855,6 @@ components:
     Group:
       description: A group within the Cloud Identity Groups API. A `Group` is a collection of entities, where each entity is either a user, another group, or a service account.
       properties:
-        additionalGroupKeys:
-          description: Additional entity key aliases for a Group.
-          items:
-            $ref: "#/components/schemas/EntityKey"
-          type: array
         createTime:
           description: Output only. The time when the `Group` was created.
           format: google-datetime
@@ -2221,17 +1878,12 @@ components:
           description: Required. One or more label entries that apply to the Group. Currently supported labels contain a key with an empty value. Google Groups are the default type of group and have a label with a key of `cloudidentity.googleapis.com/groups.discussion_forum` and an empty value. Existing Google Groups can have an additional label with a key of `cloudidentity.googleapis.com/groups.security` and an empty value added to them. **This is an immutable change and the security label cannot be removed once added.** Dynamic groups have a label with a key of `cloudidentity.googleapis.com/groups.dynamic`. Identity-mapped groups for Cloud Search have a label with a key of `system/groups/external` and an empty value.
           type: object
         name:
-          description: Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Group`. Shall be of the form `groups/{group_id}`.
+          description: Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Group`. Shall be of the form `groups/{group}`.
           readOnly: true
           type: string
         parent:
-          description: Required. Immutable. The resource name of the entity under which this `Group` resides in the Cloud Identity resource hierarchy. Must be of the form `identitysources/{identity_source_id}` for external- identity-mapped groups or `customers/{customer_id}` for Google Groups. The `customer_id` must begin with "C" (for example, 'C046psxkn').
+          description: Required. Immutable. The resource name of the entity under which this `Group` resides in the Cloud Identity resource hierarchy. Must be of the form `identitysources/{identity_source}` for external- identity-mapped groups or `customers/{customer}` for Google Groups. The `customer` must begin with "C" (for example, 'C046psxkn').
           type: string
-        posixGroups:
-          description: Optional. The POSIX groups associated with the `Group`.
-          items:
-            $ref: "#/components/schemas/PosixGroup"
-          type: array
         updateTime:
           description: Output only. The time when the `Group` was last updated.
           format: google-datetime
@@ -2269,59 +1921,16 @@ components:
             $ref: "#/components/schemas/TransitiveMembershipRole"
           type: array
       type: object
-    IsInvitableUserResponse:
-      description: Response for IsInvitableUser RPC.
-      properties:
-        isInvitableUser:
-          description: Returns true if the email address is invitable.
-          type: boolean
-      type: object
-    ListClientStatesResponse:
-      description: Response message that is returned in LRO result of ListClientStates Operation.
-      properties:
-        clientStates:
-          description: Client states meeting the list restrictions.
-          items:
-            $ref: "#/components/schemas/ClientState"
-          type: array
-        nextPageToken:
-          description: Token to retrieve the next page of results. Empty if there are no more results.
-          type: string
-      type: object
-    ListDeviceUsersResponse:
-      description: Response message that is returned from the ListDeviceUsers method.
-      properties:
-        deviceUsers:
-          description: Devices meeting the list restrictions.
-          items:
-            $ref: "#/components/schemas/DeviceUser"
-          type: array
-        nextPageToken:
-          description: Token to retrieve the next page of results. Empty if there are no more results.
-          type: string
-      type: object
-    ListDevicesResponse:
-      description: Response message that is returned from the ListDevices method.
-      properties:
-        devices:
-          description: Devices meeting the list restrictions.
-          items:
-            $ref: "#/components/schemas/Device"
-          type: array
-        nextPageToken:
-          description: Token to retrieve the next page of results. Empty if there are no more results.
-          type: string
-      type: object
     ListGroupsResponse:
-      description: The response message for GroupsService.ListGroups.
+      description: Response message for ListGroups operation.
       properties:
         groups:
-          description: The `Group` resources under the specified `parent`.
+          description: Groups returned in response to list request. The results are not sorted.
           items:
             $ref: "#/components/schemas/Group"
           type: array
         nextPageToken:
-          description: A continuation token to retrieve the next page of results, or empty if there are no more results available.
+          description: Token to retrieve the next page of results, or empty if there are no more results available for listing.
           type: string
       type: object
     ListMembershipsResponse:
@@ -2336,46 +1945,18 @@ components:
           description: A continuation token to retrieve the next page of results, or empty if there are no more results available.
           type: string
       type: object
-    ListUserInvitationsResponse:
-      description: Response message for UserInvitation listing request.
-      properties:
-        nextPageToken:
-          description: The token for the next page. If not empty, indicates that there may be more `UserInvitation` resources that match the listing request; this value can be used in a subsequent ListUserInvitationsRequest to get continued results with the current list call.
-          type: string
-        userInvitations:
-          description: The list of UserInvitation resources.
-          items:
-            $ref: "#/components/schemas/UserInvitation"
-          type: array
-      type: object
     LookupGroupNameResponse:
       description: The response message for GroupsService.LookupGroupName.
       properties:
         name:
-          description: Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of the looked-up `Group`.
-          readOnly: true
+          description: The [resource name](https://cloud.google.com/apis/design/resource_names) of the looked-up `Group`.
           type: string
       type: object
     LookupMembershipNameResponse:
       description: The response message for MembershipsService.LookupMembershipName.
       properties:
         name:
-          description: The [resource name](https://cloud.google.com/apis/design/resource_names) of the looked-up `Membership`. Must be of the form `groups/{group_id}/memberships/{membership_id}`.
-          type: string
-      type: object
-    LookupSelfDeviceUsersResponse:
-      description: Response containing resource names of the DeviceUsers associated with the caller's credentials.
-      properties:
-        customer:
-          description: The obfuscated customer Id that may be passed back to other Devices API methods such as List, Get, etc.
-          type: string
-        names:
-          description: "[Resource names](https://cloud.google.com/apis/design/resource_names) of the DeviceUsers in the format: `devices/{device_id}/deviceUsers/{user_resource_id}`, where device_id is the unique ID assigned to a Device and user_resource_id is the unique user ID"
-          items:
-            type: string
-          type: array
-        nextPageToken:
-          description: Token to retrieve the next page of results. Empty if there are no more results.
+          description: The [resource name](https://cloud.google.com/apis/design/resource_names) of the looked-up `Membership`. Must be of the form `groups/{group}/memberships/{membership}`.
           type: string
       type: object
     MemberRelation:
@@ -2411,16 +1992,13 @@ components:
           format: google-datetime
           readOnly: true
           type: string
-        memberKey:
-          $ref: "#/components/schemas/EntityKey"
-          description: Immutable. The `EntityKey` of the member. Either `member_key` or `preferred_member_key` must be set when calling MembershipsService.CreateMembership but not both; both shall be set when returned.
         name:
-          description: Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership`. Shall be of the form `groups/{group_id}/memberships/{membership_id}`.
+          description: Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership`. Shall be of the form `groups/{group}/memberships/{membership}`.
           readOnly: true
           type: string
         preferredMemberKey:
           $ref: "#/components/schemas/EntityKey"
-          description: Required. Immutable. The `EntityKey` of the member. Either `member_key` or `preferred_member_key` must be set when calling MembershipsService.CreateMembership but not both; both shall be set when returned.
+          description: Required. Immutable. The `EntityKey` of the member.
         roles:
           description: The `MembershipRole`s that apply to the `Membership`. If unspecified, defaults to a single `MembershipRole` with `name` `MEMBER`. Must not contain duplicate `MembershipRole`s with the same `name`.
           items:
@@ -2514,20 +2092,6 @@ components:
           description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
-    PosixGroup:
-      description: POSIX Group definition to represent a group in a POSIX compliant system.
-      properties:
-        gid:
-          description: GID of the POSIX group.
-          format: uint64
-          type: string
-        name:
-          description: Name of the POSIX group.
-          type: string
-        systemId:
-          description: System identifier for which group name and gid apply to. If not specified it will default to empty value.
-          type: string
-      type: object
     SearchGroupsResponse:
       description: The response message for GroupsService.SearchGroups.
       properties:
@@ -2564,10 +2128,6 @@ components:
           description: Token to retrieve the next page of results, or empty if there are no more results.
           type: string
       type: object
-    SendUserInvitationRequest:
-      description: A request to send email for inviting target user corresponding to the UserInvitation.
-      properties: {}
-      type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
@@ -2593,6 +2153,14 @@ components:
           description: 'TransitiveMembershipRole in string format. Currently supported TransitiveMembershipRoles: `"MEMBER"`, `"OWNER"`, and `"MANAGER"`.'
           type: string
       type: object
+    UpdateGroupMetadata:
+      description: Metadata for UpdateGroup LRO.
+      properties: {}
+      type: object
+    UpdateMembershipMetadata:
+      description: Metadata for UpdateMembership LRO.
+      properties: {}
+      type: object
     UpdateMembershipRolesParams:
       description: The details of an update to a `MembershipRole`.
       properties:
@@ -2602,7 +2170,7 @@ components:
           type: string
         membershipRole:
           $ref: "#/components/schemas/MembershipRole"
-          description: The `MembershipRole`s to be updated. Only `MEMBER` `MembershipRoles` can currently be updated. May only contain a `MembershipRole` with `name` `MEMBER`.
+          description: The `MembershipRole`s to be updated. Only `MEMBER` `MembershipRole` can currently be updated.
       type: object
     UserInvitation:
       description: The `UserInvitation` resource represents an email that can be sent to an unmanaged user account inviting them to join the customer’s Google Workspace or Cloud Identity account. An unmanaged account shares an email address domain with the Google Workspace or Cloud Identity account but is not managed by it yet. If the user accepts the `UserInvitation`, the user account will become managed.
@@ -2627,31 +2195,6 @@ components:
           description: Time when the `UserInvitation` was last updated.
           format: google-datetime
           type: string
-      type: object
-    WipeDeviceRequest:
-      description: Request message for wiping all data on the device.
-      properties:
-        removeResetLock:
-          description: Optional. Specifies if a user is able to factory reset a device after a Device Wipe. On iOS, this is called "Activation Lock", while on Android, this is known as "Factory Reset Protection". If true, this protection will be removed from the device, so that a user can successfully factory reset. If false, the setting is untouched on the device.
-          type: boolean
-      type: object
-    WipeDeviceResponse:
-      description: Response message for wiping all data on the device.
-      properties:
-        device:
-          $ref: "#/components/schemas/Device"
-          description: Resultant Device object for the action. Note that asset tags will not be returned in the device object.
-      type: object
-    WipeDeviceUserRequest:
-      description: Request message for starting an account wipe on device.
-      properties: {}
-      type: object
-    WipeDeviceUserResponse:
-      description: Response message for wiping the user's account from the device.
-      properties:
-        deviceUser:
-          $ref: "#/components/schemas/DeviceUser"
-          description: Resultant DeviceUser object for the action.
       type: object
   securitySchemes:
     Oauth2:

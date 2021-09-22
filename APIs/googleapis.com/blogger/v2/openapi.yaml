@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Blogger API v3
-  version: v3
+  version: v2
   x-apisguru-categories:
     - analytics
     - media
@@ -20,7 +20,7 @@ info:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: https://blogger.googleapis.com/$discovery/rest?version=v3
+      url: https://blogger.googleapis.com/$discovery/rest?version=v2
       version: v1
   x-providerName: googleapis.com
   x-serviceName: blogger
@@ -28,64 +28,12 @@ externalDocs:
   url: https://developers.google.com/blogger/docs/3.0/getting_started
 tags:
   - name: blogs
-  - name: blogUserInfos
   - name: comments
   - name: pages
-  - name: pageViews
   - name: posts
-  - name: postUserInfos
   - name: users
 paths:
-  /v3/blogs/byurl:
-    get:
-      description: Gets a blog by url.
-      operationId: blogger.blogs.getByUrl
-      parameters:
-        - in: query
-          name: url
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: view
-          schema:
-            enum:
-              - VIEW_TYPE_UNSPECIFIED
-              - READER
-              - AUTHOR
-              - ADMIN
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Blog"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger.readonly
-      tags:
-        - blogs
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v3/blogs/{blogId}":
+  "/v2/blogs/{blogId}":
     get:
       description: Gets a blog by id.
       operationId: blogger.blogs.get
@@ -95,19 +43,6 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
-          name: maxPosts
-          schema:
-            type: integer
-        - in: query
-          name: view
-          schema:
-            enum:
-              - VIEW_TYPE_UNSPECIFIED
-              - READER
-              - AUTHOR
-              - ADMIN
-            type: string
       responses:
         "200":
           content:
@@ -120,10 +55,6 @@ paths:
             - https://www.googleapis.com/auth/blogger
           Oauth2c:
             - https://www.googleapis.com/auth/blogger
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger.readonly
       tags:
         - blogs
     parameters:
@@ -138,80 +69,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/blogs/{blogId}/comments":
-    get:
-      description: Lists comments by blog.
-      operationId: blogger.comments.listByBlog
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: endDate
-          schema:
-            type: string
-        - in: query
-          name: fetchBodies
-          schema:
-            type: boolean
-        - in: query
-          name: maxResults
-          schema:
-            type: integer
-        - in: query
-          name: pageToken
-          schema:
-            type: string
-        - in: query
-          name: startDate
-          schema:
-            type: string
-        - explode: true
-          in: query
-          name: status
-          schema:
-            items:
-              enum:
-                - LIVE
-                - EMPTIED
-                - PENDING
-                - SPAM
-              type: string
-            type: array
-          style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CommentList"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger.readonly
-      tags:
-        - comments
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v3/blogs/{blogId}/pages":
+  "/v2/blogs/{blogId}/pages":
     get:
       description: Lists pages.
       operationId: blogger.pages.list
@@ -225,34 +83,6 @@ paths:
           name: fetchBodies
           schema:
             type: boolean
-        - in: query
-          name: maxResults
-          schema:
-            type: integer
-        - in: query
-          name: pageToken
-          schema:
-            type: string
-        - explode: true
-          in: query
-          name: status
-          schema:
-            items:
-              enum:
-                - LIVE
-                - DRAFT
-              type: string
-            type: array
-          style: form
-        - in: query
-          name: view
-          schema:
-            enum:
-              - VIEW_TYPE_UNSPECIFIED
-              - READER
-              - AUTHOR
-              - ADMIN
-            type: string
       responses:
         "200":
           content:
@@ -265,10 +95,6 @@ paths:
             - https://www.googleapis.com/auth/blogger
           Oauth2c:
             - https://www.googleapis.com/auth/blogger
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger.readonly
       tags:
         - pages
     parameters:
@@ -283,63 +109,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Inserts a page.
-      operationId: blogger.pages.insert
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: isDraft
-          schema:
-            type: boolean
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Page"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Page"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-      tags:
-        - pages
-  "/v3/blogs/{blogId}/pages/{pageId}":
-    delete:
-      description: Deletes a page by blog id and page id.
-      operationId: blogger.pages.delete
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: pageId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-      tags:
-        - pages
+  "/v2/blogs/{blogId}/pages/{pageId}":
     get:
       description: Gets a page by blog id and page id.
       operationId: blogger.pages.get
@@ -354,15 +124,6 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
-          name: view
-          schema:
-            enum:
-              - VIEW_TYPE_UNSPECIFIED
-              - READER
-              - AUTHOR
-              - ADMIN
-            type: string
       responses:
         "200":
           content:
@@ -375,10 +136,6 @@ paths:
             - https://www.googleapis.com/auth/blogger
           Oauth2c:
             - https://www.googleapis.com/auth/blogger
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger.readonly
       tags:
         - pages
     parameters:
@@ -393,219 +150,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    patch:
-      description: Patches a page.
-      operationId: blogger.pages.patch
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: pageId
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: publish
-          schema:
-            type: boolean
-        - in: query
-          name: revert
-          schema:
-            type: boolean
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Page"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Page"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-      tags:
-        - pages
-    put:
-      description: Updates a page by blog id and page id.
-      operationId: blogger.pages.update
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: pageId
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: publish
-          schema:
-            type: boolean
-        - in: query
-          name: revert
-          schema:
-            type: boolean
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Page"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Page"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-      tags:
-        - pages
-  "/v3/blogs/{blogId}/pages/{pageId}/publish":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Publishes a page.
-      operationId: blogger.pages.publish
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: pageId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Page"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-      tags:
-        - pages
-  "/v3/blogs/{blogId}/pages/{pageId}/revert":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Reverts a published or scheduled page to draft state.
-      operationId: blogger.pages.revert
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: pageId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Page"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-      tags:
-        - pages
-  "/v3/blogs/{blogId}/pageviews":
-    get:
-      description: Gets page views by blog id.
-      operationId: blogger.pageViews.get
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - explode: true
-          in: query
-          name: range
-          schema:
-            items:
-              enum:
-                - all
-                - 30DAYS
-                - 7DAYS
-              type: string
-            type: array
-          style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Pageviews"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-      tags:
-        - pageViews
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v3/blogs/{blogId}/posts":
+  "/v2/blogs/{blogId}/posts":
     get:
       description: Lists posts.
       operationId: blogger.posts.list
@@ -616,33 +161,13 @@ paths:
           schema:
             type: string
         - in: query
-          name: endDate
-          schema:
-            type: string
-        - in: query
           name: fetchBodies
           schema:
             type: boolean
         - in: query
-          name: fetchImages
-          schema:
-            type: boolean
-        - in: query
-          name: labels
-          schema:
-            type: string
-        - in: query
           name: maxResults
           schema:
             type: integer
-        - in: query
-          name: orderBy
-          schema:
-            enum:
-              - ORDER_BY_UNSPECIFIED
-              - PUBLISHED
-              - UPDATED
-            type: string
         - in: query
           name: pageToken
           schema:
@@ -651,27 +176,6 @@ paths:
           name: startDate
           schema:
             type: string
-        - explode: true
-          in: query
-          name: status
-          schema:
-            items:
-              enum:
-                - LIVE
-                - DRAFT
-                - SCHEDULED
-              type: string
-            type: array
-          style: form
-        - in: query
-          name: view
-          schema:
-            enum:
-              - VIEW_TYPE_UNSPECIFIED
-              - READER
-              - AUTHOR
-              - ADMIN
-            type: string
       responses:
         "200":
           content:
@@ -684,10 +188,6 @@ paths:
             - https://www.googleapis.com/auth/blogger
           Oauth2c:
             - https://www.googleapis.com/auth/blogger
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger.readonly
       tags:
         - posts
     parameters:
@@ -702,186 +202,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Inserts a post.
-      operationId: blogger.posts.insert
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: fetchBody
-          schema:
-            type: boolean
-        - in: query
-          name: fetchImages
-          schema:
-            type: boolean
-        - in: query
-          name: isDraft
-          schema:
-            type: boolean
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Post"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Post"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-      tags:
-        - posts
-  "/v3/blogs/{blogId}/posts/bypath":
-    get:
-      description: Gets a post by path.
-      operationId: blogger.posts.getByPath
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: path
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: maxComments
-          schema:
-            type: integer
-        - in: query
-          name: view
-          schema:
-            enum:
-              - VIEW_TYPE_UNSPECIFIED
-              - READER
-              - AUTHOR
-              - ADMIN
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Post"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger.readonly
-      tags:
-        - posts
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v3/blogs/{blogId}/posts/search":
-    get:
-      description: Searches for posts matching given query terms in the specified blog.
-      operationId: blogger.posts.search
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: q
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: fetchBodies
-          schema:
-            type: boolean
-        - in: query
-          name: orderBy
-          schema:
-            enum:
-              - ORDER_BY_UNSPECIFIED
-              - PUBLISHED
-              - UPDATED
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PostList"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger.readonly
-      tags:
-        - posts
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v3/blogs/{blogId}/posts/{postId}":
-    delete:
-      description: Deletes a post by blog id and post id.
-      operationId: blogger.posts.delete
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: postId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-      tags:
-        - posts
+  "/v2/blogs/{blogId}/posts/{postId}":
     get:
       description: Gets a post by blog id and post id
       operationId: blogger.posts.get
@@ -896,27 +217,6 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
-          name: fetchBody
-          schema:
-            type: boolean
-        - in: query
-          name: fetchImages
-          schema:
-            type: boolean
-        - in: query
-          name: maxComments
-          schema:
-            type: integer
-        - in: query
-          name: view
-          schema:
-            enum:
-              - VIEW_TYPE_UNSPECIFIED
-              - READER
-              - AUTHOR
-              - ADMIN
-            type: string
       responses:
         "200":
           content:
@@ -929,10 +229,6 @@ paths:
             - https://www.googleapis.com/auth/blogger
           Oauth2c:
             - https://www.googleapis.com/auth/blogger
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger.readonly
       tags:
         - posts
     parameters:
@@ -947,113 +243,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    patch:
-      description: Patches a post.
-      operationId: blogger.posts.patch
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: postId
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: fetchBody
-          schema:
-            type: boolean
-        - in: query
-          name: fetchImages
-          schema:
-            type: boolean
-        - in: query
-          name: maxComments
-          schema:
-            type: integer
-        - in: query
-          name: publish
-          schema:
-            type: boolean
-        - in: query
-          name: revert
-          schema:
-            type: boolean
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Post"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Post"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-      tags:
-        - posts
-    put:
-      description: Updates a post by blog id and post id.
-      operationId: blogger.posts.update
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: postId
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: fetchBody
-          schema:
-            type: boolean
-        - in: query
-          name: fetchImages
-          schema:
-            type: boolean
-        - in: query
-          name: maxComments
-          schema:
-            type: integer
-        - in: query
-          name: publish
-          schema:
-            type: boolean
-        - in: query
-          name: revert
-          schema:
-            type: boolean
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Post"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Post"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-      tags:
-        - posts
-  "/v3/blogs/{blogId}/posts/{postId}/comments":
+  "/v2/blogs/{blogId}/posts/{postId}/comments":
     get:
       description: Lists comments.
       operationId: blogger.comments.list
@@ -1069,10 +259,6 @@ paths:
           schema:
             type: string
         - in: query
-          name: endDate
-          schema:
-            type: string
-        - in: query
           name: fetchBodies
           schema:
             type: boolean
@@ -1088,24 +274,6 @@ paths:
           name: startDate
           schema:
             type: string
-        - in: query
-          name: status
-          schema:
-            enum:
-              - LIVE
-              - EMPTIED
-              - PENDING
-              - SPAM
-            type: string
-        - in: query
-          name: view
-          schema:
-            enum:
-              - VIEW_TYPE_UNSPECIFIED
-              - READER
-              - AUTHOR
-              - ADMIN
-            type: string
       responses:
         "200":
           content:
@@ -1118,10 +286,6 @@ paths:
             - https://www.googleapis.com/auth/blogger
           Oauth2c:
             - https://www.googleapis.com/auth/blogger
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger.readonly
       tags:
         - comments
     parameters:
@@ -1136,38 +300,9 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/blogs/{blogId}/posts/{postId}/comments/{commentId}":
-    delete:
-      description: Deletes a comment by blog id, post id and comment id.
-      operationId: blogger.comments.delete
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: postId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: commentId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-      tags:
-        - comments
+  "/v2/blogs/{blogId}/posts/{postId}/comments/{commentId}":
     get:
-      description: Gets a comment by id.
+      description: Gets a comment by blog id, post id and comment id.
       operationId: blogger.comments.get
       parameters:
         - in: path
@@ -1185,77 +320,6 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
-          name: view
-          schema:
-            enum:
-              - VIEW_TYPE_UNSPECIFIED
-              - READER
-              - AUTHOR
-              - ADMIN
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Comment"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger.readonly
-      tags:
-        - comments
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v3/blogs/{blogId}/posts/{postId}/comments/{commentId}/approve":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Marks a comment as not spam by blog id, post id and comment id.
-      operationId: blogger.comments.approve
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: postId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: commentId
-          required: true
-          schema:
-            type: string
       responses:
         "200":
           content:
@@ -1270,7 +334,6 @@ paths:
             - https://www.googleapis.com/auth/blogger
       tags:
         - comments
-  "/v3/blogs/{blogId}/posts/{postId}/comments/{commentId}/removecontent":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1283,174 +346,9 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Removes the content of a comment by blog id, post id and comment id.
-      operationId: blogger.comments.removeContent
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: postId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: commentId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Comment"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-      tags:
-        - comments
-  "/v3/blogs/{blogId}/posts/{postId}/comments/{commentId}/spam":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Marks a comment as spam by blog id, post id and comment id.
-      operationId: blogger.comments.markAsSpam
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: postId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: commentId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Comment"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-      tags:
-        - comments
-  "/v3/blogs/{blogId}/posts/{postId}/publish":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Publishes a post.
-      operationId: blogger.posts.publish
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: postId
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: publishDate
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Post"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-      tags:
-        - posts
-  "/v3/blogs/{blogId}/posts/{postId}/revert":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Reverts a published or scheduled post to draft state.
-      operationId: blogger.posts.revert
-      parameters:
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: postId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Post"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-      tags:
-        - posts
-  "/v3/users/{userId}":
+  "/v2/users/{userId}":
     get:
-      description: Gets one user by user_id.
+      description: Gets a user by user id.
       operationId: blogger.users.get
       parameters:
         - in: path
@@ -1470,10 +368,6 @@ paths:
             - https://www.googleapis.com/auth/blogger
           Oauth2c:
             - https://www.googleapis.com/auth/blogger
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger.readonly
       tags:
         - users
     parameters:
@@ -1488,53 +382,15 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/users/{userId}/blogs":
+  "/v2/users/{userId}/blogs":
     get:
-      description: Lists blogs by user.
-      operationId: blogger.blogs.listByUser
+      description: Lists blogs by user id, possibly filtered.
+      operationId: blogger.blogs.list
       parameters:
         - in: path
           name: userId
           required: true
           schema:
-            type: string
-        - in: query
-          name: fetchUserInfo
-          schema:
-            type: boolean
-        - explode: true
-          in: query
-          name: role
-          schema:
-            items:
-              enum:
-                - VIEW_TYPE_UNSPECIFIED
-                - READER
-                - AUTHOR
-                - ADMIN
-              type: string
-            type: array
-          style: form
-        - description: Default value of status is LIVE.
-          explode: true
-          in: query
-          name: status
-          schema:
-            items:
-              enum:
-                - LIVE
-                - DELETED
-              type: string
-            type: array
-          style: form
-        - in: query
-          name: view
-          schema:
-            enum:
-              - VIEW_TYPE_UNSPECIFIED
-              - READER
-              - AUTHOR
-              - ADMIN
             type: string
       responses:
         "200":
@@ -1548,213 +404,8 @@ paths:
             - https://www.googleapis.com/auth/blogger
           Oauth2c:
             - https://www.googleapis.com/auth/blogger
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger.readonly
       tags:
         - blogs
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v3/users/{userId}/blogs/{blogId}":
-    get:
-      description: Gets one blog and user info pair by blog id and user id.
-      operationId: blogger.blogUserInfos.get
-      parameters:
-        - in: path
-          name: userId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: maxPosts
-          schema:
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BlogUserInfo"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger.readonly
-      tags:
-        - blogUserInfos
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v3/users/{userId}/blogs/{blogId}/posts":
-    get:
-      description: Lists post and user info pairs.
-      operationId: blogger.postUserInfos.list
-      parameters:
-        - in: path
-          name: userId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: endDate
-          schema:
-            type: string
-        - in: query
-          name: fetchBodies
-          schema:
-            type: boolean
-        - in: query
-          name: labels
-          schema:
-            type: string
-        - in: query
-          name: maxResults
-          schema:
-            type: integer
-        - in: query
-          name: orderBy
-          schema:
-            enum:
-              - ORDER_BY_UNSPECIFIED
-              - PUBLISHED
-              - UPDATED
-            type: string
-        - in: query
-          name: pageToken
-          schema:
-            type: string
-        - in: query
-          name: startDate
-          schema:
-            type: string
-        - explode: true
-          in: query
-          name: status
-          schema:
-            items:
-              enum:
-                - LIVE
-                - DRAFT
-                - SCHEDULED
-              type: string
-            type: array
-          style: form
-        - in: query
-          name: view
-          schema:
-            enum:
-              - VIEW_TYPE_UNSPECIFIED
-              - READER
-              - AUTHOR
-              - ADMIN
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PostUserInfosList"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger.readonly
-      tags:
-        - postUserInfos
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v3/users/{userId}/blogs/{blogId}/posts/{postId}":
-    get:
-      description: Gets one post and user info pair, by post_id and user_id.
-      operationId: blogger.postUserInfos.get
-      parameters:
-        - in: path
-          name: userId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: blogId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: postId
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: maxComments
-          schema:
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PostUserInfo"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger
-        - Oauth2:
-            - https://www.googleapis.com/auth/blogger.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/blogger.readonly
-      tags:
-        - postUserInfos
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2143,32 +794,6 @@ components:
           description: Pagination token to fetch the next page, if one exists.
           type: string
       type: object
-    Pageviews:
-      properties:
-        blogId:
-          description: Blog Id.
-          type: string
-        counts:
-          description: The container of posts in this blog.
-          items:
-            properties:
-              count:
-                description: Count of page views for the given time range.
-                format: int64
-                type: string
-              timeRange:
-                description: Time range the given count applies to.
-                enum:
-                  - ALL_TIME
-                  - THIRTY_DAYS
-                  - SEVEN_DAYS
-                type: string
-            type: object
-          type: array
-        kind:
-          description: The kind of this entry. Always blogger#page_views.
-          type: string
-      type: object
     Post:
       properties:
         author:
@@ -2313,50 +938,6 @@ components:
           description: Pagination token to fetch the previous page, if one exists.
           type: string
       type: object
-    PostPerUserInfo:
-      properties:
-        blogId:
-          description: ID of the Blog that the post resource belongs to.
-          type: string
-        hasEditAccess:
-          description: True if the user has Author level access to the post.
-          type: boolean
-        kind:
-          description: The kind of this entity. Always blogger#postPerUserInfo.
-          type: string
-        postId:
-          description: ID of the Post resource.
-          type: string
-        userId:
-          description: ID of the User.
-          type: string
-      type: object
-    PostUserInfo:
-      properties:
-        kind:
-          description: The kind of this entity. Always blogger#postUserInfo.
-          type: string
-        post:
-          $ref: "#/components/schemas/Post"
-          description: The Post resource.
-        post_user_info:
-          $ref: "#/components/schemas/PostPerUserInfo"
-          description: Information about a User for the Post.
-      type: object
-    PostUserInfosList:
-      properties:
-        items:
-          description: The list of Posts with User information for the post, for this Blog.
-          items:
-            $ref: "#/components/schemas/PostUserInfo"
-          type: array
-        kind:
-          description: The kind of this entity. Always blogger#postList.
-          type: string
-        nextPageToken:
-          description: Pagination token to fetch the next page, if one exists.
-          type: string
-      type: object
     User:
       properties:
         about:
@@ -2409,7 +990,6 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/blogger: Manage your Blogger account
-            https://www.googleapis.com/auth/blogger.readonly: View your Blogger account
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -2418,6 +998,5 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/blogger: Manage your Blogger account
-            https://www.googleapis.com/auth/blogger.readonly: View your Blogger account
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

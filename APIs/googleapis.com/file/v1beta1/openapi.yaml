@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Cloud Filestore API
-  version: v1p1alpha1
+  version: v1beta1
   x-apiClientRegistration:
     url: https://console.developers.google.com
   x-apisguru-categories:
@@ -29,17 +29,47 @@ info:
       version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: file
+  x-preferred: false
 externalDocs:
   url: https://cloud.google.com/filestore/
 tags:
   - name: projects
 paths:
-  "/v1p1alpha1/{name}":
+  "/v1beta1/{name}":
     delete:
-      description: Deletes a snapshot.
-      operationId: file.projects.locations.snapshots.delete
+      description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: file.projects.locations.operations.delete
       parameters:
-        - description: Required. The snapshot resource name, in the format `projects/{project_number}/locations/{location}/snapshots/{snapshot_id}`
+        - description: The name of the operation resource to be deleted.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: If set to true, any snapshots of the instance will also be deleted. (Otherwise, the request will only work if the instance has no snapshots.)
+          in: query
+          name: force
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    get:
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: file.projects.locations.operations.get
+      parameters:
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -51,30 +81,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    get:
-      description: Gets the details of a specific snapshot.
-      operationId: file.projects.locations.snapshots.get
-      parameters:
-        - description: Required. The snapshot resource name, in the format `projects/{project_number}/locations/{location}/snapshots/{snapshot_id}`.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Snapshot"
           description: Successful response
       security:
         - Oauth2:
@@ -97,9 +103,9 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates the settings of a specific snapshot.
-      operationId: file.projects.locations.snapshots.patch
+      operationId: file.projects.locations.instances.snapshots.patch
       parameters:
-        - description: Output only. The resource name of the snapshot, in the format `projects/{project_id}/locations/{location_id}/snapshots/{snapshot_id}`.
+        - description: Output only. The resource name of the snapshot, in the format `projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}`.
           in: path
           name: name
           required: true
@@ -129,7 +135,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1p1alpha1/{name}/locations":
+  "/v1beta1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
       operationId: file.projects.locations.list
@@ -186,7 +192,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1p1alpha1/{name}/operations":
+  "/v1beta1/{name}/operations":
     get:
       description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
       operationId: file.projects.locations.operations.list
@@ -238,7 +244,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1p1alpha1/{name}:cancel":
+  "/v1beta1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -280,7 +286,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1p1alpha1/{name}:restore":
+  "/v1beta1/{name}:restore":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -294,7 +300,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Restores an existing instance's file share from a snapshot or backup. The capacity of the instance needs to be equal to or larger than the capacity of the snapshot or backup (and also equal to or larger than the minimum capacity of the tier).
+      description: Restores an existing instance's file share from a backup. The capacity of the instance needs to be equal to or larger than the capacity of the backup (and also equal to or larger than the minimum capacity of the tier).
       operationId: file.projects.locations.instances.restore
       parameters:
         - description: Required. The resource name of the instance, in the format `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
@@ -322,12 +328,12 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1p1alpha1/{parent}/backups":
+  "/v1beta1/{parent}/backups":
     get:
       description: Lists all backups in a project for either a specified location or for all locations.
       operationId: file.projects.locations.backups.list
       parameters:
-        - description: Required. The project and location for which to retrieve backup information, in the format `projects/{project_number}/locations/{location}`. In Cloud Filestore, backup locations map to GCP regions, for example **us-west1**. To retrieve backup information for all locations, use "-" for the `{location}` value.
+        - description: Required. The project and location for which to retrieve backup information, in the format `projects/{project_id}/locations/{location}`. In Cloud Filestore, backup locations map to GCP regions, for example **us-west1**. To retrieve backup information for all locations, use "-" for the `{location}` value.
           in: path
           name: parent
           required: true
@@ -383,7 +389,7 @@ paths:
       description: Creates a backup.
       operationId: file.projects.locations.backups.create
       parameters:
-        - description: Required. The backup's project and location, in the format `projects/{project_number}/locations/{location}`. In Cloud Filestore, backup locations map to GCP regions, for example **us-west1**.
+        - description: Required. The backup's project and location, in the format `projects/{project_id}/locations/{location}`. In Cloud Filestore, backup locations map to GCP regions, for example **us-west1**.
           in: path
           name: parent
           required: true
@@ -413,12 +419,12 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1p1alpha1/{parent}/instances":
+  "/v1beta1/{parent}/instances":
     get:
       description: Lists all instances in a project for either a specified location or for all locations.
       operationId: file.projects.locations.instances.list
       parameters:
-        - description: Required. The project and location for which to retrieve instance information, in the format `projects/{project_number}/locations/{location}`. In Cloud Filestore, locations map to GCP zones, for example **us-west1-b**. To retrieve instance information for all locations, use "-" for the `{location}` value.
+        - description: Required. The project and location for which to retrieve instance information, in the format `projects/{project_id}/locations/{location}`. In Cloud Filestore, locations map to GCP zones, for example **us-west1-b**. To retrieve instance information for all locations, use "-" for the `{location}` value.
           in: path
           name: parent
           required: true
@@ -471,10 +477,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates an instance. When creating from a snapshot or backup, the capacity of the new instance needs to be equal to or larger than the capacity of the snapshot or backup (and also equal to or larger than the minimum capacity of the tier).
+      description: Creates an instance. When creating from a backup, the capacity of the new instance needs to be equal to or larger than the capacity of the backup (and also equal to or larger than the minimum capacity of the tier).
       operationId: file.projects.locations.instances.create
       parameters:
-        - description: Required. The instance's project and location, in the format `projects/{project_number}/locations/{location}`. In Cloud Filestore, locations map to GCP zones, for example **us-west1-b**.
+        - description: Required. The instance's project and location, in the format `projects/{project_id}/locations/{location}`. In Cloud Filestore, locations map to GCP zones, for example **us-west1-b**.
           in: path
           name: parent
           required: true
@@ -504,12 +510,12 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1p1alpha1/{parent}/snapshots":
+  "/v1beta1/{parent}/snapshots":
     get:
       description: Lists all snapshots in a project for either a specified location or for all locations.
-      operationId: file.projects.locations.snapshots.list
+      operationId: file.projects.locations.instances.snapshots.list
       parameters:
-        - description: Required. The project and location for which to retrieve snapshot information, in the format `projects/{project_number}/locations/{location}`. In Cloud Filestore, snapshot locations map to GCP zones, for example **us-west1-b**, for local snapshots and to GCP regions, for example **us-west1**, otherwise. To retrieve snapshot information for all locations, use "-" for the `{location}` value.
+        - description: Required. The instance for which to retrieve snapshot information, in the format `projects/{project_id}/locations/{location}/instances/{instance_id}`.
           in: path
           name: parent
           required: true
@@ -563,15 +569,15 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a snapshot.
-      operationId: file.projects.locations.snapshots.create
+      operationId: file.projects.locations.instances.snapshots.create
       parameters:
-        - description: Required. The snapshot's project and location, in the format `projects/{project_number}/locations/{location}`. In Cloud Filestore, snapshot locations map to GCP zones, for example **us-west1-b**, for local snapshots and to GCP regions, for example **us-west1**, otherwise.
+        - description: Required. The Filestore Instance to create the snapshots of, in the format `projects/{project_id}/locations/{location}/instances/{instance_id}`
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Required. The ID to use for the snapshot. The ID must be unique within the specified project and location. This value must start with a lowercase letter followed by up to 62 lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+        - description: Required. The ID to use for the snapshot. The ID must be unique within the specified instance. This value must start with a lowercase letter followed by up to 62 lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
           in: query
           name: snapshotId
           schema:
@@ -787,15 +793,6 @@ components:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
       type: object
-    ExportConfig:
-      description: File share export specification.
-      properties:
-        allowedIpRanges:
-          description: List of IPv4 addresses in the format `{octet1}.{octet2}.{octet3}.{octet4}` or CIDR ranges in the format `{octet1}.{octet2}.{octet3}.{octet4}/{mask size}` which may mount the fileshare.
-          items:
-            type: string
-          type: array
-      type: object
     FileShareConfig:
       description: File share configuration for the instance.
       properties:
@@ -803,13 +800,8 @@ components:
           description: File share capacity in gigabytes (GB). Cloud Filestore defines 1 GB as 1024^3 bytes.
           format: int64
           type: string
-        exports:
-          description: Exports. If exports are omitted, a default allowed_ip_ranges is set to RFC1918 Internal IP ranges (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16) This field is deprecated, use nfs_export_options instead.
-          items:
-            $ref: "#/components/schemas/ExportConfig"
-          type: array
         name:
-          description: The name of the file share (must be 32 characters or less for the Enterprise and High Scale SSD tiers, 16 characters or less for all other tiers).
+          description: The name of the file share (must be 32 characters or less for Enterprise and High Scale SSD tiers and 16 characters or less for all other tiers).
           type: string
         nfsExportOptions:
           description: Nfs Export Options. There is a limit of 10 export options per file share.
@@ -817,10 +809,7 @@ components:
             $ref: "#/components/schemas/NfsExportOptions"
           type: array
         sourceBackup:
-          description: The resource name of the backup, in the format `projects/{project_id}/locations/{location_id}/backups/{backup_id}`, that this file share has been restored from. Empty, if the file share is created from scratch and not restored from a backup.
-          type: string
-        sourceSnapshot:
-          description: The resource name of the snapshot, in the format `projects/{project_id}/locations/{location_id}/snapshots/{snapshot_id}`, that this file share has been restored from. Empty, if the file share is created from scratch and not restored from a snapshot.
+          description: The resource name of the backup, in the format `projects/{project_id}/locations/{location_id}/backups/{backup_id}`, that this file share has been restored from.
           type: string
       type: object
     GoogleCloudSaasacceleratorManagementProvidersV1Instance:
@@ -1003,7 +992,7 @@ components:
           readOnly: true
           type: string
         description:
-          description: A description of the instance (2048 characters or less).
+          description: The description of the instance (2048 characters or less).
           type: string
         etag:
           description: Server-specified ETag for the instance resource to prevent simultaneous updates from overwriting each other.
@@ -1013,13 +1002,16 @@ components:
           items:
             $ref: "#/components/schemas/FileShareConfig"
           type: array
+        kmsKeyName:
+          description: KMS key name used for data encryption.
+          type: string
         labels:
           additionalProperties:
             type: string
           description: Resource labels to represent user provided metadata.
           type: object
         name:
-          description: Output only. The resource name of the instance, in the format `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
+          description: Output only. The resource name of the instance, in the format `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
           readOnly: true
           type: string
         networks:
@@ -1041,12 +1033,22 @@ components:
             - DELETING
             - ERROR
             - RESTORING
+            - SUSPENDED
           readOnly: true
           type: string
         statusMessage:
           description: Output only. Additional information about the instance state, if available.
           readOnly: true
           type: string
+        suspensionReasons:
+          description: Output only. field indicates all the reasons the instance is in "SUSPENDED" state.
+          items:
+            enum:
+              - SUSPENSION_REASON_UNSPECIFIED
+              - KMS_KEY_ISSUE
+            type: string
+          readOnly: true
+          type: array
         tier:
           description: The service tier of the instance.
           enum:
@@ -1124,14 +1126,9 @@ components:
           description: The token you can use to retrieve the next page of results. Not returned if there are no more results in the list.
           type: string
         snapshots:
-          description: A list of snapshots in the project for the specified location. If the `{location}` value in the request is "-", the response contains a list of snapshots from all locations. If any location is unreachable, the response will only return snapshots in reachable locations and the "unreachable_locations" field will be populated with a list of unreachable locations.
+          description: A list of snapshots in the project for the specified instance.
           items:
             $ref: "#/components/schemas/Snapshot"
-          type: array
-        unreachableLocations:
-          description: Locations that could not be reached.
-          items:
-            type: string
           type: array
       type: object
     Location:
@@ -1250,7 +1247,7 @@ components:
           format: int64
           type: string
         ipRanges:
-          description: List of either an IPv4 addresses in the format `{octet1}.{octet2}.{octet3}.{octet4}` or CIDR ranges in the format `{octet1}.{octet2}.{octet3}.{octet4}/{mask size}` which may mount the file share. Overlapping IP ranges are not allowed, both within and across NfsExportOptions. An error will be returned. The limit is 128 IP ranges/addresses for each FileShareConfig among all NfsExportOptions.
+          description: List of either an IPv4 addresses in the format `{octet1}.{octet2}.{octet3}.{octet4}` or CIDR ranges in the format `{octet1}.{octet2}.{octet3}.{octet4}/{mask size}` which may mount the file share. Overlapping IP ranges are not allowed, both within and across NfsExportOptions. An error will be returned. The limit is 64 IP ranges/addresses for each FileShareConfig among all NfsExportOptions.
           items:
             type: string
           type: array
@@ -1358,11 +1355,6 @@ components:
     Snapshot:
       description: A Cloud Filestore snapshot.
       properties:
-        capacityGb:
-          description: Output only. Capacity of the source file share when the snapshot was created.
-          format: int64
-          readOnly: true
-          type: string
         createTime:
           description: Output only. The time when the snapshot was created.
           format: google-datetime
@@ -1371,31 +1363,18 @@ components:
         description:
           description: A description of the snapshot with 2048 characters or less. Requests with longer descriptions will be rejected.
           type: string
+        filesystemUsedBytes:
+          description: Output only. The amount of bytes needed to allocate a full copy of the snapshot content
+          format: int64
+          readOnly: true
+          type: string
         labels:
           additionalProperties:
             type: string
           description: Resource labels to represent user provided metadata.
           type: object
         name:
-          description: Output only. The resource name of the snapshot, in the format `projects/{project_id}/locations/{location_id}/snapshots/{snapshot_id}`.
-          readOnly: true
-          type: string
-        sourceFileShare:
-          description: Name of the file share in the source Cloud Filestore instance that the snapshot is created from.
-          type: string
-        sourceInstance:
-          description: The resource name of the source Cloud Filestore instance, in the format `projects/{project_id}/locations/{location_id}/instances/{instance_id}`, used to create this snapshot.
-          type: string
-        sourceInstanceTier:
-          description: Output only. The service tier of the source Cloud Filestore instance that this snapshot is created from.
-          enum:
-            - TIER_UNSPECIFIED
-            - STANDARD
-            - PREMIUM
-            - BASIC_HDD
-            - BASIC_SSD
-            - HIGH_SCALE_SSD
-            - ENTERPRISE
+          description: Output only. The resource name of the snapshot, in the format `projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}`.
           readOnly: true
           type: string
         state:
@@ -1403,23 +1382,9 @@ components:
           enum:
             - STATE_UNSPECIFIED
             - CREATING
-            - FINALIZING
             - READY
             - DELETING
           readOnly: true
-          type: string
-        storageBytes:
-          description: Output only. The size of the storage used by the snapshot. As snapshots share storage, this number is expected to change with snapshot creation/deletion. Always equals to capacityGb for local snapshots.
-          format: int64
-          readOnly: true
-          type: string
-        type:
-          description: The Type of the Snapshot.
-          enum:
-            - TYPE_UNSPECIFIED
-            - BACKUP
-            - LOCAL
-            - IN_PLACE
           type: string
       type: object
     Status:
@@ -1506,3 +1471,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

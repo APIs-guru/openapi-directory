@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Cloud Scheduler API
-  version: v1beta1
+  version: v1
   x-apisguru-categories:
     - analytics
     - media
@@ -20,7 +20,7 @@ info:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: https://cloudscheduler.googleapis.com/$discovery/rest?version=v1beta1
+      url: https://cloudscheduler.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-providerName: googleapis.com
   x-serviceName: cloudscheduler
@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta1/{name}":
+  "/v1/{name}":
     delete:
       description: Deletes a job.
       operationId: cloudscheduler.projects.locations.jobs.delete
@@ -40,11 +40,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: This field is used to manage the legacy App Engine Cron jobs using the Cloud Scheduler API. If the field is set to true, the job in the __cron queue with the corresponding name will be deleted instead.
-          in: query
-          name: legacyAppEngineCron
-          schema:
-            type: boolean
       responses:
         "200":
           content:
@@ -129,7 +124,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}/locations":
+  "/v1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
       operationId: cloudscheduler.projects.locations.list
@@ -181,7 +176,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:pause":
+  "/v1/{name}:pause":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -223,7 +218,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:resume":
+  "/v1/{name}:resume":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -265,7 +260,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:run":
+  "/v1/{name}:run":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -307,7 +302,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/jobs":
+  "/v1/{parent}/jobs":
     get:
       description: Lists jobs.
       operationId: cloudscheduler.projects.locations.jobs.list
@@ -318,16 +313,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: '`filter` can be used to specify a subset of jobs. If `filter` equals `target_config="HttpConfig"`, then the http target jobs are retrieved. If `filter` equals `target_config="PubSubConfig"`, then the Pub/Sub target jobs are retrieved. If `filter` equals `labels.foo=value1 labels.foo=value2` then only jobs which are labeled with foo=value1 AND foo=value2 will be returned.'
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: This field is used to manage the legacy App Engine Cron jobs using the Cloud Scheduler API. If the field is set to true, the jobs in the __cron queue will be listed instead.
-          in: query
-          name: legacyAppEngineCron
-          schema:
-            type: boolean
         - description: Requested page size. The maximum page size is 500. If unspecified, the page size will be the maximum. Fewer jobs than requested might be returned, even if more jobs exist; use next_page_token to determine if more jobs exist.
           in: query
           name: pageSize
@@ -561,7 +546,7 @@ components:
           $ref: "#/components/schemas/AppEngineHttpTarget"
           description: App Engine HTTP target.
         attemptDeadline:
-          description: "The deadline for job attempts. If the request handler does not respond by this deadline then the request is cancelled and the attempt is marked as a `DEADLINE_EXCEEDED` failure. The failed attempt can be viewed in execution logs. Cloud Scheduler will retry the job according to the RetryConfig. The allowed duration for this deadline is: * For HTTP targets, between 15 seconds and 30 minutes. * For App Engine HTTP targets, between 15 seconds and 24 hours. * For PubSub targets, this field is ignored."
+          description: "The deadline for job attempts. If the request handler does not respond by this deadline then the request is cancelled and the attempt is marked as a `DEADLINE_EXCEEDED` failure. The failed attempt can be viewed in execution logs. Cloud Scheduler will retry the job according to the RetryConfig. The allowed duration for this deadline is: * For HTTP targets, between 15 seconds and 30 minutes. * For App Engine HTTP targets, between 15 seconds and 24 hours."
           format: google-duration
           type: string
         description:
@@ -574,9 +559,6 @@ components:
           description: Output only. The time the last job attempt started.
           format: google-datetime
           type: string
-        legacyAppEngineCron:
-          description: Immutable. This field is used to manage the legacy App Engine Cron jobs using the Cloud Scheduler API. If the field is set to true, the job will be considered a legacy job. Note that App Engine Cron jobs have fewer features than Cloud Scheduler jobs, e.g., are only limited to App Engine targets.
-          type: boolean
         name:
           description: "Optionally caller-specified in CreateJob, after which it becomes output only. The job name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`. * `PROJECT_ID` can contain letters ([A-Za-z]), numbers ([0-9]), hyphens (-), colons (:), or periods (.). For more information, see [Identifying projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects) * `LOCATION_ID` is the canonical ID for the job's location. The list of available locations can be obtained by calling ListLocations. For more information, see https://cloud.google.com/about/locations/. * `JOB_ID` can contain only letters ([A-Za-z]), numbers ([0-9]), hyphens (-), or underscores (_). The maximum length is 500 characters."
           type: string
@@ -753,10 +735,7 @@ components:
       type: object
     RunJobRequest:
       description: Request message for forcing a job to run now using RunJob.
-      properties:
-        legacyAppEngineCron:
-          description: This field is used to manage the legacy App Engine Cron jobs using the Cloud Scheduler API. If the field is set to true, the job in the __cron queue with the corresponding name will be forced to run instead.
-          type: boolean
+      properties: {}
       type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."

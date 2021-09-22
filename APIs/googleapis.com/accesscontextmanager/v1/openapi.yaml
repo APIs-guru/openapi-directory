@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Access Context Manager API
-  version: v1beta
+  version: v1
   x-apisguru-categories:
     - analytics
     - media
@@ -20,7 +20,7 @@ info:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: https://accesscontextmanager.googleapis.com/$discovery/rest?version=v1beta
+      url: https://accesscontextmanager.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-providerName: googleapis.com
   x-serviceName: accesscontextmanager
@@ -29,8 +29,9 @@ externalDocs:
 tags:
   - name: accessPolicies
   - name: operations
+  - name: organizations
 paths:
-  /v1beta/accessPolicies:
+  /v1/accessPolicies:
     get:
       description: List all AccessPolicies under a container.
       operationId: accesscontextmanager.accessPolicies.list
@@ -98,12 +99,12 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - accessPolicies
-  "/v1beta/{name}":
+  "/v1/{name}":
     delete:
-      description: Delete a Service Perimeter by resource name. The longrunning operation from this RPC will have a successful status once the Service Perimeter has been removed from long-lasting storage.
-      operationId: accesscontextmanager.accessPolicies.servicePerimeters.delete
+      description: Deletes a GcpUserAccessBinding. Completion of this long-running operation does not necessarily signify that the binding deletion is deployed onto all affected users, which may take more time.
+      operationId: accesscontextmanager.organizations.gcpUserAccessBindings.delete
       parameters:
-        - description: "Required. Resource name for the Service Perimeter. Format: `accessPolicies/{policy_id}/servicePerimeters/{service_perimeter_id}`"
+        - description: 'Required. Example: "organizations/256/gcpUserAccessBindings/b3-BhcX_Ud5N"'
           in: path
           name: name
           required: true
@@ -122,32 +123,42 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - accessPolicies
+        - organizations
     get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: accesscontextmanager.operations.get
+      description: Gets the GcpUserAccessBinding with the given name.
+      operationId: accesscontextmanager.organizations.gcpUserAccessBindings.get
       parameters:
-        - description: The name of the operation resource.
+        - description: 'Required. Example: "organizations/256/gcpUserAccessBindings/b3-BhcX_Ud5N"'
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Whether to return `BasicLevels` in the Cloud Common Expression Language rather than as `BasicLevels`. Defaults to AS_DEFINED, where Access Levels are returned as `BasicLevels` or `CustomLevels` based on how they were created. If set to CEL, all Access Levels are returned as `CustomLevels`. In the CEL case, `BasicLevels` are translated to equivalent `CustomLevels`.
+        - description: The standard list filter.
           in: query
-          name: accessLevelFormat
+          name: filter
           schema:
             enum:
               - LEVEL_FORMAT_UNSPECIFIED
               - AS_DEFINED
               - CEL
             type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/GcpUserAccessBinding"
           description: Successful response
       security:
         - Oauth2:
@@ -155,7 +166,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - operations
+        - organizations
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -169,16 +180,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Update a Service Perimeter. The longrunning operation from this RPC will have a successful status once the changes to the Service Perimeter have propagated to long-lasting storage. Service Perimeter containing errors will result in an error response for the first error encountered.
-      operationId: accesscontextmanager.accessPolicies.servicePerimeters.patch
+      description: Updates a GcpUserAccessBinding. Completion of this long-running operation does not necessarily signify that the changed binding is deployed onto all affected users, which may take more time.
+      operationId: accesscontextmanager.organizations.gcpUserAccessBindings.patch
       parameters:
-        - description: "Required. Resource name for the ServicePerimeter. The `short_name` component must begin with a letter and only include alphanumeric and '_'. Format: `accessPolicies/{policy_id}/servicePerimeters/{short_name}`"
+        - description: 'Immutable. Assigned by the server during creation. The last segment has an arbitrary length and has only URI unreserved characters (as defined by [RFC 3986 Section 2.3](https://tools.ietf.org/html/rfc3986#section-2.3)). Should not be specified by the client during creation. Example: "organizations/256/gcpUserAccessBindings/b3-BhcX_Ud5N"'
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Required. Mask to control which fields get updated. Must be non-empty.
+        - description: 'Required. Only the fields specified in this mask are updated. Because name and group_key cannot be changed, update_mask is required and must always be: update_mask { paths: "access_levels" }'
           in: query
           name: updateMask
           schema:
@@ -187,7 +198,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ServicePerimeter"
+              $ref: "#/components/schemas/GcpUserAccessBinding"
       responses:
         "200":
           content:
@@ -201,8 +212,50 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - accessPolicies
-  "/v1beta/{parent}/accessLevels":
+        - organizations
+  "/v1/{name}:cancel":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+      operationId: accesscontextmanager.operations.cancel
+      parameters:
+        - description: The name of the operation resource to be cancelled.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelOperationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - operations
+  "/v1/{parent}/accessLevels":
     get:
       description: List all Access Levels for an access policy.
       operationId: accesscontextmanager.accessPolicies.accessLevels.list
@@ -287,7 +340,125 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - accessPolicies
-  "/v1beta/{parent}/servicePerimeters":
+  "/v1/{parent}/accessLevels:replaceAll":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Replace all existing Access Levels in an Access Policy with the Access Levels provided. This is done atomically. The longrunning operation from this RPC will have a successful status once all replacements have propagated to long-lasting storage. Replacements containing errors will result in an error response for the first error encountered. Replacement will be cancelled on error, existing Access Levels will not be affected. Operation.response field will contain ReplaceAccessLevelsResponse. Removing Access Levels contained in existing Service Perimeters will result in error.
+      operationId: accesscontextmanager.accessPolicies.accessLevels.replaceAll
+      parameters:
+        - description: "Required. Resource name for the access policy which owns these Access Levels. Format: `accessPolicies/{policy_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReplaceAccessLevelsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - accessPolicies
+  "/v1/{parent}/gcpUserAccessBindings":
+    get:
+      description: Lists all GcpUserAccessBindings for a Google Cloud organization.
+      operationId: accesscontextmanager.organizations.gcpUserAccessBindings.list
+      parameters:
+        - description: 'Required. Example: "organizations/256"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Maximum number of items to return. The server may return fewer items. If left blank, the server may return any number of items.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. If left blank, returns the first page. To enumerate all items, use the next_page_token from your previous list operation.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListGcpUserAccessBindingsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a GcpUserAccessBinding. If the client specifies a name, the server will ignore it. Fails if a resource already exists with the same group_key. Completion of this long-running operation does not necessarily signify that the new binding is deployed onto all affected users, which may take more time.
+      operationId: accesscontextmanager.organizations.gcpUserAccessBindings.create
+      parameters:
+        - description: 'Required. Example: "organizations/256"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GcpUserAccessBinding"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+  "/v1/{parent}/servicePerimeters":
     get:
       description: List all Service Perimeters for an access policy.
       operationId: accesscontextmanager.accessPolicies.servicePerimeters.list
@@ -349,6 +520,90 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ServicePerimeter"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - accessPolicies
+  "/v1/{parent}/servicePerimeters:commit":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Commit the dry-run spec for all the Service Perimeters in an Access Policy. A commit operation on a Service Perimeter involves copying its `spec` field to that Service Perimeter's `status` field. Only Service Perimeters with `use_explicit_dry_run_spec` field set to true are affected by a commit operation. The longrunning operation from this RPC will have a successful status once the dry-run specs for all the Service Perimeters have been committed. If a commit fails, it will cause the longrunning operation to return an error response and the entire commit operation will be cancelled. When successful, Operation.response field will contain CommitServicePerimetersResponse. The `dry_run` and the `spec` fields will be cleared after a successful commit operation.
+      operationId: accesscontextmanager.accessPolicies.servicePerimeters.commit
+      parameters:
+        - description: "Required. Resource name for the parent Access Policy which owns all Service Perimeters in scope for the commit operation. Format: `accessPolicies/{policy_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CommitServicePerimetersRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - accessPolicies
+  "/v1/{parent}/servicePerimeters:replaceAll":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Replace all existing Service Perimeters in an Access Policy with the Service Perimeters provided. This is done atomically. The longrunning operation from this RPC will have a successful status once all replacements have propagated to long-lasting storage. Replacements containing errors will result in an error response for the first error encountered. Replacement will be cancelled on error, existing Service Perimeters will not be affected. Operation.response field will contain ReplaceServicePerimetersResponse.
+      operationId: accesscontextmanager.accessPolicies.servicePerimeters.replaceAll
+      parameters:
+        - description: "Required. Resource name for the access policy which owns these Service Perimeters. Format: `accessPolicies/{policy_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReplaceServicePerimetersRequest"
       responses:
         "200":
           content:
@@ -456,7 +711,7 @@ components:
           description: Description of the `AccessLevel` and its use. Does not affect behavior.
           type: string
         name:
-          description: "Required. Resource name for the Access Level. The `short_name` component must begin with a letter and only include alphanumeric and '_'. Format: `accessPolicies/{policy_id}/accessLevels/{short_name}`. The maximum length // of the `short_name` component is 50 characters."
+          description: "Required. Resource name for the Access Level. The `short_name` component must begin with a letter and only include alphanumeric and '_'. Format: `accessPolicies/{access_policy}/accessLevels/{access_level}`. The maximum length of the `access_level` component is 50 characters."
           type: string
         title:
           description: Human readable title. Must be unique within the Policy.
@@ -465,14 +720,29 @@ components:
     AccessPolicy:
       description: "`AccessPolicy` is a container for `AccessLevels` (which define the necessary attributes to use Google Cloud services) and `ServicePerimeters` (which define regions of services able to freely pass data within a perimeter). An access policy is globally visible within an organization, and the restrictions it specifies apply to all projects within an organization."
       properties:
+        etag:
+          description: Output only. An opaque identifier for the current version of the `AccessPolicy`. This will always be a strongly validated etag, meaning that two Access Polices will be identical if and only if their etags are identical. Clients should not expect this to be in any specific format.
+          type: string
         name:
-          description: "Output only. Resource name of the `AccessPolicy`. Format: `accessPolicies/{policy_id}`"
+          description: "Output only. Resource name of the `AccessPolicy`. Format: `accessPolicies/{access_policy}`"
           type: string
         parent:
           description: "Required. The parent of this `AccessPolicy` in the Cloud Resource Hierarchy. Currently immutable once created. Format: `organizations/{organization_id}`"
           type: string
         title:
           description: Required. Human readable title. Does not affect behavior.
+          type: string
+      type: object
+    ApiOperation:
+      description: Identification for an API Operation.
+      properties:
+        methodSelectors:
+          description: API methods or permissions to allow. Method or permission must belong to the service specified by `service_name` field. A single MethodSelector entry with `*` specified for the `method` field will allow all methods AND permissions for the service specified in `service_name`.
+          items:
+            $ref: "#/components/schemas/MethodSelector"
+          type: array
+        serviceName:
+          description: The name of the API whose methods or permissions the IngressPolicy or EgressPolicy want to allow. A single ApiOperation with `service_name` field set to `*` will allow all methods AND permissions for all services.
           type: string
       type: object
     BasicLevel:
@@ -488,6 +758,26 @@ components:
           description: Required. A list of requirements for the `AccessLevel` to be granted.
           items:
             $ref: "#/components/schemas/Condition"
+          type: array
+      type: object
+    CancelOperationRequest:
+      description: The request message for Operations.CancelOperation.
+      properties: {}
+      type: object
+    CommitServicePerimetersRequest:
+      description: A request to commit dry-run specs in all Service Perimeters belonging to an Access Policy.
+      properties:
+        etag:
+          description: Optional. The etag for the version of the Access Policy that this commit operation is to be performed on. If, at the time of commit, the etag for the Access Policy stored in Access Context Manager is different from the specified etag, then the commit operation will not be performed and the call will fail. This field is not required. If etag is not provided, the operation will be performed as if a valid etag is provided.
+          type: string
+      type: object
+    CommitServicePerimetersResponse:
+      description: A response to CommitServicePerimetersRequest. This will be put inside of Operation.response field.
+      properties:
+        servicePerimeters:
+          description: List of all the Service Perimeter instances in the Access Policy.
+          items:
+            $ref: "#/components/schemas/ServicePerimeter"
           type: array
       type: object
     Condition:
@@ -565,6 +855,51 @@ components:
           description: Whether or not screenlock is required for the DevicePolicy to be true. Defaults to `false`.
           type: boolean
       type: object
+    EgressFrom:
+      description: Defines the conditions under which an EgressPolicy matches a request. Conditions based on information about the source of the request. Note that if the destination of the request is also protected by a ServicePerimeter, then that ServicePerimeter must have an IngressPolicy which allows access in order for this request to succeed.
+      properties:
+        identities:
+          description: A list of identities that are allowed access through this [EgressPolicy]. Should be in the format of email address. The email address should represent individual user or service account only.
+          items:
+            type: string
+          type: array
+        identityType:
+          description: Specifies the type of identities that are allowed access to outside the perimeter. If left unspecified, then members of `identities` field will be allowed access.
+          enum:
+            - IDENTITY_TYPE_UNSPECIFIED
+            - ANY_IDENTITY
+            - ANY_USER_ACCOUNT
+            - ANY_SERVICE_ACCOUNT
+          type: string
+      type: object
+    EgressPolicy:
+      description: Policy for egress from perimeter. EgressPolicies match requests based on `egress_from` and `egress_to` stanzas. For an EgressPolicy to match, both `egress_from` and `egress_to` stanzas must be matched. If an EgressPolicy matches a request, the request is allowed to span the ServicePerimeter boundary. For example, an EgressPolicy can be used to allow VMs on networks within the ServicePerimeter to access a defined set of projects outside the perimeter in certain contexts (e.g. to read data from a Cloud Storage bucket or query against a BigQuery dataset). EgressPolicies are concerned with the *resources* that a request relates as well as the API services and API actions being used. They do not related to the direction of data movement. More detailed documentation for this concept can be found in the descriptions of EgressFrom and EgressTo.
+      properties:
+        egressFrom:
+          $ref: "#/components/schemas/EgressFrom"
+          description: Defines conditions on the source of a request causing this EgressPolicy to apply.
+        egressTo:
+          $ref: "#/components/schemas/EgressTo"
+          description: Defines the conditions on the ApiOperation and destination resources that cause this EgressPolicy to apply.
+      type: object
+    EgressTo:
+      description: Defines the conditions under which an EgressPolicy matches a request. Conditions are based on information about the ApiOperation intended to be performed on the `resources` specified. Note that if the destination of the request is also protected by a ServicePerimeter, then that ServicePerimeter must have an IngressPolicy which allows access in order for this request to succeed. The request must match `operations` AND `resources` fields in order to be allowed egress out of the perimeter.
+      properties:
+        operations:
+          description: A list of ApiOperations allowed to be performed by the sources specified in the corresponding EgressFrom. A request matches if it uses an operation/service in this list.
+          items:
+            $ref: "#/components/schemas/ApiOperation"
+          type: array
+        resources:
+          description: A list of resources, currently only projects in the form `projects/`, that are allowed to be accessed by sources defined in the corresponding EgressFrom. A request matches if it contains a resource in this list. If `*` is specified for `resources`, then this EgressTo rule will authorize access to all resources outside the perimeter.
+          items:
+            type: string
+          type: array
+      type: object
+    Empty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      properties: {}
+      type: object
     Expr:
       description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."
       properties:
@@ -580,6 +915,81 @@ components:
         title:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
+      type: object
+    GcpUserAccessBinding:
+      description: Restricts access to Cloud Console and Google Cloud APIs for a set of users using Context-Aware Access.
+      properties:
+        accessLevels:
+          description: 'Required. Access level that a user must have to be granted access. Only one access level is supported, not multiple. This repeated field must have exactly one element. Example: "accessPolicies/9522/accessLevels/device_trusted"'
+          items:
+            type: string
+          type: array
+        groupKey:
+          description: "Required. Immutable. Google Group id whose members are subject to this binding's restrictions. See \"id\" in the [G Suite Directory API's Groups resource] (https://developers.google.com/admin-sdk/directory/v1/reference/groups#resource). If a group's email address/alias is changed, this resource will continue to point at the changed group. This field does not accept group email addresses or aliases. Example: \"01d520gv4vjcrht\""
+          type: string
+        name:
+          description: 'Immutable. Assigned by the server during creation. The last segment has an arbitrary length and has only URI unreserved characters (as defined by [RFC 3986 Section 2.3](https://tools.ietf.org/html/rfc3986#section-2.3)). Should not be specified by the client during creation. Example: "organizations/256/gcpUserAccessBindings/b3-BhcX_Ud5N"'
+          type: string
+      type: object
+    GcpUserAccessBindingOperationMetadata:
+      description: Currently, a completed operation means nothing. In the future, this metadata and a completed operation may indicate that the binding has taken effect and is affecting access decisions for all users.
+      properties: {}
+      type: object
+    IngressFrom:
+      description: Defines the conditions under which an IngressPolicy matches a request. Conditions are based on information about the source of the request. The request must satisfy what is defined in `sources` AND identity related fields in order to match.
+      properties:
+        identities:
+          description: A list of identities that are allowed access through this ingress policy. Should be in the format of email address. The email address should represent individual user or service account only.
+          items:
+            type: string
+          type: array
+        identityType:
+          description: Specifies the type of identities that are allowed access from outside the perimeter. If left unspecified, then members of `identities` field will be allowed access.
+          enum:
+            - IDENTITY_TYPE_UNSPECIFIED
+            - ANY_IDENTITY
+            - ANY_USER_ACCOUNT
+            - ANY_SERVICE_ACCOUNT
+          type: string
+        sources:
+          description: Sources that this IngressPolicy authorizes access from.
+          items:
+            $ref: "#/components/schemas/IngressSource"
+          type: array
+      type: object
+    IngressPolicy:
+      description: Policy for ingress into ServicePerimeter. IngressPolicies match requests based on `ingress_from` and `ingress_to` stanzas. For an ingress policy to match, both the `ingress_from` and `ingress_to` stanzas must be matched. If an IngressPolicy matches a request, the request is allowed through the perimeter boundary from outside the perimeter. For example, access from the internet can be allowed either based on an AccessLevel or, for traffic hosted on Google Cloud, the project of the source network. For access from private networks, using the project of the hosting network is required. Individual ingress policies can be limited by restricting which services and/or actions they match using the `ingress_to` field.
+      properties:
+        ingressFrom:
+          $ref: "#/components/schemas/IngressFrom"
+          description: Defines the conditions on the source of a request causing this IngressPolicy to apply.
+        ingressTo:
+          $ref: "#/components/schemas/IngressTo"
+          description: Defines the conditions on the ApiOperation and request destination that cause this IngressPolicy to apply.
+      type: object
+    IngressSource:
+      description: The source that IngressPolicy authorizes access from.
+      properties:
+        accessLevel:
+          description: "An AccessLevel resource name that allow resources within the ServicePerimeters to be accessed from the internet. AccessLevels listed must be in the same policy as this ServicePerimeter. Referencing a nonexistent AccessLevel will cause an error. If no AccessLevel names are listed, resources within the perimeter can only be accessed via Google Cloud calls with request origins within the perimeter. Example: `accessPolicies/MY_POLICY/accessLevels/MY_LEVEL`. If a single `*` is specified for `access_level`, then all IngressSources will be allowed."
+          type: string
+        resource:
+          description: "A Google Cloud resource that is allowed to ingress the perimeter. Requests from these resources will be allowed to access perimeter data. Currently only projects are allowed. Format: `projects/{project_number}` The project may be in any Google Cloud organization, not just the organization that the perimeter is defined in. `*` is not allowed, the case of allowing all Google Cloud resources only is not supported."
+          type: string
+      type: object
+    IngressTo:
+      description: Defines the conditions under which an IngressPolicy matches a request. Conditions are based on information about the ApiOperation intended to be performed on the target resource of the request. The request must satisfy what is defined in `operations` AND `resources` in order to match.
+      properties:
+        operations:
+          description: A list of ApiOperations allowed to be performed by the sources specified in corresponding IngressFrom in this ServicePerimeter.
+          items:
+            $ref: "#/components/schemas/ApiOperation"
+          type: array
+        resources:
+          description: A list of resources, currently only projects in the form `projects/`, protected by this ServicePerimeter that are allowed to be accessed by sources defined in the corresponding IngressFrom. If a single `*` is specified, then access to all resources inside the perimeter are allowed.
+          items:
+            type: string
+          type: array
       type: object
     ListAccessLevelsResponse:
       description: A response to `ListAccessLevelsRequest`.
@@ -605,6 +1015,30 @@ components:
           description: The pagination token to retrieve the next page of results. If the value is empty, no further results remain.
           type: string
       type: object
+    ListGcpUserAccessBindingsResponse:
+      description: Response of ListGcpUserAccessBindings.
+      properties:
+        gcpUserAccessBindings:
+          description: GcpUserAccessBinding
+          items:
+            $ref: "#/components/schemas/GcpUserAccessBinding"
+          type: array
+        nextPageToken:
+          description: Token to get the next page of items. If blank, there are no more items.
+          type: string
+      type: object
+    ListOperationsResponse:
+      description: The response message for Operations.ListOperations.
+      properties:
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+        operations:
+          description: A list of operations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
     ListServicePerimetersResponse:
       description: A response to `ListServicePerimetersRequest`.
       properties:
@@ -616,6 +1050,16 @@ components:
           items:
             $ref: "#/components/schemas/ServicePerimeter"
           type: array
+      type: object
+    MethodSelector:
+      description: An allowed method or permission of a service specified in ApiOperation.
+      properties:
+        method:
+          description: Value for `method` should be a valid method name for the corresponding `service_name` in ApiOperation. If `*` used as value for `method`, then ALL methods and permissions are allowed.
+          type: string
+        permission:
+          description: Value for `permission` should be a valid Cloud IAM permission for the corresponding `service_name` in ApiOperation.
+          type: string
       type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
@@ -661,6 +1105,48 @@ components:
           description: Only allows requests from devices with a verified Chrome OS. Verifications includes requirements that the device is enterprise-managed, conformant to domain policies, and the caller has permission to call the API targeted by the request.
           type: boolean
       type: object
+    ReplaceAccessLevelsRequest:
+      description: A request to replace all existing Access Levels in an Access Policy with the Access Levels provided. This is done atomically.
+      properties:
+        accessLevels:
+          description: Required. The desired Access Levels that should replace all existing Access Levels in the Access Policy.
+          items:
+            $ref: "#/components/schemas/AccessLevel"
+          type: array
+        etag:
+          description: Optional. The etag for the version of the Access Policy that this replace operation is to be performed on. If, at the time of replace, the etag for the Access Policy stored in Access Context Manager is different from the specified etag, then the replace operation will not be performed and the call will fail. This field is not required. If etag is not provided, the operation will be performed as if a valid etag is provided.
+          type: string
+      type: object
+    ReplaceAccessLevelsResponse:
+      description: A response to ReplaceAccessLevelsRequest. This will be put inside of Operation.response field.
+      properties:
+        accessLevels:
+          description: List of the Access Level instances.
+          items:
+            $ref: "#/components/schemas/AccessLevel"
+          type: array
+      type: object
+    ReplaceServicePerimetersRequest:
+      description: A request to replace all existing Service Perimeters in an Access Policy with the Service Perimeters provided. This is done atomically.
+      properties:
+        etag:
+          description: Optional. The etag for the version of the Access Policy that this replace operation is to be performed on. If, at the time of replace, the etag for the Access Policy stored in Access Context Manager is different from the specified etag, then the replace operation will not be performed and the call will fail. This field is not required. If etag is not provided, the operation will be performed as if a valid etag is provided.
+          type: string
+        servicePerimeters:
+          description: Required. The desired Service Perimeters that should replace all existing Service Perimeters in the Access Policy.
+          items:
+            $ref: "#/components/schemas/ServicePerimeter"
+          type: array
+      type: object
+    ReplaceServicePerimetersResponse:
+      description: A response to ReplaceServicePerimetersRequest. This will be put inside of Operation.response field.
+      properties:
+        servicePerimeters:
+          description: List of the Service Perimeter instances.
+          items:
+            $ref: "#/components/schemas/ServicePerimeter"
+          type: array
+      type: object
     ServicePerimeter:
       description: "`ServicePerimeter` describes a set of Google Cloud resources which can freely import and export data amongst themselves, but not export outside of the `ServicePerimeter`. If a request with a source within this `ServicePerimeter` has a target outside of the `ServicePerimeter`, the request will be blocked. Otherwise the request is allowed. There are two types of Service Perimeter - Regular and Bridge. Regular Service Perimeters cannot overlap, a single Google Cloud project can only belong to a single regular Service Perimeter. Service Perimeter Bridges can contain only Google Cloud projects as members, a single Google Cloud project may belong to multiple Service Perimeter Bridges."
       properties:
@@ -668,20 +1154,26 @@ components:
           description: Description of the `ServicePerimeter` and its use. Does not affect behavior.
           type: string
         name:
-          description: "Required. Resource name for the ServicePerimeter. The `short_name` component must begin with a letter and only include alphanumeric and '_'. Format: `accessPolicies/{policy_id}/servicePerimeters/{short_name}`"
+          description: "Required. Resource name for the ServicePerimeter. The `short_name` component must begin with a letter and only include alphanumeric and '_'. Format: `accessPolicies/{access_policy}/servicePerimeters/{service_perimeter}`"
           type: string
         perimeterType:
-          description: Perimeter type indicator. A single project is allowed to be a member of single regular perimeter, but multiple service perimeter bridges. A project cannot be a included in a perimeter bridge without being included in regular perimeter. For perimeter bridges, restricted/unrestricted service lists as well as access lists must be empty.
+          description: Perimeter type indicator. A single project is allowed to be a member of single regular perimeter, but multiple service perimeter bridges. A project cannot be a included in a perimeter bridge without being included in regular perimeter. For perimeter bridges, the restricted service list as well as access level lists must be empty.
           enum:
             - PERIMETER_TYPE_REGULAR
             - PERIMETER_TYPE_BRIDGE
           type: string
+        spec:
+          $ref: "#/components/schemas/ServicePerimeterConfig"
+          description: Proposed (or dry run) ServicePerimeter configuration. This configuration allows to specify and test ServicePerimeter configuration without enforcing actual access restrictions. Only allowed to be set when the "use_explicit_dry_run_spec" flag is set.
         status:
           $ref: "#/components/schemas/ServicePerimeterConfig"
-          description: Current ServicePerimeter configuration. Specifies sets of resources, restricted/unrestricted services and access levels that determine perimeter content and boundaries.
+          description: Current ServicePerimeter configuration. Specifies sets of resources, restricted services and access levels that determine perimeter content and boundaries.
         title:
           description: Human readable title. Must be unique within the Policy.
           type: string
+        useExplicitDryRunSpec:
+          description: Use explicit dry run spec flag. Ordinarily, a dry-run spec implicitly exists for all Service Perimeters, and that spec is identical to the status for those Service Perimeters. When this flag is set, it inhibits the generation of the implicit spec, thereby allowing the user to explicitly provide a configuration ("spec") to use in a dry-run version of the Service Perimeter. This allows the user to test changes to the enforced config ("status") without actually enforcing them. This testing is done through analyzing the differences between currently enforced and suggested restrictions. use_explicit_dry_run_spec must bet set to True if any of the fields in the spec are set to non-default values.
+          type: boolean
       type: object
     ServicePerimeterConfig:
       description: "`ServicePerimeterConfig` specifies a set of Google Cloud resources that describe specific Service Perimeter configuration."
@@ -691,24 +1183,29 @@ components:
           items:
             type: string
           type: array
+        egressPolicies:
+          description: List of EgressPolicies to apply to the perimeter. A perimeter may have multiple EgressPolicies, each of which is evaluated separately. Access is granted if any EgressPolicy grants it. Must be empty for a perimeter bridge.
+          items:
+            $ref: "#/components/schemas/EgressPolicy"
+          type: array
+        ingressPolicies:
+          description: List of IngressPolicies to apply to the perimeter. A perimeter may have multiple IngressPolicies, each of which is evaluated separately. Access is granted if any Ingress Policy grants it. Must be empty for a perimeter bridge.
+          items:
+            $ref: "#/components/schemas/IngressPolicy"
+          type: array
         resources:
           description: "A list of Google Cloud resources that are inside of the service perimeter. Currently only projects are allowed. Format: `projects/{project_number}`"
           items:
             type: string
           type: array
         restrictedServices:
-          description: Google Cloud services that are subject to the Service Perimeter restrictions. Must contain a list of services. For example, if `storage.googleapis.com` is specified, access to the storage buckets inside the perimeter must meet the perimeter's access restrictions.
-          items:
-            type: string
-          type: array
-        unrestrictedServices:
-          description: Google Cloud services that are not subject to the Service Perimeter restrictions. Deprecated. Must be set to a single wildcard "*". The wildcard means that unless explicitly specified by "restricted_services" list, any service is treated as unrestricted.
+          description: Google Cloud services that are subject to the Service Perimeter restrictions. For example, if `storage.googleapis.com` is specified, access to the storage buckets inside the perimeter must meet the perimeter's access restrictions.
           items:
             type: string
           type: array
         vpcAccessibleServices:
           $ref: "#/components/schemas/VpcAccessibleServices"
-          description: Beta. Configuration for APIs allowed within Perimeter.
+          description: Configuration for APIs allowed within Perimeter.
       type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."

@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Cloud DNS API
-  version: v2beta1
+  version: v1beta2
   x-apiClientRegistration:
     url: https://console.developers.google.com
   x-apisguru-categories:
@@ -21,14 +21,12 @@ info:
   x-logo:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - converter:
-        url: https://github.com/mermade/oas-kit
-        version: 7.0.4
-      format: google
-      url: https://www.googleapis.com/discovery/v1/apis/dns/v2beta1/rest
-      version: v1
+    - format: openapi
+      url: https://dns.googleapis.com/$discovery/rest?version=v1beta2
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: dns
+  x-preferred: false
 externalDocs:
   url: https://cloud.google.com/dns/docs
 tags:
@@ -39,8 +37,10 @@ tags:
   - name: policies
   - name: projects
   - name: resourceRecordSets
+  - name: responsePolicies
+  - name: responsePolicyRules
 paths:
-  "/dns/v2beta1/projects/{project}":
+  "/dns/v1beta2/projects/{project}":
     get:
       description: Fetches the representation of an existing Project.
       operationId: dns.projects.get
@@ -94,7 +94,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dns/v2beta1/projects/{project}/managedZones":
+  "/dns/v1beta2/projects/{project}/managedZones":
     get:
       description: Enumerates ManagedZones that have been created but not yet deleted.
       operationId: dns.managedZones.list
@@ -196,7 +196,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - managedZones
-  "/dns/v2beta1/projects/{project}/managedZones/{managedZone}":
+  "/dns/v1beta2/projects/{project}/managedZones/{managedZone}":
     delete:
       description: Deletes a previously created ManagedZone.
       operationId: dns.managedZones.delete
@@ -379,7 +379,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - managedZones
-  "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/changes":
+  "/dns/v1beta2/projects/{project}/managedZones/{managedZone}/changes":
     get:
       description: Enumerates Changes to a ResourceRecordSet collection.
       operationId: dns.changes.list
@@ -411,7 +411,7 @@ paths:
           name: sortBy
           schema:
             enum:
-              - CHANGE_SEQUENCE
+              - changeSequence
             type: string
         - description: "Sorting order direction: 'ascending' or 'descending'."
           in: query
@@ -500,7 +500,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - changes
-  "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/changes/{changeId}":
+  "/dns/v1beta2/projects/{project}/managedZones/{managedZone}/changes/{changeId}":
     get:
       description: Fetches the representation of an existing Change.
       operationId: dns.changes.get
@@ -566,7 +566,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/dnsKeys":
+  "/dns/v1beta2/projects/{project}/managedZones/{managedZone}/dnsKeys":
     get:
       description: Enumerates DnsKeys to a ResourceRecordSet collection.
       operationId: dns.dnsKeys.list
@@ -636,7 +636,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/dnsKeys/{dnsKeyId}":
+  "/dns/v1beta2/projects/{project}/managedZones/{managedZone}/dnsKeys/{dnsKeyId}":
     get:
       description: Fetches the representation of an existing DnsKey.
       operationId: dns.dnsKeys.get
@@ -707,7 +707,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/operations":
+  "/dns/v1beta2/projects/{project}/managedZones/{managedZone}/operations":
     get:
       description: Enumerates Operations for the given ManagedZone.
       operationId: dns.managedZoneOperations.list
@@ -739,8 +739,8 @@ paths:
           name: sortBy
           schema:
             enum:
-              - START_TIME
-              - ID
+              - startTime
+              - id
             type: string
       responses:
         "200":
@@ -780,7 +780,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/operations/{operation}":
+  "/dns/v1beta2/projects/{project}/managedZones/{managedZone}/operations/{operation}":
     get:
       description: Fetches the representation of an existing Operation.
       operationId: dns.managedZoneOperations.get
@@ -846,7 +846,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/rrsets":
+  "/dns/v1beta2/projects/{project}/managedZones/{managedZone}/rrsets":
     get:
       description: Enumerates ResourceRecordSets that you have created but not yet deleted.
       operationId: dns.resourceRecordSets.list
@@ -921,7 +921,226 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dns/v2beta1/projects/{project}/policies":
+    post:
+      description: Creates a new ResourceRecordSet.
+      operationId: dns.resourceRecordSets.create
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or ID.
+          in: path
+          name: managedZone
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResourceRecordSet"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceRecordSet"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - resourceRecordSets
+  "/dns/v1beta2/projects/{project}/managedZones/{managedZone}/rrsets/{name}/{type}":
+    delete:
+      description: Deletes a previously created ResourceRecordSet.
+      operationId: dns.resourceRecordSets.delete
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or ID.
+          in: path
+          name: managedZone
+          required: true
+          schema:
+            type: string
+        - description: Fully qualified domain name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: RRSet type.
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - resourceRecordSets
+    get:
+      description: Fetches the representation of an existing ResourceRecordSet.
+      operationId: dns.resourceRecordSets.get
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or ID.
+          in: path
+          name: managedZone
+          required: true
+          schema:
+            type: string
+        - description: Fully qualified domain name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: RRSet type.
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceRecordSet"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - resourceRecordSets
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Applies a partial update to an existing ResourceRecordSet.
+      operationId: dns.resourceRecordSets.patch
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or ID.
+          in: path
+          name: managedZone
+          required: true
+          schema:
+            type: string
+        - description: Fully qualified domain name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: RRSet type.
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResourceRecordSet"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceRecordSet"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - resourceRecordSets
+  "/dns/v1beta2/projects/{project}/policies":
     get:
       description: Enumerates all Policies associated with a project.
       operationId: dns.policies.list
@@ -949,6 +1168,23 @@ paths:
               schema:
                 $ref: "#/components/schemas/PoliciesListResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - policies
     parameters:
@@ -990,9 +1226,18 @@ paths:
               schema:
                 $ref: "#/components/schemas/Policy"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - policies
-  "/dns/v2beta1/projects/{project}/policies/{policy}":
+  "/dns/v1beta2/projects/{project}/policies/{policy}":
     delete:
       description: Deletes a previously created Policy. Fails if the policy is still being referenced by a network.
       operationId: dns.policies.delete
@@ -1017,6 +1262,15 @@ paths:
       responses:
         "200":
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - policies
     get:
@@ -1047,6 +1301,23 @@ paths:
               schema:
                 $ref: "#/components/schemas/Policy"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - policies
     parameters:
@@ -1094,6 +1365,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/PoliciesPatchResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - policies
     put:
@@ -1129,8 +1409,613 @@ paths:
               schema:
                 $ref: "#/components/schemas/PoliciesUpdateResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - policies
+  "/dns/v1beta2/projects/{project}/responsePolicies":
+    get:
+      description: Enumerates all Response Policies associated with a project.
+      operationId: dns.responsePolicies.list
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server decides how many results to return.
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+        - description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponsePoliciesListResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - responsePolicies
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new Response Policy
+      operationId: dns.responsePolicies.create
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponsePolicy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponsePolicy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - responsePolicies
+  "/dns/v1beta2/projects/{project}/responsePolicies/{responsePolicy}":
+    delete:
+      description: Deletes a previously created Response Policy. Fails if the response policy is non-empty or still being referenced by a network.
+      operationId: dns.responsePolicies.delete
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: User assigned name of the Response Policy addressed by this request.
+          in: path
+          name: responsePolicy
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - responsePolicies
+    get:
+      description: Fetches the representation of an existing Response Policy.
+      operationId: dns.responsePolicies.get
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: User assigned name of the Response Policy addressed by this request.
+          in: path
+          name: responsePolicy
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponsePolicy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - responsePolicies
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Applies a partial update to an existing Response Policy.
+      operationId: dns.responsePolicies.patch
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: User assigned name of the Respones Policy addressed by this request.
+          in: path
+          name: responsePolicy
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponsePolicy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponsePoliciesPatchResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - responsePolicies
+    put:
+      description: Updates an existing Response Policy.
+      operationId: dns.responsePolicies.update
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: User assigned name of the Response Policy addressed by this request.
+          in: path
+          name: responsePolicy
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponsePolicy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponsePoliciesUpdateResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - responsePolicies
+  "/dns/v1beta2/projects/{project}/responsePolicies/{responsePolicy}/rules":
+    get:
+      description: Enumerates all Response Policy Rules associated with a project.
+      operationId: dns.responsePolicyRules.list
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: User assigned name of the Response Policy to list.
+          in: path
+          name: responsePolicy
+          required: true
+          schema:
+            type: string
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server decides how many results to return.
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+        - description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponsePolicyRulesListResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - responsePolicyRules
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new Response Policy Rule.
+      operationId: dns.responsePolicyRules.create
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: User assigned name of the Response Policy containing the Response Policy Rule.
+          in: path
+          name: responsePolicy
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponsePolicyRule"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponsePolicyRule"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - responsePolicyRules
+  "/dns/v1beta2/projects/{project}/responsePolicies/{responsePolicy}/rules/{responsePolicyRule}":
+    delete:
+      description: Deletes a previously created Response Policy Rule.
+      operationId: dns.responsePolicyRules.delete
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: User assigned name of the Response Policy containing the Response Policy Rule.
+          in: path
+          name: responsePolicy
+          required: true
+          schema:
+            type: string
+        - description: User assigned name of the Response Policy Rule addressed by this request.
+          in: path
+          name: responsePolicyRule
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - responsePolicyRules
+    get:
+      description: Fetches the representation of an existing Response Policy Rule.
+      operationId: dns.responsePolicyRules.get
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: User assigned name of the Response Policy containing the Response Policy Rule.
+          in: path
+          name: responsePolicy
+          required: true
+          schema:
+            type: string
+        - description: User assigned name of the Response Policy Rule addressed by this request.
+          in: path
+          name: responsePolicyRule
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponsePolicyRule"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - responsePolicyRules
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Applies a partial update to an existing Response Policy Rule.
+      operationId: dns.responsePolicyRules.patch
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: User assigned name of the Response Policy containing the Response Policy Rule.
+          in: path
+          name: responsePolicy
+          required: true
+          schema:
+            type: string
+        - description: User assigned name of the Response Policy Rule addressed by this request.
+          in: path
+          name: responsePolicyRule
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponsePolicyRule"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponsePolicyRulesPatchResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - responsePolicyRules
+    put:
+      description: Updates an existing Response Policy Rule.
+      operationId: dns.responsePolicyRules.update
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: User assigned name of the Response Policy containing the Response Policy Rule.
+          in: path
+          name: responsePolicy
+          required: true
+          schema:
+            type: string
+        - description: User assigned name of the Response Policy Rule addressed by this request.
+          in: path
+          name: responsePolicyRule
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponsePolicyRule"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponsePolicyRulesUpdateResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - responsePolicyRules
 components:
   parameters:
     _.xgafv:
@@ -1235,8 +2120,8 @@ components:
         status:
           description: Status of the operation (output only). A status of "done" means that the request to update the authoritative servers has been sent, but the servers might not be updated yet.
           enum:
-            - PENDING
-            - DONE
+            - pending
+            - done
           type: string
       type: object
     ChangesListResponse:
@@ -1263,11 +2148,11 @@ components:
         algorithm:
           description: String mnemonic specifying the DNSSEC algorithm of this key. Immutable after creation time.
           enum:
-            - RSASHA1
-            - RSASHA256
-            - RSASHA512
-            - ECDSAP256SHA256
-            - ECDSAP384SHA384
+            - rsasha1
+            - rsasha256
+            - rsasha512
+            - ecdsap256sha256
+            - ecdsap384sha384
           type: string
         creationTime:
           description: The time that this resource was created in the control plane. This is in RFC3339 text format. Output only.
@@ -1303,8 +2188,8 @@ components:
         type:
           description: One of "KEY_SIGNING" or "ZONE_SIGNING". Keys of type KEY_SIGNING have the Secure Entry Point flag set and, when active, are used to sign only resource record sets of type DNSKEY. Otherwise, the Secure Entry Point flag is cleared, and this key is used to sign only resource record sets of other types. Immutable after creation time.
           enum:
-            - KEY_SIGNING
-            - ZONE_SIGNING
+            - keySigning
+            - zoneSigning
           type: string
       type: object
     DnsKeyDigest:
@@ -1315,9 +2200,9 @@ components:
         type:
           description: Specifies the algorithm used to calculate this digest.
           enum:
-            - SHA1
-            - SHA256
-            - SHA384
+            - sha1
+            - sha256
+            - sha384
           type: string
       type: object
     DnsKeySpec:
@@ -1326,11 +2211,11 @@ components:
         algorithm:
           description: String mnemonic specifying the DNSSEC algorithm of this key.
           enum:
-            - RSASHA1
-            - RSASHA256
-            - RSASHA512
-            - ECDSAP256SHA256
-            - ECDSAP384SHA384
+            - rsasha1
+            - rsasha256
+            - rsasha512
+            - ecdsap256sha256
+            - ecdsap384sha384
           type: string
         keyLength:
           description: Length of the keys in bits.
@@ -1339,8 +2224,8 @@ components:
         keyType:
           description: Specifies whether this is a key signing key (KSK) or a zone signing key (ZSK). Key signing keys have the Secure Entry Point flag set and, when active, are only used to sign resource record sets of type DNSKEY. Zone signing keys do not have the Secure Entry Point flag set and are used to sign all other types of resource record sets.
           enum:
-            - KEY_SIGNING
-            - ZONE_SIGNING
+            - keySigning
+            - zoneSigning
           type: string
         kind:
           default: dns#dnsKeySpec
@@ -1420,8 +2305,8 @@ components:
         visibility:
           description: "The zone's visibility: public zones are exposed to the Internet, while private zones are visible only to Virtual Private Cloud resources."
           enum:
-            - PUBLIC
-            - PRIVATE
+            - public
+            - private
           type: string
       type: object
     ManagedZoneDnsSecConfig:
@@ -1437,15 +2322,15 @@ components:
         nonExistence:
           description: Specifies the mechanism for authenticated denial-of-existence responses. Can only be changed while the state is OFF.
           enum:
-            - NSEC
-            - NSEC3
+            - nsec
+            - nsec3
           type: string
         state:
           description: Specifies whether DNSSEC is enabled, and what mode it is in.
           enum:
-            - OFF
-            - ON
-            - TRANSFER
+            - off
+            - on
+            - transfer
           type: string
       type: object
     ManagedZoneForwardingConfig:
@@ -1464,11 +2349,14 @@ components:
         forwardingPath:
           description: Forwarding path for this NameServerTarget. If unset or set to DEFAULT, Cloud DNS makes forwarding decisions based on IP address ranges; that is, RFC1918 addresses go to the VPC network, non-RFC1918 addresses go to the internet. When set to PRIVATE, Cloud DNS always sends queries through the VPC network for this target.
           enum:
-            - DEFAULT
-            - PRIVATE
+            - default
+            - private
           type: string
         ipv4Address:
           description: IPv4 address of a target name server.
+          type: string
+        ipv6Address:
+          description: IPv6 address of a target name server. Does not accept both fields (ipv4 & ipv6) being populated.
           type: string
         kind:
           default: dns#managedZoneForwardingConfigNameServerTarget
@@ -1514,6 +2402,11 @@ components:
       type: object
     ManagedZonePrivateVisibilityConfig:
       properties:
+        gkeClusters:
+          description: The list of Google Kubernetes Engine clusters that can see this zone.
+          items:
+            $ref: "#/components/schemas/ManagedZonePrivateVisibilityConfigGKECluster"
+          type: array
         kind:
           default: dns#managedZonePrivateVisibilityConfig
           type: string
@@ -1522,6 +2415,15 @@ components:
           items:
             $ref: "#/components/schemas/ManagedZonePrivateVisibilityConfigNetwork"
           type: array
+      type: object
+    ManagedZonePrivateVisibilityConfigGKECluster:
+      properties:
+        gkeClusterName:
+          description: "The resource name of the cluster to bind this ManagedZone to. This should be specified in the format like: projects/*/locations/*/clusters/*. This is referenced from GKE projects.locations.clusters.get API: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters/get"
+          type: string
+        kind:
+          default: dns#managedZonePrivateVisibilityConfigGKECluster
+          type: string
       type: object
     ManagedZonePrivateVisibilityConfigNetwork:
       properties:
@@ -1595,8 +2497,8 @@ components:
         status:
           description: 'Status of the operation. Can be one of the following: "PENDING" or "DONE" (output only). A status of "DONE" means that the request to update the authoritative servers has been sent, but the servers might not be updated yet.'
           enum:
-            - PENDING
-            - DONE
+            - pending
+            - done
           type: string
         type:
           description: Type of the operation. Operations include insert, update, and delete (output only).
@@ -1704,11 +2606,14 @@ components:
         forwardingPath:
           description: Forwarding path for this TargetNameServer. If unset or set to DEFAULT, Cloud DNS makes forwarding decisions based on address ranges; that is, RFC1918 addresses go to the VPC network, non-RFC1918 addresses go to the internet. When set to PRIVATE, Cloud DNS always sends queries through the VPC network for this target.
           enum:
-            - DEFAULT
-            - PRIVATE
+            - default
+            - private
           type: string
         ipv4Address:
           description: IPv4 address to forward to.
+          type: string
+        ipv6Address:
+          description: IPv6 address to forward to. Does not accept both fields (ipv4 & ipv6) being populated.
           type: string
         kind:
           default: dns#policyAlternativeNameServerConfigTargetNameServer
@@ -1747,11 +2652,27 @@ components:
           description: Maximum allowed number of DnsKeys per ManagedZone.
           format: int32
           type: integer
+        gkeClustersPerManagedZone:
+          description: Maximum allowed number of GKE clusters to which a privately scoped zone can be attached.
+          format: int32
+          type: integer
+        gkeClustersPerResponsePolicy:
+          description: Maximum allowed number of GKE clusters per response policy.
+          format: int32
+          type: integer
+        itemsPerRoutingPolicy:
+          description: Maximum allowed number of items per routing policy.
+          format: int32
+          type: integer
         kind:
           default: dns#quota
           type: string
         managedZones:
           description: Maximum allowed number of managed zones in the project.
+          format: int32
+          type: integer
+        managedZonesPerGkeCluster:
+          description: Maximum allowed number of managed zones which can be attached to a GKE cluster.
           format: int32
           type: integer
         managedZonesPerNetwork:
@@ -1772,6 +2693,10 @@ components:
           type: integer
         resourceRecordsPerRrset:
           description: Maximum allowed number of ResourceRecords per ResourceRecordSet.
+          format: int32
+          type: integer
+        responsePolicyRulesPerResponsePolicy:
+          description: Maximum allowed number of rules per response policy.
           format: int32
           type: integer
         rrsetAdditionsPerChange:
@@ -1804,6 +2729,84 @@ components:
             $ref: "#/components/schemas/DnsKeySpec"
           type: array
       type: object
+    RRSetRoutingPolicy:
+      description: A RRSetRoutingPolicy represents ResourceRecordSet data that is returned dynamically with the response varying based on configured properties such as geolocation or by weighted random selection.
+      properties:
+        geo:
+          $ref: "#/components/schemas/RRSetRoutingPolicyGeoPolicy"
+        geoPolicy:
+          $ref: "#/components/schemas/RRSetRoutingPolicyGeoPolicy"
+        kind:
+          default: dns#rRSetRoutingPolicy
+          type: string
+        wrr:
+          $ref: "#/components/schemas/RRSetRoutingPolicyWrrPolicy"
+        wrrPolicy:
+          $ref: "#/components/schemas/RRSetRoutingPolicyWrrPolicy"
+      type: object
+    RRSetRoutingPolicyGeoPolicy:
+      properties:
+        failovers:
+          description: If the health check for the primary target for a geo location returns an unhealthy status, the failover target is returned instead. This failover configuration is not mandatory. If a failover is not provided, the primary target won't be healthchecked, and it returns the primarily configured rrdata irrespective of whether it is healthy or not.
+          items:
+            $ref: "#/components/schemas/RRSetRoutingPolicyGeoPolicyGeoPolicyItem"
+          type: array
+        items:
+          description: The primary geo routing configuration. If there are multiple items with the same location, an error is returned instead.
+          items:
+            $ref: "#/components/schemas/RRSetRoutingPolicyGeoPolicyGeoPolicyItem"
+          type: array
+        kind:
+          default: dns#rRSetRoutingPolicyGeoPolicy
+          type: string
+      type: object
+    RRSetRoutingPolicyGeoPolicyGeoPolicyItem:
+      properties:
+        kind:
+          default: dns#rRSetRoutingPolicyGeoPolicyGeoPolicyItem
+          type: string
+        location:
+          description: The geo-location granularity is a GCP region. This location string should correspond to a GCP region. e.g. "us-east1", "southamerica-east1", "asia-east1", etc.
+          type: string
+        rrdatas:
+          items:
+            type: string
+          type: array
+        signatureRrdatas:
+          description: DNSSEC generated signatures for the above geo_rrdata.
+          items:
+            type: string
+          type: array
+      type: object
+    RRSetRoutingPolicyWrrPolicy:
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/RRSetRoutingPolicyWrrPolicyWrrPolicyItem"
+          type: array
+        kind:
+          default: dns#rRSetRoutingPolicyWrrPolicy
+          type: string
+      type: object
+    RRSetRoutingPolicyWrrPolicyWrrPolicyItem:
+      properties:
+        kind:
+          default: dns#rRSetRoutingPolicyWrrPolicyWrrPolicyItem
+          type: string
+        rrdatas:
+          items:
+            type: string
+          type: array
+        signatureRrdatas:
+          description: DNSSEC generated signatures for the above wrr_rrdata.
+          items:
+            type: string
+          type: array
+        weight:
+          description: The weight corresponding to this subset of rrdata. When multiple WeightedRoundRobinPolicyItems are configured, the probability of returning an rrset is proportional to its weight relative to the sum of weights configured for all items. This weight should be non-negative.
+          format: double
+          type: number
+      type: object
     ResourceRecordSet:
       description: A unit of data that is returned by the DNS servers.
       properties:
@@ -1813,6 +2816,9 @@ components:
         name:
           description: For example, www.example.com.
           type: string
+        routingPolicy:
+          $ref: "#/components/schemas/RRSetRoutingPolicy"
+          description: Configures dynamic query responses based on geo location of querying user or a weighted round robin based routing policy. A ResourceRecordSet should only have either rrdata (static) or routing_policy (dynamic). An error is returned otherwise.
         rrdatas:
           description: As defined in RFC 1035 (section 5) and RFC 1034 (section 3.6.1) -- see examples.
           items:
@@ -1855,6 +2861,135 @@ components:
           description: For mutating operation requests that completed successfully. This is the client_operation_id if the client specified it, otherwise it is generated by the server (output only).
           type: string
       type: object
+    ResponsePoliciesListResponse:
+      properties:
+        header:
+          $ref: "#/components/schemas/ResponseHeader"
+        nextPageToken:
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. This lets you the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. You cannot retrieve a consistent snapshot of a collection larger than the maximum page size.
+          type: string
+        responsePolicies:
+          description: The Response Policy resources.
+          items:
+            $ref: "#/components/schemas/ResponsePolicy"
+          type: array
+      type: object
+    ResponsePoliciesPatchResponse:
+      properties:
+        header:
+          $ref: "#/components/schemas/ResponseHeader"
+        responsePolicy:
+          $ref: "#/components/schemas/ResponsePolicy"
+      type: object
+    ResponsePoliciesUpdateResponse:
+      properties:
+        header:
+          $ref: "#/components/schemas/ResponseHeader"
+        responsePolicy:
+          $ref: "#/components/schemas/ResponsePolicy"
+      type: object
+    ResponsePolicy:
+      description: A Response Policy is a collection of selectors that apply to queries made against one or more Virtual Private Cloud networks.
+      properties:
+        description:
+          description: User-provided description for this Response Policy.
+          type: string
+        gkeClusters:
+          description: The list of Google Kubernetes Engine clusters to which this response policy is applied.
+          items:
+            $ref: "#/components/schemas/ResponsePolicyGKECluster"
+          type: array
+        id:
+          description: Unique identifier for the resource; defined by the server (output only).
+          format: int64
+          type: string
+        kind:
+          default: dns#responsePolicy
+          type: string
+        networks:
+          description: List of network names specifying networks to which this policy is applied.
+          items:
+            $ref: "#/components/schemas/ResponsePolicyNetwork"
+          type: array
+        responsePolicyName:
+          description: User assigned name for this Response Policy.
+          type: string
+      type: object
+    ResponsePolicyGKECluster:
+      properties:
+        gkeClusterName:
+          description: "The resource name of the cluster to bind this response policy to. This should be specified in the format like: projects/*/locations/*/clusters/*. This is referenced from GKE projects.locations.clusters.get API: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters/get"
+          type: string
+        kind:
+          default: dns#responsePolicyGKECluster
+          type: string
+      type: object
+    ResponsePolicyNetwork:
+      properties:
+        kind:
+          default: dns#responsePolicyNetwork
+          type: string
+        networkUrl:
+          description: The fully qualified URL of the VPC network to bind to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
+          type: string
+      type: object
+    ResponsePolicyRule:
+      description: A Response Policy Rule is a selector that applies its behavior to queries that match the selector. Selectors are DNS names, which may be wildcards or exact matches. Each DNS query subject to a Response Policy matches at most one ResponsePolicyRule, as identified by the dns_name field with the longest matching suffix.
+      properties:
+        behavior:
+          description: Answer this query with a behavior rather than DNS data.
+          enum:
+            - behaviorUnspecified
+            - bypassResponsePolicy
+          type: string
+        dnsName:
+          description: The DNS name (wildcard or exact) to apply this rule to. Must be unique within the Response Policy Rule.
+          type: string
+        kind:
+          default: dns#responsePolicyRule
+          type: string
+        localData:
+          $ref: "#/components/schemas/ResponsePolicyRuleLocalData"
+          description: Answer this query directly with DNS data. These ResourceRecordSets override any other DNS behavior for the matched name; in particular they override private zones, the public internet, and GCP internal DNS. No SOA nor NS types are allowed.
+        ruleName:
+          description: An identifier for this rule. Must be unique with the ResponsePolicy.
+          type: string
+      type: object
+    ResponsePolicyRuleLocalData:
+      properties:
+        localDatas:
+          description: All resource record sets for this selector, one per resource record type. The name must match the dns_name.
+          items:
+            $ref: "#/components/schemas/ResourceRecordSet"
+          type: array
+      type: object
+    ResponsePolicyRulesListResponse:
+      properties:
+        header:
+          $ref: "#/components/schemas/ResponseHeader"
+        nextPageToken:
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. This lets you the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. You cannot retrieve a consistent snapshot of a collection larger than the maximum page size.
+          type: string
+        responsePolicyRules:
+          description: The Response Policy Rule resources.
+          items:
+            $ref: "#/components/schemas/ResponsePolicyRule"
+          type: array
+      type: object
+    ResponsePolicyRulesPatchResponse:
+      properties:
+        header:
+          $ref: "#/components/schemas/ResponseHeader"
+        responsePolicyRule:
+          $ref: "#/components/schemas/ResponsePolicyRule"
+      type: object
+    ResponsePolicyRulesUpdateResponse:
+      properties:
+        header:
+          $ref: "#/components/schemas/ResponseHeader"
+        responsePolicyRule:
+          $ref: "#/components/schemas/ResponsePolicyRule"
+      type: object
   securitySchemes:
     Oauth2:
       description: Oauth 2.0 implicit authentication
@@ -1879,3 +3014,5 @@ components:
             https://www.googleapis.com/auth/ndev.clouddns.readwrite: View and manage your DNS records hosted by Google Cloud DNS
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Service Usage API
-  version: v1beta1
+  version: v1
   x-apisguru-categories:
     - analytics
     - media
@@ -20,7 +20,7 @@ info:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: https://serviceusage.googleapis.com/$discovery/rest?version=v1beta1
+      url: https://serviceusage.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-providerName: googleapis.com
   x-serviceName: serviceusage
@@ -30,7 +30,7 @@ tags:
   - name: operations
   - name: services
 paths:
-  /v1beta1/operations:
+  /v1/operations:
     get:
       description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
       operationId: serviceusage.operations.list
@@ -85,41 +85,23 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}":
+  "/v1/{name}":
     delete:
-      description: Deletes a consumer override.
-      operationId: serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.delete
+      description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: serviceusage.operations.delete
       parameters:
-        - description: "The resource name of the override to delete. An example name would be: `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`"
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Whether to force the deletion of the quota override. Setting the force parameter to 'true' ignores all quota safety checks that would fail the request. QuotaSafetyCheck lists all such validations.
-          in: query
-          name: force
-          schema:
-            type: boolean
-        - description: The list of quota safety checks to ignore before the override mutation. Unlike 'force' field that ignores all the quota safety checks, the 'force_only' field ignores only the specified checks; other checks are still enforced. The 'force' and 'force_only' fields cannot both be set.
-          explode: true
-          in: query
-          name: forceOnly
-          schema:
-            items:
-              enum:
-                - QUOTA_SAFETY_CHECK_UNSPECIFIED
-                - LIMIT_DECREASE_BELOW_USAGE
-                - LIMIT_DECREASE_PERCENTAGE_TOO_HIGH
-              type: string
-            type: array
-          style: form
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
@@ -131,32 +113,23 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/service.management
       tags:
-        - services
+        - operations
     get:
-      description: Retrieves a summary of quota information for a specific quota limit.
-      operationId: serviceusage.services.consumerQuotaMetrics.limits.get
+      description: Returns the service configuration and enabled state for a given service.
+      operationId: serviceusage.services.get
       parameters:
-        - description: The resource name of the quota limit. Use the quota limit resource name returned by previous ListConsumerQuotaMetrics and GetConsumerQuotaMetric API calls.
+        - description: "Name of the consumer and service to get the `ConsumerState` for. An example name would be: `projects/123/services/serviceusage.googleapis.com` where `123` is the project number."
           in: path
           name: name
           required: true
           schema:
-            type: string
-        - description: Specifies the level of detail for quota information in the response.
-          in: query
-          name: view
-          schema:
-            enum:
-              - QUOTA_VIEW_UNSPECIFIED
-              - BASIC
-              - FULL
             type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ConsumerQuotaLimit"
+                $ref: "#/components/schemas/GoogleApiServiceusageV1Service"
           description: Successful response
       security:
         - Oauth2:
@@ -181,63 +154,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    patch:
-      description: Updates a consumer override.
-      operationId: serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.patch
-      parameters:
-        - description: "The resource name of the override to update. An example name would be: `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-        - description: Whether to force the update of the quota override. Setting the force parameter to 'true' ignores all quota safety checks that would fail the request. QuotaSafetyCheck lists all such validations.
-          in: query
-          name: force
-          schema:
-            type: boolean
-        - description: The list of quota safety checks to ignore before the override mutation. Unlike 'force' field that ignores all the quota safety checks, the 'force_only' field ignores only the specified checks; other checks are still enforced. The 'force' and 'force_only' fields cannot both be set.
-          explode: true
-          in: query
-          name: forceOnly
-          schema:
-            items:
-              enum:
-                - QUOTA_SAFETY_CHECK_UNSPECIFIED
-                - LIMIT_DECREASE_BELOW_USAGE
-                - LIMIT_DECREASE_PERCENTAGE_TOO_HIGH
-              type: string
-            type: array
-          style: form
-        - description: Update only the specified fields of the override. If unset, all fields will be updated.
-          in: query
-          name: updateMask
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/QuotaOverride"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/service.management
-          Oauth2c:
-            - https://www.googleapis.com/auth/service.management
-      tags:
-        - services
-  "/v1beta1/{name}:disable":
+  "/v1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -251,10 +168,56 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Disables a service so that it can no longer be used with a project. This prevents unintended usage that may cause unexpected billing charges or security leaks. It is not valid to call the disable method on a service that is not currently enabled. Callers will receive a `FAILED_PRECONDITION` status if the target service is not currently enabled. Operation response type: `google.protobuf.Empty`"
+      description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+      operationId: serviceusage.operations.cancel
+      parameters:
+        - description: The name of the operation resource to be cancelled.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelOperationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - operations
+  "/v1/{name}:disable":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Disable a service so that it can no longer be used with a project. This prevents unintended usage that may cause unexpected billing charges or security leaks. It is not valid to call the disable method on a service that is not currently enabled. Callers will receive a `FAILED_PRECONDITION` status if the target service is not currently enabled.
       operationId: serviceusage.services.disable
       parameters:
-        - description: "Name of the consumer and service to disable the service on. The enable and disable methods currently only support projects. An example name would be: `projects/123/services/serviceusage.googleapis.com` where `123` is the project number (not project ID)."
+        - description: "Name of the consumer and service to disable the service on. The enable and disable methods currently only support projects. An example name would be: `projects/123/services/serviceusage.googleapis.com` where `123` is the project number."
           in: path
           name: name
           required: true
@@ -283,7 +246,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta1/{name}:enable":
+  "/v1/{name}:enable":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -297,10 +260,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Enables a service so that it can be used with a project. Operation response type: `google.protobuf.Empty`"
+      description: Enable a service so that it can be used with a project.
       operationId: serviceusage.services.enable
       parameters:
-        - description: "Name of the consumer and service to enable the service on. The `EnableService` and `DisableService` methods currently only support projects. Enabling a service requires that the service is public or is shared with the user enabling the service. An example name would be: `projects/123/services/serviceusage.googleapis.com` where `123` is the project number (not project ID)."
+        - description: "Name of the consumer and service to enable the service on. The `EnableService` and `DisableService` methods currently only support projects. Enabling a service requires that the service is public or is shared with the user enabling the service. An example name would be: `projects/123/services/serviceusage.googleapis.com` where `123` is the project number."
           in: path
           name: name
           required: true
@@ -329,368 +292,12 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta1/{parent}/adminOverrides":
+  "/v1/{parent}/services":
     get:
-      description: Lists all admin overrides on this limit.
-      operationId: serviceusage.services.consumerQuotaMetrics.limits.adminOverrides.list
-      parameters:
-        - description: "The resource name of the parent quota limit, returned by a ListConsumerQuotaMetrics or GetConsumerQuotaMetric call. An example name would be: `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Requested size of the next page of data.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Token identifying which result to start with; returned by a previous list call.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListAdminOverridesResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-      tags:
-        - services
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates an admin override. An admin override is applied by an administrator of a parent folder or parent organization of the consumer receiving the override. An admin override is intended to limit the amount of quota the consumer can use out of the total quota pool allocated to all children of the folder or organization.
-      operationId: serviceusage.services.consumerQuotaMetrics.limits.adminOverrides.create
-      parameters:
-        - description: "The resource name of the parent quota limit, returned by a ListConsumerQuotaMetrics or GetConsumerQuotaMetric call. An example name would be: `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Whether to force the creation of the quota override. Setting the force parameter to 'true' ignores all quota safety checks that would fail the request. QuotaSafetyCheck lists all such validations.
-          in: query
-          name: force
-          schema:
-            type: boolean
-        - description: The list of quota safety checks to ignore before the override mutation. Unlike 'force' field that ignores all the quota safety checks, the 'force_only' field ignores only the specified checks; other checks are still enforced. The 'force' and 'force_only' fields cannot both be set.
-          explode: true
-          in: query
-          name: forceOnly
-          schema:
-            items:
-              enum:
-                - QUOTA_SAFETY_CHECK_UNSPECIFIED
-                - LIMIT_DECREASE_BELOW_USAGE
-                - LIMIT_DECREASE_PERCENTAGE_TOO_HIGH
-              type: string
-            type: array
-          style: form
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/QuotaOverride"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/service.management
-          Oauth2c:
-            - https://www.googleapis.com/auth/service.management
-      tags:
-        - services
-  "/v1beta1/{parent}/consumerOverrides":
-    get:
-      description: Lists all consumer overrides on this limit.
-      operationId: serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.list
-      parameters:
-        - description: "The resource name of the parent quota limit, returned by a ListConsumerQuotaMetrics or GetConsumerQuotaMetric call. An example name would be: `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Requested size of the next page of data.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Token identifying which result to start with; returned by a previous list call.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListConsumerOverridesResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-      tags:
-        - services
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates a consumer override. A consumer override is applied to the consumer on its own authority to limit its own quota usage. Consumer overrides cannot be used to grant more quota than would be allowed by admin overrides, producer overrides, or the default limit of the service.
-      operationId: serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.create
-      parameters:
-        - description: "The resource name of the parent quota limit, returned by a ListConsumerQuotaMetrics or GetConsumerQuotaMetric call. An example name would be: `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Whether to force the creation of the quota override. Setting the force parameter to 'true' ignores all quota safety checks that would fail the request. QuotaSafetyCheck lists all such validations.
-          in: query
-          name: force
-          schema:
-            type: boolean
-        - description: The list of quota safety checks to ignore before the override mutation. Unlike 'force' field that ignores all the quota safety checks, the 'force_only' field ignores only the specified checks; other checks are still enforced. The 'force' and 'force_only' fields cannot both be set.
-          explode: true
-          in: query
-          name: forceOnly
-          schema:
-            items:
-              enum:
-                - QUOTA_SAFETY_CHECK_UNSPECIFIED
-                - LIMIT_DECREASE_BELOW_USAGE
-                - LIMIT_DECREASE_PERCENTAGE_TOO_HIGH
-              type: string
-            type: array
-          style: form
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/QuotaOverride"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/service.management
-          Oauth2c:
-            - https://www.googleapis.com/auth/service.management
-      tags:
-        - services
-  "/v1beta1/{parent}/consumerQuotaMetrics":
-    get:
-      description: Retrieves a summary of all quota information visible to the service consumer, organized by service metric. Each metric includes information about all of its defined limits. Each limit includes the limit configuration (quota unit, preciseness, default value), the current effective limit value, and all of the overrides applied to the limit.
-      operationId: serviceusage.services.consumerQuotaMetrics.list
-      parameters:
-        - description: "Parent of the quotas resource. Some example names would be: `projects/123/services/serviceconsumermanagement.googleapis.com` `folders/345/services/serviceconsumermanagement.googleapis.com` `organizations/456/services/serviceconsumermanagement.googleapis.com`"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Requested size of the next page of data.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Token identifying which result to start with; returned by a previous list call.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-        - description: Specifies the level of detail for quota information in the response.
-          in: query
-          name: view
-          schema:
-            enum:
-              - QUOTA_VIEW_UNSPECIFIED
-              - BASIC
-              - FULL
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListConsumerQuotaMetricsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-      tags:
-        - services
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/consumerQuotaMetrics:importAdminOverrides":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates or updates multiple admin overrides atomically, all on the same consumer, but on many different metrics or limits. The name field in the quota override message should not be set.
-      operationId: serviceusage.services.consumerQuotaMetrics.importAdminOverrides
-      parameters:
-        - description: "The resource name of the consumer. An example name would be: `projects/123/services/compute.googleapis.com`"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ImportAdminOverridesRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/service.management
-          Oauth2c:
-            - https://www.googleapis.com/auth/service.management
-      tags:
-        - services
-  "/v1beta1/{parent}/consumerQuotaMetrics:importConsumerOverrides":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates or updates multiple consumer overrides atomically, all on the same consumer, but on many different metrics or limits. The name field in the quota override message should not be set.
-      operationId: serviceusage.services.consumerQuotaMetrics.importConsumerOverrides
-      parameters:
-        - description: "The resource name of the consumer. An example name would be: `projects/123/services/compute.googleapis.com`"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ImportConsumerOverridesRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/service.management
-          Oauth2c:
-            - https://www.googleapis.com/auth/service.management
-      tags:
-        - services
-  "/v1beta1/{parent}/services":
-    get:
-      description: Lists all services available to the specified project, and the current state of those services with respect to the project. The list includes all public services, all services for which the calling user has the `servicemanagement.services.bind` permission, and all services that have already been enabled on the project. The list can be filtered to only include services in a specific state, for example to only include services enabled on the project.
+      description: "List all services available to the specified project, and the current state of those services with respect to the project. The list includes all public services, all services for which the calling user has the `servicemanagement.services.bind` permission, and all services that have already been enabled on the project. The list can be filtered to only include services in a specific state, for example to only include services enabled on the project. WARNING: If you need to query enabled services frequently or across an organization, you should use [Cloud Asset Inventory API](https://cloud.google.com/asset-inventory/docs/apis), which provides higher throughput and richer filtering capability."
       operationId: serviceusage.services.list
       parameters:
-        - description: "Parent to search for services on. An example name would be: `projects/123` where `123` is the project number (not project ID)."
+        - description: "Parent to search for services on. An example name would be: `projects/123` where `123` is the project number."
           in: path
           name: parent
           required: true
@@ -741,7 +348,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/services:batchEnable":
+  "/v1/{parent}/services:batchEnable":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -755,10 +362,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Enables multiple services on a project. The operation is atomic: if enabling any service fails, then the entire batch fails, and no state changes occur. Operation response type: `google.protobuf.Empty`"
+      description: "Enable multiple services on a project. The operation is atomic: if enabling any service fails, then the entire batch fails, and no state changes occur. To enable a single service, use the `EnableService` method instead."
       operationId: serviceusage.services.batchEnable
       parameters:
-        - description: "Parent to enable services on. An example name would be: `projects/123` where `123` is the project number (not project ID). The `BatchEnableServices` method currently only supports projects."
+        - description: "Parent to enable services on. An example name would be: `projects/123` where `123` is the project number. The `BatchEnableServices` method currently only supports projects."
           in: path
           name: parent
           required: true
@@ -787,7 +394,44 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta1/{parent}:generateServiceIdentity":
+  "/v1/{parent}/services:batchGet":
+    get:
+      description: Returns the service configurations and enabled states for a given list of services.
+      operationId: serviceusage.services.batchGet
+      parameters:
+        - description: "Parent to retrieve services from. If this is set, the parent of all of the services specified in `names` must match this field. An example name would be: `projects/123` where `123` is the project number. The `BatchGetServices` method currently only supports projects."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Names of the services to retrieve. An example name would be: `projects/123/services/serviceusage.googleapis.com` where `123` is the project number. A single request can get a maximum of 30 services at a time."
+          explode: true
+          in: query
+          name: names
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchGetServicesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+      tags:
+        - services
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -800,34 +444,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Generates service identity for service.
-      operationId: serviceusage.services.generateServiceIdentity
-      parameters:
-        - description: "Name of the consumer and service to generate an identity for. The `GenerateServiceIdentity` methods currently only support projects. An example name would be: `projects/123/services/example.googleapis.com` where `123` is the project number."
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/service.management
-          Oauth2c:
-            - https://www.googleapis.com/auth/service.management
-      tags:
-        - services
 components:
   parameters:
     _.xgafv:
@@ -1093,7 +709,7 @@ components:
       description: Request message for the `BatchEnableServices` method.
       properties:
         serviceIds:
-          description: "The identifiers of the services to enable on the project. A valid identifier would be: serviceusage.googleapis.com Enabling services requires that each service is public or is shared with the user enabling the service. Two or more services must be specified. To enable a single service, use the `EnableService` method instead. A single request can enable a maximum of 20 services at a time. If more than 20 services are specified, the request will fail, and no state changes will occur."
+          description: "The identifiers of the services to enable on the project. A valid identifier would be: serviceusage.googleapis.com Enabling services requires that each service is public or is shared with the user enabling the service. A single request can enable a maximum of 20 services at a time. If more than 20 services are specified, the request will fail, and no state changes will occur."
           items:
             type: string
           type: array
@@ -1108,6 +724,15 @@ components:
           type: array
         services:
           description: The new state of the services after enabling.
+          items:
+            $ref: "#/components/schemas/GoogleApiServiceusageV1Service"
+          type: array
+      type: object
+    BatchGetServicesResponse:
+      description: Response message for the `BatchGetServices` method.
+      properties:
+        services:
+          description: The requested Service states.
           items:
             $ref: "#/components/schemas/GoogleApiServiceusageV1Service"
           type: array
@@ -1133,55 +758,9 @@ components:
           description: The monitored resource type. The type must be defined in Service.monitored_resources section.
           type: string
       type: object
-    ConsumerQuotaLimit:
-      description: Consumer quota settings for a quota limit.
-      properties:
-        allowsAdminOverrides:
-          description: Whether admin overrides are allowed on this limit
-          type: boolean
-        isPrecise:
-          description: Whether this limit is precise or imprecise.
-          type: boolean
-        metric:
-          description: "The name of the parent metric of this limit. An example name would be: `compute.googleapis.com/cpus`"
-          type: string
-        name:
-          description: "The resource name of the quota limit. An example name would be: `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion` The resource name is intended to be opaque and should not be parsed for its component strings, since its representation could change in the future."
-          type: string
-        quotaBuckets:
-          description: Summary of the enforced quota buckets, organized by quota dimension, ordered from least specific to most specific (for example, the global default bucket, with no quota dimensions, will always appear first).
-          items:
-            $ref: "#/components/schemas/QuotaBucket"
-          type: array
-        unit:
-          description: The limit unit. An example unit would be `1/{project}/{region}` Note that `{project}` and `{region}` are not placeholders in this example; the literal characters `{` and `}` occur in the string.
-          type: string
-      type: object
-    ConsumerQuotaMetric:
-      description: Consumer quota settings for a quota metric.
-      properties:
-        consumerQuotaLimits:
-          description: The consumer quota for each quota limit defined on the metric.
-          items:
-            $ref: "#/components/schemas/ConsumerQuotaLimit"
-          type: array
-        descendantConsumerQuotaLimits:
-          description: The quota limits targeting the descendant containers of the consumer in request. If the consumer in request is of type `organizations` or `folders`, the field will list per-project limits in the metric; if the consumer in request is of type `project`, the field will be empty. The `quota_buckets` field of each descendant consumer quota limit will not be populated.
-          items:
-            $ref: "#/components/schemas/ConsumerQuotaLimit"
-          type: array
-        displayName:
-          description: "The display name of the metric. An example name would be: `CPUs`"
-          type: string
-        metric:
-          description: "The name of the metric. An example name would be: `compute.googleapis.com/cpus`"
-          type: string
-        name:
-          description: "The resource name of the quota settings on this metric for this consumer. An example name would be: `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus` The resource name is intended to be opaque and should not be parsed for its component strings, since its representation could change in the future."
-          type: string
-        unit:
-          description: The units in which the metric value is reported.
-          type: string
+    CancelOperationRequest:
+      description: The request message for Operations.CancelOperation.
+      properties: {}
       type: object
     Context:
       description: '`Context` defines which contexts an API requests. Example: context: rules: - selector: "*" requested: - google.rpc.context.ProjectContext - google.rpc.context.OriginContext The above specifies that all methods in the API request `google.rpc.context.ProjectContext` and `google.rpc.context.OriginContext`. Available context types are defined in package `google.rpc.context`. This also provides mechanism to allowlist any protobuf message extension that can be sent in grpc metadata using “x-goog-ext--bin” and “x-goog-ext--jspb” format. For example, list any service specific protobuf types that can appear in grpc metadata as follows in your yaml file: Example: context: rules: - selector: "google.example.library.v1.LibraryService.CreateBook" allowed_request_extensions: - google.foo.v1.NewExtension allowed_response_extensions: - google.foo.v1.NewExtension You can also specify extension ID instead of fully qualified extension name here.'
@@ -1270,7 +849,17 @@ components:
       type: object
     DisableServiceRequest:
       description: Request message for the `DisableService` method.
-      properties: {}
+      properties:
+        checkIfServiceHasUsage:
+          description: Defines the behavior for checking service usage when disabling a service.
+          enum:
+            - CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED
+            - SKIP
+            - CHECK
+          type: string
+        disableDependentServices:
+          description: Indicates if services that are enabled and which depend on this service should also be disabled. If not set, an error will be generated if any enabled services depend on the service to be disabled. When set, the service, and any enabled services that depend on it, will be disabled together.
+          type: boolean
       type: object
     DisableServiceResponse:
       description: Response message for the `DisableService` method. This response message is assigned to the `response` field of the returned Operation when that operation is done.
@@ -1724,25 +1313,6 @@ components:
       description: Metadata message that provides information such as progress, partial failures, and similar information on each GetOperation call of LRO returned by ImportAdminOverrides.
       properties: {}
       type: object
-    ImportAdminOverridesRequest:
-      description: Request message for ImportAdminOverrides
-      properties:
-        force:
-          description: Whether to force the creation of the quota overrides. Setting the force parameter to 'true' ignores all quota safety checks that would fail the request. QuotaSafetyCheck lists all such validations.
-          type: boolean
-        forceOnly:
-          description: The list of quota safety checks to ignore before the override mutation. Unlike 'force' field that ignores all the quota safety checks, the 'force_only' field ignores only the specified checks; other checks are still enforced. The 'force' and 'force_only' fields cannot both be set.
-          items:
-            enum:
-              - QUOTA_SAFETY_CHECK_UNSPECIFIED
-              - LIMIT_DECREASE_BELOW_USAGE
-              - LIMIT_DECREASE_PERCENTAGE_TOO_HIGH
-            type: string
-          type: array
-        inlineSource:
-          $ref: "#/components/schemas/OverrideInlineSource"
-          description: The import data is specified in the request message itself
-      type: object
     ImportAdminOverridesResponse:
       description: Response message for ImportAdminOverrides
       properties:
@@ -1768,25 +1338,6 @@ components:
     ImportConsumerOverridesMetadata:
       description: Metadata message that provides information such as progress, partial failures, and similar information on each GetOperation call of LRO returned by ImportConsumerOverrides.
       properties: {}
-      type: object
-    ImportConsumerOverridesRequest:
-      description: Request message for ImportConsumerOverrides
-      properties:
-        force:
-          description: Whether to force the creation of the quota overrides. Setting the force parameter to 'true' ignores all quota safety checks that would fail the request. QuotaSafetyCheck lists all such validations.
-          type: boolean
-        forceOnly:
-          description: The list of quota safety checks to ignore before the override mutation. Unlike 'force' field that ignores all the quota safety checks, the 'force_only' field ignores only the specified checks; other checks are still enforced. The 'force' and 'force_only' fields cannot both be set.
-          items:
-            enum:
-              - QUOTA_SAFETY_CHECK_UNSPECIFIED
-              - LIMIT_DECREASE_BELOW_USAGE
-              - LIMIT_DECREASE_PERCENTAGE_TOO_HIGH
-            type: string
-          type: array
-        inlineSource:
-          $ref: "#/components/schemas/OverrideInlineSource"
-          description: The import data is specified in the request message itself
       type: object
     ImportConsumerOverridesResponse:
       description: Response message for ImportConsumerOverrides
@@ -1827,42 +1378,6 @@ components:
             - INT64
           type: string
       type: object
-    ListAdminOverridesResponse:
-      description: Response message for ListAdminOverrides.
-      properties:
-        nextPageToken:
-          description: Token identifying which result to start with; returned by a previous list call.
-          type: string
-        overrides:
-          description: Admin overrides on this limit.
-          items:
-            $ref: "#/components/schemas/QuotaOverride"
-          type: array
-      type: object
-    ListConsumerOverridesResponse:
-      description: Response message for ListConsumerOverrides.
-      properties:
-        nextPageToken:
-          description: Token identifying which result to start with; returned by a previous list call.
-          type: string
-        overrides:
-          description: Consumer overrides on this limit.
-          items:
-            $ref: "#/components/schemas/QuotaOverride"
-          type: array
-      type: object
-    ListConsumerQuotaMetricsResponse:
-      description: Response message for ListConsumerQuotaMetrics
-      properties:
-        metrics:
-          description: Quota settings for the consumer, organized by quota metric.
-          items:
-            $ref: "#/components/schemas/ConsumerQuotaMetric"
-          type: array
-        nextPageToken:
-          description: Token identifying which result to start with; returned by a previous list call.
-          type: string
-      type: object
     ListOperationsResponse:
       description: The response message for Operations.ListOperations.
       properties:
@@ -1884,7 +1399,7 @@ components:
         services:
           description: The available services for the requested project.
           items:
-            $ref: "#/components/schemas/Service"
+            $ref: "#/components/schemas/GoogleApiServiceusageV1Service"
           type: array
       type: object
     LogDescriptor:
@@ -2181,15 +1696,6 @@ components:
           description: The option's value packed in an Any message. If the value is a primitive, the corresponding wrapper type defined in google/protobuf/wrappers.proto should be used. If the value is an enum, it should be stored as an int32 value using the google.protobuf.Int32Value type.
           type: object
       type: object
-    OverrideInlineSource:
-      description: Import data embedded in the request message
-      properties:
-        overrides:
-          description: The overrides to create. Each override must have a value for 'metric' and 'unit', to specify which metric and which limit the override should be applied to. The 'name' field of the override does not need to be set; it is ignored.
-          items:
-            $ref: "#/components/schemas/QuotaOverride"
-          type: array
-      type: object
     Page:
       description: Represents a documentation page. A page can contain subpages to represent nested documentation set structure.
       properties:
@@ -2218,32 +1724,6 @@ components:
           items:
             $ref: "#/components/schemas/MetricRule"
           type: array
-      type: object
-    QuotaBucket:
-      description: A quota bucket is a quota provisioning unit for a specific set of dimensions.
-      properties:
-        adminOverride:
-          $ref: "#/components/schemas/QuotaOverride"
-          description: Admin override on this quota bucket.
-        consumerOverride:
-          $ref: "#/components/schemas/QuotaOverride"
-          description: Consumer override on this quota bucket.
-        defaultLimit:
-          description: The default limit of this quota bucket, as specified by the service configuration.
-          format: int64
-          type: string
-        dimensions:
-          additionalProperties:
-            type: string
-          description: The dimensions of this quota bucket. If this map is empty, this is the global bucket, which is the default quota value applied to all requests that do not have a more specific override. If this map is nonempty, the default limit, effective limit, and quota overrides apply only to requests that have the dimensions given in the map. For example, if the map has key `region` and value `us-east-1`, then the specified effective limit is only effective in that region, and the specified overrides apply only in that region.
-          type: object
-        effectiveLimit:
-          description: The effective limit of this quota bucket. Equal to default_limit if there are no overrides.
-          format: int64
-          type: string
-        producerOverride:
-          $ref: "#/components/schemas/QuotaOverride"
-          description: Producer override on this quota bucket.
       type: object
     QuotaLimit:
       description: "`QuotaLimit` defines a specific limit that applies over a specified duration for a limit type. There can be at most one limit for a duration and limit type combination defined within a `QuotaGroup`."
@@ -2309,66 +1789,6 @@ components:
         unit:
           description: "The limit unit of the limit to which this override applies. An example unit would be: `1/{project}/{region}` Note that `{project}` and `{region}` are not placeholders in this example; the literal characters `{` and `}` occur in the string."
           type: string
-      type: object
-    Service:
-      description: A service that is available for use by the consumer.
-      properties:
-        config:
-          $ref: "#/components/schemas/ServiceConfig"
-          description: The service configuration of the available service. Some fields may be filtered out of the configuration in responses to the `ListServices` method. These fields are present only in responses to the `GetService` method.
-        name:
-          description: "The resource name of the consumer and service. A valid name would be: - `projects/123/services/serviceusage.googleapis.com`"
-          type: string
-        parent:
-          description: "The resource name of the consumer. A valid name would be: - `projects/123`"
-          type: string
-        state:
-          description: Whether or not the service has been enabled for use by the consumer.
-          enum:
-            - STATE_UNSPECIFIED
-            - DISABLED
-            - ENABLED
-          type: string
-      type: object
-    ServiceConfig:
-      description: The configuration of the service.
-      properties:
-        apis:
-          description: A list of API interfaces exported by this service. Contains only the names, versions, and method names of the interfaces.
-          items:
-            $ref: "#/components/schemas/Api"
-          type: array
-        authentication:
-          $ref: "#/components/schemas/Authentication"
-          description: Auth configuration. Contains only the OAuth rules.
-        documentation:
-          $ref: "#/components/schemas/Documentation"
-          description: Additional API documentation. Contains only the summary and the documentation URL.
-        endpoints:
-          description: Configuration for network endpoints. Contains only the names and aliases of the endpoints.
-          items:
-            $ref: "#/components/schemas/Endpoint"
-          type: array
-        monitoredResources:
-          description: Defines the monitored resources used by this service. This is required by the Service.monitoring and Service.logging configurations.
-          items:
-            $ref: "#/components/schemas/MonitoredResourceDescriptor"
-          type: array
-        monitoring:
-          $ref: "#/components/schemas/Monitoring"
-          description: Monitoring configuration. This should not include the 'producer_destinations' field.
-        name:
-          description: "The DNS address at which this service is available. An example DNS address would be: `calendar.googleapis.com`."
-          type: string
-        quota:
-          $ref: "#/components/schemas/Quota"
-          description: Quota configuration.
-        title:
-          description: The product title for this service.
-          type: string
-        usage:
-          $ref: "#/components/schemas/Usage"
-          description: Configuration controlling usage of this service.
       type: object
     ServiceIdentity:
       description: Service identity for a service. This is the identity that service producer should use to access consumer resources.

@@ -13,18 +13,20 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Firestore API
   version: v1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - format: google
       url: https://firestore.googleapis.com/$discovery/rest?version=v1
       version: v1
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: firestore
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/firestore
 tags:
@@ -761,6 +763,47 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
+  "/v1/{parent}/databases":
+    get:
+      description: List all the databases in the project.
+      operationId: firestore.projects.databases.list
+      parameters:
+        - description: Required. A parent name of the form `projects/{project_id}`
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirestoreAdminV1ListDatabasesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/datastore
+          Oauth2c:
+            - https://www.googleapis.com/auth/datastore
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/fields":
     get:
       description: Lists the field configuration and metadata for this database. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with the filter set to `indexConfig.usesAncestorConfig:false` .
@@ -1606,6 +1649,34 @@ components:
           $ref: "#/components/schemas/UnaryFilter"
           description: A filter that takes exactly one argument.
       type: object
+    GoogleFirestoreAdminV1Database:
+      description: A Cloud Firestore Database in Native Mode. Currently one database is allowed per cloud project. It is named '(default)'
+      properties:
+        concurrencyMode:
+          description: The concurrency control mode to use for this database.
+          enum:
+            - CONCURRENCY_MODE_UNSPECIFIED
+            - OPTIMISTIC
+            - PESSIMISTIC
+            - OPTIMISTIC_WITH_ENTITY_GROUPS
+          type: string
+        etag:
+          description: This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
+          type: string
+        locationId:
+          description: The location of the database. Available databases are listed at https://cloud.google.com/firestore/docs/locations.
+          type: string
+        name:
+          description: "The resource name of the Database. Format: `projects/{project}/databases/{database}`"
+          type: string
+        type:
+          description: The type of the database. See https://cloud.google.com/datastore/docs/firestore-or-datastore for information about how to choose.
+          enum:
+            - DATABASE_TYPE_UNSPECIFIED
+            - FIRESTORE_NATIVE
+            - DATASTORE_MODE
+          type: string
+      type: object
     GoogleFirestoreAdminV1ExportDocumentsMetadata:
       description: Metadata for google.longrunning.Operation results from FirestoreAdmin.ExportDocuments.
       properties:
@@ -1872,6 +1943,15 @@ components:
             - FAILED
             - CANCELLED
           type: string
+      type: object
+    GoogleFirestoreAdminV1ListDatabasesResponse:
+      description: The list of databases for a project.
+      properties:
+        databases:
+          description: The databases in the project.
+          items:
+            $ref: "#/components/schemas/GoogleFirestoreAdminV1Database"
+          type: array
       type: object
     GoogleFirestoreAdminV1ListFieldsResponse:
       description: The response for FirestoreAdmin.ListFields.
@@ -2487,3 +2567,5 @@ components:
             https://www.googleapis.com/auth/datastore: View and manage your Google Cloud Datastore data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

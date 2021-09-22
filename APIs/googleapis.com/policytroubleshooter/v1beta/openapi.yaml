@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Policy Troubleshooter API
-  version: v2alpha1
+  version: v1beta
   x-apiClientRegistration:
     url: https://console.developers.google.com
   x-apisguru-categories:
@@ -29,12 +29,13 @@ info:
       version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: policytroubleshooter
+  x-preferred: false
 externalDocs:
   url: https://cloud.google.com/iam/
 tags:
   - name: iam
 paths:
-  /v2alpha1/iam:troubleshoot:
+  /v1beta/iam:troubleshoot:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -54,13 +55,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV2alpha1TroubleshootIamPolicyRequest"
+              $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV2alpha1TroubleshootIamPolicyResponse"
+                $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -145,12 +146,9 @@ components:
       schema:
         type: string
   schemas:
-    GoogleCloudPolicytroubleshooterV2alpha1AccessTuple:
+    GoogleCloudPolicytroubleshooterV1betaAccessTuple:
       description: Information about the member, resource, and permission to check.
       properties:
-        conditionContext:
-          $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV2alpha1ConditionContext"
-          description: Optional. The Cloud IAM condition context under which defines the kind of access being explained. TroubleshootIamPolicy would explain if and why the principal has the queried permission on the resource specified in full_resource_name under this context
         fullResourceName:
           description: Required. The full resource name that identifies the resource. For example, `//compute.googleapis.com/projects/my-project/zones/us-central1-a/instances/my-instance`. For examples of full resource names for Google Cloud services, see https://cloud.google.com/iam/help/troubleshooter/full-resource-names.
           type: string
@@ -161,11 +159,11 @@ components:
           description: Required. The member, or principal, whose access you want to check, in the form of the email address that represents that member. For example, `alice@example.com` or `my-service-account@my-project.iam.gserviceaccount.com`. The member must be a Google Account or a service account. Other types of members are not supported.
           type: string
       type: object
-    GoogleCloudPolicytroubleshooterV2alpha1BindingExplanation:
+    GoogleCloudPolicytroubleshooterV1betaBindingExplanation:
       description: Details about how a binding in a policy affects a member's ability to use a permission.
       properties:
         access:
-          description: Required. Indicates whether _this binding_ provides the specified permission to the specified member for the specified resource. This field does _not_ indicate whether the member actually has the permission for the resource. There might be another binding that overrides this binding. To determine whether the member actually has the permission, use the `access` field in the TroubleshootIamPolicyResponse.
+          description: Indicates whether _this binding_ provides the specified permission to the specified member for the specified resource. This field does _not_ indicate whether the member actually has the permission for the resource. There might be another binding that overrides this binding. To determine whether the member actually has the permission, use the `access` field in the TroubleshootIamPolicyResponse.
           enum:
             - ACCESS_STATE_UNSPECIFIED
             - GRANTED
@@ -176,12 +174,9 @@ components:
         condition:
           $ref: "#/components/schemas/GoogleTypeExpr"
           description: A condition expression that prevents access unless the expression evaluates to `true`. To learn about IAM Conditions, see http://cloud.google.com/iam/help/conditions/overview.
-        conditionExplanation:
-          $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV2alpha1ConditionExplanation"
-          description: Condition evaluation state for this binding.
         memberships:
           additionalProperties:
-            $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV2alpha1BindingExplanationAnnotatedMembership"
+            $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV1betaBindingExplanationAnnotatedMembership"
           description: "Indicates whether each member in the binding includes the member specified in the request, either directly or indirectly. Each key identifies a member in the binding, and each value indicates whether the member in the binding includes the member in the request. For example, suppose that a binding includes the following members: * `user:alice@example.com` * `group:product-eng@example.com` You want to troubleshoot access for `user:bob@example.com`. This user is a member of the group `group:product-eng@example.com`. For the first member in the binding, the key is `user:alice@example.com`, and the `membership` field in the value is set to `MEMBERSHIP_NOT_INCLUDED`. For the second member in the binding, the key is `group:product-eng@example.com`, and the `membership` field in the value is set to `MEMBERSHIP_INCLUDED`."
           type: object
         relevance:
@@ -210,7 +205,7 @@ components:
             - HIGH
           type: string
       type: object
-    GoogleCloudPolicytroubleshooterV2alpha1BindingExplanationAnnotatedMembership:
+    GoogleCloudPolicytroubleshooterV1betaBindingExplanationAnnotatedMembership:
       description: Details about whether the binding includes the member.
       properties:
         membership:
@@ -230,45 +225,7 @@ components:
             - HIGH
           type: string
       type: object
-    GoogleCloudPolicytroubleshooterV2alpha1ConditionContext:
-      description: Represents the attributes that will be used to do IAM condition evaluation.
-      properties:
-        destination:
-          $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV2alpha1Peer"
-          description: The destination of a network activity, such as accepting a TCP connection. In a multi hop network activity, the destination represents the receiver of the last hop.
-        request:
-          $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV2alpha1Request"
-          description: Represents a network request, such as an HTTP request.
-        resource:
-          $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV2alpha1Resource"
-          description: Represents a target resource that is involved with a network activity. If multiple resources are involved with an activity, this must be the primary one.
-      type: object
-    GoogleCloudPolicytroubleshooterV2alpha1ConditionExplanation:
-      description: Condition Explanation
-      properties:
-        evaluationStates:
-          description: List of evaluated states of non boolean expression in the condition
-          items:
-            $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV2alpha1ConditionExplanationEvaluationState"
-          type: array
-        value:
-          description: Value of the condition
-      type: object
-    GoogleCloudPolicytroubleshooterV2alpha1ConditionExplanationEvaluationState:
-      description: Evaluated state of an expression
-      properties:
-        end:
-          description: 'End position of an expression in the original condition, by character, end included, for example: the end position of the first part of "a==b || c==d" would be 4'
-          format: int32
-          type: integer
-        start:
-          description: Start position of an expression in the original condition, by character
-          format: int32
-          type: integer
-        value:
-          description: Value of this expression
-      type: object
-    GoogleCloudPolicytroubleshooterV2alpha1ExplainedPolicy:
+    GoogleCloudPolicytroubleshooterV1betaExplainedPolicy:
       description: Details about how a specific IAM Policy contributed to the access check.
       properties:
         access:
@@ -283,7 +240,7 @@ components:
         bindingExplanations:
           description: Details about how each binding in the policy affects the member's ability, or inability, to use the permission for the resource. If the sender of the request does not have access to the policy, this field is omitted.
           items:
-            $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV2alpha1BindingExplanation"
+            $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV1betaBindingExplanation"
           type: array
         fullResourceName:
           description: The full resource name that identifies the resource. For example, `//compute.googleapis.com/projects/my-project/zones/us-central1-a/instances/my-instance`. If the sender of the request does not have access to the policy, this field is omitted. For examples of full resource names for Google Cloud services, see https://cloud.google.com/iam/help/troubleshooter/full-resource-names.
@@ -299,50 +256,18 @@ components:
             - HIGH
           type: string
       type: object
-    GoogleCloudPolicytroubleshooterV2alpha1Peer:
-      description: This message defines attributes for a node that handles a network request. The node can be either a service or an application that sends, forwards, or receives the request. Service peers should fill in `principal` and `labels` as appropriate.
-      properties:
-        ip:
-          description: The IPv4 or IPv6 address of the peer.
-          type: string
-        port:
-          description: The network port of the peer.
-          format: int64
-          type: string
-      type: object
-    GoogleCloudPolicytroubleshooterV2alpha1Request:
-      description: This message defines attributes for an HTTP request. If the actual request is not an HTTP request, the runtime system should try to map the actual request to an equivalent HTTP request.
-      properties:
-        receiveTime:
-          description: Optional. The timestamp when the `destination` service receives the first byte of the request.
-          format: google-datetime
-          type: string
-      type: object
-    GoogleCloudPolicytroubleshooterV2alpha1Resource:
-      description: This message defines core attributes for a resource. A resource is an addressable (named) entity provided by the destination service. For example, a file stored on a network storage service.
-      properties:
-        name:
-          description: 'The stable identifier (name) of a resource on the `service`. A resource can be logically identified as "//{resource.service}/{resource.name}". The differences between a resource name and a URI are: * Resource name is a logical identifier, independent of network protocol and API version. For example, `//pubsub.googleapis.com/projects/123/topics/news-feed`. * URI often includes protocol and version information, so it can be used directly by applications. For example, `https://pubsub.googleapis.com/v1/projects/123/topics/news-feed`. See https://cloud.google.com/apis/design/resource_names for details.'
-          type: string
-        service:
-          description: The name of the service that this resource belongs to, such as `pubsub.googleapis.com`. The service may be different from the DNS hostname that actually serves the request.
-          type: string
-        type:
-          description: The type of the resource. The syntax is platform-specific because different platforms define their resources differently. For Google APIs, the type format must be "{service}/{kind}".
-          type: string
-      type: object
-    GoogleCloudPolicytroubleshooterV2alpha1TroubleshootIamPolicyRequest:
+    GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyRequest:
       description: Request for TroubleshootIamPolicy.
       properties:
         accessTuple:
-          $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV2alpha1AccessTuple"
+          $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV1betaAccessTuple"
           description: The information to use for checking whether a member has a permission for a resource.
       type: object
-    GoogleCloudPolicytroubleshooterV2alpha1TroubleshootIamPolicyResponse:
+    GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponse:
       description: Response for TroubleshootIamPolicy.
       properties:
         access:
-          description: Indicates whether the member has the specified permission for the specified resource, based on evaluating all of the applicable IAM policies.
+          description: Indicates whether the member has the specified permission for the specified resource, based on evaluating all of the applicable policies.
           enum:
             - ACCESS_STATE_UNSPECIFIED
             - GRANTED
@@ -353,7 +278,7 @@ components:
         explainedPolicies:
           description: List of IAM policies that were evaluated to check the member's permissions, with annotations to indicate how each policy contributed to the final result. The list of policies can include the policy for the resource itself. It can also include policies that are inherited from higher levels of the resource hierarchy, including the organization, the folder, and the project. To learn more about the resource hierarchy, see https://cloud.google.com/iam/help/resource-hierarchy.
           items:
-            $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV2alpha1ExplainedPolicy"
+            $ref: "#/components/schemas/GoogleCloudPolicytroubleshooterV1betaExplainedPolicy"
           type: array
       type: object
     GoogleIamV1AuditConfig:
@@ -456,3 +381,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

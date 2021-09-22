@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Cloud Video Intelligence API
-  version: v1p3beta1
+  version: v1p2beta1
   x-apisguru-categories:
     - analytics
     - media
@@ -20,7 +20,7 @@ info:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: https://videointelligence.googleapis.com/$discovery/rest?version=v1p3beta1
+      url: https://videointelligence.googleapis.com/$discovery/rest?version=v1p2beta1
       version: v1
   x-providerName: googleapis.com
   x-serviceName: videointelligence
@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: videos
 paths:
-  /v1p3beta1/videos:annotate:
+  /v1p2beta1/videos:annotate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -49,7 +49,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoRequest"
+              $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest"
       responses:
         "200":
           content:
@@ -1850,6 +1850,42 @@ components:
             $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress"
           type: array
       type: object
+    GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest:
+      description: Video annotation request.
+      properties:
+        features:
+          description: Required. Requested video annotation features.
+          items:
+            enum:
+              - FEATURE_UNSPECIFIED
+              - LABEL_DETECTION
+              - SHOT_CHANGE_DETECTION
+              - EXPLICIT_CONTENT_DETECTION
+              - FACE_DETECTION
+              - SPEECH_TRANSCRIPTION
+              - TEXT_DETECTION
+              - OBJECT_TRACKING
+              - LOGO_RECOGNITION
+              - PERSON_DETECTION
+            type: string
+          type: array
+        inputContent:
+          description: The video data bytes. If unset, the input video(s) should be specified via the `input_uri`. If set, `input_uri` must be unset.
+          format: byte
+          type: string
+        inputUri:
+          description: "Input video location. Currently, only [Cloud Storage](https://cloud.google.com/storage/) URIs are supported. URIs must be specified in the following format: `gs://bucket-id/object-id` (other URI formats return google.rpc.Code.INVALID_ARGUMENT). For more information, see [Request URIs](https://cloud.google.com/storage/docs/request-endpoints). To identify multiple videos, a video URI may include wildcards in the `object-id`. Supported wildcards: '*' to match 0 or more characters; '?' to match 1 character. If unset, the input video should be embedded in the request as `input_content`. If set, `input_content` must be unset."
+          type: string
+        locationId:
+          description: "Optional. Cloud region where annotation should take place. Supported cloud regions are: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region is specified, the region will be determined based on video file location."
+          type: string
+        outputUri:
+          description: "Optional. Location where the output (in JSON format) should be stored. Currently, only [Cloud Storage](https://cloud.google.com/storage/) URIs are supported. These must be specified in the following format: `gs://bucket-id/object-id` (other URI formats return google.rpc.Code.INVALID_ARGUMENT). For more information, see [Request URIs](https://cloud.google.com/storage/docs/request-endpoints)."
+          type: string
+        videoContext:
+          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_VideoContext"
+          description: Additional video context and/or feature-specific parameters.
+      type: object
     GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse:
       description: Video annotation response. Included in the `response` field of the `Operation` returned by the `GetOperation` call of the `google::longrunning::Operations` service.
       properties:
@@ -1912,6 +1948,13 @@ components:
           description: Feature version.
           type: string
       type: object
+    GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig:
+      description: Config for EXPLICIT_CONTENT_DETECTION.
+      properties:
+        model:
+          description: 'Model to use for explicit content detection. Supported values: "builtin/stable" (the default if unset) and "builtin/latest".'
+          type: string
+      type: object
     GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame:
       description: Video frame level annotation results for explicit content.
       properties:
@@ -1964,6 +2007,19 @@ components:
           description: Feature version.
           type: string
       type: object
+    GoogleCloudVideointelligenceV1p2beta1_FaceDetectionConfig:
+      description: Config for FACE_DETECTION.
+      properties:
+        includeAttributes:
+          description: Whether to enable face attributes detection, such as glasses, dark_glasses, mouth_open etc. Ignored if 'include_bounding_boxes' is set to false.
+          type: boolean
+        includeBoundingBoxes:
+          description: Whether bounding boxes are included in the face annotation output.
+          type: boolean
+        model:
+          description: 'Model to use for face detection. Supported values: "builtin/stable" (the default if unset) and "builtin/latest".'
+          type: string
+      type: object
     GoogleCloudVideointelligenceV1p2beta1_FaceFrame:
       description: Deprecated. No effect.
       properties:
@@ -2008,6 +2064,32 @@ components:
         version:
           description: Feature version.
           type: string
+      type: object
+    GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig:
+      description: Config for LABEL_DETECTION.
+      properties:
+        frameConfidenceThreshold:
+          description: "The confidence threshold we perform filtering on the labels from frame-level detection. If not set, it is set to 0.4 by default. The valid range for this threshold is [0.1, 0.9]. Any value set outside of this range will be clipped. Note: For best results, follow the default threshold. We will update the default threshold everytime when we release a new model."
+          format: float
+          type: number
+        labelDetectionMode:
+          description: What labels should be detected with LABEL_DETECTION, in addition to video-level labels or segment-level labels. If unspecified, defaults to `SHOT_MODE`.
+          enum:
+            - LABEL_DETECTION_MODE_UNSPECIFIED
+            - SHOT_MODE
+            - FRAME_MODE
+            - SHOT_AND_FRAME_MODE
+          type: string
+        model:
+          description: 'Model to use for label detection. Supported values: "builtin/stable" (the default if unset) and "builtin/latest".'
+          type: string
+        stationaryCamera:
+          description: Whether the video has been shot from a stationary (i.e., non-moving) camera. When set to true, might improve detection accuracy for moving objects. Should be used with `SHOT_AND_FRAME_MODE` enabled.
+          type: boolean
+        videoConfidenceThreshold:
+          description: "The confidence threshold we perform filtering on the labels from video-level and shot-level detections. If not set, it's set to 0.3 by default. The valid range for this threshold is [0.1, 0.9]. Any value set outside of this range will be clipped. Note: For best results, follow the default threshold. We will update the default threshold everytime when we release a new model."
+          format: float
+          type: number
       type: object
     GoogleCloudVideointelligenceV1p2beta1_LabelFrame:
       description: Video frame level annotation results for label detection.
@@ -2116,6 +2198,13 @@ components:
           description: Feature version.
           type: string
       type: object
+    GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingConfig:
+      description: Config for OBJECT_TRACKING.
+      properties:
+        model:
+          description: 'Model to use for object tracking. Supported values: "builtin/stable" (the default if unset) and "builtin/latest".'
+          type: string
+      type: object
     GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame:
       description: Video frame level annotations for object detection and tracking. This field stores per frame location, time offset, and confidence.
       properties:
@@ -2138,6 +2227,35 @@ components:
         version:
           description: Feature version.
           type: string
+      type: object
+    GoogleCloudVideointelligenceV1p2beta1_PersonDetectionConfig:
+      description: Config for PERSON_DETECTION.
+      properties:
+        includeAttributes:
+          description: Whether to enable person attributes detection, such as cloth color (black, blue, etc), type (coat, dress, etc), pattern (plain, floral, etc), hair, etc. Ignored if 'include_bounding_boxes' is set to false.
+          type: boolean
+        includeBoundingBoxes:
+          description: Whether bounding boxes are included in the person detection annotation output.
+          type: boolean
+        includePoseLandmarks:
+          description: Whether to enable pose landmarks detection. Ignored if 'include_bounding_boxes' is set to false.
+          type: boolean
+      type: object
+    GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig:
+      description: Config for SHOT_CHANGE_DETECTION.
+      properties:
+        model:
+          description: 'Model to use for shot change detection. Supported values: "builtin/stable" (the default if unset), "builtin/latest", and "builtin/legacy".'
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1p2beta1_SpeechContext:
+      description: Provides "hints" to the speech recognizer to favor specific words and phrases in the results.
+      properties:
+        phrases:
+          description: Optional. A list of strings containing words and phrases "hints" so that the speech recognition is more likely to recognize them. This can be used to improve the accuracy for specific words and phrases, for example, if specific commands are typically spoken by the user. This can also be used to add additional words to the vocabulary of the recognizer. See [usage limits](https://cloud.google.com/speech/limits#content).
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative:
       description: Alternative hypotheses (a.k.a. n-best list).
@@ -2170,6 +2288,44 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig:
+      description: Config for SPEECH_TRANSCRIPTION.
+      properties:
+        audioTracks:
+          description: "Optional. For file formats, such as MXF or MKV, supporting multiple audio tracks, specify up to two tracks. Default: track 0."
+          items:
+            format: int32
+            type: integer
+          type: array
+        diarizationSpeakerCount:
+          description: Optional. If set, specifies the estimated number of speakers in the conversation. If not set, defaults to '2'. Ignored unless enable_speaker_diarization is set to true.
+          format: int32
+          type: integer
+        enableAutomaticPunctuation:
+          description: "Optional. If 'true', adds punctuation to recognition result hypotheses. This feature is only available in select languages. Setting this for requests in other languages has no effect at all. The default 'false' value does not add punctuation to result hypotheses. NOTE: \"This is currently offered as an experimental service, complimentary to all users. In the future this may be exclusively available as a premium feature.\""
+          type: boolean
+        enableSpeakerDiarization:
+          description: "Optional. If 'true', enables speaker detection for each recognized word in the top alternative of the recognition result using a speaker_tag provided in the WordInfo. Note: When this is true, we send all the words from the beginning of the audio for the top alternative in every consecutive response. This is done in order to improve our speaker tags as our models learn to identify the speakers in the conversation over time."
+          type: boolean
+        enableWordConfidence:
+          description: Optional. If `true`, the top result includes a list of words and the confidence for those words. If `false`, no word-level confidence information is returned. The default is `false`.
+          type: boolean
+        filterProfanity:
+          description: Optional. If set to `true`, the server will attempt to filter out profanities, replacing all but the initial character in each filtered word with asterisks, e.g. "f***". If set to `false` or omitted, profanities won't be filtered out.
+          type: boolean
+        languageCode:
+          description: 'Required. *Required* The language of the supplied audio as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. Example: "en-US". See [Language Support](https://cloud.google.com/speech/docs/languages) for a list of the currently supported language codes.'
+          type: string
+        maxAlternatives:
+          description: Optional. Maximum number of recognition hypotheses to be returned. Specifically, the maximum number of `SpeechRecognitionAlternative` messages within each `SpeechTranscription`. The server may return fewer than `max_alternatives`. Valid values are `0`-`30`. A value of `0` or `1` will return a maximum of one. If omitted, will return a maximum of one.
+          format: int32
+          type: integer
+        speechContexts:
+          description: Optional. A means to provide context to assist the speech recognition.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_SpeechContext"
+          type: array
+      type: object
     GoogleCloudVideointelligenceV1p2beta1_TextAnnotation:
       description: Annotations related to one detected OCR text snippet. This will contain the corresponding text, confidence value, and frame level information for each detection.
       properties:
@@ -2183,6 +2339,18 @@ components:
           type: string
         version:
           description: Feature version.
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig:
+      description: Config for TEXT_DETECTION.
+      properties:
+        languageHints:
+          description: Language hint can be specified if the language to be detected is known a priori. It can increase the accuracy of the detection. Language hint must be language code in BCP-47 format. Automatic language detection is performed if no hint is provided.
+          items:
+            type: string
+          type: array
+        model:
+          description: 'Model to use for text detection. Supported values: "builtin/stable" (the default if unset) and "builtin/latest".'
           type: string
       type: object
     GoogleCloudVideointelligenceV1p2beta1_TextFrame:
@@ -2371,6 +2539,39 @@ components:
             $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_TextAnnotation"
           type: array
       type: object
+    GoogleCloudVideointelligenceV1p2beta1_VideoContext:
+      description: Video context and/or feature-specific parameters.
+      properties:
+        explicitContentDetectionConfig:
+          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig"
+          description: Config for EXPLICIT_CONTENT_DETECTION.
+        faceDetectionConfig:
+          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_FaceDetectionConfig"
+          description: Config for FACE_DETECTION.
+        labelDetectionConfig:
+          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig"
+          description: Config for LABEL_DETECTION.
+        objectTrackingConfig:
+          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingConfig"
+          description: Config for OBJECT_TRACKING.
+        personDetectionConfig:
+          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_PersonDetectionConfig"
+          description: Config for PERSON_DETECTION.
+        segments:
+          description: Video segments to annotate. The segments may overlap and are not required to be contiguous or span the whole video. If unspecified, each video is treated as a single segment.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_VideoSegment"
+          type: array
+        shotChangeDetectionConfig:
+          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig"
+          description: Config for SHOT_CHANGE_DETECTION.
+        speechTranscriptionConfig:
+          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig"
+          description: Config for SPEECH_TRANSCRIPTION.
+        textDetectionConfig:
+          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig"
+          description: Config for TEXT_DETECTION.
+      type: object
     GoogleCloudVideointelligenceV1p2beta1_VideoSegment:
       description: Video segment.
       properties:
@@ -2416,43 +2617,6 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_VideoAnnotationProgress"
           type: array
-      type: object
-    GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoRequest:
-      description: Video annotation request.
-      properties:
-        features:
-          description: Required. Requested video annotation features.
-          items:
-            enum:
-              - FEATURE_UNSPECIFIED
-              - LABEL_DETECTION
-              - SHOT_CHANGE_DETECTION
-              - EXPLICIT_CONTENT_DETECTION
-              - FACE_DETECTION
-              - SPEECH_TRANSCRIPTION
-              - TEXT_DETECTION
-              - OBJECT_TRACKING
-              - LOGO_RECOGNITION
-              - CELEBRITY_RECOGNITION
-              - PERSON_DETECTION
-            type: string
-          type: array
-        inputContent:
-          description: The video data bytes. If unset, the input video(s) should be specified via the `input_uri`. If set, `input_uri` must be unset.
-          format: byte
-          type: string
-        inputUri:
-          description: "Input video location. Currently, only [Cloud Storage](https://cloud.google.com/storage/) URIs are supported. URIs must be specified in the following format: `gs://bucket-id/object-id` (other URI formats return google.rpc.Code.INVALID_ARGUMENT). For more information, see [Request URIs](https://cloud.google.com/storage/docs/request-endpoints). To identify multiple videos, a video URI may include wildcards in the `object-id`. Supported wildcards: '*' to match 0 or more characters; '?' to match 1 character. If unset, the input video should be embedded in the request as `input_content`. If set, `input_content` must be unset."
-          type: string
-        locationId:
-          description: "Optional. Cloud region where annotation should take place. Supported cloud regions are: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region is specified, the region will be determined based on video file location."
-          type: string
-        outputUri:
-          description: "Optional. Location where the output (in JSON format) should be stored. Currently, only [Cloud Storage](https://cloud.google.com/storage/) URIs are supported. These must be specified in the following format: `gs://bucket-id/object-id` (other URI formats return google.rpc.Code.INVALID_ARGUMENT). For more information, see [Request URIs](https://cloud.google.com/storage/docs/request-endpoints)."
-          type: string
-        videoContext:
-          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_VideoContext"
-          description: Additional video context and/or feature-specific parameters.
       type: object
     GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoResponse:
       description: Video annotation response. Included in the `response` field of the `Operation` returned by the `GetOperation` call of the `google::longrunning::Operations` service.
@@ -2553,13 +2717,6 @@ components:
           description: Feature version.
           type: string
       type: object
-    GoogleCloudVideointelligenceV1p3beta1_ExplicitContentDetectionConfig:
-      description: Config for EXPLICIT_CONTENT_DETECTION.
-      properties:
-        model:
-          description: 'Model to use for explicit content detection. Supported values: "builtin/stable" (the default if unset) and "builtin/latest".'
-          type: string
-      type: object
     GoogleCloudVideointelligenceV1p3beta1_ExplicitContentFrame:
       description: Video frame level annotation results for explicit content.
       properties:
@@ -2612,19 +2769,6 @@ components:
           description: Feature version.
           type: string
       type: object
-    GoogleCloudVideointelligenceV1p3beta1_FaceDetectionConfig:
-      description: Config for FACE_DETECTION.
-      properties:
-        includeAttributes:
-          description: Whether to enable face attributes detection, such as glasses, dark_glasses, mouth_open etc. Ignored if 'include_bounding_boxes' is set to false.
-          type: boolean
-        includeBoundingBoxes:
-          description: Whether bounding boxes are included in the face annotation output.
-          type: boolean
-        model:
-          description: 'Model to use for face detection. Supported values: "builtin/stable" (the default if unset) and "builtin/latest".'
-          type: string
-      type: object
     GoogleCloudVideointelligenceV1p3beta1_FaceFrame:
       description: Deprecated. No effect.
       properties:
@@ -2669,32 +2813,6 @@ components:
         version:
           description: Feature version.
           type: string
-      type: object
-    GoogleCloudVideointelligenceV1p3beta1_LabelDetectionConfig:
-      description: Config for LABEL_DETECTION.
-      properties:
-        frameConfidenceThreshold:
-          description: "The confidence threshold we perform filtering on the labels from frame-level detection. If not set, it is set to 0.4 by default. The valid range for this threshold is [0.1, 0.9]. Any value set outside of this range will be clipped. Note: For best results, follow the default threshold. We will update the default threshold everytime when we release a new model."
-          format: float
-          type: number
-        labelDetectionMode:
-          description: What labels should be detected with LABEL_DETECTION, in addition to video-level labels or segment-level labels. If unspecified, defaults to `SHOT_MODE`.
-          enum:
-            - LABEL_DETECTION_MODE_UNSPECIFIED
-            - SHOT_MODE
-            - FRAME_MODE
-            - SHOT_AND_FRAME_MODE
-          type: string
-        model:
-          description: 'Model to use for label detection. Supported values: "builtin/stable" (the default if unset) and "builtin/latest".'
-          type: string
-        stationaryCamera:
-          description: Whether the video has been shot from a stationary (i.e., non-moving) camera. When set to true, might improve detection accuracy for moving objects. Should be used with `SHOT_AND_FRAME_MODE` enabled.
-          type: boolean
-        videoConfidenceThreshold:
-          description: "The confidence threshold we perform filtering on the labels from video-level and shot-level detections. If not set, it's set to 0.3 by default. The valid range for this threshold is [0.1, 0.9]. Any value set outside of this range will be clipped. Note: For best results, follow the default threshold. We will update the default threshold everytime when we release a new model."
-          format: float
-          type: number
       type: object
     GoogleCloudVideointelligenceV1p3beta1_LabelFrame:
       description: Video frame level annotation results for label detection.
@@ -2803,13 +2921,6 @@ components:
           description: Feature version.
           type: string
       type: object
-    GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingConfig:
-      description: Config for OBJECT_TRACKING.
-      properties:
-        model:
-          description: 'Model to use for object tracking. Supported values: "builtin/stable" (the default if unset) and "builtin/latest".'
-          type: string
-      type: object
     GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingFrame:
       description: Video frame level annotations for object detection and tracking. This field stores per frame location, time offset, and confidence.
       properties:
@@ -2833,19 +2944,6 @@ components:
           description: Feature version.
           type: string
       type: object
-    GoogleCloudVideointelligenceV1p3beta1_PersonDetectionConfig:
-      description: Config for PERSON_DETECTION.
-      properties:
-        includeAttributes:
-          description: Whether to enable person attributes detection, such as cloth color (black, blue, etc), type (coat, dress, etc), pattern (plain, floral, etc), hair, etc. Ignored if 'include_bounding_boxes' is set to false.
-          type: boolean
-        includeBoundingBoxes:
-          description: Whether bounding boxes are included in the person detection annotation output.
-          type: boolean
-        includePoseLandmarks:
-          description: Whether to enable pose landmarks detection. Ignored if 'include_bounding_boxes' is set to false.
-          type: boolean
-      type: object
     GoogleCloudVideointelligenceV1p3beta1_RecognizedCelebrity:
       description: The recognized celebrity with confidence score.
       properties:
@@ -2856,22 +2954,6 @@ components:
           description: Recognition confidence. Range [0, 1].
           format: float
           type: number
-      type: object
-    GoogleCloudVideointelligenceV1p3beta1_ShotChangeDetectionConfig:
-      description: Config for SHOT_CHANGE_DETECTION.
-      properties:
-        model:
-          description: 'Model to use for shot change detection. Supported values: "builtin/stable" (the default if unset), "builtin/latest", and "builtin/legacy".'
-          type: string
-      type: object
-    GoogleCloudVideointelligenceV1p3beta1_SpeechContext:
-      description: Provides "hints" to the speech recognizer to favor specific words and phrases in the results.
-      properties:
-        phrases:
-          description: Optional. A list of strings containing words and phrases "hints" so that the speech recognition is more likely to recognize them. This can be used to improve the accuracy for specific words and phrases, for example, if specific commands are typically spoken by the user. This can also be used to add additional words to the vocabulary of the recognizer. See [usage limits](https://cloud.google.com/speech/limits#content).
-          items:
-            type: string
-          type: array
       type: object
     GoogleCloudVideointelligenceV1p3beta1_SpeechRecognitionAlternative:
       description: Alternative hypotheses (a.k.a. n-best list).
@@ -2903,44 +2985,6 @@ components:
           description: Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the language in this result. This language code was detected to have the most likelihood of being spoken in the audio.
           readOnly: true
           type: string
-      type: object
-    GoogleCloudVideointelligenceV1p3beta1_SpeechTranscriptionConfig:
-      description: Config for SPEECH_TRANSCRIPTION.
-      properties:
-        audioTracks:
-          description: "Optional. For file formats, such as MXF or MKV, supporting multiple audio tracks, specify up to two tracks. Default: track 0."
-          items:
-            format: int32
-            type: integer
-          type: array
-        diarizationSpeakerCount:
-          description: Optional. If set, specifies the estimated number of speakers in the conversation. If not set, defaults to '2'. Ignored unless enable_speaker_diarization is set to true.
-          format: int32
-          type: integer
-        enableAutomaticPunctuation:
-          description: "Optional. If 'true', adds punctuation to recognition result hypotheses. This feature is only available in select languages. Setting this for requests in other languages has no effect at all. The default 'false' value does not add punctuation to result hypotheses. NOTE: \"This is currently offered as an experimental service, complimentary to all users. In the future this may be exclusively available as a premium feature.\""
-          type: boolean
-        enableSpeakerDiarization:
-          description: "Optional. If 'true', enables speaker detection for each recognized word in the top alternative of the recognition result using a speaker_tag provided in the WordInfo. Note: When this is true, we send all the words from the beginning of the audio for the top alternative in every consecutive response. This is done in order to improve our speaker tags as our models learn to identify the speakers in the conversation over time."
-          type: boolean
-        enableWordConfidence:
-          description: Optional. If `true`, the top result includes a list of words and the confidence for those words. If `false`, no word-level confidence information is returned. The default is `false`.
-          type: boolean
-        filterProfanity:
-          description: Optional. If set to `true`, the server will attempt to filter out profanities, replacing all but the initial character in each filtered word with asterisks, e.g. "f***". If set to `false` or omitted, profanities won't be filtered out.
-          type: boolean
-        languageCode:
-          description: 'Required. *Required* The language of the supplied audio as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. Example: "en-US". See [Language Support](https://cloud.google.com/speech/docs/languages) for a list of the currently supported language codes.'
-          type: string
-        maxAlternatives:
-          description: Optional. Maximum number of recognition hypotheses to be returned. Specifically, the maximum number of `SpeechRecognitionAlternative` messages within each `SpeechTranscription`. The server may return fewer than `max_alternatives`. Valid values are `0`-`30`. A value of `0` or `1` will return a maximum of one. If omitted, will return a maximum of one.
-          format: int32
-          type: integer
-        speechContexts:
-          description: Optional. A means to provide context to assist the speech recognition.
-          items:
-            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_SpeechContext"
-          type: array
       type: object
     GoogleCloudVideointelligenceV1p3beta1_StreamingAnnotateVideoResponse:
       description: "`StreamingAnnotateVideoResponse` is the only message returned to the client by `StreamingAnnotateVideo`. A series of zero or more `StreamingAnnotateVideoResponse` messages are streamed back to the client."
@@ -2994,18 +3038,6 @@ components:
           type: string
         version:
           description: Feature version.
-          type: string
-      type: object
-    GoogleCloudVideointelligenceV1p3beta1_TextDetectionConfig:
-      description: Config for TEXT_DETECTION.
-      properties:
-        languageHints:
-          description: Language hint can be specified if the language to be detected is known a priori. It can increase the accuracy of the detection. Language hint must be language code in BCP-47 format. Automatic language detection is performed if no hint is provided.
-          items:
-            type: string
-          type: array
-        model:
-          description: 'Model to use for text detection. Supported values: "builtin/stable" (the default if unset) and "builtin/latest".'
           type: string
       type: object
     GoogleCloudVideointelligenceV1p3beta1_TextFrame:
@@ -3197,39 +3229,6 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_TextAnnotation"
           type: array
-      type: object
-    GoogleCloudVideointelligenceV1p3beta1_VideoContext:
-      description: Video context and/or feature-specific parameters.
-      properties:
-        explicitContentDetectionConfig:
-          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_ExplicitContentDetectionConfig"
-          description: Config for EXPLICIT_CONTENT_DETECTION.
-        faceDetectionConfig:
-          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_FaceDetectionConfig"
-          description: Config for FACE_DETECTION.
-        labelDetectionConfig:
-          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_LabelDetectionConfig"
-          description: Config for LABEL_DETECTION.
-        objectTrackingConfig:
-          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingConfig"
-          description: Config for OBJECT_TRACKING.
-        personDetectionConfig:
-          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_PersonDetectionConfig"
-          description: Config for PERSON_DETECTION.
-        segments:
-          description: Video segments to annotate. The segments may overlap and are not required to be contiguous or span the whole video. If unspecified, each video is treated as a single segment.
-          items:
-            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_VideoSegment"
-          type: array
-        shotChangeDetectionConfig:
-          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_ShotChangeDetectionConfig"
-          description: Config for SHOT_CHANGE_DETECTION.
-        speechTranscriptionConfig:
-          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_SpeechTranscriptionConfig"
-          description: Config for SPEECH_TRANSCRIPTION.
-        textDetectionConfig:
-          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_TextDetectionConfig"
-          description: Config for TEXT_DETECTION.
       type: object
     GoogleCloudVideointelligenceV1p3beta1_VideoSegment:
       description: Video segment.

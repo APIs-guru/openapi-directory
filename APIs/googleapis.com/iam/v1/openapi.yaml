@@ -586,7 +586,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Disable a ServiceAccountKey. A disabled service account key can be enabled through EnableServiceAccountKey. The API is currently in preview phase.
+      description: Disable a ServiceAccountKey. A disabled service account key can be enabled through EnableServiceAccountKey.
       operationId: iam.projects.serviceAccounts.keys.disable
       parameters:
         - description: "Required. The resource name of the service account key in the following format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}/keys/{key}`. Using `-` as a wildcard for the `PROJECT_ID` will infer the project from the account. The `ACCOUNT` value can be the `email` address or the `unique_id` of the service account."
@@ -628,7 +628,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Enable a ServiceAccountKey. The API is currently in preview phase.
+      description: Enable a ServiceAccountKey.
       operationId: iam.projects.serviceAccounts.keys.enable
       parameters:
         - description: "Required. The resource name of the service account key in the following format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}/keys/{key}`. Using `-` as a wildcard for the `PROJECT_ID` will infer the project from the account. The `ACCOUNT` value can be the `email` address or the `unique_id` of the service account."

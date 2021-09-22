@@ -1,7 +1,6 @@
 openapi: 3.0.0
 servers:
   - url: https://servicenetworking.googleapis.com/
-x-hasEquivalentPaths: true
 info:
   contact:
     name: Google
@@ -13,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Service Networking API
-  version: v1beta
+  version: v1
   x-apisguru-categories:
     - analytics
     - media
@@ -21,7 +20,7 @@ info:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: https://servicenetworking.googleapis.com/$discovery/rest?version=v1beta
+      url: https://servicenetworking.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-providerName: googleapis.com
   x-serviceName: servicenetworking
@@ -31,12 +30,12 @@ tags:
   - name: operations
   - name: services
 paths:
-  "/v1beta/{name}":
-    get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: servicenetworking.operations.get
+  "/v1/{name}":
+    delete:
+      description: Deletes a peered DNS domain.
+      operationId: servicenetworking.services.projects.global.networks.peeredDnsDomains.delete
       parameters:
-        - description: The name of the operation resource.
+        - description: "Required. The name of the peered DNS domain to delete in the format: `services/{service}/projects/{project}/global/networks/{network}/peeredDnsDomains/{name}`. {service} is the peering service that is managing connectivity for the service producer's organization. For Google services that support this functionality, this value is `servicenetworking.googleapis.com`. {project} is the number of the project that contains the service consumer's VPC network e.g. `12345`. {network} is the name of the service consumer's VPC network. {name} is the name of the peered DNS domain."
           in: path
           name: name
           required: true
@@ -59,20 +58,50 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/service.management
       tags:
-        - operations
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{name}/connections":
+        - services
+    get:
+      description: Service producers use this method to get the configuration of their connection including the import/export of custom routes and subnetwork routes with public IP.
+      operationId: servicenetworking.services.projects.global.networks.get
+      parameters:
+        - description: "Required. Name of the consumer config to retrieve in the format: `services/{service}/projects/{project}/global/networks/{network}`. {service} is the peering service that is managing connectivity for the service producer's organization. For Google services that support this functionality, this value is `servicenetworking.googleapis.com`. {project} is a project number e.g. `12345` that contains the service consumer's VPC network. {network} is the name of the service consumer's VPC network."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The standard list filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConsumerConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -86,10 +115,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the allocated ranges that are assigned to a connection. The response from the `get` operation will be of type `Connection` if the operation successfully completes.
-      operationId: servicenetworking.services.updateConnections
+      description: Updates the allocated ranges that are assigned to a connection.
+      operationId: servicenetworking.services.connections.patch
       parameters:
-        - description: The service producer peering service that is managing peering connectivity for a service producer organization. For Google services that support this functionality, this is `services/servicenetworking.googleapis.com`.
+        - description: The private service connection that connects to a service producer organization. The name includes both the private service name and the VPC network peering name in the format of `services/{peering_service_name}/connections/{vpc_peering_name}`. For Google services that support this functionality, this is `services/servicenetworking.googleapis.com/connections/servicenetworking-googleapis-com`.
           in: path
           name: name
           required: true
@@ -109,7 +138,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudServicenetworkingV1betaConnection"
+              $ref: "#/components/schemas/Connection"
       responses:
         "200":
           content:
@@ -128,12 +157,91 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta/{parent}/connections":
+    post:
+      description: Deletes a private service access connection.
+      operationId: servicenetworking.services.connections.deleteConnection
+      parameters:
+        - description: Required. The private service connection that connects to a service producer organization. The name includes both the private service name and the VPC network peering name in the format of `services/{peering_service_name}/connections/{vpc_peering_name}`. For Google services that support this functionality, this is `services/servicenetworking.googleapis.com/connections/servicenetworking-googleapis-com`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeleteConnectionRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+  "/v1/{name}:cancel":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+      operationId: servicenetworking.operations.cancel
+      parameters:
+        - description: The name of the operation resource to be cancelled.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelOperationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - operations
+  "/v1/{parent}/connections":
     get:
       description: List the private connections that are configured in a service consumer's VPC network.
       operationId: servicenetworking.services.connections.list
       parameters:
-        - description: The service that is managing peering connectivity for a service producer's organization. For Google services that support this functionality, this value is `services/servicenetworking.googleapis.com`. If you specify `-` as the parameter value, all configured public peering services are listed.
+        - description: The service that is managing peering connectivity for a service producer's organization. For Google services that support this functionality, this value is `services/servicenetworking.googleapis.com`. If you specify `services/-` as the parameter value, all configured peering services are listed.
           in: path
           name: parent
           required: true
@@ -175,7 +283,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a private connection that establishes a VPC Network Peering connection to a VPC network in the service producer's organization. The administrator of the service consumer's VPC network invokes this method. The administrator must assign one or more allocated IP ranges for provisioning subnetworks in the service producer's VPC network. This connection is used for all supported services in the service producer's organization, so it only needs to be invoked once. The response from the `get` operation will be of type `Connection` if the operation successfully completes.
+      description: Creates a private connection that establishes a VPC Network Peering connection to a VPC network in the service producer's organization. The administrator of the service consumer's VPC network invokes this method. The administrator must assign one or more allocated IP ranges for provisioning subnetworks in the service producer's VPC network. This connection is used for all supported services in the service producer's organization, so it only needs to be invoked once.
       operationId: servicenetworking.services.connections.create
       parameters:
         - description: The service that is managing peering connectivity for a service producer's organization. For Google services that support this functionality, this value is `services/servicenetworking.googleapis.com`.
@@ -188,7 +296,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudServicenetworkingV1betaConnection"
+              $ref: "#/components/schemas/Connection"
       responses:
         "200":
           content:
@@ -207,7 +315,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta/{parent}:addSubnetwork":
+  "/v1/{parent}/dnsRecordSets:add":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -221,7 +329,357 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: For service producers, provisions a new subnet in a peered service's shared VPC network in the requested region and with the requested size that's expressed as a CIDR range (number of leading bits of ipV4 network mask). The method checks against the assigned allocated ranges to find a non-conflicting IP address range. The method will reuse a subnet if subsequent calls contain the same subnet name, region, and prefix length. This method will make producer's tenant project to be a shared VPC service project as needed. The response from the `get` operation will be of type `Subnetwork` if the operation successfully completes.
+      description: Service producers can use this method to add DNS record sets to private DNS zones in the shared producer host project.
+      operationId: servicenetworking.services.dnsRecordSets.add
+      parameters:
+        - description: Required. The service that is managing peering connectivity for a service producer's organization. For Google services that support this functionality, this value is `services/servicenetworking.googleapis.com`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddDnsRecordSetRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+  "/v1/{parent}/dnsRecordSets:remove":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Service producers can use this method to remove DNS record sets from private DNS zones in the shared producer host project.
+      operationId: servicenetworking.services.dnsRecordSets.remove
+      parameters:
+        - description: Required. The service that is managing peering connectivity for a service producer's organization. For Google services that support this functionality, this value is `services/servicenetworking.googleapis.com`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RemoveDnsRecordSetRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+  "/v1/{parent}/dnsRecordSets:update":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Service producers can use this method to update DNS record sets from private DNS zones in the shared producer host project.
+      operationId: servicenetworking.services.dnsRecordSets.update
+      parameters:
+        - description: Required. The service that is managing peering connectivity for a service producer's organization. For Google services that support this functionality, this value is `services/servicenetworking.googleapis.com`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateDnsRecordSetRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+  "/v1/{parent}/dnsZones:add":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Service producers can use this method to add private DNS zones in the shared producer host project and matching peering zones in the consumer project.
+      operationId: servicenetworking.services.dnsZones.add
+      parameters:
+        - description: Required. The service that is managing peering connectivity for a service producer's organization. For Google services that support this functionality, this value is `services/servicenetworking.googleapis.com`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddDnsZoneRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+  "/v1/{parent}/dnsZones:remove":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Service producers can use this method to remove private DNS zones in the shared producer host project and matching peering zones in the consumer project.
+      operationId: servicenetworking.services.dnsZones.remove
+      parameters:
+        - description: Required. The service that is managing peering connectivity for a service producer's organization. For Google services that support this functionality, this value is `services/servicenetworking.googleapis.com`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RemoveDnsZoneRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+  "/v1/{parent}/peeredDnsDomains":
+    get:
+      description: Lists peered DNS domains for a connection.
+      operationId: servicenetworking.services.projects.global.networks.peeredDnsDomains.list
+      parameters:
+        - description: "Required. Parent resource identifying the connection which owns this collection of peered DNS domains in the format: `services/{service}/projects/{project}/global/networks/{network}`. {service} is the peering service that is managing connectivity for the service producer's organization. For Google services that support this functionality, this value is `servicenetworking.googleapis.com`. {project} is a project number e.g. `12345` that contains the service consumer's VPC network. {network} is the name of the service consumer's VPC network."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPeeredDnsDomainsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a peered DNS domain which sends requests for records in given namespace originating in the service producer VPC network to the consumer VPC network to be resolved.
+      operationId: servicenetworking.services.projects.global.networks.peeredDnsDomains.create
+      parameters:
+        - description: "Required. Parent resource identifying the connection for which the peered DNS domain will be created in the format: `services/{service}/projects/{project}/global/networks/{network}` {service} is the peering service that is managing connectivity for the service producer's organization. For Google services that support this functionality, this value is `servicenetworking.googleapis.com`. {project} is the number of the project that contains the service consumer's VPC network e.g. `12345`. {network} is the name of the service consumer's VPC network."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PeeredDnsDomain"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+  "/v1/{parent}/roles:add":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Service producers can use this method to add roles in the shared VPC host project. Each role is bound to the provided member. Each role must be selected from within an allowlisted set of roles. Each role is applied at only the granularity specified in the allowlist.
+      operationId: servicenetworking.services.roles.add
+      parameters:
+        - description: Required. This is in a form services/{service} where {service} is the name of the private access management service. For example 'service-peering.example.com'.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddRolesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+  "/v1/{parent}:addSubnetwork":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: For service producers, provisions a new subnet in a peered service's shared VPC network in the requested region and with the requested size that's expressed as a CIDR range (number of leading bits of ipV4 network mask). The method checks against the assigned allocated ranges to find a non-conflicting IP address range. The method will reuse a subnet if subsequent calls contain the same subnet name, region, and prefix length. This method will make producer's tenant project to be a shared VPC service project as needed.
       operationId: servicenetworking.services.addSubnetwork
       parameters:
         - description: "Required. A tenant project in the service producer organization, in the following format: services/{service}/{collection-id}/{resource-id}. {collection-id} is the cloud resource collection type that represents the tenant project. Only `projects` are supported. {resource-id} is the tenant project numeric id, such as `123456`. {service} the name of the peering service, such as `service-peering.example.com`. This service must already be enabled in the service consumer's project."
@@ -253,7 +711,99 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta/{parent}:searchRange":
+  "/v1/{parent}:disableVpcServiceControls":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Disables VPC service controls for a connection.
+      operationId: servicenetworking.services.disableVpcServiceControls
+      parameters:
+        - description: The service that is managing peering connectivity for a service producer's organization. For Google services that support this functionality, this value is `services/servicenetworking.googleapis.com`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DisableVpcServiceControlsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+  "/v1/{parent}:enableVpcServiceControls":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Enables VPC service controls for a connection.
+      operationId: servicenetworking.services.enableVpcServiceControls
+      parameters:
+        - description: The service that is managing peering connectivity for a service producer's organization. For Google services that support this functionality, this value is `services/servicenetworking.googleapis.com`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnableVpcServiceControlsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+  "/v1/{parent}:searchRange":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -267,7 +817,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Service producers can use this method to find a currently unused range within consumer allocated ranges. This returned range is not reserved, and not guaranteed to remain unused. It will validate previously provided allocated ranges, find non-conflicting sub-range of requested size (expressed in number of leading bits of ipv4 network mask, as in CIDR range notation). Operation
+      description: Service producers can use this method to find a currently unused range within consumer allocated ranges. This returned range is not reserved, and not guaranteed to remain unused. It will validate previously provided allocated ranges, find non-conflicting sub-range of requested size (expressed in number of leading bits of ipv4 network mask, as in CIDR range notation).
       operationId: servicenetworking.services.searchRange
       parameters:
         - description: Required. This is in a form services/{service}. {service} the name of the private access management service, for example 'service-peering.example.com'.
@@ -287,6 +837,98 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+  "/v1/{parent}:updateConsumerConfig":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Service producers use this method to update the configuration of their connection including the import/export of custom routes and subnetwork routes with public IP.
+      operationId: servicenetworking.services.projects.global.networks.updateConsumerConfig
+      parameters:
+        - description: "Required. Parent resource identifying the connection for which the consumer config is being updated in the format: `services/{service}/projects/{project}/global/networks/{network}` {service} is the peering service that is managing connectivity for the service producer's organization. For Google services that support this functionality, this value is `servicenetworking.googleapis.com`. {project} is the number of the project that contains the service consumer's VPC network e.g. `12345`. {network} is the name of the service consumer's VPC network."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateConsumerConfigRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+  "/v1/{parent}:validate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Service producers use this method to validate if the consumer provided network, project and requested range are valid. This allows them to use a fail-fast mechanism for consumer requests, and not have to wait for AddSubnetwork operation completion to determine if user request is invalid.
+      operationId: servicenetworking.services.validate
+      parameters:
+        - description: Required. This is in a form services/{service} where {service} is the name of the private access management service. For example 'service-peering.example.com'.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidateConsumerConfigRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidateConsumerConfigResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -379,9 +1021,35 @@ components:
       description: Metadata provided through GetOperation request for the LRO generated by AddDnsRecordSet API
       properties: {}
       type: object
+    AddDnsRecordSetRequest:
+      description: Request to add a record set to a private managed DNS zone in the shared producer host project.
+      properties:
+        consumerNetwork:
+          description: Required. The network that the consumer is using to connect with services. Must be in the form of projects/{project}/global/networks/{network} {project} is the project number, as in '12345' {network} is the network name.
+          type: string
+        dnsRecordSet:
+          $ref: "#/components/schemas/DnsRecordSet"
+          description: Required. The DNS record set to add.
+        zone:
+          description: Required. The name of the private DNS zone in the shared producer host project to which the record set will be added.
+          type: string
+      type: object
     AddDnsZoneMetadata:
       description: Metadata provided through GetOperation request for the LRO generated by AddDnsZone API
       properties: {}
+      type: object
+    AddDnsZoneRequest:
+      description: Request to add a private managed DNS zone in the shared producer host project and a matching DNS peering zone in the consumer project.
+      properties:
+        consumerNetwork:
+          description: Required. The network that the consumer is using to connect with services. Must be in the form of projects/{project}/global/networks/{network} {project} is the project number, as in '12345' {network} is the network name.
+          type: string
+        dnsSuffix:
+          description: Required. The DNS name suffix for the zones e.g. `example.com`.
+          type: string
+        name:
+          description: Required. The name for both the private zone in the shared producer host project and the peering zone in the consumer project. Must be unique within both projects. The name must be 1-63 characters long, must begin with a letter, end with a letter or digit, and only contain lowercase letters, digits or dashes.
+          type: string
       type: object
     AddDnsZoneResponse:
       description: Represents managed DNS zones created in the shared producer host and consumer projects.
@@ -396,6 +1064,18 @@ components:
     AddRolesMetadata:
       description: Metadata provided through GetOperation request for the LRO generated by AddRoles API
       properties: {}
+      type: object
+    AddRolesRequest:
+      description: Request for AddRoles to allow Service Producers to add roles in the shared VPC host project for them to use.
+      properties:
+        consumerNetwork:
+          description: Required. The network that the consumer is using to connect with services. Must be in the form of projects/{project}/global/networks/{network} {project} is a project number, as in '12345' {network} is a network name.
+          type: string
+        policyBinding:
+          description: Required. List of policy bindings to add to shared VPC host project.
+          items:
+            $ref: "#/components/schemas/PolicyBinding"
+          type: array
       type: object
     AddRolesResponse:
       description: Represents IAM roles added to the shared VPC host project.
@@ -416,18 +1096,31 @@ components:
           description: "Required. The name of the service consumer's VPC network. The network must have an existing private connection that was provisioned through the connections.create method. The name must be in the following format: `projects/{project}/global/networks/{network}`, where {project} is a project number, such as `12345`. {network} is the name of a VPC network in the project."
           type: string
         description:
-          description: An optional description of the subnet.
+          description: Optional. Description of the subnet.
           type: string
         ipPrefixLength:
           description: Required. The prefix length of the subnet's IP address range. Use CIDR range notation, such as `30` to provision a subnet with an `x.x.x.x/30` CIDR range. The IP address range is drawn from a pool of available ranges in the service consumer's allocated range.
           format: int32
           type: integer
+        privateIpv6GoogleAccess:
+          description: Optional. The private IPv6 google access type for the VMs in this subnet. For information about the access types that can be set using this field, see [subnetwork](https://cloud.google.com/compute/docs/reference/rest/v1/subnetworks) in the Compute API documentation.
+          type: string
         region:
           description: Required. The name of a [region](/compute/docs/regions-zones) for the subnet, such `europe-west1`.
           type: string
         requestedAddress:
           description: Optional. The starting address of a range. The address must be a valid IPv4 address in the x.x.x.x format. This value combined with the IP prefix range is the CIDR range for the subnet. The range must be within the allocated range that is assigned to the private connection. If the CIDR range isn't available, the call fails.
           type: string
+        requestedRanges:
+          description: Optional. The name of one or more allocated IP address ranges associated with this private service access connection. If no range names are provided all ranges associated with this connection will be considered. If a CIDR range with the specified IP prefix length is not available within these ranges, the call fails.
+          items:
+            type: string
+          type: array
+        secondaryIpRangeSpecs:
+          description: Optional. A list of secondary IP ranges to be created within the new subnetwork.
+          items:
+            $ref: "#/components/schemas/SecondaryIpRangeSpec"
+          type: array
         subnetwork:
           description: Required. A name for the new subnet. For information about the naming requirements, see [subnetwork](/compute/docs/reference/rest/v1/subnetworks) in the Compute API documentation.
           type: string
@@ -600,6 +1293,10 @@ components:
           description: The monitored resource type. The type must be defined in Service.monitored_resources section.
           type: string
       type: object
+    CancelOperationRequest:
+      description: The request message for Operations.CancelOperation.
+      properties: {}
+      type: object
     Connection:
       description: Represents a private connection resource. A private connection is implemented as a VPC Network Peering connection between a service producer's VPC network and a service consumer's VPC network.
       properties:
@@ -665,6 +1362,14 @@ components:
     ConsumerConfigMetadata:
       description: Metadata provided through GetOperation request for the LRO generated by UpdateConsumerConfig API.
       properties: {}
+      type: object
+    ConsumerProject:
+      description: Represents a consumer project.
+      properties:
+        projectNum:
+          description: Required. Project number of the consumer that is launching the service instance. It can own the network that is peered with Google or, be a service project in an XPN where the host project has the network.
+          format: int64
+          type: string
       type: object
     Context:
       description: '`Context` defines which contexts an API requests. Example: context: rules: - selector: "*" requested: - google.rpc.context.ProjectContext - google.rpc.context.OriginContext The above specifies that all methods in the API request `google.rpc.context.ProjectContext` and `google.rpc.context.OriginContext`. Available context types are defined in package `google.rpc.context`. This also provides mechanism to allowlist any protobuf message extension that can be sent in grpc metadata using “x-goog-ext--bin” and “x-goog-ext--jspb” format. For example, list any service specific protobuf types that can appear in grpc metadata as follows in your yaml file: Example: context: rules: - selector: "google.example.library.v1.LibraryService.CreateBook" allowed_request_extensions: - google.foo.v1.NewExtension allowed_response_extensions: - google.foo.v1.NewExtension You can also specify extension ID instead of fully qualified extension name here.'
@@ -747,9 +1452,23 @@ components:
       description: Metadata provided through GetOperation request for the LRO generated by Delete Connection API
       properties: {}
       type: object
+    DeleteConnectionRequest:
+      description: Request to delete a private service access connection. The call will fail if there are any managed service instances using this connection.
+      properties:
+        consumerNetwork:
+          description: Required. The network that the consumer is using to connect with services. Must be in the form of projects/{project}/global/networks/{network} {project} is a project number, as in '12345' {network} is a network name.
+          type: string
+      type: object
     DeletePeeredDnsDomainMetadata:
       description: Metadata provided through GetOperation request for the LRO generated by DeletePeeredDnsDomain API.
       properties: {}
+      type: object
+    DisableVpcServiceControlsRequest:
+      description: Request to disable VPC service controls.
+      properties:
+        consumerNetwork:
+          description: Required. The network that the consumer is using to connect with services. Must be in the form of projects/{project}/global/networks/{network} {project} is a project number, as in '12345' {network} is network name.
+          type: string
       type: object
     DnsRecordSet:
       description: Represents a DNS record set resource.
@@ -817,6 +1536,17 @@ components:
           type: string
         selector:
           description: The selector is a comma-separated list of patterns for any element such as a method, a field, an enum value. Each pattern is a qualified name of the element which may end in "*", indicating a wildcard. Wildcards are only allowed at the end and for a whole component of the qualified name, i.e. "foo.*" is ok, but not "foo.b*" or "foo.*.bar". A wildcard will match one or more components. To specify a default for all applicable elements, the whole pattern "*" is used.
+          type: string
+      type: object
+    Empty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      properties: {}
+      type: object
+    EnableVpcServiceControlsRequest:
+      description: Request to enable VPC service controls.
+      properties:
+        consumerNetwork:
+          description: Required. The network that the consumer is using to connect with services. Must be in the form of projects/{project}/global/networks/{network} {project} is a project number, as in '12345' {network} is network name.
           type: string
       type: object
     Endpoint:
@@ -1069,7 +1799,28 @@ components:
         connections:
           description: The list of Connections.
           items:
-            $ref: "#/components/schemas/GoogleCloudServicenetworkingV1betaConnection"
+            $ref: "#/components/schemas/Connection"
+          type: array
+      type: object
+    ListOperationsResponse:
+      description: The response message for Operations.ListOperations.
+      properties:
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+        operations:
+          description: A list of operations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListPeeredDnsDomainsResponse:
+      description: Response to list peered DNS domains for a given connection.
+      properties:
+        peeredDnsDomains:
+          description: The list of peered DNS domains.
+          items:
+            $ref: "#/components/schemas/PeeredDnsDomain"
           type: array
       type: object
     LogDescriptor:
@@ -1464,9 +2215,46 @@ components:
           description: "In the Shared VPC host project, the VPC network that's peered with the consumer network. For example: `projects/1234321/global/networks/host-network`"
           type: string
       type: object
+    RangeReservation:
+      description: Represents a range reservation.
+      properties:
+        ipPrefixLength:
+          description: Required. The size of the desired subnet. Use usual CIDR range notation. For example, '30' to find unused x.x.x.x/30 CIDR range. The goal is to determine if one of the allocated ranges has enough free space for a subnet of the requested size.
+          format: int32
+          type: integer
+        requestedRanges:
+          description: Optional. The name of one or more allocated IP address ranges associated with this private service access connection. If no range names are provided all ranges associated with this connection will be considered. If a CIDR range with the specified IP prefix length is not available within these ranges the validation fails.
+          items:
+            type: string
+          type: array
+        secondaryRangeIpPrefixLengths:
+          description: Optional. The size of the desired secondary ranges for the subnet. Use usual CIDR range notation. For example, '30' to find unused x.x.x.x/30 CIDR range. The goal is to determine that the allocated ranges have enough free space for all the requested secondary ranges.
+          items:
+            format: int32
+            type: integer
+          type: array
+        subnetworkCandidates:
+          description: Optional. List of subnetwork candidates to validate. The required input fields are `name`, `network`, and `region`. Subnetworks from this list which exist will be returned in the response with the `ip_cidr_range`, `secondary_ip_cider_ranges`, and `outside_allocation` fields set.
+          items:
+            $ref: "#/components/schemas/Subnetwork"
+          type: array
+      type: object
     RemoveDnsRecordSetMetadata:
       description: Metadata provided through GetOperation request for the LRO generated by RemoveDnsRecordSet API
       properties: {}
+      type: object
+    RemoveDnsRecordSetRequest:
+      description: Request to remove a record set from a private managed DNS zone in the shared producer host project. The name, type, ttl, and data values must all exactly match an existing record set in the specified zone.
+      properties:
+        consumerNetwork:
+          description: Required. The network that the consumer is using to connect with services. Must be in the form of projects/{project}/global/networks/{network} {project} is the project number, as in '12345' {network} is the network name.
+          type: string
+        dnsRecordSet:
+          $ref: "#/components/schemas/DnsRecordSet"
+          description: Required. The DNS record set to remove.
+        zone:
+          description: Required. The name of the private DNS zone in the shared producer host project from which the record set will be removed.
+          type: string
       type: object
     RemoveDnsRecordSetResponse:
       description: Blank message response type for RemoveDnsRecordSet API
@@ -1475,6 +2263,16 @@ components:
     RemoveDnsZoneMetadata:
       description: Metadata provided through GetOperation request for the LRO generated by RemoveDnsZone API
       properties: {}
+      type: object
+    RemoveDnsZoneRequest:
+      description: Request to remove a private managed DNS zone in the shared producer host project and a matching DNS peering zone in the consumer project.
+      properties:
+        consumerNetwork:
+          description: Required. The network that the consumer is using to connect with services. Must be in the form of projects/{project}/global/networks/{network} {project} is the project number, as in '12345' {network} is the network name.
+          type: string
+        name:
+          description: Required. The name for both the private zone in the shared producer host project and the peering zone in the consumer project.
+          type: string
       type: object
     RemoveDnsZoneResponse:
       description: Blank message response type for RemoveDnsZone API
@@ -1514,6 +2312,19 @@ components:
           type: string
         rangeName:
           description: Name of the secondary IP range.
+          type: string
+      type: object
+    SecondaryIpRangeSpec:
+      properties:
+        ipPrefixLength:
+          description: Required. The prefix length of the secondary IP range. Use CIDR range notation, such as `30` to provision a secondary IP range with an `x.x.x.x/30` CIDR range. The IP address range is drawn from a pool of available ranges in the service consumer's allocated range.
+          format: int32
+          type: integer
+        rangeName:
+          description: Required. A name for the secondary IP range. The name must be 1-63 characters long, and comply with RFC1035. The name must be unique within the subnetwork.
+          type: string
+        requestedAddress:
+          description: Optional. The starting address of a range. The address must be a valid IPv4 address in the x.x.x.x format. This value combined with the IP prefix range is the CIDR range for the secondary IP range. The range must be within the allocated range that is assigned to the private connection. If the CIDR range isn't available, the call fails.
           type: string
       type: object
     Service:
@@ -1743,9 +2554,32 @@ components:
             - SYNTAX_PROTO3
           type: string
       type: object
+    UpdateConsumerConfigRequest:
+      description: Request to update the configuration of a service networking connection including the import/export of custom routes and subnetwork routes with public IP.
+      properties:
+        consumerConfig:
+          $ref: "#/components/schemas/ConsumerConfig"
+          description: Required. The updated peering config.
+      type: object
     UpdateDnsRecordSetMetadata:
       description: Metadata provided through GetOperation request for the LRO generated by UpdateDnsRecordSet API
       properties: {}
+      type: object
+    UpdateDnsRecordSetRequest:
+      description: Request to update a record set from a private managed DNS zone in the shared producer host project. The name, type, ttl, and data values of the existing record set must all exactly match an existing record set in the specified zone.
+      properties:
+        consumerNetwork:
+          description: Required. The network that the consumer is using to connect with services. Must be in the form of projects/{project}/global/networks/{network} {project} is the project number, as in '12345' {network} is the network name.
+          type: string
+        existingDnsRecordSet:
+          $ref: "#/components/schemas/DnsRecordSet"
+          description: Required. The existing DNS record set to update.
+        newDnsRecordSet:
+          $ref: "#/components/schemas/DnsRecordSet"
+          description: Required. The new values that the DNS record set should be updated to hold.
+        zone:
+          description: Required. The name of the private DNS zone in the shared producer host project from which the record set will be removed.
+          type: string
       type: object
     Usage:
       description: Configuration controlling usage of a service.
@@ -1776,6 +2610,50 @@ components:
         skipServiceControl:
           description: If true, the selected method should skip service control and the control plane features, such as quota and billing, will not be available. This flag is used by Google Cloud Endpoints to bypass checks for internal methods, such as service health check methods.
           type: boolean
+      type: object
+    ValidateConsumerConfigRequest:
+      properties:
+        consumerNetwork:
+          description: Required. The network that the consumer is using to connect with services. Must be in the form of projects/{project}/global/networks/{network} {project} is a project number, as in '12345' {network} is network name.
+          type: string
+        consumerProject:
+          $ref: "#/components/schemas/ConsumerProject"
+          description: NETWORK_NOT_IN_CONSUMERS_PROJECT, NETWORK_NOT_IN_CONSUMERS_HOST_PROJECT, and HOST_PROJECT_NOT_FOUND are done when consumer_project is provided.
+        rangeReservation:
+          $ref: "#/components/schemas/RangeReservation"
+          description: RANGES_EXHAUSTED, RANGES_EXHAUSTED, and RANGES_DELETED_LATER are done when range_reservation is provided.
+        validateNetwork:
+          description: The validations will be performed in the order listed in the ValidationError enum. The first failure will return. If a validation is not requested, then the next one will be performed. SERVICE_NETWORKING_NOT_ENABLED and NETWORK_NOT_PEERED checks are performed for all requests where validation is requested. NETWORK_NOT_FOUND and NETWORK_DISCONNECTED checks are done for requests that have validate_network set to true.
+          type: boolean
+      type: object
+    ValidateConsumerConfigResponse:
+      properties:
+        existingSubnetworkCandidates:
+          description: List of subnetwork candidates from the request which exist with the `ip_cidr_range`, `secondary_ip_cider_ranges`, and `outside_allocation` fields set.
+          items:
+            $ref: "#/components/schemas/Subnetwork"
+          type: array
+        isValid:
+          description: Indicates whether all the requested validations passed.
+          type: boolean
+        validationError:
+          description: The first validation which failed.
+          enum:
+            - VALIDATION_ERROR_UNSPECIFIED
+            - VALIDATION_NOT_REQUESTED
+            - SERVICE_NETWORKING_NOT_ENABLED
+            - NETWORK_NOT_FOUND
+            - NETWORK_NOT_PEERED
+            - NETWORK_PEERING_DELETED
+            - NETWORK_NOT_IN_CONSUMERS_PROJECT
+            - NETWORK_NOT_IN_CONSUMERS_HOST_PROJECT
+            - HOST_PROJECT_NOT_FOUND
+            - CONSUMER_PROJECT_NOT_SERVICE_PROJECT
+            - RANGES_EXHAUSTED
+            - RANGES_NOT_RESERVED
+            - RANGES_DELETED_LATER
+            - COMPUTE_API_NOT_ENABLED
+          type: string
       type: object
   securitySchemes:
     Oauth2:

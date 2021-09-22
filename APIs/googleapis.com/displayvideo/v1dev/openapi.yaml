@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Display & Video 360 API
-  version: v2dev
+  version: v1dev
   x-apiClientRegistration:
     url: https://console.developers.google.com
   x-apisguru-categories:
@@ -26,6 +26,7 @@ info:
       version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: displayvideo
+  x-preferred: false
 externalDocs:
   url: https://developers.google.com/display-video/
 tags:
@@ -119,7 +120,7 @@ paths:
             - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - media
-  "/v2dev/{name}":
+  "/v1dev/{name}":
     get:
       description: Gets the latest state of an asynchronous SDF download task operation. Clients should poll this method at intervals of 30 seconds.
       operationId: displayvideo.sdfdownloadtasks.operations.get
@@ -304,3 +305,5 @@ components:
             https://www.googleapis.com/auth/doubleclickbidmanager: View and manage your reports in DoubleClick Bid Manager
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

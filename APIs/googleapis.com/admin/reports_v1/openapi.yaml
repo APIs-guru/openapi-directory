@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Admin SDK API
-  version: v1
+  version: reports_v1
   x-apiClientRegistration:
     url: https://console.developers.google.com
   x-apisguru-categories:
@@ -26,10 +26,499 @@ info:
       version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: admin
+  x-preferred: false
 externalDocs:
   url: https://developers.google.com/admin-sdk/
-tags: []
-paths: {}
+tags:
+  - name: activities
+  - name: channels
+  - name: customerUsageReports
+  - name: entityUsageReports
+  - name: userUsageReport
+paths:
+  "/admin/reports/v1/activity/users/{userKey}/applications/{applicationName}":
+    get:
+      description: "Retrieves a list of activities for a specific customer's account and application such as the Admin console application or the Google Drive application. For more information, see the guides for administrator and Google Drive activity reports. For more information about the activity report's parameters, see the activity parameters reference guides. "
+      operationId: reports.activities.list
+      parameters:
+        - description: Represents the profile ID or the user email for which the data should be filtered. Can be `all` for all information, or `userKey` for a user's unique Google Workspace profile ID or their primary email address. Must not be a deleted user. For a deleted user, call `users.list` in Directory API with `showDeleted=true`, then use the returned `ID` as the `userKey`.
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+        - description: Application name for which the events are to be retrieved.
+          in: path
+          name: applicationName
+          required: true
+          schema:
+            enum:
+              - access_transparency
+              - admin
+              - calendar
+              - chat
+              - drive
+              - gcp
+              - gplus
+              - groups
+              - groups_enterprise
+              - jamboard
+              - login
+              - meet
+              - mobile
+              - rules
+              - saml
+              - token
+              - user_accounts
+              - context_aware_access
+              - chrome
+              - data_studio
+              - keep
+            type: string
+        - description: The Internet Protocol (IP) Address of host where the event was performed. This is an additional way to filter a report's summary using the IP address of the user whose activity is being reported. This IP address may or may not reflect the user's physical location. For example, the IP address can be the user's proxy server's address or a virtual private network (VPN) address. This parameter supports both IPv4 and IPv6 address versions.
+          in: query
+          name: actorIpAddress
+          schema:
+            type: string
+        - description: The unique ID of the customer to retrieve data for.
+          in: query
+          name: customerId
+          schema:
+            type: string
+        - description: "Sets the end of the range of time shown in the report. The date is in the RFC 3339 format, for example 2010-10-28T10:26:35.000Z. The default value is the approximate time of the API request. An API report has three basic time concepts: - *Date of the API's request for a report*: When the API created and retrieved the report. - *Report's start time*: The beginning of the timespan shown in the report. The `startTime` must be before the `endTime` (if specified) and the current time when the request is made, or the API returns an error. - *Report's end time*: The end of the timespan shown in the report. For example, the timespan of events summarized in a report can start in April and end in May. The report itself can be requested in August. If the `endTime` is not specified, the report returns all activities from the `startTime` until the current time or the most recent 180 days if the `startTime` is more than 180 days in the past."
+          in: query
+          name: endTime
+          schema:
+            type: string
+        - description: The name of the event being queried by the API. Each `eventName` is related to a specific Google Workspace service or feature which the API organizes into types of events. An example is the Google Calendar events in the Admin console application's reports. The Calendar Settings `type` structure has all of the Calendar `eventName` activities reported by the API. When an administrator changes a Calendar setting, the API reports this activity in the Calendar Settings `type` and `eventName` parameters. For more information about `eventName` query strings and parameters, see the list of event names for various applications above in `applicationName`.
+          in: query
+          name: eventName
+          schema:
+            type: string
+        - description: "The `filters` query string is a comma-separated list. The list is composed of event parameters that are manipulated by relational operators. Event parameters are in the form `parameter1 name[parameter1 value],parameter2 name[parameter2 value],...` These event parameters are associated with a specific `eventName`. An empty report is returned if the filtered request's parameter does not belong to the `eventName`. For more information about `eventName` parameters, see the list of event names for various applications above in `applicationName`. In the following Admin Activity example, the <> operator is URL-encoded in the request's query string (%3C%3E): GET...&eventName=CHANGE_CALENDAR_SETTING &filters=NEW_VALUE%3C%3EREAD_ONLY_ACCESS In the following Drive example, the list can be a view or edit event's `doc_id` parameter with a value that is manipulated by an 'equal to' (==) or 'not equal to' (<>) relational operator. In the first example, the report returns each edited document's `doc_id`. In the second example, the report returns each viewed document's `doc_id` that equals the value 12345 and does not return any viewed document's which have a `doc_id` value of 98765. The <> operator is URL-encoded in the request's query string (%3C%3E): GET...&eventName=edit&filters=doc_id GET...&eventName=view&filters=doc_id==12345,doc_id%3C%3E98765 The relational operators include: - `==` - 'equal to'. - `<>` - 'not equal to'. It is URL-encoded (%3C%3E). - `<` - 'less than'. It is URL-encoded (%3C). - `<=` - 'less than or equal to'. It is URL-encoded (%3C=). - `>` - 'greater than'. It is URL-encoded (%3E). - `>=` - 'greater than or equal to'. It is URL-encoded (%3E=). *Note:* The API doesn't accept multiple values of a parameter. If a particular parameter is supplied more than once in the API request, the API only accepts the last value of that request parameter. In addition, if an invalid request parameter is supplied in the API request, the API ignores that request parameter and returns the response corresponding to the remaining valid request parameters. If no parameters are requested, all parameters are returned. "
+          in: query
+          name: filters
+          schema:
+            type: string
+        - description: 'Comma separated group ids (obfuscated) on which user activities are filtered, i.e. the response will contain activities for only those users that are a part of at least one of the group ids mentioned here. Format: "id:abc123,id:xyz456"'
+          in: query
+          name: groupIdFilter
+          schema:
+            type: string
+        - description: Determines how many activity records are shown on each response page. For example, if the request sets `maxResults=1` and the report has two activities, the report has two pages. The response's `nextPageToken` property has the token to the second page. The `maxResults` query string is optional in the request. The default value is 1000.
+          in: query
+          name: maxResults
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: ID of the organizational unit to report on. Activity records will be shown only for users who belong to the specified organizational unit. Data before Dec 17, 2018 doesn't appear in the filtered results.
+          in: query
+          name: orgUnitID
+          schema:
+            type: string
+        - description: The token to specify next page. A report with multiple pages has a `nextPageToken` property in the response. In your follow-on request getting the next page of the report, enter the `nextPageToken` value in the `pageToken` query string.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Sets the beginning of the range of time shown in the report. The date is in the RFC 3339 format, for example 2010-10-28T10:26:35.000Z. The report returns all activities from `startTime` until `endTime`. The `startTime` must be before the `endTime` (if specified) and the current time when the request is made, or the API returns an error.
+          in: query
+          name: startTime
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Activities"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.reports.audit.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.reports.audit.readonly
+      tags:
+        - activities
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/admin/reports/v1/activity/users/{userKey}/applications/{applicationName}/watch":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Start receiving notifications for account activities. For more information, see Receiving Push Notifications.
+      operationId: reports.activities.watch
+      parameters:
+        - description: Represents the profile ID or the user email for which the data should be filtered. Can be `all` for all information, or `userKey` for a user's unique Google Workspace profile ID or their primary email address. Must not be a deleted user. For a deleted user, call `users.list` in Directory API with `showDeleted=true`, then use the returned `ID` as the `userKey`.
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+        - description: Application name for which the events are to be retrieved.
+          in: path
+          name: applicationName
+          required: true
+          schema:
+            enum:
+              - access_transparency
+              - admin
+              - calendar
+              - chat
+              - drive
+              - gcp
+              - gplus
+              - groups
+              - groups_enterprise
+              - jamboard
+              - login
+              - meet
+              - mobile
+              - rules
+              - saml
+              - token
+              - user_accounts
+              - context_aware_access
+              - chrome
+              - data_studio
+              - keep
+            type: string
+        - description: The Internet Protocol (IP) Address of host where the event was performed. This is an additional way to filter a report's summary using the IP address of the user whose activity is being reported. This IP address may or may not reflect the user's physical location. For example, the IP address can be the user's proxy server's address or a virtual private network (VPN) address. This parameter supports both IPv4 and IPv6 address versions.
+          in: query
+          name: actorIpAddress
+          schema:
+            type: string
+        - description: The unique ID of the customer to retrieve data for.
+          in: query
+          name: customerId
+          schema:
+            type: string
+        - description: "Sets the end of the range of time shown in the report. The date is in the RFC 3339 format, for example 2010-10-28T10:26:35.000Z. The default value is the approximate time of the API request. An API report has three basic time concepts: - *Date of the API's request for a report*: When the API created and retrieved the report. - *Report's start time*: The beginning of the timespan shown in the report. The `startTime` must be before the `endTime` (if specified) and the current time when the request is made, or the API returns an error. - *Report's end time*: The end of the timespan shown in the report. For example, the timespan of events summarized in a report can start in April and end in May. The report itself can be requested in August. If the `endTime` is not specified, the report returns all activities from the `startTime` until the current time or the most recent 180 days if the `startTime` is more than 180 days in the past."
+          in: query
+          name: endTime
+          schema:
+            type: string
+        - description: The name of the event being queried by the API. Each `eventName` is related to a specific Google Workspace service or feature which the API organizes into types of events. An example is the Google Calendar events in the Admin console application's reports. The Calendar Settings `type` structure has all of the Calendar `eventName` activities reported by the API. When an administrator changes a Calendar setting, the API reports this activity in the Calendar Settings `type` and `eventName` parameters. For more information about `eventName` query strings and parameters, see the list of event names for various applications above in `applicationName`.
+          in: query
+          name: eventName
+          schema:
+            type: string
+        - description: "The `filters` query string is a comma-separated list. The list is composed of event parameters that are manipulated by relational operators. Event parameters are in the form `parameter1 name[parameter1 value],parameter2 name[parameter2 value],...` These event parameters are associated with a specific `eventName`. An empty report is returned if the filtered request's parameter does not belong to the `eventName`. For more information about `eventName` parameters, see the list of event names for various applications above in `applicationName`. In the following Admin Activity example, the <> operator is URL-encoded in the request's query string (%3C%3E): GET...&eventName=CHANGE_CALENDAR_SETTING &filters=NEW_VALUE%3C%3EREAD_ONLY_ACCESS In the following Drive example, the list can be a view or edit event's `doc_id` parameter with a value that is manipulated by an 'equal to' (==) or 'not equal to' (<>) relational operator. In the first example, the report returns each edited document's `doc_id`. In the second example, the report returns each viewed document's `doc_id` that equals the value 12345 and does not return any viewed document's which have a `doc_id` value of 98765. The <> operator is URL-encoded in the request's query string (%3C%3E): GET...&eventName=edit&filters=doc_id GET...&eventName=view&filters=doc_id==12345,doc_id%3C%3E98765 The relational operators include: - `==` - 'equal to'. - `<>` - 'not equal to'. It is URL-encoded (%3C%3E). - `<` - 'less than'. It is URL-encoded (%3C). - `<=` - 'less than or equal to'. It is URL-encoded (%3C=). - `>` - 'greater than'. It is URL-encoded (%3E). - `>=` - 'greater than or equal to'. It is URL-encoded (%3E=). *Note:* The API doesn't accept multiple values of a parameter. If a particular parameter is supplied more than once in the API request, the API only accepts the last value of that request parameter. In addition, if an invalid request parameter is supplied in the API request, the API ignores that request parameter and returns the response corresponding to the remaining valid request parameters. If no parameters are requested, all parameters are returned. "
+          in: query
+          name: filters
+          schema:
+            type: string
+        - description: 'Comma separated group ids (obfuscated) on which user activities are filtered, i.e. the response will contain activities for only those users that are a part of at least one of the group ids mentioned here. Format: "id:abc123,id:xyz456"'
+          in: query
+          name: groupIdFilter
+          schema:
+            type: string
+        - description: Determines how many activity records are shown on each response page. For example, if the request sets `maxResults=1` and the report has two activities, the report has two pages. The response's `nextPageToken` property has the token to the second page. The `maxResults` query string is optional in the request. The default value is 1000.
+          in: query
+          name: maxResults
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: ID of the organizational unit to report on. Activity records will be shown only for users who belong to the specified organizational unit. Data before Dec 17, 2018 doesn't appear in the filtered results.
+          in: query
+          name: orgUnitID
+          schema:
+            type: string
+        - description: The token to specify next page. A report with multiple pages has a `nextPageToken` property in the response. In your follow-on request getting the next page of the report, enter the `nextPageToken` value in the `pageToken` query string.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Sets the beginning of the range of time shown in the report. The date is in the RFC 3339 format, for example 2010-10-28T10:26:35.000Z. The report returns all activities from `startTime` until `endTime`. The `startTime` must be before the `endTime` (if specified) and the current time when the request is made, or the API returns an error.
+          in: query
+          name: startTime
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Channel"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Channel"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.reports.audit.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.reports.audit.readonly
+      tags:
+        - activities
+  "/admin/reports/v1/usage/dates/{date}":
+    get:
+      description: "Retrieves a report which is a collection of properties and statistics for a specific customer's account. For more information, see the Customers Usage Report guide. For more information about the customer report's parameters, see the Customers Usage parameters reference guides. "
+      operationId: reports.customerUsageReports.get
+      parameters:
+        - description: Represents the date the usage occurred. The timestamp is in the ISO 8601 format, yyyy-mm-dd. We recommend you use your account's time zone for this.
+          in: path
+          name: date
+          required: true
+          schema:
+            type: string
+        - description: The unique ID of the customer to retrieve data for.
+          in: query
+          name: customerId
+          schema:
+            type: string
+        - description: Token to specify next page. A report with multiple pages has a `nextPageToken` property in the response. For your follow-on requests getting all of the report's pages, enter the `nextPageToken` value in the `pageToken` query string.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: "The `parameters` query string is a comma-separated list of event parameters that refine a report's results. The parameter is associated with a specific application. The application values for the Customers usage report include `accounts`, `app_maker`, `apps_scripts`, `calendar`, `classroom`, `cros`, `docs`, `gmail`, `gplus`, `device_management`, `meet`, and `sites`. A `parameters` query string is in the CSV form of `app_name1:param_name1, app_name2:param_name2`. *Note:* The API doesn't accept multiple values of a parameter. If a particular parameter is supplied more than once in the API request, the API only accepts the last value of that request parameter. In addition, if an invalid request parameter is supplied in the API request, the API ignores that request parameter and returns the response corresponding to the remaining valid request parameters. An example of an invalid request parameter is one that does not belong to the application. If no parameters are requested, all parameters are returned. "
+          in: query
+          name: parameters
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsageReports"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.reports.usage.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.reports.usage.readonly
+      tags:
+        - customerUsageReports
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/admin/reports/v1/usage/users/{userKey}/dates/{date}":
+    get:
+      description: Retrieves a report which is a collection of properties and statistics for a set of users with the account. For more information, see the User Usage Report guide. For more information about the user report's parameters, see the Users Usage parameters reference guides.
+      operationId: reports.userUsageReport.get
+      parameters:
+        - description: Represents the profile ID or the user email for which the data should be filtered. Can be `all` for all information, or `userKey` for a user's unique Google Workspace profile ID or their primary email address. Must not be a deleted user. For a deleted user, call `users.list` in Directory API with `showDeleted=true`, then use the returned `ID` as the `userKey`.
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+        - description: Represents the date the usage occurred. The timestamp is in the ISO 8601 format, yyyy-mm-dd. We recommend you use your account's time zone for this.
+          in: path
+          name: date
+          required: true
+          schema:
+            type: string
+        - description: The unique ID of the customer to retrieve data for.
+          in: query
+          name: customerId
+          schema:
+            type: string
+        - description: "The `filters` query string is a comma-separated list of an application's event parameters where the parameter's value is manipulated by a relational operator. The `filters` query string includes the name of the application whose usage is returned in the report. The application values for the Users Usage Report include `accounts`, `docs`, and `gmail`. Filters are in the form `[application name]:parameter name[parameter value],...`. In this example, the `<>` 'not equal to' operator is URL-encoded in the request's query string (%3C%3E): GET https://www.googleapis.com/admin/reports/v1/usage/users/all/dates/2013-03-03 ?parameters=accounts:last_login_time &filters=accounts:last_login_time%3C%3E2010-10-28T10:26:35.000Z The relational operators include: - `==` - 'equal to'. - `<>` - 'not equal to'. It is URL-encoded (%3C%3E). - `<` - 'less than'. It is URL-encoded (%3C). - `<=` - 'less than or equal to'. It is URL-encoded (%3C=). - `>` - 'greater than'. It is URL-encoded (%3E). - `>=` - 'greater than or equal to'. It is URL-encoded (%3E=). "
+          in: query
+          name: filters
+          schema:
+            type: string
+        - description: 'Comma separated group ids (obfuscated) on which user activities are filtered, i.e. the response will contain activities for only those users that are a part of at least one of the group ids mentioned here. Format: "id:abc123,id:xyz456"'
+          in: query
+          name: groupIdFilter
+          schema:
+            type: string
+        - description: Determines how many activity records are shown on each response page. For example, if the request sets `maxResults=1` and the report has two activities, the report has two pages. The response's `nextPageToken` property has the token to the second page. The `maxResults` query string is optional.
+          in: query
+          name: maxResults
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: ID of the organizational unit to report on. User activity will be shown only for users who belong to the specified organizational unit. Data before Dec 17, 2018 doesn't appear in the filtered results.
+          in: query
+          name: orgUnitID
+          schema:
+            type: string
+        - description: Token to specify next page. A report with multiple pages has a `nextPageToken` property in the response. In your follow-on request getting the next page of the report, enter the `nextPageToken` value in the `pageToken` query string.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: "The `parameters` query string is a comma-separated list of event parameters that refine a report's results. The parameter is associated with a specific application. The application values for the Customers Usage report include `accounts`, `app_maker`, `apps_scripts`, `calendar`, `classroom`, `cros`, `docs`, `gmail`, `gplus`, `device_management`, `meet`, and `sites`. A `parameters` query string is in the CSV form of `app_name1:param_name1, app_name2:param_name2`. *Note:* The API doesn't accept multiple values of a parameter. If a particular parameter is supplied more than once in the API request, the API only accepts the last value of that request parameter. In addition, if an invalid request parameter is supplied in the API request, the API ignores that request parameter and returns the response corresponding to the remaining valid request parameters. An example of an invalid request parameter is one that does not belong to the application. If no parameters are requested, all parameters are returned. "
+          in: query
+          name: parameters
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsageReports"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.reports.usage.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.reports.usage.readonly
+      tags:
+        - userUsageReport
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/admin/reports/v1/usage/{entityType}/{entityKey}/dates/{date}":
+    get:
+      description: Retrieves a report which is a collection of properties and statistics for entities used by users within the account. For more information, see the Entities Usage Report guide. For more information about the entities report's parameters, see the Entities Usage parameters reference guides.
+      operationId: reports.entityUsageReports.get
+      parameters:
+        - description: Represents the type of entity for the report.
+          in: path
+          name: entityType
+          required: true
+          schema:
+            enum:
+              - gplus_communities
+            type: string
+        - description: Represents the key of the object to filter the data with.
+          in: path
+          name: entityKey
+          required: true
+          schema:
+            enum:
+              - all
+              - entityKey
+            type: string
+        - description: Represents the date the usage occurred. The timestamp is in the ISO 8601 format, yyyy-mm-dd. We recommend you use your account's time zone for this.
+          in: path
+          name: date
+          required: true
+          schema:
+            type: string
+        - description: The unique ID of the customer to retrieve data for.
+          in: query
+          name: customerId
+          schema:
+            type: string
+        - description: "The `filters` query string is a comma-separated list of an application's event parameters where the parameter's value is manipulated by a relational operator. The `filters` query string includes the name of the application whose usage is returned in the report. The application values for the Entities usage report include `accounts`, `docs`, and `gmail`. Filters are in the form `[application name]:parameter name[parameter value],...`. In this example, the `<>` 'not equal to' operator is URL-encoded in the request's query string (%3C%3E): GET https://www.googleapis.com/admin/reports/v1/usage/gplus_communities/all/dates/2017-12-01 ?parameters=gplus:community_name,gplus:num_total_members &filters=gplus:num_total_members%3C%3E0 The relational operators include: - `==` - 'equal to'. - `<>` - 'not equal to'. It is URL-encoded (%3C%3E). - `<` - 'less than'. It is URL-encoded (%3C). - `<=` - 'less than or equal to'. It is URL-encoded (%3C=). - `>` - 'greater than'. It is URL-encoded (%3E). - `>=` - 'greater than or equal to'. It is URL-encoded (%3E=). Filters can only be applied to numeric parameters."
+          in: query
+          name: filters
+          schema:
+            type: string
+        - description: Determines how many activity records are shown on each response page. For example, if the request sets `maxResults=1` and the report has two activities, the report has two pages. The response's `nextPageToken` property has the token to the second page.
+          in: query
+          name: maxResults
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: Token to specify next page. A report with multiple pages has a `nextPageToken` property in the response. In your follow-on request getting the next page of the report, enter the `nextPageToken` value in the `pageToken` query string.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: "The `parameters` query string is a comma-separated list of event parameters that refine a report's results. The parameter is associated with a specific application. The application values for the Entities usage report are only `gplus`. A `parameter` query string is in the CSV form of `[app_name1:param_name1], [app_name2:param_name2]...`. *Note:* The API doesn't accept multiple values of a parameter. If a particular parameter is supplied more than once in the API request, the API only accepts the last value of that request parameter. In addition, if an invalid request parameter is supplied in the API request, the API ignores that request parameter and returns the response corresponding to the remaining valid request parameters. An example of an invalid request parameter is one that does not belong to the application. If no parameters are requested, all parameters are returned. "
+          in: query
+          name: parameters
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsageReports"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.reports.usage.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.reports.usage.readonly
+      tags:
+        - entityUsageReports
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /admin/reports_v1/channels/stop:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Stop watching resources through this channel.
+      operationId: admin.channels.stop
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Channel"
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.reports.audit.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.reports.audit.readonly
+      tags:
+        - channels
 components:
   parameters:
     _.xgafv:
@@ -106,356 +595,346 @@ components:
       schema:
         type: string
   schemas:
-    Alias:
-      description: JSON template for Alias object in Directory API.
+    Activities:
+      description: JSON template for a collection of activities.
       properties:
-        alias:
-          type: string
         etag:
+          description: ETag of the resource.
+          type: string
+        items:
+          description: Each activity record in the response.
+          items:
+            $ref: "#/components/schemas/Activity"
+          type: array
+        kind:
+          default: admin#reports#activities
+          description: The type of API resource. For an activity report, the value is `reports#activities`.
+          type: string
+        nextPageToken:
+          description: Token for retrieving the follow-on next page of the report. The `nextPageToken` value is used in the request's `pageToken` query string.
+          type: string
+      type: object
+    Activity:
+      description: JSON template for the activity resource.
+      properties:
+        actor:
+          description: User doing the action.
+          properties:
+            callerType:
+              description: The type of actor.
+              type: string
+            email:
+              description: The primary email address of the actor. May be absent if there is no email address associated with the actor.
+              type: string
+            key:
+              description: Only present when `callerType` is `KEY`. Can be the `consumer_key` of the requestor for OAuth 2LO API requests or an identifier for robot accounts.
+              type: string
+            profileId:
+              description: The unique Google Workspace profile ID of the actor. May be absent if the actor is not a Google Workspace user.
+              type: string
+          type: object
+        etag:
+          description: ETag of the entry.
+          type: string
+        events:
+          description: Activity events in the report.
+          items:
+            properties:
+              name:
+                description: "Name of the event. This is the specific name of the activity reported by the API. And each `eventName` is related to a specific Google Workspace service or feature which the API organizes into types of events. For `eventName` request parameters in general: - If no `eventName` is given, the report returns all possible instances of an `eventName`. - When you request an `eventName`, the API's response returns all activities which contain that `eventName`. It is possible that the returned activities will have other `eventName` properties in addition to the one requested. For more information about `eventName` properties, see the list of event names for various applications above in `applicationName`."
+                type: string
+              parameters:
+                description: Parameter value pairs for various applications. For more information about `eventName` parameters, see the list of event names for various applications above in `applicationName`.
+                items:
+                  properties:
+                    boolValue:
+                      description: Boolean value of the parameter.
+                      type: boolean
+                    intValue:
+                      description: Integer value of the parameter.
+                      format: int64
+                      type: string
+                    messageValue:
+                      description: "Nested parameter value pairs associated with this parameter. Complex value type for a parameter are returned as a list of parameter values. For example, the address parameter may have a value as `[{parameter: [{name: city, value: abc}]}]`"
+                      properties:
+                        parameter:
+                          description: Parameter values
+                          items:
+                            $ref: "#/components/schemas/NestedParameter"
+                          type: array
+                      type: object
+                    multiIntValue:
+                      description: Integer values of the parameter.
+                      items:
+                        format: int64
+                        type: string
+                      type: array
+                    multiMessageValue:
+                      description: List of `messageValue` objects.
+                      items:
+                        properties:
+                          parameter:
+                            description: Parameter values
+                            items:
+                              $ref: "#/components/schemas/NestedParameter"
+                            type: array
+                        type: object
+                      type: array
+                    multiValue:
+                      description: String values of the parameter.
+                      items:
+                        type: string
+                      type: array
+                    name:
+                      description: The name of the parameter.
+                      type: string
+                    value:
+                      description: String value of the parameter.
+                      type: string
+                  type: object
+                type: array
+              type:
+                description: Type of event. The Google Workspace service or feature that an administrator changes is identified in the `type` property which identifies an event using the `eventName` property. For a full list of the API's `type` categories, see the list of event names for various applications above in `applicationName`.
+                type: string
+            type: object
+          type: array
+        id:
+          description: Unique identifier for each activity record.
+          properties:
+            applicationName:
+              description: Application name to which the event belongs. For possible values see the list of applications above in `applicationName`.
+              type: string
+            customerId:
+              description: The unique identifier for a Google Workspace account.
+              type: string
+            time:
+              description: Time of occurrence of the activity. This is in UNIX epoch time in seconds.
+              format: date-time
+              type: string
+            uniqueQualifier:
+              description: Unique qualifier if multiple events have the same time.
+              format: int64
+              type: string
+          type: object
+        ipAddress:
+          description: IP address of the user doing the action. This is the Internet Protocol (IP) address of the user when logging into Google Workspace, which may or may not reflect the user's physical location. For example, the IP address can be the user's proxy server's address or a virtual private network (VPN) address. The API supports IPv4 and IPv6.
+          type: string
+        kind:
+          default: admin#reports#activity
+          description: The type of API resource. For an activity report, the value is `audit#activity`.
+          type: string
+        ownerDomain:
+          description: This is the domain that is affected by the report's event. For example domain of Admin console or the Drive application's document owner.
+          type: string
+      type: object
+    Channel:
+      description: A notification channel used to watch for resource changes.
+      properties:
+        address:
+          description: The address where notifications are delivered for this channel.
+          type: string
+        expiration:
+          description: Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+          format: int64
           type: string
         id:
+          description: A UUID or similar unique string that identifies this channel.
           type: string
         kind:
-          default: admin#directory#alias
+          default: api#channel
+          description: Identifies this as a notification channel used to watch for changes to a resource, which is "`api#channel`".
           type: string
-        primaryEmail:
+        params:
+          additionalProperties:
+            type: string
+          description: Additional parameters controlling delivery channel behavior. Optional.
+          type: object
+        payload:
+          description: A Boolean value to indicate whether payload is wanted. Optional.
+          type: boolean
+        resourceId:
+          description: An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.
+          type: string
+        resourceUri:
+          description: A version-specific identifier for the watched resource.
+          type: string
+        token:
+          description: An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.
+          type: string
+        type:
+          description: The type of delivery mechanism used for this channel. The value should be set to `"web_hook"`.
           type: string
       type: object
-    Aliases:
-      description: JSON response template to list aliases in Directory API.
+    NestedParameter:
+      description: JSON template for a parameter used in various reports.
       properties:
-        aliases:
-          items: {}
+        boolValue:
+          description: Boolean value of the parameter.
+          type: boolean
+        intValue:
+          description: Integer value of the parameter.
+          format: int64
+          type: string
+        multiBoolValue:
+          description: Multiple boolean values of the parameter.
+          items:
+            type: boolean
           type: array
-        etag:
+        multiIntValue:
+          description: Multiple integer values of the parameter.
+          items:
+            format: int64
+            type: string
+          type: array
+        multiValue:
+          description: Multiple string values of the parameter.
+          items:
+            type: string
+          type: array
+        name:
+          description: The name of the parameter.
           type: string
-        kind:
-          default: admin#directory#aliases
+        value:
+          description: String value of the parameter.
           type: string
       type: object
-    Feature:
-      description: JSON template for Feature object in Directory API.
+    UsageReport:
+      description: JSON template for a usage report.
       properties:
-        etags:
+        date:
+          description: Output only. The date of the report request.
+          readOnly: true
+          type: string
+        entity:
+          description: Output only. Information about the type of the item.
+          properties:
+            customerId:
+              description: Output only. The unique identifier of the customer's account.
+              readOnly: true
+              type: string
+            entityId:
+              description: 'Output only. Object key. Only relevant if entity.type = "OBJECT" Note: external-facing name of report is "Entities" rather than "Objects".'
+              readOnly: true
+              type: string
+            profileId:
+              description: Output only. The user's immutable Google Workspace profile identifier.
+              readOnly: true
+              type: string
+            type:
+              description: Output only. The type of item. The value is `user`.
+              readOnly: true
+              type: string
+            userEmail:
+              description: Output only. The user's email address. Only relevant if entity.type = "USER"
+              readOnly: true
+              type: string
+          readOnly: true
+          type: object
+        etag:
           description: ETag of the resource.
           type: string
         kind:
-          default: admin#directory#resources#features#Feature
-          description: Kind of resource this is.
-          type: string
-        name:
-          description: The name of the feature.
-          type: string
-      type: object
-    FeatureInstance:
-      description: JSON template for a feature instance.
-      properties:
-        feature:
-          $ref: "#/components/schemas/Feature"
-          description: The feature that this is an instance of. A calendar resource may have multiple instances of a feature.
-      type: object
-    UserAbout:
-      description: JSON template for About (notes) of a user in Directory API.
-      properties:
-        contentType:
-          description: About entry can have a type which indicates the content type. It can either be plain or html. By default, notes contents are assumed to contain plain text.
-          type: string
-        value:
-          description: Actual value of notes.
-          type: string
-      type: object
-    UserAddress:
-      description: JSON template for address.
-      properties:
-        country:
-          description: Country.
-          type: string
-        countryCode:
-          description: Country code.
-          type: string
-        customType:
-          description: Custom type.
-          type: string
-        extendedAddress:
-          description: Extended Address.
-          type: string
-        formatted:
-          description: Formatted address.
-          type: string
-        locality:
-          description: Locality.
-          type: string
-        poBox:
-          description: Other parts of address.
-          type: string
-        postalCode:
-          description: Postal code.
-          type: string
-        primary:
-          description: If this is user's primary address. Only one entry could be marked as primary.
-          type: boolean
-        region:
-          description: Region.
-          type: string
-        sourceIsStructured:
-          description: User supplied address was structured. Structured addresses are NOT supported at this time. You might be able to write structured addresses but any values will eventually be clobbered.
-          type: boolean
-        streetAddress:
-          description: Street.
-          type: string
-        type:
-          description: Each entry can have a type which indicates standard values of that entry. For example address could be of home work etc. In addition to the standard type an entry can have a custom type and can take any value. Such type should have the CUSTOM value as type and also have a customType value.
-          type: string
-      type: object
-    UserCustomProperties:
-      additionalProperties: {}
-      description: JSON template for a set of custom properties (i.e. all fields in a particular schema)
-      type: object
-    UserEmail:
-      description: JSON template for an email.
-      properties:
-        address:
-          description: Email id of the user.
-          type: string
-        customType:
-          description: Custom Type.
-          type: string
-        primary:
-          description: If this is user's primary email. Only one entry could be marked as primary.
-          type: boolean
-        type:
-          description: Each entry can have a type which indicates standard types of that entry. For example email could be of home, work etc. In addition to the standard type, an entry can have a custom type and can take any value Such types should have the CUSTOM value as type and also have a customType value.
-          type: string
-      type: object
-    UserExternalId:
-      description: JSON template for an externalId entry.
-      properties:
-        customType:
-          description: Custom type.
-          type: string
-        type:
-          description: The type of the Id.
-          type: string
-        value:
-          description: The value of the id.
-          type: string
-      type: object
-    UserGender:
-      properties:
-        addressMeAs:
-          description: AddressMeAs. A human-readable string containing the proper way to refer to the profile owner by humans for example he/him/his or they/them/their.
-          type: string
-        customGender:
-          description: Custom gender.
-          type: string
-        type:
-          description: Gender.
-          type: string
-      type: object
-    UserIm:
-      description: JSON template for instant messenger of an user.
-      properties:
-        customProtocol:
-          description: Custom protocol.
-          type: string
-        customType:
-          description: Custom type.
-          type: string
-        im:
-          description: Instant messenger id.
-          type: string
-        primary:
-          description: If this is user's primary im. Only one entry could be marked as primary.
-          type: boolean
-        protocol:
-          description: Protocol used in the instant messenger. It should be one of the values from ImProtocolTypes map. Similar to type it can take a CUSTOM value and specify the custom name in customProtocol field.
-          type: string
-        type:
-          description: Each entry can have a type which indicates standard types of that entry. For example instant messengers could be of home work etc. In addition to the standard type an entry can have a custom type and can take any value. Such types should have the CUSTOM value as type and also have a customType value.
-          type: string
-      type: object
-    UserKeyword:
-      description: JSON template for a keyword entry.
-      properties:
-        customType:
-          description: Custom Type.
-          type: string
-        type:
-          description: Each entry can have a type which indicates standard type of that entry. For example keyword could be of type occupation or outlook. In addition to the standard type an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a customType value.
-          type: string
-        value:
-          description: Keyword.
-          type: string
-      type: object
-    UserLanguage:
-      description: JSON template for a language entry.
-      properties:
-        customLanguage:
-          description: Other language. User can provide own language name if there is no corresponding Google III language code. If this is set LanguageCode can't be set
-          type: string
-        languageCode:
-          description: Language Code. Should be used for storing Google III LanguageCode string representation for language. Illegal values cause SchemaException.
-          type: string
-      type: object
-    UserLocation:
-      description: JSON template for a location entry.
-      properties:
-        area:
-          description: Textual location. This is most useful for display purposes to concisely describe the location. For example 'Mountain View, CA', 'Near Seattle', 'US-NYC-9TH 9A209A.''
-          type: string
-        buildingId:
-          description: Building Identifier.
-          type: string
-        customType:
-          description: Custom Type.
-          type: string
-        deskCode:
-          description: Most specific textual code of individual desk location.
-          type: string
-        floorName:
-          description: Floor name/number.
-          type: string
-        floorSection:
-          description: Floor section. More specific location within the floor. For example if a floor is divided into sections 'A', 'B' and 'C' this field would identify one of those values.
-          type: string
-        type:
-          description: Each entry can have a type which indicates standard types of that entry. For example location could be of types default and desk. In addition to standard type an entry can have a custom type and can give it any name. Such types should have 'custom' as type and also have a customType value.
-          type: string
-      type: object
-    UserOrganization:
-      description: JSON template for an organization entry.
-      properties:
-        costCenter:
-          description: The cost center of the users department.
-          type: string
-        customType:
-          description: Custom type.
-          type: string
-        department:
-          description: Department within the organization.
-          type: string
-        description:
-          description: Description of the organization.
-          type: string
-        domain:
-          description: The domain to which the organization belongs to.
-          type: string
-        fullTimeEquivalent:
-          description: The full-time equivalent millipercent within the organization (100000 = 100%).
-          format: int32
-          type: integer
-        location:
-          description: Location of the organization. This need not be fully qualified address.
-          type: string
-        name:
-          description: Name of the organization
-          type: string
-        primary:
-          description: If it user's primary organization.
-          type: boolean
-        symbol:
-          description: Symbol of the organization.
-          type: string
-        title:
-          description: Title (designation) of the user in the organization.
-          type: string
-        type:
-          description: Each entry can have a type which indicates standard types of that entry. For example organization could be of school work etc. In addition to the standard type an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a CustomType value.
-          type: string
-      type: object
-    UserPhone:
-      description: JSON template for a phone entry.
-      properties:
-        customType:
-          description: Custom Type.
-          type: string
-        primary:
-          description: If this is user's primary phone or not.
-          type: boolean
-        type:
-          description: Each entry can have a type which indicates standard types of that entry. For example phone could be of home_fax work mobile etc. In addition to the standard type an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a customType value.
-          type: string
-        value:
-          description: Phone number.
-          type: string
-      type: object
-    UserPosixAccount:
-      description: JSON template for a POSIX account entry.
-      properties:
-        accountId:
-          description: A POSIX account field identifier.
-          type: string
-        gecos:
-          description: The GECOS (user information) for this account.
-          type: string
-        gid:
-          description: The default group ID.
-          format: uint64
-          type: string
-        homeDirectory:
-          description: The path to the home directory for this account.
-          type: string
-        operatingSystemType:
-          description: The operating system type for this account.
-          type: string
-        primary:
-          description: If this is user's primary account within the SystemId.
-          type: boolean
-        shell:
-          description: The path to the login shell for this account.
-          type: string
-        systemId:
-          description: System identifier for which account Username or Uid apply to.
-          type: string
-        uid:
-          description: The POSIX compliant user ID.
-          format: uint64
-          type: string
-        username:
-          description: The username of the account.
-          type: string
-      type: object
-    UserRelation:
-      description: JSON template for a relation entry.
-      properties:
-        customType:
-          description: Custom Type.
-          type: string
-        type:
-          description: The relation of the user. Some of the possible values are mother father sister brother manager assistant partner.
-          type: string
-        value:
-          description: The name of the relation.
-          type: string
-      type: object
-    UserSshPublicKey:
-      description: JSON template for a POSIX account entry.
-      properties:
-        expirationTimeUsec:
-          description: An expiration time in microseconds since epoch.
-          format: int64
-          type: string
-        fingerprint:
-          description: A SHA-256 fingerprint of the SSH public key. (Read-only)
+          default: admin#reports#usageReport
+          description: The type of API resource. For a usage report, the value is `admin#reports#usageReport`.
+          type: string
+        parameters:
+          description: Output only. Parameter value pairs for various applications. For the Entity Usage Report parameters and values, see [the Entity Usage parameters reference](/admin-sdk/reports/v1/reference/usage-ref-appendix-a/entities).
+          items:
+            properties:
+              boolValue:
+                description: Output only. Boolean value of the parameter.
+                readOnly: true
+                type: boolean
+              datetimeValue:
+                description: The RFC 3339 formatted value of the parameter, for example 2010-10-28T10:26:35.000Z.
+                format: date-time
+                readOnly: true
+                type: string
+              intValue:
+                description: Output only. Integer value of the parameter.
+                format: int64
+                readOnly: true
+                type: string
+              msgValue:
+                description: Output only. Nested message value of the parameter.
+                items:
+                  additionalProperties:
+                    description: Properties of the object.
+                  type: object
+                readOnly: true
+                type: array
+              name:
+                description: The name of the parameter. For the User Usage Report parameter names, see the User Usage parameters reference.
+                type: string
+              stringValue:
+                description: Output only. String value of the parameter.
+                readOnly: true
+                type: string
+            type: object
           readOnly: true
-          type: string
-        key:
-          description: An SSH public key.
-          type: string
+          type: array
       type: object
-    UserWebsite:
-      description: JSON template for a website entry.
+    UsageReports:
       properties:
-        customType:
-          description: Custom Type.
+        etag:
+          description: ETag of the resource.
           type: string
-        primary:
-          description: If this is user's primary website or not.
-          type: boolean
-        type:
-          description: Each entry can have a type which indicates standard types of that entry. For example website could be of home work blog etc. In addition to the standard type an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a customType value.
+        kind:
+          default: admin#reports#usageReports
+          description: The type of API resource. For a usage report, the value is `admin#reports#usageReports`.
           type: string
-        value:
-          description: Website.
+        nextPageToken:
+          description: Token to specify next page. A report with multiple pages has a `nextPageToken` property in the response. For your follow-on requests getting all of the report's pages, enter the `nextPageToken` value in the `pageToken` query string.
           type: string
+        usageReports:
+          description: Various application parameter records.
+          items:
+            $ref: "#/components/schemas/UsageReport"
+          type: array
+        warnings:
+          description: Warnings, if any.
+          items:
+            properties:
+              code:
+                description: Machine readable code or warning type. The warning code value is `200`.
+                type: string
+              data:
+                description: Key-value pairs to give detailed information on the warning.
+                items:
+                  properties:
+                    key:
+                      description: Key associated with a key-value pair to give detailed information on the warning.
+                      type: string
+                    value:
+                      description: Value associated with a key-value pair to give detailed information on the warning.
+                      type: string
+                  type: object
+                type: array
+              message:
+                description: 'The human readable messages for a warning are: - Data is not available warning - Sorry, data for date yyyy-mm-dd for application "`application name`" is not available. - Partial data is available warning - Data for date yyyy-mm-dd for application "`application name`" is not available right now, please try again after a few hours. '
+                type: string
+            type: object
+          type: array
       type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/admin.reports.audit.readonly: View audit reports for your G Suite domain
+            https://www.googleapis.com/auth/admin.reports.usage.readonly: View usage reports for your G Suite domain
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/admin.reports.audit.readonly: View audit reports for your G Suite domain
+            https://www.googleapis.com/auth/admin.reports.usage.readonly: View usage reports for your G Suite domain
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2
+source:
+  url: {}

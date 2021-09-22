@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: AdMob API
-  version: v1beta
+  version: v1
   x-apisguru-categories:
     - analytics
     - media
@@ -20,7 +20,7 @@ info:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: https://admob.googleapis.com/$discovery/rest?version=v1beta
+      url: https://admob.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-providerName: googleapis.com
   x-serviceName: admob
@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: accounts
 paths:
-  /v1beta/accounts:
+  /v1/accounts:
     get:
       description: Lists the AdMob publisher account that was most recently signed in to from the AdMob UI. For more information, see https://support.google.com/admob/answer/10243672.
       operationId: admob.accounts.list
@@ -74,7 +74,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{name}":
+  "/v1/{name}":
     get:
       description: Gets information about the specified AdMob publisher account.
       operationId: admob.accounts.get
@@ -115,7 +115,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/adUnits":
+  "/v1/{parent}/adUnits":
     get:
       description: List the ad units under the specified AdMob account.
       operationId: admob.accounts.adUnits.list
@@ -162,7 +162,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/apps":
+  "/v1/{parent}/apps":
     get:
       description: List the apps under the specified AdMob account.
       operationId: admob.accounts.apps.list
@@ -209,7 +209,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/mediationReport:generate":
+  "/v1/{parent}/mediationReport:generate":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -255,7 +255,7 @@ paths:
             - https://www.googleapis.com/auth/admob.report
       tags:
         - accounts
-  "/v1beta/{parent}/networkReport:generate":
+  "/v1/{parent}/networkReport:generate":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

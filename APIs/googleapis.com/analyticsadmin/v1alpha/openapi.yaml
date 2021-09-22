@@ -2594,6 +2594,9 @@ components:
     GoogleAnalyticsAdminV1alphaProperty:
       description: A resource message representing a Google Analytics GA4 property.
       properties:
+        account:
+          description: 'Immutable. The resource name of the parent account Format: accounts/{account_id} Example: "accounts/123"'
+          type: string
         createTime:
           description: Output only. Time when the entity was originally created.
           format: google-datetime

@@ -1,7 +1,6 @@
 openapi: 3.0.0
 servers:
   - url: https://vision.googleapis.com/
-x-hasEquivalentPaths: true
 info:
   contact:
     name: Google
@@ -13,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Cloud Vision API
-  version: v1p4beta1
+  version: v1p2beta1
   x-apiClientRegistration:
     url: https://console.developers.google.com
   x-apisguru-categories:
@@ -30,6 +29,7 @@ info:
       version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: vision
+  x-preferred: false
 externalDocs:
   url: https://cloud.google.com/vision/
 tags:
@@ -37,7 +37,7 @@ tags:
   - name: images
   - name: projects
 paths:
-  /v1p4beta1/files:annotate:
+  /v1p2beta1/files:annotate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -57,13 +57,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1BatchAnnotateFilesRequest"
+              $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse"
+                $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -76,7 +76,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-vision
       tags:
         - files
-  /v1p4beta1/files:asyncBatchAnnotate:
+  /v1p2beta1/files:asyncBatchAnnotate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -96,7 +96,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1AsyncBatchAnnotateFilesRequest"
+              $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest"
       responses:
         "200":
           content:
@@ -115,7 +115,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-vision
       tags:
         - files
-  /v1p4beta1/images:annotate:
+  /v1p2beta1/images:annotate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -135,13 +135,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1BatchAnnotateImagesRequest"
+              $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1BatchAnnotateImagesResponse"
+                $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -154,7 +154,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-vision
       tags:
         - images
-  /v1p4beta1/images:asyncBatchAnnotate:
+  /v1p2beta1/images:asyncBatchAnnotate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -174,7 +174,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1AsyncBatchAnnotateImagesRequest"
+              $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest"
       responses:
         "200":
           content:
@@ -193,257 +193,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-vision
       tags:
         - images
-  "/v1p4beta1/{name}":
-    delete:
-      description: Permanently deletes a ProductSet. Products and ReferenceImages in the ProductSet are not deleted. The actual image files are not deleted from Google Cloud Storage.
-      operationId: vision.projects.locations.productSets.delete
-      parameters:
-        - description: "Required. Resource name of the ProductSet to delete. Format is: `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Empty"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-vision
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-vision
-      tags:
-        - projects
-    get:
-      description: "Gets information associated with a ProductSet. Possible errors: * Returns NOT_FOUND if the ProductSet does not exist."
-      operationId: vision.projects.locations.productSets.get
-      parameters:
-        - description: "Required. Resource name of the ProductSet to get. Format is: `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ProductSet"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-vision
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-vision
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    patch:
-      description: "Makes changes to a ProductSet resource. Only display_name can be updated currently. Possible errors: * Returns NOT_FOUND if the ProductSet does not exist. * Returns INVALID_ARGUMENT if display_name is present in update_mask but missing from the request or longer than 4096 characters."
-      operationId: vision.projects.locations.productSets.patch
-      parameters:
-        - description: "The resource name of the ProductSet. Format is: `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`. This field is ignored when creating a ProductSet."
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-        - description: The FieldMask that specifies which fields to update. If update_mask isn't specified, all mutable fields are to be updated. Valid mask path is `display_name`.
-          in: query
-          name: updateMask
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ProductSet"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ProductSet"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-vision
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-vision
-      tags:
-        - projects
-  "/v1p4beta1/{name}/products":
-    get:
-      description: "Lists the Products in a ProductSet, in an unspecified order. If the ProductSet does not exist, the products field of the response will be empty. Possible errors: * Returns INVALID_ARGUMENT if page_size is greater than 100 or less than 1."
-      operationId: vision.projects.locations.productSets.products.list
-      parameters:
-        - description: "Required. The ProductSet resource for which to retrieve Products. Format is: `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-        - description: The maximum number of items to return. Default 10, maximum 100.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The next_page_token returned from a previous List request, if any.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ListProductsInProductSetResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-vision
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-vision
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1p4beta1/{name}:addProduct":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: "Adds a Product to the specified ProductSet. If the Product is already present, no change is made. One Product can be added to at most 100 ProductSets. Possible errors: * Returns NOT_FOUND if the Product or the ProductSet doesn't exist."
-      operationId: vision.projects.locations.productSets.addProduct
-      parameters:
-        - description: "Required. The resource name for the ProductSet to modify. Format is: `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1AddProductToProductSetRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Empty"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-vision
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-vision
-      tags:
-        - projects
-  "/v1p4beta1/{name}:removeProduct":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Removes a Product from the specified ProductSet.
-      operationId: vision.projects.locations.productSets.removeProduct
-      parameters:
-        - description: "Required. The resource name for the ProductSet to modify. Format is: `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1RemoveProductFromProductSetRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Empty"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-vision
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-vision
-      tags:
-        - projects
-  "/v1p4beta1/{parent}/files:annotate":
+  "/v1p2beta1/{parent}/files:annotate":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -470,13 +220,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1BatchAnnotateFilesRequest"
+              $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse"
+                $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -489,7 +239,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-vision
       tags:
         - projects
-  "/v1p4beta1/{parent}/files:asyncBatchAnnotate":
+  "/v1p2beta1/{parent}/files:asyncBatchAnnotate":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -516,7 +266,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1AsyncBatchAnnotateFilesRequest"
+              $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest"
       responses:
         "200":
           content:
@@ -535,7 +285,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-vision
       tags:
         - projects
-  "/v1p4beta1/{parent}/images:annotate":
+  "/v1p2beta1/{parent}/images:annotate":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -562,13 +312,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1BatchAnnotateImagesRequest"
+              $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1BatchAnnotateImagesResponse"
+                $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -581,7 +331,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-vision
       tags:
         - projects
-  "/v1p4beta1/{parent}/images:asyncBatchAnnotate":
+  "/v1p2beta1/{parent}/images:asyncBatchAnnotate":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -608,372 +358,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1AsyncBatchAnnotateImagesRequest"
+              $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-vision
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-vision
-      tags:
-        - projects
-  "/v1p4beta1/{parent}/productSets":
-    get:
-      description: "Lists ProductSets in an unspecified order. Possible errors: * Returns INVALID_ARGUMENT if page_size is greater than 100, or less than 1."
-      operationId: vision.projects.locations.productSets.list
-      parameters:
-        - description: Required. The project from which ProductSets should be listed. Format is `projects/PROJECT_ID/locations/LOC_ID`.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: The maximum number of items to return. Default 10, maximum 100.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The next_page_token returned from a previous List request, if any.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ListProductSetsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-vision
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-vision
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: "Creates and returns a new ProductSet resource. Possible errors: * Returns INVALID_ARGUMENT if display_name is missing, or is longer than 4096 characters."
-      operationId: vision.projects.locations.productSets.create
-      parameters:
-        - description: Required. The project in which the ProductSet should be created. Format is `projects/PROJECT_ID/locations/LOC_ID`.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: A user-supplied resource id for this ProductSet. If set, the server will attempt to use this value as the resource id. If it is already in use, an error is returned with code ALREADY_EXISTS. Must be at most 128 characters long. It cannot contain the character `/`.
-          in: query
-          name: productSetId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ProductSet"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ProductSet"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-vision
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-vision
-      tags:
-        - projects
-  "/v1p4beta1/{parent}/productSets:import":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Asynchronous API that imports a list of reference images to specified product sets based on a list of image information. The google.longrunning.Operation API can be used to keep track of the progress and results of the request. `Operation.metadata` contains `BatchOperationMetadata`. (progress) `Operation.response` contains `ImportProductSetsResponse`. (results) The input source of this method is a csv file on Google Cloud Storage. For the format of the csv file please see ImportProductSetsGcsSource.csv_file_uri.
-      operationId: vision.projects.locations.productSets.import
-      parameters:
-        - description: Required. The project in which the ProductSets should be imported. Format is `projects/PROJECT_ID/locations/LOC_ID`.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ImportProductSetsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-vision
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-vision
-      tags:
-        - projects
-  "/v1p4beta1/{parent}/products":
-    get:
-      description: "Lists products in an unspecified order. Possible errors: * Returns INVALID_ARGUMENT if page_size is greater than 100 or less than 1."
-      operationId: vision.projects.locations.products.list
-      parameters:
-        - description: "Required. The project OR ProductSet from which Products should be listed. Format: `projects/PROJECT_ID/locations/LOC_ID`"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: The maximum number of items to return. Default 10, maximum 100.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The next_page_token returned from a previous List request, if any.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ListProductsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-vision
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-vision
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: "Creates and returns a new product resource. Possible errors: * Returns INVALID_ARGUMENT if display_name is missing or longer than 4096 characters. * Returns INVALID_ARGUMENT if description is longer than 4096 characters. * Returns INVALID_ARGUMENT if product_category is missing or invalid."
-      operationId: vision.projects.locations.products.create
-      parameters:
-        - description: Required. The project in which the Product should be created. Format is `projects/PROJECT_ID/locations/LOC_ID`.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: A user-supplied resource id for this Product. If set, the server will attempt to use this value as the resource id. If it is already in use, an error is returned with code ALREADY_EXISTS. Must be at most 128 characters long. It cannot contain the character `/`.
-          in: query
-          name: productId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1Product"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1Product"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-vision
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-vision
-      tags:
-        - projects
-  "/v1p4beta1/{parent}/products:purge":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Asynchronous API to delete all Products in a ProductSet or all Products that are in no ProductSet. If a Product is a member of the specified ProductSet in addition to other ProductSets, the Product will still be deleted. It is recommended to not delete the specified ProductSet until after this operation has completed. It is also recommended to not add any of the Products involved in the batch delete to a new ProductSet while this operation is running because those Products may still end up deleted. It's not possible to undo the PurgeProducts operation. Therefore, it is recommended to keep the csv files used in ImportProductSets (if that was how you originally built the Product Set) before starting PurgeProducts, in case you need to re-import the data after deletion. If the plan is to purge all of the Products from a ProductSet and then re-use the empty ProductSet to re-import new Products into the empty ProductSet, you must wait until the PurgeProducts operation has finished for that ProductSet. The google.longrunning.Operation API can be used to keep track of the progress and results of the request. `Operation.metadata` contains `BatchOperationMetadata`. (progress)
-      operationId: vision.projects.locations.products.purge
-      parameters:
-        - description: Required. The project and location in which the Products should be deleted. Format is `projects/PROJECT_ID/locations/LOC_ID`.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1PurgeProductsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-vision
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-vision
-      tags:
-        - projects
-  "/v1p4beta1/{parent}/referenceImages":
-    get:
-      description: "Lists reference images. Possible errors: * Returns NOT_FOUND if the parent product does not exist. * Returns INVALID_ARGUMENT if the page_size is greater than 100, or less than 1."
-      operationId: vision.projects.locations.products.referenceImages.list
-      parameters:
-        - description: Required. Resource name of the product containing the reference images. Format is `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: The maximum number of items to return. Default 10, maximum 100.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: A token identifying a page of results to be returned. This is the value of `nextPageToken` returned in a previous reference image list request. Defaults to the first page if not specified.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ListReferenceImagesResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-vision
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-vision
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: "Creates and returns a new ReferenceImage resource. The `bounding_poly` field is optional. If `bounding_poly` is not specified, the system will try to detect regions of interest in the image that are compatible with the product_category on the parent product. If it is specified, detection is ALWAYS skipped. The system converts polygons into non-rotated rectangles. Note that the pipeline will resize the image if the image resolution is too large to process (above 50MP). Possible errors: * Returns INVALID_ARGUMENT if the image_uri is missing or longer than 4096 characters. * Returns INVALID_ARGUMENT if the product does not exist. * Returns INVALID_ARGUMENT if bounding_poly is not provided, and nothing compatible with the parent product's product_category is detected. * Returns INVALID_ARGUMENT if bounding_poly contains more than 10 polygons."
-      operationId: vision.projects.locations.products.referenceImages.create
-      parameters:
-        - description: Required. Resource name of the product in which to create the reference image. Format is `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: A user-supplied resource id for the ReferenceImage to be added. If set, the server will attempt to use this value as the resource id. If it is already in use, an error is returned with code ALREADY_EXISTS. Must be at most 128 characters long. It cannot contain the character `/`.
-          in: query
-          name: referenceImageId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ReferenceImage"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ReferenceImage"
           description: Successful response
       security:
         - Oauth2:
@@ -1330,10 +721,6 @@ components:
           items:
             $ref: "#/components/schemas/ColorInfo"
           type: array
-      type: object
-    Empty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
-      properties: {}
       type: object
     EntityAnnotation:
       description: Set of detected entity features.
@@ -2401,6 +1788,27 @@ components:
             $ref: "#/components/schemas/GoogleCloudVisionV1p1beta1Symbol"
           type: array
       type: object
+    GoogleCloudVisionV1p2beta1AnnotateFileRequest:
+      description: A request to annotate one single file, e.g. a PDF, TIFF or GIF file.
+      properties:
+        features:
+          description: Required. Requested features.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1Feature"
+          type: array
+        imageContext:
+          $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1ImageContext"
+          description: Additional context that may accompany the image(s) in the file.
+        inputConfig:
+          $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1InputConfig"
+          description: Required. Information about the input file.
+        pages:
+          description: Pages of the file to perform image annotation. Pages starts from 1, we assume the first page of the file is page 1. At most 5 pages are supported per request. Pages can be negative. Page 1 means the first page. Page 2 means the second page. Page -1 means the last page. Page -2 means the second to the last page. If the file is GIF instead of PDF or TIFF, page refers to GIF frames. If this field is empty, by default the service performs image annotation for the first 5 pages of the file.
+          items:
+            format: int32
+            type: integer
+          type: array
+      type: object
     GoogleCloudVisionV1p2beta1AnnotateFileResponse:
       description: Response to a single file annotation request. A file may contain one or more images, which individually have their own responses.
       properties:
@@ -2419,6 +1827,21 @@ components:
           description: This field gives the total number of pages in the file.
           format: int32
           type: integer
+      type: object
+    GoogleCloudVisionV1p2beta1AnnotateImageRequest:
+      description: Request for performing Google Cloud Vision API tasks over a user-provided image, with user-requested features, and with context information.
+      properties:
+        features:
+          description: Requested features.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1Feature"
+          type: array
+        image:
+          $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1Image"
+          description: The image to be processed.
+        imageContext:
+          $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1ImageContext"
+          description: Additional context that may accompany the image.
       type: object
     GoogleCloudVisionV1p2beta1AnnotateImageResponse:
       description: Response to an image annotation request.
@@ -2478,12 +1901,42 @@ components:
           $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1WebDetection"
           description: If present, web detection has completed successfully.
       type: object
+    GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest:
+      description: An offline file annotation request.
+      properties:
+        features:
+          description: Required. Requested features.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1Feature"
+          type: array
+        imageContext:
+          $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1ImageContext"
+          description: Additional context that may accompany the image(s) in the file.
+        inputConfig:
+          $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1InputConfig"
+          description: Required. Information about the input file.
+        outputConfig:
+          $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1OutputConfig"
+          description: Required. The desired output location and metadata (e.g. format).
+      type: object
     GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse:
       description: The response for a single offline file annotation request.
       properties:
         outputConfig:
           $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1OutputConfig"
           description: The output location and metadata from AsyncAnnotateFileRequest.
+      type: object
+    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest:
+      description: Multiple async file annotation requests are batched into a single service call.
+      properties:
+        parent:
+          description: "Optional. Target project and location to make a call. Format: `projects/{project-id}/locations/{location-id}`. If no parent is specified, a region will be chosen automatically. Supported location-ids: `us`: USA country only, `asia`: East asia areas, like Japan, Taiwan, `eu`: The European Union. Example: `projects/project-A/locations/eu`."
+          type: string
+        requests:
+          description: Required. Individual async file annotation requests for this batch.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest"
+          type: array
       type: object
     GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse:
       description: Response to an async batch file annotation request.
@@ -2492,6 +1945,63 @@ components:
           description: The list of file annotation responses, one for each request in AsyncBatchAnnotateFilesRequest.
           items:
             $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse"
+          type: array
+      type: object
+    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest:
+      description: Request for async image annotation for a list of images.
+      properties:
+        outputConfig:
+          $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1OutputConfig"
+          description: Required. The desired output location and metadata (e.g. format).
+        parent:
+          description: "Optional. Target project and location to make a call. Format: `projects/{project-id}/locations/{location-id}`. If no parent is specified, a region will be chosen automatically. Supported location-ids: `us`: USA country only, `asia`: East asia areas, like Japan, Taiwan, `eu`: The European Union. Example: `projects/project-A/locations/eu`."
+          type: string
+        requests:
+          description: Required. Individual image annotation requests for this batch.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1AnnotateImageRequest"
+          type: array
+      type: object
+    GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest:
+      description: A list of requests to annotate files using the BatchAnnotateFiles API.
+      properties:
+        parent:
+          description: "Optional. Target project and location to make a call. Format: `projects/{project-id}/locations/{location-id}`. If no parent is specified, a region will be chosen automatically. Supported location-ids: `us`: USA country only, `asia`: East asia areas, like Japan, Taiwan, `eu`: The European Union. Example: `projects/project-A/locations/eu`."
+          type: string
+        requests:
+          description: Required. The list of file annotation requests. Right now we support only one AnnotateFileRequest in BatchAnnotateFilesRequest.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1AnnotateFileRequest"
+          type: array
+      type: object
+    GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse:
+      description: A list of file annotation responses.
+      properties:
+        responses:
+          description: The list of file annotation responses, each response corresponding to each AnnotateFileRequest in BatchAnnotateFilesRequest.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1AnnotateFileResponse"
+          type: array
+      type: object
+    GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest:
+      description: Multiple image annotation requests are batched into a single service call.
+      properties:
+        parent:
+          description: "Optional. Target project and location to make a call. Format: `projects/{project-id}/locations/{location-id}`. If no parent is specified, a region will be chosen automatically. Supported location-ids: `us`: USA country only, `asia`: East asia areas, like Japan, Taiwan, `eu`: The European Union. Example: `projects/project-A/locations/eu`."
+          type: string
+        requests:
+          description: Required. Individual image annotation requests for this batch.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1AnnotateImageRequest"
+          type: array
+      type: object
+    GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse:
+      description: Response to a batch image annotation request.
+      properties:
+        responses:
+          description: Individual responses to image annotation requests within the batch.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1AnnotateImageResponse"
           type: array
       type: object
     GoogleCloudVisionV1p2beta1Block:
@@ -2574,6 +2084,16 @@ components:
           description: Crop hint results.
           items:
             $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1CropHint"
+          type: array
+      type: object
+    GoogleCloudVisionV1p2beta1CropHintsParams:
+      description: Parameters for crop hints annotation request.
+      properties:
+        aspectRatios:
+          description: Aspect ratios in floats, representing the ratio of the width to the height of the image. For example, if the desired aspect ratio is 4/3, the corresponding float value should be 1.33333. If not specified, the best possible crop is returned. The number of provided aspect ratios is limited to a maximum of 16; any aspect ratios provided after the 16th are ignored.
+          items:
+            format: float
+            type: number
           type: array
       type: object
     GoogleCloudVisionV1p2beta1DominantColorsAnnotation:
@@ -2776,6 +2296,34 @@ components:
             - RIGHT_CHEEK_CENTER
           type: string
       type: object
+    GoogleCloudVisionV1p2beta1Feature:
+      description: The type of Google Cloud Vision API detection to perform, and the maximum number of results to return for that type. Multiple `Feature` objects can be specified in the `features` list.
+      properties:
+        maxResults:
+          description: Maximum number of results of this type. Does not apply to `TEXT_DETECTION`, `DOCUMENT_TEXT_DETECTION`, or `CROP_HINTS`.
+          format: int32
+          type: integer
+        model:
+          description: 'Model to use for the feature. Supported values: "builtin/stable" (the default if unset) and "builtin/latest".'
+          type: string
+        type:
+          description: The feature type.
+          enum:
+            - TYPE_UNSPECIFIED
+            - FACE_DETECTION
+            - LANDMARK_DETECTION
+            - LOGO_DETECTION
+            - LABEL_DETECTION
+            - TEXT_DETECTION
+            - DOCUMENT_TEXT_DETECTION
+            - SAFE_SEARCH_DETECTION
+            - IMAGE_PROPERTIES
+            - CROP_HINTS
+            - WEB_DETECTION
+            - PRODUCT_SEARCH
+            - OBJECT_LOCALIZATION
+          type: string
+      type: object
     GoogleCloudVisionV1p2beta1GcsDestination:
       description: The Google Cloud Storage location where the output will be written to.
       properties:
@@ -2790,6 +2338,17 @@ components:
           description: Google Cloud Storage URI for the input file. This must only be a Google Cloud Storage object. Wildcards are not currently supported.
           type: string
       type: object
+    GoogleCloudVisionV1p2beta1Image:
+      description: Client image to perform Google Cloud Vision API tasks over.
+      properties:
+        content:
+          description: "Image content, represented as a stream of bytes. Note: As with all `bytes` fields, protobuffers use a pure binary representation, whereas JSON representations use base64. Currently, this field only works for BatchAnnotateImages requests. It does not work for AsyncBatchAnnotateImages requests."
+          format: byte
+          type: string
+        source:
+          $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1ImageSource"
+          description: Google Cloud Storage image location, or publicly-accessible image URL. If both `content` and `source` are provided for an image, `content` takes precedence and is used to perform the image annotation request.
+      type: object
     GoogleCloudVisionV1p2beta1ImageAnnotationContext:
       description: If an image was produced from a file (e.g. a PDF), this message gives information about the source of that image.
       properties:
@@ -2801,12 +2360,46 @@ components:
           description: The URI of the file used to produce the image.
           type: string
       type: object
+    GoogleCloudVisionV1p2beta1ImageContext:
+      description: Image context and/or feature-specific parameters.
+      properties:
+        cropHintsParams:
+          $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1CropHintsParams"
+          description: Parameters for crop hints annotation request.
+        languageHints:
+          description: List of languages to use for TEXT_DETECTION. In most cases, an empty value yields the best results since it enables automatic language detection. For languages based on the Latin alphabet, setting `language_hints` is not needed. In rare cases, when the language of the text in the image is known, setting a hint will help get better results (although it will be a significant hindrance if the hint is wrong). Text detection returns an error if one or more of the specified languages is not one of the [supported languages](https://cloud.google.com/vision/docs/languages).
+          items:
+            type: string
+          type: array
+        latLongRect:
+          $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1LatLongRect"
+          description: Not used.
+        productSearchParams:
+          $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1ProductSearchParams"
+          description: Parameters for product search.
+        textDetectionParams:
+          $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1TextDetectionParams"
+          description: Parameters for text detection and document text detection.
+        webDetectionParams:
+          $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1WebDetectionParams"
+          description: Parameters for web detection.
+      type: object
     GoogleCloudVisionV1p2beta1ImageProperties:
       description: Stores image properties, such as dominant colors.
       properties:
         dominantColors:
           $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1DominantColorsAnnotation"
           description: If present, dominant colors completed successfully.
+      type: object
+    GoogleCloudVisionV1p2beta1ImageSource:
+      description: External image source (Google Cloud Storage or web URL image location).
+      properties:
+        gcsImageUri:
+          description: "**Use `image_uri` instead.** The Google Cloud Storage URI of the form `gs://bucket_name/object_name`. Object versioning is not supported. See [Google Cloud Storage Request URIs](https://cloud.google.com/storage/docs/reference-uris) for more info."
+          type: string
+        imageUri:
+          description: "The URI of the source image. Can be either: 1. A Google Cloud Storage URI of the form `gs://bucket_name/object_name`. Object versioning is not supported. See [Google Cloud Storage Request URIs](https://cloud.google.com/storage/docs/reference-uris) for more info. 2. A publicly-accessible image HTTP/HTTPS URL. When fetching images from HTTP/HTTPS URLs, Google cannot guarantee that the request will be completed. Your request may fail if the specified host denies the request (e.g. due to request throttling or DOS prevention), or if Google throttles requests to the site for abuse prevention. You should not depend on externally-hosted images for production applications. When both `gcs_image_uri` and `image_uri` are specified, `image_uri` takes precedence."
+          type: string
       type: object
     GoogleCloudVisionV1p2beta1InputConfig:
       description: The desired input location and metadata.
@@ -2821,6 +2414,16 @@ components:
         mimeType:
           description: The type of the file. Currently only "application/pdf", "image/tiff" and "image/gif" are supported. Wildcards are not supported.
           type: string
+      type: object
+    GoogleCloudVisionV1p2beta1LatLongRect:
+      description: Rectangle determined by min and max `LatLng` pairs.
+      properties:
+        maxLatLng:
+          $ref: "#/components/schemas/LatLng"
+          description: Max lat/long pair.
+        minLatLng:
+          $ref: "#/components/schemas/LatLng"
+          description: Min lat/long pair.
       type: object
     GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation:
       description: Set of detected objects with bounding boxes.
@@ -2981,6 +2584,24 @@ components:
           type: string
         value:
           description: The value of the label attached to the product. Cannot be empty and cannot exceed 128 bytes.
+          type: string
+      type: object
+    GoogleCloudVisionV1p2beta1ProductSearchParams:
+      description: Parameters for a product search request.
+      properties:
+        boundingPoly:
+          $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1BoundingPoly"
+          description: The bounding polygon around the area of interest in the image. If it is not specified, system discretion will be applied.
+        filter:
+          description: "The filtering expression. This can be used to restrict search results based on Product labels. We currently support an AND of OR of key-value expressions, where each expression within an OR must have the same key. An '=' should be used to connect the key and value. For example, \"(color = red OR color = blue) AND brand = Google\" is acceptable, but \"(color = red OR brand = Google)\" is not acceptable. \"color: red\" is not acceptable because it uses a ':' instead of an '='."
+          type: string
+        productCategories:
+          description: The list of product categories to search in. Currently, we only consider the first category, and either "homegoods-v2", "apparel-v2", "toys-v2", "packagedgoods-v1", or "general-v1" should be specified. The legacy categories "homegoods", "apparel", and "toys" are still supported but will be deprecated. For new products, please use "homegoods-v2", "apparel-v2", or "toys-v2" for better product search accuracy. It is recommended to migrate existing products to these categories as well.
+          items:
+            type: string
+          type: array
+        productSet:
+          description: "The resource name of a ProductSet to be searched for similar images. Format is: `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`."
           type: string
       type: object
     GoogleCloudVisionV1p2beta1ProductSearchResults:
@@ -3186,6 +2807,13 @@ components:
             $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage"
           type: array
       type: object
+    GoogleCloudVisionV1p2beta1TextDetectionParams:
+      description: Parameters for text detections. This is used to control TEXT_DETECTION and DOCUMENT_TEXT_DETECTION features.
+      properties:
+        enableTextDetectionConfidenceScore:
+          description: By default, Cloud Vision API only includes confidence score for DOCUMENT_TEXT_DETECTION result. Set the flag to true to include confidence score for TEXT_DETECTION as well.
+          type: boolean
+      type: object
     GoogleCloudVisionV1p2beta1Vertex:
       description: "A vertex represents a 2D point in the image. NOTE: the vertex coordinates are in the same scale as the original image."
       properties:
@@ -3231,6 +2859,13 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1WebDetectionWebEntity"
           type: array
+      type: object
+    GoogleCloudVisionV1p2beta1WebDetectionParams:
+      description: Parameters for web detection request.
+      properties:
+        includeGeoResults:
+          description: Whether to include results derived from the geo information in the image.
+          type: boolean
       type: object
     GoogleCloudVisionV1p2beta1WebDetectionWebEntity:
       description: Entity deduced from similar images on the Internet.
@@ -4269,34 +3904,6 @@ components:
             $ref: "#/components/schemas/GoogleCloudVisionV1p3beta1Symbol"
           type: array
       type: object
-    GoogleCloudVisionV1p4beta1AddProductToProductSetRequest:
-      description: Request message for the `AddProductToProductSet` method.
-      properties:
-        product:
-          description: "Required. The resource name for the Product to be added to this ProductSet. Format is: `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`"
-          type: string
-      type: object
-    GoogleCloudVisionV1p4beta1AnnotateFileRequest:
-      description: A request to annotate one single file, e.g. a PDF, TIFF or GIF file.
-      properties:
-        features:
-          description: Required. Requested features.
-          items:
-            $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1Feature"
-          type: array
-        imageContext:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ImageContext"
-          description: Additional context that may accompany the image(s) in the file.
-        inputConfig:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1InputConfig"
-          description: Required. Information about the input file.
-        pages:
-          description: Pages of the file to perform image annotation. Pages starts from 1, we assume the first page of the file is page 1. At most 5 pages are supported per request. Pages can be negative. Page 1 means the first page. Page 2 means the second page. Page -1 means the last page. Page -2 means the second to the last page. If the file is GIF instead of PDF or TIFF, page refers to GIF frames. If this field is empty, by default the service performs image annotation for the first 5 pages of the file.
-          items:
-            format: int32
-            type: integer
-          type: array
-      type: object
     GoogleCloudVisionV1p4beta1AnnotateFileResponse:
       description: Response to a single file annotation request. A file may contain one or more images, which individually have their own responses.
       properties:
@@ -4315,21 +3922,6 @@ components:
           description: This field gives the total number of pages in the file.
           format: int32
           type: integer
-      type: object
-    GoogleCloudVisionV1p4beta1AnnotateImageRequest:
-      description: Request for performing Google Cloud Vision API tasks over a user-provided image, with user-requested features, and with context information.
-      properties:
-        features:
-          description: Requested features.
-          items:
-            $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1Feature"
-          type: array
-        image:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1Image"
-          description: The image to be processed.
-        imageContext:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ImageContext"
-          description: Additional context that may accompany the image.
       type: object
     GoogleCloudVisionV1p4beta1AnnotateImageResponse:
       description: Response to an image annotation request.
@@ -4389,42 +3981,12 @@ components:
           $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1WebDetection"
           description: If present, web detection has completed successfully.
       type: object
-    GoogleCloudVisionV1p4beta1AsyncAnnotateFileRequest:
-      description: An offline file annotation request.
-      properties:
-        features:
-          description: Required. Requested features.
-          items:
-            $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1Feature"
-          type: array
-        imageContext:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ImageContext"
-          description: Additional context that may accompany the image(s) in the file.
-        inputConfig:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1InputConfig"
-          description: Required. Information about the input file.
-        outputConfig:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1OutputConfig"
-          description: Required. The desired output location and metadata (e.g. format).
-      type: object
     GoogleCloudVisionV1p4beta1AsyncAnnotateFileResponse:
       description: The response for a single offline file annotation request.
       properties:
         outputConfig:
           $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1OutputConfig"
           description: The output location and metadata from AsyncAnnotateFileRequest.
-      type: object
-    GoogleCloudVisionV1p4beta1AsyncBatchAnnotateFilesRequest:
-      description: Multiple async file annotation requests are batched into a single service call.
-      properties:
-        parent:
-          description: "Optional. Target project and location to make a call. Format: `projects/{project-id}/locations/{location-id}`. If no parent is specified, a region will be chosen automatically. Supported location-ids: `us`: USA country only, `asia`: East asia areas, like Japan, Taiwan, `eu`: The European Union. Example: `projects/project-A/locations/eu`."
-          type: string
-        requests:
-          description: Required. Individual async file annotation requests for this batch.
-          items:
-            $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1AsyncAnnotateFileRequest"
-          type: array
       type: object
     GoogleCloudVisionV1p4beta1AsyncBatchAnnotateFilesResponse:
       description: Response to an async batch file annotation request.
@@ -4435,39 +3997,12 @@ components:
             $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1AsyncAnnotateFileResponse"
           type: array
       type: object
-    GoogleCloudVisionV1p4beta1AsyncBatchAnnotateImagesRequest:
-      description: Request for async image annotation for a list of images.
-      properties:
-        outputConfig:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1OutputConfig"
-          description: Required. The desired output location and metadata (e.g. format).
-        parent:
-          description: "Optional. Target project and location to make a call. Format: `projects/{project-id}/locations/{location-id}`. If no parent is specified, a region will be chosen automatically. Supported location-ids: `us`: USA country only, `asia`: East asia areas, like Japan, Taiwan, `eu`: The European Union. Example: `projects/project-A/locations/eu`."
-          type: string
-        requests:
-          description: Required. Individual image annotation requests for this batch.
-          items:
-            $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1AnnotateImageRequest"
-          type: array
-      type: object
     GoogleCloudVisionV1p4beta1AsyncBatchAnnotateImagesResponse:
       description: Response to an async batch image annotation request.
       properties:
         outputConfig:
           $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1OutputConfig"
           description: The output location and metadata from AsyncBatchAnnotateImagesRequest.
-      type: object
-    GoogleCloudVisionV1p4beta1BatchAnnotateFilesRequest:
-      description: A list of requests to annotate files using the BatchAnnotateFiles API.
-      properties:
-        parent:
-          description: "Optional. Target project and location to make a call. Format: `projects/{project-id}/locations/{location-id}`. If no parent is specified, a region will be chosen automatically. Supported location-ids: `us`: USA country only, `asia`: East asia areas, like Japan, Taiwan, `eu`: The European Union. Example: `projects/project-A/locations/eu`."
-          type: string
-        requests:
-          description: Required. The list of file annotation requests. Right now we support only one AnnotateFileRequest in BatchAnnotateFilesRequest.
-          items:
-            $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1AnnotateFileRequest"
-          type: array
       type: object
     GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse:
       description: A list of file annotation responses.
@@ -4476,27 +4011,6 @@ components:
           description: The list of file annotation responses, each response corresponding to each AnnotateFileRequest in BatchAnnotateFilesRequest.
           items:
             $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1AnnotateFileResponse"
-          type: array
-      type: object
-    GoogleCloudVisionV1p4beta1BatchAnnotateImagesRequest:
-      description: Multiple image annotation requests are batched into a single service call.
-      properties:
-        parent:
-          description: "Optional. Target project and location to make a call. Format: `projects/{project-id}/locations/{location-id}`. If no parent is specified, a region will be chosen automatically. Supported location-ids: `us`: USA country only, `asia`: East asia areas, like Japan, Taiwan, `eu`: The European Union. Example: `projects/project-A/locations/eu`."
-          type: string
-        requests:
-          description: Required. Individual image annotation requests for this batch.
-          items:
-            $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1AnnotateImageRequest"
-          type: array
-      type: object
-    GoogleCloudVisionV1p4beta1BatchAnnotateImagesResponse:
-      description: Response to a batch image annotation request.
-      properties:
-        responses:
-          description: Individual responses to image annotation requests within the batch.
-          items:
-            $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1AnnotateImageResponse"
           type: array
       type: object
     GoogleCloudVisionV1p4beta1BatchOperationMetadata:
@@ -4613,16 +4127,6 @@ components:
           description: Crop hint results.
           items:
             $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1CropHint"
-          type: array
-      type: object
-    GoogleCloudVisionV1p4beta1CropHintsParams:
-      description: Parameters for crop hints annotation request.
-      properties:
-        aspectRatios:
-          description: Aspect ratios in floats, representing the ratio of the width to the height of the image. For example, if the desired aspect ratio is 4/3, the corresponding float value should be 1.33333. If not specified, the best possible crop is returned. The number of provided aspect ratios is limited to a maximum of 16; any aspect ratios provided after the 16th are ignored.
-          items:
-            format: float
-            type: number
           type: array
       type: object
     GoogleCloudVisionV1p4beta1DominantColorsAnnotation:
@@ -4830,15 +4334,6 @@ components:
             - RIGHT_CHEEK_CENTER
           type: string
       type: object
-    GoogleCloudVisionV1p4beta1FaceRecognitionParams:
-      description: Parameters for a celebrity recognition request.
-      properties:
-        celebritySet:
-          description: The resource names for one or more CelebritySets. A celebrity set is preloaded and can be specified as "builtin/default". If this is specified, the algorithm will try to match the faces detected in the input image to the Celebrities in the CelebritySets.
-          items:
-            type: string
-          type: array
-      type: object
     GoogleCloudVisionV1p4beta1FaceRecognitionResult:
       description: Information about a face's identity.
       properties:
@@ -4849,34 +4344,6 @@ components:
           description: Recognition confidence. Range [0, 1].
           format: float
           type: number
-      type: object
-    GoogleCloudVisionV1p4beta1Feature:
-      description: The type of Google Cloud Vision API detection to perform, and the maximum number of results to return for that type. Multiple `Feature` objects can be specified in the `features` list.
-      properties:
-        maxResults:
-          description: Maximum number of results of this type. Does not apply to `TEXT_DETECTION`, `DOCUMENT_TEXT_DETECTION`, or `CROP_HINTS`.
-          format: int32
-          type: integer
-        model:
-          description: 'Model to use for the feature. Supported values: "builtin/stable" (the default if unset) and "builtin/latest".'
-          type: string
-        type:
-          description: The feature type.
-          enum:
-            - TYPE_UNSPECIFIED
-            - FACE_DETECTION
-            - LANDMARK_DETECTION
-            - LOGO_DETECTION
-            - LABEL_DETECTION
-            - TEXT_DETECTION
-            - DOCUMENT_TEXT_DETECTION
-            - SAFE_SEARCH_DETECTION
-            - IMAGE_PROPERTIES
-            - CROP_HINTS
-            - WEB_DETECTION
-            - PRODUCT_SEARCH
-            - OBJECT_LOCALIZATION
-          type: string
       type: object
     GoogleCloudVisionV1p4beta1GcsDestination:
       description: The Google Cloud Storage location where the output will be written to.
@@ -4892,17 +4359,6 @@ components:
           description: Google Cloud Storage URI for the input file. This must only be a Google Cloud Storage object. Wildcards are not currently supported.
           type: string
       type: object
-    GoogleCloudVisionV1p4beta1Image:
-      description: Client image to perform Google Cloud Vision API tasks over.
-      properties:
-        content:
-          description: "Image content, represented as a stream of bytes. Note: As with all `bytes` fields, protobuffers use a pure binary representation, whereas JSON representations use base64. Currently, this field only works for BatchAnnotateImages requests. It does not work for AsyncBatchAnnotateImages requests."
-          format: byte
-          type: string
-        source:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ImageSource"
-          description: Google Cloud Storage image location, or publicly-accessible image URL. If both `content` and `source` are provided for an image, `content` takes precedence and is used to perform the image annotation request.
-      type: object
     GoogleCloudVisionV1p4beta1ImageAnnotationContext:
       description: If an image was produced from a file (e.g. a PDF), this message gives information about the source of that image.
       properties:
@@ -4914,70 +4370,12 @@ components:
           description: The URI of the file used to produce the image.
           type: string
       type: object
-    GoogleCloudVisionV1p4beta1ImageContext:
-      description: Image context and/or feature-specific parameters.
-      properties:
-        cropHintsParams:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1CropHintsParams"
-          description: Parameters for crop hints annotation request.
-        faceRecognitionParams:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1FaceRecognitionParams"
-          description: Parameters for face recognition.
-        languageHints:
-          description: List of languages to use for TEXT_DETECTION. In most cases, an empty value yields the best results since it enables automatic language detection. For languages based on the Latin alphabet, setting `language_hints` is not needed. In rare cases, when the language of the text in the image is known, setting a hint will help get better results (although it will be a significant hindrance if the hint is wrong). Text detection returns an error if one or more of the specified languages is not one of the [supported languages](https://cloud.google.com/vision/docs/languages).
-          items:
-            type: string
-          type: array
-        latLongRect:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1LatLongRect"
-          description: Not used.
-        productSearchParams:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ProductSearchParams"
-          description: Parameters for product search.
-        textDetectionParams:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1TextDetectionParams"
-          description: Parameters for text detection and document text detection.
-        webDetectionParams:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1WebDetectionParams"
-          description: Parameters for web detection.
-      type: object
     GoogleCloudVisionV1p4beta1ImageProperties:
       description: Stores image properties, such as dominant colors.
       properties:
         dominantColors:
           $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1DominantColorsAnnotation"
           description: If present, dominant colors completed successfully.
-      type: object
-    GoogleCloudVisionV1p4beta1ImageSource:
-      description: External image source (Google Cloud Storage or web URL image location).
-      properties:
-        gcsImageUri:
-          description: "**Use `image_uri` instead.** The Google Cloud Storage URI of the form `gs://bucket_name/object_name`. Object versioning is not supported. See [Google Cloud Storage Request URIs](https://cloud.google.com/storage/docs/reference-uris) for more info."
-          type: string
-        imageUri:
-          description: "The URI of the source image. Can be either: 1. A Google Cloud Storage URI of the form `gs://bucket_name/object_name`. Object versioning is not supported. See [Google Cloud Storage Request URIs](https://cloud.google.com/storage/docs/reference-uris) for more info. 2. A publicly-accessible image HTTP/HTTPS URL. When fetching images from HTTP/HTTPS URLs, Google cannot guarantee that the request will be completed. Your request may fail if the specified host denies the request (e.g. due to request throttling or DOS prevention), or if Google throttles requests to the site for abuse prevention. You should not depend on externally-hosted images for production applications. When both `gcs_image_uri` and `image_uri` are specified, `image_uri` takes precedence."
-          type: string
-      type: object
-    GoogleCloudVisionV1p4beta1ImportProductSetsGcsSource:
-      description: The Google Cloud Storage location for a csv file which preserves a list of ImportProductSetRequests in each line.
-      properties:
-        csvFileUri:
-          description: 'The Google Cloud Storage URI of the input csv file. The URI must start with `gs://`. The format of the input csv file should be one image per line. In each line, there are 8 columns. 1. image-uri 2. image-id 3. product-set-id 4. product-id 5. product-category 6. product-display-name 7. labels 8. bounding-poly The `image-uri`, `product-set-id`, `product-id`, and `product-category` columns are required. All other columns are optional. If the `ProductSet` or `Product` specified by the `product-set-id` and `product-id` values does not exist, then the system will create a new `ProductSet` or `Product` for the image. In this case, the `product-display-name` column refers to display_name, the `product-category` column refers to product_category, and the `labels` column refers to product_labels. The `image-id` column is optional but must be unique if provided. If it is empty, the system will automatically assign a unique id to the image. The `product-display-name` column is optional. If it is empty, the system sets the display_name field for the product to a space (" "). You can update the `display_name` later by using the API. If a `Product` with the specified `product-id` already exists, then the system ignores the `product-display-name`, `product-category`, and `labels` columns. The `labels` column (optional) is a line containing a list of comma-separated key-value pairs, in the following format: "key_1=value_1,key_2=value_2,...,key_n=value_n" The `bounding-poly` column (optional) identifies one region of interest from the image in the same manner as `CreateReferenceImage`. If you do not specify the `bounding-poly` column, then the system will try to detect regions of interest automatically. At most one `bounding-poly` column is allowed per line. If the image contains multiple regions of interest, add a line to the CSV file that includes the same product information, and the `bounding-poly` values for each region of interest. The `bounding-poly` column must contain an even number of comma-separated numbers, in the format "p1_x,p1_y,p2_x,p2_y,...,pn_x,pn_y". Use non-negative integers for absolute bounding polygons, and float values in [0, 1] for normalized bounding polygons. The system will resize the image if the image resolution is too large to process (larger than 20MP).'
-          type: string
-      type: object
-    GoogleCloudVisionV1p4beta1ImportProductSetsInputConfig:
-      description: The input content for the `ImportProductSets` method.
-      properties:
-        gcsSource:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ImportProductSetsGcsSource"
-          description: The Google Cloud Storage location for a csv file which preserves a list of ImportProductSetRequests in each line.
-      type: object
-    GoogleCloudVisionV1p4beta1ImportProductSetsRequest:
-      description: Request message for the `ImportProductSets` method.
-      properties:
-        inputConfig:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ImportProductSetsInputConfig"
-          description: Required. The input content for the list of requests.
       type: object
     GoogleCloudVisionV1p4beta1ImportProductSetsResponse:
       description: Response message for the `ImportProductSets` method. This message is returned by the google.longrunning.Operations.GetOperation method in the returned google.longrunning.Operation.response field.
@@ -5006,68 +4404,6 @@ components:
         mimeType:
           description: The type of the file. Currently only "application/pdf", "image/tiff" and "image/gif" are supported. Wildcards are not supported.
           type: string
-      type: object
-    GoogleCloudVisionV1p4beta1LatLongRect:
-      description: Rectangle determined by min and max `LatLng` pairs.
-      properties:
-        maxLatLng:
-          $ref: "#/components/schemas/LatLng"
-          description: Max lat/long pair.
-        minLatLng:
-          $ref: "#/components/schemas/LatLng"
-          description: Min lat/long pair.
-      type: object
-    GoogleCloudVisionV1p4beta1ListProductSetsResponse:
-      description: Response message for the `ListProductSets` method.
-      properties:
-        nextPageToken:
-          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
-          type: string
-        productSets:
-          description: List of ProductSets.
-          items:
-            $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ProductSet"
-          type: array
-      type: object
-    GoogleCloudVisionV1p4beta1ListProductsInProductSetResponse:
-      description: Response message for the `ListProductsInProductSet` method.
-      properties:
-        nextPageToken:
-          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
-          type: string
-        products:
-          description: The list of Products.
-          items:
-            $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1Product"
-          type: array
-      type: object
-    GoogleCloudVisionV1p4beta1ListProductsResponse:
-      description: Response message for the `ListProducts` method.
-      properties:
-        nextPageToken:
-          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
-          type: string
-        products:
-          description: List of products.
-          items:
-            $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1Product"
-          type: array
-      type: object
-    GoogleCloudVisionV1p4beta1ListReferenceImagesResponse:
-      description: Response message for the `ListReferenceImages` method.
-      properties:
-        nextPageToken:
-          description: The next_page_token returned from a previous List request, if any.
-          type: string
-        pageSize:
-          description: The maximum number of items to return. Default 10, maximum 100.
-          format: int32
-          type: integer
-        referenceImages:
-          description: The list of reference images.
-          items:
-            $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ReferenceImage"
-          type: array
       type: object
     GoogleCloudVisionV1p4beta1LocalizedObjectAnnotation:
       description: Set of detected objects with bounding boxes.
@@ -5230,24 +4566,6 @@ components:
           description: The value of the label attached to the product. Cannot be empty and cannot exceed 128 bytes.
           type: string
       type: object
-    GoogleCloudVisionV1p4beta1ProductSearchParams:
-      description: Parameters for a product search request.
-      properties:
-        boundingPoly:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1BoundingPoly"
-          description: The bounding polygon around the area of interest in the image. If it is not specified, system discretion will be applied.
-        filter:
-          description: "The filtering expression. This can be used to restrict search results based on Product labels. We currently support an AND of OR of key-value expressions, where each expression within an OR must have the same key. An '=' should be used to connect the key and value. For example, \"(color = red OR color = blue) AND brand = Google\" is acceptable, but \"(color = red OR brand = Google)\" is not acceptable. \"color: red\" is not acceptable because it uses a ':' instead of an '='."
-          type: string
-        productCategories:
-          description: The list of product categories to search in. Currently, we only consider the first category, and either "homegoods-v2", "apparel-v2", "toys-v2", "packagedgoods-v1", or "general-v1" should be specified. The legacy categories "homegoods", "apparel", and "toys" are still supported but will be deprecated. For new products, please use "homegoods-v2", "apparel-v2", or "toys-v2" for better product search accuracy. It is recommended to migrate existing products to these categories as well.
-          items:
-            type: string
-          type: array
-        productSet:
-          description: "The resource name of a ProductSet to be searched for similar images. Format is: `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`."
-          type: string
-      type: object
     GoogleCloudVisionV1p4beta1ProductSearchResults:
       description: Results for a product search request.
       properties:
@@ -5314,32 +4632,6 @@ components:
           format: float
           type: number
       type: object
-    GoogleCloudVisionV1p4beta1ProductSet:
-      description: A ProductSet contains Products. A ProductSet can contain a maximum of 1 million reference images. If the limit is exceeded, periodic indexing will fail.
-      properties:
-        displayName:
-          description: The user-provided name for this ProductSet. Must not be empty. Must be at most 4096 characters long.
-          type: string
-        indexError:
-          $ref: "#/components/schemas/Status"
-          description: Output only. If there was an error with indexing the product set, the field is populated. This field is ignored when creating a ProductSet.
-          readOnly: true
-        indexTime:
-          description: Output only. The time at which this ProductSet was last indexed. Query results will reflect all updates before this time. If this ProductSet has never been indexed, this timestamp is the default value "1970-01-01T00:00:00Z". This field is ignored when creating a ProductSet.
-          format: google-datetime
-          readOnly: true
-          type: string
-        name:
-          description: "The resource name of the ProductSet. Format is: `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`. This field is ignored when creating a ProductSet."
-          type: string
-      type: object
-    GoogleCloudVisionV1p4beta1ProductSetPurgeConfig:
-      description: Config to control which ProductSet contains the Products to be deleted.
-      properties:
-        productSetId:
-          description: The ProductSet that contains the Products to delete. If a Product is a member of product_set_id in addition to other ProductSets, the Product will still be deleted.
-          type: string
-      type: object
     GoogleCloudVisionV1p4beta1Property:
       description: A `Property` consists of a user-supplied name/value pair.
       properties:
@@ -5354,19 +4646,6 @@ components:
           description: Value of the property.
           type: string
       type: object
-    GoogleCloudVisionV1p4beta1PurgeProductsRequest:
-      description: Request message for the `PurgeProducts` method.
-      properties:
-        deleteOrphanProducts:
-          description: If delete_orphan_products is true, all Products that are not in any ProductSet will be deleted.
-          type: boolean
-        force:
-          description: The default value is false. Override this value to true to actually perform the purge.
-          type: boolean
-        productSetPurgeConfig:
-          $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1ProductSetPurgeConfig"
-          description: Specify which ProductSet contains the Products to be deleted.
-      type: object
     GoogleCloudVisionV1p4beta1ReferenceImage:
       description: A `ReferenceImage` represents a product image and its associated metadata, such as bounding boxes.
       properties:
@@ -5380,13 +4659,6 @@ components:
           type: string
         uri:
           description: Required. The Google Cloud Storage URI of the reference image. The URI must start with `gs://`.
-          type: string
-      type: object
-    GoogleCloudVisionV1p4beta1RemoveProductFromProductSetRequest:
-      description: Request message for the `RemoveProductFromProductSet` method.
-      properties:
-        product:
-          description: "Required. The resource name for the Product to be removed from this ProductSet. Format is: `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`"
           type: string
       type: object
     GoogleCloudVisionV1p4beta1SafeSearchAnnotation:
@@ -5512,13 +4784,6 @@ components:
             $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1TextAnnotationDetectedLanguage"
           type: array
       type: object
-    GoogleCloudVisionV1p4beta1TextDetectionParams:
-      description: Parameters for text detections. This is used to control TEXT_DETECTION and DOCUMENT_TEXT_DETECTION features.
-      properties:
-        enableTextDetectionConfidenceScore:
-          description: By default, Cloud Vision API only includes confidence score for DOCUMENT_TEXT_DETECTION result. Set the flag to true to include confidence score for TEXT_DETECTION as well.
-          type: boolean
-      type: object
     GoogleCloudVisionV1p4beta1Vertex:
       description: "A vertex represents a 2D point in the image. NOTE: the vertex coordinates are in the same scale as the original image."
       properties:
@@ -5564,13 +4829,6 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1WebDetectionWebEntity"
           type: array
-      type: object
-    GoogleCloudVisionV1p4beta1WebDetectionParams:
-      description: Parameters for web detection request.
-      properties:
-        includeGeoResults:
-          description: Whether to include results derived from the geo information in the image.
-          type: boolean
       type: object
     GoogleCloudVisionV1p4beta1WebDetectionWebEntity:
       description: Entity deduced from similar images on the Internet.
@@ -6292,3 +5550,5 @@ components:
             https://www.googleapis.com/auth/cloud-vision: Apply machine learning models to understand and label images
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

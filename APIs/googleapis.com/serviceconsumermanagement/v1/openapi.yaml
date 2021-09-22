@@ -12,7 +12,7 @@ info:
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Service Consumer Management API
-  version: v1beta1
+  version: v1
   x-apisguru-categories:
     - analytics
     - media
@@ -20,7 +20,7 @@ info:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: https://serviceconsumermanagement.googleapis.com/$discovery/rest?version=v1beta1
+      url: https://serviceconsumermanagement.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-providerName: googleapis.com
   x-serviceName: serviceconsumermanagement
@@ -30,35 +30,17 @@ tags:
   - name: operations
   - name: services
 paths:
-  "/v1beta1/{name}":
+  "/v1/{name}":
     delete:
-      description: Deletes a producer override.
-      operationId: serviceconsumermanagement.services.consumerQuotaMetrics.limits.producerOverrides.delete
+      description: Delete a tenancy unit. Before you delete the tenancy unit, there should be no tenant resources in it that aren't in a DELETED state. Operation.
+      operationId: serviceconsumermanagement.services.tenancyUnits.delete
       parameters:
-        - description: "The resource name of the override to delete. An example name would be: `services/compute.googleapis.com/projects/123/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/producerOverrides/4a3f2c1d`"
+        - description: Required. Name of the tenancy unit to be deleted.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Whether to force the deletion of the quota override. Setting the force parameter to 'true' ignores all quota safety checks that would fail the request. QuotaSafetyCheck lists all such validations.
-          in: query
-          name: force
-          schema:
-            type: boolean
-        - description: The list of quota safety checks to ignore before the override mutation. Unlike 'force' field that ignores all the quota safety checks, the 'force_only' field ignores only the specified checks; other checks are still enforced. The 'force' and 'force_only' fields cannot both be set.
-          explode: true
-          in: query
-          name: forceOnly
-          schema:
-            items:
-              enum:
-                - QUOTA_SAFETY_CHECK_UNSPECIFIED
-                - LIMIT_DECREASE_BELOW_USAGE
-                - LIMIT_DECREASE_PERCENTAGE_TOO_HIGH
-              type: string
-            type: array
-          style: form
       responses:
         "200":
           content:
@@ -74,138 +56,36 @@ paths:
       tags:
         - services
     get:
-      description: Retrieves a summary of quota information for a specific quota limit.
-      operationId: serviceconsumermanagement.services.consumerQuotaMetrics.limits.get
+      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
+      operationId: serviceconsumermanagement.operations.list
       parameters:
-        - description: "The resource name of the quota limit, returned by a ListConsumerQuotaMetrics or GetConsumerQuotaMetric call. An example name would be: `services/compute.googleapis.com/projects/123/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`"
+        - description: The name of the operation's parent resource.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Specifies the level of detail for quota information in the response.
+        - description: The standard list filter.
           in: query
-          name: view
-          schema:
-            enum:
-              - QUOTA_VIEW_UNSPECIFIED
-              - BASIC
-              - FULL
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/V1Beta1ConsumerQuotaLimit"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - services
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    patch:
-      description: Updates a producer override.
-      operationId: serviceconsumermanagement.services.consumerQuotaMetrics.limits.producerOverrides.patch
-      parameters:
-        - description: "The resource name of the override to update. An example name would be: `services/compute.googleapis.com/projects/123/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/producerOverrides/4a3f2c1d`"
-          in: path
-          name: name
-          required: true
+          name: filter
           schema:
             type: string
-        - description: Whether to force the update of the quota override. Setting the force parameter to 'true' ignores all quota safety checks that would fail the request. QuotaSafetyCheck lists all such validations.
-          in: query
-          name: force
-          schema:
-            type: boolean
-        - description: The list of quota safety checks to ignore before the override mutation. Unlike 'force' field that ignores all the quota safety checks, the 'force_only' field ignores only the specified checks; other checks are still enforced. The 'force' and 'force_only' fields cannot both be set.
-          explode: true
-          in: query
-          name: forceOnly
-          schema:
-            items:
-              enum:
-                - QUOTA_SAFETY_CHECK_UNSPECIFIED
-                - LIMIT_DECREASE_BELOW_USAGE
-                - LIMIT_DECREASE_PERCENTAGE_TOO_HIGH
-              type: string
-            type: array
-          style: form
-        - description: Update only the specified fields. If unset, all modifiable fields will be updated.
-          in: query
-          name: updateMask
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/V1Beta1QuotaOverride"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - services
-  "/v1beta1/{parent}/consumerQuotaMetrics":
-    get:
-      description: Retrieves a summary of all quota information about this consumer that is visible to the service producer, for each quota metric defined by the service. Each metric includes information about all of its defined limits. Each limit includes the limit configuration (quota unit, preciseness, default value), the current effective limit value, and all of the overrides applied to the limit.
-      operationId: serviceconsumermanagement.services.consumerQuotaMetrics.list
-      parameters:
-        - description: "Parent of the quotas resource. An example parent would be: `services/serviceconsumermanagement.googleapis.com/projects/123`"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Requested size of the next page of data.
+        - description: The standard list page size.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Token identifying which result to start with; returned by a previous list call.
+        - description: The standard list page token.
           in: query
           name: pageToken
           schema:
-            type: string
-        - description: Specifies the level of detail for quota information in the response.
-          in: query
-          name: view
-          schema:
-            enum:
-              - QUOTA_VIEW_UNSPECIFIED
-              - BASIC
-              - FULL
             type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/V1Beta1ListConsumerQuotaMetricsResponse"
+                $ref: "#/components/schemas/ListOperationsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -213,7 +93,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - services
+        - operations
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -226,7 +106,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/consumerQuotaMetrics:importProducerOverrides":
+  "/v1/{name}:applyProjectConfig":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -240,12 +120,12 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Create or update multiple producer overrides atomically, all on the same consumer, but on many different metrics or limits. The name field in the quota override message should not be set.
-      operationId: serviceconsumermanagement.services.consumerQuotaMetrics.importProducerOverrides
+      description: Apply a configuration to an existing tenant project. This project must exist in an active state and have the original owner account. The caller must have permission to add a project to the given tenancy unit. The configuration is applied, but any existing settings on the project aren't modified. Specified policy bindings are applied. Existing bindings aren't modified. Specified services are activated. No service is deactivated. If specified, new billing configuration is applied. Omit a billing configuration to keep the existing one. A service account in the project is created if previously non existed. Specified labels will be appended to tenant project, note that the value of existing label key will be updated if the same label key is requested. The specified folder is ignored, as moving a tenant project to a different folder isn't supported. The operation fails if any of the steps fail, but no rollback of already applied configuration changes is attempted. Operation.
+      operationId: serviceconsumermanagement.services.tenancyUnits.applyProjectConfig
       parameters:
-        - description: "The resource name of the consumer. An example name would be: `services/compute.googleapis.com/projects/123`"
+        - description: Required. Name of the tenancy unit. Such as 'services/service.googleapis.com/projects/12345/tenancyUnits/abcd'.
           in: path
-          name: parent
+          name: name
           required: true
           schema:
             type: string
@@ -253,7 +133,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/V1Beta1ImportProducerOverridesRequest"
+              $ref: "#/components/schemas/ApplyTenantProjectConfigRequest"
       responses:
         "200":
           content:
@@ -268,23 +148,238 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - services
-  "/v1beta1/{parent}/producerOverrides":
-    get:
-      description: Lists all producer overrides on this limit.
-      operationId: serviceconsumermanagement.services.consumerQuotaMetrics.limits.producerOverrides.list
+  "/v1/{name}:attachProject":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Attach an existing project to the tenancy unit as a new tenant resource. The project could either be the tenant project reserved by calling `AddTenantProject` under a tenancy unit of a service producer's project of a managed service, or from a separate project. The caller is checked against a set of permissions as if calling `AddTenantProject` on the same service consumer. To trigger the attachment, the targeted tenant project must be in a folder. Make sure the ServiceConsumerManagement service account is the owner of that project. These two requirements are already met if the project is reserved by calling `AddTenantProject`. Operation.
+      operationId: serviceconsumermanagement.services.tenancyUnits.attachProject
       parameters:
-        - description: "The resource name of the parent quota limit, returned by a ListConsumerQuotaMetrics or GetConsumerQuotaMetric call. An example name would be: `services/compute.googleapis.com/projects/123/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`"
+        - description: Required. Name of the tenancy unit that the project will be attached to. Such as 'services/service.googleapis.com/projects/12345/tenancyUnits/abcd'.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AttachTenantProjectRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - services
+  "/v1/{name}:cancel":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+      operationId: serviceconsumermanagement.operations.cancel
+      parameters:
+        - description: The name of the operation resource to be cancelled.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelOperationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - operations
+  "/v1/{name}:deleteProject":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Deletes the specified project resource identified by a tenant resource tag. The mothod removes a project lien with a 'TenantManager' origin if that was added. It will then attempt to delete the project. If that operation fails, this method also fails. After the project has been deleted, the tenant resource state is set to DELETED. To permanently remove resource metadata, call the `RemoveTenantProject` method. New resources with the same tag can't be added if there are existing resources in a DELETED state. Operation.
+      operationId: serviceconsumermanagement.services.tenancyUnits.deleteProject
+      parameters:
+        - description: Required. Name of the tenancy unit. Such as 'services/service.googleapis.com/projects/12345/tenancyUnits/abcd'.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeleteTenantProjectRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - services
+  "/v1/{name}:removeProject":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Removes the specified project resource identified by a tenant resource tag. The method removes the project lien with 'TenantManager' origin if that was added. It then attempts to delete the project. If that operation fails, this method also fails. Calls to remove already removed or non-existent tenant project succeed. After the project has been deleted, or if was already in a DELETED state, resource metadata is permanently removed from the tenancy unit. Operation.
+      operationId: serviceconsumermanagement.services.tenancyUnits.removeProject
+      parameters:
+        - description: Required. Name of the tenancy unit. Such as 'services/service.googleapis.com/projects/12345/tenancyUnits/abcd'.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RemoveTenantProjectRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - services
+  "/v1/{name}:undeleteProject":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Attempts to undelete a previously deleted tenant project. The project must be in a DELETED state. There are no guarantees that an undeleted project will be in a fully restored and functional state. Call the `ApplyTenantProjectConfig` method to update its configuration and then validate all managed service resources. Operation.
+      operationId: serviceconsumermanagement.services.tenancyUnits.undeleteProject
+      parameters:
+        - description: Required. Name of the tenancy unit. Such as 'services/service.googleapis.com/projects/12345/tenancyUnits/abcd'.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UndeleteTenantProjectRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - services
+  "/v1/{parent}/tenancyUnits":
+    get:
+      description: Find the tenancy unit for a managed service and service consumer. This method shouldn't be used in a service producer's runtime path, for example to find the tenant project number when creating VMs. Service producers must persist the tenant project's information after the project is created.
+      operationId: serviceconsumermanagement.services.tenancyUnits.list
+      parameters:
+        - description: "Required. Managed service and service consumer. Required. services/{service}/{collection id}/{resource id} {collection id} is the cloud resource collection type representing the service consumer, for example 'projects', or 'organizations'. {resource id} is the consumer numeric id, such as project number: '123456'. {service} the name of a service, such as 'service.googleapis.com'."
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Requested size of the next page of data.
+        - description: Optional. Filter expression over tenancy resources field. Optional.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The maximum number of results returned by this request.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Token identifying which result to start with; returned by a previous list call.
+        - description: Optional. The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of `nextPageToken` from the previous response.
           in: query
           name: pageToken
           schema:
@@ -294,7 +389,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/V1Beta1ListProducerOverridesResponse"
+                $ref: "#/components/schemas/ListTenancyUnitsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -316,38 +411,62 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a producer override. A producer override is applied by the owner or administrator of a service to increase or decrease the amount of quota a consumer of the service is allowed to use. To create multiple overrides at once, use ImportProducerOverrides instead. If an override with the specified dimensions already exists, this call will fail. To overwrite an existing override if one is already present ("upsert" semantics), use ImportProducerOverrides instead.
-      operationId: serviceconsumermanagement.services.consumerQuotaMetrics.limits.producerOverrides.create
+      description: Creates a tenancy unit with no tenant resources. If tenancy unit already exists, it will be returned, however, in this case, returned TenancyUnit does not have tenant_resources field set and ListTenancyUnits has to be used to get a complete TenancyUnit with all fields populated.
+      operationId: serviceconsumermanagement.services.tenancyUnits.create
       parameters:
-        - description: "The resource name of the parent quota limit, returned by a ListConsumerQuotaMetrics or GetConsumerQuotaMetric call. An example name would be: `services/compute.googleapis.com/projects/123/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`"
+        - description: "Required. services/{service}/{collection id}/{resource id} {collection id} is the cloud resource collection type representing the service consumer, for example 'projects', or 'organizations'. {resource id} is the consumer numeric id, such as project number: '123456'. {service} the name of a managed service, such as 'service.googleapis.com'. Enables service binding using the new tenancy unit."
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Whether to force the creation of the quota override. Setting the force parameter to 'true' ignores all quota safety checks that would fail the request. QuotaSafetyCheck lists all such validations.
-          in: query
-          name: force
-          schema:
-            type: boolean
-        - description: The list of quota safety checks to ignore before the override mutation. Unlike 'force' field that ignores all the quota safety checks, the 'force_only' field ignores only the specified checks; other checks are still enforced. The 'force' and 'force_only' fields cannot both be set.
-          explode: true
-          in: query
-          name: forceOnly
-          schema:
-            items:
-              enum:
-                - QUOTA_SAFETY_CHECK_UNSPECIFIED
-                - LIMIT_DECREASE_BELOW_USAGE
-                - LIMIT_DECREASE_PERCENTAGE_TOO_HIGH
-              type: string
-            type: array
-          style: form
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/V1Beta1QuotaOverride"
+              $ref: "#/components/schemas/CreateTenancyUnitRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TenancyUnit"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - services
+  "/v1/{parent}:addProject":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Add a new tenant project to the tenancy unit. There can be a maximum of 1024 tenant projects in a tenancy unit. If there are previously failed `AddTenantProject` calls, you might need to call `RemoveTenantProject` first to resolve them before you can make another call to `AddTenantProject` with the same tag. Operation.
+      operationId: serviceconsumermanagement.services.tenancyUnits.addProject
+      parameters:
+        - description: Required. Name of the tenancy unit. Such as 'services/service.googleapis.com/projects/12345/tenancyUnits/abcd'.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddTenantProjectRequest"
       responses:
         "200":
           content:
@@ -362,6 +481,58 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - services
+  "/v1/{parent}:search":
+    get:
+      description: Search tenancy units for a managed service.
+      operationId: serviceconsumermanagement.services.search
+      parameters:
+        - description: Required. Service for which search is performed. services/{service} {service} the name of a service, for example 'service.googleapis.com'.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The maximum number of results returned by this request. Currently, the default maximum is set to 1000. If `page_size` isn't provided or the size provided is a number larger than 1000, it's automatically set to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of `nextPageToken` from the previous response.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: "Optional. Set a query `{expression}` for querying tenancy units. Your `{expression}` must be in the format: `field_name=literal_string`. The `field_name` is the name of the field you want to compare. Supported fields are `tenant_resources.tag` and `tenant_resources.resource`. For example, to search tenancy units that contain at least one tenant resource with a given tag 'xyz', use the query `tenant_resources.tag=xyz`. To search tenancy units that contain at least one tenant resource with a given resource name 'projects/123456', use the query `tenant_resources.resource=projects/123456`. Multiple expressions can be joined with `AND`s. Tenancy units must match all expressions to be included in the result set. For example, `tenant_resources.tag=xyz AND tenant_resources.resource=projects/123456`"
+          in: query
+          name: query
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchTenancyUnitsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - services
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:
@@ -438,6 +609,16 @@ components:
       schema:
         type: string
   schemas:
+    AddTenantProjectRequest:
+      description: Request to add a newly created and configured tenant project to a tenancy unit.
+      properties:
+        projectConfig:
+          $ref: "#/components/schemas/TenantProjectConfig"
+          description: Configuration of the new tenant project to be added to tenancy unit resources.
+        tag:
+          description: Required. Tag of the added project. Must be less than 128 characters. Required.
+          type: string
+      type: object
     Api:
       description: Api is a light-weight descriptor for an API Interface. Interfaces are also described as "protocol buffer services" in some contexts, such as by the "service" keyword in a .proto file, but they are different from API Services, which represent a concrete implementation of an interface as opposed to simply a description of methods and bindings. They are also sometimes simply referred to as "APIs" in other contexts, such as the name of this message itself. See https://cloud.google.com/apis/design/glossary for detailed terminology.
       properties:
@@ -470,6 +651,29 @@ components:
           type: string
         version:
           description: "A version string for this interface. If specified, must have the form `major-version.minor-version`, as in `1.10`. If the minor version is omitted, it defaults to zero. If the entire version field is empty, the major version is derived from the package name, as outlined below. If the field is not empty, the version in the package name will be verified to be consistent with what is provided here. The versioning schema uses [semantic versioning](http://semver.org) where the major version number indicates a breaking change and the minor version an additive, non-breaking change. Both version numbers are signals to users what to expect from different versions, and should be carefully chosen based on the product plan. The major version is also reflected in the package name of the interface, which must end in `v`, as in `google.feature.v1`. For major versions 0 and 1, the suffix can be omitted. Zero major versions must only be used for experimental, non-GA interfaces. "
+          type: string
+      type: object
+    ApplyTenantProjectConfigRequest:
+      description: Request to apply configuration to an existing tenant project.
+      properties:
+        projectConfig:
+          $ref: "#/components/schemas/TenantProjectConfig"
+          description: Configuration that should be applied to the existing tenant project.
+        tag:
+          description: Required. Tag of the project. Must be less than 128 characters. Required.
+          type: string
+      type: object
+    AttachTenantProjectRequest:
+      description: Request to attach an existing project to the tenancy unit as a new tenant resource.
+      properties:
+        externalResource:
+          description: When attaching an external project, this is in the format of `projects/{project_number}`.
+          type: string
+        reservedResource:
+          description: When attaching a reserved project already in tenancy units, this is the tag of a tenant resource under the tenancy unit for the managed service's service producer project. The reserved tenant resource must be in an active state.
+          type: string
+        tag:
+          description: Required. Tag of the tenant resource after attachment. Must be less than 128 characters. Required.
           type: string
       type: object
     AuthProvider:
@@ -589,6 +793,13 @@ components:
             $ref: "#/components/schemas/BillingDestination"
           type: array
       type: object
+    BillingConfig:
+      description: Describes the billing configuration for a new tenant project.
+      properties:
+        billingAccount:
+          description: Name of the billing account. For example `billingAccounts/012345-567890-ABCDEF`.
+          type: string
+      type: object
     BillingDestination:
       description: Configuration of a specific billing destination (Currently only support bill against consumer project).
       properties:
@@ -600,6 +811,10 @@ components:
         monitoredResource:
           description: The monitored resource type. The type must be defined in Service.monitored_resources section.
           type: string
+      type: object
+    CancelOperationRequest:
+      description: The request message for Operations.CancelOperation.
+      properties: {}
       type: object
     Context:
       description: '`Context` defines which contexts an API requests. Example: context: rules: - selector: "*" requested: - google.rpc.context.ProjectContext - google.rpc.context.OriginContext The above specifies that all methods in the API request `google.rpc.context.ProjectContext` and `google.rpc.context.OriginContext`. Available context types are defined in package `google.rpc.context`. This also provides mechanism to allowlist any protobuf message extension that can be sent in grpc metadata using “x-goog-ext--bin” and “x-goog-ext--jspb” format. For example, list any service specific protobuf types that can appear in grpc metadata as follows in your yaml file: Example: context: rules: - selector: "google.example.library.v1.LibraryService.CreateBook" allowed_request_extensions: - google.foo.v1.NewExtension allowed_response_extensions: - google.foo.v1.NewExtension You can also specify extension ID instead of fully qualified extension name here.'
@@ -644,6 +859,13 @@ components:
           description: The service control environment to use. If empty, no control plane feature (like quota and billing) will be enabled.
           type: string
       type: object
+    CreateTenancyUnitRequest:
+      description: Request to create a tenancy unit for a service consumer of a managed service.
+      properties:
+        tenancyUnitId:
+          description: Optional. Optional service producer-provided identifier of the tenancy unit. Must be no longer than 40 characters and preferably URI friendly. If it isn't provided, a UID for the tenancy unit is automatically generated. The identifier must be unique across a managed service. If the tenancy unit already exists for the managed service and service consumer pair, calling `CreateTenancyUnit` returns the existing tenancy unit if the provided identifier is identical or empty, otherwise the call fails.
+          type: string
+      type: object
     CustomError:
       description: "Customize service error responses. For example, list any service specific protobuf types that can appear in error detail lists of error responses. Example: custom_error: types: - google.foo.v1.CustomError - google.foo.v1.AnotherError"
       properties:
@@ -676,6 +898,13 @@ components:
           type: string
         path:
           description: The path matched by this custom verb.
+          type: string
+      type: object
+    DeleteTenantProjectRequest:
+      description: Request message to delete tenant project resource from the tenancy unit.
+      properties:
+        tag:
+          description: Required. Tag of the resource within the tenancy unit.
           type: string
       type: object
     Documentation:
@@ -916,6 +1145,30 @@ components:
             - BOOL
             - INT64
           type: string
+      type: object
+    ListOperationsResponse:
+      description: The response message for Operations.ListOperations.
+      properties:
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+        operations:
+          description: A list of operations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListTenancyUnitsResponse:
+      description: Response for the list request.
+      properties:
+        nextPageToken:
+          description: Pagination token for large results.
+          type: string
+        tenancyUnits:
+          description: Tenancy units matching the request.
+          items:
+            $ref: "#/components/schemas/TenancyUnit"
+          type: array
       type: object
     LogDescriptor:
       description: "A description of a log type. Example in YAML format: - name: library.googleapis.com/activity_history description: The history of borrowing and returning library items. display_name: Activity labels: - key: /customer_id description: Identifier of a library customer"
@@ -1217,6 +1470,18 @@ components:
             $ref: "#/components/schemas/Page"
           type: array
       type: object
+    PolicyBinding:
+      description: Translates to IAM Policy bindings (without auditing at this level)
+      properties:
+        members:
+          description: Uses the same format as in IAM policy. `member` must include both a prefix and ID. For example, `user:{emailId}`, `serviceAccount:{emailId}`, `group:{emailId}`.
+          items:
+            type: string
+          type: array
+        role:
+          description: Role. (https://cloud.google.com/iam/docs/understanding-roles) For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          type: string
+      type: object
     Quota:
       description: 'Quota configuration helps to achieve fairness and budgeting in service usage. The metric based quota configuration works this way: - The service configuration defines a set of metrics. - For API calls, the quota.metric_rules maps methods to metrics with corresponding costs. - The quota.limits defines limits on the metrics, which will be used for quota checks at runtime. An example quota configuration in yaml format: quota: limits: - name: apiWriteQpsPerProject metric: library.googleapis.com/write_calls unit: "1/min/{project}" # rate limit for consumer projects values: STANDARD: 10000 # The metric rules bind all methods to the read_calls metric, # except for the UpdateBook and DeleteBook methods. These two methods # are mapped to the write_calls metric, with the UpdateBook method # consuming at twice rate as the DeleteBook method. metric_rules: - selector: "*" metric_costs: library.googleapis.com/read_calls: 1 - selector: google.example.library.v1.LibraryService.UpdateBook metric_costs: library.googleapis.com/write_calls: 2 - selector: google.example.library.v1.LibraryService.DeleteBook metric_costs: library.googleapis.com/write_calls: 1 Corresponding Metric definition: metrics: - name: library.googleapis.com/read_calls display_name: Read requests metric_kind: DELTA value_type: INT64 - name: library.googleapis.com/write_calls display_name: Write requests metric_kind: DELTA value_type: INT64 '
       properties:
@@ -1270,6 +1535,25 @@ components:
             type: string
           description: Tiered limit values. You must specify this as a key:value pair, with an integer value that is the maximum number of requests allowed for the specified unit. Currently only STANDARD is supported.
           type: object
+      type: object
+    RemoveTenantProjectRequest:
+      description: Request message to remove a tenant project resource from the tenancy unit.
+      properties:
+        tag:
+          description: Required. Tag of the resource within the tenancy unit.
+          type: string
+      type: object
+    SearchTenancyUnitsResponse:
+      description: Response for the search query.
+      properties:
+        nextPageToken:
+          description: Pagination token for large results.
+          type: string
+        tenancyUnits:
+          description: Tenancy Units matching the request.
+          items:
+            $ref: "#/components/schemas/TenancyUnit"
+          type: array
       type: object
     Service:
       description: '`Service` is the root object of Google API service configuration (service config). It describes the basic information about a logical service, such as the service name and the user-facing title, and delegates other aspects to sub-sections. Each sub-section is either a proto message or a repeated proto message that configures a specific aspect, such as auth. For more information, see each proto message definition. Example: type: google.api.Service name: calendar.googleapis.com title: Google Calendar API apis: - name: google.calendar.v3.Calendar visibility: rules: - selector: "google.calendar.v3.*" restriction: PREVIEW backend: rules: - selector: "google.calendar.v3.*" address: calendar.example.com authentication: providers: - id: google_calendar_auth jwks_uri: https://www.googleapis.com/oauth2/v1/certs issuer: https://securetoken.google.com rules: - selector: "*" requirements: provider_id: google_calendar_auth'
@@ -1373,6 +1657,18 @@ components:
           $ref: "#/components/schemas/Usage"
           description: Configuration controlling usage of this service.
       type: object
+    ServiceAccountConfig:
+      description: Describes the service account configuration for the tenant project.
+      properties:
+        accountId:
+          description: 'ID of the IAM service account to be created in tenant project. The email format of the service account is "@.iam.gserviceaccount.com". This account ID must be unique within tenant project and service producers have to guarantee it. The ID must be 6-30 characters long, and match the following regular expression: `[a-z]([-a-z0-9]*[a-z0-9])`.'
+          type: string
+        tenantProjectRoles:
+          description: Roles for the associated service account for the tenant project.
+          items:
+            type: string
+          type: array
+      type: object
     SourceContext:
       description: "`SourceContext` represents information about the source of a protobuf element, like the file in which it is defined."
       properties:
@@ -1443,6 +1739,87 @@ components:
             $ref: "#/components/schemas/SystemParameterRule"
           type: array
       type: object
+    TenancyUnit:
+      description: Representation of a tenancy unit.
+      properties:
+        consumer:
+          description: Output only. @OutputOnly Cloud resource name of the consumer of this service. For example 'projects/123456'.
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. @OutputOnly The time this tenancy unit was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: Globally unique identifier of this tenancy unit "services/{service}/{collection id}/{resource id}/tenancyUnits/{unit}"
+          type: string
+        service:
+          description: Output only. Google Cloud API name of the managed service owning this tenancy unit. For example 'serviceconsumermanagement.googleapis.com'.
+          readOnly: true
+          type: string
+        tenantResources:
+          description: Resources constituting the tenancy unit. There can be at most 512 tenant resources in a tenancy unit.
+          items:
+            $ref: "#/components/schemas/TenantResource"
+          type: array
+      type: object
+    TenantProjectConfig:
+      description: This structure defines a tenant project to be added to the specified tenancy unit and its initial configuration and properties. A project lien is created for the tenant project to prevent the tenant project from being deleted accidentally. The lien is deleted as part of tenant project removal.
+      properties:
+        billingConfig:
+          $ref: "#/components/schemas/BillingConfig"
+          description: Billing account properties. The billing account must be specified.
+        folder:
+          description: Folder where project in this tenancy unit must be located This folder must have been previously created with the required permissions for the caller to create and configure a project in it. Valid folder resource names have the format `folders/{folder_number}` (for example, `folders/123456`).
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels that are applied to this project.
+          type: object
+        serviceAccountConfig:
+          $ref: "#/components/schemas/ServiceAccountConfig"
+          description: Configuration for the IAM service account on the tenant project.
+        services:
+          description: "Google Cloud API names of services that are activated on this project during provisioning. If any of these services can't be activated, the request fails. For example: 'compute.googleapis.com','cloudfunctions.googleapis.com'"
+          items:
+            type: string
+          type: array
+        tenantProjectPolicy:
+          $ref: "#/components/schemas/TenantProjectPolicy"
+          description: Describes ownership and policies for the new tenant project. Required.
+      type: object
+    TenantProjectPolicy:
+      description: Describes policy settings that need to be applied to a newly created tenant project.
+      properties:
+        policyBindings:
+          description: Policy bindings to be applied to the tenant project, in addition to the 'roles/owner' role granted to the Service Consumer Management service account. At least one binding must have the role `roles/owner`.
+          items:
+            $ref: "#/components/schemas/PolicyBinding"
+          type: array
+      type: object
+    TenantResource:
+      description: Resource constituting the TenancyUnit.
+      properties:
+        resource:
+          description: Output only. @OutputOnly Identifier of the tenant resource. For cloud projects, it is in the form 'projects/{number}'. For example 'projects/123456'.
+          readOnly: true
+          type: string
+        status:
+          description: Status of tenant resource.
+          enum:
+            - STATUS_UNSPECIFIED
+            - PENDING_CREATE
+            - ACTIVE
+            - PENDING_DELETE
+            - FAILED
+            - DELETED
+          type: string
+        tag:
+          description: Unique per single tenancy unit.
+          type: string
+      type: object
     Type:
       description: A protocol buffer message type.
       properties:
@@ -1472,6 +1849,13 @@ components:
           enum:
             - SYNTAX_PROTO2
             - SYNTAX_PROTO3
+          type: string
+      type: object
+    UndeleteTenantProjectRequest:
+      description: Request message to undelete tenant project resource previously deleted from the tenancy unit.
+      properties:
+        tag:
+          description: Required. Tag of the resource within the tenancy unit.
           type: string
       type: object
     Usage:
@@ -1504,6 +1888,15 @@ components:
           description: If true, the selected method should skip service control and the control plane features, such as quota and billing, will not be available. This flag is used by Google Cloud Endpoints to bypass checks for internal methods, such as service health check methods.
           type: boolean
       type: object
+    V1AddVisibilityLabelsResponse:
+      description: Response message for the `AddVisibilityLabels` method. This response message is assigned to the `response` field of the returned Operation when that operation is done.
+      properties:
+        labels:
+          description: The updated set of visibility labels for this consumer on this service.
+          items:
+            type: string
+          type: array
+      type: object
     V1Beta1BatchCreateProducerOverridesResponse:
       description: Response message for BatchCreateProducerOverrides
       properties:
@@ -1512,53 +1905,6 @@ components:
           items:
             $ref: "#/components/schemas/V1Beta1QuotaOverride"
           type: array
-      type: object
-    V1Beta1ConsumerQuotaLimit:
-      description: Consumer quota settings for a quota limit.
-      properties:
-        isPrecise:
-          description: Whether this limit is precise or imprecise.
-          type: boolean
-        metric:
-          description: "The name of the parent metric of this limit. An example name would be: `compute.googleapis.com/cpus`"
-          type: string
-        name:
-          description: "The resource name of the quota limit. An example name would be: `services/compute.googleapis.com/projects/123/quotas/metrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion` The resource name is intended to be opaque and should not be parsed for its component strings, since its representation could change in the future."
-          type: string
-        quotaBuckets:
-          description: Summary of the enforced quota buckets, organized by quota dimension, ordered from least specific to most specific (for example, the global default bucket, with no quota dimensions, will always appear first).
-          items:
-            $ref: "#/components/schemas/V1Beta1QuotaBucket"
-          type: array
-        unit:
-          description: "The limit unit. An example unit would be: `1/{project}/{region}` Note that `{project}` and `{region}` are not placeholders in this example; the literal characters `{` and `}` occur in the string."
-          type: string
-      type: object
-    V1Beta1ConsumerQuotaMetric:
-      description: Consumer quota settings for a quota metric.
-      properties:
-        consumerQuotaLimits:
-          description: The consumer quota for each quota limit defined on the metric.
-          items:
-            $ref: "#/components/schemas/V1Beta1ConsumerQuotaLimit"
-          type: array
-        descendantConsumerQuotaLimits:
-          description: The quota limits targeting the descendant containers of the consumer in request. If the consumer in request is of type `organizations` or `folders`, the field will list per-project limits in the metric; if the consumer in request is of type `project`, the field will be empty. The `quota_buckets` field of each descendant consumer quota limit will not be populated.
-          items:
-            $ref: "#/components/schemas/V1Beta1ConsumerQuotaLimit"
-          type: array
-        displayName:
-          description: 'The display name of the metric. An example name would be: "CPUs"'
-          type: string
-        metric:
-          description: "The name of the metric. An example name would be: `compute.googleapis.com/cpus`"
-          type: string
-        name:
-          description: "The resource name of the quota settings on this metric for this consumer. An example name would be: `services/serviceconsumermanagement.googleapis.com/projects/123/quota/metrics/compute.googleapis.com%2Fcpus The resource name is intended to be opaque and should not be parsed for its component strings, since its representation could change in the future."
-          type: string
-        unit:
-          description: The units in which the metric value is reported.
-          type: string
       type: object
     V1Beta1DisableConsumerResponse:
       description: Response message for the `DisableConsumer` method. This response message is assigned to the `response` field of the returned Operation when that operation is done.
@@ -1574,25 +1920,6 @@ components:
         identity:
           $ref: "#/components/schemas/V1Beta1ServiceIdentity"
           description: ServiceIdentity that was created or retrieved.
-      type: object
-    V1Beta1ImportProducerOverridesRequest:
-      description: Request message for ImportProducerOverrides
-      properties:
-        force:
-          description: Whether to force the creation of the quota overrides. Setting the force parameter to 'true' ignores all quota safety checks that would fail the request. QuotaSafetyCheck lists all such validations.
-          type: boolean
-        forceOnly:
-          description: The list of quota safety checks to ignore before the override mutation. Unlike 'force' field that ignores all the quota safety checks, the 'force_only' field ignores only the specified checks; other checks are still enforced. The 'force' and 'force_only' fields cannot both be set.
-          items:
-            enum:
-              - QUOTA_SAFETY_CHECK_UNSPECIFIED
-              - LIMIT_DECREASE_BELOW_USAGE
-              - LIMIT_DECREASE_PERCENTAGE_TOO_HIGH
-            type: string
-          type: array
-        inlineSource:
-          $ref: "#/components/schemas/V1Beta1OverrideInlineSource"
-          description: The import data is specified in the request message itself
       type: object
     V1Beta1ImportProducerOverridesResponse:
       description: Response message for ImportProducerOverrides
@@ -1610,39 +1937,6 @@ components:
           description: The policies that were created from the imported data.
           items:
             $ref: "#/components/schemas/V1Beta1ProducerQuotaPolicy"
-          type: array
-      type: object
-    V1Beta1ListConsumerQuotaMetricsResponse:
-      description: Response message for ListConsumerQuotaMetrics.
-      properties:
-        metrics:
-          description: Quota settings for the consumer, organized by quota metric.
-          items:
-            $ref: "#/components/schemas/V1Beta1ConsumerQuotaMetric"
-          type: array
-        nextPageToken:
-          description: Token identifying which result to start with; returned by a previous list call.
-          type: string
-      type: object
-    V1Beta1ListProducerOverridesResponse:
-      description: Response message for ListProducerOverrides.
-      properties:
-        nextPageToken:
-          description: Token identifying which result to start with; returned by a previous list call.
-          type: string
-        overrides:
-          description: Producer overrides on this limit.
-          items:
-            $ref: "#/components/schemas/V1Beta1QuotaOverride"
-          type: array
-      type: object
-    V1Beta1OverrideInlineSource:
-      description: Import data embedded in the request message
-      properties:
-        overrides:
-          description: The overrides to create. Each override must have a value for 'metric' and 'unit', to specify which metric and which limit the override should be applied to. The 'name' field of the override does not need to be set; it is ignored.
-          items:
-            $ref: "#/components/schemas/V1Beta1QuotaOverride"
           type: array
       type: object
     V1Beta1ProducerQuotaPolicy:
@@ -1669,32 +1963,6 @@ components:
         unit:
           description: "The limit unit of the limit to which this policy applies. An example unit would be: `1/{project}/{region}` Note that `{project}` and `{region}` are not placeholders in this example; the literal characters `{` and `}` occur in the string."
           type: string
-      type: object
-    V1Beta1QuotaBucket:
-      description: A quota bucket is a quota provisioning unit for a specific set of dimensions.
-      properties:
-        adminOverride:
-          $ref: "#/components/schemas/V1Beta1QuotaOverride"
-          description: Admin override on this quota bucket.
-        consumerOverride:
-          $ref: "#/components/schemas/V1Beta1QuotaOverride"
-          description: Consumer override on this quota bucket.
-        defaultLimit:
-          description: The default limit of this quota bucket, as specified by the service configuration.
-          format: int64
-          type: string
-        dimensions:
-          additionalProperties:
-            type: string
-          description: The dimensions of this quota bucket. If this map is empty, this is the global bucket, which is the default quota value applied to all requests that do not have a more specific override. If this map is nonempty, the default limit, effective limit, and quota overrides apply only to requests that have the dimensions given in the map. For example, if the map has key "region" and value "us-east-1", then the specified effective limit is only effective in that region, and the specified overrides apply only in that region.
-          type: object
-        effectiveLimit:
-          description: The effective limit of this quota bucket. Equal to default_limit if there are no overrides.
-          format: int64
-          type: string
-        producerOverride:
-          $ref: "#/components/schemas/V1Beta1QuotaOverride"
-          description: Producer override on this quota bucket.
       type: object
     V1Beta1QuotaOverride:
       description: A quota override
@@ -1741,16 +2009,7 @@ components:
           description: The unique and stable id of the service identity.
           type: string
       type: object
-    V1beta1AddVisibilityLabelsResponse:
-      description: Response message for the `AddVisibilityLabels` method. This response message is assigned to the `response` field of the returned Operation when that operation is done.
-      properties:
-        labels:
-          description: The updated set of visibility labels for this consumer on this service.
-          items:
-            type: string
-          type: array
-      type: object
-    V1beta1DefaultIdentity:
+    V1DefaultIdentity:
       description: A default identity in the Identity and Access Management API.
       properties:
         email:
@@ -1766,15 +2025,15 @@ components:
           description: The unique and stable id of the default identity.
           type: string
       type: object
-    V1beta1DisableConsumerResponse:
+    V1DisableConsumerResponse:
       description: Response message for the `DisableConsumer` method. This response message is assigned to the `response` field of the returned Operation when that operation is done.
       properties: {}
       type: object
-    V1beta1EnableConsumerResponse:
+    V1EnableConsumerResponse:
       description: Response message for the `EnableConsumer` method. This response message is assigned to the `response` field of the returned Operation when that operation is done.
       properties: {}
       type: object
-    V1beta1GenerateDefaultIdentityResponse:
+    V1GenerateDefaultIdentityResponse:
       description: Response message for the `GenerateDefaultIdentity` method. This response message is assigned to the `response` field of the returned Operation when that operation is done.
       properties:
         attachStatus:
@@ -1787,24 +2046,24 @@ components:
             - ATTACH_DENIED_BY_ORG_POLICY
           type: string
         identity:
-          $ref: "#/components/schemas/V1beta1DefaultIdentity"
+          $ref: "#/components/schemas/V1DefaultIdentity"
           description: DefaultIdentity that was created or retrieved.
         role:
           description: Role attached to consumer project. Empty if not attached in this request. (Under development, currently always return empty.)
           type: string
       type: object
-    V1beta1GenerateServiceAccountResponse:
+    V1GenerateServiceAccountResponse:
       description: Response message for the `GenerateServiceAccount` method. This response message is assigned to the `response` field of the returned Operation when that operation is done.
       properties:
         account:
-          $ref: "#/components/schemas/V1beta1ServiceAccount"
+          $ref: "#/components/schemas/V1ServiceAccount"
           description: ServiceAccount that was created or retrieved.
       type: object
-    V1beta1RefreshConsumerResponse:
+    V1RefreshConsumerResponse:
       description: Response message for the `RefreshConsumer` method. This response message is assigned to the `response` field of the returned Operation when that operation is done.
       properties: {}
       type: object
-    V1beta1RemoveVisibilityLabelsResponse:
+    V1RemoveVisibilityLabelsResponse:
       description: Response message for the `RemoveVisibilityLabels` method. This response message is assigned to the `response` field of the returned Operation when that operation is done.
       properties:
         labels:
@@ -1813,7 +2072,7 @@ components:
             type: string
           type: array
       type: object
-    V1beta1ServiceAccount:
+    V1ServiceAccount:
       description: A service account in the Identity and Access Management API.
       properties:
         email:
