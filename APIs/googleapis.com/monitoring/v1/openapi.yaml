@@ -13,17 +13,20 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Monitoring API
   version: v1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - format: google
       url: https://monitoring.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-providerName: googleapis.com
   x-serviceName: monitoring
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/monitoring/api/
 tags:
@@ -943,6 +946,32 @@ components:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
+    TableDataSet:
+      description: Groups a time series query definition with table options.
+      properties:
+        minAlignmentPeriod:
+          description: Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
+          format: google-duration
+          type: string
+        tableDisplayOptions:
+          $ref: "#/components/schemas/TableDisplayOptions"
+          description: Optional. Table display options for configuring how the table is rendered.
+        tableTemplate:
+          description: Optional. A template string for naming TimeSeries in the resulting data set. This should be a string with interpolations of the form ${label_name}, which will resolve to the label's value i.e. "${resource.labels.project_id}."
+          type: string
+        timeSeriesQuery:
+          $ref: "#/components/schemas/TimeSeriesQuery"
+          description: Required. Fields for querying time series data from the Stackdriver metrics API.
+      type: object
+    TableDisplayOptions:
+      description: Table display options that can be reused.
+      properties:
+        shownColumns:
+          description: "Optional. Columns to display in the table. Leave empty to display all available columns. Note: This field is for future features and is not currently used."
+          items:
+            type: string
+          type: array
+      type: object
     Text:
       description: A widget that displays textual content.
       properties:
@@ -1066,6 +1095,15 @@ components:
           description: The unit of data contained in fetched time series. If non-empty, this unit will override any unit that accompanies fetched data. The format is the same as the unit (https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors) field in MetricDescriptor.
           type: string
       type: object
+    TimeSeriesTable:
+      description: A table that displays time series data.
+      properties:
+        dataSets:
+          description: Required. The data displayed in this table.
+          items:
+            $ref: "#/components/schemas/TableDataSet"
+          type: array
+      type: object
     Type:
       description: A protocol buffer message type.
       properties:
@@ -1112,6 +1150,9 @@ components:
         text:
           $ref: "#/components/schemas/Text"
           description: A raw string or markdown displaying textual content.
+        timeSeriesTable:
+          $ref: "#/components/schemas/TimeSeriesTable"
+          description: A widget that displays time series data in a tabular format.
         title:
           description: Optional. The title of the widget.
           type: string
@@ -1173,3 +1214,5 @@ components:
             https://www.googleapis.com/auth/monitoring.write: Publish metric data to your Google Cloud projects
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}
