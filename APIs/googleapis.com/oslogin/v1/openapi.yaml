@@ -173,9 +173,17 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
             - https://www.googleapis.com/auth/compute
           Oauth2c:
             - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
       tags:
         - users
     parameters:
@@ -420,7 +428,9 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+            https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud services and see the email address of your Google Account
             https://www.googleapis.com/auth/compute: View and manage your Google Compute Engine resources
+            https://www.googleapis.com/auth/compute.readonly: View your Google Compute Engine resources
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -429,7 +439,9 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+            https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud services and see the email address of your Google Account
             https://www.googleapis.com/auth/compute: View and manage your Google Compute Engine resources
+            https://www.googleapis.com/auth/compute.readonly: View your Google Compute Engine resources
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
 source:

@@ -13,17 +13,20 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: App Engine Admin API
   version: v1beta
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://appengine.googleapis.com/$discovery/rest?version=v1beta
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: appengine
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/appengine/docs/admin-api/
 tags:
@@ -3098,6 +3101,11 @@ components:
         id:
           description: "Relative name of the service within the application. Example: default.@OutputOnly"
           type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: A set of labels to apply to this service. Labels are key/value pairs that describe the service and all resources that belong to it (e.g., versions). The labels can be used to search and group resources, and are propagated to the usage and billing reports, enabling fine-grain analysis of costs. An example of using labels is to tag resources belonging to different environments (e.g., "env=prod", "env=qa"). Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores, dashes, and international characters. Label keys must start with a lowercase letter or an international character. Each service can have at most 32 labels.
+          type: object
         name:
           description: "Full path to the Service resource in the API. Example: apps/myapp/services/default.@OutputOnly"
           type: string
@@ -3488,3 +3496,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud services and see the email address of your Google Account
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

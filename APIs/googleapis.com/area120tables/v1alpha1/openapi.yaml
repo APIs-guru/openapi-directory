@@ -752,6 +752,9 @@ components:
         name:
           description: column name
           type: string
+        readonly:
+          description: Optional. Indicates that values for the column cannot be set by the user.
+          type: boolean
         relationshipDetails:
           $ref: "#/components/schemas/RelationshipDetails"
           description: Optional. Additional details about a relationship column. Specified when data_type is relationship.
