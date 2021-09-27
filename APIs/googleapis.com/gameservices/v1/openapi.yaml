@@ -2030,7 +2030,7 @@ components:
             type: string
           type: array
         logConfig:
-          description: The config returned to callers of tech.iam.IAM.CheckPolicy for any entries that match the LOG action.
+          description: The config returned to callers of CheckPolicy for any entries that match the LOG action.
           items:
             $ref: "#/components/schemas/LogConfig"
           type: array
