@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta3
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: documentai
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -4015,7 +4016,7 @@ components:
       description: EntityType is the wrapper of a label of the corresponding model with detailed attributes and limitations for entity-based processors. Multiple types can also compose a dependency tree to represent nested types.
       properties:
         baseType:
-          description: "Type of the entity. It must be one of the following: `document` - the entity represents a classification of a logical document. `object` - if the entity has properties it is likely an object (or or a document.) `datetime` - the entity is a date or time value. `money` - the entity represents a money value amount. `number` - the entity is a number - integer or floating point. `string` - the entity is a string value. `boolean` - the entity is a boolean value. `address` - the entity is a location address."
+          description: "Type of the entity. It must be one of the following: `document` - the entity represents a classification of a logical document. `object` - if the entity has properties it is likely an object (or or a document.) `datetime` - the entity is a date or time value. `money` - the entity represents a money value amount. `number` - the entity is a number - integer or floating point. `string` - the entity is a string value. `boolean` - the entity is a boolean value. `address` - the entity is a location address. `duration` - the entity is a duration."
           type: string
         description:
           description: Description of the entity type.

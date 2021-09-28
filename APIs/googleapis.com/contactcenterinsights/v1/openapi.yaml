@@ -1022,7 +1022,7 @@ components:
           additionalProperties:
             format: int32
             type: integer
-          description: "A map associating each issue resource name with its respective number of matches in the set of conversations. Key has the format: `projects//locations//issueModels//issues/`"
+          description: "A map associating each issue resource name with its respective number of matches in the set of conversations. Key has the format: `projects//locations//issueModels//issues/` Deprecated, use `issue_matches_stats` field instead."
           type: object
         smartHighlighterMatches:
           additionalProperties:
@@ -1252,12 +1252,22 @@ components:
           description: A confidence estimate between 0.0 and 1.0 of the fidelity of this segment. A default value of 0.0 indicates that the value is unset.
           format: float
           type: number
+        dialogflowSegmentMetadata:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegmentDialogflowSegmentMetadata"
+          description: CCAI metadata relating to the current transcript segment.
         languageCode:
           description: 'The language code of this segment as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. Example: "en-US".'
+          type: string
+        messageTime:
+          description: The time that the message occurred, if provided.
+          format: google-datetime
           type: string
         segmentParticipant:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1ConversationParticipant"
           description: The participant of this segment.
+        sentiment:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1SentimentData"
+          description: The sentiment for this transcript segment.
         text:
           description: The text of this segment.
           type: string
@@ -1266,6 +1276,13 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegmentWordInfo"
           type: array
+      type: object
+    GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegmentDialogflowSegmentMetadata:
+      description: Metadata from Dialogflow relating to the current transcript segment.
+      properties:
+        smartReplyAllowlistCovered:
+          description: Whether the transcript segment was covered under the configured smart reply allowlist in Agent Assist.
+          type: boolean
       type: object
     GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegmentWordInfo:
       description: Word-level info for words in a transcript.

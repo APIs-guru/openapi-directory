@@ -1,47 +1,46 @@
 openapi: 3.0.0
 servers:
-  - url: https://gkehub.googleapis.com/
+  - url: https://networkconnectivity.googleapis.com/
 info:
   contact:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: ""
+  description: The Network Connectivity API provides access to Network Connectivity Center.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
-  title: GKE Hub API
-  version: v1beta1
+  title: Network Connectivity API
+  version: v1
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
-      url: https://gkehub.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+    - format: google
+      url: https://networkconnectivity.googleapis.com/$discovery/rest?version=v1
+      version: v1
   x-providerName: googleapis.com
-  x-serviceName: gkehub
-  x-preferred: true
+  x-serviceName: networkconnectivity
 externalDocs:
-  url: https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster
+  url: https://cloud.google.com/network-connectivity/docs/reference/networkconnectivity/rest
 tags:
   - name: projects
 paths:
-  "/v1beta1/{name}":
+  "/v1/{name}":
     delete:
-      description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: gkehub.projects.locations.operations.delete
+      description: Deletes the specified spoke.
+      operationId: networkconnectivity.projects.locations.spokes.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: Required. The name of the spoke to delete.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        - description: Optional. A unique request ID (optional). If you specify this ID, you can use it in cases when you need to retry your request. When you need to retry, this ID lets the server know that it can ignore the request if it has already been completed. The server guarantees that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check to see whether the original operation was received. If it was, the server ignores the second request. This behavior prevents clients from mistakenly creating duplicate commitments. The request ID must be a valid UUID, with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
           in: query
           name: requestId
           schema:
@@ -51,7 +50,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Empty"
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -61,10 +60,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: gkehub.projects.locations.operations.get
+      description: Gets details about the specified spoke.
+      operationId: networkconnectivity.projects.locations.spokes.get
       parameters:
-        - description: The name of the operation resource.
+        - description: Required. The name of the spoke resource.
           in: path
           name: name
           required: true
@@ -75,7 +74,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/Spoke"
           description: Successful response
       security:
         - Oauth2:
@@ -97,21 +96,21 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an existing Membership.
-      operationId: gkehub.projects.locations.memberships.patch
+      description: Updates the parameters of the specified spoke.
+      operationId: networkconnectivity.projects.locations.spokes.patch
       parameters:
-        - description: "Required. The membership resource name in the format: `projects/[project_id]/locations/global/memberships/[membership_id]`"
+        - description: "Immutable. The name of the spoke. Spoke names must be unique. They use the following form: `projects/{project_number}/locations/{region}/spokes/{spoke_id}`"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        - description: Optional. A unique request ID (optional). If you specify this ID, you can use it in cases when you need to retry your request. When you need to retry, this ID lets the server know that it can ignore the request if it has already been completed. The server guarantees that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check to see whether the original operation was received. If it was, the server ignores the second request. This behavior prevents clients from mistakenly creating duplicate commitments. The request ID must be a valid UUID, with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
           in: query
           name: requestId
           schema:
             type: string
-        - description: Required. Mask of fields to update. At least one field path must be specified in this mask.
+        - description: Optional. In the case of an update to an existing spoke, field mask is used to specify the fields to be overwritten. The fields specified in the update_mask are relative to the resource, not the full request. A field is overwritten if it is in the mask. If the user does not provide a mask, then all fields are overwritten.
           in: query
           name: updateMask
           schema:
@@ -120,13 +119,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Membership"
+              $ref: "#/components/schemas/Spoke"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -135,10 +134,10 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}/locations":
+  "/v1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
-      operationId: gkehub.projects.locations.list
+      operationId: networkconnectivity.projects.locations.list
       parameters:
         - description: The resource that owns the locations collection, if applicable.
           in: path
@@ -187,10 +186,10 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}/operations":
+  "/v1/{name}/operations":
     get:
       description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
-      operationId: gkehub.projects.locations.operations.list
+      operationId: networkconnectivity.projects.locations.operations.list
       parameters:
         - description: The name of the operation's parent resource.
           in: path
@@ -218,7 +217,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListOperationsResponse"
+                $ref: "#/components/schemas/GoogleLongrunningListOperationsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -239,7 +238,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:cancel":
+  "/v1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -254,7 +253,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
-      operationId: gkehub.projects.locations.operations.cancel
+      operationId: networkconnectivity.projects.locations.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
           in: path
@@ -266,7 +265,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CancelOperationRequest"
+              $ref: "#/components/schemas/GoogleLongrunningCancelOperationRequest"
       responses:
         "200":
           content:
@@ -281,152 +280,33 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:generateConnectManifest":
+  "/v1/{parent}/hubs":
     get:
-      description: Generates the manifest for deployment of the GKE connect agent. **This method is used internally by Google-provided libraries.** Most clients should not need to call this method directly.
-      operationId: gkehub.projects.locations.memberships.generateConnectManifest
+      description: Lists hubs in a given project.
+      operationId: networkconnectivity.projects.locations.global.hubs.list
       parameters:
-        - description: Required. The Membership resource name the Agent will associate with, in the format `projects/*/locations/*/memberships/*`.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-        - description: Do not set.
-          in: query
-          name: connectAgent.name
-          schema:
-            type: string
-        - description: Optional. Namespace for GKE Connect agent resources. Defaults to `gke-connect`. The Connect Agent is authorized automatically when run in the default namespace. Otherwise, explicit authorization must be granted with an additional IAM binding.
-          in: query
-          name: connectAgent.namespace
-          schema:
-            type: string
-        - description: Optional. URI of a proxy if connectivity from the agent to gkeconnect.googleapis.com requires the use of a proxy. Format must be in the form `http(s)://{proxy_address}`, depending on the HTTP/HTTPS protocol supported by the proxy. This will direct the connect agent's outbound traffic through a HTTP(S) proxy.
-          in: query
-          name: connectAgent.proxy
-          schema:
-            type: string
-        - description: Optional. The image pull secret content for the registry, if not public.
-          in: query
-          name: imagePullSecretContent
-          schema:
-            type: string
-        - description: Optional. If true, generate the resources for upgrade only. Some resources generated only for installation (e.g. secrets) will be excluded.
-          in: query
-          name: isUpgrade
-          schema:
-            type: boolean
-        - description: Optional. The registry to fetch the connect agent image from. Defaults to gcr.io/gkeconnect.
-          in: query
-          name: registry
-          schema:
-            type: string
-        - description: Optional. The Connect agent version to use. Defaults to the most current version.
-          in: query
-          name: version
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenerateConnectManifestResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:generateExclusivityManifest":
-    get:
-      description: GenerateExclusivityManifest generates the manifests to update the exclusivity artifacts in the cluster if needed. Exclusivity artifacts include the Membership custom resource definition (CRD) and the singleton Membership custom resource (CR). Combined with ValidateExclusivity, exclusivity artifacts guarantee that a Kubernetes cluster is only registered to a single GKE Hub. The Membership CRD is versioned, and may require conversion when the GKE Hub API server begins serving a newer version of the CRD and corresponding CR. The response will be the converted CRD and CR if there are any differences between the versions.
-      operationId: gkehub.projects.locations.memberships.generateExclusivityManifest
-      parameters:
-        - description: Required. The Membership resource name in the format `projects/*/locations/*/memberships/*`.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-        - description: Optional. The YAML manifest of the membership CR retrieved by `kubectl get memberships membership`. Leave empty if the resource does not exist.
-          in: query
-          name: crManifest
-          schema:
-            type: string
-        - description: Optional. The YAML manifest of the membership CRD retrieved by `kubectl get customresourcedefinitions membership`. Leave empty if the resource does not exist.
-          in: query
-          name: crdManifest
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenerateExclusivityManifestResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/memberships":
-    get:
-      description: Lists Memberships in a given project and location.
-      operationId: gkehub.projects.locations.memberships.list
-      parameters:
-        - description: Required. The parent (project and location) where the Memberships will be listed. Specified in the format `projects/*/locations/*`.
+        - description: Required. The parent resource's name.
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: 'Optional. Lists Memberships that match the filter expression, following the syntax outlined in https://google.aip.dev/160. Examples: - Name is `bar` in project `foo-proj` and location `global`: name = "projects/foo-proj/locations/global/membership/bar" - Memberships that have a label called `foo`: labels.foo:* - Memberships that have a label called `foo` whose value is `bar`: labels.foo = bar - Memberships in the CREATING state: state = CREATING'
+        - description: An expression that filters the results listed in the response.
           in: query
           name: filter
           schema:
             type: string
-        - description: Optional. One or more fields to compare and use to sort the output. See https://google.aip.dev/132#ordering.
+        - description: Sort the results by a certain order.
           in: query
           name: orderBy
           schema:
             type: string
-        - description: Optional. When requesting a 'page' of resources, `page_size` specifies number of resources to return. If unspecified or set to 0, all resources will be returned.
+        - description: The maximum number of results per page that should be returned.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Optional. Token returned by previous call to `ListMemberships` which specifies the position in the list from where to continue listing the resources.
+        - description: The page token.
           in: query
           name: pageToken
           schema:
@@ -436,7 +316,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListMembershipsResponse"
+                $ref: "#/components/schemas/ListHubsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -458,21 +338,21 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new Membership. **This is currently only supported for GKE clusters on Google Cloud**. To register other clusters, follow the instructions at https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster.
-      operationId: gkehub.projects.locations.memberships.create
+      description: Creates a new hub in the specified project.
+      operationId: networkconnectivity.projects.locations.global.hubs.create
       parameters:
-        - description: Required. The parent (project and location) where the Memberships will be created. Specified in the format `projects/*/locations/*`.
+        - description: Required. The parent resource.
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: "Required. Client chosen ID for the membership. `membership_id` must be a valid RFC 1123 compliant DNS label: 1. At most 63 characters in length 2. It must consist of lower case alphanumeric characters or `-` 3. It must start and end with an alphanumeric character Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`, with a maximum length of 63 characters."
+        - description: Optional. A unique identifier for the hub.
           in: query
-          name: membershipId
+          name: hubId
           schema:
             type: string
-        - description: Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        - description: Optional. A unique request ID (optional). If you specify this ID, you can use it in cases when you need to retry your request. When you need to retry, this ID lets the server know that it can ignore the request if it has already been completed. The server guarantees that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check to see whether the original operation was received. If it was, the server ignores the second request. This behavior prevents clients from mistakenly creating duplicate commitments. The request ID must be a valid UUID, with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
           in: query
           name: requestId
           schema:
@@ -481,13 +361,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Membership"
+              $ref: "#/components/schemas/Hub"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -496,25 +376,35 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/memberships:validateExclusivity":
+  "/v1/{parent}/spokes":
     get:
-      description: ValidateExclusivity validates the state of exclusivity in the cluster. The validation does not depend on an existing Hub membership resource.
-      operationId: gkehub.projects.locations.memberships.validateExclusivity
+      description: Lists the spokes in the specified project and location.
+      operationId: networkconnectivity.projects.locations.spokes.list
       parameters:
-        - description: Required. The parent (project and location) where the Memberships will be created. Specified in the format `projects/*/locations/*`.
+        - description: Required. The parent resource.
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Optional. The YAML of the membership CR in the cluster. Empty if the membership CR does not exist.
+        - description: An expression that filters the results listed in the response.
           in: query
-          name: crManifest
+          name: filter
           schema:
             type: string
-        - description: Required. The intended membership name under the `parent`. This method only does validation in anticipation of a CreateMembership call with the same name.
+        - description: Sort the results by a certain order.
           in: query
-          name: intendedMembership
+          name: orderBy
+          schema:
+            type: string
+        - description: The maximum number of results per page that should be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The page token.
+          in: query
+          name: pageToken
           schema:
             type: string
       responses:
@@ -522,7 +412,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ValidateExclusivityResponse"
+                $ref: "#/components/schemas/ListSpokesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -543,10 +433,49 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{resource}:getIamPolicy":
+    post:
+      description: Creates a spoke in the specified project and location.
+      operationId: networkconnectivity.projects.locations.spokes.create
+      parameters:
+        - description: Required. The parent resource.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. A unique request ID (optional). If you specify this ID, you can use it in cases when you need to retry your request. When you need to retry, this ID lets the server know that it can ignore the request if it has already been completed. The server guarantees that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check to see whether the original operation was received. If it was, the server ignores the second request. This behavior prevents clients from mistakenly creating duplicate commitments. The request ID must be a valid UUID, with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+        - description: Optional. Unique id for the spoke to create.
+          in: query
+          name: spokeId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Spoke"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-      operationId: gkehub.projects.locations.memberships.getIamPolicy
+      operationId: networkconnectivity.projects.locations.spokes.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
           in: path
@@ -585,7 +514,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{resource}:setIamPolicy":
+  "/v1/{resource}:setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -600,7 +529,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
-      operationId: gkehub.projects.locations.memberships.setIamPolicy
+      operationId: networkconnectivity.projects.locations.spokes.setIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field."
           in: path
@@ -627,7 +556,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:testIamPermissions":
+  "/v1/{resource}:testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -642,7 +571,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
-      operationId: gkehub.projects.locations.memberships.testIamPermissions
+      operationId: networkconnectivity.projects.locations.spokes.testIamPermissions
       parameters:
         - description: "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field."
           in: path
@@ -774,25 +703,6 @@ components:
             - DATA_READ
           type: string
       type: object
-    Authority:
-      description: "Authority encodes how Google will recognize identities from this Membership. See the workload identity documentation for more details: https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity"
-      properties:
-        identityProvider:
-          description: Output only. An identity provider that reflects the `issuer` in the workload identity pool.
-          readOnly: true
-          type: string
-        issuer:
-          description: Optional. A JSON Web Token (JWT) issuer URI. `issuer` must start with `https://` and be a valid URL with length <2000 characters. If set, then Google will allow valid OIDC tokens from this issuer to authenticate within the workload_identity_pool. OIDC discovery will be performed on this URI to validate tokens from the issuer. Clearing `issuer` disables Workload Identity. `issuer` cannot be directly modified; it must be cleared (and Workload Identity disabled) before using a new issuer (and re-enabling Workload Identity).
-          type: string
-        oidcJwks:
-          description: Optional. OIDC verification keys for this Membership in JWKS format (RFC 7517). When this field is set, OIDC discovery will NOT be performed on `issuer`, and instead OIDC tokens will be validated using this field.
-          format: byte
-          type: string
-        workloadIdentityPool:
-          description: Output only. The name of the workload identity pool in which `issuer` will be recognized. There is a single Workload Identity Pool per Hub that is shared between all Memberships that belong to that Hub. For a Hub hosted in {PROJECT_ID}, the workload pool format is `{PROJECT_ID}.hub.id.goog`, although this is subject to change in newer versions of this API.
-          readOnly: true
-          type: string
-      type: object
     Binding:
       description: Associates `members` with a `role`.
       properties:
@@ -807,20 +717,6 @@ components:
         role:
           description: Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
-      type: object
-    CancelOperationRequest:
-      description: The request message for Operations.CancelOperation.
-      properties: {}
-      type: object
-    ConnectAgentResource:
-      description: ConnectAgentResource represents a Kubernetes resource manifest for Connect Agent deployment.
-      properties:
-        manifest:
-          description: YAML manifest of the resource.
-          type: string
-        type:
-          $ref: "#/components/schemas/TypeMeta"
-          description: Kubernetes type of the resource.
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
@@ -842,35 +738,44 @@ components:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
-    GenerateConnectManifestResponse:
-      description: GenerateConnectManifestResponse contains manifest information for installing/upgrading a Connect agent.
+    GoogleLongrunningCancelOperationRequest:
+      description: The request message for Operations.CancelOperation.
+      properties: {}
+      type: object
+    GoogleLongrunningListOperationsResponse:
+      description: The response message for Operations.ListOperations.
       properties:
-        manifest:
-          description: The ordered list of Kubernetes resources that need to be applied to the cluster for GKE Connect agent installation/upgrade.
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+        operations:
+          description: A list of operations that matches the specified filter in the request.
           items:
-            $ref: "#/components/schemas/ConnectAgentResource"
+            $ref: "#/components/schemas/GoogleLongrunningOperation"
           type: array
       type: object
-    GenerateExclusivityManifestResponse:
-      description: The response of the exclusivity artifacts manifests for the client to apply.
+    GoogleLongrunningOperation:
+      description: This resource represents a long-running operation that is the result of a network API call.
       properties:
-        crManifest:
-          description: The YAML manifest of the membership CR to apply if a new version of the CR is available. Empty if no update needs to be applied.
-          type: string
-        crdManifest:
-          description: The YAML manifest of the membership CRD to apply if a newer version of the CRD is available. Empty if no update needs to be applied.
-          type: string
-      type: object
-    GkeCluster:
-      description: GkeCluster contains information specific to GKE clusters.
-      properties:
-        clusterMissing:
-          description: Output only. If cluster_missing is set then it denotes that the GKE cluster no longer exists in the GKE Control Plane.
-          readOnly: true
+        done:
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
           type: boolean
-        resourceLink:
-          description: "Immutable. Self-link of the GCP resource for the GKE cluster. For example: //container.googleapis.com/projects/my-project/locations/us-west1-a/clusters/my-cluster Zonal clusters are also supported."
+        error:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: The error result of the operation in case of failure or cancellation.
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          type: object
+        name:
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
+        response:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          type: object
       type: object
     GoogleRpcStatus:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
@@ -890,59 +795,101 @@ components:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
-    KubernetesMetadata:
-      description: KubernetesMetadata provides informational metadata for Memberships representing Kubernetes clusters.
+    Hub:
+      description: A hub is a collection of spokes. A single hub can contain spokes from multiple regions. However, all of a hub's spokes must be associated with resources that reside in the same VPC network.
       properties:
-        kubernetesApiServerVersion:
-          description: Output only. Kubernetes API server version string as reported by '/version'.
-          readOnly: true
-          type: string
-        memoryMb:
-          description: Output only. The total memory capacity as reported by the sum of all Kubernetes nodes resources, defined in MB.
-          format: int32
-          readOnly: true
-          type: integer
-        nodeCount:
-          description: Output only. Node count as reported by Kubernetes nodes resources.
-          format: int32
-          readOnly: true
-          type: integer
-        nodeProviderId:
-          description: Output only. Node providerID as reported by the first node in the list of nodes on the Kubernetes endpoint. On Kubernetes platforms that support zero-node clusters (like GKE-on-GCP), the node_count will be zero and the node_provider_id will be empty.
-          readOnly: true
-          type: string
-        updateTime:
-          description: Output only. The time at which these details were last updated. This update_time is different from the Membership-level update_time since EndpointDetails are updated internally for API consumers.
+        createTime:
+          description: Output only. The time the hub was created.
           format: google-datetime
           readOnly: true
           type: string
-        vcpuCount:
-          description: Output only. vCPU count as reported by Kubernetes nodes resources.
-          format: int32
-          readOnly: true
-          type: integer
-      type: object
-    KubernetesResource:
-      description: KubernetesResource contains the YAML manifests and configuration for Membership Kubernetes resources in the cluster. After CreateMembership or UpdateMembership, these resources should be re-applied in the cluster.
-      properties:
-        connectResources:
-          description: Output only. The Kubernetes resources for installing the GKE Connect agent This field is only populated in the Membership returned from a successful long-running operation from CreateMembership or UpdateMembership. It is not populated during normal GetMembership or ListMemberships requests. To get the resource manifest after the initial registration, the caller should make a UpdateMembership call with an empty field mask.
-          items:
-            $ref: "#/components/schemas/ResourceManifest"
-          readOnly: true
-          type: array
-        membershipCrManifest:
-          description: Input only. The YAML representation of the Membership CR. This field is ignored for GKE clusters where Hub can read the CR directly. Callers should provide the CR that is currently present in the cluster during CreateMembership or UpdateMembership, or leave this field empty if none exists. The CR manifest is used to validate the cluster has not been registered with another Membership.
+        description:
+          description: An optional description of the hub.
           type: string
-        membershipResources:
-          description: Output only. Additional Kubernetes resources that need to be applied to the cluster after Membership creation, and after every update. This field is only populated in the Membership returned from a successful long-running operation from CreateMembership or UpdateMembership. It is not populated during normal GetMembership or ListMemberships requests. To get the resource manifest after the initial registration, the caller should make a UpdateMembership call with an empty field mask.
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional labels in key:value format. For more information about labels, see [Requirements for labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
+          type: object
+        name:
+          description: "Immutable. The name of the hub. Hub names must be unique. They use the following form: `projects/{project_number}/locations/global/hubs/{hub_id}`"
+          type: string
+        routingVpcs:
+          description: The VPC network associated with this hub's spokes. All of the VPN tunnels, VLAN attachments, and router appliance instances referenced by this hub's spokes must belong to this VPC network. This field is read-only. Network Connectivity Center automatically populates it based on the set of spokes attached to the hub.
           items:
-            $ref: "#/components/schemas/ResourceManifest"
-          readOnly: true
+            $ref: "#/components/schemas/RoutingVPC"
           type: array
-        resourceOptions:
-          $ref: "#/components/schemas/ResourceOptions"
-          description: Optional. Options for Kubernetes resource generation.
+        state:
+          description: Output only. The current lifecycle state of this hub.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
+            - DELETING
+          readOnly: true
+          type: string
+        uniqueId:
+          description: Output only. The Google-generated UUID for the hub. This value is unique across all hub resources. If a hub is deleted and another with the same name is created, the new hub is assigned a different unique_id.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The time the hub was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    LinkedInterconnectAttachments:
+      description: A collection of VLAN attachment resources. These resources should be redundant attachments that all advertise the same prefixes to Google Cloud. Alternatively, in active/passive configurations, all attachments should be capable of advertising the same prefixes.
+      properties:
+        siteToSiteDataTransfer:
+          description: A value that controls whether site-to-site data transfer is enabled for these resources. This field is set to false by default, but you must set it to true. Note that data transfer is available only in supported locations.
+          type: boolean
+        uris:
+          description: The URIs of linked interconnect attachment resources
+          items:
+            type: string
+          type: array
+      type: object
+    LinkedRouterApplianceInstances:
+      description: A collection of router appliance instances. If you have multiple router appliance instances connected to the same site, they should all be attached to the same spoke.
+      properties:
+        instances:
+          description: The list of router appliance instances.
+          items:
+            $ref: "#/components/schemas/RouterApplianceInstance"
+          type: array
+        siteToSiteDataTransfer:
+          description: A value that controls whether site-to-site data transfer is enabled for these resources. This field is set to false by default, but you must set it to true. Note that data transfer is available only in supported locations.
+          type: boolean
+      type: object
+    LinkedVpnTunnels:
+      description: A collection of Cloud VPN tunnel resources. These resources should be redundant HA VPN tunnels that all advertise the same prefixes to Google Cloud. Alternatively, in a passive/active configuration, all tunnels should be capable of advertising the same prefixes.
+      properties:
+        siteToSiteDataTransfer:
+          description: A value that controls whether site-to-site data transfer is enabled for these resources. This field is set to false by default, but you must set it to true. Note that data transfer is available only in supported locations.
+          type: boolean
+        uris:
+          description: The URIs of linked VPN tunnel resources.
+          items:
+            type: string
+          type: array
+      type: object
+    ListHubsResponse:
+      description: Response for HubService.ListHubs method.
+      properties:
+        hubs:
+          description: The requested hubs.
+          items:
+            $ref: "#/components/schemas/Hub"
+          type: array
+        nextPageToken:
+          description: The next pagination token in the List response. It should be used as page_token for the following request. An empty value means no more result.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
       type: object
     ListLocationsResponse:
       description: The response message for Locations.ListLocations.
@@ -956,33 +903,21 @@ components:
           description: The standard List next-page token.
           type: string
       type: object
-    ListMembershipsResponse:
-      description: Response message for the `GkeHubMembershipService.ListMemberships` method.
+    ListSpokesResponse:
+      description: The response for HubService.ListSpokes.
       properties:
         nextPageToken:
-          description: A token to request the next page of resources from the `ListMemberships` method. The value of an empty string means that there are no more resources to return.
+          description: The next pagination token in the List response. It should be used as page_token for the following request. An empty value means no more result.
           type: string
-        resources:
-          description: The list of matching Memberships.
+        spokes:
+          description: The requested spokes.
           items:
-            $ref: "#/components/schemas/Membership"
+            $ref: "#/components/schemas/Spoke"
           type: array
         unreachable:
-          description: List of locations that could not be reached while fetching this list.
+          description: Locations that could not be reached.
           items:
             type: string
-          type: array
-      type: object
-    ListOperationsResponse:
-      description: The response message for Operations.ListOperations.
-      properties:
-        nextPageToken:
-          description: The standard List next-page token.
-          type: string
-        operations:
-          description: A list of operations that matches the specified filter in the request.
-          items:
-            $ref: "#/components/schemas/Operation"
           type: array
       type: object
     Location:
@@ -1008,156 +943,6 @@ components:
           description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
           type: string
       type: object
-    Membership:
-      description: Membership contains information about a member cluster.
-      properties:
-        authority:
-          $ref: "#/components/schemas/Authority"
-          description: "Optional. How to identify workloads from this Membership. See the documentation on Workload Identity for more details: https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity"
-        createTime:
-          description: Output only. When the Membership was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        deleteTime:
-          description: Output only. When the Membership was deleted.
-          format: google-datetime
-          readOnly: true
-          type: string
-        description:
-          description: "Optional. Description of this membership, limited to 63 characters. Must match the regex: `a-zA-Z0-9*`"
-          type: string
-        endpoint:
-          $ref: "#/components/schemas/MembershipEndpoint"
-          description: Optional. Endpoint information to reach this member.
-        externalId:
-          description: "Optional. An externally-generated and managed ID for this Membership. This ID may be modified after creation, but this is not recommended. For GKE clusters, external_id is managed by the Hub API and updates will be ignored. The ID must match the regex: `a-zA-Z0-9*` If this Membership represents a Kubernetes cluster, this value should be set to the UID of the `kube-system` namespace object."
-          type: string
-        infrastructureType:
-          description: Optional. The infrastructure type this Membership is running on.
-          enum:
-            - INFRASTRUCTURE_TYPE_UNSPECIFIED
-            - ON_PREM
-            - MULTI_CLOUD
-          type: string
-        labels:
-          additionalProperties:
-            type: string
-          description: Optional. GCP labels for this membership.
-          type: object
-        lastConnectionTime:
-          description: Output only. For clusters using Connect, the timestamp of the most recent connection established with Google Cloud. This time is updated every several minutes, not continuously. For clusters that do not use GKE Connect, or that have never connected successfully, this field will be unset.
-          format: google-datetime
-          readOnly: true
-          type: string
-        name:
-          description: "Output only. The full, unique name of this Membership resource in the format `projects/*/locations/*/memberships/{membership_id}`, set during creation. `membership_id` must be a valid RFC 1123 compliant DNS label: 1. At most 63 characters in length 2. It must consist of lower case alphanumeric characters or `-` 3. It must start and end with an alphanumeric character Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`, with a maximum length of 63 characters."
-          readOnly: true
-          type: string
-        state:
-          $ref: "#/components/schemas/MembershipState"
-          description: Output only. State of the Membership resource.
-          readOnly: true
-        uniqueId:
-          description: Output only. Google-generated UUID for this resource. This is unique across all Membership resources. If a Membership resource is deleted and another resource with the same name is created, it gets a different unique_id.
-          readOnly: true
-          type: string
-        updateTime:
-          description: Output only. When the Membership was last updated.
-          format: google-datetime
-          readOnly: true
-          type: string
-      type: object
-    MembershipEndpoint:
-      description: MembershipEndpoint contains information needed to contact a Kubernetes API, endpoint and any additional Kubernetes metadata.
-      properties:
-        gkeCluster:
-          $ref: "#/components/schemas/GkeCluster"
-          description: Optional. Specific information for a GKE-on-GCP cluster.
-        kubernetesMetadata:
-          $ref: "#/components/schemas/KubernetesMetadata"
-          description: Output only. Useful Kubernetes-specific metadata.
-          readOnly: true
-        kubernetesResource:
-          $ref: "#/components/schemas/KubernetesResource"
-          description: "Optional. The in-cluster Kubernetes Resources that should be applied for a correctly registered cluster, in the steady state. These resources: * Ensure that the cluster is exclusively registered to one and only one Hub Membership. * Propagate Workload Pool Information available in the Membership Authority field. * Ensure proper initial configuration of default Hub Features."
-        multiCloudCluster:
-          $ref: "#/components/schemas/MultiCloudCluster"
-          description: Optional. Specific information for a GKE Multi-Cloud cluster.
-        onPremCluster:
-          $ref: "#/components/schemas/OnPremCluster"
-          description: Optional. Specific information for a GKE On-Prem cluster.
-      type: object
-    MembershipState:
-      description: State of the Membership resource.
-      properties:
-        code:
-          description: Output only. The current state of the Membership resource.
-          enum:
-            - CODE_UNSPECIFIED
-            - CREATING
-            - READY
-            - DELETING
-            - UPDATING
-            - SERVICE_UPDATING
-          readOnly: true
-          type: string
-        description:
-          description: This field is never set by the Hub Service.
-          type: string
-        updateTime:
-          description: This field is never set by the Hub Service.
-          format: google-datetime
-          type: string
-      type: object
-    MultiCloudCluster:
-      description: MultiCloudCluster contains information specific to GKE Multi-Cloud clusters.
-      properties:
-        clusterMissing:
-          description: Output only. If cluster_missing is set then it denotes that API(gkemulticloud.googleapis.com) resource for this GKE Multi-Cloud cluster no longer exists.
-          readOnly: true
-          type: boolean
-        resourceLink:
-          description: "Immutable. Self-link of the GCP resource for the GKE Multi-Cloud cluster. For example: //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/awsClusters/my-cluster //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/azureClusters/my-cluster"
-          type: string
-      type: object
-    OnPremCluster:
-      description: OnPremCluster contains information specific to GKE On-Prem clusters.
-      properties:
-        adminCluster:
-          description: Immutable. Whether the cluster is an admin cluster.
-          type: boolean
-        clusterMissing:
-          description: Output only. If cluster_missing is set then it denotes that API(gkeonprem.googleapis.com) resource for this GKE On-Prem cluster no longer exists.
-          readOnly: true
-          type: boolean
-        resourceLink:
-          description: "Immutable. Self-link of the GCP resource for the GKE On-Prem cluster. For example: //gkeonprem.googleapis.com/projects/my-project/locations/us-west1-a/vmwareClusters/my-cluster //gkeonprem.googleapis.com/projects/my-project/locations/us-west1-a/bareMetalClusters/my-cluster"
-          type: string
-      type: object
-    Operation:
-      description: This resource represents a long-running operation that is the result of a network API call.
-      properties:
-        done:
-          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
-          type: boolean
-        error:
-          $ref: "#/components/schemas/GoogleRpcStatus"
-          description: The error result of the operation in case of failure or cancellation.
-        metadata:
-          additionalProperties:
-            description: Properties of the object. Contains field @type with type URL.
-          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
-          type: object
-        name:
-          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
-          type: string
-        response:
-          additionalProperties:
-            description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
-          type: object
-      type: object
     OperationMetadata:
       description: Represents the metadata of the long-running operation.
       properties:
@@ -1165,10 +950,6 @@ components:
           description: Output only. API version used to start the operation.
           readOnly: true
           type: string
-        cancelRequested:
-          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
-          readOnly: true
-          type: boolean
         createTime:
           description: Output only. The time the operation was created.
           format: google-datetime
@@ -1179,7 +960,11 @@ components:
           format: google-datetime
           readOnly: true
           type: string
-        statusDetail:
+        requestedCancellation:
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
+          type: boolean
+        statusMessage:
           description: Output only. Human-readable status of the operation, if any.
           readOnly: true
           type: string
@@ -1214,25 +999,22 @@ components:
           format: int32
           type: integer
       type: object
-    ResourceManifest:
-      description: ResourceManifest represents a single Kubernetes resource to be applied to the cluster.
+    RouterApplianceInstance:
+      description: A router appliance instance is a Compute Engine virtual machine (VM) instance that acts as a BGP speaker. A router appliance instance is specified by the URI of the VM and the internal IP address of one of the VM's network interfaces.
       properties:
-        clusterScoped:
-          description: Whether the resource provided in the manifest is `cluster_scoped`. If unset, the manifest is assumed to be namespace scoped. This field is used for REST mapping when applying the resource in a cluster.
-          type: boolean
-        manifest:
-          description: YAML manifest of the resource.
+        ipAddress:
+          description: The IP address on the VM to use for peering.
+          type: string
+        virtualMachine:
+          description: The URI of the VM.
           type: string
       type: object
-    ResourceOptions:
-      description: ResourceOptions represent options for Kubernetes resource generation.
+    RoutingVPC:
+      description: RoutingVPC contains information about the VPC network that is associated with a hub's spokes.
       properties:
-        connectVersion:
-          description: Optional. The Connect agent version to use for connect_resources. Defaults to the latest GKE Connect version. The version must be a currently supported version, obsolete versions will be rejected.
+        uri:
+          description: The URI of the VPC network.
           type: string
-        v1beta1Crd:
-          description: Optional. Use `apiextensions/v1beta1` instead of `apiextensions/v1` for CustomResourceDefinition resources. This option should be set for clusters with Kubernetes apiserver versions <1.16.
-          type: boolean
       type: object
     SetIamPolicyRequest:
       description: Request message for `SetIamPolicy` method.
@@ -1243,6 +1025,56 @@ components:
         updateMask:
           description: 'OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: `paths: "bindings, etag"`'
           format: google-fieldmask
+          type: string
+      type: object
+    Spoke:
+      description: "A spoke represents a connection between your Google Cloud network resources and a non-Google-Cloud network. When you create a spoke, you associate it with a hub. You must also identify a value for exactly one of the following fields: * linked_vpn_tunnels * linked_interconnect_attachments * linked_router_appliance_instances"
+      properties:
+        createTime:
+          description: Output only. The time the spoke was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: An optional description of the spoke.
+          type: string
+        hub:
+          description: Immutable. The URI of the hub that this spoke is attached to.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional labels in key:value format. For more information about labels, see [Requirements for labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
+          type: object
+        linkedInterconnectAttachments:
+          $ref: "#/components/schemas/LinkedInterconnectAttachments"
+          description: VLAN attachments that are associated with the spoke.
+        linkedRouterApplianceInstances:
+          $ref: "#/components/schemas/LinkedRouterApplianceInstances"
+          description: Router appliance instances that are associated with the spoke.
+        linkedVpnTunnels:
+          $ref: "#/components/schemas/LinkedVpnTunnels"
+          description: VPN tunnels that are associated with the spoke.
+        name:
+          description: "Immutable. The name of the spoke. Spoke names must be unique. They use the following form: `projects/{project_number}/locations/{region}/spokes/{spoke_id}`"
+          type: string
+        state:
+          description: Output only. The current lifecycle state of this spoke.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
+            - DELETING
+          readOnly: true
+          type: string
+        uniqueId:
+          description: Output only. The Google-generated UUID for the spoke. This value is unique across all spoke resources. If a spoke is deleted and another with the same name is created, the new spoke is assigned a different unique_id.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The time the spoke was last updated.
+          format: google-datetime
+          readOnly: true
           type: string
       type: object
     TestIamPermissionsRequest:
@@ -1262,23 +1094,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    TypeMeta:
-      description: TypeMeta is the type information needed for content unmarshalling of Kubernetes resources in the manifest.
-      properties:
-        apiVersion:
-          description: APIVersion of the resource (e.g. v1).
-          type: string
-        kind:
-          description: Kind of the resource (e.g. Deployment).
-          type: string
-      type: object
-    ValidateExclusivityResponse:
-      description: The response of exclusivity artifacts validation result status.
-      properties:
-        status:
-          $ref: "#/components/schemas/GoogleRpcStatus"
-          description: The validation result. * `OK` means that exclusivity is validated, assuming the manifest produced by GenerateExclusivityManifest is successfully applied. * `ALREADY_EXISTS` means that the Membership CRD is already owned by another Hub. See `status.message` for more information.
       type: object
   securitySchemes:
     Oauth2:
