@@ -4073,6 +4073,12 @@ components:
         advancedApiOpsConfig:
           $ref: "#/components/schemas/GoogleCloudApigeeV1AdvancedApiOpsConfig"
           description: Configuration for the Advanced API Ops add-on.
+        connectorsPlatformConfig:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ConnectorsPlatformConfig"
+          description: Configuration for the Connectors Platform add-on.
+        integrationConfig:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1IntegrationConfig"
+          description: Configuration for the Integration add-on.
         monetizationConfig:
           $ref: "#/components/schemas/GoogleCloudApigeeV1MonetizationConfig"
           description: Configuration for the Monetization add-on.
@@ -4662,6 +4668,18 @@ components:
           description: Minor version of the API proxy configuration schema.
           format: int32
           type: integer
+      type: object
+    GoogleCloudApigeeV1ConnectorsPlatformConfig:
+      description: Configuration for the Connectors Platform add-on.
+      properties:
+        enabled:
+          description: Flag that specifies whether the Connectors Platform add-on is enabled.
+          type: boolean
+        expiresAt:
+          description: Output only. Time at which the Connectors Platform add-on expires in in milliseconds since epoch. If unspecified, the add-on will never expire.
+          format: int64
+          readOnly: true
+          type: string
       type: object
     GoogleCloudApigeeV1Credential:
       properties:
@@ -5887,6 +5905,13 @@ components:
           description: Percentage of ingress replicas reporting this route.
           format: int32
           type: integer
+      type: object
+    GoogleCloudApigeeV1IntegrationConfig:
+      description: Configuration for the Integration add-on.
+      properties:
+        enabled:
+          description: Flag that specifies whether the Integration add-on is enabled.
+          type: boolean
       type: object
     GoogleCloudApigeeV1KeyAliasReference:
       properties:
