@@ -1013,6 +1013,32 @@ components:
       properties:
         application_id:
           $ref: "#/components/schemas/ApplicationId"
+        attempts:
+          description: record of each attempt to call webhook endpoint
+          items:
+            properties:
+              execution_attempt:
+                description: Number of attempts webhook endpoint was called before a success was returned or eventually failed
+                example: 3
+                type: number
+              retry_scheduled:
+                description: If the request has not hit the max retry limit and will be retried.
+                example: true
+                type: boolean
+              status_code:
+                description: HTTP Status code that was returned.
+                example: 200
+                type: integer
+              success:
+                description: Whether or not the request was successful.
+                example: true
+                type: boolean
+              timestamp:
+                description: ISO Date and time when the request was made.
+                example: 2021-07-12T14:26:17.420Z
+                type: string
+            type: object
+          type: array
         consumer_id:
           $ref: "#/components/schemas/ConsumerId"
         endpoint:
@@ -1024,11 +1050,6 @@ components:
         entity_type:
           description: Name of the Entity described by the attributes delivered within payload
           example: Connection
-          type: string
-        error_message:
-          description: If error occured, response captured here
-          example: Forbidden
-          nullable: true
           type: string
         event_type:
           description: Name of source event that webhook is subscribed to.
@@ -1086,6 +1107,10 @@ components:
       type: object
     WebhookEventLogsFilter:
       properties:
+        consumer_id:
+          example: test_user_id
+          nullable: true
+          type: string
         entity_type:
           example: Connection
           nullable: true
@@ -1104,10 +1129,6 @@ components:
             id:
               type: string
           type: object
-        status_code:
-          example: 201
-          nullable: true
-          type: number
       type: object
       x-graphql-type-name: WebhookEventLogsFilter
   securitySchemes:
@@ -1148,6 +1169,12 @@ x-webhooks:
                 entity_type:
                   example: Connection
                   type: string
+                event_id:
+                  example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+                  type: string
+                execution_attempt:
+                  example: 2
+                  type: number
               type: object
       responses:
         "200":
@@ -1171,6 +1198,12 @@ x-webhooks:
                 entity_type:
                   example: Connection
                   type: string
+                event_id:
+                  example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+                  type: string
+                execution_attempt:
+                  example: 2
+                  type: number
               type: object
       responses:
         "200":
@@ -1194,6 +1227,12 @@ x-webhooks:
                 entity_type:
                   example: Connection
                   type: string
+                event_id:
+                  example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+                  type: string
+                execution_attempt:
+                  example: 2
+                  type: number
               type: object
       responses:
         "200":
@@ -1291,6 +1330,12 @@ x-webhooks:
                 entity_type:
                   example: Connection
                   type: string
+                event_id:
+                  example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+                  type: string
+                execution_attempt:
+                  example: 2
+                  type: number
               type: object
       responses:
         "200":

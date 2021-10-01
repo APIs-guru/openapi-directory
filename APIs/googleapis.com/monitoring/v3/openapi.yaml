@@ -1134,6 +1134,56 @@ paths:
             - https://www.googleapis.com/auth/monitoring.write
       tags:
         - projects
+  "/v3/{name}/timeSeries:createService":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates or adds data to one or more service time series. A service time series is a time series for a metric from a Google Cloud service. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response. This endpoint rejects writes to user-defined metrics. This method is only for use by Google Cloud services. Use projects.timeSeries.create instead.
+      operationId: monitoring.projects.timeSeries.createService
+      parameters:
+        - description: "Required. The project (https://cloud.google.com/monitoring/api/v3#project_name) on which to execute the request. The format is: projects/[PROJECT_ID_OR_NUMBER] "
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTimeSeriesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/monitoring
+          Oauth2c:
+            - https://www.googleapis.com/auth/monitoring
+        - Oauth2:
+            - https://www.googleapis.com/auth/monitoring.write
+          Oauth2c:
+            - https://www.googleapis.com/auth/monitoring.write
+      tags:
+        - projects
   "/v3/{name}/timeSeries:query":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1800,7 +1850,7 @@ components:
       description: Control over how the notification channels in notification_channels are notified when this alert fires.
       properties:
         autoClose:
-          description: If an alert policy that was active has no data for this log, any open incidents will close
+          description: If an alert policy that was active has no data for this long, any open incidents will close
           format: google-duration
           type: string
         notificationRateLimit:

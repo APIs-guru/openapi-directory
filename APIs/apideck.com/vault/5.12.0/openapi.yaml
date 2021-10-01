@@ -3001,6 +3001,12 @@ x-webhooks:
                 entity_type:
                   example: Connection
                   type: string
+                event_id:
+                  example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+                  type: string
+                execution_attempt:
+                  example: 2
+                  type: number
               type: object
       responses:
         "200":
@@ -3024,6 +3030,12 @@ x-webhooks:
                 entity_type:
                   example: Connection
                   type: string
+                event_id:
+                  example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+                  type: string
+                execution_attempt:
+                  example: 2
+                  type: number
               type: object
       responses:
         "200":
