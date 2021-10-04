@@ -1650,7 +1650,7 @@ components:
           description: A filter that takes exactly one argument.
       type: object
     GoogleFirestoreAdminV1Database:
-      description: A Cloud Firestore Database in Native Mode. Currently one database is allowed per cloud project. It is named '(default)'
+      description: A Cloud Firestore Database. Currently only one database is allowed per cloud project; this database must have a `database_id` of '(default)'.
       properties:
         concurrencyMode:
           description: The concurrency control mode to use for this database.

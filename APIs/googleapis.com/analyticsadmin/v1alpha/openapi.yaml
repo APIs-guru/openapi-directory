@@ -1807,12 +1807,12 @@ components:
       description: Read-only resource used to summarize a principal's effective roles.
       properties:
         directRoles:
-          description: "Roles directly assigned to this user for this entity. Format: predefinedRoles/read Excludes roles that are inherited from an account (if this is for a property), group, or organization admin role."
+          description: "Roles directly assigned to this user for this entity. Format: predefinedRoles/viewer Excludes roles that are inherited from an account (if this is for a property), group, or organization admin role."
           items:
             type: string
           type: array
         effectiveRoles:
-          description: "Union of all permissions a user has at this account or property (includes direct permissions, group-inherited permissions, etc.). Format: predefinedRoles/read"
+          description: "Union of all permissions a user has at this account or property (includes direct permissions, group-inherited permissions, etc.). Format: predefinedRoles/viewer"
           items:
             type: string
           type: array
@@ -2780,7 +2780,7 @@ components:
       description: A resource message representing a user's permissions on an Account or Property resource.
       properties:
         directRoles:
-          description: "Roles directly assigned to this user for this account or property. Valid values: predefinedRoles/read predefinedRoles/collaborate predefinedRoles/edit predefinedRoles/admin Excludes roles that are inherited from a higher-level entity, group, or organization admin role. A UserLink that is updated to have an empty list of direct_roles will be deleted."
+          description: "Roles directly assigned to this user for this account or property. Valid values: predefinedRoles/viewer predefinedRoles/analyst predefinedRoles/editor predefinedRoles/admin predefinedRoles/no-cost-data predefinedRoles/no-revenue-data Excludes roles that are inherited from a higher-level entity, group, or organization admin role. A UserLink that is updated to have an empty list of direct_roles will be deleted."
           items:
             type: string
           type: array

@@ -30,6 +30,7 @@ info:
 externalDocs:
   url: https://developers.google.com/android-publisher
 tags:
+  - name: applications
   - name: edits
   - name: inappproducts
   - name: internalappsharingartifacts
@@ -1949,6 +1950,48 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - orders
+  "/androidpublisher/v3/applications/{packageName}/pricing:convertRegionPrices":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Calculates the region prices, using today's exchange rate and country-specific pricing patterns, based on the price in the request for a set of regions.
+      operationId: androidpublisher.applications.pricing.convertRegionPrices
+      parameters:
+        - description: Required. The app package name.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConvertRegionPricesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConvertRegionPricesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - applications
   "/androidpublisher/v3/applications/{packageName}/purchases/products/{productId}/tokens/{token}":
     get:
       description: Checks the purchase and consumption status of an inapp item.
@@ -2915,6 +2958,48 @@ components:
           $ref: "#/components/schemas/UserComment"
           description: A comment from a user.
       type: object
+    ConvertRegionPricesRequest:
+      description: Request message for ConvertRegionPrices.
+      properties:
+        price:
+          $ref: "#/components/schemas/Money"
+          description: The intital price to convert other regions from. Tax exclusive.
+      type: object
+    ConvertRegionPricesResponse:
+      description: Response message for ConvertRegionPrices.
+      properties:
+        convertedOtherRegionsPrice:
+          $ref: "#/components/schemas/ConvertedOtherRegionsPrice"
+          description: Converted other regions prices in USD and EUR, to use for countries where Play doesn't support a country's local currency.
+        convertedRegionPrices:
+          additionalProperties:
+            $ref: "#/components/schemas/ConvertedRegionPrice"
+          description: Map from region code to converted region price.
+          type: object
+      type: object
+    ConvertedOtherRegionsPrice:
+      description: Converted other regions prices.
+      properties:
+        eurPrice:
+          $ref: "#/components/schemas/Money"
+          description: Price in EUR to use for the "Other regions" location exclusive of taxes.
+        usdPrice:
+          $ref: "#/components/schemas/Money"
+          description: Price in USD to use for the "Other regions" location exclusive of taxes.
+      type: object
+    ConvertedRegionPrice:
+      description: A converted region price.
+      properties:
+        price:
+          $ref: "#/components/schemas/Money"
+          description: The converted price tax inclusive.
+        regionCode:
+          description: The region code of the region.
+          type: string
+        taxAmount:
+          $ref: "#/components/schemas/Money"
+          description: The tax amount of the converted price.
+      type: object
     CountryTargeting:
       description: Country targeting specification.
       properties:
@@ -3288,6 +3373,21 @@ components:
           type: string
         text:
           description: The text in the given language.
+          type: string
+      type: object
+    Money:
+      description: Represents an amount of money with its currency type.
+      properties:
+        currencyCode:
+          description: The three-letter currency code defined in ISO 4217.
+          type: string
+        nanos:
+          description: Number of nano (10^-9) units of the amount. The value must be between -999,999,999 and +999,999,999 inclusive. If `units` is positive, `nanos` must be positive or zero. If `units` is zero, `nanos` can be positive, zero, or negative. If `units` is negative, `nanos` must be negative or zero. For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
+          format: int32
+          type: integer
+        units:
+          description: The whole units of the amount. For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
+          format: int64
           type: string
       type: object
     PageInfo:

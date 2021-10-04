@@ -1,95 +1,43 @@
 openapi: 3.0.0
 servers:
-  - url: https://datamigration.googleapis.com/
+  - url: https://connectors.googleapis.com/
 info:
   contact:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Manage Cloud Database Migration Service resources on Google Cloud Platform.
+  description: ""
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
-  title: Database Migration API
-  version: v1beta1
+  title: Connectors API
+  version: v1
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
-      url: https://datamigration.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+    - format: google
+      url: https://connectors.googleapis.com/$discovery/rest?version=v1
+      version: v1
   x-providerName: googleapis.com
-  x-serviceName: datamigration
+  x-serviceName: connectors
 externalDocs:
-  url: https://cloud.google.com/database-migration/
+  url: https://cloud.devsite.corp.google.com/apigee/docs/api-platform/connectors/about-connectors
 tags:
   - name: projects
 paths:
-  "/v1beta1/{migrationJob}:generateSshScript":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Generate a SSH configuration script to configure the reverse SSH connectivity.
-      operationId: datamigration.projects.locations.migrationJobs.generateSshScript
-      parameters:
-        - description: Name of the migration job resource to generate the SSH script.
-          in: path
-          name: migrationJob
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GenerateSshScriptRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SshScript"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1beta1/{name}":
+  "/v1/{name}":
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: datamigration.projects.locations.operations.delete
+      operationId: connectors.projects.locations.operations.delete
       parameters:
         - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
-          schema:
-            type: string
-        - description: The destination CloudSQL connection profile is always deleted with the migration job. In case of force delete, the destination CloudSQL replica database is also deleted.
-          in: query
-          name: force
-          schema:
-            type: boolean
-        - description: A unique id used to identify the request. If the server receives two requests with the same id, then the second request will be ignored. It is recommended to always set this value to a UUID. The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.
-          in: query
-          name: requestId
           schema:
             type: string
       responses:
@@ -108,13 +56,22 @@ paths:
         - projects
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: datamigration.projects.locations.operations.get
+      operationId: connectors.projects.locations.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
           name: name
           required: true
           schema:
+            type: string
+        - description: Specifies which fields of the ConnectorVersion are returned in the response. Defaults to `CUSTOMER` view.
+          in: query
+          name: view
+          schema:
+            enum:
+              - CONNECTOR_VERSION_VIEW_UNSPECIFIED
+              - CONNECTOR_VERSION_VIEW_BASIC
+              - CONNECTOR_VERSION_VIEW_FULL
             type: string
       responses:
         "200":
@@ -143,21 +100,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the parameters of a single migration job.
-      operationId: datamigration.projects.locations.migrationJobs.patch
+      description: Updates the parameters of a single Connection.
+      operationId: connectors.projects.locations.connections.patch
       parameters:
-        - description: "The name (URI) of this migration job resource, in the form of: projects/{project}/locations/{location}/instances/{instance}."
+        - description: "Output only. Resource name of the Connection. Format: projects/{project}/locations/{location}/connections/{connection}"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: A unique id used to identify the request. If the server receives two requests with the same id, then the second request will be ignored. It is recommended to always set this value to a UUID. The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.
-          in: query
-          name: requestId
-          schema:
-            type: string
-        - description: Required. Field mask is used to specify the fields to be overwritten in the migration job resource by the update.
+        - description: Field mask is used to specify the fields to be overwritten in the Connection resource by the update. The fields specified in the update_mask are relative to the resource, not the full request. A field will be overwritten if it is in the mask. If the user does not provide a mask then all fields will be overwritten.
           in: query
           name: updateMask
           schema:
@@ -166,7 +118,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/MigrationJob"
+              $ref: "#/components/schemas/Connection"
       responses:
         "200":
           content:
@@ -181,10 +133,10 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}/locations":
+  "/v1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
-      operationId: datamigration.projects.locations.list
+      operationId: connectors.projects.locations.list
       parameters:
         - description: The resource that owns the locations collection, if applicable.
           in: path
@@ -233,10 +185,10 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}/operations":
+  "/v1/{name}/operations":
     get:
       description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
-      operationId: datamigration.projects.locations.operations.list
+      operationId: connectors.projects.locations.operations.list
       parameters:
         - description: The name of the operation's parent resource.
           in: path
@@ -285,7 +237,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:cancel":
+  "/v1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -300,7 +252,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
-      operationId: datamigration.projects.locations.operations.cancel
+      operationId: connectors.projects.locations.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
           in: path
@@ -327,285 +279,123 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:promote":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Promote a migration job, stopping replication to the destination and promoting the destination to be a standalone database.
-      operationId: datamigration.projects.locations.migrationJobs.promote
-      parameters:
-        - description: Name of the migration job resource to promote.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PromoteMigrationJobRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1beta1/{name}:restart":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Restart a stopped or failed migration job, resetting the destination instance to its original state and starting the migration process from scratch.
-      operationId: datamigration.projects.locations.migrationJobs.restart
-      parameters:
-        - description: Name of the migration job resource to restart.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RestartMigrationJobRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1beta1/{name}:resume":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Resume a migration job that is currently stopped and is resumable (was stopped during CDC phase).
-      operationId: datamigration.projects.locations.migrationJobs.resume
-      parameters:
-        - description: Name of the migration job resource to resume.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ResumeMigrationJobRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1beta1/{name}:start":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Start an already created migration job.
-      operationId: datamigration.projects.locations.migrationJobs.start
-      parameters:
-        - description: Name of the migration job resource to start.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/StartMigrationJobRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1beta1/{name}:stop":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Stops a running migration job.
-      operationId: datamigration.projects.locations.migrationJobs.stop
-      parameters:
-        - description: Name of the migration job resource to stop.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/StopMigrationJobRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1beta1/{name}:verify":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Verify a migration job, making sure the destination can reach the source and that all configuration and prerequisites are met.
-      operationId: datamigration.projects.locations.migrationJobs.verify
-      parameters:
-        - description: Name of the migration job resource to verify.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/VerifyMigrationJobRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1beta1/{parent}/connectionProfiles":
+  "/v1/{parent}/connections":
     get:
-      description: Retrieve a list of all connection profiles in a given project and location.
-      operationId: datamigration.projects.locations.connectionProfiles.list
+      description: Lists Connections in a given project and location.
+      operationId: connectors.projects.locations.connections.list
       parameters:
-        - description: Required. The parent, which owns this collection of connection profiles.
+        - description: "Required. Parent resource of the Connection, of the form: `projects/*/locations/*`"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: A filter expression that filters connection profiles listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <. For example, list connection profiles created this year by specifying **createTime %gt; 2020-01-01T00:00:00.000000000Z**. You can also filter nested fields. For example, you could specify **mySql.username = %lt;my_username%gt;** to list all connection profiles configured to connect with a specific username.
+        - description: Filter.
           in: query
           name: filter
           schema:
             type: string
-        - description: the order by fields for the result.
+        - description: Order by parameters.
           in: query
           name: orderBy
           schema:
             type: string
-        - description: The maximum number of connection profiles to return. The service may return fewer than this value. If unspecified, at most 50 connection profiles will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+        - description: Page size.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous `ListConnectionProfiles` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListConnectionProfiles` must match the call that provided the page token.
+        - description: Page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Specifies which fields of the Connection are returned in the response. Defaults to `BASIC` view.
+          in: query
+          name: view
+          schema:
+            enum:
+              - CONNECTION_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListConnectionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new Connection in a given project and location.
+      operationId: connectors.projects.locations.connections.create
+      parameters:
+        - description: "Required. Parent resource of the Connection, of the form: `projects/*/locations/*`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Identifier to assign to the Connection. Must be unique within scope of the parent resource.
+          in: query
+          name: connectionId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Connection"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/connectors":
+    get:
+      description: Lists Connectors in a given project and location.
+      operationId: connectors.projects.locations.global.providers.connectors.list
+      parameters:
+        - description: "Required. Parent resource of the connectors, of the form: `projects/*/locations/*/providers/*`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token.
           in: query
           name: pageToken
           schema:
@@ -615,7 +405,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListConnectionProfilesResponse"
+                $ref: "#/components/schemas/ListConnectorsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -636,72 +426,23 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates a new connection profile in a given project and location.
-      operationId: datamigration.projects.locations.connectionProfiles.create
-      parameters:
-        - description: Required. The parent, which owns this collection of connection profiles.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Required. The connection profile identifier.
-          in: query
-          name: connectionProfileId
-          schema:
-            type: string
-        - description: A unique id used to identify the request. If the server receives two requests with the same id, then the second request will be ignored. It is recommended to always set this value to a UUID. The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.
-          in: query
-          name: requestId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ConnectionProfile"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1beta1/{parent}/migrationJobs":
+  "/v1/{parent}/providers":
     get:
-      description: Lists migration jobs in a given project and location.
-      operationId: datamigration.projects.locations.migrationJobs.list
+      description: Lists Providers in a given project and location.
+      operationId: connectors.projects.locations.global.providers.list
       parameters:
-        - description: Required. The parent, which owns this collection of migrationJobs.
+        - description: "Required. Parent resource of the API, of the form: `projects/*/locations/*`"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: A filter expression that filters migration jobs listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <. For example, list migration jobs created this year by specifying **createTime %gt; 2020-01-01T00:00:00.000000000Z.** You can also filter nested fields. For example, you could specify **reverseSshConnectivity.vmIp = "1.2.3.4"** to select all migration jobs connecting through the specific SSH tunnel bastion.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: 'Sort the results based on the migration job name. Valid values are: "name", "name asc", and "name desc".'
-          in: query
-          name: orderBy
-          schema:
-            type: string
-        - description: The maximum number of migration jobs to return. The service may return fewer than this value. If unspecified, at most 50 migration jobs will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+        - description: Page size.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: The nextPageToken value received in the previous call to migrationJobs.list, used in the subsequent request to retrieve the next page of results. On first call this should be left blank. When paginating, all other parameters provided to migrationJobs.list must match the call that provided the page token.
+        - description: Page token.
           in: query
           name: pageToken
           schema:
@@ -711,7 +452,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListMigrationJobsResponse"
+                $ref: "#/components/schemas/ListProvidersResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -732,37 +473,38 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates a new migration job in a given project and location.
-      operationId: datamigration.projects.locations.migrationJobs.create
+  "/v1/{parent}/runtimeActionSchemas":
+    get:
+      description: List schema of a runtime actions filtered by action name.
+      operationId: connectors.projects.locations.connections.runtimeActionSchemas.list
       parameters:
-        - description: Required. The parent, which owns this collection of migration jobs.
+        - description: "Required. Parent resource of RuntimeActionSchema Format: projects/{project}/locations/{location}/connections/{connection}"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Required. The ID of the instance to create.
+        - description: Filter
           in: query
-          name: migrationJobId
+          name: filter
           schema:
             type: string
-        - description: A unique id used to identify the request. If the server receives two requests with the same id, then the second request will be ignored. It is recommended to always set this value to a UUID. The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.
+        - description: Page size.
           in: query
-          name: requestId
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token.
+          in: query
+          name: pageToken
           schema:
             type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/MigrationJob"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/ListRuntimeActionSchemasResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -771,10 +513,130 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:getIamPolicy":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/runtimeEntitySchemas":
+    get:
+      description: List schema of a runtime entities filtered by entity name.
+      operationId: connectors.projects.locations.connections.runtimeEntitySchemas.list
+      parameters:
+        - description: "Required. Parent resource of RuntimeEntitySchema Format: projects/{project}/locations/{location}/connections/{connection}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filter
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListRuntimeEntitySchemasResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/versions":
+    get:
+      description: Lists Connector Versions in a given project and location.
+      operationId: connectors.projects.locations.global.providers.connectors.versions.list
+      parameters:
+        - description: "Required. Parent resource of the connectors, of the form: `projects/*/locations/*/providers/*/connectors/*`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Specifies which fields of the ConnectorVersion are returned in the response. Defaults to `CUSTOMER` view.
+          in: query
+          name: view
+          schema:
+            enum:
+              - CONNECTOR_VERSION_VIEW_UNSPECIFIED
+              - CONNECTOR_VERSION_VIEW_BASIC
+              - CONNECTOR_VERSION_VIEW_FULL
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListConnectorVersionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-      operationId: datamigration.projects.locations.migrationJobs.getIamPolicy
+      operationId: connectors.projects.locations.providers.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
           in: path
@@ -813,7 +675,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{resource}:setIamPolicy":
+  "/v1/{resource}:setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -828,7 +690,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
-      operationId: datamigration.projects.locations.migrationJobs.setIamPolicy
+      operationId: connectors.projects.locations.providers.setIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field."
           in: path
@@ -855,7 +717,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:testIamPermissions":
+  "/v1/{resource}:testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -870,7 +732,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
-      operationId: datamigration.projects.locations.migrationJobs.testIamPermissions
+      operationId: connectors.projects.locations.providers.testIamPermissions
       parameters:
         - description: "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field."
           in: path
@@ -1002,6 +864,49 @@ components:
             - DATA_READ
           type: string
       type: object
+    AuthConfig:
+      description: AuthConfig defines details of a authentication type.
+      properties:
+        additionalVariables:
+          description: List containing additional auth configs.
+          items:
+            $ref: "#/components/schemas/ConfigVariable"
+          type: array
+        authType:
+          description: The type of authentication configured.
+          enum:
+            - AUTH_TYPE_UNSPECIFIED
+            - USER_PASSWORD
+            - OAUTH2_JWT_BEARER
+            - OAUTH2_CLIENT_CREDENTIALS
+          type: string
+        oauth2ClientCredentials:
+          $ref: "#/components/schemas/Oauth2ClientCredentials"
+          description: Oauth2ClientCredentials.
+        oauth2JwtBearer:
+          $ref: "#/components/schemas/Oauth2JwtBearer"
+          description: Oauth2JwtBearer.
+        userPassword:
+          $ref: "#/components/schemas/UserPassword"
+          description: UserPassword.
+      type: object
+    AuthConfigTemplate:
+      description: AuthConfigTemplate defines required field over an authentication type.
+      properties:
+        authType:
+          description: The type of authentication configured.
+          enum:
+            - AUTH_TYPE_UNSPECIFIED
+            - USER_PASSWORD
+            - OAUTH2_JWT_BEARER
+            - OAUTH2_CLIENT_CREDENTIALS
+          type: string
+        configVariableTemplates:
+          description: Config variables to describe an `AuthConfig` for a `Connection`.
+          items:
+            $ref: "#/components/schemas/ConfigVariableTemplate"
+          type: array
+      type: object
     Binding:
       description: Associates `members` with a `role`.
       properties:
@@ -1021,161 +926,277 @@ components:
       description: The request message for Operations.CancelOperation.
       properties: {}
       type: object
-    CloudSqlConnectionProfile:
-      description: Specifies required connection parameters, and, optionally, the parameters required to create a Cloud SQL destination database instance.
+    ConfigVariable:
+      description: ConfigVariable represents a configuration variable present in a Connection. or AuthConfig.
       properties:
-        cloudSqlId:
-          description: Output only. The Cloud SQL instance ID that this connection profile is associated with.
-          readOnly: true
-          type: string
-        privateIp:
-          description: Output only. The Cloud SQL database instance's private IP.
-          readOnly: true
-          type: string
-        publicIp:
-          description: Output only. The Cloud SQL database instance's public IP.
-          readOnly: true
-          type: string
-        settings:
-          $ref: "#/components/schemas/CloudSqlSettings"
-          description: Immutable. Metadata used to create the destination Cloud SQL database.
-      type: object
-    CloudSqlSettings:
-      description: Settings for creating a Cloud SQL database instance.
-      properties:
-        activationPolicy:
-          description: "The activation policy specifies when the instance is activated; it is applicable only when the instance state is 'RUNNABLE'. Valid values: 'ALWAYS': The instance is on, and remains so even in the absence of connection requests. `NEVER`: The instance is off; it is not activated, even if a connection request arrives."
-          enum:
-            - SQL_ACTIVATION_POLICY_UNSPECIFIED
-            - ALWAYS
-            - NEVER
-          type: string
-        autoStorageIncrease:
-          description: "[default: ON] If you enable this setting, Cloud SQL checks your available storage every 30 seconds. If the available storage falls below a threshold size, Cloud SQL automatically adds additional storage capacity. If the available storage repeatedly falls below the threshold size, Cloud SQL continues to add storage until it reaches the maximum of 30 TB."
+        boolValue:
+          description: Value is a bool.
           type: boolean
-        dataDiskSizeGb:
-          description: The storage capacity available to the database, in GB. The minimum (and default) size is 10GB.
+        intValue:
+          description: Value is an integer
           format: int64
           type: string
-        dataDiskType:
-          description: "The type of storage: `PD_SSD` (default) or `PD_HDD`."
-          enum:
-            - SQL_DATA_DISK_TYPE_UNSPECIFIED
-            - PD_SSD
-            - PD_HDD
+        key:
+          description: Key of the config variable.
           type: string
-        databaseFlags:
-          additionalProperties:
-            type: string
-          description: 'The database flags passed to the Cloud SQL instance at startup. An object containing a list of "key": value pairs. Example: { "name": "wrench", "mass": "1.3kg", "count": "3" }.'
-          type: object
-        databaseVersion:
-          description: The database engine type and version.
-          enum:
-            - SQL_DATABASE_VERSION_UNSPECIFIED
-            - MYSQL_5_6
-            - MYSQL_5_7
-            - MYSQL_8_0
-          type: string
-        ipConfig:
-          $ref: "#/components/schemas/SqlIpConfig"
-          description: The settings for IP Management. This allows to enable or disable the instance IP and manage which external networks can connect to the instance. The IPv4 address cannot be disabled.
-        rootPassword:
-          description: Input only. Initial root password.
-          type: string
-        rootPasswordSet:
-          description: Output only. Indicates If this connection profile root password is stored.
-          readOnly: true
-          type: boolean
-        sourceId:
-          description: "The Database Migration Service source connection profile ID, in the format: `projects/my_project_name/locations/us-central1/connectionProfiles/connection_profile_ID`"
-          type: string
-        storageAutoResizeLimit:
-          description: The maximum size to which storage capacity can be automatically increased. The default value is 0, which specifies that there is no limit.
-          format: int64
-          type: string
-        tier:
-          description: "The tier (or machine type) for this instance, for example: `db-n1-standard-1` (MySQL instances). For more information, see [Cloud SQL Instance Settings](https://cloud.google.com/sql/docs/mysql/instance-settings)."
-          type: string
-        userLabels:
-          additionalProperties:
-            type: string
-          description: 'The resource labels for a Cloud SQL instance to use to annotate any related underlying resources such as Compute Engine VMs. An object containing a list of "key": "value" pairs. Example: `{ "name": "wrench", "mass": "18kg", "count": "3" }`.'
-          type: object
-        zone:
-          description: The Google Cloud Platform zone where your Cloud SQL datdabse instance is located.
+        secretValue:
+          $ref: "#/components/schemas/Secret"
+          description: Value is a secret.
+        stringValue:
+          description: Value is a string.
           type: string
       type: object
-    ConnectionProfile:
-      description: A connection profile definition.
+    ConfigVariableTemplate:
+      description: ConfigVariableTemplate provides metadata about a `ConfigVariable` that is used in a Connection.
       properties:
-        cloudsql:
-          $ref: "#/components/schemas/CloudSqlConnectionProfile"
-          description: A CloudSQL database connection profile.
+        description:
+          description: Description.
+          type: string
+        displayName:
+          description: Display name of the parameter.
+          type: string
+        key:
+          description: Key of the config variable.
+          type: string
+        required:
+          description: Flag represents that this `ConfigVariable` must be provided for a connection.
+          type: boolean
+        validationRegex:
+          description: Regular expression in RE2 syntax used for validating the `value` of a `ConfigVariable`.
+          type: string
+        valueType:
+          description: "Type of the parameter: string, int, bool etc. consider custom type for the benefit for the validation."
+          enum:
+            - VALUE_TYPE_UNSPECIFIED
+            - STRING
+            - INT
+            - BOOL
+            - SECRET
+          type: string
+      type: object
+    Connection:
+      description: Connection represents an instance of connector.
+      properties:
+        authConfig:
+          $ref: "#/components/schemas/AuthConfig"
+          description: Optional. Configuration for establishing the connection's authentication with an external system.
+        configVariables:
+          description: Optional. Configuration for configuring the connection with an external system.
+          items:
+            $ref: "#/components/schemas/ConfigVariable"
+          type: array
+        connectorVersion:
+          description: "Required. Connector version on which the connection is created. The format is: projects/*/locations/global/providers/*/connectors/*/versions/*"
+          type: string
         createTime:
-          description: 'Output only. The timestamp when the resource was created. A timestamp in RFC3339 UTC "Zulu" format, accurate to nanoseconds. Example: "2014-10-02T15:01:23.045123456Z".'
+          description: Output only. Created time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. Description of the resource.
+          type: string
+        egressBackends:
+          description: Output only. Outbound domains/hosts needs to be allowlisted.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        envoyImageLocation:
+          description: "Output only. GCR location where the envoy image is stored. formatted like: gcr.io/{bucketName}/{imageName}"
+          readOnly: true
+          type: string
+        imageLocation:
+          description: "Output only. GCR location where the runtime image is stored. formatted like: gcr.io/{bucketName}/{imageName}"
+          readOnly: true
+          type: string
+        inactive:
+          description: Optional. Inactive indicates the connection is active to use or not.
+          type: boolean
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Resource labels to represent user-provided metadata. Refer to cloud documentation on labels for more details. https://cloud.google.com/compute/docs/labeling-resources
+          type: object
+        lockConfig:
+          $ref: "#/components/schemas/LockConfig"
+          description: Optional. Configuration that indicates whether or not the Connection can be edited.
+        name:
+          description: "Output only. Resource name of the Connection. Format: projects/{project}/locations/{location}/connections/{connection}"
+          readOnly: true
+          type: string
+        serviceAccount:
+          description: Optional. Service account needed for runtime plane to access GCP resources.
+          type: string
+        serviceDirectory:
+          description: Output only. The name of the Service Directory service name. Used for Private Harpoon to resolve the ILB address. e.g. "projects/cloud-connectors-e2e-testing/locations/us-central1/namespaces/istio-system/services/istio-ingressgateway-connectors"
+          readOnly: true
+          type: string
+        status:
+          $ref: "#/components/schemas/ConnectionStatus"
+          description: Output only. Current status of the connection.
+          readOnly: true
+        updateTime:
+          description: Output only. Updated time.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    ConnectionSchemaMetadata:
+      description: Metadata of connection schema.
+      properties:
+        actions:
+          description: Output only. List of actions.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        entities:
+          description: Output only. List of entity names.
+          items:
+            type: string
+          readOnly: true
+          type: array
+      type: object
+    ConnectionStatus:
+      description: ConnectionStatus indicates the state of the connection.
+      properties:
+        description:
+          description: Description.
+          type: string
+        state:
+          description: State.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
+            - INACTIVE
+            - DELETING
+            - UPDATING
+            - ERROR
+          type: string
+        status:
+          description: Status provides detailed information for the state.
+          type: string
+      type: object
+    Connector:
+      description: Connectors indicates a specific connector type, e.x. Salesforce, SAP etc.
+      properties:
+        createTime:
+          description: Output only. Created time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Output only. Description of the resource.
+          readOnly: true
+          type: string
+        displayName:
+          description: Output only. Display name.
+          readOnly: true
+          type: string
+        documentationUri:
+          description: Output only. Link to documentation page.
+          readOnly: true
+          type: string
+        externalUri:
+          description: Output only. Link to external page.
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Output only. Resource labels to represent user-provided metadata. Refer to cloud documentation on labels for more details. https://cloud.google.com/compute/docs/labeling-resources
+          readOnly: true
+          type: object
+        name:
+          description: "Output only. Resource name of the Connector. Format: projects/{project}/locations/{location}/providers/{provider}/connectors/{connector}"
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Updated time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        webAssetsLocation:
+          description: Output only. Cloud storage location of icons etc consumed by UI.
+          readOnly: true
+          type: string
+      type: object
+    ConnectorVersion:
+      description: ConnectorVersion indicates a specific version of a connector.
+      properties:
+        authConfigTemplates:
+          description: Output only. List of auth configs supported by the Connector Version.
+          items:
+            $ref: "#/components/schemas/AuthConfigTemplate"
+          readOnly: true
+          type: array
+        configVariableTemplates:
+          description: Output only. List of config variables needed to create a connection.
+          items:
+            $ref: "#/components/schemas/ConfigVariableTemplate"
+          readOnly: true
+          type: array
+        createTime:
+          description: Output only. Created time.
           format: google-datetime
           readOnly: true
           type: string
         displayName:
-          description: The connection profile display name.
+          description: Output only. Display name.
+          readOnly: true
           type: string
-        error:
-          $ref: "#/components/schemas/Status"
-          description: Output only. The error details in case of state FAILED.
+        egressControlConfig:
+          $ref: "#/components/schemas/EgressControlConfig"
+          description: Output only. Configuration for Egress Control.
           readOnly: true
         labels:
           additionalProperties:
             type: string
-          description: 'The resource labels for connection profile to use to annotate any related underlying resources such as Compute Engine VMs. An object containing a list of "key": "value" pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }`.'
+          description: Output only. Resource labels to represent user-provided metadata. Refer to cloud documentation on labels for more details. https://cloud.google.com/compute/docs/labeling-resources
+          readOnly: true
           type: object
-        mysql:
-          $ref: "#/components/schemas/MySqlConnectionProfile"
-          description: A MySQL database connection profile.
+        launchStage:
+          description: Output only. Flag to mark the version indicating the launch stage.
+          enum:
+            - LAUNCH_STAGE_UNSPECIFIED
+            - PREVIEW
+            - GA
+            - DEPRECATED
+          readOnly: true
+          type: string
         name:
-          description: The name of this connection profile resource in the form of projects/{project}/locations/{location}/instances/{instance}.
+          description: "Output only. Resource name of the Version. Format: projects/{project}/locations/{location}/providers/{provider}/connectors/{connector}/versions/{version}"
+          readOnly: true
           type: string
-        provider:
-          description: The database provider.
-          enum:
-            - DATABASE_PROVIDER_UNSPECIFIED
-            - CLOUDSQL
-            - RDS
+        releaseVersion:
+          description: 'Output only. ReleaseVersion of the connector, for example: "1.0.1-alpha".'
+          readOnly: true
           type: string
-        state:
-          description: The current connection profile state (e.g. DRAFT, READY, or FAILED).
-          enum:
-            - STATE_UNSPECIFIED
-            - DRAFT
-            - CREATING
-            - READY
-            - UPDATING
-            - DELETING
-            - DELETED
-            - FAILED
-          type: string
+        roleGrant:
+          $ref: "#/components/schemas/RoleGrant"
+          description: Output only. Role grant configuration for this config variable.
+          readOnly: true
+        supportedRuntimeFeatures:
+          $ref: "#/components/schemas/SupportedRuntimeFeatures"
+          description: Output only. Information about the runtime features supported by the Connector.
+          readOnly: true
         updateTime:
-          description: 'Output only. The timestamp when the resource was last updated. A timestamp in RFC3339 UTC "Zulu" format, accurate to nanoseconds. Example: "2014-10-02T15:01:23.045123456Z".'
+          description: Output only. Updated time.
           format: google-datetime
           readOnly: true
           type: string
       type: object
-    DatabaseType:
-      description: A message defining the database engine and provider.
+    EgressControlConfig:
+      description: Egress control config for connector runtime. These configurations define the rules to identify which outbound domains/hosts needs to be whitelisted. It may be a static information for a particular connector version or it is derived from the configurations provided by the customer in Connection resource.
       properties:
-        engine:
-          description: The database engine.
-          enum:
-            - DATABASE_ENGINE_UNSPECIFIED
-            - MYSQL
+        backends:
+          description: Static Comma separated backends which are common for all Connection resources. Supported formats for each backend are host:port or just host (host can be ip address or domain name).
           type: string
-        provider:
-          description: The database provider.
-          enum:
-            - DATABASE_PROVIDER_UNSPECIFIED
-            - CLOUDSQL
-            - RDS
-          type: string
+        extractionRules:
+          $ref: "#/components/schemas/ExtractionRules"
+          description: Extractions Rules to extract the backends from customer provided configuration.
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
@@ -1197,24 +1218,370 @@ components:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
-    GenerateSshScriptRequest:
-      description: Request message for 'GenerateSshScript' request.
+    ExtractionRule:
+      description: Extraction Rule.
       properties:
-        vm:
-          description: Required. Bastion VM Instance name to use or to create.
+        extractionRegex:
+          description: Regex used to extract backend details from source. If empty, whole source value will be used.
           type: string
-        vmCreationConfig:
-          $ref: "#/components/schemas/VmCreationConfig"
-          description: The VM creation configuration
-        vmPort:
-          description: The port that will be open on the bastion host
-          format: int32
-          type: integer
-        vmSelectionConfig:
-          $ref: "#/components/schemas/VmSelectionConfig"
-          description: The VM selection configuration
+        source:
+          $ref: "#/components/schemas/Source"
+          description: Source on which the rule is applied.
       type: object
-    GoogleCloudClouddmsV1beta1OperationMetadata:
+    ExtractionRules:
+      description: Extraction Rules to identity the backends from customer provided configuration in Connection resource.
+      properties:
+        extractionRule:
+          description: Collection of Extraction Rule.
+          items:
+            $ref: "#/components/schemas/ExtractionRule"
+          type: array
+      type: object
+    Field:
+      description: Metadata of an entity field.
+      properties:
+        additionalDetails:
+          additionalProperties:
+            description: Properties of the object.
+          description: The following map contains fields that are not explicitly mentioned above,this give connectors the flexibility to add new metadata fields.
+          type: object
+        dataType:
+          description: The data type of the Field.
+          enum:
+            - DATA_TYPE_UNSPECIFIED
+            - DATA_TYPE_INT
+            - DATA_TYPE_SMALLINT
+            - DATA_TYPE_DOUBLE
+            - DATA_TYPE_DATE
+            - DATA_TYPE_DATETIME
+            - DATA_TYPE_TIME
+            - DATA_TYPE_STRING
+            - DATA_TYPE_LONG
+            - DATA_TYPE_BOOLEAN
+            - DATA_TYPE_DECIMAL
+            - DATA_TYPE_UUID
+            - DATA_TYPE_BLOB
+            - DATA_TYPE_BIT
+            - DATA_TYPE_TINYINT
+            - DATA_TYPE_INTEGER
+            - DATA_TYPE_BIGINT
+            - DATA_TYPE_FLOAT
+            - DATA_TYPE_REAL
+            - DATA_TYPE_NUMERIC
+            - DATA_TYPE_CHAR
+            - DATA_TYPE_VARCHAR
+            - DATA_TYPE_LONGVARCHAR
+            - DATA_TYPE_TIMESTAMP
+            - DATA_TYPE_NCHAR
+            - DATA_TYPE_NVARCHAR
+            - DATA_TYPE_LONGNVARCHAR
+            - DATA_TYPE_NULL
+            - DATA_TYPE_OTHER
+            - DATA_TYPE_JAVA_OBJECT
+            - DATA_TYPE_DISTINCT
+            - DATA_TYPE_STRUCT
+            - DATA_TYPE_ARRAY
+            - DATA_TYPE_CLOB
+            - DATA_TYPE_REF
+            - DATA_TYPE_DATALINK
+            - DATA_TYPE_ROWID
+            - DATA_TYPE_BINARY
+            - DATA_TYPE_VARBINARY
+            - DATA_TYPE_LONGVARBINARY
+            - DATA_TYPE_NCLOB
+            - DATA_TYPE_SQLXML
+            - DATA_TYPE_REF_CURSOR
+            - DATA_TYPE_TIME_WITH_TIMEZONE
+            - DATA_TYPE_TIMESTAMP_WITH_TIMEZONE
+          type: string
+        defaultValue:
+          description: The following field specifies the default value of the Field provided by the external system if a value is not provided.
+        description:
+          description: A brief description of the Field.
+          type: string
+        field:
+          description: Name of the Field.
+          type: string
+        key:
+          description: The following boolean field specifies if the current Field acts as a primary key or id if the parent is of type entity.
+          type: boolean
+        nullable:
+          description: Specifies whether a null value is allowed.
+          type: boolean
+        readonly:
+          description: Specifies if the Field is readonly.
+          type: boolean
+      type: object
+    InputParameter:
+      description: Metadata of an input parameter.
+      properties:
+        dataType:
+          description: The data type of the Parameter.
+          enum:
+            - DATA_TYPE_UNSPECIFIED
+            - DATA_TYPE_INT
+            - DATA_TYPE_SMALLINT
+            - DATA_TYPE_DOUBLE
+            - DATA_TYPE_DATE
+            - DATA_TYPE_DATETIME
+            - DATA_TYPE_TIME
+            - DATA_TYPE_STRING
+            - DATA_TYPE_LONG
+            - DATA_TYPE_BOOLEAN
+            - DATA_TYPE_DECIMAL
+            - DATA_TYPE_UUID
+            - DATA_TYPE_BLOB
+            - DATA_TYPE_BIT
+            - DATA_TYPE_TINYINT
+            - DATA_TYPE_INTEGER
+            - DATA_TYPE_BIGINT
+            - DATA_TYPE_FLOAT
+            - DATA_TYPE_REAL
+            - DATA_TYPE_NUMERIC
+            - DATA_TYPE_CHAR
+            - DATA_TYPE_VARCHAR
+            - DATA_TYPE_LONGVARCHAR
+            - DATA_TYPE_TIMESTAMP
+            - DATA_TYPE_NCHAR
+            - DATA_TYPE_NVARCHAR
+            - DATA_TYPE_LONGNVARCHAR
+            - DATA_TYPE_NULL
+            - DATA_TYPE_OTHER
+            - DATA_TYPE_JAVA_OBJECT
+            - DATA_TYPE_DISTINCT
+            - DATA_TYPE_STRUCT
+            - DATA_TYPE_ARRAY
+            - DATA_TYPE_CLOB
+            - DATA_TYPE_REF
+            - DATA_TYPE_DATALINK
+            - DATA_TYPE_ROWID
+            - DATA_TYPE_BINARY
+            - DATA_TYPE_VARBINARY
+            - DATA_TYPE_LONGVARBINARY
+            - DATA_TYPE_NCLOB
+            - DATA_TYPE_SQLXML
+            - DATA_TYPE_REF_CURSOR
+            - DATA_TYPE_TIME_WITH_TIMEZONE
+            - DATA_TYPE_TIMESTAMP_WITH_TIMEZONE
+          type: string
+        defaultValue:
+          description: The following field specifies the default value of the Parameter provided by the external system if a value is not provided.
+        description:
+          description: A brief description of the Parameter.
+          type: string
+        nullable:
+          description: Specifies whether a null value is allowed.
+          type: boolean
+        parameter:
+          description: Name of the Parameter.
+          type: string
+      type: object
+    JwtClaims:
+      description: JWT claims used for the jwt-bearer authorization grant.
+      properties:
+        audience:
+          description: Value for the "aud" claim.
+          type: string
+        issuer:
+          description: Value for the "iss" claim.
+          type: string
+        subject:
+          description: Value for the "sub" claim.
+          type: string
+      type: object
+    ListConnectionsResponse:
+      description: Response message for ConnectorsService.ListConnections
+      properties:
+        connections:
+          description: Connections.
+          items:
+            $ref: "#/components/schemas/Connection"
+          type: array
+        nextPageToken:
+          description: Next page token.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListConnectorVersionsResponse:
+      description: Response message for Connectors.ListConnectorVersions.
+      properties:
+        connectorVersions:
+          description: A list of connector versions.
+          items:
+            $ref: "#/components/schemas/ConnectorVersion"
+          type: array
+        nextPageToken:
+          description: Next page token.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListConnectorsResponse:
+      description: Response message for Connectors.ListConnectors.
+      properties:
+        connectors:
+          description: A list of connectors.
+          items:
+            $ref: "#/components/schemas/Connector"
+          type: array
+        nextPageToken:
+          description: Next page token.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListLocationsResponse:
+      description: The response message for Locations.ListLocations.
+      properties:
+        locations:
+          description: A list of locations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Location"
+          type: array
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+      type: object
+    ListOperationsResponse:
+      description: The response message for Operations.ListOperations.
+      properties:
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+        operations:
+          description: A list of operations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListProvidersResponse:
+      description: Response message for Connectors.ListProviders.
+      properties:
+        nextPageToken:
+          description: Next page token.
+          type: string
+        providers:
+          description: A list of providers.
+          items:
+            $ref: "#/components/schemas/Provider"
+          type: array
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListRuntimeActionSchemasResponse:
+      description: Response message for ConnectorsService.ListRuntimeActionSchemas.
+      properties:
+        nextPageToken:
+          description: Next page token.
+          type: string
+        runtimeActionSchemas:
+          description: Runtime action schemas.
+          items:
+            $ref: "#/components/schemas/RuntimeActionSchema"
+          type: array
+      type: object
+    ListRuntimeEntitySchemasResponse:
+      description: Response message for ConnectorsService.ListRuntimeEntitySchemas.
+      properties:
+        nextPageToken:
+          description: Next page token.
+          type: string
+        runtimeEntitySchemas:
+          description: Runtime entity schemas.
+          items:
+            $ref: "#/components/schemas/RuntimeEntitySchema"
+          type: array
+      type: object
+    Location:
+      description: A resource that represents Google Cloud Platform location.
+      properties:
+        displayName:
+          description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Cross-service attributes for the location. For example {"cloud.googleapis.com/region": "us-east1"}'
+          type: object
+        locationId:
+          description: 'The canonical id for this location. For example: `"us-east1"`.'
+          type: string
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata. For example the available capacity at the given location.
+          type: object
+        name:
+          description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
+          type: string
+      type: object
+    LockConfig:
+      description: Determines whether or no a connection is locked. If locked, a reason must be specified.
+      properties:
+        locked:
+          description: Indicates whether or not the connection is locked.
+          type: boolean
+        reason:
+          description: Describes why a connection is locked.
+          type: string
+      type: object
+    Oauth2ClientCredentials:
+      description: Parameters to support Oauth 2.0 Client Credentials Grant Authentication. See https://tools.ietf.org/html/rfc6749#section-1.3.4 for more details.
+      properties:
+        clientId:
+          description: The client identifier.
+          type: string
+        clientSecret:
+          $ref: "#/components/schemas/Secret"
+          description: Secret version reference containing the client secret.
+      type: object
+    Oauth2JwtBearer:
+      description: Parameters to support JSON Web Token (JWT) Profile for Oauth 2.0 Authorization Grant based authentication. See https://tools.ietf.org/html/rfc7523 for more details.
+      properties:
+        clientKey:
+          $ref: "#/components/schemas/Secret"
+          description: "Secret version reference containing a PKCS#8 PEM-encoded private key associated with the Client Certificate. This private key will be used to sign JWTs used for the jwt-bearer authorization grant. Specified in the form as: `projects/*/secrets/*/versions/*`."
+        jwtClaims:
+          $ref: "#/components/schemas/JwtClaims"
+          description: JwtClaims providers fields to generate the token.
+      type: object
+    Operation:
+      description: This resource represents a long-running operation that is the result of a network API call.
+      properties:
+        done:
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
+          type: boolean
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The error result of the operation in case of failure or cancellation.
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          type: object
+        name:
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          type: object
+      type: object
+    OperationMetadata:
       description: Represents the metadata of the long-running operation.
       properties:
         apiVersion:
@@ -1248,264 +1615,6 @@ components:
           readOnly: true
           type: string
       type: object
-    ListConnectionProfilesResponse:
-      description: Response message for 'ListConnectionProfiles' request.
-      properties:
-        connectionProfiles:
-          description: The response list of connection profiles.
-          items:
-            $ref: "#/components/schemas/ConnectionProfile"
-          type: array
-        nextPageToken:
-          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
-          type: string
-        unreachable:
-          description: Locations that could not be reached.
-          items:
-            type: string
-          type: array
-      type: object
-    ListLocationsResponse:
-      description: The response message for Locations.ListLocations.
-      properties:
-        locations:
-          description: A list of locations that matches the specified filter in the request.
-          items:
-            $ref: "#/components/schemas/Location"
-          type: array
-        nextPageToken:
-          description: The standard List next-page token.
-          type: string
-      type: object
-    ListMigrationJobsResponse:
-      description: Response message for 'ListMigrationJobs' request.
-      properties:
-        migrationJobs:
-          description: The list of migration jobs objects.
-          items:
-            $ref: "#/components/schemas/MigrationJob"
-          type: array
-        nextPageToken:
-          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
-          type: string
-        unreachable:
-          description: Locations that could not be reached.
-          items:
-            type: string
-          type: array
-      type: object
-    ListOperationsResponse:
-      description: The response message for Operations.ListOperations.
-      properties:
-        nextPageToken:
-          description: The standard List next-page token.
-          type: string
-        operations:
-          description: A list of operations that matches the specified filter in the request.
-          items:
-            $ref: "#/components/schemas/Operation"
-          type: array
-      type: object
-    Location:
-      description: A resource that represents Google Cloud Platform location.
-      properties:
-        displayName:
-          description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
-          type: string
-        labels:
-          additionalProperties:
-            type: string
-          description: 'Cross-service attributes for the location. For example {"cloud.googleapis.com/region": "us-east1"}'
-          type: object
-        locationId:
-          description: 'The canonical id for this location. For example: `"us-east1"`.'
-          type: string
-        metadata:
-          additionalProperties:
-            description: Properties of the object. Contains field @type with type URL.
-          description: Service-specific metadata. For example the available capacity at the given location.
-          type: object
-        name:
-          description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
-          type: string
-      type: object
-    MigrationJob:
-      description: Represents a Database Migration Service migration job object.
-      properties:
-        createTime:
-          description: 'Output only. The timestamp when the migration job resource was created. A timestamp in RFC3339 UTC "Zulu" format, accurate to nanoseconds. Example: "2014-10-02T15:01:23.045123456Z".'
-          format: google-datetime
-          readOnly: true
-          type: string
-        destination:
-          description: Required. The resource name (URI) of the destination connection profile.
-          type: string
-        destinationDatabase:
-          $ref: "#/components/schemas/DatabaseType"
-          description: The database engine type and provider of the destination.
-        displayName:
-          description: The migration job display name.
-          type: string
-        dumpPath:
-          description: "The path to the dump file in Google Cloud Storage, in the format: (gs://[BUCKET_NAME]/[OBJECT_NAME])."
-          type: string
-        duration:
-          description: "Output only. The duration of the migration job (in seconds). A duration in seconds with up to nine fractional digits, terminated by 's'. Example: \"3.5s\"."
-          format: google-duration
-          readOnly: true
-          type: string
-        endTime:
-          description: Output only. If the migration job is completed, the time when it was completed.
-          format: google-datetime
-          readOnly: true
-          type: string
-        error:
-          $ref: "#/components/schemas/Status"
-          description: Output only. The error details in case of state FAILED.
-          readOnly: true
-        labels:
-          additionalProperties:
-            type: string
-          description: 'The resource labels for migration job to use to annotate any related underlying resources such as Compute Engine VMs. An object containing a list of "key": "value" pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }`.'
-          type: object
-        name:
-          description: "The name (URI) of this migration job resource, in the form of: projects/{project}/locations/{location}/instances/{instance}."
-          type: string
-        phase:
-          description: Output only. The current migration job phase.
-          enum:
-            - PHASE_UNSPECIFIED
-            - FULL_DUMP
-            - CDC
-            - PROMOTE_IN_PROGRESS
-            - WAITING_FOR_SOURCE_WRITES_TO_STOP
-            - PREPARING_THE_DUMP
-          readOnly: true
-          type: string
-        reverseSshConnectivity:
-          $ref: "#/components/schemas/ReverseSshConnectivity"
-          description: The details needed to communicate to the source over Reverse SSH tunnel connectivity.
-        source:
-          description: Required. The resource name (URI) of the source connection profile.
-          type: string
-        sourceDatabase:
-          $ref: "#/components/schemas/DatabaseType"
-          description: The database engine type and provider of the source.
-        state:
-          description: The current migration job state.
-          enum:
-            - STATE_UNSPECIFIED
-            - MAINTENANCE
-            - DRAFT
-            - CREATING
-            - NOT_STARTED
-            - RUNNING
-            - FAILED
-            - COMPLETED
-            - DELETING
-            - STOPPING
-            - STOPPED
-            - DELETED
-            - UPDATING
-            - STARTING
-            - RESTARTING
-            - RESUMING
-          type: string
-        staticIpConnectivity:
-          $ref: "#/components/schemas/StaticIpConnectivity"
-          description: static ip connectivity data (default, no additional details needed).
-        type:
-          description: Required. The migration job type.
-          enum:
-            - TYPE_UNSPECIFIED
-            - ONE_TIME
-            - CONTINUOUS
-          type: string
-        updateTime:
-          description: 'Output only. The timestamp when the migration job resource was last updated. A timestamp in RFC3339 UTC "Zulu" format, accurate to nanoseconds. Example: "2014-10-02T15:01:23.045123456Z".'
-          format: google-datetime
-          readOnly: true
-          type: string
-        vpcPeeringConnectivity:
-          $ref: "#/components/schemas/VpcPeeringConnectivity"
-          description: The details of the VPC network that the source database is located in.
-      type: object
-    MigrationJobVerificationError:
-      description: Error message of a verification Migration job.
-      properties:
-        errorCode:
-          description: Output only. An instance of ErrorCode specifying the error that occurred.
-          enum:
-            - ERROR_CODE_UNSPECIFIED
-            - CONNECTION_FAILURE
-            - AUTHENTICATION_FAILURE
-            - INVALID_CONNECTION_PROFILE_CONFIG
-            - VERSION_INCOMPATIBILITY
-            - CONNECTION_PROFILE_TYPES_INCOMPATIBILITY
-            - UNSUPPORTED_GTID_MODE
-            - UNSUPPORTED_DEFINER
-            - CANT_RESTART_RUNNING_MIGRATION
-          readOnly: true
-          type: string
-        errorDetailMessage:
-          description: Output only. A specific detailed error message, if supplied by the engine.
-          readOnly: true
-          type: string
-        errorMessage:
-          description: Output only. A formatted message with further details about the error and a CTA.
-          readOnly: true
-          type: string
-      type: object
-    MySqlConnectionProfile:
-      description: Specifies connection parameters required specifically for MySQL databases.
-      properties:
-        cloudSqlId:
-          description: If the source is a Cloud SQL database, use this field to provide the Cloud SQL instance ID of the source.
-          type: string
-        host:
-          description: Required. The IP or hostname of the source MySQL database.
-          type: string
-        password:
-          description: Required. Input only. The password for the user that Database Migration Service will be using to connect to the database. This field is not returned on request, and the value is encrypted when stored in Database Migration Service.
-          type: string
-        passwordSet:
-          description: Output only. Indicates If this connection profile password is stored.
-          readOnly: true
-          type: boolean
-        port:
-          description: Required. The network port of the source MySQL database.
-          format: int32
-          type: integer
-        ssl:
-          $ref: "#/components/schemas/SslConfig"
-          description: SSL configuration for the destination to connect to the source database.
-        username:
-          description: Required. The username that Database Migration Service will use to connect to the database. The value is encrypted when stored in Database Migration Service.
-          type: string
-      type: object
-    Operation:
-      description: This resource represents a long-running operation that is the result of a network API call.
-      properties:
-        done:
-          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
-          type: boolean
-        error:
-          $ref: "#/components/schemas/Status"
-          description: The error result of the operation in case of failure or cancellation.
-        metadata:
-          additionalProperties:
-            description: Properties of the object. Contains field @type with type URL.
-          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
-          type: object
-        name:
-          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
-          type: string
-        response:
-          additionalProperties:
-            description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
-          type: object
-      type: object
     Policy:
       description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
       properties:
@@ -1528,33 +1637,233 @@ components:
           format: int32
           type: integer
       type: object
-    PromoteMigrationJobRequest:
-      description: Request message for 'PromoteMigrationJob' request.
-      properties: {}
-      type: object
-    RestartMigrationJobRequest:
-      description: Request message for 'RestartMigrationJob' request.
-      properties: {}
-      type: object
-    ResumeMigrationJobRequest:
-      description: Request message for 'ResumeMigrationJob' request.
-      properties: {}
-      type: object
-    ReverseSshConnectivity:
-      description: The details needed to configure a reverse SSH tunnel between the source and destination databases. These details will be used when calling the generateSshScript method (see https://cloud.google.com/database-migration/docs/reference/rest/v1beta1/projects.locations.migrationJobs/generateSshScript) to produce the script that will help set up the reverse SSH tunnel, and to set up the VPC peering between the Cloud SQL private network and the VPC.
+    Provider:
+      description: Provider indicates the owner who provides the connectors.
       properties:
-        vm:
-          description: The name of the virtual machine (Compute Engine) used as the bastion server for the SSH tunnel.
+        createTime:
+          description: Output only. Created time.
+          format: google-datetime
+          readOnly: true
           type: string
-        vmIp:
-          description: Required. The IP of the virtual machine (Compute Engine) used as the bastion server for the SSH tunnel.
+        description:
+          description: Output only. Description of the resource.
+          readOnly: true
           type: string
-        vmPort:
-          description: Required. The forwarding port of the virtual machine (Compute Engine) used as the bastion server for the SSH tunnel.
-          format: int32
-          type: integer
-        vpc:
-          description: The name of the VPC to peer with the Cloud SQL private network.
+        displayName:
+          description: Output only. Display name.
+          readOnly: true
+          type: string
+        documentationUri:
+          description: Output only. Link to documentation page.
+          readOnly: true
+          type: string
+        externalUri:
+          description: Output only. Link to external page.
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Output only. Resource labels to represent user-provided metadata. Refer to cloud documentation on labels for more details. https://cloud.google.com/compute/docs/labeling-resources
+          readOnly: true
+          type: object
+        name:
+          description: "Output only. Resource name of the Provider. Format: projects/{project}/locations/{location}/providers/{provider}"
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Updated time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        webAssetsLocation:
+          description: Output only. Cloud storage location of icons etc consumed by UI.
+          readOnly: true
+          type: string
+      type: object
+    Resource:
+      description: Resource definition
+      properties:
+        pathTemplate:
+          description: Template to uniquely represent a GCP resource in a format IAM expects This is a template that can have references to other values provided in the config variable template.
+          type: string
+        type:
+          description: Different types of resource supported.
+          enum:
+            - TYPE_UNSPECIFIED
+            - GCP_PROJECT
+            - GCP_RESOURCE
+            - GCP_SECRETMANAGER_SECRET
+            - GCP_SECRETMANAGER_SECRET_VERSION
+          type: string
+      type: object
+    ResultMetadata:
+      description: Metadata of result field.
+      properties:
+        dataType:
+          description: The data type of the field.
+          enum:
+            - DATA_TYPE_UNSPECIFIED
+            - DATA_TYPE_INT
+            - DATA_TYPE_SMALLINT
+            - DATA_TYPE_DOUBLE
+            - DATA_TYPE_DATE
+            - DATA_TYPE_DATETIME
+            - DATA_TYPE_TIME
+            - DATA_TYPE_STRING
+            - DATA_TYPE_LONG
+            - DATA_TYPE_BOOLEAN
+            - DATA_TYPE_DECIMAL
+            - DATA_TYPE_UUID
+            - DATA_TYPE_BLOB
+            - DATA_TYPE_BIT
+            - DATA_TYPE_TINYINT
+            - DATA_TYPE_INTEGER
+            - DATA_TYPE_BIGINT
+            - DATA_TYPE_FLOAT
+            - DATA_TYPE_REAL
+            - DATA_TYPE_NUMERIC
+            - DATA_TYPE_CHAR
+            - DATA_TYPE_VARCHAR
+            - DATA_TYPE_LONGVARCHAR
+            - DATA_TYPE_TIMESTAMP
+            - DATA_TYPE_NCHAR
+            - DATA_TYPE_NVARCHAR
+            - DATA_TYPE_LONGNVARCHAR
+            - DATA_TYPE_NULL
+            - DATA_TYPE_OTHER
+            - DATA_TYPE_JAVA_OBJECT
+            - DATA_TYPE_DISTINCT
+            - DATA_TYPE_STRUCT
+            - DATA_TYPE_ARRAY
+            - DATA_TYPE_CLOB
+            - DATA_TYPE_REF
+            - DATA_TYPE_DATALINK
+            - DATA_TYPE_ROWID
+            - DATA_TYPE_BINARY
+            - DATA_TYPE_VARBINARY
+            - DATA_TYPE_LONGVARBINARY
+            - DATA_TYPE_NCLOB
+            - DATA_TYPE_SQLXML
+            - DATA_TYPE_REF_CURSOR
+            - DATA_TYPE_TIME_WITH_TIMEZONE
+            - DATA_TYPE_TIMESTAMP_WITH_TIMEZONE
+          type: string
+        description:
+          description: A brief description of the field.
+          type: string
+        field:
+          description: Name of the result field.
+          type: string
+      type: object
+    RoleGrant:
+      description: This configuration defines all the Cloud IAM roles that needs to be granted to a particular GCP resource for the selected prinicpal like service account. These configurations will let UI display to customers what IAM roles need to be granted by them. Or these configurations can be used by the UI to render a 'grant' button to do the same on behalf of the user.
+      properties:
+        helperTextTemplate:
+          description: Template that UI can use to provide helper text to customers.
+          type: string
+        principal:
+          description: Prinicipal/Identity for whom the role need to assigned.
+          enum:
+            - PRINCIPAL_UNSPECIFIED
+            - CONNECTOR_SA
+          type: string
+        resource:
+          $ref: "#/components/schemas/Resource"
+          description: Resource on which the roles needs to be granted for the principal.
+        roles:
+          description: List of roles that need to be granted.
+          items:
+            type: string
+          type: array
+      type: object
+    RuntimeActionSchema:
+      description: Schema of a runtime action.
+      properties:
+        action:
+          description: Output only. Name of the action.
+          readOnly: true
+          type: string
+        inputParameters:
+          description: Output only. List of input parameter metadata for the action.
+          items:
+            $ref: "#/components/schemas/InputParameter"
+          readOnly: true
+          type: array
+        resultMetadata:
+          description: Output only. List of result field metadata.
+          items:
+            $ref: "#/components/schemas/ResultMetadata"
+          readOnly: true
+          type: array
+      type: object
+    RuntimeConfig:
+      description: "RuntimeConfig is the singleton resource of each location. It includes generic resource configs consumed by control plane and runtime plane like: pub/sub topic/subscription resource name, Cloud Storage location storing schema etc."
+      properties:
+        conndSubscription:
+          description: Output only. Pub/Sub subscription for connd to receive message. E.g. projects/{project-id}/subscriptions/{topic-id}
+          readOnly: true
+          type: string
+        conndTopic:
+          description: Output only. Pub/Sub topic for connd to send message. E.g. projects/{project-id}/topics/{topic-id}
+          readOnly: true
+          type: string
+        controlPlaneSubscription:
+          description: Output only. Pub/Sub subscription for control plane to receive message. E.g. projects/{project-id}/subscriptions/{topic-id}
+          readOnly: true
+          type: string
+        controlPlaneTopic:
+          description: Output only. Pub/Sub topic for control plne to send message. communication. E.g. projects/{project-id}/topics/{topic-id}
+          readOnly: true
+          type: string
+        locationId:
+          description: Output only. location_id of the runtime location. E.g. "us-west1".
+          readOnly: true
+          type: string
+        runtimeEndpoint:
+          description: Output only. The endpoint of the connectors runtime ingress.
+          readOnly: true
+          type: string
+        schemaGcsBucket:
+          description: Output only. The Cloud Storage bucket that stores connector's schema reports.
+          readOnly: true
+          type: string
+        serviceDirectory:
+          description: Output only. The name of the Service Directory service name. Used for Private Harpoon to resolve the ILB address. e.g. "projects/cloud-connectors-e2e-testing/locations/us-central1/namespaces/istio-system/services/istio-ingressgateway-connectors"
+          readOnly: true
+          type: string
+        state:
+          description: Output only. The state of the location.
+          enum:
+            - STATE_UNSPECIFIED
+            - INACTIVE
+            - ACTIVATING
+            - ACTIVE
+            - CREATING
+            - DELETING
+            - UPDATING
+          readOnly: true
+          type: string
+      type: object
+    RuntimeEntitySchema:
+      description: Schema of a runtime entity.
+      properties:
+        entity:
+          description: Output only. Name of the entity.
+          readOnly: true
+          type: string
+        fields:
+          description: Output only. List of fields in the entity.
+          items:
+            $ref: "#/components/schemas/Field"
+          readOnly: true
+          type: array
+      type: object
+    Secret:
+      description: Secret provides a reference to entries in Secret Manager.
+      properties:
+        secretVersion:
+          description: "The resource name of the secret version in the format, format as: `projects/*/secrets/*/versions/*`."
           type: string
       type: object
     SetIamPolicyRequest:
@@ -1568,77 +1877,18 @@ components:
           format: google-fieldmask
           type: string
       type: object
-    SqlAclEntry:
-      description: An entry for an Access Control list.
+    Source:
+      description: Source to extract the backend from.
       properties:
-        expireTime:
-          description: "The time when this access control entry expires in [RFC 3339](https://tools.ietf.org/html/rfc3339) format, for example: `2012-11-15T16:19:00.094Z`."
-          format: google-datetime
+        fieldId:
+          description: Field identifier. For example config vaiable name.
           type: string
-        label:
-          description: A label to identify this entry.
-          type: string
-        ttl:
-          description: Input only. The time-to-leave of this access control entry.
-          format: google-duration
-          type: string
-        value:
-          description: The allowlisted value for the access control list.
-          type: string
-      type: object
-    SqlIpConfig:
-      description: IP Management configuration.
-      properties:
-        authorizedNetworks:
-          description: The list of external networks that are allowed to connect to the instance using the IP. See https://en.wikipedia.org/wiki/CIDR_notation#CIDR_notation, also known as 'slash' notation (e.g. `192.168.100.0/24`).
-          items:
-            $ref: "#/components/schemas/SqlAclEntry"
-          type: array
-        enableIpv4:
-          description: Whether the instance is assigned a public IP address or not.
-          type: boolean
-        privateNetwork:
-          description: The resource link for the VPC network from which the Cloud SQL instance is accessible for private IP. For example, `/projects/myProject/global/networks/default`. This setting can be updated, but it cannot be removed after it is set.
-          type: string
-        requireSsl:
-          description: Whether SSL connections over IP should be enforced or not.
-          type: boolean
-      type: object
-    SshScript:
-      description: Response message for 'GenerateSshScript' request.
-      properties:
-        script:
-          description: The ssh configuration script.
-          type: string
-      type: object
-    SslConfig:
-      description: SSL configuration information.
-      properties:
-        caCertificate:
-          description: Required. Input only. The x509 PEM-encoded certificate of the CA that signed the source database server's certificate. The replica will use this certificate to verify it's connecting to the right host.
-          type: string
-        clientCertificate:
-          description: Input only. The x509 PEM-encoded certificate that will be used by the replica to authenticate against the source database server.If this field is used then the 'client_key' field is mandatory.
-          type: string
-        clientKey:
-          description: Input only. The unencrypted PKCS#1 or PKCS#8 PEM-encoded private key associated with the Client Certificate. If this field is used then the 'client_certificate' field is mandatory.
-          type: string
-        type:
-          description: Output only. The ssl config type according to 'client_key', 'client_certificate' and 'ca_certificate'.
+        sourceType:
+          description: Type of the source.
           enum:
-            - SSL_TYPE_UNSPECIFIED
-            - SERVER_ONLY
-            - SERVER_CLIENT
-          readOnly: true
+            - SOURCE_TYPE_UNSPECIFIED
+            - CONFIG_VARIABLE
           type: string
-      type: object
-    StartMigrationJobRequest:
-      description: Request message for 'StartMigrationJob' request.
-      properties: {}
-      type: object
-    StaticIpConnectivity:
-      description: The source database will allow incoming connections from the destination database's public IP. You can retrieve the Cloud SQL instance's public IP from the Cloud SQL console or using Cloud SQL APIs. No additional configuration is required.
-      properties: {}
       type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
@@ -1658,9 +1908,18 @@ components:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
-    StopMigrationJobRequest:
-      description: Request message for 'StopMigrationJob' request.
-      properties: {}
+    SupportedRuntimeFeatures:
+      description: Supported runtime features of a connector version. This is passed to the management layer to add a new connector version by the connector developer. Details about how this proto is passed to the management layer is covered in this doc - go/runtime-manifest.
+      properties:
+        actionApis:
+          description: Specifies if the connector supports action apis like 'executeAction'.
+          type: boolean
+        entityApis:
+          description: Specifies if the connector supports entity apis like 'createEntity'.
+          type: boolean
+        sqlQuery:
+          description: Specifies if the connector supports 'ExecuteSqlQuery' operation.
+          type: boolean
       type: object
     TestIamPermissionsRequest:
       description: Request message for `TestIamPermissions` method.
@@ -1680,35 +1939,14 @@ components:
             type: string
           type: array
       type: object
-    VerifyMigrationJobRequest:
-      description: Request message for 'VerifyMigrationJob' request.
-      properties: {}
-      type: object
-    VmCreationConfig:
-      description: VM creation configuration message
+    UserPassword:
+      description: Parameters to support Username and Password Authentication.
       properties:
-        subnet:
-          description: The subnet name the vm needs to be created in.
-          type: string
-        vmMachineType:
-          description: Required. VM instance machine type to create.
-          type: string
-        vmZone:
-          description: The Google Cloud Platform zone to create the VM in.
-          type: string
-      type: object
-    VmSelectionConfig:
-      description: VM selection configuration message
-      properties:
-        vmZone:
-          description: Required. The Google Cloud Platform zone the VM is located.
-          type: string
-      type: object
-    VpcPeeringConnectivity:
-      description: The details of the VPC where the source database is located in Google Cloud. We will use this information to set up the VPC peering connection between Cloud SQL and this VPC.
-      properties:
-        vpc:
-          description: The name of the VPC network to peer with the Cloud SQL private network.
+        password:
+          $ref: "#/components/schemas/Secret"
+          description: Secret version reference containing the password.
+        username:
+          description: Username.
           type: string
       type: object
   securitySchemes:

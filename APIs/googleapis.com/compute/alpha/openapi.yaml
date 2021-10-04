@@ -87,7 +87,6 @@ tags:
   - name: regionDiskTypes
   - name: regionHealthChecks
   - name: regionHealthCheckServices
-  - name: regionInPlaceSnapshots
   - name: regionInstanceGroupManagers
   - name: regionInstanceGroups
   - name: regionInstances
@@ -123,7 +122,6 @@ tags:
   - name: urlMaps
   - name: vpnGateways
   - name: vpnTunnels
-  - name: zoneInPlaceSnapshots
   - name: zoneOperations
   - name: zones
 paths:
@@ -2968,7 +2966,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
   "/projects/{project}/aggregated/instances":
     get:
-      description: Retrieves aggregated list of all of the instances in your project across all regions and zones.
+      description: Retrieves an aggregated list of all of the instances in your project across all regions and zones. The performance of this method degrades when a filter is specified on a project that has a very large number of instances.
       operationId: compute.instances.aggregatedList
       parameters:
         - description: Project ID for this request.
@@ -14219,7 +14217,7 @@ paths:
       tags:
         - globalOperations
     get:
-      description: Retrieves the specified Operations resource. Gets a list of operations by making a `list()` request.
+      description: Retrieves the specified Operations resource.
       operationId: compute.globalOperations.get
       parameters:
         - description: Project ID for this request.
@@ -24404,480 +24402,6 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - regionHealthChecks
-  "/projects/{project}/regions/{region}/inPlaceSnapshots":
-    get:
-      description: Retrieves the list of InPlaceSnapshot resources contained within the specified region.
-      operationId: compute.regionInPlaceSnapshots.list
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the region for this request.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: 'A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```'
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
-          in: query
-          name: maxResults
-          schema:
-            minimum: 0
-            type: integer
-        - description: Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-          in: query
-          name: orderBy
-          schema:
-            type: string
-        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-          in: query
-          name: returnPartialSuccess
-          schema:
-            type: boolean
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InPlaceSnapshotList"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute.readonly
-      tags:
-        - regionInPlaceSnapshots
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Creates an in-place snapshot in the specified region.
-      operationId: compute.regionInPlaceSnapshots.insert
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: Name of the region for this request.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/InPlaceSnapshot"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - regionInPlaceSnapshots
-  "/projects/{project}/regions/{region}/inPlaceSnapshots/{inPlaceSnapshot}":
-    delete:
-      description: Deletes the specified InPlaceSnapshot resource. Keep in mind that deleting a single inPlaceSnapshot might not necessarily delete all the data on that inPlaceSnapshot. If any data on the inPlaceSnapshot that is marked for deletion is needed for subsequent inPlaceSnapshots, the data will be moved to the next corresponding inPlaceSnapshot. For more information, see Deleting inPlaceSnapshots.
-      operationId: compute.regionInPlaceSnapshots.delete
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the region for this request.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: Name of the InPlaceSnapshot resource to delete.
-          in: path
-          name: inPlaceSnapshot
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - regionInPlaceSnapshots
-    get:
-      description: Returns the specified InPlaceSnapshot resource in the specified region.
-      operationId: compute.regionInPlaceSnapshots.get
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the region for this request.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: Name of the InPlaceSnapshot resource to return.
-          in: path
-          name: inPlaceSnapshot
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InPlaceSnapshot"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute.readonly
-      tags:
-        - regionInPlaceSnapshots
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-  "/projects/{project}/regions/{region}/inPlaceSnapshots/{resource}/getIamPolicy":
-    get:
-      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-      operationId: compute.regionInPlaceSnapshots.getIamPolicy
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the region for this request.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: Name or id of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          schema:
-            type: string
-        - description: Requested IAM Policy version.
-          in: query
-          name: optionsRequestedPolicyVersion
-          schema:
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Policy"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute.readonly
-      tags:
-        - regionInPlaceSnapshots
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-  "/projects/{project}/regions/{region}/inPlaceSnapshots/{resource}/setIamPolicy":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Sets the access control policy on the specified resource. Replaces any existing policy.
-      operationId: compute.regionInPlaceSnapshots.setIamPolicy
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the region for this request.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: Name or id of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RegionSetPolicyRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Policy"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - regionInPlaceSnapshots
-  "/projects/{project}/regions/{region}/inPlaceSnapshots/{resource}/setLabels":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Sets the labels on a inPlaceSnapshot in the given region. To learn more about labels, read the Labeling Resources documentation.
-      operationId: compute.regionInPlaceSnapshots.setLabels
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The region for this request.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: Name or id of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RegionSetLabelsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - regionInPlaceSnapshots
-  "/projects/{project}/regions/{region}/inPlaceSnapshots/{resource}/testIamPermissions":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Returns permissions that a caller has on the specified resource.
-      operationId: compute.regionInPlaceSnapshots.testIamPermissions
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the region for this request.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: Name or id of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TestPermissionsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TestPermissionsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute.readonly
-      tags:
-        - regionInPlaceSnapshots
   "/projects/{project}/regions/{region}/instanceGroupManagers":
     get:
       description: Retrieves the list of managed instance groups that are contained within the specified region.
@@ -25104,7 +24628,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     patch:
-      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group are still in the process of being patched. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group are still in the process of being patched. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports PATCH semantics and uses the JSON merge patch format and processing rules. If you update your group to specify a new template or instance configuration, it's possible that your intended specification for each VM in the group is different from the current state of that VM. To learn how to apply an updated configuration to the VMs in a MIG, see Updating instances in a MIG.
       operationId: compute.regionInstanceGroupManagers.patch
       parameters:
         - description: Project ID for this request.
@@ -25154,7 +24678,7 @@ paths:
       tags:
         - regionInstanceGroupManagers
     put:
-      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method.
+      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method. If you update your group to specify a new template or instance configuration, it's possible that your intended specification for each VM in the group is different from the current state of that VM. To learn how to apply an updated configuration to the VMs in a MIG, see Updating instances in a MIG.
       operationId: compute.regionInstanceGroupManagers.update
       parameters:
         - description: Project ID for this request.
@@ -38152,480 +37676,6 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
-  "/projects/{project}/zones/{zone}/inPlaceSnapshots":
-    get:
-      description: Retrieves the list of InPlaceSnapshot resources contained within the specified zone.
-      operationId: compute.zoneInPlaceSnapshots.list
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          schema:
-            type: string
-        - description: 'A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```'
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
-          in: query
-          name: maxResults
-          schema:
-            minimum: 0
-            type: integer
-        - description: Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-          in: query
-          name: orderBy
-          schema:
-            type: string
-        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-          in: query
-          name: returnPartialSuccess
-          schema:
-            type: boolean
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InPlaceSnapshotList"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute.readonly
-      tags:
-        - zoneInPlaceSnapshots
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Creates an in-place snapshot in the specified zone.
-      operationId: compute.zoneInPlaceSnapshots.insert
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/InPlaceSnapshot"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - zoneInPlaceSnapshots
-  "/projects/{project}/zones/{zone}/inPlaceSnapshots/{inPlaceSnapshot}":
-    delete:
-      description: Deletes the specified InPlaceSnapshot resource. Keep in mind that deleting a single inPlaceSnapshot might not necessarily delete all the data on that inPlaceSnapshot. If any data on the inPlaceSnapshot that is marked for deletion is needed for subsequent inPlaceSnapshots, the data will be moved to the next corresponding inPlaceSnapshot. For more information, see Deleting inPlaceSnapshots.
-      operationId: compute.zoneInPlaceSnapshots.delete
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          schema:
-            type: string
-        - description: Name of the InPlaceSnapshot resource to delete.
-          in: path
-          name: inPlaceSnapshot
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - zoneInPlaceSnapshots
-    get:
-      description: Returns the specified InPlaceSnapshot resource in the specified zone.
-      operationId: compute.zoneInPlaceSnapshots.get
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          schema:
-            type: string
-        - description: Name of the InPlaceSnapshot resource to return.
-          in: path
-          name: inPlaceSnapshot
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InPlaceSnapshot"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute.readonly
-      tags:
-        - zoneInPlaceSnapshots
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-  "/projects/{project}/zones/{zone}/inPlaceSnapshots/{resource}/getIamPolicy":
-    get:
-      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-      operationId: compute.zoneInPlaceSnapshots.getIamPolicy
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          schema:
-            type: string
-        - description: Name or id of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          schema:
-            type: string
-        - description: Requested IAM Policy version.
-          in: query
-          name: optionsRequestedPolicyVersion
-          schema:
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Policy"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute.readonly
-      tags:
-        - zoneInPlaceSnapshots
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-  "/projects/{project}/zones/{zone}/inPlaceSnapshots/{resource}/setIamPolicy":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Sets the access control policy on the specified resource. Replaces any existing policy.
-      operationId: compute.zoneInPlaceSnapshots.setIamPolicy
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          schema:
-            type: string
-        - description: Name or id of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ZoneSetPolicyRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Policy"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - zoneInPlaceSnapshots
-  "/projects/{project}/zones/{zone}/inPlaceSnapshots/{resource}/setLabels":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Sets the labels on a inPlaceSnapshot in the given zone. To learn more about labels, read the Labeling Resources documentation.
-      operationId: compute.zoneInPlaceSnapshots.setLabels
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          schema:
-            type: string
-        - description: Name or id of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ZoneSetLabelsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - zoneInPlaceSnapshots
-  "/projects/{project}/zones/{zone}/inPlaceSnapshots/{resource}/testIamPermissions":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Returns permissions that a caller has on the specified resource.
-      operationId: compute.zoneInPlaceSnapshots.testIamPermissions
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          schema:
-            type: string
-        - description: Name or id of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TestPermissionsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TestPermissionsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute.readonly
-      tags:
-        - zoneInPlaceSnapshots
   "/projects/{project}/zones/{zone}/instanceGroupManagers":
     get:
       description: Retrieves a list of managed instance groups that are contained within the specified project and zone.
@@ -38852,7 +37902,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     patch:
-      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group are still in the process of being patched. You must separately verify the status of the individual instances with the listManagedInstances method. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group are still in the process of being patched. You must separately verify the status of the individual instances with the listManagedInstances method. This method supports PATCH semantics and uses the JSON merge patch format and processing rules. If you update your group to specify a new template or instance configuration, it's possible that your intended specification for each VM in the group is different from the current state of that VM. To learn how to apply an updated configuration to the VMs in a MIG, see Updating instances in a MIG.
       operationId: compute.instanceGroupManagers.patch
       parameters:
         - description: Project ID for this request.
@@ -38902,7 +37952,7 @@ paths:
       tags:
         - instanceGroupManagers
     put:
-      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listManagedInstances method.
+      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listManagedInstances method. If you update your group to specify a new template or instance configuration, it's possible that your intended specification for each VM in the group is different from the current state of that VM. To learn how to apply an updated configuration to the VMs in a MIG, see Updating instances in a MIG.
       operationId: compute.instanceGroupManagers.update
       parameters:
         - description: Project ID for this request.
@@ -47838,6 +46888,9 @@ components:
         enableNestedVirtualization:
           description: Whether to enable nested virtualization or not (default is false).
           type: boolean
+        enableUefiNetworking:
+          description: Whether to enable UEFI networking for instance creation.
+          type: boolean
         numaNodeCount:
           description: The number of vNUMA nodes.
           format: int32
@@ -49199,10 +48252,10 @@ components:
             - NEVER_PERSIST
           type: string
         enableStrongAffinity:
-          description: Enable Strong Session Affinity. This is only available in External TCP/UDP load balancer.
+          description: Enable Strong Session Affinity for Network Load Balancing. This option is not available publicly.
           type: boolean
         idleTimeoutSec:
-          description: Specifies how long to keep a Connection Tracking entry while there is no matching traffic (in seconds). For L4 ILB the minimum(default) is 10 minutes and maximum is 16 hours. For NLB the minimum(default) is 60 seconds and the maximum is 16 hours. This field will be supported only if the Connection Tracking key is less than 5-tuple.
+          description: Specifies how long to keep a Connection Tracking entry while there is no matching traffic (in seconds). For L4 ILB the minimum(default) is 10 minutes and maximum is 16 hours. For Network Load Balancer the default is 60 seconds. This option is not available publicly. This field will be supported only if the Connection Tracking key is less than 5-tuple.
           format: int32
           type: integer
         trackingMode:
@@ -50183,16 +49236,16 @@ components:
     CustomerEncryptionKey:
       properties:
         kmsKeyName:
-          description: The name of the encryption key that is stored in Google Cloud KMS.
+          description: 'The name of the encryption key that is stored in Google Cloud KMS. For example: "kmsKeyName": "projects/kms_project_id/locations/region/keyRings/ key_region/cryptoKeys/key '
           type: string
         kmsKeyServiceAccount:
-          description: The service account being used for the encryption request for the given KMS key. If absent, the Compute Engine default service account is used.
+          description: 'The service account being used for the encryption request for the given KMS key. If absent, the Compute Engine default service account is used. For example: "kmsKeyServiceAccount": "name@project_id.iam.gserviceaccount.com/ '
           type: string
         rawKey:
-          description: Specifies a 256-bit customer-supplied encryption key, encoded in RFC 4648 base64 to either encrypt or decrypt this resource.
+          description: 'Specifies a 256-bit customer-supplied encryption key, encoded in RFC 4648 base64 to either encrypt or decrypt this resource. You can provide either the rawKey or the rsaEncryptedKey. For example: "rawKey": "SGVsbG8gZnJvbSBHb29nbGUgQ2xvdWQgUGxhdGZvcm0=" '
           type: string
         rsaEncryptedKey:
-          description: "Specifies an RFC 4648 base64 encoded, RSA-wrapped 2048-bit customer-supplied encryption key to either encrypt or decrypt this resource. The key must meet the following requirements before you can provide it to Compute Engine: 1. The key is wrapped using a RSA public key certificate provided by Google. 2. After being wrapped, the key must be encoded in RFC 4648 base64 encoding. Gets the RSA public key certificate provided by Google at: https://cloud-certs.storage.googleapis.com/google-cloud-csek-ingress.pem "
+          description: 'Specifies an RFC 4648 base64 encoded, RSA-wrapped 2048-bit customer-supplied encryption key to either encrypt or decrypt this resource. You can provide either the rawKey or the rsaEncryptedKey. For example: "rsaEncryptedKey": "ieCx/NcW06PcT7Ep1X6LUTc/hLvUDYyzSZPPVCVPTVEohpeHASqC8uw5TzyO9U+Fka9JFH z0mBibXUInrC/jEk014kCK/NPjYgEMOyssZ4ZINPKxlUh2zn1bV+MCaTICrdmuSBTWlUUiFoD D6PYznLwh8ZNdaheCeZ8ewEXgFQ8V+sDroLaN3Xs3MDTXQEMMoNUXMCZEIpg9Vtp9x2oe==" The key must meet the following requirements before you can provide it to Compute Engine: 1. The key is wrapped using a RSA public key certificate provided by Google. 2. After being wrapped, the key must be encoded in RFC 4648 base64 encoding. Gets the RSA public key certificate provided by Google at: https://cloud-certs.storage.googleapis.com/google-cloud-csek-ingress.pem '
           type: string
         sha256:
           description: "[Output only] The RFC 4648 base64 encoded SHA-256 hash of the customer-supplied encryption key that protects this resource."
@@ -50204,7 +49257,7 @@ components:
           $ref: "#/components/schemas/CustomerEncryptionKey"
           description: Decrypts data associated with the disk with a customer-supplied encryption key.
         source:
-          description: Specifies a valid partial or full URL to an existing Persistent Disk resource. This field is only applicable for persistent disks.
+          description: 'Specifies a valid partial or full URL to an existing Persistent Disk resource. This field is only applicable for persistent disks. For example: "source": "/compute/v1/projects/project_id/zones/zone/disks/ disk_name '
           type: string
       type: object
     DeprecationStatus:
@@ -50359,12 +49412,6 @@ components:
           description: The customer-supplied encryption key of the source image. Required if the source image is protected by a customer-supplied encryption key.
         sourceImageId:
           description: "[Output Only] The ID value of the image used to create this disk. This value identifies the exact image that was used to create this persistent disk. For example, if you created the persistent disk from an image that was later deleted and recreated under the same name, the source image ID would identify the exact version of the image that was used."
-          type: string
-        sourceInPlaceSnapshot:
-          description: "[Deprecated] The source in-place snapshot used to create this disk. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project /global/inPlaceSnapshots/inPlaceSnapshots - projects/project/global/inPlaceSnapshots/inPlaceSnapshots - global/inPlaceSnapshots/inPlaceSnapshots "
-          type: string
-        sourceInPlaceSnapshotId:
-          description: Deprecated The unique ID of the in-place snapshot used to create this disk. This value identifies the exact in-place snapshot that was used to create this persistent disk. For example, if you created the persistent disk from an in-place snapshot that was later deleted and recreated under the same name, the source in-place snapshot ID would identify the exact version of the in-place snapshot that was used.
           type: string
         sourceInstantSnapshot:
           description: "The source instant snapshot used to create this disk. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /instantSnapshots/instantSnapshot - projects/project/zones/zone/instantSnapshots/instantSnapshot - zones/zone/instantSnapshots/instantSnapshot "
@@ -51275,7 +50322,7 @@ components:
           $ref: "#/components/schemas/FirewallLogConfig"
           description: This field denotes the logging options for a particular firewall rule. If logging is enabled, logs will be exported to Cloud Logging.
         name:
-          description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?. The first character must be a lowercase letter, and all following characters (except for the last character) must be a dash, lowercase letter, or digit. The last character must be a lowercase letter or digit.
+          description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])?. The first character must be a lowercase letter, and all following characters (except for the last character) must be a dash, lowercase letter, or digit. The last character must be a lowercase letter or digit.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
           type: string
         network:
@@ -54003,140 +53050,6 @@ components:
               type: string
           type: object
       type: object
-    InPlaceSnapshot:
-      description: Represents a InPlaceSnapshot resource. You can use in-place snapshots to create disk rollback points quickly..
-      properties:
-        creationTimestamp:
-          description: "[Output Only] Creation timestamp in RFC3339 text format."
-          type: string
-        description:
-          description: An optional description of this resource. Provide this property when you create the resource.
-          type: string
-        diskSizeGb:
-          description: "[Output Only] Size of the source disk, specified in GB."
-          format: int64
-          type: string
-        guestFlush:
-          description: Specifies to create an application consistent in-place snapshot by informing the OS to prepare for the snapshot process. Currently only supported on Windows instances using the Volume Shadow Copy Service (VSS).
-          type: boolean
-        id:
-          description: "[Output Only] The unique identifier for the resource. This identifier is defined by the server."
-          format: uint64
-          type: string
-        kind:
-          default: compute#inPlaceSnapshot
-          description: "[Output Only] Type of the resource. Always compute#inPlaceSnapshot for InPlaceSnapshot resources."
-          type: string
-        labelFingerprint:
-          description: A fingerprint for the labels being applied to this InPlaceSnapshot, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve a InPlaceSnapshot.
-          format: byte
-          type: string
-        labels:
-          additionalProperties:
-            type: string
-          description: Labels to apply to this InPlaceSnapshot. These can be later modified by the setLabels method. Label values may be empty.
-          type: object
-        name:
-          description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
-          pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
-          type: string
-        region:
-          description: "[Output Only] URL of the region where the in-place snapshot resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body."
-          type: string
-        selfLink:
-          description: "[Output Only] Server-defined URL for the resource."
-          type: string
-        selfLinkWithId:
-          description: "[Output Only] Server-defined URL for this resource's resource id."
-          type: string
-        sourceDisk:
-          description: "URL of the source disk used to create this in-place snapshot. Note that the source disk must be in the same zone/region as the in-place snapshot to be created. This can be a full or valid partial URL. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /disks/disk - projects/project/zones/zone/disks/disk - zones/zone/disks/disk "
-          type: string
-        sourceDiskId:
-          description: "[Output Only] The ID value of the disk used to create this InPlaceSnapshot. This value may be used to determine whether the InPlaceSnapshot was taken from the current or a previous instance of a given disk name."
-          type: string
-        status:
-          description: "[Output Only] The status of the inPlaceSnapshot. This can be CREATING, DELETING, FAILED, or READY."
-          enum:
-            - CREATING
-            - DELETING
-            - FAILED
-            - READY
-          type: string
-        zone:
-          description: "[Output Only] URL of the zone where the in-place snapshot resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body."
-          type: string
-      type: object
-    InPlaceSnapshotList:
-      description: Contains a list of InPlaceSnapshot resources.
-      properties:
-        id:
-          description: "[Output Only] Unique identifier for the resource; defined by the server."
-          type: string
-        items:
-          description: A list of InPlaceSnapshot resources.
-          items:
-            $ref: "#/components/schemas/InPlaceSnapshot"
-          type: array
-        kind:
-          default: compute#inPlaceSnapshotList
-          description: Type of resource.
-          type: string
-        nextPageToken:
-          description: "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results."
-          type: string
-        selfLink:
-          description: "[Output Only] Server-defined URL for this resource."
-          type: string
-        warning:
-          description: "[Output Only] Informational warning message."
-          properties:
-            code:
-              description: "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response."
-              enum:
-                - CLEANUP_FAILED
-                - DEPRECATED_RESOURCE_USED
-                - DEPRECATED_TYPE_USED
-                - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
-                - EXPERIMENTAL_TYPE_USED
-                - EXTERNAL_API_WARNING
-                - FIELD_VALUE_OVERRIDEN
-                - INJECTED_KERNELS_DEPRECATED
-                - LARGE_DEPLOYMENT_WARNING
-                - MISSING_TYPE_DEPENDENCY
-                - NEXT_HOP_ADDRESS_NOT_ASSIGNED
-                - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_NOT_FOUND
-                - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
-                - NEXT_HOP_NOT_RUNNING
-                - NOT_CRITICAL_ERROR
-                - NO_RESULTS_ON_PAGE
-                - PARTIAL_SUCCESS
-                - REQUIRED_TOS_AGREEMENT
-                - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
-                - RESOURCE_NOT_DELETED
-                - SCHEMA_VALIDATION_IGNORED
-                - SINGLE_INSTANCE_PROPERTY_TEMPLATE
-                - UNDECLARED_PROPERTIES
-                - UNREACHABLE
-              type: string
-            data:
-              description: '[Output Only] Metadata about this warning in key: value format. For example: "data": [ { "key": "scope", "value": "zones/us-east1-d" } '
-              items:
-                properties:
-                  key:
-                    description: "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding)."
-                    type: string
-                  value:
-                    description: "[Output Only] A warning data value corresponding to the key."
-                    type: string
-                type: object
-              type: array
-            message:
-              description: "[Output Only] A human-readable description of the warning code."
-              type: string
-          type: object
-      type: object
     InitialStateConfig:
       description: Initial State for shielded instance, these are public keys which are safe to store in public
       properties:
@@ -54627,6 +53540,9 @@ components:
     InstanceGroupManager:
       description: Represents a Managed Instance Group resource. An instance group is a collection of VM instances that you can manage as a single entity. For more information, read Instance groups. For zonal Managed Instance Group, use the instanceGroupManagers resource. For regional Managed Instance Group, use the regionInstanceGroupManagers resource.
       properties:
+        allInstancesConfig:
+          $ref: "#/components/schemas/InstanceGroupManagerAllInstancesConfig"
+          description: Specifies the instances configs overrides that should be applied for all instances in the MIG.
         autoHealingPolicies:
           description: The autohealing policy for this managed instance group. You can specify only one value.
           items:
@@ -54864,6 +53780,12 @@ components:
               type: string
           type: object
       type: object
+    InstanceGroupManagerAllInstancesConfig:
+      properties:
+        properties:
+          $ref: "#/components/schemas/InstancePropertiesPatch"
+          description: Properties for instances that are created using this instances config. You can add or modify properties using the instanceGroupManagers.patch or regionInstanceGroupManagers.patch. After setting instances_config, you must update your instances to use it; for example, you can use the applyUpdatesToInstances method.
+      type: object
     InstanceGroupManagerAutoHealingPolicy:
       properties:
         healthCheck:
@@ -54876,6 +53798,11 @@ components:
         maxUnavailable:
           $ref: "#/components/schemas/FixedOrPercent"
           description: "Maximum number of instances that can be unavailable when autohealing. When 'percent' is used, the value is rounded if necessary. The instance is considered available if all of the following conditions are satisfied: 1. Instance's status is RUNNING. 2. Instance's currentAction is NONE (in particular its liveness health check result was observed to be HEALTHY at least once as it passed VERIFYING). 3. There is no outgoing action on an instance triggered by IGM. By default, number of concurrently autohealed instances is smaller than the managed instance group target size. However, if a zonal managed instance group has only one instance, or a regional managed instance group has only one instance per zone, autohealing will recreate these instances when they become unhealthy."
+        updateInstances:
+          enum:
+            - ALWAYS
+            - FOLLOW_UPDATE_POLICY
+          type: string
       type: object
     InstanceGroupManagerInstanceLifecyclePolicy:
       properties:
@@ -54968,6 +53895,9 @@ components:
       type: object
     InstanceGroupManagerStatus:
       properties:
+        allInstancesConfig:
+          $ref: "#/components/schemas/InstanceGroupManagerStatusAllInstancesConfig"
+          description: "[Output Only] A status of consistency of Instances' config applied to instances with Instances' config defined in managed instance group."
         autoscaler:
           description: "[Output Only] The URL of the Autoscaler that targets this instance group manager."
           type: string
@@ -54980,6 +53910,15 @@ components:
         versionTarget:
           $ref: "#/components/schemas/InstanceGroupManagerStatusVersionTarget"
           description: "[Output Only] A status of consistency of Instances' versions with their target version specified by version field on Instance Group Manager."
+      type: object
+    InstanceGroupManagerStatusAllInstancesConfig:
+      properties:
+        currentRevision:
+          description: "[Output Only] Current instances' config revision. This value is in RFC3339 text format."
+          type: string
+        effective:
+          description: "[Output Only] A bit indicating whether instances' config has been applied to all managed instances in managed instance group."
+          type: boolean
       type: object
     InstanceGroupManagerStatusStateful:
       properties:
@@ -55783,7 +54722,7 @@ components:
         networkPerformanceConfig:
           $ref: "#/components/schemas/NetworkPerformanceConfig"
         postKeyRevocationActionType:
-          description: PostKeyRevocationActionType of the instance.
+          description: PostKeyRevocationActionType of the instance.(will be deprecated soon)
           enum:
             - NOOP
             - POST_KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED
@@ -55825,6 +54764,20 @@ components:
         tags:
           $ref: "#/components/schemas/Tags"
           description: A list of tags to apply to the instances that are created from these properties. The tags identify valid sources or targets for network firewalls. The setTags method can modify this list of tags. Each tag within the list must comply with RFC1035.
+      type: object
+    InstancePropertiesPatch:
+      description: Represents the change that you want to make to the instance properties.
+      properties:
+        labels:
+          additionalProperties:
+            type: string
+          description: The label key-value pairs that you want to patch onto the instance.
+          type: object
+        metadata:
+          additionalProperties:
+            type: string
+          description: The metadata key-value pairs that you want to patch onto the instance. For more information, see Project and instance metadata.
+          type: object
       type: object
     InstanceReference:
       properties:
@@ -58201,6 +57154,9 @@ components:
     ManagedInstance:
       description: A Managed Instance resource.
       properties:
+        allInstancesConfig:
+          $ref: "#/components/schemas/ManagedInstanceAllInstancesConfig"
+          description: "[Output Only] Instances config revision applied to this instance."
         currentAction:
           description: "[Output Only] The current action that the managed instance group has scheduled for the instance. Possible values: - NONE The instance is running, and the managed instance group does not have any scheduled actions for this instance. - CREATING The managed instance group is creating this instance. If the group fails to create this instance, it will try again until it is successful. - CREATING_WITHOUT_RETRIES The managed instance group is attempting to create this instance only once. If the group fails to create this instance, it does not try again and the group's targetSize value is decreased instead. - RECREATING The managed instance group is recreating this instance. - DELETING The managed instance group is permanently deleting this instance. - ABANDONING The managed instance group is abandoning this instance. The instance will be removed from the instance group and from any target pools that are associated with this group. - RESTARTING The managed instance group is restarting the instance. - REFRESHING The managed instance group is applying configuration changes to the instance without stopping it. For example, the group can update the target pool list for an instance without stopping that instance. - VERIFYING The managed instance group has created the instance and it is in the process of being verified. "
           enum:
@@ -58271,6 +57227,12 @@ components:
         version:
           $ref: "#/components/schemas/ManagedInstanceVersion"
           description: "[Output Only] Intended version of this instance."
+      type: object
+    ManagedInstanceAllInstancesConfig:
+      properties:
+        revision:
+          description: "[Output Only] Instances config revision. This value is in RFC3339 text format."
+          type: string
       type: object
     ManagedInstanceInstanceHealth:
       properties:
@@ -58424,6 +57386,9 @@ components:
         description:
           description: An optional description of this resource. Provide this field when you create the resource.
           type: string
+        enableUlaInternalIpv6:
+          description: Enable ULA internal ipv6 on this network. Enabling this feature will assign a /48 from google defined ULA prefix fd20::/20. .
+          type: boolean
         firewallPolicy:
           description: "[Output Only] URL of the firewall policy the network is associated with."
           type: string
@@ -58434,6 +57399,9 @@ components:
         id:
           description: "[Output Only] The unique identifier for the resource. This identifier is defined by the server."
           format: uint64
+          type: string
+        internalIpv6Range:
+          description: When enabling ula internal ipv6, caller optionally can specify the /48 range they want from the google defined ULA prefix fd20::/20. The input must be a valid /48 ULA IPv6 address and must be within the fd20::/20. Operation will fail if the speficied /48 is already in used by another resource. If the field is not speficied, then a /48 range will be randomly allocated from fd20::/20 and returned via this field. .
           type: string
         kind:
           default: compute#network
@@ -58446,6 +57414,11 @@ components:
         name:
           description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?`. The first character must be a lowercase letter, and all following characters (except for the last character) must be a dash, lowercase letter, or digit. The last character must be a lowercase letter or digit.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
+          type: string
+        networkFirewallPolicyEnforcementOrder:
+          enum:
+            - AFTER_CLASSIC_FIREWALL
+            - BEFORE_CLASSIC_FIREWALL
           type: string
         peerings:
           description: "[Output Only] A list of network peerings for the resource."
@@ -64166,6 +63139,11 @@ components:
         allowConflictingSubnetworks:
           description: Whether this route can conflict with existing subnetworks. Setting this to true allows this route to conflict with subnetworks that have already been configured on the corresponding network.
           type: boolean
+        asPaths:
+          description: "[Output Only] AS path."
+          items:
+            $ref: "#/components/schemas/RouteAsPath"
+          type: array
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
           type: string
@@ -64224,6 +63202,14 @@ components:
           description: The priority of this route. Priority is used to break ties in cases where there is more than one matching route of equal prefix length. In cases where multiple routes have equal prefix length, the one with the lowest-numbered priority value wins. The default value is `1000`. The priority value must be from `0` to `65535`, inclusive.
           format: uint32
           type: integer
+        routeType:
+          description: "[Output Only] The type of this route, which can be one of the following values: - 'TRANSIT' for a transit route that this router learned from another Cloud Router and will readvertise to one of its BGP peers - 'SUBNET' for a route from a subnet of the VPC - 'BGP' for a route learned from a BGP peer of this router - 'STATIC' for a static route"
+          enum:
+            - BGP
+            - STATIC
+            - SUBNET
+            - TRANSIT
+          type: string
         selfLink:
           description: "[Output Only] Server-defined fully-qualified URL for this resource."
           type: string
@@ -64285,6 +63271,23 @@ components:
                 type: string
             type: object
           type: array
+      type: object
+    RouteAsPath:
+      properties:
+        asLists:
+          description: "[Output Only] The AS numbers of the AS Path."
+          items:
+            format: uint32
+            type: integer
+          type: array
+        pathSegmentType:
+          description: "[Output Only] The type of the AS Path, which can be one of the following values: - 'AS_SET': unordered set of autonomous systems that the route in has traversed - 'AS_SEQUENCE': ordered set of autonomous systems that the route has traversed - 'AS_CONFED_SEQUENCE': ordered set of Member Autonomous Systems in the local confederation that the route has traversed - 'AS_CONFED_SET': unordered set of Member Autonomous Systems in the local confederation that the route has traversed "
+          enum:
+            - AS_CONFED_SEQUENCE
+            - AS_CONFED_SET
+            - AS_SEQUENCE
+            - AS_SET
+          type: string
       type: object
     RouteList:
       description: Contains a list of Route resources.
@@ -69598,7 +68601,7 @@ components:
           type: string
       type: object
     UpcomingMaintenance:
-      description: Upcoming Maintenance notification information.
+      description: Upcoming Maintenance notification information. TODO(b/196881882) Deprecate this proto once it's fully migrated to be under proto ResourceStatus.UpcomingMaintenance.
       properties:
         date:
           description: "[Output Only] The date when the maintenance will take place. This value is in RFC3339 text format. DEPRECATED: Use start_time_window instead."
