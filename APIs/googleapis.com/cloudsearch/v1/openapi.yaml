@@ -2754,8 +2754,10 @@ components:
           type: array
       type: object
     GetSearchApplicationQueryStatsResponse:
+      description: Response format for getting query stats at a search application level between given dates.
       properties:
         stats:
+          description: Search application level query stats per date
           items:
             $ref: "#/components/schemas/SearchApplicationQueryStats"
           type: array
@@ -3857,6 +3859,7 @@ components:
           type: array
       type: object
     SearchApplicationQueryStats:
+      description: Search application level query stats per date
       properties:
         date:
           $ref: "#/components/schemas/Date"

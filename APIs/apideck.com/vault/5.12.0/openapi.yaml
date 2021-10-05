@@ -1460,6 +1460,7 @@ paths:
                 settings: {
                   hide_resource_settings: false,
                   sandbox_mode: false,
+                  isolation_mode: false,
                   session_length: '30m',
                   show_logs: true
                 },
@@ -2795,8 +2796,13 @@ components:
             hide_resource_settings:
               default: false
               type: boolean
+            isolation_mode:
+              default: false
+              description: Forces Vault to run in isolation mode, meaning it only shows the connection settings and hides the navigation items.
+              type: boolean
             sandbox_mode:
               default: false
+              description: Forces Vault to shows a banner informing the current consumer is in a test environment.
               type: boolean
             session_length:
               default: 1h

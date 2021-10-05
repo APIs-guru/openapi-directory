@@ -1634,6 +1634,48 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
+  "/v1alpha/{property}:acknowledgeUserDataCollection":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Acknowledges the terms of user data collection for the specified property. This acknowledgement must be completed (either in the Google Analytics UI or via this API) before MeasurementProtocolSecret resources may be created.
+      operationId: analyticsadmin.properties.acknowledgeUserDataCollection
+      parameters:
+        - description: Required. The property for which to acknowledge user data collection.
+          in: path
+          name: property
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAcknowledgeUserDataCollectionRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAcknowledgeUserDataCollectionResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+      tags:
+        - properties
 components:
   parameters:
     _.xgafv:
@@ -1755,6 +1797,17 @@ components:
           items:
             $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaPropertySummary"
           type: array
+      type: object
+    GoogleAnalyticsAdminV1alphaAcknowledgeUserDataCollectionRequest:
+      description: Request message for AcknowledgeUserDataCollection RPC.
+      properties:
+        acknowledgement:
+          description: 'Required. An acknowledgement that the caller of this method understands the terms of user data collection. This field must contain the exact value: "I acknowledge that I have the necessary privacy disclosures and rights from my end users for the collection and processing of their data, including the association of such data with the visitation information Google Analytics collects from my site and/or app property."'
+          type: string
+      type: object
+    GoogleAnalyticsAdminV1alphaAcknowledgeUserDataCollectionResponse:
+      description: Response message for AcknowledgeUserDataCollection RPC.
+      properties: {}
       type: object
     GoogleAnalyticsAdminV1alphaAndroidAppDataStream:
       description: A resource message representing a Google Analytics Android app stream.

@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Kubernetes Engine API
   version: v1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://container.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: container
 externalDocs:
@@ -3165,6 +3167,9 @@ components:
         masterAuthorizedNetworksConfig:
           $ref: "#/components/schemas/MasterAuthorizedNetworksConfig"
           description: The configuration options for master authorized networks feature.
+        meshCertificates:
+          $ref: "#/components/schemas/MeshCertificates"
+          description: Configuration for issuance of mTLS keys and certificates to Kubernetes pods.
         monitoringConfig:
           $ref: "#/components/schemas/MonitoringConfig"
           description: Monitoring configuration for the cluster.
@@ -3335,6 +3340,9 @@ components:
         desiredMasterVersion:
           description: 'The Kubernetes version to change the master to. Users may specify either explicit versions offered by Kubernetes Engine or version aliases, which have the following behavior: - "latest": picks the highest valid Kubernetes version - "1.X": picks the highest valid patch+gke.N patch in the 1.X version - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version - "1.X.Y-gke.N": picks an explicit Kubernetes version - "-": picks the default Kubernetes version'
           type: string
+        desiredMeshCertificates:
+          $ref: "#/components/schemas/MeshCertificates"
+          description: Configuration for issuance of mTLS keys and certificates to Kubernetes pods.
         desiredMonitoringConfig:
           $ref: "#/components/schemas/MonitoringConfig"
           description: The desired monitoring configuration.
@@ -3832,6 +3840,10 @@ components:
           description: Constraint enforced on the max num of pods per node.
           format: int64
           type: string
+      type: object
+    MeshCertificates:
+      description: Configuration for issuance of mTLS keys and certificates to Kubernetes pods.
+      properties: {}
       type: object
     Metric:
       description: Progress metric is (string, int|float|string) pair.
@@ -5047,3 +5059,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}
