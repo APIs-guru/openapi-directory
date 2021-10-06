@@ -30,10 +30,10 @@ info:
 externalDocs:
   url: https://developers.google.com/android-publisher
 tags:
-  - name: applications
   - name: edits
   - name: inappproducts
   - name: internalappsharingartifacts
+  - name: monetization
   - name: orders
   - name: purchases
   - name: reviews
@@ -1965,7 +1965,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Calculates the region prices, using today's exchange rate and country-specific pricing patterns, based on the price in the request for a set of regions.
-      operationId: androidpublisher.applications.pricing.convertRegionPrices
+      operationId: androidpublisher.monetization.convertRegionPrices
       parameters:
         - description: Required. The app package name.
           in: path
@@ -1991,7 +1991,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
-        - applications
+        - monetization
   "/androidpublisher/v3/applications/{packageName}/purchases/products/{productId}/tokens/{token}":
     get:
       description: Checks the purchase and consumption status of an inapp item.

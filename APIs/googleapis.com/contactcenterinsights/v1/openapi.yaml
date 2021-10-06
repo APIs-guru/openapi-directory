@@ -1136,7 +1136,7 @@ components:
           description: Output only. The conversation's latest analysis, if one exists.
           readOnly: true
         medium:
-          description: Immutable. The conversation medium.
+          description: Immutable. The conversation medium, if unspecified will default to PHONE_CALL.
           enum:
             - MEDIUM_UNSPECIFIED
             - PHONE_CALL

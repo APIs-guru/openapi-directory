@@ -711,7 +711,7 @@ components:
         type: string
   schemas:
     AdvancedSecurityOverrides:
-      description: Security policies set to the most secure values by default. To maintain the security posture of a device, we don't recommend overriding any of the default values.
+      description: Security policies set to secure values by default. To maintain the security posture of a device, we don't recommend overriding any of the default values.
       properties:
         commonCriteriaMode:
           description: "Controls Common Criteria Mode—security standards defined in the Common Criteria for Information Technology Security Evaluation (https://www.commoncriteriaportal.org/) (CC). Enabling Common Criteria Mode increases certain security components on a device, including AES-GCM encryption of Bluetooth Long Term Keys, and Wi-Fi configuration stores.Warning: Common Criteria Mode enforces a strict security model typically only required for IT products used in national security systems and other highly sensitive organizations. Standard device use may be affected. Only enabled if required."
@@ -2163,7 +2163,7 @@ components:
           type: boolean
         advancedSecurityOverrides:
           $ref: "#/components/schemas/AdvancedSecurityOverrides"
-          description: Security policies set to the most secure values by default. To maintain the security posture of a device, we don't recommend overriding any of the default values.
+          description: Security policies set to secure values by default. To maintain the security posture of a device, we don't recommend overriding any of the default values.
         alwaysOnVpnPackage:
           $ref: "#/components/schemas/AlwaysOnVpnPackage"
           description: Configuration for an always-on VPN connection. Use with vpn_config_disabled to prevent modification of this setting.
