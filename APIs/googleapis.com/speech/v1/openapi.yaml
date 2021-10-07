@@ -315,6 +315,12 @@ components:
     LongRunningRecognizeResponse:
       description: The only message returned to the client by the `LongRunningRecognize` method. It contains the result as zero or more sequential `SpeechRecognitionResult` messages. It is included in the `result.response` field of the `Operation` returned by the `GetOperation` call of the `google::longrunning::Operations` service.
       properties:
+        outputConfig:
+          $ref: "#/components/schemas/TranscriptOutputConfig"
+          description: Original output config if present in the request.
+        outputError:
+          $ref: "#/components/schemas/Status"
+          description: If the transcript output fails this field contains the relevant error.
         results:
           description: Sequential list of transcription results corresponding to sequential portions of audio.
           items:
@@ -389,6 +395,7 @@ components:
             - AMR_WB
             - OGG_OPUS
             - SPEEX_WITH_HEADER_BYTE
+            - WEBM_OPUS
           type: string
         languageCode:
           description: 'Required. The language of the supplied audio as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. Example: "en-US". See [Language Support](https://cloud.google.com/speech-to-text/docs/languages) for a list of the currently supported language codes.'
