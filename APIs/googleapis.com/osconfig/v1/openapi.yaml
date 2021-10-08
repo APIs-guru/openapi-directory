@@ -103,16 +103,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: "Update an existing OS policy assignment. This method creates a new revision of the OS policy assignment. This method returns a long running operation (LRO) that contains the rollout details. The rollout can be cancelled by cancelling the LRO. For more information, see [Method: projects.locations.osPolicyAssignments.operations.cancel](https://cloud.google.com/compute/docs/osconfig/rest/v1/projects.locations.osPolicyAssignments.operations/cancel)."
-      operationId: osconfig.projects.locations.osPolicyAssignments.patch
+      description: Update an OS Config patch deployment.
+      operationId: osconfig.projects.patchDeployments.patch
       parameters:
-        - description: "Resource name. Format: `projects/{project_number}/locations/{location}/osPolicyAssignments/{os_policy_assignment_id}` This field is ignored when you create an OS policy assignment."
+        - description: "Unique name for the patch deployment resource in a project. The patch deployment name is in the form: `projects/{project_id}/patchDeployments/{patch_deployment_id}`. This field is ignored when you create a new patch deployment."
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Optional. Field mask that controls which fields of the assignment should be updated.
+        - description: Optional. Field mask that controls which fields of the patch deployment should be updated.
           in: query
           name: updateMask
           schema:
@@ -121,13 +121,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/OSPolicyAssignment"
+              $ref: "#/components/schemas/PatchDeployment"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/PatchDeployment"
           description: Successful response
       security:
         - Oauth2:

@@ -19,12 +19,11 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://dialogflow.googleapis.com/$discovery/rest?version=v3
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: dialogflow
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/dialogflow/
 tags:
@@ -4153,6 +4152,9 @@ components:
             description: Properties of the object.
           description: The free-form diagnostic info. For example, this field could contain webhook call latency. The string keys of the Struct's fields map can change without notice.
           type: object
+        dtmf:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3DtmfInput"
+          description: If a DTMF was provided as input, this field will contain a copy of the DTMFInput.
         intent:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Intent"
           description: "The Intent that matched the conversational query. Some, not all fields are filled in this message, including but not limited to: `name` and `display_name`. This field is deprecated, please use QueryResult.match instead."
