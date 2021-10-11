@@ -30,6 +30,405 @@ externalDocs:
 tags:
   - name: projects
 paths:
+  "/v1alpha1/{instance}:disableInteractiveSerialConsole":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Disable the interactive serial console feature on a specific machine.
+      operationId: baremetalsolution.projects.locations.instances.disableInteractiveSerialConsole
+      parameters:
+        - description: Required. Name of the instance to disable the interactive serial console feature on.
+          in: path
+          name: instance
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DisableInteractiveSerialConsoleRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisableInteractiveSerialConsoleResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{instance}:enableInteractiveSerialConsole":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Enable the interactive serial console feature on a specific machine.
+      operationId: baremetalsolution.projects.locations.instances.enableInteractiveSerialConsole
+      parameters:
+        - description: Required. Name of the instance to enable the interactive serial console feature on.
+          in: path
+          name: instance
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnableInteractiveSerialConsoleRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnableInteractiveSerialConsoleResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{instance}:readSerialPortOutput":
+    get:
+      description: Read the most recent serial port output from a machine.
+      operationId: baremetalsolution.projects.locations.instances.readSerialPortOutput
+      parameters:
+        - description: Required. Name of the instance to get serial port output of.
+          in: path
+          name: instance
+          required: true
+          schema:
+            type: string
+        - description: Optional. The start byte of the serial port output to return.
+          in: query
+          name: startByte
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SerialPortOutput"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1alpha1/{instance}:resetInstance":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Perform an ungraceful, hard reset on a machine (equivalent to physically turning power off and then back on).
+      operationId: baremetalsolution.projects.locations.instances.resetInstance
+      parameters:
+        - description: Required. Name of the instance to reset.
+          in: path
+          name: instance
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetInstanceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResetInstanceResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{name}":
+    delete:
+      description: Delete an SSH key registration in the specified project.
+      operationId: baremetalsolution.projects.sshKeys.delete
+      parameters:
+        - description: Required. The name of the SSH key to delete.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    get:
+      description: Get details for a specific snapshot schedule policy
+      operationId: baremetalsolution.projects.snapshotSchedulePolicies.get
+      parameters:
+        - description: Required. The name of the policy to retrieve.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SnapshotSchedulePolicy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Update a SnapshotSchedulePolicy.
+      operationId: baremetalsolution.projects.snapshotSchedulePolicies.patch
+      parameters:
+        - description: Output only. The name of this SnapshotSchedulePolicy.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The list of fields to update.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SnapshotSchedulePolicy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SnapshotSchedulePolicy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{name}:restore":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Restore a VolumeSnapshot.
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.restore
+      parameters:
+        - description: Required. Name of the VolumeSnapshot to restore.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RestoreVolumeSnapshotRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{parent}/instances":
+    get:
+      description: List Instances (physical servers).
+      operationId: baremetalsolution.projects.locations.instances.list
+      parameters:
+        - description: Required. The location to list Instances in.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListInstancesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1alpha1/{parent}/luns":
+    get:
+      description: List Luns.
+      operationId: baremetalsolution.projects.locations.luns.list
+      parameters:
+        - description: Required. The location to list Luns in.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLunsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1alpha1/{parent}/provisioningQuotas":
     get:
       description: List the budget details to provision resources on a given project.
@@ -57,6 +456,291 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListProvisioningQuotasResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1alpha1/{parent}/snapshotSchedulePolicies":
+    get:
+      description: List the snapshot schedule policies for the specified project
+      operationId: baremetalsolution.projects.snapshotSchedulePolicies.list
+      parameters:
+        - description: Required. The parent project containing the Snapshot Schedule Policies.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSnapshotSchedulePoliciesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a SnapshotSchedulePolicy.
+      operationId: baremetalsolution.projects.snapshotSchedulePolicies.create
+      parameters:
+        - description: Required. The parent project containing the SnapshotSchedulePolicy.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Snapshot policy ID
+          in: query
+          name: snapshotSchedulePolicyId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SnapshotSchedulePolicy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SnapshotSchedulePolicy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{parent}/snapshots":
+    get:
+      description: List the Snapshots for the specified Volume
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.list
+      parameters:
+        - description: Required. The Volume containing the VolumeSnapshots.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListVolumeSnapshotsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create snapshot of the specified Volume
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.create
+      parameters:
+        - description: Required. The Volume containing the VolumeSnapshots.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VolumeSnapshot"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VolumeSnapshot"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{parent}/sshKeys":
+    get:
+      description: List the public SSH keys registered for the specified project.
+      operationId: baremetalsolution.projects.sshKeys.list
+      parameters:
+        - description: Required. The parent project containing the SSH keys.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSSHKeysResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a new SSH key registration in the specified project.
+      operationId: baremetalsolution.projects.sshKeys.create
+      parameters:
+        - description: Required. The parent project containing the SSH keys.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. The ID to use for the key, which will become the final component of the key's resource name. This value should be match the regex: [a-zA-Z0-9@.\\-_]{1,64}"
+          in: query
+          name: sshKeyId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SSHKey"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SSHKey"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{parent}/volumes":
+    get:
+      description: List the volumes for the specified project
+      operationId: baremetalsolution.projects.locations.volumes.list
+      parameters:
+        - description: Required. The location to list Volumes in.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListVolumesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -117,6 +801,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProvisioningConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{volume}:setVolumeSnapshotSchedulePolicy":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Sets the specified snapshot schedule policy on the specified volume.
+      operationId: baremetalsolution.projects.locations.volumes.setVolumeSnapshotSchedulePolicy
+      parameters:
+        - description: Required. Name of the volume to set snapshot schedule policy on.
+          in: path
+          name: volume
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetVolumeSnapshotSchedulePolicyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SetVolumeSnapshotSchedulePolicyResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -201,6 +927,60 @@ components:
       schema:
         type: string
   schemas:
+    DisableInteractiveSerialConsoleRequest:
+      description: Request for DisableInteractiveSerialConsole.
+      properties: {}
+      type: object
+    DisableInteractiveSerialConsoleResponse:
+      description: Response for DisableInteractiveSerialConsole.
+      properties: {}
+      type: object
+    Empty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      properties: {}
+      type: object
+    EnableInteractiveSerialConsoleRequest:
+      description: Request for EnableInteractiveSerialConsole.
+      properties: {}
+      type: object
+    EnableInteractiveSerialConsoleResponse:
+      description: Response for EnableInteractiveSerialConsole.
+      properties: {}
+      type: object
+    Instance:
+      description: An Instance.
+      properties:
+        hyperthreadingEnabled:
+          description: Is hyperthreading enabled for this instance?
+          type: boolean
+        luns:
+          description: The Luns attached to this instance
+          items:
+            $ref: "#/components/schemas/Lun"
+          type: array
+        name:
+          description: Output only. The name of this Instance.
+          readOnly: true
+          type: string
+        scheduledPowerResetTime:
+          description: The scheduled power reset time.
+          format: google-datetime
+          type: string
+        sshEnabled:
+          description: Is SSH enabled for this instance?
+          type: boolean
+        state:
+          description: The state of this Instance.
+          enum:
+            - STATE_UNSPECIFIED
+            - RESERVED
+            - PROVISIONING
+            - PROVISIONED
+            - DEPROVISIONING
+            - DEPROVISIONED
+            - UPDATING
+          type: string
+      type: object
     InstanceConfig:
       description: Configuration parameters for a new instance.
       properties:
@@ -243,6 +1023,30 @@ components:
           description: Location where the quota applies.
           type: string
       type: object
+    ListInstancesResponse:
+      description: Response for ListInstances.
+      properties:
+        instances:
+          description: The Instances in this project.
+          items:
+            $ref: "#/components/schemas/Instance"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+      type: object
+    ListLunsResponse:
+      description: Response for ListLuns.
+      properties:
+        luns:
+          description: The Luns in this project.
+          items:
+            $ref: "#/components/schemas/Lun"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+      type: object
     ListProvisioningQuotasResponse:
       description: Response for ListProvisioningQuotas.
       properties:
@@ -254,6 +1058,95 @@ components:
           items:
             $ref: "#/components/schemas/ProvisioningQuota"
           type: array
+      type: object
+    ListSSHKeysResponse:
+      description: Response for ListSSHKeys.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        sshKeys:
+          description: The SSH keys registered in this project.
+          items:
+            $ref: "#/components/schemas/SSHKey"
+          type: array
+      type: object
+    ListSnapshotSchedulePoliciesResponse:
+      description: Response for ListSnapshotSchedulePolicies.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        snapshotSchedulePolicies:
+          description: The snapshot schedule policies registered in this project.
+          items:
+            $ref: "#/components/schemas/SnapshotSchedulePolicy"
+          type: array
+      type: object
+    ListVolumeSnapshotsResponse:
+      description: Response for ListVolumeSnapshots.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        volumeSnapshots:
+          description: The VolumeSnapshots for the volume.
+          items:
+            $ref: "#/components/schemas/VolumeSnapshot"
+          type: array
+      type: object
+    ListVolumesResponse:
+      description: Response for ListVolumes.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        volumes:
+          description: The volumes registered in this project.
+          items:
+            $ref: "#/components/schemas/Volume"
+          type: array
+      type: object
+    Lun:
+      description: A storage Lun.
+      properties:
+        isBoot:
+          description: Whether this Lun is a boot Lun.
+          type: boolean
+        multiprotocolType:
+          description: The multiprotocol type of this Lun.
+          type: string
+        name:
+          description: Output only. The name of this Lun.
+          readOnly: true
+          type: string
+        remoteVolume:
+          $ref: "#/components/schemas/Volume"
+          description: The storage volume that this Lun is attached to.
+        serialNumber:
+          description: The serial number of this Lun
+          type: string
+        shareable:
+          description: Whether this Lun is allowed to be shared between multiple physical servers.
+          type: boolean
+        sizeGb:
+          description: The size of this Lun, in gigabytes.
+          format: int64
+          type: string
+        state:
+          description: The state of this Lun.
+          enum:
+            - STATE_UNSPECIFIED
+            - RESERVED
+            - PROVISIONING
+            - PROVISIONED
+            - DEPROVISIONING
+            - DEPROVISIONED
+            - UPDATING
+          type: string
+        wwid:
+          description: World Wide IDentifier of this Lun
+          type: string
       type: object
     LunRange:
       description: A LUN range.
@@ -381,12 +1274,93 @@ components:
           $ref: "#/components/schemas/InstanceQuota"
           description: Instance quota.
       type: object
+    ResetInstanceRequest:
+      description: Request for ResetInstance.
+      properties: {}
+      type: object
+    ResetInstanceResponse:
+      description: Response for ResetInstance.
+      properties: {}
+      type: object
+    RestoreVolumeSnapshotRequest:
+      description: Request for RestoreVolumeSnapshot.
+      properties: {}
+      type: object
+    SSHKey:
+      description: A public SSH key registered in the project. Used primarily for the interactive serial console feature.
+      properties:
+        name:
+          description: Output only. The name of this SSH key.
+          readOnly: true
+          type: string
+        publicKey:
+          description: The public SSH key.
+          type: string
+      type: object
+    Schedule:
+      description: A snapshot schedule.
+      properties:
+        crontabSpec:
+          description: The crontab-like specification that this Schedule will use to take snapshots.
+          type: string
+        prefix:
+          description: A string to prefix names of snapshots created under this Schedule.
+          type: string
+        retentionCount:
+          description: The maximum number of snapshots to retain under this Schedule.
+          format: int32
+          type: integer
+      type: object
+    SerialPortOutput:
+      description: Response for ReadSerialPortOutput.
+      properties:
+        contents:
+          description: The serial port output.
+          type: string
+        nextStartByte:
+          description: The byte index to use in a subsequent call to ReadSerialPortOutput to get more output.
+          format: int64
+          type: string
+        start:
+          description: The start byte index of the included contents.
+          format: int64
+          type: string
+      type: object
+    SetVolumeSnapshotSchedulePolicyRequest:
+      description: Request for SetVolumeSnapshotSchedulePolicy.
+      properties:
+        snapshotSchedulePolicy:
+          description: Required. The name of the policy to set on the volume.
+          type: string
+      type: object
+    SetVolumeSnapshotSchedulePolicyResponse:
+      description: Response for SetVolumeSnapshotSchedulePolicy.
+      properties: {}
+      type: object
+    SnapshotSchedulePolicy:
+      description: A snapshot schedule policy.
+      properties:
+        description:
+          description: The description of this SnapshotSchedulePolicy.
+          type: string
+        name:
+          description: Output only. The name of this SnapshotSchedulePolicy.
+          readOnly: true
+          type: string
+        schedules:
+          description: The snapshot Schedules contained in this Policy. At most 5 Schedules may be specified.
+          items:
+            $ref: "#/components/schemas/Schedule"
+          type: array
+        volumes:
+          description: The names of the Volumes this policy is associated with.
+          items:
+            type: string
+          type: array
+      type: object
     SubmitProvisioningConfigRequest:
       description: Request for SubmitProvisioningConfig.
       properties:
-        email:
-          description: Optional. Email provided to send a confirmation with provisioning config to.
-          type: string
         provisioningConfig:
           $ref: "#/components/schemas/ProvisioningConfig"
           description: Required. The ProvisioningConfig to submit.
@@ -399,6 +1373,65 @@ components:
           type: string
         pairingKey:
           description: Attachment pairing key.
+          type: string
+      type: object
+    Volume:
+      description: Volume registered in the project.
+      properties:
+        autoGrownSizeGb:
+          description: The size, in GB, that this Volume has expanded as a result of an auto grow policy.
+          format: int64
+          type: string
+        currentSizeGb:
+          description: The current size of this Volume, in GB, including space reserved for snapshots. This size may be different than the requested size if the Volume has been configured with auto grow or auto shrink.
+          format: int64
+          type: string
+        name:
+          description: Output only. The name of this Volume.
+          readOnly: true
+          type: string
+        remainingSpaceGb:
+          description: The space remaining in the Volume for new LUNs, in GB, excluding space reserved for snapshots.
+          format: int64
+          type: string
+        requestedSizeGb:
+          description: The requested size of this Volume, in GB.
+          format: int64
+          type: string
+        snapshotAutoDeleteBehavior:
+          description: The behavior to use when snapshot reserved space is full.
+          enum:
+            - SNAPSHOT_AUTO_DELETE_BEHAVIOR_UNSPECIFIED
+            - DISABLE
+            - OLDEST
+            - NEWEST
+          type: string
+        snapshotReservedSpacePercent:
+          description: The percent of space on this Volume reserved for snapshots.
+          format: int32
+          type: integer
+        snapshotReservedSpaceRemainingGb:
+          description: The amount, in GB, of space available in this Volume's reserved snapshot space.
+          format: int64
+          type: string
+        snapshotReservedSpaceUsedPercent:
+          description: The percent of reserved snapshot space on this Volume that is actually used by snapshot copies. This may be higher than 100% if snapshot copies are occupying more space than has been reserved on the Volume.
+          format: int32
+          type: integer
+        state:
+          description: The state of this Volume.
+          enum:
+            - STATE_UNSPECIFIED
+            - PROVISIONED
+            - DEPROVISIONING_REQUESTED
+            - DEPROVISIONING_COOLOFF
+          type: string
+        type:
+          description: The type of this Volume.
+          enum:
+            - TYPE_UNSPECIFIED
+            - FLASH
+            - DISK
           type: string
       type: object
     VolumeConfig:
@@ -448,6 +1481,32 @@ components:
           type: string
         userNote:
           description: User note field, it can be used by customers to add additional information for the BMS Ops team (b/194021617).
+          type: string
+      type: object
+    VolumeSnapshot:
+      description: VolumeSnapshot registered for given Volume
+      properties:
+        creationTime:
+          description: The creation time of this Snapshot.
+          format: google-datetime
+          type: string
+        description:
+          description: The description of this Snapshot.
+          type: string
+        name:
+          description: Output only. The name of this Snapshot.
+          readOnly: true
+          type: string
+        sizeBytes:
+          description: The real size of this Snapshot, in bytes.
+          format: int64
+          type: string
+        state:
+          description: The state of this Snapshot.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
           type: string
       type: object
   securitySchemes:

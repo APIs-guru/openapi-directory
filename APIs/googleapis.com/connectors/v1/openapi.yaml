@@ -25,7 +25,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: connectors
 externalDocs:
-  url: https://cloud.devsite.corp.google.com/apigee/docs/api-platform/connectors/about-connectors
+  url: https://cloud.google.com/apigee/docs/api-platform/connectors/about-connectors
 tags:
   - name: projects
 paths:
@@ -961,6 +961,9 @@ components:
         required:
           description: Flag represents that this `ConfigVariable` must be provided for a connection.
           type: boolean
+        roleGrant:
+          $ref: "#/components/schemas/RoleGrant"
+          description: Role grant configuration for the config variable.
         validationRegex:
           description: Regular expression in RE2 syntax used for validating the `value` of a `ConfigVariable`.
           type: string
@@ -1176,8 +1179,14 @@ components:
           type: string
         roleGrant:
           $ref: "#/components/schemas/RoleGrant"
-          description: Output only. Role grant configuration for this config variable.
+          description: Output only. Role grant configuration for this config variable. It will be DEPRECATED soon.
           readOnly: true
+        roleGrants:
+          description: Output only. Role grant configurations for this connector version.
+          items:
+            $ref: "#/components/schemas/RoleGrant"
+          readOnly: true
+          type: array
         supportedRuntimeFeatures:
           $ref: "#/components/schemas/SupportedRuntimeFeatures"
           description: Output only. Information about the runtime features supported by the Connector.
@@ -1624,7 +1633,7 @@ components:
             $ref: "#/components/schemas/AuditConfig"
           type: array
         bindings:
-          description: Associates a list of `members` to a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one member.
+          description: Associates a list of `members` to a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one member. The `bindings` in a `Policy` can refer to up to 1,500 members; up to 250 of these members can be Google groups. Each occurrence of a member counts towards these limits. For example, if the `bindings` grant 50 different roles to `user:alice@example.com`, and not to any other member, then you can add another 1,450 members to the `bindings` in the `Policy`.
           items:
             $ref: "#/components/schemas/Binding"
           type: array

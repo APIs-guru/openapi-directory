@@ -875,7 +875,7 @@ paths:
       description: Performs a search. This feature is only available for users who have Retail Search enabled. Please submit a form [here](https://cloud.google.com/contact) to contact cloud sales if you are interested in using Retail Search.
       operationId: retail.projects.locations.catalogs.placements.search
       parameters:
-        - description: "Required. The resource name of the search engine placement, such as `projects/*/locations/global/catalogs/default_catalog/placements/default_search`. This field is used to identify the set of models that will be used to make the search. We currently support one placement with the following ID: * `default_search`."
+        - description: Required. The resource name of the search engine placement, such as `projects/*/locations/global/catalogs/default_catalog/placements/default_search`. This field is used to identify the serving configuration name and the set of models that will be used to make the search.
           in: path
           name: placement
           required: true
@@ -1185,7 +1185,7 @@ components:
           type: string
       type: object
     GoogleCloudRetailV2AddFulfillmentPlacesResponse:
-      description: Response of the RemoveFulfillmentPlacesRequest. Currently empty because there is no meaningful response populated from the AddFulfillmentPlaces method.
+      description: Response of the AddFulfillmentPlacesRequest. Currently empty because there is no meaningful response populated from the AddFulfillmentPlaces method.
       properties: {}
       type: object
     GoogleCloudRetailV2Audience:
@@ -1957,7 +1957,7 @@ components:
       properties:
         boostSpec:
           $ref: "#/components/schemas/GoogleCloudRetailV2SearchRequestBoostSpec"
-          description: Boost specification to boost certain products. See more details at this [user guide](https://cloud.google.com/retail/docs/boosting).
+          description: Boost specification to boost certain products. See more details at this [user guide](https://cloud.google.com/retail/docs/boosting). Notice that if both ServingConfig.boost_control_ids and [SearchRequest.boost_spec] are set, the boost conditions from both places are evaluated. If a search request matches multiple boost conditions, the final boost score is equal to the sum of the boost scores from all matched boost conditions.
         branch:
           description: The branch resource name, such as `projects/*/locations/global/catalogs/default_catalog/branches/0`. Use "default_branch" as the branch ID or leave this field empty, to search products under the default branch.
           type: string
@@ -2004,7 +2004,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudRetailV2UserInfo"
           description: User information.
         variantRollupKeys:
-          description: 'The keys to fetch and rollup the matching variant Products attributes. The attributes from all the matching variant Products are merged and de-duplicated. Notice that rollup variant Products attributes will lead to extra query latency. Maximum number of keys is 10. For FulfillmentInfo, a fulfillment type and a fulfillment ID must be provided in the format of "fulfillmentType.fulfillmentId". E.g., in "pickupInStore.store123", "pickupInStore" is fulfillment type and "store123" is the store ID. Supported keys are: * colorFamilies * price * originalPrice * discount * attributes.key, where key is any key in the Product.attributes map. * pickupInStore.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "pickup-in-store". * shipToStore.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "ship-to-store". * sameDayDelivery.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "same-day-delivery". * nextDayDelivery.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "next-day-delivery". * customFulfillment1.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "custom-type-1". * customFulfillment2.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "custom-type-2". * customFulfillment3.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "custom-type-3". * customFulfillment4.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "custom-type-4". * customFulfillment5.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "custom-type-5". If this field is set to an invalid value other than these, an INVALID_ARGUMENT error is returned.'
+          description: 'The keys to fetch and rollup the matching variant Products attributes. The attributes from all the matching variant Products are merged and de-duplicated. Notice that rollup variant Products attributes will lead to extra query latency. Maximum number of keys is 10. For FulfillmentInfo, a fulfillment type and a fulfillment ID must be provided in the format of "fulfillmentType.fulfillmentId". E.g., in "pickupInStore.store123", "pickupInStore" is fulfillment type and "store123" is the store ID. Supported keys are: * colorFamilies * price * originalPrice * discount * inventory(place_id,price) * attributes.key, where key is any key in the Product.attributes map. * pickupInStore.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "pickup-in-store". * shipToStore.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "ship-to-store". * sameDayDelivery.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "same-day-delivery". * nextDayDelivery.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "next-day-delivery". * customFulfillment1.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "custom-type-1". * customFulfillment2.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "custom-type-2". * customFulfillment3.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "custom-type-3". * customFulfillment4.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "custom-type-4". * customFulfillment5.id, where id is any FulfillmentInfo.place_ids for FulfillmentInfo.type "custom-type-5". If this field is set to an invalid value other than these, an INVALID_ARGUMENT error is returned.'
           items:
             type: string
           type: array
@@ -2076,7 +2076,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudRetailV2Interval"
           type: array
         key:
-          description: 'Required. Supported textual and numerical facet keys in Product object, over which the facet values are computed. Facet key is case-sensitive. Allowed facet keys when FacetKey.query is not specified: * textual_field = * "brands" * "categories" * "genders" * "ageGroups" * "availability" * "colorFamilies" * "colors" * "sizes" * "materials" * "patterns" * "conditions" * "attributes.key" * "pickupInStore" * "shipToStore" * "sameDayDelivery" * "nextDayDelivery" * "customFulfillment1" * "customFulfillment2" * "customFulfillment3" * "customFulfillment4" * "customFulfillment5" * numerical_field = * "price" * "discount" * "rating" * "ratingCount" * "attributes.key"'
+          description: 'Required. Supported textual and numerical facet keys in Product object, over which the facet values are computed. Facet key is case-sensitive. Allowed facet keys when FacetKey.query is not specified: * textual_field = * "brands" * "categories" * "genders" * "ageGroups" * "availability" * "colorFamilies" * "colors" * "sizes" * "materials" * "patterns" * "conditions" * "attributes.key" * "pickupInStore" * "shipToStore" * "sameDayDelivery" * "nextDayDelivery" * "customFulfillment1" * "customFulfillment2" * "customFulfillment3" * "customFulfillment4" * "customFulfillment5" * numerical_field = * "price" * "discount" * "rating" * "ratingCount" * "attributes.key" * "inventory(place_id,price)"'
           type: string
         orderBy:
           description: 'The order in which Facet.values are returned. Allowed values are: * "count desc", which means order by Facet.FacetValue.count descending. * "value desc", which means order by Facet.FacetValue.value descending. Only applies to textual facets. If not set, textual values are sorted in [natural order](https://en.wikipedia.org/wiki/Natural_sort_order); numerical intervals are sorted in the order given by FacetSpec.FacetKey.intervals; FulfillmentInfo.place_ids are sorted in the order given by FacetSpec.FacetKey.restricted_values.'
@@ -2371,11 +2371,7 @@ components:
       properties: {}
       type: object
     GoogleCloudRetailV2alphaAddFulfillmentPlacesResponse:
-      description: Response of the RemoveFulfillmentPlacesRequest. Currently empty because there is no meaningful response populated from the AddFulfillmentPlaces method.
-      properties: {}
-      type: object
-    GoogleCloudRetailV2alphaEnrollSolutionMetadata:
-      description: Metadata related to the EnrollSolution method. This will be returned by the google.longrunning.Operation.metadata field.
+      description: Response of the AddFulfillmentPlacesRequest. Currently empty because there is no meaningful response populated from the AddFulfillmentPlaces method.
       properties: {}
       type: object
     GoogleCloudRetailV2alphaExportErrorsConfig:
@@ -2547,7 +2543,7 @@ components:
       properties: {}
       type: object
     GoogleCloudRetailV2betaAddFulfillmentPlacesResponse:
-      description: Response of the RemoveFulfillmentPlacesRequest. Currently empty because there is no meaningful response populated from the AddFulfillmentPlaces method.
+      description: Response of the AddFulfillmentPlacesRequest. Currently empty because there is no meaningful response populated from the AddFulfillmentPlaces method.
       properties: {}
       type: object
     GoogleCloudRetailV2betaExportErrorsConfig:

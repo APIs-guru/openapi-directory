@@ -61,7 +61,7 @@ paths:
       description: Gets details of a single Peering.
       operationId: managedidentities.projects.locations.global.peerings.get
       parameters:
-        - description: "Required. Peering resource name using the form: `projects/{project_id}/locations/global/domains/{peering_id}`"
+        - description: "Required. Peering resource name using the form: `projects/{project_id}/locations/global/peerings/{peering_id}`"
           in: path
           name: name
           required: true
@@ -512,6 +512,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1alpha1/{name}:restore":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: RestoreDomain restores domain backup mentioned in the RestoreDomainRequest
+      operationId: managedidentities.projects.locations.global.domains.restore
+      parameters:
+        - description: Required. resource name for the domain to which the backup belongs
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RestoreDomainRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1alpha1/{name}:validateTrust":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -540,6 +582,97 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ValidateTrustRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{parent}/backups":
+    get:
+      description: Lists Backup in a given project.
+      operationId: managedidentities.projects.locations.global.domains.backups.list
+      parameters:
+        - description: "Required. The domain resource name using the form: `projects/{project_id}/locations/global/domains/{domain_name}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filter specifying constraints of a list operation. For example, `backup.location ="us-west1-a"`.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Specifies the ordering of results following syntax at https://cloud.google.com/apis/design/design_patterns#sorting_order.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return. If not specified, a default value of 1000 will be used by the service. Regardless of the page_size value, the response may include a partial list and a caller should only rely on response's next_page_token to determine if there are more instances left to be queried.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListBackupsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a Backup for a domain.
+      operationId: managedidentities.projects.locations.global.domains.backups.create
+      parameters:
+        - description: "Required. The domain resource name using the form: `projects/{project_id}/locations/global/domains/{domain_name}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. Backup Id, unique name to identify the backups with the following restrictions: * Must be lowercase letters, numbers, and hyphens * Must start with a letter. * Must contain between 1-63 characters. * Must end with a number or a letter. * Must be unique within the domain."
+          in: query
+          name: backupId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Backup"
       responses:
         "200":
           content:
@@ -1000,6 +1133,51 @@ components:
         trust:
           $ref: "#/components/schemas/Trust"
           description: The domain trust resource.
+      type: object
+    Backup:
+      description: Represents a Managed Microsoft Identities backup.
+      properties:
+        createTime:
+          description: Output only. The time the backups was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Resource labels to represent user provided metadata.
+          type: object
+        name:
+          description: Output only. The unique name of the Backup in the form of projects/{project_id}/locations/global/domains/{domain_name}/backups/{name}
+          readOnly: true
+          type: string
+        state:
+          description: Output only. The current state of the backup.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
+            - FAILED
+            - DELETING
+          readOnly: true
+          type: string
+        statusMessage:
+          description: Output only. Additional information about the current status of this backup, if available.
+          readOnly: true
+          type: string
+        type:
+          description: Output only. Indicates whether it’s an on-demand backup or scheduled.
+          enum:
+            - TYPE_UNSPECIFIED
+            - ON_DEMAND
+            - SCHEDULED
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Last update time.
+          format: google-datetime
+          readOnly: true
+          type: string
       type: object
     Binding:
       description: Associates `members` with a `role`.
@@ -1463,6 +1641,23 @@ components:
           readOnly: true
           type: string
       type: object
+    ListBackupsResponse:
+      description: ListBackupsResponse is the response message for ListBackups method.
+      properties:
+        backups:
+          description: A list of Cloud AD backups in the domain.
+          items:
+            $ref: "#/components/schemas/Backup"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
     ListDomainsResponse:
       properties:
         domains:
@@ -1707,7 +1902,7 @@ components:
       description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
       properties:
         bindings:
-          description: Associates a list of `members` to a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one member.
+          description: Associates a list of `members` to a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one member. The `bindings` in a `Policy` can refer to up to 1,500 members; up to 250 of these members can be Google groups. Each occurrence of a member counts towards these limits. For example, if the `bindings` grant 50 different roles to `user:alice@example.com`, and not to any other member, then you can add another 1,450 members to the `bindings` in the `Policy`.
           items:
             $ref: "#/components/schemas/Binding"
           type: array
@@ -1733,6 +1928,13 @@ components:
       properties:
         password:
           description: A random password. See admin for more information.
+          type: string
+      type: object
+    RestoreDomainRequest:
+      description: RestoreDomainRequest is the request received by RestoreDomain rpc
+      properties:
+        backupId:
+          description: Required. ID of the backup to be restored
           type: string
       type: object
     SQLIntegration:
