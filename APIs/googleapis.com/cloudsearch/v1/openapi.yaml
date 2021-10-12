@@ -39,6 +39,7 @@ tags:
   - name: query
   - name: settings
   - name: stats
+  - name: v1
 paths:
   "/v1/debug/{name}/items:searchByViewUrl":
     parameters:
@@ -2143,6 +2144,49 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1:initializeCustomer:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Initializes the customer. **Note:** This API requires an admin account to execute.
+      operationId: cloudsearch.initializeCustomer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InitializeCustomerRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud_search
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud_search
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud_search.settings
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud_search.settings
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud_search.settings.indexing
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud_search.settings.indexing
+      tags:
+        - v1
 components:
   parameters:
     _.xgafv:
@@ -2828,6 +2872,10 @@ components:
             - SYNCHRONOUS
             - ASYNCHRONOUS
           type: string
+      type: object
+    InitializeCustomerRequest:
+      description: Request message for `InitializeCustomer` method.
+      properties: {}
       type: object
     IntegerOperatorOptions:
       description: Used to provide a search operator for integer properties. This is optional. Search operators let users restrict the query to specific fields relevant to the type of item being searched.

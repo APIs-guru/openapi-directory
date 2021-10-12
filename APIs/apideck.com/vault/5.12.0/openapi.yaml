@@ -1462,7 +1462,8 @@ paths:
                   sandbox_mode: false,
                   isolation_mode: false,
                   session_length: '30m',
-                  show_logs: true
+                  show_logs: true,
+                  show_suggestions: true
                 },
                 theme: {
                   favicon: 'https://res.cloudinary.com/apideck/icons/intercom',
@@ -2795,22 +2796,33 @@ components:
           properties:
             hide_resource_settings:
               default: false
+              title: Hide resource settings
               type: boolean
             isolation_mode:
               default: false
-              description: Forces Vault to run in isolation mode, meaning it only shows the connection settings and hides the navigation items.
+              description: Configure [Vault](/apis/vault/reference#section/Get-Started) to run in isolation mode, meaning it only shows the connection settings and hides the navigation items.
+              title: Isolation mode
               type: boolean
             sandbox_mode:
               default: false
-              description: Forces Vault to shows a banner informing the current consumer is in a test environment.
+              description: Configure [Vault](/apis/vault/reference#section/Get-Started) to show a banner informing the logged in user is in a test environment.
+              title: Sandbox mode
               type: boolean
             session_length:
               default: 1h
               description: The duration of time the session is valid for (maximum 1 week).
               example: 30m
+              title: Session Length
               type: string
             show_logs:
               default: true
+              description: Configure [Vault](/apis/vault/reference#section/Get-Started) to show the logs page. Defaults to `true`.
+              title: Show logs
+              type: boolean
+            show_suggestions:
+              default: true
+              description: Configure [Vault](/apis/vault/reference#section/Get-Started) to show the suggestions page. Defaults to `true`.
+              title: Show suggestions
               type: boolean
           type: object
           x-graphql-type-name: SessionSettings

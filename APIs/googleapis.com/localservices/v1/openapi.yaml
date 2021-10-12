@@ -334,6 +334,26 @@ components:
           description: Provider id (listed in aggregator system) which maps to a account id in GLS system.
           type: string
       type: object
+    GoogleAdsHomeservicesLocalservicesV1BookingLead:
+      description: Container for booking lead specific information.
+      properties:
+        bookingAppointmentTimestamp:
+          description: Timestamp of when service is provided by advertiser.
+          format: google-datetime
+          type: string
+        consumerEmail:
+          description: Consumer email associated with the booking lead.
+          type: string
+        consumerPhoneNumber:
+          description: Consumer phone number associated with the booking lead.
+          type: string
+        customerName:
+          description: Name of the customer who created the lead.
+          type: string
+        jobType:
+          description: The job type of the specified lead.
+          type: string
+      type: object
     GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport:
       description: A Detailed Lead Report of a lead identified by their lead id and contains consumer, account, monetization, and lead data.
       properties:
@@ -344,6 +364,9 @@ components:
         aggregatorInfo:
           $ref: "#/components/schemas/GoogleAdsHomeservicesLocalservicesV1AggregatorInfo"
           description: Aggregator specific information related to the lead.
+        bookingLead:
+          $ref: "#/components/schemas/GoogleAdsHomeservicesLocalservicesV1BookingLead"
+          description: More information associated to only booking leads.
         businessName:
           description: Business name associated to the account.
           type: string
@@ -384,6 +407,7 @@ components:
             - LEAD_TYPE_UNSPECIFIED
             - MESSAGE
             - PHONE_CALL
+            - BOOKING
           type: string
         messageLead:
           $ref: "#/components/schemas/GoogleAdsHomeservicesLocalservicesV1MessageLead"

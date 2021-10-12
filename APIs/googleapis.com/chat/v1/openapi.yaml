@@ -165,7 +165,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Required. The field paths to be updated, comma separated if there are multiple. Currently supported field paths: * text * cards"
+        - description: "Required. The field paths to be updated, comma separated if there are multiple. Currently supported field paths: * text * cards * gsuite_message_integration_render_data * attachment"
           in: query
           name: updateMask
           schema:

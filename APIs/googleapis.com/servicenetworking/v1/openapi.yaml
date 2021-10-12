@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Service Networking API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://servicenetworking.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: servicenetworking
 externalDocs:
@@ -1109,6 +1107,9 @@ components:
           type: string
         privateIpv6GoogleAccess:
           description: Optional. The private IPv6 google access type for the VMs in this subnet. For information about the access types that can be set using this field, see [subnetwork](https://cloud.google.com/compute/docs/reference/rest/v1/subnetworks) in the Compute API documentation.
+          type: string
+        purpose:
+          description: Optional. Defines the purpose field of the subnet, e.g. 'PRIVATE_SERVICE_CONNECT'. For information about the purposes that can be set using this field, see [subnetwork](https://cloud.google.com/compute/docs/reference/rest/v1/subnetworks) in the Compute API documentation.
           type: string
         region:
           description: Required. The name of a [region](/compute/docs/regions-zones) for the subnet, such `europe-west1`.
@@ -2683,5 +2684,3 @@ components:
             https://www.googleapis.com/auth/service.management: Manage your Google API service configuration
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

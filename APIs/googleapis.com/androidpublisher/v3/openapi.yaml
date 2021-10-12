@@ -31,6 +31,7 @@ externalDocs:
   url: https://developers.google.com/android-publisher
 tags:
   - name: edits
+  - name: grants
   - name: inappproducts
   - name: internalappsharingartifacts
   - name: monetization
@@ -38,6 +39,7 @@ tags:
   - name: purchases
   - name: reviews
   - name: systemapks
+  - name: users
 paths:
   "/androidpublisher/v3/applications/internalappsharing/{packageName}/artifacts/apk":
     parameters:
@@ -2771,6 +2773,191 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/androidpublisher/v3/{name}":
+    delete:
+      description: Removes all access for the user to the given developer account.
+      operationId: androidpublisher.users.delete
+      parameters:
+        - description: "Required. The name of the user to delete. Format: developers/{developer}/users/{email}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - users
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates access for the user to the developer account.
+      operationId: androidpublisher.users.patch
+      parameters:
+        - description: Required. Resource name for this user, following the pattern "developers/{developer}/users/{email}".
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Optional. The list of fields to be updated.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - users
+  "/androidpublisher/v3/{parent}/grants":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Grant access for a user to the given package.
+      operationId: androidpublisher.grants.create
+      parameters:
+        - description: "Required. The user which needs permission. Format: developers/{developer}/users/{user}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grant"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grant"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - grants
+  "/androidpublisher/v3/{parent}/users":
+    get:
+      description: Lists all users with access to a developer account.
+      operationId: androidpublisher.users.list
+      parameters:
+        - description: "Required. The developer account to fetch users from. Format: developers/{developer}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of results to return. This must be set to -1 to disable pagination.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token received from a previous call to this method, in order to retrieve further results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListUsersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - users
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Grant access for a user to the given developer account.
+      operationId: androidpublisher.users.create
+      parameters:
+        - description: "Required. The developer account to add the user to. Format: developers/{developer}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - users
 components:
   parameters:
     _.xgafv:
@@ -3180,6 +3367,33 @@ components:
           description: The version name of this APK.
           type: string
       type: object
+    Grant:
+      description: An access grant resource.
+      properties:
+        appLevelPermissions:
+          description: The permissions granted to the user for this app.
+          items:
+            enum:
+              - APP_LEVEL_PERMISSION_UNSPECIFIED
+              - CAN_ACCESS_APP
+              - CAN_VIEW_FINANCIAL_DATA
+              - CAN_MANAGE_PERMISSIONS
+              - CAN_REPLY_TO_REVIEWS
+              - CAN_MANAGE_PUBLIC_APKS
+              - CAN_MANAGE_TRACK_APKS
+              - CAN_MANAGE_TRACK_USERS
+              - CAN_MANAGE_PUBLIC_LISTING
+              - CAN_MANAGE_DRAFT_APPS
+              - CAN_MANAGE_ORDERS
+            type: string
+          type: array
+        name:
+          description: Required. Resource name for this grant, following the pattern "developers/{developer}/users/{email}/grants/{package_name}".
+          type: string
+        packageName:
+          description: Immutable. The package name of the app.
+          type: string
+      type: object
     Image:
       description: An uploaded image. The resource for ImagesService.
       properties:
@@ -3333,6 +3547,18 @@ components:
         introductoryPricePeriod:
           description: Introductory price period, specified in ISO 8601 format. Common values are (but not limited to) "P1W" (one week), "P1M" (one month), "P3M" (three months), "P6M" (six months), and "P1Y" (one year).
           type: string
+      type: object
+    ListUsersResponse:
+      description: A response containing one or more users with access to an account.
+      properties:
+        nextPageToken:
+          description: A token to pass to subsequent calls in order to retrieve subsequent results. This will not be set if there are no more results to return.
+          type: string
+        users:
+          description: The resulting users.
+          items:
+            $ref: "#/components/schemas/User"
+          type: array
       type: object
     Listing:
       description: A localized store listing. The resource for ListingsService.
@@ -3786,6 +4012,61 @@ components:
           items:
             $ref: "#/components/schemas/Track"
           type: array
+      type: object
+    User:
+      description: A user resource.
+      properties:
+        accessState:
+          description: Output only. The state of the user's access to the Play Console.
+          enum:
+            - ACCESS_STATE_UNSPECIFIED
+            - INVITED
+            - INVITATION_EXPIRED
+            - ACCESS_GRANTED
+            - ACCESS_EXPIRED
+          readOnly: true
+          type: string
+        developerAccountPermissions:
+          description: Permissions for the user which apply across the developer account.
+          items:
+            enum:
+              - DEVELOPER_LEVEL_PERMISSION_UNSPECIFIED
+              - CAN_SEE_ALL_APPS
+              - CAN_VIEW_FINANCIAL_DATA_GLOBAL
+              - CAN_MANAGE_PERMISSIONS_GLOBAL
+              - CAN_EDIT_GAMES_GLOBAL
+              - CAN_PUBLISH_GAMES_GLOBAL
+              - CAN_REPLY_TO_REVIEWS_GLOBAL
+              - CAN_MANAGE_PUBLIC_APKS_GLOBAL
+              - CAN_MANAGE_TRACK_APKS_GLOBAL
+              - CAN_MANAGE_TRACK_USERS_GLOBAL
+              - CAN_MANAGE_PUBLIC_LISTING_GLOBAL
+              - CAN_MANAGE_DRAFT_APPS_GLOBAL
+              - CAN_CREATE_MANAGED_PLAY_APPS_GLOBAL
+              - CAN_CHANGE_MANAGED_PLAY_SETTING_GLOBAL
+              - CAN_MANAGE_ORDERS_GLOBAL
+            type: string
+          type: array
+        email:
+          description: Immutable. The user's email address.
+          type: string
+        expirationTime:
+          description: The time at which the user's access expires, if set.
+          format: google-datetime
+          type: string
+        grants:
+          description: Output only. Per-app permissions for the user.
+          items:
+            $ref: "#/components/schemas/Grant"
+          readOnly: true
+          type: array
+        name:
+          description: Required. Resource name for this user, following the pattern "developers/{developer}/users/{email}".
+          type: string
+        partial:
+          description: Output only. Whether there are more permissions for the user that are not represented here.
+          readOnly: true
+          type: boolean
       type: object
     UserComment:
       description: User entry from conversation between user and developer.
