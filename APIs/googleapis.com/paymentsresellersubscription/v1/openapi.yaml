@@ -149,7 +149,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Used by partners to extend a subscription service for their customers. It should be called directly by the partner using service accounts.
+      description: Used by partners to extend a subscription service for their customers on an ongoing basis for the subscription to remain active and renewable. It should be called directly by the partner using service accounts.
       operationId: paymentsresellersubscription.partners.subscriptions.extend
       parameters:
         - description: Required. The name of the subscription resource to be extended. It will have the format of "partners/{partner_id}/subscriptions/{subscription_id}".
@@ -461,7 +461,7 @@ components:
     GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequest:
       properties:
         cancelImmediately:
-          description: Optional. If true, the subscription will be cancelled immediately. Otherwise, the subscription will be cancelled at the end of the current cycle, and therefore no prorated refund will be issued for the rest of the cycle.
+          description: Optional. If true, the subscription will be cancelled immediately. Otherwise, the subscription will be cancelled at renewal_time, and therefore no prorated refund will be issued for the rest of the cycle.
           type: boolean
         cancellationReason:
           description: Specifies the reason for the cancellation.

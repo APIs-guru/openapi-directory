@@ -163,7 +163,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 5.12.0
+  version: 5.12.1
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -486,19 +486,6 @@ paths:
                   plan: 'enterprise'
                 },
                 auth_type: 'oauth2',
-                form_fields: [
-                  {
-                    id: 'instance_url',
-                    label: 'Instance url',
-                    value: 'https://eu28.salesforce.com',
-                    placeholder: '',
-                    mask: false,
-                    type: 'text',
-                    required: true,
-                    disabled: false,
-                    custom_field: false
-                  }
-                ],
                 configuration: [
                   {
                     resource: 'leads',
@@ -585,19 +572,6 @@ paths:
                   plan: 'enterprise'
                 },
                 auth_type: 'oauth2',
-                form_fields: [
-                  {
-                    id: 'instance_url',
-                    label: 'Instance url',
-                    value: 'https://eu28.salesforce.com',
-                    placeholder: '',
-                    mask: false,
-                    type: 'text',
-                    required: true,
-                    disabled: false,
-                    custom_field: false
-                  }
-                ],
                 configuration: [
                   {
                     resource: 'leads',
@@ -744,19 +718,6 @@ paths:
                   plan: 'enterprise'
                 },
                 auth_type: 'oauth2',
-                form_fields: [
-                  {
-                    id: 'instance_url',
-                    label: 'Instance url',
-                    value: 'https://eu28.salesforce.com',
-                    placeholder: '',
-                    mask: false,
-                    type: 'text',
-                    required: true,
-                    disabled: false,
-                    custom_field: false
-                  }
-                ],
                 configuration: [
                   {
                     resource: 'leads',
@@ -1937,6 +1898,7 @@ components:
               value: https://eu28.salesforce.com
           items:
             $ref: "#/components/schemas/FormField"
+          readOnly: true
           type: array
         icon:
           example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
@@ -2027,6 +1989,37 @@ components:
         website:
           example: https://www.salesforce.com
           readOnly: true
+          type: string
+      type: object
+    ConnectionEvent:
+      properties:
+        entity:
+          $ref: "#/components/schemas/ConsumerConnection"
+        entity_id:
+          description: The service provider's ID of the entity that triggered this event
+          example: 123456ASDF
+          type: string
+        entity_type:
+          description: The type entity that triggered this event
+          example: Company
+          type: string
+        event_id:
+          description: Unique reference to this request event
+          example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+          type: string
+        event_type:
+          $ref: "#/components/schemas/EventType"
+        execution_attempt:
+          description: The current count this request event has been attempted
+          example: 2
+          type: number
+        occured_at:
+          description: ISO Datetime for when the original event occurred
+          example: 2021-10-01T03:14:55.419Z
+          type: string
+        service_id:
+          description: Service provider identifier
+          example: close
           type: string
       type: object
     ConnectionMetadata:
@@ -2252,6 +2245,14 @@ components:
       required:
         - ""
       type: object
+    EventType:
+      enum:
+        - vault.connection.created
+        - vault.connection.updated
+        - vault.connection.deleted
+        - vault.connection.callable
+      example: vault.connection.created
+      type: string
     FormField:
       properties:
         custom_field:
@@ -3004,61 +3005,91 @@ components:
       name: x-apideck-app-id
       type: apiKey
 x-webhooks:
-  ConnectionCreated:
+  ConnectionCallable:
     post:
-      description: Connection Created
-      operationId: connectionCreated
+      description: Connection Callable
+      operationId: connectionCallable
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/EventType"
       requestBody:
         content:
           application/json:
             schema:
-              additionalProperties: false
-              properties:
-                entity:
-                  $ref: "#/components/schemas/ConsumerConnection"
-                entity_type:
-                  example: Connection
-                  type: string
-                event_id:
-                  example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-                  type: string
-                execution_attempt:
-                  example: 2
-                  type: number
-              type: object
+              $ref: "#/components/schemas/ConnectionEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Connection Callable
+      tags:
+        - Webhook Events
+  ConnectionCreated:
+    post:
+      description: Connection Created
+      operationId: connectionCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/EventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConnectionEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
       summary: Connection Created
       tags:
-        - Connection
-      x-apideck-event-type: vault.connection.created
-  ConnectionUpdated:
+        - Webhook Events
+  ConnectionDeleted:
     post:
-      description: Connection Updated
-      operationId: connectionUpdated
+      description: Connection Deleted
+      operationId: connectionDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/EventType"
       requestBody:
         content:
           application/json:
             schema:
-              additionalProperties: false
-              properties:
-                entity:
-                  $ref: "#/components/schemas/ConsumerConnection"
-                entity_type:
-                  example: Connection
-                  type: string
-                event_id:
-                  example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-                  type: string
-                execution_attempt:
-                  example: 2
-                  type: number
-              type: object
+              $ref: "#/components/schemas/ConnectionEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Connection Deleted
+      tags:
+        - Webhook Events
+  ConnectionUpdated:
+    post:
+      description: Connection Updated
+      operationId: connectionUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/EventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConnectionEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
       summary: Connection Updated
       tags:
-        - Connection
-      x-apideck-event-type: vault.connection.updated
+        - Webhook Events

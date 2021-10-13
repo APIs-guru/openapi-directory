@@ -267,7 +267,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 5.12.0
+  version: 5.12.1
   x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -4908,6 +4908,28 @@ components:
       required:
         - email
       type: object
+    EventType:
+      enum:
+        - crm.activity.created
+        - crm.activity.updated
+        - crm.activity.deleted
+        - crm.company.created
+        - crm.company.updated
+        - crm.company.deleted
+        - crm.contact.created
+        - crm.contact.updated
+        - crm.contact.deleted
+        - crm.lead.created
+        - crm.lead.updated
+        - crm.lead.deleted
+        - crm.note.created
+        - crm.note.updated
+        - crm.note.deleted
+        - crm.opportunity.created
+        - crm.opportunity.updated
+        - crm.opportunity.deleted
+      example: crm.company.created
+      type: string
     GetActivitiesResponse:
       properties:
         data:
@@ -6579,6 +6601,38 @@ components:
         - first_name
         - last_name
         - email
+    WebhookEvent:
+      allOf:
+        - properties:
+            entity_id:
+              description: The service provider's ID of the entity that triggered this event
+              example: 123456ASDF
+              type: string
+            entity_type:
+              description: The type entity that triggered this event
+              example: Company
+              type: string
+            event_id:
+              description: Unique reference to this request event
+              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+              type: string
+            execution_attempt:
+              description: The current count this request event has been attempted
+              example: 2
+              type: number
+            occured_at:
+              description: ISO Datetime for when the original event occurred
+              example: 2021-10-01T03:14:55.419Z
+              type: string
+            service_id:
+              description: Service provider identifier
+              example: close
+              type: string
+          type: object
+        - properties:
+            event_type:
+              $ref: "#/components/schemas/EventType"
+          type: object
     Website:
       properties:
         id:
@@ -6634,3 +6688,292 @@ components:
       in: header
       name: x-apideck-consumer-id
       type: apiKey
+x-webhooks:
+  ActivityCreated:
+    post:
+      description: Activity Created
+      operationId: activityCreated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Activity Created
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.activity.created
+  ActivityDeleted:
+    post:
+      description: Activity Deleted
+      operationId: activityDeleted
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Activity Deleted
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.activity.deleted
+  ActivityUpdated:
+    post:
+      description: Activity Updated
+      operationId: activityUpdated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Activity Updated
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.activity.updated
+  CompanyCreated:
+    post:
+      description: Company Created
+      operationId: companyCreated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Company Created
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.company.created
+  CompanyDeleted:
+    post:
+      description: Company Deleted
+      operationId: companyDeleted
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Company Deleted
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.company.deleted
+  CompanyUpdated:
+    post:
+      description: Company Updated
+      operationId: companyUpdated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Company Updated
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.company.updated
+  ContactCreated:
+    post:
+      description: Contact Created
+      operationId: contactCreated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Contact Created
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.contact.created
+  ContactDeleted:
+    post:
+      description: Contact Deleted
+      operationId: contactDeleted
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Contact Deleted
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.contact.deleted
+  ContactUpdated:
+    post:
+      description: Contact Updated
+      operationId: contactUpdated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Contact Updated
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.contact.updated
+  LeadCreated:
+    post:
+      description: Lead Created
+      operationId: leadCreated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Lead Created
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.lead.created
+  LeadDeleted:
+    post:
+      description: Lead Deleted
+      operationId: leadDeleted
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Lead Deleted
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.lead.deleted
+  LeadUpdated:
+    post:
+      description: Lead Updated
+      operationId: leadUpdated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Lead Updated
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.lead.updated
+  NoteCreated:
+    post:
+      description: Note Created
+      operationId: noteCreated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Note Created
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.note.created
+  NoteDeleted:
+    post:
+      description: Note Deleted
+      operationId: noteDeleted
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Note Deleted
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.note.deleted
+  NoteUpdated:
+    post:
+      description: Note Updated
+      operationId: noteUpdated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Note Updated
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.note.updated
+  OpportunityCreated:
+    post:
+      description: Opportunity Created
+      operationId: opportunityCreated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Opportunity Created
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.opportunity.created
+  OpportunityDeleted:
+    post:
+      description: Opportunity Deleted
+      operationId: opportunityDeleted
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Opportunity Deleted
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.opportunity.deleted
+  OpportunityUpdated:
+    post:
+      description: Opportunity Updated
+      operationId: opportunityUpdated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Opportunity Updated
+      tags:
+        - Webhook Events
+      x-apideck-event-type: crm.opportunity.updated

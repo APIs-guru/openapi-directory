@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.3
 servers:
   - url: https://unify.apideck.com
 info:
@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Webhook API
-  version: 5.12.0
+  version: 5.12.1
   x-apideck-api: webhook
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -90,7 +90,6 @@ paths:
       operationId: webhooksAll
       parameters:
         - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
       responses:
@@ -137,7 +136,6 @@ paths:
       operationId: webhooksAdd
       parameters:
         - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
       requestBody:
         content:
           application/json:
@@ -178,6 +176,7 @@ paths:
 
             const params = {
               webhook: {
+                unified_api: 'vault',
                 description: 'This is a webhook. It listens to connection events',
                 status: 'enabled',
                 url: 'https://example.com/my/webhook/endpoint',
@@ -196,9 +195,8 @@ paths:
       description: Delete webhook
       operationId: webhooksDelete
       parameters:
-        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/webhookToken"
         - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
       responses:
         "200":
           $ref: "#/components/responses/DeleteWebhookResponse"
@@ -243,9 +241,8 @@ paths:
       description: Get webhook
       operationId: webhooksOne
       parameters:
-        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/webhookToken"
         - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
       responses:
         "200":
           $ref: "#/components/responses/GetWebhookResponse"
@@ -290,9 +287,8 @@ paths:
       description: Update webhook
       operationId: webhooksUpdate
       parameters:
-        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/webhookToken"
         - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
       requestBody:
         content:
           application/json:
@@ -334,6 +330,7 @@ paths:
             const params = {
               id: 'id_example',
               webhook: {
+                unified_api: 'vault',
                 description: 'This is a webhook. It listens to connection events',
                 status: 'enabled',
                 url: 'https://example.com/my/webhook/endpoint',
@@ -347,6 +344,66 @@ paths:
             } catch (error) {
               console.error(error)
             }
+  "/webhook/webhooks/{id}/execute/{serviceId}":
+    post:
+      description: Execute a webhook
+      operationId: webhooksExecute
+      parameters:
+        - $ref: "#/components/parameters/webhookToken"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/ExecuteWebhookEventRequest"
+                - $ref: "#/components/schemas/ExecuteWebhookEventsRequest"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/ExecuteWebhookResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Execute a webhook
+      tags:
+        - Webhooks
+      x-apideck-api: webhook
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY'
+            })
+
+            const params = {
+              id: 'id_example',
+              serviceId: 'serviceId_example',
+              webhooksExecute: {}
+            }
+
+            try {
+              const { data } = await apideck.webhook.webhooksExecute(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-exclude: true
+      x-sdk-exclude: true
 components:
   parameters:
     applicationId:
@@ -395,9 +452,17 @@ components:
         minimum: 1
         type: integer
     serviceId:
-      description: Provide the service id you want to call (e.g., pipedrive). [See the full list in the connector section.](#section/Connectors) Only needed when a consumer has activated multiple integrations for a Unified API.
-      in: header
-      name: x-apideck-service-id
+      description: Service provider ID.
+      in: path
+      name: serviceId
+      required: true
+      schema:
+        type: string
+    webhookToken:
+      description: JWT Webhook token that represents the unifiedApi and applicationId associated to the event source.
+      in: path
+      name: id
+      required: true
       schema:
         type: string
   responses:
@@ -419,6 +484,12 @@ components:
           schema:
             $ref: "#/components/schemas/DeleteWebhookResponse"
       description: Webhooks
+    ExecuteWebhookResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ExecuteWebhookResponse"
+      description: Execute Webhook
     GetWebhookEventLogsResponse:
       content:
         application/json:
@@ -515,6 +586,109 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
+    ConnectionEvent:
+      properties:
+        entity:
+          properties:
+            auth_type:
+              enum:
+                - oauth2
+                - apiKey
+                - basic
+                - none
+              type: string
+            consumer_id:
+              example: test_user_id
+              type: string
+            created_at:
+              example: 2020-09-19T12:18:37.071Z
+              type: string
+            enabled:
+              example: true
+              type: boolean
+            icon:
+              example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
+              type: string
+            id:
+              example: 1111+test_user_id
+              readOnly: true
+              type: string
+            logo:
+              example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
+              type: string
+            metadata:
+              additionalProperties: true
+              description: Attach your own consumer specific metadata
+              example:
+                account:
+                  id: c01458a5-7276-41ce-bc19-639906b0450a
+                  name: My Company
+                plan: enterprise
+              nullable: true
+              properties: {}
+              type: object
+            name:
+              example: Salesforce
+              type: string
+            service_id:
+              example: teamleader
+              type: string
+            settings:
+              description: Connection settings. Values will persist to `form_fields` with corresponding id
+              example:
+                instance_url: https://eu28.salesforce.com
+              nullable: true
+              type: object
+            state:
+              enum:
+                - available
+                - callable
+                - added
+                - configured
+                - authorized
+              example: authorized
+              type: string
+            tag_line:
+              example: CRM software solutions and enterprise cloud computing from Salesforce, the leader in customer relationship management (CRM) and PaaS. Free 30 day trial.
+              readOnly: true
+              type: string
+            unified_api:
+              example: crm
+              type: string
+            updated_at:
+              example: 2020-09-19T12:18:37.071Z
+              nullable: true
+              type: string
+            website:
+              example: https://www.salesforce.com
+              readOnly: true
+              type: string
+          type: object
+        entity_id:
+          description: The service provider's ID of the entity that triggered this event
+          example: 123456ASDF
+          type: string
+        entity_type:
+          description: The type entity that triggered this event
+          example: Company
+          type: string
+        event_id:
+          description: Unique reference to this request event
+          example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+          type: string
+        event_type:
+          $ref: "#/components/schemas/EventType"
+        execution_attempt:
+          description: The current count this request event has been attempted
+          example: 2
+          type: number
+        occured_at:
+          description: ISO Datetime for when the original event occurred
+          example: 2021-10-01T03:14:55.419Z
+          type: string
+        service_id:
+          $ref: "#/components/schemas/ServiceId"
+      type: object
     ConsumerId:
       description: Consumer identifier
       example: test_consumer_id
@@ -532,7 +706,7 @@ components:
             - vault.connection.created
             - vault.connection.updated
           items:
-            $ref: "#/components/schemas/Event"
+            $ref: "#/components/schemas/EventType"
           title: Subscribed events
           type: array
         id:
@@ -541,6 +715,8 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/Status"
+        unified_api:
+          $ref: "#/components/schemas/UnifiedApi"
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         url:
@@ -549,6 +725,7 @@ components:
         - url
         - status
         - events
+        - unified_api
       type: object
     CreateWebhookResponse:
       properties:
@@ -593,14 +770,74 @@ components:
       description: An optional description of what the webhook is used for.
       example: This is a webhook. It listens to connection events
       type: string
-    Event:
+    EventType:
       enum:
         - "*"
+        - crm.activity.created
+        - crm.activity.updated
+        - crm.activity.deleted
+        - crm.company.created
+        - crm.company.updated
+        - crm.company.deleted
+        - crm.contact.created
+        - crm.contact.updated
+        - crm.contact.deleted
+        - crm.lead.created
+        - crm.lead.updated
+        - crm.lead.deleted
+        - crm.note.created
+        - crm.notes.updated
+        - crm.notes.deleted
+        - crm.opportunity.created
+        - crm.opportunity.updated
+        - crm.opportunity.deleted
+        - lead.lead.created
+        - lead.lead.updated
+        - lead.lead.deleted
         - vault.connection.created
         - vault.connection.updated
         - vault.connection.deleted
         - vault.connection.callable
+      example: crm.company.created
       type: string
+    ExecuteBaseUrl:
+      description: The Unify Base URL events from connectors will be sent to after service id is appended.
+      example: https://unify.apideck.com/webhook/webhooks/1234/execute
+      format: uri
+      pattern: ^(https?)://
+      readOnly: true
+      type: string
+    ExecuteWebhookEventRequest:
+      additionalProperties: true
+      type: object
+    ExecuteWebhookEventsRequest:
+      items:
+        additionalProperties: true
+        type: object
+      type: array
+    ExecuteWebhookResponse:
+      properties:
+        requestId:
+          description: UUID of the request received
+          example: c6af9ac6-7b61-11e6-9a41-93e8deadbeef
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+        timestamp:
+          description: ISO Dtae time webhook event was received
+          example: 2021-10-01T08:26:28.039Z
+          type: string
+      required:
+        - status_code
+        - status
+        - data
+      type: object
     GetWebhookEventLogsResponse:
       properties:
         data:
@@ -867,24 +1104,9 @@ components:
           example: RequestHeadersValidationError
           type: string
     UnifiedApi:
-      description: Name of Apideck Unified Api
-      enum:
-        - crm
-        - lead
-        - proxy
-        - vault
-        - accounting
-      example: crm
+      description: The unifiedApi the webhook originated from
+      example: vault
       type: string
-    UnifiedId:
-      properties:
-        id:
-          example: "12345"
-          readOnly: true
-          type: string
-      required:
-        - id
-      title: UnifiedId
     UnprocessableResponse:
       properties:
         detail:
@@ -924,7 +1146,7 @@ components:
             - vault.connection.created
             - vault.connection.updated
           items:
-            $ref: "#/components/schemas/Event"
+            $ref: "#/components/schemas/EventType"
           title: Subscribed events
           type: array
         id:
@@ -933,6 +1155,9 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/Status"
+        unified_api:
+          $ref: "#/components/schemas/UnifiedApi"
+          readOnly: true
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         url:
@@ -972,41 +1197,63 @@ components:
         created_at:
           $ref: "#/components/schemas/CreatedAt"
         description:
-          description: An optional description of what the webhook is used for.
-          example: This is a webhook. It listens to connection events
-          type: string
+          $ref: "#/components/schemas/Description"
         events:
           description: The list of subscribed events for this webhook. [’*’] indicates that all events are enabled.
           example:
             - vault.connection.created
             - vault.connection.updated
           items:
-            $ref: "#/components/schemas/Event"
+            $ref: "#/components/schemas/EventType"
           title: Subscribed events
           type: array
+        execute_base_url:
+          $ref: "#/components/schemas/ExecuteBaseUrl"
         id:
           example: "1234"
           readOnly: true
           type: string
         status:
-          description: The status of the webhook.
-          enum:
-            - enabled
-            - disabled
-          example: enabled
-          type: string
+          $ref: "#/components/schemas/Status"
+        unified_api:
+          $ref: "#/components/schemas/UnifiedApi"
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         url:
-          description: The URL of the webhook endpoint.
-          example: https://example.com/my/webhook/endpoint
-          format: uri
-          pattern: ^(https?)://
-          type: string
+          $ref: "#/components/schemas/Url"
       required:
         - url
         - status
         - events
+        - unified_api
+        - execute_base_url
+      type: object
+    WebhookEvent:
+      properties:
+        entity_id:
+          description: The service provider's ID of the entity that triggered this event
+          example: 123456ASDF
+          type: string
+        entity_type:
+          description: The type entity that triggered this event
+          example: Company
+          type: string
+        event_id:
+          description: Unique reference to this request event
+          example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+          type: string
+        event_type:
+          $ref: "#/components/schemas/EventType"
+        execution_attempt:
+          description: The current count this request event has been attempted
+          example: 2
+          type: number
+        occured_at:
+          description: ISO Datetime for when the original event occurred
+          example: 2021-10-01T03:14:55.419Z
+          type: string
+        service_id:
+          $ref: "#/components/schemas/ServiceId"
       type: object
     WebhookEventLog:
       additionalProperties: false
@@ -1119,7 +1366,7 @@ components:
           example: vault.connection.callable
           nullable: true
           type: string
-        exclude_unified_apis:
+        exclude_apis:
           example: vault,proxy
           nullable: true
           type: string
@@ -1153,194 +1400,3 @@ components:
       in: header
       name: Authorization
       type: apiKey
-x-webhooks:
-  ConnectionCallable:
-    post:
-      description: Connection Callable
-      operationId: connectionCallable
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: false
-              properties:
-                entity:
-                  $ref: "#/x-webhooks/ConnectionUpdated/post/requestBody/content/application~1json/schema/properties/entity"
-                entity_type:
-                  example: Connection
-                  type: string
-                event_id:
-                  example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-                  type: string
-                execution_attempt:
-                  example: 2
-                  type: number
-              type: object
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Connection Callable
-      tags:
-        - Connection
-      x-apideck-event-type: vault.connection.callable
-  ConnectionCreated:
-    post:
-      description: Connection Created
-      operationId: connectionCreated
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: false
-              properties:
-                entity:
-                  $ref: "#/x-webhooks/ConnectionUpdated/post/requestBody/content/application~1json/schema/properties/entity"
-                entity_type:
-                  example: Connection
-                  type: string
-                event_id:
-                  example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-                  type: string
-                execution_attempt:
-                  example: 2
-                  type: number
-              type: object
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Connection Created
-      tags:
-        - Connection
-      x-apideck-event-type: vault.connection.created
-  ConnectionDeleted:
-    post:
-      description: Connection Deleted
-      operationId: connectionDeleted
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: false
-              properties:
-                entity:
-                  $ref: "#/x-webhooks/ConnectionUpdated/post/requestBody/content/application~1json/schema/properties/entity"
-                entity_type:
-                  example: Connection
-                  type: string
-                event_id:
-                  example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-                  type: string
-                execution_attempt:
-                  example: 2
-                  type: number
-              type: object
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Connection Deleted
-      tags:
-        - Connection
-      x-apideck-event-type: vault.connection.deleted
-  ConnectionUpdated:
-    post:
-      description: Connection Updated
-      operationId: connectionUpdated
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: false
-              properties:
-                entity:
-                  properties:
-                    auth_type:
-                      enum:
-                        - oauth2
-                        - apiKey
-                        - basic
-                        - none
-                      type: string
-                    consumer_id:
-                      example: test_user_id
-                      type: string
-                    created_at:
-                      example: 2020-09-19T12:18:37.071Z
-                      type: string
-                    enabled:
-                      example: true
-                      type: boolean
-                    icon:
-                      example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
-                      type: string
-                    id:
-                      example: 1111+test_user_id
-                      readOnly: true
-                      type: string
-                    logo:
-                      example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
-                      type: string
-                    metadata:
-                      additionalProperties: true
-                      description: Attach your own consumer specific metadata
-                      example:
-                        account:
-                          id: c01458a5-7276-41ce-bc19-639906b0450a
-                          name: My Company
-                        plan: enterprise
-                      nullable: true
-                      properties: {}
-                      type: object
-                    name:
-                      example: Salesforce
-                      type: string
-                    service_id:
-                      example: teamleader
-                      type: string
-                    settings:
-                      description: Connection settings. Values will persist to `form_fields` with corresponding id
-                      example:
-                        instance_url: https://eu28.salesforce.com
-                      nullable: true
-                      type: object
-                    state:
-                      enum:
-                        - available
-                        - callable
-                        - added
-                        - configured
-                        - authorized
-                      example: authorized
-                      type: string
-                    tag_line:
-                      example: CRM software solutions and enterprise cloud computing from Salesforce, the leader in customer relationship management (CRM) and PaaS. Free 30 day trial.
-                      readOnly: true
-                      type: string
-                    unified_api:
-                      example: crm
-                      type: string
-                    updated_at:
-                      example: 2020-09-19T12:18:37.071Z
-                      nullable: true
-                      type: string
-                    website:
-                      example: https://www.salesforce.com
-                      readOnly: true
-                      type: string
-                  type: object
-                entity_type:
-                  example: Connection
-                  type: string
-                event_id:
-                  example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-                  type: string
-                execution_attempt:
-                  example: 2
-                  type: number
-              type: object
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Connection Updated
-      tags:
-        - Connection
-      x-apideck-event-type: vault.connection.updated

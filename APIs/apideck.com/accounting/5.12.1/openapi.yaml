@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.3
 servers:
   - url: https://unify.apideck.com
 info:
@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 5.12.0
+  version: 5.12.1
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -3900,6 +3900,25 @@ components:
       required:
         - email
       type: object
+    EventType:
+      enum:
+        - accounting.customer.created
+        - accounting.customer.updated
+        - accounting.customer.deleted
+        - accounting.invoice.created
+        - accounting.invoice.updated
+        - accounting.invoice.deleted
+        - accounting.invoice_item.created
+        - accounting.invoice_item.updated
+        - accounting.invoice_item.deleted
+        - accounting.ledger_account.created
+        - accounting.ledger_account.updated
+        - accounting.ledger_account.deleted
+        - accounting.tax_rate.created
+        - accounting.tax_rate.updated
+        - accounting.tax_rate.deleted
+      example: accounting.invoice.created
+      type: string
     FirstName:
       example: Elon
       nullable: true
@@ -5703,6 +5722,38 @@ components:
         - first_name
         - last_name
         - email
+    WebhookEvent:
+      allOf:
+        - properties:
+            entity_id:
+              description: The service provider's ID of the entity that triggered this event
+              example: 123456ASDF
+              type: string
+            entity_type:
+              description: The type entity that triggered this event
+              example: Company
+              type: string
+            event_id:
+              description: Unique reference to this request event
+              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+              type: string
+            execution_attempt:
+              description: The current count this request event has been attempted
+              example: 2
+              type: number
+            occured_at:
+              description: ISO Datetime for when the original event occurred
+              example: 2021-10-01T03:14:55.419Z
+              type: string
+            service_id:
+              description: Service provider identifier
+              example: close
+              type: string
+          type: object
+        - properties:
+            event_type:
+              $ref: "#/components/schemas/EventType"
+          type: object
     Website:
       properties:
         id:
