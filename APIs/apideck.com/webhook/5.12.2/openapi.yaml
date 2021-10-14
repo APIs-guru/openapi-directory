@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Webhook API
-  version: 5.12.1
+  version: 5.12.2
   x-apideck-api: webhook
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -176,8 +176,8 @@ paths:
 
             const params = {
               webhook: {
-                unified_api: 'vault',
                 description: 'This is a webhook. It listens to connection events',
+                unified_api: 'vault',
                 status: 'enabled',
                 url: 'https://example.com/my/webhook/endpoint',
                 events: ['vault.connection.created', 'vault.connection.updated']
@@ -330,7 +330,6 @@ paths:
             const params = {
               id: 'id_example',
               webhook: {
-                unified_api: 'vault',
                 description: 'This is a webhook. It listens to connection events',
                 status: 'enabled',
                 url: 'https://example.com/my/webhook/endpoint',
@@ -696,8 +695,6 @@ components:
     CreateWebhookRequest:
       additionalProperties: false
       properties:
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
         description:
           $ref: "#/components/schemas/Description"
         events:
@@ -709,16 +706,10 @@ components:
             $ref: "#/components/schemas/EventType"
           title: Subscribed events
           type: array
-        id:
-          example: "1234"
-          readOnly: true
-          type: string
         status:
           $ref: "#/components/schemas/Status"
         unified_api:
           $ref: "#/components/schemas/UnifiedApi"
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
         url:
           $ref: "#/components/schemas/Url"
       required:
@@ -1136,8 +1127,6 @@ components:
     UpdateWebhookRequest:
       additionalProperties: false
       properties:
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
         description:
           $ref: "#/components/schemas/Description"
         events:
@@ -1149,17 +1138,8 @@ components:
             $ref: "#/components/schemas/EventType"
           title: Subscribed events
           type: array
-        id:
-          example: "1234"
-          readOnly: true
-          type: string
         status:
           $ref: "#/components/schemas/Status"
-        unified_api:
-          $ref: "#/components/schemas/UnifiedApi"
-          readOnly: true
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
         url:
           $ref: "#/components/schemas/Url"
       type: object
