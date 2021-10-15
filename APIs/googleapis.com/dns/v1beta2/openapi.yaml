@@ -2746,11 +2746,6 @@ components:
       type: object
     RRSetRoutingPolicyGeoPolicy:
       properties:
-        failovers:
-          description: If the health check for the primary target for a geo location returns an unhealthy status, the failover target is returned instead. This failover configuration is not mandatory. If a failover is not provided, the primary target won't be healthchecked, and it returns the primarily configured rrdata irrespective of whether it is healthy or not.
-          items:
-            $ref: "#/components/schemas/RRSetRoutingPolicyGeoPolicyGeoPolicyItem"
-          type: array
         items:
           description: The primary geo routing configuration. If there are multiple items with the same location, an error is returned instead.
           items:

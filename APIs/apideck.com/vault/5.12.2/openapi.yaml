@@ -2255,6 +2255,12 @@ components:
       type: string
     FormField:
       properties:
+        allow_custom_values:
+          default: false
+          description: Only applicable to select fields. Allow the user to add a custom value though the option select if the desired value is not in the option select list.
+          example: false
+          title: Allow custom values
+          type: boolean
         custom_field:
           example: false
           type: boolean
@@ -2303,6 +2309,7 @@ components:
             - number
           example: select
       type: object
+      x-graphql-type-name: FormField
     FormFieldOption:
       anyOf:
         - $ref: "#/components/schemas/SimpleFormFieldOption"
