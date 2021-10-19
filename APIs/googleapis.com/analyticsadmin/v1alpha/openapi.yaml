@@ -2238,7 +2238,7 @@ components:
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLinkProposal:
-      description: A proposal for a link between an GA4 property and a Display & Video 360 advertiser. A proposal is converted to a DisplayVideo360AdvertiserLink once approved. Google Analytics admins approve inbound proposals while Display & Video 360 admins approve outbound proposals.
+      description: A proposal for a link between a GA4 property and a Display & Video 360 advertiser. A proposal is converted to a DisplayVideo360AdvertiserLink once approved. Google Analytics admins approve inbound proposals while Display & Video 360 admins approve outbound proposals.
       properties:
         adsPersonalizationEnabled:
           description: Immutable. Enables personalized advertising features with this integration. If this field is not set on create, it will be defaulted to true.
@@ -2312,7 +2312,7 @@ components:
           type: boolean
       type: object
     GoogleAnalyticsAdminV1alphaFirebaseLink:
-      description: A link between an GA4 property and a Firebase project.
+      description: A link between a GA4 property and a Firebase project.
       properties:
         createTime:
           description: Output only. Time when this FirebaseLink was originally created.
@@ -2339,7 +2339,7 @@ components:
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaGoogleAdsLink:
-      description: A link between an GA4 property and a Google Ads account.
+      description: A link between a GA4 property and a Google Ads account.
       properties:
         adsPersonalizationEnabled:
           description: Enable personalized advertising features with this integration. Automatically publish my Google Analytics audience lists and Google Analytics remarketing events/parameters to the linked Google Ads account. If this field is not set on create/update, it will be defaulted to true.
@@ -2727,7 +2727,7 @@ components:
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaPropertySummary:
-      description: A virtual resource representing metadata for an GA4 property.
+      description: A virtual resource representing metadata for a GA4 property.
       properties:
         displayName:
           description: Display name for the property referred to in this account summary.

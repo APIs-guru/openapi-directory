@@ -19,12 +19,11 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://retail.googleapis.com/$discovery/rest?version=v2beta
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: retail
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/recommendations
 tags:
@@ -2344,6 +2343,13 @@ components:
         queryExpansionSpec:
           $ref: "#/components/schemas/GoogleCloudRetailV2betaSearchRequestQueryExpansionSpec"
           description: The query expansion specification that specifies the conditions under which query expansion will occur. See more details at this [user guide](https://cloud.google.com/retail/docs/result-size#query_expansion).
+        searchMode:
+          description: The search mode of the search request. If not specified, a single search request triggers both product search and faceted search.
+          enum:
+            - SEARCH_MODE_UNSPECIFIED
+            - PRODUCT_SEARCH_ONLY
+            - FACETED_SEARCH_ONLY
+          type: string
         userInfo:
           $ref: "#/components/schemas/GoogleCloudRetailV2betaUserInfo"
           description: User information.

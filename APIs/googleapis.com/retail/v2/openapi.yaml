@@ -2000,6 +2000,13 @@ components:
         queryExpansionSpec:
           $ref: "#/components/schemas/GoogleCloudRetailV2SearchRequestQueryExpansionSpec"
           description: The query expansion specification that specifies the conditions under which query expansion will occur. See more details at this [user guide](https://cloud.google.com/retail/docs/result-size#query_expansion).
+        searchMode:
+          description: The search mode of the search request. If not specified, a single search request triggers both product search and faceted search.
+          enum:
+            - SEARCH_MODE_UNSPECIFIED
+            - PRODUCT_SEARCH_ONLY
+            - FACETED_SEARCH_ONLY
+          type: string
         userInfo:
           $ref: "#/components/schemas/GoogleCloudRetailV2UserInfo"
           description: User information.

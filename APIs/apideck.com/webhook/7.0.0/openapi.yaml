@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Webhook API
-  version: 6.0.0
+  version: 7.0.0
   x-apideck-api: webhook
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1217,6 +1217,10 @@ components:
         entity_type:
           description: The type entity that triggered this event
           example: Company
+          type: string
+        entity_url:
+          description: The url to retrieve entity detail.
+          example: https://unify.apideck.com/crm/contacts/123456
           type: string
         event_id:
           description: Unique reference to this request event

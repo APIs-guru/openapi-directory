@@ -551,9 +551,10 @@ components:
             - FRAUD
             - NUMBER_HARVESTING
             - PAYMENTS_FRAUD
+            - UNWANTED_CONTENT
           type: string
         productName:
-          description: 'The name of the product being abused. This is restricted to only the following values: "Gmail" "Payments" "Voice" "Workspace" "Other"'
+          description: 'The name of the product being abused. This is restricted to only the following values: "Gmail" "Google Workspace" "Payments" "Voice" "YouTube" "Other"'
           type: string
       type: object
     AccountSuspensionWarning:

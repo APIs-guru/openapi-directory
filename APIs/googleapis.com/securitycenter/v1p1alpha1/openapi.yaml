@@ -408,9 +408,6 @@ components:
     GoogleCloudSecuritycenterV1Resource:
       description: Information related to the Google Cloud resource.
       properties:
-        displayName:
-          description: The human readable name of the resource.
-          type: string
         folders:
           description: Output only. Contains a Folder message for each folder in the assets ancestry. The first folder is the deepest nested folder, and the last folder is the folder directly under the Organization.
           items:
