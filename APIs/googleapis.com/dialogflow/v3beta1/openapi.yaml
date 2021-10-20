@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://dialogflow.googleapis.com/$discovery/rest?version=v3beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: dialogflow
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/dialogflow/
 tags:
@@ -80,6 +81,52 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v3beta1/{baseVersion}:compareVersions":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Compares the specified base version with target version.
+      operationId: dialogflow.projects.locations.agents.flows.versions.compareVersions
+      parameters:
+        - description: "Required. Name of the base flow version to compare with the target version. Use version ID `0` to indicate the draft version of the specified flow. Format: `projects//locations//agents//flows//versions/`."
+          in: path
+          name: baseVersion
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1CompareVersionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1CompareVersionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
   "/v3beta1/{environment}:deployFlow":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -945,6 +992,62 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
+  "/v3beta1/{parent}/changelogs":
+    get:
+      description: Returns the list of Changelogs.
+      operationId: dialogflow.projects.locations.agents.changelogs.list
+      parameters:
+        - description: "Required. The agent containing the changelogs. Format: `projects//locations//agents/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: 'The filter string. Supports filter by user_email, resource, type and create_time. Some examples: 1. By user email: user_email = "someone@google.com" 2. By resource name: resource = "projects/123/locations/global/agents/456/flows/789" 3. By resource display name: display_name = "my agent" 4. By action: action = "Create" 5. By type: type = "flows" 6. By create time. Currently predicates on `create_time` and `create_time_epoch_seconds` are supported: create_time_epoch_seconds > 1551790877 AND create_time <= 2017-01-15T01:30:15.01Z 7. Combination of above filters: resource = "projects/123/locations/global/agents/456/flows/789" AND user_email = "someone@google.com" AND create_time <= 2017-01-15T01:30:15.01Z'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of items to return in a single page. By default 100 and at most 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ListChangelogsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3beta1/{parent}/continuousTestResults":
     get:
       description: Fetches a list of continuous test results for a given environment.
@@ -3782,6 +3885,56 @@ components:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TransitionCoverage"
           description: Transition (excluding transition route groups) coverage.
       type: object
+    GoogleCloudDialogflowCxV3beta1Changelog:
+      description: Changelogs represents a change made to a given agent.
+      properties:
+        action:
+          description: The action of the change.
+          type: string
+        createTime:
+          description: The timestamp of the change.
+          format: google-datetime
+          type: string
+        displayName:
+          description: The affected resource display name of the change.
+          type: string
+        name:
+          description: "The unique identifier of the changelog. Format: `projects//locations//agents//changelogs/`."
+          type: string
+        resource:
+          description: The affected resource name of the change.
+          type: string
+        type:
+          description: The affected resource type.
+          type: string
+        userEmail:
+          description: Email address of the authenticated user.
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1CompareVersionsRequest:
+      description: The request message for Versions.CompareVersions.
+      properties:
+        languageCode:
+          description: "The language to compare the flow versions for. If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
+          type: string
+        targetVersion:
+          description: "Required. Name of the target flow version to compare with the base version. Use version ID `0` to indicate the draft version of the specified flow. Format: `projects//locations//agents//flows//versions/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1CompareVersionsResponse:
+      description: The response message for Versions.CompareVersions.
+      properties:
+        baseVersionContentJson:
+          description: JSON representation of the base version content.
+          type: string
+        compareTime:
+          description: The timestamp when the two version compares.
+          format: google-datetime
+          type: string
+        targetVersionContentJson:
+          description: JSON representation of the target version content.
+          type: string
+      type: object
     GoogleCloudDialogflowCxV3beta1ContinuousTestResult:
       description: Represents a result from running a test case in an agent environment.
       properties:
@@ -4796,6 +4949,18 @@ components:
           description: The list of agents. There will be a maximum number of items returned based on the page_size field in the request.
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Agent"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1ListChangelogsResponse:
+      description: The response message for Changelogs.ListChangelogs.
+      properties:
+        changelogs:
+          description: The list of changelogs. There will be a maximum number of items returned based on the page_size field in the request. The changelogs will be ordered by timestamp.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Changelog"
           type: array
         nextPageToken:
           description: Token to retrieve the next page of results, or empty if there are no more results in the list.

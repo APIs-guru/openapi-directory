@@ -62,6 +62,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Return devices from all child orgunits, as well as the specified org unit. If this is set to true 'orgUnitPath' must be provided.
+          in: query
+          name: includeChildOrgunits
+          schema:
+            type: boolean
         - description: Maximum number of results to return.
           in: query
           name: maxResults

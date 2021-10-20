@@ -1051,6 +1051,9 @@ components:
         dataLossFromOtherRow:
           description: If true, indicates some buckets of dimension combinations are rolled into "(other)" row. This can happen for high cardinality reports.
           type: boolean
+        emptyReason:
+          description: If empty reason is specified, the report is empty for this reason.
+          type: string
         timeZone:
           description: The property's current timezone. Intended to be used to interpret time-based dimensions like `hour` and `minute`. Formatted as strings from the IANA Time Zone database (https://www.iana.org/time-zones); for example "America/New_York" or "Asia/Tokyo".
           type: string
