@@ -393,7 +393,6 @@ paths:
 
             const params = {
               customer: {
-                id: '12345',
                 company_name: 'SpaceX',
                 first_name: 'Elon',
                 last_name: 'Musk',
@@ -609,7 +608,6 @@ paths:
             const params = {
               id: 'id_example',
               customer: {
-                id: '12345',
                 company_name: 'SpaceX',
                 first_name: 'Elon',
                 last_name: 'Musk',
@@ -1936,6 +1934,7 @@ components:
           type: string
         id:
           example: "12345"
+          readOnly: true
           type: string
         individual:
           example: true

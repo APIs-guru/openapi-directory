@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Text-to-Speech API
   version: v1beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://texttospeech.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: texttospeech
 externalDocs:
@@ -215,6 +213,20 @@ components:
           format: double
           type: number
       type: object
+    CustomVoiceParams:
+      description: Description of the custom voice to be synthesized.
+      properties:
+        model:
+          description: Required. The name of the AutoML model that synthesizes the custom voice.
+          type: string
+        reportedUsage:
+          description: Optional. The usage of the synthesized audio to be reported.
+          enum:
+            - REPORTED_USAGE_UNSPECIFIED
+            - REALTIME
+            - OFFLINE
+          type: string
+      type: object
     ListVoicesResponse:
       description: The message returned to the client by the `ListVoices` method.
       properties:
@@ -309,6 +321,9 @@ components:
     VoiceSelectionParams:
       description: Description of which voice to use for a synthesis request.
       properties:
+        customVoice:
+          $ref: "#/components/schemas/CustomVoiceParams"
+          description: The configuration for a custom voice. If [CustomVoiceParams.model] is set, the service will choose the custom voice matching the specified configuration.
         languageCode:
           description: Required. The language (and potentially also the region) of the voice expressed as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag, e.g. "en-US". This should not include a script tag (e.g. use "cmn-cn" rather than "cmn-Hant-cn"), because the script will be inferred from the input provided in the SynthesisInput. The TTS service will use this parameter to help choose an appropriate voice. Note that the TTS service may choose a voice with a slightly different language code than the one selected; it may substitute a different region (e.g. using en-US rather than en-CA if there isn't a Canadian voice available), or even a different language, e.g. using "nb" (Norwegian Bokmal) instead of "no" (Norwegian)".
           type: string
@@ -342,5 +357,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

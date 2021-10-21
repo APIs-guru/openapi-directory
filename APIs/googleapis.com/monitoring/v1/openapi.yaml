@@ -544,6 +544,11 @@ components:
         gridLayout:
           $ref: "#/components/schemas/GridLayout"
           description: Content is arranged with a basic layout that re-flows a simple list of informational elements like widgets or tiles.
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels applied to the dashboard
+          type: object
         mosaicLayout:
           $ref: "#/components/schemas/MosaicLayout"
           description: The content is arranged as a grid of tiles, with each content widget occupying one or more grid blocks.

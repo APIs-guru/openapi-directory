@@ -3528,6 +3528,17 @@ components:
           items:
             $ref: "#/components/schemas/BucketAccessControl"
           type: array
+        autoclass:
+          description: The bucket's Autoclass configuration.
+          properties:
+            enabled:
+              description: Whether or not Autoclass is enabled on this bucket
+              type: boolean
+            toggleTime:
+              description: A date and time in RFC 3339 format representing the instant at which "enabled" was last toggled.
+              format: date-time
+              type: string
+          type: object
         billing:
           description: The bucket's billing configuration.
           properties:

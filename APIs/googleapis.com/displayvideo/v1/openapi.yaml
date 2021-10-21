@@ -86,6 +86,52 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/media/{resourceName}":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Uploads media. Upload is supported on the URI `/upload/media/{resource_name=**}?upload_type=media.` **Note**: Upload requests will not be successful without including `upload_type=media` query string."
+      operationId: displayvideo.media.upload
+      parameters:
+        - description: Name of the media that is being downloaded. See ReadRequest.resource_name.
+          in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              $ref: "#/components/schemas/GoogleBytestreamMedia"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleBytestreamMedia"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+        - Oauth2:
+            - https://www.googleapis.com/auth/doubleclickbidmanager
+          Oauth2c:
+            - https://www.googleapis.com/auth/doubleclickbidmanager
+      tags:
+        - media
   /v1/advertisers:
     get:
       description: Lists advertisers that are accessible to the current user. The order is defined by the order_by parameter. A single partner_id is required. Cross-partner listing is not supported.
@@ -4279,6 +4325,28 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new custom bidding algorithm. Returns the newly created custom bidding algorithm if successful.
+      operationId: displayvideo.customBiddingAlgorithms.create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomBiddingAlgorithm"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomBiddingAlgorithm"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - customBiddingAlgorithms
   "/v1/customBiddingAlgorithms/{customBiddingAlgorithmId}":
     get:
       description: Gets a custom bidding algorithm.
@@ -4306,6 +4374,241 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CustomBiddingAlgorithm"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - customBiddingAlgorithms
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates an existing custom bidding algorithm. Returns the updated custom bidding algorithm if successful.
+      operationId: displayvideo.customBiddingAlgorithms.patch
+      parameters:
+        - description: Output only. The unique ID of the custom bidding algorithm. Assigned by the system.
+          in: path
+          name: customBiddingAlgorithmId
+          required: true
+          schema:
+            type: string
+        - description: Required. The mask to control which fields to update.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomBiddingAlgorithm"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomBiddingAlgorithm"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - customBiddingAlgorithms
+  "/v1/customBiddingAlgorithms/{customBiddingAlgorithmId}/scripts":
+    get:
+      description: Lists custom bidding scripts that belong to the given algorithm. The order is defined by the order_by parameter.
+      operationId: displayvideo.customBiddingAlgorithms.scripts.list
+      parameters:
+        - description: Required. The ID of the custom bidding algorithm owns the script.
+          in: path
+          name: customBiddingAlgorithmId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the advertiser that owns the parent custom bidding algorithm.
+          in: query
+          name: advertiserId
+          schema:
+            type: string
+        - description: 'Field by which to sort the list. Acceptable values are: * `createTime desc` (default) The default sorting order is descending. To specify ascending order for a field, the suffix "desc" should be removed. Example: `createTime`.'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return. Typically, this is the value of next_page_token returned from the previous call to `ListCustomBiddingScripts` method. If not specified, the first page of results will be returned.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: The ID of the partner that owns the parent custom bidding algorithm. Only this partner will have write access to this custom bidding script.
+          in: query
+          name: partnerId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCustomBiddingScriptsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - customBiddingAlgorithms
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new custom bidding script. Returns the newly created script if successful.
+      operationId: displayvideo.customBiddingAlgorithms.scripts.create
+      parameters:
+        - description: Required. The ID of the custom bidding algorithm that owns the script.
+          in: path
+          name: customBiddingAlgorithmId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the advertiser that owns the parent custom bidding algorithm.
+          in: query
+          name: advertiserId
+          schema:
+            type: string
+        - description: The ID of the partner that owns the parent custom bidding algorithm. Only this partner will have write access to this custom bidding script.
+          in: query
+          name: partnerId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomBiddingScript"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomBiddingScript"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - customBiddingAlgorithms
+  "/v1/customBiddingAlgorithms/{customBiddingAlgorithmId}/scripts/{customBiddingScriptId}":
+    get:
+      description: Gets a custom bidding script.
+      operationId: displayvideo.customBiddingAlgorithms.scripts.get
+      parameters:
+        - description: Required. The ID of the custom bidding algorithm owns the script.
+          in: path
+          name: customBiddingAlgorithmId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the custom bidding script to fetch.
+          in: path
+          name: customBiddingScriptId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the advertiser that owns the parent custom bidding algorithm.
+          in: query
+          name: advertiserId
+          schema:
+            type: string
+        - description: The ID of the partner that owns the parent custom bidding algorithm. Only this partner will have write access to this custom bidding script.
+          in: query
+          name: partnerId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomBiddingScript"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - customBiddingAlgorithms
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/customBiddingAlgorithms/{customBiddingAlgorithmId}:uploadScript":
+    get:
+      description: Creates a custom bidding script reference object for a script file. The resulting reference object provides a resource path to which the script file should be uploaded. This reference object should be included in when creating a new custom bidding script object.
+      operationId: displayvideo.customBiddingAlgorithms.uploadScript
+      parameters:
+        - description: Required. The ID of the custom bidding algorithm owns the script.
+          in: path
+          name: customBiddingAlgorithmId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the advertiser that owns the parent custom bidding algorithm.
+          in: query
+          name: advertiserId
+          schema:
+            type: string
+        - description: The ID of the partner that owns the parent custom bidding algorithm. Only this partner will have write access to this custom bidding script.
+          in: query
+          name: partnerId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomBiddingScriptRef"
           description: Successful response
       security:
         - Oauth2:
@@ -8550,6 +8853,58 @@ components:
             type: string
           type: array
       type: object
+    CustomBiddingScript:
+      description: A single custom bidding script.
+      properties:
+        active:
+          description: Output only. Whether the script is currently being used for scoring by the parent algorithm.
+          readOnly: true
+          type: boolean
+        createTime:
+          description: Output only. The time when the script was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        customBiddingAlgorithmId:
+          description: Output only. The unique ID of the custom bidding algorithm the script belongs to.
+          format: int64
+          readOnly: true
+          type: string
+        customBiddingScriptId:
+          description: Output only. The unique ID of the custom bidding script.
+          format: int64
+          readOnly: true
+          type: string
+        errors:
+          description: Output only. Error details of a rejected custom bidding script. This field will only be populated when Script.state is REJECTED.
+          items:
+            $ref: "#/components/schemas/ScriptError"
+          readOnly: true
+          type: array
+        name:
+          description: Output only. The resource name of the custom bidding script.
+          readOnly: true
+          type: string
+        script:
+          $ref: "#/components/schemas/CustomBiddingScriptRef"
+          description: The reference to the uploaded script file.
+        state:
+          description: Output only. The state of the custom bidding script.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACCEPTED
+            - REJECTED
+            - PENDING
+          readOnly: true
+          type: string
+      type: object
+    CustomBiddingScriptRef:
+      description: The reference to the uploaded custom bidding script file.
+      properties:
+        resourceName:
+          description: A resource name to be used in media.download to Download the script files. Or media.upload to Upload the script files. Resource names have the format `customBiddingAlgorithms/{custom_bidding_algorithm_id}/scriptRef/{ref_id}`.
+          type: string
+      type: object
     CustomList:
       description: Describes a custom list entity, such as a custom affinity or custom intent audience list.
       properties:
@@ -10644,6 +10999,17 @@ components:
           description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListCustomBiddingAlgorithmsRequest` method to retrieve the next page of results. If this field is null, it means this is the last page.
           type: string
       type: object
+    ListCustomBiddingScriptsResponse:
+      properties:
+        customBiddingScripts:
+          description: The list of custom bidding scripts. This list will be absent if empty.
+          items:
+            $ref: "#/components/schemas/CustomBiddingScript"
+          type: array
+        nextPageToken:
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListCustomBiddingScriptsRequest` method to retrieve the next page of results. If this field is null, it means this is the last page.
+          type: string
+      type: object
     ListCustomListsResponse:
       properties:
         customLists:
@@ -11769,6 +12135,29 @@ components:
           items:
             $ref: "#/components/schemas/PublisherReviewStatus"
           type: array
+      type: object
+    ScriptError:
+      description: An error message for a custom bidding script.
+      properties:
+        column:
+          description: The column number in the script where the error was thrown.
+          format: int64
+          type: string
+        errorCode:
+          description: The type of error.
+          enum:
+            - ERROR_CODE_UNSPECIFIED
+            - SYNTAX_ERROR
+            - DEPRECATED_SYNTAX
+            - INTERNAL_ERROR
+          type: string
+        errorMessage:
+          description: The detailed error message.
+          type: string
+        line:
+          description: The line number in the script where the error was thrown.
+          format: int64
+          type: string
       type: object
     SdfConfig:
       description: Structured Data File (SDF) related settings.

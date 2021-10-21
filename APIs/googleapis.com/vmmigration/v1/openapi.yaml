@@ -1520,6 +1520,14 @@ components:
           $ref: "#/components/schemas/AppliedLicense"
           description: Output only. The OS license returned from the adaptation module report.
           readOnly: true
+        bootOption:
+          description: Output only. The VM Boot Option, as set in the source vm.
+          enum:
+            - COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED
+            - COMPUTE_ENGINE_BOOT_OPTION_EFI
+            - COMPUTE_ENGINE_BOOT_OPTION_BIOS
+          readOnly: true
+          type: string
         computeScheduling:
           $ref: "#/components/schemas/ComputeScheduling"
           description: Compute instance scheduling information (if empty default is used).
@@ -1549,6 +1557,11 @@ components:
         machineTypeSeries:
           description: The machine type series to create the VM with.
           type: string
+        metadata:
+          additionalProperties:
+            type: string
+          description: The metadata key/value pairs to assign to the VM.
+          type: object
         networkInterfaces:
           description: List of NICs connected to this VM.
           items:
@@ -1559,6 +1572,9 @@ components:
           items:
             type: string
           type: array
+        secureBoot:
+          description: Defines whether the instance has Secure Boot enabled. This can be set to true only if the vm boot option is EFI.
+          type: boolean
         serviceAccount:
           description: The service account to associate the VM with.
           type: string

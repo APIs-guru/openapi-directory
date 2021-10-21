@@ -160,7 +160,8 @@ paths:
       description: Updates a message.
       operationId: chat.spaces.messages.update
       parameters:
-        - in: path
+        - description: "Resource name in the form `spaces/*/messages/*`. Example: `spaces/AAAAMpdlehY/messages/UMxbHmzDlr4.UMxbHmzDlr4`"
+          in: path
           name: name
           required: true
           schema:
@@ -249,6 +250,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. A unique request ID for this message. If a message has already been created in the space with this request ID, the subsequent request will return the existing message and no new message will be created.
+          in: query
+          name: requestId
+          schema:
+            type: string
         - description: Optional. Opaque thread identifier string that can be specified to group messages into a single thread. If this is the first message with a given thread identifier, a new thread is created. Subsequent messages with the same thread identifier will be posted into the same thread. This relieves bots and webhooks from having to store the Google Chat thread ID of a thread (created earlier by them) to post further updates to it. Has no effect if thread field, corresponding to an existing thread, is set in message.
           in: query
           name: threadKey
@@ -289,6 +295,11 @@ paths:
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: Optional. A unique request ID for this message. If a message has already been created in the space with this request ID, the subsequent request will return the existing message and no new message will be created.
+          in: query
+          name: requestId
           schema:
             type: string
         - description: Optional. Opaque thread identifier string that can be specified to group messages into a single thread. If this is the first message with a given thread identifier, a new thread is created. Subsequent messages with the same thread identifier will be posted into the same thread. This relieves bots and webhooks from having to store the Google Chat thread ID of a thread (created earlier by them) to post further updates to it. Has no effect if thread field, corresponding to an existing thread, is set in message.
@@ -1496,6 +1507,7 @@ components:
           readOnly: true
           type: string
         name:
+          description: "Resource name in the form `spaces/*/messages/*`. Example: `spaces/AAAAMpdlehY/messages/UMxbHmzDlr4.UMxbHmzDlr4`"
           type: string
         previewText:
           description: Text for generating preview chips. This text will not be displayed to the user, but any links to images, web pages, videos, etc. included here will generate preview chips.
@@ -1584,7 +1596,7 @@ components:
           description: Output only. The display name (only if the space is of type `ROOM`). Please note that this field might not be populated in direct messages between humans.
           type: string
         name:
-          description: 'Resource name of the space, in the form "spaces/*". Example: spaces/AAAAMpdlehYs'
+          description: 'Resource name of the space, in the form "spaces/*". Example: spaces/AAAAAAAAAAAA'
           type: string
         singleUserBotDm:
           description: Whether the space is a DM between a bot and a single human.

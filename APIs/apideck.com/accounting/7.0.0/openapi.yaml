@@ -321,8 +321,6 @@ paths:
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/cursor"
-        - $ref: "#/components/parameters/limit"
       responses:
         "200":
           $ref: "#/components/responses/GetCompanyInfoResponse"
@@ -463,7 +461,7 @@ paths:
 
             const params = {
               customer: {
-                id: '12345',
+                display_id: 'EMP00101',
                 company_name: 'SpaceX',
                 first_name: 'Elon',
                 last_name: 'Musk',
@@ -508,7 +506,7 @@ paths:
                   }
                 ],
                 tax_rate: {
-                  id: '12345',
+                  id: '123456',
                   code: 'N-T'
                 },
                 tax_number: 'US123945459',
@@ -683,7 +681,7 @@ paths:
             const params = {
               id: 'id_example',
               customer: {
-                id: '12345',
+                display_id: 'EMP00101',
                 company_name: 'SpaceX',
                 first_name: 'Elon',
                 last_name: 'Musk',
@@ -728,7 +726,7 @@ paths:
                   }
                 ],
                 tax_rate: {
-                  id: '12345',
+                  id: '123456',
                   code: 'N-T'
                 },
                 tax_number: 'US123945459',
@@ -851,7 +849,6 @@ paths:
 
             const params = {
               invoiceItem: {
-                id: '12345',
                 code: '120-C',
                 sold: true,
                 name: 'Model Y',
@@ -863,14 +860,13 @@ paths:
                   unit_of_measure: 'hour',
                   tax_inclusive: true,
                   tax_rate: {
-                    id: '12345',
+                    id: '123456',
                     code: 'N-T'
                   }
                 },
                 quantity: 2,
                 unit_price: 27500.5,
                 ledger_account: {
-                  id: '12345',
                   name: 'Bank account'
                 },
                 active: true,
@@ -1036,7 +1032,6 @@ paths:
             const params = {
               id: 'id_example',
               invoiceItem: {
-                id: '12345',
                 code: '120-C',
                 sold: true,
                 name: 'Model Y',
@@ -1048,14 +1043,13 @@ paths:
                   unit_of_measure: 'hour',
                   tax_inclusive: true,
                   tax_rate: {
-                    id: '12345',
+                    id: '123456',
                     code: 'N-T'
                   }
                 },
                 quantity: 2,
                 unit_price: 27500.5,
                 ledger_account: {
-                  id: '12345',
                   name: 'Bank account'
                 },
                 active: true,
@@ -1169,11 +1163,9 @@ paths:
 
             const params = {
               invoice: {
-                id: '12345',
                 type: 'Service',
                 number: 'OIT00546',
                 customer: {
-                  id: '12345',
                   company_name: 'The boring company'
                 },
                 invoice_date: '2020-09-30',
@@ -1190,7 +1182,6 @@ paths:
                 customer_memo: 'Thank you for your business and have a great day!',
                 line_items: [
                   {
-                    id: '12345',
                     row_id: '12345',
                     code: '120-C',
                     line_number: 1,
@@ -1208,11 +1199,10 @@ paths:
                       name: 'Model Y'
                     },
                     tax_rate: {
-                      id: '12345',
+                      id: '123456',
                       code: 'N-T'
                     },
                     ledger_account: {
-                      id: '12345',
                       name: 'Bank account'
                     },
                     row_version: '1-12345'
@@ -1420,11 +1410,9 @@ paths:
             const params = {
               id: 'id_example',
               invoice: {
-                id: '12345',
                 type: 'Service',
                 number: 'OIT00546',
                 customer: {
-                  id: '12345',
                   company_name: 'The boring company'
                 },
                 invoice_date: '2020-09-30',
@@ -1441,7 +1429,6 @@ paths:
                 customer_memo: 'Thank you for your business and have a great day!',
                 line_items: [
                   {
-                    id: '12345',
                     row_id: '12345',
                     code: '120-C',
                     line_number: 1,
@@ -1459,11 +1446,10 @@ paths:
                       name: 'Model Y'
                     },
                     tax_rate: {
-                      id: '12345',
+                      id: '123456',
                       code: 'N-T'
                     },
                     ledger_account: {
-                      id: '12345',
                       name: 'Bank account'
                     },
                     row_version: '1-12345'
@@ -1619,7 +1605,7 @@ paths:
 
             const params = {
               ledgerAccount: {
-                id: '12345',
+                display_id: '1-12345',
                 nominal_code: '091',
                 classification: 'asset',
                 type: 'bank',
@@ -1632,10 +1618,10 @@ paths:
                 currency: 'USD',
                 tax_type: 'USD',
                 tax_rate: {
-                  id: '12345',
+                  id: '123456',
                   code: 'N-T'
                 },
-                level: 2,
+                level: 1,
                 active: true,
                 header: true,
                 bank_account: {
@@ -1646,7 +1632,13 @@ paths:
                   account_number: '123456789',
                   account_name: 'SPACEX LLC'
                 },
-                sub_account: true
+                parent_account: {
+                  id: '12345',
+                  name: 'Bank Accounts',
+                  display_id: '1-1100'
+                },
+                sub_account: false,
+                row_version: '3144638439811448832'
               }
             }
 
@@ -1808,7 +1800,7 @@ paths:
             const params = {
               id: 'id_example',
               ledgerAccount: {
-                id: '12345',
+                display_id: '1-12345',
                 nominal_code: '091',
                 classification: 'asset',
                 type: 'bank',
@@ -1821,10 +1813,10 @@ paths:
                 currency: 'USD',
                 tax_type: 'USD',
                 tax_rate: {
-                  id: '12345',
+                  id: '123456',
                   code: 'N-T'
                 },
-                level: 2,
+                level: 1,
                 active: true,
                 header: true,
                 bank_account: {
@@ -1835,7 +1827,13 @@ paths:
                   account_number: '123456789',
                   account_name: 'SPACEX LLC'
                 },
-                sub_account: true
+                parent_account: {
+                  id: '12345',
+                  name: 'Bank Accounts',
+                  display_id: '1-1100'
+                },
+                sub_account: false,
+                row_version: '3144638439811448832'
               }
             }
 
@@ -1945,7 +1943,6 @@ paths:
 
             const params = {
               taxRate: {
-                id: '12345',
                 name: '15% GST on Expenses',
                 code: 'ABN',
                 description: 'No ABN Withholding',
@@ -1958,7 +1955,7 @@ paths:
                     compound: true
                   }
                 ],
-                special_tax_type: 'NONE',
+                tax_type: 'NONE',
                 original_tax_rate_id: '12345',
                 active: true
               }
@@ -2122,7 +2119,6 @@ paths:
             const params = {
               id: 'id_example',
               taxRate: {
-                id: '12345',
                 name: '15% GST on Expenses',
                 code: 'ABN',
                 description: 'No ABN Withholding',
@@ -2135,7 +2131,7 @@ paths:
                     compound: true
                   }
                 ],
-                special_tax_type: 'NONE',
+                tax_type: 'NONE',
                 original_tax_rate_id: '12345',
                 active: true
               }
@@ -2730,7 +2726,7 @@ components:
     CompanyInfo:
       additionalProperties: false
       properties:
-        addressses:
+        addresses:
           items:
             $ref: "#/components/schemas/Address"
           type: array
@@ -2752,7 +2748,7 @@ components:
           items:
             $ref: "#/components/schemas/PhoneNumber"
           type: array
-        salex_tax_number:
+        sales_tax_number:
           $ref: "#/components/schemas/SalesTaxNumber"
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
@@ -3699,6 +3695,11 @@ components:
           $ref: "#/components/schemas/CreatedBy"
         currency:
           $ref: "#/components/schemas/Currency"
+        display_id:
+          example: EMP00101
+          nullable: true
+          title: Display ID
+          type: string
         emails:
           items:
             $ref: "#/components/schemas/Email"
@@ -4320,6 +4321,7 @@ components:
       x-graphql-type-name: TaxRateList
     Id:
       example: "12345"
+      readOnly: true
       type: string
     Invoice:
       additionalProperties: false
@@ -4754,7 +4756,6 @@ components:
           type: string
         display_id:
           example: 1-12345
-          readOnly: true
           type: string
         fully_qualified_name:
           example: Asset.Bank.Checking_Account
@@ -4776,7 +4777,7 @@ components:
           title: Last Reconciliation Date
           type: string
         level:
-          example: 2
+          example: 1
           nullable: true
           type: number
         name:
@@ -4805,15 +4806,13 @@ components:
               example: Bank Accounts
               title: Name
               type: string
-          readOnly: true
           type: object
         row_version:
-          example: 1-12345
+          example: "3144638439811448832"
           nullable: true
-          readOnly: true
           type: string
         sub_account:
-          example: true
+          example: false
           nullable: true
           type: boolean
         sub_accounts:
@@ -4883,7 +4882,8 @@ components:
           nullable: true
           type: string
         id:
-          $ref: "#/components/schemas/Id"
+          example: "123456"
+          type: string
       type: object
       x-graphql-type-name: LinkedTaxRate
     Links:
@@ -5381,7 +5381,7 @@ components:
           nullable: true
           title: Original tax rate ID
           type: string
-        special_tax_type:
+        tax_type:
           description: Special tax type to handle zero rate taxes. Used with VAT registered Businesses who receive goods/services (acquisitions) from other EU countries, will need to calculate the VAT due, but not paid, on these acquisitions. The rate of VAT payable is the same that would have been paid if the goods had been supplied by a UK supplier.
           example: NONE
           nullable: true
