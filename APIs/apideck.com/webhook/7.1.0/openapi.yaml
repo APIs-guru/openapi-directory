@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Webhook API
-  version: 7.0.0
+  version: 7.1.0
   x-apideck-api: webhook
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -179,7 +179,7 @@ paths:
                 description: 'This is a webhook. It listens to connection events',
                 unified_api: 'vault',
                 status: 'enabled',
-                url: 'https://example.com/my/webhook/endpoint',
+                delivery_url: 'https://example.com/my/webhook/endpoint',
                 events: ['vault.connection.created', 'vault.connection.updated']
               }
             }
@@ -332,7 +332,7 @@ paths:
               webhook: {
                 description: 'This is a webhook. It listens to connection events',
                 status: 'enabled',
-                url: 'https://example.com/my/webhook/endpoint',
+                delivery_url: 'https://example.com/my/webhook/endpoint',
                 events: ['vault.connection.created', 'vault.connection.updated']
               }
             }
@@ -695,6 +695,8 @@ components:
     CreateWebhookRequest:
       additionalProperties: false
       properties:
+        delivery_url:
+          $ref: "#/components/schemas/DeliveryUrl"
         description:
           $ref: "#/components/schemas/Description"
         events:
@@ -710,10 +712,8 @@ components:
           $ref: "#/components/schemas/Status"
         unified_api:
           $ref: "#/components/schemas/UnifiedApi"
-        url:
-          $ref: "#/components/schemas/Url"
       required:
-        - url
+        - delivery_url
         - status
         - events
         - unified_api
@@ -757,6 +757,12 @@ components:
         - status
         - data
       type: object
+    DeliveryUrl:
+      description: The delivery url of the webhook endpoint.
+      example: https://example.com/my/webhook/endpoint
+      format: uri
+      pattern: ^(https?)://
+      type: string
     Description:
       description: An optional description of what the webhook is used for.
       example: This is a webhook. It listens to connection events
@@ -1127,6 +1133,8 @@ components:
     UpdateWebhookRequest:
       additionalProperties: false
       properties:
+        delivery_url:
+          $ref: "#/components/schemas/DeliveryUrl"
         description:
           $ref: "#/components/schemas/Description"
         events:
@@ -1140,8 +1148,6 @@ components:
           type: array
         status:
           $ref: "#/components/schemas/Status"
-        url:
-          $ref: "#/components/schemas/Url"
       type: object
     UpdateWebhookResponse:
       properties:
@@ -1165,17 +1171,13 @@ components:
       format: date-time
       readOnly: true
       type: string
-    Url:
-      description: The URL of the webhook endpoint.
-      example: https://example.com/my/webhook/endpoint
-      format: uri
-      pattern: ^(https?)://
-      type: string
     Webhook:
       additionalProperties: false
       properties:
         created_at:
           $ref: "#/components/schemas/CreatedAt"
+        delivery_url:
+          $ref: "#/components/schemas/DeliveryUrl"
         description:
           $ref: "#/components/schemas/Description"
         events:
@@ -1199,10 +1201,8 @@ components:
           $ref: "#/components/schemas/UnifiedApi"
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
-        url:
-          $ref: "#/components/schemas/Url"
       required:
-        - url
+        - delivery_url
         - status
         - events
         - unified_api
