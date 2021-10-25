@@ -1,14 +1,14 @@
-openapi: 3.0.3
+openapi: 3.0.0
 servers:
   - url: https://unify.apideck.com
 info:
   contact:
     email: hello@apideck.com
     url: https://developers.apideck.com
-  description: |
-    Welcome to the File storage API.
+  description: |+
+    Welcome to the sms.
 
-    You can use this API to access all File storage API endpoints.
+    You can use this API to access all sms endpoints.
 
     ## Base URL
 
@@ -262,12 +262,13 @@ info:
     ## Support
 
     If you have problems or need help with your case, you can always reach out to our Support.
+
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: File storage API
-  version: 7.1.0
-  x-apideck-api: file-storage
+  title: sms
+  version: 8.0.0
+  x-apideck-api: sms
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -275,10 +276,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/file-storage.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/sms.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: file-storage
+  x-serviceName: sms
   x-tags:
     - partner
 externalDocs:
@@ -287,15 +288,15 @@ externalDocs:
 security:
   - apiKey: []
 tags:
-  - description: Files
-    name: Files
+  - description: ""
+    name: Messages
     x-apideck-model:
-      $ref: "#/components/schemas/File"
+      $ref: "#/components/schemas/Message"
 paths:
-  /file-storage/files:
+  /sms/messages:
     get:
-      description: List Files
-      operationId: filesAll
+      description: List Messages
+      operationId: messagesAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -303,10 +304,9 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
-        - $ref: "#/components/parameters/filesFilter"
       responses:
         "200":
-          $ref: "#/components/responses/GetFilesResponse"
+          $ref: "#/components/responses/GetMessagesResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -321,10 +321,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Files
+      summary: List Messages
       tags:
-        - Files
-      x-apideck-api: fileStorage
+        - Messages
+      x-apideck-api: sms
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -338,17 +338,17 @@ paths:
             })
 
             try {
-              const { data } = await apideck.fileStorage.filesAll({})
+              const { data } = await apideck.sms.messagesAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: files
-  /file-storage/files/search:
+      x-graphql-field-name: messages
     post:
-      description: Search Files
-      operationId: filesSearch
+      description: Create Message
+      operationId: messagesAdd
       parameters:
+        - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
@@ -356,11 +356,175 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/FilesSearch"
+              $ref: "#/components/schemas/Message"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateMessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Message
+      tags:
+        - Messages
+      x-apideck-api: sms
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              message: {
+                from: '+15017122661',
+                to: '+15017122662',
+                body: 'Hi! How are you doing?',
+                messaging_service_id: '123456'
+              }
+            }
+
+            try {
+              const { data } = await apideck.sms.messagesAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/sms/messages/{id}":
+    delete:
+      description: Delete Message
+      operationId: messagesDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteMessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Message
+      tags:
+        - Messages
+      x-apideck-api: sms
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.sms.messagesDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Message
+      operationId: messagesOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetMessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Message
+      tags:
+        - Messages
+      x-apideck-api: sms
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.sms.messagesOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update Message
+      operationId: messagesUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Message"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/GetFilesResponse"
+          $ref: "#/components/responses/UpdateMessageResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -375,10 +539,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Search Files
+      summary: Update Message
       tags:
-        - Files
-      x-apideck-api: fileStorage
+        - Messages
+      x-apideck-api: sms
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -391,168 +555,22 @@ paths:
               consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
+            const params = {
+              id: 'id_example',
+              message: {
+                from: '+15017122661',
+                to: '+15017122662',
+                body: 'Hi! How are you doing?',
+                messaging_service_id: '123456'
+              }
+            }
+
             try {
-              const { data } = await apideck.fileStorage.filesSearch({
-                filesSearch: {
-                  query: 'logo jpg'
-                }
-              })
+              const { data } = await apideck.sms.messagesUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/file-storage/files/{id}":
-    delete:
-      description: Delete File
-      operationId: filesDelete
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/DeleteFileResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Delete File
-      tags:
-        - Files
-      x-apideck-api: fileStorage
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.fileStorage.filesDelete({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-    get:
-      description: Get File
-      operationId: filesOne
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetFileResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Get File
-      tags:
-        - Files
-      x-apideck-api: fileStorage
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.fileStorage.filesOne({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  "/file-storage/files/{id}/download":
-    get:
-      description: Download File
-      operationId: filesDownload
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetFileDownloadResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Download File
-      tags:
-        - Files
-      x-apideck-api: fileStorage
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.fileStorage.filesDownload({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-      x-graphql-exclude: true
 components:
   parameters:
     applicationId:
@@ -576,14 +594,6 @@ components:
       schema:
         nullable: true
         type: string
-    filesFilter:
-      description: Apply filters (beta)
-      explode: true
-      in: query
-      name: filter
-      schema:
-        $ref: "#/components/schemas/FilesFilter"
-      style: deepObject
     id:
       description: ID of the record you are acting upon.
       in: path
@@ -620,37 +630,30 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    CreateFileResponse:
+    CreateMessageResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateFileResponse"
-      description: Files
-    DeleteFileResponse:
+            $ref: "#/components/schemas/CreateMessageResponse"
+      description: Messages
+    DeleteMessageResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteFileResponse"
-      description: Files
-    GetFileDownloadResponse:
-      content:
-        "*/*":
-          schema:
-            format: binary
-            type: string
-      description: File Download
-    GetFileResponse:
+            $ref: "#/components/schemas/DeleteMessageResponse"
+      description: Messages
+    GetMessageResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetFileResponse"
-      description: Files
-    GetFilesResponse:
+            $ref: "#/components/schemas/GetMessageResponse"
+      description: Messages
+    GetMessagesResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetFilesResponse"
-      description: Files
+            $ref: "#/components/schemas/GetMessagesResponse"
+      description: Messages
     NotFoundResponse:
       content:
         application/json:
@@ -687,12 +690,12 @@ components:
           schema:
             $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
-    UpdateFileResponse:
+    UpdateMessageResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateFileResponse"
-      description: Files
+            $ref: "#/components/schemas/UpdateMessageResponse"
+      description: Messages
   schemas:
     BadRequestResponse:
       properties:
@@ -725,7 +728,7 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
-    CreateFileResponse:
+    CreateMessageResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -735,11 +738,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: files
+          example: Messages
           type: string
         service:
           description: Apideck ID of service provider
-          example: google-drive
+          example: zoho-crm
           type: string
         status:
           description: HTTP Response Status
@@ -757,174 +760,595 @@ components:
         - operation
         - data
       type: object
-    DeleteFileResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: files
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: google-drive
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-    File:
+    Currency:
+      description: Indicates the associated currency for an amount of money. Values correspond to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
+      enum:
+        - UNKNOWN_CURRENCY
+        - AED
+        - AFN
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - ARS
+        - AUD
+        - AWG
+        - AZN
+        - BAM
+        - BBD
+        - BDT
+        - BGN
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BOV
+        - BRL
+        - BSD
+        - BTN
+        - BWP
+        - BYR
+        - BZD
+        - CAD
+        - CDF
+        - CHE
+        - CHF
+        - CHW
+        - CLF
+        - CLP
+        - CNY
+        - COP
+        - COU
+        - CRC
+        - CUC
+        - CUP
+        - CVE
+        - CZK
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - EGP
+        - ERN
+        - ETB
+        - EUR
+        - FJD
+        - FKP
+        - GBP
+        - GEL
+        - GHS
+        - GIP
+        - GMD
+        - GNF
+        - GTQ
+        - GYD
+        - HKD
+        - HNL
+        - HRK
+        - HTG
+        - HUF
+        - IDR
+        - ILS
+        - INR
+        - IQD
+        - IRR
+        - ISK
+        - JMD
+        - JOD
+        - JPY
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LTL
+        - LVL
+        - LYD
+        - MAD
+        - MDL
+        - MGA
+        - MKD
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MUR
+        - MVR
+        - MWK
+        - MXN
+        - MXV
+        - MYR
+        - MZN
+        - NAD
+        - NGN
+        - NIO
+        - NOK
+        - NPR
+        - NZD
+        - OMR
+        - PAB
+        - PEN
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PYG
+        - QAR
+        - RON
+        - RSD
+        - RUB
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDG
+        - SEK
+        - SGD
+        - SHP
+        - SLL
+        - SOS
+        - SRD
+        - SSP
+        - STD
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJS
+        - TMT
+        - TND
+        - TOP
+        - TRY
+        - TTD
+        - TWD
+        - TZS
+        - UAH
+        - UGX
+        - USD
+        - USN
+        - USS
+        - UYI
+        - UYU
+        - UZS
+        - VEF
+        - VND
+        - VUV
+        - WST
+        - XAF
+        - XAG
+        - XAU
+        - XBA
+        - XBB
+        - XBC
+        - XBD
+        - XCD
+        - XDR
+        - XOF
+        - XPD
+        - XPF
+        - XPT
+        - XTS
+        - XXX
+        - YER
+        - ZAR
+        - ZMK
+        - ZMW
+        - BTC
+      example: USD
+      nullable: true
+      title: Currency
+      type: string
+      x-enum-elements:
+        - description: Unknown currency
+          name: UNKNOWN_CURRENCY
+        - description: United Arab Emirates dirham
+          name: AED
+        - description: Afghan afghani
+          name: AFN
+        - description: Albanian lek
+          name: ALL
+        - description: Armenian dram
+          name: AMD
+        - description: Netherlands Antillean guilder
+          name: ANG
+        - description: Angolan kwanza
+          name: AOA
+        - description: Argentine peso
+          name: ARS
+        - description: Australian dollar
+          name: AUD
+        - description: Aruban florin
+          name: AWG
+        - description: Azerbaijani manat
+          name: AZN
+        - description: Bosnia and Herzegovina convertible mark
+          name: BAM
+        - description: Barbados dollar
+          name: BBD
+        - description: Bangladeshi taka
+          name: BDT
+        - description: Bulgarian lev
+          name: BGN
+        - description: Bahraini dinar
+          name: BHD
+        - description: Burundian franc
+          name: BIF
+        - description: Bermudian dollar
+          name: BMD
+        - description: Brunei dollar
+          name: BND
+        - description: Boliviano
+          name: BOB
+        - description: Bolivian Mvdol
+          name: BOV
+        - description: Brazilian real
+          name: BRL
+        - description: Bahamian dollar
+          name: BSD
+        - description: Bhutanese ngultrum
+          name: BTN
+        - description: Botswana pula
+          name: BWP
+        - description: Belarusian ruble
+          name: BYR
+        - description: Belize dollar
+          name: BZD
+        - description: Canadian dollar
+          name: CAD
+        - description: Congolese franc
+          name: CDF
+        - description: WIR Euro
+          name: CHE
+        - description: Swiss franc
+          name: CHF
+        - description: WIR Franc
+          name: CHW
+        - description: Unidad de Fomento
+          name: CLF
+        - description: Chilean peso
+          name: CLP
+        - description: Chinese yuan
+          name: CNY
+        - description: Colombian peso
+          name: COP
+        - description: Unidad de Valor Real
+          name: COU
+        - description: Costa Rican colon
+          name: CRC
+        - description: Cuban convertible peso
+          name: CUC
+        - description: Cuban peso
+          name: CUP
+        - description: Cape Verdean escudo
+          name: CVE
+        - description: Czech koruna
+          name: CZK
+        - description: Djiboutian franc
+          name: DJF
+        - description: Danish krone
+          name: DKK
+        - description: Dominican peso
+          name: DOP
+        - description: Algerian dinar
+          name: DZD
+        - description: Egyptian pound
+          name: EGP
+        - description: Eritrean nakfa
+          name: ERN
+        - description: Ethiopian birr
+          name: ETB
+        - description: Euro
+          name: EUR
+        - description: Fiji dollar
+          name: FJD
+        - description: Falkland Islands pound
+          name: FKP
+        - description: Pound sterling
+          name: GBP
+        - description: Georgian lari
+          name: GEL
+        - description: Ghanaian cedi
+          name: GHS
+        - description: Gibraltar pound
+          name: GIP
+        - description: Gambian dalasi
+          name: GMD
+        - description: Guinean franc
+          name: GNF
+        - description: Guatemalan quetzal
+          name: GTQ
+        - description: Guyanese dollar
+          name: GYD
+        - description: Hong Kong dollar
+          name: HKD
+        - description: Honduran lempira
+          name: HNL
+        - description: Croatian kuna
+          name: HRK
+        - description: Haitian gourde
+          name: HTG
+        - description: Hungarian forint
+          name: HUF
+        - description: Indonesian rupiah
+          name: IDR
+        - description: Israeli new shekel
+          name: ILS
+        - description: Indian rupee
+          name: INR
+        - description: Iraqi dinar
+          name: IQD
+        - description: Iranian rial
+          name: IRR
+        - description: Icelandic króna
+          name: ISK
+        - description: Jamaican dollar
+          name: JMD
+        - description: Jordanian dinar
+          name: JOD
+        - description: Japanese yen
+          name: JPY
+        - description: Kenyan shilling
+          name: KES
+        - description: Kyrgyzstani som
+          name: KGS
+        - description: Cambodian riel
+          name: KHR
+        - description: Comoro franc
+          name: KMF
+        - description: North Korean won
+          name: KPW
+        - description: South Korean won
+          name: KRW
+        - description: Kuwaiti dinar
+          name: KWD
+        - description: Cayman Islands dollar
+          name: KYD
+        - description: Kazakhstani tenge
+          name: KZT
+        - description: Lao kip
+          name: LAK
+        - description: Lebanese pound
+          name: LBP
+        - description: Sri Lankan rupee
+          name: LKR
+        - description: Liberian dollar
+          name: LRD
+        - description: Lesotho loti
+          name: LSL
+        - description: Lithuanian litas
+          name: LTL
+        - description: Latvian lats
+          name: LVL
+        - description: Libyan dinar
+          name: LYD
+        - description: Moroccan dirham
+          name: MAD
+        - description: Moldovan leu
+          name: MDL
+        - description: Malagasy ariary
+          name: MGA
+        - description: Macedonian denar
+          name: MKD
+        - description: Myanmar kyat
+          name: MMK
+        - description: Mongolian tögrög
+          name: MNT
+        - description: Macanese pataca
+          name: MOP
+        - description: Mauritanian ouguiya
+          name: MRO
+        - description: Mauritian rupee
+          name: MUR
+        - description: Maldivian rufiyaa
+          name: MVR
+        - description: Malawian kwacha
+          name: MWK
+        - description: Mexican peso
+          name: MXN
+        - description: Mexican Unidad de Inversion
+          name: MXV
+        - description: Malaysian ringgit
+          name: MYR
+        - description: Mozambican metical
+          name: MZN
+        - description: Namibian dollar
+          name: NAD
+        - description: Nigerian naira
+          name: NGN
+        - description: Nicaraguan córdoba
+          name: NIO
+        - description: Norwegian krone
+          name: NOK
+        - description: Nepalese rupee
+          name: NPR
+        - description: New Zealand dollar
+          name: NZD
+        - description: Omani rial
+          name: OMR
+        - description: Panamanian balboa
+          name: PAB
+        - description: Peruvian sol
+          name: PEN
+        - description: Papua New Guinean kina
+          name: PGK
+        - description: Philippine peso
+          name: PHP
+        - description: Pakistani rupee
+          name: PKR
+        - description: Polish złoty
+          name: PLN
+        - description: Paraguayan guaraní
+          name: PYG
+        - description: Qatari riyal
+          name: QAR
+        - description: Romanian leu
+          name: RON
+        - description: Serbian dinar
+          name: RSD
+        - description: Russian ruble
+          name: RUB
+        - description: Rwandan franc
+          name: RWF
+        - description: Saudi riyal
+          name: SAR
+        - description: Solomon Islands dollar
+          name: SBD
+        - description: Seychelles rupee
+          name: SCR
+        - description: Sudanese pound
+          name: SDG
+        - description: Swedish krona
+          name: SEK
+        - description: Singapore dollar
+          name: SGD
+        - description: Saint Helena pound
+          name: SHP
+        - description: Sierra Leonean leone
+          name: SLL
+        - description: Somali shilling
+          name: SOS
+        - description: Surinamese dollar
+          name: SRD
+        - description: South Sudanese pound
+          name: SSP
+        - description: São Tomé and Príncipe dobra
+          name: STD
+        - description: Salvadoran colón
+          name: SVC
+        - description: Syrian pound
+          name: SYP
+        - description: Swazi lilangeni
+          name: SZL
+        - description: Thai baht
+          name: THB
+        - description: Tajikstani somoni
+          name: TJS
+        - description: Turkmenistan manat
+          name: TMT
+        - description: Tunisian dinar
+          name: TND
+        - description: Tongan pa'anga
+          name: TOP
+        - description: Turkish lira
+          name: TRY
+        - description: Trinidad and Tobago dollar
+          name: TTD
+        - description: New Taiwan dollar
+          name: TWD
+        - description: Tanzanian shilling
+          name: TZS
+        - description: Ukrainian hryvnia
+          name: UAH
+        - description: Ugandan shilling
+          name: UGX
+        - description: United States dollar
+          name: USD
+        - description: United States dollar (next day)
+          name: USN
+        - description: United States dollar (same day)
+          name: USS
+        - description: Uruguay Peso en Unidedades Indexadas
+          name: UYI
+        - description: Uruguyan peso
+          name: UYU
+        - description: Uzbekistan som
+          name: UZS
+        - description: Venezuelan bolívar soberano
+          name: VEF
+        - description: Vietnamese đồng
+          name: VND
+        - description: Vanuatu vatu
+          name: VUV
+        - description: Samoan tala
+          name: WST
+        - description: CFA franc BEAC
+          name: XAF
+        - description: Silver
+          name: XAG
+        - description: Gold
+          name: XAU
+        - description: European Composite Unit
+          name: XBA
+        - description: European Monetary Unit
+          name: XBB
+        - description: European Unit of Account 9
+          name: XBC
+        - description: European Unit of Account 17
+          name: XBD
+        - description: East Caribbean dollar
+          name: XCD
+        - description: Special drawing rights (International Monetary Fund)
+          name: XDR
+        - description: CFA franc BCEAO
+          name: XOF
+        - description: Palladium
+          name: XPD
+        - description: CFP franc
+          name: XPF
+        - description: Platinum
+          name: XPT
+        - description: Code reserved for testing
+          name: XTS
+        - description: No currency
+          name: XXX
+        - description: Yemeni rial
+          name: YER
+        - description: South African rand
+          name: ZAR
+        - description: Zambian kwacha
+          name: ZMK
+        - description: Zambian kwacha
+          name: ZMW
+        - description: Bitcoin
+          name: BTC
+    CustomField:
       additionalProperties: false
       properties:
-        created_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
-        created_by:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          type: string
-        description:
-          description: Optional description of the file
-          example: A sample image
-          type: string
-        downloadable:
-          description: Whether the current user can download this file
-          type: boolean
         id:
-          $ref: "#/components/schemas/Id"
-        mime_type:
-          description: The MIME type of the file.
-          example: image/jpeg
+          example: custom_technologies
           type: string
-        name:
-          description: The name of the file
-          example: sample.jpg
-          type: string
-        owner:
-          properties:
-            email:
-              description: Email of the owner of the file
-              example: hello@apideck.com
-              readOnly: true
+        value:
+          anyOf:
+            - example: Uses Salesforce and Marketo
+              nullable: true
               type: string
-            id:
-              description: ID of the owner of the file
-              example: "12345"
-              readOnly: true
-              type: string
-            name:
-              description: Name of the owner of the file
-              example: Elon Musk
-              readOnly: true
-              type: string
-          type: object
-        parent_folders:
-          description: The parent folders of the file, starting from the root
-          items:
-            properties:
-              id:
-                $ref: "#/components/schemas/Id"
-              name:
-                description: The name of the folder
-                example: Documents
+            - example: 10
+              nullable: true
+              type: number
+            - example: true
+              nullable: true
+              type: boolean
+            - items:
                 type: string
-          type: array
-        parent_folders_complete:
-          description: Whether the list of parent folder is complete. Some connectors only return the direct parent of a file
-          type: boolean
-        path:
-          description: The full path of the file or folder (includes the file name)
-          example: /Documents/sample.jpg
-          type: string
-        size:
-          description: The size of the file in bytes
-          example: 1810673
-          type: integer
-        type:
-          description: The type of resource. Could be file, folder or url
-          enum:
-            - file
-            - folder
-            - url
-          example: file
-          readOnly: true
-          type: string
-          x-graphql-type-name: FileType
-        updated_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
-        updated_by:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          type: string
+              type: array
       required:
         - id
-        - name
-        - type
       type: object
-    FilesFilter:
-      additionalProperties: false
-      example:
-        name: SpaceX
-      properties:
-        folder_id:
-          description: ID of the folder to filter on. The root folder has an alias "root"
-          example: root
-          type: string
-        shared:
-          description: Only return files and folders that are shared
-          type: boolean
-      type: object
-      x-graphql-type-name: FilesFilter
-    FilesSearch:
-      additionalProperties: false
-      example:
-        query: logo jpg
-      properties:
-        query:
-          description: The query to search for. May match across multiple fields.
-          example: logo jpg
-          type: string
-      required:
-        - query
-      type: object
-    GetFileResponse:
+    DeleteMessageResponse:
       properties:
         data:
-          $ref: "#/components/schemas/File"
+          $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
           example: one
           type: string
         resource:
           description: Unified API resource name
-          example: files
+          example: Messages
           type: string
         service:
           description: Apideck ID of service provider
-          example: google-drive
+          example: zoho-crm
           type: string
         status:
           description: HTTP Response Status
@@ -942,12 +1366,68 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: File
-    GetFilesResponse:
+    Email:
+      properties:
+        email:
+          example: elon@musk.com
+          format: email
+          minLength: 1
+          type: string
+        id:
+          example: "123"
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - work
+            - personal
+            - billing
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: EmailType
+      required:
+        - email
+      type: object
+    GetMessageResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Message"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Messages
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: Message
+    GetMessagesResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/File"
+            $ref: "#/components/schemas/Message"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -959,11 +1439,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: files
+          example: Messages
           type: string
         service:
           description: Apideck ID of service provider
-          example: google-drive
+          example: zoho-crm
           type: string
         status:
           description: HTTP Response Status
@@ -981,11 +1461,7 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: FileList
-    Id:
-      example: "12345"
-      readOnly: true
-      type: string
+      x-graphql-type-name: MessageList
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -1003,6 +1479,139 @@ components:
           example: https://unify.apideck.com/crm/companies?cursor=em9oby1jcm06OnBhZ2U6OjE%3D
           nullable: true
           type: string
+      type: object
+    Message:
+      additionalProperties: false
+      properties:
+        body:
+          description: The message text.
+          example: Hi! How are you doing?
+          maxLength: 1600
+          title: Message Body
+          type: string
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        created_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        direction:
+          description: The direction of the message.
+          enum:
+            - inbound
+            - outbound-api
+            - outbound-call
+            - outbound-reply
+            - unknown
+          example: outbound-api
+          readOnly: true
+          title: Direction
+          type: string
+        error:
+          description: The error returned if your message status is failed or undelivered.
+          properties:
+            code:
+              description: The error_code provides more information about the failure. If the message was successful, this value is null
+              example: "444"
+              readOnly: true
+              title: Error Code
+              type: string
+            message:
+              example: Something went wrong
+              readOnly: true
+              title: Error Message
+              type: string
+          readOnly: true
+          title: Error
+          type: object
+        from:
+          description: The phone number that initiated the message.
+          example: "+15017122661"
+          title: From
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        messaging_service_id:
+          description: The ID of the Messaging Service used with the message.
+          example: "123456"
+          title: Messaging Service ID
+          type: string
+        number_of_media_files:
+          description: The number of media files associated with the message.
+          example: 1
+          readOnly: true
+          title: Number of media files
+          type: integer
+        number_of_segments:
+          description: The number of segments that make up the complete message. Messages can be split up due to the constraints of the message size.
+          example: 1
+          readOnly: true
+          title: Number of segments
+          type: integer
+        price:
+          description: Price of the message.
+          properties:
+            amount:
+              description: ""
+              example: "444"
+              readOnly: true
+              title: Price Amount
+              type: string
+            currency:
+              $ref: "#/components/schemas/Currency"
+          readOnly: true
+          title: Price
+          type: object
+        sent_at:
+          description: The date and time that the message was sent
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        status:
+          description: Status of the delivery of the message.
+          enum:
+            - accepted
+            - scheduled
+            - canceled
+            - queued
+            - sending
+            - sent
+            - failed
+            - delivered
+            - undelivered
+            - receiving
+            - received
+            - read
+          example: sent
+          readOnly: true
+          title: Status
+          type: string
+        to:
+          description: The phone number that received the message.
+          example: "+15017122662"
+          title: Message Body
+          type: string
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        updated_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+      required:
+        - from
+        - to
+        - body
       type: object
     Meta:
       description: Reponse metadata
@@ -1117,6 +1726,12 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+    Tags:
+      example:
+        - New
+      items:
+        type: string
+      type: array
     UnauthorizedResponse:
       properties:
         detail:
@@ -1209,7 +1824,7 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
-    UpdateFileResponse:
+    UpdateMessageResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -1219,11 +1834,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: files
+          example: Messages
           type: string
         service:
           description: Apideck ID of service provider
-          example: google-drive
+          example: zoho-crm
           type: string
         status:
           description: HTTP Response Status

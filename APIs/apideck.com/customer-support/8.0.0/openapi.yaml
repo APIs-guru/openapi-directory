@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Customer Support
-  version: 7.1.0
+  version: 8.0.0
   x-apideck-api: customer-support
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1118,6 +1118,11 @@ components:
       required:
         - name
       type: object
+    CompanyName:
+      example: SpaceX
+      nullable: true
+      title: Company name
+      type: string
     Contact:
       additionalProperties: false
       properties:
@@ -1357,10 +1362,7 @@ components:
         bank_accounts:
           $ref: "#/components/schemas/BankAccount"
         company_name:
-          example: SpaceX
-          nullable: true
-          title: Company name
-          type: string
+          $ref: "#/components/schemas/CompanyName"
         created_at:
           example: 2020-09-30T07:43:32.000Z
           format: date-time
@@ -2768,64 +2770,6 @@ components:
         - operation
         - data
       type: object
-    User:
-      properties:
-        created_at:
-          example: 2017-08-12T20:43:21.291Z
-          readOnly: true
-          type: string
-        email:
-          example: elon@musk.com
-          format: email
-          minLength: 1
-          type: string
-        first_name:
-          example: Elon
-          nullable: true
-          type: string
-        id:
-          example: "12345"
-          readOnly: true
-          type: string
-        image:
-          example: https://logo.clearbit.com/spacex.com?s=128
-          nullable: true
-          type: string
-        language:
-          example: EN
-          nullable: true
-          type: string
-        last_name:
-          example: Musk
-          nullable: true
-          type: string
-        parent_id:
-          example: "54321"
-          nullable: true
-          type: string
-        password:
-          example: supersecretpassword
-          type: string
-          writeOnly: true
-        status:
-          example: active
-          nullable: true
-          type: string
-        updated_at:
-          example: 2017-08-12T20:43:21.291Z
-          readOnly: true
-          type: string
-        username:
-          example: masterofcoin
-          nullable: true
-          type: string
-      required:
-        - email
-      x-pii:
-        - username
-        - first_name
-        - last_name
-        - email
     Website:
       properties:
         id:

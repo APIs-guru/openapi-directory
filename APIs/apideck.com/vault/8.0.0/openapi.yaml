@@ -163,7 +163,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 7.1.0
+  version: 8.0.0
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -2008,7 +2008,7 @@ components:
           example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
           type: string
         event_type:
-          $ref: "#/components/schemas/EventType"
+          $ref: "#/components/schemas/VaultEventType"
         execution_attempt:
           description: The current count this request event has been attempted
           example: 2
@@ -2246,14 +2246,6 @@ components:
       required:
         - ""
       type: object
-    EventType:
-      enum:
-        - vault.connection.created
-        - vault.connection.updated
-        - vault.connection.deleted
-        - vault.connection.callable
-      example: vault.connection.created
-      type: string
     FormField:
       properties:
         allow_custom_values:
@@ -2985,6 +2977,14 @@ components:
         - status
         - data
       type: object
+    VaultEventType:
+      enum:
+        - vault.connection.created
+        - vault.connection.updated
+        - vault.connection.deleted
+        - vault.connection.callable
+      example: vault.connection.created
+      type: string
   securitySchemes:
     apiKey:
       description: |
@@ -3023,7 +3023,7 @@ x-webhooks:
           name: x-apideck-event-type
           required: true
           schema:
-            $ref: "#/components/schemas/EventType"
+            $ref: "#/components/schemas/VaultEventType"
       requestBody:
         content:
           application/json:
@@ -3045,7 +3045,7 @@ x-webhooks:
           name: x-apideck-event-type
           required: true
           schema:
-            $ref: "#/components/schemas/EventType"
+            $ref: "#/components/schemas/VaultEventType"
       requestBody:
         content:
           application/json:
@@ -3067,7 +3067,7 @@ x-webhooks:
           name: x-apideck-event-type
           required: true
           schema:
-            $ref: "#/components/schemas/EventType"
+            $ref: "#/components/schemas/VaultEventType"
       requestBody:
         content:
           application/json:
@@ -3089,7 +3089,7 @@ x-webhooks:
           name: x-apideck-event-type
           required: true
           schema:
-            $ref: "#/components/schemas/EventType"
+            $ref: "#/components/schemas/VaultEventType"
       requestBody:
         content:
           application/json:

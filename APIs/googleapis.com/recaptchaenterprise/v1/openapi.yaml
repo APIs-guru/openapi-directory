@@ -406,7 +406,7 @@ components:
       description: Settings specific to keys that can be used by Android apps.
       properties:
         allowAllPackageNames:
-          description: If set to true, it means allowed_package_names will not be enforced.
+          description: If set to true, allowed_package_names are not enforced.
           type: boolean
         allowedPackageNames:
           description: "Android package names of apps allowed to use the key. Example: 'com.companyname.appname'"
@@ -506,7 +506,7 @@ components:
       description: Settings specific to keys that can be used by iOS apps.
       properties:
         allowAllBundleIds:
-          description: If set to true, it means allowed_bundle_ids will not be enforced.
+          description: If set to true, allowed_bundle_ids are not enforced.
           type: boolean
         allowedBundleIds:
           description: "iOS bundle ids of apps allowed to use the key. Example: 'com.companyname.productname.appname'"
@@ -674,7 +674,7 @@ components:
           description: If set to true, it means allowed_domains will not be enforced.
           type: boolean
         allowAmpTraffic:
-          description: Required. Whether this key can be used on AMP (Accelerated Mobile Pages) websites. This can only be set for the SCORE integration type.
+          description: If set to true, the key can be used on AMP (Accelerated Mobile Pages) websites. This is supported only for the SCORE integration type.
           type: boolean
         allowedDomains:
           description: "Domains or subdomains of websites allowed to use the key. All subdomains of an allowed domain are automatically allowed. A valid domain requires a host and must not include any path, port, query or fragment. Examples: 'example.com' or 'subdomain.example.com'"

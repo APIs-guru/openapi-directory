@@ -41,11 +41,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: If set to true, the delete will ignore any outstanding resources for this Feature (that is, `FeatureState.has_resources` is set to true). These resources will NOT be cleaned up or modified in any way.
-          in: query
-          name: force
-          schema:
-            type: boolean
         - description: Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
           in: query
           name: requestId
@@ -102,10 +97,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an existing Feature.
-      operationId: gkehub.projects.locations.features.patch
+      description: Updates an existing Membership.
+      operationId: gkehub.projects.locations.memberships.patch
       parameters:
-        - description: The Feature resource name in the format `projects/*/locations/*/features/*`.
+        - description: Required. The Membership resource name in the format `projects/*/locations/*/memberships/*`.
           in: path
           name: name
           required: true
@@ -116,7 +111,7 @@ paths:
           name: requestId
           schema:
             type: string
-        - description: Mask of fields to update.
+        - description: Required. Mask of fields to update.
           in: query
           name: updateMask
           schema:
@@ -125,7 +120,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Feature"
+              $ref: "#/components/schemas/Membership"
       responses:
         "200":
           content:
@@ -286,6 +281,73 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1alpha/{name}:generateConnectManifest":
+    get:
+      description: Generates the manifest for deployment of the GKE connect agent. **This method is used internally by Google-provided libraries.** Most clients should not need to call this method directly.
+      operationId: gkehub.projects.locations.memberships.generateConnectManifest
+      parameters:
+        - description: Required. The Membership resource name the Agent will associate with, in the format `projects/*/locations/*/memberships/*`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Optional. The image pull secret content for the registry, if not public.
+          in: query
+          name: imagePullSecretContent
+          schema:
+            type: string
+        - description: Optional. If true, generate the resources for upgrade only. Some resources generated only for installation (e.g. secrets) will be excluded.
+          in: query
+          name: isUpgrade
+          schema:
+            type: boolean
+        - description: Optional. Namespace for GKE Connect agent resources. Defaults to `gke-connect`. The Connect Agent is authorized automatically when run in the default namespace. Otherwise, explicit authorization must be granted with an additional IAM binding.
+          in: query
+          name: namespace
+          schema:
+            type: string
+        - description: Optional. URI of a proxy if connectivity from the agent to gkeconnect.googleapis.com requires the use of a proxy. Format must be in the form `http(s)://{proxy_address}`, depending on the HTTP/HTTPS protocol supported by the proxy. This will direct the connect agent's outbound traffic through a HTTP(S) proxy.
+          in: query
+          name: proxy
+          schema:
+            type: string
+        - description: Optional. The registry to fetch the connect agent image from. Defaults to gcr.io/gkeconnect.
+          in: query
+          name: registry
+          schema:
+            type: string
+        - description: Optional. The Connect agent version to use. Defaults to the most current version.
+          in: query
+          name: version
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenerateConnectManifestResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1alpha/{parent}/features":
     get:
       description: Lists Features in a given project and location.
@@ -368,6 +430,102 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Feature"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha/{parent}/memberships":
+    get:
+      description: Lists Memberships in a given project and location.
+      operationId: gkehub.projects.locations.memberships.list
+      parameters:
+        - description: Required. The parent (project and location) where the Memberships will be listed. Specified in the format `projects/*/locations/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: 'Optional. Lists Memberships that match the filter expression, following the syntax outlined in https://google.aip.dev/160. Examples: - Name is `bar` in project `foo-proj` and location `global`: name = "projects/foo-proj/locations/global/membership/bar" - Memberships that have a label called `foo`: labels.foo:* - Memberships that have a label called `foo` whose value is `bar`: labels.foo = bar - Memberships in the CREATING state: state = CREATING'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. One or more fields to compare and use to sort the output. See https://google.aip.dev/132#ordering.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. When requesting a 'page' of resources, `page_size` specifies number of resources to return. If unspecified or set to 0, all resources will be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Token returned by previous call to `ListMemberships` which specifies the position in the list from where to continue listing the resources.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListMembershipsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new Membership. **This is currently only supported for GKE clusters on Google Cloud**. To register other clusters, follow the instructions at https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster.
+      operationId: gkehub.projects.locations.memberships.create
+      parameters:
+        - description: Required. The parent (project and location) where the Memberships will be created. Specified in the format `projects/*/locations/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. Client chosen ID for the membership. `membership_id` must be a valid RFC 1123 compliant DNS label: 1. At most 63 characters in length 2. It must consist of lower case alphanumeric characters or `-` 3. It must start and end with an alphanumeric character Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`, with a maximum length of 63 characters."
+          in: query
+          name: membershipId
+          schema:
+            type: string
+        - description: Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Membership"
       responses:
         "200":
           content:
@@ -690,18 +848,18 @@ components:
           type: string
       type: object
     Binding:
-      description: Associates `members` with a `role`.
+      description: Associates `members`, or principals, with a `role`.
       properties:
         condition:
           $ref: "#/components/schemas/Expr"
-          description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the members in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+          description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
-          description: "Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. "
+          description: "Specifies the principals requesting access for a Cloud Platform resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. "
           items:
             type: string
           type: array
         role:
-          description: Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
     CancelOperationRequest:
@@ -1185,6 +1343,16 @@ components:
           description: Token indicating the state of the syncer.
           type: string
       type: object
+    ConnectAgentResource:
+      description: ConnectAgentResource represents a Kubernetes resource manifest for Connect Agent deployment.
+      properties:
+        manifest:
+          description: YAML manifest of the resource.
+          type: string
+        type:
+          $ref: "#/components/schemas/TypeMeta"
+          description: Kubernetes type of the resource.
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
@@ -1287,6 +1455,15 @@ components:
           description: The time this status and any related Feature-specific details were updated.
           format: google-datetime
           type: string
+      type: object
+    GenerateConnectManifestResponse:
+      description: GenerateConnectManifestResponse contains manifest information for installing/upgrading a Connect agent.
+      properties:
+        manifest:
+          description: The ordered list of Kubernetes resources that need to be applied to the cluster for GKE Connect agent installation/upgrade.
+          items:
+            $ref: "#/components/schemas/ConnectAgentResource"
+          type: array
       type: object
     GkeCluster:
       description: GkeCluster contains information specific to GKE clusters.
@@ -1469,6 +1646,23 @@ components:
           description: The standard List next-page token.
           type: string
       type: object
+    ListMembershipsResponse:
+      description: Response message for the `GkeHub.ListMemberships` method.
+      properties:
+        nextPageToken:
+          description: A token to request the next page of resources from the `ListMemberships` method. The value of an empty string means that there are no more resources to return.
+          type: string
+        resources:
+          description: The list of matching Memberships.
+          items:
+            $ref: "#/components/schemas/Membership"
+          type: array
+        unreachable:
+          description: List of locations that could not be reached while fetching this list.
+          items:
+            type: string
+          type: array
+      type: object
     ListOperationsResponse:
       description: The response message for Operations.ListOperations.
       properties:
@@ -1573,7 +1767,7 @@ components:
           description: Optional. Specific information for a GKE Multi-Cloud cluster.
         onPremCluster:
           $ref: "#/components/schemas/OnPremCluster"
-          description: Optional. Specific information for a GKE On-Prem cluster.
+          description: Optional. Specific information for a GKE On-Prem cluster. An onprem user-cluster who has no resourceLink is not allowed to use this field, it should have a nil "type" instead.
       type: object
     MembershipFeatureSpec:
       description: MembershipFeatureSpec contains configuration information for a single Membership.
@@ -1584,6 +1778,9 @@ components:
         identityservice:
           $ref: "#/components/schemas/IdentityServiceMembershipSpec"
           description: Identity Service-specific spec.
+        mesh:
+          $ref: "#/components/schemas/ServiceMeshMembershipSpec"
+          description: Anthos Service Mesh-specific spec
       type: object
     MembershipFeatureState:
       description: MembershipFeatureState contains Feature status information for a single Membership.
@@ -1728,7 +1925,7 @@ components:
           type: string
       type: object
     Policy:
-      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
+      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
       properties:
         auditConfigs:
           description: Specifies cloud audit logging configuration for this policy.
@@ -1736,7 +1933,7 @@ components:
             $ref: "#/components/schemas/AuditConfig"
           type: array
         bindings:
-          description: Associates a list of `members` to a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one member.
+          description: Associates a list of `members`, or principals, with a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one principal. The `bindings` in a `Policy` can refer to up to 1,500 principals; up to 250 of these principals can be Google groups. Each occurrence of a principal counts towards these limits. For example, if the `bindings` grant 50 different roles to `user:alice@example.com`, and not to any other principal, then you can add another 1,450 principals to the `bindings` in the `Policy`.
           items:
             $ref: "#/components/schemas/Binding"
           type: array
@@ -1797,6 +1994,10 @@ components:
           readOnly: true
           type: array
       type: object
+    ServiceMeshMembershipSpec:
+      description: "**Service Mesh**: Spec for a single Membership for the servicemesh feature"
+      properties: {}
+      type: object
     ServiceMeshMembershipState:
       description: "**Service Mesh**: State for a single Membership, as analyzed by the Service Mesh Hub Controller."
       properties:
@@ -1845,6 +2046,16 @@ components:
           items:
             type: string
           type: array
+      type: object
+    TypeMeta:
+      description: TypeMeta is the type information needed for content unmarshalling of Kubernetes resources in the manifest.
+      properties:
+        apiVersion:
+          description: APIVersion of the resource (e.g. v1).
+          type: string
+        kind:
+          description: Kind of the resource (e.g. Deployment).
+          type: string
       type: object
   securitySchemes:
     Oauth2:

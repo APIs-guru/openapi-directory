@@ -5384,6 +5384,49 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - promotions
+  "/{merchantId}/promotions/{id}":
+    get:
+      description: Retrieves a promotion from your Merchant Center account.
+      operationId: content.promotions.get
+      parameters:
+        - description: Required. The ID of the account that contains the collection.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: Required. REST ID of the promotion to retrieve.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Promotion"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - promotions
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/{merchantId}/pubsubnotificationsettings":
     get:
       description: Retrieves a Merchant Center account's pubsub notification settings.
@@ -7239,7 +7282,7 @@ components:
           description: The phone number of the business. This can only be updated if a verified phone number is not already set. To replace a verified phone number use the `Accounts.requestphoneverification` and `Accounts.verifyphonenumber`.
           type: string
         phoneVerificationStatus:
-          description: 'Verification status of the phone number of the business. This status is read only and can be updated only by successful phone verification. Acceptable values are: - "`verified`" - "`unverified`" "`unspecified`" - '
+          description: 'Verification status of the phone number of the business. This status is read only and can be updated only by successful phone verification. Acceptable values are: - "`verified`" - "`unverified`" '
           type: string
       type: object
     AccountCredentials:
@@ -10204,6 +10247,9 @@ components:
     OrderTrackingSignalLineItemDetails:
       description: The line items of the order.
       properties:
+        brand:
+          description: Brand of the product.
+          type: string
         gtin:
           description: The Global Trade Item Number.
           type: string
@@ -10214,20 +10260,23 @@ components:
           description: The manufacturer part number.
           type: string
         productDescription:
-          description: Plain text description of this product.
+          description: "Plain text description of this product (deprecated: Please use product_title instead)."
           type: string
         productId:
           description: Required. The Content API REST ID of the product, in the form channel:contentLanguage:targetCountry:offerId.
+          type: string
+        productTitle:
+          description: Plain text title of this product.
           type: string
         quantity:
           description: Required. The quantity of the line item in the order.
           format: int64
           type: string
         sku:
-          description: Merchant SKU for this item.
+          description: Merchant SKU for this item (deprecated).
           type: string
         upc:
-          description: Universal product code for this item.
+          description: "Universal product code for this item (deprecated: Please use GTIN instead)."
           type: string
       type: object
     OrderTrackingSignalShipmentLineItemMapping:

@@ -1118,7 +1118,7 @@ components:
           type: string
       type: object
     InventoryWindowsApplication:
-      description: Contains information about a Windows application that is retrieved from the Windows Registry. For more information about these fields, see Windows Installer Properties for the Uninstall Registry.
+      description: "Contains information about a Windows application that is retrieved from the Windows Registry. For more information about these fields, see: https://docs.microsoft.com/en-us/windows/win32/msi/uninstall-registry-key"
       properties:
         displayName:
           description: The name of the application or product.
@@ -2246,6 +2246,7 @@ components:
             - FREQUENCY_UNSPECIFIED
             - WEEKLY
             - MONTHLY
+            - DAILY
           type: string
         lastExecuteTime:
           description: Output only. The time the last patch job ran successfully.

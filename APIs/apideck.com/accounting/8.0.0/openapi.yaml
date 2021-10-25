@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 7.1.0
+  version: 8.0.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1638,7 +1638,8 @@ paths:
                   display_id: '1-1100'
                 },
                 sub_account: false,
-                row_version: '3144638439811448832'
+                last_reconciliation_date: '2020-09-30',
+                row_version: '1-12345'
               }
             }
 
@@ -1833,7 +1834,8 @@ paths:
                   display_id: '1-1100'
                 },
                 sub_account: false,
-                row_version: '3144638439811448832'
+                last_reconciliation_date: '2020-09-30',
+                row_version: '1-12345'
               }
             }
 
@@ -1948,6 +1950,8 @@ paths:
                 description: 'No ABN Withholding',
                 effective_tax_rate: 10,
                 total_tax_rate: 10,
+                tax_payable_account_id: '123456',
+                tax_remitted_account_id: '123456',
                 components: [
                   {
                     name: 'City tax',
@@ -1955,9 +1959,10 @@ paths:
                     compound: true
                   }
                 ],
-                tax_type: 'NONE',
+                tax_type: 'output_gst',
                 original_tax_rate_id: '12345',
-                active: true
+                active: true,
+                row_version: '1-12345'
               }
             }
 
@@ -2124,6 +2129,8 @@ paths:
                 description: 'No ABN Withholding',
                 effective_tax_rate: 10,
                 total_tax_rate: 10,
+                tax_payable_account_id: '123456',
+                tax_remitted_account_id: '123456',
                 components: [
                   {
                     name: 'City tax',
@@ -2131,9 +2138,10 @@ paths:
                     compound: true
                   }
                 ],
-                tax_type: 'NONE',
+                tax_type: 'output_gst',
                 original_tax_rate_id: '12345',
-                active: true
+                active: true,
+                row_version: '1-12345'
               }
             }
 
@@ -2401,6 +2409,25 @@ components:
             $ref: "#/components/schemas/UpdateTaxRateResponse"
       description: TaxRate updated
   schemas:
+    AccountingEventType:
+      enum:
+        - accounting.customer.created
+        - accounting.customer.updated
+        - accounting.customer.deleted
+        - accounting.invoice.created
+        - accounting.invoice.updated
+        - accounting.invoice.deleted
+        - accounting.invoice_item.created
+        - accounting.invoice_item.updated
+        - accounting.invoice_item.deleted
+        - accounting.ledger_account.created
+        - accounting.ledger_account.updated
+        - accounting.ledger_account.deleted
+        - accounting.tax_rate.created
+        - accounting.tax_rate.updated
+        - accounting.tax_rate.deleted
+      example: accounting.invoice.created
+      type: string
     Address:
       properties:
         city:
@@ -3902,25 +3929,6 @@ components:
       required:
         - email
       type: object
-    EventType:
-      enum:
-        - accounting.customer.created
-        - accounting.customer.updated
-        - accounting.customer.deleted
-        - accounting.invoice.created
-        - accounting.invoice.updated
-        - accounting.invoice.deleted
-        - accounting.invoice_item.created
-        - accounting.invoice_item.updated
-        - accounting.invoice_item.deleted
-        - accounting.ledger_account.created
-        - accounting.ledger_account.updated
-        - accounting.ledger_account.deleted
-        - accounting.tax_rate.created
-        - accounting.tax_rate.updated
-        - accounting.tax_rate.deleted
-      example: accounting.invoice.created
-      type: string
     FirstName:
       example: Elon
       nullable: true
@@ -4773,7 +4781,6 @@ components:
           example: 2020-09-30
           format: date
           nullable: true
-          readOnly: true
           title: Last Reconciliation Date
           type: string
         level:
@@ -4808,9 +4815,7 @@ components:
               type: string
           type: object
         row_version:
-          example: "3144638439811448832"
-          nullable: true
-          type: string
+          $ref: "#/components/schemas/RowVersion"
         sub_account:
           example: false
           nullable: true
@@ -5291,6 +5296,7 @@ components:
       type: integer
     RowVersion:
       example: 1-12345
+      nullable: true
       title: Row version
       type: string
     SalesTaxNumber:
@@ -5381,11 +5387,36 @@ components:
           nullable: true
           title: Original tax rate ID
           type: string
-        tax_type:
-          description: Special tax type to handle zero rate taxes. Used with VAT registered Businesses who receive goods/services (acquisitions) from other EU countries, will need to calculate the VAT due, but not paid, on these acquisitions. The rate of VAT payable is the same that would have been paid if the goods had been supplied by a UK supplier.
-          example: NONE
+        row_version:
+          $ref: "#/components/schemas/RowVersion"
+        tax_payable_account_id:
+          description: Unique identifier for the account for tax collected.
+          example: "123456"
           nullable: true
-          title: Description
+          title: Tax payable account id
+          type: string
+        tax_remitted_account_id:
+          description: Unique identifier for the account for tax remitted.
+          example: "123456"
+          nullable: true
+          title: Tax remitted account id
+          type: string
+        tax_type:
+          description: Tax type used to define the source of tax collected or paid
+          enum:
+            - output
+            - input
+            - withholdings
+            - import_gst
+            - output_gst
+            - input_exempt
+            - output_exempt
+            - consolidated
+            - luxury_car_tax
+            - none
+          example: output_gst
+          nullable: true
+          title: Tax Type
           type: string
         total_tax_rate:
           description: Not compounded sum of the components of a tax rate
@@ -5665,64 +5696,6 @@ components:
       nullable: true
       readOnly: true
       type: string
-    User:
-      properties:
-        created_at:
-          example: 2017-08-12T20:43:21.291Z
-          readOnly: true
-          type: string
-        email:
-          example: elon@musk.com
-          format: email
-          minLength: 1
-          type: string
-        first_name:
-          example: Elon
-          nullable: true
-          type: string
-        id:
-          example: "12345"
-          readOnly: true
-          type: string
-        image:
-          example: https://logo.clearbit.com/spacex.com?s=128
-          nullable: true
-          type: string
-        language:
-          example: EN
-          nullable: true
-          type: string
-        last_name:
-          example: Musk
-          nullable: true
-          type: string
-        parent_id:
-          example: "54321"
-          nullable: true
-          type: string
-        password:
-          example: supersecretpassword
-          type: string
-          writeOnly: true
-        status:
-          example: active
-          nullable: true
-          type: string
-        updated_at:
-          example: 2017-08-12T20:43:21.291Z
-          readOnly: true
-          type: string
-        username:
-          example: masterofcoin
-          nullable: true
-          type: string
-      required:
-        - email
-      x-pii:
-        - username
-        - first_name
-        - last_name
-        - email
     WebhookEvent:
       allOf:
         - properties:
@@ -5757,7 +5730,7 @@ components:
           type: object
         - properties:
             event_type:
-              $ref: "#/components/schemas/EventType"
+              $ref: "#/components/schemas/AccountingEventType"
           type: object
       x-sdk-exclude: true
     Website:

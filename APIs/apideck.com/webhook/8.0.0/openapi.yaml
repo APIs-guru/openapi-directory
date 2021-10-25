@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Webhook API
-  version: 7.1.0
+  version: 8.0.0
   x-apideck-api: webhook
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -585,109 +585,6 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
-    ConnectionEvent:
-      properties:
-        entity:
-          properties:
-            auth_type:
-              enum:
-                - oauth2
-                - apiKey
-                - basic
-                - none
-              type: string
-            consumer_id:
-              example: test_user_id
-              type: string
-            created_at:
-              example: 2020-09-19T12:18:37.071Z
-              type: string
-            enabled:
-              example: true
-              type: boolean
-            icon:
-              example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
-              type: string
-            id:
-              example: 1111+test_user_id
-              readOnly: true
-              type: string
-            logo:
-              example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
-              type: string
-            metadata:
-              additionalProperties: true
-              description: Attach your own consumer specific metadata
-              example:
-                account:
-                  id: c01458a5-7276-41ce-bc19-639906b0450a
-                  name: My Company
-                plan: enterprise
-              nullable: true
-              properties: {}
-              type: object
-            name:
-              example: Salesforce
-              type: string
-            service_id:
-              example: teamleader
-              type: string
-            settings:
-              description: Connection settings. Values will persist to `form_fields` with corresponding id
-              example:
-                instance_url: https://eu28.salesforce.com
-              nullable: true
-              type: object
-            state:
-              enum:
-                - available
-                - callable
-                - added
-                - configured
-                - authorized
-              example: authorized
-              type: string
-            tag_line:
-              example: CRM software solutions and enterprise cloud computing from Salesforce, the leader in customer relationship management (CRM) and PaaS. Free 30 day trial.
-              readOnly: true
-              type: string
-            unified_api:
-              example: crm
-              type: string
-            updated_at:
-              example: 2020-09-19T12:18:37.071Z
-              nullable: true
-              type: string
-            website:
-              example: https://www.salesforce.com
-              readOnly: true
-              type: string
-          type: object
-        entity_id:
-          description: The service provider's ID of the entity that triggered this event
-          example: 123456ASDF
-          type: string
-        entity_type:
-          description: The type entity that triggered this event
-          example: Company
-          type: string
-        event_id:
-          description: Unique reference to this request event
-          example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-          type: string
-        event_type:
-          $ref: "#/components/schemas/EventType"
-        execution_attempt:
-          description: The current count this request event has been attempted
-          example: 2
-          type: number
-        occured_at:
-          description: ISO Datetime for when the original event occurred
-          example: 2021-10-01T03:14:55.419Z
-          type: string
-        service_id:
-          $ref: "#/components/schemas/ServiceId"
-      type: object
     ConsumerId:
       description: Consumer identifier
       example: test_consumer_id
@@ -705,7 +602,7 @@ components:
             - vault.connection.created
             - vault.connection.updated
           items:
-            $ref: "#/components/schemas/EventType"
+            $ref: "#/components/schemas/WebhookEventType"
           title: Subscribed events
           type: array
         status:
@@ -767,36 +664,6 @@ components:
       description: An optional description of what the webhook is used for.
       example: This is a webhook. It listens to connection events
       type: string
-    EventType:
-      enum:
-        - "*"
-        - crm.activity.created
-        - crm.activity.updated
-        - crm.activity.deleted
-        - crm.company.created
-        - crm.company.updated
-        - crm.company.deleted
-        - crm.contact.created
-        - crm.contact.updated
-        - crm.contact.deleted
-        - crm.lead.created
-        - crm.lead.updated
-        - crm.lead.deleted
-        - crm.note.created
-        - crm.notes.updated
-        - crm.notes.deleted
-        - crm.opportunity.created
-        - crm.opportunity.updated
-        - crm.opportunity.deleted
-        - lead.lead.created
-        - lead.lead.updated
-        - lead.lead.deleted
-        - vault.connection.created
-        - vault.connection.updated
-        - vault.connection.deleted
-        - vault.connection.callable
-      example: crm.company.created
-      type: string
     ExecuteBaseUrl:
       description: The Unify Base URL events from connectors will be sent to after service id is appended.
       example: https://unify.apideck.com/webhook/webhooks/1234/execute
@@ -814,7 +681,7 @@ components:
       type: array
     ExecuteWebhookResponse:
       properties:
-        requestId:
+        request_id:
           description: UUID of the request received
           example: c6af9ac6-7b61-11e6-9a41-93e8deadbeef
           type: string
@@ -1143,7 +1010,7 @@ components:
             - vault.connection.created
             - vault.connection.updated
           items:
-            $ref: "#/components/schemas/EventType"
+            $ref: "#/components/schemas/WebhookEventType"
           title: Subscribed events
           type: array
         status:
@@ -1186,7 +1053,7 @@ components:
             - vault.connection.created
             - vault.connection.updated
           items:
-            $ref: "#/components/schemas/EventType"
+            $ref: "#/components/schemas/WebhookEventType"
           title: Subscribed events
           type: array
         execute_base_url:
@@ -1227,7 +1094,7 @@ components:
           example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
           type: string
         event_type:
-          $ref: "#/components/schemas/EventType"
+          $ref: "#/components/schemas/WebhookEventType"
         execution_attempt:
           description: The current count this request event has been attempted
           example: 2
@@ -1363,6 +1230,36 @@ components:
           type: object
       type: object
       x-graphql-type-name: WebhookEventLogsFilter
+    WebhookEventType:
+      enum:
+        - "*"
+        - crm.activity.created
+        - crm.activity.updated
+        - crm.activity.deleted
+        - crm.company.created
+        - crm.company.updated
+        - crm.company.deleted
+        - crm.contact.created
+        - crm.contact.updated
+        - crm.contact.deleted
+        - crm.lead.created
+        - crm.lead.updated
+        - crm.lead.deleted
+        - crm.note.created
+        - crm.notes.updated
+        - crm.notes.deleted
+        - crm.opportunity.created
+        - crm.opportunity.updated
+        - crm.opportunity.deleted
+        - lead.lead.created
+        - lead.lead.updated
+        - lead.lead.deleted
+        - vault.connection.created
+        - vault.connection.updated
+        - vault.connection.deleted
+        - vault.connection.callable
+      example: crm.company.created
+      type: string
   securitySchemes:
     apiKey:
       description: |
