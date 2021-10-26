@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta3
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: documentai
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -793,9 +794,6 @@ components:
           description: The creation time of the operation.
           format: google-datetime
           type: string
-        resource:
-          description: A related resource to this operation.
-          type: string
         state:
           description: The state of the operation.
           enum:
@@ -1055,9 +1053,6 @@ components:
         createTime:
           description: The creation time of the operation.
           format: google-datetime
-          type: string
-        resource:
-          description: A related resource to this operation.
           type: string
         state:
           description: The state of the operation.
@@ -2900,9 +2895,6 @@ components:
         createTime:
           description: The creation time of the operation.
           format: google-datetime
-          type: string
-        resource:
-          description: A related resource to this operation.
           type: string
         state:
           description: The state of the operation.

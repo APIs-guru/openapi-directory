@@ -630,7 +630,7 @@ components:
               description: Only present when `callerType` is `KEY`. Can be the `consumer_key` of the requestor for OAuth 2LO API requests or an identifier for robot accounts.
               type: string
             profileId:
-              description: The unique Google Workspace profile ID of the actor. May be absent if the actor is not a Google Workspace user.
+              description: The unique Google Workspace profile ID of the actor. This value might be absent if the actor is not a Google Workspace user, or may be the number 105250506097979753968 which acts as a placeholder ID.
               type: string
           type: object
         etag:

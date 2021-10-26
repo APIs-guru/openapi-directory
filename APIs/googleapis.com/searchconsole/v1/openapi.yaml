@@ -487,6 +487,8 @@ components:
             - NOT_EQUALS
             - CONTAINS
             - NOT_CONTAINS
+            - INCLUDING_REGEX
+            - EXCLUDING_REGEX
           type: string
       type: object
     ApiDimensionFilterGroup:
@@ -625,6 +627,8 @@ components:
             - IMAGE
             - VIDEO
             - NEWS
+            - DISCOVER
+            - GOOGLE_NEWS
           type: string
         startDate:
           description: " [Required] Start date of the requested date range, in YYYY-MM-DD format, in PST time (UTC - 8:00). Must be less than or equal to the end date. This value is included in the range."
@@ -633,6 +637,16 @@ components:
           description: "[Optional; Default is 0] Zero-based index of the first row in the response. Must be a non-negative number."
           format: int32
           type: integer
+        type:
+          description: 'Optional. [Optional; Default is \"web\"] Type of report: search type, or either Discover or Gnews.'
+          enum:
+            - WEB
+            - IMAGE
+            - VIDEO
+            - NEWS
+            - DISCOVER
+            - GOOGLE_NEWS
+          type: string
       type: object
     SearchAnalyticsQueryResponse:
       description: A list of rows, one per result, grouped by key. Metrics in each row are aggregated for all data grouped by that key either by page or property, as specified by the aggregation type parameter.

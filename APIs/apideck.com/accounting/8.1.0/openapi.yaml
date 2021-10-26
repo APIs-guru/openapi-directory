@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.0.0
+  version: 8.1.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -4410,25 +4410,7 @@ components:
               id:
                 $ref: "#/components/schemas/Id"
               item:
-                properties:
-                  code:
-                    description: User defined item code
-                    example: 120-C
-                    nullable: true
-                    title: Item code
-                    type: string
-                  id:
-                    description: ID of the linked item
-                    example: "12344"
-                    nullable: true
-                    title: Item ID
-                    type: string
-                  name:
-                    example: Model Y
-                    nullable: true
-                    title: Item name
-                    type: string
-                type: object
+                $ref: "#/components/schemas/LinkedInvoiceItem"
               ledger_account:
                 $ref: "#/components/schemas/LinkedLedgerAccount"
               line_number:
@@ -4869,6 +4851,27 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+    LinkedInvoiceItem:
+      properties:
+        code:
+          description: User defined item code
+          example: 120-C
+          nullable: true
+          title: Item code
+          type: string
+        id:
+          description: ID of the linked item
+          example: "12344"
+          nullable: true
+          title: Item ID
+          type: string
+        name:
+          example: Model Y
+          nullable: true
+          title: Item name
+          type: string
+      type: object
+      x-graphql-type-name: LinkedInvoiceItem
     LinkedLedgerAccount:
       properties:
         id:

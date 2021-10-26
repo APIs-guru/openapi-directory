@@ -13,20 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Firestore API
   version: v1beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://firestore.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: firestore
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/firestore
 tags:
@@ -370,7 +367,7 @@ paths:
           name: currentDocument.exists
           schema:
             type: boolean
-        - description: When set, the target document must exist and have been last updated at that time.
+        - description: When set, the target document must exist and have been last updated at that time. Timestamp must be microsecond aligned.
           in: query
           name: currentDocument.updateTime
           schema:
@@ -467,7 +464,7 @@ paths:
           name: currentDocument.exists
           schema:
             type: boolean
-        - description: When set, the target document must exist and have been last updated at that time.
+        - description: When set, the target document must exist and have been last updated at that time. Timestamp must be microsecond aligned.
           in: query
           name: currentDocument.updateTime
           schema:
@@ -1758,7 +1755,7 @@ components:
           description: When set to `true`, the target document must exist. When set to `false`, the target document must not exist.
           type: boolean
         updateTime:
-          description: When set, the target document must exist and have been last updated at that time.
+          description: When set, the target document must exist and have been last updated at that time. Timestamp must be microsecond aligned.
           format: google-datetime
           type: string
       type: object
@@ -2116,5 +2113,3 @@ components:
             https://www.googleapis.com/auth/datastore: View and manage your Google Cloud Datastore data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}
