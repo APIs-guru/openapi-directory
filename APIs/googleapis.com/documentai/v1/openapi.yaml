@@ -937,6 +937,9 @@ components:
           description: The creation time of the operation.
           format: google-datetime
           type: string
+        resource:
+          description: A related resource to this operation.
+          type: string
         state:
           description: The state of the operation.
           enum:
@@ -1233,6 +1236,9 @@ components:
         createTime:
           description: The creation time of the operation.
           format: google-datetime
+          type: string
+        resource:
+          description: A related resource to this operation.
           type: string
         state:
           description: The state of the operation.
@@ -4075,6 +4081,9 @@ components:
         createTime:
           description: The creation time of the operation.
           format: google-datetime
+          type: string
+        resource:
+          description: A related resource to this operation.
           type: string
         state:
           description: The state of the operation.

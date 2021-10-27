@@ -3757,7 +3757,7 @@ components:
       description: The configuration for continuous tests.
       properties:
         enableContinuousRun:
-          description: Whether to run test cases in TestCasesConfig.test_cases periodically. Default false. If set to ture, run once a day.
+          description: Whether to run test cases in TestCasesConfig.test_cases periodically. Default false. If set to true, run once a day.
           type: boolean
         enablePredeploymentRun:
           description: Whether to run test cases in TestCasesConfig.test_cases before deploying a flow version to the environment. Default false.

@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://workflowexecutions.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: workflowexecutions
 externalDocs:
@@ -286,7 +286,7 @@ components:
       description: Error describes why the execution was abnormally terminated.
       properties:
         context:
-          description: Human readable stack trace string.
+          description: Human-readable stack trace string.
           type: string
         payload:
           description: Error message and data returned represented as a JSON string.
@@ -365,7 +365,7 @@ components:
           format: int64
           type: string
         length:
-          description: The length in bytes of text in this character group, e.g. digits of a number, string length, or AST (abstract syntax tree) node.
+          description: The number of bytes of source code making up this stack trace element.
           format: int64
           type: string
         line:
@@ -377,7 +377,7 @@ components:
       description: A collection of stack elements (frames) where an error occurred.
       properties:
         elements:
-          description: An array of Stack elements.
+          description: An array of stack elements.
           items:
             $ref: "#/components/schemas/StackTraceElement"
           type: array
@@ -387,7 +387,7 @@ components:
       properties:
         position:
           $ref: "#/components/schemas/Position"
-          description: The source position information of the stacktrace element.
+          description: The source position information of the stack trace element.
         routine:
           description: The routine where the error occurred.
           type: string

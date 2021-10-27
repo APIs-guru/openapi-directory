@@ -29,6 +29,63 @@ externalDocs:
 tags:
   - name: customers
 paths:
+  "/v1/{customer}/apps:countChromeAppRequests":
+    get:
+      description: Generate summary of app installation requests.
+      operationId: chromemanagement.customers.apps.countChromeAppRequests
+      parameters:
+        - description: Required. Customer id or "my_customer" to use the customer associated to the account making the request.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: "Field used to order results. Supported fields: * request_count * latest_request_time"
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: The ID of the organizational unit.
+          in: query
+          name: orgUnitId
+          schema:
+            type: string
+        - description: Maximum number of results to return. Maximum and default are 50, anything above will be coerced to 50.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token to specify the page of the request to be returned.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleChromeManagementV1CountChromeAppRequestsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chrome.management.appdetails.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chrome.management.appdetails.readonly
+      tags:
+        - customers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{customer}/reports:countChromeVersions":
     get:
       description: Generate report of installed Chrome versions.
@@ -540,6 +597,40 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleChromeManagementV1ChromeAppRequest:
+      description: Details of an app installation request.
+      properties:
+        appDetails:
+          description: "Output only. Format: app_details=customers/{customer_id}/apps/chrome/{app_id}"
+          readOnly: true
+          type: string
+        appId:
+          description: 'Output only. Unique store identifier for the app. Example: "gmbmikajjgmnabiglmofipeabaddhgne" for the Save to Google Drive Chrome extension.'
+          readOnly: true
+          type: string
+        detailUri:
+          description: Output only. The uri for the detail page of the item.
+          readOnly: true
+          type: string
+        displayName:
+          description: Output only. App's display name.
+          readOnly: true
+          type: string
+        iconUri:
+          description: Output only. A link to an image that can be used as an icon for the product.
+          readOnly: true
+          type: string
+        latestRequestTime:
+          description: Output only. The timestamp of the most recently made request for this app.
+          format: google-datetime
+          readOnly: true
+          type: string
+        requestCount:
+          description: Output only. Total count of requests for this app.
+          format: int64
+          readOnly: true
+          type: string
+      type: object
     GoogleChromeManagementV1ChromeAppSiteAccess:
       description: Represent one host permission.
       properties:
@@ -547,6 +638,22 @@ components:
           description: Output only. This can contain very specific hosts, or patterns like "*.com" for instance.
           readOnly: true
           type: string
+      type: object
+    GoogleChromeManagementV1CountChromeAppRequestsResponse:
+      description: Response containing summary of requested app installations.
+      properties:
+        nextPageToken:
+          description: Token to specify the next page in the list.
+          type: string
+        requestedApps:
+          description: Count of requested apps matching request.
+          items:
+            $ref: "#/components/schemas/GoogleChromeManagementV1ChromeAppRequest"
+          type: array
+        totalSize:
+          description: Total number of matching app requests.
+          format: int32
+          type: integer
       type: object
     GoogleChromeManagementV1CountChromeVersionsResponse:
       description: Response containing requested browser versions details and counts.

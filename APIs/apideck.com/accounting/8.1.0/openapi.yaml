@@ -506,8 +506,7 @@ paths:
                   }
                 ],
                 tax_rate: {
-                  id: '123456',
-                  code: 'N-T'
+                  id: '123456'
                 },
                 tax_number: 'US123945459',
                 currency: 'USD',
@@ -726,8 +725,7 @@ paths:
                   }
                 ],
                 tax_rate: {
-                  id: '123456',
-                  code: 'N-T'
+                  id: '123456'
                 },
                 tax_number: 'US123945459',
                 currency: 'USD',
@@ -849,6 +847,7 @@ paths:
 
             const params = {
               invoiceItem: {
+                id: '123456',
                 code: '120-C',
                 sold: true,
                 name: 'Model Y',
@@ -860,13 +859,13 @@ paths:
                   unit_of_measure: 'hour',
                   tax_inclusive: true,
                   tax_rate: {
-                    id: '123456',
-                    code: 'N-T'
+                    id: '123456'
                   }
                 },
                 quantity: 2,
                 unit_price: 27500.5,
                 ledger_account: {
+                  id: '123456',
                   name: 'Bank account'
                 },
                 active: true,
@@ -1032,6 +1031,7 @@ paths:
             const params = {
               id: 'id_example',
               invoiceItem: {
+                id: '123456',
                 code: '120-C',
                 sold: true,
                 name: 'Model Y',
@@ -1043,13 +1043,13 @@ paths:
                   unit_of_measure: 'hour',
                   tax_inclusive: true,
                   tax_rate: {
-                    id: '123456',
-                    code: 'N-T'
+                    id: '123456'
                   }
                 },
                 quantity: 2,
                 unit_price: 27500.5,
                 ledger_account: {
+                  id: '123456',
                   name: 'Bank account'
                 },
                 active: true,
@@ -1163,15 +1163,15 @@ paths:
 
             const params = {
               invoice: {
-                type: 'Service',
+                type: 'service',
                 number: 'OIT00546',
                 customer: {
-                  company_name: 'The boring company'
+                  id: '12345'
                 },
                 invoice_date: '2020-09-30',
                 due_date: '2020-10-30',
                 po_number: '90000117',
-                status: 'paid',
+                status: 'submitted',
                 currency: 'USD',
                 tax_inclusive: true,
                 sub_total: 27500,
@@ -1192,6 +1192,7 @@ paths:
                     total_amount: 27500,
                     quantity: 2,
                     unit_price: 27500.5,
+                    unit_of_measure: 'each',
                     discount_percentage: 15,
                     item: {
                       id: '12344',
@@ -1199,10 +1200,10 @@ paths:
                       name: 'Model Y'
                     },
                     tax_rate: {
-                      id: '123456',
-                      code: 'N-T'
+                      id: '123456'
                     },
                     ledger_account: {
+                      id: '123456',
                       name: 'Bank account'
                     },
                     row_version: '1-12345'
@@ -1410,15 +1411,15 @@ paths:
             const params = {
               id: 'id_example',
               invoice: {
-                type: 'Service',
+                type: 'service',
                 number: 'OIT00546',
                 customer: {
-                  company_name: 'The boring company'
+                  id: '12345'
                 },
                 invoice_date: '2020-09-30',
                 due_date: '2020-10-30',
                 po_number: '90000117',
-                status: 'paid',
+                status: 'submitted',
                 currency: 'USD',
                 tax_inclusive: true,
                 sub_total: 27500,
@@ -1439,6 +1440,7 @@ paths:
                     total_amount: 27500,
                     quantity: 2,
                     unit_price: 27500.5,
+                    unit_of_measure: 'each',
                     discount_percentage: 15,
                     item: {
                       id: '12344',
@@ -1446,10 +1448,10 @@ paths:
                       name: 'Model Y'
                     },
                     tax_rate: {
-                      id: '123456',
-                      code: 'N-T'
+                      id: '123456'
                     },
                     ledger_account: {
+                      id: '123456',
                       name: 'Bank account'
                     },
                     row_version: '1-12345'
@@ -1618,8 +1620,7 @@ paths:
                 currency: 'USD',
                 tax_type: 'USD',
                 tax_rate: {
-                  id: '123456',
-                  code: 'N-T'
+                  id: '123456'
                 },
                 level: 1,
                 active: true,
@@ -1814,8 +1815,7 @@ paths:
                 currency: 'USD',
                 tax_type: 'USD',
                 tax_rate: {
-                  id: '123456',
-                  code: 'N-T'
+                  id: '123456'
                 },
                 level: 1,
                 active: true,
@@ -3028,7 +3028,7 @@ components:
     CreateInvoiceResponse:
       properties:
         data:
-          $ref: "#/components/schemas/UnifiedId"
+          $ref: "#/components/schemas/InvoiceResponse"
         operation:
           description: Operation performed
           example: one
@@ -3812,7 +3812,7 @@ components:
     DeleteInvoiceResponse:
       properties:
         data:
-          $ref: "#/components/schemas/UnifiedId"
+          $ref: "#/components/schemas/InvoiceResponse"
         operation:
           description: Operation performed
           example: one
@@ -3905,6 +3905,12 @@ components:
         - operation
         - data
       type: object
+    DownstreamId:
+      description: The third-party API ID of original entity
+      example: "12345"
+      nullable: true
+      readOnly: true
+      type: string
     Email:
       properties:
         email:
@@ -4355,9 +4361,18 @@ components:
               example: The boring company
               minLength: 1
               nullable: true
+              readOnly: true
+              type: string
+            display_id:
+              example: CUST00101
+              nullable: true
+              readOnly: true
+              title: Display ID
               type: string
             id:
-              $ref: "#/components/schemas/Id"
+              example: "12345"
+              title: Customer ID
+              type: string
           required:
             - id
           title: Customer
@@ -4373,6 +4388,8 @@ components:
           nullable: true
           title: Deposit
           type: number
+        downstream_id:
+          $ref: "#/components/schemas/DownstreamId"
         due_date:
           description: The invoice due date is the date on which a payment or invoice is scheduled to be received by the seller - YYYY-MM-DD
           example: 2020-10-30
@@ -4447,6 +4464,11 @@ components:
                 title: Type
                 type: string
                 x-graphql-type-name: InvoiceLineItemType
+              unit_of_measure:
+                example: each
+                nullable: true
+                title: Unit of measure
+                type: string
               unit_price:
                 $ref: "#/components/schemas/UnitPrice"
             type: object
@@ -4475,7 +4497,7 @@ components:
             - paid
             - void
             - credit
-          example: paid
+          example: submitted
           nullable: true
           title: Status
           type: string
@@ -4501,11 +4523,17 @@ components:
           title: Total tax amount
           type: number
         type:
-          description: ""
-          example: Service
+          enum:
+            - standard
+            - credit
+            - service
+            - product
+            - other
+          example: service
           nullable: true
           title: Invoice type
           type: string
+          x-graphql-type-name: InvoiceType
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
@@ -4535,7 +4563,9 @@ components:
           title: Description
           type: string
         id:
-          $ref: "#/components/schemas/Id"
+          example: "123456"
+          title: Item ID
+          type: string
         ledger_account:
           $ref: "#/components/schemas/LinkedLedgerAccount"
         name:
@@ -4586,6 +4616,13 @@ components:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
+      type: object
+    InvoiceResponse:
+      properties:
+        downstream_id:
+          $ref: "#/components/schemas/DownstreamId"
+        id:
+          $ref: "#/components/schemas/Id"
       type: object
     LastName:
       example: Musk
@@ -4875,23 +4912,31 @@ components:
     LinkedLedgerAccount:
       properties:
         id:
-          $ref: "#/components/schemas/Id"
+          example: "123456"
+          title: Account ID
+          type: string
         name:
           example: Bank account
           minLength: 1
           nullable: true
           title: Account Name
           type: string
+      required:
+        - id
+      type: object
       x-graphql-type-name: LinkedLedgerAccount
     LinkedTaxRate:
       properties:
         code:
           example: N-T
           nullable: true
+          readOnly: true
           type: string
         id:
           example: "123456"
           type: string
+      required:
+        - id
       type: object
       x-graphql-type-name: LinkedTaxRate
     Links:
@@ -5596,7 +5641,7 @@ components:
     UpdateInvoiceResponse:
       properties:
         data:
-          $ref: "#/components/schemas/UnifiedId"
+          $ref: "#/components/schemas/InvoiceResponse"
         operation:
           description: Operation performed
           example: one

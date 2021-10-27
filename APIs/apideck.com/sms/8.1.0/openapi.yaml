@@ -394,8 +394,10 @@ paths:
               message: {
                 from: '+15017122661',
                 to: '+15017122662',
+                subject: 'Picture',
                 body: 'Hi! How are you doing?',
                 type: 'SMS',
+                webhook_url: 'https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms',
                 messaging_service_id: '123456'
               }
             }
@@ -560,8 +562,10 @@ paths:
               message: {
                 from: '+15017122661',
                 to: '+15017122662',
+                subject: 'Picture',
                 body: 'Hi! How are you doing?',
                 type: 'SMS',
+                webhook_url: 'https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms',
                 messaging_service_id: '123456'
               }
             }
@@ -1600,6 +1604,10 @@ components:
           readOnly: true
           title: Status
           type: string
+        subject:
+          example: Picture
+          title: Message Subject
+          type: string
         to:
           description: The phone number that received the message.
           example: "+15017122662"
@@ -1622,6 +1630,11 @@ components:
           example: "12345"
           nullable: true
           readOnly: true
+          type: string
+        webhook_url:
+          description: Define a webhook to receive delivery notifications.
+          example: https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms
+          title: Webhook URL
           type: string
       required:
         - from

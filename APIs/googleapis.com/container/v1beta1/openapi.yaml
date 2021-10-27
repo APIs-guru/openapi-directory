@@ -3385,9 +3385,6 @@ components:
         desiredAuthenticatorGroupsConfig:
           $ref: "#/components/schemas/AuthenticatorGroupsConfig"
           description: AuthenticatorGroupsConfig specifies the config for the cluster security groups settings.
-        desiredAutopilot:
-          $ref: "#/components/schemas/Autopilot"
-          description: The desired Autopilot configuration for the cluster.
         desiredBinaryAuthorization:
           $ref: "#/components/schemas/BinaryAuthorization"
           description: The desired configuration options for the Binary Authorization feature.
@@ -3413,6 +3410,9 @@ components:
         desiredDnsConfig:
           $ref: "#/components/schemas/DNSConfig"
           description: DNSConfig contains clusterDNS config for this cluster.
+        desiredGcfsConfig:
+          $ref: "#/components/schemas/GcfsConfig"
+          description: The desired GCFS config for the cluster
         desiredIdentityServiceConfig:
           $ref: "#/components/schemas/IdentityServiceConfig"
           description: The desired Identity Service component configuration.
@@ -3669,6 +3669,13 @@ components:
       properties:
         enabled:
           description: Whether the Compute Engine PD CSI driver is enabled for this cluster.
+          type: boolean
+      type: object
+    GcfsConfig:
+      description: GcfsConfig contains configurations of Google Container File System.
+      properties:
+        enabled:
+          description: Whether to use GCFS.
           type: boolean
       type: object
     GcpFilestoreCsiDriverConfig:
@@ -4200,6 +4207,9 @@ components:
         ephemeralStorageConfig:
           $ref: "#/components/schemas/EphemeralStorageConfig"
           description: Parameters for the ephemeral storage filesystem. If unspecified, ephemeral storage is backed by the boot disk.
+        gcfsConfig:
+          $ref: "#/components/schemas/GcfsConfig"
+          description: GCFS (Google Container File System) configs.
         gvnic:
           $ref: "#/components/schemas/VirtualNIC"
           description: Enable or disable gvnic on the node pool.
@@ -4274,7 +4284,10 @@ components:
       type: object
     NodeConfigDefaults:
       description: Subset of NodeConfig message that has defaults.
-      properties: {}
+      properties:
+        gcfsConfig:
+          $ref: "#/components/schemas/GcfsConfig"
+          description: GCFS (Google Container File System, a.k.a Riptide) options.
       type: object
     NodeKubeletConfig:
       description: Node kubelet configs.
@@ -5189,6 +5202,9 @@ components:
         clusterId:
           description: Required. Deprecated. The name of the cluster to upgrade. This field has been deprecated and replaced by the name field.
           type: string
+        gcfsConfig:
+          $ref: "#/components/schemas/GcfsConfig"
+          description: GCFS config.
         gvnic:
           $ref: "#/components/schemas/VirtualNIC"
           description: Enable or disable gvnic on the node pool.
