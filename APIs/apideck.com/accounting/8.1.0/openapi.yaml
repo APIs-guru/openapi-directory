@@ -862,7 +862,7 @@ paths:
                     id: '123456'
                   }
                 },
-                quantity: 2,
+                quantity: 1,
                 unit_price: 27500.5,
                 ledger_account: {
                   id: '123456',
@@ -1046,7 +1046,7 @@ paths:
                     id: '123456'
                   }
                 },
-                quantity: 2,
+                quantity: 1,
                 unit_price: 27500.5,
                 ledger_account: {
                   id: '123456',
@@ -1175,10 +1175,10 @@ paths:
                 currency: 'USD',
                 tax_inclusive: true,
                 sub_total: 27500,
-                total_tax: 1000,
-                total: 28500,
-                balance: 26500,
-                deposit: 2000,
+                total_tax: 2500,
+                total: 27500,
+                balance: 27500,
+                deposit: 0,
                 customer_memo: 'Thank you for your business and have a great day!',
                 line_items: [
                   {
@@ -1190,10 +1190,10 @@ paths:
                     type: 'Inventory',
                     tax_amount: 27500,
                     total_amount: 27500,
-                    quantity: 2,
+                    quantity: 1,
                     unit_price: 27500.5,
-                    unit_of_measure: 'each',
-                    discount_percentage: 15,
+                    unit_of_measure: 'pc.',
+                    discount_percentage: 0,
                     item: {
                       id: '12344',
                       code: '120-C',
@@ -1423,10 +1423,10 @@ paths:
                 currency: 'USD',
                 tax_inclusive: true,
                 sub_total: 27500,
-                total_tax: 1000,
-                total: 28500,
-                balance: 26500,
-                deposit: 2000,
+                total_tax: 2500,
+                total: 27500,
+                balance: 27500,
+                deposit: 0,
                 customer_memo: 'Thank you for your business and have a great day!',
                 line_items: [
                   {
@@ -1438,10 +1438,10 @@ paths:
                     type: 'Inventory',
                     tax_amount: 27500,
                     total_amount: 27500,
-                    quantity: 2,
+                    quantity: 1,
                     unit_price: 27500.5,
-                    unit_of_measure: 'each',
-                    discount_percentage: 15,
+                    unit_of_measure: 'pc.',
+                    discount_percentage: 0,
                     item: {
                       id: '12344',
                       code: '120-C',
@@ -4341,7 +4341,7 @@ components:
       additionalProperties: false
       properties:
         balance:
-          example: 26500
+          example: 27500
           nullable: true
           title: Balance
           type: number
@@ -4384,7 +4384,7 @@ components:
           title: Customer memo
           type: string
         deposit:
-          example: 2000
+          example: 0
           nullable: true
           title: Deposit
           type: number
@@ -4420,7 +4420,7 @@ components:
                 title: Description
                 type: string
               discount_percentage:
-                example: 15
+                example: 0
                 nullable: true
                 title: Amount
                 type: integer
@@ -4465,7 +4465,7 @@ components:
                 type: string
                 x-graphql-type-name: InvoiceLineItemType
               unit_of_measure:
-                example: each
+                example: pc.
                 nullable: true
                 title: Unit of measure
                 type: string
@@ -4513,12 +4513,12 @@ components:
           title: Tax inclusive
           type: boolean
         total:
-          example: 28500
+          example: 27500
           nullable: true
           title: Total amount
           type: number
         total_tax:
-          example: 1000
+          example: 2500
           nullable: true
           title: Total tax amount
           type: number
@@ -5338,7 +5338,7 @@ components:
         - name
       x-pii: []
     Quantity:
-      example: 2
+      example: 1
       nullable: true
       title: Quantity
       type: integer

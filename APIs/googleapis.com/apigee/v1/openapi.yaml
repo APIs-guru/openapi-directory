@@ -4285,6 +4285,11 @@ components:
             type: string
           description: Metadata describing the API proxy revision as a key-value map.
           type: object
+        integrationEndpoints:
+          description: List of IntegrationEndpoints in the '/integration-endpoints' directory of the API proxy. This is a 'manifest' setting designed to provide visibility into the contents of the API proxy.
+          items:
+            type: string
+          type: array
         lastModifiedAt:
           description: Time that the API proxy revision was last modified in milliseconds since epoch.
           format: int64

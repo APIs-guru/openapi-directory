@@ -176,7 +176,7 @@ paths:
 
             const params = {
               webhook: {
-                description: 'This is a webhook. It listens to connection events',
+                description: 'A description',
                 unified_api: 'vault',
                 status: 'enabled',
                 delivery_url: 'https://example.com/my/webhook/endpoint',
@@ -330,7 +330,7 @@ paths:
             const params = {
               id: 'id_example',
               webhook: {
-                description: 'This is a webhook. It listens to connection events',
+                description: 'A description',
                 status: 'enabled',
                 delivery_url: 'https://example.com/my/webhook/endpoint',
                 events: ['vault.connection.created', 'vault.connection.updated']
@@ -661,8 +661,9 @@ components:
       pattern: ^(https?)://
       type: string
     Description:
-      description: An optional description of what the webhook is used for.
-      example: This is a webhook. It listens to connection events
+      example: A description
+      nullable: true
+      title: Description
       type: string
     ExecuteBaseUrl:
       description: The Unify Base URL events from connectors will be sent to after service id is appended.

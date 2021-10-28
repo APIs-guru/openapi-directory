@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://datamigration.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: datamigration
 externalDocs:
@@ -146,7 +146,7 @@ paths:
       description: Updates the parameters of a single migration job.
       operationId: datamigration.projects.locations.migrationJobs.patch
       parameters:
-        - description: "The name (URI) of this migration job resource, in the form of: projects/{project}/locations/{location}/instances/{instance}."
+        - description: "The name (URI) of this migration job resource, in the form of: projects/{project}/locations/{location}/migrationJobs/{migrationJob}."
           in: path
           name: name
           required: true
@@ -1141,7 +1141,7 @@ components:
           $ref: "#/components/schemas/MySqlConnectionProfile"
           description: A MySQL database connection profile.
         name:
-          description: The name of this connection profile resource in the form of projects/{project}/locations/{location}/connectionProfiles/{instance}.
+          description: The name of this connection profile resource in the form of projects/{project}/locations/{location}/connectionProfiles/{connectionProfile}.
           type: string
         postgresql:
           $ref: "#/components/schemas/PostgreSqlConnectionProfile"
@@ -1381,7 +1381,7 @@ components:
           description: 'The resource labels for migration job to use to annotate any related underlying resources such as Compute Engine VMs. An object containing a list of "key": "value" pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }`.'
           type: object
         name:
-          description: "The name (URI) of this migration job resource, in the form of: projects/{project}/locations/{location}/instances/{instance}."
+          description: "The name (URI) of this migration job resource, in the form of: projects/{project}/locations/{location}/migrationJobs/{migrationJob}."
           type: string
         phase:
           description: Output only. The current migration job phase.

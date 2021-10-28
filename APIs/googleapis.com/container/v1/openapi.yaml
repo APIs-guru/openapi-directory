@@ -2932,6 +2932,14 @@ components:
           $ref: "#/components/schemas/NetworkPolicyConfig"
           description: Configuration for NetworkPolicy. This only tracks whether the addon is enabled or not on the Master, it does not track whether network policy is enabled for the nodes.
       type: object
+    AdvancedMachineFeatures:
+      description: Specifies options for controlling advanced machine features.
+      properties:
+        threadsPerCore:
+          description: The number of threads per physical core. To disable simultaneous multithreading (SMT) set this to 1. If unset, the maximum number of threads supported per core by the underlying processor is assumed.
+          format: int64
+          type: string
+      type: object
     AuthenticatorGroupsConfig:
       description: Configuration for returning group information from authenticators.
       properties:
@@ -3196,6 +3204,9 @@ components:
           description: "[Output only] The size of the address space on each node for hosting containers. This is provisioned from within the `container_ipv4_cidr` range. This field will only be set when cluster is in route-based network mode."
           format: int32
           type: integer
+        nodePoolDefaults:
+          $ref: "#/components/schemas/NodePoolDefaults"
+          description: Default NodePool settings for the entire cluster. These settings are overridden if specified on the specific NodePool object.
         nodePools:
           description: The node pools associated with this cluster. This field should not be set if "node_config" or "initial_node_count" are specified.
           items:
@@ -3293,9 +3304,6 @@ components:
         desiredAuthenticatorGroupsConfig:
           $ref: "#/components/schemas/AuthenticatorGroupsConfig"
           description: The desired authenticator groups config for the cluster.
-        desiredAutopilot:
-          $ref: "#/components/schemas/Autopilot"
-          description: The desired Autopilot configuration for the cluster.
         desiredBinaryAuthorization:
           $ref: "#/components/schemas/BinaryAuthorization"
           description: The desired configuration options for the Binary Authorization feature.
@@ -3315,6 +3323,12 @@ components:
         desiredDefaultSnatStatus:
           $ref: "#/components/schemas/DefaultSnatStatus"
           description: The desired status of whether to disable default sNAT for this cluster.
+        desiredDnsConfig:
+          $ref: "#/components/schemas/DNSConfig"
+          description: DNSConfig contains clusterDNS config for this cluster.
+        desiredGcfsConfig:
+          $ref: "#/components/schemas/GcfsConfig"
+          description: The desired GCFS config for the cluster
         desiredImageType:
           description: 'The desired image type for the node pool. NOTE: Set the "desired_node_pool" field as well.'
           type: string
@@ -3461,6 +3475,26 @@ components:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the parent field.
           type: string
       type: object
+    DNSConfig:
+      description: DNSConfig contains the desired set of options for configuring clusterDNS.
+      properties:
+        clusterDns:
+          description: cluster_dns indicates which in-cluster DNS provider should be used.
+          enum:
+            - PROVIDER_UNSPECIFIED
+            - PLATFORM_DEFAULT
+            - CLOUD_DNS
+          type: string
+        clusterDnsDomain:
+          description: cluster_dns_domain is the suffix used for all cluster service records.
+          type: string
+        clusterDnsScope:
+          description: cluster_dns_scope indicates the scope of access to cluster DNS records.
+          enum:
+            - DNS_SCOPE_UNSPECIFIED
+            - VPC_SCOPE
+          type: string
+      type: object
     DailyMaintenanceWindow:
       description: Time window specified for daily maintenance operations.
       properties:
@@ -3508,6 +3542,13 @@ components:
       properties:
         enabled:
           description: Whether the Compute Engine PD CSI driver is enabled for this cluster.
+          type: boolean
+      type: object
+    GcfsConfig:
+      description: GcfsConfig contains configurations of Google Container File System (image streaming).
+      properties:
+        enabled:
+          description: Whether to use GCFS.
           type: boolean
       type: object
     GcpFilestoreCsiDriverConfig:
@@ -3844,7 +3885,10 @@ components:
       type: object
     MeshCertificates:
       description: Configuration for issuance of mTLS keys and certificates to Kubernetes pods.
-      properties: {}
+      properties:
+        enableCertificates:
+          description: enable_certificates controls issuance of workload mTLS certificates. If set, the GKE Workload Identity Certificates controller and node agent will be deployed in the cluster, which can then be configured by creating a WorkloadCertificateConfig Custom Resource. Requires Workload Identity (workload_pool must be non-empty).
+          type: boolean
       type: object
     Metric:
       description: Progress metric is (string, int|float|string) pair.
@@ -3896,6 +3940,9 @@ components:
         defaultSnatStatus:
           $ref: "#/components/schemas/DefaultSnatStatus"
           description: Whether the cluster disables default in-node sNAT rules. In-node sNAT rules will be disabled when default_snat_status is disabled. When disabled is set to false, default IP masquerade rules will be applied to the nodes to prevent sNAT on cluster internal traffic.
+        dnsConfig:
+          $ref: "#/components/schemas/DNSConfig"
+          description: DNSConfig contains clusterDNS config for this cluster.
         enableIntraNodeVisibility:
           description: Whether Intra-node visibility is enabled for this cluster. This makes same node pod to pod traffic visible for VPC network.
           type: boolean
@@ -3945,6 +3992,9 @@ components:
           items:
             $ref: "#/components/schemas/AcceleratorConfig"
           type: array
+        advancedMachineFeatures:
+          $ref: "#/components/schemas/AdvancedMachineFeatures"
+          description: Advanced features for the Compute Engine VM.
         bootDiskKmsKey:
           description: " The Customer Managed Encryption Key used to encrypt the boot disk attached to each node in the node pool. This should be of the form projects/[KEY_PROJECT_ID]/locations/[LOCATION]/keyRings/[RING_NAME]/cryptoKeys/[KEY_NAME]. For more information about protecting resources with Cloud KMS Keys please see: https://cloud.google.com/compute/docs/disks/customer-managed-encryption"
           type: string
@@ -3955,6 +4005,9 @@ components:
         diskType:
           description: Type of the disk attached to each node (e.g. 'pd-standard', 'pd-ssd' or 'pd-balanced') If unspecified, the default disk type is 'pd-standard'
           type: string
+        gcfsConfig:
+          $ref: "#/components/schemas/GcfsConfig"
+          description: Google Container File System (image streaming) configs.
         gvnic:
           $ref: "#/components/schemas/VirtualNIC"
           description: Enable or disable gvnic in the node pool.
@@ -4023,6 +4076,13 @@ components:
         workloadMetadataConfig:
           $ref: "#/components/schemas/WorkloadMetadataConfig"
           description: The workload metadata configuration for this node.
+      type: object
+    NodeConfigDefaults:
+      description: Subset of NodeConfig message that has defaults.
+      properties:
+        gcfsConfig:
+          $ref: "#/components/schemas/GcfsConfig"
+          description: GCFS (Google Container File System, a.k.a Riptide) options.
       type: object
     NodeKubeletConfig:
       description: Node kubelet configs.
@@ -4148,6 +4208,13 @@ components:
           description: Minimum number of nodes for one location in the NodePool. Must be >= 1 and <= max_node_count.
           format: int32
           type: integer
+      type: object
+    NodePoolDefaults:
+      description: Subset of Nodepool message that has defaults.
+      properties:
+        nodeConfigDefaults:
+          $ref: "#/components/schemas/NodeConfigDefaults"
+          description: Subset of NodeConfig message that has defaults.
       type: object
     NodeTaint:
       description: "Kubernetes taint is comprised of three fields: key, value, and effect. Effect can only be one of three types: NoSchedule, PreferNoSchedule or NoExecute. See [here](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration) for more information, including usage and the valid values."
@@ -4872,6 +4939,9 @@ components:
         clusterId:
           description: Deprecated. The name of the cluster to upgrade. This field has been deprecated and replaced by the name field.
           type: string
+        gcfsConfig:
+          $ref: "#/components/schemas/GcfsConfig"
+          description: GCFS config.
         gvnic:
           $ref: "#/components/schemas/VirtualNIC"
           description: Enable or disable gvnic on the node pool.
