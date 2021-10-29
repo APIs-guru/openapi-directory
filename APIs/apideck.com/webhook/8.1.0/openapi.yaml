@@ -177,7 +177,7 @@ paths:
             const params = {
               webhook: {
                 description: 'A description',
-                unified_api: 'vault',
+                unified_api: 'crm',
                 status: 'enabled',
                 delivery_url: 'https://example.com/my/webhook/endpoint',
                 events: ['vault.connection.created', 'vault.connection.updated']
@@ -608,7 +608,7 @@ components:
         status:
           $ref: "#/components/schemas/Status"
         unified_api:
-          $ref: "#/components/schemas/UnifiedApi"
+          $ref: "#/components/schemas/UnifiedApiId"
       required:
         - delivery_url
         - status
@@ -968,9 +968,29 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
-    UnifiedApi:
-      description: The unifiedApi the webhook originated from
-      example: vault
+    UnifiedApiId:
+      description: Name of Apideck Unified API
+      enum:
+        - vault
+        - lead
+        - crm
+        - accounting
+        - spreadsheet
+        - email
+        - script
+        - sms
+        - team-messaging
+        - ecommerce
+        - payroll
+        - customer-support
+        - time-registration
+        - transactional-email
+        - hcm
+        - form
+        - csp
+        - email-marketing
+        - ats
+      example: crm
       type: string
     UnprocessableResponse:
       properties:
@@ -1066,7 +1086,7 @@ components:
         status:
           $ref: "#/components/schemas/Status"
         unified_api:
-          $ref: "#/components/schemas/UnifiedApi"
+          $ref: "#/components/schemas/UnifiedApiId"
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
       required:
@@ -1203,7 +1223,7 @@ components:
           example: 2021-07-12T14:26:17.420Z
           type: string
         unified_api:
-          $ref: "#/components/schemas/UnifiedApi"
+          $ref: "#/components/schemas/UnifiedApiId"
       type: object
     WebhookEventLogsFilter:
       properties:
