@@ -2305,6 +2305,7 @@ components:
             - passportNumber
             - payoutMethodCode
             - payoutSchedule
+            - pciSelfAssessment
             - personalData
             - phoneCountryCode
             - phoneNumber
@@ -3085,7 +3086,7 @@ components:
         schedule:
           description: |-
             The payout schedule to which the account is to be updated.
-            Permitted values: `DEFAULT`, `HOLD`, `DAILY`, `WEEKLY`, `MONTHLY`.
+            Permitted values: `DAILY`, `DAILY_US`, `DAILY_EU`, `DAILY_AU`, `DAILY_SG`, `WEEKLY`, `WEEKLY_ON_TUE_FRI_MIDNIGHT`, `BIWEEKLY_ON_1ST_AND_15TH_AT_MIDNIGHT`, `MONTHLY`, `HOLD`.
             `HOLD` will prevent scheduled payouts from happening but will still allow manual payouts to occur.
           enum:
             - BIWEEKLY_ON_1ST_AND_15TH_AT_MIDNIGHT
@@ -3217,6 +3218,8 @@ components:
           deprecated: true
           description: An ID number of the person.
           type: string
+          x-deprecatedInVersion: "3"
+          x-deprecatedMessage: Use `individualDetails.personalData.documentData.number` instead.
         nationality:
           description: |
             The nationality of the person represented by a two-character country code,  in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **NL**.

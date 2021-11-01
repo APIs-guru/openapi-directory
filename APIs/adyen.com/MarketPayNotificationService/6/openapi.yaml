@@ -372,23 +372,23 @@ components:
           type: string
           x-addedInVersion: "5"
         payoutAccountCountry:
-          description: Payout account country.
+          description: The country code of the bank from which the payout was initiated.
           type: string
           x-addedInVersion: "6"
         payoutAccountNumber:
-          description: Payout bank account number.
+          description: The account number of the bank from which the payout was initiated.
           type: string
           x-addedInVersion: "6"
         payoutBankName:
-          description: Payout bank name.
+          description: The name of the bank the payout from which the payout was initiated.
           type: string
           x-addedInVersion: "6"
         payoutBranchCode:
-          description: Payout branch code.
+          description: The branch code of the bank from which the payout was initiated.
           type: string
           x-addedInVersion: "6"
         payoutReference:
-          description: Payout transaction id.
+          description: The unique payout identifier.
           format: int64
           type: integer
           x-addedInVersion: "6"
@@ -1476,6 +1476,7 @@ components:
             - passportNumber
             - payoutMethodCode
             - payoutSchedule
+            - pciSelfAssessment
             - personalData
             - phoneCountryCode
             - phoneNumber
@@ -1982,16 +1983,19 @@ components:
     PayoutMethod:
       properties:
         merchantAccount:
+          description: The [`merchantAccount`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__reqParam_merchantAccount) you used in the `/payments` request when you [saved the account holder's card details](https://docs.adyen.com/platforms/payout-to-cards#check-and-store).
           type: string
         payoutMethodCode:
+          description: Adyen-generated unique alphanumeric identifier (UUID) for the payout method, returned in the response when you create a payout method. Required when updating an existing payout method in an `/updateAccountHolder` request.
           type: string
-        payoutMethodType:
-          enum:
-            - CardToken
+        payoutMethodReference:
+          description: Your reference for the payout method.
           type: string
         recurringDetailReference:
+          description: The [`recurringDetailReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_additionalData-ResponseAdditionalDataCommon-recurring-recurringDetailReference)  returned in the `/payments` response when you [saved the account holder's card details](https://docs.adyen.com/platforms/payout-to-cards#check-and-store).
           type: string
         shopperReference:
+          description: The [`shopperReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__reqParam_shopperReference) you sent in the `/payments` request when you [saved the account holder's card details](https://docs.adyen.com/platforms/payout-to-cards#check-and-store).
           type: string
       required:
         - merchantAccount

@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: sms
-  version: 8.1.0
+  version: 8.2.0
   x-apideck-api: sms
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -396,8 +396,10 @@ paths:
                 to: '+15017122662',
                 subject: 'Picture',
                 body: 'Hi! How are you doing?',
-                type: 'SMS',
+                type: 'sms',
+                scheduled_at: '2020-09-30T07:43:32.000Z',
                 webhook_url: 'https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms',
+                reference: 'CUST001',
                 messaging_service_id: '123456'
               }
             }
@@ -564,8 +566,10 @@ paths:
                 to: '+15017122662',
                 subject: 'Picture',
                 body: 'Hi! How are you doing?',
-                type: 'SMS',
+                type: 'sms',
+                scheduled_at: '2020-09-30T07:43:32.000Z',
                 webhook_url: 'https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms',
+                reference: 'CUST001',
                 messaging_service_id: '123456'
               }
             }
@@ -747,7 +751,7 @@ components:
           type: string
         service:
           description: Apideck ID of service provider
-          example: zoho-crm
+          example: twilio
           type: string
         status:
           description: HTTP Response Status
@@ -913,6 +917,7 @@ components:
         - TMT
         - TND
         - TOP
+        - TRC
         - TRY
         - TTD
         - TWD
@@ -1319,8 +1324,19 @@ components:
     CustomField:
       additionalProperties: false
       properties:
+        description:
+          description: More information about the custom field
+          example: Employee Level
+          title: Description
+          type: string
         id:
-          example: custom_technologies
+          example: "2389328923893298"
+          title: ID
+          type: string
+        name:
+          description: Name of the custom field.
+          example: employee_level
+          title: Name
           type: string
         value:
           anyOf:
@@ -1353,7 +1369,7 @@ components:
           type: string
         service:
           description: Apideck ID of service provider
-          example: zoho-crm
+          example: twilio
           type: string
         status:
           description: HTTP Response Status
@@ -1409,7 +1425,7 @@ components:
           type: string
         service:
           description: Apideck ID of service provider
-          example: zoho-crm
+          example: twilio
           type: string
         status:
           description: HTTP Response Status
@@ -1448,7 +1464,7 @@ components:
           type: string
         service:
           description: Apideck ID of service provider
-          example: zoho-crm
+          example: twilio
           type: string
         status:
           description: HTTP Response Status
@@ -1518,10 +1534,13 @@ components:
           type: string
         error:
           description: The error returned if your message status is failed or undelivered.
+          example:
+            code: X1
+            message: Something went wrong
           properties:
             code:
               description: The error_code provides more information about the failure. If the message was successful, this value is null
-              example: "444"
+              example: X1
               readOnly: true
               title: Error Code
               type: string
@@ -1561,24 +1580,38 @@ components:
           type: integer
         price:
           description: Price of the message.
+          example:
+            currency: USD
+            per_unit: "0.01"
+            total_amount: "0.01"
           properties:
             currency:
               $ref: "#/components/schemas/Currency"
             per_unit:
               description: ""
-              example: "444"
+              example: "0.01"
               readOnly: true
               title: Price per unit
               type: string
             total_amount:
               description: ""
-              example: "444"
+              example: "0.01"
               readOnly: true
               title: Price Amount
               type: string
           readOnly: true
           title: Price
           type: object
+        reference:
+          description: A client reference.
+          example: CUST001
+          title: Reference
+          type: string
+        scheduled_at:
+          description: The scheduled date and time of the message.
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          type: string
         sent_at:
           description: The date and time that the message was sent
           example: 2020-09-30T07:43:32.000Z
@@ -1618,7 +1651,7 @@ components:
           enum:
             - sms
             - mms
-          example: SMS
+          example: sms
           title: Message type
           type: string
         updated_at:
@@ -1866,7 +1899,7 @@ components:
           type: string
         service:
           description: Apideck ID of service provider
-          example: zoho-crm
+          example: twilio
           type: string
         status:
           description: HTTP Response Status

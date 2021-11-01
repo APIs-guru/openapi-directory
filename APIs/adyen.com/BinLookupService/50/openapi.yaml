@@ -446,8 +446,9 @@ components:
           type: string
         shopperReference:
           description: |-
-            Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
-            > This field is required for recurring payments.
+            Required for recurring payments. 
+            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
+            > Your reference must not include personally identifiable information (PII), for example name or email address.
           type: string
       required:
         - amount

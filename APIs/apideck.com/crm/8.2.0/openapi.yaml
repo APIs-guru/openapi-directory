@@ -267,7 +267,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 8.1.0
+  version: 8.2.0
   x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -460,7 +460,9 @@ paths:
                 reminder_set: false,
                 custom_fields: [
                   {
-                    id: 'custom_technologies',
+                    id: '2389328923893298',
+                    name: 'employee_level',
+                    description: 'Employee Level',
                     value: 'Uses Salesforce and Marketo'
                   }
                 ]
@@ -662,7 +664,9 @@ paths:
                 reminder_set: false,
                 custom_fields: [
                   {
-                    id: 'custom_technologies',
+                    id: '2389328923893298',
+                    name: 'employee_level',
+                    description: 'Employee Level',
                     value: 'Uses Salesforce and Marketo'
                   }
                 ]
@@ -859,7 +863,9 @@ paths:
                 ],
                 custom_fields: [
                   {
-                    id: 'custom_technologies',
+                    id: '2389328923893298',
+                    name: 'employee_level',
+                    description: 'Employee Level',
                     value: 'Uses Salesforce and Marketo'
                   }
                 ],
@@ -1108,7 +1114,9 @@ paths:
                 ],
                 custom_fields: [
                   {
-                    id: 'custom_technologies',
+                    id: '2389328923893298',
+                    name: 'employee_level',
+                    description: 'Employee Level',
                     value: 'Uses Salesforce and Marketo'
                   }
                 ],
@@ -1302,7 +1310,9 @@ paths:
                 ],
                 custom_fields: [
                   {
-                    id: 'custom_technologies',
+                    id: '2389328923893298',
+                    name: 'employee_level',
+                    description: 'Employee Level',
                     value: 'Uses Salesforce and Marketo'
                   }
                 ],
@@ -1545,7 +1555,9 @@ paths:
                 ],
                 custom_fields: [
                   {
-                    id: 'custom_technologies',
+                    id: '2389328923893298',
+                    name: 'employee_level',
+                    description: 'Employee Level',
                     value: 'Uses Salesforce and Marketo'
                   }
                 ],
@@ -1731,7 +1743,9 @@ paths:
                 ],
                 custom_fields: [
                   {
-                    id: 'custom_technologies',
+                    id: '2389328923893298',
+                    name: 'employee_level',
+                    description: 'Employee Level',
                     value: 'Uses Salesforce and Marketo'
                   }
                 ],
@@ -1967,7 +1981,9 @@ paths:
                 ],
                 custom_fields: [
                   {
-                    id: 'custom_technologies',
+                    id: '2389328923893298',
+                    name: 'employee_level',
+                    description: 'Employee Level',
                     value: 'Uses Salesforce and Marketo'
                   }
                 ],
@@ -2397,7 +2413,9 @@ paths:
                 tags: ['New'],
                 custom_fields: [
                   {
-                    id: 'custom_technologies',
+                    id: '2389328923893298',
+                    name: 'employee_level',
+                    description: 'Employee Level',
                     value: 'Uses Salesforce and Marketo'
                   }
                 ],
@@ -2591,7 +2609,9 @@ paths:
                 tags: ['New'],
                 custom_fields: [
                   {
-                    id: 'custom_technologies',
+                    id: '2389328923893298',
+                    name: 'employee_level',
+                    description: 'Employee Level',
                     value: 'Uses Salesforce and Marketo'
                   }
                 ],
@@ -4696,8 +4716,19 @@ components:
     CustomField:
       additionalProperties: false
       properties:
+        description:
+          description: More information about the custom field
+          example: Employee Level
+          title: Description
+          type: string
         id:
-          example: custom_technologies
+          example: "2389328923893298"
+          title: ID
+          type: string
+        name:
+          description: Name of the custom field.
+          example: employee_level
+          title: Name
           type: string
         value:
           anyOf:
@@ -6197,6 +6228,7 @@ components:
             - assistant
             - fax
             - direct-dial-in
+            - personal
             - other
           example: primary
           type: string
@@ -6676,6 +6708,7 @@ components:
         first_name:
           example: Elon
           nullable: true
+          title: First name
           type: string
         id:
           example: "12345"
@@ -6686,12 +6719,14 @@ components:
           nullable: true
           type: string
         language:
+          description: language code according to ISO 639-1. For the United States - EN
           example: EN
           nullable: true
           type: string
         last_name:
           example: Musk
           nullable: true
+          title: Last name
           type: string
         parent_id:
           example: "54321"

@@ -1166,6 +1166,7 @@ components:
             - passportNumber
             - payoutMethodCode
             - payoutSchedule
+            - pciSelfAssessment
             - personalData
             - phoneCountryCode
             - phoneNumber
@@ -2123,6 +2124,8 @@ components:
           deprecated: true
           description: An ID number of the person.
           type: string
+          x-deprecatedInVersion: "3"
+          x-deprecatedMessage: Use `individualDetails.personalData.documentData.number` instead.
         nationality:
           description: |
             The nationality of the person represented by a two-character country code,  in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **NL**.

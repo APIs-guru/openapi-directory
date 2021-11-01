@@ -103,7 +103,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Required. Mask of fields to update. At least one path must be supplied in this field. The elements of the repeated paths field may only include these fields from Instance: * `displayName` * `labels` * `memorySizeGb` * `redisConfig`"
+        - description: "Required. Mask of fields to update. At least one path must be supplied in this field. The elements of the repeated paths field may only include these fields from Instance: * `displayName` * `labels` * `memorySizeGb` * `redisConfig` * `replica_count`"
           in: query
           name: updateMask
           schema:
@@ -764,10 +764,10 @@ components:
           description: Google Cloud Storage location where input content is located.
       type: object
     Instance:
-      description: A Google Cloud Redis instance. next id = 37
+      description: A Google Cloud Redis instance. next id = 38
       properties:
         alternativeLocationId:
-          description: Optional. Only applicable to STANDARD_HA tier which protects the instance against zonal failures by provisioning it across two zones. If provided, it must be a different zone from the one provided in location_id.
+          description: Optional. If specified, at least one node will be provisioned in this zone in addition to the zone specified in location_id. Only applicable to standard tier. If provided, it must be a different zone from the one provided in [location_id]. Additional nodes beyond the first 2 will be placed in zones selected by the service.
           type: string
         authEnabled:
           description: Optional. Indicates whether OSS Redis AUTH is enabled for the instance. If set to "true" AUTH is enabled on the instance. Default value is "false" meaning AUTH is disabled.
@@ -788,7 +788,7 @@ components:
           readOnly: true
           type: string
         currentLocationId:
-          description: Output only. The current zone where the Redis endpoint is placed. For Basic Tier instances, this will always be the same as the location_id provided by the user at creation time. For Standard Tier instances, this can be either location_id or alternative_location_id and can change after a failover event.
+          description: Output only. The current zone where the Redis primary node is located. In basic tier, this will always be the same as [location_id]. In standard tier, this can be the zone of any node in the instance.
           readOnly: true
           type: string
         displayName:
@@ -804,7 +804,7 @@ components:
           description: Resource labels to represent user provided metadata
           type: object
         locationId:
-          description: Optional. The zone where the instance will be provisioned. If not provided, the service will choose a zone from the specified region for the instance. For standard tier, instances will be created across two zones for protection against zonal failures. If [alternative_location_id] is also provided, it must be different from [location_id].
+          description: Optional. The zone where the instance will be provisioned. If not provided, the service will choose a zone from the specified region for the instance. For standard tier, additional nodes will be added across multiple zones for protection against zonal failures. If specified, at least one node will be provisioned in this zone.
           type: string
         maintenancePolicy:
           $ref: "#/components/schemas/MaintenancePolicy"
@@ -826,6 +826,9 @@ components:
             $ref: "#/components/schemas/NodeInfo"
           readOnly: true
           type: array
+        persistenceConfig:
+          $ref: "#/components/schemas/PersistenceConfig"
+          description: Optional. Persistence configuration parameters
         persistenceIamIdentity:
           description: Output only. Cloud IAM identity used by import / export operations to transfer data to/from Cloud Storage. Format is "serviceAccount:". The value may change over time for a given instance so should be checked before each import/export operation.
           readOnly: true
@@ -860,11 +863,11 @@ components:
           description: "Optional. The version of Redis software. If not provided, latest supported version will be used. Currently, the supported values are: * `REDIS_3_2` for Redis 3.2 compatibility * `REDIS_4_0` for Redis 4.0 compatibility (default) * `REDIS_5_0` for Redis 5.0 compatibility * `REDIS_6_X` for Redis 6.x compatibility"
           type: string
         replicaCount:
-          description: Optional. The number of replica nodes. Valid range for standard tier is [1-5] and defaults to 1. Valid value for basic tier is 0 and defaults to 0.
+          description: Optional. The number of replica nodes. Valid range for standard tier is [1-5] and defaults to 2. Valid value for basic tier is 0 and defaults to 0.
           format: int32
           type: integer
         reservedIpRange:
-          description: Optional. For DIRECT_PEERING mode, the CIDR range of internal addresses that are reserved for this instance. Range must be unique and non-overlapping with existing subnets in an authorized network. For PRIVATE_SERVICE_ACCESS mode, the name of one allocated IP address ranges associated with this private service access connection. If not provided, the service will choose an unused /29 block, for example, 10.0.0.0/29 or 192.168.0.0/29.
+          description: Optional. For DIRECT_PEERING mode, the CIDR range of internal addresses that are reserved for this instance. Range must be unique and non-overlapping with existing subnets in an authorized network. For PRIVATE_SERVICE_ACCESS mode, the name of one allocated IP address ranges associated with this private service access connection. If not provided, the service will choose an unused /29 block, for example, 10.0.0.0/29 or 192.168.0.0/29. For READ_REPLICAS_ENABLED the default block size is /28.
           type: string
         serverCaCerts:
           description: Output only. List of server CA certificates for the instance.
@@ -1024,11 +1027,11 @@ components:
       description: Node specific properties.
       properties:
         id:
-          description: Output only. Output Only. Node identifying string. e.g. 'node-0', 'node-1'
+          description: Output only. Node identifying string. e.g. 'node-0', 'node-1'
           readOnly: true
           type: string
         zone:
-          description: Output only. Output Only. Location of the node.
+          description: Output only. Location of the node.
           readOnly: true
           type: string
       type: object
@@ -1061,6 +1064,35 @@ components:
         gcsDestination:
           $ref: "#/components/schemas/GcsDestination"
           description: Google Cloud Storage destination for output content.
+      type: object
+    PersistenceConfig:
+      description: Configuration of the persistence functionality.
+      properties:
+        persistenceMode:
+          description: Optional. Controls whether Persistence features are enabled. If not provided, the existing value will be used.
+          enum:
+            - PERSISTENCE_MODE_UNSPECIFIED
+            - DISABLED
+            - RDB
+          type: string
+        rdbNextSnapshotTime:
+          description: Output only. The next time that a snapshot attempt is scheduled to occur.
+          format: google-datetime
+          readOnly: true
+          type: string
+        rdbSnapshotPeriod:
+          description: Optional. Period between RDB snapshots. Snapshots will be attempted every period starting from the provided snapshot start time. For example, a start time of 01/01/2033 06:45 and SIX_HOURS snapshot period will do nothing until 01/01/2033, and then trigger snapshots every day at 06:45, 12:45, 18:45, and 00:45 the next day, and so on. If not provided, TWENTY_FOUR_HOURS will be used as default.
+          enum:
+            - SNAPSHOT_PERIOD_UNSPECIFIED
+            - ONE_HOUR
+            - SIX_HOURS
+            - TWELVE_HOURS
+            - TWENTY_FOUR_HOURS
+          type: string
+        rdbSnapshotStartTime:
+          description: Optional. Date and time that the first snapshot was/will be attempted, and to which future snapshots will be aligned. If not provided, the current time will be used.
+          format: google-datetime
+          type: string
       type: object
     RescheduleMaintenanceRequest:
       description: Request for RescheduleMaintenance.

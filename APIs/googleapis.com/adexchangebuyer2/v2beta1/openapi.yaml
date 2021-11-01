@@ -4435,7 +4435,8 @@ components:
           description: The unique ID for the seller. The seller fills in this field. The seller account ID is then available to buyer in the product.
           type: string
         subAccountId:
-          description: Optional sub-account ID for the seller.
+          description: Output only. Ad manager network code for the seller.
+          readOnly: true
           type: string
       type: object
     ServingContext:

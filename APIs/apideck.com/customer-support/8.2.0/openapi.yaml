@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Customer Support
-  version: 8.1.0
+  version: 8.2.0
   x-apideck-api: customer-support
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1332,8 +1332,19 @@ components:
     CustomField:
       additionalProperties: false
       properties:
+        description:
+          description: More information about the custom field
+          example: Employee Level
+          title: Description
+          type: string
         id:
-          example: custom_technologies
+          example: "2389328923893298"
+          title: ID
+          type: string
+        name:
+          description: Name of the custom field.
+          example: employee_level
+          title: Name
           type: string
         value:
           anyOf:
@@ -1521,6 +1532,7 @@ components:
             - TMT
             - TND
             - TOP
+            - TRC
             - TRY
             - TTD
             - TWD
@@ -2568,6 +2580,7 @@ components:
             - assistant
             - fax
             - direct-dial-in
+            - personal
             - other
           example: primary
           type: string

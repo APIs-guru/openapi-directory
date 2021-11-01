@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.0.0
 servers:
   - url: https://unify.apideck.com
 info:
@@ -6,9 +6,9 @@ info:
     email: hello@apideck.com
     url: https://developers.apideck.com
   description: |
-    Welcome to the File storage API.
+    Welcome to the hris.
 
-    You can use this API to access all File storage API endpoints.
+    You can use this API to access all hris endpoints.
 
     ## Base URL
 
@@ -265,9 +265,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: File storage API
-  version: 8.1.0
-  x-apideck-api: file-storage
+  title: hris
+  version: 8.2.0
+  x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -275,10 +275,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/file-storage.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/hris.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: file-storage
+  x-serviceName: hris
   x-tags:
     - partner
 externalDocs:
@@ -287,15 +287,15 @@ externalDocs:
 security:
   - apiKey: []
 tags:
-  - description: Files
-    name: Files
+  - description: ""
+    name: Employees
     x-apideck-model:
-      $ref: "#/components/schemas/File"
+      $ref: "#/components/schemas/Employee"
 paths:
-  /file-storage/files:
+  /hris/employees:
     get:
-      description: List Files
-      operationId: filesAll
+      description: List Employees
+      operationId: employeesAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -303,10 +303,9 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
-        - $ref: "#/components/parameters/filesFilter"
       responses:
         "200":
-          $ref: "#/components/responses/GetFilesResponse"
+          $ref: "#/components/responses/GetEmployeesResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -321,10 +320,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Files
+      summary: List Employees
       tags:
-        - Files
-      x-apideck-api: fileStorage
+        - Employees
+      x-apideck-api: hris
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -338,17 +337,17 @@ paths:
             })
 
             try {
-              const { data } = await apideck.fileStorage.filesAll({})
+              const { data } = await apideck.hris.employeesAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: files
-  /file-storage/files/search:
+      x-graphql-field-name: employees
     post:
-      description: Search Files
-      operationId: filesSearch
+      description: Create Employee
+      operationId: employeesAdd
       parameters:
+        - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
@@ -356,11 +355,272 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/FilesSearch"
+              $ref: "#/components/schemas/Employee"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateEmployeeResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Employee
+      tags:
+        - Employees
+      x-apideck-api: hris
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              employee: {
+                first_name: 'Elon',
+                last_name: 'Musk',
+                middle_name: 'D.',
+                title: 'CEO',
+                division: 'Europe',
+                department: 'R&D',
+                company_id: '23456',
+                company_name: 'SpaceX',
+                employee_number: '123456-AB',
+                employment_status: 'active',
+                manager_id: '23456',
+                social_security_number: '123456789',
+                birthday: '2000-08-12',
+                description: 'A description',
+                gender: 'female',
+                language: 'EN',
+                addresses: [
+                  {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638',
+                    contact_name: '111-111-1111',
+                    salutation: '111-111-1111',
+                    phone_number: '111-111-1111',
+                    fax: '111-111-1111',
+                    email: '111-111-1111',
+                    website: '111-111-1111'
+                  }
+                ],
+                phone_numbers: [
+                  {
+                    id: '12345',
+                    country_code: '1',
+                    area_code: '323',
+                    number: '111-111-1111',
+                    type: 'primary'
+                  }
+                ],
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                jobs: [
+                  {
+                    title: 'CEO',
+                    compensation_rate: 'year',
+                    hired_at: '2020-08-12',
+                    is_primary: true,
+                    payment_unit: 'year',
+                    location: {
+                      id: '123',
+                      type: 'primary',
+                      string: '25 Spring Street, Blackburn, VIC 3130',
+                      name: 'HQ US',
+                      line1: 'Main street',
+                      line2: 'apt #',
+                      city: 'San Francisco',
+                      state: 'CA',
+                      postal_code: '94104',
+                      country: 'US',
+                      latitude: '40.759211',
+                      longitude: '-73.984638',
+                      contact_name: '111-111-1111',
+                      salutation: '111-111-1111',
+                      phone_number: '111-111-1111',
+                      fax: '111-111-1111',
+                      email: '111-111-1111',
+                      website: '111-111-1111'
+                    },
+                    compensations: [
+                      {
+                        id: '3404301363494309004',
+                        job_id: '3490439050957906679',
+                        rate: '50.00',
+                        payment_unit: 'hour',
+                        flsa_status: 'nonexempt',
+                        effective_date: '2021-06-11'
+                      }
+                    ]
+                  }
+                ],
+                custom_fields: [
+                  {
+                    id: '2389328923893298',
+                    name: 'employee_level',
+                    description: 'Employee Level',
+                    value: 'Uses Salesforce and Marketo'
+                  }
+                ]
+              }
+            }
+
+            try {
+              const { data } = await apideck.hris.employeesAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/hris/employees/{id}":
+    delete:
+      description: Delete Employee
+      operationId: employeesDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteEmployeeResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Employee
+      tags:
+        - Employees
+      x-apideck-api: hris
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.hris.employeesDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Employee
+      operationId: employeesOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetEmployeeResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Employee
+      tags:
+        - Employees
+      x-apideck-api: hris
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.hris.employeesOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update Employee
+      operationId: employeesUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Employee"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/GetFilesResponse"
+          $ref: "#/components/responses/UpdateEmployeeResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -375,10 +635,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Search Files
+      summary: Update Employee
       tags:
-        - Files
-      x-apideck-api: fileStorage
+        - Employees
+      x-apideck-api: hris
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -391,168 +651,119 @@ paths:
               consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
+            const params = {
+              id: 'id_example',
+              employee: {
+                first_name: 'Elon',
+                last_name: 'Musk',
+                middle_name: 'D.',
+                title: 'CEO',
+                division: 'Europe',
+                department: 'R&D',
+                company_id: '23456',
+                company_name: 'SpaceX',
+                employee_number: '123456-AB',
+                employment_status: 'active',
+                manager_id: '23456',
+                social_security_number: '123456789',
+                birthday: '2000-08-12',
+                description: 'A description',
+                gender: 'female',
+                language: 'EN',
+                addresses: [
+                  {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638',
+                    contact_name: '111-111-1111',
+                    salutation: '111-111-1111',
+                    phone_number: '111-111-1111',
+                    fax: '111-111-1111',
+                    email: '111-111-1111',
+                    website: '111-111-1111'
+                  }
+                ],
+                phone_numbers: [
+                  {
+                    id: '12345',
+                    country_code: '1',
+                    area_code: '323',
+                    number: '111-111-1111',
+                    type: 'primary'
+                  }
+                ],
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                jobs: [
+                  {
+                    title: 'CEO',
+                    compensation_rate: 'year',
+                    hired_at: '2020-08-12',
+                    is_primary: true,
+                    payment_unit: 'year',
+                    location: {
+                      id: '123',
+                      type: 'primary',
+                      string: '25 Spring Street, Blackburn, VIC 3130',
+                      name: 'HQ US',
+                      line1: 'Main street',
+                      line2: 'apt #',
+                      city: 'San Francisco',
+                      state: 'CA',
+                      postal_code: '94104',
+                      country: 'US',
+                      latitude: '40.759211',
+                      longitude: '-73.984638',
+                      contact_name: '111-111-1111',
+                      salutation: '111-111-1111',
+                      phone_number: '111-111-1111',
+                      fax: '111-111-1111',
+                      email: '111-111-1111',
+                      website: '111-111-1111'
+                    },
+                    compensations: [
+                      {
+                        id: '3404301363494309004',
+                        job_id: '3490439050957906679',
+                        rate: '50.00',
+                        payment_unit: 'hour',
+                        flsa_status: 'nonexempt',
+                        effective_date: '2021-06-11'
+                      }
+                    ]
+                  }
+                ],
+                custom_fields: [
+                  {
+                    id: '2389328923893298',
+                    name: 'employee_level',
+                    description: 'Employee Level',
+                    value: 'Uses Salesforce and Marketo'
+                  }
+                ]
+              }
+            }
+
             try {
-              const { data } = await apideck.fileStorage.filesSearch({
-                filesSearch: {
-                  query: 'logo jpg'
-                }
-              })
+              const { data } = await apideck.hris.employeesUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/file-storage/files/{id}":
-    delete:
-      description: Delete File
-      operationId: filesDelete
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/DeleteFileResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Delete File
-      tags:
-        - Files
-      x-apideck-api: fileStorage
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.fileStorage.filesDelete({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-    get:
-      description: Get File
-      operationId: filesOne
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetFileResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Get File
-      tags:
-        - Files
-      x-apideck-api: fileStorage
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.fileStorage.filesOne({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  "/file-storage/files/{id}/download":
-    get:
-      description: Download File
-      operationId: filesDownload
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetFileDownloadResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Download File
-      tags:
-        - Files
-      x-apideck-api: fileStorage
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.fileStorage.filesDownload({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-      x-graphql-exclude: true
 components:
   parameters:
     applicationId:
@@ -576,14 +787,6 @@ components:
       schema:
         nullable: true
         type: string
-    filesFilter:
-      description: Apply filters (beta)
-      explode: true
-      in: query
-      name: filter
-      schema:
-        $ref: "#/components/schemas/FilesFilter"
-      style: deepObject
     id:
       description: ID of the record you are acting upon.
       in: path
@@ -620,37 +823,30 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    CreateFileResponse:
+    CreateEmployeeResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateFileResponse"
-      description: Files
-    DeleteFileResponse:
+            $ref: "#/components/schemas/CreateEmployeeResponse"
+      description: Employees
+    DeleteEmployeeResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteFileResponse"
-      description: Files
-    GetFileDownloadResponse:
-      content:
-        "*/*":
-          schema:
-            format: binary
-            type: string
-      description: File Download
-    GetFileResponse:
+            $ref: "#/components/schemas/DeleteEmployeeResponse"
+      description: Employees
+    GetEmployeeResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetFileResponse"
-      description: Files
-    GetFilesResponse:
+            $ref: "#/components/schemas/GetEmployeeResponse"
+      description: Employees
+    GetEmployeesResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetFilesResponse"
-      description: Files
+            $ref: "#/components/schemas/GetEmployeesResponse"
+      description: Employees
     NotFoundResponse:
       content:
         application/json:
@@ -687,13 +883,103 @@ components:
           schema:
             $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
-    UpdateFileResponse:
+    UpdateEmployeeResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateFileResponse"
-      description: Files
+            $ref: "#/components/schemas/UpdateEmployeeResponse"
+      description: Employees
   schemas:
+    Address:
+      properties:
+        city:
+          description: Name of city.
+          example: San Francisco
+          nullable: true
+          type: string
+        contact_name:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        country:
+          description: country code according to ISO 3166-1 alpha-2.
+          example: US
+          nullable: true
+          type: string
+        email:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        fax:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        id:
+          example: "123"
+          nullable: true
+          type: string
+        latitude:
+          example: "40.759211"
+          nullable: true
+          type: string
+        line1:
+          description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
+          example: Main street
+          nullable: true
+          type: string
+        line2:
+          description: Line 2 of the address
+          example: "apt #"
+          nullable: true
+          type: string
+        longitude:
+          example: "-73.984638"
+          nullable: true
+          type: string
+        name:
+          example: HQ US
+          nullable: true
+          type: string
+        phone_number:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        postal_code:
+          description: Zip code or equivalent.
+          example: "94104"
+          nullable: true
+          type: string
+        salutation:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        state:
+          description: Name of state
+          example: CA
+          nullable: true
+          type: string
+        string:
+          example: 25 Spring Street, Blackburn, VIC 3130
+          nullable: true
+          title: The address string. Some APIs don't provide structured address data.
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - home
+            - office
+            - shipping
+            - billing
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: AddressType
+        website:
+          example: 111-111-1111
+          nullable: true
+          type: string
+      type: object
     BadRequestResponse:
       properties:
         detail:
@@ -725,7 +1011,52 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
-    CreateFileResponse:
+    BankAccount:
+      properties:
+        account_name:
+          description: The name which you used in opening your bank account.
+          example: SPACEX LLC
+          nullable: true
+          title: Bank Account Name
+          type: string
+        account_number:
+          description: A bank account number is a number that is tied to your bank account. If you have several bank accounts, such as personal, joint, business (and so on), each account will have a different account number.
+          example: "123456789"
+          nullable: true
+          title: Bank Account Number
+          type: string
+        bank_code:
+          description: A bank code is a code assigned by a central bank, a bank supervisory body or a Bankers Association in a country to all its licensed member banks or financial institutions.
+          example: BNH
+          nullable: true
+          title: Bank Code
+          type: string
+        bic:
+          example: AUDSCHGGXXX
+          nullable: true
+          type: string
+        bsb_number:
+          description: A BSB is a 6 digit numeric code used for identifying the branch of an Australian or New Zealand bank or financial institution.
+          example: 062-001
+          nullable: true
+          title: BSB Number
+          type: string
+        iban:
+          example: CH2989144532982975332
+          nullable: true
+          type: string
+      type: object
+    CompanyId:
+      example: "23456"
+      nullable: true
+      title: Company ID
+      type: string
+    CompanyName:
+      example: SpaceX
+      nullable: true
+      title: Company name
+      type: string
+    CreateEmployeeResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -735,11 +1066,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: files
+          example: Employees
           type: string
         service:
           description: Apideck ID of service provider
-          example: google-drive
+          example: undefined
           type: string
         status:
           description: HTTP Response Status
@@ -757,41 +1088,129 @@ components:
         - operation
         - data
       type: object
-    DeleteFileResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: files
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: google-drive
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-    File:
+    CustomField:
       additionalProperties: false
       properties:
+        description:
+          description: More information about the custom field
+          example: Employee Level
+          title: Description
+          type: string
+        id:
+          example: "2389328923893298"
+          title: ID
+          type: string
+        name:
+          description: Name of the custom field.
+          example: employee_level
+          title: Name
+          type: string
+        value:
+          anyOf:
+            - example: Uses Salesforce and Marketo
+              nullable: true
+              type: string
+            - example: 10
+              nullable: true
+              type: number
+            - example: true
+              nullable: true
+              type: boolean
+            - items:
+                type: string
+              type: array
+      required:
+        - id
+      type: object
+    DeleteEmployeeResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Employees
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: undefined
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    Department:
+      description: The department the user is currently in.
+      example: R&D
+      nullable: true
+      title: Department
+      type: string
+    Description:
+      example: A description
+      nullable: true
+      title: Description
+      type: string
+    Division:
+      description: The division the user is currently in.
+      example: Europe
+      nullable: true
+      title: Division
+      type: string
+    Email:
+      properties:
+        email:
+          example: elon@musk.com
+          format: email
+          minLength: 1
+          type: string
+        id:
+          example: "123"
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - work
+            - personal
+            - billing
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: EmailType
+      required:
+        - email
+      type: object
+    Employee:
+      additionalProperties: false
+      properties:
+        addresses:
+          items:
+            $ref: "#/components/schemas/Address"
+          type: array
+        birthday:
+          example: 2000-08-12
+          format: date
+          nullable: true
+          type: string
+        company_id:
+          $ref: "#/components/schemas/CompanyId"
+        company_name:
+          $ref: "#/components/schemas/CompanyName"
         created_at:
           example: 2020-09-30T07:43:32.000Z
           format: date-time
@@ -802,73 +1221,121 @@ components:
           nullable: true
           readOnly: true
           type: string
+        custom_fields:
+          items:
+            $ref: "#/components/schemas/CustomField"
+          type: array
+        department:
+          $ref: "#/components/schemas/Department"
         description:
-          description: Optional description of the file
-          example: A sample image
+          $ref: "#/components/schemas/Description"
+        division:
+          $ref: "#/components/schemas/Division"
+        emails:
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        employee_number:
+          $ref: "#/components/schemas/EmployeeNumber"
+        employment_status:
+          enum:
+            - active
+            - inactive
+            - other
+          example: active
+          nullable: true
           type: string
-        downloadable:
-          description: Whether the current user can download this file
-          type: boolean
+        first_name:
+          $ref: "#/components/schemas/FirstName"
+        gender:
+          $ref: "#/components/schemas/Gender"
         id:
           $ref: "#/components/schemas/Id"
-        mime_type:
-          description: The MIME type of the file.
-          example: image/jpeg
-          type: string
-        name:
-          description: The name of the file
-          example: sample.jpg
-          type: string
-        owner:
-          properties:
-            email:
-              description: Email of the owner of the file
-              example: hello@apideck.com
-              readOnly: true
-              type: string
-            id:
-              description: ID of the owner of the file
-              example: "12345"
-              readOnly: true
-              type: string
-            name:
-              description: Name of the owner of the file
-              example: Elon Musk
-              readOnly: true
-              type: string
-          type: object
-        parent_folders:
-          description: The parent folders of the file, starting from the root
+        jobs:
           items:
             properties:
+              compensation_rate:
+                example: year
+                title: The compensation rate of the job.
+                type: string
+              compensations:
+                items:
+                  example:
+                    effective_date: 2021-06-11
+                    flsa_status: nonexempt
+                    id: "3404301363494309004"
+                    job_id: "3490439050957906679"
+                    payment_unit: hour
+                    rate: "50.00"
+                  properties:
+                    effective_date:
+                      description: The effective date for this compensation.
+                      readOnly: false
+                      type: string
+                    flsa_status:
+                      description: The FLSA status for this compensation.
+                      enum:
+                        - exempt
+                        - salaried-nonexempt
+                        - nonexempt
+                        - owner
+                      readOnly: false
+                      type: string
+                    id:
+                      $ref: "#/components/schemas/Id"
+                    job_id:
+                      description: The ID of the job to which the compensation belongs.
+                      readOnly: true
+                      type: integer
+                    payment_unit:
+                      $ref: "#/components/schemas/PaymentUnit"
+                    rate:
+                      description: The amount paid per payment unit.
+                      readOnly: false
+                      type: string
+                  type: object
+                type: array
+              employee_id:
+                $ref: "#/components/schemas/Id"
+              hired_at:
+                example: 2020-08-12
+                format: date
+                nullable: true
+                type: string
               id:
                 $ref: "#/components/schemas/Id"
-              name:
-                description: The name of the folder
-                example: Documents
-                type: string
+              is_primary:
+                description: Indicates whether this the employee's primary job
+                example: true
+                title: Primary
+                type: boolean
+              location:
+                $ref: "#/components/schemas/Address"
+              payment_unit:
+                $ref: "#/components/schemas/PaymentUnit"
+              title:
+                $ref: "#/components/schemas/Title"
+            type: object
           type: array
-        parent_folders_complete:
-          description: Whether the list of parent folder is complete. Some connectors only return the direct parent of a file
-          type: boolean
-        path:
-          description: The full path of the file or folder (includes the file name)
-          example: /Documents/sample.jpg
+        language:
+          $ref: "#/components/schemas/Language"
+        last_name:
+          $ref: "#/components/schemas/LastName"
+        manager_id:
+          example: "23456"
+          nullable: true
+          title: Manager ID
           type: string
-        size:
-          description: The size of the file in bytes
-          example: 1810673
-          type: integer
-        type:
-          description: The type of resource. Could be file, folder or url
-          enum:
-            - file
-            - folder
-            - url
-          example: file
-          readOnly: true
-          type: string
-          x-graphql-type-name: FileType
+        middle_name:
+          $ref: "#/components/schemas/MiddleName"
+        phone_numbers:
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          type: array
+        social_security_number:
+          $ref: "#/components/schemas/SocialSecurityNumber"
+        title:
+          $ref: "#/components/schemas/Title"
         updated_at:
           example: 2020-09-30T07:43:32.000Z
           format: date-time
@@ -879,52 +1346,42 @@ components:
           nullable: true
           readOnly: true
           type: string
-      required:
-        - id
-        - name
-        - type
       type: object
-    FilesFilter:
-      additionalProperties: false
-      example:
-        name: SpaceX
-      properties:
-        folder_id:
-          description: ID of the folder to filter on. The root folder has an alias "root"
-          example: root
-          type: string
-        shared:
-          description: Only return files and folders that are shared
-          type: boolean
-      type: object
-      x-graphql-type-name: FilesFilter
-    FilesSearch:
-      additionalProperties: false
-      example:
-        query: logo jpg
-      properties:
-        query:
-          description: The query to search for. May match across multiple fields.
-          example: logo jpg
-          type: string
-      required:
-        - query
-      type: object
-    GetFileResponse:
+    EmployeeNumber:
+      description: An Employee Number, Employee ID or Employee Code, is a unique number that has been assigned to each individual staff member within a company.
+      example: 123456-AB
+      nullable: true
+      title: Employee number
+      type: string
+    FirstName:
+      example: Elon
+      nullable: true
+      title: First name
+      type: string
+    Gender:
+      enum:
+        - male
+        - female
+        - unisex
+        - other
+      example: female
+      nullable: true
+      type: string
+    GetEmployeeResponse:
       properties:
         data:
-          $ref: "#/components/schemas/File"
+          $ref: "#/components/schemas/Employee"
         operation:
           description: Operation performed
           example: one
           type: string
         resource:
           description: Unified API resource name
-          example: files
+          example: Employees
           type: string
         service:
           description: Apideck ID of service provider
-          example: google-drive
+          example: undefined
           type: string
         status:
           description: HTTP Response Status
@@ -942,12 +1399,12 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: File
-    GetFilesResponse:
+      x-graphql-type-name: Employee
+    GetEmployeesResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/File"
+            $ref: "#/components/schemas/Employee"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -959,11 +1416,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: files
+          example: Employees
           type: string
         service:
           description: Apideck ID of service provider
-          example: google-drive
+          example: undefined
           type: string
         status:
           description: HTTP Response Status
@@ -981,10 +1438,20 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: FileList
+      x-graphql-type-name: EmployeeList
     Id:
       example: "12345"
       readOnly: true
+      type: string
+    Language:
+      description: language code according to ISO 639-1. For the United States - EN
+      example: EN
+      nullable: true
+      type: string
+    LastName:
+      example: Musk
+      nullable: true
+      title: Last name
       type: string
     Links:
       description: Links to navigate to previous or next pages through the API
@@ -1031,6 +1498,11 @@ components:
           example: 50
           type: integer
       type: object
+    MiddleName:
+      example: D.
+      nullable: true
+      title: Middle name
+      type: string
     NotFoundResponse:
       properties:
         detail:
@@ -1117,6 +1589,86 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+    PaymentUnit:
+      enum:
+        - hour
+        - week
+        - month
+        - year
+        - paycheck
+      example: year
+      type: string
+    PhoneNumber:
+      properties:
+        area_code:
+          example: "323"
+          nullable: true
+          title: Area Code
+          type: string
+        country_code:
+          example: "1"
+          nullable: true
+          title: Country Code
+          type: string
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        number:
+          example: 111-111-1111
+          minLength: 1
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - home
+            - office
+            - mobile
+            - assistant
+            - fax
+            - direct-dial-in
+            - personal
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: PhoneType
+      required:
+        - number
+      type: object
+    SocialLink:
+      properties:
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        type:
+          example: twitter
+          nullable: true
+          type: string
+        url:
+          example: https://www.twitter.com/apideck-io
+          minLength: 1
+          type: string
+      required:
+        - url
+      type: object
+    SocialSecurityNumber:
+      example: "123456789"
+      nullable: true
+      title: Social Security Number
+      type: string
+    Tags:
+      example:
+        - New
+      items:
+        type: string
+      type: array
+    Title:
+      example: CEO
+      nullable: true
+      title: Title
+      type: string
     UnauthorizedResponse:
       properties:
         detail:
@@ -1209,7 +1761,7 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
-    UpdateFileResponse:
+    UpdateEmployeeResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -1219,11 +1771,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: files
+          example: Employees
           type: string
         service:
           description: Apideck ID of service provider
-          example: google-drive
+          example: undefined
           type: string
         status:
           description: HTTP Response Status
@@ -1240,6 +1792,29 @@ components:
         - resource
         - operation
         - data
+      type: object
+    Website:
+      properties:
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - work
+            - personal
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: WebsiteType
+        url:
+          example: http://example.com
+          minLength: 1
+          type: string
+      required:
+        - url
       type: object
   securitySchemes:
     apiKey:

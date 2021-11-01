@@ -1428,6 +1428,7 @@ components:
             - passportNumber
             - payoutMethodCode
             - payoutSchedule
+            - pciSelfAssessment
             - personalData
             - phoneCountryCode
             - phoneNumber
@@ -1743,16 +1744,19 @@ components:
     PayoutMethod:
       properties:
         merchantAccount:
+          description: The [`merchantAccount`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__reqParam_merchantAccount) you used in the `/payments` request when you [saved the account holder's card details](https://docs.adyen.com/platforms/payout-to-cards#check-and-store).
           type: string
         payoutMethodCode:
+          description: Adyen-generated unique alphanumeric identifier (UUID) for the payout method, returned in the response when you create a payout method. Required when updating an existing payout method in an `/updateAccountHolder` request.
           type: string
-        payoutMethodType:
-          enum:
-            - CardToken
+        payoutMethodReference:
+          description: Your reference for the payout method.
           type: string
         recurringDetailReference:
+          description: The [`recurringDetailReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_additionalData-ResponseAdditionalDataCommon-recurring-recurringDetailReference)  returned in the `/payments` response when you [saved the account holder's card details](https://docs.adyen.com/platforms/payout-to-cards#check-and-store).
           type: string
         shopperReference:
+          description: The [`shopperReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__reqParam_shopperReference) you sent in the `/payments` request when you [saved the account holder's card details](https://docs.adyen.com/platforms/payout-to-cards#check-and-store).
           type: string
       required:
         - merchantAccount

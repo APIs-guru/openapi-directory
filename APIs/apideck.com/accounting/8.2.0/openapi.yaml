@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.1.0
+  version: 8.2.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -311,6 +311,10 @@ tags:
     name: Company Info
     x-apideck-model:
       $ref: "#/components/schemas/CompanyInfo"
+  - description: ""
+    name: Payments
+    x-apideck-model:
+      $ref: "#/components/schemas/Payment"
 paths:
   /accounting/company-info:
     get:
@@ -518,7 +522,8 @@ paths:
                   account_number: '123456789',
                   account_name: 'SPACEX LLC'
                 },
-                status: 'active'
+                status: 'active',
+                row_version: '1-12345'
               }
             }
 
@@ -737,7 +742,8 @@ paths:
                   account_number: '123456789',
                   account_name: 'SPACEX LLC'
                 },
-                status: 'active'
+                status: 'active',
+                row_version: '1-12345'
               }
             }
 
@@ -865,8 +871,7 @@ paths:
                 quantity: 1,
                 unit_price: 27500.5,
                 ledger_account: {
-                  id: '123456',
-                  name: 'Bank account'
+                  id: '123456'
                 },
                 active: true,
                 row_version: '1-12345'
@@ -1049,8 +1054,7 @@ paths:
                 quantity: 1,
                 unit_price: 27500.5,
                 ledger_account: {
-                  id: '123456',
-                  name: 'Bank account'
+                  id: '123456'
                 },
                 active: true,
                 row_version: '1-12345'
@@ -1195,16 +1199,13 @@ paths:
                     unit_of_measure: 'pc.',
                     discount_percentage: 0,
                     item: {
-                      id: '12344',
-                      code: '120-C',
-                      name: 'Model Y'
+                      id: '12344'
                     },
                     tax_rate: {
                       id: '123456'
                     },
                     ledger_account: {
-                      id: '123456',
-                      name: 'Bank account'
+                      id: '123456'
                     },
                     row_version: '1-12345'
                   }
@@ -1443,16 +1444,13 @@ paths:
                     unit_of_measure: 'pc.',
                     discount_percentage: 0,
                     item: {
-                      id: '12344',
-                      code: '120-C',
-                      name: 'Model Y'
+                      id: '12344'
                     },
                     tax_rate: {
                       id: '123456'
                     },
                     ledger_account: {
-                      id: '123456',
-                      name: 'Bank account'
+                      id: '123456'
                     },
                     row_version: '1-12345'
                   }
@@ -1841,6 +1839,310 @@ paths:
 
             try {
               const { data } = await apideck.accounting.ledgerAccountsUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  /accounting/payments:
+    get:
+      description: List Payments
+      operationId: paymentsAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetPaymentsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Payments
+      tags:
+        - Payments
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.paymentsAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: Payments
+    post:
+      description: Create Payment
+      operationId: paymentsAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Payment"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreatePaymentResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Payment
+      tags:
+        - Payments
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              payment: {
+                currency: 'USD',
+                currency_rate: 0.69,
+                total_amount: 49.99,
+                reference: '123456',
+                accounts_receivable_account_type: 'Account',
+                accounts_receivable_account_id: '123456',
+                transaction_date: '2021-05-01T12:00:00.000Z',
+                customer: {
+                  id: '12345'
+                },
+                allocations: [
+                  {
+                    id: '123456',
+                    type: 'invoice',
+                    amount: 49.99
+                  }
+                ]
+              }
+            }
+
+            try {
+              const { data } = await apideck.accounting.paymentsAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/accounting/payments/{id}":
+    delete:
+      description: Delete Payment
+      operationId: paymentsDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeletePaymentResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Payment
+      tags:
+        - Payments
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.paymentsDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Payment
+      operationId: paymentsOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetPaymentResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Payment
+      tags:
+        - Payments
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.paymentsOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update Payment
+      operationId: paymentsUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Payment"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdatePaymentResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update Payment
+      tags:
+        - Payments
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              payment: {
+                currency: 'USD',
+                currency_rate: 0.69,
+                total_amount: 49.99,
+                reference: '123456',
+                accounts_receivable_account_type: 'Account',
+                accounts_receivable_account_id: '123456',
+                transaction_date: '2021-05-01T12:00:00.000Z',
+                customer: {
+                  id: '12345'
+                },
+                allocations: [
+                  {
+                    id: '123456',
+                    type: 'invoice',
+                    amount: 49.99
+                  }
+                ]
+              }
+            }
+
+            try {
+              const { data } = await apideck.accounting.paymentsUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -2240,6 +2542,12 @@ components:
           schema:
             $ref: "#/components/schemas/CreateLedgerAccountResponse"
       description: LedgerAccount created
+    CreatePaymentResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreatePaymentResponse"
+      description: Payment created
     CreateTaxRateResponse:
       content:
         application/json:
@@ -2270,6 +2578,12 @@ components:
           schema:
             $ref: "#/components/schemas/DeleteLedgerAccountResponse"
       description: LedgerAccount deleted
+    DeletePaymentResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeletePaymentResponse"
+      description: Payment deleted
     DeleteTaxRateResponse:
       content:
         application/json:
@@ -2287,7 +2601,7 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/GetCustomerResponse"
-      description: Customers
+      description: Customer
     GetCustomersResponse:
       content:
         application/json:
@@ -2330,6 +2644,18 @@ components:
           schema:
             $ref: "#/components/schemas/GetLedgerAccountsResponse"
       description: LedgerAccounts
+    GetPaymentResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetPaymentResponse"
+      description: Payment
+    GetPaymentsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetPaymentsResponse"
+      description: Payments
     GetTaxRateResponse:
       content:
         application/json:
@@ -2402,6 +2728,12 @@ components:
           schema:
             $ref: "#/components/schemas/UpdateLedgerAccountResponse"
       description: LedgerAccount updated
+    UpdatePaymentResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdatePaymentResponse"
+      description: Payment Updated
     UpdateTaxRateResponse:
       content:
         application/json:
@@ -3089,6 +3421,38 @@ components:
         - operation
         - data
       type: object
+    CreatePaymentResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: add
+          type: string
+        resource:
+          description: Unified API resource name
+          example: payments
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: xero
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     CreateTaxRateResponse:
       properties:
         data:
@@ -3279,6 +3643,7 @@ components:
         - TMT
         - TND
         - TOP
+        - TRC
         - TRY
         - TTD
         - TWD
@@ -3685,8 +4050,19 @@ components:
     CustomField:
       additionalProperties: false
       properties:
+        description:
+          description: More information about the custom field
+          example: Employee Level
+          title: Description
+          type: string
         id:
-          example: custom_technologies
+          example: "2389328923893298"
+          title: ID
+          type: string
+        name:
+          description: Name of the custom field.
+          example: employee_level
+          title: Name
           type: string
         value:
           anyOf:
@@ -3706,7 +4082,6 @@ components:
         - id
       type: object
     Customer:
-      additionalProperties: false
       properties:
         addresses:
           items:
@@ -3751,6 +4126,8 @@ components:
           items:
             $ref: "#/components/schemas/PhoneNumber"
           type: array
+        row_version:
+          $ref: "#/components/schemas/RowVersion"
         status:
           description: Customer status
           enum:
@@ -3852,6 +4229,38 @@ components:
         resource:
           description: Unified API resource name
           example: ledger-accounts
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: xero
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    DeletePaymentResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: delete
+          type: string
+        resource:
+          description: Unified API resource name
+          example: payments
           type: string
         service:
           description: Apideck ID of service provider
@@ -4261,6 +4670,78 @@ components:
         - data
       type: object
       x-graphql-type-name: LedgerAccountList
+    GetPaymentResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Payment"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: payments
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: xero
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: Payment
+    GetPaymentsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Payment"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: payments
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: xero
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: PaymentList
     GetTaxRateResponse:
       properties:
         data:
@@ -4894,6 +5375,7 @@ components:
           description: User defined item code
           example: 120-C
           nullable: true
+          readOnly: true
           title: Item code
           type: string
         id:
@@ -4905,6 +5387,7 @@ components:
         name:
           example: Model Y
           nullable: true
+          readOnly: true
           title: Item name
           type: string
       type: object
@@ -4919,6 +5402,7 @@ components:
           example: Bank account
           minLength: 1
           nullable: true
+          readOnly: true
           title: Account Name
           type: string
       required:
@@ -5226,6 +5710,100 @@ components:
         - title
         - primary_contact_id
       type: object
+    Payment:
+      properties:
+        accounts_receivable_account_id:
+          description: Unique identifier for the account to allocate payment to.
+          example: "123456"
+          title: Accounts receivable account id
+          type: string
+        accounts_receivable_account_type:
+          description: Type of accounts receivable account.
+          example: Account
+          nullable: true
+          title: Type of accounts receivable account
+          type: string
+        allocations:
+          items:
+            properties:
+              amount:
+                description: Amount of payment that should be attributted to this allocation
+                example: 49.99
+                title: Amount
+                type: number
+              id:
+                description: Unique identifier of entity this payment should be attributed to.
+                example: "123456"
+                title: Linked Entity Id
+                type: string
+              type:
+                enum:
+                  - invoice
+                  - order
+                title: Sale type
+                type: string
+          type: array
+        currency:
+          $ref: "#/components/schemas/Currency"
+        currency_rate:
+          description: Exchange rate when payment is received
+          example: 0.69
+          nullable: true
+          title: Currency exchange Rate
+          type: number
+        customer:
+          description: The customer this payment is linked to.
+          nullable: true
+          properties:
+            company_name:
+              example: The boring company
+              minLength: 1
+              nullable: true
+              readOnly: true
+              type: string
+            display_id:
+              example: CUST00101
+              nullable: true
+              readOnly: true
+              title: Display ID
+              type: string
+            id:
+              example: "12345"
+              title: Customer ID
+              type: string
+          required:
+            - id
+          title: Customer
+          type: object
+          x-graphql-type-name: LinkedPayment
+        id:
+          description: Unique identifier representing the entity
+          example: "123456"
+          readOnly: true
+          title: Payment Identifier
+          type: string
+        reference:
+          description: "Optional payment reference message ie: Debit remittance detail."
+          example: "123456"
+          nullable: true
+          title: Payment reference
+          type: string
+        total_amount:
+          description: Amount of payment
+          example: 49.99
+          title: Total Amount
+          type: number
+        transaction_date:
+          description: Date transction was entered - YYYY:MM::DDThh:mm:ss.sTZD
+          example: 2021-05-01T12:00:00.000Z
+          format: date-time
+          title: Transaction datetime
+          type: string
+      required:
+        - total_amount
+        - accounts_receivable_account_id
+        - transaction_date
+      type: object
     PaymentRequiredResponse:
       properties:
         detail:
@@ -5282,6 +5860,7 @@ components:
             - assistant
             - fax
             - direct-dial-in
+            - personal
             - other
           example: primary
           type: string
@@ -5681,6 +6260,38 @@ components:
         resource:
           description: Unified API resource name
           example: ledger-accounts
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: xero
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    UpdatePaymentResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: update
+          type: string
+        resource:
+          description: Unified API resource name
+          example: payments
           type: string
         service:
           description: Apideck ID of service provider

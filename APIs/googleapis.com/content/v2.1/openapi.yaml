@@ -12327,9 +12327,15 @@ components:
         promotionDisplayDates:
           description: String representation of the promotion display dates.
           type: string
+        promotionDisplayTimePeriod:
+          $ref: "#/components/schemas/TimePeriod"
+          description: TimePeriod representation of the promotion display dates.
         promotionEffectiveDates:
           description: Required. String representation of the promotion effective dates.
           type: string
+        promotionEffectiveTimePeriod:
+          $ref: "#/components/schemas/TimePeriod"
+          description: Required. TimePeriod representation of the promotion effective dates.
         promotionId:
           description: Required. The user provided promotion id to uniquely identify the promotion.
           type: string
@@ -13955,6 +13961,18 @@ components:
           type: string
         phoneNumber:
           description: Required. The phone number of the person picking up the items.
+          type: string
+      type: object
+    TimePeriod:
+      description: A message that represents a time period.
+      properties:
+        endTime:
+          description: The ending timestamp.
+          format: google-datetime
+          type: string
+        startTime:
+          description: The starting timestamp.
+          format: google-datetime
           type: string
       type: object
     TimeZone:

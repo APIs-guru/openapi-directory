@@ -1,0 +1,485 @@
+openapi: 3.1.0
+servers:
+  - url: https://balanceplatform-api-test.adyen.com/btl/v1
+info:
+  contact:
+    email: developer-experience@adyen.com
+    name: Adyen Developer Experience team
+    url: https://www.adyen.help/hc/en-us/community/topics
+    x-twitter: Adyen
+  description: |-
+    The Balance Platform Transfers API provides an endpoint that you can use to move funds within your balance platform, or to send funds from your balance platform to a [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/transferInstruments).
+
+    For information on how the API is used in Adyen Issuing, refer to [Manage funds](https://docs.adyen.com/issuing/manage-funds#transfer).
+
+    ## Authentication
+    Your Adyen contact will provide your API credential and an API key. To connect to the API, add an `X-API-Key` header with the API key as the value, for example:
+
+     ```
+    curl
+    -H "Content-Type: application/json" \
+    -H "X-API-Key: YOUR_API_KEY" \
+    ...
+    ```
+
+    Alternatively, you can use the username and password to connect to the API using basic authentication. For example:
+
+    ```
+    curl
+    -H "Content-Type: application/json" \
+    -U "ws@BalancePlatform.YOUR_BALANCE_PLATFORM":"YOUR_WS_PASSWORD" \
+    ...
+    ```
+    ## Roles and permissions
+    To use the Balance Platforms Transfers API, you need an additional role for your API credential. Transfers must also be enabled for the source balance account. Your Adyen contact will set up the roles and permissions for you.
+    ## Versioning
+    The Balance Platform Transfers API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
+
+    For example:
+    ```
+    https://balanceplatform-api-test.adyen.com/btl/v1
+    ```
+    ## Going live
+    When going live, your Adyen contact will provide your API credential for the live environment. You can then use the username and password to send requests to `https://balanceplatform-api-live.adyen.com/btl/v1`.
+
+    For more information, refer to our [Going live documentation](https://docs.adyen.com/issuing/integration-checklist#going-live).
+  termsOfService: https://www.adyen.com/legal/terms-and-conditions
+  title: Balance Platform Transfers API
+  version: "1"
+  x-apisguru-categories:
+    - payment
+  x-logo:
+    url: https://twitter.com/Adyen/profile_image?size=original
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/TransferService-v1.json
+      version: "3.1"
+  x-providerName: adyen.com
+  x-publicVersion: true
+  x-serviceName: TransferService
+  x-preferred: false
+paths:
+  /transfers:
+    post:
+      description: |-
+        Starts a transfer request to move funds within your balance platform, or send funds to a [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/transferInstruments). Adyen sends the outcome of the transfer request through webhooks.
+
+        To use this endpoint, you need an additional role for your API credential and transfers must be enabled for the source balance account. Your Adyen contact will set these up for you.
+      operationId: post-transfers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransferInfoOld"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransferOld"
+          description: OK - the request has succeeded.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
+      summary: Transfer funds.
+      tags:
+        - General
+      x-addedInVersion: "1"
+      x-groupName: General
+      x-sortIndex: 0
+components:
+  examples: {}
+  schemas:
+    Address:
+      properties:
+        city:
+          description: "The name of the city. Maximum length: 3000 characters."
+          type: string
+        country:
+          description: |-
+            The two-character country code as defined in ISO-3166-1 alpha-2. For example, **US**.
+            > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
+          type: string
+        houseNumberOrName:
+          description: "The number or name of the house. Maximum length: 3000 characters."
+          type: string
+        postalCode:
+          description: A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries.
+          type: string
+        stateOrProvince:
+          description: |-
+            State or province codes as defined in ISO 3166-2. For example, **CA** in the US or **ON** in Canada.
+            > Required for the US and Canada.
+          type: string
+        street:
+          description: |-
+            The name of the street. Maximum length: 3000 characters.
+            > The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
+          type: string
+      required:
+        - street
+        - houseNumberOrName
+        - city
+        - postalCode
+        - country
+    Amount:
+      properties:
+        currency:
+          description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
+          maxLength: 3
+          minLength: 3
+          type: string
+        value:
+          description: The amount of the transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+          format: int64
+          type: integer
+      required:
+        - value
+        - currency
+    BankAccountInfo:
+      properties:
+        address:
+          $ref: "#/components/schemas/Address"
+          description: The address of the bank account holder.
+        iban:
+          description: The international bank account number as defined in the [ISO-13616](https://www.iso.org/standard/81090.html) standard.
+          type: string
+        ownerName:
+          $ref: "#/components/schemas/Name"
+          description: The name of the bank account holder.
+    Counterparty:
+      properties:
+        balanceAccountId:
+          description: Unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__queryParam_id).
+          type: string
+        bankAccount:
+          $ref: "#/components/schemas/BankAccountInfo"
+          description: The bankAccount.
+        merchant:
+          $ref: "#/components/schemas/MerchantData"
+        transferInstrumentId:
+          description: Unique identifier of the [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/transferInstruments).
+          type: string
+    InternalPartyIdentification:
+      properties:
+        balanceAccountId:
+          description: Unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__queryParam_id).
+          type: string
+        paymentInstrumentId:
+          description: Unique identifier of the [payment instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/paymentInstruments/{id}).
+          type: string
+    InvalidField:
+      properties:
+        message:
+          description: Description of the validation error.
+          type: string
+        name:
+          description: The field that has an invalid value.
+          type: string
+        value:
+          description: The invalid value.
+          type: string
+      required:
+        - name
+        - value
+        - message
+    Link:
+      properties:
+        href:
+          type: string
+    Links:
+      properties:
+        next:
+          $ref: "#/components/schemas/Link"
+        prev:
+          $ref: "#/components/schemas/Link"
+    MerchantData:
+      properties:
+        mcc:
+          description: The merchant category code.
+          type: string
+        merchantId:
+          description: The merchant identifier.
+          type: string
+        nameLocation:
+          $ref: "#/components/schemas/NameLocation"
+          description: Contains the merchant's name and location.
+    Name:
+      properties:
+        firstName:
+          description: The first name.
+          type: string
+        fullName:
+          description: The full name.
+          type: string
+        infix:
+          description: The infix in the name, if any.
+          type: string
+        lastName:
+          description: The last name.
+          type: string
+    NameLocation:
+      properties:
+        city:
+          description: The city where the merchant is located.
+          type: string
+        country:
+          description: The country where the merchant is located in [three-letter country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) format.
+          type: string
+        countryOfOrigin:
+          description: The home country in [three-digit country code](https://en.wikipedia.org/wiki/ISO_3166-1_numeric) format, used for government-controlled merchants such as embassies.
+          type: string
+        name:
+          description: The name of the merchant's shop or service.
+          type: string
+        rawData:
+          description: The raw data.
+          type: string
+        state:
+          description: The state where the merchant is located.
+          type: string
+    PartyIdentification:
+      properties:
+        balanceAccountId:
+          description: Unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__queryParam_id).
+          type: string
+        paymentInstrumentId:
+          description: Unique identifier of the [payment instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/paymentInstruments/{id}).
+          type: string
+    RestServiceError:
+      properties:
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.
+          type: string
+        errorCode:
+          description: A code that identifies the problem type.
+          type: string
+        errorType:
+          description: A URI that identifies the problem type, which points to human-readable documentation on this problem type.
+          type: string
+        instance:
+          description: A unique URI that identifies the specific occurrence of the problem.
+          type: string
+        invalidFields:
+          description: Detailed explanations of each validation error, when applicable.
+          items:
+            $ref: "#/components/schemas/InvalidField"
+          type: array
+        requestId:
+          description: A unique reference for the request, essentially same as `pspReference`.
+          type: string
+        status:
+          description: The HTTP status code.
+          format: int32
+          type: integer
+        title:
+          description: A short, human-readable summary of the problem type.
+          type: string
+      required:
+        - errorType
+        - errorCode
+        - title
+        - detail
+        - status
+    Transaction:
+      properties:
+        accountHolderId:
+          description: Unique identifier of the account holder.
+          type: string
+          x-addedInVersion: "1"
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount.
+          x-addedInVersion: "1"
+        balanceAccountId:
+          description: Unique identifier of the balance account.
+          type: string
+          x-addedInVersion: "1"
+        balancePlatform:
+          description: Unique identifier of the balance platform.
+          type: string
+          x-addedInVersion: "1"
+        bookingDate:
+          description: The date the transaction is booked to balance.
+          format: date-time
+          type: string
+          x-addedInVersion: "1"
+        counterparty:
+          $ref: "#/components/schemas/Counterparty"
+          description: The counterparty of this transaction.
+        createdAt:
+          description: The date the transaction is created.
+          format: date-time
+          type: string
+          x-addedInVersion: "1"
+        description:
+          description: A human-readable description for the transaction.
+          type: string
+          x-addedInVersion: "1"
+        id:
+          description: Unique identifier of the transaction.
+          type: string
+          x-addedInVersion: "1"
+        instructedAmount:
+          $ref: "#/components/schemas/Amount"
+          description: The originally instructed amount.
+          x-addedInVersion: "1"
+        paymentInstrumentId:
+          description: Unique identifier of the payment instrument that was used for this transaction.
+          type: string
+          x-addedInVersion: "1"
+        reference:
+          description: The reference for this transaction.
+          type: string
+          x-addedInVersion: "1"
+        referenceForBeneficiary:
+          description: The reference for beneficiary.
+          type: string
+          x-addedInVersion: "1"
+        status:
+          description: |-
+            The status of the transaction.
+
+             Possible values:
+
+            * **pending**: the transaction has is still pending.* **booked**: the transaction has been booked to balance.
+          enum:
+            - booked
+            - pending
+          type: string
+          x-addedInVersion: "1"
+        transferId:
+          description: Unique identifier of the related transfer.
+          type: string
+          x-addedInVersion: "1"
+        valueDate:
+          description: The date the balance of this transfer becomes available.
+          format: date-time
+          type: string
+          x-addedInVersion: "1"
+      required:
+        - id
+        - transferId
+        - balancePlatform
+        - accountHolderId
+        - balanceAccountId
+        - paymentInstrumentId
+        - amount
+        - referenceForBeneficiary
+        - reference
+        - instructedAmount
+        - status
+        - createdAt
+        - bookingDate
+        - valueDate
+        - counterparty
+    TransactionSearchResponse:
+      properties:
+        _links:
+          $ref: "#/components/schemas/Links"
+        data:
+          items:
+            $ref: "#/components/schemas/Transaction"
+          type: array
+    TransferInfoOld:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount of the transfer.
+          x-addedInVersion: "1"
+        description:
+          description: A human-readable description for the transfer. You can use alphanumeric characters and hyphens. We recommend sending a maximum of 140 characters, otherwise the description will be truncated in the webhooks that you receive about the transfer.
+          type: string
+          x-addedInVersion: "1"
+        destination:
+          $ref: "#/components/schemas/PartyIdentification"
+          description: Contains information about the resource where funds will be transferred to.
+          x-addedInVersion: "1"
+        reference:
+          description: Your unique reference for the transfer. You can use alphanumeric characters and hyphens. Maximum length 80 characters.
+          type: string
+          x-addedInVersion: "1"
+        source:
+          $ref: "#/components/schemas/InternalPartyIdentification"
+          description: Contains information about the resource where funds will be taken from.
+          x-addedInVersion: "1"
+      required:
+        - source
+        - destination
+        - amount
+    TransferOld:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount of the transfer.
+          x-addedInVersion: "1"
+        description:
+          description: A human-readable description for the transfer. You can use alphanumeric characters and hyphens. We recommend sending a maximum of 140 characters, otherwise the description will be truncated in the webhooks that you receive about the transfer.
+          type: string
+          x-addedInVersion: "1"
+        destination:
+          $ref: "#/components/schemas/PartyIdentification"
+          description: Contains information about the resource where funds will be transferred to.
+          x-addedInVersion: "1"
+        id:
+          description: Unique identifier of the transfer.
+          type: string
+          x-addedInVersion: "1"
+        reference:
+          description: Your unique reference for the transfer. You can use alphanumeric characters and hyphens. Maximum length 80 characters.
+          type: string
+          x-addedInVersion: "1"
+        refusalReason:
+          description: Additional information about the result of the transfer request.
+          type: string
+          x-addedInVersion: "1"
+        resultCode:
+          description: |-
+            The result of the transfer request.
+
+             Possible values: **Authorised**, **Refused**.
+          type: string
+          x-addedInVersion: "1"
+        source:
+          $ref: "#/components/schemas/InternalPartyIdentification"
+          description: Contains information about the resource where funds will be taken from.
+          x-addedInVersion: "1"
+      required:
+        - source
+        - destination
+        - amount
+        - id
+        - resultCode
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: X-API-Key
+      type: apiKey
+    BasicAuth:
+      scheme: basic
+      type: http
+x-groups:
+  - General

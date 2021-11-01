@@ -3063,7 +3063,6 @@ components:
 
           type: object
       required:
-        - contactDetails
         - id
     AccountHolderInfo:
       properties:
@@ -3098,8 +3097,6 @@ components:
              The key must be a currency code in the three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) format and in uppercase. For example, **EUR**. The value must be an object containing the sweep configuration.
 
           type: object
-      required:
-        - contactDetails
     Address:
       properties:
         city:
@@ -3399,7 +3396,7 @@ components:
       properties:
         authentication:
           $ref: "#/components/schemas/Authentication"
-          description: Authentication details for 3D Secure and wallet activation.
+          description: Contains the card user's password and mobile phone number. This is required when you issue cards that can be used to make online payments within the EEA and the UK, or can be added to digital wallets. Refer to [3D Secure and digital wallets](https://docs.adyen.com/issuing/3d-secure-and-wallets) for more information.
         bin:
           description: The BIN of the card number.
           type: string
@@ -3481,7 +3478,7 @@ components:
       properties:
         authentication:
           $ref: "#/components/schemas/Authentication"
-          description: Authentication details for 3D Secure and wallet activation.
+          description: Contains the card user's password and mobile phone number. This is required when you issue cards that can be used to make online payments within the EEA and the UK, or can be added to digital wallets. Refer to [3D Secure and digital wallets](https://docs.adyen.com/issuing/3d-secure-and-wallets) for more information.
         brand:
           description: |-
             The brand for the payment instrument.
@@ -3887,7 +3884,7 @@ components:
             - belowTaxThreshold
           type: string
         type:
-          description: "The type of organization. Possible values: **associationIncorporated**, **governmentalOrganization**, **listedPublicCompany**,**nonProfit**, **partnershipIncorporated**, **privateCompany**, **unlistedPublicCompany**, **soleProprietorship**."
+          description: "The type of organization. Possible values: **associationIncorporated**, **governmentalOrganization**, **listedPublicCompany**,**nonProfit**, **partnershipIncorporated**, **privateCompany**."
           enum:
             - associationIncorporated
             - governmentalOrganization
@@ -3895,8 +3892,6 @@ components:
             - nonProfit
             - partnershipIncorporated
             - privateCompany
-            - unlistedPublicCompany
-            - soleProprietorship
           type: string
         webData:
           $ref: "#/components/schemas/WebData"
@@ -4366,8 +4361,35 @@ components:
         - title
         - detail
         - status
-    ServiceError: {}
-    StockData: {}
+    ServiceError:
+      properties:
+        errorCode:
+          description: The error code mapped to the error message.
+          type: string
+        errorType:
+          description: The category of the error.
+          type: string
+        message:
+          description: A short explanation of the issue.
+          type: string
+        pspReference:
+          description: The PSP reference of the payment.
+          type: string
+        status:
+          description: The HTTP response status.
+          format: int32
+          type: integer
+    StockData:
+      properties:
+        marketIdentifier:
+          description: The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) of the stock market where the organization's stocks are traded.
+          type: string
+        stockNumber:
+          description: The stock number.
+          type: string
+        tickerSymbol:
+          description: The stock ticker symbol.
+          type: string
     SweepConfiguration:
       properties:
         balanceAccountId:
