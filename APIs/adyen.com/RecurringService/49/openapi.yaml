@@ -40,7 +40,7 @@ info:
     - format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/RecurringService-v49.json
       version: "3.1"
-  x-preferred: true
+  x-preferred: false
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: RecurringService
@@ -678,5 +678,7 @@ components:
     BasicAuth:
       scheme: basic
       type: http
+source:
+  url: {}
 x-groups:
   - General

@@ -31,9 +31,33 @@ tags:
   - name: projects
 paths:
   "/v2/{name}":
+    delete:
+      description: Deletes a storage volume snapshot for a given volume.
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.delete
+      parameters:
+        - description: Required. The name of the snapshot to delete.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
     get:
-      description: Get details of a single storage lun.
-      operationId: baremetalsolution.projects.locations.volumes.luns.get
+      description: Get details of a single storage volume snapshot.
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.get
       parameters:
         - description: Required. Name of the resource.
           in: path
@@ -46,7 +70,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Lun"
+                $ref: "#/components/schemas/VolumeSnapshot"
           description: Successful response
       security:
         - Oauth2:
@@ -67,6 +91,40 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Update details of a single storage volume.
+      operationId: baremetalsolution.projects.locations.volumes.patch
+      parameters:
+        - description: "Output only. The resource name of this `Volume`. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. Format: `projects/{project}/locations/{location}/volumes/{volume}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: "The list of fields to update. The only currently supported fields are: `snapshot_auto_delete_behavior` `snapshot_schedule_policy_name`"
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Volume"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v2/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
@@ -119,6 +177,142 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v2/{name}/operations":
+    get:
+      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
+      operationId: baremetalsolution.projects.locations.operations.list
+      parameters:
+        - description: The name of the operation's parent resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The standard list filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOperationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{name}:cancel":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+      operationId: baremetalsolution.projects.locations.operations.cancel
+      parameters:
+        - description: The name of the operation resource to be cancelled.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelOperationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{name}:reset":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Perform an ungraceful, hard reset on a server. Equivalent to shutting the power off and then turning it back on.
+      operationId: baremetalsolution.projects.locations.instances.reset
+      parameters:
+        - description: Required. Name of the resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetInstanceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v2/{parent}/instances":
     get:
       description: List servers in a given project and location.
@@ -128,16 +322,6 @@ paths:
           in: path
           name: parent
           required: true
-          schema:
-            type: string
-        - description: Filtering results.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: Hint for how to order the results.
-          in: query
-          name: orderBy
           schema:
             type: string
         - description: Requested page size. Server may return fewer items than requested. If unspecified, the server will pick an appropriate default.
@@ -187,16 +371,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: Filtering results.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: Hint for how to order the results.
-          in: query
-          name: orderBy
-          schema:
-            type: string
         - description: Requested page size. The server might return fewer items than requested. If unspecified, server will pick an appropriate default.
           in: query
           name: pageSize
@@ -233,6 +407,299 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v2/{parent}/networks":
+    get:
+      description: List network in a given project and location.
+      operationId: baremetalsolution.projects.locations.networks.list
+      parameters:
+        - description: Required. Parent value for ListNetworksRequest.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Requested page size. The server might return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results from the server.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListNetworksResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{parent}/snapshotSchedulePolicies":
+    get:
+      description: List snapshot schedule policies in a given project and location.
+      operationId: baremetalsolution.projects.locations.snapshotSchedulePolicies.list
+      parameters:
+        - description: Required. The parent project containing the Snapshot Schedule Policies.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSnapshotSchedulePoliciesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a snapshot schedule policy in the specified project.
+      operationId: baremetalsolution.projects.locations.snapshotSchedulePolicies.create
+      parameters:
+        - description: Required. The parent project and location containing the SnapshotSchedulePolicy.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Snapshot policy ID
+          in: query
+          name: snapshotSchedulePolicyId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SnapshotSchedulePolicy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SnapshotSchedulePolicy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{parent}/snapshots":
+    get:
+      description: List storage volume snapshots for given storage volume.
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.list
+      parameters:
+        - description: Required. Parent value for ListVolumesRequest.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Requested page size. The server might return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results from the server.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListVolumeSnapshotsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a storage volume snapshot in a containing volume.
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.create
+      parameters:
+        - description: Required. The volume to snapshot.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VolumeSnapshot"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VolumeSnapshot"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{parent}/volumes":
+    get:
+      description: List storage volumes in a given project and location.
+      operationId: baremetalsolution.projects.locations.volumes.list
+      parameters:
+        - description: Required. Parent value for ListVolumesRequest.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Requested page size. The server might return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results from the server.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListVolumesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{volumeSnapshot}:restoreVolumeSnapshot":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Restore a storage volume snapshot to its containing volume.
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.restoreVolumeSnapshot
+      parameters:
+        - description: Required. Name of the resource.
+          in: path
+          name: volumeSnapshot
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RestoreVolumeSnapshotRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
 components:
   parameters:
     _.xgafv:
@@ -309,6 +776,14 @@ components:
       schema:
         type: string
   schemas:
+    CancelOperationRequest:
+      description: The request message for Operations.CancelOperation.
+      properties: {}
+      type: object
+    Empty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      properties: {}
+      type: object
     Instance:
       description: A server.
       properties:
@@ -403,6 +878,81 @@ components:
           description: Locations that could not be reached.
           items:
             type: string
+          type: array
+      type: object
+    ListNetworksResponse:
+      description: Response message containing the list of networks.
+      properties:
+        networks:
+          description: The list of networks.
+          items:
+            $ref: "#/components/schemas/Network"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results from the server.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListOperationsResponse:
+      description: The response message for Operations.ListOperations.
+      properties:
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+        operations:
+          description: A list of operations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListSnapshotSchedulePoliciesResponse:
+      description: Response message containing the list of snapshot schedule policies.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        snapshotSchedulePolicies:
+          description: The snapshot schedule policies registered in this project.
+          items:
+            $ref: "#/components/schemas/SnapshotSchedulePolicy"
+          type: array
+      type: object
+    ListVolumeSnapshotsResponse:
+      description: Response message containing the list of storage volume snapshots.
+      properties:
+        nextPageToken:
+          description: A token identifying a page of results from the server.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+        volumeSnapshots:
+          description: The list of storage volumes.
+          items:
+            $ref: "#/components/schemas/VolumeSnapshot"
+          type: array
+      type: object
+    ListVolumesResponse:
+      description: Response message containing the list of storage volumes.
+      properties:
+        nextPageToken:
+          description: A token identifying a page of results from the server.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+        volumes:
+          description: The list of storage volumes.
+          items:
+            $ref: "#/components/schemas/Volume"
           type: array
       type: object
     Location:
@@ -516,6 +1066,106 @@ components:
           $ref: "#/components/schemas/VRF"
           description: The vrf for the Network.
       type: object
+    Operation:
+      description: This resource represents a long-running operation that is the result of a network API call.
+      properties:
+        done:
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
+          type: boolean
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The error result of the operation in case of failure or cancellation.
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          type: object
+        name:
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          type: object
+      type: object
+    ResetInstanceRequest:
+      description: Message requesting to reset a server.
+      properties: {}
+      type: object
+    RestoreVolumeSnapshotRequest:
+      description: Message for restoring a volume snapshot.
+      properties: {}
+      type: object
+    Schedule:
+      description: A snapshot schedule.
+      properties:
+        crontabSpec:
+          description: A crontab-like specification that the schedule uses to take snapshots.
+          type: string
+        prefix:
+          description: A list of snapshot names created in this schedule.
+          type: string
+        retentionCount:
+          description: The maximum number of snapshots to retain in this schedule.
+          format: int32
+          type: integer
+      type: object
+    SnapshotReservationDetail:
+      description: Details about snapshot space reservation and usage on the storage volume.
+      properties:
+        reservedSpaceGib:
+          description: The space on this storage volume reserved for snapshots, shown in GiB.
+          format: int64
+          type: string
+        reservedSpaceRemainingGib:
+          description: The amount, in GiB, of available space in this storage volume's reserved snapshot space.
+          format: int64
+          type: string
+        reservedSpaceUsedPercent:
+          description: The percent of snapshot space on this storage volume actually being used by the snapshot copies. This value might be higher than 100% if the snapshot copies have overflowed into the data portion of the storage volume.
+          format: int32
+          type: integer
+      type: object
+    SnapshotSchedulePolicy:
+      description: A snapshot schedule policy.
+      properties:
+        description:
+          description: The description of the snapshot schedule policy.
+          type: string
+        name:
+          description: Output only. The name of the snapshot schedule policy.
+          readOnly: true
+          type: string
+        schedules:
+          description: The snapshot schedules contained in this policy. You can specify a maxiumum of 5 schedules.
+          items:
+            $ref: "#/components/schemas/Schedule"
+          type: array
+        volumes:
+          description: The names of the volumes associated with this policy.
+          items:
+            type: string
+          type: array
+      type: object
+    Status:
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      properties:
+        code:
+          description: The status code, which should be an enum value of google.rpc.Code.
+          format: int32
+          type: integer
+        details:
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
     VRF:
       description: A network VRF.
       properties:
@@ -538,6 +1188,81 @@ components:
             - STATE_UNSPECIFIED
             - PROVISIONING
             - PROVISIONED
+          type: string
+      type: object
+    Volume:
+      description: A storage volume.
+      properties:
+        autoGrownSizeGib:
+          description: The size, in GiB, that this storage volume has expanded as a result of an auto grow policy. In the absence of auto-grow, the value is 0.
+          format: int64
+          type: string
+        currentSizeGib:
+          description: The current size of this storage volume, in GiB, including space reserved for snapshots. This size might be different than the requested size if the storage volume has been configured with auto grow or auto shrink.
+          format: int64
+          type: string
+        name:
+          description: "Output only. The resource name of this `Volume`. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. Format: `projects/{project}/locations/{location}/volumes/{volume}`"
+          readOnly: true
+          type: string
+        remainingSpaceGib:
+          description: The space remaining in the storage volume for new LUNs, in GiB, excluding space reserved for snapshots.
+          format: int64
+          type: string
+        requestedSizeGib:
+          description: The requested size of this storage volume, in GiB.
+          format: int64
+          type: string
+        snapshotAutoDeleteBehavior:
+          description: The behavior to use when snapshot reserved space is full.
+          enum:
+            - SNAPSHOT_AUTO_DELETE_BEHAVIOR_UNSPECIFIED
+            - DISABLED
+            - OLDEST_FIRST
+            - NEWEST_FIRST
+          type: string
+        snapshotReservationDetail:
+          $ref: "#/components/schemas/SnapshotReservationDetail"
+          description: Details about snapshot space reservation and usage on the storage volume.
+        snapshotSchedulePolicy:
+          description: The name of the snapshot schedule policy in use for this volume, if any.
+          type: string
+        state:
+          description: The state of this storage volume.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - READY
+            - DELETING
+          type: string
+        storageType:
+          description: The storage type for this volume.
+          enum:
+            - STORAGE_TYPE_UNSPECIFIED
+            - SSD
+            - HDD
+          type: string
+      type: object
+    VolumeSnapshot:
+      description: Snapshot registered for a given storage volume.
+      properties:
+        createTime:
+          description: Optional. The creation time of the storage volume snapshot.
+          format: google-datetime
+          type: string
+        description:
+          description: The description of the storage volume snapshot.
+          type: string
+        name:
+          description: Output only. The name of the storage volume snapshot.
+          readOnly: true
+          type: string
+        sizeBytes:
+          description: The size of the storage volume snapshot, in bytes.
+          format: int64
+          type: string
+        storageVolume:
+          description: The storage volume this snapshot belongs to.
           type: string
       type: object
   securitySchemes:

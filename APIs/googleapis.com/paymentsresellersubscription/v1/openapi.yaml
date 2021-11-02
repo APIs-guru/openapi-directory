@@ -620,6 +620,13 @@ components:
           description: Output only. Response only. Resource name of the subscription promotion. It will have the format of "partners/{partner_id}/promotion/{promotion_id}"
           readOnly: true
           type: string
+        promotionType:
+          description: Output only. Output Only. Specifies the type of the promotion.
+          enum:
+            - PROMOTION_TYPE_UNSPECIFIED
+            - PROMOTION_TYPE_FREE_TRIAL
+          readOnly: true
+          type: string
         regionCodes:
           description: 'Output only. 2-letter ISO region code where the promotion is available in. Ex. "US" Please refers to: https://en.wikipedia.org/wiki/ISO_3166-1'
           items:

@@ -1772,6 +1772,9 @@ components:
         riskdata.riskProfileReference:
           description: Reference number of the risk profile that you want to apply to the payment. If not provided or left blank, the merchant-level account's default risk profile will be applied to the payment. For more information, see [dynamically assign a risk profile to a payment](https://docs.adyen.com/risk-management/create-and-use-risk-profiles#dynamically-assign-a-risk-profile-to-a-payment).
           type: string
+        riskdata.skipRisk:
+          description: If this parameter is provided with the value **true**, risk checks for the payment request are skipped and the transaction will not get a risk score.
+          type: string
     AdditionalDataRiskStandalone:
       properties:
         PayPal.CountryCode:
@@ -2343,7 +2346,7 @@ components:
     Mandate:
       properties:
         amount:
-          description: The billing amount of the recurring transactions.
+          description: The billing amount(in minor units) of the recurring transactions.
           type: string
         amountRule:
           description: |+
@@ -2578,9 +2581,9 @@ components:
           $ref: "#/components/schemas/Address"
           description: |-
             The address where to send the invoice.
-            > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object. 
-
-            > For cross-border payouts to and from Canada, this field is required.
+            > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
+            >* For 3D Secure 2 transactions in all browser-based and mobile implementations.
+            >* For cross-border payouts to and from Canada.
           x-addedInVersion: "4"
         browserInfo:
           $ref: "#/components/schemas/BrowserInfo"
@@ -2680,7 +2683,7 @@ components:
           x-addedInVersion: "17"
         mpiData:
           $ref: "#/components/schemas/ThreeDSecureData"
-          description: Authentication data produced by an MPI (Mastercard SecureCode or Visa Secure).
+          description: Authentication data produced by an MPI (Mastercard SecureCode, Visa Secure, or Cartes Bancaires).
         nationality:
           description: The two-character country code of the shopper's nationality.
           maxLength: 2
@@ -2762,8 +2765,9 @@ components:
           x-addedInVersion: "7"
         shopperReference:
           description: |-
-            Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
-            > This field is required for recurring payments.
+            Required for recurring payments. 
+            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
+            > Your reference must not include personally identifiable information (PII), for example name or email address.
           type: string
         shopperStatement:
           description: |-
@@ -3629,7 +3633,7 @@ components:
           description: |-
             The billing address.
 
-            > For cross-border payouts to and from Canada, this field is required.
+            > The `billingAddress` object is required for cross-border payouts to and from Canada. Include all of the fields within this object.
           x-addedInVersion: "18"
         card:
           $ref: "#/components/schemas/Card"
@@ -3754,7 +3758,7 @@ components:
           description: |-
             The billing address.
 
-            > For cross-border payouts to and from Canada, this field is required.
+            > The `billingAddress` object is required for cross-border payouts to and from Canada. Include all of the fields within this object.
           x-addedInVersion: "18"
         card:
           $ref: "#/components/schemas/Card"
@@ -4118,6 +4122,8 @@ components:
     BasicAuth:
       scheme: basic
       type: http
+source:
+  url: {}
 x-groups:
   - Initialization
   - Reviewing

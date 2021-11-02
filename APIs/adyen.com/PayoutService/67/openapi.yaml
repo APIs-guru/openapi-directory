@@ -35,10 +35,10 @@ info:
     - format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/PayoutService-v67.json
       version: "3.1"
+  x-preferred: false
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: PayoutService
-  x-preferred: false
 paths:
   /confirmThirdParty:
     post:
@@ -4221,6 +4221,8 @@ components:
     BasicAuth:
       scheme: basic
       type: http
+source:
+  url: {}
 x-groups:
   - Initialization
   - Reviewing

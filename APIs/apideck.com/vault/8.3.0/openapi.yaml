@@ -163,7 +163,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 8.2.0
+  version: 8.3.0
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1419,6 +1419,7 @@ paths:
                 },
                 redirect_uri: 'https://mysaas.com/dashboard',
                 settings: {
+                  unified_apis: ['crm'],
                   hide_resource_settings: false,
                   sandbox_mode: false,
                   isolation_mode: false,
@@ -2825,6 +2826,11 @@ components:
               description: Configure [Vault](/apis/vault/reference#section/Get-Started) to show the suggestions page. Defaults to `true`.
               title: Show suggestions
               type: boolean
+            unified_apis:
+              description: Provide the IDs of the Unified APIs you want to be visible. Leaving it empty or omiting this field will show all Unified APIs.
+              items:
+                $ref: "#/components/schemas/UnifiedApiId"
+              type: array
           type: object
           x-graphql-type-name: SessionSettings
         theme:
@@ -2934,6 +2940,31 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
+    UnifiedApiId:
+      description: Name of Apideck Unified API
+      enum:
+        - vault
+        - lead
+        - crm
+        - accounting
+        - spreadsheet
+        - email
+        - script
+        - sms
+        - team-messaging
+        - ecommerce
+        - payroll
+        - customer-support
+        - time-registration
+        - transactional-email
+        - hcm
+        - form
+        - csp
+        - email-marketing
+        - ats
+        - hris
+      example: crm
+      type: string
     UnprocessableResponse:
       properties:
         detail:

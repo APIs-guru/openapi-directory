@@ -3138,7 +3138,7 @@ components:
             type: onebip
           - name: One Two Three
             type: onetwothree
-          - name: Local Polish Payment Methods (P24)
+          - name: Online Banking PL
             type: onlineBanking_PL
           - details:
               - items:
@@ -5686,6 +5686,9 @@ components:
         riskdata.riskProfileReference:
           description: Reference number of the risk profile that you want to apply to the payment. If not provided or left blank, the merchant-level account's default risk profile will be applied to the payment. For more information, see [dynamically assign a risk profile to a payment](https://docs.adyen.com/risk-management/create-and-use-risk-profiles#dynamically-assign-a-risk-profile-to-a-payment).
           type: string
+        riskdata.skipRisk:
+          description: If this parameter is provided with the value **true**, risk checks for the payment request are skipped and the transaction will not get a risk score.
+          type: string
     AdditionalDataRiskStandalone:
       properties:
         PayPal.CountryCode:
@@ -6095,6 +6098,7 @@ components:
             - billdesk_online
             - billdesk_wallet
             - onlinebanking_IN
+            - wallet_IN
           type: string
       required:
         - type
@@ -6300,6 +6304,7 @@ components:
             - kcp_naverpay
             - upi
             - onlinebanking_IN
+            - wallet_IN
             - entercash
             - primeiropay_boleto
             - gopay_wallet
@@ -6538,8 +6543,9 @@ components:
           x-addedInVersion: "7"
         shopperReference:
           description: |-
-            Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
-            > This field is required for recurring payments.
+            Required for recurring payments. 
+            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
+            > Your reference must not include personally identifiable information (PII), for example name or email address.
           type: string
         shopperStatement:
           description: |-
@@ -7004,7 +7010,9 @@ components:
           $ref: "#/components/schemas/Name"
           description: The shopper's full name. This object is required for some payment methods such as AfterPay, Klarna, or if you're enrolled in the PayPal Seller Protection program.
         shopperReference:
-          description: "Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters."
+          description: |-
+            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
+            > Your reference must not include personally identifiable information (PII), for example name or email address.
           type: string
         splits:
           description: An array of objects specifying how the payment should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/platforms/processing-payments#providing-split-information).
@@ -7520,7 +7528,7 @@ components:
     Mandate:
       properties:
         amount:
-          description: The billing amount of the recurring transactions.
+          description: The billing amount(in minor units) of the recurring transactions.
           type: string
         amountRule:
           description: |+
@@ -8240,10 +8248,11 @@ components:
         status:
           description: |-
             Status of the payment link. Possible values:
-            * **active** 
+            * **active**
             * **expired**
-            * **completed** (v66 and above) 
-            * **paid** (v65 and below)
+            * **paymentPending** (v68 and later)
+            * **completed** (v66 and later)
+            * **paid** (v65 and earlier)
           enum:
             - active
             - completed
@@ -8387,8 +8396,9 @@ components:
           x-addedInVersion: "7"
         shopperReference:
           description: |-
-            Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
-            > This field is required for recurring payments.
+            Required for recurring payments. 
+            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
+            > Your reference must not include personally identifiable information (PII), for example name or email address.
           type: string
         store:
           description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner arrangement integrations](https://docs.adyen.com/platforms/platforms-for-partners#route-payments) for Adyen for Platforms.
@@ -8627,7 +8637,7 @@ components:
           x-addedInVersion: "17"
         mpiData:
           $ref: "#/components/schemas/ThreeDSecureData"
-          description: Authentication data produced by an MPI (Mastercard SecureCode or Visa Secure).
+          description: Authentication data produced by an MPI (Mastercard SecureCode, Visa Secure, or Cartes Bancaires).
         order:
           $ref: "#/components/schemas/CheckoutOrder"
           description: Contains the order information which is required for partial payments.
@@ -8775,8 +8785,9 @@ components:
           x-addedInVersion: "7"
         shopperReference:
           description: |-
-            Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
-            > This field is required for recurring payments.
+            Required for recurring payments. 
+            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
+            > Your reference must not include personally identifiable information (PII), for example name or email address.
           type: string
         shopperStatement:
           description: |-
@@ -9197,8 +9208,9 @@ components:
           x-addedInVersion: "7"
         shopperReference:
           description: |-
-            Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
-            > This field is required for recurring payments.
+            Required for recurring payments. 
+            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
+            > Your reference must not include personally identifiable information (PII), for example name or email address.
           type: string
         shopperStatement:
           description: |-
@@ -9256,7 +9268,7 @@ components:
       properties:
         payload:
           description: Encrypted and signed payment result data. You should receive this value from the Checkout SDK after the shopper completes the payment.
-          maxLength: 10000
+          maxLength: 40000
           type: string
       required:
         - payload
@@ -10437,7 +10449,7 @@ components:
           description: The `transStatus` value as defined in the 3D Secure 2 specification.
           type: string
         transStatusReason:
-          description: The `transStatusReason` value as defined in the 3D Secure 2 specification.
+          description: Provides information on why the `transStatus` field has the specified value. For possible values, refer to [our docs](https://docs.adyen.com/online-payments/3d-secure/api-reference#possible-transstatusreason-values).
           type: string
     ThreeDSecureData:
       properties:
@@ -10611,6 +10623,8 @@ components:
     BasicAuth:
       scheme: basic
       type: http
+source:
+  url: {}
 x-groups:
   - Payments
   - Payment links

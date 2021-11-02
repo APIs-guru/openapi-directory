@@ -1252,6 +1252,9 @@ components:
         objectConditions:
           $ref: "#/components/schemas/ObjectConditions"
           description: Only objects that satisfy these object conditions are included in the set of data source and data sink objects. Object conditions based on objects' "last modification time" do not exclude objects in a data sink.
+        posixDataSink:
+          $ref: "#/components/schemas/PosixFilesystem"
+          description: A POSIX Filesystem data sink.
         posixDataSource:
           $ref: "#/components/schemas/PosixFilesystem"
           description: A POSIX Filesystem data source.

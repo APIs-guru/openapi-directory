@@ -41,7 +41,7 @@ info:
     - format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/CheckoutService-v67.json
       version: "3.1"
-  x-preferred: true
+  x-preferred: false
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: CheckoutService
@@ -227,7 +227,7 @@ paths:
         - Payments
       x-addedInVersion: "67"
       x-groupName: Payments
-      x-sortIndex: 4
+      x-sortIndex: 5
   /orders:
     post:
       description: Creates an order to be used for partial payments. Make a POST `/orders` call before making a `/payments` call when processing payments with different payment methods.
@@ -838,7 +838,7 @@ paths:
       tags:
         - Payments
       x-groupName: Payments
-      x-sortIndex: 1
+      x-sortIndex: 2
   /paymentMethods/balance:
     post:
       description: Retrieves the balance remaining on a shopper's gift card. To check a gift card's balance, make a POST `/paymentMethods/balance` call and include the gift card's details inside a `paymentMethod` object.
@@ -1160,7 +1160,7 @@ paths:
       tags:
         - Payments
       x-groupName: Payments
-      x-sortIndex: 2
+      x-sortIndex: 3
   /payments/details:
     post:
       description: |+
@@ -1244,7 +1244,7 @@ paths:
       tags:
         - Payments
       x-groupName: Payments
-      x-sortIndex: 3
+      x-sortIndex: 4
   /payments/result:
     post:
       description: |-
@@ -3283,7 +3283,7 @@ components:
             type: onebip
           - name: One Two Three
             type: onetwothree
-          - name: Local Polish Payment Methods (P24)
+          - name: Online Banking PL
             type: onlineBanking_PL
           - details:
               - items:
@@ -5923,6 +5923,9 @@ components:
         riskdata.riskProfileReference:
           description: Reference number of the risk profile that you want to apply to the payment. If not provided or left blank, the merchant-level account's default risk profile will be applied to the payment. For more information, see [dynamically assign a risk profile to a payment](https://docs.adyen.com/risk-management/create-and-use-risk-profiles#dynamically-assign-a-risk-profile-to-a-payment).
           type: string
+        riskdata.skipRisk:
+          description: If this parameter is provided with the value **true**, risk checks for the payment request are skipped and the transaction will not get a risk score.
+          type: string
     AdditionalDataRiskStandalone:
       properties:
         PayPal.CountryCode:
@@ -6365,6 +6368,7 @@ components:
             - billdesk_online
             - billdesk_wallet
             - onlinebanking_IN
+            - wallet_IN
           type: string
       required:
         - type
@@ -6584,6 +6588,7 @@ components:
             - kcp_naverpay
             - upi
             - onlinebanking_IN
+            - wallet_IN
             - entercash
             - primeiropay_boleto
             - gopay_wallet
@@ -6680,7 +6685,9 @@ components:
           $ref: "#/components/schemas/Address"
           description: |-
             The address where to send the invoice.
-            > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object.
+            > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
+            >* For 3D Secure 2 transactions in all browser-based and mobile implementations.
+            >* For cross-border payouts to and from Canada.
           x-addedInVersion: "4"
         browserInfo:
           $ref: "#/components/schemas/BrowserInfo"
@@ -6841,8 +6848,9 @@ components:
           x-addedInVersion: "7"
         shopperReference:
           description: |-
-            Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
-            > This field is required for recurring payments.
+            Required for recurring payments. 
+            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
+            > Your reference must not include personally identifiable information (PII), for example name or email address.
           type: string
         shopperStatement:
           description: |-
@@ -7595,7 +7603,9 @@ components:
           $ref: "#/components/schemas/Name"
           description: The shopper's full name. This object is required for some payment methods such as AfterPay, Klarna, or if you're enrolled in the PayPal Seller Protection program.
         shopperReference:
-          description: "Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters."
+          description: |-
+            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
+            > Your reference must not include personally identifiable information (PII), for example name or email address.
           type: string
         splits:
           description: An array of objects specifying how the payment should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/platforms/processing-payments#providing-split-information).
@@ -7609,6 +7619,10 @@ components:
           description: When this is set to **true** and the `shopperReference` is provided, the payment details will be stored. From api version 68 use `storePaymentMethodMode` instead.
           type: boolean
           x-addedInVersion: "50"
+        themeId:
+          description: Use to set a theme to shopper other than default
+          type: string
+          x-addedInVersion: "67"
       required:
         - amount
         - reference
@@ -8228,7 +8242,7 @@ components:
     Mandate:
       properties:
         amount:
-          description: The billing amount of the recurring transactions.
+          description: The billing amount(in minor units) of the recurring transactions.
           type: string
         amountRule:
           description: |+
@@ -8909,7 +8923,9 @@ components:
           $ref: "#/components/schemas/Address"
           description: |-
             The address where to send the invoice.
-            > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object.
+            > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
+            >* For 3D Secure 2 transactions in all browser-based and mobile implementations.
+            >* For cross-border payouts to and from Canada.
           x-addedInVersion: "4"
         browserInfo:
           $ref: "#/components/schemas/BrowserInfo"
@@ -9058,7 +9074,7 @@ components:
           x-addedInVersion: "17"
         mpiData:
           $ref: "#/components/schemas/ThreeDSecureData"
-          description: Authentication data produced by an MPI (Mastercard SecureCode or Visa Secure).
+          description: Authentication data produced by an MPI (Mastercard SecureCode, Visa Secure, or Cartes Bancaires).
         order:
           $ref: "#/components/schemas/CheckoutOrder"
           description: Contains the order information which is required for partial payments.
@@ -9206,8 +9222,9 @@ components:
           x-addedInVersion: "7"
         shopperReference:
           description: |-
-            Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
-            > This field is required for recurring payments.
+            Required for recurring payments. 
+            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
+            > Your reference must not include personally identifiable information (PII), for example name or email address.
           type: string
         shopperStatement:
           description: |-
@@ -9371,10 +9388,11 @@ components:
         status:
           description: |-
             Status of the payment link. Possible values:
-            * **active** 
+            * **active**
             * **expired**
-            * **completed** (v66 and above) 
-            * **paid** (v65 and below)
+            * **paymentPending** (v68 and later)
+            * **completed** (v66 and later)
+            * **paid** (v65 and earlier)
           enum:
             - active
             - completed
@@ -9388,6 +9406,10 @@ components:
           description: When this is set to **true** and the `shopperReference` is provided, the payment details will be stored.
           type: boolean
           x-addedInVersion: "50"
+        themeId:
+          description: A [theme](https://docs.adyen.com/unified-commerce/pay-by-link/api#themes) to customize the appearance of the payment page.If not specified, the payment page is rendered according to the theme set as default in your Customer Area.
+          type: string
+          x-addedInVersion: "67"
         url:
           description: The URL at which the shopper can complete the payment.
           readOnly: true
@@ -9527,8 +9549,9 @@ components:
           x-addedInVersion: "7"
         shopperReference:
           description: |-
-            Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
-            > This field is required for recurring payments.
+            Required for recurring payments. 
+            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
+            > Your reference must not include personally identifiable information (PII), for example name or email address.
           type: string
         splitCardFundingSources:
           default: false
@@ -9632,7 +9655,9 @@ components:
           $ref: "#/components/schemas/Address"
           description: |-
             The address where to send the invoice.
-            > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object.
+            > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
+            >* For 3D Secure 2 transactions in all browser-based and mobile implementations.
+            >* For cross-border payouts to and from Canada.
           x-addedInVersion: "4"
         browserInfo:
           $ref: "#/components/schemas/BrowserInfo"
@@ -9772,7 +9797,7 @@ components:
           x-addedInVersion: "17"
         mpiData:
           $ref: "#/components/schemas/ThreeDSecureData"
-          description: Authentication data produced by an MPI (Mastercard SecureCode or Visa Secure).
+          description: Authentication data produced by an MPI (Mastercard SecureCode, Visa Secure, or Cartes Bancaires).
         order:
           $ref: "#/components/schemas/CheckoutOrder"
           description: Contains the order information which is required for partial payments.
@@ -9920,8 +9945,9 @@ components:
           x-addedInVersion: "7"
         shopperReference:
           description: |-
-            Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
-            > This field is required for recurring payments.
+            Required for recurring payments. 
+            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
+            > Your reference must not include personally identifiable information (PII), for example name or email address.
           type: string
         shopperStatement:
           description: |-
@@ -10152,7 +10178,9 @@ components:
           $ref: "#/components/schemas/Address"
           description: |-
             The address where to send the invoice.
-            > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object.
+            > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
+            >* For 3D Secure 2 transactions in all browser-based and mobile implementations.
+            >* For cross-border payouts to and from Canada.
           x-addedInVersion: "4"
         blockedPaymentMethods:
           description: |-
@@ -10369,8 +10397,9 @@ components:
           x-addedInVersion: "7"
         shopperReference:
           description: |-
-            Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
-            > This field is required for recurring payments.
+            Required for recurring payments. 
+            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
+            > Your reference must not include personally identifiable information (PII), for example name or email address.
           type: string
         shopperStatement:
           description: |-
@@ -10437,7 +10466,7 @@ components:
       properties:
         payload:
           description: Encrypted and signed payment result data. You should receive this value from the Checkout SDK after the shopper completes the payment.
-          maxLength: 10000
+          maxLength: 40000
           type: string
       required:
         - payload
@@ -11770,14 +11799,34 @@ components:
           description: The `authenticationValue` value as defined in the 3D Secure 2 specification.
           type: string
         cavvAlgorithm:
-          description: The algorithm used by the ACS to calculate the authentication value, only for CartesBancaires integrations.
+          description: The algorithm used by the ACS to calculate the authentication value, only for Cartes Bancaires integrations.
           type: string
           x-addedInVersion: "50"
         challengeCancel:
-          description: Indicator informing the ACS and the DS that the authentication has been canceled.
+          description: Indicator informing the Access Control Server (ACS) and the Directory Server (DS) that the authentication has been cancelled. For possible values, refer to [3D Secure API reference](https://docs.adyen.com/online-payments/3d-secure/api-reference#mpidata).
+          enum:
+            - "01"
+            - "02"
+            - "03"
+            - "04"
+            - "05"
+            - "06"
+            - "07"
           type: string
           x-addedInVersion: "67"
         challengeIndicator:
+          description: |
+            Specifies a preference for receiving a challenge from the issuer.
+            Allowed values:
+            * `noPreference`
+            * `requestNoChallenge`
+            * `requestChallenge`
+            * `requestChallengeAsMandate`
+          enum:
+            - noPreference
+            - requestNoChallenge
+            - requestChallenge
+            - requestChallengeAsMandate
           type: string
           x-addedInVersion: "67"
         dsTransID:
@@ -11787,6 +11836,18 @@ components:
           description: The `eci` value as defined in the 3D Secure 2 specification.
           type: string
         exemptionIndicator:
+          description: |
+            Indicates the exemption type that was applied by the issuer to the authentication, if exemption applied.
+            Allowed values:
+            * `lowValue`
+            * `secureCorporate`
+            * `trustedBeneficiary`
+            * `transactionRiskAnalysis`
+          enum:
+            - lowValue
+            - secureCorporate
+            - trustedBeneficiary
+            - transactionRiskAnalysis
           type: string
           x-addedInVersion: "67"
         messageVersion:
@@ -11794,6 +11855,7 @@ components:
           type: string
           x-addedInVersion: "49"
         riskScore:
+          description: Risk score calculated by Cartes Bancaires Directory Server (DS).
           type: string
           x-addedInVersion: "67"
         threeDSServerTransID:
@@ -11806,7 +11868,7 @@ components:
           description: The `transStatus` value as defined in the 3D Secure 2 specification.
           type: string
         transStatusReason:
-          description: The `transStatusReason` value as defined in the 3D Secure 2 specification.
+          description: Provides information on why the `transStatus` field has the specified value. For possible values, refer to [our docs](https://docs.adyen.com/online-payments/3d-secure/api-reference#possible-transstatusreason-values).
           type: string
         whiteListStatus:
           description: The `whiteListStatus` value as defined in the 3D Secure 2 specification.
@@ -11833,6 +11895,15 @@ components:
           description: The CAVV algorithm used. Include this only for 3D Secure 1.
           type: string
         challengeCancel:
+          description: Indicator informing the Access Control Server (ACS) and the Directory Server (DS) that the authentication has been cancelled. For possible values, refer to [3D Secure API reference](https://docs.adyen.com/online-payments/3d-secure/api-reference#mpidata).
+          enum:
+            - "01"
+            - "02"
+            - "03"
+            - "04"
+            - "05"
+            - "06"
+            - "07"
           type: string
           x-addedInVersion: "67"
         directoryResponse:
@@ -11858,6 +11929,7 @@ components:
           description: The electronic commerce indicator.
           type: string
         riskScore:
+          description: Risk score calculated by Directory Server (DS). Required for Cartes Bancaires integrations.
           type: string
           x-addedInVersion: "67"
         threeDSVersion:
@@ -11865,6 +11937,7 @@ components:
           type: string
           x-addedInVersion: "40"
         transStatusReason:
+          description: Provides information on why the `transStatus` field has the specified value. For possible values, refer to [our docs](https://docs.adyen.com/online-payments/3d-secure/api-reference#possible-transstatusreason-values).
           type: string
           x-addedInVersion: "67"
         xid:
@@ -12014,6 +12087,8 @@ components:
     BasicAuth:
       scheme: basic
       type: http
+source:
+  url: {}
 x-groups:
   - Payments
   - Payment links

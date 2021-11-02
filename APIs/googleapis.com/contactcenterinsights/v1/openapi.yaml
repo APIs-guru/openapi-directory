@@ -184,10 +184,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an issue.
-      operationId: contactcenterinsights.projects.locations.issueModels.issues.patch
+      description: Updates a phrase matcher.
+      operationId: contactcenterinsights.projects.locations.phraseMatchers.patch
       parameters:
-        - description: "Immutable. The resource name of the issue. Format: projects/{project}/locations/{location}/issueModels/{issue_model}/issues/{issue}"
+        - description: "The resource name of the phrase matcher. Format: projects/{project}/locations/{location}/phraseMatchers/{phrase_matcher}"
           in: path
           name: name
           required: true
@@ -202,13 +202,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1Issue"
+              $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1PhraseMatcher"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1Issue"
+                $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1PhraseMatcher"
           description: Successful response
       security:
         - Oauth2:
