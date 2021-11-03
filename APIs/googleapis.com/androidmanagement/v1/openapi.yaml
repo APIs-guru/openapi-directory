@@ -1546,6 +1546,10 @@ components:
         deviceBasebandVersion:
           description: Baseband version. For example, MDM9625_104662.22.05.34p.
           type: string
+        enterpriseSpecificId:
+          description: Output only. ID that uniquely identifies a personally-owned device in a particular organization. On the same physical device when enrolled with the same organization, this ID persists across setups and even factory resets. This ID is available on personally-owned devices with a work profile on devices running Android 12 and above.
+          readOnly: true
+          type: string
         gpuShutdownTemperatures:
           description: GPU shutdown temperature thresholds in Celsius for each GPU on the device.
           items:

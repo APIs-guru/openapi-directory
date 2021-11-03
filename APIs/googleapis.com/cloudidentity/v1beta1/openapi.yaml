@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Identity API
   version: v1beta1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://cloudidentity.googleapis.com/$discovery/rest?version=v1beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: cloudidentity
 externalDocs:
@@ -1406,6 +1408,58 @@ components:
           $ref: "#/components/schemas/DeviceUser"
           description: Resultant DeviceUser object for the action.
       type: object
+    CertificateInfo:
+      description: Stores information about a certificate.
+      properties:
+        certificateTemplate:
+          $ref: "#/components/schemas/CertificateTemplate"
+          description: The X.509 extension for CertificateTemplate.
+        fingerprint:
+          description: The encoded certificate fingerprint.
+          type: string
+        issuer:
+          description: The name of the issuer of this certificate.
+          type: string
+        serialNumber:
+          description: 'Serial number of the certificate, Example: "123456789".'
+          type: string
+        subject:
+          description: The subject name of this certificate.
+          type: string
+        thumbprint:
+          description: The certificate thumbprint.
+          type: string
+        validationState:
+          description: Validation state of this certificate.
+          enum:
+            - CERTIFICATE_VALIDATION_STATE_UNSPECIFIED
+            - VALIDATION_SUCCESSFUL
+            - VALIDATION_FAILED
+          type: string
+        validityExpirationTime:
+          description: Certificate not valid at or after this timestamp.
+          format: google-datetime
+          type: string
+        validityStartTime:
+          description: Certificate not valid before this timestamp.
+          format: google-datetime
+          type: string
+      type: object
+    CertificateTemplate:
+      description: CertificateTemplate (v3 Extension in X.509).
+      properties:
+        id:
+          description: 'The template id of the template. Example: "1.3.6.1.4.1.311.21.8.15608621.11768144.5720724.16068415.6889630.81.2472537.7784047".'
+          type: string
+        majorVersion:
+          description: "The Major version of the template. Example: 100."
+          format: int32
+          type: integer
+        minorVersion:
+          description: "The minor version of the template. Example: 12."
+          format: int32
+          type: integer
+      type: object
     CheckTransitiveMembershipResponse:
       description: The response message for MembershipsService.CheckTransitiveMembership.
       properties:
@@ -1572,6 +1626,10 @@ components:
             - NOT_ENCRYPTED
           readOnly: true
           type: string
+        endpointVerificationSpecificAttributes:
+          $ref: "#/components/schemas/EndpointVerificationSpecificAttributes"
+          description: Output only. Attributes specific to Endpoint Verification devices.
+          readOnly: true
         imei:
           description: Output only. IMEI number of device if GSM device; empty otherwise.
           readOnly: true
@@ -1752,6 +1810,15 @@ components:
           format: google-datetime
           type: string
       type: object
+    EndpointVerificationSpecificAttributes:
+      description: Resource representing the Endpoint Verification-specific attributes of a Device.
+      properties:
+        certificateInfo:
+          description: Details of certificates.
+          items:
+            $ref: "#/components/schemas/CertificateInfo"
+          type: array
+      type: object
     EntityKey:
       description: A unique identifier for an entity in the Cloud Identity Groups API. An entity can represent either a group with an optional `namespace` or a user without a `namespace`. The combination of `id` and `namespace` must be unique; however, the same `id` can be used with different `namespace`s.
       properties:
@@ -1768,6 +1835,16 @@ components:
         expireTime:
           description: The time at which the `MembershipRole` will expire.
           format: google-datetime
+          type: string
+      type: object
+    FirstAdminInvitationInfo:
+      description: Message containing first admin invitation info for customers
+      properties:
+        isFirstAdmin:
+          description: Optional. To enable First Admin Invitation for Domained Customer
+          type: boolean
+        primaryDomain:
+          description: Optional. Domain information of first admin invited
           type: string
       type: object
     GetMembershipGraphResponse:
@@ -2625,7 +2702,10 @@ components:
       type: object
     SendUserInvitationRequest:
       description: A request to send email for inviting target user corresponding to the UserInvitation.
-      properties: {}
+      properties:
+        firstAdminInvitationInfo:
+          $ref: "#/components/schemas/FirstAdminInvitationInfo"
+          description: Optional. First admin invitation info for customers
       type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
@@ -2736,3 +2816,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}
