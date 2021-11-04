@@ -14,15 +14,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Healthcare API
   version: v1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://healthcare.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: healthcare
 externalDocs:
@@ -3162,6 +3164,9 @@ components:
           items:
             $ref: "#/components/schemas/StreamConfig"
           type: array
+        validationConfig:
+          $ref: "#/components/schemas/ValidationConfig"
+          description: Configuration for how to validate incoming FHIR resources against configured profiles.
         version:
           description: Immutable. The FHIR specification version that this FHIR store supports natively. This field is immutable after store creation. Requests are rejected if they contain FHIR resources of a different version. Version is required for every FHIR store.
           enum:
@@ -4224,6 +4229,19 @@ components:
           description: Required. User's UUID provided by the client.
           type: string
       type: object
+    ValidationConfig:
+      description: Contains the configuration for FHIR profiles and validation.
+      properties:
+        disableFhirpathValidation:
+          description: Whether to disable FHIRPath validation for incoming resources. Set this to true to disable checking incoming resources for conformance against FHIRPath requirement defined in the FHIR specification. This property only affects resource types that do not have profiles configured for them, any rules in enabled implementation guides will still be enforced.
+          type: boolean
+        disableReferenceTypeValidation:
+          description: Whether to disable reference type validation for incoming resources. Set this to true to disable checking incoming resources for conformance against reference type requirement defined in the FHIR specification. This property only affects resource types that do not have profiles configured for them, any rules in enabled implementation guides will still be enforced.
+          type: boolean
+        disableRequiredFieldValidation:
+          description: Whether to disable required fields validation for incoming resources. Set this to true to disable checking incoming resources for conformance against required fields requirement defined in the FHIR specification. This property only affects resource types that do not have profiles configured for them, any rules in enabled implementation guides will still be enforced.
+          type: boolean
+      type: object
     VersionSource:
       description: Describes a selector for extracting and matching an MSH field to a value.
       properties:
@@ -4252,3 +4270,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

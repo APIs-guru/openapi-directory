@@ -5,7 +5,7 @@ info:
   contact:
     email: hello@apideck.com
     url: https://developers.apideck.com
-  description: |+
+  description: |
     Welcome to the Connector API.
 
     You can use this API to access all connector endpoints.
@@ -262,12 +262,11 @@ info:
     ## Support
 
     If you have problems or need help with your case, you can always reach out to our Support.
-
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Connector API
-  version: 0.0.1
+  version: 8.4.0
   x-apideck-api: connector
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -287,7 +286,6 @@ externalDocs:
   url: https://developers.apideck.com
 security:
   - apiKey: []
-  - applicationId: []
 tags:
   - description: ""
     name: Connectors
@@ -311,6 +309,7 @@ paths:
       description: List APIs
       operationId: apisAll
       parameters:
+        - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/apis_filter"
@@ -338,7 +337,8 @@ paths:
             import { Apideck } from '@apideck/node'
 
             const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY'
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID'
             })
 
             try {
@@ -353,6 +353,7 @@ paths:
       description: Get API
       operationId: apisOne
       parameters:
+        - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/id"
       responses:
         "200":
@@ -378,7 +379,8 @@ paths:
             import { Apideck } from '@apideck/node'
 
             const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY'
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID'
             })
 
             try {
@@ -394,6 +396,7 @@ paths:
       description: Get API Resource
       operationId: apiResourcesOne
       parameters:
+        - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/resourceId"
       responses:
@@ -420,7 +423,8 @@ paths:
             import { Apideck } from '@apideck/node'
 
             const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY'
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID'
             })
 
             const params = {
@@ -439,6 +443,7 @@ paths:
       description: Get API Resource Coverage
       operationId: apiResourceCoverageOne
       parameters:
+        - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/resourceId"
       responses:
@@ -465,7 +470,8 @@ paths:
             import { Apideck } from '@apideck/node'
 
             const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY'
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID'
             })
 
             const params = {
@@ -484,6 +490,7 @@ paths:
       description: List Connectors
       operationId: connectorsAll
       parameters:
+        - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/connectors_filter"
@@ -511,7 +518,8 @@ paths:
             import { Apideck } from '@apideck/node'
 
             const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY'
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID'
             })
 
             try {
@@ -526,6 +534,7 @@ paths:
       description: Get Connector
       operationId: connectorsOne
       parameters:
+        - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/id"
       responses:
         "200":
@@ -551,7 +560,8 @@ paths:
             import { Apideck } from '@apideck/node'
 
             const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY'
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID'
             })
 
             try {
@@ -567,6 +577,7 @@ paths:
       description: Get ConnectorResource
       operationId: connectorResourcesOne
       parameters:
+        - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/resourceId"
       responses:
@@ -593,7 +604,8 @@ paths:
             import { Apideck } from '@apideck/node'
 
             const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY'
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID'
             })
 
             const params = {
@@ -617,6 +629,13 @@ components:
       schema:
         $ref: "#/components/schemas/ApisFilter"
       style: deepObject
+    applicationId:
+      description: The ID of your Unify application
+      in: header
+      name: x-apideck-app-id
+      required: true
+      schema:
+        type: string
     connectors_filter:
       description: Apply filters
       explode: true
@@ -1559,9 +1578,4 @@ components:
         Go to Unify to grab your API KEY https://app.apideck.com/unify/api-keys
       in: header
       name: Authorization
-      type: apiKey
-    applicationId:
-      description: The ID of your Unify application
-      in: header
-      name: x-apideck-app-id
       type: apiKey

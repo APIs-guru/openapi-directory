@@ -14,17 +14,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Healthcare API
   version: v1beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://healthcare.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: healthcare
 externalDocs:
@@ -5191,8 +5189,17 @@ components:
     ValidationConfig:
       description: Contains the configuration for FHIR profiles and validation.
       properties:
+        disableFhirpathValidation:
+          description: Whether to disable FHIRPath validation for incoming resources. Set this to true to disable checking incoming resources for conformance against FHIRPath requirement defined in the FHIR specification. This property only affects resource types that do not have profiles configured for them, any rules in enabled implementation guides will still be enforced.
+          type: boolean
         disableProfileValidation:
           description: Whether to disable profile validation for this FHIR store. Set this to true to disable checking incoming resources for conformance against StructureDefinitions in this FHIR store.
+          type: boolean
+        disableReferenceTypeValidation:
+          description: Whether to disable reference type validation for incoming resources. Set this to true to disable checking incoming resources for conformance against reference type requirement defined in the FHIR specification. This property only affects resource types that do not have profiles configured for them, any rules in enabled implementation guides will still be enforced.
+          type: boolean
+        disableRequiredFieldValidation:
+          description: Whether to disable required fields validation for incoming resources. Set this to true to disable checking incoming resources for conformance against required fields requirement defined in the FHIR specification. This property only affects resource types that do not have profiles configured for them, any rules in enabled implementation guides will still be enforced.
           type: boolean
         enabledImplementationGuides:
           description: 'A list of ImplementationGuide URLs in this FHIR store that are used to configure the profiles to use for validation. For example, to use the US Core profiles for validation, set `enabled_implementation_guides` to `["http://hl7.org/fhir/us/core/ImplementationGuide/ig"]`. If `enabled_implementation_guides` is empty or omitted, then incoming resources are only required to conform to the base FHIR profiles. Otherwise, a resource must conform to at least one profile listed in the `global` property of one of the enabled ImplementationGuides. The Cloud Healthcare API does not currently enforce all of the rules in a StructureDefinition. The following rules are supported: - min/max - minValue/maxValue - maxLength - type - fixed[x] - pattern[x] on simple types - slicing, when using "value" as the discriminator type When a URL cannot be resolved (for example, in a type assertion), the server does not return an error.'
@@ -5240,5 +5247,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

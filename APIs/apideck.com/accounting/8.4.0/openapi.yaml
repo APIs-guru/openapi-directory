@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.3.2
+  version: 8.4.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -4905,11 +4905,7 @@ components:
           title: Sub-total amount
           type: number
         tax_inclusive:
-          description: Amounts include tax
-          example: true
-          nullable: true
-          title: Tax inclusive
-          type: boolean
+          $ref: "#/components/schemas/TaxInclusive"
         total:
           example: 27500
           nullable: true
@@ -4981,11 +4977,7 @@ components:
         sales_details:
           properties:
             tax_inclusive:
-              description: Indicates the unit price includes tax.
-              example: true
-              nullable: true
-              title: Tax inclusive
-              type: boolean
+              $ref: "#/components/schemas/TaxInclusive"
             tax_rate:
               $ref: "#/components/schemas/LinkedTaxRate"
             unit_of_measure:
@@ -5946,6 +5938,12 @@ components:
       items:
         type: string
       type: array
+    TaxInclusive:
+      description: Amounts are including tax
+      example: true
+      nullable: true
+      title: Tax inclusive
+      type: boolean
     TaxRate:
       additionalProperties: false
       properties:

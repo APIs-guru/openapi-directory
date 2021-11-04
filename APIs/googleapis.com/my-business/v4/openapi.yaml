@@ -420,7 +420,7 @@ paths:
       tags:
         - accounts
     put:
-      description: "Sets the pubsub notification settings for the account informing My Business which topic to send pubsub notifications for: - New reviews for locations administered by the account. - Updated reviews for locations administered by the account. - New `GoogleUpdates` for locations administered by the account. An account will only have one notification settings resource, and only one pubsub topic can be set."
+      description: "Sets the pubsub notification settings for the account informing Business Profile which topic to send pubsub notifications for: - New reviews for locations administered by the account. - Updated reviews for locations administered by the account. - New `GoogleUpdates` for locations administered by the account. An account will only have one notification settings resource, and only one pubsub topic can be set."
       operationId: mybusiness.accounts.updateNotifications
       parameters:
         - description: The notification settings resource name.
@@ -1014,7 +1014,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v4/{name}:recommendGoogleLocations":
     get:
-      description: List all the GoogleLocations that have been recommended to the specified GMB account. Recommendations are provided for personal accounts and location groups only, requests for all other account types will result in an error. The recommendations for location groups are based on the locations in that group. The recommendations for personal accounts are based on all of the locations that the user has access to on Google My Business (which includes locations they can access through location groups), and is a superset of all recommendations generated for the user.
+      description: List all the GoogleLocations that have been recommended to the specified Business Profile account. Recommendations are provided for personal accounts and location groups only, requests for all other account types will result in an error. The recommendations for location groups are based on the locations in that group. The recommendations for personal accounts are based on all of the locations that the user has access to on Business Profile (which includes locations they can access through location groups), and is a superset of all recommendations generated for the user.
       operationId: mybusiness.accounts.listRecommendGoogleLocations
       parameters:
         - description: Name of the account resource to fetch recommended Google locations for.
@@ -1593,7 +1593,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: How many media items to return per page. The default value is 100, which is also the maximum supported number of media items able to be added to a location with the My Business API. Maximum page size is 2500.
+        - description: How many media items to return per page. The default value is 100, which is also the maximum supported number of media items able to be added to a location with the Google My Business API. Maximum page size is 2500.
           in: query
           name: pageSize
           schema:
@@ -4119,10 +4119,10 @@ components:
           type: integer
       type: object
     ListRecommendedGoogleLocationsResponse:
-      description: Response message for GoogleLocations.ListRecommendedGoogleLocations. It also contains some locations that have been claimed by other GMB users since the last time they were recommended to this GMB account.
+      description: Response message for GoogleLocations.ListRecommendedGoogleLocations. It also contains some locations that have been claimed by other Business Profile users since the last time they were recommended to this Business Profile account.
       properties:
         googleLocations:
-          description: The locations recommended to a GMB account. Each of these represents a GoogleLocation that is present on Maps. The locations are sorted in decreasing order of relevance to the GMB account.
+          description: The locations recommended to a Business Profile account. Each of these represents a GoogleLocation that is present on Maps. The locations are sorted in decreasing order of relevance to the Business Profile account.
           items:
             $ref: "#/components/schemas/GoogleLocation"
           type: array
@@ -4130,7 +4130,7 @@ components:
           description: During pagination, if there are more locations available to be fetched in the next page, this field is populated with a token to fetch the next page of locations in a subsequent call. If there are no more locations to be fetched, this field is not present in the response.
           type: string
         totalSize:
-          description: The total number of recommended locations for this GMB account, irrespective of pagination.
+          description: The total number of recommended locations for this Business Profile account, irrespective of pagination.
           format: int32
           type: integer
       type: object
@@ -5049,7 +5049,7 @@ components:
           type: string
         latlng:
           $ref: "#/components/schemas/LatLng"
-          description: User-provided latitude and longitude. When creating a location, this field is ignored if the provided address geocodes successfully. This field is only returned on get requests if the user-provided `latlng` value was accepted during create, or the `latlng` value was updated through the Google My Business website. This field cannot be updated.
+          description: User-provided latitude and longitude. When creating a location, this field is ignored if the provided address geocodes successfully. This field is only returned on get requests if the user-provided `latlng` value was accepted during create, or the `latlng` value was updated through the Business Profile website. This field cannot be updated.
         locationKey:
           $ref: "#/components/schemas/LocationKey"
           description: A collection of keys that link this business to other Google properties, such as a Google+ page and Google Maps Places.
@@ -5159,7 +5159,7 @@ components:
           description: Output only. If this location has a Google+ page associated with it, this is populated with the Google+ page ID for this location.
           type: string
         requestId:
-          description: Output only. The `request_id` used to create this location. May be empty if this location was created outside of the GMB API or Google My Business Locations.
+          description: Output only. The `request_id` used to create this location. May be empty if this location was created outside of the Google My Business API or Business Profile Locations.
           type: string
       type: object
     LocationMetrics:
@@ -5361,7 +5361,7 @@ components:
           $ref: "#/components/schemas/MediaItemDataRef"
           description: Input only. A reference to media item binary data as obtained by the `StartUploadMediaItemData` method. When creating a media item, either sourceUrl or dataRef must be set.
         description:
-          description: Description for this media item. Descriptions cannot be modified through the My Business API, but can be set when creating a new media item that is not a cover photo.
+          description: Description for this media item. Descriptions cannot be modified through the Google My Business API, but can be set when creating a new media item that is not a cover photo.
           type: string
         dimensions:
           $ref: "#/components/schemas/Dimensions"
@@ -5393,7 +5393,7 @@ components:
           type: string
       type: object
     MediaItemDataRef:
-      description: Reference to the photo binary data of a `MediaItem` uploaded through the My Business API. Create a data ref using StartUploadMediaItemData, and use this ref when uploading bytes to [UpdateMedia] and subsequently calling CreateMediaItem.
+      description: Reference to the photo binary data of a `MediaItem` uploaded through the Google My Business API. Create a data ref using StartUploadMediaItemData, and use this ref when uploading bytes to [UpdateMedia] and subsequently calling CreateMediaItem.
       properties:
         resourceName:
           description: "The unique ID for this media item's binary data. Used to upload the photo data with [UpdateMedia] and when creating a new media item from those bytes with CreateMediaItem. Example of uploading bytes: `curl -X POST -T{path_to_file} \"http://mybusiness.googleapis.com/upload/v1/media/{resource_name}?upload_type=media\"` For CreateMediaItem calls, set this as the `MediaItem` `data_ref`."
@@ -6533,7 +6533,7 @@ components:
             - DUPLICATE
           type: string
         reportReasonBadRecommendation:
-          description: The reason for which the user is reporting this location when the issue is with the recommendation. This report is useful if the location has been recommended to the GMB account.
+          description: The reason for which the user is reporting this location when the issue is with the recommendation. This report is useful if the location has been recommended to the Business Profile account.
           enum:
             - BAD_RECOMMENDATION_REASON_UNSPECIFIED
             - NOT_A_STORE_FRONT

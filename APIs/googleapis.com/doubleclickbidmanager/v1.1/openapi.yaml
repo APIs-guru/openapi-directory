@@ -651,6 +651,7 @@ components:
             - FILTER_VERIFICATION_VIDEO_RESIZED
             - FILTER_VERIFICATION_AUDIBILITY_START
             - FILTER_VERIFICATION_AUDIBILITY_COMPLETE
+            - FILTER_MEDIA_TYPE
           type: string
         value:
           description: Filter value.
@@ -998,6 +999,7 @@ components:
               - FILTER_VERIFICATION_VIDEO_RESIZED
               - FILTER_VERIFICATION_AUDIBILITY_START
               - FILTER_VERIFICATION_AUDIBILITY_COMPLETE
+              - FILTER_MEDIA_TYPE
             type: string
           type: array
         includeInviteData:
@@ -1844,6 +1846,7 @@ components:
             - FILTER_VERIFICATION_VIDEO_RESIZED
             - FILTER_VERIFICATION_AUDIBILITY_START
             - FILTER_VERIFICATION_AUDIBILITY_COMPLETE
+            - FILTER_MEDIA_TYPE
           type: string
         match:
           description: Indicates how the filter should be matched to the value.
