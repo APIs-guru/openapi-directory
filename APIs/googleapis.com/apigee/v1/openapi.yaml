@@ -155,67 +155,67 @@ paths:
           name: format
           schema:
             type: string
-        - description: Required. The hostname for which the interactive query will be executed.
+        - description: Required. Hostname for which the interactive query will be executed.
           in: query
           name: envgroupHostname
           schema:
             type: string
-        - description: Enables drill-down on specific dimension values.
+        - description: Filter that enables you to drill-down on specific dimension values.
           in: query
           name: filter
           schema:
             type: string
-        - description: This parameter is used to limit the number of result items. Default and the max value is 14400.
+        - description: Maximum number of result items to return. The default and maximum value that can be returned is 14400.
           in: query
           name: limit
           schema:
             type: string
-        - description: Use offset with limit to enable pagination of results. For example, to display results 11-20, set limit to '10' and offset to '10'.
+        - description: Offset value. Use `offset` with `limit` to enable pagination of results. For example, to display results 11-20, set limit to `10` and offset to `10`.
           in: query
           name: offset
           schema:
             type: string
-        - description: "Legacy field: not used anymore."
+        - description: No longer used by Apigee. Supported for backwards compatibility.
           in: query
           name: realtime
           schema:
             type: boolean
-        - description: Required. The select parameter contains a comma separated list of metrics. E.g. sum(message_count),sum(error_count)
+        - description: "Required. Comma-separated list of metrics. For example: `sum(message_count),sum(error_count)`"
           in: query
           name: select
           schema:
             type: string
-        - description: This parameter specifies if the sort order should be ascending or descending Supported values are DESC and ASC.
+        - description: Flag that specifies whether the sort order should be ascending or descending. Valid values include `DESC` and `ASC`.
           in: query
           name: sort
           schema:
             type: string
-        - description: Comma separated list of columns to sort the final result.
+        - description: Comma-separated list of columns used to sort the final result.
           in: query
           name: sortby
           schema:
             type: string
-        - description: Required. Time interval for the interactive query. Time range is specified as start~end. E.g 04/15/2017 00:00~05/15/2017 23:59.
+        - description: "Required. Time interval for the interactive query. Time range is specified in GMT as `start~end`. For example: `04/15/2017 00:00~05/15/2017 23:59`."
           in: query
           name: timeRange
           schema:
             type: string
-        - description: A value of second, minute, hour, day, week, month. Time Unit specifies the granularity of metrics returned.
+        - description: "Granularity of metrics returned. Valid values include: `second`, `minute`, `hour`, `day`, `week`, or `month`."
           in: query
           name: timeUnit
           schema:
             type: string
-        - description: Take 'top k' results from results, for example, to return the top 5 results 'topk=5'.
+        - description: Top number of results to return. For example, to return the top 5 results, set `topk=5`.
           in: query
           name: topk
           schema:
             type: string
-        - description: Lists timestamps in ascending order if set to true. Recommend setting this value to true if you are using sortby with sort=DESC.
+        - description: Flag that specifies whether to list timestamps in ascending (`true`) or descending (`false`) order. Apigee recommends that you set this value to `true` if you are using `sortby` with `sort=DESC`.
           in: query
           name: tsAscending
           schema:
             type: boolean
-        - description: This parameters contains the timezone offset value.
+        - description: Timezone offset value.
           in: query
           name: tzo
           schema:
@@ -5379,15 +5379,15 @@ components:
           type: string
       type: object
     GoogleCloudApigeeV1DimensionMetric:
-      description: This message type encapsulates a metric grouped by dimension.
+      description: Encapsulates a metric grouped by dimension.
       properties:
         metrics:
-          description: This field contains a list of metrics.
+          description: List of metrics.
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1Metric"
           type: array
         name:
-          description: This field contains the name of the dimension.
+          description: Name of the dimension.
           type: string
       type: object
     GoogleCloudApigeeV1EntityMetadata:
@@ -6227,7 +6227,7 @@ components:
           type: array
       type: object
     GoogleCloudApigeeV1Metadata:
-      description: This message type encapsulates additional information about query execution.
+      description: Encapsulates additional information about query execution.
       properties:
         errors:
           description: List of error messages as strings.
@@ -6235,19 +6235,19 @@ components:
             type: string
           type: array
         notices:
-          description: 'List of additional information such as data source, if result was truncated etc. E.g "notices": [ "Source:Postgres", "PG Host:uappg0rw.e2e.apigeeks.net", "query served by:4b64601e-40de-4eb1-bfb9-eeee7ac929ed", "Table used: edge.api.uapgroup2.agg_api" ]'
+          description: 'List of additional information such as data source, if result was truncated. For example: ``` "notices": [ "Source:Postgres", "PG Host:uappg0rw.e2e.apigeeks.net", "query served by:4b64601e-40de-4eb1-bfb9-eeee7ac929ed", "Table used: edge.api.uapgroup2.agg_api" ]```'
           items:
             type: string
           type: array
       type: object
     GoogleCloudApigeeV1Metric:
-      description: 'This message type encapsulates the metric data point. Example: { "name": "sum(message_count)", "values" : [ { "timestamp": 1549004400000, "value": "39.0" }, { "timestamp" : 1548997200000, "value" : "0.0" } ] } or { "name": "sum(message_count)", "values" : ["39.0"] }'
+      description: 'Encapsulates the metric data point. For example: ```{ "name": "sum(message_count)", "values" : [ { "timestamp": 1549004400000, "value": "39.0" }, { "timestamp" : 1548997200000, "value" : "0.0" } ] }``` or ```{ "name": "sum(message_count)", "values" : ["39.0"] }```'
       properties:
         name:
-          description: This field contains the metric name.
+          description: Metric name.
           type: string
         values:
-          description: 'List of metric values. Possible value format: "values":["39.0"] or "values":[ { "value": "39.0", "timestamp": 1232434354} ]'
+          description: 'List of metric values. Possible value formats include: `"values":["39.0"]` or `"values":[ { "value": "39.0", "timestamp": 1232434354} ]`'
           items: {}
           type: array
       type: object
@@ -6375,33 +6375,33 @@ components:
       properties:
         Response:
           $ref: "#/components/schemas/GoogleCloudApigeeV1OptimizedStatsResponse"
-          description: 'This field wraps the stats response for Js Optimized Scenario with a Response key. E.g. { "Response": { "TimeUnit": [], "metaData": { "errors": [], "notices": [ "Source:Postgres", "Table used: edge.api.aaxgroup001.agg_api", "PG Host:ruappg08-ro.production.apigeeks.net", "query served by:80c4ebca-6a10-4a2e-8faf-c60c1ee306ca" ] }, "resultTruncated": false, "stats": { "data": [ { "identifier": { "names": [ "apiproxy" ], "values": [ "sirjee" ] }, "metric": [ { "env": "prod", "name": "sum(message_count)", "values": [ 36.0 ] }, { "env": "prod", "name": "sum(is_error)", "values": [ 36.0 ] } ] } ] } } }'
+          description: 'Wraps the `stats` response for JavaScript Optimized Scenario with a response key. For example: ```{ "Response": { "TimeUnit": [], "metaData": { "errors": [], "notices": [ "Source:Postgres", "Table used: edge.api.aaxgroup001.agg_api", "PG Host:ruappg08-ro.production.apigeeks.net", "query served by:80c4ebca-6a10-4a2e-8faf-c60c1ee306ca" ] }, "resultTruncated": false, "stats": { "data": [ { "identifier": { "names": [ "apiproxy" ], "values": [ "sirjee" ] }, "metric": [ { "env": "prod", "name": "sum(message_count)", "values": [ 36.0 ] }, { "env": "prod", "name": "sum(is_error)", "values": [ 36.0 ] } ] } ] } } }```'
       type: object
     GoogleCloudApigeeV1OptimizedStatsNode:
-      description: 'This message type encapsulates a data node as represented below: { "identifier": { "names": [ "apiproxy" ], "values": [ "sirjee" ] }, "metric": [ { "env": "prod", "name": "sum(message_count)", "values": [ 36.0 ] } ] } OR { "env": "prod", "name": "sum(message_count)", "values": [ 36.0 ] } Depending on whether a dimension is present in the query or not the data node type can be a simple metric value or dimension identifier with list of metrics.'
+      description: 'Encapsulates a data node as represented below: ``` { "identifier": { "names": [ "apiproxy" ], "values": [ "sirjee" ] }, "metric": [ { "env": "prod", "name": "sum(message_count)", "values": [ 36.0 ] } ] }``` or ``` { "env": "prod", "name": "sum(message_count)", "values": [ 36.0 ] }``` Depending on whether a dimension is present in the query or not the data node type can be a simple metric value or dimension identifier with list of metrics.'
       properties:
         data:
           items: {}
           type: array
       type: object
     GoogleCloudApigeeV1OptimizedStatsResponse:
-      description: This message type encapsulates a response format for Js Optimized Scenario.
+      description: Encapsulates a response format for JavaScript Optimized Scenario.
       properties:
         TimeUnit:
-          description: This field contains a list of time unit values. Time unit refers to an epoch timestamp value.
+          description: List of time unit values. Time unit refers to an epoch timestamp value.
           items:
             format: int64
             type: string
           type: array
         metaData:
           $ref: "#/components/schemas/GoogleCloudApigeeV1Metadata"
-          description: This field contains metadata information about the query executed
+          description: Metadata information about the query executed.
         resultTruncated:
-          description: This ia a boolean field to indicate if the results were truncated based on the limit parameter.
+          description: Boolean flag that indicates whether the results were truncated based on the limit parameter.
           type: boolean
         stats:
           $ref: "#/components/schemas/GoogleCloudApigeeV1OptimizedStatsNode"
-          description: This field contains a stats results.
+          description: "`stats` results."
       type: object
     GoogleCloudApigeeV1Organization:
       properties:
@@ -7236,53 +7236,54 @@ components:
           type: string
       type: object
     GoogleCloudApigeeV1Stats:
-      description: This message type encapsulates a stats response.
+      description: Encapsulates a `stats` response.
       properties:
         environments:
-          description: This field contains a list of query results on environment level.
+          description: List of query results on the environment level.
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1StatsEnvironmentStats"
           type: array
         hosts:
-          description: This field contains a list of query results grouped by host.
+          description: List of query results grouped by host.
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1StatsHostStats"
           type: array
         metaData:
           $ref: "#/components/schemas/GoogleCloudApigeeV1Metadata"
-          description: This field contains the metadata information.
+          description: Metadata information.
       type: object
     GoogleCloudApigeeV1StatsEnvironmentStats:
-      description: 'This message type encapsulates the environment wrapper: "environments": [ { "metrics": [ { "name": "sum(message_count)", "values": [ "2.52056245E8" ] } ], "name": "prod" } ]'
+      description: 'Encapsulates the environment wrapper: ``` "environments": [ { "metrics": [ { "name": "sum(message_count)", "values": [ "2.52056245E8" ] } ], "name": "prod" } ]```'
       properties:
         dimensions:
-          description: This field contains the list of metrics grouped under dimensions.
+          description: List of metrics grouped under dimensions.
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1DimensionMetric"
           type: array
         metrics:
-          description: 'In the final response, only one of the following fields will be present based on the dimensions provided. If no dimensions are provided, then only a top level metrics is provided. If dimensions are included, then there will be a top level dimensions field under environments which will contain metrics values and the dimension name. Example: "environments": [ { "dimensions": [ { "metrics": [ { "name": "sum(message_count)", "values": [ "2.14049521E8" ] } ], "name": "nit_proxy" } ], "name": "prod" } ] OR "environments": [ { "metrics": [ { "name": "sum(message_count)", "values": [ "2.19026331E8" ] } ], "name": "prod" } ] This field contains the list of metric values.'
+          description: 'In the final response, only one of the following fields will be present based on the dimensions provided. If no dimensions are provided, then only top-level metrics is provided. If dimensions are included, then there will be a top-level dimensions field under environments which will contain metrics values and the dimension name. Example: ``` "environments": [ { "dimensions": [ { "metrics": [ { "name": "sum(message_count)", "values": [ "2.14049521E8" ] } ], "name": "nit_proxy" } ], "name": "prod" } ]``` or ```"environments": [ { "metrics": [ { "name": "sum(message_count)", "values": [ "2.19026331E8" ] } ], "name": "prod" } ]``` List of metric values.'
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1Metric"
           type: array
         name:
+          description: Name of the environment.
           type: string
       type: object
     GoogleCloudApigeeV1StatsHostStats:
-      description: 'This message type encapsulates the hostname wrapper: "hosts": [ { "metrics": [ { "name": "sum(message_count)", "values": [ "2.52056245E8" ] } ], "name": "example.com" } ]'
+      description: 'Encapsulates the hostname wrapper: ``` "hosts": [ { "metrics": [ { "name": "sum(message_count)", "values": [ "2.52056245E8" ] } ], "name": "example.com" } ]```'
       properties:
         dimensions:
-          description: This field contains the list of metrics grouped under dimensions.
+          description: List of metrics grouped under dimensions.
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1DimensionMetric"
           type: array
         metrics:
-          description: 'In the final response, only one of the following fields will be present based on the dimensions provided. If no dimensions are provided, then only a top level metrics is provided. If dimensions are included, then there will be a top level dimensions field under hostnames which will contain metrics values and the dimension name. Example: "hosts": [ { "dimensions": [ { "metrics": [ { "name": "sum(message_count)", "values": [ "2.14049521E8" ] } ], "name": "nit_proxy" } ], "name": "example.com" } ] OR "hosts": [ { "metrics": [ { "name": "sum(message_count)", "values": [ "2.19026331E8" ] } ], "name": "example.com" } ] This field contains the list of metric values.'
+          description: 'In the final response, only one of the following fields will be present based on the dimensions provided. If no dimensions are provided, then only the top-level metrics are provided. If dimensions are included, then there will be a top-level dimensions field under hostnames which will contain metrics values and the dimension name. Example: ``` "hosts": [ { "dimensions": [ { "metrics": [ { "name": "sum(message_count)", "values": [ "2.14049521E8" ] } ], "name": "nit_proxy" } ], "name": "example.com" } ]``` OR ```"hosts": [ { "metrics": [ { "name": "sum(message_count)", "values": [ "2.19026331E8" ] } ], "name": "example.com" } ]``` List of metric values.'
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1Metric"
           type: array
         name:
-          description: This field contains the hostname used in query.
+          description: Hostname used in query.
           type: string
       type: object
     GoogleCloudApigeeV1Subscription:

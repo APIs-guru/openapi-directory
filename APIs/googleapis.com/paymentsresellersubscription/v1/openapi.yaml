@@ -616,6 +616,9 @@ components:
         freeTrialDuration:
           $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1Duration"
           description: Optional. Specifies the duration of the free trial of the subscription when promotion_type is PROMOTION_TYPE_FREE_TRIAL
+        introductoryPricingDetails:
+          $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails"
+          description: Optional. Specifies the introductory pricing details when the promotion_type is PROMOTION_TYPE_INTRODUCTORY_PRICING.
         name:
           description: Output only. Response only. Resource name of the subscription promotion. It will have the format of "partners/{partner_id}/promotion/{promotion_id}"
           readOnly: true
@@ -625,6 +628,7 @@ components:
           enum:
             - PROMOTION_TYPE_UNSPECIFIED
             - PROMOTION_TYPE_FREE_TRIAL
+            - PROMOTION_TYPE_INTRODUCTORY_PRICING
           readOnly: true
           type: string
         regionCodes:
@@ -643,6 +647,24 @@ components:
             $ref: "#/components/schemas/GoogleTypeLocalizedText"
           readOnly: true
           type: array
+      type: object
+    GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails:
+      description: The details of a introductory pricing promotion.
+      properties:
+        introductoryPricingSpecs:
+          description: Specifies the introductory pricing periods.
+          items:
+            $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpec"
+          type: array
+      type: object
+    GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpec:
+      description: The duration of an introductory pricing promotion.
+      properties:
+        recurrenceCount:
+          description: Output only. Output Only. The duration of an introductory offer in billing cycles.
+          format: int32
+          readOnly: true
+          type: integer
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1Subscription:
       description: A Subscription resource managed by 3P Partners.

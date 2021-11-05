@@ -13,20 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: OS Config API
   version: v1alpha
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://osconfig.googleapis.com/$discovery/rest?version=v1alpha
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: osconfig
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/compute/docs/osconfig/rest
 tags:
@@ -712,6 +709,38 @@ components:
           description: Specifies the relative value defined as a percentage, which will be multiplied by a reference value.
           format: int32
           type: integer
+      type: object
+    GoogleCloudOsconfigV1__OSPolicyAssignmentOperationMetadata:
+      description: OS policy assignment operation metadata provided by OS policy assignment API methods that return long running operations.
+      properties:
+        apiMethod:
+          description: The OS policy assignment API method.
+          enum:
+            - API_METHOD_UNSPECIFIED
+            - CREATE
+            - UPDATE
+            - DELETE
+          type: string
+        osPolicyAssignment:
+          description: "Reference to the `OSPolicyAssignment` API resource. Format: `projects/{project_number}/locations/{location}/osPolicyAssignments/{os_policy_assignment_id@revision_id}`"
+          type: string
+        rolloutStartTime:
+          description: Rollout start time
+          format: google-datetime
+          type: string
+        rolloutState:
+          description: State of the rollout
+          enum:
+            - ROLLOUT_STATE_UNSPECIFIED
+            - IN_PROGRESS
+            - CANCELLING
+            - CANCELLED
+            - SUCCEEDED
+          type: string
+        rolloutUpdateTime:
+          description: Rollout update time
+          format: google-datetime
+          type: string
       type: object
     InstanceOSPoliciesCompliance:
       description: This API resource represents the OS policies compliance data for a Compute Engine virtual machine (VM) instance at a given point in time. A Compute Engine VM can have multiple OS policy assignments, and each assignment can have multiple OS policies. As a result, multiple OS policies could be applied to a single VM. You can use this API resource to determine both the compliance state of your VM as well as the compliance state of an individual OS policy. For more information, see [View compliance](https://cloud.google.com/compute/docs/os-configuration-management/view-compliance).
@@ -1881,5 +1910,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

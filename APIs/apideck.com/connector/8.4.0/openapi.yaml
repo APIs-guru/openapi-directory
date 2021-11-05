@@ -922,13 +922,7 @@ components:
                 example: Companies
                 type: string
               status:
-                description: Status of the resource. Resources with status live or beta are available.
-                enum:
-                  - live
-                  - beta
-                  - development
-                  - considering
-                type: string
+                $ref: "#/components/schemas/ResourceStatus"
             type: object
           type: array
         spec_url:
@@ -936,13 +930,7 @@ components:
           example: https://specs.apideck.com/file-storage.yml
           type: string
         status:
-          description: Status of the API. APIs with status live or beta are callable.
-          enum:
-            - live
-            - beta
-            - development
-            - considering
-          type: string
+          $ref: "#/components/schemas/ApiStatus"
         type:
           description: Indicates whether the API is a Unified API. If unified_api is false, the API is a Platform API.
           enum:
@@ -956,6 +944,16 @@ components:
           description: ID of the resource, typically a lowercased version of name.
           example: companies
           type: string
+        linked_resources:
+          description: List of linked resources.
+          items:
+            properties:
+              id:
+                $ref: "#/components/schemas/ResourceId"
+              unified_property:
+                $ref: "#/components/schemas/UnifiedProperty"
+            type: object
+          type: array
         name:
           description: Name of the resource (plural)
           example: Companies
@@ -992,13 +990,7 @@ components:
           type: object
           x-json-schema: true
         status:
-          description: Status of the resource. Resources with status live or beta are available.
-          enum:
-            - live
-            - beta
-            - development
-            - considering
-          type: string
+          $ref: "#/components/schemas/ResourceStatus"
       type: object
     ApiResourceCoverage:
       properties:
@@ -1020,9 +1012,7 @@ components:
               items:
                 properties:
                   unified_property:
-                    description: Name of the property in our Unified API.
-                    example: owner_id
-                    type: string
+                    $ref: "#/components/schemas/UnifiedProperty"
                 type: object
               type: array
             x-supported_filters:
@@ -1063,28 +1053,23 @@ components:
           example: Companies
           type: string
         status:
-          description: Status of the resource. Resources with status live or beta are available.
-          enum:
-            - live
-            - beta
-            - development
-            - considering
-          type: string
+          $ref: "#/components/schemas/ResourceStatus"
       type: object
+    ApiStatus:
+      description: Status of the API. APIs with status live or beta are callable.
+      enum:
+        - live
+        - beta
+        - development
+        - considering
+      type: string
     ApisFilter:
       additionalProperties: false
       example:
         status: beta
       properties:
         status:
-          description: Status to filter on
-          enum:
-            - live
-            - beta
-            - development
-            - considering
-          example: beta
-          type: string
+          $ref: "#/components/schemas/ApiStatus"
       type: object
       x-graphql-type-name: ApisFilter
     Connector:
@@ -1104,7 +1089,7 @@ components:
             - leads
             - companies
           items:
-            type: string
+            $ref: "#/components/schemas/ResourceId"
           type: array
         description:
           example: A description
@@ -1139,23 +1124,17 @@ components:
             $ref: "#/components/schemas/ConnectorSetting"
           type: array
         status:
-          description: Status of the connector. Connectors with status live or beta are callable.
-          enum:
-            - live
-            - beta
-            - development
-            - considering
-          type: string
+          $ref: "#/components/schemas/ConnectorStatus"
         supported_events:
-          description: List of resources that are supported on the connector.
+          description: List of events that are supported on the connector. Events are delivered via Webhooks.
           items:
             properties:
               downstream_event_type:
                 type: string
               event_type:
                 type: string
-              resource:
-                type: string
+              resource_id:
+                $ref: "#/components/schemas/ResourceId"
             type: object
           type: array
         supported_resources:
@@ -1171,21 +1150,13 @@ components:
                 example: Accounts
                 type: string
               id:
-                description: ID of the resource, typically a lowercased version of its name.
-                example: companies
-                type: string
+                $ref: "#/components/schemas/ResourceId"
               name:
                 description: Name of the resource (plural)
                 example: Companies
                 type: string
               status:
-                description: Status of the resource. Resources with status live or beta are available.
-                enum:
-                  - live
-                  - beta
-                  - development
-                  - considering
-                type: string
+                $ref: "#/components/schemas/ResourceStatus"
             type: object
           type: array
         unified_apis:
@@ -1193,31 +1164,7 @@ components:
           items:
             properties:
               id:
-                description: Name of Apideck Unified API
-                enum:
-                  - vault
-                  - lead
-                  - crm
-                  - accounting
-                  - file-storage
-                  - spreadsheet
-                  - email
-                  - script
-                  - sms
-                  - team-messaging
-                  - ecommerce
-                  - payroll
-                  - customer-support
-                  - time-registration
-                  - transactional-email
-                  - hcm
-                  - form
-                  - csp
-                  - email-marketing
-                  - ats
-                  - hris
-                example: crm
-                type: string
+                $ref: "#/components/schemas/UnifiedApiId"
               oauth_scopes:
                 items:
                   description: OAuth scopes required for the connector. Add these scopes to your OAuth app.
@@ -1254,9 +1201,7 @@ components:
           example: Accounts
           type: string
         id:
-          description: ID of the resource, typically a lowercased version of name.
-          example: companies
-          type: string
+          $ref: "#/components/schemas/ResourceId"
         name:
           description: Name of the resource (plural)
           example: Companies
@@ -1265,21 +1210,13 @@ components:
           description: Indicates if pagination (cursor and limit parameters) is supported on the list endpoint of the resource.
           type: boolean
         status:
-          description: Status of the resource. Resources with status live or beta are available.
-          enum:
-            - live
-            - beta
-            - development
-            - considering
-          type: string
+          $ref: "#/components/schemas/ResourceStatus"
         supported_fields:
           description: Supported fields.
           items:
             properties:
               unified_property:
-                description: Name of the property in our Unified API.
-                example: owner_id
-                type: string
+                $ref: "#/components/schemas/UnifiedProperty"
             type: object
           type: array
         supported_filters:
@@ -1336,24 +1273,23 @@ components:
             - number
           example: select
       type: object
+    ConnectorStatus:
+      description: Status of the connector. Connectors with status live or beta are callable.
+      enum:
+        - live
+        - beta
+        - development
+        - considering
+      type: string
     ConnectorsFilter:
       additionalProperties: false
       example:
         unified_api: file-storage
       properties:
         status:
-          description: Status to filter on
-          enum:
-            - live
-            - beta
-            - development
-            - considering
-          example: beta
-          type: string
+          $ref: "#/components/schemas/ConnectorStatus"
         unified_api:
-          description: Unified API to filter on
-          example: file-storage
-          type: string
+          $ref: "#/components/schemas/UnifiedApiId"
       type: object
       x-graphql-type-name: ConnectorsFilter
     GetApiResourceCoverageResponse:
@@ -1375,9 +1311,6 @@ components:
       required:
         - status_code
         - status
-        - service
-        - resource
-        - operation
         - data
       type: object
     GetApiResourceResponse:
@@ -1557,6 +1490,48 @@ components:
           example: 50
           type: integer
       type: object
+    ResourceId:
+      description: ID of the resource, typically a lowercased version of name.
+      example: companies
+      type: string
+    ResourceStatus:
+      description: Status of the resource. Resources with status live or beta are callable.
+      enum:
+        - live
+        - beta
+        - development
+        - considering
+      type: string
+    UnifiedApiId:
+      description: Name of Apideck Unified API
+      enum:
+        - vault
+        - lead
+        - crm
+        - accounting
+        - file-storage
+        - spreadsheet
+        - email
+        - script
+        - sms
+        - team-messaging
+        - ecommerce
+        - payroll
+        - customer-support
+        - time-registration
+        - transactional-email
+        - hcm
+        - form
+        - csp
+        - email-marketing
+        - ats
+        - hris
+      example: crm
+      type: string
+    UnifiedProperty:
+      description: Name of the property in our Unified API.
+      example: owner_id
+      type: string
   securitySchemes:
     apiKey:
       description: |

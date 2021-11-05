@@ -1201,7 +1201,7 @@ paths:
                     quantity: 1,
                     unit_price: 27500.5,
                     unit_of_measure: 'pc.',
-                    discount_percentage: 0,
+                    discount_percentage: 0.01,
                     item: {
                       id: '12344'
                     },
@@ -1446,7 +1446,7 @@ paths:
                     quantity: 1,
                     unit_price: 27500.5,
                     unit_of_measure: 'pc.',
-                    discount_percentage: 0,
+                    discount_percentage: 0.01,
                     item: {
                       id: '12344'
                     },
@@ -5026,10 +5026,10 @@ components:
           title: Description
           type: string
         discount_percentage:
-          example: 0
+          example: 0.01
           nullable: true
           title: Amount
-          type: integer
+          type: number
         id:
           $ref: "#/components/schemas/Id"
         item:

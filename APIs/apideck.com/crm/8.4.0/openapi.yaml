@@ -3528,6 +3528,27 @@ components:
           schema:
             $ref: "#/components/schemas/GetActivityResponse"
       description: Activity
+      links:
+        company:
+          operationId: companiesOne
+          parameters:
+            id: $response.body#/data/company_id
+        contact:
+          operationId: contactsOne
+          parameters:
+            id: $response.body#/data/contact_id
+        lead:
+          operationId: leadsOne
+          parameters:
+            id: $response.body#/data/lead_id
+        opportunity:
+          operationId: opportunitiesOne
+          parameters:
+            id: $response.body#/data/opportunity_id
+        owner:
+          operationId: usersOne
+          parameters:
+            id: $response.body#/data/owner_id
     GetCompaniesResponse:
       content:
         application/json:
@@ -3540,12 +3561,34 @@ components:
           schema:
             $ref: "#/components/schemas/GetCompanyResponse"
       description: Company
+      links:
+        owner:
+          operationId: usersOne
+          parameters:
+            id: $response.body#/data/owner_id
+        parentById:
+          operationId: companiesOne
+          parameters:
+            id: $response.body#/data/parent_id
     GetContactResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetContactResponse"
       description: Contact
+      links:
+        company:
+          operationId: companiesOne
+          parameters:
+            id: $response.body#/data/company_id
+        lead:
+          operationId: leadsOne
+          parameters:
+            id: $response.body#/data/lead_id
+        owner:
+          operationId: usersOne
+          parameters:
+            id: $response.body#/data/owner_id
     GetContactsResponse:
       content:
         application/json:
@@ -3558,6 +3601,19 @@ components:
           schema:
             $ref: "#/components/schemas/GetLeadResponse"
       description: Lead
+      links:
+        company:
+          operationId: companiesOne
+          parameters:
+            id: $response.body#/data/company_id
+        contact:
+          operationId: contactsOne
+          parameters:
+            id: $response.body#/data/contact_id
+        owner:
+          operationId: usersOne
+          parameters:
+            id: $response.body#/data/owner_id
     GetLeadsResponse:
       content:
         application/json:
@@ -3570,6 +3626,27 @@ components:
           schema:
             $ref: "#/components/schemas/GetNoteResponse"
       description: Note
+      links:
+        company:
+          operationId: companiesOne
+          parameters:
+            id: $response.body#/data/company_id
+        contact:
+          operationId: contactsOne
+          parameters:
+            id: $response.body#/data/contact_id
+        lead:
+          operationId: leadsOne
+          parameters:
+            id: $response.body#/data/lead_id
+        opportunity:
+          operationId: opportunitiesOne
+          parameters:
+            id: $response.body#/data/opportunity_id
+        owner:
+          operationId: usersOne
+          parameters:
+            id: $response.body#/data/owner_id
     GetNotesResponse:
       content:
         application/json:
@@ -3588,6 +3665,31 @@ components:
           schema:
             $ref: "#/components/schemas/GetOpportunityResponse"
       description: Opportunity
+      links:
+        company:
+          operationId: companiesOne
+          parameters:
+            id: $response.body#/data/company_id
+        contact:
+          operationId: contactsOne
+          parameters:
+            id: $response.body#/data/contact_id
+        lead:
+          operationId: leadsOne
+          parameters:
+            id: $response.body#/data/lead_id
+        owner:
+          operationId: usersOne
+          parameters:
+            id: $response.body#/data/owner_id
+        pipelineById:
+          operationId: pipelinesOne
+          parameters:
+            id: $response.body#/data/pipeline_id
+        primarycontact:
+          operationId: contactsOne
+          parameters:
+            id: $response.body#/data/primary_contact_id
     GetPipelineResponse:
       content:
         application/json:

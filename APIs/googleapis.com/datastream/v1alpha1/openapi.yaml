@@ -1652,6 +1652,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        customerManagedEncryptionKey:
+          description: Immutable. A reference to a KMS encryption key. If provided, it will be used to encrypt the data. If left blank, data will be encrypted using an internal Stream-specific encryption key provisioned through KMS.
+          type: string
         destinationConfig:
           $ref: "#/components/schemas/DestinationConfig"
           description: Required. Destination connection profile configuration.

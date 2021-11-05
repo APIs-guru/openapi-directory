@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Memorystore for Memcached API
   version: v1beta2
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://memcache.googleapis.com/$discovery/rest?version=v1beta2
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: memcache
 externalDocs:
@@ -909,7 +911,7 @@ components:
           type: integer
         parameters:
           $ref: "#/components/schemas/MemcacheParameters"
-          description: "Optional: User defined parameters to apply to the memcached process on each node."
+          description: User defined parameters to apply to the memcached process on each node.
         state:
           description: Output only. The state of this Memcached instance.
           enum:
@@ -1066,10 +1068,9 @@ components:
           description: Weekly cycle.
       type: object
     MemcacheParameters:
-      description: The unique ID associated with this set of parameters. Users can use this id to determine if the parameters associated with the instance differ from the parameters associated with the nodes. A discrepancy between parameter ids can inform users that they may need to take action to apply parameters on nodes.
       properties:
         id:
-          description: Output only.
+          description: Output only. The unique ID associated with this set of parameters. Users can use this id to determine if the parameters associated with the instance differ from the parameters associated with the nodes. A discrepancy between parameter ids can inform users that they may need to take action to apply parameters on nodes.
           readOnly: true
           type: string
         params:
@@ -1305,3 +1306,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

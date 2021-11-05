@@ -1897,7 +1897,7 @@ components:
           description: "Required. The offer resource name for which the entitlement is to be created. Takes the form: accounts/{account_id}/offers/{offer_id}."
           type: string
         parameters:
-          description: "Extended entitlement parameters. When creating an entitlement, valid parameter names and values are defined in the Offer.parameter_definitions. The response may include the following output-only Parameters: - assigned_units: The number of licenses assigned to a user. - max_units: The maximum assignable units for a flexible offer. - num_units: The total commitment for commitment-based offers."
+          description: "Extended entitlement parameters. When creating an entitlement, valid parameter names and values are defined in the Offer.parameter_definitions. The response may include the following output-only Parameters: - assigned_units: The number of licenses assigned to users. - max_units: The maximum assignable units for a flexible offer. - num_units: The total commitment for commitment-based offers."
           items:
             $ref: "#/components/schemas/GoogleCloudChannelV1Parameter"
           type: array
@@ -2761,7 +2761,7 @@ components:
           description: "Required. The offer resource name for which the entitlement is to be created. Takes the form: accounts/{account_id}/offers/{offer_id}."
           type: string
         parameters:
-          description: "Extended entitlement parameters. When creating an entitlement, valid parameter names and values are defined in the Offer.parameter_definitions. The response may include the following output-only Parameters: - assigned_units: The number of licenses assigned to a user. - max_units: The maximum assignable units for a flexible offer. - num_units: The total commitment for commitment-based offers."
+          description: "Extended entitlement parameters. When creating an entitlement, valid parameter names and values are defined in the Offer.parameter_definitions. The response may include the following output-only Parameters: - assigned_units: The number of licenses assigned to users. - max_units: The maximum assignable units for a flexible offer. - num_units: The total commitment for commitment-based offers."
           items:
             $ref: "#/components/schemas/GoogleCloudChannelV1alpha1Parameter"
           type: array
