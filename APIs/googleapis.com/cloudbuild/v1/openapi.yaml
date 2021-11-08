@@ -632,7 +632,7 @@ paths:
           name: allowMissing
           schema:
             type: boolean
-        - description: Optional. If this is provided, it must match the server's etag on the workerpool for the request to be processed.
+        - description: Optional. If provided, it must match the server's etag on the workerpool for the request to be processed.
           in: query
           name: etag
           schema:
@@ -1852,6 +1852,15 @@ components:
         disabled:
           description: If true, the trigger will never automatically execute a build.
           type: boolean
+        eventType:
+          description: Optional. EventType allows the user to explicitly set the type of event to which this BuildTrigger should respond. This field is optional but will be validated against the rest of the configuration if it is set.
+          enum:
+            - EVENT_TYPE_UNSPECIFIED
+            - REPO
+            - WEBHOOK
+            - PUBSUB
+            - MANUAL
+          type: string
         filename:
           description: Path, from the source root, to the build configuration file (i.e. cloudbuild.yaml).
           type: string

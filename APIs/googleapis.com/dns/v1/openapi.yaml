@@ -1658,6 +1658,8 @@ components:
     ManagedZone:
       description: A zone is a subtree of the DNS namespace under one administrative responsibility. A ManagedZone is a resource that represents a DNS zone hosted by the Cloud DNS service.
       properties:
+        cloudLoggingConfig:
+          $ref: "#/components/schemas/ManagedZoneCloudLoggingConfig"
         creationTime:
           description: The time that this resource was created on the server. This is in RFC3339 text format. Output only.
           type: string
@@ -1713,6 +1715,16 @@ components:
           enum:
             - public
             - private
+          type: string
+      type: object
+    ManagedZoneCloudLoggingConfig:
+      description: Cloud Logging configurations for publicly visible zones.
+      properties:
+        enableLogging:
+          description: If set, enable query logging for this ManagedZone. False by default, making logging opt-in.
+          type: boolean
+        kind:
+          default: dns#managedZoneCloudLoggingConfig
           type: string
       type: object
     ManagedZoneDnsSecConfig:
