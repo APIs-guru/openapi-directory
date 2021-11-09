@@ -893,9 +893,9 @@ components:
         customerType:
           description: "Identifies the type of the customer. Acceptable values include: * `domain`: Implies a domain-verified customer (default). * `team`: Implies an email-verified customer. For more information, see [managed teams](https://support.google.com/a/users/answer/9939479)."
           enum:
-            - CUSTOMER_TYPE_UNSPECIFIED
-            - DOMAIN
-            - TEAM
+            - customerTypeUnspecified
+            - domain
+            - team
           type: string
         kind:
           default: reseller#customer

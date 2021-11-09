@@ -6,9 +6,9 @@ info:
     email: hello@apideck.com
     url: https://developers.apideck.com
   description: |
-    Welcome to the Connector API.
+    Welcome to the ats.
 
-    You can use this API to access all connector endpoints.
+    You can use this API to access all ats endpoints.
 
     ## Base URL
 
@@ -265,9 +265,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: Connector API
-  version: 8.4.0
-  x-apideck-api: connector
+  title: ats
+  version: 8.5.0
+  x-apideck-api: ats
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -275,10 +275,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/connector.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/ats.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: connector
+  x-serviceName: ats
   x-tags:
     - partner
 externalDocs:
@@ -288,90 +288,47 @@ security:
   - apiKey: []
 tags:
   - description: ""
-    name: Connectors
+    name: Jobs
     x-apideck-model:
-      $ref: "#/components/schemas/Connector"
+      $ref: "#/components/schemas/Job"
   - description: ""
-    name: APIs
+    name: Applicants
     x-apideck-model:
-      $ref: "#/components/schemas/Api"
-  - description: ""
-    name: Connector Resources
-    x-apideck-model:
-      $ref: "#/components/schemas/ConnectorResource"
-  - description: ""
-    name: API Resources
-    x-apideck-model:
-      $ref: "#/components/schemas/ApiResource"
+      $ref: "#/components/schemas/Applicant"
 paths:
-  /connector/apis:
+  /ats/applicants:
     get:
-      description: List APIs
-      operationId: apisAll
+      description: List applicants
+      operationId: applicantsAll
       parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
-        - $ref: "#/components/parameters/apis_filter"
+        - $ref: "#/components/parameters/jobsFilter"
       responses:
         "200":
-          $ref: "#/components/responses/GetApisResponse"
+          $ref: "#/components/responses/GetApplicantsResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
           $ref: "#/components/responses/UnauthorizedResponse"
         "402":
           $ref: "#/components/responses/PaymentRequiredResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: List APIs
-      tags:
-        - APIs
-      x-apideck-api: connector
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
-            })
-
-            try {
-              const { data } = await apideck.connector.apisAll({})
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-      x-graphql-field-name: APIs
-  "/connector/apis/{id}":
-    get:
-      description: Get API
-      operationId: apisOne
-      parameters:
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/id"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetApiResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
           $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get API
+      summary: List applicants
       tags:
-        - APIs
-      x-apideck-api: connector
+        - Applicants
+      x-apideck-api: ats
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -380,137 +337,52 @@ paths:
 
             const apideck = new Apideck({
               apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
             try {
-              const { data } = await apideck.connector.apisOne({
-                id: 'id_example'
-              })
+              const { data } = await apideck.ats.applicantsAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/connector/apis/{id}/resources/{resource_id}":
-    get:
-      description: Get API Resource
-      operationId: apiResourcesOne
+      x-graphql-field-name: applicants
+    post:
+      description: Create applicant
+      operationId: applicantsAdd
       parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/resourceId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Applicant"
+        required: true
       responses:
-        "200":
-          $ref: "#/components/responses/GetApiResourceResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Get API Resource
-      tags:
-        - API Resources
-      x-apideck-api: connector
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
-            })
-
-            const params = {
-              id: 'id_example',
-              resourceId: 'resource_id_example'
-            }
-
-            try {
-              const { data } = await apideck.connector.apiResourcesOne(params)
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  "/connector/apis/{id}/resources/{resource_id}/coverage":
-    get:
-      description: Get API Resource Coverage
-      operationId: apiResourceCoverageOne
-      parameters:
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/resourceId"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetApiResourceCoverageResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Get API Resource Coverage
-      tags:
-        - API Resources
-      x-apideck-api: connector
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
-            })
-
-            const params = {
-              id: 'id_example',
-              resourceId: 'resource_id_example'
-            }
-
-            try {
-              const { data } = await apideck.connector.apiResourceCoverageOne(params)
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  /connector/connectors:
-    get:
-      description: List Connectors
-      operationId: connectorsAll
-      parameters:
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/cursor"
-        - $ref: "#/components/parameters/limit"
-        - $ref: "#/components/parameters/connectors_filter"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetConnectorsResponse"
+        "201":
+          $ref: "#/components/responses/CreateApplicantResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
           $ref: "#/components/responses/UnauthorizedResponse"
         "402":
           $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Connectors
+      summary: Create applicant
       tags:
-        - Connectors
-      x-apideck-api: connector
+        - Applicants
+      x-apideck-api: ats
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -519,40 +391,72 @@ paths:
 
             const apideck = new Apideck({
               apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
+            const params = {
+              applicant: {
+                position_id: '123',
+                name: 'Elon Musk',
+                first_name: 'Elon',
+                last_name: 'Musk',
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                phone_numbers: [
+                  {
+                    id: '12345',
+                    country_code: '1',
+                    area_code: '323',
+                    number: '111-111-1111',
+                    type: 'primary'
+                  }
+                ]
+              }
+            }
+
             try {
-              const { data } = await apideck.connector.connectorsAll({})
+              const { data } = await apideck.ats.applicantsAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: connectors
-  "/connector/connectors/{id}":
+  "/ats/applicants/{id}":
     get:
-      description: Get Connector
-      operationId: connectorsOne
+      description: Get applicant
+      operationId: applicantsOne
       parameters:
-        - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetConnectorResponse"
+          $ref: "#/components/responses/GetApplicantResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
           $ref: "#/components/responses/UnauthorizedResponse"
         "402":
           $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
           $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Connector
+      summary: Get applicant
       tags:
-        - Connectors
-      x-apideck-api: connector
+        - Applicants
+      x-apideck-api: ats
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -561,42 +465,50 @@ paths:
 
             const apideck = new Apideck({
               apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
             try {
-              const { data } = await apideck.connector.connectorsOne({
+              const { data } = await apideck.ats.applicantsOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/connector/connectors/{id}/resources/{resource_id}":
+  /ats/jobs:
     get:
-      description: Get ConnectorResource
-      operationId: connectorResourcesOne
+      description: List jobs
+      operationId: jobsAll
       parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/resourceId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
       responses:
         "200":
-          $ref: "#/components/responses/GetConnectorResourceResponse"
+          $ref: "#/components/responses/GetJobsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
           $ref: "#/components/responses/UnauthorizedResponse"
         "402":
           $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
           $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get ConnectorResource
+      summary: List jobs
       tags:
-        - Connector Resources
-      x-apideck-api: connector
+        - Jobs
+      x-apideck-api: ats
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -605,30 +517,70 @@ paths:
 
             const apideck = new Apideck({
               apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
-            const params = {
-              id: 'id_example',
-              resourceId: 'resource_id_example'
+            try {
+              const { data } = await apideck.ats.jobsAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
             }
+      x-graphql-field-name: jobs
+  "/ats/jobs/{id}":
+    get:
+      description: Get job
+      operationId: jobsOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetJobResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get job
+      tags:
+        - Jobs
+      x-apideck-api: ats
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
 
             try {
-              const { data } = await apideck.connector.connectorResourcesOne(params)
+              const { data } = await apideck.ats.jobsOne({
+                id: 'id_example'
+              })
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
 components:
   parameters:
-    apis_filter:
-      description: Apply filters
-      explode: true
-      in: query
-      name: filter
-      schema:
-        $ref: "#/components/schemas/ApisFilter"
-      style: deepObject
     applicationId:
       description: The ID of your Unify application
       in: header
@@ -636,14 +588,13 @@ components:
       required: true
       schema:
         type: string
-    connectors_filter:
-      description: Apply filters
-      explode: true
-      in: query
-      name: filter
+    consumerId:
+      description: ID of the consumer which you want to get or push data from
+      in: header
+      name: x-apideck-consumer-id
+      required: true
       schema:
-        $ref: "#/components/schemas/ConnectorsFilter"
-      style: deepObject
+        type: string
     cursor:
       description: Cursor to start from. You can find cursors for next/previous pages in the meta.cursors property of the response.
       in: query
@@ -658,6 +609,14 @@ components:
       required: true
       schema:
         type: string
+    jobsFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/JobsFilter"
+      style: deepObject
     limit:
       description: Number of records to return
       in: query
@@ -667,11 +626,17 @@ components:
         maximum: 200
         minimum: 1
         type: integer
-    resourceId:
-      description: ID of the resource you are acting upon.
-      in: path
-      name: resource_id
-      required: true
+    raw:
+      description: Include raw response. Mostly used for debugging purposes
+      in: query
+      name: raw
+      schema:
+        default: true
+        type: boolean
+    serviceId:
+      description: Provide the service id you want to call (e.g., pipedrive). [See the full list in the connector section.](#section/Connectors) Only needed when a consumer has activated multiple integrations for a Unified API.
+      in: header
+      name: x-apideck-service-id
       schema:
         type: string
   responses:
@@ -679,772 +644,520 @@ components:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                anyOf:
-                  - example: Missing property foobar
-                    type: string
-                  - example:
-                      missing:
-                        - foobar: required
-                    type: object
-                description: Contains parameter or domain specific information related to the error and why it occurred.
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Bad Request
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Invalid Params
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#requestbodyvalidationerror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 400
-                type: number
-              type_name:
-                description: The type of error returned
-                example: RequestHeadersValidationError
-                type: string
+            $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    GetApiResourceCoverageResponse:
+    CreateApplicantResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetApiResourceCoverageResponse"
-      description: ApiResources
-    GetApiResourceResponse:
+            $ref: "#/components/schemas/CreateApplicantResponse"
+      description: Applicants
+    GetApplicantResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetApiResourceResponse"
-      description: ApiResources
-    GetApiResponse:
+            $ref: "#/components/schemas/GetApplicantResponse"
+      description: Applicants
+    GetApplicantsResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetApiResponse"
-      description: Apis
-    GetApisResponse:
+            $ref: "#/components/schemas/GetApplicantsResponse"
+      description: Applicants
+    GetJobResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetApisResponse"
-      description: Apis
-    GetConnectorResourceResponse:
+            $ref: "#/components/schemas/GetJobResponse"
+      description: Jobs
+    GetJobsResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetConnectorResourceResponse"
-      description: ConnectorResources
-    GetConnectorResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/GetConnectorResponse"
-      description: Connectors
-    GetConnectorsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/GetConnectorsResponse"
-      description: Connectors
+            $ref: "#/components/schemas/GetJobsResponse"
+      description: Jobs
     NotFoundResponse:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                anyOf:
-                  - example: "Could not find widget with id: '123'"
-                    type: string
-                  - example:
-                      not_found:
-                        entity: widget
-                        id: "123"
-                    type: object
-                description: Contains parameter or domain specific information related to the error and why it occurred.
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Not Found
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Unknown Widget
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#entitynotfounderror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 404
-                type: number
-              type_name:
-                description: The type of error returned
-                example: EntityNotFoundError
-                type: string
+            $ref: "#/components/schemas/NotFoundResponse"
       description: The specified resource was not found
+    NotImplementedResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/NotImplementedResponse"
+      description: Not Implemented
     PaymentRequiredResponse:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                description: Contains parameter or domain specific information related to the error and why it occurred.
-                example: You have reached your limit of 2000
-                type: string
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Payment Required
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Request Limit Reached
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#requestlimiterror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 402
-                type: number
-              type_name:
-                description: The type of error returned
-                example: RequestLimitError
-                type: string
+            $ref: "#/components/schemas/PaymentRequiredResponse"
       description: Payment Required
     UnauthorizedResponse:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                description: Contains parameter or domain specific information related to the error and why it occurred.
-                example: Failed to generate valid JWT Session. Verify applicationId is correct
-                type: string
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Unauthorized
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Unauthorized Request
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#unauthorizederror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 401
-                type: number
-              type_name:
-                description: The type of error returned
-                example: UnauthorizedError
-                type: string
+            $ref: "#/components/schemas/UnauthorizedResponse"
       description: Unauthorized
     UnexpectedErrorResponse:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                anyOf:
-                  - example: "Missing Header: x-apideck-consumer-id"
-                    type: string
-                  - example:
-                      missing:
-                        - x-apideck-consumer-id: required
-                    type: object
-                description: Contains parameter or domain specific information related to the error and why it occurred.
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Bad Request
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Invalid Params
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#unauthorizederror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 400
-                type: number
-              type_name:
-                description: The type of error returned
-                example: RequestHeadersValidationError
-                type: string
+            $ref: "#/components/schemas/UnexpectedErrorResponse"
       description: Unexpected error
+    UnprocessableResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UnprocessableResponse"
+      description: Unprocessable
   schemas:
-    Api:
+    Address:
       properties:
-        api_reference_url:
-          description: Link to the API reference of the API.
-          example: https://developers.apideck.com/apis/file-storage/reference
-          type: string
-        categories:
-          description: List of categories the API belongs to.
-          example:
-            - files
-            - file-storage
-            - cloud-storage
-            - object-storage
-          items:
-            type: string
-          type: array
-        id:
-          description: ID of the API.
-          example: file-storage
-          readOnly: true
-          type: string
-        name:
-          description: Name of the API.
-          example: File Storage API
-          type: string
-        resources:
-          description: List of resources supported in this API.
-          items:
-            properties:
-              id:
-                description: ID of the resource, typically a lowercased version of its name.
-                example: companies
-                type: string
-              name:
-                description: Name of the resource (plural)
-                example: Companies
-                type: string
-              status:
-                $ref: "#/components/schemas/ResourceStatus"
-            type: object
-          type: array
-        spec_url:
-          description: Link to the latest OpenAPI specification of the API.
-          example: https://specs.apideck.com/file-storage.yml
-          type: string
-        status:
-          $ref: "#/components/schemas/ApiStatus"
-        type:
-          description: Indicates whether the API is a Unified API. If unified_api is false, the API is a Platform API.
-          enum:
-            - platform
-            - unified
-          type: string
-      type: object
-    ApiResource:
-      properties:
-        id:
-          description: ID of the resource, typically a lowercased version of name.
-          example: companies
-          type: string
-        linked_resources:
-          description: List of linked resources.
-          items:
-            properties:
-              id:
-                $ref: "#/components/schemas/ResourceId"
-              unified_property:
-                $ref: "#/components/schemas/UnifiedProperty"
-            type: object
-          type: array
-        name:
-          description: Name of the resource (plural)
-          example: Companies
-          type: string
-        schema:
-          description: JSON Schema of the resource in our Unified API
-          example:
-            additionalProperties: false
-            properties:
-              created_at:
-                example: 2020-09-30T07:43:32.000Z
-                readOnly: true
-                type: string
-              id:
-                example: "12345"
-                readOnly: true
-                type: string
-              name:
-                example: Elon Musk
-                minLength: 1
-                type: string
-              updated_at:
-                example: 2020-09-30T07:43:32.000Z
-                readOnly: true
-                type: string
-            required:
-              - name
-              - company_name
-            x-pii:
-              - name
-              - email
-              - first_name
-              - last_name
-          type: object
-          x-json-schema: true
-        status:
-          $ref: "#/components/schemas/ResourceStatus"
-      type: object
-    ApiResourceCoverage:
-      properties:
-        coverage:
-          items:
-            x-downstream_id:
-              description: ID of the resource in the Connector's API (downstream)
-              example: accounts
-              type: string
-            x-downstream_name:
-              description: Name of the resource in the Connector's API (downstream)
-              example: Accounts
-              type: string
-            x-pagination_supported:
-              description: Indicates if pagination (cursor and limit parameters) is supported on the list endpoint of the resource.
-              type: boolean
-            x-supported_fields:
-              description: Supported fields.
-              items:
-                properties:
-                  unified_property:
-                    $ref: "#/components/schemas/UnifiedProperty"
-                type: object
-              type: array
-            x-supported_filters:
-              description: Supported filters on the list endpoint of the resource.
-              example:
-                - name
-                - email
-              items:
-                type: string
-              type: array
-            x-supported_operations:
-              description: List of supported operations on the resource.
-              example:
-                - all
-                - one
-                - add
-                - update
-                - delete
-              items:
-                type: string
-              type: array
-            x-supported_sort_by:
-              description: Supported sorting properties on the list endpoint of the resource.
-              example:
-                - updated_at
-                - created_at
-                - name
-              items:
-                type: string
-              type: array
-          type: array
-        id:
-          description: ID of the resource, typically a lowercased version of name.
-          example: companies
-          type: string
-        name:
-          description: Name of the resource (plural)
-          example: Companies
-          type: string
-        status:
-          $ref: "#/components/schemas/ResourceStatus"
-      type: object
-    ApiStatus:
-      description: Status of the API. APIs with status live or beta are callable.
-      enum:
-        - live
-        - beta
-        - development
-        - considering
-      type: string
-    ApisFilter:
-      additionalProperties: false
-      example:
-        status: beta
-      properties:
-        status:
-          $ref: "#/components/schemas/ApiStatus"
-      type: object
-      x-graphql-type-name: ApisFilter
-    Connector:
-      properties:
-        auth_type:
-          description: Type of authorization used by the connector
-          enum:
-            - oauth2
-            - apiKey
-            - basic
-            - none
-          example: oauth2
-          type: string
-        configurable_resources:
-          description: List of resources that have settings that can be configured.
-          example:
-            - leads
-            - companies
-          items:
-            $ref: "#/components/schemas/ResourceId"
-          type: array
-        description:
-          example: A description
+        city:
+          description: Name of city.
+          example: San Francisco
           nullable: true
+          type: string
+        contact_name:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        country:
+          description: country code according to ISO 3166-1 alpha-2.
+          example: US
+          nullable: true
+          type: string
+        email:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        fax:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        id:
+          example: "123"
+          nullable: true
+          type: string
+        latitude:
+          example: "40.759211"
+          nullable: true
+          type: string
+        line1:
+          description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
+          example: Main street
+          nullable: true
+          type: string
+        line2:
+          description: Line 2 of the address
+          example: "apt #"
+          nullable: true
+          type: string
+        longitude:
+          example: "-73.984638"
+          nullable: true
+          type: string
+        name:
+          example: HQ US
+          nullable: true
+          type: string
+        phone_number:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        postal_code:
+          description: Zip code or equivalent.
+          example: "94104"
+          nullable: true
+          type: string
+        salutation:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        state:
+          description: Name of state
+          example: CA
+          nullable: true
+          type: string
+        string:
+          example: 25 Spring Street, Blackburn, VIC 3130
+          nullable: true
+          title: The address string. Some APIs don't provide structured address data.
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - home
+            - office
+            - shipping
+            - billing
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: AddressType
+        website:
+          example: 111-111-1111
+          nullable: true
+          type: string
+      type: object
+    Applicant:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        emails:
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        first_name:
+          example: Elon
+          nullable: true
+          title: First name
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        last_name:
+          example: Musk
+          nullable: true
+          title: Last name
+          type: string
+        name:
+          description: The name of an applicant.
+          example: Elon Musk
+          type: string
+        phone_numbers:
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          type: array
+        position_id:
+          description: The PositionId the applicant applied for.
+          example: "123"
+          type: string
+      type: object
+    BadRequestResponse:
+      properties:
+        detail:
+          anyOf:
+            - example: Missing property foobar
+              type: string
+            - example:
+                missing:
+                  - foobar: required
+              type: object
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Bad Request
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Invalid Params
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#requestbodyvalidationerror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 400
+          type: number
+        type_name:
+          description: The type of error returned
+          example: RequestHeadersValidationError
+          type: string
+    Code:
+      description: The code of the job.
+      example: 123-OC
+      type: string
+    CreateApplicantResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Applicants
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    CreatedAt:
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      readOnly: true
+      type: string
+    CustomField:
+      additionalProperties: false
+      properties:
+        description:
+          description: More information about the custom field
+          example: Employee Level
           title: Description
           type: string
-        icon_url:
-          description: Link to a small square icon for the connector.
-          example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
-          format: uri
-          type: string
         id:
-          description: ID of the connector.
-          example: crm+salesforce
-          readOnly: true
-          type: string
-        logo_url:
-          description: Link to the full logo for the connector.
-          example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
-          format: uri
+          example: "2389328923893298"
+          title: ID
           type: string
         name:
-          description: Name of the connector.
-          example: Salesforce
+          description: Name of the custom field.
+          example: employee_level
+          title: Name
           type: string
-        service_id:
-          description: Service provider identifier
-          example: close
-          type: string
-        settings:
-          items:
-            $ref: "#/components/schemas/ConnectorSetting"
-          type: array
-        status:
-          $ref: "#/components/schemas/ConnectorStatus"
-        supported_events:
-          description: List of events that are supported on the connector. Events are delivered via Webhooks.
-          items:
-            properties:
-              downstream_event_type:
+        value:
+          anyOf:
+            - example: Uses Salesforce and Marketo
+              nullable: true
+              type: string
+            - example: 10
+              nullable: true
+              type: number
+            - example: true
+              nullable: true
+              type: boolean
+            - items:
                 type: string
-              event_type:
-                type: string
-              resource_id:
-                $ref: "#/components/schemas/ResourceId"
-            type: object
-          type: array
-        supported_resources:
-          description: List of resources that are supported on the connector.
-          items:
-            properties:
-              downstream_id:
-                description: ID of the resource in the Connector's API (downstream)
-                example: accounts
-                type: string
-              downstream_name:
-                description: Name of the resource in the Connector's API (downstream)
-                example: Accounts
-                type: string
-              id:
-                $ref: "#/components/schemas/ResourceId"
-              name:
-                description: Name of the resource (plural)
-                example: Companies
-                type: string
-              status:
-                $ref: "#/components/schemas/ResourceStatus"
-            type: object
-          type: array
-        unified_apis:
-          description: List of Unified APIs that feature this connector.
-          items:
-            properties:
-              id:
-                $ref: "#/components/schemas/UnifiedApiId"
-              oauth_scopes:
-                items:
-                  description: OAuth scopes required for the connector. Add these scopes to your OAuth app.
-                  example:
-                    id: contacts:all
-                    label: Read/write on the Contacts resource
-                  properties:
-                    id:
-                      description: ID of the OAuth scope.
-                      example: contacts:all
-                      type: string
-                    label:
-                      description: Label of the OAuth scope.
-                      example: Read/write on the Contacts resource
-                      type: string
-                  type: object
-                type: array
-            type: object
-          type: array
-        website_url:
-          description: Link to the connector's website.
-          example: https://www.salesforce.com
-          format: uri
-          type: string
+              type: array
+      required:
+        - id
       type: object
-    ConnectorResource:
+    Description:
+      example: A description
+      nullable: true
+      title: Description
+      type: string
+    Email:
       properties:
-        downstream_id:
-          description: ID of the resource in the Connector's API (downstream)
-          example: accounts
-          type: string
-        downstream_name:
-          description: Name of the resource in the Connector's API (downstream)
-          example: Accounts
+        email:
+          example: elon@musk.com
+          format: email
+          minLength: 1
           type: string
         id:
-          $ref: "#/components/schemas/ResourceId"
-        name:
-          description: Name of the resource (plural)
-          example: Companies
-          type: string
-        pagination_supported:
-          description: Indicates if pagination (cursor and limit parameters) is supported on the list endpoint of the resource.
-          type: boolean
-        status:
-          $ref: "#/components/schemas/ResourceStatus"
-        supported_fields:
-          description: Supported fields.
-          items:
-            properties:
-              unified_property:
-                $ref: "#/components/schemas/UnifiedProperty"
-            type: object
-          type: array
-        supported_filters:
-          description: Supported filters on the list endpoint of the resource.
-          example:
-            - name
-            - email
-          items:
-            type: string
-          type: array
-        supported_operations:
-          description: List of supported operations on the resource.
-          example:
-            - all
-            - one
-            - add
-            - update
-            - delete
-          items:
-            type: string
-          type: array
-        supported_sort_by:
-          description: Supported sorting properties on the list endpoint of the resource.
-          example:
-            - updated_at
-            - created_at
-            - name
-          items:
-            type: string
-          type: array
-      type: object
-    ConnectorSetting:
-      properties:
-        id:
-          example: pipeline_id
-          type: string
-        label:
-          example: Pipeline
+          example: "123"
           type: string
         type:
           enum:
-            - text
-            - checkbox
-            - tel
-            - email
-            - url
-            - textarea
-            - select
-            - filtered-select
-            - multi-select
-            - datetime
-            - date
-            - time
-            - number
-          example: select
+            - primary
+            - secondary
+            - work
+            - personal
+            - billing
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: EmailType
+      required:
+        - email
       type: object
-    ConnectorStatus:
-      description: Status of the connector. Connectors with status live or beta are callable.
-      enum:
-        - live
-        - beta
-        - development
-        - considering
+    GetApplicantResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Applicant"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Applicants
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: Applicant
+    GetApplicantsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Applicant"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Applicants
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: ApplicantList
+    GetJobResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Job"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Jobs
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: lever
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: Job
+    GetJobsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Job"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Jobs
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: lever
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: JobList
+    Id:
+      example: "12345"
+      readOnly: true
       type: string
-    ConnectorsFilter:
+    Job:
+      additionalProperties: false
+      properties:
+        code:
+          $ref: "#/components/schemas/Code"
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        description:
+          $ref: "#/components/schemas/Description"
+        id:
+          $ref: "#/components/schemas/Id"
+        status:
+          $ref: "#/components/schemas/JobStatus"
+        title:
+          $ref: "#/components/schemas/Title"
+        url:
+          $ref: "#/components/schemas/Url"
+      type: object
+    JobStatus:
+      description: The status of the job.
+      enum:
+        - draft
+        - internal
+        - published
+        - completed
+      example: completed
+      type: string
+    JobsFilter:
       additionalProperties: false
       example:
-        unified_api: file-storage
+        job_id: "1234"
       properties:
-        status:
-          $ref: "#/components/schemas/ConnectorStatus"
-        unified_api:
-          $ref: "#/components/schemas/UnifiedApiId"
-      type: object
-      x-graphql-type-name: ConnectorsFilter
-    GetApiResourceCoverageResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/ApiResourceCoverage"
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        status:
-          description: HTTP Response Status
-          example: OK
+        job_id:
+          description: Id of the job to filter on
+          example: "1234"
           type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - data
       type: object
-    GetApiResourceResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/ApiResource"
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - data
-      type: object
-    GetApiResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/Api"
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - data
-      type: object
-    GetApisResponse:
-      properties:
-        data:
-          items:
-            $ref: "#/components/schemas/Api"
-          type: array
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - data
-      type: object
-      x-graphql-type-name: ApiList
-    GetConnectorResourceResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/ConnectorResource"
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - data
-      type: object
-    GetConnectorResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/Connector"
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - data
-      type: object
-    GetConnectorsResponse:
-      properties:
-        data:
-          items:
-            $ref: "#/components/schemas/Connector"
-          type: array
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - data
-      type: object
-      x-graphql-type-name: ConnectorList
+      x-graphql-type-name: JobsFilter
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -1490,47 +1203,238 @@ components:
           example: 50
           type: integer
       type: object
-    ResourceId:
-      description: ID of the resource, typically a lowercased version of name.
-      example: companies
+    NotFoundResponse:
+      properties:
+        detail:
+          anyOf:
+            - example: "Could not find widget with id: '123'"
+              type: string
+            - example:
+                not_found:
+                  entity: widget
+                  id: "123"
+              type: object
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Not Found
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Unknown Widget
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#entitynotfounderror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 404
+          type: number
+        type_name:
+          description: The type of error returned
+          example: EntityNotFoundError
+          type: string
+    NotImplementedResponse:
+      properties:
+        detail:
+          anyOf:
+            - example: Failed to retrieve Widget tokenUrl from 'components.securitySchemes.oauth2.flows'
+              type: string
+            - type: object
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Not Implemented
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Unmapped Attribute
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#mappingerror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 501
+          type: number
+        type_name:
+          description: The type of error returned
+          example: MappingError
+          type: string
+    PaymentRequiredResponse:
+      properties:
+        detail:
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+          example: You have reached your limit of 2000
+          type: string
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Payment Required
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Request Limit Reached
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#requestlimiterror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 402
+          type: number
+        type_name:
+          description: The type of error returned
+          example: RequestLimitError
+          type: string
+    PhoneNumber:
+      properties:
+        area_code:
+          example: "323"
+          nullable: true
+          title: Area Code
+          type: string
+        country_code:
+          example: "1"
+          nullable: true
+          title: Country Code
+          type: string
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        number:
+          example: 111-111-1111
+          minLength: 1
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - home
+            - office
+            - mobile
+            - assistant
+            - fax
+            - direct-dial-in
+            - personal
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: PhoneType
+      required:
+        - number
+      type: object
+    Tags:
+      example:
+        - New
+      items:
+        type: string
+      type: array
+    Title:
+      example: CEO
+      nullable: true
+      title: Title
       type: string
-    ResourceStatus:
-      description: Status of the resource. Resources with status live or beta are callable.
-      enum:
-        - live
-        - beta
-        - development
-        - considering
-      type: string
-    UnifiedApiId:
-      description: Name of Apideck Unified API
-      enum:
-        - vault
-        - lead
-        - crm
-        - accounting
-        - file-storage
-        - spreadsheet
-        - email
-        - script
-        - sms
-        - team-messaging
-        - ecommerce
-        - payroll
-        - customer-support
-        - time-registration
-        - transactional-email
-        - hcm
-        - form
-        - csp
-        - email-marketing
-        - ats
-        - hris
-      example: crm
-      type: string
-    UnifiedProperty:
-      description: Name of the property in our Unified API.
-      example: owner_id
+    UnauthorizedResponse:
+      properties:
+        detail:
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+          example: Failed to generate valid JWT Session. Verify applicationId is correct
+          type: string
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Unauthorized
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Unauthorized Request
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#unauthorizederror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 401
+          type: number
+        type_name:
+          description: The type of error returned
+          example: UnauthorizedError
+          type: string
+    UnexpectedErrorResponse:
+      properties:
+        detail:
+          anyOf:
+            - example: "Missing Header: x-apideck-consumer-id"
+              type: string
+            - example:
+                missing:
+                  - x-apideck-consumer-id: required
+              type: object
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Bad Request
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Invalid Params
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#unauthorizederror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 400
+          type: number
+        type_name:
+          description: The type of error returned
+          example: RequestHeadersValidationError
+          type: string
+    UnifiedId:
+      properties:
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+      required:
+        - id
+      title: UnifiedId
+    UnprocessableResponse:
+      properties:
+        detail:
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+          example: State did not include unified_api
+          type: string
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Unprocessable Entity
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Invalid State
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#invalidstateerror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 422
+          type: number
+        type_name:
+          description: The type of error returned
+          example: InvalidStateError
+          type: string
+    Url:
+      description: The url pointing to the job.
+      example: https://downstreamconnector.com/job?id=123
+      format: uri
+      pattern: ^(https?)://
       type: string
   securitySchemes:
     apiKey:

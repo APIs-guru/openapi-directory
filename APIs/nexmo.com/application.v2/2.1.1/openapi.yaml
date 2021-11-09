@@ -11,7 +11,7 @@ info:
 
     This API is backwards compatible with version 1. Applications created using version 1 of the API can also be managed using version 2 (this version) of the API.
   title: Application API
-  version: 2.1.0
+  version: 2.1.1
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/application.v2.yml
@@ -135,6 +135,9 @@ paths:
                     messages:
                       description: Messages and Dispatch application webhook config
                       properties:
+                        version:
+                          description: If not populated will be set to v1
+                          type: string
                         webhooks:
                           properties:
                             inbound_url:

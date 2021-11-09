@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Composer API
   version: v1beta1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://composer.googleapis.com/$discovery/rest?version=v1beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: composer
 externalDocs:
@@ -509,6 +511,16 @@ components:
           description: Pypi dependencies specified in the environment configuration, at the time when the build was triggered.
           type: object
       type: object
+    CidrBlock:
+      description: CidrBlock contains an optional name and one CIDR block.
+      properties:
+        cidrBlock:
+          description: cidr_block must be specified in CIDR notation.
+          type: string
+        displayName:
+          description: display_name is a field for users to identify CIDR blocks.
+          type: string
+      type: object
     DatabaseConfig:
       description: The configuration of Cloud SQL instance that is used by the Apache Airflow software. Supported for Cloud Composer environments in versions composer-1.*.*-airflow-*.*.*.
       properties:
@@ -614,6 +626,9 @@ components:
         maintenanceWindow:
           $ref: "#/components/schemas/MaintenanceWindow"
           description: Optional. The maintenance window is the period when Cloud Composer components may undergo maintenance. It is defined so that maintenance is not executed during peak hours or critical time periods. The system will not be under maintenance for every occurrence of this window, but when maintenance is planned, it will be scheduled during the window. The maintenance window period must encompass at least 12 hours per week. This may be split into multiple chunks, each with a size of at least 4 hours. If this value is omitted, Cloud Composer components may be subject to maintenance at any time.
+        masterAuthorizedNetworksConfig:
+          $ref: "#/components/schemas/MasterAuthorizedNetworksConfig"
+          description: "Optional. The configuration options for GKE clusters master authorized networks. By default master authorized networks feature is: - in case of private environment: enabled with no external networks allowlisted. - in case of public environment: disabled."
         nodeConfig:
           $ref: "#/components/schemas/NodeConfig"
           description: The configuration used for the Kubernetes Engine cluster.
@@ -717,7 +732,7 @@ components:
           type: array
       type: object
     MaintenanceWindow:
-      description: 'The configuration settings for Cloud Composer maintenance window. The following example: { "startTime":"2019-08-01T01:00:00Z" "endTime":"2019-08-01T07:00:00Z" "recurrence":"FREQ=WEEKLY;BYDAY=TU,WE" } would define a maintenance window between 01 and 07 hours UTC during each Tuesday and Wednesday.'
+      description: 'The configuration settings for Cloud Composer maintenance window. The following example: ``` { "startTime":"2019-08-01T01:00:00Z" "endTime":"2019-08-01T07:00:00Z" "recurrence":"FREQ=WEEKLY;BYDAY=TU,WE" } ``` would define a maintenance window between 01 and 07 hours UTC during each Tuesday and Wednesday.'
       properties:
         endTime:
           description: Required. Maintenance window end time. It is used only to calculate the duration of the maintenance window. The value for end_time must be in the future, relative to `start_time`.
@@ -730,6 +745,18 @@ components:
           description: Required. Start time of the first recurrence of the maintenance window.
           format: google-datetime
           type: string
+      type: object
+    MasterAuthorizedNetworksConfig:
+      description: Configuration options for the master authorized networks feature. Enabled master authorized networks will disallow all external traffic to access Kubernetes master through HTTPS except traffic from the given CIDR blocks, Google Compute Engine Public IPs and Google Prod IPs.
+      properties:
+        cidrBlocks:
+          description: cidr_blocks define up to 50 external networks that could access Kubernetes master through HTTPS.
+          items:
+            $ref: "#/components/schemas/CidrBlock"
+          type: array
+        enabled:
+          description: Whether or not master authorized networks is enabled.
+          type: boolean
       type: object
     NodeConfig:
       description: The configuration information for the Kubernetes Engine nodes running the Apache Airflow software.
@@ -1035,3 +1062,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

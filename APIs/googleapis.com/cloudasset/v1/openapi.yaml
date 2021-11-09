@@ -33,14 +33,15 @@ tags:
   - name: assets
   - name: feeds
   - name: operations
+  - name: savedQueries
   - name: v1
 paths:
   "/v1/{name}":
     delete:
-      description: Deletes an asset feed.
-      operationId: cloudasset.feeds.delete
+      description: Deletes a saved query.
+      operationId: cloudasset.savedQueries.delete
       parameters:
-        - description: "Required. The name of the feed and it must be in the format of: projects/project_number/feeds/feed_id folders/folder_number/feeds/feed_id organizations/organization_number/feeds/feed_id"
+        - description: "Required. The name of the saved query to delete. It must be in the format of: * projects/project_number/savedQueries/saved_query_id * folders/folder_number/savedQueries/saved_query_id * organizations/organization_number/savedQueries/saved_query_id"
           in: path
           name: name
           required: true
@@ -59,12 +60,12 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - feeds
+        - savedQueries
     get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: cloudasset.operations.get
+      description: Gets details about a saved query.
+      operationId: cloudasset.savedQueries.get
       parameters:
-        - description: The name of the operation resource.
+        - description: "Required. The name of the saved query and it must be in the format of: * projects/project_number/savedQueries/saved_query_id * folders/folder_number/savedQueries/saved_query_id * organizations/organization_number/savedQueries/saved_query_id"
           in: path
           name: name
           required: true
@@ -75,7 +76,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/SavedQuery"
           description: Successful response
       security:
         - Oauth2:
@@ -83,7 +84,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - operations
+        - savedQueries
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -97,26 +98,31 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an asset feed configuration.
-      operationId: cloudasset.feeds.patch
+      description: Updates a saved query.
+      operationId: cloudasset.savedQueries.patch
       parameters:
-        - description: Required. The format will be projects/{project_number}/feeds/{client-assigned_feed_identifier} or folders/{folder_number}/feeds/{client-assigned_feed_identifier} or organizations/{organization_number}/feeds/{client-assigned_feed_identifier} The client-assigned feed identifier must be unique within the parent project/folder/organization.
+        - description: "The resource name of the saved query. The format must be: * projects/project_number/savedQueries/saved_query_id * folders/folder_number/savedQueries/saved_query_id * organizations/organization_number/savedQueries/saved_query_id"
           in: path
           name: name
           required: true
+          schema:
+            type: string
+        - description: Required. The list of fields to update.
+          in: query
+          name: updateMask
           schema:
             type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateFeedRequest"
+              $ref: "#/components/schemas/SavedQuery"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Feed"
+                $ref: "#/components/schemas/SavedQuery"
           description: Successful response
       security:
         - Oauth2:
@@ -124,7 +130,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - feeds
+        - savedQueries
   "/v1/{parent}/assets":
     get:
       description: Lists assets with time and resource types and returns paged results in response.
@@ -274,6 +280,92 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - feeds
+  "/v1/{parent}/savedQueries":
+    get:
+      description: Lists all saved queries in a parent project/folder/organization.
+      operationId: cloudasset.savedQueries.list
+      parameters:
+        - description: Required. The parent project/folder/organization whose savedQueries are to be listed. It can only be using project/folder/organization number (such as "folders/12345")", or a project ID (such as "projects/my-project-id").
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The expression to filter resources. The expression is a list of zero or more restrictions combined via logical operators `AND` and `OR`. When `AND` and `OR` are both used in the expression, parentheses must be appropriately used to group the combinations. The expression may also contain regular expressions. See https://google.aip.dev/160 for more information on the grammar.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The maximum number of saved queries to return per page. The service may return fewer than this value. If unspecified, at most 50 will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A page token, received from a previous `ListSavedQueries` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListSavedQueries` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSavedQueriesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - savedQueries
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a saved query in a parent project/folder/organization.
+      operationId: cloudasset.savedQueries.create
+      parameters:
+        - description: Required. The name of the project/folder/organization where this saved_query should be created in. It can only be an organization number (such as "organizations/123"), a folder number (such as "folders/123"), a project ID (such as "projects/my-project-id")", or a project number (such as "projects/12345").
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the saved query, which must be unique in the specified parent. It will become the final component of the saved query's resource name. This value should be 4-63 characters, and valid characters are /a-z-/. Notice that this field is required in the saved query creation, and the `name` field of the `saved_query` will be ignored.
+          in: query
+          name: savedQueryId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SavedQuery"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SavedQuery"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - savedQueries
   "/v1/{parent}:batchGetAssetsHistory":
     get:
       description: Batch gets the update history of assets that overlap a time window. For IAM_POLICY content, this API outputs history when the asset and its attached IAM POLICY both exist. This can create gaps in the output history. Otherwise, this API outputs history with asset in both non-delete or deleted status. If a specified asset does not exist, this API returns an INVALID_ARGUMENT error.
@@ -522,6 +614,11 @@ paths:
         - description: Optional. Amount of time executable has to complete. See JSON representation of [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json). If this field is set with a value less than the RPC deadline, and the execution of your query hasn't finished in the specified execution timeout, you will get a response with partial result. Otherwise, your query's execution will continue until the RPC deadline. If it's not finished until then, you will get a DEADLINE_EXCEEDED error. Default is empty.
           in: query
           name: executionTimeout
+          schema:
+            type: string
+        - description: "Optional. The name of a saved query, which must be in the format of: * projects/project_number/savedQueries/saved_query_id * folders/folder_number/savedQueries/saved_query_id * organizations/organization_number/savedQueries/saved_query_id If both `analysis_query` and `saved_analysis_query` are provided, they will be merged together with the `saved_analysis_query` as base and the `analysis_query` as overrides. For more details of the merge behavior, please refer to the [MergeFrom](https://developers.google.com/protocol-buffers/docs/reference/cpp/google.protobuf.message#Message.MergeFrom.details) page. Note that you cannot override primitive fields with default value, such as 0 or empty string, etc., because we use proto3, which doesn't support field presence yet."
+          in: query
+          name: savedAnalysisQuery
           schema:
             type: string
       responses:
@@ -837,6 +934,9 @@ components:
         outputConfig:
           $ref: "#/components/schemas/IamPolicyAnalysisOutputConfig"
           description: Required. Output configuration indicating where the results will be output to.
+        savedAnalysisQuery:
+          description: "Optional. The name of a saved query, which must be in the format of: * projects/project_number/savedQueries/saved_query_id * folders/folder_number/savedQueries/saved_query_id * organizations/organization_number/savedQueries/saved_query_id If both `analysis_query` and `saved_analysis_query` are provided, they will be merged together with the `saved_analysis_query` as base and the `analysis_query` as overrides. For more details of the merge behavior, please refer to the [MergeFrom](https://developers.google.com/protocol-buffers/docs/reference/cpp/google.protobuf.message#Message.MergeFrom.details) doc. Note that you cannot override primitive fields with default value, such as 0 or empty string, etc., because we use proto3, which doesn't support field presence yet."
+          type: string
       type: object
     AnalyzeIamPolicyLongrunningResponse:
       description: A response message for AssetService.AnalyzeIamPolicyLongrunning.
@@ -1992,6 +2092,18 @@ components:
             $ref: "#/components/schemas/Feed"
           type: array
       type: object
+    ListSavedQueriesResponse:
+      description: Response of listing saved queries.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        savedQueries:
+          description: A list of savedQueries.
+          items:
+            $ref: "#/components/schemas/SavedQuery"
+          type: array
+      type: object
     MoveAnalysis:
       description: A message to group the analysis information.
       properties:
@@ -2157,6 +2269,13 @@ components:
         topic:
           description: "The name of the Pub/Sub topic to publish to. Example: `projects/PROJECT_ID/topics/TOPIC_ID`."
           type: string
+      type: object
+    QueryContent:
+      description: The query content.
+      properties:
+        iamPolicyAnalysisQuery:
+          $ref: "#/components/schemas/IamPolicyAnalysisQuery"
+          description: An IAM Policy Analysis query, which could be used in the AssetService.AnalyzeIamPolicy rpc or the AssetService.AnalyzeIamPolicyLongrunning rpc.
       type: object
     RelatedAsset:
       description: An asset identifier in Google Cloud which contains its name, type and ancestors. An asset can be any resource in the Google Cloud [resource hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy), a resource outside the Google Cloud resource hierarchy (such as Google Kubernetes Engine clusters and objects), or a policy (e.g. Cloud IAM policy). See [Supported asset types](https://cloud.google.com/asset-inventory/docs/supported-asset-types) for more information.
@@ -2332,6 +2451,42 @@ components:
       properties:
         fullResourceName:
           description: Required. The [full resource name] (https://cloud.google.com/asset-inventory/docs/resource-name-format) of a resource of [supported resource types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#analyzable_asset_types).
+          type: string
+      type: object
+    SavedQuery:
+      description: A saved query which can be shared with others or used later.
+      properties:
+        content:
+          $ref: "#/components/schemas/QueryContent"
+          description: The query content.
+        createTime:
+          description: Output only. The create time of this saved query.
+          format: google-datetime
+          readOnly: true
+          type: string
+        creator:
+          description: Output only. The account's email address who has created this saved query.
+          readOnly: true
+          type: string
+        description:
+          description: The description of this saved query. This value should be fewer than 255 characters.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels applied on the resource. This value should not contain more than 10 entries. The key and value of each entry must be non-empty and fewer than 64 characters.
+          type: object
+        lastUpdateTime:
+          description: Output only. The last update time of this saved query.
+          format: google-datetime
+          readOnly: true
+          type: string
+        lastUpdater:
+          description: Output only. The account's email address who has updated this saved query most recently.
+          readOnly: true
+          type: string
+        name:
+          description: "The resource name of the saved query. The format must be: * projects/project_number/savedQueries/saved_query_id * folders/folder_number/savedQueries/saved_query_id * organizations/organization_number/savedQueries/saved_query_id"
           type: string
       type: object
     SearchAllIamPoliciesResponse:

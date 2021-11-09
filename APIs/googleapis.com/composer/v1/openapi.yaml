@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Composer API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://composer.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: composer
 externalDocs:
@@ -505,6 +503,14 @@ components:
         encryptionConfig:
           $ref: "#/components/schemas/EncryptionConfig"
           description: Optional. The encryption options for the Cloud Composer environment and its dependencies. Cannot be updated. This field is supported for Cloud Composer environments in versions composer-1.*.*-airflow-*.*.*.
+        environmentSize:
+          description: Optional. The size of the Cloud Composer environment. This field is supported for Cloud Composer environments in versions composer-2.*.*-airflow-*.*.* and newer.
+          enum:
+            - ENVIRONMENT_SIZE_UNSPECIFIED
+            - ENVIRONMENT_SIZE_SMALL
+            - ENVIRONMENT_SIZE_MEDIUM
+            - ENVIRONMENT_SIZE_LARGE
+          type: string
         gkeCluster:
           description: Output only. The Kubernetes Engine cluster used to run this environment.
           type: string
@@ -527,6 +533,9 @@ components:
         webServerNetworkAccessControl:
           $ref: "#/components/schemas/WebServerNetworkAccessControl"
           description: Optional. The network-level access control policy for the Airflow web server. If unspecified, no network-level access restrictions will be applied. This field is supported for Cloud Composer environments in versions composer-1.*.*-airflow-*.*.*.
+        workloadsConfig:
+          $ref: "#/components/schemas/WorkloadsConfig"
+          description: Optional. The workloads configuration settings for the GKE cluster associated with the Cloud Composer environment. The GKE cluster runs Airflow scheduler, web server and workers workloads. This field is supported for Cloud Composer environments in versions composer-2.*.*-airflow-*.*.* and newer.
       type: object
     IPAllocationPolicy:
       description: Configuration for controlling how IPs are allocated in the GKE cluster running the Apache Airflow software.
@@ -720,6 +729,13 @@ components:
     PrivateEnvironmentConfig:
       description: The configuration information for configuring a Private IP Cloud Composer environment.
       properties:
+        cloudComposerNetworkIpv4CidrBlock:
+          description: Optional. The CIDR block from which IP range for Cloud Composer Network in tenant project will be reserved. Needs to be disjoint from private_cluster_config.master_ipv4_cidr_block and cloud_sql_ipv4_cidr_block. This field is supported for Cloud Composer environments in versions composer-2.*.*-airflow-*.*.* and newer.
+          type: string
+        cloudComposerNetworkIpv4ReservedRange:
+          description: Output only. The IP range reserved for the tenant project's Cloud Composer network. This field is supported for Cloud Composer environments in versions composer-2.*.*-airflow-*.*.* and newer.
+          readOnly: true
+          type: string
         cloudSqlIpv4CidrBlock:
           description: Optional. The CIDR block from which IP range in tenant project will be reserved for Cloud SQL. Needs to be disjoint from `web_server_ipv4_cidr_block`.
           type: string
@@ -736,6 +752,26 @@ components:
           description: Output only. The IP range reserved for the tenant project's App Engine VMs. This field is supported for Cloud Composer environments in versions composer-1.*.*-airflow-*.*.*.
           readOnly: true
           type: string
+      type: object
+    SchedulerResource:
+      description: Configuration for resources used by Airflow schedulers.
+      properties:
+        count:
+          description: Optional. The number of schedulers.
+          format: int32
+          type: integer
+        cpu:
+          description: Optional. CPU request and limit for a single Airflow scheduler replica.
+          format: float
+          type: number
+        memoryGb:
+          description: Optional. Memory (GB) request and limit for a single Airflow scheduler replica.
+          format: float
+          type: number
+        storageGb:
+          description: Optional. Storage (GB) request and limit for a single Airflow scheduler replica.
+          format: float
+          type: number
       type: object
     SoftwareConfig:
       description: Specifies the selection and configuration of software inside the environment.
@@ -800,6 +836,59 @@ components:
             $ref: "#/components/schemas/AllowedIpRange"
           type: array
       type: object
+    WebServerResource:
+      description: Configuration for resources used by Airflow web server.
+      properties:
+        cpu:
+          description: Optional. CPU request and limit for Airflow web server.
+          format: float
+          type: number
+        memoryGb:
+          description: Optional. Memory (GB) request and limit for Airflow web server.
+          format: float
+          type: number
+        storageGb:
+          description: Optional. Storage (GB) request and limit for Airflow web server.
+          format: float
+          type: number
+      type: object
+    WorkerResource:
+      description: Configuration for resources used by Airflow workers.
+      properties:
+        cpu:
+          description: Optional. CPU request and limit for a single Airflow worker replica.
+          format: float
+          type: number
+        maxCount:
+          description: Optional. Maximum number of workers for autoscaling.
+          format: int32
+          type: integer
+        memoryGb:
+          description: Optional. Memory (GB) request and limit for a single Airflow worker replica.
+          format: float
+          type: number
+        minCount:
+          description: Optional. Minimum number of workers for autoscaling.
+          format: int32
+          type: integer
+        storageGb:
+          description: Optional. Storage (GB) request and limit for a single Airflow worker replica.
+          format: float
+          type: number
+      type: object
+    WorkloadsConfig:
+      description: The Kubernetes workloads configuration for GKE cluster associated with the Cloud Composer environment. Supported for Cloud Composer environments in versions composer-2.*.*-airflow-*.*.* and newer.
+      properties:
+        scheduler:
+          $ref: "#/components/schemas/SchedulerResource"
+          description: Optional. Resources used by Airflow schedulers.
+        webServer:
+          $ref: "#/components/schemas/WebServerResource"
+          description: Optional. Resources used by Airflow web server.
+        worker:
+          $ref: "#/components/schemas/WorkerResource"
+          description: Optional. Resources used by Airflow workers.
+      type: object
   securitySchemes:
     Oauth2:
       description: Oauth 2.0 implicit authentication
@@ -818,5 +907,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}
