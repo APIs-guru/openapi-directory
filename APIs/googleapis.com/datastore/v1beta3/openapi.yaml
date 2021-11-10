@@ -13,20 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Datastore API
   version: v1beta3
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://datastore.googleapis.com/$discovery/rest?version=v1beta3
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: datastore
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/datastore/
 tags:
@@ -593,6 +590,30 @@ components:
             - SUCCESSFUL
             - FAILED
             - CANCELLED
+          type: string
+      type: object
+    GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata:
+      description: 'Metadata for Datastore to Firestore migration operations. The DatastoreFirestoreMigration operation is not started by the end-user via an explicit "creation" method. This is an intentional deviation from the LRO design pattern. This singleton resource can be accessed at: "projects/{project_id}/datastore-firestore-migration"'
+      properties:
+        migrationState:
+          description: The current state of migration from Cloud Datastore to Cloud Firestore in Datastore mode.
+          enum:
+            - MIGRATION_STATE_UNSPECIFIED
+            - RUNNING
+            - PAUSED
+            - COMPLETE
+          type: string
+        migrationStep:
+          description: The current step of migration from Cloud Datastore to Cloud Firestore in Datastore mode.
+          enum:
+            - MIGRATION_STEP_UNSPECIFIED
+            - PREPARE
+            - START
+            - APPLY_WRITES_SYNCHRONOUSLY
+            - COPY_AND_VERIFY
+            - REDIRECT_EVENTUALLY_CONSISTENT_READS
+            - REDIRECT_STRONGLY_CONSISTENT_READS
+            - REDIRECT_WRITES
           type: string
       type: object
     GoogleDatastoreAdminV1EntityFilter:
@@ -1232,5 +1253,3 @@ components:
             https://www.googleapis.com/auth/datastore: View and manage your Google Cloud Datastore data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

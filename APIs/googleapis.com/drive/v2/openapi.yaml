@@ -5136,6 +5136,9 @@ components:
         capabilities:
           description: Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
           properties:
+            canAcceptOwnership:
+              description: Whether the current user is the pending owner of the file. Not populated for shared drive files.
+              type: boolean
             canAddChildren:
               description: Whether the current user can add children to this folder. This is always false when the item is not a folder.
               type: boolean
@@ -5754,6 +5757,9 @@ components:
         name:
           description: The name for this permission.
           type: string
+        pendingOwner:
+          description: Whether the account associated with this permission is a pending owner. Only populated for user type permissions for files that are not in a shared drive.
+          type: boolean
         permissionDetails:
           description: Details of whether the permissions on this shared drive item are inherited or directly on this item. This is an output-only field which is present only for shared drive items.
           items:
