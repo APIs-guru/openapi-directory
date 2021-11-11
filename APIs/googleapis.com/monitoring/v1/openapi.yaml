@@ -1030,6 +1030,18 @@ components:
             $ref: "#/components/schemas/MetricsScope"
           type: array
       type: object
+    LogsPanel:
+      description: A widget that displays a stream of log.
+      properties:
+        filter:
+          description: A filter that chooses which log entries to return. See Advanced Logs Queries (https://cloud.google.com/logging/docs/view/advanced-queries). Only log entries that match the filter are returned. An empty filter matches all log entries.
+          type: string
+        resourceNames:
+          description: The names of logging resources to collect logs for. Does not implicitly include the current host project. Currently only projects are supported. There must be at least one resource_name.
+          items:
+            type: string
+          type: array
+      type: object
     MetricsScope:
       description: Represents a Metrics Scope (https://cloud.google.com/monitoring/settings#concept-scope) in Cloud Monitoring, which specifies one or more Google projects and zero or more AWS accounts to monitor together.
       properties:
@@ -1510,6 +1522,9 @@ components:
         blank:
           $ref: "#/components/schemas/Empty"
           description: A blank space.
+        logsPanel:
+          $ref: "#/components/schemas/LogsPanel"
+          description: A widget that shows a stream of logs.
         scorecard:
           $ref: "#/components/schemas/Scorecard"
           description: A scorecard summarizing time series data.

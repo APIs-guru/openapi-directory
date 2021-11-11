@@ -652,6 +652,7 @@ components:
             - FILTER_VERIFICATION_AUDIBILITY_START
             - FILTER_VERIFICATION_AUDIBILITY_COMPLETE
             - FILTER_MEDIA_TYPE
+            - FILTER_AUDIO_FEED_TYPE_NAME
           type: string
         value:
           description: Filter value.
@@ -1000,6 +1001,7 @@ components:
               - FILTER_VERIFICATION_AUDIBILITY_START
               - FILTER_VERIFICATION_AUDIBILITY_COMPLETE
               - FILTER_MEDIA_TYPE
+              - FILTER_AUDIO_FEED_TYPE_NAME
             type: string
           type: array
         includeInviteData:
@@ -1847,6 +1849,7 @@ components:
             - FILTER_VERIFICATION_AUDIBILITY_START
             - FILTER_VERIFICATION_AUDIBILITY_COMPLETE
             - FILTER_MEDIA_TYPE
+            - FILTER_AUDIO_FEED_TYPE_NAME
           type: string
         match:
           description: Indicates how the filter should be matched to the value.

@@ -1027,6 +1027,10 @@ components:
           description: Output only. Indicates whether the location can be deleted using the API.
           readOnly: true
           type: boolean
+        canHaveBusinessCalls:
+          description: Output only. Indicates if the listing is eligible for business calls.
+          readOnly: true
+          type: boolean
         canHaveFoodMenus:
           description: Output only. Indicates if the listing is eligible for food menu.
           readOnly: true

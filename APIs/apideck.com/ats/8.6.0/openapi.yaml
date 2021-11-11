@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.0.0
 servers:
   - url: https://unify.apideck.com
 info:
@@ -6,9 +6,9 @@ info:
     email: hello@apideck.com
     url: https://developers.apideck.com
   description: |
-    Welcome to the File storage API.
+    Welcome to the ats.
 
-    You can use this API to access all File storage API endpoints.
+    You can use this API to access all ats endpoints.
 
     ## Base URL
 
@@ -265,9 +265,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: File storage API
-  version: 8.5.0
-  x-apideck-api: file-storage
+  title: ats
+  version: 8.6.0
+  x-apideck-api: ats
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -275,10 +275,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/file-storage.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/ats.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: file-storage
+  x-serviceName: ats
   x-tags:
     - partner
 externalDocs:
@@ -287,19 +287,19 @@ externalDocs:
 security:
   - apiKey: []
 tags:
-  - description: Files
-    name: Files
-    x-apideck-model:
-      $ref: "#/components/schemas/File"
   - description: ""
-    name: Folders
+    name: Jobs
     x-apideck-model:
-      $ref: "#/components/schemas/Folder"
+      $ref: "#/components/schemas/Job"
+  - description: ""
+    name: Applicants
+    x-apideck-model:
+      $ref: "#/components/schemas/Applicant"
 paths:
-  /file-storage/files:
+  /ats/applicants:
     get:
-      description: List Files
-      operationId: filesAll
+      description: List applicants
+      operationId: applicantsAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -307,11 +307,10 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
-        - $ref: "#/components/parameters/filesFilter"
-        - $ref: "#/components/parameters/filesSort"
+        - $ref: "#/components/parameters/jobsFilter"
       responses:
         "200":
-          $ref: "#/components/responses/GetFilesResponse"
+          $ref: "#/components/responses/GetApplicantsResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -326,10 +325,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Files
+      summary: List applicants
       tags:
-        - Files
-      x-apideck-api: fileStorage
+        - Applicants
+      x-apideck-api: ats
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -343,225 +342,15 @@ paths:
             })
 
             try {
-              const { data } = await apideck.fileStorage.filesAll({})
+              const { data } = await apideck.ats.applicantsAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: files
-  /file-storage/files/search:
+      x-graphql-field-name: applicants
     post:
-      description: Search Files
-      operationId: filesSearch
-      parameters:
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/FilesSearch"
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/GetFilesResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Search Files
-      tags:
-        - Files
-      x-apideck-api: fileStorage
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.fileStorage.filesSearch({
-                filesSearch: {
-                  query: 'logo jpg'
-                }
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  "/file-storage/files/{id}":
-    delete:
-      description: Delete File
-      operationId: filesDelete
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/DeleteFileResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Delete File
-      tags:
-        - Files
-      x-apideck-api: fileStorage
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.fileStorage.filesDelete({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-    get:
-      description: Get File
-      operationId: filesOne
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetFileResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Get File
-      tags:
-        - Files
-      x-apideck-api: fileStorage
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.fileStorage.filesOne({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  "/file-storage/files/{id}/download":
-    get:
-      description: Download File
-      operationId: filesDownload
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetFileDownloadResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Download File
-      tags:
-        - Files
-      x-apideck-api: fileStorage
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.fileStorage.filesDownload({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-      x-graphql-exclude: true
-  /file-storage/folders:
-    post:
-      description: Create Folder
-      operationId: foldersAdd
+      description: Create applicant
+      operationId: applicantsAdd
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -571,11 +360,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateFolderRequest"
+              $ref: "#/components/schemas/Applicant"
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateFolderResponse"
+          $ref: "#/components/responses/CreateApplicantResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -590,10 +379,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Create Folder
+      summary: Create applicant
       tags:
-        - Folders
-      x-apideck-api: fileStorage
+        - Applicants
+      x-apideck-api: ats
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -607,73 +396,40 @@ paths:
             })
 
             const params = {
-              folder: {
-                name: 'Documents',
-                description: 'My Personal Documents',
-                parent_folder_id: '1234'
+              applicant: {
+                position_id: '123',
+                name: 'Elon Musk',
+                first_name: 'Elon',
+                last_name: 'Musk',
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                phone_numbers: [
+                  {
+                    id: '12345',
+                    country_code: '1',
+                    area_code: '323',
+                    number: '111-111-1111',
+                    type: 'primary'
+                  }
+                ]
               }
             }
 
             try {
-              const { data } = await apideck.fileStorage.foldersAdd(params)
+              const { data } = await apideck.ats.applicantsAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/file-storage/folders/{id}":
-    delete:
-      description: Delete Folder
-      operationId: foldersDelete
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/DeleteFolderResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Delete Folder
-      tags:
-        - Folders
-      x-apideck-api: fileStorage
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.fileStorage.foldersDelete({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
+  "/ats/applicants/{id}":
     get:
-      description: Get Folder
-      operationId: foldersOne
+      description: Get applicant
+      operationId: applicantsOne
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -682,7 +438,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetFolderResponse"
+          $ref: "#/components/responses/GetApplicantResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -697,10 +453,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Folder
+      summary: Get applicant
       tags:
-        - Folders
-      x-apideck-api: fileStorage
+        - Applicants
+      x-apideck-api: ats
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -714,31 +470,27 @@ paths:
             })
 
             try {
-              const { data } = await apideck.fileStorage.foldersOne({
+              const { data } = await apideck.ats.applicantsOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-    patch:
-      description: Rename or move Folder
-      operationId: foldersUpdate
+  /ats/jobs:
+    get:
+      description: List jobs
+      operationId: jobsAll
       parameters:
-        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateFolderRequest"
-        required: true
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
       responses:
         "200":
-          $ref: "#/components/responses/UpdateFolderResponse"
+          $ref: "#/components/responses/GetJobsResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -753,10 +505,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Rename or move Folder
+      summary: List jobs
       tags:
-        - Folders
-      x-apideck-api: fileStorage
+        - Jobs
+      x-apideck-api: ats
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -769,40 +521,26 @@ paths:
               consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
-            const params = {
-              id: 'id_example',
-              folder: {
-                name: 'Documents',
-                description: 'My Personal Documents',
-                parent_folder_id: '1234'
-              }
-            }
-
             try {
-              const { data } = await apideck.fileStorage.foldersUpdate(params)
+              const { data } = await apideck.ats.jobsAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/file-storage/folders/{id}/copy":
-    post:
-      description: Copy Folder
-      operationId: foldersCopy
+      x-graphql-field-name: jobs
+  "/ats/jobs/{id}":
+    get:
+      description: Get job
+      operationId: jobsOne
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CopyFolderRequest"
-        required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateFolderResponse"
+          $ref: "#/components/responses/GetJobResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -817,10 +555,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Copy Folder
+      summary: Get job
       tags:
-        - Folders
-      x-apideck-api: fileStorage
+        - Jobs
+      x-apideck-api: ats
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -833,21 +571,14 @@ paths:
               consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
-            const params = {
-              id: 'id_example',
-              folder: {
-                name: 'Documents',
-                parent_folder_id: '1234'
-              }
-            }
-
             try {
-              const { data } = await apideck.fileStorage.foldersCopy(params)
+              const { data } = await apideck.ats.jobsOne({
+                id: 'id_example'
+              })
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-exclude: true
 components:
   parameters:
     applicationId:
@@ -871,22 +602,6 @@ components:
       schema:
         nullable: true
         type: string
-    filesFilter:
-      description: Apply filters (beta)
-      explode: true
-      in: query
-      name: filter
-      schema:
-        $ref: "#/components/schemas/FilesFilter"
-      style: deepObject
-    filesSort:
-      description: Apply sorting
-      explode: true
-      in: query
-      name: sort
-      schema:
-        $ref: "#/components/schemas/FilesSort"
-      style: deepObject
     id:
       description: ID of the record you are acting upon.
       in: path
@@ -894,6 +609,14 @@ components:
       required: true
       schema:
         type: string
+    jobsFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/JobsFilter"
+      style: deepObject
     limit:
       description: Number of records to return
       in: query
@@ -923,61 +646,36 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    CreateFileResponse:
+    CreateApplicantResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateFileResponse"
-      description: Files
-    CreateFolderResponse:
+            $ref: "#/components/schemas/CreateApplicantResponse"
+      description: Applicants
+    GetApplicantResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateFolderResponse"
-      description: Folders
-    DeleteFileResponse:
+            $ref: "#/components/schemas/GetApplicantResponse"
+      description: Applicants
+    GetApplicantsResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteFileResponse"
-      description: Files
-    DeleteFolderResponse:
+            $ref: "#/components/schemas/GetApplicantsResponse"
+      description: Applicants
+    GetJobResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteFolderResponse"
-      description: Folders
-    GetFileDownloadResponse:
-      content:
-        "*/*":
-          schema:
-            format: binary
-            type: string
-      description: File Download
-    GetFileResponse:
+            $ref: "#/components/schemas/GetJobResponse"
+      description: Jobs
+    GetJobsResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetFileResponse"
-      description: Files
-    GetFilesResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/GetFilesResponse"
-      description: Files
-    GetFolderResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/GetFolderResponse"
-      description: Folders
-    GetFoldersResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/GetFoldersResponse"
-      description: Folders
+            $ref: "#/components/schemas/GetJobsResponse"
+      description: Jobs
     NotFoundResponse:
       content:
         application/json:
@@ -1014,19 +712,131 @@ components:
           schema:
             $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
-    UpdateFileResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/UpdateFileResponse"
-      description: Files
-    UpdateFolderResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/UpdateFolderResponse"
-      description: Folders
   schemas:
+    Address:
+      properties:
+        city:
+          description: Name of city.
+          example: San Francisco
+          nullable: true
+          type: string
+        contact_name:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        country:
+          description: country code according to ISO 3166-1 alpha-2.
+          example: US
+          nullable: true
+          type: string
+        email:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        fax:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        id:
+          example: "123"
+          nullable: true
+          type: string
+        latitude:
+          example: "40.759211"
+          nullable: true
+          type: string
+        line1:
+          description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
+          example: Main street
+          nullable: true
+          type: string
+        line2:
+          description: Line 2 of the address
+          example: "apt #"
+          nullable: true
+          type: string
+        longitude:
+          example: "-73.984638"
+          nullable: true
+          type: string
+        name:
+          example: HQ US
+          nullable: true
+          type: string
+        phone_number:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        postal_code:
+          description: Zip code or equivalent.
+          example: "94104"
+          nullable: true
+          type: string
+        salutation:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        state:
+          description: Name of state
+          example: CA
+          nullable: true
+          type: string
+        string:
+          example: 25 Spring Street, Blackburn, VIC 3130
+          nullable: true
+          title: The address string. Some APIs don't provide structured address data.
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - home
+            - office
+            - shipping
+            - billing
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: AddressType
+        website:
+          example: 111-111-1111
+          nullable: true
+          type: string
+      type: object
+    Applicant:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        emails:
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        first_name:
+          example: Elon
+          nullable: true
+          title: First name
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        last_name:
+          example: Musk
+          nullable: true
+          title: Last name
+          type: string
+        name:
+          description: The name of an applicant.
+          example: Elon Musk
+          type: string
+        phone_numbers:
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          type: array
+        position_id:
+          description: The PositionId the applicant applied for.
+          example: "123"
+          type: string
+      type: object
     BadRequestResponse:
       properties:
         detail:
@@ -1058,23 +868,11 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
-    CopyFolderRequest:
-      additionalProperties: false
-      properties:
-        id:
-          $ref: "#/components/schemas/Id"
-        name:
-          description: The name of the folder.
-          example: Documents
-          type: string
-        parent_folder_id:
-          description: The parent folder to copy the folder to.
-          example: "1234"
-          type: string
-      required:
-        - parent_folder_id
-      type: object
-    CreateFileResponse:
+    Code:
+      description: The code of the job.
+      example: 123-OC
+      type: string
+    CreateApplicantResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -1084,64 +882,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: files
+          example: Applicants
           type: string
         service:
           description: Apideck ID of service provider
-          example: google-drive
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-    CreateFolderRequest:
-      additionalProperties: false
-      properties:
-        description:
-          description: Optional description of the folder.
-          example: My Personal Documents
-          type: string
-        id:
-          $ref: "#/components/schemas/Id"
-        name:
-          description: The name of the folder.
-          example: Documents
-          type: string
-        parent_folder_id:
-          description: The parent folder to create the new folder within.
-          example: "1234"
-          type: string
-      required:
-        - name
-        - parent_folder_id
-      type: object
-    CreateFolderResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Folders
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: undefined
+          example: zoho-crm
           type: string
         status:
           description: HTTP Response Status
@@ -1164,243 +909,84 @@ components:
       format: date-time
       readOnly: true
       type: string
-    CreatedBy:
-      example: "12345"
-      nullable: true
-      readOnly: true
-      type: string
-    DeleteFileResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: files
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: google-drive
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-    DeleteFolderResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Folders
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: undefined
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-    File:
+    CustomField:
       additionalProperties: false
       properties:
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        created_by:
-          $ref: "#/components/schemas/CreatedBy"
         description:
-          description: Optional description of the file
-          example: A sample image
+          description: More information about the custom field
+          example: Employee Level
+          title: Description
           type: string
-        downloadable:
-          description: Whether the current user can download this file
-          type: boolean
         id:
-          $ref: "#/components/schemas/Id"
-        mime_type:
-          description: The MIME type of the file.
-          example: image/jpeg
+          example: "2389328923893298"
+          title: ID
           type: string
         name:
-          description: The name of the file
-          example: sample.jpg
+          description: Name of the custom field.
+          example: employee_level
+          title: Name
           type: string
-        owner:
-          $ref: "#/components/schemas/Owner"
-        parent_folders:
-          description: The parent folders of the file, starting from the root
-          items:
-            $ref: "#/components/schemas/LinkedFolder"
-          type: array
-        parent_folders_complete:
-          description: Whether the list of parent folder is complete. Some connectors only return the direct parent of a file
-          type: boolean
-        path:
-          description: The full path of the file or folder (includes the file name)
-          example: /Documents/sample.jpg
-          type: string
-        size:
-          description: The size of the file in bytes
-          example: 1810673
-          type: integer
-        type:
-          description: The type of resource. Could be file, folder or url
-          enum:
-            - file
-            - folder
-            - url
-          example: file
-          readOnly: true
-          type: string
-          x-graphql-type-name: FileType
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
-        updated_by:
-          $ref: "#/components/schemas/UpdatedBy"
+        value:
+          anyOf:
+            - example: Uses Salesforce and Marketo
+              nullable: true
+              type: string
+            - example: 10
+              nullable: true
+              type: number
+            - example: true
+              nullable: true
+              type: boolean
+            - items:
+                type: string
+              type: array
       required:
         - id
-        - name
-        - type
       type: object
-    FilesFilter:
-      additionalProperties: false
-      example:
-        name: SpaceX
+    Description:
+      example: A description
+      nullable: true
+      title: Description
+      type: string
+    Email:
       properties:
-        folder_id:
-          description: ID of the folder to filter on. The root folder has an alias "root"
-          example: root
-          type: string
-        shared:
-          description: Only return files and folders that are shared
-          type: boolean
-      type: object
-      x-graphql-type-name: FilesFilter
-    FilesSearch:
-      additionalProperties: false
-      example:
-        query: logo jpg
-      properties:
-        query:
-          description: The query to search for. May match across multiple fields.
-          example: logo jpg
-          type: string
-      required:
-        - query
-      type: object
-    FilesSort:
-      additionalProperties: false
-      example:
-        by: updated_at
-        direction: desc
-      properties:
-        by:
-          description: The field on which to sort the Files
-          enum:
-            - updated_at
-            - name
-          example: updated_at
-          type: string
-          x-graphql-type-name: FilesSortBy
-        direction:
-          $ref: "#/components/schemas/SortDirection"
-      required:
-        - by
-      type: object
-      x-graphql-type-name: FilesSort
-    Folder:
-      additionalProperties: false
-      properties:
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        created_by:
-          $ref: "#/components/schemas/CreatedBy"
-        description:
-          description: Optional description of the folder
-          example: My Personal Documents
+        email:
+          example: elon@musk.com
+          format: email
+          minLength: 1
           type: string
         id:
-          $ref: "#/components/schemas/Id"
-        name:
-          description: The name of the folder
-          example: Documents
+          example: "123"
           type: string
-        owner:
-          $ref: "#/components/schemas/Owner"
-        parent_folders:
-          description: The parent folders of the file, starting from the root
-          items:
-            $ref: "#/components/schemas/LinkedFolder"
-          type: array
-        parent_folders_complete:
-          description: Whether the list of parent folder is complete. Some connectors only return the direct parent of a folder
-          readOnly: true
-          type: boolean
-        path:
-          description: The full path of the folder (includes the folder name)
-          example: /Personal/Documents
-          readOnly: true
+        type:
+          enum:
+            - primary
+            - secondary
+            - work
+            - personal
+            - billing
+            - other
+          example: primary
           type: string
-        size:
-          description: The size of the folder in bytes
-          example: 1810673
-          readOnly: true
-          type: integer
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
-        updated_by:
-          $ref: "#/components/schemas/UpdatedBy"
+          x-graphql-type-name: EmailType
       required:
-        - name
-        - parent_folders
+        - email
       type: object
-    GetFileResponse:
+    GetApplicantResponse:
       properties:
         data:
-          $ref: "#/components/schemas/File"
+          $ref: "#/components/schemas/Applicant"
         operation:
           description: Operation performed
           example: one
           type: string
         resource:
           description: Unified API resource name
-          example: files
+          example: Applicants
           type: string
         service:
           description: Apideck ID of service provider
-          example: google-drive
+          example: zoho-crm
           type: string
         status:
           description: HTTP Response Status
@@ -1418,12 +1004,12 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: File
-    GetFilesResponse:
+      x-graphql-type-name: Applicant
+    GetApplicantsResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/File"
+            $ref: "#/components/schemas/Applicant"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -1435,11 +1021,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: files
+          example: Applicants
           type: string
         service:
           description: Apideck ID of service provider
-          example: google-drive
+          example: zoho-crm
           type: string
         status:
           description: HTTP Response Status
@@ -1457,22 +1043,22 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: FileList
-    GetFolderResponse:
+      x-graphql-type-name: ApplicantList
+    GetJobResponse:
       properties:
         data:
-          $ref: "#/components/schemas/Folder"
+          $ref: "#/components/schemas/Job"
         operation:
           description: Operation performed
           example: one
           type: string
         resource:
           description: Unified API resource name
-          example: Folders
+          example: Jobs
           type: string
         service:
           description: Apideck ID of service provider
-          example: undefined
+          example: lever
           type: string
         status:
           description: HTTP Response Status
@@ -1490,12 +1076,12 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: Folder
-    GetFoldersResponse:
+      x-graphql-type-name: Job
+    GetJobsResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/Folder"
+            $ref: "#/components/schemas/Job"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -1507,11 +1093,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Folders
+          example: Jobs
           type: string
         service:
           description: Apideck ID of service provider
-          example: undefined
+          example: lever
           type: string
         status:
           description: HTTP Response Status
@@ -1529,22 +1115,49 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: FolderList
+      x-graphql-type-name: JobList
     Id:
       example: "12345"
       readOnly: true
       type: string
-    LinkedFolder:
+    Job:
+      additionalProperties: false
       properties:
+        code:
+          $ref: "#/components/schemas/Code"
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        description:
+          $ref: "#/components/schemas/Description"
         id:
           $ref: "#/components/schemas/Id"
-        name:
-          description: The name of the folder
-          example: Personal
-          type: string
-      required:
-        - id
+        status:
+          $ref: "#/components/schemas/JobStatus"
+        title:
+          $ref: "#/components/schemas/Title"
+        url:
+          $ref: "#/components/schemas/Url"
       type: object
+    JobStatus:
+      description: The status of the job.
+      enum:
+        - draft
+        - internal
+        - published
+        - completed
+      example: completed
+      type: string
+    JobsFilter:
+      additionalProperties: false
+      example:
+        job_id: "1234"
+      properties:
+        job_id:
+          description: Id of the job to filter on
+          example: "1234"
+          type: string
+      type: object
+      x-graphql-type-name: JobsFilter
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -1650,25 +1263,6 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
-    Owner:
-      properties:
-        email:
-          description: Email of the owner
-          example: hello@apideck.com
-          readOnly: true
-          type: string
-        id:
-          description: ID of the owner
-          example: "12345"
-          readOnly: true
-          type: string
-        name:
-          description: Name of the owner
-          example: Elon Musk
-          readOnly: true
-          type: string
-      readOnly: true
-      type: object
     PaymentRequiredResponse:
       properties:
         detail:
@@ -1695,14 +1289,55 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
-    SortDirection:
-      default: asc
-      description: The direction in which to sort the results
-      enum:
-        - asc
-        - desc
+    PhoneNumber:
+      properties:
+        area_code:
+          example: "323"
+          nullable: true
+          title: Area Code
+          type: string
+        country_code:
+          example: "1"
+          nullable: true
+          title: Country Code
+          type: string
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        number:
+          example: 111-111-1111
+          minLength: 1
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - home
+            - office
+            - mobile
+            - assistant
+            - fax
+            - direct-dial-in
+            - personal
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: PhoneType
+      required:
+        - number
+      type: object
+    Tags:
+      example:
+        - New
+      items:
+        type: string
+      type: array
+    Title:
+      example: CEO
+      nullable: true
+      title: Title
       type: string
-      x-graphql-type-name: SortDirection
     UnauthorizedResponse:
       properties:
         detail:
@@ -1795,97 +1430,11 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
-    UpdateFileResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: files
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: google-drive
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-    UpdateFolderRequest:
-      additionalProperties: false
-      properties:
-        description:
-          description: Optional description of the folder.
-          example: My Personal Documents
-          type: string
-        id:
-          $ref: "#/components/schemas/Id"
-        name:
-          description: The name of the folder.
-          example: Documents
-          type: string
-        parent_folder_id:
-          description: The parent folder to create the new folder within.
-          example: "1234"
-          type: string
-      type: object
-    UpdateFolderResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Folders
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: undefined
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-    UpdatedAt:
-      example: 2020-09-30T07:43:32.000Z
-      format: date-time
-      readOnly: true
-      type: string
-    UpdatedBy:
-      example: "12345"
-      nullable: true
-      readOnly: true
+    Url:
+      description: The url pointing to the job.
+      example: https://downstreamconnector.com/job?id=123
+      format: uri
+      pattern: ^(https?)://
       type: string
   securitySchemes:
     apiKey:
