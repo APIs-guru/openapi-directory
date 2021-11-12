@@ -900,6 +900,11 @@ components:
           items:
             type: string
           type: array
+        description:
+          description: Description of the API.
+          example: Manage API keys, access tokens, OAuth flows and integrations.
+          nullable: true
+          type: string
         id:
           description: ID of the API.
           example: file-storage
@@ -908,6 +913,11 @@ components:
         name:
           description: Name of the API.
           example: File Storage API
+          type: string
+        postman_collection_id:
+          description: ID of the Postman collection of the API.
+          example: 1311564-00e7266b-a3d6-4f40-b172-baaa66a3ed6f
+          nullable: true
           type: string
         resources:
           description: List of resources supported in this API.

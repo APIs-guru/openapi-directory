@@ -721,7 +721,7 @@ components:
           nullable: true
           type: string
         contact_name:
-          example: 111-111-1111
+          example: Elon Musk
           nullable: true
           type: string
         country:
@@ -729,12 +729,17 @@ components:
           example: US
           nullable: true
           type: string
+        county:
+          description: Address field that holds a sublocality, such as a county
+          example: Santa Clara
+          nullable: true
+          type: string
         email:
-          example: 111-111-1111
+          example: elon@musk.com
           nullable: true
           type: string
         fax:
-          example: 111-111-1111
+          example: 122-111-1111
           nullable: true
           type: string
         id:
@@ -773,12 +778,17 @@ components:
           nullable: true
           type: string
         salutation:
-          example: 111-111-1111
+          example: Mr
           nullable: true
           type: string
         state:
           description: Name of state
           example: CA
+          nullable: true
+          type: string
+        street_number:
+          description: Street number
+          example: "25"
           nullable: true
           type: string
         string:
@@ -799,7 +809,7 @@ components:
           type: string
           x-graphql-type-name: AddressType
         website:
-          example: 111-111-1111
+          example: https://elonmusk.com
           nullable: true
           type: string
       type: object

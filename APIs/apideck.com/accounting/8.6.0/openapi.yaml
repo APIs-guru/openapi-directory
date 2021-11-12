@@ -478,18 +478,20 @@ paths:
                     name: 'HQ US',
                     line1: 'Main street',
                     line2: 'apt #',
+                    street_number: '25',
                     city: 'San Francisco',
                     state: 'CA',
                     postal_code: '94104',
                     country: 'US',
                     latitude: '40.759211',
                     longitude: '-73.984638',
-                    contact_name: '111-111-1111',
-                    salutation: '111-111-1111',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
                     phone_number: '111-111-1111',
-                    fax: '111-111-1111',
-                    email: '111-111-1111',
-                    website: '111-111-1111'
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com'
                   }
                 ],
                 notes: 'Some notes about this customer',
@@ -698,18 +700,20 @@ paths:
                     name: 'HQ US',
                     line1: 'Main street',
                     line2: 'apt #',
+                    street_number: '25',
                     city: 'San Francisco',
                     state: 'CA',
                     postal_code: '94104',
                     country: 'US',
                     latitude: '40.759211',
                     longitude: '-73.984638',
-                    contact_name: '111-111-1111',
-                    salutation: '111-111-1111',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
                     phone_number: '111-111-1111',
-                    fax: '111-111-1111',
-                    email: '111-111-1111',
-                    website: '111-111-1111'
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com'
                   }
                 ],
                 notes: 'Some notes about this customer',
@@ -1221,18 +1225,20 @@ paths:
                   name: 'HQ US',
                   line1: 'Main street',
                   line2: 'apt #',
+                  street_number: '25',
                   city: 'San Francisco',
                   state: 'CA',
                   postal_code: '94104',
                   country: 'US',
                   latitude: '40.759211',
                   longitude: '-73.984638',
-                  contact_name: '111-111-1111',
-                  salutation: '111-111-1111',
+                  county: 'Santa Clara',
+                  contact_name: 'Elon Musk',
+                  salutation: 'Mr',
                   phone_number: '111-111-1111',
-                  fax: '111-111-1111',
-                  email: '111-111-1111',
-                  website: '111-111-1111'
+                  fax: '122-111-1111',
+                  email: 'elon@musk.com',
+                  website: 'https://elonmusk.com'
                 },
                 shipping_address: {
                   id: '123',
@@ -1241,18 +1247,20 @@ paths:
                   name: 'HQ US',
                   line1: 'Main street',
                   line2: 'apt #',
+                  street_number: '25',
                   city: 'San Francisco',
                   state: 'CA',
                   postal_code: '94104',
                   country: 'US',
                   latitude: '40.759211',
                   longitude: '-73.984638',
-                  contact_name: '111-111-1111',
-                  salutation: '111-111-1111',
+                  county: 'Santa Clara',
+                  contact_name: 'Elon Musk',
+                  salutation: 'Mr',
                   phone_number: '111-111-1111',
-                  fax: '111-111-1111',
-                  email: '111-111-1111',
-                  website: '111-111-1111'
+                  fax: '122-111-1111',
+                  email: 'elon@musk.com',
+                  website: 'https://elonmusk.com'
                 },
                 row_version: '1-12345'
               }
@@ -1466,18 +1474,20 @@ paths:
                   name: 'HQ US',
                   line1: 'Main street',
                   line2: 'apt #',
+                  street_number: '25',
                   city: 'San Francisco',
                   state: 'CA',
                   postal_code: '94104',
                   country: 'US',
                   latitude: '40.759211',
                   longitude: '-73.984638',
-                  contact_name: '111-111-1111',
-                  salutation: '111-111-1111',
+                  county: 'Santa Clara',
+                  contact_name: 'Elon Musk',
+                  salutation: 'Mr',
                   phone_number: '111-111-1111',
-                  fax: '111-111-1111',
-                  email: '111-111-1111',
-                  website: '111-111-1111'
+                  fax: '122-111-1111',
+                  email: 'elon@musk.com',
+                  website: 'https://elonmusk.com'
                 },
                 shipping_address: {
                   id: '123',
@@ -1486,18 +1496,20 @@ paths:
                   name: 'HQ US',
                   line1: 'Main street',
                   line2: 'apt #',
+                  street_number: '25',
                   city: 'San Francisco',
                   state: 'CA',
                   postal_code: '94104',
                   country: 'US',
                   latitude: '40.759211',
                   longitude: '-73.984638',
-                  contact_name: '111-111-1111',
-                  salutation: '111-111-1111',
+                  county: 'Santa Clara',
+                  contact_name: 'Elon Musk',
+                  salutation: 'Mr',
                   phone_number: '111-111-1111',
-                  fax: '111-111-1111',
-                  email: '111-111-1111',
-                  website: '111-111-1111'
+                  fax: '122-111-1111',
+                  email: 'elon@musk.com',
+                  website: 'https://elonmusk.com'
                 },
                 row_version: '1-12345'
               }
@@ -2846,7 +2858,7 @@ components:
           nullable: true
           type: string
         contact_name:
-          example: 111-111-1111
+          example: Elon Musk
           nullable: true
           type: string
         country:
@@ -2854,12 +2866,17 @@ components:
           example: US
           nullable: true
           type: string
+        county:
+          description: Address field that holds a sublocality, such as a county
+          example: Santa Clara
+          nullable: true
+          type: string
         email:
-          example: 111-111-1111
+          example: elon@musk.com
           nullable: true
           type: string
         fax:
-          example: 111-111-1111
+          example: 122-111-1111
           nullable: true
           type: string
         id:
@@ -2898,12 +2915,17 @@ components:
           nullable: true
           type: string
         salutation:
-          example: 111-111-1111
+          example: Mr
           nullable: true
           type: string
         state:
           description: Name of state
           example: CA
+          nullable: true
+          type: string
+        street_number:
+          description: Street number
+          example: "25"
           nullable: true
           type: string
         string:
@@ -2924,7 +2946,7 @@ components:
           type: string
           x-graphql-type-name: AddressType
         website:
-          example: 111-111-1111
+          example: https://elonmusk.com
           nullable: true
           type: string
       type: object

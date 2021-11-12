@@ -425,6 +425,7 @@ paths:
               activity: {
                 activity_datetime: '2021-05-01T12:00:00.000Z',
                 duration_seconds: 1800,
+                user_id: '12345',
                 account_id: '12345',
                 contact_id: '12345',
                 company_id: '12345',
@@ -441,7 +442,30 @@ paths:
                 type: 'meeting',
                 title: 'Meeting',
                 description: 'More info about the meeting',
+                note: 'An internal note about the meeting',
                 location: 'Space',
+                location_address: {
+                  id: '123',
+                  type: 'primary',
+                  string: '25 Spring Street, Blackburn, VIC 3130',
+                  name: 'HQ US',
+                  line1: 'Main street',
+                  line2: 'apt #',
+                  street_number: '25',
+                  city: 'San Francisco',
+                  state: 'CA',
+                  postal_code: '94104',
+                  country: 'US',
+                  latitude: '40.759211',
+                  longitude: '-73.984638',
+                  county: 'Santa Clara',
+                  contact_name: 'Elon Musk',
+                  salutation: 'Mr',
+                  phone_number: '111-111-1111',
+                  fax: '122-111-1111',
+                  email: 'elon@musk.com',
+                  website: 'https://elonmusk.com'
+                },
                 all_day_event: false,
                 private: true,
                 group_event: true,
@@ -451,19 +475,35 @@ paths:
                 archived: false,
                 deleted: false,
                 show_as: 'busy',
-                activity_date: '2021-05-01',
+                done: false,
                 start_datetime: '2021-05-01T12:00:00.000Z',
                 end_datetime: '2021-05-01T12:30:00.000Z',
+                activity_date: '2021-05-01',
                 end_date: '2021-05-01',
                 recurrent: false,
                 reminder_datetime: '2021-05-01T17:00:00.000Z',
                 reminder_set: false,
+                video_conference_url: 'https://us02web.zoom.us/j/88120759396',
+                video_conference_id: 'zoom:88120759396',
                 custom_fields: [
                   {
                     id: '2389328923893298',
                     name: 'employee_level',
                     description: 'Employee Level',
                     value: 'Uses Salesforce and Marketo'
+                  }
+                ],
+                attendees: [
+                  {
+                    name: 'Elon Musk',
+                    first_name: 'Elon',
+                    middle_name: 'D.',
+                    last_name: 'Musk',
+                    prefix: 'Mr.',
+                    suffix: 'PhD',
+                    email_address: 'elon@musk.com',
+                    is_organizer: true,
+                    status: 'accepted'
                   }
                 ]
               }
@@ -629,6 +669,7 @@ paths:
               activity: {
                 activity_datetime: '2021-05-01T12:00:00.000Z',
                 duration_seconds: 1800,
+                user_id: '12345',
                 account_id: '12345',
                 contact_id: '12345',
                 company_id: '12345',
@@ -645,7 +686,30 @@ paths:
                 type: 'meeting',
                 title: 'Meeting',
                 description: 'More info about the meeting',
+                note: 'An internal note about the meeting',
                 location: 'Space',
+                location_address: {
+                  id: '123',
+                  type: 'primary',
+                  string: '25 Spring Street, Blackburn, VIC 3130',
+                  name: 'HQ US',
+                  line1: 'Main street',
+                  line2: 'apt #',
+                  street_number: '25',
+                  city: 'San Francisco',
+                  state: 'CA',
+                  postal_code: '94104',
+                  country: 'US',
+                  latitude: '40.759211',
+                  longitude: '-73.984638',
+                  county: 'Santa Clara',
+                  contact_name: 'Elon Musk',
+                  salutation: 'Mr',
+                  phone_number: '111-111-1111',
+                  fax: '122-111-1111',
+                  email: 'elon@musk.com',
+                  website: 'https://elonmusk.com'
+                },
                 all_day_event: false,
                 private: true,
                 group_event: true,
@@ -655,19 +719,35 @@ paths:
                 archived: false,
                 deleted: false,
                 show_as: 'busy',
-                activity_date: '2021-05-01',
+                done: false,
                 start_datetime: '2021-05-01T12:00:00.000Z',
                 end_datetime: '2021-05-01T12:30:00.000Z',
+                activity_date: '2021-05-01',
                 end_date: '2021-05-01',
                 recurrent: false,
                 reminder_datetime: '2021-05-01T17:00:00.000Z',
                 reminder_set: false,
+                video_conference_url: 'https://us02web.zoom.us/j/88120759396',
+                video_conference_id: 'zoom:88120759396',
                 custom_fields: [
                   {
                     id: '2389328923893298',
                     name: 'employee_level',
                     description: 'Employee Level',
                     value: 'Uses Salesforce and Marketo'
+                  }
+                ],
+                attendees: [
+                  {
+                    name: 'Elon Musk',
+                    first_name: 'Elon',
+                    middle_name: 'D.',
+                    last_name: 'Musk',
+                    prefix: 'Mr.',
+                    suffix: 'PhD',
+                    email_address: 'elon@musk.com',
+                    is_organizer: true,
+                    status: 'accepted'
                   }
                 ]
               }
@@ -824,18 +904,20 @@ paths:
                     name: 'HQ US',
                     line1: 'Main street',
                     line2: 'apt #',
+                    street_number: '25',
                     city: 'San Francisco',
                     state: 'CA',
                     postal_code: '94104',
                     country: 'US',
                     latitude: '40.759211',
                     longitude: '-73.984638',
-                    contact_name: '111-111-1111',
-                    salutation: '111-111-1111',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
                     phone_number: '111-111-1111',
-                    fax: '111-111-1111',
-                    email: '111-111-1111',
-                    website: '111-111-1111'
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com'
                   }
                 ],
                 social_links: [
@@ -1075,18 +1157,20 @@ paths:
                     name: 'HQ US',
                     line1: 'Main street',
                     line2: 'apt #',
+                    street_number: '25',
                     city: 'San Francisco',
                     state: 'CA',
                     postal_code: '94104',
                     country: 'US',
                     latitude: '40.759211',
                     longitude: '-73.984638',
-                    contact_name: '111-111-1111',
-                    salutation: '111-111-1111',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
                     phone_number: '111-111-1111',
-                    fax: '111-111-1111',
-                    email: '111-111-1111',
-                    website: '111-111-1111'
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com'
                   }
                 ],
                 social_links: [
@@ -1271,18 +1355,20 @@ paths:
                     name: 'HQ US',
                     line1: 'Main street',
                     line2: 'apt #',
+                    street_number: '25',
                     city: 'San Francisco',
                     state: 'CA',
                     postal_code: '94104',
                     country: 'US',
                     latitude: '40.759211',
                     longitude: '-73.984638',
-                    contact_name: '111-111-1111',
-                    salutation: '111-111-1111',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
                     phone_number: '111-111-1111',
-                    fax: '111-111-1111',
-                    email: '111-111-1111',
-                    website: '111-111-1111'
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com'
                   }
                 ],
                 social_links: [
@@ -1516,18 +1602,20 @@ paths:
                     name: 'HQ US',
                     line1: 'Main street',
                     line2: 'apt #',
+                    street_number: '25',
                     city: 'San Francisco',
                     state: 'CA',
                     postal_code: '94104',
                     country: 'US',
                     latitude: '40.759211',
                     longitude: '-73.984638',
-                    contact_name: '111-111-1111',
-                    salutation: '111-111-1111',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
                     phone_number: '111-111-1111',
-                    fax: '111-111-1111',
-                    email: '111-111-1111',
-                    website: '111-111-1111'
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com'
                   }
                 ],
                 social_links: [
@@ -1704,18 +1792,20 @@ paths:
                     name: 'HQ US',
                     line1: 'Main street',
                     line2: 'apt #',
+                    street_number: '25',
                     city: 'San Francisco',
                     state: 'CA',
                     postal_code: '94104',
                     country: 'US',
                     latitude: '40.759211',
                     longitude: '-73.984638',
-                    contact_name: '111-111-1111',
-                    salutation: '111-111-1111',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
                     phone_number: '111-111-1111',
-                    fax: '111-111-1111',
-                    email: '111-111-1111',
-                    website: '111-111-1111'
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com'
                   }
                 ],
                 social_links: [
@@ -1942,18 +2032,20 @@ paths:
                     name: 'HQ US',
                     line1: 'Main street',
                     line2: 'apt #',
+                    street_number: '25',
                     city: 'San Francisco',
                     state: 'CA',
                     postal_code: '94104',
                     country: 'US',
                     latitude: '40.759211',
                     longitude: '-73.984638',
-                    contact_name: '111-111-1111',
-                    salutation: '111-111-1111',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
                     phone_number: '111-111-1111',
-                    fax: '111-111-1111',
-                    email: '111-111-1111',
-                    website: '111-111-1111'
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com'
                   }
                 ],
                 social_links: [
@@ -3045,18 +3137,20 @@ paths:
                     name: 'HQ US',
                     line1: 'Main street',
                     line2: 'apt #',
+                    street_number: '25',
                     city: 'San Francisco',
                     state: 'CA',
                     postal_code: '94104',
                     country: 'US',
                     latitude: '40.759211',
                     longitude: '-73.984638',
-                    contact_name: '111-111-1111',
-                    salutation: '111-111-1111',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
                     phone_number: '111-111-1111',
-                    fax: '111-111-1111',
-                    email: '111-111-1111',
-                    website: '111-111-1111'
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com'
                   }
                 ],
                 phone_numbers: [
@@ -3258,18 +3352,20 @@ paths:
                     name: 'HQ US',
                     line1: 'Main street',
                     line2: 'apt #',
+                    street_number: '25',
                     city: 'San Francisco',
                     state: 'CA',
                     postal_code: '94104',
                     country: 'US',
                     latitude: '40.759211',
                     longitude: '-73.984638',
-                    contact_name: '111-111-1111',
-                    salutation: '111-111-1111',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
                     phone_number: '111-111-1111',
-                    fax: '111-111-1111',
-                    email: '111-111-1111',
-                    website: '111-111-1111'
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com'
                   }
                 ],
                 phone_numbers: [
@@ -3825,6 +3921,10 @@ components:
           example: "12345"
           nullable: true
           type: string
+        attendees:
+          items:
+            $ref: "#/components/schemas/ActivityAttendee"
+          type: array
         campaign_id:
           example: "12345"
           nullable: true
@@ -3872,6 +3972,11 @@ components:
           example: More info about the meeting
           nullable: true
           type: string
+        done:
+          description: Whether the Activity is done or not
+          example: false
+          title: Done
+          type: boolean
         duration_minutes:
           example: 30
           nullable: true
@@ -3912,6 +4017,13 @@ components:
         location:
           example: Space
           nullable: true
+          type: string
+        location_address:
+          $ref: "#/components/schemas/Address"
+        note:
+          example: An internal note about the meeting
+          nullable: true
+          title: Note (internal)
           type: string
         opportunity_id:
           example: "12345"
@@ -3964,6 +4076,7 @@ components:
             - email
             - note
             - task
+            - deadline
             - send-letter
             - send-quote
             - other
@@ -3979,9 +4092,92 @@ components:
           nullable: true
           readOnly: true
           type: string
+        user_id:
+          example: "12345"
+          nullable: true
+          type: string
+        video_conference_id:
+          example: zoom:88120759396
+          title: Meeting ID
+          type: string
+        video_conference_url:
+          example: https://us02web.zoom.us/j/88120759396
+          title: Meeting URL
+          type: string
       required:
         - type
       type: object
+    ActivityAttendee:
+      additionalProperties: false
+      properties:
+        contact_id:
+          example: "12345"
+          readOnly: true
+          type: string
+        created_at:
+          example: 2017-08-12T20:43:21.291Z
+          format: date-time
+          readOnly: true
+          type: string
+        email_address:
+          example: elon@musk.com
+          nullable: true
+          type: string
+        first_name:
+          example: Elon
+          nullable: true
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        is_organizer:
+          example: true
+          nullable: true
+          type: boolean
+        last_name:
+          example: Musk
+          nullable: true
+          type: string
+        middle_name:
+          example: D.
+          nullable: true
+          type: string
+        name:
+          example: Elon Musk
+          minLength: 1
+          type: string
+        prefix:
+          example: Mr.
+          nullable: true
+          type: string
+        status:
+          enum:
+            - accepted
+            - tentative
+            - declined
+          example: accepted
+          nullable: true
+          type: string
+        suffix:
+          example: PhD
+          nullable: true
+          type: string
+        updated_at:
+          example: 2017-08-12T20:43:21.291Z
+          format: date-time
+          readOnly: true
+          type: string
+        user_id:
+          example: "12345"
+          readOnly: true
+          type: string
+      x-pii:
+        - name
+        - first_name
+        - middle_name
+        - last_name
+        - email_address
     Address:
       properties:
         city:
@@ -3990,7 +4186,7 @@ components:
           nullable: true
           type: string
         contact_name:
-          example: 111-111-1111
+          example: Elon Musk
           nullable: true
           type: string
         country:
@@ -3998,12 +4194,17 @@ components:
           example: US
           nullable: true
           type: string
+        county:
+          description: Address field that holds a sublocality, such as a county
+          example: Santa Clara
+          nullable: true
+          type: string
         email:
-          example: 111-111-1111
+          example: elon@musk.com
           nullable: true
           type: string
         fax:
-          example: 111-111-1111
+          example: 122-111-1111
           nullable: true
           type: string
         id:
@@ -4042,12 +4243,17 @@ components:
           nullable: true
           type: string
         salutation:
-          example: 111-111-1111
+          example: Mr
           nullable: true
           type: string
         state:
           description: Name of state
           example: CA
+          nullable: true
+          type: string
+        street_number:
+          description: Street number
+          example: "25"
           nullable: true
           type: string
         string:
@@ -4068,7 +4274,7 @@ components:
           type: string
           x-graphql-type-name: AddressType
         website:
-          example: 111-111-1111
+          example: https://elonmusk.com
           nullable: true
           type: string
       type: object

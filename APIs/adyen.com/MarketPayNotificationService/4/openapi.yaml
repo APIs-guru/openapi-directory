@@ -1585,6 +1585,9 @@ components:
             - MONTHLY
             - MONTHLY_ON_15TH_AT_MIDNIGHT
             - WEEKLY
+            - WEEKLY_MON_TO_FRI_AU
+            - WEEKLY_MON_TO_FRI_EU
+            - WEEKLY_MON_TO_FRI_US
             - WEEKLY_ON_TUE_FRI_MIDNIGHT
             - YEARLY
           type: string
@@ -2196,35 +2199,36 @@ components:
     ViasAddress:
       properties:
         city:
-          description: |-
-            The name of the city.
-            >Required if either `houseNumberOrName`, `street`, `postalCode`, or `stateOrProvince` are provided.
+          description: The name of the city. Required if the `houseNumberOrName`, `street`, `postalCode`, or `stateOrProvince` are provided.
           type: string
         country:
-          description: |-
-            The two-character country code of the address. The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
-            > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
+          description: The two-character country code of the address in ISO-3166-1 alpha-2 format. For example, **NL**.
           type: string
         houseNumberOrName:
           description: The number or name of the house.
           type: string
         postalCode:
           description: |-
-            The postal code.
-            >A maximum of five (5) digits for an address in the USA, or a maximum of ten (10) characters for an address in all other countries.
-            >Required if either `houseNumberOrName`, `street`, `city`, or `stateOrProvince` are provided.
+            The postal code. Required if the `houseNumberOrName`, `street`, `city`, or `stateOrProvince` are provided.
+
+            Maximum length:
+
+            * 5 digits for addresses in the US.
+
+            * 10 characters for all other countries.
           type: string
         stateOrProvince:
-          description: |-
-            The abbreviation of the state or province.
-            >Two (2) characters for an address in the USA or Canada, or a maximum of three (3) characters for an address in all other countries.
-            >Required for an address in the USA or Canada if either `houseNumberOrName`, `street`, `city`, or `postalCode` are provided.
+          description: |
+            The abbreviation of the state or province. Required if the `houseNumberOrName`, `street`, `city`, or `postalCode` are provided. 
+
+            Maximum length:
+
+            * 2 characters for addresses in the US or Canada.
+
+            * 3 characters for all other countries.
           type: string
         street:
-          description: |-
-            The name of the street.
-            >The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
-            >Required if either `houseNumberOrName`, `city`, `postalCode`, or `stateOrProvince` are provided.
+          description: The name of the street. Required if the `houseNumberOrName`, `city`, `postalCode`, or `stateOrProvince` are provided.
           type: string
       required:
         - country

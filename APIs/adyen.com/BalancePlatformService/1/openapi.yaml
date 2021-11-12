@@ -3011,6 +3011,11 @@ components:
         balancePlatform:
           description: Unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id) where the account holder belongs. Required in the request if your API credentials has access to multiple balance platforms.
           type: string
+        capabilities:
+          additionalProperties:
+            $ref: "#/components/schemas/AccountHolderCapability"
+          description: Contains key-value pairs that specify the actions that an account holder can do in your platform. The key is a capability, such as **issueCard**, and the value is an object containing the settings for the capability.
+          type: object
         contactDetails:
           $ref: "#/components/schemas/ContactDetails"
           description: Contact details of the account holder.
@@ -3064,6 +3069,72 @@ components:
           type: object
       required:
         - id
+    AccountHolderCapability:
+      properties:
+        allowed:
+          description: Indicates whether the capability is allowed. Adyen sets this to **true** if the verification is successful, and the account holder is permitted to use the capability.
+          readOnly: true
+          type: boolean
+        allowedLevel:
+          description: "The capability level that is allowed for the account holder.Possible values: **notApplicable**, **low**, **medium**, **high**"
+          enum:
+            - high
+            - low
+            - medium
+            - notApplicable
+          readOnly: true
+          type: string
+        allowedSettings:
+          $ref: "#/components/schemas/JSONObject"
+          description: A JSON object containing the settings that are allowed for the account holder.
+          readOnly: true
+        enabled:
+          description: Indicates whether the capability is enabled. You can set this field to **false** if you want to temporarily stop an account holder from using a capability.
+          type: boolean
+        problems:
+          description: Contains verification errors and the actions that you can take to resolve them.
+          items:
+            $ref: "#/components/schemas/CapabilityProblem"
+          readOnly: true
+          type: array
+        requested:
+          description: Indicates whether the capability is requested. To know whether the account holder is permitted to use the capability, refer to the `allowed` field.
+          type: boolean
+        requestedLevel:
+          description: |-
+            The requested level of the capability. Some capabilities, such as those used in [card issuing](https://docs.adyen.com/issuing/add-capabilities#capability-levels) have different levels. Levels increase the capability, but also require additional checks and increased monitoring.
+
+            Possible values: **notApplicable**, **low**, **medium**, **high**
+          enum:
+            - high
+            - low
+            - medium
+            - notApplicable
+          type: string
+        requestedSettings:
+          $ref: "#/components/schemas/JSONObject"
+          description: A JSON object containing the settings that were requested for the account holder.
+          readOnly: true
+        verificationStatus:
+          description: |
+            The status of the verification checks for the capability.
+
+            Possible values:
+
+            - **pending** - Adyen is running the verification.
+
+            - **invalid** - The verification failed. Check if the `errors` array contains more information.
+
+            - **valid** - The verification has been successfully completed.
+
+            - **rejected** - Adyen has verified the information, but has found reasons to not allow the capability.
+          enum:
+            - invalid
+            - pending
+            - rejected
+            - valid
+          readOnly: true
+          type: string
     AccountHolderInfo:
       properties:
         balancePlatform:
@@ -3392,6 +3463,84 @@ components:
         dateOfBirth:
           description: The individual's date of birth, in YYYY-MM-DD format.
           type: string
+    BulkAddress:
+      properties:
+        city:
+          description: The name of the city.
+          type: string
+        company:
+          description: The name of the company.
+          type: string
+        country:
+          description: The two-character country code in ISO-3166-1 alpha-2 format. For example, **US**.
+          type: string
+        email:
+          description: The email address.
+          type: string
+        houseNumberOrName:
+          description: The house number or name.
+          type: string
+        mobile:
+          description: The full telephone number.
+          type: string
+        postalCode:
+          description: |-
+            The postal code.
+
+            Maximum length:
+
+            * 5 digits for addresses in the US.
+
+            * 10 characters for all other countries.
+          type: string
+        stateOrProvince:
+          description: |-
+            State or province codes as defined in ISO 3166-2.
+
+            Maximum length: 2 characters for addresses in the US.
+          type: string
+        street:
+          description: The streetname of the house.
+          type: string
+      required:
+        - country
+    CapabilityProblem:
+      properties:
+        entity:
+          $ref: "#/components/schemas/CapabilityProblemEntity"
+          description: Contains the type of the entity and the corresponding ID.
+        verificationErrors:
+          description: Contains information about the verification error.
+          items:
+            $ref: "#/components/schemas/VerificationError"
+          type: array
+    CapabilityProblemEntity:
+      properties:
+        id:
+          description: The ID of the entity.
+          type: string
+        owner:
+          $ref: "#/components/schemas/CapabilityProblemEntity-recursive"
+          description: Contains details about the owner of the entity that has an error.
+        type:
+          description: "The type of the entity. Possible values: **LegalEntity**, **BankAccount**, **Document**"
+          enum:
+            - BankAccount
+            - Document
+            - LegalEntity
+          type: string
+    CapabilityProblemEntity-recursive:
+      properties:
+        id:
+          description: The ID of the entity.
+          type: string
+        type:
+          description: "The type of the entity. Possible values: **LegalEntity**, **BankAccount**, **Document**"
+          enum:
+            - BankAccount
+            - Document
+            - LegalEntity
+          type: string
     Card:
       properties:
         authentication:
@@ -3415,7 +3564,7 @@ components:
           type: string
         configuration:
           $ref: "#/components/schemas/CardConfiguration"
-          description: Specific settings for this card, including the configuration profile.
+          description: Settings required when creating a physical card. Reach out to your Adyen contact to get the values that you can send in this object.
         cvc:
           description: |-
             The CVC2 value of the card.
@@ -3453,27 +3602,56 @@ components:
         - number
     CardConfiguration:
       properties:
-        activationUrl:
-          description: The activation URL of the card configuration profile.
+        activation:
+          description: Overrides the activation label design ID defined in the `configurationProfileId`. The activation label is attached to the card containing activation instructions.
           type: string
+        activationUrl:
+          description: |-
+            Your app's URL, if you want to activate cards through your app. For example, **my-app://ref1236a7d**. A QR code is created based on this URL, and is included in the carrier.
+
+             Maximum length: 255 characters.
+          type: string
+        bulkAddress:
+          $ref: "#/components/schemas/BulkAddress"
+          description: Overrides the shipment bulk address defined in the `configurationProfileId`.
         cardImageId:
-          description: The Entity Reference of the card image.
+          description: The ID of the card image. This is the image that will be printed on the full front of the card.
+          type: string
+        carrier:
+          description: Overrides the carrier design ID defined in the `configurationProfileId`. The carrier is the letter or packaging to which the card is attached.
           type: string
         carrierImageId:
-          description: The Entity Reference of the carrier image.
+          description: The ID of the carrier image. This is the image that will printed on the letter to which the card is attached.
           type: string
         configurationProfileId:
-          description: The ID of the card configuration profile.
+          description: |-
+            The ID of the card configuration profile, which contains settings for the card. Examples of these settings include the envelope and PIN mailer designs, and the logistics company handling the shipment. All the settings in the profile are applied to the card, unless you provide other fields to override the settings.
+
+            For example, send the `shipmentMethod` to override the logistics company defined in the card configuration profile.
           type: string
         currency:
-          description: The ISO-4217 currency code for the card. For example **EUR**.
+          description: The three-letter currency code for the card, in the [ISO-4217](https://en.wikipedia.org/wiki/ISO_4217) format. For example **EUR**.
+          type: string
+        envelope:
+          description: "Overrides the envelope design ID defined in the `configurationProfileId`. "
+          type: string
+        insert:
+          description: Overrides the insert design ID defined in the `configurationProfileId`. An insert is any additional material, such as marketing materials, that are shipped together with the card.
           type: string
         language:
-          description: The ISO-639-1 application language for the card. For example, **en**.
+          description: The language for the card, in the [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format. For example, **en**.
           type: string
         logoImageId:
-          description: The Entity Reference of the logo image.
+          description: The ID of the logo image. This is the image that will be printed on the partial front of the card, such as a logo on the upper right corner.
           type: string
+        pinMailer:
+          description: Overrides the PIN mailer design ID defined in the `configurationProfileId`. The PIN mailer is the letter on which the PIN is printed.
+          type: string
+        shipmentMethod:
+          description: Overrides the logistics company defined in the `configurationProfileId`.
+          type: string
+      required:
+        - configurationProfileId
     CardInfo:
       properties:
         authentication:
@@ -3494,7 +3672,7 @@ components:
           type: string
         configuration:
           $ref: "#/components/schemas/CardConfiguration"
-          description: Specific settings for this card, including the configuration profile.
+          description: Settings required when creating a physical card. Reach out to your Adyen contact to get the values that you can send in this object.
         deliveryContact:
           $ref: "#/components/schemas/Contact"
           description: The delivery contact (name and address) for physical card delivery.
@@ -3747,6 +3925,20 @@ components:
         - name
         - value
         - message
+    JSONObject:
+      properties:
+        paths:
+          items:
+            $ref: "#/components/schemas/JSONPath"
+          type: array
+        rootPath:
+          $ref: "#/components/schemas/JSONPath"
+    JSONPath:
+      properties:
+        content:
+          items:
+            type: string
+          type: array
     LegalEntity:
       properties:
         documents:
@@ -4326,6 +4518,7 @@ components:
         shopperReference:
           description: The unique identifier used when the payment details were stored.
           type: string
+    RemediatingAction: {}
     RestServiceError:
       properties:
         detail:
@@ -4782,6 +4975,49 @@ components:
             The type of transfer instrument.
 
             Possible values: **bankAccount**, **recurringDetail**.
+          type: string
+    VerificationError:
+      properties:
+        code:
+          description: The verification error code.
+          type: string
+        message:
+          description: A description of the error.
+          type: string
+        remediatingActions:
+          description: Contains the actions that you can take to resolve the verification error.
+          items:
+            $ref: "#/components/schemas/RemediatingAction"
+          type: array
+        subErrors:
+          description: Contains more granular information about the verification error.
+          items:
+            $ref: "#/components/schemas/VerificationError-recursive"
+          type: array
+        type:
+          description: "The type of error. Possible values: **invalidInput**, **dataMissing**"
+          enum:
+            - dataMissing
+            - invalidInput
+          type: string
+    VerificationError-recursive:
+      properties:
+        code:
+          description: The verification error code.
+          type: string
+        message:
+          description: A description of the error.
+          type: string
+        remediatingActions:
+          description: Contains the actions that you can take to resolve the verification error.
+          items:
+            $ref: "#/components/schemas/RemediatingAction"
+          type: array
+        type:
+          description: "The type of error. Possible values: **invalidInput**, **dataMissing**"
+          enum:
+            - dataMissing
+            - invalidInput
           type: string
     VoidResponse: {}
     WebData:

@@ -747,7 +747,7 @@ paths:
       tags:
         - Payments
       x-groupName: Payments
-      x-sortIndex: 1
+      x-sortIndex: 2
   /paymentMethods/balance:
     post:
       description: Retrieves the balance remaining on a shopper's gift card. To check a gift card's balance, make a POST `/paymentMethods/balance` call and include the gift card's details inside a `paymentMethod` object.
@@ -1063,7 +1063,7 @@ paths:
       tags:
         - Payments
       x-groupName: Payments
-      x-sortIndex: 2
+      x-sortIndex: 3
   /payments/details:
     post:
       description: |+
@@ -1151,7 +1151,7 @@ paths:
       tags:
         - Payments
       x-groupName: Payments
-      x-sortIndex: 3
+      x-sortIndex: 4
   /payments/result:
     post:
       description: |-
@@ -6236,6 +6236,9 @@ components:
     CardDetails:
       additionalProperties: false
       properties:
+        brand:
+          description: "Secondary brand of the card. For example: **plastix**, **hmclub**."
+          type: string
         cupsecureplus.smscode:
           deprecated: true
           type: string
@@ -6294,6 +6297,7 @@ components:
             - giftcard
             - alliancedata
             - card
+            - atome
             - moneybookers
             - qiwiwallet
             - alipay_hk
@@ -6381,7 +6385,8 @@ components:
           $ref: "#/components/schemas/Address"
           description: |-
             The address where to send the invoice.
-            > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object.
+            > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
+            >* For 3D Secure 2 transactions in all browser-based and mobile implementations.
           x-addedInVersion: "4"
         browserInfo:
           $ref: "#/components/schemas/BrowserInfo"
@@ -7527,7 +7532,7 @@ components:
     Mandate:
       properties:
         amount:
-          description: The billing amount(in minor units) of the recurring transactions.
+          description: The billing amount (in minor units) of the recurring transactions.
           type: string
         amountRule:
           description: |+
@@ -8500,7 +8505,8 @@ components:
           $ref: "#/components/schemas/Address"
           description: |-
             The address where to send the invoice.
-            > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object.
+            > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
+            >* For 3D Secure 2 transactions in all browser-based and mobile implementations.
           x-addedInVersion: "4"
         browserInfo:
           $ref: "#/components/schemas/BrowserInfo"
@@ -8595,7 +8601,7 @@ components:
         lineItems:
           description: |-
             Price and product information about the purchased items, to be included on the invoice sent to the shopper.
-            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
+            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
@@ -8994,7 +9000,8 @@ components:
           $ref: "#/components/schemas/Address"
           description: |-
             The address where to send the invoice.
-            > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object.
+            > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
+            >* For 3D Secure 2 transactions in all browser-based and mobile implementations.
           x-addedInVersion: "4"
         blockedPaymentMethods:
           description: |-
@@ -9091,7 +9098,7 @@ components:
         lineItems:
           description: |-
             Price and product information about the purchased items, to be included on the invoice sent to the shopper.
-            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
+            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array

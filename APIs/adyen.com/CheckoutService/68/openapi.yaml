@@ -6709,6 +6709,9 @@ components:
     CardDetails:
       additionalProperties: false
       properties:
+        brand:
+          description: "Secondary brand of the card. For example: **plastix**, **hmclub**."
+          type: string
         cupsecureplus.smscode:
           deprecated: true
           type: string
@@ -6774,6 +6777,7 @@ components:
             - giftcard
             - alliancedata
             - card
+            - atome
             - moneybookers
             - qiwiwallet
             - alipay_hk
@@ -8952,7 +8956,7 @@ components:
     Mandate:
       properties:
         amount:
-          description: The billing amount(in minor units) of the recurring transactions.
+          description: The billing amount (in minor units) of the recurring transactions.
           type: string
         amountRule:
           description: |+
@@ -9771,7 +9775,7 @@ components:
         lineItems:
           description: |-
             Price and product information about the purchased items, to be included on the invoice sent to the shopper.
-            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
+            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
@@ -10528,7 +10532,7 @@ components:
         lineItems:
           description: |-
             Price and product information about the purchased items, to be included on the invoice sent to the shopper.
-            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
+            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
@@ -11057,7 +11061,7 @@ components:
         lineItems:
           description: |-
             Price and product information about the purchased items, to be included on the invoice sent to the shopper.
-            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
+            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array

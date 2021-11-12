@@ -551,7 +551,7 @@ components:
           description: Indicates whether the notification subscription is active.
           type: boolean
         apiVersion:
-          description: The API version of the notification to send.
+          description: The version of the notification to which you are subscribing. To make sure that your integration can properly process the notification, subscribe to the same version as the API that you're using.
           format: int32
           type: integer
         description:
