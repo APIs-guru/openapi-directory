@@ -1913,7 +1913,7 @@ components:
       description: Request message for pausing a finalized deal.
       properties:
         reason:
-          description: The reason to pause the finalized deal, will be displayed to the seller. Maximum length is 1000 characters.
+          description: Required. The reason to pause the finalized deal, will be displayed to the seller. Maximum length is 1000 characters.
           type: string
       type: object
     PlacementTargeting:
