@@ -13,20 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: OS Config API
   version: v1beta
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://osconfig.googleapis.com/$discovery/rest?version=v1beta
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: osconfig
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/compute/docs/osconfig/rest
 tags:
@@ -1660,6 +1657,10 @@ components:
             - SATURDAY
             - SUNDAY
           type: string
+        dayOffset:
+          description: Optional. Represents the number of days before or after the given week day of month that the patch deployment is scheduled for. For example if `week_ordinal` and `day_of_week` values point to the second day of the month and this `day_offset` value is set to `3`, the patch deployment takes place three days after the second Tuesday of the month. If this value is negative, for example -5, the patches are deployed five days before before the second Tuesday of the month. Allowed values are in range [-30, 30].
+          format: int32
+          type: integer
         weekOrdinal:
           description: Required. Week number in a month. 1-4 indicates the 1st to 4th week of the month. -1 indicates the last week of the month.
           format: int32
@@ -1815,5 +1816,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

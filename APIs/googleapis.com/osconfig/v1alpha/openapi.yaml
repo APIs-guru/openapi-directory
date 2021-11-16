@@ -13,17 +13,20 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: OS Config API
   version: v1alpha
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://osconfig.googleapis.com/$discovery/rest?version=v1alpha
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: osconfig
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/compute/docs/osconfig/rest
 tags:
@@ -1852,6 +1855,11 @@ components:
           items:
             type: string
           type: array
+        items:
+          description: List of items affected by the vulnerability.
+          items:
+            $ref: "#/components/schemas/VulnerabilityReportVulnerabilityItem"
+          type: array
         updateTime:
           description: The timestamp for when the vulnerability was last modified.
           format: google-datetime
@@ -1892,6 +1900,22 @@ components:
           description: The url of the reference.
           type: string
       type: object
+    VulnerabilityReportVulnerabilityItem:
+      description: OS inventory item that is affected by a vulnerability or fixed as a result of a vulnerability.
+      properties:
+        availableInventoryItemId:
+          description: Corresponds to the `AVAILABLE_PACKAGE` inventory item on the VM. If the vulnerability report was not updated after the VM inventory update, these values might not display in VM inventory. If there is no available fix, the field is empty. The `inventory_item` value specifies the latest `SoftwarePackage` available to the VM that fixes the vulnerability.
+          type: string
+        fixedCpeUri:
+          description: The recommended [CPE URI](https://cpe.mitre.org/specification/) update that contains a fix for this vulnerability.
+          type: string
+        installedInventoryItemId:
+          description: Corresponds to the `INSTALLED_PACKAGE` inventory item on the VM. This field displays the inventory items affected by this vulnerability. If the vulnerability report was not updated after the VM inventory update, these values might not display in VM inventory. For some operating systems, this field might be empty.
+          type: string
+        upstreamFix:
+          description: The upstream OS patch, packages or KB that fixes the vulnerability.
+          type: string
+      type: object
   securitySchemes:
     Oauth2:
       description: Oauth 2.0 implicit authentication
@@ -1910,3 +1934,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

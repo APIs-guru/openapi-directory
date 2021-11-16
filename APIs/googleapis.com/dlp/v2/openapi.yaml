@@ -3069,6 +3069,9 @@ components:
         replaceConfig:
           $ref: "#/components/schemas/GooglePrivacyDlpV2ReplaceValueConfig"
           description: Replace with a specified value.
+        replaceDictionaryConfig:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2ReplaceDictionaryConfig"
+          description: Replace with a value randomly drawn (with replacement) from a dictionary.
         replaceWithInfoTypeConfig:
           $ref: "#/components/schemas/GooglePrivacyDlpV2ReplaceWithInfoTypeConfig"
           description: Replace with infotype
@@ -3321,6 +3324,13 @@ components:
         overview:
           $ref: "#/components/schemas/GooglePrivacyDlpV2TransformationOverview"
           description: An overview of the changes that were made to the `item`.
+      type: object
+    GooglePrivacyDlpV2ReplaceDictionaryConfig:
+      description: Replace each input value with a value randomly selected from the dictionary.
+      properties:
+        wordList:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2WordList"
+          description: A list of words to select from for random replacement. The [limits](https://cloud.google.com/dlp/limits) page contains details about the size limits of dictionaries.
       type: object
     GooglePrivacyDlpV2ReplaceValueConfig:
       description: Replace each input value with a given `Value`.

@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.6.0
+  version: 8.7.1
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -522,7 +522,9 @@ paths:
                   bsb_number: '062-001',
                   bank_code: 'BNH',
                   account_number: '123456789',
-                  account_name: 'SPACEX LLC'
+                  account_name: 'SPACEX LLC',
+                  account_type: 'credit_card',
+                  currency: 'USD'
                 },
                 status: 'active',
                 row_version: '1-12345'
@@ -744,7 +746,9 @@ paths:
                   bsb_number: '062-001',
                   bank_code: 'BNH',
                   account_number: '123456789',
-                  account_name: 'SPACEX LLC'
+                  account_name: 'SPACEX LLC',
+                  account_type: 'credit_card',
+                  currency: 'USD'
                 },
                 status: 'active',
                 row_version: '1-12345'
@@ -857,11 +861,13 @@ paths:
 
             const params = {
               invoiceItem: {
-                code: '120-C',
-                sold: true,
                 name: 'Model Y',
                 description:
                   'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
+                code: '120-C',
+                sold: true,
+                purchased: true,
+                tracked: true,
                 type: 'inventory',
                 sales_details: {
                   unit_price: 27500.5,
@@ -871,8 +877,19 @@ paths:
                     id: '123456'
                   }
                 },
+                purchase_details: {
+                  unit_price: 27500.5,
+                  unit_of_measure: 'pc.',
+                  tax_inclusive: true,
+                  tax_rate: {
+                    id: '123456'
+                  }
+                },
                 quantity: 1,
                 unit_price: 27500.5,
+                asset_account: {
+                  id: '123456'
+                },
                 income_account: {
                   id: '123456'
                 },
@@ -1042,11 +1059,13 @@ paths:
             const params = {
               id: 'id_example',
               invoiceItem: {
-                code: '120-C',
-                sold: true,
                 name: 'Model Y',
                 description:
                   'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
+                code: '120-C',
+                sold: true,
+                purchased: true,
+                tracked: true,
                 type: 'inventory',
                 sales_details: {
                   unit_price: 27500.5,
@@ -1056,8 +1075,19 @@ paths:
                     id: '123456'
                   }
                 },
+                purchase_details: {
+                  unit_price: 27500.5,
+                  unit_of_measure: 'pc.',
+                  tax_inclusive: true,
+                  tax_rate: {
+                    id: '123456'
+                  }
+                },
                 quantity: 1,
                 unit_price: 27500.5,
+                asset_account: {
+                  id: '123456'
+                },
                 income_account: {
                   id: '123456'
                 },
@@ -1199,7 +1229,7 @@ paths:
                     line_number: 1,
                     description:
                       'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
-                    type: 'Inventory',
+                    type: 'inventory',
                     tax_amount: 27500,
                     total_amount: 27500,
                     quantity: 1,
@@ -1448,7 +1478,7 @@ paths:
                     line_number: 1,
                     description:
                       'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
-                    type: 'Inventory',
+                    type: 'inventory',
                     tax_amount: 27500,
                     total_amount: 27500,
                     quantity: 1,
@@ -1622,7 +1652,7 @@ paths:
             const params = {
               ledgerAccount: {
                 display_id: '1-12345',
-                nominal_code: '091',
+                nominal_code: 'N091',
                 classification: 'asset',
                 type: 'bank',
                 sub_type: 'CHECKING_ACCOUNT',
@@ -1632,12 +1662,13 @@ paths:
                 opening_balance: 75000,
                 current_balance: 20000,
                 currency: 'USD',
-                tax_type: 'USD',
+                tax_type: 'NONE',
                 tax_rate: {
                   id: '123456'
                 },
                 level: 1,
                 active: true,
+                status: 'active',
                 header: true,
                 bank_account: {
                   iban: 'CH2989144532982975332',
@@ -1645,7 +1676,9 @@ paths:
                   bsb_number: '062-001',
                   bank_code: 'BNH',
                   account_number: '123456789',
-                  account_name: 'SPACEX LLC'
+                  account_name: 'SPACEX LLC',
+                  account_type: 'credit_card',
+                  currency: 'USD'
                 },
                 parent_account: {
                   id: '12345',
@@ -1817,7 +1850,7 @@ paths:
               id: 'id_example',
               ledgerAccount: {
                 display_id: '1-12345',
-                nominal_code: '091',
+                nominal_code: 'N091',
                 classification: 'asset',
                 type: 'bank',
                 sub_type: 'CHECKING_ACCOUNT',
@@ -1827,12 +1860,13 @@ paths:
                 opening_balance: 75000,
                 current_balance: 20000,
                 currency: 'USD',
-                tax_type: 'USD',
+                tax_type: 'NONE',
                 tax_rate: {
                   id: '123456'
                 },
                 level: 1,
                 active: true,
+                status: 'active',
                 header: true,
                 bank_account: {
                   iban: 'CH2989144532982975332',
@@ -1840,7 +1874,9 @@ paths:
                   bsb_number: '062-001',
                   bank_code: 'BNH',
                   account_number: '123456789',
-                  account_name: 'SPACEX LLC'
+                  account_name: 'SPACEX LLC',
+                  account_type: 'credit_card',
+                  currency: 'USD'
                 },
                 parent_account: {
                   id: '12345',
@@ -2263,24 +2299,25 @@ paths:
 
             const params = {
               taxRate: {
-                name: '15% GST on Expenses',
+                id: '1234',
+                name: 'GST on Purchases',
                 code: 'ABN',
-                description: 'No ABN Withholding',
+                description: 'Reduced rate GST Purchases',
                 effective_tax_rate: 10,
                 total_tax_rate: 10,
                 tax_payable_account_id: '123456',
                 tax_remitted_account_id: '123456',
                 components: [
                   {
-                    name: 'City tax',
+                    name: 'GST',
                     rate: 10,
                     compound: true
                   }
                 ],
                 tax_type: 'output_gst',
-                type: 'GST_VAT',
+                type: 'NONE',
                 original_tax_rate_id: '12345',
-                active: true,
+                status: 'active',
                 row_version: '1-12345'
               }
             }
@@ -2443,24 +2480,25 @@ paths:
             const params = {
               id: 'id_example',
               taxRate: {
-                name: '15% GST on Expenses',
+                id: '1234',
+                name: 'GST on Purchases',
                 code: 'ABN',
-                description: 'No ABN Withholding',
+                description: 'Reduced rate GST Purchases',
                 effective_tax_rate: 10,
                 total_tax_rate: 10,
                 tax_payable_account_id: '123456',
                 tax_remitted_account_id: '123456',
                 components: [
                   {
-                    name: 'City tax',
+                    name: 'GST',
                     rate: 10,
                     compound: true
                   }
                 ],
                 tax_type: 'output_gst',
-                type: 'GST_VAT',
+                type: 'NONE',
                 original_tax_rate_id: '12345',
-                active: true,
+                status: 'active',
                 row_version: '1-12345'
               }
             }
@@ -2995,6 +3033,16 @@ components:
           nullable: true
           title: Bank Account Number
           type: string
+        account_type:
+          description: The type of bank account.
+          enum:
+            - bank_account
+            - credit_card
+            - other
+          example: credit_card
+          nullable: true
+          title: Account Type
+          type: string
         bank_code:
           description: A bank code is a code assigned by a central bank, a bank supervisory body or a Bankers Association in a country to all its licensed member banks or financial institutions.
           example: BNH
@@ -3011,6 +3059,8 @@ components:
           nullable: true
           title: BSB Number
           type: string
+        currency:
+          $ref: "#/components/schemas/Currency"
         iban:
           example: CH2989144532982975332
           nullable: true
@@ -3061,9 +3111,7 @@ components:
           readOnly: true
           type: string
         currency:
-          example: USD
-          nullable: true
-          type: string
+          $ref: "#/components/schemas/Currency"
         custom_fields:
           items:
             $ref: "#/components/schemas/CustomField"
@@ -4965,6 +5013,8 @@ components:
           nullable: true
           title: Is active
           type: boolean
+        asset_account:
+          $ref: "#/components/schemas/LinkedLedgerAccount"
         code:
           description: User defined item code
           example: 120-C
@@ -4994,6 +5044,23 @@ components:
           nullable: true
           title: Item name
           type: string
+        purchase_details:
+          properties:
+            tax_inclusive:
+              $ref: "#/components/schemas/TaxInclusive"
+            tax_rate:
+              $ref: "#/components/schemas/LinkedTaxRate"
+            unit_of_measure:
+              $ref: "#/components/schemas/UnitOfMeasure"
+            unit_price:
+              $ref: "#/components/schemas/UnitPrice"
+          type: object
+        purchased:
+          description: Item is available for purchase transactions
+          example: true
+          nullable: true
+          title: Item purchased
+          type: boolean
         quantity:
           $ref: "#/components/schemas/Quantity"
         row_version:
@@ -5010,10 +5077,16 @@ components:
               $ref: "#/components/schemas/UnitPrice"
           type: object
         sold:
-          description: Item can be sold
+          description: Item will be available on sales transactions
           example: true
           nullable: true
           title: Item sold
+          type: boolean
+        tracked:
+          description: Item is inventoried
+          example: true
+          nullable: true
+          title: Item tracked
           type: boolean
         type:
           enum:
@@ -5031,6 +5104,8 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+    InvoiceItemAssetAccount:
+      $ref: "#/components/schemas/LinkedLedgerAccount"
     InvoiceItemExpenseAccount:
       $ref: "#/components/schemas/LinkedLedgerAccount"
     InvoiceItemIncomeAccount:
@@ -5089,7 +5164,7 @@ components:
           enum:
             - inventory
             - service
-          example: Inventory
+          example: inventory
           nullable: true
           title: Type
           type: string
@@ -5111,119 +5186,6 @@ components:
       nullable: true
       title: Last name
       type: string
-    Lead:
-      additionalProperties: false
-      properties:
-        addresses:
-          items:
-            $ref: "#/components/schemas/Address"
-          type: array
-        company_id:
-          example: "2"
-          nullable: true
-          type: string
-        company_name:
-          example: Spacex
-          nullable: true
-          type: string
-        contact_id:
-          example: "2"
-          nullable: true
-          type: string
-        created_at:
-          example: 2020-09-30T07:43:32.000Z
-          readOnly: true
-          type: string
-        currency:
-          example: USD
-          nullable: true
-          type: string
-        custom_fields:
-          items:
-            $ref: "#/components/schemas/CustomField"
-          type: array
-        description:
-          example: A thinker
-          nullable: true
-          type: string
-        emails:
-          items:
-            $ref: "#/components/schemas/Email"
-          type: array
-        fax:
-          example: "+12129876543"
-          nullable: true
-          type: string
-        first_name:
-          example: Elon
-          nullable: true
-          type: string
-        id:
-          example: "12345"
-          readOnly: true
-          type: string
-        language:
-          description: language code according to ISO 639-1. For the United States - EN
-          example: EN
-          nullable: true
-          type: string
-        last_name:
-          example: Musk
-          nullable: true
-          type: string
-        lead_source:
-          example: Cold Call
-          nullable: true
-          type: string
-        monetary_amount:
-          example: 75000
-          nullable: true
-          type: number
-        name:
-          example: Elon Musk
-          minLength: 1
-          type: string
-        owner_id:
-          example: "54321"
-          type: string
-        phone_numbers:
-          items:
-            $ref: "#/components/schemas/PhoneNumber"
-          type: array
-        prefix:
-          example: Sir
-          nullable: true
-          type: string
-        social_links:
-          items:
-            $ref: "#/components/schemas/SocialLink"
-          type: array
-        status:
-          example: New
-          nullable: true
-          type: string
-        tags:
-          $ref: "#/components/schemas/Tags"
-        title:
-          example: CEO
-          nullable: true
-          type: string
-        updated_at:
-          example: 2020-09-30T07:43:32.000Z
-          readOnly: true
-          type: string
-        websites:
-          items:
-            $ref: "#/components/schemas/Website"
-          type: array
-      required:
-        - name
-        - company_name
-      x-pii:
-        - name
-        - email
-        - first_name
-        - last_name
     LedgerAccount:
       additionalProperties: true
       properties:
@@ -5293,7 +5255,7 @@ components:
           nullable: true
           type: string
         nominal_code:
-          example: 91
+          example: N091
           nullable: true
           type: string
         opening_balance:
@@ -5317,6 +5279,16 @@ components:
           type: object
         row_version:
           $ref: "#/components/schemas/RowVersion"
+        status:
+          enum:
+            - active
+            - inactive
+            - archived
+          example: active
+          nullable: true
+          title: Account status
+          type: string
+          x-graphql-type-name: LedgerAccountStatus
         sub_account:
           example: false
           nullable: true
@@ -5342,14 +5314,16 @@ components:
         tax_rate:
           $ref: "#/components/schemas/LinkedTaxRate"
         tax_type:
-          example: USD
+          example: NONE
           nullable: true
           type: string
         type:
           enum:
             - accounts_receivable
+            - revenue
             - bank
             - current_asset
+            - fixed_asset
             - non_current_asset
             - other_asset
             - equity
@@ -5362,7 +5336,6 @@ components:
             - non_current_liability
             - other_liability
           example: bank
-          nullable: true
           type: string
           x-graphql-type-name: LedgerAccountType
         updated_at:
@@ -5423,6 +5396,7 @@ components:
       type: object
       x-graphql-type-name: LinkedInvoiceItem
     LinkedLedgerAccount:
+      nullable: true
       properties:
         id:
           example: "123456"
@@ -5558,188 +5532,6 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
-    Opportunity:
-      additionalProperties: false
-      properties:
-        close_date:
-          example: 2020-10-30
-          format: date
-          nullable: true
-          type: string
-        company_id:
-          example: "12345"
-          nullable: true
-          type: string
-        company_name:
-          example: Copper
-          nullable: true
-          type: string
-        contact_id:
-          example: "12345"
-          nullable: true
-          type: string
-        created_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
-        created_by:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          type: string
-        currency:
-          example: USD
-          nullable: true
-          type: string
-        custom_fields:
-          items:
-            $ref: "#/components/schemas/CustomField"
-          type: array
-        date_last_contacted:
-          example: 2020-09-30T00:00:00.000Z
-          format: date-time
-          nullable: true
-          readOnly: true
-          type: string
-        date_lead_created:
-          example: 2020-09-30T00:00:00.000Z
-          format: date-time
-          nullable: true
-          readOnly: true
-          type: string
-        date_stage_changed:
-          example: 2020-09-30T00:00:00.000Z
-          format: date-time
-          nullable: true
-          readOnly: true
-          type: string
-        deleted:
-          example: false
-          readOnly: true
-          type: boolean
-        description:
-          example: Opportunities are created for People and Companies that are interested in buying your products or services. Create Opportunities for People and Companies to move them through one of your Pipelines.
-          minLength: 1
-          nullable: true
-          type: string
-        expected_revenue:
-          description: Expected Revenue
-          example: 75000
-          nullable: true
-          readOnly: true
-          type: number
-        id:
-          example: "12345"
-          readOnly: true
-          type: string
-        interaction_count:
-          example: 0
-          nullable: true
-          readOnly: true
-          type: number
-        last_activity_at:
-          example: 2020-09-30T07:43:32.000Z
-          nullable: true
-          readOnly: true
-          type: string
-        lead_id:
-          example: "12345"
-          nullable: true
-          type: string
-        lead_source:
-          description: Lead source
-          example: Website
-          nullable: true
-          type: string
-        loss_reason:
-          example: No budget
-          nullable: true
-          type: string
-        loss_reason_id:
-          example: "12345"
-          nullable: true
-          type: string
-        monetary_amount:
-          example: 75000
-          nullable: true
-          type: number
-        owner_id:
-          example: "12345"
-          nullable: true
-          type: string
-        pipeline_id:
-          example: "12345"
-          nullable: true
-          type: string
-        pipeline_stage_id:
-          example: "12345"
-          nullable: true
-          type: string
-        primary_contact_id:
-          example: "12345"
-          nullable: true
-          type: string
-        priority:
-          example: None
-          minLength: 1
-          nullable: true
-          type: string
-        source_id:
-          example: "12345"
-          nullable: true
-          type: string
-        stage_last_changed_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          nullable: true
-          type: string
-        status:
-          example: Open
-          minLength: 1
-          nullable: true
-          type: string
-        status_id:
-          example: "12345"
-          nullable: true
-          type: string
-        tags:
-          $ref: "#/components/schemas/Tags"
-        title:
-          example: New Rocket
-          minLength: 1
-          type: string
-        type:
-          example: Existing Customer - Upgrade
-          minLength: 1
-          nullable: true
-          type: string
-        updated_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
-        updated_by:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          type: string
-        win_probability:
-          example: 40
-          nullable: true
-          type: number
-        won_reason:
-          example: Best pitch
-          nullable: true
-          type: string
-        won_reason_id:
-          example: "12345"
-          nullable: true
-          type: string
-      required:
-        - title
-        - primary_contact_id
-      type: object
     Payment:
       properties:
         accounts_receivable_account_id:
@@ -5887,8 +5679,7 @@ components:
           readOnly: true
           type: string
         currency:
-          example: USD
-          type: string
+          $ref: "#/components/schemas/Currency"
         display_order:
           example: 1
           type: integer
@@ -5971,11 +5762,6 @@ components:
     TaxRate:
       additionalProperties: false
       properties:
-        active:
-          example: true
-          nullable: true
-          title: Active
-          type: boolean
         code:
           example: ABN
           minLength: 1
@@ -5991,13 +5777,13 @@ components:
                 title: Compound
                 type: boolean
               name:
-                example: City tax
+                example: GST
                 minLength: 1
                 type: string
               rate:
                 example: 10
                 nullable: true
-                title: Tax rate
+                title: TaxRate
                 type: number
           nullable: true
           title: Tax components
@@ -6007,7 +5793,7 @@ components:
         created_by:
           $ref: "#/components/schemas/CreatedBy"
         description:
-          example: No ABN Withholding
+          example: Reduced rate GST Purchases
           nullable: true
           title: Description
           type: string
@@ -6017,9 +5803,11 @@ components:
           title: Effective tax rate
           type: number
         id:
-          $ref: "#/components/schemas/Id"
+          example: "1234"
+          nullable: true
+          type: string
         name:
-          example: 15% GST on Expenses
+          example: GST on Purchases
           minLength: 1
           type: string
         original_tax_rate_id:
@@ -6030,6 +5818,16 @@ components:
           type: string
         row_version:
           $ref: "#/components/schemas/RowVersion"
+        status:
+          enum:
+            - active
+            - inactive
+            - archived
+          example: active
+          nullable: true
+          title: Tax rate status
+          type: string
+          x-graphql-type-name: TaxRateStatus
         tax_payable_account_id:
           description: Unique identifier for the account for tax collected.
           example: "123456"
@@ -6068,7 +5866,7 @@ components:
           type: number
         type:
           description: Tax type used to indicate the source of tax collected or paid
-          example: GST_VAT
+          example: NONE
           nullable: true
           title: Tax Type
           type: string

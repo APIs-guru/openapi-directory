@@ -239,7 +239,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Proxy API
-  version: 8.6.0
+  version: 8.7.1
   x-apideck-api: proxy
   x-apisguru-categories:
     - developer_tools
@@ -327,7 +327,7 @@ paths:
         - $ref: "#/components/parameters/x-apideck-downstream-authorization"
       requestBody:
         content:
-          application/json:
+          "*/*":
             schema:
               example:
                 addresses:
@@ -381,7 +381,7 @@ paths:
         - $ref: "#/components/parameters/x-apideck-downstream-authorization"
       requestBody:
         content:
-          application/json:
+          "*/*":
             schema:
               example:
                 addresses:
@@ -435,7 +435,7 @@ paths:
         - $ref: "#/components/parameters/x-apideck-downstream-authorization"
       requestBody:
         content:
-          application/json:
+          "*/*":
             schema:
               example:
                 addresses:

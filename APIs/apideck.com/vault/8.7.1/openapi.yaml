@@ -163,7 +163,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 8.6.0
+  version: 8.7.1
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1425,7 +1425,7 @@ paths:
                   isolation_mode: false,
                   session_length: '30m',
                   show_logs: true,
-                  show_suggestions: true
+                  show_suggestions: false
                 },
                 theme: {
                   favicon: 'https://res.cloudinary.com/apideck/icons/intercom',
@@ -2824,7 +2824,7 @@ components:
               title: Show logs
               type: boolean
             show_suggestions:
-              default: true
+              default: false
               description: Configure [Vault](/apis/vault/reference#section/Get-Started) to show the suggestions page. Defaults to `true`.
               title: Show suggestions
               type: boolean

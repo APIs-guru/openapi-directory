@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Connector API
-  version: 8.6.0
+  version: 8.7.1
   x-apideck-api: connector
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -574,7 +574,7 @@ paths:
             }
   "/connector/connectors/{id}/resources/{resource_id}":
     get:
-      description: Get ConnectorResource
+      description: Get Connector Resource
       operationId: connectorResourcesOne
       parameters:
         - $ref: "#/components/parameters/applicationId"
@@ -593,7 +593,7 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get ConnectorResource
+      summary: Get Connector Resource
       tags:
         - Connector Resources
       x-apideck-api: connector
