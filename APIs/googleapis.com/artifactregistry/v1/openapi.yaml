@@ -35,10 +35,10 @@ tags:
 paths:
   "/v1/{name}":
     get:
-      description: Gets a repository.
-      operationId: artifactregistry.projects.locations.repositories.get
+      description: Gets a docker image.
+      operationId: artifactregistry.projects.locations.repositories.dockerImages.get
       parameters:
-        - description: Required. The name of the repository to retrieve.
+        - description: Required. The name of the docker images.
           in: path
           name: name
           required: true
@@ -49,7 +49,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Repository"
+                $ref: "#/components/schemas/DockerImage"
           description: Successful response
       security:
         - Oauth2:
