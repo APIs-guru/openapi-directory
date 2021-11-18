@@ -61,10 +61,10 @@ paths:
       tags:
         - projects
     get:
-      description: Use this method to get details about a stream.
-      operationId: datastream.projects.locations.streams.get
+      description: Use this method to get details about a stream object.
+      operationId: datastream.projects.locations.streams.objects.get
       parameters:
-        - description: Required. The name of the stream resource to get.
+        - description: Required. The name of the stream object resource to get.
           in: path
           name: name
           required: true
@@ -75,7 +75,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Stream"
+                $ref: "#/components/schemas/StreamObject"
           description: Successful response
       security:
         - Oauth2:
@@ -338,6 +338,80 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1alpha1/{object}:startBackfillJob":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Starts backfill job for the specified stream object.
+      operationId: datastream.projects.locations.streams.objects.startBackfillJob
+      parameters:
+        - description: Required. The name of the stream object resource to start a backfill job for.
+          in: path
+          name: object
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StartBackfillJobResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{object}:stopBackfillJob":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Stops the backfill job for the specified stream object.
+      operationId: datastream.projects.locations.streams.objects.stopBackfillJob
+      parameters:
+        - description: Required. The name of the stream object resource to stop the backfill job for.
+          in: path
+          name: object
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StopBackfillJobResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1alpha1/{parent}/connectionProfiles":
     get:
       description: Use this method to list connection profiles created in a project and location.
@@ -476,6 +550,53 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1alpha1/{parent}/objects":
+    get:
+      description: Use this method to list the objects of a specific stream.
+      operationId: datastream.projects.locations.streams.objects.list
+      parameters:
+        - description: Required. The parent stream that owns the collection of objects.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of objects to return. Default is 50. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token received from a previous `ListStreamObjectsRequest` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListStreamObjectsRequest` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListStreamObjectsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1alpha1/{parent}/privateConnections":
     get:
       description: Use this method to list private connectivity configurations in a project and location.
@@ -906,6 +1027,45 @@ components:
           $ref: "#/components/schemas/OracleRdbms"
           description: Oracle data source objects to avoid backfilling.
       type: object
+    BackfillJob:
+      description: Represents a backfill job on a specific stream object.
+      properties:
+        errors:
+          description: Output only. Errors which caused the backfill job to fail.
+          items:
+            $ref: "#/components/schemas/Error"
+          readOnly: true
+          type: array
+        lastEndTime:
+          description: Output only. Backfill job's end time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        lastStartTime:
+          description: Output only. Backfill job's start time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        state:
+          description: Backfill job state.
+          enum:
+            - STATE_UNSPECIFIED
+            - NOT_STARTED
+            - PENDING
+            - ACTIVE
+            - STOPPED
+            - FAILED
+            - COMPLETED
+            - UNSUPPORTED
+          type: string
+        trigger:
+          description: Backfill job's triggering reason.
+          enum:
+            - TRIGGER_UNSPECIFIED
+            - AUTOMATIC
+            - MANUAL
+          type: string
+      type: object
     BackfillNoneStrategy:
       description: Backfill strategy to disable automatic backfill for the Stream's objects.
       properties: {}
@@ -1200,6 +1360,18 @@ components:
             type: string
           type: array
       type: object
+    ListStreamObjectsResponse:
+      description: Response containing the objects for a stream.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page.
+          type: string
+        streamObjects:
+          description: List of stream objects.
+          items:
+            $ref: "#/components/schemas/StreamObject"
+          type: array
+      type: object
     ListStreamsResponse:
       properties:
         nextPageToken:
@@ -1277,6 +1449,16 @@ components:
           items:
             $ref: "#/components/schemas/MysqlTable"
           type: array
+      type: object
+    MysqlObjectIdentifier:
+      description: Mysql data source object identifier.
+      properties:
+        database:
+          description: The database name.
+          type: string
+        table:
+          description: The table name.
+          type: string
       type: object
     MysqlProfile:
       description: MySQL database profile.
@@ -1454,6 +1636,16 @@ components:
           format: int32
           type: integer
       type: object
+    OracleObjectIdentifier:
+      description: Oracle data source object identifier.
+      properties:
+        schema:
+          description: The schema name.
+          type: string
+        table:
+          description: The table name.
+          type: string
+      type: object
     OracleProfile:
       description: Oracle database profile.
       properties:
@@ -1618,6 +1810,23 @@ components:
           description: Required. Source connection profile identifier.
           type: string
       type: object
+    SourceObjectIdentifier:
+      description: Represents an identifier of an object in the data source.
+      properties:
+        mysqlIdentifier:
+          $ref: "#/components/schemas/MysqlObjectIdentifier"
+          description: Mysql data source object identifier.
+        oracleIdentifier:
+          $ref: "#/components/schemas/OracleObjectIdentifier"
+          description: Oracle data source object identifier.
+      type: object
+    StartBackfillJobResponse:
+      description: Response for manually initiating a backfill job for a specific stream object.
+      properties:
+        object:
+          $ref: "#/components/schemas/StreamObject"
+          description: The stream object resource a backfill job was started for.
+      type: object
     StaticServiceIpConnectivity:
       description: Static IP address connectivity.
       properties: {}
@@ -1639,6 +1848,13 @@ components:
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
+      type: object
+    StopBackfillJobResponse:
+      description: Response for manually stop a backfill job for a specific stream object.
+      properties:
+        object:
+          $ref: "#/components/schemas/StreamObject"
+          description: The stream object resource the backfill job was stopped for.
       type: object
     Stream:
       properties:
@@ -1695,6 +1911,39 @@ components:
           type: string
         updateTime:
           description: Output only. The last update time of the stream.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    StreamObject:
+      description: A specific stream object (e.g a specific DB table).
+      properties:
+        backfillJob:
+          $ref: "#/components/schemas/BackfillJob"
+          description: The latest backfill job that was initiated for the stream object.
+        createTime:
+          description: Output only. The creation time of the object.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Required. Display name.
+          type: string
+        errors:
+          description: Output only. Active errors on the object.
+          items:
+            $ref: "#/components/schemas/Error"
+          readOnly: true
+          type: array
+        name:
+          description: Output only. The object's name.
+          readOnly: true
+          type: string
+        sourceObject:
+          $ref: "#/components/schemas/SourceObjectIdentifier"
+          description: The object identifier in the data source.
+        updateTime:
+          description: Output only. The last update time of the object.
           format: google-datetime
           readOnly: true
           type: string

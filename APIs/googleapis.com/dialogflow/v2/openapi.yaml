@@ -4768,6 +4768,9 @@ components:
     GoogleCloudDialogflowV2AnalyzeContentRequest:
       description: The request message for Participants.AnalyzeContent.
       properties:
+        assistQueryParams:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2AssistQueryParameters"
+          description: Parameters for a human assist query.
         eventInput:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2EventInput"
           description: An input event to send to Dialogflow.
@@ -4894,6 +4897,15 @@ components:
         uri:
           description: The article URI.
           type: string
+      type: object
+    GoogleCloudDialogflowV2AssistQueryParameters:
+      description: Represents the parameters of human assist query.
+      properties:
+        documentsMetadataFilters:
+          additionalProperties:
+            type: string
+          description: "Key-value filters on the metadata of documents returned by article suggestion. If specified, article suggestion only returns suggested documents that match all filters in their Document.metadata. Multiple values for a metadata key should be concatenated by comma. For example, filters to match all documents that have 'US' or 'CA' in their market metadata values and 'agent' in their user metadata values will be ``` documents_metadata_filters { key: \"market\" value: \"US,CA\" } documents_metadata_filters { key: \"user\" value: \"agent\" } ```"
+          type: object
       type: object
     GoogleCloudDialogflowV2AutomatedAgentConfig:
       description: Defines the Automated Agent to connect to a conversation.
@@ -6661,6 +6673,11 @@ components:
     GoogleCloudDialogflowV2Participant:
       description: Represents a conversation participant (human agent, virtual agent, end-user).
       properties:
+        documentsMetadataFilters:
+          additionalProperties:
+            type: string
+          description: "Optional. Key-value filters on the metadata of documents returned by article suggestion. If specified, article suggestion only returns suggested documents that match all filters in their Document.metadata. Multiple values for a metadata key should be concatenated by comma. For example, filters to match all documents that have 'US' or 'CA' in their market metadata values and 'agent' in their user metadata values will be ``` documents_metadata_filters { key: \"market\" value: \"US,CA\" } documents_metadata_filters { key: \"user\" value: \"agent\" } ```"
+          type: object
         name:
           description: "Optional. The unique identifier of this participant. Format: `projects//locations//conversations//participants/`."
           type: string
@@ -6892,6 +6909,9 @@ components:
     GoogleCloudDialogflowV2SuggestArticlesRequest:
       description: The request message for Participants.SuggestArticles.
       properties:
+        assistQueryParams:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2AssistQueryParameters"
+          description: Parameters for a human assist query.
         contextSize:
           description: Max number of messages prior to and including latest_message to use as context when compiling the suggestion. By default 20 and at most 50.
           format: int32
@@ -6919,6 +6939,9 @@ components:
     GoogleCloudDialogflowV2SuggestFaqAnswersRequest:
       description: The request message for Participants.SuggestFaqAnswers.
       properties:
+        assistQueryParams:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2AssistQueryParameters"
+          description: Parameters for a human assist query.
         contextSize:
           description: Max number of messages prior to and including [latest_message] to use as context when compiling the suggestion. By default 20 and at most 50.
           format: int32
@@ -6952,6 +6975,7 @@ components:
             - TYPE_UNSPECIFIED
             - ARTICLE_SUGGESTION
             - FAQ
+            - SMART_REPLY
           type: string
       type: object
     GoogleCloudDialogflowV2SuggestionResult:

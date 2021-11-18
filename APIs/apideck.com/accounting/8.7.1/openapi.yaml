@@ -1213,8 +1213,11 @@ paths:
                 invoice_date: '2020-09-30',
                 due_date: '2020-10-30',
                 po_number: '90000117',
+                reference: '123456',
                 status: 'submitted',
+                invoice_sent: true,
                 currency: 'USD',
+                currency_rate: 0.69,
                 tax_inclusive: true,
                 sub_total: 27500,
                 total_tax: 2500,
@@ -1462,8 +1465,11 @@ paths:
                 invoice_date: '2020-09-30',
                 due_date: '2020-10-30',
                 po_number: '90000117',
+                reference: '123456',
                 status: 'submitted',
+                invoice_sent: true,
                 currency: 'USD',
+                currency_rate: 0.69,
                 tax_inclusive: true,
                 sub_total: 27500,
                 total_tax: 2500,
@@ -4195,6 +4201,12 @@ components:
           name: ZMW
         - description: Bitcoin
           name: BTC
+    CurrencyRate:
+      description: Currency Exchange Rate at the time entity was recorded/generated.
+      example: 0.69
+      nullable: true
+      title: Currency Exchange Rate
+      type: number
     CustomField:
       additionalProperties: false
       properties:
@@ -4910,6 +4922,8 @@ components:
           $ref: "#/components/schemas/CreatedBy"
         currency:
           $ref: "#/components/schemas/Currency"
+        currency_rate:
+          $ref: "#/components/schemas/CurrencyRate"
         customer:
           $ref: "#/components/schemas/LinkedCustomer"
           x-graphql-type-name: AccountingLinkedCustomer
@@ -4939,6 +4953,11 @@ components:
           format: date
           title: Invoice date
           type: string
+        invoice_sent:
+          description: Invoice sent to contact/customer
+          example: true
+          title: Invoice Sent
+          type: boolean
         line_items:
           items:
             $ref: "#/components/schemas/InvoiceLineItem"
@@ -4954,6 +4973,12 @@ components:
           nullable: true
           title: Purchase Order number
           type: string
+        reference:
+          description: Optional invoice reference.
+          example: "123456"
+          nullable: true
+          title: Invoice reference
+          type: string
         row_version:
           $ref: "#/components/schemas/RowVersion"
         shipping_address:
@@ -4963,6 +4988,7 @@ components:
           enum:
             - draft
             - submitted
+            - authorised
             - partially_paid
             - paid
             - void
@@ -4994,6 +5020,7 @@ components:
             - credit
             - service
             - product
+            - supplier
             - other
           example: service
           nullable: true
@@ -5422,9 +5449,8 @@ components:
           type: string
         id:
           example: "123456"
+          nullable: true
           type: string
-      required:
-        - id
       type: object
       x-graphql-type-name: LinkedTaxRate
     Links:
@@ -5568,11 +5594,7 @@ components:
         currency:
           $ref: "#/components/schemas/Currency"
         currency_rate:
-          description: Exchange rate when payment is received
-          example: 0.69
-          nullable: true
-          title: Currency exchange Rate
-          type: number
+          $ref: "#/components/schemas/CurrencyRate"
         customer:
           $ref: "#/components/schemas/LinkedCustomer"
           x-graphql-type-name: AccountingLinkedCustomer
