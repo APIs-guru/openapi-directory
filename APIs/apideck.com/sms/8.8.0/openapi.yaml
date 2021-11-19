@@ -6,9 +6,9 @@ info:
     email: hello@apideck.com
     url: https://developers.apideck.com
   description: |
-    Welcome to the hris.
+    Welcome to the sms.
 
-    You can use this API to access all hris endpoints.
+    You can use this API to access all sms endpoints.
 
     ## Base URL
 
@@ -265,9 +265,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: hris
-  version: 8.7.1
-  x-apideck-api: hris
+  title: sms
+  version: 8.8.0
+  x-apideck-api: sms
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -275,10 +275,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/hris.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/sms.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: hris
+  x-serviceName: sms
   x-tags:
     - partner
 externalDocs:
@@ -288,18 +288,14 @@ security:
   - apiKey: []
 tags:
   - description: ""
-    name: Employees
+    name: Messages
     x-apideck-model:
-      $ref: "#/components/schemas/Employee"
-  - description: ""
-    name: Companies
-    x-apideck-model:
-      $ref: "#/components/schemas/HrisCompany"
+      $ref: "#/components/schemas/Message"
 paths:
-  /hris/companies:
+  /sms/messages:
     get:
-      description: List Companies
-      operationId: companiesAll
+      description: List Messages
+      operationId: messagesAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -309,7 +305,7 @@ paths:
         - $ref: "#/components/parameters/limit"
       responses:
         "200":
-          $ref: "#/components/responses/GetHrisCompaniesResponse"
+          $ref: "#/components/responses/GetMessagesResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -324,10 +320,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Companies
+      summary: List Messages
       tags:
-        - Companies
-      x-apideck-api: hris
+        - Messages
+      x-apideck-api: sms
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -341,15 +337,15 @@ paths:
             })
 
             try {
-              const { data } = await apideck.hris.companiesAll({})
+              const { data } = await apideck.sms.messagesAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: hrisCompanies
+      x-graphql-field-name: messages
     post:
-      description: Create Company
-      operationId: companiesAdd
+      description: Create Message
+      operationId: messagesAdd
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -359,11 +355,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/HrisCompany"
+              $ref: "#/components/schemas/Message"
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateHrisCompanyResponse"
+          $ref: "#/components/responses/CreateMessageResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -378,10 +374,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Create Company
+      summary: Create Message
       tags:
-        - Companies
-      x-apideck-api: hris
+        - Messages
+      x-apideck-api: sms
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -395,23 +391,29 @@ paths:
             })
 
             const params = {
-              company: {
-                legal_name: 'SpaceX',
-                display_name: 'SpaceX',
-                debtor_id: '12345'
+              message: {
+                from: '+15017122661',
+                to: '+15017122662',
+                subject: 'Picture',
+                body: 'Hi! How are you doing?',
+                type: 'sms',
+                scheduled_at: '2020-09-30T07:43:32.000Z',
+                webhook_url: 'https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms',
+                reference: 'CUST001',
+                messaging_service_id: '123456'
               }
             }
 
             try {
-              const { data } = await apideck.hris.companiesAdd(params)
+              const { data } = await apideck.sms.messagesAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/hris/companies/{id}":
+  "/sms/messages/{id}":
     delete:
-      description: Delete Company
-      operationId: companiesDelete
+      description: Delete Message
+      operationId: messagesDelete
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -420,7 +422,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteHrisCompanyResponse"
+          $ref: "#/components/responses/DeleteMessageResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -435,10 +437,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Delete Company
+      summary: Delete Message
       tags:
-        - Companies
-      x-apideck-api: hris
+        - Messages
+      x-apideck-api: sms
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -452,7 +454,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.hris.companiesDelete({
+              const { data } = await apideck.sms.messagesDelete({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -460,8 +462,8 @@ paths:
               console.error(error)
             }
     get:
-      description: Get Company
-      operationId: companiesOne
+      description: Get Message
+      operationId: messagesOne
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -470,7 +472,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetHrisCompanyResponse"
+          $ref: "#/components/responses/GetMessageResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -485,10 +487,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Company
+      summary: Get Message
       tags:
-        - Companies
-      x-apideck-api: hris
+        - Messages
+      x-apideck-api: sms
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -502,7 +504,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.hris.companiesOne({
+              const { data } = await apideck.sms.messagesOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -510,8 +512,8 @@ paths:
               console.error(error)
             }
     patch:
-      description: Update Company
-      operationId: companiesUpdate
+      description: Update Message
+      operationId: messagesUpdate
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -522,11 +524,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/HrisCompany"
+              $ref: "#/components/schemas/Message"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateHrisCompanyResponse"
+          $ref: "#/components/responses/UpdateMessageResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -541,10 +543,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Update Company
+      summary: Update Message
       tags:
-        - Companies
-      x-apideck-api: hris
+        - Messages
+      x-apideck-api: sms
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -559,525 +561,21 @@ paths:
 
             const params = {
               id: 'id_example',
-              company: {
-                legal_name: 'SpaceX',
-                display_name: 'SpaceX',
-                debtor_id: '12345'
+              message: {
+                from: '+15017122661',
+                to: '+15017122662',
+                subject: 'Picture',
+                body: 'Hi! How are you doing?',
+                type: 'sms',
+                scheduled_at: '2020-09-30T07:43:32.000Z',
+                webhook_url: 'https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms',
+                reference: 'CUST001',
+                messaging_service_id: '123456'
               }
             }
 
             try {
-              const { data } = await apideck.hris.companiesUpdate(params)
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  /hris/employees:
-    get:
-      description: List Employees
-      operationId: employeesAll
-      parameters:
-        - $ref: "#/components/parameters/raw"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/cursor"
-        - $ref: "#/components/parameters/limit"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetEmployeesResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: List Employees
-      tags:
-        - Employees
-      x-apideck-api: hris
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.hris.employeesAll({})
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-      x-graphql-field-name: employees
-    post:
-      description: Create Employee
-      operationId: employeesAdd
-      parameters:
-        - $ref: "#/components/parameters/raw"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Employee"
-        required: true
-      responses:
-        "201":
-          $ref: "#/components/responses/CreateEmployeeResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Create Employee
-      tags:
-        - Employees
-      x-apideck-api: hris
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            const params = {
-              employee: {
-                first_name: 'Elon',
-                last_name: 'Musk',
-                middle_name: 'D.',
-                display_name: 'Technoking',
-                preffered_name: 'Elon Musk',
-                initials: 'EM',
-                salutation: 'Mr',
-                title: 'CEO',
-                marital_status: 'Maried',
-                picture_url: 'https://example.com/picture.jpg',
-                division: 'Europe',
-                department: 'R&D',
-                team: {
-                  id: '1234',
-                  name: 'Full Stack Engineers'
-                },
-                company_id: '23456',
-                company_name: 'SpaceX',
-                employment_start_date: '2021-10-26',
-                employment_end_date: '2028-10-26',
-                employee_number: '123456-AB',
-                employment_status: 'active',
-                manager_id: '23456',
-                social_security_number: '123456789',
-                birthday: '2000-08-12',
-                country_of_birth: 'US',
-                description: 'A description',
-                gender: 'male',
-                prefered_language: 'EN',
-                languages: ['EN'],
-                nationalities: ['US'],
-                jobs: [
-                  {
-                    title: 'CEO',
-                    compensation_rate: 'year',
-                    hired_at: '2020-08-12',
-                    is_primary: true,
-                    payment_unit: 'year',
-                    location: {
-                      id: '123',
-                      type: 'primary',
-                      string: '25 Spring Street, Blackburn, VIC 3130',
-                      name: 'HQ US',
-                      line1: 'Main street',
-                      line2: 'apt #',
-                      street_number: '25',
-                      city: 'San Francisco',
-                      state: 'CA',
-                      postal_code: '94104',
-                      country: 'US',
-                      latitude: '40.759211',
-                      longitude: '-73.984638',
-                      county: 'Santa Clara',
-                      contact_name: 'Elon Musk',
-                      salutation: 'Mr',
-                      phone_number: '111-111-1111',
-                      fax: '122-111-1111',
-                      email: 'elon@musk.com',
-                      website: 'https://elonmusk.com'
-                    },
-                    compensations: [
-                      {
-                        id: '3404301363494309004',
-                        job_id: '3490439050957906679',
-                        rate: '50.00',
-                        payment_unit: 'hour',
-                        flsa_status: 'nonexempt',
-                        effective_date: '2021-06-11'
-                      }
-                    ]
-                  }
-                ],
-                addresses: [
-                  {
-                    id: '123',
-                    type: 'primary',
-                    string: '25 Spring Street, Blackburn, VIC 3130',
-                    name: 'HQ US',
-                    line1: 'Main street',
-                    line2: 'apt #',
-                    street_number: '25',
-                    city: 'San Francisco',
-                    state: 'CA',
-                    postal_code: '94104',
-                    country: 'US',
-                    latitude: '40.759211',
-                    longitude: '-73.984638',
-                    county: 'Santa Clara',
-                    contact_name: 'Elon Musk',
-                    salutation: 'Mr',
-                    phone_number: '111-111-1111',
-                    fax: '122-111-1111',
-                    email: 'elon@musk.com',
-                    website: 'https://elonmusk.com'
-                  }
-                ],
-                phone_numbers: [
-                  {
-                    id: '12345',
-                    country_code: '1',
-                    area_code: '323',
-                    number: '111-111-1111',
-                    type: 'primary'
-                  }
-                ],
-                emails: [
-                  {
-                    id: '123',
-                    email: 'elon@musk.com',
-                    type: 'primary'
-                  }
-                ],
-                custom_fields: [
-                  {
-                    id: '2389328923893298',
-                    name: 'employee_level',
-                    description: 'Employee Level',
-                    value: 'Uses Salesforce and Marketo'
-                  }
-                ]
-              }
-            }
-
-            try {
-              const { data } = await apideck.hris.employeesAdd(params)
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  "/hris/employees/{id}":
-    delete:
-      description: Delete Employee
-      operationId: employeesDelete
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/DeleteEmployeeResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Delete Employee
-      tags:
-        - Employees
-      x-apideck-api: hris
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.hris.employeesDelete({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-    get:
-      description: Get Employee
-      operationId: employeesOne
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetEmployeeResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Get Employee
-      tags:
-        - Employees
-      x-apideck-api: hris
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.hris.employeesOne({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-    patch:
-      description: Update Employee
-      operationId: employeesUpdate
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Employee"
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/UpdateEmployeeResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Update Employee
-      tags:
-        - Employees
-      x-apideck-api: hris
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            const params = {
-              id: 'id_example',
-              employee: {
-                first_name: 'Elon',
-                last_name: 'Musk',
-                middle_name: 'D.',
-                display_name: 'Technoking',
-                preffered_name: 'Elon Musk',
-                initials: 'EM',
-                salutation: 'Mr',
-                title: 'CEO',
-                marital_status: 'Maried',
-                picture_url: 'https://example.com/picture.jpg',
-                division: 'Europe',
-                department: 'R&D',
-                team: {
-                  id: '1234',
-                  name: 'Full Stack Engineers'
-                },
-                company_id: '23456',
-                company_name: 'SpaceX',
-                employment_start_date: '2021-10-26',
-                employment_end_date: '2028-10-26',
-                employee_number: '123456-AB',
-                employment_status: 'active',
-                manager_id: '23456',
-                social_security_number: '123456789',
-                birthday: '2000-08-12',
-                country_of_birth: 'US',
-                description: 'A description',
-                gender: 'male',
-                prefered_language: 'EN',
-                languages: ['EN'],
-                nationalities: ['US'],
-                jobs: [
-                  {
-                    title: 'CEO',
-                    compensation_rate: 'year',
-                    hired_at: '2020-08-12',
-                    is_primary: true,
-                    payment_unit: 'year',
-                    location: {
-                      id: '123',
-                      type: 'primary',
-                      string: '25 Spring Street, Blackburn, VIC 3130',
-                      name: 'HQ US',
-                      line1: 'Main street',
-                      line2: 'apt #',
-                      street_number: '25',
-                      city: 'San Francisco',
-                      state: 'CA',
-                      postal_code: '94104',
-                      country: 'US',
-                      latitude: '40.759211',
-                      longitude: '-73.984638',
-                      county: 'Santa Clara',
-                      contact_name: 'Elon Musk',
-                      salutation: 'Mr',
-                      phone_number: '111-111-1111',
-                      fax: '122-111-1111',
-                      email: 'elon@musk.com',
-                      website: 'https://elonmusk.com'
-                    },
-                    compensations: [
-                      {
-                        id: '3404301363494309004',
-                        job_id: '3490439050957906679',
-                        rate: '50.00',
-                        payment_unit: 'hour',
-                        flsa_status: 'nonexempt',
-                        effective_date: '2021-06-11'
-                      }
-                    ]
-                  }
-                ],
-                addresses: [
-                  {
-                    id: '123',
-                    type: 'primary',
-                    string: '25 Spring Street, Blackburn, VIC 3130',
-                    name: 'HQ US',
-                    line1: 'Main street',
-                    line2: 'apt #',
-                    street_number: '25',
-                    city: 'San Francisco',
-                    state: 'CA',
-                    postal_code: '94104',
-                    country: 'US',
-                    latitude: '40.759211',
-                    longitude: '-73.984638',
-                    county: 'Santa Clara',
-                    contact_name: 'Elon Musk',
-                    salutation: 'Mr',
-                    phone_number: '111-111-1111',
-                    fax: '122-111-1111',
-                    email: 'elon@musk.com',
-                    website: 'https://elonmusk.com'
-                  }
-                ],
-                phone_numbers: [
-                  {
-                    id: '12345',
-                    country_code: '1',
-                    area_code: '323',
-                    number: '111-111-1111',
-                    type: 'primary'
-                  }
-                ],
-                emails: [
-                  {
-                    id: '123',
-                    email: 'elon@musk.com',
-                    type: 'primary'
-                  }
-                ],
-                custom_fields: [
-                  {
-                    id: '2389328923893298',
-                    name: 'employee_level',
-                    description: 'Employee Level',
-                    value: 'Uses Salesforce and Marketo'
-                  }
-                ]
-              }
-            }
-
-            try {
-              const { data } = await apideck.hris.employeesUpdate(params)
+              const { data } = await apideck.sms.messagesUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -1141,54 +639,30 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    CreateEmployeeResponse:
+    CreateMessageResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateEmployeeResponse"
-      description: Employees
-    CreateHrisCompanyResponse:
+            $ref: "#/components/schemas/CreateMessageResponse"
+      description: Messages
+    DeleteMessageResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateHrisCompanyResponse"
-      description: Companies
-    DeleteEmployeeResponse:
+            $ref: "#/components/schemas/DeleteMessageResponse"
+      description: Messages
+    GetMessageResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteEmployeeResponse"
-      description: Employees
-    DeleteHrisCompanyResponse:
+            $ref: "#/components/schemas/GetMessageResponse"
+      description: Messages
+    GetMessagesResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteHrisCompanyResponse"
-      description: Companies
-    GetEmployeeResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/GetEmployeeResponse"
-      description: Employees
-    GetEmployeesResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/GetEmployeesResponse"
-      description: Employees
-    GetHrisCompaniesResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/GetHrisCompaniesResponse"
-      description: Company
-    GetHrisCompanyResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/GetHrisCompanyResponse"
-      description: Companies
+            $ref: "#/components/schemas/GetMessagesResponse"
+      description: Messages
     NotFoundResponse:
       content:
         application/json:
@@ -1225,119 +699,13 @@ components:
           schema:
             $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
-    UpdateEmployeeResponse:
+    UpdateMessageResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateEmployeeResponse"
-      description: Employees
-    UpdateHrisCompanyResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/UpdateHrisCompanyResponse"
-      description: Companies
+            $ref: "#/components/schemas/UpdateMessageResponse"
+      description: Messages
   schemas:
-    Address:
-      properties:
-        city:
-          description: Name of city.
-          example: San Francisco
-          nullable: true
-          type: string
-        contact_name:
-          example: Elon Musk
-          nullable: true
-          type: string
-        country:
-          description: country code according to ISO 3166-1 alpha-2.
-          example: US
-          nullable: true
-          type: string
-        county:
-          description: Address field that holds a sublocality, such as a county
-          example: Santa Clara
-          nullable: true
-          type: string
-        email:
-          example: elon@musk.com
-          nullable: true
-          type: string
-        fax:
-          example: 122-111-1111
-          nullable: true
-          type: string
-        id:
-          example: "123"
-          nullable: true
-          type: string
-        latitude:
-          example: "40.759211"
-          nullable: true
-          type: string
-        line1:
-          description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
-          example: Main street
-          nullable: true
-          type: string
-        line2:
-          description: Line 2 of the address
-          example: "apt #"
-          nullable: true
-          type: string
-        longitude:
-          example: "-73.984638"
-          nullable: true
-          type: string
-        name:
-          example: HQ US
-          nullable: true
-          type: string
-        phone_number:
-          example: 111-111-1111
-          nullable: true
-          type: string
-        postal_code:
-          description: Zip code or equivalent.
-          example: "94104"
-          nullable: true
-          type: string
-        salutation:
-          example: Mr
-          nullable: true
-          type: string
-        state:
-          description: Name of state
-          example: CA
-          nullable: true
-          type: string
-        street_number:
-          description: Street number
-          example: "25"
-          nullable: true
-          type: string
-        string:
-          example: 25 Spring Street, Blackburn, VIC 3130
-          nullable: true
-          title: The address string. Some APIs don't provide structured address data.
-          type: string
-        type:
-          enum:
-            - primary
-            - secondary
-            - home
-            - office
-            - shipping
-            - billing
-            - other
-          example: primary
-          type: string
-          x-graphql-type-name: AddressType
-        website:
-          example: https://elonmusk.com
-          nullable: true
-          type: string
-      type: object
     BadRequestResponse:
       properties:
         detail:
@@ -1369,17 +737,7 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
-    CompanyId:
-      example: "23456"
-      nullable: true
-      title: Company ID
-      type: string
-    CompanyName:
-      example: SpaceX
-      nullable: true
-      title: Company name
-      type: string
-    CreateEmployeeResponse:
+    CreateMessageResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -1389,11 +747,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Employees
+          example: Messages
           type: string
         service:
           description: Apideck ID of service provider
-          example: sage-hr
+          example: twilio
           type: string
         status:
           description: HTTP Response Status
@@ -1411,48 +769,558 @@ components:
         - operation
         - data
       type: object
-    CreateHrisCompanyResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Companies
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: undefined
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-    CreatedAt:
-      example: 2020-09-30T07:43:32.000Z
-      format: date-time
-      readOnly: true
-      type: string
-    CreatedBy:
-      example: "12345"
+    Currency:
+      description: Indicates the associated currency for an amount of money. Values correspond to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
+      enum:
+        - UNKNOWN_CURRENCY
+        - AED
+        - AFN
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - ARS
+        - AUD
+        - AWG
+        - AZN
+        - BAM
+        - BBD
+        - BDT
+        - BGN
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BOV
+        - BRL
+        - BSD
+        - BTN
+        - BWP
+        - BYR
+        - BZD
+        - CAD
+        - CDF
+        - CHE
+        - CHF
+        - CHW
+        - CLF
+        - CLP
+        - CNY
+        - COP
+        - COU
+        - CRC
+        - CUC
+        - CUP
+        - CVE
+        - CZK
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - EGP
+        - ERN
+        - ETB
+        - EUR
+        - FJD
+        - FKP
+        - GBP
+        - GEL
+        - GHS
+        - GIP
+        - GMD
+        - GNF
+        - GTQ
+        - GYD
+        - HKD
+        - HNL
+        - HRK
+        - HTG
+        - HUF
+        - IDR
+        - ILS
+        - INR
+        - IQD
+        - IRR
+        - ISK
+        - JMD
+        - JOD
+        - JPY
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LTL
+        - LVL
+        - LYD
+        - MAD
+        - MDL
+        - MGA
+        - MKD
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MUR
+        - MVR
+        - MWK
+        - MXN
+        - MXV
+        - MYR
+        - MZN
+        - NAD
+        - NGN
+        - NIO
+        - NOK
+        - NPR
+        - NZD
+        - OMR
+        - PAB
+        - PEN
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PYG
+        - QAR
+        - RON
+        - RSD
+        - RUB
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDG
+        - SEK
+        - SGD
+        - SHP
+        - SLL
+        - SOS
+        - SRD
+        - SSP
+        - STD
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJS
+        - TMT
+        - TND
+        - TOP
+        - TRC
+        - TRY
+        - TTD
+        - TWD
+        - TZS
+        - UAH
+        - UGX
+        - USD
+        - USN
+        - USS
+        - UYI
+        - UYU
+        - UZS
+        - VEF
+        - VND
+        - VUV
+        - WST
+        - XAF
+        - XAG
+        - XAU
+        - XBA
+        - XBB
+        - XBC
+        - XBD
+        - XCD
+        - XDR
+        - XOF
+        - XPD
+        - XPF
+        - XPT
+        - XTS
+        - XXX
+        - YER
+        - ZAR
+        - ZMK
+        - ZMW
+        - BTC
+      example: USD
       nullable: true
-      readOnly: true
+      title: Currency
       type: string
+      x-enum-elements:
+        - description: Unknown currency
+          name: UNKNOWN_CURRENCY
+        - description: United Arab Emirates dirham
+          name: AED
+        - description: Afghan afghani
+          name: AFN
+        - description: Albanian lek
+          name: ALL
+        - description: Armenian dram
+          name: AMD
+        - description: Netherlands Antillean guilder
+          name: ANG
+        - description: Angolan kwanza
+          name: AOA
+        - description: Argentine peso
+          name: ARS
+        - description: Australian dollar
+          name: AUD
+        - description: Aruban florin
+          name: AWG
+        - description: Azerbaijani manat
+          name: AZN
+        - description: Bosnia and Herzegovina convertible mark
+          name: BAM
+        - description: Barbados dollar
+          name: BBD
+        - description: Bangladeshi taka
+          name: BDT
+        - description: Bulgarian lev
+          name: BGN
+        - description: Bahraini dinar
+          name: BHD
+        - description: Burundian franc
+          name: BIF
+        - description: Bermudian dollar
+          name: BMD
+        - description: Brunei dollar
+          name: BND
+        - description: Boliviano
+          name: BOB
+        - description: Bolivian Mvdol
+          name: BOV
+        - description: Brazilian real
+          name: BRL
+        - description: Bahamian dollar
+          name: BSD
+        - description: Bhutanese ngultrum
+          name: BTN
+        - description: Botswana pula
+          name: BWP
+        - description: Belarusian ruble
+          name: BYR
+        - description: Belize dollar
+          name: BZD
+        - description: Canadian dollar
+          name: CAD
+        - description: Congolese franc
+          name: CDF
+        - description: WIR Euro
+          name: CHE
+        - description: Swiss franc
+          name: CHF
+        - description: WIR Franc
+          name: CHW
+        - description: Unidad de Fomento
+          name: CLF
+        - description: Chilean peso
+          name: CLP
+        - description: Chinese yuan
+          name: CNY
+        - description: Colombian peso
+          name: COP
+        - description: Unidad de Valor Real
+          name: COU
+        - description: Costa Rican colon
+          name: CRC
+        - description: Cuban convertible peso
+          name: CUC
+        - description: Cuban peso
+          name: CUP
+        - description: Cape Verdean escudo
+          name: CVE
+        - description: Czech koruna
+          name: CZK
+        - description: Djiboutian franc
+          name: DJF
+        - description: Danish krone
+          name: DKK
+        - description: Dominican peso
+          name: DOP
+        - description: Algerian dinar
+          name: DZD
+        - description: Egyptian pound
+          name: EGP
+        - description: Eritrean nakfa
+          name: ERN
+        - description: Ethiopian birr
+          name: ETB
+        - description: Euro
+          name: EUR
+        - description: Fiji dollar
+          name: FJD
+        - description: Falkland Islands pound
+          name: FKP
+        - description: Pound sterling
+          name: GBP
+        - description: Georgian lari
+          name: GEL
+        - description: Ghanaian cedi
+          name: GHS
+        - description: Gibraltar pound
+          name: GIP
+        - description: Gambian dalasi
+          name: GMD
+        - description: Guinean franc
+          name: GNF
+        - description: Guatemalan quetzal
+          name: GTQ
+        - description: Guyanese dollar
+          name: GYD
+        - description: Hong Kong dollar
+          name: HKD
+        - description: Honduran lempira
+          name: HNL
+        - description: Croatian kuna
+          name: HRK
+        - description: Haitian gourde
+          name: HTG
+        - description: Hungarian forint
+          name: HUF
+        - description: Indonesian rupiah
+          name: IDR
+        - description: Israeli new shekel
+          name: ILS
+        - description: Indian rupee
+          name: INR
+        - description: Iraqi dinar
+          name: IQD
+        - description: Iranian rial
+          name: IRR
+        - description: Icelandic króna
+          name: ISK
+        - description: Jamaican dollar
+          name: JMD
+        - description: Jordanian dinar
+          name: JOD
+        - description: Japanese yen
+          name: JPY
+        - description: Kenyan shilling
+          name: KES
+        - description: Kyrgyzstani som
+          name: KGS
+        - description: Cambodian riel
+          name: KHR
+        - description: Comoro franc
+          name: KMF
+        - description: North Korean won
+          name: KPW
+        - description: South Korean won
+          name: KRW
+        - description: Kuwaiti dinar
+          name: KWD
+        - description: Cayman Islands dollar
+          name: KYD
+        - description: Kazakhstani tenge
+          name: KZT
+        - description: Lao kip
+          name: LAK
+        - description: Lebanese pound
+          name: LBP
+        - description: Sri Lankan rupee
+          name: LKR
+        - description: Liberian dollar
+          name: LRD
+        - description: Lesotho loti
+          name: LSL
+        - description: Lithuanian litas
+          name: LTL
+        - description: Latvian lats
+          name: LVL
+        - description: Libyan dinar
+          name: LYD
+        - description: Moroccan dirham
+          name: MAD
+        - description: Moldovan leu
+          name: MDL
+        - description: Malagasy ariary
+          name: MGA
+        - description: Macedonian denar
+          name: MKD
+        - description: Myanmar kyat
+          name: MMK
+        - description: Mongolian tögrög
+          name: MNT
+        - description: Macanese pataca
+          name: MOP
+        - description: Mauritanian ouguiya
+          name: MRO
+        - description: Mauritian rupee
+          name: MUR
+        - description: Maldivian rufiyaa
+          name: MVR
+        - description: Malawian kwacha
+          name: MWK
+        - description: Mexican peso
+          name: MXN
+        - description: Mexican Unidad de Inversion
+          name: MXV
+        - description: Malaysian ringgit
+          name: MYR
+        - description: Mozambican metical
+          name: MZN
+        - description: Namibian dollar
+          name: NAD
+        - description: Nigerian naira
+          name: NGN
+        - description: Nicaraguan córdoba
+          name: NIO
+        - description: Norwegian krone
+          name: NOK
+        - description: Nepalese rupee
+          name: NPR
+        - description: New Zealand dollar
+          name: NZD
+        - description: Omani rial
+          name: OMR
+        - description: Panamanian balboa
+          name: PAB
+        - description: Peruvian sol
+          name: PEN
+        - description: Papua New Guinean kina
+          name: PGK
+        - description: Philippine peso
+          name: PHP
+        - description: Pakistani rupee
+          name: PKR
+        - description: Polish złoty
+          name: PLN
+        - description: Paraguayan guaraní
+          name: PYG
+        - description: Qatari riyal
+          name: QAR
+        - description: Romanian leu
+          name: RON
+        - description: Serbian dinar
+          name: RSD
+        - description: Russian ruble
+          name: RUB
+        - description: Rwandan franc
+          name: RWF
+        - description: Saudi riyal
+          name: SAR
+        - description: Solomon Islands dollar
+          name: SBD
+        - description: Seychelles rupee
+          name: SCR
+        - description: Sudanese pound
+          name: SDG
+        - description: Swedish krona
+          name: SEK
+        - description: Singapore dollar
+          name: SGD
+        - description: Saint Helena pound
+          name: SHP
+        - description: Sierra Leonean leone
+          name: SLL
+        - description: Somali shilling
+          name: SOS
+        - description: Surinamese dollar
+          name: SRD
+        - description: South Sudanese pound
+          name: SSP
+        - description: São Tomé and Príncipe dobra
+          name: STD
+        - description: Salvadoran colón
+          name: SVC
+        - description: Syrian pound
+          name: SYP
+        - description: Swazi lilangeni
+          name: SZL
+        - description: Thai baht
+          name: THB
+        - description: Tajikstani somoni
+          name: TJS
+        - description: Turkmenistan manat
+          name: TMT
+        - description: Tunisian dinar
+          name: TND
+        - description: Tongan pa'anga
+          name: TOP
+        - description: Turkish lira
+          name: TRY
+        - description: Trinidad and Tobago dollar
+          name: TTD
+        - description: New Taiwan dollar
+          name: TWD
+        - description: Tanzanian shilling
+          name: TZS
+        - description: Ukrainian hryvnia
+          name: UAH
+        - description: Ugandan shilling
+          name: UGX
+        - description: United States dollar
+          name: USD
+        - description: United States dollar (next day)
+          name: USN
+        - description: United States dollar (same day)
+          name: USS
+        - description: Uruguay Peso en Unidedades Indexadas
+          name: UYI
+        - description: Uruguyan peso
+          name: UYU
+        - description: Uzbekistan som
+          name: UZS
+        - description: Venezuelan bolívar soberano
+          name: VEF
+        - description: Vietnamese đồng
+          name: VND
+        - description: Vanuatu vatu
+          name: VUV
+        - description: Samoan tala
+          name: WST
+        - description: CFA franc BEAC
+          name: XAF
+        - description: Silver
+          name: XAG
+        - description: Gold
+          name: XAU
+        - description: European Composite Unit
+          name: XBA
+        - description: European Monetary Unit
+          name: XBB
+        - description: European Unit of Account 9
+          name: XBC
+        - description: European Unit of Account 17
+          name: XBD
+        - description: East Caribbean dollar
+          name: XCD
+        - description: Special drawing rights (International Monetary Fund)
+          name: XDR
+        - description: CFA franc BCEAO
+          name: XOF
+        - description: Palladium
+          name: XPD
+        - description: CFP franc
+          name: XPF
+        - description: Platinum
+          name: XPT
+        - description: Code reserved for testing
+          name: XTS
+        - description: No currency
+          name: XXX
+        - description: Yemeni rial
+          name: YER
+        - description: South African rand
+          name: ZAR
+        - description: Zambian kwacha
+          name: ZMK
+        - description: Zambian kwacha
+          name: ZMW
+        - description: Bitcoin
+          name: BTC
     CustomField:
       additionalProperties: false
       properties:
@@ -1487,7 +1355,7 @@ components:
       required:
         - id
       type: object
-    DeleteEmployeeResponse:
+    DeleteMessageResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -1497,11 +1365,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Employees
+          example: Messages
           type: string
         service:
           description: Apideck ID of service provider
-          example: sage-hr
+          example: twilio
           type: string
         status:
           description: HTTP Response Status
@@ -1519,55 +1387,6 @@ components:
         - operation
         - data
       type: object
-    DeleteHrisCompanyResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Companies
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: undefined
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-    Department:
-      description: The department the user is currently in.
-      example: R&D
-      nullable: true
-      title: Department
-      type: string
-    Description:
-      example: A description
-      nullable: true
-      title: Description
-      type: string
-    Division:
-      description: The division the user is currently in.
-      example: Europe
-      nullable: true
-      title: Division
-      type: string
     Email:
       properties:
         email:
@@ -1592,260 +1411,21 @@ components:
       required:
         - email
       type: object
-    Employee:
-      additionalProperties: false
-      properties:
-        addresses:
-          items:
-            $ref: "#/components/schemas/Address"
-          type: array
-        birthday:
-          example: 2000-08-12
-          format: date
-          nullable: true
-          type: string
-        company_id:
-          $ref: "#/components/schemas/CompanyId"
-        company_name:
-          $ref: "#/components/schemas/CompanyName"
-        country_of_birth:
-          description: country code according to ISO 3166-1 alpha-2.
-          example: US
-          nullable: true
-          type: string
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        created_by:
-          $ref: "#/components/schemas/CreatedBy"
-        custom_fields:
-          items:
-            $ref: "#/components/schemas/CustomField"
-          type: array
-        department:
-          $ref: "#/components/schemas/Department"
-        description:
-          $ref: "#/components/schemas/Description"
-        display_name:
-          example: Technoking
-          nullable: true
-          title: Display name
-          type: string
-        division:
-          $ref: "#/components/schemas/Division"
-        emails:
-          items:
-            $ref: "#/components/schemas/Email"
-          type: array
-        employee_number:
-          $ref: "#/components/schemas/EmployeeNumber"
-        employment_end_date:
-          description: A Start Date is the date that the employee ended working at the company
-          example: 2028-10-26
-          nullable: true
-          title: Employee end date
-          type: string
-        employment_start_date:
-          description: A Start Date is the date that the employee started working at the company
-          example: 2021-10-26
-          nullable: true
-          title: Employee start date
-          type: string
-        employment_status:
-          enum:
-            - active
-            - inactive
-            - other
-          example: active
-          nullable: true
-          type: string
-        first_name:
-          $ref: "#/components/schemas/FirstName"
-        gender:
-          $ref: "#/components/schemas/Gender"
-        id:
-          $ref: "#/components/schemas/Id"
-        initials:
-          example: EM
-          nullable: true
-          title: Initials
-          type: string
-        jobs:
-          items:
-            properties:
-              compensation_rate:
-                example: year
-                title: The compensation rate of the job.
-                type: string
-              compensations:
-                items:
-                  example:
-                    effective_date: 2021-06-11
-                    flsa_status: nonexempt
-                    id: "3404301363494309004"
-                    job_id: "3490439050957906679"
-                    payment_unit: hour
-                    rate: "50.00"
-                  properties:
-                    effective_date:
-                      description: The effective date for this compensation.
-                      readOnly: false
-                      type: string
-                    flsa_status:
-                      description: The FLSA status for this compensation.
-                      enum:
-                        - exempt
-                        - salaried-nonexempt
-                        - nonexempt
-                        - owner
-                      readOnly: false
-                      type: string
-                    id:
-                      $ref: "#/components/schemas/Id"
-                    job_id:
-                      description: The ID of the job to which the compensation belongs.
-                      example: "12345"
-                      readOnly: true
-                      type: string
-                    payment_unit:
-                      $ref: "#/components/schemas/PaymentUnit"
-                    rate:
-                      description: The amount paid per payment unit.
-                      readOnly: false
-                      type: string
-                  type: object
-                type: array
-              employee_id:
-                $ref: "#/components/schemas/Id"
-              hired_at:
-                example: 2020-08-12
-                format: date
-                nullable: true
-                type: string
-              id:
-                $ref: "#/components/schemas/Id"
-              is_primary:
-                description: Indicates whether this the employee's primary job
-                example: true
-                title: Primary
-                type: boolean
-              location:
-                $ref: "#/components/schemas/Address"
-              payment_unit:
-                $ref: "#/components/schemas/PaymentUnit"
-              title:
-                $ref: "#/components/schemas/Employee/properties/title"
-            type: object
-          type: array
-        languages:
-          items:
-            $ref: "#/components/schemas/Language"
-          type: array
-        last_name:
-          $ref: "#/components/schemas/LastName"
-        manager_id:
-          example: "23456"
-          nullable: true
-          title: Manager ID
-          type: string
-        marital_status:
-          example: Maried
-          nullable: true
-          title: Marital status
-          type: string
-        middle_name:
-          $ref: "#/components/schemas/MiddleName"
-        nationalities:
-          items:
-            description: country code according to ISO 3166-1 alpha-2.
-            example: US
-            nullable: true
-            title: Nationality
-            type: string
-          type: array
-        phone_numbers:
-          items:
-            $ref: "#/components/schemas/PhoneNumber"
-          type: array
-        picture_url:
-          description: The URL pointing to a picture.
-          example: https://example.com/picture.jpg
-          nullable: true
-          title: Picture URL
-          type: string
-        prefered_language:
-          $ref: "#/components/schemas/Language"
-        preffered_name:
-          example: Elon Musk
-          nullable: true
-          title: Preffered name
-          type: string
-        salutation:
-          example: Mr
-          nullable: true
-          type: string
-        social_security_number:
-          example: "123456789"
-          nullable: true
-          title: Social Security Number
-          type: string
-        team:
-          description: The team the user is currently in.
-          nullable: true
-          properties:
-            id:
-              example: "1234"
-              nullable: true
-              type: string
-            name:
-              example: Full Stack Engineers
-              nullable: true
-              type: string
-          type: object
-        title:
-          example: CEO
-          nullable: true
-          title: Title
-          type: string
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
-        updated_by:
-          $ref: "#/components/schemas/UpdatedBy"
-      type: object
-    EmployeeNumber:
-      description: An Employee Number, Employee ID or Employee Code, is a unique number that has been assigned to each individual staff member within a company.
-      example: 123456-AB
-      nullable: true
-      title: Employee number
-      type: string
-    FirstName:
-      example: Elon
-      nullable: true
-      title: First name
-      type: string
-    Gender:
-      enum:
-        - male
-        - female
-        - unisex
-        - other
-      example: male
-      nullable: true
-      type: string
-    GetEmployeeResponse:
+    GetMessageResponse:
       properties:
         data:
-          $ref: "#/components/schemas/Employee"
+          $ref: "#/components/schemas/Message"
         operation:
           description: Operation performed
           example: one
           type: string
         resource:
           description: Unified API resource name
-          example: Employees
+          example: Messages
           type: string
         service:
           description: Apideck ID of service provider
-          example: sage-hr
+          example: twilio
           type: string
         status:
           description: HTTP Response Status
@@ -1863,12 +1443,12 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: Employee
-    GetEmployeesResponse:
+      x-graphql-type-name: Message
+    GetMessagesResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/Employee"
+            $ref: "#/components/schemas/Message"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -1880,11 +1460,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Employees
+          example: Messages
           type: string
         service:
           description: Apideck ID of service provider
-          example: sage-hr
+          example: twilio
           type: string
         status:
           description: HTTP Response Status
@@ -1902,125 +1482,7 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: EmployeeList
-    GetHrisCompaniesResponse:
-      properties:
-        data:
-          items:
-            $ref: "#/components/schemas/HrisCompany"
-          type: array
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Companies
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: undefined
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-graphql-type-name: HrisCompanyList
-    GetHrisCompanyResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/HrisCompany"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Companies
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: undefined
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-graphql-type-name: HrisCompany
-    HrisCompany:
-      additionalProperties: false
-      properties:
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        created_by:
-          $ref: "#/components/schemas/CreatedBy"
-        debtor_id:
-          example: "12345"
-          minLength: 1
-          type: string
-        deleted:
-          example: false
-          readOnly: true
-          type: boolean
-        display_name:
-          example: SpaceX
-          minLength: 1
-          type: string
-        id:
-          $ref: "#/components/schemas/Id"
-        legal_name:
-          example: SpaceX
-          minLength: 1
-          type: string
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
-        updated_by:
-          $ref: "#/components/schemas/UpdatedBy"
-      required:
-        - name
-      type: object
-    Id:
-      example: "12345"
-      readOnly: true
-      type: string
-    Language:
-      description: language code according to ISO 639-1. For the United States - EN
-      example: EN
-      nullable: true
-      type: string
-    LastName:
-      example: Musk
-      nullable: true
-      title: Last name
-      type: string
+      x-graphql-type-name: MessageList
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -2038,6 +1500,179 @@ components:
           example: https://unify.apideck.com/crm/companies?cursor=em9oby1jcm06OnBhZ2U6OjE%3D
           nullable: true
           type: string
+      type: object
+    Message:
+      additionalProperties: false
+      properties:
+        body:
+          description: The message text.
+          example: Hi! How are you doing?
+          maxLength: 1600
+          title: Message Body
+          type: string
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        created_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        direction:
+          description: The direction of the message.
+          enum:
+            - inbound
+            - outbound-api
+            - outbound-call
+            - outbound-reply
+            - unknown
+          example: outbound-api
+          readOnly: true
+          title: Direction
+          type: string
+        error:
+          description: The error returned if your message status is failed or undelivered.
+          example:
+            code: X1
+            message: Something went wrong
+          properties:
+            code:
+              description: The error_code provides more information about the failure. If the message was successful, this value is null
+              example: X1
+              readOnly: true
+              title: Error Code
+              type: string
+            message:
+              example: Something went wrong
+              readOnly: true
+              title: Error Message
+              type: string
+          readOnly: true
+          title: Error
+          type: object
+        from:
+          description: The phone number that initiated the message.
+          example: "+15017122661"
+          title: From
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        messaging_service_id:
+          description: The ID of the Messaging Service used with the message. In case of Plivo this links to the Powerpack ID.
+          example: "123456"
+          title: Messaging Service ID
+          type: string
+        number_of_media_files:
+          description: The number of media files associated with the message.
+          example: 1
+          readOnly: true
+          title: Number of media files
+          type: integer
+        number_of_units:
+          description: The number of units that make up the complete message. Messages can be split up due to the constraints of the message size.
+          example: 1
+          readOnly: true
+          title: Number of units
+          type: integer
+        price:
+          description: Price of the message.
+          example:
+            currency: USD
+            per_unit: "0.01"
+            total_amount: "0.01"
+          properties:
+            currency:
+              $ref: "#/components/schemas/Currency"
+            per_unit:
+              description: ""
+              example: "0.01"
+              readOnly: true
+              title: Price per unit
+              type: string
+            total_amount:
+              description: ""
+              example: "0.01"
+              readOnly: true
+              title: Price Amount
+              type: string
+          readOnly: true
+          title: Price
+          type: object
+        reference:
+          description: A client reference.
+          example: CUST001
+          title: Reference
+          type: string
+        scheduled_at:
+          description: The scheduled date and time of the message.
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          type: string
+        sent_at:
+          description: The date and time that the message was sent
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        status:
+          description: Status of the delivery of the message.
+          enum:
+            - accepted
+            - scheduled
+            - canceled
+            - queued
+            - sending
+            - sent
+            - failed
+            - delivered
+            - undelivered
+            - receiving
+            - received
+            - read
+          example: sent
+          readOnly: true
+          title: Status
+          type: string
+        subject:
+          example: Picture
+          title: Message Subject
+          type: string
+        to:
+          description: The phone number that received the message.
+          example: "+15017122662"
+          title: Message Body
+          type: string
+        type:
+          description: Set to sms for SMS messages and mms for MMS messages.
+          enum:
+            - sms
+            - mms
+          example: sms
+          title: Message type
+          type: string
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        updated_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        webhook_url:
+          description: Define a webhook to receive delivery notifications.
+          example: https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms
+          title: Webhook URL
+          type: string
+      required:
+        - from
+        - to
+        - body
       type: object
     Meta:
       description: Response metadata
@@ -2066,11 +1701,6 @@ components:
           example: 50
           type: integer
       type: object
-    MiddleName:
-      example: D.
-      nullable: true
-      title: Middle name
-      type: string
     NotFoundResponse:
       properties:
         detail:
@@ -2157,53 +1787,12 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
-    PaymentUnit:
-      enum:
-        - hour
-        - week
-        - month
-        - year
-        - paycheck
-      example: year
-      type: string
-    PhoneNumber:
-      properties:
-        area_code:
-          example: "323"
-          nullable: true
-          title: Area Code
-          type: string
-        country_code:
-          example: "1"
-          nullable: true
-          title: Country Code
-          type: string
-        id:
-          example: "12345"
-          nullable: true
-          type: string
-        number:
-          example: 111-111-1111
-          minLength: 1
-          type: string
-        type:
-          enum:
-            - primary
-            - secondary
-            - home
-            - office
-            - mobile
-            - assistant
-            - fax
-            - direct-dial-in
-            - personal
-            - other
-          example: primary
-          type: string
-          x-graphql-type-name: PhoneType
-      required:
-        - number
-      type: object
+    Tags:
+      example:
+        - New
+      items:
+        type: string
+      type: array
     UnauthorizedResponse:
       properties:
         detail:
@@ -2296,7 +1885,7 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
-    UpdateEmployeeResponse:
+    UpdateMessageResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -2306,11 +1895,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Employees
+          example: Messages
           type: string
         service:
           description: Apideck ID of service provider
-          example: sage-hr
+          example: twilio
           type: string
         status:
           description: HTTP Response Status
@@ -2327,71 +1916,6 @@ components:
         - resource
         - operation
         - data
-      type: object
-    UpdateHrisCompanyResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Companies
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: undefined
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-    UpdatedAt:
-      example: 2020-09-30T07:43:32.000Z
-      format: date-time
-      readOnly: true
-      type: string
-    UpdatedBy:
-      example: "12345"
-      nullable: true
-      readOnly: true
-      type: string
-    Website:
-      properties:
-        id:
-          example: "12345"
-          nullable: true
-          type: string
-        type:
-          enum:
-            - primary
-            - secondary
-            - work
-            - personal
-            - other
-          example: primary
-          type: string
-          x-graphql-type-name: WebsiteType
-        url:
-          example: http://example.com
-          minLength: 1
-          type: string
-      required:
-        - url
       type: object
   securitySchemes:
     apiKey:

@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Composer API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://composer.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: composer
 externalDocs:
@@ -534,7 +532,7 @@ components:
           description: Optional. The configuration settings for the Airflow web server App Engine instance.
         webServerNetworkAccessControl:
           $ref: "#/components/schemas/WebServerNetworkAccessControl"
-          description: Optional. The network-level access control policy for the Airflow web server. If unspecified, no network-level access restrictions will be applied. This field is supported for Cloud Composer environments in versions composer-1.*.*-airflow-*.*.*.
+          description: Optional. The network-level access control policy for the Airflow web server. If unspecified, no network-level access restrictions will be applied.
         workloadsConfig:
           $ref: "#/components/schemas/WorkloadsConfig"
           description: Optional. The workloads configuration settings for the GKE cluster associated with the Cloud Composer environment. The GKE cluster runs Airflow scheduler, web server and workers workloads. This field is supported for Cloud Composer environments in versions composer-2.*.*-airflow-*.*.* and newer.
@@ -696,6 +694,7 @@ components:
             - DELETE
             - UPDATE
             - CHECK
+            - STORE_STATE
           type: string
         resource:
           description: Output only. The resource being operated on, as a [relative resource name]( /apis/design/resource_names#relative_resource_name).
@@ -830,7 +829,7 @@ components:
           type: string
       type: object
     WebServerNetworkAccessControl:
-      description: Network-level access control policy for the Airflow web server. Supported for Cloud Composer environments in versions composer-1.*.*-airflow-*.*.*.
+      description: Network-level access control policy for the Airflow web server.
       properties:
         allowedIpRanges:
           description: A collection of allowed IP ranges with descriptions.
@@ -909,5 +908,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

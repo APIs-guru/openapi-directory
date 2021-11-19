@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.7.1
+  version: 8.8.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1214,7 +1214,7 @@ paths:
                 due_date: '2020-10-30',
                 po_number: '90000117',
                 reference: '123456',
-                status: 'submitted',
+                status: 'draft',
                 invoice_sent: true,
                 currency: 'USD',
                 currency_rate: 0.69,
@@ -1295,6 +1295,7 @@ paths:
                   email: 'elon@musk.com',
                   website: 'https://elonmusk.com'
                 },
+                template_id: '123456',
                 row_version: '1-12345'
               }
             }
@@ -1466,7 +1467,7 @@ paths:
                 due_date: '2020-10-30',
                 po_number: '90000117',
                 reference: '123456',
-                status: 'submitted',
+                status: 'draft',
                 invoice_sent: true,
                 currency: 'USD',
                 currency_rate: 0.69,
@@ -1547,6 +1548,7 @@ paths:
                   email: 'elon@musk.com',
                   website: 'https://elonmusk.com'
                 },
+                template_id: '123456',
                 row_version: '1-12345'
               }
             }
@@ -4993,7 +4995,8 @@ components:
             - paid
             - void
             - credit
-          example: submitted
+            - deleted
+          example: draft
           nullable: true
           title: Status
           type: string
@@ -5004,6 +5007,12 @@ components:
           type: number
         tax_inclusive:
           $ref: "#/components/schemas/TaxInclusive"
+        template_id:
+          description: Optional invoice template
+          example: "123456"
+          nullable: true
+          title: Template
+          type: string
         total:
           example: 27500
           nullable: true
