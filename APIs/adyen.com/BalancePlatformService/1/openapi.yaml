@@ -543,6 +543,82 @@ paths:
       x-addedInVersion: "1"
       x-groupName: Balance accounts
       x-sortIndex: 3
+    patch:
+      description: Updates a balance account.
+      operationId: patch-balanceAccounts-id
+      parameters:
+        - description: Unique identifier of the balance account.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BalanceAccountUpdateRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BalanceAccount"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-400"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Update a balance account.
+      tags:
+        - Balance accounts
+      x-addedInVersion: "1"
+      x-groupName: Balance accounts
+      x-sortIndex: 2
   "/balanceAccounts/{id}/paymentInstruments":
     get:
       description: |-
@@ -3387,6 +3463,42 @@ components:
           type: object
       required:
         - accountHolderId
+    BalanceAccountUpdateRequest:
+      properties:
+        accountHolderId:
+          description: Unique identifier of the [account holder](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/accountHolders/{id}) associated with the balance account.
+          type: string
+        description:
+          description: A human-readable description of the balance account, maximum 300 characters. You can use this parameter to help distinguish between multiple balance accounts under an account holder.
+          maxLength: 300
+          type: string
+        status:
+          description: |-
+            The status of the balance account. Payment instruments linked to the balance account can only be used if the balance account status is **Active**.
+
+            Possible values: **Active**, **Inactive**, **Closed**, **Suspended**.
+          enum:
+            - Active
+            - Closed
+            - Inactive
+            - Suspended
+          type: string
+        sweepConfigurations:
+          additionalProperties:
+            $ref: "#/components/schemas/SweepConfiguration"
+          description: |-
+            Contains key-value pairs that specify [balance sweep configuration per currency code](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__reqParam_sweepConfigurations).
+
+            You can update the balance account to add, update, or delete configurations.
+
+            * To add a configuration, send the currency code as a key and the configuration as the object.
+
+             * To update a configuration, send the whole configuration with your updates.
+
+            * To delete a configuration, set the value to **null**. For example, `"EUR": null`.
+          type: object
+      required:
+        - accountHolderId
     BalancePlatform:
       properties:
         description:
@@ -4518,7 +4630,14 @@ components:
         shopperReference:
           description: The unique identifier used when the payment details were stored.
           type: string
-    RemediatingAction: {}
+    RemediatingAction:
+      properties:
+        code:
+          description: The remediating action code.
+          type: string
+        message:
+          description: A description of how you can resolve the verification error.
+          type: string
     RestServiceError:
       properties:
         detail:
