@@ -676,11 +676,11 @@ paths:
                 last_name: 'Musk',
                 middle_name: 'D.',
                 display_name: 'Technoking',
-                preffered_name: 'Elon Musk',
+                preferred_name: 'Elon Musk',
                 initials: 'EM',
                 salutation: 'Mr',
                 title: 'CEO',
-                marital_status: 'Maried',
+                marital_status: 'married',
                 picture_url: 'https://example.com/picture.jpg',
                 division: 'Europe',
                 department: 'R&D',
@@ -957,11 +957,11 @@ paths:
                 last_name: 'Musk',
                 middle_name: 'D.',
                 display_name: 'Technoking',
-                preffered_name: 'Elon Musk',
+                preferred_name: 'Elon Musk',
                 initials: 'EM',
                 salutation: 'Mr',
                 title: 'CEO',
-                marital_status: 'Maried',
+                marital_status: 'married',
                 picture_url: 'https://example.com/picture.jpg',
                 division: 'Europe',
                 department: 'R&D',
@@ -1733,7 +1733,7 @@ components:
               payment_unit:
                 $ref: "#/components/schemas/PaymentUnit"
               title:
-                $ref: "#/components/schemas/Employee/properties/title"
+                $ref: "#/components/schemas/Title"
             type: object
           type: array
         languages:
@@ -1748,7 +1748,7 @@ components:
           title: Manager ID
           type: string
         marital_status:
-          example: Maried
+          example: married
           nullable: true
           title: Marital status
           type: string
@@ -1774,10 +1774,10 @@ components:
           type: string
         prefered_language:
           $ref: "#/components/schemas/Language"
-        preffered_name:
+        preferred_name:
           example: Elon Musk
           nullable: true
-          title: Preffered name
+          title: Preferred name
           type: string
         salutation:
           example: Mr
@@ -1802,10 +1802,7 @@ components:
               type: string
           type: object
         title:
-          example: CEO
-          nullable: true
-          title: Title
-          type: string
+          $ref: "#/components/schemas/Title"
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
@@ -2204,6 +2201,11 @@ components:
       required:
         - number
       type: object
+    Title:
+      example: CEO
+      nullable: true
+      title: Title
+      type: string
     UnauthorizedResponse:
       properties:
         detail:

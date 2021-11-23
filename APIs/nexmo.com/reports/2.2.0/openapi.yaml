@@ -19,7 +19,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://www.nexmo.com/terms-of-use
   title: Reports API
-  version: 2.1.17
+  version: 2.2.0
   x-label: Beta
   x-origin:
     - format: openapi
@@ -77,6 +77,7 @@ paths:
               oneOf:
                 - $ref: "#/components/schemas/SMS"
                 - $ref: "#/components/schemas/VOICE-CALL"
+                - $ref: "#/components/schemas/IN-APP-VOICE"
                 - $ref: "#/components/schemas/WEBSOCKET-CALL"
                 - $ref: "#/components/schemas/VERIFY-API"
                 - $ref: "#/components/schemas/NUMBER-INSIGHT"
@@ -123,15 +124,16 @@ paths:
               - SMS
               - VOICE-CALL
               - VOICE-FAILED
+              - IN-APP-VOICE
               - WEBSOCKET-CALL
               - VERIFY-API
               - NUMBER-INSIGHT
               - MESSAGES
-              - CONVERSATIONS
               - ASR
+              - CONVERSATIONS
               - REPORTS-USAGE
             type: string
-        - description: Direction of the communication, either `inbound` (received by our services), or `outbound` (originated from our services). Required for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
+        - description: Direction of the communication, either `inbound` (received by our services), or `outbound` (originated from our services). Required for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for `IN-APP-VOICE`, `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
           example: inbound
           in: query
           name: direction
@@ -195,16 +197,6 @@ paths:
               - true
               - false
             type: boolean
-        - description: The event type to search for. Only used, and is required, when product is `CONVERSATIONS`.
-          example: ip-voice
-          in: query
-          name: type
-          schema:
-            default: none
-            enum:
-              - ip-voice
-              - cs-custom-event
-            type: string
         - description: The SMS status to search for. Optional where product is `SMS`.
           example: delivered
           in: query
@@ -272,7 +264,7 @@ paths:
                               example: product
                               type: string
                             reason:
-                              example: Could not resolve product name. Please use one of the following values [CONVERSATIONS, MESSAGES, NUMBER-INSIGHT, SMS, VERIFY-API, VERIFY-SDK, VOICE-CALL, WEBSOCKET-CALL, ASR]
+                              example: Could not resolve product name. Please use one of the following values [IN-APP-VOICE, MESSAGES, NUMBER-INSIGHT, SMS, VERIFY-API, VERIFY-SDK, VOICE-CALL, WEBSOCKET-CALL, ASR]
                               type: string
                           type: object
                         type: array
@@ -515,12 +507,12 @@ components:
                     - $ref: "#/components/schemas/csv_sms_outbound"
                     - $ref: "#/components/schemas/csv_sms_inbound"
                     - $ref: "#/components/schemas/csv_voice"
+                    - $ref: "#/components/schemas/csv_in_app_voice"
                     - $ref: "#/components/schemas/csv_websockets"
                     - $ref: "#/components/schemas/csv_verify"
                     - $ref: "#/components/schemas/csv_ni"
                     - $ref: "#/components/schemas/csv_messages_outbound"
                     - $ref: "#/components/schemas/csv_messages_inbound"
-                    - $ref: "#/components/schemas/csv_conversations_ip_voice"
                     - $ref: "#/components/schemas/csv_asr"
                   type: object
                 type: array
@@ -536,7 +528,7 @@ components:
                   - description: SMS (Outbound)
                     properties:
                       direction:
-                        description: Direction of the communication, either `inbound` (received by our services), or `outbound` (originated from our services). Required for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
+                        description: Direction of the communication, either `inbound` (received by our services), or `outbound` (originated from our services). Required for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for `IN-APP-VOICE`, `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
                         enum:
                           - inbound
                           - outbound
@@ -616,6 +608,23 @@ components:
                     x-tab-id: voice-call
               - allOf:
                   - $ref: "#/components/schemas/report_response_top_level"
+                  - description: In App Voice
+                    properties:
+                      items_count:
+                        description: The number of returned records
+                        example: 1
+                        type: integer
+                      product:
+                        $ref: "#/components/schemas/product_in_app_voice"
+                      records:
+                        description: Records in JSON format
+                        items:
+                          $ref: "#/components/schemas/csv_in_app_voice"
+                        type: array
+                    type: object
+                    x-tab-id: in-app-voice
+              - allOf:
+                  - $ref: "#/components/schemas/report_response_top_level"
                   - description: WebSocket Call
                     properties:
                       items_count:
@@ -670,7 +679,7 @@ components:
                   - description: Messages (Outbound)
                     properties:
                       direction:
-                        description: Direction of the communication, either `inbound` (received by our services), or `outbound` (originated from our services). Required for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
+                        description: Direction of the communication, either `inbound` (received by our services), or `outbound` (originated from our services). Required for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for `IN-APP-VOICE`, `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
                         enum:
                           - inbound
                           - outbound
@@ -702,7 +711,7 @@ components:
                   - description: Messages (Inbound)
                     properties:
                       direction:
-                        description: Direction of the communication, either `inbound` (received by our services), or `outbound` (originated from our services). Required for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
+                        description: Direction of the communication, either `inbound` (received by our services), or `outbound` (originated from our services). Required for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for `IN-APP-VOICE`, `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
                         enum:
                           - inbound
                           - outbound
@@ -731,23 +740,6 @@ components:
                     x-tab-id: messages-inbound
               - allOf:
                   - $ref: "#/components/schemas/report_response_top_level"
-                  - description: IP Voice
-                    properties:
-                      items_count:
-                        description: The number of returned records
-                        example: 1
-                        type: integer
-                      product:
-                        $ref: "#/components/schemas/product_conversations"
-                      records:
-                        description: Records in JSON format
-                        items:
-                          $ref: "#/components/schemas/csv_conversations_ip_voice"
-                        type: array
-                    type: object
-                    x-tab-id: conversations
-              - allOf:
-                  - $ref: "#/components/schemas/report_response_top_level"
                   - description: ASR
                     properties:
                       items_count:
@@ -763,6 +755,23 @@ components:
                         type: array
                     type: object
                     x-tab-id: asr
+              - allOf:
+                  - $ref: "#/components/schemas/report_response_top_level"
+                  - description: Conversations
+                    properties:
+                      items_count:
+                        description: The number of returned records
+                        example: 1
+                        type: integer
+                      product:
+                        $ref: "#/components/schemas/product_conversations"
+                      records:
+                        description: Records in JSON format
+                        items:
+                          $ref: "#/components/schemas/csv_conversations"
+                        type: array
+                    type: object
+                    x-tab-id: conversations
       description: OK
     list_report_response:
       content:
@@ -778,6 +787,7 @@ components:
                   anyOf:
                     - $ref: "#/components/schemas/sms_response_get_report"
                     - $ref: "#/components/schemas/voice_call_response_get_report"
+                    - $ref: "#/components/schemas/in_app_voice_response_get_report"
                     - $ref: "#/components/schemas/websocket_call_response_get_report"
                     - $ref: "#/components/schemas/verify_api_response_get_report"
                     - $ref: "#/components/schemas/number_insight_response_get_report"
@@ -800,6 +810,7 @@ components:
             oneOf:
               - $ref: "#/components/schemas/sms_response_get_report"
               - $ref: "#/components/schemas/voice_call_response_get_report"
+              - $ref: "#/components/schemas/in_app_voice_response_get_report"
               - $ref: "#/components/schemas/websocket_call_response_get_report"
               - $ref: "#/components/schemas/verify_api_response_get_report"
               - $ref: "#/components/schemas/number_insight_response_get_report"
@@ -814,6 +825,7 @@ components:
             oneOf:
               - $ref: "#/components/schemas/sms_response_create_report"
               - $ref: "#/components/schemas/voice_call_response_create_report"
+              - $ref: "#/components/schemas/in_app_voice_response_create_report"
               - $ref: "#/components/schemas/websocket_call_response_create_report"
               - $ref: "#/components/schemas/verify_api_response_create_report"
               - $ref: "#/components/schemas/number_insight_response_create_report"
@@ -834,6 +846,12 @@ components:
         - $ref: "#/components/schemas/conversations_fields"
       description: Conversations
       x-tab-id: conversations
+    IN-APP-VOICE:
+      allOf:
+        - $ref: "#/components/schemas/report_request"
+        - $ref: "#/components/schemas/in_app_voice_fields"
+      description: In App Voice
+      x-tab-id: in-app-voice
     MESSAGES:
       allOf:
         - $ref: "#/components/schemas/report_request"
@@ -950,6 +968,10 @@ components:
       description: ASR error message.
       example: ""
       type: string
+    call_conversation_id:
+      description: Search only for In App Voive calls attached to this particular Conversation. This should include the "CON-" prefix.
+      example: CON-abc123
+      type: string
     call_end_date:
       description: Date of the end of the call.
       example: 2019-06-28T15:30:00+0000
@@ -965,6 +987,10 @@ components:
       example: https://requestb.in/12345
       format: uri
       type: string
+    cdr_id:
+      description: Id of the related CDR.
+      example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
+      type: string
     client_ref:
       description: Search for messages with this `client_ref`.
       maxLength: 40
@@ -976,15 +1002,12 @@ components:
       example: "true"
       type: boolean
     conversation_id:
-      description: Search only for Voice calls attached to this particular Conversation. This should include the "CON-" prefix.
+      description: Search only for events sent to this particular Conversation. This should include the "CON-" prefix.
       example: CON-abc123
       type: string
-    conversation_type:
-      description: Type of conversation request. Only used, and is required, when product is `CONVERSATIONS`.
-      enum:
-        - ip-voice
-        - cs-custom-event
-      example: ip-voice
+    conversation_user_id:
+      description: User id in the conversation.
+      example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
       type: string
     conversations_fields:
       description: Conversations
@@ -995,8 +1018,6 @@ components:
           $ref: "#/components/schemas/product_conversations"
         status:
           $ref: "#/components/schemas/status"
-        type:
-          $ref: "#/components/schemas/conversation_type"
       type: object
       x-tab-id: conversations
     conversations_response_create_report:
@@ -1011,10 +1032,6 @@ components:
         - $ref: "#/components/schemas/conversations_fields"
       description: Conversations
       x-tab-id: conversations
-    conversations_user_id:
-      description: User ID of the caller.
-      example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
-      type: string
     country:
       description: Country where the request was sent.
       example: FR
@@ -1022,6 +1039,11 @@ components:
     country_name:
       description: Country name where the request was sent.
       example: France
+      type: string
+    creation_date:
+      description: Date the event was created.
+      example: 2021-11-18T18:49:16+00:00
+      format: date
       type: string
     csv_asr:
       description: ASR
@@ -1056,13 +1078,42 @@ components:
           $ref: "#/components/schemas/total_price"
       type: object
       x-tab-id: asr
-    csv_conversations_ip_voice:
-      description: IP Voice Conversations
+    csv_conversations:
+      description: Conversations
       properties:
         account_id:
           $ref: "#/components/schemas/account_id"
         application_id:
           $ref: "#/components/schemas/application_id"
+        client_ref:
+          $ref: "#/components/schemas/client_ref"
+        conversation_id:
+          $ref: "#/components/schemas/conversation_id"
+        creation_date:
+          $ref: "#/components/schemas/creation_date"
+        currency:
+          $ref: "#/components/schemas/currency"
+        id:
+          $ref: "#/components/schemas/cdr_id"
+        price:
+          $ref: "#/components/schemas/price"
+        request_id:
+          $ref: "#/components/schemas/request_id"
+        total_price:
+          $ref: "#/components/schemas/total_price"
+        user_id:
+          $ref: "#/components/schemas/conversation_user_id"
+      type: object
+      x-tab-id: conversastions
+    csv_in_app_voice:
+      description: In App Voice
+      properties:
+        account_id:
+          $ref: "#/components/schemas/account_id"
+        application_id:
+          $ref: "#/components/schemas/application_id"
+        client_ref:
+          $ref: "#/components/schemas/client_ref"
         conversation_id:
           $ref: "#/components/schemas/conversation_id"
         currency:
@@ -1073,6 +1124,8 @@ components:
           $ref: "#/components/schemas/call_start_date"
         duration:
           $ref: "#/components/schemas/duration"
+        id:
+          $ref: "#/components/schemas/cdr_id"
         leg_id:
           $ref: "#/components/schemas/ip_voice_leg_id"
         price:
@@ -1084,9 +1137,9 @@ components:
         total_price:
           $ref: "#/components/schemas/total_price"
         user_id:
-          $ref: "#/components/schemas/conversations_user_id"
+          $ref: "#/components/schemas/conversation_user_id"
       type: object
-      x-tab-id: conversations-ip-voice
+      x-tab-id: in-app-voice
     csv_messages_inbound:
       description: Inbound Messages
       properties:
@@ -1404,7 +1457,7 @@ components:
       format: date
       type: string
     direction:
-      description: Direction of the communication, either `inbound` (received by our services), or `outbound` (originated from our services). Required for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
+      description: Direction of the communication, either `inbound` (received by our services), or `outbound` (originated from our services). Required for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for `IN-APP-VOICE`, `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
       enum:
         - inbound
         - outbound
@@ -1447,6 +1500,27 @@ components:
       description: If you request multiple records using a comma-separated list of UUIDs, then the UUIDs of any records not found are listed in this field.
       example: 7b10a0c2-1a05-11eb-bad9-38f9d331649,7b1091b8-1a05-11eb-bad9-38f9d331493
       type: string
+    in_app_voice_fields:
+      description: In App Voice
+      properties:
+        conversation_id:
+          $ref: "#/components/schemas/call_conversation_id"
+        product:
+          $ref: "#/components/schemas/product_in_app_voice"
+      type: object
+      x-tab-id: in-app-voice
+    in_app_voice_response_create_report:
+      allOf:
+        - $ref: "#/components/schemas/report_response_create_report"
+        - $ref: "#/components/schemas/in_app_voice_fields"
+      description: In App Voice
+      x-tab-id: in-app-voice
+    in_app_voice_response_get_report:
+      allOf:
+        - $ref: "#/components/schemas/report_response"
+        - $ref: "#/components/schemas/in_app_voice_fields"
+      description: In App Voice
+      x-tab-id: in-app-voice
     include_message:
       default: false
       description: Include the text of messages in the report.
@@ -1464,12 +1538,12 @@ components:
       example: f94b4e56604e07e5e5ad5a7228618f81
       type: string
     ip_voice_leg_id:
-      description: Id of the leg.
+      description: Id of the call leg.
       example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
       type: string
     ip_voice_status:
-      description: Status of the conversation evnet.
-      example: "0"
+      description: Status of the termination of the In-App call.
+      example: "200"
       type: string
     items_count:
       description: The number of rows in the resulting file (when report has been completed).
@@ -1734,6 +1808,7 @@ components:
       enum:
         - SMS
         - VOICE-CALL
+        - IN-APP-VOICE
         - WEBSOCKET-CALL
         - VERIFY-API
         - NUMBER-INSIGHT
@@ -1747,6 +1822,7 @@ components:
       enum:
         - SMS
         - VOICE-CALL
+        - IN-APP-VOICE
         - WEBSOCKET-CALL
         - VERIFY-API
         - NUMBER-INSIGHT
@@ -1760,6 +1836,7 @@ components:
       enum:
         - SMS
         - VOICE-CALL
+        - IN-APP-VOICE
         - WEBSOCKET-CALL
         - VERIFY-API
         - NUMBER-INSIGHT
@@ -1768,11 +1845,26 @@ components:
         - ASR
       example: CONVERSATIONS
       type: string
+    product_in_app_voice:
+      description: Which product you wish to generate a report for.
+      enum:
+        - SMS
+        - VOICE-CALL
+        - IN-APP-VOICE
+        - WEBSOCKET-CALL
+        - VERIFY-API
+        - NUMBER-INSIGHT
+        - MESSAGES
+        - CONVERSATIONS
+        - ASR
+      example: IN-APP-VOICE
+      type: string
     product_messages:
       description: Which product you wish to generate a report for.
       enum:
         - SMS
         - VOICE-CALL
+        - IN-APP-VOICE
         - VERIFY-API
         - NUMBER-INSIGHT
         - MESSAGES
@@ -1785,6 +1877,7 @@ components:
       enum:
         - SMS
         - VOICE-CALL
+        - IN-APP-VOICE
         - WEBSOCKET-CALL
         - VERIFY-API
         - NUMBER-INSIGHT
@@ -1798,6 +1891,7 @@ components:
       enum:
         - SMS
         - VOICE-CALL
+        - IN-APP-VOICE
         - WEBSOCKET-CALL
         - VERIFY-API
         - NUMBER-INSIGHT
@@ -1811,6 +1905,7 @@ components:
       enum:
         - SMS
         - VOICE-CALL
+        - IN-APP-VOICE
         - WEBSOCKET-CALL
         - VERIFY-API
         - NUMBER-INSIGHT
@@ -1824,6 +1919,7 @@ components:
       enum:
         - SMS
         - VOICE-CALL
+        - IN-APP-VOICE
         - WEBSOCKET-CALL
         - VERIFY-API
         - NUMBER-INSIGHT
@@ -1837,6 +1933,7 @@ components:
       enum:
         - SMS
         - VOICE-CALL
+        - IN-APP-VOICE
         - WEBSOCKET-CALL
         - VERIFY-API
         - NUMBER-INSIGHT

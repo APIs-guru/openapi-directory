@@ -3981,6 +3981,12 @@ components:
           example: false
           title: Done
           type: boolean
+        downstream_id:
+          description: The third-party API ID of original entity
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
         duration_minutes:
           example: 30
           nullable: true
