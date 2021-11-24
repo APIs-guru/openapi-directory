@@ -6,9 +6,9 @@ info:
     email: hello@apideck.com
     url: https://developers.apideck.com
   description: |
-    Welcome to the sms.
+    Welcome to the Customer Support.
 
-    You can use this API to access all sms endpoints.
+    You can use this API to access all Customer Support endpoints.
 
     ## Base URL
 
@@ -265,9 +265,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: sms
-  version: 8.8.0
-  x-apideck-api: sms
+  title: Customer Support
+  version: 8.8.1
+  x-apideck-api: customer-support
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -275,10 +275,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/sms.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/customer-support.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: sms
+  x-serviceName: customer-support
   x-tags:
     - partner
 externalDocs:
@@ -288,14 +288,14 @@ security:
   - apiKey: []
 tags:
   - description: ""
-    name: Messages
+    name: Customers
     x-apideck-model:
-      $ref: "#/components/schemas/Message"
+      $ref: "#/components/schemas/CustomerSupportCustomer"
 paths:
-  /sms/messages:
+  /customer-support/customers:
     get:
-      description: List Messages
-      operationId: messagesAll
+      description: List Customer Support Customers
+      operationId: customersAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -305,7 +305,7 @@ paths:
         - $ref: "#/components/parameters/limit"
       responses:
         "200":
-          $ref: "#/components/responses/GetMessagesResponse"
+          $ref: "#/components/responses/GetCustomerSupportCustomersResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -320,10 +320,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Messages
+      summary: List Customer Support Customers
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Customers
+      x-apideck-api: customerSupport
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -337,15 +337,15 @@ paths:
             })
 
             try {
-              const { data } = await apideck.sms.messagesAll({})
+              const { data } = await apideck.customerSupport.customersAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: messages
+      x-graphql-field-name: customerSupportCustomers
     post:
-      description: Create Message
-      operationId: messagesAdd
+      description: Create Customer Support Customer
+      operationId: customersAdd
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -355,11 +355,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Message"
+              $ref: "#/components/schemas/CustomerSupportCustomer"
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateMessageResponse"
+          $ref: "#/components/responses/CreateCustomerSupportCustomerResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -374,10 +374,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Create Message
+      summary: Create Customer Support Customer
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Customers
+      x-apideck-api: customerSupport
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -391,29 +391,78 @@ paths:
             })
 
             const params = {
-              message: {
-                from: '+15017122661',
-                to: '+15017122662',
-                subject: 'Picture',
-                body: 'Hi! How are you doing?',
-                type: 'sms',
-                scheduled_at: '2020-09-30T07:43:32.000Z',
-                webhook_url: 'https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms',
-                reference: 'CUST001',
-                messaging_service_id: '123456'
+              customer: {
+                company_name: 'SpaceX',
+                first_name: 'Elon',
+                last_name: 'Musk',
+                individual: true,
+                addresses: [
+                  {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    street_number: '25',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
+                    phone_number: '111-111-1111',
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com'
+                  }
+                ],
+                notes: 'Some notes about this customer',
+                phone_numbers: [
+                  {
+                    id: '12345',
+                    country_code: '1',
+                    area_code: '323',
+                    number: '111-111-1111',
+                    type: 'primary'
+                  }
+                ],
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                tax_number: 'US123945459',
+                currency: 'USD',
+                bank_accounts: {
+                  iban: 'CH2989144532982975332',
+                  bic: 'AUDSCHGGXXX',
+                  bsb_number: '062-001',
+                  bank_code: 'BNH',
+                  account_number: '123456789',
+                  account_name: 'SPACEX LLC',
+                  account_type: 'credit_card',
+                  currency: 'USD'
+                },
+                status: 'active'
               }
             }
 
             try {
-              const { data } = await apideck.sms.messagesAdd(params)
+              const { data } = await apideck.customerSupport.customersAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/sms/messages/{id}":
+  "/customer-support/customers/{id}":
     delete:
-      description: Delete Message
-      operationId: messagesDelete
+      description: Delete Customer Support Customer
+      operationId: customersDelete
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -422,7 +471,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteMessageResponse"
+          $ref: "#/components/responses/DeleteCustomerSupportCustomerResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -437,10 +486,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Delete Message
+      summary: Delete Customer Support Customer
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Customers
+      x-apideck-api: customerSupport
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -454,7 +503,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.sms.messagesDelete({
+              const { data } = await apideck.customerSupport.customersDelete({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -462,8 +511,8 @@ paths:
               console.error(error)
             }
     get:
-      description: Get Message
-      operationId: messagesOne
+      description: Get Customer Support Customer
+      operationId: customersOne
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -472,7 +521,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetMessageResponse"
+          $ref: "#/components/responses/GetCustomerSupportCustomerResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -487,10 +536,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Message
+      summary: Get Customer Support Customer
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Customers
+      x-apideck-api: customerSupport
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -504,7 +553,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.sms.messagesOne({
+              const { data } = await apideck.customerSupport.customersOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -512,8 +561,8 @@ paths:
               console.error(error)
             }
     patch:
-      description: Update Message
-      operationId: messagesUpdate
+      description: Update Customer Support Customer
+      operationId: customersUpdate
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -524,11 +573,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Message"
+              $ref: "#/components/schemas/CustomerSupportCustomer"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateMessageResponse"
+          $ref: "#/components/responses/UpdateCustomerSupportCustomerResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -543,10 +592,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Update Message
+      summary: Update Customer Support Customer
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Customers
+      x-apideck-api: customerSupport
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -561,21 +610,70 @@ paths:
 
             const params = {
               id: 'id_example',
-              message: {
-                from: '+15017122661',
-                to: '+15017122662',
-                subject: 'Picture',
-                body: 'Hi! How are you doing?',
-                type: 'sms',
-                scheduled_at: '2020-09-30T07:43:32.000Z',
-                webhook_url: 'https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms',
-                reference: 'CUST001',
-                messaging_service_id: '123456'
+              customer: {
+                company_name: 'SpaceX',
+                first_name: 'Elon',
+                last_name: 'Musk',
+                individual: true,
+                addresses: [
+                  {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    street_number: '25',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
+                    phone_number: '111-111-1111',
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com'
+                  }
+                ],
+                notes: 'Some notes about this customer',
+                phone_numbers: [
+                  {
+                    id: '12345',
+                    country_code: '1',
+                    area_code: '323',
+                    number: '111-111-1111',
+                    type: 'primary'
+                  }
+                ],
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                tax_number: 'US123945459',
+                currency: 'USD',
+                bank_accounts: {
+                  iban: 'CH2989144532982975332',
+                  bic: 'AUDSCHGGXXX',
+                  bsb_number: '062-001',
+                  bank_code: 'BNH',
+                  account_number: '123456789',
+                  account_name: 'SPACEX LLC',
+                  account_type: 'credit_card',
+                  currency: 'USD'
+                },
+                status: 'active'
               }
             }
 
             try {
-              const { data } = await apideck.sms.messagesUpdate(params)
+              const { data } = await apideck.customerSupport.customersUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -639,30 +737,30 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    CreateMessageResponse:
+    CreateCustomerSupportCustomerResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateMessageResponse"
-      description: Messages
-    DeleteMessageResponse:
+            $ref: "#/components/schemas/CreateCustomerSupportCustomerResponse"
+      description: CustomerSupportCustomers
+    DeleteCustomerSupportCustomerResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteMessageResponse"
-      description: Messages
-    GetMessageResponse:
+            $ref: "#/components/schemas/DeleteCustomerSupportCustomerResponse"
+      description: CustomerSupportCustomers
+    GetCustomerSupportCustomerResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetMessageResponse"
-      description: Messages
-    GetMessagesResponse:
+            $ref: "#/components/schemas/GetCustomerSupportCustomerResponse"
+      description: CustomerSupportCustomers
+    GetCustomerSupportCustomersResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetMessagesResponse"
-      description: Messages
+            $ref: "#/components/schemas/GetCustomerSupportCustomersResponse"
+      description: CustomerSupportCustomers
     NotFoundResponse:
       content:
         application/json:
@@ -699,13 +797,113 @@ components:
           schema:
             $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
-    UpdateMessageResponse:
+    UpdateCustomerSupportCustomerResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateMessageResponse"
-      description: Messages
+            $ref: "#/components/schemas/UpdateCustomerSupportCustomerResponse"
+      description: CustomerSupportCustomers
   schemas:
+    Address:
+      properties:
+        city:
+          description: Name of city.
+          example: San Francisco
+          nullable: true
+          type: string
+        contact_name:
+          example: Elon Musk
+          nullable: true
+          type: string
+        country:
+          description: country code according to ISO 3166-1 alpha-2.
+          example: US
+          nullable: true
+          type: string
+        county:
+          description: Address field that holds a sublocality, such as a county
+          example: Santa Clara
+          nullable: true
+          type: string
+        email:
+          example: elon@musk.com
+          nullable: true
+          type: string
+        fax:
+          example: 122-111-1111
+          nullable: true
+          type: string
+        id:
+          example: "123"
+          nullable: true
+          type: string
+        latitude:
+          example: "40.759211"
+          nullable: true
+          type: string
+        line1:
+          description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
+          example: Main street
+          nullable: true
+          type: string
+        line2:
+          description: Line 2 of the address
+          example: "apt #"
+          nullable: true
+          type: string
+        longitude:
+          example: "-73.984638"
+          nullable: true
+          type: string
+        name:
+          example: HQ US
+          nullable: true
+          type: string
+        phone_number:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        postal_code:
+          description: Zip code or equivalent.
+          example: "94104"
+          nullable: true
+          type: string
+        salutation:
+          example: Mr
+          nullable: true
+          type: string
+        state:
+          description: Name of state
+          example: CA
+          nullable: true
+          type: string
+        street_number:
+          description: Street number
+          example: "25"
+          nullable: true
+          type: string
+        string:
+          example: 25 Spring Street, Blackburn, VIC 3130
+          nullable: true
+          title: The address string. Some APIs don't provide structured address data.
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - home
+            - office
+            - shipping
+            - billing
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: AddressType
+        website:
+          example: https://elonmusk.com
+          nullable: true
+          type: string
+      type: object
     BadRequestResponse:
       properties:
         detail:
@@ -737,7 +935,397 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
-    CreateMessageResponse:
+    BankAccount:
+      properties:
+        account_name:
+          description: The name which you used in opening your bank account.
+          example: SPACEX LLC
+          nullable: true
+          title: Bank Account Name
+          type: string
+        account_number:
+          description: A bank account number is a number that is tied to your bank account. If you have several bank accounts, such as personal, joint, business (and so on), each account will have a different account number.
+          example: "123456789"
+          nullable: true
+          title: Bank Account Number
+          type: string
+        account_type:
+          description: The type of bank account.
+          enum:
+            - bank_account
+            - credit_card
+            - other
+          example: credit_card
+          nullable: true
+          title: Account Type
+          type: string
+        bank_code:
+          description: A bank code is a code assigned by a central bank, a bank supervisory body or a Bankers Association in a country to all its licensed member banks or financial institutions.
+          example: BNH
+          nullable: true
+          title: Bank Code
+          type: string
+        bic:
+          example: AUDSCHGGXXX
+          nullable: true
+          type: string
+        bsb_number:
+          description: A BSB is a 6 digit numeric code used for identifying the branch of an Australian or New Zealand bank or financial institution.
+          example: 062-001
+          nullable: true
+          title: BSB Number
+          type: string
+        currency:
+          $ref: "#/components/schemas/Currency"
+        iban:
+          example: CH2989144532982975332
+          nullable: true
+          type: string
+      type: object
+    Company:
+      additionalProperties: false
+      properties:
+        abn_branch:
+          description: An ABN Branch (also known as a GST Branch) is used if part of your business needs to account for GST separately from its parent entity.
+          example: "123"
+          nullable: true
+          title: ABN Branch
+          type: string
+        abn_or_tfn:
+          description: An ABN is necessary for operating a business, while a TFN (Tax File Number) is required for any person working in Australia.
+          example: 46 115 614 695
+          nullable: true
+          title: ABN or TFN
+          type: string
+        acn:
+          description: The Australian Company Number (ACN) is a nine digit number with the last digit being a check digit calculated using a modified modulus 10 calculation. ASIC has adopted a convention of always printing and displaying the ACN in the format XXX XXX XXX; three blocks of three characters, each block separated by a blank.
+          example: XXX XXX XXX
+          nullable: true
+          title: ACN
+          type: string
+        addresses:
+          items:
+            $ref: "#/components/schemas/Address"
+          type: array
+        annual_revenue:
+          description: Annual revenue
+          example: +$35m
+          nullable: true
+          type: string
+        bank_accounts:
+          items:
+            $ref: "#/components/schemas/BankAccount"
+          type: array
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        created_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        currency:
+          $ref: "#/components/schemas/Currency"
+        custom_fields:
+          items:
+            $ref: "#/components/schemas/CustomField"
+          type: array
+        deleted:
+          example: false
+          readOnly: true
+          type: boolean
+        description:
+          example: Space Exploration Technologies Corp. is an American aerospace manufacturer, space transportation services and communications company headquartered in Hawthorne, California.
+          nullable: true
+          type: string
+        emails:
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        fax:
+          example: "+12129876543"
+          nullable: true
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        image:
+          example: https://www.spacex.com/static/images/share.jpg
+          nullable: true
+          type: string
+        industry:
+          description: Industry
+          example: Apparel
+          nullable: true
+          type: string
+        interaction_count:
+          example: 1
+          nullable: true
+          readOnly: true
+          type: integer
+        last_activity_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        name:
+          example: SpaceX
+          minLength: 1
+          type: string
+        number_of_employees:
+          description: Number of employees
+          example: 500-1000
+          nullable: true
+          type: string
+        owner_id:
+          example: "12345"
+          type: string
+        ownership:
+          description: Ownership
+          example: Public
+          nullable: true
+          type: string
+        parent_id:
+          description: Parent ID
+          example: "22345"
+          readOnly: true
+          type: string
+        payee_number:
+          example: 78932EN
+          nullable: true
+          title: Payee number
+          type: string
+        phone_numbers:
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          type: array
+        read_only:
+          example: false
+          nullable: true
+          title: Read-only
+          type: boolean
+        sales_tax_number:
+          example: 12456EN
+          nullable: true
+          title: Sales tax number
+          type: string
+        social_links:
+          items:
+            $ref: "#/components/schemas/SocialLink"
+          type: array
+        status:
+          example: Open
+          minLength: 1
+          nullable: true
+          type: string
+        tags:
+          $ref: "#/components/schemas/Tags"
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        updated_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        vat_number:
+          description: VAT number
+          example: BE0689615164
+          nullable: true
+          type: string
+        websites:
+          items:
+            $ref: "#/components/schemas/Website"
+          type: array
+      required:
+        - name
+      type: object
+    CompanyName:
+      example: SpaceX
+      nullable: true
+      title: Company name
+      type: string
+    Contact:
+      additionalProperties: false
+      properties:
+        active:
+          example: true
+          nullable: true
+          type: boolean
+        addresses:
+          items:
+            $ref: "#/components/schemas/Address"
+          type: array
+        birthday:
+          example: 2000-08-12
+          nullable: true
+          type: string
+        company_id:
+          example: "23456"
+          nullable: true
+          type: string
+        company_name:
+          example: "23456"
+          nullable: true
+          type: string
+        created_at:
+          example: 2017-08-12T20:43:21.291Z
+          format: date-time
+          readOnly: true
+          type: string
+        current_balance:
+          example: 10.5
+          nullable: true
+          title: Current Balance
+          type: number
+        custom_fields:
+          items:
+            $ref: "#/components/schemas/CustomField"
+          type: array
+        department:
+          example: Engineering
+          nullable: true
+          type: string
+        description:
+          example: Internal champion
+          nullable: true
+          title: Description
+          type: string
+        emails:
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        fax:
+          example: "+12129876543"
+          nullable: true
+          type: string
+        first_call_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        first_email_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        first_name:
+          example: Elon
+          nullable: true
+          type: string
+        gender:
+          enum:
+            - male
+            - female
+            - unisex
+          example: female
+          nullable: true
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        image:
+          example: https://unavatar.io/elon-musk
+          nullable: true
+          type: string
+        language:
+          description: language code according to ISO 639-1. For the United States - EN
+          example: EN
+          nullable: true
+          type: string
+        last_activity_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        last_name:
+          example: Musk
+          nullable: true
+          type: string
+        lead_id:
+          example: "34567"
+          nullable: true
+          type: string
+        lead_source:
+          example: Cold Call
+          minLength: 1
+          nullable: true
+          type: string
+        middle_name:
+          example: D.
+          nullable: true
+          type: string
+        name:
+          example: Elon Musk
+          minLength: 1
+          type: string
+        owner_id:
+          example: "54321"
+          nullable: true
+          type: string
+        phone_numbers:
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          type: array
+        prefix:
+          example: Mr.
+          nullable: true
+          type: string
+        social_links:
+          items:
+            $ref: "#/components/schemas/SocialLink"
+          type: array
+        status:
+          example: open
+          nullable: true
+          type: string
+        suffix:
+          example: PhD
+          nullable: true
+          type: string
+        tags:
+          $ref: "#/components/schemas/Tags"
+        title:
+          example: CEO
+          nullable: true
+          type: string
+        type:
+          enum:
+            - customer
+            - supplier
+            - employee
+            - personal
+          example: personal
+          nullable: true
+          type: string
+        updated_at:
+          example: 2017-08-12T20:43:21.291Z
+          format: date-time
+          readOnly: true
+          type: string
+        websites:
+          items:
+            $ref: "#/components/schemas/Website"
+          type: array
+      required:
+        - name
+      x-pii:
+        - name
+        - first_name
+        - middle_name
+        - last_name
+        - email
+    CreateCustomerSupportCustomerResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -747,11 +1335,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: customers
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: kustomer
           type: string
         status:
           description: HTTP Response Status
@@ -1355,7 +1943,90 @@ components:
       required:
         - id
       type: object
-    DeleteMessageResponse:
+    CustomerSupportCustomer:
+      additionalProperties: false
+      properties:
+        addresses:
+          items:
+            $ref: "#/components/schemas/Address"
+          type: array
+        bank_accounts:
+          $ref: "#/components/schemas/BankAccount"
+        company_name:
+          $ref: "#/components/schemas/CompanyName"
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        created_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        currency:
+          $ref: "#/components/schemas/Currency"
+        emails:
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        first_name:
+          example: Elon
+          nullable: true
+          title: First name
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        individual:
+          example: true
+          nullable: true
+          title: Is individual
+          type: boolean
+        last_name:
+          example: Musk
+          nullable: true
+          title: Last name
+          type: string
+        notes:
+          example: Some notes about this customer
+          nullable: true
+          title: Notes
+          type: string
+        phone_numbers:
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          type: array
+        status:
+          description: Customer status
+          enum:
+            - active
+            - archived
+            - gdpr-erasure-request
+            - unknown
+          example: active
+          nullable: true
+          title: Status
+          type: string
+          x-graphql-type-name: CustomerStatus
+        tax_number:
+          example: US123945459
+          nullable: true
+          title: Tax number
+          type: string
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        updated_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    DeleteCustomerSupportCustomerResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -1365,11 +2036,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: customers
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: kustomer
           type: string
         status:
           description: HTTP Response Status
@@ -1411,21 +2082,21 @@ components:
       required:
         - email
       type: object
-    GetMessageResponse:
+    GetCustomerSupportCustomerResponse:
       properties:
         data:
-          $ref: "#/components/schemas/Message"
+          $ref: "#/components/schemas/CustomerSupportCustomer"
         operation:
           description: Operation performed
           example: one
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: customers
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: kustomer
           type: string
         status:
           description: HTTP Response Status
@@ -1443,12 +2114,12 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: Message
-    GetMessagesResponse:
+      x-graphql-type-name: CustomerSupportCustomer
+    GetCustomerSupportCustomersResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/Message"
+            $ref: "#/components/schemas/CustomerSupportCustomer"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -1460,11 +2131,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: customers
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: kustomer
           type: string
         status:
           description: HTTP Response Status
@@ -1482,7 +2153,118 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: MessageList
+      x-graphql-type-name: CustomerSupportCustomerList
+    Lead:
+      additionalProperties: false
+      properties:
+        addresses:
+          items:
+            $ref: "#/components/schemas/Address"
+          type: array
+        company_id:
+          example: "2"
+          nullable: true
+          type: string
+        company_name:
+          example: Spacex
+          nullable: true
+          type: string
+        contact_id:
+          example: "2"
+          nullable: true
+          type: string
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          readOnly: true
+          type: string
+        currency:
+          $ref: "#/components/schemas/Currency"
+        custom_fields:
+          items:
+            $ref: "#/components/schemas/CustomField"
+          type: array
+        description:
+          example: A thinker
+          nullable: true
+          type: string
+        emails:
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        fax:
+          example: "+12129876543"
+          nullable: true
+          type: string
+        first_name:
+          example: Elon
+          nullable: true
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        language:
+          description: language code according to ISO 639-1. For the United States - EN
+          example: EN
+          nullable: true
+          type: string
+        last_name:
+          example: Musk
+          nullable: true
+          type: string
+        lead_source:
+          example: Cold Call
+          nullable: true
+          type: string
+        monetary_amount:
+          example: 75000
+          nullable: true
+          type: number
+        name:
+          example: Elon Musk
+          minLength: 1
+          type: string
+        owner_id:
+          example: "54321"
+          type: string
+        phone_numbers:
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          type: array
+        prefix:
+          example: Sir
+          nullable: true
+          type: string
+        social_links:
+          items:
+            $ref: "#/components/schemas/SocialLink"
+          type: array
+        status:
+          example: New
+          nullable: true
+          type: string
+        tags:
+          $ref: "#/components/schemas/Tags"
+        title:
+          example: CEO
+          nullable: true
+          type: string
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          readOnly: true
+          type: string
+        websites:
+          items:
+            $ref: "#/components/schemas/Website"
+          type: array
+      required:
+        - name
+        - company_name
+      x-pii:
+        - name
+        - email
+        - first_name
+        - last_name
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -1500,179 +2282,6 @@ components:
           example: https://unify.apideck.com/crm/companies?cursor=em9oby1jcm06OnBhZ2U6OjE%3D
           nullable: true
           type: string
-      type: object
-    Message:
-      additionalProperties: false
-      properties:
-        body:
-          description: The message text.
-          example: Hi! How are you doing?
-          maxLength: 1600
-          title: Message Body
-          type: string
-        created_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
-        created_by:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          type: string
-        direction:
-          description: The direction of the message.
-          enum:
-            - inbound
-            - outbound-api
-            - outbound-call
-            - outbound-reply
-            - unknown
-          example: outbound-api
-          readOnly: true
-          title: Direction
-          type: string
-        error:
-          description: The error returned if your message status is failed or undelivered.
-          example:
-            code: X1
-            message: Something went wrong
-          properties:
-            code:
-              description: The error_code provides more information about the failure. If the message was successful, this value is null
-              example: X1
-              readOnly: true
-              title: Error Code
-              type: string
-            message:
-              example: Something went wrong
-              readOnly: true
-              title: Error Message
-              type: string
-          readOnly: true
-          title: Error
-          type: object
-        from:
-          description: The phone number that initiated the message.
-          example: "+15017122661"
-          title: From
-          type: string
-        id:
-          example: "12345"
-          readOnly: true
-          type: string
-        messaging_service_id:
-          description: The ID of the Messaging Service used with the message. In case of Plivo this links to the Powerpack ID.
-          example: "123456"
-          title: Messaging Service ID
-          type: string
-        number_of_media_files:
-          description: The number of media files associated with the message.
-          example: 1
-          readOnly: true
-          title: Number of media files
-          type: integer
-        number_of_units:
-          description: The number of units that make up the complete message. Messages can be split up due to the constraints of the message size.
-          example: 1
-          readOnly: true
-          title: Number of units
-          type: integer
-        price:
-          description: Price of the message.
-          example:
-            currency: USD
-            per_unit: "0.01"
-            total_amount: "0.01"
-          properties:
-            currency:
-              $ref: "#/components/schemas/Currency"
-            per_unit:
-              description: ""
-              example: "0.01"
-              readOnly: true
-              title: Price per unit
-              type: string
-            total_amount:
-              description: ""
-              example: "0.01"
-              readOnly: true
-              title: Price Amount
-              type: string
-          readOnly: true
-          title: Price
-          type: object
-        reference:
-          description: A client reference.
-          example: CUST001
-          title: Reference
-          type: string
-        scheduled_at:
-          description: The scheduled date and time of the message.
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          type: string
-        sent_at:
-          description: The date and time that the message was sent
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
-        status:
-          description: Status of the delivery of the message.
-          enum:
-            - accepted
-            - scheduled
-            - canceled
-            - queued
-            - sending
-            - sent
-            - failed
-            - delivered
-            - undelivered
-            - receiving
-            - received
-            - read
-          example: sent
-          readOnly: true
-          title: Status
-          type: string
-        subject:
-          example: Picture
-          title: Message Subject
-          type: string
-        to:
-          description: The phone number that received the message.
-          example: "+15017122662"
-          title: Message Body
-          type: string
-        type:
-          description: Set to sms for SMS messages and mms for MMS messages.
-          enum:
-            - sms
-            - mms
-          example: sms
-          title: Message type
-          type: string
-        updated_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
-        updated_by:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          type: string
-        webhook_url:
-          description: Define a webhook to receive delivery notifications.
-          example: https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms
-          title: Webhook URL
-          type: string
-      required:
-        - from
-        - to
-        - body
       type: object
     Meta:
       description: Response metadata
@@ -1761,6 +2370,186 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
+    Opportunity:
+      additionalProperties: false
+      properties:
+        close_date:
+          example: 2020-10-30
+          format: date
+          nullable: true
+          type: string
+        company_id:
+          example: "12345"
+          nullable: true
+          type: string
+        company_name:
+          example: Copper
+          nullable: true
+          type: string
+        contact_id:
+          example: "12345"
+          nullable: true
+          type: string
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        created_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        currency:
+          $ref: "#/components/schemas/Currency"
+        custom_fields:
+          items:
+            $ref: "#/components/schemas/CustomField"
+          type: array
+        date_last_contacted:
+          example: 2020-09-30T00:00:00.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        date_lead_created:
+          example: 2020-09-30T00:00:00.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        date_stage_changed:
+          example: 2020-09-30T00:00:00.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        deleted:
+          example: false
+          readOnly: true
+          type: boolean
+        description:
+          example: Opportunities are created for People and Companies that are interested in buying your products or services. Create Opportunities for People and Companies to move them through one of your Pipelines.
+          minLength: 1
+          nullable: true
+          type: string
+        expected_revenue:
+          description: Expected Revenue
+          example: 75000
+          nullable: true
+          readOnly: true
+          type: number
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        interaction_count:
+          example: 0
+          nullable: true
+          readOnly: true
+          type: number
+        last_activity_at:
+          example: 2020-09-30T07:43:32.000Z
+          nullable: true
+          readOnly: true
+          type: string
+        lead_id:
+          example: "12345"
+          nullable: true
+          type: string
+        lead_source:
+          description: Lead source
+          example: Website
+          nullable: true
+          type: string
+        loss_reason:
+          example: No budget
+          nullable: true
+          type: string
+        loss_reason_id:
+          example: "12345"
+          nullable: true
+          type: string
+        monetary_amount:
+          example: 75000
+          nullable: true
+          type: number
+        owner_id:
+          example: "12345"
+          nullable: true
+          type: string
+        pipeline_id:
+          example: "12345"
+          nullable: true
+          type: string
+        pipeline_stage_id:
+          example: "12345"
+          nullable: true
+          type: string
+        primary_contact_id:
+          example: "12345"
+          nullable: true
+          type: string
+        priority:
+          example: None
+          minLength: 1
+          nullable: true
+          type: string
+        source_id:
+          example: "12345"
+          nullable: true
+          type: string
+        stage_last_changed_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          type: string
+        status:
+          example: Open
+          minLength: 1
+          nullable: true
+          type: string
+        status_id:
+          example: "12345"
+          nullable: true
+          type: string
+        tags:
+          $ref: "#/components/schemas/Tags"
+        title:
+          example: New Rocket
+          minLength: 1
+          type: string
+        type:
+          example: Existing Customer - Upgrade
+          minLength: 1
+          nullable: true
+          type: string
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        updated_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        win_probability:
+          example: 40
+          nullable: true
+          type: number
+        won_reason:
+          example: Best pitch
+          nullable: true
+          type: string
+        won_reason_id:
+          example: "12345"
+          nullable: true
+          type: string
+      required:
+        - title
+        - primary_contact_id
+      type: object
     PaymentRequiredResponse:
       properties:
         detail:
@@ -1787,6 +2576,108 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+    PhoneNumber:
+      properties:
+        area_code:
+          example: "323"
+          nullable: true
+          title: Area Code
+          type: string
+        country_code:
+          example: "1"
+          nullable: true
+          title: Country Code
+          type: string
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        number:
+          example: 111-111-1111
+          minLength: 1
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - home
+            - office
+            - mobile
+            - assistant
+            - fax
+            - direct-dial-in
+            - personal
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: PhoneType
+      required:
+        - number
+      type: object
+    Pipeline:
+      additionalProperties: false
+      properties:
+        archived:
+          example: false
+          type: boolean
+        created_at:
+          example: 2017-08-12T20:43:21.291Z
+          readOnly: true
+          type: string
+        currency:
+          $ref: "#/components/schemas/Currency"
+        display_order:
+          example: 1
+          type: integer
+        id:
+          example: default
+          type: string
+        name:
+          example: Sales Pipeline
+          minLength: 1
+          type: string
+        stages:
+          items:
+            properties:
+              display_order:
+                example: 1
+                type: integer
+              id:
+                example: contractsent
+                readOnly: true
+                type: string
+              name:
+                example: Contract Sent
+                type: string
+              value:
+                example: CONTRACT_SENT
+                type: string
+            type: object
+          type: array
+        updated_at:
+          example: 2017-08-12T20:43:21.291Z
+          readOnly: true
+          type: string
+      required:
+        - name
+      x-pii: []
+    SocialLink:
+      properties:
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        type:
+          example: twitter
+          nullable: true
+          type: string
+        url:
+          example: https://www.twitter.com/apideck-io
+          minLength: 1
+          type: string
+      required:
+        - url
+      type: object
     Tags:
       example:
         - New
@@ -1885,7 +2776,7 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
-    UpdateMessageResponse:
+    UpdateCustomerSupportCustomerResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -1895,11 +2786,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: customers
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: kustomer
           type: string
         status:
           description: HTTP Response Status
@@ -1916,6 +2807,29 @@ components:
         - resource
         - operation
         - data
+      type: object
+    Website:
+      properties:
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - work
+            - personal
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: WebsiteType
+        url:
+          example: http://example.com
+          minLength: 1
+          type: string
+      required:
+        - url
       type: object
   securitySchemes:
     apiKey:

@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.8.0
+  version: 8.8.1
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -888,13 +888,16 @@ paths:
                 quantity: 1,
                 unit_price: 27500.5,
                 asset_account: {
-                  id: '123456'
+                  id: '123456',
+                  nominal_code: 'N091'
                 },
                 income_account: {
-                  id: '123456'
+                  id: '123456',
+                  nominal_code: 'N091'
                 },
                 expense_account: {
-                  id: '123456'
+                  id: '123456',
+                  nominal_code: 'N091'
                 },
                 active: true,
                 row_version: '1-12345'
@@ -1086,13 +1089,16 @@ paths:
                 quantity: 1,
                 unit_price: 27500.5,
                 asset_account: {
-                  id: '123456'
+                  id: '123456',
+                  nominal_code: 'N091'
                 },
                 income_account: {
-                  id: '123456'
+                  id: '123456',
+                  nominal_code: 'N091'
                 },
                 expense_account: {
-                  id: '123456'
+                  id: '123456',
+                  nominal_code: 'N091'
                 },
                 active: true,
                 row_version: '1-12345'
@@ -1246,7 +1252,8 @@ paths:
                       id: '123456'
                     },
                     ledger_account: {
-                      id: '123456'
+                      id: '123456',
+                      nominal_code: 'N091'
                     },
                     row_version: '1-12345'
                   }
@@ -1499,7 +1506,8 @@ paths:
                       id: '123456'
                     },
                     ledger_account: {
-                      id: '123456'
+                      id: '123456',
+                      nominal_code: 'N091'
                     },
                     row_version: '1-12345'
                   }
@@ -2009,10 +2017,17 @@ paths:
                 reference: '123456',
                 accounts_receivable_account_type: 'Account',
                 accounts_receivable_account_id: '123456',
+                account: {
+                  id: '123456',
+                  nominal_code: 'N091'
+                },
                 transaction_date: '2021-05-01T12:00:00.000Z',
                 customer: {
                   id: '12345'
                 },
+                reconciled: true,
+                status: 'authorised',
+                type: 'accounts_receivable',
                 allocations: [
                   {
                     id: '123456',
@@ -2187,10 +2202,17 @@ paths:
                 reference: '123456',
                 accounts_receivable_account_type: 'Account',
                 accounts_receivable_account_id: '123456',
+                account: {
+                  id: '123456',
+                  nominal_code: 'N091'
+                },
                 transaction_date: '2021-05-01T12:00:00.000Z',
                 customer: {
                   id: '12345'
                 },
+                reconciled: true,
+                status: 'authorised',
+                type: 'accounts_receivable',
                 allocations: [
                   {
                     id: '123456',
@@ -2322,7 +2344,6 @@ paths:
                     compound: true
                   }
                 ],
-                tax_type: 'output_gst',
                 type: 'NONE',
                 original_tax_rate_id: '12345',
                 status: 'active',
@@ -2503,7 +2524,6 @@ paths:
                     compound: true
                   }
                 ],
-                tax_type: 'output_gst',
                 type: 'NONE',
                 original_tax_rate_id: '12345',
                 status: 'active',
@@ -5372,6 +5392,7 @@ components:
             - current_liability
             - non_current_liability
             - other_liability
+            - sales
           example: bank
           type: string
           x-graphql-type-name: LedgerAccountType
@@ -5445,6 +5466,10 @@ components:
           nullable: true
           readOnly: true
           title: Account Name
+          type: string
+        nominal_code:
+          example: N091
+          nullable: true
           type: string
       required:
         - id
@@ -5570,12 +5595,17 @@ components:
           type: string
     Payment:
       properties:
+        account:
+          $ref: "#/components/schemas/LinkedLedgerAccount"
         accounts_receivable_account_id:
+          deprecated: true
           description: Unique identifier for the account to allocate payment to.
           example: "123456"
+          nullable: true
           title: Accounts receivable account id
           type: string
         accounts_receivable_account_type:
+          deprecated: true
           description: Type of accounts receivable account.
           example: Account
           nullable: true
@@ -5585,10 +5615,15 @@ components:
           items:
             properties:
               amount:
-                description: Amount of payment that should be attributed to this allocation
+                description: Amount of payment that should be attributed to this allocation. If null, the total_amount will be used.
                 example: 49.99
+                nullable: true
                 title: Amount
                 type: number
+              code:
+                example: N091
+                readOnly: true
+                type: string
               id:
                 description: Unique identifier of entity this payment should be attributed to.
                 example: "123456"
@@ -5598,8 +5633,12 @@ components:
                 enum:
                   - invoice
                   - order
-                title: Sale type
+                  - credit_note
+                  - over_payment
+                  - pre_payment
+                title: Allocation type
                 type: string
+                x-graphql-type-name: AllocationType
           type: array
         currency:
           $ref: "#/components/schemas/Currency"
@@ -5614,12 +5653,28 @@ components:
           readOnly: true
           title: Payment Identifier
           type: string
+        reconciled:
+          description: Payment has been reconciled
+          example: true
+          title: Reconciled
+          type: boolean
         reference:
           description: "Optional payment reference message ie: Debit remittance detail."
           example: "123456"
           nullable: true
           title: Payment reference
           type: string
+        status:
+          description: Status of payment
+          enum:
+            - authorised
+            - paid
+            - voided
+            - deleted
+          example: authorised
+          title: Payment Status
+          type: string
+          x-graphql-type-name: PaymentStatus
         total_amount:
           description: Amount of payment
           example: 49.99
@@ -5631,9 +5686,25 @@ components:
           format: date-time
           title: Transaction datetime
           type: string
+        type:
+          description: Type of payment
+          enum:
+            - accounts_receivable
+            - accounts_payable
+            - accounts_receivable_credit
+            - accounts_payable_credit
+            - accounts_receivable_overpayment
+            - accounts_payable_overpayment
+            - accounts_receivable_prepayment
+            - accounts_payable_prepayment
+          example: accounts_receivable
+          title: Payment Type
+          type: string
+          x-graphql-type-name: PaymentType
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
       required:
         - total_amount
-        - accounts_receivable_account_id
         - transaction_date
       type: object
     PaymentRequiredResponse:
@@ -5871,24 +5942,6 @@ components:
           example: "123456"
           nullable: true
           title: Tax remitted account id
-          type: string
-        tax_type:
-          deprecated: true
-          description: Tax type used to define the source of tax collected or paid
-          enum:
-            - output
-            - input
-            - withholdings
-            - import_gst
-            - output_gst
-            - input_exempt
-            - output_exempt
-            - consolidated
-            - luxury_car_tax
-            - none
-          example: output_gst
-          nullable: true
-          title: Tax Type
           type: string
         total_tax_rate:
           description: Not compounded sum of the components of a tax rate
