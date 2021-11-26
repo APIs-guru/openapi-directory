@@ -317,11 +317,11 @@ components:
           example: "0011223344556677"
           type: string
         callback:
-          description: "**Advanced**: The webhook endpoint the delivery receipt for this sms is sent to. This parameter overrides the webhook endpoint you set in Dashboard."
+          description: "**Advanced**: The webhook endpoint the delivery receipt for this sms is sent to. This parameter overrides the webhook endpoint you set in Dashboard. Max 100 characters."
           example: https://example.com/sms-dlr
           type: string
         client-ref:
-          description: "**Advanced**: You can optionally include your own reference of up to 40 characters."
+          description: "**Advanced**: You can optionally include your own reference of up to 100 characters."
           example: my-personal-reference
           type: string
         content-id:
