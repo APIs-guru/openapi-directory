@@ -2845,7 +2845,7 @@ paths:
         - liasettings
   "/{merchantId}/liasettings/{accountId}/accessiblegmbaccounts":
     get:
-      description: Retrieves the list of accessible Google My Business accounts.
+      description: Retrieves the list of accessible Business Profiles.
       operationId: content.liasettings.getaccessiblegmbaccounts
       parameters:
         - description: The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and `accountId` must be the ID of a sub-account of this account.
@@ -2854,7 +2854,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The ID of the account for which to retrieve accessible Google My Business accounts.
+        - description: The ID of the account for which to retrieve accessible Business Profiles.
           in: path
           name: accountId
           required: true
@@ -2900,7 +2900,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Requests access to a specified Google My Business account.
+      description: Requests access to a specified Business Profile.
       operationId: content.liasettings.requestgmbaccess
       parameters:
         - description: The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and `accountId` must be the ID of a sub-account of this account.
@@ -2909,13 +2909,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: The ID of the account for which GMB access is requested.
+        - description: The ID of the account for which Business Profile access is requested.
           in: path
           name: accountId
           required: true
           schema:
             type: string
-        - description: The email of the Google My Business account.
+        - description: The email of the Business Profile.
           in: query
           name: gmbEmail
           required: true
@@ -3074,7 +3074,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The ID of the account for which to retrieve accessible Google My Business accounts.
+        - description: The ID of the account for which to retrieve accessible Business Profiles.
           in: path
           name: accountId
           required: true
@@ -7205,7 +7205,7 @@ components:
           type: string
         googleMyBusinessLink:
           $ref: "#/components/schemas/AccountGoogleMyBusinessLink"
-          description: The GMB account which is linked or in the process of being linked with the Merchant Center account.
+          description: The Business Profile which is linked or in the process of being linked with the Merchant Center account.
         id:
           description: Required for update. Merchant Center account ID.
           format: uint64
@@ -7318,13 +7318,13 @@ components:
     AccountGoogleMyBusinessLink:
       properties:
         gmbAccountId:
-          description: The ID of the GMB account. If this is provided, then `gmbEmail` is ignored. The value of this field should match the `accountId` used by the GMB API.
+          description: The ID of the Business Profile. If this is provided, then `gmbEmail` is ignored. The value of this field should match the `accountId` used by the Business Profile API.
           type: string
         gmbEmail:
-          description: The GMB email address of which a specific account within a GMB account. A sample account within a GMB account could be a business account with set of locations, managed under the GMB account.
+          description: The Business Profile email address of a specific account within a Business Profile. A sample account within a Business Profile could be a business account with set of locations, managed under the Business Profile.
           type: string
         status:
-          description: 'Status of the link between this Merchant Center account and the GMB account. Acceptable values are: - "`active`" - "`pending`" '
+          description: 'Status of the link between this Merchant Center account and the Business Profile. Acceptable values are: - "`active`" - "`pending`" '
           type: string
       type: object
     AccountIdentifier:
@@ -8756,7 +8756,7 @@ components:
           format: uint64
           type: string
         gmbAccounts:
-          description: A list of GMB accounts which are available to the merchant.
+          description: A list of Business Profiles which are available to the merchant.
           items:
             $ref: "#/components/schemas/GmbAccountsGmbAccount"
           type: array
@@ -8764,17 +8764,17 @@ components:
     GmbAccountsGmbAccount:
       properties:
         email:
-          description: The email which identifies the GMB account.
+          description: The email which identifies the Business Profile.
           type: string
         listingCount:
           description: Number of listings under this account.
           format: uint64
           type: string
         name:
-          description: The name of the GMB account.
+          description: The name of the Business Profile.
           type: string
         type:
-          description: The type of the GMB account (User or Business).
+          description: The type of the Business Profile (User or Business).
           type: string
       type: object
     Headers:
@@ -9019,7 +9019,7 @@ components:
           description: The country code. Required only for RequestInventoryVerification.
           type: string
         gmbEmail:
-          description: The GMB account. Required only for RequestGmbAccess.
+          description: The Business Profile. Required only for RequestGmbAccess.
           type: string
         liaSettings:
           $ref: "#/components/schemas/LiaSettings"
@@ -9061,7 +9061,7 @@ components:
           description: A list of errors defined if, and only if, the request failed.
         gmbAccounts:
           $ref: "#/components/schemas/GmbAccounts"
-          description: The list of accessible GMB accounts.
+          description: The list of accessible Business Profiles.
         kind:
           description: 'Identifies what kind of resource this is. Value: the fixed string "`content#liasettingsCustomBatchResponseEntry`"'
           type: string
@@ -9081,7 +9081,7 @@ components:
           format: uint64
           type: string
         gmbAccounts:
-          description: A list of GMB accounts which are available to the merchant.
+          description: A list of Business Profiles which are available to the merchant.
           items:
             $ref: "#/components/schemas/GmbAccountsGmbAccount"
           type: array
@@ -10269,7 +10269,7 @@ components:
           description: Plain text title of this product.
           type: string
         quantity:
-          description: Required. The quantity of the line item in the order.
+          description: The quantity of the line item in the order.
           format: int64
           type: string
         sku:
@@ -10286,7 +10286,7 @@ components:
           description: Required. The line item ID.
           type: string
         quantity:
-          description: Required. The line item quantity in the shipment.
+          description: The line item quantity in the shipment.
           format: int64
           type: string
         shipmentId:
@@ -11250,7 +11250,7 @@ components:
           format: int64
           type: string
         storeCode:
-          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in Google My Business.
+          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in a Business Profile.
           type: string
         targetCountry:
           description: Required. The CLDR territory code for the item.
@@ -11278,7 +11278,7 @@ components:
           format: int64
           type: string
         storeCode:
-          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in Google My Business.
+          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in a Business Profile.
           type: string
         targetCountry:
           description: Required. The CLDR territory code for the item.
@@ -11309,7 +11309,7 @@ components:
           format: int64
           type: string
         storeCode:
-          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in Google My Business.
+          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in a Business Profile.
           type: string
         targetCountry:
           description: Required. The CLDR territory code for the item.
@@ -11354,7 +11354,7 @@ components:
           description: A unique ID to group items from the same sale event.
           type: string
         storeCode:
-          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in Google My Business.
+          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in a Business Profile.
           type: string
         targetCountry:
           description: Required. The CLDR territory code for the item.
@@ -11385,7 +11385,7 @@ components:
           description: A unique ID to group items from the same sale event.
           type: string
         storeCode:
-          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in Google My Business.
+          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in a Business Profile.
           type: string
         targetCountry:
           description: Required. The CLDR territory code for the item.
@@ -11419,7 +11419,7 @@ components:
           description: A unique ID to group items from the same sale event.
           type: string
         storeCode:
-          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in Google My Business.
+          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in a Business Profile.
           type: string
         targetCountry:
           description: Required. The CLDR territory code for the item.

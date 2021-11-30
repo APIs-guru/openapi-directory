@@ -1474,7 +1474,7 @@ components:
       description: Representation of an ad client. An ad client represents a user's subscription with a specific AdSense product.
       properties:
         name:
-          description: "Resource name of the ad client. Format: accounts/{account}/adclient/{adclient}"
+          description: "Resource name of the ad client. Format: accounts/{account}/adclients/{adclient}"
           type: string
         productCode:
           description: Output only. Product code of the ad client. For example, "AFC" for AdSense for Content.
@@ -1511,7 +1511,7 @@ components:
           description: Display name of the ad unit, as provided when the ad unit was created.
           type: string
         name:
-          description: "Resource name of the ad unit. Format: accounts/{account}/adclient/{adclient}/adunits/{adunit}"
+          description: "Resource name of the ad unit. Format: accounts/{account}/adclients/{adclient}/adunits/{adunit}"
           type: string
         reportingDimensionId:
           description: Output only. Unique ID of the ad unit as used in the `AD_UNIT_ID` reporting dimension.
@@ -1898,7 +1898,7 @@ components:
       description: Representation of a URL channel. URL channels allow you to track the performance of particular pages in your site; see [URL channels](https://support.google.com/adsense/answer/2923836) for more information.
       properties:
         name:
-          description: "Resource name of the URL channel. Format: accounts/{account}/adclient/{adclient}/urlchannels/{urlchannel}"
+          description: "Resource name of the URL channel. Format: accounts/{account}/adclients/{adclient}/urlchannels/{urlchannel}"
           type: string
         reportingDimensionId:
           description: Output only. Unique ID of the custom channel as used in the `URL_CHANNEL_ID` reporting dimension.
