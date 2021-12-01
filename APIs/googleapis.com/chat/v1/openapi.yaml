@@ -110,7 +110,7 @@ paths:
       description: Deletes a message.
       operationId: chat.spaces.messages.delete
       parameters:
-        - description: 'Required. Resource name of the message to be deleted, in the form "spaces/*/messages/*" Example: spaces/AAAAMpdlehY/messages/UMxbHmzDlr4.UMxbHmzDlr4'
+        - description: 'Required. Resource name of the message to be deleted, in the form "spaces/*/messages/*" Example: spaces/AAAAAAAAAAA/messages/BBBBBBBBBBB.BBBBBBBBBBB'
           in: path
           name: name
           required: true
@@ -160,7 +160,7 @@ paths:
       description: Updates a message.
       operationId: chat.spaces.messages.update
       parameters:
-        - description: "Resource name in the form `spaces/*/messages/*`. Example: `spaces/AAAAMpdlehY/messages/UMxbHmzDlr4.UMxbHmzDlr4`"
+        - description: "Resource name in the form `spaces/*/messages/*`. Example: `spaces/AAAAAAAAAAA/messages/BBBBBBBBBBB.BBBBBBBBBBB`"
           in: path
           name: name
           required: true
@@ -244,7 +244,7 @@ paths:
       description: Creates a message.
       operationId: chat.spaces.messages.create
       parameters:
-        - description: 'Required. Space resource name, in the form "spaces/*". Example: spaces/AAAAMpdlehY'
+        - description: 'Required. Space resource name, in the form "spaces/*". Example: spaces/AAAAAAAAAAA'
           in: path
           name: parent
           required: true
@@ -291,7 +291,7 @@ paths:
       description: Legacy path for creating message. Calling these will result in a BadRequest response.
       operationId: chat.spaces.webhooks
       parameters:
-        - description: 'Required. Space resource name, in the form "spaces/*". Example: spaces/AAAAMpdlehY'
+        - description: 'Required. Space resource name, in the form "spaces/*". Example: spaces/AAAAAAAAAAA'
           in: path
           name: parent
           required: true
@@ -1465,8 +1465,9 @@ components:
       description: Represents a membership relation in Google Chat.
       properties:
         createTime:
-          description: The creation time of the membership a.k.a. the time at which the member joined the space, if applicable.
+          description: Output only. The creation time of the membership a.k.a. the time at which the member joined the space, if applicable.
           format: google-datetime
+          readOnly: true
           type: string
         member:
           $ref: "#/components/schemas/User"
@@ -1474,7 +1475,7 @@ components:
         name:
           type: string
         state:
-          description: State of the membership.
+          description: State of the membership. Required for `CreateMembership`. Read-only for other usage.
           enum:
             - MEMBERSHIP_STATE_UNSPECIFIED
             - JOINED
@@ -1520,7 +1521,7 @@ components:
           readOnly: true
           type: string
         name:
-          description: "Resource name in the form `spaces/*/messages/*`. Example: `spaces/AAAAMpdlehY/messages/UMxbHmzDlr4.UMxbHmzDlr4`"
+          description: "Resource name in the form `spaces/*/messages/*`. Example: `spaces/AAAAAAAAAAA/messages/BBBBBBBBBBB.BBBBBBBBBBB`"
           type: string
         previewText:
           description: Text for generating preview chips. This text will not be displayed to the user, but any links to images, web pages, videos, etc. included here will generate preview chips.
@@ -1606,19 +1607,21 @@ components:
       description: A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat bot.
       properties:
         displayName:
-          description: The display name (only if the space is of type `ROOM`). Please note that this field might not be populated in direct messages between humans.
+          description: The space's display name. For direct messages between humans, this field might be empty.
           type: string
         name:
           description: 'Resource name of the space, in the form "spaces/*". Example: spaces/AAAAAAAAAAAA'
           type: string
         singleUserBotDm:
-          description: Whether the space is a DM between a bot and a single human.
+          description: Output only. Whether the space is a DM between a bot and a single human.
+          readOnly: true
           type: boolean
         threaded:
-          description: Whether the messages are threaded in this space.
+          description: Output only. Whether the messages are threaded in this space.
+          readOnly: true
           type: boolean
         type:
-          description: Output only. The type of a space. This is deprecated. Use `single_user_bot_dm` instead.
+          description: Deprecated. Use `single_user_bot_dm` instead. Output only. The type of a space.
           enum:
             - TYPE_UNSPECIFIED
             - ROOM
@@ -1671,7 +1674,7 @@ components:
       description: A thread in Google Chat.
       properties:
         name:
-          description: 'Resource name, in the form "spaces/*/threads/*". Example: spaces/AAAAMpdlehY/threads/UMxbHmzDlr4'
+          description: 'Resource name, in the form "spaces/*/threads/*". Example: spaces/AAAAAAAAAAA/threads/TTTTTTTTTTT'
           type: string
       type: object
     TimeInput:

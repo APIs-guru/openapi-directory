@@ -340,7 +340,7 @@ components:
           description: Contact's email address.
           type: string
         legalBasis:
-          description: Legal basis for resubscribing the contact (required for GDPR enabled portals).
+          description: Legal basis for updating the contact's status (required for GDPR enabled portals).
           enum:
             - LEGITIMATE_INTEREST_PQL
             - LEGITIMATE_INTEREST_CLIENT
@@ -354,7 +354,7 @@ components:
           description: A more detailed explanation to go with the legal basis (required for GDPR enabled portals).
           type: string
         subscriptionId:
-          description: ID of the subscription the contact is being resubscribed to.
+          description: ID of the subscription being updated for the contact.
           type: string
       required:
         - emailAddress

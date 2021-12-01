@@ -796,6 +796,86 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
+  "/v1alpha/{parent}/dataStreams":
+    get:
+      description: Lists DataStreams on a property.
+      operationId: analyticsadmin.properties.dataStreams.list
+      parameters:
+        - description: "Required. Example format: properties/1234"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of resources to return. If unspecified, at most 50 resources will be returned. The maximum value is 200 (higher values will be coerced to the maximum).
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListDataStreams` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListDataStreams` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListDataStreamsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.readonly
+      tags:
+        - properties
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a DataStream.
+      operationId: analyticsadmin.properties.dataStreams.create
+      parameters:
+        - description: "Required. Example format: properties/1234"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaDataStream"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaDataStream"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+      tags:
+        - properties
   "/v1alpha/{parent}/displayVideo360AdvertiserLinkProposals":
     get:
       description: Lists DisplayVideo360AdvertiserLinkProposals on a property.
@@ -2206,6 +2286,81 @@ components:
           description: Allows Google to share the data anonymously in aggregate form with others.
           type: boolean
       type: object
+    GoogleAnalyticsAdminV1alphaDataStream:
+      description: A resource message representing a data stream.
+      properties:
+        androidAppStreamData:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaDataStreamAndroidAppStreamData"
+          description: Data specific to Android app streams. Must be populated if type is ANDROID_APP_DATA_STREAM.
+        createTime:
+          description: Output only. Time when this stream was originally created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Human-readable display name for the Data Stream. Required for web data streams. The max allowed display name length is 255 UTF-16 code units.
+          type: string
+        iosAppStreamData:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaDataStreamIosAppStreamData"
+          description: Data specific to iOS app streams. Must be populated if type is IOS_APP_DATA_STREAM.
+        name:
+          description: 'Output only. Resource name of this Data Stream. Format: properties/{property_id}/dataStreams/{stream_id} Example: "properties/1000/dataStreams/2000"'
+          readOnly: true
+          type: string
+        type:
+          description: Required. Immutable. The type of this DataStream resource.
+          enum:
+            - DATA_STREAM_TYPE_UNSPECIFIED
+            - WEB_DATA_STREAM
+            - ANDROID_APP_DATA_STREAM
+            - IOS_APP_DATA_STREAM
+          type: string
+        updateTime:
+          description: Output only. Time when stream payload fields were last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+        webStreamData:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaDataStreamWebStreamData"
+          description: Data specific to web streams. Must be populated if type is WEB_DATA_STREAM.
+      type: object
+    GoogleAnalyticsAdminV1alphaDataStreamAndroidAppStreamData:
+      description: Data specific to Android app streams.
+      properties:
+        firebaseAppId:
+          description: Output only. ID of the corresponding Android app in Firebase, if any. This ID can change if the Android app is deleted and recreated.
+          readOnly: true
+          type: string
+        packageName:
+          description: 'Immutable. The package name for the app being measured. Example: "com.example.myandroidapp"'
+          type: string
+      type: object
+    GoogleAnalyticsAdminV1alphaDataStreamIosAppStreamData:
+      description: Data specific to iOS app streams.
+      properties:
+        bundleId:
+          description: 'Required. Immutable. The Apple App Store Bundle ID for the app Example: "com.example.myiosapp"'
+          type: string
+        firebaseAppId:
+          description: Output only. ID of the corresponding iOS app in Firebase, if any. This ID can change if the iOS app is deleted and recreated.
+          readOnly: true
+          type: string
+      type: object
+    GoogleAnalyticsAdminV1alphaDataStreamWebStreamData:
+      description: Data specific to web streams.
+      properties:
+        defaultUri:
+          description: 'Immutable. Domain name of the web app being measured, or empty. Example: "http://www.google.com", "https://www.google.com"'
+          type: string
+        firebaseAppId:
+          description: Output only. ID of the corresponding web app in Firebase, if any. This ID can change if the web app is deleted and recreated.
+          readOnly: true
+          type: string
+        measurementId:
+          description: 'Output only. Analytics "Measurement ID", without the "G-" prefix. Example: "G-1A2BCD345E" would just be "1A2BCD345E"'
+          readOnly: true
+          type: string
+      type: object
     GoogleAnalyticsAdminV1alphaDeleteUserLinkRequest:
       description: Request message for DeleteUserLink RPC.
       properties:
@@ -2478,6 +2633,18 @@ components:
           description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
+    GoogleAnalyticsAdminV1alphaListDataStreamsResponse:
+      description: Response message for ListDataStreams RPC.
+      properties:
+        dataStreams:
+          description: List of DataStreams.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaDataStream"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
     GoogleAnalyticsAdminV1alphaListDisplayVideo360AdvertiserLinkProposalsResponse:
       description: Response message for ListDisplayVideo360AdvertiserLinkProposals RPC.
       properties:
@@ -2687,7 +2854,7 @@ components:
       description: A virtual resource representing metadata for a GA4 property.
       properties:
         displayName:
-          description: Display name for the property referred to in this account summary.
+          description: Display name for the property referred to in this property summary.
           type: string
         property:
           description: 'Resource name of property referred to by this property summary Format: properties/{property_id} Example: "properties/1000"'

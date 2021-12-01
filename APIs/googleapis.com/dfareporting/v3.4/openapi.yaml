@@ -13,20 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Campaign Manager 360 API
   version: v3.4
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://dfareporting.googleapis.com/$discovery/rest?version=v3.4
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: dfareporting
-  x-preferred: true
 externalDocs:
   url: https://developers.google.com/doubleclick-advertisers/
 tags:
@@ -7041,6 +7038,7 @@ paths:
                 - PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY
                 - PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY
                 - PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4
+                - PLACEMENT_TAG_TRACKING_THIRD_PARTY_MEASUREMENT
               type: string
             type: array
           style: form
@@ -11413,7 +11411,7 @@ components:
           description: Whether this particular request may come from a user under the age of 13, under COPPA compliance.
           type: boolean
         customVariables:
-          description: Custom floodlight variables.
+          description: Custom floodlight variables. This field may only be used when calling batchinsert; it is not supported by batchupdate.
           items:
             $ref: "#/components/schemas/CustomFloodlightVariable"
           type: array
@@ -12928,7 +12926,7 @@ components:
           type: array
       type: object
     CustomFloodlightVariable:
-      description: A custom floodlight variable.
+      description: A custom floodlight variable. This field may only be used when calling batchinsert; it is not supported by batchupdate.
       properties:
         kind:
           description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#customFloodlightVariable".'
@@ -15251,6 +15249,7 @@ components:
               - PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY
               - PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY
               - PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4
+              - PLACEMENT_TAG_TRACKING_THIRD_PARTY_MEASUREMENT
             type: string
           type: array
         tagSetting:
@@ -16788,6 +16787,7 @@ components:
             - PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY
             - PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY
             - PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4
+            - PLACEMENT_TAG_TRACKING_THIRD_PARTY_MEASUREMENT
           type: string
         impressionTag:
           description: Tag string for serving an ad.
@@ -17454,5 +17454,3 @@ components:
             https://www.googleapis.com/auth/dfatrafficking: View and manage your DoubleClick Campaign Manager's (DCM) display ad campaigns
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}
