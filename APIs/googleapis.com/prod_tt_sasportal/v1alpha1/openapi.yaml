@@ -79,6 +79,28 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new SAS customer.
+      operationId: prod_tt_sasportal.customers.create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SasPortalCustomer"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SasPortalCustomer"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
+      tags:
+        - customers
   /v1alpha1/installer:generateSecret:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"

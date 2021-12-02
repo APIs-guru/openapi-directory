@@ -423,6 +423,56 @@ paths:
               console.error(error)
             }
       x-graphql-field-name: connectionsDelete
+    get:
+      description: Get a connection
+      operationId: connectionsOne
+      parameters:
+        - $ref: "#/components/parameters/x-apideck-consumer-id"
+        - $ref: "#/components/parameters/x-apideck-app-id"
+        - $ref: "#/components/parameters/service_id"
+        - $ref: "#/components/parameters/unified_api"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetConnectionResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get connection
+      tags:
+        - Connections
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.vault.connectionsOne({
+                serviceId: 'pipedrive',
+                unifiedApi: 'crm'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
     patch:
       description: Update a connection
       operationId: connectionsUpdate
@@ -1670,7 +1720,7 @@ components:
         application/json:
           example: {}
           schema: {}
-      description: Resource succesfully deleted
+      description: Resource successfully deleted
     GetConnectionResponse:
       content:
         application/json:
@@ -2197,6 +2247,95 @@ components:
         - status_code
         - status
         - data
+      type: object
+    ConsumerWebhook:
+      additionalProperties: false
+      properties:
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        delivery_url:
+          description: The delivery url of the webhook endpoint.
+          example: https://example.com/my/webhook/endpoint
+          format: uri
+          pattern: ^(https?)://
+          type: string
+        description:
+          example: A description
+          nullable: true
+          title: Description
+          type: string
+        events:
+          description: The list of subscribed events for this webhook. [’*’] indicates that all events are enabled.
+          example:
+            - vault.connection.created
+            - vault.connection.updated
+          items:
+            enum:
+              - "*"
+              - crm.activity.created
+              - crm.activity.updated
+              - crm.activity.deleted
+              - crm.company.created
+              - crm.company.updated
+              - crm.company.deleted
+              - crm.contact.created
+              - crm.contact.updated
+              - crm.contact.deleted
+              - crm.lead.created
+              - crm.lead.updated
+              - crm.lead.deleted
+              - crm.note.created
+              - crm.notes.updated
+              - crm.notes.deleted
+              - crm.opportunity.created
+              - crm.opportunity.updated
+              - crm.opportunity.deleted
+              - lead.lead.created
+              - lead.lead.updated
+              - lead.lead.deleted
+              - vault.connection.created
+              - vault.connection.updated
+              - vault.connection.deleted
+              - vault.connection.callable
+            example: crm.company.created
+            type: string
+          title: Subscribed events
+          type: array
+        execute_base_url:
+          description: The Unify Base URL events from connectors will be sent to after service id is appended.
+          example: https://unify.apideck.com/webhook/webhooks/1234/execute
+          format: uri
+          pattern: ^(https?)://
+          readOnly: true
+          type: string
+        id:
+          example: "1234"
+          readOnly: true
+          type: string
+        status:
+          description: The status of the webhook.
+          enum:
+            - enabled
+            - disabled
+          example: enabled
+          type: string
+          x-graphql-type-name: WebhookStatus
+        unified_api:
+          $ref: "#/components/schemas/UnifiedApiId"
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+      required:
+        - delivery_url
+        - status
+        - events
+        - unified_api
+        - execute_base_url
       type: object
     CreateConnectionResponse:
       properties:
