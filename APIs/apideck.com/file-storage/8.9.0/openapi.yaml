@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: File storage API
-  version: 8.8.1
+  version: 8.9.0
   x-apideck-api: file-storage
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1594,11 +1594,13 @@ components:
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       readOnly: true
+      title: Created at (timestamp)
       type: string
     CreatedBy:
       example: "12345"
       nullable: true
       readOnly: true
+      title: Created by
       type: string
     DeleteFileResponse:
       properties:
@@ -2511,6 +2513,7 @@ components:
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       readOnly: true
+      title: Updated at (timestamp)
       type: string
     UpdatedBy:
       example: "12345"

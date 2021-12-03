@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Customer Support
-  version: 8.8.1
+  version: 8.9.0
   x-apideck-api: customer-support
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1958,11 +1958,13 @@ components:
           example: 2020-09-30T07:43:32.000Z
           format: date-time
           readOnly: true
+          title: Created at (timestamp)
           type: string
         created_by:
           example: "12345"
           nullable: true
           readOnly: true
+          title: Created by
           type: string
         currency:
           $ref: "#/components/schemas/Currency"
@@ -2019,6 +2021,7 @@ components:
           example: 2020-09-30T07:43:32.000Z
           format: date-time
           readOnly: true
+          title: Updated at (timestamp)
           type: string
         updated_by:
           example: "12345"

@@ -2352,7 +2352,7 @@ components:
       properties:
         date:
           $ref: "#/components/schemas/Date"
-          description: Date for which session stats were calculated. Stats are calculated on the following day, close to midnight PST, and then returned.
+          description: Date for which session stats were calculated. Stats calculated on the next day close to midnight are returned.
         searchSessionsCount:
           description: The count of search sessions on the day
           format: int64
@@ -3921,7 +3921,7 @@ components:
       properties:
         date:
           $ref: "#/components/schemas/Date"
-          description: Date for which session stats were calculated. Stats are calculated on the following day, close to midnight PST, and then returned.
+          description: Date for which session stats were calculated. Stats calculated on the next day close to midnight are returned.
         searchSessionsCount:
           description: The count of search sessions on the day
           format: int64

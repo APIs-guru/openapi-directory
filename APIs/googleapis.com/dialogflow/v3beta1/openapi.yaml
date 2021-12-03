@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://dialogflow.googleapis.com/$discovery/rest?version=v3beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: dialogflow
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/dialogflow/
 tags:
@@ -3335,6 +3336,9 @@ components:
         playAudio:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ResponseMessagePlayAudio"
           description: Signal that the client should play an audio clip hosted at a client-specific URI. Dialogflow uses this to construct mixed_audio. However, Dialogflow itself does not try to read or process the URI in any way.
+        telephonyTransferCall:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ResponseMessageTelephonyTransferCall"
+          description: A signal that the client should transfer the phone call connected to this agent to a third-party endpoint.
         text:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ResponseMessageText"
           description: Returns a text response.
@@ -3408,6 +3412,13 @@ components:
           type: boolean
         audioUri:
           description: Required. URI of the audio clip. Dialogflow does not impose any validation on this value. It is specific to the client that reads it.
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3ResponseMessageTelephonyTransferCall:
+      description: Represents the signal that telles the client to transfer the phone call connected to the agent to a third-party endpoint.
+      properties:
+        phoneNumber:
+          description: Transfer the call to a phone number in [E.164 format](https://en.wikipedia.org/wiki/E.164).
           type: string
       type: object
     GoogleCloudDialogflowCxV3ResponseMessageText:
@@ -5523,6 +5534,9 @@ components:
         playAudio:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ResponseMessagePlayAudio"
           description: Signal that the client should play an audio clip hosted at a client-specific URI. Dialogflow uses this to construct mixed_audio. However, Dialogflow itself does not try to read or process the URI in any way.
+        telephonyTransferCall:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ResponseMessageTelephonyTransferCall"
+          description: A signal that the client should transfer the phone call connected to this agent to a third-party endpoint.
         text:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ResponseMessageText"
           description: Returns a text response.
@@ -5596,6 +5610,13 @@ components:
           type: boolean
         audioUri:
           description: Required. URI of the audio clip. Dialogflow does not impose any validation on this value. It is specific to the client that reads it.
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1ResponseMessageTelephonyTransferCall:
+      description: Represents the signal that telles the client to transfer the phone call connected to the agent to a third-party endpoint.
+      properties:
+        phoneNumber:
+          description: Transfer the call to a phone number in [E.164 format](https://en.wikipedia.org/wiki/E.164).
           type: string
       type: object
     GoogleCloudDialogflowCxV3beta1ResponseMessageText:

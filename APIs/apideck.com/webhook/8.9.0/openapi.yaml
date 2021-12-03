@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Webhook API
-  version: 8.8.1
+  version: 8.9.0
   x-apideck-api: webhook
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -636,6 +636,7 @@ components:
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       readOnly: true
+      title: Created at (timestamp)
       type: string
     DeleteWebhookResponse:
       properties:
@@ -1061,6 +1062,7 @@ components:
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       readOnly: true
+      title: Updated at (timestamp)
       type: string
     Webhook:
       additionalProperties: false
@@ -1126,6 +1128,7 @@ components:
         occurred_at:
           description: ISO Datetime for when the original event occurred
           example: 2021-10-01T03:14:55.419Z
+          format: date-time
           type: string
         service_id:
           $ref: "#/components/schemas/ServiceId"
@@ -1282,6 +1285,12 @@ components:
         - vault.connection.updated
         - vault.connection.deleted
         - vault.connection.callable
+        - ats.job.created
+        - ats.job.updated
+        - ats.job.deleted
+        - ats.applicant.created
+        - ats.applicant.updated
+        - ats.applicant.deleted
       example: crm.company.created
       type: string
   securitySchemes:

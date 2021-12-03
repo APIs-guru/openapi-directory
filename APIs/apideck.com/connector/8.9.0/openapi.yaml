@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Connector API
-  version: 8.8.1
+  version: 8.9.0
   x-apideck-api: connector
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -923,6 +923,10 @@ components:
           description: List of resources supported in this API.
           items:
             properties:
+              excluded_from_coverage:
+                description: Exclude from mapping coverage
+                example: false
+                type: boolean
               id:
                 description: ID of the resource, typically a lowercased version of its name.
                 example: companies
@@ -1512,6 +1516,7 @@ components:
         - live
         - beta
         - development
+        - upcoming
         - considering
       type: string
     UnifiedApiId:
