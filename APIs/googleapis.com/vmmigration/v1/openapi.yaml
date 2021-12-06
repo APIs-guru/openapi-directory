@@ -1453,6 +1453,10 @@ components:
           description: The full path name of the MigratingVm to add.
           type: string
       type: object
+    AddGroupMigrationResponse:
+      description: Response message for 'AddGroupMigration' request.
+      properties: {}
+      type: object
     AppliedLicense:
       description: AppliedLicense holds the license data returned by adaptation module report.
       properties:
@@ -1472,8 +1476,16 @@ components:
       description: Request message for 'CancelCloneJob' request.
       properties: {}
       type: object
+    CancelCloneJobResponse:
+      description: Response message for 'CancelCloneJob' request.
+      properties: {}
+      type: object
     CancelCutoverJobRequest:
       description: Request message for 'CancelCutoverJob' request.
+      properties: {}
+      type: object
+    CancelCutoverJobResponse:
+      description: Response message for 'CancelCutoverJob' request.
       properties: {}
       type: object
     CancelOperationRequest:
@@ -1810,6 +1822,10 @@ components:
       type: object
     FinalizeMigrationRequest:
       description: Request message for 'FinalizeMigration' request.
+      properties: {}
+      type: object
+    FinalizeMigrationResponse:
+      description: Response message for 'FinalizeMigration' request.
       properties: {}
       type: object
     Group:
@@ -2264,12 +2280,20 @@ components:
       description: Request message for 'PauseMigration' request.
       properties: {}
       type: object
+    PauseMigrationResponse:
+      description: Response message for 'PauseMigration' request.
+      properties: {}
+      type: object
     RemoveGroupMigrationRequest:
       description: Request message for 'RemoveMigration' request.
       properties:
         migratingVm:
           description: The MigratingVm to remove.
           type: string
+      type: object
+    RemoveGroupMigrationResponse:
+      description: Response message for 'RemoveMigration' request.
+      properties: {}
       type: object
     ReplicationCycle:
       description: ReplicationCycle contains information about the current replication cycle status.
@@ -2293,6 +2317,10 @@ components:
       type: object
     ResumeMigrationRequest:
       description: Request message for 'ResumeMigration' request.
+      properties: {}
+      type: object
+    ResumeMigrationResponse:
+      description: Response message for 'ResumeMigration' request.
       properties: {}
       type: object
     SchedulePolicy:
@@ -2356,6 +2384,10 @@ components:
       type: object
     StartMigrationRequest:
       description: Request message for 'StartMigrationRequest' request.
+      properties: {}
+      type: object
+    StartMigrationResponse:
+      description: Response message for 'StartMigration' request.
       properties: {}
       type: object
     Status:

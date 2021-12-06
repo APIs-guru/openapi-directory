@@ -2508,7 +2508,8 @@ components:
             type: string
           type: array
         project:
-          description: The project in which to create the VM.
+          description: Output only. The project in which to create the VM.
+          readOnly: true
           type: string
         secureBoot:
           description: Defines whether the instance has Secure Boot enabled. This can be set to true only if the vm boot option is EFI.

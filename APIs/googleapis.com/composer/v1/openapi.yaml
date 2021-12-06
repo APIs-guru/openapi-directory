@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Composer API
   version: v1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://composer.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: composer
 externalDocs:
@@ -502,7 +504,7 @@ components:
           description: Optional. The configuration settings for Cloud SQL instance used internally by Apache Airflow software. This field is supported for Cloud Composer environments in versions composer-1.*.*-airflow-*.*.*.
         encryptionConfig:
           $ref: "#/components/schemas/EncryptionConfig"
-          description: Optional. The encryption options for the Cloud Composer environment and its dependencies. Cannot be updated. This field is supported for Cloud Composer environments in versions composer-1.*.*-airflow-*.*.*.
+          description: Optional. The encryption options for the Cloud Composer environment and its dependencies. Cannot be updated.
         environmentSize:
           description: Optional. The size of the Cloud Composer environment. This field is supported for Cloud Composer environments in versions composer-2.*.*-airflow-*.*.* and newer.
           enum:
@@ -514,6 +516,9 @@ components:
         gkeCluster:
           description: Output only. The Kubernetes Engine cluster used to run this environment.
           type: string
+        maintenanceWindow:
+          $ref: "#/components/schemas/MaintenanceWindow"
+          description: Optional. The maintenance window is the period when Cloud Composer components may undergo maintenance. It is defined so that maintenance is not executed during peak hours or critical time periods. The system will not be under maintenance for every occurrence of this window, but when maintenance is planned, it will be scheduled during the window. The maintenance window period must encompass at least 12 hours per week. This may be split into multiple chunks, each with a size of at least 4 hours. If this value is omitted, the default value for maintenance window will be applied. The default value is Saturday and Sunday 00-06 GMT.
         nodeConfig:
           $ref: "#/components/schemas/NodeConfig"
           description: The configuration used for the Kubernetes Engine cluster.
@@ -616,6 +621,21 @@ components:
             $ref: "#/components/schemas/Operation"
           type: array
       type: object
+    MaintenanceWindow:
+      description: 'The configuration settings for Cloud Composer maintenance window. The following example: ``` { "startTime":"2019-08-01T01:00:00Z" "endTime":"2019-08-01T07:00:00Z" "recurrence":"FREQ=WEEKLY;BYDAY=TU,WE" } ``` would define a maintenance window between 01 and 07 hours UTC during each Tuesday and Wednesday.'
+      properties:
+        endTime:
+          description: Required. Maintenance window end time. It is used only to calculate the duration of the maintenance window. The value for end-time must be in the future, relative to `start_time`.
+          format: google-datetime
+          type: string
+        recurrence:
+          description: "Required. Maintenance window recurrence. Format is a subset of [RFC-5545](https://tools.ietf.org/html/rfc5545) `RRULE`. The only allowed values for `FREQ` field are `FREQ=DAILY` and `FREQ=WEEKLY;BYDAY=...` Example values: `FREQ=WEEKLY;BYDAY=TU,WE`, `FREQ=DAILY`."
+          type: string
+        startTime:
+          description: Required. Start time of the first recurrence of the maintenance window.
+          format: google-datetime
+          type: string
+      type: object
     NodeConfig:
       description: The configuration information for the Kubernetes Engine nodes running the Apache Airflow software.
       properties:
@@ -695,6 +715,7 @@ components:
             - UPDATE
             - CHECK
             - STORE_STATE
+            - LOAD_STATE
           type: string
         resource:
           description: Output only. The resource being operated on, as a [relative resource name]( /apis/design/resource_names#relative_resource_name).
@@ -908,3 +929,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

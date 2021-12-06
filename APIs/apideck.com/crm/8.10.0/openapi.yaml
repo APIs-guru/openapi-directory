@@ -267,7 +267,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 8.9.0
+  version: 8.10.0
   x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -935,6 +935,7 @@ paths:
                     country_code: '1',
                     area_code: '323',
                     number: '111-111-1111',
+                    extension: '105',
                     type: 'primary'
                   }
                 ],
@@ -1190,6 +1191,7 @@ paths:
                     country_code: '1',
                     area_code: '323',
                     number: '111-111-1111',
+                    extension: '105',
                     type: 'primary'
                   }
                 ],
@@ -1388,6 +1390,7 @@ paths:
                     country_code: '1',
                     area_code: '323',
                     number: '111-111-1111',
+                    extension: '105',
                     type: 'primary'
                   }
                 ],
@@ -1635,6 +1638,7 @@ paths:
                     country_code: '1',
                     area_code: '323',
                     number: '111-111-1111',
+                    extension: '105',
                     type: 'primary'
                   }
                 ],
@@ -1825,6 +1829,7 @@ paths:
                     country_code: '1',
                     area_code: '323',
                     number: '111-111-1111',
+                    extension: '105',
                     type: 'primary'
                   }
                 ],
@@ -2065,6 +2070,7 @@ paths:
                     country_code: '1',
                     area_code: '323',
                     number: '111-111-1111',
+                    extension: '105',
                     type: 'primary'
                   }
                 ],
@@ -3163,6 +3169,7 @@ paths:
                     country_code: '1',
                     area_code: '323',
                     number: '111-111-1111',
+                    extension: '105',
                     type: 'primary'
                   }
                 ],
@@ -3378,6 +3385,7 @@ paths:
                     country_code: '1',
                     area_code: '323',
                     number: '111-111-1111',
+                    extension: '105',
                     type: 'primary'
                   }
                 ],
@@ -7080,12 +7088,17 @@ components:
         area_code:
           example: "323"
           nullable: true
-          title: Area Code
+          title: Area code
           type: string
         country_code:
           example: "1"
           nullable: true
-          title: Country Code
+          title: Country code
+          type: string
+        extension:
+          example: "105"
+          nullable: true
+          title: Phone extension
           type: string
         id:
           example: "12345"
@@ -7094,12 +7107,14 @@ components:
         number:
           example: 111-111-1111
           minLength: 1
+          title: Phone number
           type: string
         type:
           enum:
             - primary
             - secondary
             - home
+            - work
             - office
             - mobile
             - assistant
@@ -7623,7 +7638,7 @@ components:
         title:
           example: CEO
           nullable: true
-          title: Title
+          title: Job title
           type: string
         updated_at:
           example: 2017-08-12T20:43:21.291Z

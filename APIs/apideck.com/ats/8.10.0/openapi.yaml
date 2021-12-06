@@ -5,10 +5,10 @@ info:
   contact:
     email: hello@apideck.com
     url: https://developers.apideck.com
-  description: |
-    Welcome to the sms.
+  description: |+
+    Welcome to the ats.
 
-    You can use this API to access all sms endpoints.
+    You can use this API to access all ats endpoints.
 
     ## Base URL
 
@@ -262,12 +262,13 @@ info:
     ## Support
 
     If you have problems or need help with your case, you can always reach out to our Support.
+
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: sms
-  version: 8.9.0
-  x-apideck-api: sms
+  title: ats
+  version: 8.10.0
+  x-apideck-api: ats
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -275,10 +276,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/sms.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/ats.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: sms
+  x-serviceName: ats
   x-tags:
     - partner
 externalDocs:
@@ -288,14 +289,236 @@ security:
   - apiKey: []
 tags:
   - description: ""
-    name: Messages
+    name: Jobs
     x-apideck-model:
-      $ref: "#/components/schemas/Message"
+      $ref: "#/components/schemas/Job"
+  - description: ""
+    name: Applicants
+    x-apideck-model:
+      $ref: "#/components/schemas/Applicant"
+  - description: ""
+    name: Employees
+    x-apideck-upcoming: true
 paths:
-  /sms/messages:
+  /ats/applicants:
     get:
-      description: List Messages
-      operationId: messagesAll
+      description: List applicants
+      operationId: applicantsAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/jobsFilter"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetApplicantsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List applicants
+      tags:
+        - Applicants
+      x-apideck-api: ats
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.ats.applicantsAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: applicants
+    post:
+      description: Create applicant
+      operationId: applicantsAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Applicant"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateApplicantResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create applicant
+      tags:
+        - Applicants
+      x-apideck-api: ats
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              applicant: {
+                position_id: '123',
+                name: 'Elon Musk',
+                first_name: 'Elon',
+                last_name: 'Musk',
+                headline: 'PepsiCo, Inc, Central Perk',
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                phone_numbers: [
+                  {
+                    id: '12345',
+                    country_code: '1',
+                    area_code: '323',
+                    number: '111-111-1111',
+                    extension: '105',
+                    type: 'primary'
+                  }
+                ],
+                addresses: [
+                  {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    street_number: '25',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
+                    phone_number: '111-111-1111',
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com'
+                  }
+                ],
+                applications: ['a0d636c6-43b3-4bde-8c70-85b707d992f4', 'a98lfd96-43b3-4bde-8c70-85b707d992e6'],
+                followers: ['a0d636c6-43b3-4bde-8c70-85b707d992f4', 'a98lfd96-43b3-4bde-8c70-85b707d992e6'],
+                sources: ['Job site'],
+                confidential: false,
+                anonymized: 'true',
+                tags: ['New'],
+                archived: false,
+                owner_id: '54321'
+              }
+            }
+
+            try {
+              const { data } = await apideck.ats.applicantsAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/ats/applicants/{id}":
+    get:
+      description: Get applicant
+      operationId: applicantsOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetApplicantResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get applicant
+      tags:
+        - Applicants
+      x-apideck-api: ats
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.ats.applicantsOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  /ats/jobs:
+    get:
+      description: List jobs
+      operationId: jobsAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -305,7 +528,7 @@ paths:
         - $ref: "#/components/parameters/limit"
       responses:
         "200":
-          $ref: "#/components/responses/GetMessagesResponse"
+          $ref: "#/components/responses/GetJobsResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -320,10 +543,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Messages
+      summary: List jobs
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Jobs
+      x-apideck-api: ats
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -337,133 +560,16 @@ paths:
             })
 
             try {
-              const { data } = await apideck.sms.messagesAll({})
+              const { data } = await apideck.ats.jobsAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: messages
-    post:
-      description: Create Message
-      operationId: messagesAdd
-      parameters:
-        - $ref: "#/components/parameters/raw"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Message"
-        required: true
-      responses:
-        "201":
-          $ref: "#/components/responses/CreateMessageResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Create Message
-      tags:
-        - Messages
-      x-apideck-api: sms
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            const params = {
-              message: {
-                from: '+15017122661',
-                to: '+15017122662',
-                subject: 'Picture',
-                body: 'Hi! How are you doing?',
-                type: 'sms',
-                scheduled_at: '2020-09-30T07:43:32.000Z',
-                webhook_url: 'https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms',
-                reference: 'CUST001',
-                messaging_service_id: '123456'
-              }
-            }
-
-            try {
-              const { data } = await apideck.sms.messagesAdd(params)
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  "/sms/messages/{id}":
-    delete:
-      description: Delete Message
-      operationId: messagesDelete
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/DeleteMessageResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Delete Message
-      tags:
-        - Messages
-      x-apideck-api: sms
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.sms.messagesDelete({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
+      x-graphql-field-name: jobs
+  "/ats/jobs/{id}":
     get:
-      description: Get Message
-      operationId: messagesOne
+      description: Get job
+      operationId: jobsOne
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -472,7 +578,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetMessageResponse"
+          $ref: "#/components/responses/GetJobResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -487,10 +593,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Message
+      summary: Get job
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Jobs
+      x-apideck-api: ats
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -504,78 +610,9 @@ paths:
             })
 
             try {
-              const { data } = await apideck.sms.messagesOne({
+              const { data } = await apideck.ats.jobsOne({
                 id: 'id_example'
               })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-    patch:
-      description: Update Message
-      operationId: messagesUpdate
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Message"
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/UpdateMessageResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Update Message
-      tags:
-        - Messages
-      x-apideck-api: sms
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            const params = {
-              id: 'id_example',
-              message: {
-                from: '+15017122661',
-                to: '+15017122662',
-                subject: 'Picture',
-                body: 'Hi! How are you doing?',
-                type: 'sms',
-                scheduled_at: '2020-09-30T07:43:32.000Z',
-                webhook_url: 'https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms',
-                reference: 'CUST001',
-                messaging_service_id: '123456'
-              }
-            }
-
-            try {
-              const { data } = await apideck.sms.messagesUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -610,6 +647,14 @@ components:
       required: true
       schema:
         type: string
+    jobsFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/JobsFilter"
+      style: deepObject
     limit:
       description: Number of records to return
       in: query
@@ -639,30 +684,36 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    CreateMessageResponse:
+    CreateApplicantResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateMessageResponse"
-      description: Messages
-    DeleteMessageResponse:
+            $ref: "#/components/schemas/CreateApplicantResponse"
+      description: Applicants
+    GetApplicantResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteMessageResponse"
-      description: Messages
-    GetMessageResponse:
+            $ref: "#/components/schemas/GetApplicantResponse"
+      description: Applicants
+    GetApplicantsResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetMessageResponse"
-      description: Messages
-    GetMessagesResponse:
+            $ref: "#/components/schemas/GetApplicantsResponse"
+      description: Applicants
+    GetJobResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetMessagesResponse"
-      description: Messages
+            $ref: "#/components/schemas/GetJobResponse"
+      description: Jobs
+    GetJobsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetJobsResponse"
+      description: Jobs
     NotFoundResponse:
       content:
         application/json:
@@ -699,13 +750,212 @@ components:
           schema:
             $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
-    UpdateMessageResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/UpdateMessageResponse"
-      description: Messages
   schemas:
+    Address:
+      properties:
+        city:
+          description: Name of city.
+          example: San Francisco
+          nullable: true
+          type: string
+        contact_name:
+          example: Elon Musk
+          nullable: true
+          type: string
+        country:
+          description: country code according to ISO 3166-1 alpha-2.
+          example: US
+          nullable: true
+          type: string
+        county:
+          description: Address field that holds a sublocality, such as a county
+          example: Santa Clara
+          nullable: true
+          type: string
+        email:
+          example: elon@musk.com
+          nullable: true
+          type: string
+        fax:
+          example: 122-111-1111
+          nullable: true
+          type: string
+        id:
+          example: "123"
+          nullable: true
+          type: string
+        latitude:
+          example: "40.759211"
+          nullable: true
+          type: string
+        line1:
+          description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
+          example: Main street
+          nullable: true
+          type: string
+        line2:
+          description: Line 2 of the address
+          example: "apt #"
+          nullable: true
+          type: string
+        longitude:
+          example: "-73.984638"
+          nullable: true
+          type: string
+        name:
+          example: HQ US
+          nullable: true
+          type: string
+        phone_number:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        postal_code:
+          description: Zip code or equivalent.
+          example: "94104"
+          nullable: true
+          type: string
+        salutation:
+          example: Mr
+          nullable: true
+          type: string
+        state:
+          description: Name of state
+          example: CA
+          nullable: true
+          type: string
+        street_number:
+          description: Street number
+          example: "25"
+          nullable: true
+          type: string
+        string:
+          example: 25 Spring Street, Blackburn, VIC 3130
+          nullable: true
+          title: The address string. Some APIs don't provide structured address data.
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - home
+            - office
+            - shipping
+            - billing
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: AddressType
+        website:
+          example: https://elonmusk.com
+          nullable: true
+          type: string
+      type: object
+    Anonymized:
+      example: "true"
+      title: Anonymized
+      type: boolean
+    Applicant:
+      additionalProperties: false
+      properties:
+        addresses:
+          items:
+            $ref: "#/components/schemas/Address"
+          type: array
+        anonymized:
+          $ref: "#/components/schemas/Anonymized"
+        applications:
+          example:
+            - a0d636c6-43b3-4bde-8c70-85b707d992f4
+            - a98lfd96-43b3-4bde-8c70-85b707d992e6
+          items:
+            type: string
+          nullable: true
+          type: array
+        archived:
+          $ref: "#/components/schemas/Archived"
+        confidential:
+          example: false
+          title: Confidential
+          type: boolean
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        deleted_at:
+          $ref: "#/components/schemas/DeletedAt"
+        deleted_by:
+          $ref: "#/components/schemas/DeletedBy"
+        emails:
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        first_name:
+          example: Elon
+          nullable: true
+          title: First name
+          type: string
+        followers:
+          example:
+            - a0d636c6-43b3-4bde-8c70-85b707d992f4
+            - a98lfd96-43b3-4bde-8c70-85b707d992e6
+          items:
+            type: string
+          nullable: true
+          type: array
+        headline:
+          description: Typically a list of previous companies where the contact has worked or schools that the contact has attended
+          example: PepsiCo, Inc, Central Perk
+          title: Headline
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        last_interaction_at:
+          $ref: "#/components/schemas/LastInteractionAt"
+        last_name:
+          example: Musk
+          nullable: true
+          title: Last name
+          type: string
+        name:
+          description: The name of an applicant.
+          example: Elon Musk
+          type: string
+        owner_id:
+          $ref: "#/components/schemas/OwnerId"
+        phone_numbers:
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          type: array
+        position_id:
+          description: The PositionId the applicant applied for.
+          example: "123"
+          type: string
+        sourced_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          title: Sourced by
+          type: string
+        sources:
+          example:
+            - Job site
+          items:
+            type: string
+          nullable: true
+          type: array
+        stage_id:
+          example: "12345"
+          readOnly: true
+          title: Stage
+          type: string
+        tags:
+          $ref: "#/components/schemas/Tags"
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+      type: object
+    Archived:
+      example: false
+      title: Archived
+      type: boolean
     BadRequestResponse:
       properties:
         detail:
@@ -737,7 +987,11 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
-    CreateMessageResponse:
+    Code:
+      description: The code of the job.
+      example: 123-OC
+      type: string
+    CreateApplicantResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -747,11 +1001,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: Applicants
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: lever
           type: string
         status:
           description: HTTP Response Status
@@ -769,6 +1023,18 @@ components:
         - operation
         - data
       type: object
+    CreatedAt:
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      readOnly: true
+      title: Created at (timestamp)
+      type: string
+    CreatedBy:
+      example: "12345"
+      nullable: true
+      readOnly: true
+      title: Created by
+      type: string
     Currency:
       description: Indicates the associated currency for an amount of money. Values correspond to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
       enum:
@@ -1355,38 +1621,24 @@ components:
       required:
         - id
       type: object
-    DeleteMessageResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Messages
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: twilio
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
+    DeletedAt:
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      nullable: true
+      readOnly: true
+      title: Deleted at (timestamp)
+      type: string
+    DeletedBy:
+      example: "12345"
+      nullable: true
+      readOnly: true
+      title: Deleted by
+      type: string
+    Description:
+      example: A description
+      nullable: true
+      title: Description
+      type: string
     Email:
       properties:
         email:
@@ -1411,21 +1663,21 @@ components:
       required:
         - email
       type: object
-    GetMessageResponse:
+    GetApplicantResponse:
       properties:
         data:
-          $ref: "#/components/schemas/Message"
+          $ref: "#/components/schemas/Applicant"
         operation:
           description: Operation performed
           example: one
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: Applicants
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: lever
           type: string
         status:
           description: HTTP Response Status
@@ -1443,12 +1695,12 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: Message
-    GetMessagesResponse:
+      x-graphql-type-name: Applicant
+    GetApplicantsResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/Message"
+            $ref: "#/components/schemas/Applicant"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -1460,11 +1712,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: Applicants
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: lever
           type: string
         status:
           description: HTTP Response Status
@@ -1482,7 +1734,194 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: MessageList
+      x-graphql-type-name: ApplicantList
+    GetJobResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Job"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Jobs
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: lever
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: Job
+    GetJobsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Job"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Jobs
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: lever
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: JobList
+    Id:
+      example: "12345"
+      readOnly: true
+      type: string
+    Job:
+      additionalProperties: false
+      properties:
+        blocks:
+          items:
+            properties:
+              content:
+                type: string
+              title:
+                type: string
+          type: array
+        closing:
+          example: The closing section of the job description
+          nullable: true
+          title: Closing
+          type: string
+        closing_html:
+          description: The closing section of the job description in HTML format
+          nullable: true
+          title: Closing
+          type: string
+        code:
+          $ref: "#/components/schemas/Code"
+        confidential:
+          example: false
+          title: Confidential
+          type: boolean
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        description:
+          $ref: "#/components/schemas/Description"
+        description_html:
+          description: The job description in HTML format
+          nullable: true
+          title: Description (HTML)
+          type: string
+        hiring_managers:
+          example:
+            - "123456"
+          items:
+            properties:
+              id:
+                example: "12345"
+                readOnly: true
+                type: string
+          type: array
+        id:
+          $ref: "#/components/schemas/Id"
+        job_portal_url:
+          description: URL of the job portal
+          nullable: true
+          title: URL
+          type: string
+        owner_id:
+          $ref: "#/components/schemas/OwnerId"
+        requisition_id:
+          description: A job's Requisition ID (Req ID) allows your organization to identify and track a job based on alphanumeric naming conventions unique to your company's internal processes.
+          example: abc123
+          title: Requisition ID
+          type: string
+        status:
+          $ref: "#/components/schemas/JobStatus"
+        tags:
+          $ref: "#/components/schemas/Tags"
+        title:
+          $ref: "#/components/schemas/Title"
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
+        url:
+          description: URL of the job description
+          nullable: true
+          title: URL
+          type: string
+        visibility:
+          items:
+            enum:
+              - public
+              - internal
+            type: string
+          type: array
+      type: object
+    JobStatus:
+      description: The status of the job.
+      enum:
+        - draft
+        - internal
+        - published
+        - completed
+      example: completed
+      type: string
+    JobsFilter:
+      additionalProperties: false
+      example:
+        job_id: "1234"
+      properties:
+        job_id:
+          description: Id of the job to filter on
+          example: "1234"
+          type: string
+      type: object
+      x-graphql-type-name: JobsFilter
+    LastInteractionAt:
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      readOnly: true
+      title: Last interaction at (timestamp)
+      type: string
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -1500,182 +1939,6 @@ components:
           example: https://unify.apideck.com/crm/companies?cursor=em9oby1jcm06OnBhZ2U6OjE%3D
           nullable: true
           type: string
-      type: object
-    Message:
-      additionalProperties: false
-      properties:
-        body:
-          description: The message text.
-          example: Hi! How are you doing?
-          maxLength: 1600
-          title: Message Body
-          type: string
-        created_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          title: Created at (timestamp)
-          type: string
-        created_by:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          title: Created by
-          type: string
-        direction:
-          description: The direction of the message.
-          enum:
-            - inbound
-            - outbound-api
-            - outbound-call
-            - outbound-reply
-            - unknown
-          example: outbound-api
-          readOnly: true
-          title: Direction
-          type: string
-        error:
-          description: The error returned if your message status is failed or undelivered.
-          example:
-            code: X1
-            message: Something went wrong
-          properties:
-            code:
-              description: The error_code provides more information about the failure. If the message was successful, this value is null
-              example: X1
-              readOnly: true
-              title: Error Code
-              type: string
-            message:
-              example: Something went wrong
-              readOnly: true
-              title: Error Message
-              type: string
-          readOnly: true
-          title: Error
-          type: object
-        from:
-          description: The phone number that initiated the message.
-          example: "+15017122661"
-          title: From
-          type: string
-        id:
-          example: "12345"
-          readOnly: true
-          type: string
-        messaging_service_id:
-          description: The ID of the Messaging Service used with the message. In case of Plivo this links to the Powerpack ID.
-          example: "123456"
-          title: Messaging Service ID
-          type: string
-        number_of_media_files:
-          description: The number of media files associated with the message.
-          example: 1
-          readOnly: true
-          title: Number of media files
-          type: integer
-        number_of_units:
-          description: The number of units that make up the complete message. Messages can be split up due to the constraints of the message size.
-          example: 1
-          readOnly: true
-          title: Number of units
-          type: integer
-        price:
-          description: Price of the message.
-          example:
-            currency: USD
-            per_unit: "0.01"
-            total_amount: "0.01"
-          properties:
-            currency:
-              $ref: "#/components/schemas/Currency"
-            per_unit:
-              description: ""
-              example: "0.01"
-              readOnly: true
-              title: Price per unit
-              type: string
-            total_amount:
-              description: ""
-              example: "0.01"
-              readOnly: true
-              title: Price Amount
-              type: string
-          readOnly: true
-          title: Price
-          type: object
-        reference:
-          description: A client reference.
-          example: CUST001
-          title: Reference
-          type: string
-        scheduled_at:
-          description: The scheduled date and time of the message.
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          type: string
-        sent_at:
-          description: The date and time that the message was sent
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
-        status:
-          description: Status of the delivery of the message.
-          enum:
-            - accepted
-            - scheduled
-            - canceled
-            - queued
-            - sending
-            - sent
-            - failed
-            - delivered
-            - undelivered
-            - receiving
-            - received
-            - read
-          example: sent
-          readOnly: true
-          title: Status
-          type: string
-        subject:
-          example: Picture
-          title: Message Subject
-          type: string
-        to:
-          description: The phone number that received the message.
-          example: "+15017122662"
-          title: Message Body
-          type: string
-        type:
-          description: Set to sms for SMS messages and mms for MMS messages.
-          enum:
-            - sms
-            - mms
-          example: sms
-          title: Message type
-          type: string
-        updated_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          title: Updated at (timestamp)
-          type: string
-        updated_by:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          type: string
-        webhook_url:
-          description: Define a webhook to receive delivery notifications.
-          example: https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms
-          title: Webhook URL
-          type: string
-      required:
-        - from
-        - to
-        - body
       type: object
     Meta:
       description: Response metadata
@@ -1764,6 +2027,10 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
+    OwnerId:
+      example: "54321"
+      title: Owner ID
+      type: string
     PaymentRequiredResponse:
       properties:
         detail:
@@ -1790,12 +2057,62 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+    PhoneNumber:
+      properties:
+        area_code:
+          example: "323"
+          nullable: true
+          title: Area code
+          type: string
+        country_code:
+          example: "1"
+          nullable: true
+          title: Country code
+          type: string
+        extension:
+          example: "105"
+          nullable: true
+          title: Phone extension
+          type: string
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        number:
+          example: 111-111-1111
+          minLength: 1
+          title: Phone number
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - home
+            - work
+            - office
+            - mobile
+            - assistant
+            - fax
+            - direct-dial-in
+            - personal
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: PhoneType
+      required:
+        - number
+      type: object
     Tags:
       example:
         - New
       items:
         type: string
       type: array
+    Title:
+      example: CEO
+      nullable: true
+      title: Job title
+      type: string
     UnauthorizedResponse:
       properties:
         detail:
@@ -1888,38 +2205,68 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
-    UpdateMessageResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Messages
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: twilio
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
+    UpdatedAt:
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      readOnly: true
+      title: Updated at (timestamp)
+      type: string
+    UpdatedBy:
+      example: "12345"
+      nullable: true
+      readOnly: true
+      type: string
+    Url:
+      description: The url pointing to the job.
+      example: https://downstreamconnector.com/job?id=123
+      format: uri
+      pattern: ^(https?)://
+      type: string
+    WebhookEvent:
+      allOf:
+        - properties:
+            entity_id:
+              description: The service provider's ID of the entity that triggered this event
+              example: 123456ASDF
+              type: string
+            entity_type:
+              description: The type entity that triggered this event
+              example: Company
+              type: string
+            entity_url:
+              description: The url to retrieve entity detail.
+              example: https://unify.apideck.com/crm/contacts/123456
+              type: string
+            event_id:
+              description: Unique reference to this request event
+              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+              type: string
+            execution_attempt:
+              description: The current count this request event has been attempted
+              example: 2
+              type: number
+            occurred_at:
+              description: ISO Datetime for when the original event occurred
+              example: 2021-10-01T03:14:55.419Z
+              type: string
+            service_id:
+              description: Service provider identifier
+              example: close
+              type: string
+          type: object
+        - properties:
+            event_type:
+              enum:
+                - ats.job.created
+                - ats.job.updated
+                - ats.job.deleted
+                - ats.applicant.created
+                - ats.applicant.updated
+                - ats.applicant.deleted
+              example: ats.job.created
+              type: string
+          type: object
+      x-sdk-exclude: true
   securitySchemes:
     apiKey:
       description: |
@@ -1942,3 +2289,104 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-webhooks:
+  ApplicantCreated:
+    post:
+      description: Applicant created
+      operationId: applicantCreated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Applicant created
+      tags:
+        - Webhook Events
+      x-apideck-event-type: ats.applicant.created
+      x-apideck-upcoming: true
+  ApplicantDeleted:
+    post:
+      description: Applicant deleted
+      operationId: applicantDeleted
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Applicant deleted
+      tags:
+        - Webhook Events
+      x-apideck-event-type: ats.applicant.deleted
+      x-apideck-upcoming: true
+  ApplicantUpdated:
+    post:
+      description: Applicant updated
+      operationId: applicantUpdated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Applicant updated
+      tags:
+        - Webhook Events
+      x-apideck-event-type: ats.applicant.updated
+      x-apideck-upcoming: true
+  JobCreated:
+    post:
+      description: Job created
+      operationId: jobCreated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Job created
+      tags:
+        - Webhook Events
+      x-apideck-event-type: ats.job.created
+  JobDeleted:
+    post:
+      description: Job deleted
+      operationId: jobDeleted
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Job deleted
+      tags:
+        - Webhook Events
+      x-apideck-event-type: ats.job.deleted
+  JobUpdated:
+    post:
+      description: Job updated
+      operationId: jobUpdated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Job updated
+      tags:
+        - Webhook Events
+      x-apideck-event-type: ats.job.updated
+  x-sdk-exclude: true

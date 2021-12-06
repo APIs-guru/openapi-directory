@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Webhook API
-  version: 8.9.0
+  version: 8.10.0
   x-apideck-api: webhook
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -994,6 +994,7 @@ components:
         - email-marketing
         - ats
         - hris
+        - pos
       example: crm
       type: string
     UnprocessableResponse:
@@ -1291,6 +1292,9 @@ components:
         - ats.applicant.created
         - ats.applicant.updated
         - ats.applicant.deleted
+        - pos.order.created
+        - pos.order.updated
+        - pos.order.deleted
       example: crm.company.created
       type: string
   securitySchemes:
