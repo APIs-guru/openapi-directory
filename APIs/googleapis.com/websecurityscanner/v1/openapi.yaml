@@ -650,6 +650,10 @@ components:
         xss:
           $ref: "#/components/schemas/Xss"
           description: Output only. An addon containing information reported for an XSS, if any.
+        xxe:
+          $ref: "#/components/schemas/Xxe"
+          description: Output only. An addon containing information reported for an XXE, if any.
+          readOnly: true
       type: object
     FindingTypeStats:
       description: A FindingTypeStats resource represents stats regarding a specific FindingType of Findings under a given ScanRun.
@@ -1070,6 +1074,19 @@ components:
           type: array
         storedXssSeedingUrl:
           description: The reproduction url for the seeding POST request of a Stored XSS.
+          type: string
+      type: object
+    Xxe:
+      description: Information reported for an XXE.
+      properties:
+        payloadLocation:
+          description: Location within the request where the payload was placed.
+          enum:
+            - LOCATION_UNSPECIFIED
+            - COMPLETE_REQUEST_BODY
+          type: string
+        payloadValue:
+          description: The XML string that triggered the XXE vulnerability. Non-payload values might be redacted.
           type: string
       type: object
   securitySchemes:

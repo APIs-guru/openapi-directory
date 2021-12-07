@@ -1472,7 +1472,8 @@ paths:
                   isolation_mode: false,
                   session_length: '30m',
                   show_logs: true,
-                  show_suggestions: false
+                  show_suggestions: false,
+                  auto_redirect: false
                 },
                 theme: {
                   favicon: 'https://res.cloudinary.com/apideck/icons/intercom',
@@ -2371,12 +2372,17 @@ components:
         data:
           additionalProperties: false
           properties:
+            session_token:
+              example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb25zdW1lcl9pZCI6InRlc3RfdXNlcl9pZCIsImFwcGxpY2F0aW9uX2lkIj
+              readOnly: true
+              type: string
             session_uri:
               example: http://vault.apideck.com/session/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb25zdW1lcl9pZCI6InRlc3RfdXNlcl9pZCIsImFwcGxpY2F0aW9uX2lkIj
               readOnly: true
               type: string
           required:
             - session_uri
+            - session_token
           type: object
         status:
           description: HTTP Response Status
@@ -2945,6 +2951,11 @@ components:
         settings:
           additionalProperties: false
           properties:
+            auto_redirect:
+              default: false
+              description: Automatically redirect to redirect uri after the connection has been configured as callable. Defaults to `false`.
+              title: Auto-redirect
+              type: boolean
             hide_resource_settings:
               default: false
               title: Hide resource settings

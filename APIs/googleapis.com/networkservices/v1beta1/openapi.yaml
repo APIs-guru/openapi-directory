@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://networkservices.googleapis.com/$discovery/rest?version=v1beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: networkservices
 externalDocs:
@@ -354,7 +354,7 @@ paths:
   "/v1beta1/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-      operationId: networkservices.projects.locations.endpointPolicies.getIamPolicy
+      operationId: networkservices.projects.locations.serviceBindings.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
           in: path
@@ -408,7 +408,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
-      operationId: networkservices.projects.locations.endpointPolicies.setIamPolicy
+      operationId: networkservices.projects.locations.serviceBindings.setIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field."
           in: path
@@ -450,7 +450,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
-      operationId: networkservices.projects.locations.endpointPolicies.testIamPermissions
+      operationId: networkservices.projects.locations.serviceBindings.testIamPermissions
       parameters:
         - description: "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field."
           in: path

@@ -5382,6 +5382,8 @@ components:
           enum:
             - accounts_receivable
             - revenue
+            - sales
+            - other_income
             - bank
             - current_asset
             - fixed_asset
@@ -5396,7 +5398,6 @@ components:
             - current_liability
             - non_current_liability
             - other_liability
-            - sales
           example: bank
           type: string
           x-graphql-type-name: LedgerAccountType
