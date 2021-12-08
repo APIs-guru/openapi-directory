@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://eventarc.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: eventarc
 externalDocs:
@@ -650,7 +650,7 @@ components:
       properties:
         cloudRun:
           $ref: "#/components/schemas/CloudRun"
-          description: Cloud Run fully-managed resource that receives the events. The resource should be in the same project as the trigger.
+          description: Cloud Run fully-managed service that receives the events. The service should be running in the same project of the trigger.
         gke:
           $ref: "#/components/schemas/GKE"
           description: A GKE service capable of receiving events. The service should be running in the same project of the trigger.

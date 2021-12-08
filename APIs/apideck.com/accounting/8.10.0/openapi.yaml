@@ -466,9 +466,13 @@ paths:
             const params = {
               customer: {
                 display_id: 'EMP00101',
+                display_name: "Bill's Windsurf Shop",
                 company_name: 'SpaceX',
+                title: 'CEO',
                 first_name: 'Elon',
+                middle_name: 'D.',
                 last_name: 'Musk',
+                suffix: 'Jr.',
                 individual: true,
                 addresses: [
                   {
@@ -509,6 +513,13 @@ paths:
                   {
                     id: '123',
                     email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                websites: [
+                  {
+                    id: '12345',
+                    url: 'http://example.com',
                     type: 'primary'
                   }
                 ],
@@ -691,9 +702,13 @@ paths:
               id: 'id_example',
               customer: {
                 display_id: 'EMP00101',
+                display_name: "Bill's Windsurf Shop",
                 company_name: 'SpaceX',
+                title: 'CEO',
                 first_name: 'Elon',
+                middle_name: 'D.',
                 last_name: 'Musk',
+                suffix: 'Jr.',
                 individual: true,
                 addresses: [
                   {
@@ -734,6 +749,13 @@ paths:
                   {
                     id: '123',
                     email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                websites: [
+                  {
+                    id: '12345',
+                    url: 'http://example.com',
                     type: 'primary'
                   }
                 ],
@@ -2848,6 +2870,11 @@ components:
           nullable: true
           title: Display ID
           type: string
+        display_name:
+          example: Bill's Windsurf Shop
+          nullable: true
+          title: Display Name
+          type: string
         emails:
           items:
             $ref: "#/components/schemas/Email"
@@ -2863,6 +2890,8 @@ components:
           type: boolean
         last_name:
           $ref: "#/components/schemas/LastName"
+        middle_name:
+          $ref: "#/components/schemas/MiddleName"
         notes:
           example: Some notes about this customer
           nullable: true
@@ -2886,6 +2915,8 @@ components:
           title: Status
           type: string
           x-graphql-type-name: CustomerStatus
+        suffix:
+          $ref: "#/components/schemas/Suffix"
         tax_number:
           example: US123945459
           nullable: true
@@ -2893,10 +2924,19 @@ components:
           type: string
         tax_rate:
           $ref: "#/components/schemas/LinkedTaxRate"
+        title:
+          example: CEO
+          nullable: true
+          title: Job title
+          type: string
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
+        websites:
+          items:
+            $ref: "#/components/schemas/Website"
+          type: array
       type: object
       x-graphql-type-name: Customer
     AccountingEventType:
@@ -5538,6 +5578,11 @@ components:
           example: 50
           type: integer
       type: object
+    MiddleName:
+      example: D.
+      nullable: true
+      title: Middle name
+      type: string
     NotFoundResponse:
       properties:
         detail:
@@ -5862,6 +5907,11 @@ components:
       required:
         - url
       type: object
+    Suffix:
+      example: Jr.
+      nullable: true
+      title: Suffix
+      type: string
     Tags:
       example:
         - New

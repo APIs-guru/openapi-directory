@@ -728,6 +728,21 @@ components:
       description: The request message for Operations.CancelOperation.
       properties: {}
       type: object
+    CreateBitbucketServerConfigOperationMetadata:
+      description: Metadata for `CreateBitbucketServerConfig` operation.
+      properties:
+        bitbucketServerConfig:
+          description: "The resource name of the BitbucketServerConfig to be created. Format: `projects/{project}/locations/{location}/bitbucketServerConfigs/{id}`."
+          type: string
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+      type: object
     CreateGitHubEnterpriseConfigOperationMetadata:
       description: Metadata for `CreateGithubEnterpriseConfig` operation.
       properties:
@@ -756,6 +771,21 @@ components:
           type: string
         workerPool:
           description: "The resource name of the `WorkerPool` to create. Format: `projects/{project}/locations/{location}/workerPools/{worker_pool}`."
+          type: string
+      type: object
+    DeleteBitbucketServerConfigOperationMetadata:
+      description: Metadata for `DeleteBitbucketServerConfig` operation.
+      properties:
+        bitbucketServerConfig:
+          description: "The resource name of the BitbucketServerConfig to be deleted. Format: `projects/{project}/locations/{location}/bitbucketServerConfigs/{id}`."
+          type: string
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
           type: string
       type: object
     DeleteGitHubEnterpriseConfigOperationMetadata:
@@ -1280,6 +1310,21 @@ components:
           type: string
         startTime:
           description: Start of time span.
+          format: google-datetime
+          type: string
+      type: object
+    UpdateBitbucketServerConfigOperationMetadata:
+      description: Metadata for `UpdateBitbucketServerConfig` operation.
+      properties:
+        bitbucketServerConfig:
+          description: "The resource name of the BitbucketServerConfig to be updated. Format: `projects/{project}/locations/{location}/bitbucketServerConfigs/{id}`."
+          type: string
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
           format: google-datetime
           type: string
       type: object

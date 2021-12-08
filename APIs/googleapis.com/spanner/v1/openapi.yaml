@@ -38,7 +38,7 @@ tags:
 paths:
   "/v1/{database}":
     delete:
-      description: Drops (aka deletes) a Cloud Spanner database. Completed backups for the database will be retained according to their `expire_time`.
+      description: "Drops (aka deletes) a Cloud Spanner database. Completed backups for the database will be retained according to their `expire_time`. Note: Cloud Spanner might continue to accept requests for a few seconds after the database has been deleted."
       operationId: spanner.projects.instances.databases.dropDatabase
       parameters:
         - description: Required. The database to be dropped.

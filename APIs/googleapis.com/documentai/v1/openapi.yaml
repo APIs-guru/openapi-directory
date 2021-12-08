@@ -1923,7 +1923,7 @@ components:
           type: string
       type: object
     GoogleCloudDocumentaiV1DocumentProvenanceParent:
-      description: Structure for referencing parent provenances. When an element replaces one of more other elements parent references identify the elements that are replaced.
+      description: The parent element the current element is based on. Used for referencing/aligning, removal and replacement operations.
       properties:
         id:
           description: The id of the parent provenance.
@@ -1934,7 +1934,7 @@ components:
           format: int32
           type: integer
         revision:
-          description: The index of the [Document.revisions] identifying the parent revision.
+          description: The index of the index into current revision's parent_ids list.
           format: int32
           type: integer
       type: object
@@ -1959,6 +1959,11 @@ components:
           items:
             format: int32
             type: integer
+          type: array
+        parentIds:
+          description: The revisions that this revision is based on. Must include all the ids that have anything to do with this revision - eg. there are `provenance.parent.revision` fields that index into this field.
+          items:
+            type: string
           type: array
         processor:
           description: If the annotation was made by processor identify the processor by its resource name.
@@ -2939,7 +2944,7 @@ components:
           type: string
       type: object
     GoogleCloudDocumentaiV1beta1DocumentProvenanceParent:
-      description: Structure for referencing parent provenances. When an element replaces one of more other elements parent references identify the elements that are replaced.
+      description: The parent element the current element is based on. Used for referencing/aligning, removal and replacement operations.
       properties:
         id:
           description: The id of the parent provenance.
@@ -2950,7 +2955,7 @@ components:
           format: int32
           type: integer
         revision:
-          description: The index of the [Document.revisions] identifying the parent revision.
+          description: The index of the index into current revision's parent_ids list.
           format: int32
           type: integer
       type: object
@@ -2975,6 +2980,11 @@ components:
           items:
             format: int32
             type: integer
+          type: array
+        parentIds:
+          description: The revisions that this revision is based on. Must include all the ids that have anything to do with this revision - eg. there are `provenance.parent.revision` fields that index into this field.
+          items:
+            type: string
           type: array
         processor:
           description: If the annotation was made by processor identify the processor by its resource name.
@@ -3746,7 +3756,7 @@ components:
           type: string
       type: object
     GoogleCloudDocumentaiV1beta2DocumentProvenanceParent:
-      description: Structure for referencing parent provenances. When an element replaces one of more other elements parent references identify the elements that are replaced.
+      description: The parent element the current element is based on. Used for referencing/aligning, removal and replacement operations.
       properties:
         id:
           description: The id of the parent provenance.
@@ -3757,7 +3767,7 @@ components:
           format: int32
           type: integer
         revision:
-          description: The index of the [Document.revisions] identifying the parent revision.
+          description: The index of the index into current revision's parent_ids list.
           format: int32
           type: integer
       type: object
@@ -3782,6 +3792,11 @@ components:
           items:
             format: int32
             type: integer
+          type: array
+        parentIds:
+          description: The revisions that this revision is based on. Must include all the ids that have anything to do with this revision - eg. there are `provenance.parent.revision` fields that index into this field.
+          items:
+            type: string
           type: array
         processor:
           description: If the annotation was made by processor identify the processor by its resource name.

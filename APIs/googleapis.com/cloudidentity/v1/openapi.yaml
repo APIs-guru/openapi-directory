@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Identity API
   version: v1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://cloudidentity.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: cloudidentity
 externalDocs:
@@ -368,9 +370,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer}`, where customer is the customer to whom the device belongs.
+        - description: 'Field-level read mask of which fields to return. "*" returns all fields. If not specified, all fields will be returned. May only contain the following field: `member_restriction`.'
           in: query
-          name: customer
+          name: readMask
           schema:
             type: string
       responses:
@@ -408,16 +410,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates a `Group`.
-      operationId: cloudidentity.groups.patch
+      description: Update Security Settings
+      operationId: cloudidentity.groups.updateSecuritySettings
       parameters:
-        - description: Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Group`. Shall be of the form `groups/{group}`.
+        - description: Output only. The resource name of the security settings. Shall be of the form `groups/{group_id}/securitySettings`.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: "Required. The names of fields to update. May only contain the following field names: `display_name`, `description`, `labels`."
+        - description: "Required. The fully-qualified names of fields to update. May only contain the following field: `member_restriction.query`."
           in: query
           name: updateMask
           schema:
@@ -426,7 +428,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Group"
+              $ref: "#/components/schemas/SecuritySettings"
       responses:
         "200":
           content:
@@ -1985,6 +1987,16 @@ components:
             $ref: "#/components/schemas/TransitiveMembershipRole"
           type: array
       type: object
+    MemberRestriction:
+      description: The definition of MemberRestriction
+      properties:
+        evaluation:
+          $ref: "#/components/schemas/RestrictionEvaluation"
+          description: The evaluated state of this restriction on a group.
+        query:
+          description: "Member Restriction as defined by CEL expression. Supported restrictions are: `member.customer_id` and `member.type`. Valid values for `member.type` are `1`, `2` and `3`. They correspond to USER, SERVICE_ACCOUNT, and GROUP respectively. The value for `member.customer_id` only supports `groupCustomerId()` currently which means the customer id of the group will be used for restriction. Supported operators are `&&`, `||` and `==`, corresponding to AND, OR, and EQUAL. Examples: Allow only service accounts of given customer to be members. `member.type == 2 && member.customer_id == groupCustomerId()` Allow only users or groups to be members. `member.type == 1 || member.type == 3`"
+          type: string
+      type: object
     Membership:
       description: A membership within the Cloud Identity Groups API. A `Membership` defines a relationship between a `Group` and an entity belonging to that `Group`, referred to as a "member".
       properties:
@@ -2043,6 +2055,23 @@ components:
         name:
           description: The name of the `MembershipRole`. Must be one of `OWNER`, `MANAGER`, `MEMBER`.
           type: string
+        restrictionEvaluations:
+          $ref: "#/components/schemas/RestrictionEvaluations"
+          description: Evaluations of restrictions applied to parent group on this membership.
+      type: object
+    MembershipRoleRestrictionEvaluation:
+      description: The evaluated state of this restriction.
+      properties:
+        state:
+          description: Output only. The current state of the restriction
+          enum:
+            - STATE_UNSPECIFIED
+            - COMPLIANT
+            - FORWARD_COMPLIANT
+            - NON_COMPLIANT
+            - EVALUATING
+          readOnly: true
+          type: string
       type: object
     ModifyMembershipRolesRequest:
       description: The request message for MembershipsService.ModifyMembershipRoles.
@@ -2093,6 +2122,27 @@ components:
           description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
+    RestrictionEvaluation:
+      description: The evaluated state of this restriction.
+      properties:
+        state:
+          description: Output only. The current state of the restriction
+          enum:
+            - STATE_UNSPECIFIED
+            - EVALUATING
+            - COMPLIANT
+            - FORWARD_COMPLIANT
+            - NON_COMPLIANT
+          readOnly: true
+          type: string
+      type: object
+    RestrictionEvaluations:
+      description: Evaluations of restrictions applied to parent group on this membership.
+      properties:
+        memberRestrictionEvaluation:
+          $ref: "#/components/schemas/MembershipRoleRestrictionEvaluation"
+          description: Evaluation of the member restriction applied to this membership. Empty if the user lacks permission to view the restriction evaluation.
+      type: object
     SearchGroupsResponse:
       description: The response message for GroupsService.SearchGroups.
       properties:
@@ -2127,6 +2177,17 @@ components:
           type: array
         nextPageToken:
           description: Token to retrieve the next page of results, or empty if there are no more results.
+          type: string
+      type: object
+    SecuritySettings:
+      description: The definition of security settings.
+      properties:
+        memberRestriction:
+          $ref: "#/components/schemas/MemberRestriction"
+          description: The Member Restriction value
+        name:
+          description: Output only. The resource name of the security settings. Shall be of the form `groups/{group_id}/securitySettings`.
+          readOnly: true
           type: string
       type: object
     Status:
@@ -2221,3 +2282,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://ondemandscanning.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: ondemandscanning
 externalDocs:
@@ -553,6 +553,82 @@ components:
     BuilderConfig:
       properties:
         id:
+          type: string
+      type: object
+    CVSS:
+      description: Common Vulnerability Scoring System. For details, see https://www.first.org/cvss/specification-document This is a message we will try to use for storing multiple versions of CVSS. The intention is that as new versions of CVSS scores get added, we will be able to modify this message rather than adding new protos for each new version of the score.
+      properties:
+        attackComplexity:
+          enum:
+            - ATTACK_COMPLEXITY_UNSPECIFIED
+            - ATTACK_COMPLEXITY_LOW
+            - ATTACK_COMPLEXITY_HIGH
+          type: string
+        attackVector:
+          description: Base Metrics Represents the intrinsic characteristics of a vulnerability that are constant over time and across user environments.
+          enum:
+            - ATTACK_VECTOR_UNSPECIFIED
+            - ATTACK_VECTOR_NETWORK
+            - ATTACK_VECTOR_ADJACENT
+            - ATTACK_VECTOR_LOCAL
+            - ATTACK_VECTOR_PHYSICAL
+          type: string
+        authentication:
+          enum:
+            - AUTHENTICATION_UNSPECIFIED
+            - AUTHENTICATION_MULTIPLE
+            - AUTHENTICATION_SINGLE
+            - AUTHENTICATION_NONE
+          type: string
+        availabilityImpact:
+          enum:
+            - IMPACT_UNSPECIFIED
+            - IMPACT_HIGH
+            - IMPACT_LOW
+            - IMPACT_NONE
+          type: string
+        baseScore:
+          description: The base score is a function of the base metric scores.
+          format: float
+          type: number
+        confidentialityImpact:
+          enum:
+            - IMPACT_UNSPECIFIED
+            - IMPACT_HIGH
+            - IMPACT_LOW
+            - IMPACT_NONE
+          type: string
+        exploitabilityScore:
+          format: float
+          type: number
+        impactScore:
+          format: float
+          type: number
+        integrityImpact:
+          enum:
+            - IMPACT_UNSPECIFIED
+            - IMPACT_HIGH
+            - IMPACT_LOW
+            - IMPACT_NONE
+          type: string
+        privilegesRequired:
+          enum:
+            - PRIVILEGES_REQUIRED_UNSPECIFIED
+            - PRIVILEGES_REQUIRED_NONE
+            - PRIVILEGES_REQUIRED_LOW
+            - PRIVILEGES_REQUIRED_HIGH
+          type: string
+        scope:
+          enum:
+            - SCOPE_UNSPECIFIED
+            - SCOPE_UNCHANGED
+            - SCOPE_CHANGED
+          type: string
+        userInteraction:
+          enum:
+            - USER_INTERACTION_UNSPECIFIED
+            - USER_INTERACTION_NONE
+            - USER_INTERACTION_REQUIRED
           type: string
       type: object
     Category:
@@ -1407,6 +1483,9 @@ components:
           description: Output only. The CVSS score of this vulnerability. CVSS score is on a scale of 0 - 10 where 0 indicates low severity and 10 indicates high severity.
           format: float
           type: number
+        cvssv3:
+          $ref: "#/components/schemas/CVSS"
+          description: The cvss v3 score for the vulnerability.
         effectiveSeverity:
           description: The distro assigned severity for this vulnerability when it is available, otherwise this is the note provider assigned severity. When there are multiple PackageIssues for this vulnerability, they can have different effective severities because some might be provided by the distro while others are provided by the language ecosystem for a language pack. For this reason, it is advised to use the effective severity on the PackageIssue level. In the case where multiple PackageIssues have differing effective severities, this field should be the highest severity for any of the PackageIssues.
           enum:
