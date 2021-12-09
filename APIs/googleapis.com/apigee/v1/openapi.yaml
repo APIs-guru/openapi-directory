@@ -779,6 +779,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
+  "/v1/{name}:adjust":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Adjust the prepaid balance for the developer. This API will be used in scenarios where the developer has been under-charged or over-charged.
+      operationId: apigee.organizations.developers.balance.adjust
+      parameters:
+        - description: "Required. Account balance for the developer. Use the following structure in your request: `organizations/{org}/developers/{developer}/balance`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1AdjustDeveloperBalanceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1DeveloperBalance"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   "/v1/{name}:credit":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -4082,6 +4124,13 @@ components:
         monetizationConfig:
           $ref: "#/components/schemas/GoogleCloudApigeeV1MonetizationConfig"
           description: Configuration for the Monetization add-on.
+      type: object
+    GoogleCloudApigeeV1AdjustDeveloperBalanceRequest:
+      description: Request for AdjustDeveloperBalance.
+      properties:
+        adjustment:
+          $ref: "#/components/schemas/GoogleTypeMoney"
+          description: "* A positive value of `adjustment` means that that the API provider wishes to adjust the balance for an over-charged developer i.e. the balance of the developer will increase. * A negative value of `adjustment` means that that the API provider wishes to adjust the balance for an under-charged developer i.e. the balance of the developer will decrease."
       type: object
     GoogleCloudApigeeV1AdvancedApiOpsConfig:
       description: Configuration for the Advanced API Ops add-on.

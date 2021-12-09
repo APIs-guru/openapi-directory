@@ -1206,11 +1206,6 @@ components:
           items:
             $ref: "#/components/schemas/GooglePrivacyDlpV2FieldId"
           type: array
-        includedFields:
-          description: Limit scanning only to these fields.
-          items:
-            $ref: "#/components/schemas/GooglePrivacyDlpV2FieldId"
-          type: array
         rowsLimit:
           description: Max number of rows to scan. If the table has more rows than this value, the rest of the rows are omitted. If not set, or if set to 0, all rows will be scanned. Only one of rows_limit and rows_limit_percent can be specified. Cannot be used in conjunction with TimespanConfig.
           format: int64

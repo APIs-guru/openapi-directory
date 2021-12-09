@@ -5193,6 +5193,7 @@ components:
           enum:
             - inventory
             - service
+            - other
           example: inventory
           nullable: true
           title: Type
@@ -5530,6 +5531,11 @@ components:
         id:
           example: "123456"
           nullable: true
+          type: string
+        name:
+          example: GST on Purchases
+          nullable: true
+          readOnly: true
           type: string
       type: object
       x-graphql-type-name: LinkedTaxRate

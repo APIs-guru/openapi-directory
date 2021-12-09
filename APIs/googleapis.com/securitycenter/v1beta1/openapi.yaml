@@ -808,6 +808,28 @@ components:
       schema:
         type: string
   schemas:
+    Access:
+      description: Represents an access event.
+      properties:
+        callerIp:
+          description: Caller's IP address, such as "1.1.1.1".
+          type: string
+        callerIpGeo:
+          $ref: "#/components/schemas/Geolocation"
+          description: The caller IP's geolocation, which identifies where the call came from.
+        methodName:
+          description: The method that the service account called, e.g. "SetIamPolicy".
+          type: string
+        principalEmail:
+          description: Associated email, such as "foo@google.com".
+          type: string
+        serviceName:
+          description: This is the API service that the service account made a call to, e.g. "iam.googleapis.com"
+          type: string
+        userAgentFamily:
+          description: What kind of user agent is associated, e.g. operating system shells, embedded or stand-alone applications, etc.
+          type: string
+      type: object
     Asset:
       description: Security Command Center representation of a Google Cloud resource. The Asset is a Security Command Center resource that captures information about a single Google Cloud resource. All modifications to an Asset are only within the context of Security Command Center and don't affect the referenced Google Cloud resource.
       properties:
@@ -1005,6 +1027,9 @@ components:
     Finding:
       description: Security Command Center finding. A finding is a record of assessment data like security, risk, health, or privacy, that is ingested into Security Command Center for presentation, notification, analysis, policy testing, and enforcement. For example, a cross-site scripting (XSS) vulnerability in an App Engine application is a finding.
       properties:
+        access:
+          $ref: "#/components/schemas/Access"
+          description: Access details associated to the Finding, such as more information on the caller, which method was accessed, from where, etc.
         canonicalName:
           description: The canonical name of the finding. It's either "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}", "folders/{folder_id}/sources/{source_id}/findings/{finding_id}" or "projects/{project_number}/sources/{source_id}/findings/{finding_id}", depending on the closest CRM ancestor of the resource associated with the finding.
           type: string
@@ -1041,6 +1066,9 @@ components:
         indicator:
           $ref: "#/components/schemas/Indicator"
           description: "Represents what's commonly known as an Indicator of compromise (IoC) in computer forensics. This is an artifact observed on a network or in an operating system that, with high confidence, indicates a computer intrusion. Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise"
+        mitreAttack:
+          $ref: "#/components/schemas/MitreAttack"
+          description: "MITRE ATT&CK tactics and techniques related to this finding. See: https://attack.mitre.org"
         mute:
           description: Indicates the mute state of a finding (either unspecified, muted, unmuted or undefined).
           enum:
@@ -1104,6 +1132,13 @@ components:
           description: The user defined display name for this folder.
           type: string
       type: object
+    Geolocation:
+      description: Represents a geographical location for a given access.
+      properties:
+        regionCode:
+          description: A CLDR.
+          type: string
+      type: object
     GetIamPolicyRequest:
       description: Request message for `GetIamPolicy` method.
       properties:
@@ -1118,6 +1153,10 @@ components:
           description: Optional. The maximum policy version that will be used to format the policy. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional role bindings must specify version 3. Policies with no conditional role bindings may specify any valid value or leave the field unset. The policy in the response might use the policy version that you specified, or it might use a lower policy version. For example, if you specify version 3, but the policy has no conditional role bindings, the response uses version 1. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
           format: int32
           type: integer
+      type: object
+    GoogleCloudSecuritycenterV1BulkMuteFindingsResponse:
+      description: The response to a BulkMute request. Contains the LRO information.
+      properties: {}
       type: object
     GoogleCloudSecuritycenterV1ExternalSystem:
       description: Representation of third party SIEM/SOAR fields within SCC.
@@ -1617,6 +1656,119 @@ components:
           items:
             $ref: "#/components/schemas/Source"
           type: array
+      type: object
+    MitreAttack:
+      description: "MITRE ATT&CK tactics and techniques related to this finding. See: https://attack.mitre.org"
+      properties:
+        additionalTactics:
+          description: Additional MITRE ATT&CK tactics related to this finding, if any.
+          items:
+            enum:
+              - TACTIC_UNSPECIFIED
+              - RECONNAISSANCE
+              - RESOURCE_DEVELOPMENT
+              - INITIAL_ACCESS
+              - EXECUTION
+              - PERSISTENCE
+              - PRIVILEGE_ESCALATION
+              - DEFENSE_EVASION
+              - CREDENTIAL_ACCESS
+              - DISCOVERY
+              - LATERAL_MOVEMENT
+              - COLLECTION
+              - COMMAND_AND_CONTROL
+              - EXFILTRATION
+              - IMPACT
+            type: string
+          type: array
+        additionalTechniques:
+          description: Additional MITRE ATT&CK techniques related to this finding, if any, along with any of their respective parent techniques.
+          items:
+            enum:
+              - TECHNIQUE_UNSPECIFIED
+              - ACTIVE_SCANNING
+              - SCANNING_IP_BLOCKS
+              - INGRESS_TOOL_TRANSFER
+              - NATIVE_API
+              - SHARED_MODULES
+              - COMMAND_AND_SCRIPTING_INTERPRETER
+              - UNIX_SHELL
+              - RESOURCE_HIJACKING
+              - PROXY
+              - EXTERNAL_PROXY
+              - MULTI_HOP_PROXY
+              - DYNAMIC_RESOLUTION
+              - UNSECURED_CREDENTIALS
+              - VALID_ACCOUNTS
+              - LOCAL_ACCOUNTS
+              - CLOUD_ACCOUNTS
+              - NETWORK_DENIAL_OF_SERVICE
+              - PERMISSION_GROUPS_DISCOVERY
+              - CLOUD_GROUPS
+              - EXFILTRATION_OVER_WEB_SERVICE
+              - EXFILTRATION_TO_CLOUD_STORAGE
+              - ACCOUNT_MANIPULATION
+              - SSH_AUTHORIZED_KEYS
+              - CREATE_OR_MODIFY_SYSTEM_PROCESS
+              - STEAL_WEB_SESSION_COOKIE
+              - MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE
+            type: string
+          type: array
+        primaryTactic:
+          description: The MITRE ATT&CK tactic most closely represented by this finding, if any.
+          enum:
+            - TACTIC_UNSPECIFIED
+            - RECONNAISSANCE
+            - RESOURCE_DEVELOPMENT
+            - INITIAL_ACCESS
+            - EXECUTION
+            - PERSISTENCE
+            - PRIVILEGE_ESCALATION
+            - DEFENSE_EVASION
+            - CREDENTIAL_ACCESS
+            - DISCOVERY
+            - LATERAL_MOVEMENT
+            - COLLECTION
+            - COMMAND_AND_CONTROL
+            - EXFILTRATION
+            - IMPACT
+          type: string
+        primaryTechniques:
+          description: The MITRE ATT&CK technique most closely represented by this finding, if any. primary_techniques is a repeated field because there are multiple levels of MITRE ATT&CK techniques. If the technique most closely represented by this finding is a sub-technique (e.g. SCANNING_IP_BLOCKS), both the sub-technique and its parent technique(s) will be listed (e.g. SCANNING_IP_BLOCKS, ACTIVE_SCANNING).
+          items:
+            enum:
+              - TECHNIQUE_UNSPECIFIED
+              - ACTIVE_SCANNING
+              - SCANNING_IP_BLOCKS
+              - INGRESS_TOOL_TRANSFER
+              - NATIVE_API
+              - SHARED_MODULES
+              - COMMAND_AND_SCRIPTING_INTERPRETER
+              - UNIX_SHELL
+              - RESOURCE_HIJACKING
+              - PROXY
+              - EXTERNAL_PROXY
+              - MULTI_HOP_PROXY
+              - DYNAMIC_RESOLUTION
+              - UNSECURED_CREDENTIALS
+              - VALID_ACCOUNTS
+              - LOCAL_ACCOUNTS
+              - CLOUD_ACCOUNTS
+              - NETWORK_DENIAL_OF_SERVICE
+              - PERMISSION_GROUPS_DISCOVERY
+              - CLOUD_GROUPS
+              - EXFILTRATION_OVER_WEB_SERVICE
+              - EXFILTRATION_TO_CLOUD_STORAGE
+              - ACCOUNT_MANIPULATION
+              - SSH_AUTHORIZED_KEYS
+              - CREATE_OR_MODIFY_SYSTEM_PROCESS
+              - STEAL_WEB_SESSION_COOKIE
+              - MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE
+            type: string
+          type: array
+        version:
+          description: The MITRE ATT&CK version referenced by the above fields. E.g. "8".
+          type: string
       type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
