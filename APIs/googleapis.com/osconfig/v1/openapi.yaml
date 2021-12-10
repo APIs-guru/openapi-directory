@@ -225,6 +225,90 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}:pause":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Change state of patch deployment to "PAUSED". Patch deployment in paused state doesn't generate patch jobs.
+      operationId: osconfig.projects.patchDeployments.pause
+      parameters:
+        - description: Required. The resource name of the patch deployment in the form `projects/*/patchDeployments/*`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PausePatchDeploymentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatchDeployment"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{name}:resume":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Change state of patch deployment back to "ACTIVE". Patch deployment in active state continues to generate patch jobs.
+      operationId: osconfig.projects.patchDeployments.resume
+      parameters:
+        - description: Required. The resource name of the patch deployment in the form `projects/*/patchDeployments/*`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResumePatchDeploymentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatchDeployment"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/instanceDetails":
     get:
       description: Get a list of instance details for a given patch job.
@@ -2045,6 +2129,14 @@ components:
         rollout:
           $ref: "#/components/schemas/PatchRollout"
           description: Optional. Rollout strategy of the patch job.
+        state:
+          description: Output only. Current state of the patch deployment.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - PAUSED
+          readOnly: true
+          type: string
         updateTime:
           description: Output only. Time the patch deployment was last updated. Timestamp is in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
           format: google-datetime
@@ -2265,6 +2357,10 @@ components:
             - CONCURRENT_ZONES
           type: string
       type: object
+    PausePatchDeploymentRequest:
+      description: A request message for pausing a patch deployment.
+      properties: {}
+      type: object
     RecurringSchedule:
       description: Sets the time for recurring patch deployments.
       properties:
@@ -2306,6 +2402,10 @@ components:
         weekly:
           $ref: "#/components/schemas/WeeklySchedule"
           description: Required. Schedule with weekly executions.
+      type: object
+    ResumePatchDeploymentRequest:
+      description: A request message for resuming a patch deployment.
+      properties: {}
       type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."

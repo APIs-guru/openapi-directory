@@ -13,20 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: OS Config API
   version: v1beta
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://osconfig.googleapis.com/$discovery/rest?version=v1beta
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: osconfig
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/compute/docs/osconfig/rest
 tags:
@@ -203,6 +200,90 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PatchJob"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta/{name}:pause":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Change state of patch deployment to "PAUSED". Patch deployment in paused state doesn't generate patch jobs.
+      operationId: osconfig.projects.patchDeployments.pause
+      parameters:
+        - description: Required. The resource name of the patch deployment in the form `projects/*/patchDeployments/*`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PausePatchDeploymentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatchDeployment"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta/{name}:resume":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Change state of patch deployment back to "ACTIVE". Patch deployment in active state continues to generate patch jobs.
+      operationId: osconfig.projects.patchDeployments.resume
+      parameters:
+        - description: Required. The resource name of the patch deployment in the form `projects/*/patchDeployments/*`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResumePatchDeploymentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatchDeployment"
           description: Successful response
       security:
         - Oauth2:
@@ -1145,6 +1226,14 @@ components:
         rollout:
           $ref: "#/components/schemas/PatchRollout"
           description: Optional. Rollout strategy of the patch job.
+        state:
+          description: Output only. Current state of the patch deployment.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - PAUSED
+          readOnly: true
+          type: string
         updateTime:
           description: Output only. Time the patch deployment was last updated. Timestamp is in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
           format: google-datetime
@@ -1365,6 +1454,10 @@ components:
             - CONCURRENT_ZONES
           type: string
       type: object
+    PausePatchDeploymentRequest:
+      description: A request message for pausing a patch deployment.
+      properties: {}
+      type: object
     RecurringSchedule:
       description: Sets the time for recurring patch deployments.
       properties:
@@ -1406,6 +1499,10 @@ components:
         weekly:
           $ref: "#/components/schemas/WeeklySchedule"
           description: Required. Schedule with weekly executions.
+      type: object
+    ResumePatchDeploymentRequest:
+      description: A request message for resuming a patch deployment.
+      properties: {}
       type: object
     SoftwareRecipe:
       description: "A software recipe is a set of instructions for installing and configuring a piece of software. It consists of a set of artifacts that are downloaded, and a set of steps that install, configure, and/or update the software. Recipes support installing and updating software from artifacts in the following formats: Zip archive, Tar archive, Windows MSI, Debian package, and RPM package. Additionally, recipes support executing a script (either defined in a file or directly in this api) in bash, sh, cmd, and powershell. Updating a software recipe If a recipe is assigned to an instance and there is a recipe with the same name but a lower version already installed and the assigned state of the recipe is `UPDATED`, then the recipe is updated to the new version. Script Working Directories Each script or execution step is run in its own temporary directory which is deleted after completing the step."
@@ -1819,5 +1916,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}
