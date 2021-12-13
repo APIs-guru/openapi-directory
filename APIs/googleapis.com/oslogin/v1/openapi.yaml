@@ -198,7 +198,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/sshPublicKey":
+  "/v1/{parent}/sshPublicKeys":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -213,7 +213,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Create an SSH public key
-      operationId: oslogin.users.sshPublicKey.create
+      operationId: oslogin.users.sshPublicKeys.create
       parameters:
         - description: Required. The unique ID for the user in format `users/{user}`.
           in: path

@@ -1533,6 +1533,11 @@ components:
     ComputeEngineTargetDefaults:
       description: ComputeEngineTargetDefaults is a collection of details for creating a VM in a target Compute Engine project.
       properties:
+        additionalLicenses:
+          description: Additional licenses to assign to the VM.
+          items:
+            type: string
+          type: array
         appliedLicense:
           $ref: "#/components/schemas/AppliedLicense"
           description: Output only. The OS license returned from the adaptation module report.
@@ -1608,6 +1613,11 @@ components:
     ComputeEngineTargetDetails:
       description: ComputeEngineTargetDetails is a collection of details for creating a VM in a target Compute Engine project.
       properties:
+        additionalLicenses:
+          description: Additional licenses to assign to the VM.
+          items:
+            type: string
+          type: array
         appliedLicense:
           $ref: "#/components/schemas/AppliedLicense"
           description: The OS license returned from the adaptation module report.

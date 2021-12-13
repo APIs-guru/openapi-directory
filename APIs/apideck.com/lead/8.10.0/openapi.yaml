@@ -428,6 +428,8 @@ paths:
                     name: 'HQ US',
                     line1: 'Main street',
                     line2: 'apt #',
+                    line3: 'Suite #',
+                    line4: 'delivery instructions',
                     street_number: '25',
                     city: 'San Francisco',
                     state: 'CA',
@@ -669,6 +671,8 @@ paths:
                     name: 'HQ US',
                     line1: 'Main street',
                     line2: 'apt #',
+                    line3: 'Suite #',
+                    line4: 'delivery instructions',
                     street_number: '25',
                     city: 'San Francisco',
                     state: 'CA',
@@ -914,6 +918,16 @@ components:
         line2:
           description: Line 2 of the address
           example: "apt #"
+          nullable: true
+          type: string
+        line3:
+          description: Line 3 of the address
+          example: "Suite #"
+          nullable: true
+          type: string
+        line4:
+          description: Line 4 of the address
+          example: delivery instructions
           nullable: true
           type: string
         longitude:

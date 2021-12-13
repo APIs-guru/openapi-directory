@@ -277,7 +277,7 @@ paths:
         - googleLocations
   "/v1/{name}":
     delete:
-      description: Deletes a location. If this location cannot be deleted using the API and it is marked so in the `google.mybusiness.businessinformation.v1.LocationState`, use the [Google My Business](https://business.google.com/manage/) website.
+      description: Deletes a location. If this location cannot be deleted using the API and it is marked so in the `google.mybusiness.businessinformation.v1.LocationState`, use the [Google Business Profile](https://business.google.com/manage/) website.
       operationId: mybusinessbusinessinformation.locations.delete
       parameters:
         - description: Required. The name of the location to delete.
@@ -967,7 +967,7 @@ components:
           type: string
         latlng:
           $ref: "#/components/schemas/LatLng"
-          description: Optional. User-provided latitude and longitude. When creating a location, this field is ignored if the provided address geocodes successfully. This field is only returned on get requests if the user-provided `latlng` value was accepted during create, or the `latlng` value was updated through the Google My Business website. This field can only be updated by approved clients.
+          description: Optional. User-provided latitude and longitude. When creating a location, this field is ignored if the provided address geocodes successfully. This field is only returned on get requests if the user-provided `latlng` value was accepted during create, or the `latlng` value was updated through the Google Business Profile website. This field can only be updated by approved clients.
         metadata:
           $ref: "#/components/schemas/Metadata"
           description: Output only. Additional non-user-editable information.

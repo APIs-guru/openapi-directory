@@ -1150,6 +1150,9 @@ components:
         name:
           description: "Immutable. The resource name of the conversation. Format: projects/{project}/locations/{location}/conversations/{conversation}"
           type: string
+        obfuscatedUserId:
+          description: Obfuscated user ID which the customer sent to us.
+          type: string
         runtimeAnnotations:
           description: Output only. The annotations that were generated during the customer and agent interaction.
           items:

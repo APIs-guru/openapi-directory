@@ -482,6 +482,8 @@ paths:
                     name: 'HQ US',
                     line1: 'Main street',
                     line2: 'apt #',
+                    line3: 'Suite #',
+                    line4: 'delivery instructions',
                     street_number: '25',
                     city: 'San Francisco',
                     state: 'CA',
@@ -718,6 +720,8 @@ paths:
                     name: 'HQ US',
                     line1: 'Main street',
                     line2: 'apt #',
+                    line3: 'Suite #',
+                    line4: 'delivery instructions',
                     street_number: '25',
                     city: 'San Francisco',
                     state: 'CA',
@@ -1238,10 +1242,12 @@ paths:
                 type: 'service',
                 number: 'OIT00546',
                 customer: {
-                  id: '12345'
+                  id: '12345',
+                  display_name: "Bill's Windsurf Shop"
                 },
                 invoice_date: '2020-09-30',
                 due_date: '2020-10-30',
+                terms: 'Net 30 days',
                 po_number: '90000117',
                 reference: '123456',
                 status: 'draft',
@@ -1262,7 +1268,7 @@ paths:
                     line_number: 1,
                     description:
                       'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
-                    type: 'inventory',
+                    type: 'sales_item',
                     tax_amount: 27500,
                     total_amount: 27500,
                     quantity: 1,
@@ -1289,6 +1295,8 @@ paths:
                   name: 'HQ US',
                   line1: 'Main street',
                   line2: 'apt #',
+                  line3: 'Suite #',
+                  line4: 'delivery instructions',
                   street_number: '25',
                   city: 'San Francisco',
                   state: 'CA',
@@ -1311,6 +1319,8 @@ paths:
                   name: 'HQ US',
                   line1: 'Main street',
                   line2: 'apt #',
+                  line3: 'Suite #',
+                  line4: 'delivery instructions',
                   street_number: '25',
                   city: 'San Francisco',
                   state: 'CA',
@@ -1492,10 +1502,12 @@ paths:
                 type: 'service',
                 number: 'OIT00546',
                 customer: {
-                  id: '12345'
+                  id: '12345',
+                  display_name: "Bill's Windsurf Shop"
                 },
                 invoice_date: '2020-09-30',
                 due_date: '2020-10-30',
+                terms: 'Net 30 days',
                 po_number: '90000117',
                 reference: '123456',
                 status: 'draft',
@@ -1516,7 +1528,7 @@ paths:
                     line_number: 1,
                     description:
                       'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
-                    type: 'inventory',
+                    type: 'sales_item',
                     tax_amount: 27500,
                     total_amount: 27500,
                     quantity: 1,
@@ -1543,6 +1555,8 @@ paths:
                   name: 'HQ US',
                   line1: 'Main street',
                   line2: 'apt #',
+                  line3: 'Suite #',
+                  line4: 'delivery instructions',
                   street_number: '25',
                   city: 'San Francisco',
                   state: 'CA',
@@ -1565,6 +1579,8 @@ paths:
                   name: 'HQ US',
                   line1: 'Main street',
                   line2: 'apt #',
+                  line3: 'Suite #',
+                  line4: 'delivery instructions',
                   street_number: '25',
                   city: 'San Francisco',
                   state: 'CA',
@@ -2047,7 +2063,8 @@ paths:
                 },
                 transaction_date: '2021-05-01T12:00:00.000Z',
                 customer: {
-                  id: '12345'
+                  id: '12345',
+                  display_name: "Bill's Windsurf Shop"
                 },
                 reconciled: true,
                 status: 'authorised',
@@ -2232,7 +2249,8 @@ paths:
                 },
                 transaction_date: '2021-05-01T12:00:00.000Z',
                 customer: {
-                  id: '12345'
+                  id: '12345',
+                  display_name: "Bill's Windsurf Shop"
                 },
                 reconciled: true,
                 status: 'authorised',
@@ -3004,6 +3022,16 @@ components:
         line2:
           description: Line 2 of the address
           example: "apt #"
+          nullable: true
+          type: string
+        line3:
+          description: Line 3 of the address
+          example: "Suite #"
+          nullable: true
+          type: string
+        line4:
+          description: Line 4 of the address
+          example: delivery instructions
           nullable: true
           type: string
         longitude:
@@ -5078,6 +5106,12 @@ components:
           nullable: true
           title: Template
           type: string
+        terms:
+          description: Terms of payment
+          example: Net 30 days
+          nullable: true
+          title: Terms
+          type: string
         total:
           example: 27500
           nullable: true
@@ -5264,9 +5298,11 @@ components:
           type: number
         type:
           enum:
-            - inventory
-            - service
-          example: inventory
+            - sales_item
+            - discount
+            - info
+            - sub_total
+          example: sales_item
           nullable: true
           title: Type
           type: string
@@ -5466,6 +5502,11 @@ components:
           nullable: true
           readOnly: true
           title: Display ID
+          type: string
+        display_name:
+          example: Bill's Windsurf Shop
+          nullable: true
+          title: Display Name
           type: string
         id:
           example: "12345"

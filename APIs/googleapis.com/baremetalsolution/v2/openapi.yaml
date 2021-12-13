@@ -1089,6 +1089,14 @@ components:
           description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
+    QosPolicy:
+      description: QOS policy parameters.
+      properties:
+        bandwidthGbps:
+          description: The bandwidth permitted by the QOS policy, in gbps.
+          format: double
+          type: number
+      type: object
     ResetInstanceRequest:
       description: Message requesting to reset a server.
       properties: {}
@@ -1142,11 +1150,6 @@ components:
           items:
             $ref: "#/components/schemas/Schedule"
           type: array
-        volumes:
-          description: The names of the volumes associated with this policy.
-          items:
-            type: string
-          type: array
       type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
@@ -1169,25 +1172,37 @@ components:
     VRF:
       description: A network VRF.
       properties:
-        autonomousSystemNumber:
-          description: The autonomous system number of the VRF.
-          type: string
-        juniperAlias:
-          description: The Juniper alias of the VRF.
-          type: string
         name:
           description: The name of the VRF.
           type: string
-        routeTarget:
-          description: The route target of the VRF.
-          format: int64
-          type: string
+        qosPolicy:
+          $ref: "#/components/schemas/QosPolicy"
+          description: The QOS policy applied to this VRF.
         state:
           description: The possible state of VRF.
           enum:
             - STATE_UNSPECIFIED
             - PROVISIONING
             - PROVISIONED
+          type: string
+        vlanAttachments:
+          description: The list of VLAN attachments for the VRF.
+          items:
+            $ref: "#/components/schemas/VlanAttachment"
+          type: array
+      type: object
+    VlanAttachment:
+      description: VLAN attachment details.
+      properties:
+        peerIp:
+          description: The peer IP of the attachment.
+          type: string
+        peerVlanId:
+          description: The peer vlan ID of the attachment.
+          format: int64
+          type: string
+        routerIp:
+          description: The router IP of the attachment.
           type: string
       type: object
     Volume:
