@@ -2748,7 +2748,7 @@ components:
           format: int64
           type: string
         databaseInstalledVersion:
-          description: Output only. The databaseInstalledVersion stores the current fully resolved database version running on the instance including minor version such as MYSQL_5_6_50
+          description: Output only. Stores the current database version running on the instance including minor version such as **MYSQL_8_0_18**.
           readOnly: true
           type: string
         databaseVersion:
@@ -2797,7 +2797,7 @@ components:
               type: string
           type: object
         gceZone:
-          description: The Compute Engine zone that the instance is currently serving from. This value could be different from the zone that was specified when the instance was created if the instance has failed over to its secondary zone.
+          description: "The Compute Engine zone that the instance is currently serving from. This value could be different from the zone that was specified when the instance was created if the instance has failed over to its secondary zone. WARNING: Changing this might restart the instance."
           type: string
         instanceType:
           description: The instance type.
@@ -3375,7 +3375,7 @@ components:
           description: 'The name of the allocated ip range for the private ip CloudSQL instance. For example: "google-managed-services-default". If set, the instance ip will be created in the allocated range. The range name must comply with [RFC 1035](https://tools.ietf.org/html/rfc1035). Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?.`'
           type: string
         authorizedNetworks:
-          description: "The list of external networks that are allowed to connect to the instance using the IP. In 'CIDR' notation, also known as 'slash' notation (for example: **192.168.100.0/24**)."
+          description: "The list of external networks that are allowed to connect to the instance using the IP. In 'CIDR' notation, also known as 'slash' notation (for example: **157.197.200.0/24**)."
           items:
             $ref: "#/components/schemas/AclEntry"
           type: array
@@ -3413,7 +3413,7 @@ components:
       description: Preferred location. This specifies where a Cloud SQL instance is located. Note that if the preferred location is not available, the instance will be located as close as possible within the region. Only one location may be specified.
       properties:
         followGaeApplication:
-          description: The App Engine application to follow, it must be in the same region as the Cloud SQL instance.
+          description: "The App Engine application to follow, it must be in the same region as the Cloud SQL instance. WARNING: Changing this might restart the instance."
           type: string
         kind:
           description: This is always **sql#locationPreference**.
@@ -3422,7 +3422,7 @@ components:
           description: "The preferred Compute Engine zone for the secondary/failover (for example: us-central1-a, us-central1-b, etc.). Reserved for future use."
           type: string
         zone:
-          description: "The preferred Compute Engine zone (for example: us-central1-a, us-central1-b, etc.)."
+          description: "The preferred Compute Engine zone (for example: us-central1-a, us-central1-b, etc.). WARNING: Changing this might restart the instance."
           type: string
       type: object
     MaintenanceWindow:
@@ -3805,7 +3805,7 @@ components:
             $ref: "#/components/schemas/DatabaseFlags"
           type: array
         databaseReplicationEnabled:
-          description: Configuration specific to read replica instances. Indicates whether replication is enabled or not.
+          description: "Configuration specific to read replica instances. Indicates whether replication is enabled or not. WARNING: Changing this restarts the instance."
           type: boolean
         denyMaintenancePeriods:
           description: Deny maintenance periods
@@ -3859,7 +3859,7 @@ components:
           format: int64
           type: string
         tier:
-          description: The tier (or machine type) for this instance, for example **db-custom-1-3840**.
+          description: "The tier (or machine type) for this instance, for example **db-custom-1-3840**. WARNING: Changing this restarts the instance."
           type: string
         userLabels:
           additionalProperties:
