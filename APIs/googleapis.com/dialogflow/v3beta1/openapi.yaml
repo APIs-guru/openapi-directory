@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://dialogflow.googleapis.com/$discovery/rest?version=v3beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: dialogflow
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/dialogflow/
 tags:
@@ -8555,6 +8556,9 @@ components:
     GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata:
       description: Metadata in google::longrunning::Operation for Knowledge operations.
       properties:
+        knowledgeBase:
+          description: The name of the knowledge base interacted with during the operation.
+          type: string
         state:
           description: Required. Output only. The current state of this operation.
           enum:

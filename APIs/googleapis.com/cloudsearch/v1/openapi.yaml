@@ -300,7 +300,7 @@ paths:
               - SYNCHRONOUS
               - ASYNCHRONOUS
             type: string
-        - description: Required. The incremented version of the item to delete from the index. The indexing system stores the version from the datasource as a byte string and compares the Item version in the index to the version of the queued Item using lexical ordering. Cloud Search Indexing won't delete any queued item with a version value that is less than or equal to the version of the currently indexed item. The maximum length for this field is 1024 bytes.
+        - description: Required. The incremented version of the item to delete from the index. The indexing system stores the version from the datasource as a byte string and compares the Item version in the index to the version of the queued Item using lexical ordering. Cloud Search Indexing won't delete any queued item with a version value that is less than or equal to the version of the currently indexed item. The maximum length for this field is 1024 bytes. See [this guide](https://developers.devsite.corp.google.com/cloud-search/docs/guides/operations) to understand how item version affects reindexing after delete item.
           in: query
           name: version
           schema:
@@ -1727,6 +1727,75 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1/stats/searchapplication:
+    get:
+      description: Get search application stats for customer. **Note:** This API requires a standard end user account to execute.
+      operationId: cloudsearch.stats.getSearchapplication
+      parameters:
+        - description: Day of month. Must be from 1 to 31 and valid for the year and month.
+          in: query
+          name: endDate.day
+          schema:
+            type: integer
+        - description: Month of date. Must be from 1 to 12.
+          in: query
+          name: endDate.month
+          schema:
+            type: integer
+        - description: Year of date. Must be from 1 to 9999.
+          in: query
+          name: endDate.year
+          schema:
+            type: integer
+        - description: Day of month. Must be from 1 to 31 and valid for the year and month.
+          in: query
+          name: startDate.day
+          schema:
+            type: integer
+        - description: Month of date. Must be from 1 to 12.
+          in: query
+          name: startDate.month
+          schema:
+            type: integer
+        - description: Year of date. Must be from 1 to 9999.
+          in: query
+          name: startDate.year
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCustomerSearchApplicationStatsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud_search
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud_search
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud_search.stats
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud_search.stats
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud_search.stats.indexing
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud_search.stats.indexing
+      tags:
+        - stats
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1/stats/session:
     get:
       description: "Get the # of search sessions, % of successful sessions with a click query statistics for customer. **Note:** This API requires a standard end user account to execute."
@@ -2348,6 +2417,17 @@ components:
             $ref: "#/components/schemas/QueryCountByStatus"
           type: array
       type: object
+    CustomerSearchApplicationStats:
+      description: Search application stats for a customer for the given date.
+      properties:
+        count:
+          description: The count of search applications for the date.
+          format: int64
+          type: string
+        date:
+          $ref: "#/components/schemas/Date"
+          description: Date for which search application stats were calculated.
+      type: object
     CustomerSessionStats:
       properties:
         date:
@@ -2416,6 +2496,9 @@ components:
           items:
             type: string
           type: array
+        returnThumbnailUrls:
+          description: Can a user request to get thumbnail URI for Items indexed in this data source.
+          type: boolean
         shortName:
           description: "A short name or alias for the source. This value will be used to match the 'source' operator. For example, if the short name is *<value>* then queries like *source:<value>* will only return results for this source. The value must be unique across all datasources. The value must only contain alphanumeric characters (a-zA-Z0-9). The value cannot start with 'google' and cannot be one of the following: mail, gmail, docs, drive, groups, sites, calendar, hangouts, gplus, keep, people, teams. Its maximum length is 32 characters."
           type: string
@@ -2762,6 +2845,10 @@ components:
       type: object
     GetCustomerIndexStatsResponse:
       properties:
+        averageIndexedItemCount:
+          description: Average item count for the given date range for which billing is done.
+          format: int64
+          type: string
         stats:
           description: Summary of indexed item counts, one for each day in the requested range.
           items:
@@ -2773,6 +2860,23 @@ components:
         stats:
           items:
             $ref: "#/components/schemas/CustomerQueryStats"
+          type: array
+        totalQueryCount:
+          description: Total successful query count (status code 200) for the given date range.
+          format: int64
+          type: string
+      type: object
+    GetCustomerSearchApplicationStatsResponse:
+      description: Response format for search application stats for a customer.
+      properties:
+        averageSearchApplicationCount:
+          description: Average search application count for the given date range.
+          format: int64
+          type: string
+        stats:
+          description: Search application stats by date.
+          items:
+            $ref: "#/components/schemas/CustomerSearchApplicationStats"
           type: array
       type: object
     GetCustomerSessionStatsResponse:
@@ -2791,6 +2895,10 @@ components:
       type: object
     GetDataSourceIndexStatsResponse:
       properties:
+        averageIndexedItemCount:
+          description: Average item count for the given date range for which billing is done.
+          format: int64
+          type: string
         stats:
           description: Summary of indexed item counts, one for each day in the requested range.
           items:
@@ -2805,6 +2913,10 @@ components:
           items:
             $ref: "#/components/schemas/SearchApplicationQueryStats"
           type: array
+        totalQueryCount:
+          description: Total successful query count (status code 200) for the given date range.
+          format: int64
+          type: string
       type: object
     GetSearchApplicationSessionStatsResponse:
       properties:
@@ -2975,7 +3087,7 @@ components:
           $ref: "#/components/schemas/ItemStructuredData"
           description: The structured data for the item that should conform to a registered object definition in the schema for the data source.
         version:
-          description: Required. The indexing system stores the version from the datasource as a byte string and compares the Item version in the index to the version of the queued Item using lexical ordering. Cloud Search Indexing won't index or delete any queued item with a version value that is less than or equal to the version of the currently indexed item. The maximum length for this field is 1024 bytes.
+          description: Required. The indexing system stores the version from the datasource as a byte string and compares the Item version in the index to the version of the queued Item using lexical ordering. Cloud Search Indexing won't index or delete any queued item with a version value that is less than or equal to the version of the currently indexed item. The maximum length for this field is 1024 bytes. See [this guide](https://developers.devsite.corp.google.com/cloud-search/docs/guides/operations) to understand how item version affects reindexing after delete item.
           format: byte
           type: string
       type: object
@@ -3034,6 +3146,10 @@ components:
       properties:
         count:
           description: Number of items matching the status code.
+          format: int64
+          type: string
+        indexedItemsCount:
+          description: Number of items matching the status code for which billing is done. This excludes virtual container items from the total count. This count would not be applicable for items with ERROR or NEW_ITEM status code.
           format: int64
           type: string
         statusCode:
@@ -3248,6 +3364,9 @@ components:
         source:
           $ref: "#/components/schemas/Source"
           description: The named source for the result, such as Gmail.
+        thumbnailUrl:
+          description: The thumbnail URL of the result.
+          type: string
         updateTime:
           description: The last modified date for the object in the search result. If not set in the item, the value returned here is empty. When `updateTime` is used for calculating freshness and is not set, this value defaults to 2 years from the current time.
           format: google-datetime
@@ -3897,6 +4016,9 @@ components:
         queryInterpretationConfig:
           $ref: "#/components/schemas/QueryInterpretationConfig"
           description: The default options for query interpretation
+        returnResultThumbnailUrls:
+          description: With each result we should return the URI for its thumbnail (when applicable)
+          type: boolean
         scoringConfig:
           $ref: "#/components/schemas/ScoringConfig"
           description: Configuration for ranking results.

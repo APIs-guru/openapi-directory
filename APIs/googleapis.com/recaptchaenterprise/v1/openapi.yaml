@@ -373,48 +373,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/relatedaccountgroupmemberships:search":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Search group memberships related to a given account.
-      operationId: recaptchaenterprise.projects.relatedaccountgroupmemberships.search
-      parameters:
-        - description: Required. The name of the project to search related account group memberships from, in the format "projects/{project}".
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1SearchRelatedAccountGroupMembershipsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1SearchRelatedAccountGroupMembershipsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1/{parent}/relatedaccountgroups":
     get:
       description: List groups of related accounts.
@@ -462,6 +420,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{project}/relatedaccountgroupmemberships:search":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Search group memberships related to a given account.
+      operationId: recaptchaenterprise.projects.relatedaccountgroupmemberships.search
+      parameters:
+        - description: Required. The name of the project to search related account group memberships from, in the format "projects/{project}".
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1SearchRelatedAccountGroupMembershipsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1SearchRelatedAccountGroupMembershipsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
 components:
   parameters:
     _.xgafv:
@@ -552,6 +552,13 @@ components:
               - RELATED_ACCOUNTS_NUMBER_HIGH
             type: string
           type: array
+        recommendedAction:
+          description: Recommended action after this request.
+          enum:
+            - RECOMMENDED_ACTION_UNSPECIFIED
+            - REQUEST_2FA
+            - SKIP_2FA
+          type: string
       type: object
     GoogleCloudRecaptchaenterpriseV1AndroidKeySettings:
       description: Settings specific to keys that can be used by Android apps.
@@ -701,6 +708,9 @@ components:
         testingOptions:
           $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1TestingOptions"
           description: Options for user acceptance testing.
+        wafSettings:
+          $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1WafSettings"
+          description: Settings for WAF
         webSettings:
           $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1WebKeySettings"
           description: Settings for keys that can be used by websites.
@@ -895,6 +905,24 @@ components:
         valid:
           description: Whether the provided user response token is valid. When valid = false, the reason could be specified in invalid_reason or it could also be due to a user failing to solve a challenge or a sitekey mismatch (i.e the sitekey used to generate the token was different than the one specified in the assessment).
           type: boolean
+      type: object
+    GoogleCloudRecaptchaenterpriseV1WafSettings:
+      description: Settings specific to keys that can be used for WAF (Web Application Firewall).
+      properties:
+        wafFeature:
+          description: Required. The WAF feature for which this key is enabled.
+          enum:
+            - WAF_FEATURE_UNSPECIFIED
+            - CHALLENGE_PAGE
+            - SESSION_TOKEN
+            - ACTION_TOKEN
+          type: string
+        wafService:
+          description: Required. The WAF service that uses this key.
+          enum:
+            - WAF_SERVICE_UNSPECIFIED
+            - CA
+          type: string
       type: object
     GoogleCloudRecaptchaenterpriseV1WebKeySettings:
       description: Settings specific to keys that can be used by websites.

@@ -1008,6 +1008,35 @@ components:
             - PREMIUM
           type: string
       type: object
+    VirtualMachineThreatDetectionSettings:
+      description: Resource capturing the settings for the Virtual Machine Threat Detection service.
+      properties:
+        modules:
+          additionalProperties:
+            $ref: "#/components/schemas/Config"
+          description: The configurations including the state of enablement for the service's different modules. The absence of a module in the map implies its configuration is inherited from its parent's.
+          type: object
+        name:
+          description: "The resource name of the VirtualMachineThreatDetectionSettings. Formats: * organizations/{organization}/virtualMachineThreatDetectionSettings * folders/{folder}/virtualMachineThreatDetectionSettings * projects/{project}/virtualMachineThreatDetectionSettings"
+          type: string
+        serviceAccount:
+          description: Output only. The service account used by Virtual Machine Threat Detection detectors.
+          readOnly: true
+          type: string
+        serviceEnablementState:
+          description: The state of enablement for the service at its level of the resource hierarchy. A DISABLED state will override all module enablement_states to DISABLED.
+          enum:
+            - ENABLEMENT_STATE_UNSPECIFIED
+            - INHERITED
+            - ENABLED
+            - DISABLED
+          type: string
+        updateTime:
+          description: Output only. The time the settings were last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     Vulnerability:
       description: Refers to common vulnerability fields e.g. cve, cvss, cwe etc.
       properties:

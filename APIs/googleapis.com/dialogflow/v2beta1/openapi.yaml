@@ -8123,6 +8123,9 @@ components:
     GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata:
       description: Metadata in google::longrunning::Operation for Knowledge operations.
       properties:
+        knowledgeBase:
+          description: The name of the knowledge base interacted with during the operation.
+          type: string
         state:
           description: Required. Output only. The current state of this operation.
           enum:

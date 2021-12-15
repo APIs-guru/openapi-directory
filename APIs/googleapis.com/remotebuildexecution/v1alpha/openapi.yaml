@@ -822,6 +822,10 @@ components:
           description: The time spent completing the command, in total.
           format: google-duration
           type: string
+        stderr:
+          description: The time spent uploading the stderr logs.
+          format: google-duration
+          type: string
         stdout:
           description: The time spent uploading the stdout logs.
           format: google-duration

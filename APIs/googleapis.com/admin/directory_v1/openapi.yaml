@@ -86,7 +86,7 @@ paths:
               - status
               - supportEndDate
             type: string
-        - description: The full path of the organizational unit or its unique ID.
+        - description: The full path of the organizational unit (minus the leading `/`) or its unique ID.
           in: query
           name: orgUnitPath
           schema:
@@ -796,7 +796,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The full path of the organizational unit or its unique ID.
+        - description: The full path of the organizational unit (minus the leading `/`) or its unique ID.
           in: path
           name: orgUnitPath
           required: true
@@ -822,7 +822,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The full path of the organizational unit or its unique ID.
+        - description: The full path of the organizational unit (minus the leading `/`) or its unique ID.
           in: path
           name: orgUnitPath
           required: true
@@ -868,7 +868,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The full path of the organizational unit or its unique ID.
+        - description: The full path of the organizational unit (minus the leading `/`) or its unique ID.
           in: path
           name: orgUnitPath
           required: true
@@ -903,7 +903,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The full path of the organizational unit or its unique ID.
+        - description: The full path of the organizational unit (minus the leading `/`) or its unique ID.
           in: path
           name: orgUnitPath
           required: true
@@ -6993,13 +6993,13 @@ components:
       description: JSON template for a language entry.
       properties:
         customLanguage:
-          description: Other language. User can provide own language name if there is no corresponding ISO 639 language code. If this is set `languageCode` can't be set.
+          description: Other language. User can provide their own language name if there is no corresponding ISO 639 language code. If this is set, `languageCode` can't be set.
           type: string
         languageCode:
-          description: Language Code. Should be used for storing ISO 639 LanguageCode string representation for language. See the [Language Codes](/admin-sdk/directory/v1/languages) page for the list of supported codes. Valid language codes outside the supported set will be accepted by the API but may lead to unexpected behavior. Illegal values cause SchemaException. If this is set `customLanguage` can't be set.
+          description: ISO 639 string representation of a language. See [Language Codes](/admin-sdk/directory/v1/languages) for the list of supported codes. Valid language codes outside the supported set will be accepted by the API but may lead to unexpected behavior. Illegal values cause `SchemaException`. If this is set, `customLanguage` can't be set.
           type: string
         preference:
-          description: Preference. Optional field, which if present, controls whether the specified `languageCode` is stored as the user's preferred language. If `customLanguage` is set, this can't be set. Allowed values are `preferred` and `not_preferred`.
+          description: Optional. If present, controls whether the specified `languageCode` is the user's preferred language. If `customLanguage` is set, this can't be set. Allowed values are `preferred` and `not_preferred`.
           type: string
       type: object
     UserLocation:
