@@ -6,7 +6,7 @@ info:
     email: hello@apideck.com
     url: https://developers.apideck.com
   description: |
-    Welcome to the hris.
+    Welcome to the HRIS API.
 
     You can use this API to access all hris endpoints.
 
@@ -265,7 +265,7 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: hris
+  title: HRIS API
   version: 8.10.1
   x-apideck-api: hris
   x-apideck-sdk-support: true
@@ -697,7 +697,8 @@ paths:
                 manager: {
                   name: 'Elon Musk',
                   first_name: 'Elon',
-                  last_name: 'Musk'
+                  last_name: 'Musk',
+                  email: 'elon@musk.com'
                 },
                 social_security_number: '123456789',
                 birthday: '2000-08-12',
@@ -705,14 +706,14 @@ paths:
                 description: 'A description',
                 gender: 'male',
                 pronouns: 'she,her',
-                prefered_language: 'EN',
+                preferred_language: 'EN',
                 languages: ['EN'],
                 nationalities: ['US'],
                 photo_url: 'https://unavatar.io/elon-musk',
                 jobs: [
                   {
                     title: 'CEO',
-                    compensation_rate: 'year',
+                    compensation_rate: '72000',
                     hired_at: '2020-08-12',
                     is_primary: true,
                     payment_unit: 'year',
@@ -996,7 +997,8 @@ paths:
                 manager: {
                   name: 'Elon Musk',
                   first_name: 'Elon',
-                  last_name: 'Musk'
+                  last_name: 'Musk',
+                  email: 'elon@musk.com'
                 },
                 social_security_number: '123456789',
                 birthday: '2000-08-12',
@@ -1004,14 +1006,14 @@ paths:
                 description: 'A description',
                 gender: 'male',
                 pronouns: 'she,her',
-                prefered_language: 'EN',
+                preferred_language: 'EN',
                 languages: ['EN'],
                 nationalities: ['US'],
                 photo_url: 'https://unavatar.io/elon-musk',
                 jobs: [
                   {
                     title: 'CEO',
-                    compensation_rate: 'year',
+                    compensation_rate: '72000',
                     hired_at: '2020-08-12',
                     is_primary: true,
                     payment_unit: 'year',
@@ -1721,7 +1723,7 @@ components:
           items:
             properties:
               compensation_rate:
-                example: year
+                example: "72000"
                 title: The compensation rate of the job.
                 type: string
               compensations:
@@ -1792,6 +1794,11 @@ components:
           $ref: "#/components/schemas/LastName"
         manager:
           properties:
+            email:
+              example: elon@musk.com
+              format: email
+              nullable: true
+              type: string
             first_name:
               $ref: "#/components/schemas/FirstName"
             id:
@@ -1831,7 +1838,7 @@ components:
           nullable: true
           title: Picture URL
           type: string
-        prefered_language:
+        preferred_language:
           $ref: "#/components/schemas/Language"
         preferred_name:
           example: Elon Musk

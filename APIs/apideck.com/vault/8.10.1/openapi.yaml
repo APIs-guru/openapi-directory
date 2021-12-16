@@ -1945,8 +1945,19 @@ components:
               mask: false
               placeholder: ""
               required: true
+              sensitive: false
               type: text
               value: https://eu28.salesforce.com
+            - custom_field: false
+              disabled: false
+              id: api_key
+              label: API Key
+              mask: false
+              placeholder: ""
+              required: true
+              sensitive: true
+              type: text
+              value: "123455677"
           items:
             $ref: "#/components/schemas/FormField"
           readOnly: true
@@ -1956,7 +1967,7 @@ components:
           readOnly: true
           type: string
         id:
-          example: lead+close
+          example: crm+salesforce
           readOnly: true
           type: string
         logo:
@@ -2440,6 +2451,10 @@ components:
           type: string
         required:
           example: true
+          type: boolean
+        sensitive:
+          example: false
+          nullable: true
           type: boolean
         type:
           enum:

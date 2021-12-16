@@ -407,7 +407,9 @@ paths:
             })
 
             try {
-              const { data } = await apideck.fileStorage.filesUpload({})
+              const { data } = await apideck.fileStorage.filesUpload({
+                filesUpload: 'string'
+              })
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -1366,6 +1368,7 @@ paths:
         content:
           "*/*":
             schema:
+              example: <binary string>
               format: binary
               type: string
         required: true
@@ -1402,11 +1405,14 @@ paths:
               consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
+            const params = {
+              id: 'id_example',
+              partNumber: 0,
+              body: '<binary string>'
+            }
+
             try {
-              const { data } = await apideck.fileStorage.uploadSessionsUpload({
-                id: 'id_example',
-                partNumber: undefined
-              })
+              const { data } = await apideck.fileStorage.uploadSessionsUpload(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -1424,8 +1430,10 @@ paths:
       requestBody:
         content:
           application/json:
-            schema: {}
-        required: true
+            schema:
+              additionalProperties: false
+              properties: {}
+              type: object
       responses:
         "201":
           $ref: "#/components/responses/GetFileResponse"
@@ -1459,13 +1467,11 @@ paths:
               consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
-            const params = {
-              id: 'id_example',
-              uploadSessionsFinish: null
-            }
-
             try {
-              const { data } = await apideck.fileStorage.uploadSessionsFinish(params)
+              const { data } = await apideck.fileStorage.uploadSessionsFinish({
+                id: 'id_example',
+                uploadSessionsFinish: {}
+              })
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -1540,6 +1546,7 @@ components:
       name: part_number
       required: true
       schema:
+        example: 0
         maximum: 10000
         minimum: 0
         type: number

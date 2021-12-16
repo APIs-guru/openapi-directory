@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Service Consumer Management API
   version: v1beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://serviceconsumermanagement.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: serviceconsumermanagement
 externalDocs:
@@ -640,10 +638,10 @@ components:
           type: string
       type: object
     Control:
-      description: Selects and configures the service controller used by the service. The service controller handles features like abuse, quota, billing, logging, monitoring, etc.
+      description: "Selects and configures the service controller used by the service. The service controller handles two things: - **What is allowed:** for each API request, Chemist checks the project status, activation status, abuse status, billing status, service status, location restrictions, VPC Service Controls, SuperQuota, and other policies. - **What has happened:** for each API response, Chemist reports the telemetry data to analytics, auditing, billing, eventing, logging, monitoring, sawmill, and tracing. Chemist also accepts telemetry data not associated with API traffic, such as billing metrics. Example: control: environment: servicecontrol.googleapis.com"
       properties:
         environment:
-          description: The service control environment to use. If empty, no control plane feature (like quota and billing) will be enabled.
+          description: The service controller environment to use. If empty, no control plane feature (like quota and billing) will be enabled. The recommended value for most services is servicecontrol.googleapis.com
           type: string
       type: object
     CustomError:
@@ -1532,6 +1530,11 @@ components:
           items:
             $ref: "#/components/schemas/V1Beta1QuotaBucket"
           type: array
+        supportedLocations:
+          description: List of all supported locations. This field is present only if the limit has a {region} or {zone} dimension.
+          items:
+            type: string
+          type: array
         unit:
           description: "The limit unit. An example unit would be: `1/{project}/{region}` Note that `{project}` and `{region}` are not placeholders in this example; the literal characters `{` and `}` occur in the string."
           type: string
@@ -1852,5 +1855,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

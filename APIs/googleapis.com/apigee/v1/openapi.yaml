@@ -4275,7 +4275,7 @@ components:
           description: Name of the API product.
           type: string
         status:
-          description: Status of the API product.
+          description: Status of the API product. Valid values are `approved` or `revoked`.
           type: string
       type: object
     GoogleCloudApigeeV1ApiProxy:
@@ -6566,8 +6566,11 @@ components:
         organization:
           description: Name of the Apigee organization.
           type: string
+        projectId:
+          description: GCP project associated with the Apigee organization
+          type: string
         projectIds:
-          description: List of GCP projects associated with the Apigee organization.
+          description: "DEPRECATED: Use `project_id`. An Apigee Organization is mapped to a single project."
           items:
             type: string
           type: array
