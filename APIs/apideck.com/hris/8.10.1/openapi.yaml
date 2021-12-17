@@ -694,6 +694,10 @@ paths:
                 employment_end_date: '2028-10-26',
                 employee_number: '123456-AB',
                 employment_status: 'active',
+                employment_role: {
+                  type: 'contractor',
+                  sub_type: 'full_time'
+                },
                 manager: {
                   name: 'Elon Musk',
                   first_name: 'Elon',
@@ -994,6 +998,10 @@ paths:
                 employment_end_date: '2028-10-26',
                 employee_number: '123456-AB',
                 employment_status: 'active',
+                employment_role: {
+                  type: 'contractor',
+                  sub_type: 'full_time'
+                },
                 manager: {
                   name: 'Elon Musk',
                   first_name: 'Elon',
@@ -1694,6 +1702,24 @@ components:
           nullable: true
           title: Employee end date
           type: string
+        employment_role:
+          properties:
+            sub_type:
+              enum:
+                - full_time
+                - part_time
+                - hourly
+              nullable: true
+              type: string
+            type:
+              enum:
+                - contractor
+                - employee
+                - freelance
+                - temp
+              nullable: true
+              type: string
+          type: object
         employment_start_date:
           description: A Start Date is the date that the employee started working at the company
           example: 2021-10-26
@@ -1704,6 +1730,7 @@ components:
           enum:
             - active
             - inactive
+            - terminated
             - other
           example: active
           nullable: true
