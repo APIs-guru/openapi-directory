@@ -769,6 +769,12 @@ components:
         dashboardUri:
           description: Link to the outage event in Google Workspace Status Dashboard
           type: string
+        incidentTrackingId:
+          description: Incident tracking ID.
+          type: string
+        mergeInfo:
+          $ref: "#/components/schemas/MergeInfo"
+          description: Indicates new alert details under which the outage is communicated. Only populated when Status is MERGED.
         nextUpdateTime:
           description: Timestamp by which the next update is expected to arrive.
           format: google-datetime
@@ -789,6 +795,9 @@ components:
             - NEW
             - ONGOING
             - RESOLVED
+            - FALSE_POSITIVE
+            - PARTIALLY_RESOLVED
+            - MERGED
           type: string
       type: object
     Attachment:
@@ -1100,6 +1109,16 @@ components:
         userDefinedDetector:
           $ref: "#/components/schemas/UserDefinedDetectorInfo"
           description: For matched detector defined by administrators.
+      type: object
+    MergeInfo:
+      description: New alert tracking numbers.
+      properties:
+        newAlertId:
+          description: New alert ID. Reference the [google.apps.alertcenter.Alert] with this ID for the current state.
+          type: string
+        newIncidentTrackingId:
+          description: The new tracking ID from the parent incident.
+          type: string
       type: object
     Notification:
       description: Settings for callback notifications. For more details see [Google Workspace Alert Notification](https://developers.google.com/admin-sdk/alertcenter/guides/notifications).
