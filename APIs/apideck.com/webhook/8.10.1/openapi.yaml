@@ -597,7 +597,7 @@ components:
         description:
           $ref: "#/components/schemas/Description"
         events:
-          description: The list of subscribed events for this webhook. [’*’] indicates that all events are enabled.
+          description: The list of subscribed events for this webhook. [`*`] indicates that all events are enabled.
           example:
             - vault.connection.created
             - vault.connection.updated
@@ -1031,7 +1031,7 @@ components:
         description:
           $ref: "#/components/schemas/Description"
         events:
-          description: The list of subscribed events for this webhook. [’*’] indicates that all events are enabled.
+          description: The list of subscribed events for this webhook. [`*`] indicates that all events are enabled.
           example:
             - vault.connection.created
             - vault.connection.updated
@@ -1075,7 +1075,7 @@ components:
         description:
           $ref: "#/components/schemas/Description"
         events:
-          description: The list of subscribed events for this webhook. [’*’] indicates that all events are enabled.
+          description: The list of subscribed events for this webhook. [`*`] indicates that all events are enabled.
           example:
             - vault.connection.created
             - vault.connection.updated

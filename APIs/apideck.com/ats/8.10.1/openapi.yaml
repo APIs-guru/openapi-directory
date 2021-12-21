@@ -453,7 +453,7 @@ paths:
                 followers: ['a0d636c6-43b3-4bde-8c70-85b707d992f4', 'a98lfd96-43b3-4bde-8c70-85b707d992e6'],
                 sources: ['Job site'],
                 confidential: false,
-                anonymized: 'true',
+                anonymized: true,
                 tags: ['New'],
                 archived: false,
                 owner_id: '54321'
@@ -864,7 +864,7 @@ components:
           type: string
       type: object
     Anonymized:
-      example: "true"
+      example: true
       title: Anonymized
       type: boolean
     Applicant:

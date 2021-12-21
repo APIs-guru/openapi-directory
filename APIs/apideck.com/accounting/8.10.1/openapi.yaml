@@ -5031,7 +5031,6 @@ components:
           $ref: "#/components/schemas/CurrencyRate"
         customer:
           $ref: "#/components/schemas/LinkedCustomer"
-          x-graphql-type-name: AccountingLinkedCustomer
         customer_memo:
           example: Thank you for your business and have a great day!
           nullable: true
@@ -5756,7 +5755,6 @@ components:
           $ref: "#/components/schemas/CurrencyRate"
         customer:
           $ref: "#/components/schemas/LinkedCustomer"
-          x-graphql-type-name: AccountingLinkedCustomer
         id:
           description: Unique identifier representing the entity
           example: "123456"
