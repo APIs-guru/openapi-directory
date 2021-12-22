@@ -743,7 +743,8 @@ paths:
                       phone_number: '111-111-1111',
                       fax: '122-111-1111',
                       email: 'elon@musk.com',
-                      website: 'https://elonmusk.com'
+                      website: 'https://elonmusk.com',
+                      row_version: '1-12345'
                     },
                     compensations: [
                       {
@@ -780,7 +781,8 @@ paths:
                     phone_number: '111-111-1111',
                     fax: '122-111-1111',
                     email: 'elon@musk.com',
-                    website: 'https://elonmusk.com'
+                    website: 'https://elonmusk.com',
+                    row_version: '1-12345'
                   }
                 ],
                 phone_numbers: [
@@ -814,7 +816,8 @@ paths:
                     url: 'https://www.twitter.com/apideck-io',
                     type: 'twitter'
                   }
-                ]
+                ],
+                row_version: '1-12345'
               }
             }
 
@@ -1047,7 +1050,8 @@ paths:
                       phone_number: '111-111-1111',
                       fax: '122-111-1111',
                       email: 'elon@musk.com',
-                      website: 'https://elonmusk.com'
+                      website: 'https://elonmusk.com',
+                      row_version: '1-12345'
                     },
                     compensations: [
                       {
@@ -1084,7 +1088,8 @@ paths:
                     phone_number: '111-111-1111',
                     fax: '122-111-1111',
                     email: 'elon@musk.com',
-                    website: 'https://elonmusk.com'
+                    website: 'https://elonmusk.com',
+                    row_version: '1-12345'
                   }
                 ],
                 phone_numbers: [
@@ -1118,7 +1123,8 @@ paths:
                     url: 'https://www.twitter.com/apideck-io',
                     type: 'twitter'
                   }
-                ]
+                ],
+                row_version: '1-12345'
               }
             }
 
@@ -1358,6 +1364,8 @@ components:
           example: "94104"
           nullable: true
           type: string
+        row_version:
+          $ref: "#/components/schemas/RowVersion"
         salutation:
           example: Mr
           nullable: true
@@ -1877,6 +1885,8 @@ components:
           nullable: true
           title: Pronouns
           type: string
+        row_version:
+          $ref: "#/components/schemas/RowVersion"
         salutation:
           example: Mr
           nullable: true
@@ -2329,6 +2339,11 @@ components:
       example: https://unavatar.io/elon-musk
       nullable: true
       title: Photo URL
+      type: string
+    RowVersion:
+      example: 1-12345
+      nullable: true
+      title: Row version
       type: string
     Title:
       example: CEO

@@ -775,6 +775,8 @@ components:
           example: "94104"
           nullable: true
           type: string
+        row_version:
+          $ref: "#/components/schemas/RowVersion"
         salutation:
           example: Mr
           nullable: true
@@ -1248,6 +1250,11 @@ components:
       required:
         - number
       type: object
+    RowVersion:
+      example: 1-12345
+      nullable: true
+      title: Row version
+      type: string
     SocialLink:
       properties:
         id:

@@ -419,7 +419,8 @@ paths:
                     phone_number: '111-111-1111',
                     fax: '122-111-1111',
                     email: 'elon@musk.com',
-                    website: 'https://elonmusk.com'
+                    website: 'https://elonmusk.com',
+                    row_version: '1-12345'
                   }
                 ],
                 notes: 'Some notes about this customer',
@@ -641,7 +642,8 @@ paths:
                     phone_number: '111-111-1111',
                     fax: '122-111-1111',
                     email: 'elon@musk.com',
-                    website: 'https://elonmusk.com'
+                    website: 'https://elonmusk.com',
+                    row_version: '1-12345'
                   }
                 ],
                 notes: 'Some notes about this customer',
@@ -884,6 +886,8 @@ components:
           example: "94104"
           nullable: true
           type: string
+        row_version:
+          $ref: "#/components/schemas/RowVersion"
         salutation:
           example: Mr
           nullable: true
@@ -2687,6 +2691,11 @@ components:
       required:
         - name
       x-pii: []
+    RowVersion:
+      example: 1-12345
+      nullable: true
+      title: Row version
+      type: string
     SocialLink:
       properties:
         id:
