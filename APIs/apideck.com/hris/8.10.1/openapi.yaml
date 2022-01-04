@@ -97,17 +97,9 @@ info:
 
     ### Error Types
 
-    #### RequestBodyValidationError
+    #### RequestValidationError
 
-    Request body is not valid for the current endpoint. Check the spelling and types of your attributes, and ensure you are not passing data that is outside of the specification.
-
-    #### RequestParametersValidationError
-
-    Request parameters are not valid for the current endpoint. Check the spelling and types of your parameters, and ensure you are not passing parameters that are outside of the specification.
-
-    #### RequestHeadersValidationError
-
-    Request headers are not valid for the current endpoint. Check the spelling and types of your headers, and ensure you are not passing headers that are outside of the specification.
+    Request is not valid for the current endpoint. The response body will include details on the validation error. Check the spelling and types of your attributes, and ensure you are not passing data that is outside of the specification.
 
     #### UnsupportedFiltersError
 
@@ -265,7 +257,7 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: HRIS API
+  title: hris
   version: 8.10.1
   x-apideck-api: hris
   x-apideck-sdk-support: true
@@ -1423,7 +1415,7 @@ components:
           type: string
         ref:
           description: Link to documentation of error type
-          example: https://developers.apideck.com/errors#requestbodyvalidationerror
+          example: https://developers.apideck.com/errors#requestvalidationerror
           type: string
         status_code:
           description: HTTP status code
@@ -1431,7 +1423,7 @@ components:
           type: number
         type_name:
           description: The type of error returned
-          example: RequestHeadersValidationError
+          example: RequestValidationError
           type: string
     CompanyId:
       example: "23456"

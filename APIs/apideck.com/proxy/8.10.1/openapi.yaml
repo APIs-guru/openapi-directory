@@ -325,29 +325,31 @@ paths:
         content:
           "*/*":
             schema:
-              example:
-                addresses:
-                  - address_1: 747 Howard St
-                    address_2: Room 3
-                    city: San Francisco
-                    country: US
-                    label: business
-                    state: CA
-                    zipcode: "94103"
-                contacts:
-                  - emails:
-                      - email: gob@example.com
-                        type: office
-                    name: Gob
-                    phones:
-                      - phone: "8004445555"
-                        type: office
-                    title: Sr. Vice President
-                description: Best. Show. Ever.
-                name: Bluth Company
-                url: http://thebluthcompany.tumblr.com/
-              properties: {}
-              type: object
+              anyOf:
+                - example:
+                    addresses:
+                      - address_1: 747 Howard St
+                        address_2: Room 3
+                        city: San Francisco
+                        country: US
+                        label: business
+                        state: CA
+                        zipcode: "94103"
+                    contacts:
+                      - emails:
+                          - email: gob@example.com
+                            type: office
+                        name: Gob
+                        phones:
+                          - phone: "8004445555"
+                            type: office
+                        title: Sr. Vice President
+                    description: Best. Show. Ever.
+                    name: Bluth Company
+                    url: http://thebluthcompany.tumblr.com/
+                  properties: {}
+                  type: object
+                - type: string
         description: Depending on the verb/method of the request this will contain the request body you want to POST/PATCH/PUT.
         required: false
       responses:
@@ -379,29 +381,31 @@ paths:
         content:
           "*/*":
             schema:
-              example:
-                addresses:
-                  - address_1: 747 Howard St
-                    address_2: Room 3
-                    city: San Francisco
-                    country: US
-                    label: business
-                    state: CA
-                    zipcode: "94103"
-                contacts:
-                  - emails:
-                      - email: gob@example.com
-                        type: office
-                    name: Gob
-                    phones:
-                      - phone: "8004445555"
-                        type: office
-                    title: Sr. Vice President
-                description: Best. Show. Ever.
-                name: Bluth Company
-                url: http://thebluthcompany.tumblr.com/
-              properties: {}
-              type: object
+              anyOf:
+                - example:
+                    addresses:
+                      - address_1: 747 Howard St
+                        address_2: Room 3
+                        city: San Francisco
+                        country: US
+                        label: business
+                        state: CA
+                        zipcode: "94103"
+                    contacts:
+                      - emails:
+                          - email: gob@example.com
+                            type: office
+                        name: Gob
+                        phones:
+                          - phone: "8004445555"
+                            type: office
+                        title: Sr. Vice President
+                    description: Best. Show. Ever.
+                    name: Bluth Company
+                    url: http://thebluthcompany.tumblr.com/
+                  properties: {}
+                  type: object
+                - type: string
         description: Depending on the verb/method of the request this will contain the request body you want to POST/PATCH/PUT.
         required: false
       responses:
@@ -433,29 +437,31 @@ paths:
         content:
           "*/*":
             schema:
-              example:
-                addresses:
-                  - address_1: 747 Howard St
-                    address_2: Room 3
-                    city: San Francisco
-                    country: US
-                    label: business
-                    state: CA
-                    zipcode: "94103"
-                contacts:
-                  - emails:
-                      - email: gob@example.com
-                        type: office
-                    name: Gob
-                    phones:
-                      - phone: "8004445555"
-                        type: office
-                    title: Sr. Vice President
-                description: Best. Show. Ever.
-                name: Rich Company
-                url: http://therichcompany.tumblr.com/
-              properties: {}
-              type: object
+              anyOf:
+                - example:
+                    addresses:
+                      - address_1: 747 Howard St
+                        address_2: Room 3
+                        city: San Francisco
+                        country: US
+                        label: business
+                        state: CA
+                        zipcode: "94103"
+                    contacts:
+                      - emails:
+                          - email: gob@example.com
+                            type: office
+                        name: Gob
+                        phones:
+                          - phone: "8004445555"
+                            type: office
+                        title: Sr. Vice President
+                    description: Best. Show. Ever.
+                    name: Rich Company
+                    url: http://therichcompany.tumblr.com/
+                  properties: {}
+                  type: object
+                - type: string
         description: Depending on the verb/method of the request this will contain the request body you want to POST/PATCH/PUT.
         required: false
       responses:

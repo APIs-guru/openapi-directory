@@ -575,7 +575,7 @@ components:
           type: string
         ref:
           description: Link to documentation of error type
-          example: https://developers.apideck.com/errors#requestbodyvalidationerror
+          example: https://developers.apideck.com/errors#requestvalidationerror
           type: string
         status_code:
           description: HTTP status code
@@ -583,7 +583,7 @@ components:
           type: number
         type_name:
           description: The type of error returned
-          example: RequestHeadersValidationError
+          example: RequestValidationError
           type: string
     ConsumerId:
       description: Consumer identifier
