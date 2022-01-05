@@ -282,7 +282,7 @@ tags:
   - description: Files
     name: Files
     x-apideck-model:
-      $ref: "#/components/schemas/File"
+      $ref: "#/components/schemas/UnifiedFile"
   - description: ""
     name: Folders
     x-apideck-model:
@@ -406,6 +406,8 @@ paths:
             } catch (error) {
               console.error(error)
             }
+      x-graphql-exclude: true
+      x-sdk-exclude: true
   /file-storage/files/search:
     post:
       description: Search Files
@@ -1409,6 +1411,8 @@ paths:
             } catch (error) {
               console.error(error)
             }
+      x-graphql-exclude: true
+      x-sdk-exclude: true
   "/file-storage/upload-sessions/{id}/finish":
     post:
       description: Finish Upload Session
@@ -2090,57 +2094,6 @@ components:
       format: date-time
       readOnly: true
       type: string
-    File:
-      additionalProperties: false
-      properties:
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        created_by:
-          $ref: "#/components/schemas/CreatedBy"
-        description:
-          description: Optional description of the file
-          example: A sample image
-          type: string
-        downloadable:
-          description: Whether the current user can download this file
-          type: boolean
-        id:
-          $ref: "#/components/schemas/Id"
-        mime_type:
-          description: The MIME type of the file.
-          example: image/jpeg
-          type: string
-        name:
-          description: The name of the file
-          example: sample.jpg
-          type: string
-        owner:
-          $ref: "#/components/schemas/Owner"
-        parent_folders:
-          description: The parent folders of the file, starting from the root
-          items:
-            $ref: "#/components/schemas/LinkedFolder"
-          type: array
-        parent_folders_complete:
-          description: Whether the list of parent folder is complete. Some connectors only return the direct parent of a file
-          type: boolean
-        path:
-          description: The full path of the file or folder (includes the file name)
-          example: /Documents/sample.jpg
-          type: string
-        size:
-          $ref: "#/components/schemas/FileSize"
-        type:
-          $ref: "#/components/schemas/FileType"
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
-        updated_by:
-          $ref: "#/components/schemas/UpdatedBy"
-      required:
-        - id
-        - name
-        - type
-      type: object
     FileSize:
       description: The size of the file in bytes
       example: 1810673
@@ -2249,7 +2202,7 @@ components:
     GetFileResponse:
       properties:
         data:
-          $ref: "#/components/schemas/File"
+          $ref: "#/components/schemas/UnifiedFile"
         operation:
           description: Operation performed
           example: one
@@ -2283,7 +2236,7 @@ components:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/File"
+            $ref: "#/components/schemas/UnifiedFile"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -2787,6 +2740,57 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
+    UnifiedFile:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        description:
+          description: Optional description of the file
+          example: A sample image
+          type: string
+        downloadable:
+          description: Whether the current user can download this file
+          type: boolean
+        id:
+          $ref: "#/components/schemas/Id"
+        mime_type:
+          description: The MIME type of the file.
+          example: image/jpeg
+          type: string
+        name:
+          description: The name of the file
+          example: sample.jpg
+          type: string
+        owner:
+          $ref: "#/components/schemas/Owner"
+        parent_folders:
+          description: The parent folders of the file, starting from the root
+          items:
+            $ref: "#/components/schemas/LinkedFolder"
+          type: array
+        parent_folders_complete:
+          description: Whether the list of parent folder is complete. Some connectors only return the direct parent of a file
+          type: boolean
+        path:
+          description: The full path of the file or folder (includes the file name)
+          example: /Documents/sample.jpg
+          type: string
+        size:
+          $ref: "#/components/schemas/FileSize"
+        type:
+          $ref: "#/components/schemas/FileType"
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
+      required:
+        - id
+        - name
+        - type
+      type: object
     UnifiedId:
       properties:
         id:

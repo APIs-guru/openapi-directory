@@ -6998,6 +6998,7 @@ paths:
                 - PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY
                 - PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY
                 - PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4
+                - PLACEMENT_TAG_TRACKING_THIRD_PARTY_MEASUREMENT
               type: string
             type: array
           style: form
@@ -11304,7 +11305,7 @@ components:
           description: Whether this particular request may come from a user under the age of 13, under COPPA compliance.
           type: boolean
         customVariables:
-          description: Custom floodlight variables.
+          description: Custom floodlight variables. This field may only be used when calling batchinsert; it is not supported by batchupdate.
           items:
             $ref: "#/components/schemas/CustomFloodlightVariable"
           type: array
@@ -12649,7 +12650,7 @@ components:
           type: array
       type: object
     CustomFloodlightVariable:
-      description: A custom floodlight variable.
+      description: A custom floodlight variable. This field may only be used when calling batchinsert; it is not supported by batchupdate.
       properties:
         kind:
           description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#customFloodlightVariable".'
@@ -14801,6 +14802,7 @@ components:
               - PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY
               - PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY
               - PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4
+              - PLACEMENT_TAG_TRACKING_THIRD_PARTY_MEASUREMENT
             type: string
           type: array
         tagSetting:
@@ -16267,6 +16269,7 @@ components:
             - PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY
             - PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY
             - PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4
+            - PLACEMENT_TAG_TRACKING_THIRD_PARTY_MEASUREMENT
           type: string
         impressionTag:
           description: Tag string for serving an ad.

@@ -110,10 +110,10 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/{name}":
     delete:
-      description: Deletes a phrase matcher.
-      operationId: contactcenterinsights.projects.locations.phraseMatchers.delete
+      description: Deletes a view.
+      operationId: contactcenterinsights.projects.locations.views.delete
       parameters:
-        - description: Required. The name of the phrase matcher to delete.
+        - description: Required. The name of the view to delete.
           in: path
           name: name
           required: true
@@ -139,10 +139,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a phrase matcher.
-      operationId: contactcenterinsights.projects.locations.phraseMatchers.get
+      description: Gets a view.
+      operationId: contactcenterinsights.projects.locations.views.get
       parameters:
-        - description: Required. The name of the phrase matcher to get.
+        - description: Required. The name of the view to get.
           in: path
           name: name
           required: true
@@ -162,7 +162,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1PhraseMatcher"
+                $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1View"
           description: Successful response
       security:
         - Oauth2:
@@ -184,10 +184,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates a phrase matcher.
-      operationId: contactcenterinsights.projects.locations.phraseMatchers.patch
+      description: Updates a view.
+      operationId: contactcenterinsights.projects.locations.views.patch
       parameters:
-        - description: "The resource name of the phrase matcher. Format: projects/{project}/locations/{location}/phraseMatchers/{phrase_matcher}"
+        - description: "Immutable. The resource name of the view. Format: projects/{project}/locations/{location}/views/{view}"
           in: path
           name: name
           required: true
@@ -202,13 +202,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1PhraseMatcher"
+              $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1View"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1PhraseMatcher"
+                $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1View"
           description: Successful response
       security:
         - Oauth2:
@@ -784,6 +784,82 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1PhraseMatcher"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/views":
+    get:
+      description: Lists views.
+      operationId: contactcenterinsights.projects.locations.views.list
+      parameters:
+        - description: Required. The parent resource of the views.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of views to return in the response. If this value is zero, the service will select a default size. A call may return fewer objects than requested. A non-empty `next_page_token` in the response indicates that more data is available.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The value returned by the last `ListViewsResponse`; indicates that this is a continuation of a prior `ListViews` call and the system should return the next page of data.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1ListViewsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a view.
+      operationId: contactcenterinsights.projects.locations.views.create
+      parameters:
+        - description: "Required. The parent resource of the view. Required. The location to create a view for. Format: `projects//locations/` or `projects//locations/`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1View"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1View"
           description: Successful response
       security:
         - Oauth2:
@@ -1745,7 +1821,7 @@ components:
       description: Issue Modeling result on a conversation.
       properties:
         issueModel:
-          description: Issue model that generates the result.
+          description: "Issue model that generates the result. Format: projects/{project}/locations/{location}/issueModels/{issue_model}"
           type: string
         issues:
           description: All the matched issues.
@@ -1805,6 +1881,18 @@ components:
           description: The phrase matchers that match the request.
           items:
             $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1PhraseMatcher"
+          type: array
+      type: object
+    GoogleCloudContactcenterinsightsV1ListViewsResponse:
+      description: The response of listing views.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        views:
+          description: The views that match the request.
+          items:
+            $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1View"
           type: array
       type: object
     GoogleCloudContactcenterinsightsV1PhraseMatchData:
@@ -2065,6 +2153,29 @@ components:
     GoogleCloudContactcenterinsightsV1UndeployIssueModelResponse:
       description: The response to undeploy an issue model.
       properties: {}
+      type: object
+    GoogleCloudContactcenterinsightsV1View:
+      description: The View resource.
+      properties:
+        createTime:
+          description: Output only. The time at which this view was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: The human-readable display name of the view.
+          type: string
+        name:
+          description: "Immutable. The resource name of the view. Format: projects/{project}/locations/{location}/views/{view}"
+          type: string
+        updateTime:
+          description: Output only. The most recent time at which the view was updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+        value:
+          description: String with specific view properties.
+          type: string
       type: object
     GoogleCloudContactcenterinsightsV1alpha1CreateAnalysisOperationMetadata:
       description: Metadata for a create analysis operation.
