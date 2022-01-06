@@ -2956,6 +2956,9 @@ components:
         gcpFilestoreCsiDriverConfig:
           $ref: "#/components/schemas/GcpFilestoreCsiDriverConfig"
           description: Configuration for the GCP Filestore CSI driver.
+        gkeBackupAgentConfig:
+          $ref: "#/components/schemas/GkeBackupAgentConfig"
+          description: Configuration for the Backup for GKE agent addon.
         horizontalPodAutoscaling:
           $ref: "#/components/schemas/HorizontalPodAutoscaling"
           description: Configuration for the horizontal pod autoscaling feature, which increases or decreases the number of replica pods a replication controller has based on the resource usage of the existing pods.
@@ -3757,6 +3760,13 @@ components:
             type: string
           type: array
       type: object
+    GkeBackupAgentConfig:
+      description: Configuration for the Backup for GKE Agent.
+      properties:
+        enabled:
+          description: Whether the Backup for GKE agent is enabled for this cluster.
+          type: boolean
+      type: object
     HorizontalPodAutoscaling:
       description: Configuration options for the horizontal pod autoscaling feature, which increases or decreases the number of replica pods a replication controller has based on the resource usage of the existing pods.
       properties:
@@ -4423,6 +4433,9 @@ components:
         networkConfig:
           $ref: "#/components/schemas/NodeNetworkConfig"
           description: Networking configuration for this NodePool. If specified, it overrides the cluster-level defaults.
+        placementPolicy:
+          $ref: "#/components/schemas/PlacementPolicy"
+          description: Specifies the node placement policy.
         podIpv4CidrSize:
           description: "[Output only] The pod CIDR block size per node in this node pool."
           format: int32
@@ -4613,6 +4626,16 @@ components:
             - RUNNING
             - DONE
             - ABORTING
+          type: string
+      type: object
+    PlacementPolicy:
+      description: PlacementPolicy defines the placement policy used by the node pool.
+      properties:
+        type:
+          description: The type of placement.
+          enum:
+            - TYPE_UNSPECIFIED
+            - COMPACT
           type: string
       type: object
     PodSecurityPolicyConfig:

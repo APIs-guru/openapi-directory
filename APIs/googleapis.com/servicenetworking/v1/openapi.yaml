@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Service Networking API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://servicenetworking.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: servicenetworking
 externalDocs:
@@ -2624,6 +2622,9 @@ components:
       type: object
     ValidateConsumerConfigRequest:
       properties:
+        checkServiceNetworkingUsePermission:
+          description: Optional. The IAM permission check determines whether the consumer project has 'servicenetworking.services.use' permission or not.
+          type: boolean
         consumerNetwork:
           description: Required. The network that the consumer is using to connect with services. Must be in the form of projects/{project}/global/networks/{network} {project} is a project number, as in '12345' {network} is network name.
           type: string
@@ -2664,6 +2665,7 @@ components:
             - RANGES_NOT_RESERVED
             - RANGES_DELETED_LATER
             - COMPUTE_API_NOT_ENABLED
+            - USE_PERMISSION_NOT_FOUND
           type: string
       type: object
   securitySchemes:
@@ -2686,5 +2688,3 @@ components:
             https://www.googleapis.com/auth/service.management: Manage your Google API service configuration
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

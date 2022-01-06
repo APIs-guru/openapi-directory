@@ -64,6 +64,10 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - oauth2_legacy:
+            - communication_preferences.read_write
+        - oauth2_legacy:
+            - communication_preferences.read
       summary: Get subscription definitions
       tags:
         - Definition
@@ -108,6 +112,10 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - oauth2_legacy:
+            - communication_preferences.read_write
+        - oauth2_legacy:
+            - communication_preferences.read
       summary: Get subscription statuses for a contact
       tags:
         - Status
@@ -140,7 +148,11 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - oauth2_legacy:
+            - communication_preferences.write
         - hapikey: []
+        - oauth2_legacy:
+            - communication_preferences.read_write
       summary: Subscribe a contact
       tags:
         - Status
@@ -173,7 +185,11 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - oauth2_legacy:
+            - communication_preferences.write
         - hapikey: []
+        - oauth2_legacy:
+            - communication_preferences.read_write
       summary: Unsubscribe a contact
       tags:
         - Status
@@ -420,6 +436,16 @@ components:
       in: query
       name: hapikey
       type: apiKey
+    oauth2_legacy:
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.hubspot.com/oauth/authorize
+          scopes:
+            communication_preferences.read: Read contact subscription preferences
+            communication_preferences.read_write: Update contact subscription preferences
+            communication_preferences.write: Update contact subscription preferences
+          tokenUrl: https://api.hubapi.com/oauth/v1/token
+      type: oauth2
 x-hubspot-available-client-libraries:
   - Python
   - Ruby
