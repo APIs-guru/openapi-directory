@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Google Cloud Data Catalog API
   version: v1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://datacatalog.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: datacatalog
 externalDocs:
@@ -209,6 +211,90 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleCloudDatacatalogV1PolicyTag"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{name}:modifyEntryContacts":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Modifies contacts, part of the business context of an Entry. To call this method, you must have the `datacatalog.entries.updateContacts` IAM permission on the corresponding project.
+      operationId: datacatalog.projects.locations.entryGroups.entries.modifyEntryContacts
+      parameters:
+        - description: Required. The full resource name of the entry.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDatacatalogV1ModifyEntryContactsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDatacatalogV1Contacts"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{name}:modifyEntryOverview":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Modifies entry overview, part of the business context of an Entry. To call this method, you must have the `datacatalog.entries.updateOverview` IAM permission on the corresponding project.
+      operationId: datacatalog.projects.locations.entryGroups.entries.modifyEntryOverview
+      parameters:
+        - description: Required. The full resource name of the entry.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDatacatalogV1ModifyEntryOverviewRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDatacatalogV1EntryOverview"
           description: Successful response
       security:
         - Oauth2:
@@ -724,7 +810,7 @@ paths:
         - projects
   "/v1/{parent}/tags":
     get:
-      description: Lists tags assigned to an Entry.
+      description: Lists tags assigned to an Entry. The columns in the response are lowercased.
       operationId: datacatalog.projects.locations.entryGroups.tags.list
       parameters:
         - description: Required. The name of the Data Catalog resource to list the tags of. The resource can be an Entry or an EntryGroup (without `/entries/{entries}` at the end).
@@ -1284,6 +1370,16 @@ components:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1ViewSpec"
           description: Table view specification. Populated only if the `table_source_type` is `BIGQUERY_VIEW`.
       type: object
+    GoogleCloudDatacatalogV1BusinessContext:
+      description: Business Context of the entry.
+      properties:
+        contacts:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1Contacts"
+          description: Contact people for the entry.
+        entryOverview:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1EntryOverview"
+          description: Entry overview fields for rich text descriptions of entries.
+      type: object
     GoogleCloudDatacatalogV1CloudSqlBigQueryConnectionSpec:
       description: Specification for the BigQuery connection to a Cloud SQL instance.
       properties:
@@ -1320,6 +1416,25 @@ components:
           type: array
         type:
           description: Required. Type of the column. Must be a UTF-8 string with the maximum size of 128 bytes.
+          type: string
+      type: object
+    GoogleCloudDatacatalogV1Contacts:
+      description: Contact people for the entry.
+      properties:
+        people:
+          description: The list of contact people for the entry.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDatacatalogV1ContactsPerson"
+          type: array
+      type: object
+    GoogleCloudDatacatalogV1ContactsPerson:
+      description: A contact person for the entry.
+      properties:
+        designation:
+          description: Designation of the person, for example, Data Steward.
+          type: string
+        email:
+          description: Email of the person in the format of `john.doe@xyz`, ``, or `John Doe`.
           type: string
       type: object
     GoogleCloudDatacatalogV1CrossRegionalSource:
@@ -1370,6 +1485,9 @@ components:
         bigqueryTableSpec:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1BigQueryTableSpec"
           description: Specification that applies to a BigQuery table. Valid only for entries with the `TABLE` type.
+        businessContext:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1BusinessContext"
+          description: Business Context of the entry.
         dataSource:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1DataSource"
           description: Output only. Physical location of the entry.
@@ -1466,6 +1584,13 @@ components:
           type: string
         name:
           description: "The resource name of the entry group in URL format. Note: The entry group itself and its child resources might not be stored in the location specified in its name."
+          type: string
+      type: object
+    GoogleCloudDatacatalogV1EntryOverview:
+      description: Entry overview fields for rich text descriptions of entries.
+      properties:
+        overview:
+          description: Entry overview with support for rich text. The overview must only contain Unicode characters, and should be formatted using HTML. The maximum length is 10 MiB as this value holds HTML descriptions including encoded images. The maximum length of the text without images is 100 KiB.
           type: string
       type: object
     GoogleCloudDatacatalogV1ExportTaxonomiesResponse:
@@ -1625,6 +1750,20 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDatacatalogV1Taxonomy"
           type: array
+      type: object
+    GoogleCloudDatacatalogV1ModifyEntryContactsRequest:
+      description: Request message for ModifyEntryContacts.
+      properties:
+        contacts:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1Contacts"
+          description: Required. The new value for the Contacts.
+      type: object
+    GoogleCloudDatacatalogV1ModifyEntryOverviewRequest:
+      description: Request message for ModifyEntryOverview.
+      properties:
+        entryOverview:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1EntryOverview"
+          description: Required. The new value for the Entry Overview.
       type: object
     GoogleCloudDatacatalogV1PersonalDetails:
       description: Entry metadata relevant only to the user and private to them.
@@ -2165,3 +2304,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

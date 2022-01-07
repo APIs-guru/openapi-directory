@@ -3311,6 +3311,9 @@ components:
         currentPage:
           description: "Always present for WebhookRequest. Ignored for WebhookResponse. The unique identifier of the current page. Format: `projects//locations//agents//flows//pages/`."
           type: string
+        displayName:
+          description: Always present for WebhookRequest. Ignored for WebhookResponse. The display name of the current page.
+          type: string
         formInfo:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3PageInfoFormInfo"
           description: Optional for both WebhookRequest and WebhookResponse. Information about the form.
@@ -4428,6 +4431,9 @@ components:
       properties:
         currentPage:
           description: "Always present for WebhookRequest. Ignored for WebhookResponse. The unique identifier of the current page. Format: `projects//locations//agents//flows//pages/`."
+          type: string
+        displayName:
+          description: Always present for WebhookRequest. Ignored for WebhookResponse. The display name of the current page.
           type: string
         formInfo:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1PageInfoFormInfo"
@@ -5766,7 +5772,7 @@ components:
           description: Required. The message content.
           type: string
         createTime:
-          description: Output only. The time when the message was created.
+          description: Output only. The time when the message was created in Contact Center AI.
           format: google-datetime
           readOnly: true
           type: string
@@ -5778,7 +5784,7 @@ components:
           description: Output only. The annotation for the message.
           readOnly: true
         name:
-          description: "The unique identifier of the message. Format: `projects//locations//conversations//messages/`."
+          description: "Optional. The unique identifier of the message. Format: `projects//locations//conversations//messages/`."
           type: string
         participant:
           description: Output only. The participant that sends this message.
@@ -5793,6 +5799,14 @@ components:
             - END_USER
           readOnly: true
           type: string
+        sendTime:
+          description: Optional. The time when the message was sent.
+          format: google-datetime
+          type: string
+        sentimentAnalysis:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2SentimentAnalysisResult"
+          description: Output only. The sentiment analysis result for the message.
+          readOnly: true
       type: object
     GoogleCloudDialogflowV2MessageAnnotation:
       description: Represents the result of annotation for the message.
@@ -5923,6 +5937,20 @@ components:
           description: "Required. The unique identifier of this session entity type. Format: `projects//agent/sessions//entityTypes/`, or `projects//agent/environments//users//sessions//entityTypes/`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. `` must be the display name of an existing entity type in the same agent that will be overridden or supplemented."
           type: string
       type: object
+    GoogleCloudDialogflowV2SmartReplyAnswer:
+      description: Represents a smart reply answer.
+      properties:
+        answerRecord:
+          description: The name of answer record, in the format of "projects//locations//answerRecords/"
+          type: string
+        confidence:
+          description: Smart reply confidence. The system's confidence score that this reply is a good match for this conversation, as a value from 0.0 (completely uncertain) to 1.0 (completely certain).
+          format: float
+          type: number
+        reply:
+          description: The content of the reply.
+          type: string
+      type: object
     GoogleCloudDialogflowV2SuggestArticlesResponse:
       description: The response message for Participants.SuggestArticles.
       properties:
@@ -5955,6 +5983,23 @@ components:
           description: "The name of the latest conversation message used to compile suggestion for. Format: `projects//locations//conversations//messages/`."
           type: string
       type: object
+    GoogleCloudDialogflowV2SuggestSmartRepliesResponse:
+      description: The response message for Participants.SuggestSmartReplies.
+      properties:
+        contextSize:
+          description: Number of messages prior to and including latest_message to compile the suggestion. It may be smaller than the SuggestSmartRepliesRequest.context_size field in the request if there aren't that many messages in the conversation.
+          format: int32
+          type: integer
+        latestMessage:
+          description: "The name of the latest conversation message used to compile suggestion for. Format: `projects//locations//conversations//messages/`."
+          type: string
+        smartReplyAnswers:
+          description: Output only. Multiple reply options provided by smart reply service. The order is based on the rank of the model prediction. The maximum number of the returned replies is set in SmartReplyConfig.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2SmartReplyAnswer"
+          readOnly: true
+          type: array
+      type: object
     GoogleCloudDialogflowV2SuggestionResult:
       description: One response of different type of suggestion response which is used in the response of Participants.AnalyzeContent and Participants.AnalyzeContent, as well as HumanAgentAssistantEvent.
       properties:
@@ -5967,6 +6012,9 @@ components:
         suggestFaqAnswersResponse:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestFaqAnswersResponse"
           description: SuggestFaqAnswersResponse if request is for FAQ_ANSWER.
+        suggestSmartRepliesResponse:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestSmartRepliesResponse"
+          description: SuggestSmartRepliesResponse if request is for SMART_REPLY.
       type: object
     GoogleCloudDialogflowV2WebhookRequest:
       description: The request message for a webhook call.
@@ -7006,6 +7054,14 @@ components:
           description: "Conversation model resource name. Format: `projects//conversationModels/`."
           type: string
       type: object
+    GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigConversationProcessConfig:
+      description: Config to process conversation.
+      properties:
+        recentSentencesCount:
+          description: Number of recent non-small-talk sentences to use as context for article and FAQ suggestion
+          format: int32
+          type: integer
+      type: object
     GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigMessageAnalysisConfig:
       description: Configuration for analyses to run on each conversation message.
       properties:
@@ -7034,6 +7090,9 @@ components:
         conversationModelConfig:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigConversationModelConfig"
           description: Configs of custom conversation model.
+        conversationProcessConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigConversationProcessConfig"
+          description: Configs for processing conversation.
         enableEventBasedSuggestion:
           description: "Automatically iterates all participants and tries to compile suggestions. Supported features: ARTICLE_SUGGESTION, FAQ, DIALOGFLOW_ASSIST."
           type: boolean

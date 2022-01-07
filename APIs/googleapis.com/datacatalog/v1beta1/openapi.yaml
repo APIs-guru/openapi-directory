@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Google Cloud Data Catalog API
   version: v1beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://datacatalog.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: datacatalog
 externalDocs:
@@ -595,7 +593,7 @@ paths:
         - projects
   "/v1beta1/{parent}/tags":
     get:
-      description: Lists the tags on an Entry.
+      description: Lists tags assigned to an Entry. The columns in the response are lowercased.
       operationId: datacatalog.projects.locations.entryGroups.tags.list
       parameters:
         - description: "Required. The name of the Data Catalog resource to list the tags of. The resource could be an Entry or an EntryGroup. Examples: * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id} * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}"
@@ -1716,7 +1714,7 @@ components:
           type: object
       type: object
     GoogleCloudDatacatalogV1beta1UsageStats:
-      description: "Detailed counts on the entry's usage. Caveats: - Only BigQuery tables have usage stats - The usage stats only inlude BigQuery query jobs - The usage stats might be underestimated, e.g. wildcard table references are not yet counted in usage computation https://cloud.google.com/bigquery/docs/querying-wildcard-tables"
+      description: "Detailed counts on the entry's usage. Caveats: - Only BigQuery tables have usage stats - The usage stats only include BigQuery query jobs - The usage stats might be underestimated, e.g. wildcard table references are not yet counted in usage computation https://cloud.google.com/bigquery/docs/querying-wildcard-tables"
       properties:
         totalCancellations:
           description: The number of times that the underlying entry was attempted to be used but was cancelled by the user.
@@ -1803,5 +1801,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}
